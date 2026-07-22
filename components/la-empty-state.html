@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-empty-state — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-empty-state</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-empty-state</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-empty-state</h1>
+          <p>The "nothing to show yet" surface for the legal area page. Two variants: <code>processing</code> renders immediately after unlock to say "we're working on it", and <code>clean</code> celebrates an area that has no open insights. The <code>clean</code> variant shows a Phosphor <code>ph-check-circle</code> icon by default, or a centred illustration image when the <code>illustration</code> prop is set.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+          <p>Centred block with generous vertical padding. Variant decides whether the lead element is a spinning ring, a check-circle icon, or an illustration image.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Anatomy — processing variant after unlock</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state variant="processing" area="Governance"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Regions — processing variant</div>
+          <table class="docs-table">
+            <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td>Area heading</td><td><code>area</code> prop (optional)</td><td>20px / 700 title when set. Hidden when <code>area</code> is empty.</td></tr>
+              <tr><td>Spinner</td><td><code>.spinner</code></td><td>24px ring spinning at <code>--la-color-processing</code>. GPU-safe rotation only.</td></tr>
+              <tr><td>Headline</td><td><code>.processing-text</code></td><td>"Analysing your documents…" — fixed copy.</td></tr>
+              <tr><td>Sub</td><td><code>.processing-sub</code></td><td>"Insights will appear here as processing completes." — fixed copy.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Anatomy — clean variant (icon)</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state variant="clean" area="Governance"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Anatomy — clean variant (illustration)</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state variant="clean" area="Governance" illustration="../assets/illustrations/legal areas/all_clear_area_in_good_shape.png"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Regions — clean variant</div>
+          <table class="docs-table">
+            <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td>Lead</td><td><code>.icon</code> or <code>.illustration</code></td><td>Without <code>illustration</code>: <code>ph-fill ph-check-circle</code> at <code>--la-font-size-4xl</code> in <code>--la-color-resolved</code>. With <code>illustration</code>: 120×120 <code>&lt;img&gt;</code>.</td></tr>
+              <tr><td>Headline</td><td><code>.text</code></td><td>"<em>Area</em> is in good shape" when <code>area</code> is set, "All clear" otherwise.</td></tr>
+              <tr><td>Sub</td><td><code>.sub</code></td><td>The <code>message</code> prop, or the default "No issues found and nothing is processing."</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Controls -->
+        <div id="controls" class="preview-header" style="margin-top:8px;">
+          <h1>Controls</h1>
+          <p>Drive the live preview below. Each control maps to a public property.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>variant</label>
+              <div class="btn-group">
+                <button class="btn-toggle active" data-variant="clean" type="button">clean</button>
+                <button class="btn-toggle" data-variant="processing" type="button">processing</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="ctl-area">area</label>
+              <input id="ctl-area" type="text" value="Governance">
+            </div>
+            <div class="control-group">
+              <label for="ctl-message">message <span style="color:var(--doc-text-faint);">(clean only)</span></label>
+              <input id="ctl-message" type="text" value="" placeholder="Default: No issues found and nothing is processing." style="width:360px;">
+            </div>
+            <div class="control-group">
+              <label for="ctl-illustration">illustration URL <span style="color:var(--doc-text-faint);">(clean only)</span></label>
+              <input id="ctl-illustration" type="text" value="" placeholder="Leave blank for icon" style="width:320px;">
+            </div>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="preview" class="preview-header" style="margin-top:8px;">
+          <h1>Live preview</h1>
+          <p>Reflects the controls above.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state id="es-live"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+          <p>Every render path the legal area page hits.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Processing — immediately after unlock, with area heading</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state variant="processing" area="Governance"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Processing — without area heading (e.g. dashboard-level processing)</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state variant="processing"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Clean — icon, area named, default message</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state variant="clean" area="Governance"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Clean — icon, no area, default message</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state variant="clean"></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Clean — illustration, Governance area</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state
+                variant="clean"
+                area="Governance"
+                illustration="../assets/illustrations/legal areas/corporate_governance_locked_intro.png"
+              ></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Clean — illustration, Employment area, custom message</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state
+                variant="clean"
+                area="Employment"
+                illustration="../assets/illustrations/legal areas/employment_locked_intro.png"
+                message="Every contract is signed and every assignment is on file."
+              ></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Clean — illustration, Fundraising area</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state
+                variant="clean"
+                area="Fundraising"
+                illustration="../assets/illustrations/legal areas/fundraising_locked_intro.png"
+              ></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Clean — icon, custom message</div>
+          <div class="preview-frame" style="padding:32px; display:flex; justify-content:center;">
+            <div style="width:100%; max-width:420px;">
+              <la-empty-state
+                variant="clean"
+                area="Employment"
+                message="Every contract is signed and every assignment is on file."
+              ></la-empty-state>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context — Sprint 3 legal area page, insights column post-unlock</div>
+          <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-page);">
+            <div style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;max-width:1024px;margin:0 auto;">
+              <div style="background:var(--la-color-bg);border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-lg);min-height:360px;display:flex;align-items:center;justify-content:center;">
+                <la-empty-state variant="processing" area="Governance"></la-empty-state>
+              </div>
+              <div style="background:var(--la-color-bg);border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-lg);padding:24px;">
+                <div style="font-size:14px;font-weight:600;margin-bottom:12px;">Actions</div>
+                <div style="font-size:12px;color:var(--la-color-text-muted);">Actions widget loads here. Buttons disabled in Sprint 3.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-empty-state</h2>
+    <p>Legal area insights-column state surface. Two variants: processing (spinner, immediately after unlock) and clean (check-circle or illustration, when no insights are open). Display-only — no slots, no events.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">EmptyVariant</span></td>
+          <td><span class="default">&#39;clean&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>area</td>
+          <td><span class="default">area</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>message</td>
+          <td><span class="default">message</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>icon</td>
+          <td><span class="default">icon</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Phosphor icon class for the neutral `default` variant, e.g. "ph ph-tray".</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Headline for the neutral `default` variant.</td>
+        </tr>
+      
+        <tr>
+          <td>illustration</td>
+          <td><span class="default">illustration</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>URL of an illustration image. When set on the clean variant, renders
+a centred image in place of the check-circle icon.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+
+          <div class="docs-divider"></div>
+
+          <!-- CSS tokens -->
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+
+            <div class="docs-grid">
+              <div>
+                <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Processing variant</p>
+                <table class="docs-table">
+                  <thead><tr><th>Token</th><th>Role</th></tr></thead>
+                  <tbody>
+                    <tr><td>--la-font-size-3xl</td><td>Area heading (20px)</td></tr>
+                    <tr><td>--la-font-weight-bold</td><td>Area heading weight</td></tr>
+                    <tr><td>--la-color-processing</td><td>Spinner ring colour</td></tr>
+                    <tr><td>--la-radius-circle</td><td>Spinner shape</td></tr>
+                    <tr><td>--la-font-size-lg</td><td>"Analysing your documents…" (14px)</td></tr>
+                    <tr><td>--la-color-text-secondary</td><td>Headline colour</td></tr>
+                    <tr><td>--la-font-size-md</td><td>Sub-line (13px)</td></tr>
+                    <tr><td>--la-color-text-faint</td><td>Sub-line colour</td></tr>
+                    <tr><td>--la-space-xl / --la-space-md / --la-space-xs</td><td>Spinner top margin / text top margin / sub top margin</td></tr>
+                  </tbody>
+                </table>
+              </div>
+              <div>
+                <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Clean variant</p>
+                <table class="docs-table">
+                  <thead><tr><th>Token</th><th>Role</th></tr></thead>
+                  <tbody>
+                    <tr><td>--la-font-size-4xl</td><td>Check-circle icon size (24px)</td></tr>
+                    <tr><td>--la-color-resolved</td><td>Icon + headline colour</td></tr>
+                    <tr><td>--la-font-size-xl</td><td>Headline (16px)</td></tr>
+                    <tr><td>--la-font-weight-semibold</td><td>Headline weight</td></tr>
+                    <tr><td>--la-font-size-md</td><td>Sub-line (13px)</td></tr>
+                    <tr><td>--la-color-text-muted</td><td>Sub-line colour</td></tr>
+                    <tr><td>--la-space-sm / --la-space-xs</td><td>Icon/illustration bottom margin / sub top margin</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <div class="docs-note" style="margin-top:16px;">
+              <strong>Host padding</strong> uses <code>--la-space-2xl --la-space-lg</code> (32px / 16px). <strong>Illustration size</strong> is hardcoded at 120×120px — a design-level target size, no corresponding spacing token. Spinner geometry (24px square, 3px border) is also a fixed value. All three are accepted v1 exceptions.
+            </div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- Usage -->
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <div class="docs-grid">
+              <div>
+                <p style="margin-bottom:8px;color:#666;font-size:12px;">Processing — immediately after unlock</p>
+                <div class="docs-code"><span class="kw">&lt;la-empty-state</span>
+  <span class="at">variant</span>=<span class="str">"processing"</span>
+  <span class="at">area</span>=<span class="str">"Governance"</span>
+<span class="kw">&gt;&lt;/la-empty-state&gt;</span></div>
+                <p style="font-size:12px;color:#777;margin-top:6px;">Sprint 3 decision — show processing immediately post-unlock, not a positive graphic. The user expectation is "analysis in progress", not "all done".</p>
+              </div>
+              <div>
+                <p style="margin-bottom:8px;color:#666;font-size:12px;">Clean — icon (default)</p>
+                <div class="docs-code"><span class="kw">&lt;la-empty-state</span>
+  <span class="at">variant</span>=<span class="str">"clean"</span>
+  <span class="at">area</span>=<span class="str">"Employment"</span>
+<span class="kw">&gt;&lt;/la-empty-state&gt;</span></div>
+              </div>
+              <div>
+                <p style="margin-bottom:8px;color:#666;font-size:12px;">Clean — with illustration</p>
+                <div class="docs-code"><span class="kw">&lt;la-empty-state</span>
+  <span class="at">variant</span>=<span class="str">"clean"</span>
+  <span class="at">area</span>=<span class="str">"Employment"</span>
+  <span class="at">illustration</span>=<span class="str">"/assets/illustrations/legal areas/employment_locked_intro.png"</span>
+<span class="kw">&gt;&lt;/la-empty-state&gt;</span></div>
+              </div>
+              <div>
+                <p style="margin-bottom:8px;color:#666;font-size:12px;">Drive variant from page state</p>
+                <div class="docs-code"><span class="kw">const</span> es = document.querySelector(<span class="str">'la-empty-state'</span>);
+es.variant = page.processing ? <span class="str">'processing'</span> : <span class="str">'clean'</span>;
+es.area = page.area;
+es.illustration = page.illustrationUrl;</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- Notes -->
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <div style="display:flex;flex-direction:column;gap:8px;">
+              <div class="docs-note"><strong>Processing first, clean second.</strong> The legal area page renders <code>variant="processing"</code> immediately after unlock. <code>variant="clean"</code> is reserved for "analysis is complete and no issues found." Sprint 3 decision — see <a href="../../handoffs/stage-1-foundations/sprint-3-legal-area-page.md"><code>sprint-3-legal-area-page.md</code></a>.</div>
+              <div class="docs-note"><strong>Illustration replaces the icon.</strong> When <code>illustration</code> is set, the <code>ph-fill ph-check-circle</code> icon is replaced by a 120×120 <code>&lt;img&gt;</code>. The illustration only applies to the <code>clean</code> variant — the <code>processing</code> variant always shows the spinner.</div>
+              <div class="docs-note"><strong>Centre-aligned by design.</strong> The host applies <code>text-align: center</code>. Drop it into any container with horizontal room and it lays out correctly without further wrapping.</div>
+              <div class="docs-note"><strong>Spinner is GPU-safe.</strong> The shared <code>spin</code> keyframe animates <code>transform: rotate</code> only. Respects <code>prefers-reduced-motion</code> via an in-shadow <code>@media</code> guard.</div>
+              <div class="docs-note"><strong>No retry path.</strong> The component states the situation but does not surface a retry button. If a step fails, the surrounding flow (e.g. <code>la-unlock-panel</code> failed state) owns retry.</div>
+            </div>
+          </div>
+
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      const live = document.getElementById('es-live');
+      const ctlArea = document.getElementById('ctl-area');
+      const ctlMessage = document.getElementById('ctl-message');
+      const ctlIllustration = document.getElementById('ctl-illustration');
+      let variant = 'clean';
+
+      function sync() {
+        live.variant = variant;
+        live.area = ctlArea.value;
+        live.message = ctlMessage.value;
+        live.illustration = ctlIllustration.value;
+      }
+      sync();
+
+      ctlArea.addEventListener('input', sync);
+      ctlMessage.addEventListener('input', sync);
+      ctlIllustration.addEventListener('input', sync);
+
+      document.querySelectorAll('.btn-toggle[data-variant]').forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          document.querySelectorAll('.btn-toggle[data-variant]').forEach(function (b) { b.classList.remove('active'); });
+          btn.classList.add('active');
+          variant = btn.dataset.variant;
+          sync();
+        });
+      });
+    });
+  })();
+</script>
+
+
+</body>
+</html>

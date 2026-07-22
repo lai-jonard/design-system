@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-alert — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-alert</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-alert</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-alert</h1>
+<p>Inline alert bar for contextual messages. Persistent — not dismissible. Stays in place until the state it describes changes.</p>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Variant</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-variant="info">info</button>
+<button class="btn-toggle" data-variant="success">success</button>
+<button class="btn-toggle" data-variant="warning">warning</button>
+<button class="btn-toggle" data-variant="danger">danger</button>
+<button class="btn-toggle" data-variant="neutral">neutral</button>
+</div>
+</div>
+<div class="control-group">
+<label>Body text</label>
+<input id="ctrl-body" type="text" value="Your documents are being reviewed. We'll notify you when ready."/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px; display:block; padding:24px;">
+<la-alert id="live-alert" variant="info">
+<span id="live-body">Your documents are being reviewed. We'll notify you when ready.</span>
+</la-alert>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference — one per variant, plus a demonstration of the icon slot</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Info — processing or in-progress states</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-alert variant="info">Your documents are being reviewed. We'll notify you when ready.</la-alert>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Success — resolved or confirmed states</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-alert variant="success">Employment contracts are up to date. No action needed.</la-alert>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Warning — proactive heads-up, not urgent</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-alert variant="warning">Two contracts are expiring in the next 30 days.</la-alert>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Danger — urgent issue requiring action</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-alert variant="danger">Missing employment contracts detected. Action required before due diligence.</la-alert>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Neutral — read-only or context-only information</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-alert variant="neutral">This section is read-only. Contact your administrator to make changes.</la-alert>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">With icon slot — leading Phosphor glyph</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-alert variant="warning">
+<i class="ph-fill ph-warning-circle" slot="icon"></i>
+              Two contracts are expiring in the next 30 days.
+            </la-alert>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Narrow container (280px) — body wraps, icon stays fixed, still horizontal</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div style="max-width: 280px;">
+<la-alert variant="warning">
+<i class="ph-fill ph-warning-circle" slot="icon"></i>
+                Two employment contracts are expiring in the next 30 days and require review before renewal is possible.
+              </la-alert>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Very narrow (200px) — drops below 240px breakpoint, icon stacks above body</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div style="max-width: 200px;">
+<la-alert variant="warning">
+<i class="ph-fill ph-warning-circle" slot="icon"></i>
+                Two contracts are expiring soon and need review.
+              </la-alert>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-alert</h2>
+    <p>Inline alert bar for contextual messages. Persistent — not dismissible. Stays in place until the state it describes changes.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">AlertVariant</span></td>
+          <td><span class="default">&#39;info&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>. Override per-instance via <code style="font-family:monospace;font-size:11px;">style</code> or a wrapping CSS rule.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Typography &amp; chrome</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-font-size-base</td><td>Body text size</td></tr>
+<tr><td>--la-font-size-xl</td><td>Icon size</td></tr>
+<tr><td>--la-line-height</td><td>Body line height</td></tr>
+<tr><td>--la-space-sm</td><td>Gap between icon and body</td></tr>
+<tr><td>--la-space-md</td><td>Vertical padding</td></tr>
+<tr><td>--la-space-lg</td><td>Horizontal padding</td></tr>
+<tr><td>--la-radius-lg</td><td>Corner radius</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour pairs (by variant)</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-surface-info</td><td>info background</td></tr>
+<tr><td>--la-color-info-text</td><td>info text + icon</td></tr>
+<tr><td>--la-color-surface-success</td><td>success background</td></tr>
+<tr><td>--la-color-success-text</td><td>success text + icon</td></tr>
+<tr><td>--la-color-surface-warning</td><td>warning background</td></tr>
+<tr><td>--la-color-warning-text</td><td>warning text + icon</td></tr>
+<tr><td>--la-color-surface-danger</td><td>danger background</td></tr>
+<tr><td>--la-color-danger-text</td><td>danger text + icon</td></tr>
+<tr><td>--la-color-bg-muted</td><td>neutral background</td></tr>
+<tr><td>--la-color-text-secondary</td><td>neutral text + icon</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — info variant</p>
+<div class="docs-code"><span class="kw">&lt;la-alert</span> <span class="at">variant</span>=<span class="str">"info"</span><span class="kw">&gt;</span>
+  Your documents are being reviewed.
+<span class="kw">&lt;/la-alert&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Warning — surface an expiring item</p>
+<div class="docs-code"><span class="kw">&lt;la-alert</span> <span class="at">variant</span>=<span class="str">"warning"</span><span class="kw">&gt;</span>
+  Two contracts are expiring in the next 30 days.
+<span class="kw">&lt;/la-alert&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With icon slot — leading glyph</p>
+<div class="docs-code"><span class="kw">&lt;la-alert</span> <span class="at">variant</span>=<span class="str">"warning"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph-fill ph-warning-circle"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Two contracts are expiring soon.
+<span class="kw">&lt;/la-alert&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Neutral — context only</p>
+<div class="docs-code"><span class="kw">&lt;la-alert</span> <span class="at">variant</span>=<span class="str">"neutral"</span><span class="kw">&gt;</span>
+  This section is read-only.
+<span class="kw">&lt;/la-alert&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Persistent, not dismissible</strong> — there is no close control. The alert stays visible until the state it describes changes. For transient feedback that self-dismisses, reach for <code style="font-family:monospace;font-size:11px;">la-toast</code> instead.</div>
+<div class="docs-note"><strong>Icon slot is optional but the gap still applies</strong> — the inner flex container uses <code style="font-family:monospace;font-size:11px;">gap: 10px</code>. Leaving the <code style="font-family:monospace;font-size:11px;">icon</code> slot empty still reserves the gap between the icon region and the body. For variants where an icon adds meaning (warning, danger), include one; for pure text alerts the empty gap is harmless.</div>
+<div class="docs-note"><strong>Always use Phosphor fill weight</strong> — icons inside <code style="font-family:monospace;font-size:11px;">la-alert</code> use <code style="font-family:monospace;font-size:11px;">ph-fill</code>, not the outline <code style="font-family:monospace;font-size:11px;">ph</code> class. The filled glyph matches the alert's solid tinted surface and reads as a single emphatic unit; an outline icon against the tinted background feels visually disconnected.</div>
+<div class="docs-note"><strong>Stacks in narrow containers</strong> — below <code style="font-family:monospace;font-size:11px;">240px</code> container width, the alert switches to column layout: icon above, body below. Driven by a container query on the host, so behaviour adapts to the parent's available width without any prop or viewport check.</div>
+<div class="docs-note"><strong>Colour is not the only channel</strong> — per design-language policy, status is carried by both colour and copy framing. Do not rely on colour alone to communicate meaning — the body text should read as informative even in monochrome.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveAlert = document.getElementById('live-alert');
+        const liveBody  = document.getElementById('live-body');
+        const bodyInput = document.getElementById('ctrl-body');
+
+        // Variant toggles
+        document.querySelectorAll('[data-variant]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-variant]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveAlert.setAttribute('variant', btn.dataset.variant);
+          });
+        });
+
+        // Body text input
+        bodyInput.addEventListener('input', () => {
+          liveBody.textContent = bodyInput.value || '';
+        });
+  })();
+</script>
+
+
+</body>
+</html>

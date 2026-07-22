@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prototype — 04. Governance (locked)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  <link rel="stylesheet" href="../motion.css">
+  <script src="../bundle.js" defer></script>
+  <script>
+    // Page transition — fades .main-content out before navigating
+    window.navigateTo = function(url) {
+      var el = document.querySelector(".main-content");
+      if (!el) { window.location.href = url; return; }
+      el.classList.add('is-leaving');
+      var raw = getComputedStyle(document.documentElement).getPropertyValue('--dur-fast').trim();
+      var ms = raw.endsWith('ms') ? parseFloat(raw) : parseFloat(raw) * 1000;
+      setTimeout(function() { window.location.href = url; }, ms || 150);
+    };
+  </script>
+  <style>
+    /* FOUC fix — hide custom elements until upgraded */
+    la-modal:not(:defined),
+    la-insight-modal:not(:defined),
+    la-sidebar:not(:defined),
+    la-app-shell:not(:defined),
+    la-dashboard:not(:defined),
+    la-legal-area-page:not(:defined),
+    la-data-room-page:not(:defined),
+    la-document-page:not(:defined),
+    la-actions-widget:not(:defined),
+    la-document-list:not(:defined),
+    la-processing-widget:not(:defined),
+    la-welcome-banner:not(:defined),
+    la-unlock-panel:not(:defined),
+    la-insight-card:not(:defined),
+    la-insight-list:not(:defined),
+    la-investor-card:not(:defined),
+    la-legal-area-widget:not(:defined),
+    la-dd-readiness:not(:defined),
+    la-upcoming-deadlines:not(:defined),
+    la-anticipation-teaser:not(:defined),
+    la-summary-line:not(:defined),
+    la-empty-state:not(:defined) { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      display: flex;
+      font-family: var(--la-font-family);
+      font-size: var(--la-font-size-base);
+      background: var(--la-color-bg-subtle);
+    }
+    .proto-screen { flex: 1; min-height: 0; overflow: hidden; }
+    la-app-shell { display: flex; width: 100%; height: 100%; }
+    .main-content { padding: 40px; display: flex; flex-direction: column; align-items: center; }
+    .main-content.is-leaving { opacity: 0; transform: translateY(6px); transition: opacity var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease); }
+  </style>
+</head>
+<body>
+  <div class="proto-screen">
+    <la-app-shell id="shell" show-header page-title="Governance">
+      <la-sidebar id="sidebar" slot="sidebar"></la-sidebar>
+      <div slot="main" class="main-content anim-fade-up">
+        <la-legal-area-page id="page"></la-legal-area-page>
+      </div>
+    </la-app-shell>
+  </div>
+
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var shell = document.getElementById('shell');
+    shell.breadcrumbs = [{label: 'Dashboard', href: '03-dashboard.html'}, {label: 'Governance'}];
+
+    var sidebar = document.getElementById('sidebar');
+    sidebar.activeArea = 'governance';
+    sidebar.unlockedAreas = [];
+    sidebar.userName = 'Alex Chen';
+    sidebar.userRole = 'Acme Corp. · Founder';
+    sidebar.userInitials = 'AC';
+
+    var page = document.getElementById('page');
+    page.area = 'Governance';
+    page.pageState = 'locked-unlockable';
+    page.areaDescription = "Set up your corporate governance profile. We'll review your incorporation documents, board structure, and compliance obligations.";
+    page.illustration = '/assets/illustrations/legal%20areas/corporate_governance_locked_intro.png';
+
+    sidebar.addEventListener('la-nav-change', function(e) {
+      if (e.detail.subtab === 'data-room') { navigateTo('11-data-room.html'); return; }
+      if (e.detail.subtab === 'investors') { navigateTo('11-investors.html'); return; }
+      if (e.detail.subtab === 'cap-table') { navigateTo('14-cap-table.html'); return; }
+      var routes = {
+        'dashboard': '03-dashboard.html',
+        'governance': null,
+        'employment': '15-employment-locked.html',
+        'fundraising': '08-fundraising-locked.html',
+      };
+      if (routes[e.detail.area] !== undefined && routes[e.detail.area] !== null) {
+        navigateTo(routes[e.detail.area]);
+      }
+    });
+
+    page.addEventListener('la-start-unlock', function() {
+      navigateTo('05-corp-gov-unlock.html');
+    });
+  });
+  </script>
+</body>
+</html>

@@ -1,0 +1,311 @@
+/*
+  LawAdvisor AI — la-* tokens exposed at :root for light-DOM consumers.
+  ─────────────────────────────────────────────────────────────────────
+  Mirrors src/styles/tokens.ts, which scopes the same set to :host inside
+  every Lit component's shadow root. Light-DOM pages (prototypes, docs
+  previews) can't read shadow-scoped tokens, so we re-declare them here.
+
+  ⚠️ KEEP IN SYNC with src/styles/tokens.ts.
+     When you add or change a token in tokens.ts, update the matching line
+     here. Both files share the same naming and values by convention.
+
+  Import from any light-DOM page:
+    <link rel="stylesheet" href="/dev/la-tokens-root.css">
+
+  or chain from an existing shared CSS file:
+    @import url('../la-tokens-root.css');
+*/
+
+:root {
+  /* ── Core palette — primitives ────────────────────
+     Hue scales. The ONLY place a colour hex appears.
+     Every semantic token below is a var() alias. See
+     src/styles/tokens.ts for the explanatory header. */
+  --la-red-500:    oklch(0.581 0.171 25.273); /* #CC4643 */
+  --la-red-700:    oklch(0.493 0.159 26.346); /* #A92F2C */
+  --la-red-50:     oklch(0.972 0.011 17.342); /* #FDF3F3 */
+
+  --la-amber-500:  oklch(0.769 0.165 70.08); /* #F59E0B */
+  --la-amber-700:  oklch(0.555 0.146 48.998); /* #B45309 */
+  --la-amber-50:   oklch(0.987 0.021 95.277); /* #FFFBEB */
+
+  --la-green-500:  oklch(0.522 0.109 158.297); /* #1F7C51 */
+  --la-green-600:  oklch(0.647 0.133 157.808); /* #32A66E */
+  --la-green-700:  oklch(0.446 0.089 160.23); /* #196343 */
+  --la-green-50:   oklch(0.975 0.015 158.255); /* #EFFAF3 */
+
+  --la-blue-500:   oklch(0.582 0.138 242.423); /* #0482C5 */
+  --la-blue-600:   oklch(0.623 0.188 259.815); /* #3B82F6 */
+  --la-blue-700:   oklch(0.479 0.084 228.87); /* #1B6683 */
+  --la-blue-50:    oklch(0.979 0.014 207.878); /* #EEFBFD */
+
+  --la-purple-500: oklch(0.469 0.152 301.701); /* #6B3FA0 */
+  --la-purple-50:  oklch(0.944 0.031 302.303); /* #F0E8FE */
+
+  --la-indigo-500: oklch(0.521 0.182 268.945); /* #405CD0 */
+  --la-indigo-50:  oklch(0.962 0.018 272.314); /* #EEF2FF */
+
+  --la-white:      oklch(1 0 0); /* #FFFFFF */
+
+  /* ── Semantic colours — status ──────────────────── */
+  --la-color-urgent:          var(--la-red-500);
+  --la-color-urgent-bg:       var(--la-red-50);
+  --la-color-urgent-text:     var(--la-red-700);
+
+  --la-color-proactive:       var(--la-amber-500);
+  --la-color-proactive-bg:    var(--la-amber-50);
+  --la-color-proactive-text:  var(--la-amber-700);
+
+  --la-color-resolved:        var(--la-green-500);
+  --la-color-resolved-bg:     var(--la-green-50);
+  --la-color-resolved-text:   var(--la-green-700);
+
+  --la-color-processing:      var(--la-blue-500);
+  --la-color-processing-bg:   var(--la-blue-50);
+  --la-color-processing-text: var(--la-blue-700);
+
+  --la-color-doc:             var(--la-purple-500);
+  --la-color-doc-bg:           var(--la-purple-50);
+
+  --la-color-locked-bg:       oklch(0.968 0.007 247.896); /* #F1F5F9 */
+  --la-color-locked-text:     var(--la-color-text-muted);
+
+  /* ── Action colours ─────────────────────────────── */
+  --la-color-primary:         oklch(0.21 0.006 285.885); /* #18181B */
+  --la-color-primary-hover:   oklch(0.274 0.005 286.033); /* #27272A */
+  --la-color-primary-fg:      var(--la-white);
+
+  --la-color-secondary-bg:      var(--la-white);
+  --la-color-secondary-text:    var(--la-color-text);
+  --la-color-secondary-border:  oklch(0.915 0.002 247.841); /* #E2E3E4 */
+  --la-color-secondary-hover:   oklch(0.967 0.002 247.839); /* #F3F4F5 */
+
+  --la-color-success:           var(--la-green-500);
+  --la-color-success-hover:     var(--la-green-700);
+  --la-color-success-fg:        var(--la-white);
+  --la-color-success-text:      var(--la-green-500);
+  --la-color-danger:            var(--la-red-500);
+  --la-color-danger-hover:      var(--la-red-700);
+  --la-color-danger-fg:         var(--la-white);
+  --la-color-danger-text:       var(--la-red-700);
+
+  --la-color-accent:            var(--la-indigo-500);
+  --la-color-accent-hover:      oklch(0.469 0.183 270.49); /* #374ABF */
+  --la-color-accent-bg:         var(--la-indigo-50);
+  --la-color-accent-fg:         var(--la-white);
+
+  --la-color-neutral:           oklch(0.373 0.031 259.733); /* #374151 */
+  --la-color-neutral-hover:     oklch(0.331 0.027 261.562); /* #2E3644 */
+  --la-color-neutral-fg:        var(--la-white);
+
+  --la-color-warning:           var(--la-amber-500);
+  --la-color-warning-text:      var(--la-amber-700);
+  --la-color-info:              var(--la-blue-500);
+  --la-color-info-text:         var(--la-blue-700);
+
+  /* ── Surfaces ───────────────────────────────────── */
+  --la-color-bg:                var(--la-white);
+  --la-color-bg-subtle:         oklch(0.985 0 0); /* #FAFAFA */
+  --la-color-bg-muted:          oklch(0.97 0 0); /* #F5F5F5 */
+  --la-color-bg-page:           var(--la-color-bg);
+  --la-color-bg-surface:        oklch(0.991 0 0); /* #FCFCFC */
+  --la-color-bg-active:         oklch(0.955 0 0); /* #F0F0F0 */
+  --la-color-bg-invert:         oklch(0.205 0 0); /* #171717 */
+
+  --la-color-surface-success:   var(--la-green-50);
+  --la-color-surface-warning:   var(--la-amber-50);
+  --la-color-surface-danger:    var(--la-red-50);
+  --la-color-surface-info:      var(--la-blue-50);
+
+  --la-color-scrim:             rgba(0, 0, 0, 0.2);
+
+  /* ── Text ───────────────────────────────────────── */
+  --la-color-text:              oklch(0.263 0.015 235.56); /* #1E262B */
+  --la-color-text-secondary:    oklch(0.446 0.026 256.802); /* #4B5563 */
+  --la-color-text-muted:        oklch(0.551 0.023 264.364); /* #6B7280 */
+  --la-color-text-faint:        oklch(0.714 0.019 261.325); /* #9CA3AF */
+  --la-color-text-disabled:     oklch(0.872 0.009 258.338); /* #D1D5DB */
+  --la-color-text-invert:       var(--la-white);
+
+  /* ── Borders ────────────────────────────────────── */
+  --la-color-border:            oklch(0.9 0.021 276.933); /* #DADDEC */
+  --la-color-border-light:      oklch(0.95 0.01 273.354); /* #ECEEF5 */
+  --la-color-border-focus:      var(--la-blue-600);
+  --la-color-border-active:     oklch(0.21 0.006 285.885); /* #18181B */
+  --la-color-border-success:    var(--la-green-600);
+  --la-color-border-warning:    var(--la-amber-500);
+  --la-color-border-danger:     var(--la-red-500);
+
+  /* ── Shadows ────────────────────────────────────── */
+  --la-shadow-xs:    0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --la-shadow-sm:    0 1px 2px rgba(3, 7, 18, 0.08);
+  --la-shadow-sm-up: 0 -1px 2px rgba(3, 7, 18, 0.08); /* sm, cast upward — for sticky footers / bottom bars */
+  --la-shadow-md:    0 0 0 1px #F1F3FA, 0 1px 2px -1px rgba(3,7,18,.08), 0 2px 4px 0 rgba(3,7,18,.04);
+  --la-shadow-card:
+    0 1px 2px 0 rgba(3, 7, 18, 0.04),
+    0 4px 8px -2px rgba(3, 7, 18, 0.06),
+    0 8px 16px -4px rgba(3, 7, 18, 0.04);
+  --la-shadow-float: 0 2px 8px rgba(3, 7, 18, 0.08), 0 8px 24px rgba(3, 7, 18, 0.08);
+  --la-shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.12);
+
+  /* ── Input ──────────────────────────────────────── */
+  --la-input-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.12);
+
+  /* ── Spacing ────────────────────────────────────── */
+  --la-space-3xs:   2px;
+  --la-space-2xs:   6px;
+  --la-space-xs:    4px;
+  --la-space-sm:    8px;
+  --la-space-md:    12px;
+  --la-space-lg:    16px;
+  --la-space-xl:    24px;
+  --la-space-2xl:   32px;
+
+  /* ── Border radius ──────────────────────────────── */
+  --la-radius-sm:     10px;
+  --la-radius-md:     12px;
+  --la-radius-lg:     16px;
+  --la-radius-xl:     20px;
+  --la-radius-xl1:    24px;
+  --la-radius-xl2:    28px;
+  --la-radius-2xl:    32px;
+  --la-radius-pill:   9999px;
+  --la-radius-circle: 50%;
+
+  /* ── Spinner sizing ─────────────────────────────── */
+  --la-spinner-sm:    12px;
+  --la-spinner-md:    16px;
+  --la-spinner-lg:    24px;
+
+  /* ── Focus ring ────────────────────────────────── */
+  --la-focus-ring-width:  2px;
+  --la-focus-ring-offset: 2px;
+
+  /* ── Checkbox ───────────────────────────────────── */
+  --la-checkbox-size:       16px;
+  --la-checkbox-icon-size:  11px;
+  --la-checkbox-offset:     1px;
+
+  /* ── Switch ─────────────────────────────────────── */
+  --la-switch-bg-off:       oklch(0.915 0.002 247.841); /* #E2E3E4 */
+  --la-switch-bg-off-hover: oklch(0.872 0.009 258.338); /* #D1D5DB */
+
+  /* ── Toast sizing ───────────────────────────────── */
+  --la-toast-min-width: 260px;
+  --la-toast-max-width: 340px;
+
+  /* ── Button sizing ──────────────────────────────── */
+  --la-button-height-sm:      28px;
+  --la-button-height-default: 32px;
+  --la-button-height-lg:      44px;
+
+  /* ── Info hint sizing ───────────────────────────── */
+  --la-info-hint-height-sm:      16px;
+  --la-info-hint-height-default: 20px;
+  --la-info-hint-height-lg:      24px;
+  --la-info-hint-icon-sm:        12px;
+  --la-info-hint-icon-default:   14px;
+  --la-info-hint-icon-lg:        16px;
+
+  /* ── Typography ─────────────────────────────────── */
+  --la-font-family:         'Inter', system-ui, -apple-system, sans-serif;
+  --la-font-family-mono:    ui-monospace, SFMono-Regular, 'JetBrains Mono', Menlo, monospace; /* OS-default mono stack — used for <code>, <kbd>, and any monospace UI (no web font loaded) */
+  --la-font-signature:      'Meow Script', 'Snell Roundhand', 'Brush Script MT', cursive; /* self-hosted OFL script for adopted e-signatures (.sig-mark); @font-face in la-base-root.css */
+  --la-font-size-xs:        10px;
+  --la-font-size-sm:        11px;
+  --la-font-size-md:        13px;
+  --la-font-size-base:      13px;
+  --la-font-size-lg:        14px;
+  --la-font-size-xl:        16px;
+  --la-font-size-2xl:       18px;
+  --la-font-size-3xl:       20px;
+  --la-font-size-4xl:       24px;
+
+  --la-font-weight-normal:   400;
+  --la-font-weight-medium:   500;
+  --la-font-weight-semibold: 600;
+  --la-font-weight-bold:     700;
+
+  --la-line-height: 1.5;
+
+  /* ── Navigation ─────────────────────────────────── */
+  --la-nav-bg:              oklch(0.985 0 0); /* #FAFAFA */
+  --la-nav-bg-active:       oklch(0.949 0 0); /* #EEEEEE */
+  --la-nav-bg-hover:        oklch(0.274 0.005 286.033); /* #27272A */
+  --la-nav-icon-color:      oklch(0.263 0.015 235.56); /* #1E262B */
+
+  /* ── Sidebar ────────────────────────────────────── */
+  --la-sidebar-width:             220px;
+  --la-sidebar-collapsed-width:   56px;
+  --la-sidebar-collapsed-inset:   6px;
+  --la-nav-header-padding-h:       22px;
+  --la-nav-collapsed-header-padding: 22px;
+  --la-nav-padding-h:             12px;
+  --la-nav-padding-v:             8px;
+  --la-nav-item-padding-h:        9px;
+  --la-nav-item-padding-v:        9px;
+  --la-nav-item-gap:              4px;
+  --la-nav-item-radius:           10px;
+  --la-sidebar-collapsed-padding: 8px;
+  --la-nav-logo-size:             21px;
+  --la-nav-logo-wordmark-height:  14px;
+  --la-nav-logo-gap:              12px;
+  --la-nav-logo-padding-v:        0px;
+  --la-nav-expand-icon-size:      19px;
+  --la-nav-logo-collapsed-offset-x: 6px;
+  --la-nav-logo-collapsed-offset-y: 3px;
+  --la-sidebar-padding-top:        8px;
+  --la-nav-item-icon-size:        17px;
+  --la-nav-sub-height:            26px;
+  --la-nav-sub-padding-v:         6px;
+  --la-nav-sub-padding-h:         12px;
+
+  /* ── Page header ─────────────────────────────────── */
+  --la-ph-padding-left:   32px;
+  --la-ph-padding-right:  20px;
+  --la-ph-title-size:     18px;
+  --la-ph-title-weight:   600;
+  --la-ph-bg:             oklch(0.985 0 0); /* #FAFAFA */
+  --la-ph-height:         40px;
+  --la-ph-padding-v:      0px;
+  --la-ph-gap:            0px;
+
+  /* ── Main content area ───────────────────────────── */
+  --la-main-margin:       8px;
+  --la-main-radius:       var(--la-radius-md);
+  --la-main-shadow:       var(--la-shadow-md);
+  --la-aside-width:       320px;
+  --la-drawer-size:       var(--la-aside-width);
+
+  /* ── Animation durations ─────────────────────────── */
+  --la-dur-fast:    150ms;
+  --la-dur-base:    200ms;
+  --la-dur-modal:   330ms;
+  --la-dur-slow:    500ms;
+
+  /* ── Motion — easing curves ──────────────────────── */
+  --ease-out:       cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out:    cubic-bezier(0.77, 0, 0.175, 1);
+  --ease:           cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring-sm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snappy:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-drawer:    cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* ── Motion — durations ──────────────────────────── */
+  --dur-instant:  100ms;
+  --dur-fast:     150ms;
+  --dur-base:     200ms;
+  --dur-modal:    250ms;
+  --dur-page:     350ms;
+
+  /* ── Motion — stagger ────────────────────────────── */
+  --stagger-sm: 30ms;
+  --stagger-md: 50ms;
+  --stagger-lg: 60ms;
+
+  /* ── Motion — scale presets ──────────────────────── */
+  --scale-press:  0.97;
+  --scale-enter:  0.96;
+  --scale-hover:  1.02;
+}

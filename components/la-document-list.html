@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-document-list — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-document-list</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-document-list</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-document-list</h1>
+<p>Data-driven document library component. Accepts a flat array of <code style="font-family:monospace;color:#c3e88d;font-size:12px;">DocumentData</code> objects, groups them by optional <code style="font-family:monospace;color:#c3e88d;font-size:12px;">category</code>, and renders each as an <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-document-item</code> row inside an <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-card</code>.</p>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+</div>
+<div class="preview-group">
+<div class="preview-label">Flat list — no categories</div>
+<div class="preview-frame" style="max-width:480px; align-items:stretch;">
+<la-document-list id="snap-flat" style="width:100%;"></la-document-list>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Categorised — multiple category groups</div>
+<div class="preview-frame" style="max-width:480px; align-items:stretch;">
+<la-document-list id="snap-cats" style="width:100%;"></la-document-list>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Mixed statuses</div>
+<div class="preview-frame" style="max-width:480px; align-items:stretch;">
+<la-document-list id="snap-mixed" style="width:100%;"></la-document-list>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Empty — no documents</div>
+<div class="preview-frame" style="max-width:480px; align-items:stretch;">
+<la-document-list heading="Documents" id="snap-empty" style="width:100%;"></la-document-list>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-document-list</h2>
+    <p>Data-driven document library component. Accepts a flat array of DocumentData objects, groups them by optional category , and renders each as an la-document-item row inside an la-card .</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>documents</td>
+          <td><span class="default">documents</span></td>
+          <td><span class="type">DocumentData[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Documents&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>showPackToggle</td>
+          <td><span class="default">show-pack-toggle</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Show the "Default pack" toggle column on each row</td>
+        </tr>
+      
+        <tr>
+          <td>categoryIcons</td>
+          <td><span class="default">categoryIcons</span></td>
+          <td><span class="type">Record&lt;string, string&gt;</span></td>
+          <td><span class="default">{}</span></td>
+          <td>Map of category name → Phosphor icon class e.g. { 'Governance': 'ph ph-buildings' }</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-pack-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — flat list</p>
+<div class="docs-code"><span class="kw">const</span> list = document.querySelector(<span class="str">'la-document-list'</span>);
+list.documents = [
+  { <span class="at">name</span>: <span class="str">'Contract.pdf'</span>, <span class="at">status</span>: <span class="str">'ready'</span> },
+  { <span class="at">name</span>: <span class="str">'Policy.pdf'</span>, <span class="at">status</span>: <span class="str">'processing'</span> },
+];</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Categorised</p>
+<div class="docs-code">list.documents = [
+  { <span class="at">name</span>: <span class="str">'Contract.pdf'</span>, <span class="at">category</span>: <span class="str">'Employment'</span> },
+  { <span class="at">name</span>: <span class="str">'Board-Res.pdf'</span>, <span class="at">category</span>: <span class="str">'Corp Governance'</span> },
+  { <span class="at">name</span>: <span class="str">'Policy.pdf'</span>, <span class="at">category</span>: <span class="str">'Employment'</span> },
+];</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listen for row selection</p>
+<div class="docs-code">list.addEventListener(<span class="str">'la-select'</span>, (e) =&gt; {
+  <span class="cm">// e.target is the la-document-item that was clicked</span>
+  console.log(e.target.getAttribute(<span class="str">'name'</span>));
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Custom heading</p>
+<div class="docs-code"><span class="kw">&lt;la-document-list</span>
+<span class="at">heading</span>=<span class="str">"Related documents"</span>
+<span class="kw">&gt;&lt;/la-document-list&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Array prop — JS only</strong> — <code style="font-family:monospace;font-size:11px;">documents</code> must be set via JavaScript property assignment (<code style="font-family:monospace;font-size:11px;">el.documents = [...]</code>). HTML attributes only support strings — passing JSON as an attribute is not supported and will not work.</div>
+<div class="docs-note"><strong>Category grouping</strong> — Category labels are shown automatically when two or more distinct non-empty categories exist in the array. A single category or all uncategorised items renders a flat list with no labels.</div>
+<div class="docs-note"><strong>la-select bubbles</strong> — Row selection events bubble up from the composed <code style="font-family:monospace;font-size:11px;">la-document-item</code> elements. The event target is the individual <code style="font-family:monospace;font-size:11px;">la-document-item</code>. Use <code style="font-family:monospace;font-size:11px;">e.target.getAttribute('name')</code> to identify which document was selected.</div>
+<div class="docs-note"><strong>Per-item actions</strong> — <code style="font-family:monospace;font-size:11px;">la-document-item</code> exposes an <code style="font-family:monospace;font-size:11px;">actions</code> slot for injecting buttons into each row. <code style="font-family:monospace;font-size:11px;">la-document-list</code> does not forward this slot — if per-item actions are needed, use <code style="font-family:monospace;font-size:11px;">la-document-item</code> directly. The Company Manual uses name-only mode; grouped action patterns are deferred.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    customElements.whenDefined('la-document-list').then(() => {
+          document.getElementById('snap-flat').documents = [
+            { name: 'Employment-Contract-JSmith.pdf', association: 'Employment', status: 'ready' },
+            { name: 'Board-Resolution-2026.pdf', association: 'Corp Governance', status: 'none' },
+            { name: 'Privacy-Policy-v3.pdf', association: 'Data & Privacy', status: 'none' },
+          ];
+
+          document.getElementById('snap-cats').documents = [
+            { name: 'Employment-Contract-JSmith.pdf', category: 'Employment', status: 'ready' },
+            { name: 'Offer-Letter-2024.pdf', category: 'Employment', status: 'none' },
+            { name: 'Board-Resolution-2026.pdf', category: 'Corp Governance', status: 'none' },
+            { name: 'Articles-of-Association.pdf', category: 'Corp Governance', status: 'none' },
+            { name: 'Privacy-Policy-v3.pdf', category: 'Data & Privacy', status: 'processing' },
+          ];
+
+          document.getElementById('snap-mixed').documents = [
+            { name: 'Employment-Contract-JSmith.pdf', association: 'Employment', status: 'ready' },
+            { name: 'Board-Resolution-2026.pdf', association: 'Corp Governance', status: 'processing' },
+            { name: 'Privacy-Policy-v3.pdf', association: 'Data & Privacy', status: 'none' },
+            { name: 'Scan-corrupted.pdf', association: 'Employment', status: 'failed' },
+          ];
+
+          document.getElementById('snap-empty').documents = [];
+        });
+  })();
+</script>
+
+
+</body>
+</html>

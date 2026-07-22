@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-toast — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-toast</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#animation" class="docs-nav-item" data-nav-id="animation">Animation</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-toast</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-toast</h1>
+<p>Transient notification that auto-dismisses after a set duration or on user click. Use for outcome feedback — past tense, action-focused. Not for persistent alerts or warnings that require a decision.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:48px 40px; justify-content:center; overflow:visible;">
+<div style="position:relative; display:inline-flex; flex-direction:column; gap:40px; align-items:flex-start;">
+<!-- Annotated mock toast -->
+<div style="display:flex; align-items:flex-start; gap:10px; padding:12px 14px; border-radius:12px; background:#fff; border:1px solid #DADDEC; box-shadow:0 16px 48px rgba(0,0,0,0.12); min-width:260px; max-width:340px;">
+<!-- 1. Icon slot -->
+<div style="flex-shrink:0; width:20px; height:20px; position:relative;">
+<div style="width:20px;height:20px;border:1.5px dashed #CBD5E1;border-radius:4px;display:flex;align-items:center;justify-content:center;background:#F8FAFC;">
+<span style="font-size:12px;color:#94A3B8;line-height:1;font-family:system-ui;">i</span>
+</div>
+<span style="position:absolute;top:-22px;left:50%;transform:translateX(-50%);background:#334155;color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;white-space:nowrap;font-family:system-ui;">1</span>
+</div>
+<!-- 2+3 body -->
+<div style="flex:1;min-width:0;">
+<div style="position:relative;display:inline-block;">
+<div style="font-size:14px;font-weight:500;color:#1E262B;font-family:system-ui,sans-serif;line-height:1.4;">Document uploaded.</div>
+<span style="position:absolute;top:-22px;left:0;background:#334155;color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;white-space:nowrap;font-family:system-ui;">2</span>
+</div>
+<div style="position:relative;display:inline-block;margin-top:2px;">
+<div style="font-size:13px;color:#6B7280;font-family:system-ui,sans-serif;line-height:1.4;">Anna Chen — Employment Contract</div>
+<span style="position:absolute;bottom:-22px;left:0;background:#334155;color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;white-space:nowrap;font-family:system-ui;">3</span>
+</div>
+</div>
+<!-- 4. Dismiss button -->
+<div style="flex-shrink:0;width:24px;height:24px;display:flex;align-items:center;justify-content:center;border-radius:6px;border:1.5px dashed #CBD5E1;color:#9CA3AF;font-size:12px;font-family:system-ui;position:relative;">
+                  ✕
+                  <span style="position:absolute;top:-22px;right:0;background:#334155;color:#fff;font-size:10px;font-weight:600;padding:2px 6px;border-radius:3px;white-space:nowrap;font-family:system-ui;">4</span>
+</div>
+</div>
+<!-- Legend -->
+<ol style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px;font-size:12px;color:#555;font-family:system-ui,sans-serif;line-height:1.5;">
+<li><strong>icon</strong> slot — optional leading visual; typically a Phosphor icon</li>
+<li><strong>title</strong> prop — primary feedback text; use past tense</li>
+<li><strong>message</strong> prop / default slot — optional supporting detail or context</li>
+<li><strong>dismiss button</strong> — always present; closes the toast and fires the <code style="font-family:monospace;font-size:11px;">dismiss</code> event</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class="controls" id="controls" style="margin-top:8px;">
+<div class="controls-row">
+<div class="control-group">
+<label>Variant</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-variant="default">default</button>
+<button class="btn-toggle" data-variant="success">success</button>
+<button class="btn-toggle" data-variant="warning">warning</button>
+<button class="btn-toggle" data-variant="danger">danger</button>
+</div>
+</div>
+<div class="control-group">
+<label>Title</label>
+<input id="ctrl-title" type="text" value="Document uploaded."/>
+</div>
+<div class="control-group">
+<label>Message</label>
+<input id="ctrl-message" placeholder="optional" type="text"/>
+</div>
+<div class="control-group">
+<label>Duration (ms)</label>
+<input id="ctrl-duration" min="0" step="500" style="width:80px;" type="number" value="0"/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px; justify-content:center;">
+<la-toast id="live-toast" open="" title="Document uploaded."></la-toast>
+</div>
+<div class="preview-label">Duration set to 0 in this view — dismiss re-opens after 400ms so it stays visible for reference</div>
+</div>
+
+<div class="preview-header" id="animation" style="margin-top:8px;">
+<h1>Animation</h1>
+<p>Toasts are managed by <code style="font-family:monospace;font-size:12px;">la-toast-stack</code>. Trigger one to see the enter and exit animation.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="justify-content:center; gap:8px; flex-wrap:wrap;">
+<la-button id="btn-anim-default" variant="secondary">Default</la-button>
+<la-button id="btn-anim-success" variant="secondary">Success</la-button>
+<la-button id="btn-anim-warning" variant="secondary">Warning</la-button>
+<la-button id="btn-anim-danger" variant="secondary">Danger</la-button>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Title only</div>
+<div class="preview-frame">
+<la-toast open="" title="Document uploaded."></la-toast>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Title + message</div>
+<div class="preview-frame">
+<la-toast message="Anna Chen — Employment Contract 2026" open="" title="Contract sent for signature."></la-toast>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Short confirmation</div>
+<div class="preview-frame">
+<la-toast message="Your updates have been applied." open="" title="Changes saved."></la-toast>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">With icon slot</div>
+<div class="preview-frame">
+<la-toast open="" title="All documents reviewed.">
+<i class="ph-fill ph-check-circle" slot="icon" style="color:#1F7C51;font-size:18px;line-height:1;"></i>
+</la-toast>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-toast</h2>
+    <p>Transient notification that auto-dismisses after a set duration or on user click. Use for outcome feedback — past tense, action-focused. Not for persistent alerts or warnings that require a decision.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">ToastVariant</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>title</td>
+          <td><span class="default">title</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>message</td>
+          <td><span class="default">message</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>duration</td>
+          <td><span class="default">duration</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">3000</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_dismissTimer</td>
+          <td>—</td>
+          <td><span class="type">ReturnType&lt;typeof setTimeout&gt; | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_closeTimer</td>
+          <td>—</td>
+          <td><span class="type">ReturnType&lt;typeof setTimeout&gt; | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>dismiss</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">Colour and shape values are drawn from the token system in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>. Override per-instance via <code style="font-family:monospace;font-size:11px;">style</code> or a wrapping CSS rule.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Shape &amp; typography</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-toast-min-width</td><td>Minimum toast width (260px)</td></tr>
+<tr><td>--la-toast-max-width</td><td>Maximum toast width (340px)</td></tr>
+<tr><td>--la-radius-lg</td><td>Toast border-radius</td></tr>
+<tr><td>--la-radius-md</td><td>Dismiss button border-radius</td></tr>
+<tr><td>--la-font-size-xl</td><td>Icon area font size</td></tr>
+<tr><td>--la-font-size-lg</td><td>Title font size, dismiss button font size</td></tr>
+<tr><td>--la-font-weight-medium</td><td>Title weight</td></tr>
+<tr><td>--la-font-size-md</td><td>Message font size</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Toast background</td></tr>
+<tr><td>--la-color-border</td><td>Toast border</td></tr>
+<tr><td>--la-shadow-lg</td><td>Toast box-shadow</td></tr>
+<tr><td>--la-color-text</td><td>Title colour, dismiss hover colour</td></tr>
+<tr><td>--la-color-text-muted</td><td>Message colour</td></tr>
+<tr><td>--la-color-text-faint</td><td>Dismiss button icon colour</td></tr>
+<tr><td>--la-color-bg-muted</td><td>Dismiss button hover background</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="docs-note" style="margin-top:12px;">
+              Internal layout values — <code style="font-family:monospace;font-size:11px;">gap</code> and <code style="font-family:monospace;font-size:11px;">padding</code> — are currently hardcoded in v1 and not overridable via tokens.
+            </div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — title only</p>
+<div class="docs-code"><span class="kw">&lt;la-toast</span>
+<span class="at">id</span>=<span class="str">"toast-save"</span>
+<span class="at">title</span>=<span class="str">"Changes saved."</span>
+<span class="kw">&gt;&lt;/la-toast&gt;</span>
+<span class="kw">document</span>.querySelector(<span class="str">'#toast-save'</span>).show();</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Title + message</p>
+<div class="docs-code"><span class="kw">&lt;la-toast</span>
+<span class="at">id</span>=<span class="str">"toast-send"</span>
+<span class="at">title</span>=<span class="str">"Contract sent for signature."</span>
+<span class="at">message</span>=<span class="str">"Anna Chen — Employment Contract 2026"</span>
+<span class="kw">&gt;&lt;/la-toast&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With icon slot</p>
+<div class="docs-code"><span class="kw">&lt;la-toast</span> <span class="at">title</span>=<span class="str">"All documents reviewed."</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span>
+<span class="at">slot</span>=<span class="str">"icon"</span>
+<span class="at">class</span>=<span class="str">"ph-fill ph-check-circle"</span>
+<span class="at">style</span>=<span class="str">"color:#1F7C51;font-size:18px;"</span>
+<span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-toast&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listen for dismiss</p>
+<div class="docs-code"><span class="kw">const</span> toast = document.querySelector(<span class="str">'la-toast'</span>);
+toast.addEventListener(<span class="str">'dismiss'</span>, () =&gt; {
+  <span class="cm">// toast closed — update state if needed</span>
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Custom duration</p>
+<div class="docs-code"><span class="kw">&lt;la-toast</span>
+<span class="at">title</span>=<span class="str">"Reminder set."</span>
+<span class="at">duration</span>=<span class="str">"5000"</span>
+<span class="kw">&gt;&lt;/la-toast&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Copy pattern — past tense, action-focused</strong> — Toast copy should confirm what just happened, not describe what will happen. "Contract sent." not "Sending contract…". "Changes saved." not "Save successful". Keep titles to one short clause.</div>
+<div class="docs-note"><strong>No self-positioning</strong> — <code style="font-family:monospace;font-size:11px;">la-toast</code> does not portal itself into a fixed overlay. Place it in your layout and position it with CSS — typically <code style="font-family:monospace;font-size:11px;">position:fixed; bottom:24px; right:24px;</code> on the host element.</div>
+<div class="docs-note"><strong>Calling show() again resets the timer</strong> — if <code style="font-family:monospace;font-size:11px;">show()</code> is called while the toast is already open, a new dismiss timer starts from zero. The previous timer is not cancelled — both will fire. To safely re-trigger, set <code style="font-family:monospace;font-size:11px;">open = false</code> first.</div>
+<div class="docs-note"><strong>Default slot vs message prop</strong> — use the <code style="font-family:monospace;font-size:11px;">message</code> prop for plain text. Use the default slot when you need inline markup — a link, emphasis, or a truncated string you control with CSS. When <code style="font-family:monospace;font-size:11px;">message</code> is non-empty, the default slot is not rendered.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveToast = document.getElementById('live-toast');
+        const titleInput = document.getElementById('ctrl-title');
+        const messageInput = document.getElementById('ctrl-message');
+        const durationInput = document.getElementById('ctrl-duration');
+
+        // Re-open toast when user dismisses it in the live preview
+        liveToast.addEventListener('dismiss', () => {
+          setTimeout(() => { liveToast.open = true; }, 400);
+        });
+
+        // Variant toggles
+        document.querySelectorAll('[data-variant]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-variant]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveToast.setAttribute('variant', btn.dataset.variant);
+          });
+        });
+
+        // Title input
+        titleInput.addEventListener('input', () => {
+          liveToast.setAttribute('title', titleInput.value);
+        });
+
+        // Message input
+        messageInput.addEventListener('input', () => {
+          liveToast.setAttribute('message', messageInput.value);
+        });
+
+        // Duration input
+        durationInput.addEventListener('input', () => {
+          const val = parseInt(durationInput.value, 10);
+          liveToast.duration = isNaN(val) ? 0 : val;
+        });
+  })();
+</script>
+
+
+</body>
+</html>

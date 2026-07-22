@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-insight-list — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-insight-list</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-insight-list</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-insight-list</h1>
+<p>Organises multiple <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-insight-card</code> instances into a scannable feed grouped by severity. Renders a labelled section for each non-empty group (urgent · proactive · resolved) with a count, shows the top N cards per group by default, and reveals the rest on demand via a "Show more" toggle. The list itself emits no events — <code style="font-family:monospace;font-size:11px;">la-insight-click</code> and <code style="font-family:monospace;font-size:11px;">la-action</code> bubble up from the child cards, so consumers can listen at the list level.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Visual regions of the rendered component</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:560px;width:100%;">
+<la-insight-list defaultvisible="2" id="anatomy-list"></la-insight-list>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-insight-list</h2>
+    <p>Organises multiple la-insight-card instances into a scannable feed grouped by severity. Renders a labelled section for each non-empty group (urgent · proactive · resolved) with a count, shows the top N cards per group by default, and reveals the rest on demand via a "Show more" toggle. The list itself emits no events — la-insight-click and la-action bubble up from the child cards, so consumers can listen at the list level.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>insights</td>
+          <td><span class="default">insights</span></td>
+          <td><span class="type">InsightData[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>defaultVisible</td>
+          <td><span class="default">defaultVisible</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">3</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_expanded</td>
+          <td>—</td>
+          <td><span class="type">Record&lt;string, boolean&gt;</span></td>
+          <td><span class="default">{}</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    // Shared sample insights — covers all three severities, enough items to trigger show-more
+        const sampleInsights = [
+          {severity: 'urgent', headline: 'Missing employment contract — John Smith', reason: 'No signed employment contract on file for this employee.', badges: [{label: 'Urgent', variant: 'danger'}, {label: 'Doc Quality', variant: 'accent'}], entity: 'John Smith'},
+          {severity: 'urgent', headline: 'Unsigned employment contract — Jane Doe', reason: 'An unsigned contract is not legally binding and will fail due diligence review.', badges: [{label: 'Urgent', variant: 'danger'}, {label: 'Doc Quality', variant: 'accent'}], entity: 'Jane Doe'},
+          {severity: 'urgent', headline: 'Employment contract expiring soon — Jane Doe', reason: 'This contract expires before the next funding round closes.', badges: [{label: 'Urgent', variant: 'danger'}], deadline: '22 Apr 2026'},
+          {severity: 'urgent', headline: 'IP assignment missing from founder agreement', reason: 'Without IP assignment, the company may not own founder-created work.', badges: [{label: 'Urgent', variant: 'danger'}]},
+          {severity: 'proactive', headline: 'No employee handbook on file', reason: 'An employee handbook reduces legal exposure and demonstrates good governance to investors.', badges: [{label: 'Proactive', variant: 'warning'}, {label: 'Legal Compliance', variant: 'info'}], action: {label: 'Upload handbook', event: 'upload-handbook'}},
+          {severity: 'proactive', headline: 'Contractor agreement missing IP assignment clause', reason: 'Without an IP assignment clause, the company may not own work produced by contractors.', badges: [{label: 'Proactive', variant: 'warning'}]},
+          {severity: 'proactive', headline: 'No termination policy documented', reason: 'A documented termination policy reduces unfair dismissal risk.', badges: [{label: 'Proactive', variant: 'warning'}]},
+          {severity: 'proactive', headline: 'Leave entitlements not documented in contracts', badges: [{label: 'Proactive', variant: 'warning'}]},
+          {severity: 'resolved', headline: 'Missing non-compete clause — John Smith', reason: 'Updated contract uploaded with non-compete clause.', badges: [{label: 'Resolved', variant: 'success'}]},
+          {severity: 'resolved', headline: 'Fair Work compliance statement missing', reason: 'Compliance statement has been added to employee handbook.', badges: [{label: 'Resolved', variant: 'success'}]},
+        ];
+
+        const singleSeverityInsights = sampleInsights.filter(i => i.severity === 'urgent');
+
+        customElements.whenDefined('la-insight-list').then(() => {
+          document.getElementById('anatomy-list').insights = sampleInsights.filter(i => i.severity !== 'resolved').slice(0, 5);
+          document.getElementById('live-list').insights = sampleInsights;
+          document.getElementById('snap-full').insights = sampleInsights;
+          document.getElementById('snap-single').insights = singleSeverityInsights;
+          document.getElementById('snap-compact').insights = sampleInsights;
+          document.getElementById('snap-empty').insights = [];
+        });
+
+        // ── Controls ──
+        // Use a getter so reset-replacement stays in sync with chip clicks
+        const getLiveList = () => document.getElementById('live-list');
+
+        // defaultVisible chip picker
+        document.querySelectorAll('[data-visible]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-visible]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            getLiveList().setAttribute('defaultVisible', btn.dataset.visible);
+          });
+        });
+
+        // Collapse all — rebuild the list to reset internal expand state
+        document.getElementById('ctrl-reset').addEventListener('click', () => {
+          const old = getLiveList();
+          const current = old.insights;
+          const visible = old.getAttribute('defaultVisible') || '3';
+          const fresh = document.createElement('la-insight-list');
+          fresh.id = 'live-list';
+          fresh.setAttribute('defaultVisible', visible);
+          old.parentNode.replaceChild(fresh, old);
+          customElements.whenDefined('la-insight-list').then(() => {
+            fresh.insights = current;
+          });
+          wireListEvents(fresh);
+        });
+
+        // ── Event log ──
+        const eventLog = document.getElementById('event-log');
+        function logEvent(name, detail) {
+          const entry = document.createElement('div');
+          const time = new Date().toLocaleTimeString('en-AU', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+          entry.style.cssText = 'color:#e2e8f0;padding:2px 0;';
+          entry.innerHTML = `<span style="color:#6b7280;">${time}</span> <span style="color:#7dd3fc;">${name}</span> <span style="color:#9ca3af;word-break:break-all;">${JSON.stringify(detail)}</span>`;
+          if (eventLog.textContent.trim() === '— events will appear here —') eventLog.innerHTML = '';
+          eventLog.appendChild(entry);
+          eventLog.scrollTop = eventLog.scrollHeight;
+        }
+
+        function wireListEvents(el) {
+          el.addEventListener('la-insight-click', e => logEvent('la-insight-click', e.detail));
+          el.addEventListener('la-action', e => logEvent('la-action', e.detail));
+        }
+        wireListEvents(getLiveList());
+
+        // ── Sidebar collapse ──
+  })();
+</script>
+
+
+</body>
+</html>

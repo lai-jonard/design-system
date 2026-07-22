@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-avatar — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-avatar</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-avatar</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-avatar</h1>
+  <p>Initials avatar for people and entities. Derives two-letter initials automatically from a full name, with an optional override. Three fixed sizes — sm (32 px), md (40 px), lg (48 px) — map to specific product contexts. Purely presentational: no interactions, no events.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>A single circular surface holding up to two uppercase initials. Background is <code>--la-color-bg-muted</code> with a 1 px <code>--la-color-border-light</code> border so it reads on both white and off-white surfaces.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Three sizes — sm · md · lg</div>
+  <div class="preview-frame" style="padding:32px;display:flex;align-items:center;gap:24px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <la-avatar name="James Okafor" size="sm"></la-avatar>
+      <span style="font-size:11px;color:var(--la-color-text-faint);">sm · 32 px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <la-avatar name="James Okafor" size="md"></la-avatar>
+      <span style="font-size:11px;color:var(--la-color-text-faint);">md · 40 px</span>
+    </div>
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <la-avatar name="James Okafor" size="lg"></la-avatar>
+      <span style="font-size:11px;color:var(--la-color-text-faint);">lg · 48 px</span>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Circle</td>
+        <td><code>.avatar</code></td>
+        <td>The container — <code>border-radius: var(--la-radius-circle)</code>, background + border, fixed size from the <code>size</code> attribute.</td>
+      </tr>
+      <tr>
+        <td>Initials</td>
+        <td>Derived from <code>name</code> or set via <code>initials</code></td>
+        <td>First letter of the first two words in <code>name</code>, uppercased. Override with <code>initials</code> for entities or edge cases.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-name">name</label>
+      <input id="ctl-name" type="text" value="James Okafor" style="width:220px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-initials">initials <span style="font-weight:400;color:var(--la-color-text-faint);">(override)</span></label>
+      <input id="ctl-initials" type="text" value="" placeholder="auto" style="width:80px;">
+    </div>
+    <div class="control-group">
+      <label>size</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-size="sm" type="button">sm</button>
+        <button class="btn-toggle active" data-size="md" type="button">md</button>
+        <button class="btn-toggle" data-size="lg" type="button">lg</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px;display:flex;align-items:center;justify-content:center;">
+    <la-avatar id="av-live" name="James Okafor" size="md"></la-avatar>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed reference examples showing typical product usage.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">sm (32 px) — share modal, compact lists</div>
+  <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
+    <la-avatar name="Sarah Kim" size="sm"></la-avatar>
+    <la-avatar name="James Okafor" size="sm"></la-avatar>
+    <la-avatar name="Priya Mehta" size="sm"></la-avatar>
+    <la-avatar name="Leo Tran" size="sm"></la-avatar>
+    <la-avatar name="Chloe Park" size="sm"></la-avatar>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">md (40 px) — standard person rows, investor cards</div>
+  <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
+    <la-avatar name="Sarah Kim" size="md"></la-avatar>
+    <la-avatar name="James Okafor" size="md"></la-avatar>
+    <la-avatar name="Priya Mehta" size="md"></la-avatar>
+    <la-avatar initials="AC" size="md"></la-avatar>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">lg (48 px) — detail panel headers</div>
+  <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:24px;">
+    <la-avatar name="James Okafor" size="lg"></la-avatar>
+    <la-avatar name="Chloe Park" size="lg"></la-avatar>
+    <la-avatar initials="MW" size="lg"></la-avatar>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">In-context — detail panel header (lg)</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-subtle);">
+    <div style="display:flex;align-items:center;gap:16px;">
+      <la-avatar name="James Okafor" size="lg"></la-avatar>
+      <div>
+        <div style="font-size:var(--la-font-size-2xl);font-weight:600;color:var(--la-color-text);letter-spacing:-0.3px;">James Okafor</div>
+        <div style="font-size:var(--la-font-size-base);color:var(--la-color-text-muted);margin-top:3px;">Meridian Capital · <span style="background:var(--la-color-bg-muted);padding:1px 7px;border-radius:999px;font-size:var(--la-font-size-sm);">Seed</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Initials override — entity or abbreviation</div>
+  <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
+    <la-avatar initials="AC" size="md"></la-avatar>
+    <la-avatar initials="LP" size="md"></la-avatar>
+    <la-avatar initials="JO" size="md"></la-avatar>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-avatar</h2>
+    <p>Initials avatar for people and entities. Auto-derives two-letter initials from a full name, with an override. Three fixed sizes (sm/md/lg). Purely presentational.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>name</td>
+          <td><span class="default">name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Full name used to auto-derive initials (e.g. "James Okafor")</td>
+        </tr>
+      
+        <tr>
+          <td>initials</td>
+          <td><span class="default">initials</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Override for auto-derived initials (e.g. "JO")</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">&#39;sm&#39; | &#39;md&#39; | &#39;lg&#39;</span></td>
+          <td><span class="default">&#39;md&#39;</span></td>
+          <td>'sm' | 'md' | 'lg'. Default: 'md'</td>
+        </tr>
+      
+        <tr>
+          <td>_displayInitials</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div id="css-tokens" class="docs-section">
+  <h3>CSS custom properties</h3>
+  <p>No public CSS custom properties. Size and colour are fixed to design-token values for consistency. If you need a non-standard size, use a wrapping element with <code>transform: scale()</code> rather than forking the component.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+
+  <h4>Auto-derived initials</h4>
+  <pre><code>&lt;la-avatar name="James Okafor"&gt;&lt;/la-avatar&gt;
+&lt;!-- renders "JO" --&gt;</code></pre>
+
+  <h4>Initials override</h4>
+  <pre><code>&lt;la-avatar initials="AC" size="lg"&gt;&lt;/la-avatar&gt;</code></pre>
+
+  <h4>In a detail panel header</h4>
+  <pre><code>&lt;div class="inv-header"&gt;
+  &lt;la-avatar name="${investor.name}" size="lg"&gt;&lt;/la-avatar&gt;
+  &lt;div class="inv-identity"&gt;
+    &lt;div class="inv-name"&gt;${investor.name}&lt;/div&gt;
+    &lt;div class="inv-firm"&gt;${investor.firm}&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <ul>
+    <li><strong>Initials derivation:</strong> splits on spaces, takes the first character of the first two words. Single-word names produce a single-letter initial. Names with prefixes (e.g. "de la") may produce unexpected results — use the <code>initials</code> override.</li>
+    <li><strong>Accessibility:</strong> the circle is marked <code>aria-hidden="true"</code> — it's decorative alongside a visible name. If used standalone (e.g. in a list with no adjacent name text), add an <code>aria-label</code> to the wrapper element.</li>
+    <li><strong>Colour:</strong> background and border are fixed to token values. Do not override — the neutral palette ensures avatars don't compete with status colours (badges, dots). Future work: optional colour-seeded backgrounds per identity (decision pending).</li>
+    <li><strong>Do not use for company logos or uploaded photos</strong> — this component is initials-only. Photo/logo support is a separate component decision.</li>
+  </ul>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    var live = document.getElementById('av-live');
+
+    document.getElementById('ctl-name').addEventListener('input', function() {
+      live.name = this.value;
+    });
+
+    document.getElementById('ctl-initials').addEventListener('input', function() {
+      live.initials = this.value;
+    });
+
+    document.querySelectorAll('[data-size]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-size]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        live.size = btn.dataset.size;
+      });
+    });
+  })();
+</script>
+
+
+</body>
+</html>

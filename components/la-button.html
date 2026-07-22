@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-button — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-button</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-button</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Page header -->
+<div id="overview" class="preview-header">
+  <h1>la-button</h1>
+  <p>The primary interactive element across the design system. Wraps a native <code style="font-family:monospace;color:#c3e88d;font-size:12px;">&lt;button&gt;</code> element with a consistent set of variants and sizes. Inherits typography from the host so it works seamlessly inside any component.</p>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label>Variant</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-variant="primary">primary</button>
+        <button class="btn-toggle" data-variant="secondary">secondary</button>
+        <button class="btn-toggle" data-variant="success">success</button>
+        <button class="btn-toggle" data-variant="danger">danger</button>
+        <button class="btn-toggle" data-variant="destructive">destructive</button>
+        <button class="btn-toggle" data-variant="ghost">ghost</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Size</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-size="sm">sm</button>
+        <button class="btn-toggle active" data-size="default">default</button>
+        <button class="btn-toggle" data-size="lg">lg</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Block</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-block="true">On</button>
+        <button class="btn-toggle active" data-block="false">Off</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Label text</label>
+      <input type="text" id="ctrl-label" value="Click me" />
+    </div>
+  </div>
+
+  <div class="controls-row">
+    <div class="control-group">
+      <label>Loading</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-loading="true">On</button>
+        <button class="btn-toggle active" data-loading="false">Off</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Loading label (Pattern A)</label>
+      <input type="text" id="ctrl-loading-label" placeholder="e.g. Saving…" value="" />
+    </div>
+
+    <div class="control-group">
+      <label>Hide label (Pattern C)</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-hide-label="true">On</button>
+        <button class="btn-toggle active" data-hide-label="false">Off</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Disabled</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-disabled="true">On</button>
+        <button class="btn-toggle active" data-disabled="false">Off</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Icon-left (test auto-route)</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-icon-left="true">On</button>
+        <button class="btn-toggle active" data-icon-left="false">Off</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div class="preview-group" style="margin-top:-12px;">
+  <div class="preview-frame" id="live-frame" style="min-height:80px;">
+    <la-button id="live-btn" variant="primary">Click me</la-button>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">All variants — default size</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary">Primary</la-button>
+    <la-button variant="secondary">Secondary</la-button>
+    <la-button variant="success">Success</la-button>
+    <la-button variant="danger">Danger</la-button>
+    <la-button variant="destructive">Destructive</la-button>
+    <la-button variant="ghost">Ghost</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Sizes — sm (28px) · default (36px) · lg (44px)</div>
+  <div class="preview-frame" style="gap:8px; align-items:center;">
+    <la-button variant="primary" size="sm">Small</la-button>
+    <la-button variant="primary">Default</la-button>
+    <la-button variant="primary" size="lg">Large</la-button>
+    <la-button variant="secondary" size="sm">Small</la-button>
+    <la-button variant="secondary">Default</la-button>
+    <la-button variant="secondary" size="lg">Large</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Block — full-width</div>
+  <div class="preview-frame" style="display:block;">
+    <la-button variant="primary" block>Full width button</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">With icons — icon-left, icon-right, and both</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary">
+      <i slot="icon-left" class="ph ph-plus"></i>
+      Add document
+    </la-button>
+    <la-button variant="primary">
+      Continue
+      <i slot="icon-right" class="ph ph-arrow-right"></i>
+    </la-button>
+    <la-button variant="secondary">
+      <i slot="icon-left" class="ph ph-arrow-left"></i>
+      Previous
+      <i slot="icon-right" class="ph-bold ph-dots-three"></i>
+    </la-button>
+    <la-button variant="secondary">
+      <i slot="icon-left" class="ph ph-key"></i>
+      Link API key
+    </la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Large — with icon</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary" size="lg">
+      <i slot="icon-left" class="ph ph-key"></i>
+      Link API key
+    </la-button>
+    <la-button variant="secondary" size="lg">
+      <i slot="icon-left" class="ph ph-key"></i>
+      Link API key
+    </la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Destructive — secondary surface with red text. Use in confirmation modals as the final delete/remove commit</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="destructive">Delete document</la-button>
+    <la-button variant="destructive">
+      <i slot="icon-left" class="ph ph-trash"></i>
+      Delete document
+    </la-button>
+    <la-button variant="destructive">Remove director</la-button>
+    <la-button variant="destructive" size="sm">
+      <i slot="icon-left" class="ph ph-trash"></i>
+      Delete
+    </la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">In context — header action pair</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="secondary" size="sm">Export</la-button>
+    <la-button variant="primary" size="sm">Add document</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Loading — all variants (no icon → spinner replaces label, button keeps its width)</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary" loading>Save</la-button>
+    <la-button variant="secondary" loading>Save</la-button>
+    <la-button variant="success" loading>Save</la-button>
+    <la-button variant="danger" loading>Save</la-button>
+    <la-button variant="ghost" loading>Save</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Loading — with icon-left (spinner replaces icon, label stays — auto-route)</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary" loading>
+      <i slot="icon-left" class="ph ph-floppy-disk"></i>
+      Save
+    </la-button>
+    <la-button variant="secondary" loading>
+      <i slot="icon-left" class="ph ph-floppy-disk"></i>
+      Save
+    </la-button>
+    <la-button variant="success" loading>
+      <i slot="icon-left" class="ph ph-check"></i>
+      Approve
+    </la-button>
+    <la-button variant="danger" loading>
+      <i slot="icon-left" class="ph ph-trash"></i>
+      Delete
+    </la-button>
+    <la-button variant="ghost" loading>
+      <i slot="icon-left" class="ph ph-arrow-left"></i>
+      Back
+    </la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Loading — sizes (sm-button → 12px spinner; default + lg → 16px spinner)</div>
+  <div class="preview-frame" style="gap:8px; align-items:center;">
+    <la-button variant="primary" size="sm" loading>Save</la-button>
+    <la-button variant="primary" loading>Save</la-button>
+    <la-button variant="primary" size="lg" loading>Save</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Pattern A — <code>loading-label</code> swaps the visible label during loading</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary" loading loading-label="Saving…">Save</la-button>
+    <la-button variant="success" loading loading-label="Approving…">Approve</la-button>
+    <la-button variant="danger" loading loading-label="Deleting…">Delete</la-button>
+    <la-button variant="primary" loading loading-label="Sending…">
+      <i slot="icon-left" class="ph ph-paper-plane-tilt"></i>
+      Send for signature
+    </la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Pattern C — <code>hide-label</code> hides the label, only spinner shows</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary" loading hide-label>Save</la-button>
+    <la-button variant="primary" loading hide-label>
+      <i slot="icon-left" class="ph ph-floppy-disk"></i>
+      Save
+    </la-button>
+    <la-button variant="secondary" loading hide-label>Cancel</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Loading + disabled — orthogonal; both apply (greying + spinner)</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary" loading disabled>Save</la-button>
+    <la-button variant="secondary" loading disabled>
+      <i slot="icon-left" class="ph ph-floppy-disk"></i>
+      Save
+    </la-button>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-button</h2>
+    <p>The primary interactive element across the design system. Wraps a native button with a consistent set of variants and sizes.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">ButtonVariant</span></td>
+          <td><span class="default">&#39;primary&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">&#39;default&#39; | &#39;sm&#39; | &#39;md&#39; | &#39;lg&#39;</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>pill</td>
+          <td><span class="default">pill</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>block</td>
+          <td><span class="default">block</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>loading</td>
+          <td><span class="default">loading</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>loadingLabel</td>
+          <td><span class="default">loading-label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>hideLabel</td>
+          <td><span class="default">hide-label</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_hasIconLeft</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Tracks whether the icon-left slot has consumer-supplied content.
+Reflected to the `has-icon-left` host attribute so CSS can route
+the spinner placement (leading-area vs middle-area).</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-divider"></div>
+
+<!-- CSS tokens -->
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <p style="margin-bottom:16px;">All sizing and colour values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>. Override per-instance via <code style="font-family:monospace;font-size:11px;">style</code> or a wrapping CSS rule.</p>
+
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Sizing</p>
+      <table class="docs-table">
+        <thead><tr><th>Token used</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-radius-md</td><td>Border radius</td></tr>
+          <tr><td>--la-button-height-sm</td><td>Small height (28px)</td></tr>
+          <tr><td>--la-button-height-default</td><td>Default height (36px)</td></tr>
+          <tr><td>--la-button-height-lg</td><td>Large height (44px)</td></tr>
+          <tr><td>--la-space-sm</td><td>Horizontal padding (sm) + icon gap</td></tr>
+          <tr><td>--la-space-lg</td><td>Horizontal padding (default)</td></tr>
+          <tr><td>--la-space-xl</td><td>Horizontal padding (lg)</td></tr>
+          <tr><td>--la-font-size-sm</td><td>Label size (sm)</td></tr>
+          <tr><td>--la-font-size-md</td><td>Label size (default)</td></tr>
+          <tr><td>--la-font-size-lg</td><td>Label size (lg)</td></tr>
+          <tr><td>--la-font-weight-medium</td><td>Label weight (default)</td></tr>
+          <tr><td>--la-font-weight-normal</td><td>Label weight (ghost variant)</td></tr>
+          <tr><td>--la-line-height</td><td>Inner line height</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour tokens (by variant)</p>
+      <table class="docs-table">
+        <thead><tr><th>Token used</th><th>Variant</th></tr></thead>
+        <tbody>
+          <tr><td>--la-color-primary</td><td>primary bg</td></tr>
+          <tr><td>--la-color-primary-fg</td><td>primary text</td></tr>
+          <tr><td>--la-color-secondary-bg</td><td>secondary bg</td></tr>
+          <tr><td>--la-color-secondary-text</td><td>secondary text</td></tr>
+          <tr><td>--la-color-secondary-border</td><td>secondary border</td></tr>
+          <tr><td>--la-color-success</td><td>success bg</td></tr>
+          <tr><td>--la-color-danger</td><td>danger bg</td></tr>
+          <tr><td>--la-color-danger-fg</td><td>danger text</td></tr>
+          <tr><td>--la-color-danger-text</td><td>destructive text + icon</td></tr>
+          <tr><td>--la-color-surface-danger</td><td>destructive hover bg</td></tr>
+          <tr><td>--la-color-border-danger</td><td>destructive hover border</td></tr>
+          <tr><td>--la-color-text-secondary</td><td>ghost text</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Usage -->
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Basic</p>
+      <div class="docs-code"><span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"primary"</span><span class="kw">&gt;</span>
+  Save changes
+<span class="kw">&lt;/la-button&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Small — header actions</p>
+      <div class="docs-code"><span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"secondary"</span> <span class="at">size</span>=<span class="str">"sm"</span><span class="kw">&gt;</span>Export<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"primary"</span> <span class="at">size</span>=<span class="str">"sm"</span><span class="kw">&gt;</span>Add item<span class="kw">&lt;/la-button&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Full width — form CTA</p>
+      <div class="docs-code"><span class="kw">&lt;la-button</span>
+  <span class="at">variant</span>=<span class="str">"primary"</span>
+  <span class="at">block</span>
+<span class="kw">&gt;</span>
+  Continue
+<span class="kw">&lt;/la-button&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Click handler</p>
+      <div class="docs-code"><span class="kw">const</span> btn = document.querySelector(<span class="str">'la-button'</span>);
+btn.addEventListener(<span class="str">'click'</span>, () =&gt; {
+  <span class="cm">// handle action</span>
+});</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Danger — destructive action</p>
+      <div class="docs-code"><span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"danger"</span><span class="kw">&gt;</span>
+  Delete document
+<span class="kw">&lt;/la-button&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">CSS part override</p>
+      <div class="docs-code"><span class="cm">/* Target the inner &lt;button&gt; via part */</span>
+la-button::part(button) {
+  letter-spacing: <span class="num">0.3px</span>;
+}</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Icon left — leading glyph</p>
+      <div class="docs-code"><span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"primary"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon-left"</span> <span class="at">class</span>=<span class="str">"ph ph-plus"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Add document
+<span class="kw">&lt;/la-button&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Icon right — directional hint</p>
+      <div class="docs-code"><span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"primary"</span><span class="kw">&gt;</span>
+  Continue
+  <span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon-right"</span> <span class="at">class</span>=<span class="str">"ph ph-arrow-right"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-button&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Icon left — complex glyph</p>
+      <div class="docs-code"><span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"secondary"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon-left"</span> <span class="at">class</span>=<span class="str">"ph ph-key"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Link API key
+<span class="kw">&lt;/la-button&gt;</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Notes -->
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Native semantics</strong> — The inner <code style="font-family:monospace;font-size:11px;">&lt;button&gt;</code> element preserves native behaviour: keyboard focus, Enter/Space activation, and form submission. Passing <code style="font-family:monospace;font-size:11px;">disabled</code> on <code style="font-family:monospace;font-size:11px;">la-button</code> reflects to the host attribute (which drives the <code style="font-family:monospace;font-size:11px;">:host([disabled])</code> dim styling) and forwards to the inner <code style="font-family:monospace;font-size:11px;">&lt;button&gt;</code> via attribute binding — so keyboard activation is blocked too, not just clicks.</div>
+    <div class="docs-note"><strong>Primary = action</strong> — Per the design language, <code style="font-family:monospace;font-size:11px;">variant="primary"</code> uses <code style="font-family:monospace;font-size:11px;">--la-color-primary</code> (#18181B). Use it only on the single next actionable step. Never use it decoratively.</div>
+    <div class="docs-note"><strong>Ghost for low-prominence actions</strong> — Use <code style="font-family:monospace;font-size:11px;">variant="ghost"</code> for tertiary actions: "View details", "Back", "Learn more". Resting state is subtle secondary-coloured text with transparent background; on hover it gains a pale-grey fill and darker text. Padding matches the default button so there's no layout shift on hover.</div>
+    <div class="docs-note"><strong>danger vs destructive</strong> — <code style="font-family:monospace;font-size:11px;">variant="danger"</code> is a solid red-filled button for high-visibility system alerts or irreversible one-shot actions. <code style="font-family:monospace;font-size:11px;">variant="destructive"</code> uses the secondary surface (same background, border, and shadow) but with <code style="font-family:monospace;font-size:11px;">--la-color-danger-text</code> for label and icon — quieter at rest, red tint on hover. Use <code style="font-family:monospace;font-size:11px;">destructive</code> as the final commit button in confirmation modals (Delete, Remove) to keep the modal feeling calm without losing the destructive signal.</div>
+    <div class="docs-note"><strong>Font inheritance</strong> — <code style="font-family:monospace;font-size:11px;">la-button</code> uses <code style="font-family:monospace;font-size:11px;">font-family: inherit</code> on the inner button, so it picks up the host document's typeface. No extra font setup needed.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveBtn = document.getElementById('live-btn');
+    const liveFrame = document.getElementById('live-frame');
+    const labelInput = document.getElementById('ctrl-label');
+    const loadingLabelInput = document.getElementById('ctrl-loading-label');
+
+    /** Re-render the live button content (text + optional icon-left)
+     *  so toggling icon-left preserves the current label. */
+    function renderLiveContent() {
+      const text = labelInput.value || 'Click me';
+      const showIconLeft = liveBtn.dataset.iconLeft === 'true';
+      liveBtn.innerHTML = '';
+      if (showIconLeft) {
+        const icon = document.createElement('i');
+        icon.setAttribute('slot', 'icon-left');
+        icon.className = 'ph ph-floppy-disk';
+        liveBtn.appendChild(icon);
+      }
+      liveBtn.appendChild(document.createTextNode(text));
+    }
+
+    function setExclusiveToggle(group, activeBtn) {
+      document
+        .querySelectorAll(`[data-${group}]`)
+        .forEach((b) => b.classList.remove('active'));
+      activeBtn.classList.add('active');
+    }
+
+    document.querySelectorAll('[data-variant]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setExclusiveToggle('variant', btn);
+        liveBtn.setAttribute('variant', btn.dataset.variant);
+      });
+    });
+
+    document.querySelectorAll('[data-size]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setExclusiveToggle('size', btn);
+        if (btn.dataset.size === 'default') liveBtn.removeAttribute('size');
+        else liveBtn.setAttribute('size', btn.dataset.size);
+      });
+    });
+
+    document.querySelectorAll('[data-block]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setExclusiveToggle('block', btn);
+        if (btn.dataset.block === 'true') {
+          liveBtn.setAttribute('block', '');
+          liveFrame.style.display = 'block';
+        } else {
+          liveBtn.removeAttribute('block');
+          liveFrame.style.display = '';
+        }
+      });
+    });
+
+    document.querySelectorAll('[data-loading]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setExclusiveToggle('loading', btn);
+        if (btn.dataset.loading === 'true') liveBtn.setAttribute('loading', '');
+        else liveBtn.removeAttribute('loading');
+      });
+    });
+
+    document.querySelectorAll('[data-hide-label]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setExclusiveToggle('hide-label', btn);
+        if (btn.dataset.hideLabel === 'true')
+          liveBtn.setAttribute('hide-label', '');
+        else liveBtn.removeAttribute('hide-label');
+      });
+    });
+
+    document.querySelectorAll('[data-disabled]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setExclusiveToggle('disabled', btn);
+        if (btn.dataset.disabled === 'true')
+          liveBtn.setAttribute('disabled', '');
+        else liveBtn.removeAttribute('disabled');
+      });
+    });
+
+    document.querySelectorAll('[data-icon-left]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        setExclusiveToggle('icon-left', btn);
+        liveBtn.dataset.iconLeft = btn.dataset.iconLeft;
+        renderLiveContent();
+      });
+    });
+
+    labelInput.addEventListener('input', () => {
+      renderLiveContent();
+    });
+
+    loadingLabelInput.addEventListener('input', () => {
+      const value = loadingLabelInput.value;
+      if (value) liveBtn.setAttribute('loading-label', value);
+      else liveBtn.removeAttribute('loading-label');
+    });
+  })();
+</script>
+
+
+</body>
+</html>

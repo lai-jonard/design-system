@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Forms — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<link rel="stylesheet" href="../la-tokens-root.css">
+<link rel="stylesheet" href="../la-base-root.css">
+<style>
+  .sub-hero h1 { font-size: 36px; font-weight: 600; color: var(--doc-text); letter-spacing: -0.3px; margin-bottom: 10px; }
+  .sub-hero p { font-size: 15px; color: var(--doc-text-2); max-width: 680px; line-height: 1.6; }
+  .sub-hero-crumb { font-size: 12px; color: var(--doc-text-3); margin-bottom: 12px; }
+  .sub-hero-crumb a { color: var(--doc-text-3); }
+  .form-demo { background: var(--la-color-bg); border: 1px solid var(--la-color-border-light); border-radius: var(--la-radius-lg); padding: var(--la-space-xl); }
+  .form-row { display: flex; flex-direction: column; gap: var(--la-space-sm); margin-bottom: var(--la-space-lg); }
+  .form-row:last-child { margin-bottom: 0; }
+  .form-row-side-by-side { display: grid; grid-template-columns: 1fr 1fr; gap: var(--la-space-md); margin-bottom: var(--la-space-lg); }
+  .form-label { font-size: var(--la-font-size-base); font-weight: var(--la-font-weight-semibold); color: var(--la-color-text); }
+  .form-hint { font-size: var(--la-font-size-md); color: var(--la-color-text-muted); }
+  .form-error { font-size: var(--la-font-size-md); color: var(--la-color-urgent-text); display: flex; align-items: center; gap: var(--la-space-xs); }
+  .form-required { color: var(--la-color-urgent); margin-left: var(--la-space-3xs); }
+  .form-submit-row { display: flex; gap: var(--la-space-sm); justify-content: flex-end; padding-top: var(--la-space-md); margin-top: var(--la-space-lg); border-top: 1px solid var(--la-color-border-light); }
+  .field-spec { display: grid; grid-template-columns: 200px 1fr; gap: var(--la-space-md); align-items: start; padding: var(--la-space-md) 0; border-bottom: 1px solid var(--la-color-border-light); }
+  .field-spec:last-child { border-bottom: 0; }
+  .field-spec strong { color: var(--la-color-text); font-weight: var(--la-font-weight-semibold); }
+  .field-spec span { color: var(--la-color-text-secondary); font-size: var(--la-font-size-base); line-height: 1.55; }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">Forms</h3>
+  <div class="docs-nav-group">
+    <a href="#overview"   class="docs-nav-item" data-nav-id="overview">Overview</a>
+    <a href="#field"      class="docs-nav-item" data-nav-id="field">Field anatomy</a>
+    <a href="#widths"     class="docs-nav-item" data-nav-id="widths">Field width</a>
+    <a href="#grouping"   class="docs-nav-item" data-nav-id="grouping">Multi-field grouping</a>
+    <a href="#validation" class="docs-nav-item" data-nav-id="validation">Validation</a>
+    <a href="#submit"     class="docs-nav-item" data-nav-id="submit">Submit row</a>
+    <a href="#patterns"   class="docs-nav-item" data-nav-id="patterns">Patterns</a>
+    <a href="#choosing"   class="docs-nav-item" data-nav-id="choosing">Native vs la-* primitive</a>
+    <a href="#references" class="docs-nav-item" data-nav-id="references">Cross-references</a>
+  </div>
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../foundations/">← All foundations</a>
+    <a class="docs-nav-item" href="../index.html">Design system home</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero" id="overview">
+  <div class="sub-hero-crumb"><a href="../foundations/">Foundations</a> / Forms</div>
+  <h1>Forms</h1>
+  <p>Composition rules for the form surfaces sprints 2 and 4 build — the dashboard welcome form, the unlock flow's text and multi-field steps, and any future form-bearing surface. The system has primitives for the field types (<code>la-input</code>, <code>la-select</code>, <code>la-checkbox</code>, <code>la-switch</code>); this page covers what sits <em>around</em> them — labels, hints, error text, submit rows, validation rhythm.</p>
+</section>
+
+<div class="docs">
+
+  <section class="docs-section" id="field">
+    <h2>Field anatomy</h2>
+    <p>One form field stacks four things vertically: label · control · hint · error. Hint and error are mutually exclusive on the same field — when error replaces hint, the slot's height stays roughly the same so the form doesn't jump.</p>
+    <div class="form-demo" style="max-width:480px;">
+      <div class="form-row">
+        <label for="fa-name" class="form-label">Company name<span class="form-required" aria-hidden="true">*</span></label>
+        <la-input id="fa-name" name="name" required></la-input>
+        <div class="form-hint">Use the legal name on your incorporation documents.</div>
+      </div>
+    </div>
+    <div style="margin-top:24px;">
+      <div class="field-spec"><strong>Label</strong><span>Above the control. <code>--la-font-size-base</code> / <code>--la-font-weight-semibold</code> / <code>--la-color-text</code>. Sentence case. Verb-free — describes the field, not the action.</span></div>
+      <div class="field-spec"><strong>Required marker</strong><span>Single <code>*</code> in <code>--la-color-urgent</code> appended inline to the label, never on the input. Mark every required field — don't mark optional ones (some forms invert this; we do not).</span></div>
+      <div class="field-spec"><strong>Control</strong><span>Reach for an <code>la-*</code> primitive first (<code>la-input</code>, <code>la-select</code>, <code>la-checkbox</code>, <code>la-switch</code>). Native controls only when the system primitive doesn't fit — see <a href="../foundations/foundations-form-controls.html">Native form controls</a>.</span></div>
+      <div class="field-spec"><strong>Hint</strong><span>One short sentence under the control. <code>--la-font-size-md</code> / <code>--la-color-text-muted</code>. Only when the field needs context the label can't carry alone — never restate the label.</span></div>
+      <div class="field-spec"><strong>Error</strong><span>Replaces hint on validation failure. <code>--la-font-size-md</code> / <code>--la-color-urgent-text</code>. Lead with a Phosphor warning glyph (<code>ph-fill ph-warning-circle</code>) so colour isn't the only signal.</span></div>
+    </div>
+    <div class="docs-note" style="margin-top:16px;">
+      <strong>Why label-above-control, never label-beside?</strong> Stacked labels survive long copy at any width and translate cleanly to tablet/mobile. Side-by-side labels collapse awkwardly when the control grows or shrinks. The Sprint 2 welcome form and Sprint 4 unlock form both follow this rule.
+    </div>
+  </section>
+
+  <section class="docs-section" id="widths">
+    <h2>Field width</h2>
+    <p>Every form lives inside a constrained surface. We don't stretch text inputs to the full container width when a sensible cap exists — long text inputs read as expensive infrastructure.</p>
+    <table class="docs-table">
+      <thead><tr><th>Field type</th><th>Width</th><th>Reason</th></tr></thead>
+      <tbody>
+        <tr><td>Short text (name, email, code)</td><td>240–320px</td><td>Comfortably fits the value with margin. Never full-width on a wide surface.</td></tr>
+        <tr><td>Address line</td><td>100% of column (capped at 480px)</td><td>Real-world addresses run long.</td></tr>
+        <tr><td>Long text / description</td><td>100% of column (capped at 560px)</td><td>Match optimal reading line length.</td></tr>
+        <tr><td>Single-select / dropdown</td><td>240–360px</td><td>Caps trigger width — option list still expands as needed.</td></tr>
+        <tr><td>Number (count, year, percent)</td><td>80–120px</td><td>Numeric values are short; wider feels off.</td></tr>
+        <tr><td>Date</td><td>140–180px</td><td>Format-aware width.</td></tr>
+      </tbody>
+    </table>
+    <p style="margin-top:16px;">Caps are <em>caps</em> — if the column is narrower, the field shrinks with it. Set <code>max-width</code> on the field, not <code>width</code>, so the form stays responsive.</p>
+  </section>
+
+  <section class="docs-section" id="grouping">
+    <h2>Multi-field grouping</h2>
+    <p>When two or three fields belong together (street + city + zip; first name + last name), pair them in a single row at desktop widths. Stack them when the column gets too narrow — don't try to fit four fields side-by-side regardless of viewport.</p>
+    <div class="form-demo" style="max-width:560px;">
+      <fieldset style="border:none;padding:0;margin:0;">
+        <legend class="form-label" style="padding:0;margin-bottom:var(--la-space-md);">Registered agent</legend>
+        <div class="form-row">
+          <label for="fg-agent-name" class="form-label">Agent name<span class="form-required" aria-hidden="true">*</span></label>
+          <la-input id="fg-agent-name" required></la-input>
+        </div>
+        <div class="form-row-side-by-side">
+          <div class="form-row" style="margin-bottom:0;">
+            <label for="fg-agent-state" class="form-label">State<span class="form-required" aria-hidden="true">*</span></label>
+            <la-input id="fg-agent-state" required></la-input>
+          </div>
+          <div class="form-row" style="margin-bottom:0;">
+            <label for="fg-agent-zip" class="form-label">ZIP<span class="form-required" aria-hidden="true">*</span></label>
+            <la-input id="fg-agent-zip" required></la-input>
+          </div>
+        </div>
+        <div class="form-row">
+          <label for="fg-agent-email" class="form-label">Agent email</label>
+          <la-input id="fg-agent-email" type="email"></la-input>
+          <div class="form-hint">Optional — used for notification routing.</div>
+        </div>
+      </fieldset>
+    </div>
+    <div class="docs-note" style="margin-top:16px;">
+      <strong>Use real <code>&lt;fieldset&gt;</code> + <code>&lt;legend&gt;</code>.</strong> Group related fields semantically, then style with <code>border: none</code>. Screen readers announce the legend before each grouped field — that's the accessibility win that's hard to replicate with a styled heading.
+    </div>
+  </section>
+
+  <section class="docs-section" id="validation">
+    <h2>Validation states</h2>
+    <p>Validate on blur for individual fields. Validate on submit for the whole form. Do not validate on every keystroke — it punishes the user mid-type. Errors live with the field they describe, not as a banner on top.</p>
+    <div class="form-demo" style="max-width:480px;">
+      <div class="form-row">
+        <label for="fv-email" class="form-label">Email<span class="form-required" aria-hidden="true">*</span></label>
+        <la-input id="fv-email" type="email" error error-message="Enter a valid email address"></la-input>
+      </div>
+      <div class="form-row">
+        <label for="fv-zip" class="form-label">ZIP code</label>
+        <la-input id="fv-zip" placeholder="e.g. 94110"></la-input>
+        <div class="form-hint">Five digits. We use it to confirm jurisdiction.</div>
+      </div>
+    </div>
+    <table class="docs-table" style="margin-top:24px;">
+      <thead><tr><th>Trigger</th><th>What runs</th><th>Where the result shows</th></tr></thead>
+      <tbody>
+        <tr><td>Blur on a single field</td><td>That field's validators</td><td>Inline below the field — replaces hint with error text.</td></tr>
+        <tr><td>Submit on the form</td><td>All validators</td><td>Errors appear under each failing field. Submit re-enables once everything passes.</td></tr>
+        <tr><td>Backend validation</td><td>Server response</td><td>Either a step-level message (<code>la-unlock-panel</code> failed state) or a <code>la-toast variant="danger"</code> if the entire submit failed.</td></tr>
+      </tbody>
+    </table>
+    <div class="docs-note" style="margin-top:16px;">
+      <strong>Submit disabled until valid.</strong> The submit button stays disabled until every required field passes its validator. Don't let users click submit only to be told their form is incomplete — disable it and let the absence speak.
+    </div>
+  </section>
+
+  <section class="docs-section" id="submit">
+    <h2>Submit row</h2>
+    <p>Right-aligned. Primary action at the right edge, secondary action(s) to its left. One thin divider above so the row reads as a footer.</p>
+    <div class="form-demo" style="max-width:480px;">
+      <div class="form-row">
+        <label for="sr-name" class="form-label">Name on file<span class="form-required" aria-hidden="true">*</span></label>
+        <la-input id="sr-name" required></la-input>
+      </div>
+      <div class="form-submit-row">
+        <la-button variant="ghost">Cancel</la-button>
+        <la-button variant="primary">Save</la-button>
+      </div>
+    </div>
+    <div style="margin-top:16px;">
+      <div class="field-spec"><strong>Verb-first labels</strong><span>"Save", "Send", "Submit". Sentence case. Match the verb to the outcome the user is causing.</span></div>
+      <div class="field-spec"><strong>One primary, optional secondary</strong><span>Primary lives at the right. Cancel/back buttons sit to its left as <code>variant="ghost"</code> — never a second primary.</span></div>
+      <div class="field-spec"><strong>Modal forms keep the same shape</strong><span>The submit row sits at the bottom of the modal body, separated by the same border-top divider.</span></div>
+    </div>
+  </section>
+
+  <section class="docs-section" id="patterns">
+    <h2>Patterns the system already uses</h2>
+
+    <h3>Welcome form (Sprint 2 dashboard, pre-L0)</h3>
+    <p>Two fields (jurisdiction + company name) and one submit. Renders inline above the widget grid. Submits via in-socket re-render — no page reload, no toast unless the API errors.</p>
+    <div class="form-demo" style="max-width:560px;margin-bottom:32px;">
+      <div class="form-row">
+        <label for="wf-jurisdiction" class="form-label">Jurisdiction<span class="form-required" aria-hidden="true">*</span></label>
+        <la-select id="wf-jurisdiction" placeholder="Select a state…" required>
+          <la-option value="DE">Delaware</la-option>
+          <la-option value="CA">California</la-option>
+          <la-option value="NY">New York</la-option>
+        </la-select>
+        <div class="form-hint">Where your company is incorporated.</div>
+      </div>
+      <div class="form-row">
+        <label for="wf-company" class="form-label">Company name<span class="form-required" aria-hidden="true">*</span></label>
+        <la-input id="wf-company" placeholder="e.g. Acme Pty Ltd" required></la-input>
+      </div>
+      <div class="form-submit-row">
+        <la-button variant="primary">Continue</la-button>
+      </div>
+    </div>
+
+    <h3>Multi-field unlock step (Sprint 4 framework, Sprint 7 governance content)</h3>
+    <p>Three or four fields driven by <code>stepContent.fields</code> on <code>la-unlock-panel</code>. Each <code>{label, placeholder}</code> renders one labelled input. Skip and Submit live in the panel's step footer.</p>
+    <div class="form-demo" style="max-width:560px;">
+      <div class="form-row">
+        <label for="us-name" class="form-label">Director full name<span class="form-required" aria-hidden="true">*</span></label>
+        <la-input id="us-name" placeholder="As shown on the formation document" required></la-input>
+      </div>
+      <div class="form-row">
+        <label for="us-role" class="form-label">Role<span class="form-required" aria-hidden="true">*</span></label>
+        <la-input id="us-role" placeholder="e.g. Co-founder &amp; CEO" required></la-input>
+      </div>
+      <div class="form-row">
+        <label for="us-email" class="form-label">Email</label>
+        <la-input id="us-email" type="email" placeholder="director@example.com"></la-input>
+        <div class="form-hint">Optional — used for invite notifications later.</div>
+      </div>
+    </div>
+    <div class="docs-note" style="margin-top:16px;">
+      <strong>Inline anti-pattern in <code>la-unlock-panel</code>.</strong> The current source renders raw <code>label + input</code> instead of <code>la-input</code>. Once the panel is refactored to compose the primitive, the field rhythm above is what each row becomes. See the <a href="../components/la-unlock-panel.html">unlock panel Notes</a>.
+    </div>
+  </section>
+
+  <section class="docs-section" id="choosing">
+    <h2>Native vs <code>la-*</code> primitive</h2>
+    <p>Reach for the <code>la-*</code> primitive first. Use a native control when the primitive doesn't fit and a separate component would be over-engineered.</p>
+    <table class="docs-table">
+      <thead><tr><th>Need</th><th>Default</th><th>Fall back to native when</th></tr></thead>
+      <tbody>
+        <tr><td>Text input</td><td><code>la-input</code></td><td>Never — always use the primitive.</td></tr>
+        <tr><td>Email / URL / number</td><td><code>la-input type="email|url|number"</code></td><td>Never — always use the primitive.</td></tr>
+        <tr><td>Single-select dropdown</td><td><code>la-select</code> + <code>la-option</code></td><td>Inside an embedded LiveView form whose serialiser only handles native <code>&lt;select&gt;</code>; track to migrate.</td></tr>
+        <tr><td>Boolean</td><td><code>la-checkbox</code> or <code>la-switch</code></td><td>Inside a <code>la-data-table</code> selection cell — the table primitive owns the box.</td></tr>
+        <tr><td>Long-form text</td><td><em>Native <code>&lt;textarea&gt;</code></em> styled by <code>la-base-root.css</code></td><td>System primitive doesn't exist yet; use native + base styling.</td></tr>
+        <tr><td>Yes/no choice</td><td><em>Pending <code>la-radio-group</code> / <code>la-card-picker</code></em></td><td>Today: native <code>&lt;input type="radio"&gt;</code> with shared name. Schedule the primitive build.</td></tr>
+        <tr><td>File upload</td><td><code>la-upload-box</code></td><td>Never — always use the primitive.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="docs-section" id="references">
+    <h2>Cross-references</h2>
+    <ul class="docs-list">
+      <li><a href="../foundations/foundations-form-controls.html">Native form controls</a> — what raw <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;label&gt;</code> look like under <code>la-base-root.css</code></li>
+      <li><a href="../foundations/foundations-page-layouts.html">Page layouts</a> — where the welcome form (single-column dashboard) and unlock form (full-page blocking flow) sit</li>
+      <li><a href="../components/la-input.html">la-input</a> · <a href="../components/la-select.html">la-select</a> · <a href="../components/la-checkbox.html">la-checkbox</a> · <a href="../components/la-switch.html">la-switch</a> · <a href="../components/la-button.html">la-button</a> · <a href="../components/la-upload-box.html">la-upload-box</a></li>
+    </ul>
+  </section>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

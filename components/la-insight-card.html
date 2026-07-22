@@ -1,0 +1,637 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-insight-card — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-insight-card</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-insight-card</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-insight-card</h1>
+<p>Surfaces a single legal risk or action item with urgency signals so users can triage at a glance. Rendered by <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-legal-area-page</code> inside the Urgent and Proactive tabs. The entire card body is clickable — wire <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-insight-click</code> to open <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-insight-modal</code> with the full detail. When other insights share the same source document, related-insight one-liners appear at the bottom of the card — clicking one fires <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-insight-navigate</code> with the target insight id instead of opening this card's modal.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Visual regions of the rendered component</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;" id="anatomy-wrap">
+<la-insight-card
+  id="anatomy-card"
+  severity="urgent"
+  source-type="legal"
+  headline="Unsigned employment contract — Jane Lee"
+  explanation="An unsigned contract is not legally binding and will fail due diligence review. The agreement must be executed by both parties before employment can be formalised.">
+</la-insight-card>
+</div>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Severity</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-sev="urgent">Urgent</button>
+<button class="btn-toggle" data-sev="proactive">Proactive</button>
+<button class="btn-toggle" data-sev="resolved">Resolved</button>
+</div>
+</div>
+<div class="control-group">
+<label>Source type</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-src="legal">Legal</button>
+<button class="btn-toggle" data-src="best_practice">Best practice</button>
+</div>
+</div>
+</div>
+<div class="controls-row">
+<div class="control-group">
+<label>Entity</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-entity="person">Person</button>
+<button class="btn-toggle" data-entity="company">Company</button>
+<button class="btn-toggle" data-entity="none">None</button>
+</div>
+</div>
+<div class="control-group">
+<label>Deadline</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-dates="yes">Show</button>
+<button class="btn-toggle" data-dates="no">Hide</button>
+</div>
+</div>
+<div class="control-group">
+<label>Related insights</label>
+<div class="btn-group">
+<button class="btn-toggle" data-related="yes">Show</button>
+<button class="btn-toggle active" data-related="no">Hide</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;">
+<la-insight-card id="live-card" severity="urgent" source-type="legal" headline="Unsigned employment contract — Jane Lee" explanation="An unsigned contract is not legally binding and will fail due diligence review."></la-insight-card>
+</div>
+</div>
+<div id="event-log" style="margin-top:8px; padding:10px 14px; background:#1a1a2e; border-radius:6px; font-family:monospace; font-size:11px; color:#a0a0b0; min-height:40px; display:flex; flex-direction:column; gap:4px;">
+<span style="color:#555; font-style:italic;">— events will appear here —</span>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Urgent — Legal — entity + deadline</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;">
+<la-insight-card id="snap-urgent" severity="urgent" source-type="legal" headline="Unsigned employment contract — Jane Lee" explanation="An unsigned contract is not legally binding and will fail due diligence review."></la-insight-card>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Proactive — Best practice — no entity, no deadline</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;">
+<la-insight-card severity="proactive" source-type="best_practice" headline="No employee handbook on file" explanation="An employee handbook reduces legal exposure and demonstrates good governance to investors."></la-insight-card>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Resolved</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;">
+<la-insight-card id="snap-resolved" severity="resolved" source-type="legal" headline="Missing non-compete clause — John Smith" explanation="Updated contract uploaded with non-compete clause included."></la-insight-card>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">With related insights one-liners</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;">
+<la-insight-card id="snap-related" severity="urgent" source-type="legal" headline="Your Shareholder Agreement is missing a drag-along clause" explanation="Without a drag-along clause, minority shareholders can block an acquisition."></la-insight-card>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Company entity</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;">
+<la-insight-card id="snap-company" severity="proactive" source-type="legal" headline="No registered business address on file" explanation="A registered address is required for correspondence with ASIC and other regulatory bodies."></la-insight-card>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Minimal — headline only, no tags</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="max-width:480px;width:100%;">
+<la-insight-card severity="proactive" headline="Review your shareholder register" explanation="Ensure the register is up to date following the most recent share issuance."></la-insight-card>
+</div>
+</div>
+</div>
+
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-insight-card</h2>
+    <p>Surfaces a single legal risk or action item with urgency signals so users can triage at a glance. Rendered by la-legal-area-page inside the Urgent and Proactive tabs. Fires la-insight-click when the card body is clicked and la-insight-navigate when a related-insight one-liner is clicked.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>severity</td>
+          <td><span class="default">severity</span></td>
+          <td><span class="type">InsightSeverity</span></td>
+          <td><span class="default">&#39;urgent&#39;</span></td>
+          <td>Severity level — always backend-assigned. `'urgent'` or `'proactive'` for active insights; `'resolved'` for the resolved list.</td>
+        </tr>
+      
+        <tr>
+          <td>headline</td>
+          <td><span class="default">headline</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Plain-English headline — what the user needs to do.</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Optional one-liner shown below the headline on the card.</td>
+        </tr>
+      
+        <tr>
+          <td>insightType</td>
+          <td><span class="default">insight-type</span></td>
+          <td><span class="type">InsightType</span></td>
+          <td><span class="default">&#39;action_required&#39;</span></td>
+          <td>Insight type — determines the resolution widget in `la-insight-modal`. Not rendered on the card.</td>
+        </tr>
+      
+        <tr>
+          <td>sourceType</td>
+          <td><span class="default">source-type</span></td>
+          <td><span class="type">InsightSourceType</span></td>
+          <td><span class="default">&#39;legal&#39;</span></td>
+          <td>Source type — renders the type tag. `'legal'` → "Required by Law"; `'best_practice'` → "Best practice".</td>
+        </tr>
+      
+        <tr>
+          <td>entity</td>
+          <td><span class="default">entity</span></td>
+          <td><span class="type">{name: string; type: string; id: string} | undefined</span></td>
+          <td>—</td>
+          <td>Optional entity context (person or company). Renders as a badge with icon. JS property only.</td>
+        </tr>
+      
+        <tr>
+          <td>dates</td>
+          <td><span class="default">dates</span></td>
+          <td><span class="type">{date: string; label: string}[] | undefined</span></td>
+          <td>—</td>
+          <td>All dates associated with the insight. Card shows only `dates[0]` (nearest). Pass sorted nearest-first. JS property only.</td>
+        </tr>
+      
+        <tr>
+          <td>relatedInsights</td>
+          <td><span class="default">relatedInsights</span></td>
+          <td><span class="type">{id: string; headline: string; legalArea: string}[] | undefined</span></td>
+          <td>—</td>
+          <td>Related insights on the same source document. Each renders as a clickable one-liner below the tags row. JS property only.</td>
+        </tr>
+      
+        <tr>
+          <td>explanation</td>
+          <td><span class="default">explanation</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Why this is an issue — passed through in `la-insight-click` detail for the modal. Not rendered on the card.</td>
+        </tr>
+      
+        <tr>
+          <td>reason</td>
+          <td><span class="default">reason</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Legacy — use `explanation`. Kept for backward compat during Sprint 5 transition. Included in `la-insight-click` detail; not rendered on the card.</td>
+        </tr>
+      
+        <tr>
+          <td>action</td>
+          <td><span class="default">action</span></td>
+          <td><span class="type">{label: string; event: string} | undefined</span></td>
+          <td>—</td>
+          <td>Legacy — pre-Sprint-5 action API. Included in `la-insight-click` detail but not rendered.</td>
+        </tr>
+      
+        <tr>
+          <td>subItems</td>
+          <td><span class="default">subItems</span></td>
+          <td><span class="type">GroupSubItem[] | undefined</span></td>
+          <td>—</td>
+          <td>Sub-items for grouped insights (same obligation, multiple entities). When set with 2+ items, renders an entity-count badge instead of the single `entity` badge.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-insight-click</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All values come from the design token system in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Card chrome</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Card background</td></tr>
+<tr><td>--la-color-border-light</td><td>Card border (1px)</td></tr>
+<tr><td>--la-radius-lg</td><td>Card corner radius</td></tr>
+<tr><td>--la-space-lg</td><td>Card padding</td></tr>
+<tr><td>--la-space-sm</td><td>Card margin-bottom between stacked cards</td></tr>
+<tr><td>--la-shadow-sm</td><td>Hover elevation shadow</td></tr>
+<tr><td>--dur-fast / --ease-out</td><td>Box-shadow hover transition</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Accent stripe + severity</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-urgent</td><td>Urgent accent stripe colour</td></tr>
+<tr><td>--la-color-text-muted</td><td>Proactive + resolved accent stripe colour · resolved headline colour · related label colour</td></tr>
+<tr><td>--la-color-secondary-border</td><td>Default accent colour (fallback — severity not yet set)</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Content</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-font-size-lg</td><td>Headline font size</td></tr>
+<tr><td>--la-font-weight-medium</td><td>Headline font weight</td></tr>
+<tr><td>--la-space-xs</td><td>Headline bottom margin · tags gap · related-label bottom margin</td></tr>
+<tr><td>--la-space-md</td><td>Body flex gap (accent stripe to content)</td></tr>
+<tr><td>--la-font-size-sm</td><td>Related link + related label font size</td></tr>
+<tr><td>--la-font-size-xs</td><td>Related area label font size</td></tr>
+<tr><td>--la-color-primary</td><td>Related link colour</td></tr>
+<tr><td>--la-space-3xs</td><td>Related link vertical padding</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Focus + interaction</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-border-focus</td><td>Focus ring colour</td></tr>
+<tr><td>--la-focus-ring-width</td><td>Focus ring width</td></tr>
+<tr><td>--la-focus-ring-offset</td><td>Focus ring offset</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+<p style="margin-top:12px;font-size:12px;color:#666;"><strong>Gate 8 exceptions (accepted):</strong> accent stripe <code style="font-family:monospace;font-size:11px;">width: 4px</code> — visual-tuning constant with no matching token. Matches la-data-table and la-stepper glyph-detail precedent.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic card with entity and deadline</p>
+<div class="docs-code"><span class="kw">const</span> card = document.querySelector(<span class="str">'la-insight-card'</span>);
+card.setAttribute(<span class="str">'severity'</span>, <span class="str">'urgent'</span>);
+card.setAttribute(<span class="str">'source-type'</span>, <span class="str">'legal'</span>);
+card.setAttribute(<span class="str">'headline'</span>, <span class="str">'Unsigned employment contract — Jane Lee'</span>);
+card.setAttribute(<span class="str">'explanation'</span>, <span class="str">'An unsigned contract...'</span>);
+card.entity = { name: <span class="str">'Jane Lee'</span>, type: <span class="str">'person'</span>, id: <span class="str">'p1'</span> };
+card.dates  = [{ date: <span class="str">'30 Jun 2026'</span>, label: <span class="str">'Contract deadline'</span> }];</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listening for la-insight-click</p>
+<div class="docs-code">card.addEventListener(<span class="str">'la-insight-click'</span>, (e) => {
+  <span class="cm">// e.detail contains the full InsightData</span>
+  openModal(e.detail);
+});
+
+<span class="cm">// or listen on an ancestor — event bubbles</span>
+page.addEventListener(<span class="str">'la-insight-click'</span>, openModal);</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Related insights — cross-insight navigation</p>
+<div class="docs-code">card.relatedInsights = [
+  {
+    id: <span class="str">'ins_002'</span>,
+    headline: <span class="str">'Missing IP assignment for Jane Lee'</span>,
+    legalArea: <span class="str">'IP Protection'</span>,
+  },
+];
+
+card.addEventListener(<span class="str">'la-insight-navigate'</span>, (e) => {
+  <span class="cm">// e.detail.id is the target insight to open</span>
+  navigateToInsight(e.detail.id);
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Setting all Sprint 5 data contract fields</p>
+<div class="docs-code">card.setAttribute(<span class="str">'insight-type'</span>, <span class="str">'document_issue'</span>);
+card.setAttribute(<span class="str">'source-type'</span>, <span class="str">'legal'</span>);
+card.entity = { name: <span class="str">'Jane Lee'</span>, type: <span class="str">'person'</span>, id: <span class="str">'p1'</span> };
+card.dates  = [
+  { date: <span class="str">'30 Jun 2026'</span>, label: <span class="str">'Contract deadline'</span> },
+  { date: <span class="str">'1 Jul 2026'</span>,  label: <span class="str">'Review period ends'</span> },
+];
+card.relatedInsights = [
+  { id: <span class="str">'ins_003'</span>, headline: <span class="str">'...'</span>, legalArea: <span class="str">'IP Protection'</span> },
+];
+<span class="cm">// Card shows only the nearest date (dates[0])
+// Modal receives the full dates array</span></div>
+</div>
+</div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Severity is always backend-assigned.</strong> The card never computes its own severity. Pass <code style="font-family:monospace;font-size:11px;">severity</code> from the insight payload — <code style="font-family:monospace;font-size:11px;">'urgent'</code> or <code style="font-family:monospace;font-size:11px;">'proactive'</code> for active insights, <code style="font-family:monospace;font-size:11px;">'resolved'</code> for the resolved list.</div>
+<div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">explanation</code> is the current prop.</strong> <code style="font-family:monospace;font-size:11px;">reason</code> is kept on the type for backward compatibility during the Sprint 5 transition. Use <code style="font-family:monospace;font-size:11px;">explanation</code> going forward — the card does not render either prop visually, but both are included in <code style="font-family:monospace;font-size:11px;">la-insight-click</code> event detail for the modal.</div>
+<div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">entity</code>, <code style="font-family:monospace;font-size:11px;">dates</code>, and <code style="font-family:monospace;font-size:11px;">relatedInsights</code> are JS-only props.</strong> Arrays and objects cannot be set via HTML attribute. Always assign as JavaScript properties: <code style="font-family:monospace;font-size:11px;">card.dates = [...]</code>.</div>
+<div class="docs-note"><strong>Only the nearest date renders on the card.</strong> The card shows <code style="font-family:monospace;font-size:11px;">dates[0]</code> only — pass dates sorted nearest-first (backend responsibility). The full <code style="font-family:monospace;font-size:11px;">dates</code> array is passed through in <code style="font-family:monospace;font-size:11px;">la-insight-click</code> detail so the modal can show all dates.</div>
+<div class="docs-note"><strong>Related insight clicks do not bubble to <code style="font-family:monospace;font-size:11px;">la-insight-click</code>.</strong> The <code style="font-family:monospace;font-size:11px;">la-insight-navigate</code> event fires with <code style="font-family:monospace;font-size:11px;">stopPropagation</code> — only one event fires per user interaction. Wire <code style="font-family:monospace;font-size:11px;">la-insight-navigate</code> to navigate to that insight's modal (e.g. via <code style="font-family:monospace;font-size:11px;">/insights/{id}</code> or by swapping modal content directly if the insight is on the same page).</div>
+<div class="docs-note"><strong>Source type tag copy:</strong> <code style="font-family:monospace;font-size:11px;">'legal'</code> → "Legal"; <code style="font-family:monospace;font-size:11px;">'best_practice'</code> → "Best practice". Never exposed to users as code strings — the card renders the human-readable label.</div>
+<div class="docs-note"><strong>Entity icon convention:</strong> <code style="font-family:monospace;font-size:11px;">entity.type === 'person'</code> → <code style="font-family:monospace;font-size:11px;">ph-user</code>; any other type → <code style="font-family:monospace;font-size:11px;">ph-building</code>. The card renders the icon inside the entity badge automatically.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+(function () {
+  customElements.whenDefined('la-insight-card').then(() => {
+
+    // ── Snapshot data ─────────────────────────────────────────────────────────
+    const ENTITIES = {
+      person:  { name: 'Jane Lee',     type: 'person',  id: 'p1' },
+      company: { name: 'Acme Pty Ltd', type: 'company', id: 'c1' },
+    };
+    const DATES = [{ date: '30 Jun 2026', label: 'Contract deadline' }];
+    const RELATED = [
+      { id: 'ins_002', headline: 'Missing IP assignment for Jane Lee', legalArea: 'IP Protection' },
+    ];
+
+    const SNAP_CONTENT = {
+      urgent:    { headline: 'Unsigned employment contract — Jane Lee',      explanation: 'An unsigned contract is not legally binding and will fail due diligence review.' },
+      proactive: { headline: 'No employee handbook on file',                 explanation: 'An employee handbook reduces legal exposure and demonstrates good governance.' },
+      resolved:  { headline: 'Missing non-compete clause — John Smith',      explanation: 'Updated contract uploaded with non-compete clause included.' },
+    };
+
+    // ── Live card ──────────────────────────────────────────────────────────────
+    const liveCard = document.getElementById('live-card');
+    let currentSev = 'urgent';
+    let currentSrc = 'legal';
+    let currentEntity = 'person';
+    let currentDates  = true;
+    let currentRelated = false;
+
+    function updateLiveCard() {
+      const content = SNAP_CONTENT[currentSev];
+      liveCard.setAttribute('severity', currentSev);
+      liveCard.setAttribute('source-type', currentSrc);
+      liveCard.setAttribute('headline', content.headline);
+      liveCard.setAttribute('explanation', content.explanation);
+      liveCard.entity          = currentEntity === 'none' ? undefined : ENTITIES[currentEntity];
+      liveCard.dates           = currentDates   ? DATES   : undefined;
+      liveCard.relatedInsights = currentRelated ? RELATED : undefined;
+    }
+
+    document.querySelectorAll('[data-sev]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-sev]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSev = btn.dataset.sev;
+        updateLiveCard();
+      });
+    });
+    document.querySelectorAll('[data-src]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-src]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentSrc = btn.dataset.src;
+        updateLiveCard();
+      });
+    });
+    document.querySelectorAll('[data-entity]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-entity]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentEntity = btn.dataset.entity;
+        updateLiveCard();
+      });
+    });
+    document.querySelectorAll('[data-dates]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-dates]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentDates = btn.dataset.dates === 'yes';
+        updateLiveCard();
+      });
+    });
+    document.querySelectorAll('[data-related]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-related]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        currentRelated = btn.dataset.related === 'yes';
+        updateLiveCard();
+      });
+    });
+
+    // ── Event log ─────────────────────────────────────────────────────────────
+    const eventLog = document.getElementById('event-log');
+    let logEmpty = true;
+
+    function logEvent(name, detail) {
+      if (logEmpty) { eventLog.innerHTML = ''; logEmpty = false; }
+      const line = document.createElement('div');
+      line.style.cssText = 'display:flex; gap:8px; align-items:baseline; flex-wrap:wrap;';
+      const summary = name === 'la-insight-click'
+        ? `severity:${detail.severity} sourceType:${detail.sourceType}`
+        : `id:${detail.id}`;
+      line.innerHTML = `<span style="color:#7c7c9a;">${name}</span> <span style="color:#c3e88d;">${summary}</span>`;
+      eventLog.prepend(line);
+      if (eventLog.children.length > 5) eventLog.removeChild(eventLog.lastChild);
+    }
+
+    liveCard.addEventListener('la-insight-click',    e => logEvent('la-insight-click',    e.detail));
+    liveCard.addEventListener('la-insight-navigate', e => logEvent('la-insight-navigate', e.detail));
+
+    updateLiveCard();
+
+    // ── Anatomy card ──────────────────────────────────────────────────────────
+    const anatomyCard = document.getElementById('anatomy-card');
+    anatomyCard.entity = ENTITIES.person;
+    anatomyCard.dates  = DATES;
+
+    // ── Snapshots ─────────────────────────────────────────────────────────────
+    const snapUrgent = document.getElementById('snap-urgent');
+    snapUrgent.entity = ENTITIES.person;
+    snapUrgent.dates  = DATES;
+
+    const snapResolved = document.getElementById('snap-resolved');
+    snapResolved.entity = { name: 'John Smith', type: 'person', id: 'p2' };
+
+    const snapRelated = document.getElementById('snap-related');
+    snapRelated.entity = ENTITIES.person;
+    snapRelated.relatedInsights = [
+      { id: 'ins_002', headline: 'Missing IP assignment for Jane Lee', legalArea: 'IP Protection' },
+      { id: 'ins_003', headline: 'Director consent form not signed',    legalArea: 'Corporate Governance' },
+    ];
+
+    const snapCompany = document.getElementById('snap-company');
+    snapCompany.entity = ENTITIES.company;
+  });
+})();
+</script>
+
+
+</body>
+</html>

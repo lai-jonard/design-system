@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-info-hint — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-info-hint</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-info-hint</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-info-hint</h1>
+<p>Inline contextual help — a small info-icon affordance next to a term, stat, or control that reveals a light tooltip with more explanation on hover or focus. Use to unpack jargon (<em>DD Readiness</em>, <em>Company manual</em>), explain metric definitions, or clarify non-obvious rules without taking space on the page. Pairs a <code style="font-family:monospace;font-size:11px;">ph-info</code> icon with <code style="font-family:monospace;font-size:11px;">la-tooltip appearance="light"</code>, keeping the common case one component deep.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Visual regions of the rendered component</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="align-items:center;justify-content:center;padding:200px 64px;overflow:visible;">
+<span style="font-family:Inter,sans-serif;font-size:13px;color:#18181B;display:inline-flex;align-items:center;gap:6px;">
+              DD Readiness
+              <la-info-hint hint="Measures how ready your company is for a due-diligence review. Updates automatically as documents and insights are resolved." id="anatomy-hint" position="right">
+</la-info-hint>
+</span>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-info-hint</h2>
+    <p>Inline contextual help — a small info-icon affordance next to a term, stat, or control that reveals a light tooltip with more explanation on hover or focus. Use to unpack jargon ( DD Readiness , Company manual ), explain metric definitions, or clarify non-obvious rules without taking space on the page. Pairs a ph-info icon with la-tooltip appearance="light" , keeping the common case one component deep.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>hint</td>
+          <td><span class="default">hint</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>position</td>
+          <td><span class="default">position</span></td>
+          <td><span class="type">TooltipPosition</span></td>
+          <td><span class="default">&#39;top&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>maxWidth</td>
+          <td><span class="default">max-width</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;240px&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">&#39;default&#39; | &#39;sm&#39; | &#39;lg&#39;</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;More information&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveHint = document.getElementById('live-hint');
+        const hintInput = document.getElementById('ctrl-hint');
+
+        // Position chips
+        document.querySelectorAll('[data-position]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-position]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveHint.setAttribute('position', btn.dataset.position);
+          });
+        });
+
+        // Size chips
+        document.querySelectorAll('[data-size]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-size]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.size === 'default') {
+              liveHint.removeAttribute('size');
+            } else {
+              liveHint.setAttribute('size', btn.dataset.size);
+            }
+          });
+        });
+
+        // Max-width chips
+        document.querySelectorAll('[data-max]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-max]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveHint.setAttribute('max-width', btn.dataset.max);
+          });
+        });
+
+        // Hint text input
+        hintInput.addEventListener('input', () => {
+          liveHint.setAttribute('hint', hintInput.value || 'More information');
+        });
+  })();
+</script>
+
+
+</body>
+</html>

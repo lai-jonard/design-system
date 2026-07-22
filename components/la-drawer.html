@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-drawer — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-drawer</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-drawer</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-drawer</h1>
+<p>Edge-anchored dismissible overlay panel. Slides in from any edge (right, left, top, bottom). Used for detail inspectors, mobile navigation, and any secondary surface that needs to appear over the page without taking focus permanently. Built-in close button, focus trap with restore, page scroll lock, and opt-in backdrop dismissal.</p>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Edge</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-edge="right">right</button>
+<button class="btn-toggle" data-edge="left">left</button>
+<button class="btn-toggle" data-edge="top">top</button>
+<button class="btn-toggle" data-edge="bottom">bottom</button>
+</div>
+</div>
+<div class="control-group">
+<label>Size</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-size="default">default</button>
+<button class="btn-toggle" data-size="240px">240px</button>
+<button class="btn-toggle" data-size="480px">480px</button>
+</div>
+</div>
+<div class="control-group">
+<label>Backdrop dismiss</label>
+<div class="btn-group">
+<button class="btn-toggle" data-backdrop="true">On</button>
+<button class="btn-toggle active" data-backdrop="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Scroll lock</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-scroll-lock="true">On</button>
+<button class="btn-toggle" data-scroll-lock="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Heading</label>
+<input id="ctrl-heading" type="text" value="Drawer heading"/>
+</div>
+<div class="control-group">
+<label>Description</label>
+<input id="ctrl-description" placeholder="Optional subtext" type="text" value=""/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px;">
+<la-button id="open-live" variant="primary">
+<i class="ph ph-arrow-square-out" slot="icon-left"></i>
+              Open drawer
+            </la-button>
+</div>
+</div>
+<la-drawer heading="Drawer heading" id="live-drawer">
+<p style="margin:0;color:var(--la-color-text-secondary, #4B5563);line-height:1.6;">
+            Drive the panel from the controls above. Dismiss with the close button, the Escape key, or enable backdrop dismissal to close by clicking outside.
+          </p>
+</la-drawer>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference. Click to open each one.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">All four edges</div>
+<div class="preview-frame" style="gap:8px;">
+<la-button data-open="snap-right" variant="secondary">Right</la-button>
+<la-button data-open="snap-left" variant="secondary">Left</la-button>
+<la-button data-open="snap-top" variant="secondary">Top</la-button>
+<la-button data-open="snap-bottom" variant="secondary">Bottom</la-button>
+</div>
+</div>
+<la-drawer description="Slides in from the right. Default edge." heading="Right edge" id="snap-right">
+<p style="margin:0;">Detail inspector pattern — click a row, inspector slides in on the right.</p>
+</la-drawer>
+<la-drawer description="Slides in from the left." edge="left" heading="Left edge" id="snap-left">
+<p style="margin:0;">Mobile navigation pattern — sidebar content moved into a drawer on narrow viewports.</p>
+</la-drawer>
+<la-drawer description="Slides in from the top." edge="top" heading="Top edge" id="snap-top">
+<p style="margin:0;">Notification-style surface. Already full-width regardless of viewport.</p>
+</la-drawer>
+<la-drawer description="Slides in from the bottom." edge="bottom" heading="Bottom edge" id="snap-bottom">
+<p style="margin:0;">Mobile-sheet surface. Already full-width regardless of viewport.</p>
+</la-drawer>
+
+<div class="preview-group">
+<div class="preview-label">Custom header slot — replaces the heading block but keeps the close button</div>
+<div class="preview-frame">
+<la-button data-open="snap-header-slot" variant="secondary">Open</la-button>
+</div>
+</div>
+<la-drawer id="snap-header-slot">
+<div slot="header" style="display:flex;align-items:center;gap:8px;padding-top:4px;">
+<i class="ph ph-folder" style="font-size:20px;"></i>
+<span style="font-size:18px;font-weight:600;">Documents</span>
+</div>
+<p style="margin:0;">Use the <code style="font-family:monospace;font-size:11px;">header</code> slot for tabs, filter chips, icon + title pairings, or anything more complex than heading + description.</p>
+</la-drawer>
+
+<div class="preview-group">
+<div class="preview-label">With footer action row</div>
+<div class="preview-frame">
+<la-button data-open="snap-footer" variant="secondary">Open</la-button>
+</div>
+</div>
+<la-drawer description="Actions sit in a pinned footer row." heading="Edit details" id="snap-footer">
+<div style="display:flex;flex-direction:column;gap:16px;">
+<la-input label="Full name" placeholder="e.g. Jane Smith"></la-input>
+<la-input label="Role" placeholder="e.g. Senior Engineer"></la-input>
+</div>
+<div slot="footer">
+<la-button onclick="document.querySelector('#snap-footer').open=false" variant="secondary">Cancel</la-button>
+<la-button variant="primary">Save</la-button>
+</div>
+</la-drawer>
+
+<div class="preview-group">
+<div class="preview-label">Backdrop dismiss enabled — click outside the panel to close</div>
+<div class="preview-frame">
+<la-button data-open="snap-backdrop" variant="secondary">Open</la-button>
+</div>
+</div>
+<la-drawer backdrop-dismiss="" description="Click anywhere outside the panel to close. Escape and the close button also work." heading="Backdrop dismiss on" id="snap-backdrop">
+<p style="margin:0;">Opt in with the <code style="font-family:monospace;font-size:11px;">backdrop-dismiss</code> attribute. Off by default to prevent accidental close during multi-step tasks.</p>
+</la-drawer>
+
+<div class="preview-group">
+<div class="preview-label">Long body — scrolls internally inside the panel</div>
+<div class="preview-frame">
+<la-button data-open="snap-long" variant="secondary">Open</la-button>
+</div>
+</div>
+<la-drawer description="Body scrolls inside; header and footer stay pinned." heading="Long content" id="snap-long">
+<div style="display:flex;flex-direction:column;gap:14px;line-height:1.7;">
+<p style="margin:0;">Paragraph one — drawers use the same internal scroll pattern as modals: a flex column where the body grows and overflows, while the header row and optional footer row are pinned at fixed heights.</p>
+<p style="margin:0;">Paragraph two — scroll lock on the page behind the drawer prevents accidental scroll of the content underneath, so users stay focused on the drawer task.</p>
+<p style="margin:0;">Paragraph three — filler to exercise the scroll. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+<p style="margin:0;">Paragraph four — filler. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+<p style="margin:0;">Paragraph five — filler. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+<p style="margin:0;">Paragraph six — filler. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+<p style="margin:0;">Paragraph seven — filler. Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.</p>
+<p style="margin:0;">Paragraph eight — filler to make sure the body overflows and triggers the scroll region.</p>
+</div>
+<div slot="footer">
+<la-button onclick="document.querySelector('#snap-long').open=false" variant="primary">Got it</la-button>
+</div>
+</la-drawer>
+
+<div class="preview-group">
+<div class="preview-label">close event log — fires on Escape, close-button click, or backdrop click (when enabled)</div>
+<div class="preview-frame" style="display:block;">
+<div class="event-log" id="event-log"></div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-drawer</h2>
+    <p>Edge-anchored dismissible overlay panel. Slides in from any edge (right, left, top, bottom). Used for detail inspectors, mobile navigation, and any secondary surface that needs to appear over the page without taking focus permanently. Built-in close button, focus trap with restore, page scroll lock, and opt-in backdrop dismissal.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>edge</td>
+          <td><span class="default">edge</span></td>
+          <td><span class="type">&#39;right&#39; | &#39;left&#39; | &#39;top&#39; | &#39;bottom&#39;</span></td>
+          <td><span class="default">&#39;right&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">string | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>backdropDismiss</td>
+          <td><span class="default">backdrop-dismiss</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>noScrollLock</td>
+          <td><span class="default">no-scroll-lock</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_previousFocus</td>
+          <td>—</td>
+          <td><span class="type">HTMLElement | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_previousBodyOverflow</td>
+          <td>—</td>
+          <td><span class="type">string | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onKeydown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>close</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All sizing, colour, and motion values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>. Override per-instance via <code style="font-family:monospace;font-size:11px;">style</code> or a wrapping CSS rule.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Sizing</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-drawer-size</td><td>Panel width (right/left) or height (top/bottom) — defaults to <code style="font-family:monospace;font-size:11px;">--la-aside-width</code> (320px)</td></tr>
+<tr><td>--la-radius-xl</td><td>Corner radius on the inward-facing corners of the panel</td></tr>
+<tr><td>--la-space-md</td><td>Header gap between heading block and close button</td></tr>
+<tr><td>--la-space-lg</td><td>Header right padding (close button pocket)</td></tr>
+<tr><td>--la-space-xl</td><td>Header left padding, body padding, footer padding</td></tr>
+<tr><td>--la-space-xs</td><td>Heading-block top nudge (optical alignment with close button)</td></tr>
+<tr><td>--la-space-2xs</td><td>Gap between heading and description</td></tr>
+<tr><td>--la-font-size-2xl</td><td>Heading size</td></tr>
+<tr><td>--la-font-size-base</td><td>Description size</td></tr>
+<tr><td>--la-font-weight-semibold</td><td>Heading weight</td></tr>
+<tr><td>--la-line-height</td><td>Description line height</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Surface &amp; motion</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-scrim</td><td>Backdrop fill — 20% black overlay</td></tr>
+<tr><td>--la-color-bg</td><td>Panel background (plain white)</td></tr>
+<tr><td>--la-color-text</td><td>Heading colour</td></tr>
+<tr><td>--la-color-text-muted</td><td>Description colour</td></tr>
+<tr><td>--la-shadow-lg</td><td>Panel shadow — floating surface elevation</td></tr>
+<tr><td>--dur-modal</td><td>Open / close transition duration (250ms)</td></tr>
+<tr><td>--ease</td><td>Backdrop fade easing</td></tr>
+<tr><td>--ease-drawer</td><td>Panel slide easing — sidebar / drawer curve</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — right edge with heading</p>
+<div class="docs-code"><span class="kw">&lt;la-drawer</span> <span class="at">open</span> <span class="at">heading</span>=<span class="str">"Documents"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;p&gt;</span>Everything we've reviewed so far.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;/la-drawer&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Detail inspector — heading + description</p>
+<div class="docs-code"><span class="kw">&lt;la-drawer</span>
+<span class="at">edge</span>=<span class="str">"right"</span>
+<span class="at">heading</span>=<span class="str">"Employee details"</span>
+<span class="at">description</span>=<span class="str">"Roles, documents, and history"</span>
+<span class="at">?open</span>=<span class="str">${isInspectorOpen}</span>
+<span class="kw">&gt;</span>
+<span class="cm">&lt;!-- inspector content --&gt;</span>
+<span class="kw">&lt;/la-drawer&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Mobile navigation — left edge</p>
+<div class="docs-code"><span class="kw">&lt;la-drawer</span> <span class="at">edge</span>=<span class="str">"left"</span> <span class="at">heading</span>=<span class="str">"Menu"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-sidebar&gt;&lt;/la-sidebar&gt;</span>
+<span class="kw">&lt;/la-drawer&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Backdrop dismiss — click outside to close</p>
+<div class="docs-code"><span class="kw">&lt;la-drawer</span>
+<span class="at">backdrop-dismiss</span>
+<span class="at">heading</span>=<span class="str">"Quick filter"</span>
+<span class="kw">&gt;</span>
+<span class="cm">&lt;!-- filter chips --&gt;</span>
+<span class="kw">&lt;/la-drawer&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Custom header — replaces heading, keeps close button</p>
+<div class="docs-code"><span class="kw">&lt;la-drawer&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">slot</span>=<span class="str">"header"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-folder"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;span&gt;</span>Documents<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+<span class="cm">&lt;!-- body --&gt;</span>
+<span class="kw">&lt;/la-drawer&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With footer actions</p>
+<div class="docs-code"><span class="kw">&lt;la-drawer</span> <span class="at">heading</span>=<span class="str">"Edit details"</span><span class="kw">&gt;</span>
+<span class="cm">&lt;!-- form fields --&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">slot</span>=<span class="str">"footer"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"secondary"</span><span class="kw">&gt;</span>Cancel<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"primary"</span><span class="kw">&gt;</span>Save<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/la-drawer&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listening for close</p>
+<div class="docs-code"><span class="kw">const</span> drawer = document.querySelector(<span class="str">'la-drawer'</span>);
+drawer.addEventListener(<span class="str">'close'</span>, () =&gt; {
+  <span class="cm">// drawer has already flipped open = false</span>
+<span class="cm">// sync any related UI state here</span>
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Custom size via token override</p>
+<div class="docs-code">la-drawer.wide {
+  <span class="kw">--la-drawer-size</span>: <span class="num">480px</span>;
+}</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Always-on dismissal</strong> — Escape and the close button always close the drawer. Backdrop click is opt-in via the <code style="font-family:monospace;font-size:11px;">backdrop-dismiss</code> attribute; this protects users from losing progress during multi-step tasks.</div>
+<div class="docs-note"><strong>Scroll lock</strong> — the page behind the drawer is scroll-locked while the drawer is open by default. Set <code style="font-family:monospace;font-size:11px;">no-scroll-lock</code> to keep the page scrollable (for reference-style drawers where users cross-check content).</div>
+<div class="docs-note"><strong>Focus management</strong> — on open, focus moves to the first focusable element inside the panel (the close button by default). Tab and Shift+Tab cycle within the panel. On close, focus returns to the element that opened the drawer.</div>
+<div class="docs-note"><strong>Mobile full-width</strong> — right and left drawers become 100vw below a 480px viewport. Top and bottom drawers are already full-width at every viewport. Corner radius collapses to zero in full-width mode.</div>
+<div class="docs-note"><strong>Header pattern</strong> — the close button is always rendered in the top-right regardless of edge. If the <code style="font-family:monospace;font-size:11px;">header</code> slot is populated, it replaces the prop-driven heading block; the close button stays. If the slot is empty and no <code style="font-family:monospace;font-size:11px;">heading</code> is set, only the close button is shown.</div>
+<div class="docs-note"><strong>Composition in la-app-shell</strong> — <code style="font-family:monospace;font-size:11px;">la-app-shell</code> composes <code style="font-family:monospace;font-size:11px;">la-drawer</code> internally for its aside panel on narrow viewports. If you're rendering an aside through <code style="font-family:monospace;font-size:11px;">la-app-shell</code>, you don't need to instantiate <code style="font-family:monospace;font-size:11px;">la-drawer</code> yourself — just slot content into <code style="font-family:monospace;font-size:11px;">slot="aside"</code> and rely on <code style="font-family:monospace;font-size:11px;">la-toggle-aside</code> events.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveDrawer = document.getElementById('live-drawer');
+        const openLiveBtn = document.getElementById('open-live');
+        const headingInput = document.getElementById('ctrl-heading');
+        const descriptionInput = document.getElementById('ctrl-description');
+        const eventLog = document.getElementById('event-log');
+
+        // Open button
+        openLiveBtn.addEventListener('click', () => {
+          liveDrawer.open = true;
+        });
+
+        // Edge toggles
+        document.querySelectorAll('[data-edge]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-edge]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveDrawer.setAttribute('edge', btn.dataset.edge);
+          });
+        });
+
+        // Size toggles
+        document.querySelectorAll('[data-size]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-size]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.size === 'default') {
+              liveDrawer.removeAttribute('size');
+            } else {
+              liveDrawer.setAttribute('size', btn.dataset.size);
+            }
+          });
+        });
+
+        // Backdrop dismiss toggles
+        document.querySelectorAll('[data-backdrop]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-backdrop]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.backdrop === 'true') liveDrawer.setAttribute('backdrop-dismiss', '');
+            else liveDrawer.removeAttribute('backdrop-dismiss');
+          });
+        });
+
+        // Scroll lock toggles — reversed (On = default, Off = no-scroll-lock attribute)
+        document.querySelectorAll('[data-scroll-lock]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-scroll-lock]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.scrollLock === 'false') liveDrawer.setAttribute('no-scroll-lock', '');
+            else liveDrawer.removeAttribute('no-scroll-lock');
+          });
+        });
+
+        // Text inputs
+        headingInput.addEventListener('input', () => {
+          liveDrawer.heading = headingInput.value;
+        });
+        descriptionInput.addEventListener('input', () => {
+          liveDrawer.description = descriptionInput.value;
+        });
+
+        // Snapshot trigger buttons
+        document.querySelectorAll('[data-open]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            const target = document.getElementById(btn.dataset.open);
+            if (target) target.open = true;
+          });
+        });
+
+        // Event log — capture close events from every drawer on the page
+        document.querySelectorAll('la-drawer').forEach(d => {
+          d.addEventListener('close', () => {
+            const row = document.createElement('div');
+            row.className = 'event-row';
+            row.textContent = 'close → #' + d.id + ' @ ' + new Date().toLocaleTimeString();
+            eventLog.prepend(row);
+          });
+        });
+  })();
+</script>
+
+
+</body>
+</html>

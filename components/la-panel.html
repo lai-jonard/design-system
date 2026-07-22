@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-panel — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-panel</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-panel</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-panel</h1>
+<p>A generic content container with a subtle background, used for secondary information blocks within a layout. Less prominent than a card — sits inside a page rather than floating above it.</p>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Clickable</label>
+<div class="btn-group">
+<button class="btn-toggle" data-clickable="true">On</button>
+<button class="btn-toggle active" data-clickable="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Dimmed</label>
+<div class="btn-group">
+<button class="btn-toggle" data-dimmed="true">On</button>
+<button class="btn-toggle active" data-dimmed="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Heading</label>
+<input id="ctrl-heading" placeholder="Leave empty for no heading" style="width:220px;" type="text"/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px; align-items:flex-start;">
+<la-panel id="live-panel" style="width:320px;">
+              Panel content goes here. Use the default slot for any body content.
+            </la-panel>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Default — no heading, no modifiers</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<la-panel style="width:320px;">
+              Secondary information lives here. Sits quietly inside the layout without competing with card surfaces.
+            </la-panel>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">With heading</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<la-panel heading="Meeting notes" style="width:320px;">
+              The heading renders above slotted content with semibold weight and a bottom margin before the body.
+            </la-panel>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Dimmed — reduced opacity for locked or unavailable states</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<la-panel dimmed="" heading="Restricted area" style="width:320px;">
+              This panel is not currently accessible. Content is visible but de-emphasised at 0.7 opacity.
+            </la-panel>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Clickable — pointer cursor, use for navigable panels</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<la-panel clickable="" heading="Employment agreement" style="width:320px;">
+              Hover over this panel to see the pointer cursor. Wire a click listener to handle navigation.
+            </la-panel>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In context — two-column aside layout</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="display:grid; grid-template-columns:1fr 1fr; gap:12px; width:100%;">
+<la-panel heading="Key dates">
+                Completion: 30 June 2026<br/>
+                Review: 15 May 2026
+              </la-panel>
+<la-panel heading="Parties">
+                LawAdvisor Ltd<br/>
+                Acme Corporation
+              </la-panel>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-panel</h2>
+    <p>A generic content container with a subtle background, used for secondary information blocks within a layout. Less prominent than a card — sits inside a page rather than floating above it.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>clickable</td>
+          <td><span class="default">clickable</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>dimmed</td>
+          <td><span class="default">dimmed</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All values are sourced from the token system in <code style="font-family:monospace;color:#c3e88d;font-size:13px;">src/styles/tokens.ts</code>. No hardcoded sizes or colours.</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-radius-lg</td><td>Panel border radius</td></tr>
+<tr><td>--la-color-bg-subtle</td><td>Panel background</td></tr>
+<tr><td>--la-space-lg</td><td>Panel padding</td></tr>
+<tr><td>--la-font-size-base</td><td>Host + heading font size</td></tr>
+<tr><td>--la-font-weight-normal</td><td>Host + heading font weight (see decisions/33-panel-heading-normal-weight.md)</td></tr>
+<tr><td>--la-color-text</td><td>Host + heading text colour</td></tr>
+<tr><td>--la-line-height</td><td>Host line height</td></tr>
+<tr><td>--la-space-md</td><td>Heading bottom margin</td></tr>
+</tbody>
+</table>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:13px;">Basic</p>
+<div class="docs-code"><span class="kw">&lt;la-panel&gt;</span>
+  Secondary content here
+<span class="kw">&lt;/la-panel&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:13px;">With heading</p>
+<div class="docs-code"><span class="kw">&lt;la-panel</span> <span class="at">heading</span>=<span class="str">"Key dates"</span><span class="kw">&gt;</span>
+  Completion: 30 June 2026
+<span class="kw">&lt;/la-panel&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:13px;">Dimmed — locked state</p>
+<div class="docs-code"><span class="kw">&lt;la-panel</span> <span class="at">heading</span>=<span class="str">"Restricted area"</span> <span class="at">dimmed</span><span class="kw">&gt;</span>
+  Content visible but de-emphasised
+<span class="kw">&lt;/la-panel&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:13px;">Clickable — navigable panel</p>
+<div class="docs-code"><span class="kw">const</span> panel = document.querySelector(<span class="str">'la-panel'</span>);
+panel.addEventListener(<span class="str">'click'</span>, () =&gt; {
+  <span class="cm">// handle navigation</span>
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:13px;">Two-column aside</p>
+<div class="docs-code"><span class="kw">&lt;div</span> <span class="at">style</span>=<span class="str">"display:grid;grid-template-columns:1fr 1fr;gap:12px"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-panel</span> <span class="at">heading</span>=<span class="str">"Parties"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/la-panel&gt;</span>
+<span class="kw">&lt;la-panel</span> <span class="at">heading</span>=<span class="str">"Key dates"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/la-panel&gt;</span>
+<span class="kw">&lt;/div&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:13px;">CSS part override</p>
+<div class="docs-code"><span class="cm">/* Target the inner wrapper via part */</span>
+la-panel::part(panel) {
+  border: <span class="num">1px</span> solid var(<span class="str">--la-color-border-light</span>);
+}</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Panel vs card</strong> — <code style="font-family:monospace;font-size:13px;">la-panel</code> uses <code style="font-family:monospace;font-size:13px;">--la-color-bg-subtle</code> and no shadow, so it sits flush inside a layout. Use it for secondary information blocks (aside columns, metadata groups). Reserve a card surface (<code style="font-family:monospace;font-size:13px;">--la-color-bg</code> + shadow) for primary content that floats above the page.</div>
+<div class="docs-note"><strong>Clickable does not imply semantics</strong> — The <code style="font-family:monospace;font-size:13px;">clickable</code> prop adds only a pointer cursor. If the panel needs to be keyboard-navigable or accessible as a link, wrap the content in a native <code style="font-family:monospace;font-size:13px;">&lt;button&gt;</code> or <code style="font-family:monospace;font-size:13px;">&lt;a&gt;</code> element instead.</div>
+<div class="docs-note"><strong>Heading is a prop, not a slot</strong> — Headings are passed via the <code style="font-family:monospace;font-size:13px;">heading</code> attribute rather than a named slot. This keeps the heading style consistent and avoids layout fragility from slotted block elements.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const livePanel = document.getElementById('live-panel');
+        const headingInput = document.getElementById('ctrl-heading');
+
+        // Clickable toggles
+        document.querySelectorAll('[data-clickable]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-clickable]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.clickable === 'true') {
+              livePanel.setAttribute('clickable', '');
+            } else {
+              livePanel.removeAttribute('clickable');
+            }
+          });
+        });
+
+        // Dimmed toggles
+        document.querySelectorAll('[data-dimmed]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-dimmed]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.dimmed === 'true') {
+              livePanel.setAttribute('dimmed', '');
+            } else {
+              livePanel.removeAttribute('dimmed');
+            }
+          });
+        });
+
+        // Heading input
+        headingInput.addEventListener('input', () => {
+          if (headingInput.value) {
+            livePanel.setAttribute('heading', headingInput.value);
+          } else {
+            livePanel.removeAttribute('heading');
+          }
+        });
+  })();
+</script>
+
+
+</body>
+</html>

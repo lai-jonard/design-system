@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prototype — 03. Dashboard (post-L0)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  <link rel="stylesheet" href="../../../motion.css">
+  <script src="../../bundle.js" defer></script>
+  <script>
+    // Page transition — fades .main-content out before navigating
+    window.navigateTo = function(url) {
+      var el = document.querySelector('.main-content');
+      if (!el) { window.location.href = url; return; }
+      el.style.transition = 'opacity 150ms cubic-bezier(0.4, 0, 0.2, 1), transform 150ms cubic-bezier(0.4, 0, 0.2, 1)';
+      el.style.opacity = '0';
+      el.style.transform = 'translateY(6px)';
+      setTimeout(function() { window.location.href = url; }, 150);
+    };
+  </script>
+  <style>
+    /* FOUC fix — hide custom elements until upgraded */
+    la-modal:not(:defined),
+    la-insight-modal:not(:defined),
+    la-sidebar:not(:defined),
+    la-app-shell:not(:defined),
+    la-dashboard:not(:defined),
+    la-legal-area-page:not(:defined),
+    la-data-room-page:not(:defined),
+    la-document-page:not(:defined),
+    la-actions-widget:not(:defined),
+    la-document-list:not(:defined),
+    la-processing-widget:not(:defined),
+    la-welcome-banner:not(:defined),
+    la-unlock-panel:not(:defined),
+    la-insight-card:not(:defined),
+    la-insight-list:not(:defined),
+    la-investor-card:not(:defined),
+    la-legal-area-widget:not(:defined),
+    la-dd-readiness:not(:defined),
+    la-upcoming-deadlines:not(:defined),
+    la-anticipation-teaser:not(:defined),
+    la-summary-line:not(:defined),
+    la-empty-state:not(:defined),
+    la-button:not(:defined) { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      display: flex;
+      font-family: var(--la-font-family);
+      font-size: var(--la-font-size-base);
+      background: var(--la-color-bg-subtle);
+    }
+    .proto-screen { flex: 1; min-height: 0; overflow: hidden; }
+    la-app-shell { display: flex; width: 100%; height: 100%; }
+    .main-content {
+      padding: 80px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .content-column {
+      display: flex;
+      flex-direction: column;
+      gap: var(--la-space-lg);
+      width: 100%;
+      max-width: 900px;
+    }
+    .greeting {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      margin-bottom: var(--la-space-sm);
+    }
+    .greeting h1 {
+      font-size: 20px;
+      font-weight: var(--la-font-weight-semibold);
+      color: var(--la-color-text);
+      letter-spacing: -0.2px;
+    }
+    .greeting p {
+      font-size: var(--la-font-size-base);
+      color: var(--la-color-text-muted);
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <div class="proto-screen">
+    <la-app-shell id="shell" page-title="Dashboard">
+      <la-sidebar id="sidebar" slot="sidebar"></la-sidebar>
+      <div slot="main" class="main-content anim-fade-up">
+        <div class="content-column">
+          <!-- Greeting copy is state-driven. 03-dashboard renders State A
+               (FTUE — post-L0, no L1 done). Other states for future prototypes:
+                 B. In setup, returning  — "Pick up with Employment." (or next area)
+                 C. All set up, all calm — "Nothing urgent today."
+                 D. Steady-state, urgent — "3 items need your attention."
+               Heading stays "Hi <Name>" across all states. -->
+          <div class="greeting">
+            <h1>Hi Alex</h1>
+            <p>Three legal areas to map. Start with Governance.</p>
+          </div>
+          <la-dashboard id="dashboard"></la-dashboard>
+        </div>
+      </div>
+    </la-app-shell>
+  </div>
+
+  <script src="proto-state.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sidebar — Corp Gov is the only unlockable area in Sprint 2's reachable set.
+    // Locked-not-unlockable areas stay greyed in the sidebar.
+    var sidebar = document.getElementById('sidebar');
+    sidebar.activeArea = 'dashboard';
+    sidebar.unlockedAreas = ProtoState.getSidebarUnlockedAreas();
+    sidebar.userName = 'Alex Chen';
+    sidebar.userRole = 'Acme Corp. · Founder';
+    sidebar.userInitials = 'AC';
+
+    // Sprint 2 strict: Governance unlocked (L0 done via welcome form),
+    // primary next-level CTA only — no insight counts (L1 not done yet,
+    // no documents in the system), no Recommended badge (Governance is
+    // the only progression candidate, the others are locked-not-unlockable
+    // so calling it "recommended" states the obvious). Other two
+    // locked-not-unlockable with asymmetric dependency text.
+    // Deviates from solve §SD-10 ("hardcoded non-zero placeholder
+    // counts") — placeholder counts misled visual review by implying
+    // real insights exist pre-L1.
+    // IP Protection deferred from 1st release (solve §SD-8 session 11):
+    // only 3 widgets render in the fluid 3-up grid.
+    var dashboard = document.getElementById('dashboard');
+    dashboard.showWelcome = false;
+    dashboard.areas = [
+      {
+        name: 'Governance',
+        description: "Your company structure, board records, and incorporation documents.",
+        status: 'unlocked',
+        nextLevelLabel: 'Continue with Governance',
+      },
+      {
+        name: 'Employment',
+        description: "Your team's contracts, IP assignments, and employment paperwork.",
+        status: 'locked-not-unlockable',
+        dependencies: ['Governance'],
+      },
+      {
+        name: 'Fundraising',
+        description: "Your investor materials, cap table, and fundraise readiness.",
+        status: 'locked-not-unlockable',
+        dependencies: ['Governance', 'Employment'],
+      },
+    ];
+
+    // Sidebar nav — routes unlocked areas to their standard pages, locked
+    // areas to their locked landing pages so the user can read about what
+    // unlocking entails.
+    sidebar.addEventListener('la-nav-change', function(e) {
+      if (e.detail.subtab === 'data-room') { navigateTo('11-data-room.html'); return; }
+      if (e.detail.subtab === 'investors') { navigateTo('11-investors.html'); return; }
+      if (e.detail.subtab === 'cap-table') { navigateTo('14-cap-table.html'); return; }
+      if (e.detail.subtab === 'people') { navigateTo('18-people.html'); return; }
+      if (e.detail.subtab === 'company-manual') { navigateTo('13-company-manual.html'); return; }
+      var routes = {
+        'governance': '06-corp-gov-standard.html',
+        'employment': ProtoState.isUnlocked('employment') ? '17-employment-standard.html' : '15-employment-locked.html',
+        'fundraising': ProtoState.isUnlocked('fundraising') ? '10-fundraising-standard.html' : '08-fundraising-locked.html',
+      };
+      if (routes[e.detail.area]) navigateTo(routes[e.detail.area]);
+    });
+
+    // Card body click — Governance routes to its standard page; locked
+    // areas route to their own locked landing page so the user can read
+    // about what unlocking entails.
+    document.addEventListener('la-area-click', function(e) {
+      if (e.detail.area === 'Governance') {
+        navigateTo('06-corp-gov-standard.html');
+      } else if (e.detail.area === 'Employment') {
+        navigateTo('15-employment-locked.html');
+      } else if (e.detail.area === 'Fundraising') {
+        navigateTo('08-fundraising-locked.html');
+      }
+    });
+
+    // Recommended next-level CTA — fired by la-legal-area-widget's in-card
+    // next-level button (next-level-label="Continue with Governance" on the
+    // Governance widget). Routes to the unlock flow.
+    document.addEventListener('la-area-unlock', function(e) {
+      if (e.detail.area === 'Governance') {
+        navigateTo('05-corp-gov-unlock.html');
+      }
+    });
+  });
+  </script>
+</body>
+</html>

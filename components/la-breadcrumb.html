@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-breadcrumb — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-breadcrumb</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-breadcrumb</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-breadcrumb</h1>
+<p>A depth signal in the top bar. Shows the founder exactly where they are within the hierarchy — e.g. Dashboard / Employment / Insight detail — and provides a one-click path back up the tree. A passive secondary cue that complements the sidebar; it does not replace it.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Rendered inside the page header. The trail reads left to right — ancestors first, current page last.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="flex-direction:column; padding:0; overflow:hidden; align-items:stretch;">
+<!-- Simulated page header strip -->
+<div style="display:flex; align-items:center; padding:0 24px; height:40px; background:var(--la-ph-bg); border-bottom:1px solid var(--la-color-border-light);">
+<la-breadcrumb id="anatomy-crumb"></la-breadcrumb>
+</div>
+<!-- Annotation -->
+<div style="padding:20px 24px;">
+<ol style="list-style:decimal inside; padding:0; margin:0; font-size:13px; line-height:1.8; color:var(--la-color-text-secondary); display:flex; flex-direction:column; gap:4px;">
+<li><strong>Nav wrapper</strong> — <code style="font-family:monospace;font-size:11px;">&lt;nav aria-label="Breadcrumb"&gt;</code>. Landmark role so screen readers announce the region.</li>
+<li><strong>Ancestor link</strong> — <code style="font-family:monospace;font-size:11px;">&lt;a&gt;</code> when <code style="font-family:monospace;font-size:11px;">href</code> is set; <code style="font-family:monospace;font-size:11px;">&lt;button&gt;</code> when omitted (fires <code style="font-family:monospace;font-size:11px;">la-breadcrumb</code> event instead). Muted text, transitions to primary on hover.</li>
+<li><strong>Separator</strong> — <code style="font-family:monospace;font-size:11px;">/</code> character in faint text. <code style="font-family:monospace;font-size:11px;">aria-hidden="true"</code> — screen readers skip it.</li>
+<li><strong>Current page</strong> — <code style="font-family:monospace;font-size:11px;">&lt;span aria-current="page"&gt;</code>. Bold, primary text colour, truncates with ellipsis when space is tight. Never a link.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Depth</label>
+<div class="btn-group">
+<button class="btn-toggle" data-depth="2">2-level</button>
+<button class="btn-toggle active" data-depth="3">3-level</button>
+<button class="btn-toggle" data-depth="4">4-level</button>
+</div>
+</div>
+<div class="control-group">
+<label>Navigation</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-nav="href">href links</button>
+<button class="btn-toggle" data-nav="programmatic">Programmatic</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" style="flex-direction:column; padding:0; overflow:hidden; align-items:stretch; min-height:80px;">
+<div style="display:flex; align-items:center; padding:0 24px; height:40px; background:var(--la-ph-bg); border-bottom:1px solid var(--la-color-border-light);">
+<la-breadcrumb id="live-crumb"></la-breadcrumb>
+</div>
+<div id="event-log" style="padding:8px 24px; font-size:11px; color:var(--la-color-text-muted); font-family:monospace; min-height:28px; border-top:1px solid var(--la-color-border-light); background:var(--la-color-bg-subtle);">
+<span style="color:var(--la-color-text-faint);">Event log — click a programmatic crumb to see the fired event</span>
+</div>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">2-level — root and current page</div>
+<div class="preview-frame" style="padding:0; overflow:hidden; align-items:stretch;">
+<div style="display:flex; align-items:center; padding:0 24px; height:40px; background:var(--la-ph-bg);">
+<la-breadcrumb id="snap-2level"></la-breadcrumb>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">3-level — root, area, and current page</div>
+<div class="preview-frame" style="padding:0; overflow:hidden; align-items:stretch;">
+<div style="display:flex; align-items:center; padding:0 24px; height:40px; background:var(--la-ph-bg);">
+<la-breadcrumb id="snap-3level"></la-breadcrumb>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">4-level — deep hierarchy</div>
+<div class="preview-frame" style="padding:0; overflow:hidden; align-items:stretch;">
+<div style="display:flex; align-items:center; padding:0 24px; height:40px; background:var(--la-ph-bg);">
+<la-breadcrumb id="snap-4level"></la-breadcrumb>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Programmatic navigation — ancestors are buttons, not links</div>
+<div class="preview-frame" style="padding:0; overflow:hidden; align-items:stretch;">
+<div style="display:flex; align-items:center; padding:0 24px; height:40px; background:var(--la-ph-bg);">
+<la-breadcrumb id="snap-prog"></la-breadcrumb>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Collapsed — 4+ items collapse to root / ••• / parent / current. Click ••• to expand.</div>
+<div class="preview-frame" style="padding:0; overflow:hidden; align-items:stretch;">
+<div style="display:flex; align-items:center; padding:0 24px; height:40px; background:var(--la-ph-bg);">
+<la-breadcrumb id="snap-collapsed"></la-breadcrumb>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-breadcrumb</h2>
+    <p>A depth signal in the top bar. Shows the founder exactly where they are within the hierarchy — e.g. Dashboard / Employment / Insight detail — and provides a one-click path back up the tree. A passive secondary cue that complements the sidebar; it does not replace it.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>items</td>
+          <td><span class="default">items</span></td>
+          <td><span class="type">BreadcrumbItem[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_expanded</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-breadcrumb</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Typography</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-font-size-sm</td><td>All crumb text size</td></tr>
+<tr><td>--la-font-weight-normal</td><td>Current page label weight</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-text-muted</td><td>Ancestor link resting colour</td></tr>
+<tr><td>--la-color-text</td><td>Ancestor link hover + current page colour</td></tr>
+<tr><td>--la-color-text-faint</td><td>Separator colour</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Spacing &amp; motion</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-space-sm</td><td>Gap on each side of separator</td></tr>
+<tr><td>--dur-fast</td><td>Hover colour transition duration</td></tr>
+<tr><td>--ease</td><td>Hover colour transition easing</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Href links — browser handles navigation</p>
+<div class="docs-code"><span class="kw">&lt;la-breadcrumb</span>
+<span class="at">.items</span>=<span class="str">${[
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Employment', href: '/employment' },
+    { label: 'Insight detail' }
+  ]}</span>
+<span class="kw">&gt;&lt;/la-breadcrumb&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Programmatic — handle navigation in JS</p>
+<div class="docs-code"><span class="kw">&lt;la-breadcrumb</span>
+<span class="at">.items</span>=<span class="str">${[
+    { label: 'Dashboard' },
+    { label: 'Employment' },
+    { label: 'Insight detail' }
+  ]}</span>
+<span class="at">@la-breadcrumb</span>=<span class="str">${(e) =&gt; router.go(e.detail)}</span>
+<span class="kw">&gt;&lt;/la-breadcrumb&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Via la-app-shell — pass through the shell's breadcrumbs prop</p>
+<div class="docs-code"><span class="kw">&lt;la-app-shell</span>
+<span class="at">show-header</span>
+<span class="at">.breadcrumbs</span>=<span class="str">${[
+    { label: 'Dashboard', href: '/dashboard' },
+    { label: 'Governance', href: '/governance' },
+    { label: 'Documents' }
+  ]}</span>
+<span class="kw">&gt;</span>
+  ...
+<span class="kw">&lt;/la-app-shell&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listening for the event on la-app-shell</p>
+<div class="docs-code">shell.addEventListener(<span class="str">'la-breadcrumb'</span>, e =&gt; {
+  <span class="kw">const</span> { label, index } = e.detail;
+  router.navigateTo(index);
+});</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>The three wayfinding surfaces must agree</strong> — the sidebar active state, the breadcrumb, and the page title should all reflect the same location. A user should never be in a state where the sidebar shows one thing and the breadcrumb implies another.</div>
+<div class="docs-note"><strong>Breadcrumb is a passive cue, not the primary nav</strong> — it complements the sidebar's role. The sidebar is always visible and provides the primary spatial anchor. The breadcrumb provides depth context and a shortcut back up the tree for users who arrived via a deep link or multi-step flow.</div>
+<div class="docs-note"><strong>Last item is never a link</strong> — the current page item is always a <code style="font-family:monospace;font-size:11px;">&lt;span aria-current="page"&gt;</code>. Linking the current page serves no purpose and creates a confusing interaction. Enforce this by ensuring the last item in the <code style="font-family:monospace;font-size:11px;">items</code> array has no <code style="font-family:monospace;font-size:11px;">href</code>.</div>
+<div class="docs-note"><strong>Use href or programmatic — not both</strong> — pick one navigation strategy for the whole app. Mixing native href links with event-based navigation in the same trail will produce inconsistent browser behaviour (back-button state, history entries).</div>
+<div class="docs-note"><strong>Current page label truncates at the right edge</strong> — <code style="font-family:monospace;font-size:11px;">text-overflow: ellipsis</code> applies to the current page span only. Ancestor labels do not truncate — they push the current page label toward the edge. Keep ancestor labels short.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    // ── Item sets ──────────────────────────────────────────────────────────────
+        const SETS = {
+          href: {
+            2: [
+              {label: 'Dashboard', href: '#'},
+              {label: 'Governance'}
+            ],
+            3: [
+              {label: 'Dashboard', href: '#'},
+              {label: 'Employment', href: '#'},
+              {label: 'Insight detail'}
+            ],
+            4: [
+              {label: 'Dashboard', href: '#'},
+              {label: 'Data Privacy', href: '#'},
+              {label: 'Documents', href: '#'},
+              {label: 'SHA-2025.pdf'}
+            ]
+          },
+          programmatic: {
+            2: [
+              {label: 'Dashboard'},
+              {label: 'Governance'}
+            ],
+            3: [
+              {label: 'Dashboard'},
+              {label: 'Employment'},
+              {label: 'Insight detail'}
+            ],
+            4: [
+              {label: 'Dashboard'},
+              {label: 'Data Privacy'},
+              {label: 'Documents'},
+              {label: 'SHA-2025.pdf'}
+            ]
+          }
+        };
+
+        let currentDepth = 3;
+        let currentNav = 'href';
+
+        function updateLive() {
+          const crumb = document.getElementById('live-crumb');
+          crumb.items = SETS[currentNav][currentDepth];
+        }
+
+        // ── Controls ──────────────────────────────────────────────────────────────
+        document.querySelectorAll('[data-depth]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-depth]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentDepth = parseInt(btn.dataset.depth, 10);
+            updateLive();
+          });
+        });
+
+        document.querySelectorAll('[data-nav]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-nav]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            currentNav = btn.dataset.nav;
+            updateLive();
+            const log = document.getElementById('event-log');
+            log.innerHTML = '<span style="color:var(--la-color-text-faint);">Event log — click a programmatic crumb to see the fired event</span>';
+          });
+        });
+
+        // ── Event log ─────────────────────────────────────────────────────────────
+        document.getElementById('live-crumb').addEventListener('la-breadcrumb', e => {
+          const log = document.getElementById('event-log');
+          log.textContent = `la-breadcrumb → { label: "${e.detail.label}", index: ${e.detail.index} }`;
+        });
+
+        // ── Initialise all instances when la-breadcrumb is defined ────────────────
+        customElements.whenDefined('la-breadcrumb').then(() => {
+          // Anatomy
+          document.getElementById('anatomy-crumb').items = [
+            {label: 'Dashboard', href: '#'},
+            {label: 'Employment', href: '#'},
+            {label: 'Insight detail'}
+          ];
+
+          // Live
+          updateLive();
+
+          // Snapshots
+          document.getElementById('snap-2level').items = [
+            {label: 'Dashboard', href: '#'},
+            {label: 'Governance'}
+          ];
+          document.getElementById('snap-3level').items = [
+            {label: 'Dashboard', href: '#'},
+            {label: 'Employment', href: '#'},
+            {label: 'Insight detail'}
+          ];
+          document.getElementById('snap-4level').items = [
+            {label: 'Dashboard', href: '#'},
+            {label: 'Data Privacy', href: '#'},
+            {label: 'Documents', href: '#'},
+            {label: 'SHA-2025.pdf'}
+          ];
+          document.getElementById('snap-prog').items = [
+            {label: 'Dashboard'},
+            {label: 'Employment'},
+            {label: 'Insight detail'}
+          ];
+          document.getElementById('snap-collapsed').items = [
+            {label: 'Dashboard', href: '#'},
+            {label: 'Employment', href: '#'},
+            {label: 'Contracts', href: '#'},
+            {label: 'SHA-2025.pdf'}
+          ];
+        });
+
+        // ── Sidebar collapse ──────────────────────────────────────────────────────
+  })();
+</script>
+
+
+</body>
+</html>

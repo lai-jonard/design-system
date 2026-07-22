@@ -1,0 +1,267 @@
+/*
+  LawAdvisor AI — la-* tokens exposed at :root for light-DOM consumers.
+  ─────────────────────────────────────────────────────────────────────
+  Mirrors src/styles/tokens.ts, which scopes the same set to :host inside
+  every Lit component's shadow root. Light-DOM pages (prototypes, docs
+  previews) can't read shadow-scoped tokens, so we re-declare them here.
+
+  ⚠️ KEEP IN SYNC with src/styles/tokens.ts.
+     When you add or change a token in tokens.ts, update the matching line
+     here. Both files share the same naming and values by convention.
+
+  Import from any light-DOM page:
+    <link rel="stylesheet" href="/dev/la-tokens-root.css">
+
+  or chain from an existing shared CSS file:
+    @import url('../la-tokens-root.css');
+*/
+
+:root {
+  /* ── Semantic colours — status ──────────────────── */
+  --la-color-urgent:          #CC4643;
+  --la-color-urgent-bg:       #FDF3F3;
+  --la-color-urgent-text:     #A92F2C;
+
+  --la-color-proactive:       #F59E0B;
+  --la-color-proactive-bg:    #FFFBEB;
+  --la-color-proactive-text:  #B45309;
+
+  --la-color-resolved:        #1F7C51;
+  --la-color-resolved-bg:     #EFFAF3;
+  --la-color-resolved-text:   #196343;
+
+  --la-color-processing:      #0482C5;
+  --la-color-processing-bg:   #EEFBFD;
+  --la-color-processing-text: #1B6683;
+
+  --la-color-doc:             #6B3FA0;
+  --la-color-doc-bg:          #F0E8FE;
+
+  --la-color-locked-bg:       #F1F5F9;
+  --la-color-locked-text:     #6B7280;
+
+  /* ── Action colours ─────────────────────────────── */
+  --la-color-primary:         #18181B;
+  --la-color-primary-hover:   #27272A;
+  --la-color-primary-fg:      #FFFFFF;
+
+  --la-color-secondary-bg:      #FFFFFF;
+  --la-color-secondary-text:    #1E262B;
+  --la-color-secondary-border:  #E2E3E4;
+  --la-color-secondary-hover:   #F3F4F5;
+
+  --la-color-success:           #1F7C51;
+  --la-color-success-hover:     #196343;
+  --la-color-success-fg:        #FFFFFF;
+  --la-color-success-text:      #1F7C51;
+  --la-color-danger:            #CC4643;
+  --la-color-danger-hover:      #A92F2C;
+  --la-color-danger-fg:         #FFFFFF;
+  --la-color-danger-text:       #A92F2C;
+
+  --la-color-neutral:           #374151;
+  --la-color-neutral-hover:     #2E3644;
+  --la-color-neutral-fg:        #FFFFFF;
+
+  --la-color-warning:           #F59E0B;
+  --la-color-warning-text:      #B45309;
+  --la-color-info:              #0482C5;
+  --la-color-info-text:         #1B6683;
+
+  /* ── Surfaces ───────────────────────────────────── */
+  --la-color-bg:                #FFFFFF;
+  --la-color-bg-subtle:         #FAFAFA;
+  --la-color-bg-muted:          #F5F5F5;
+  --la-color-bg-page:           #FFFFFF;
+  --la-color-bg-surface:        #FCFCFC;
+  --la-color-bg-active:         #EBEBEB;
+  --la-color-bg-invert:         #171717;
+
+  --la-color-surface-success:   #EFFAF3;
+  --la-color-surface-warning:   #FFFBEB;
+  --la-color-surface-danger:    #FDF3F3;
+  --la-color-surface-info:      #EEFBFD;
+
+  --la-color-scrim:             rgba(0, 0, 0, 0.2);
+
+  /* ── Text ───────────────────────────────────────── */
+  --la-color-text:              #1E262B;
+  --la-color-text-secondary:    #4B5563;
+  --la-color-text-muted:        #6B7280;
+  --la-color-text-faint:        #9CA3AF;
+  --la-color-text-disabled:     #D1D5DB;
+  --la-color-text-invert:       #FFFFFF;
+
+  /* ── Borders ────────────────────────────────────── */
+  --la-color-border:            #DADDEC;
+  --la-color-border-light:      #ECEEF5;
+  --la-color-border-focus:      #3B82F6;
+  --la-color-border-active:     #18181B;
+  --la-color-border-success:    #32A66E;
+  --la-color-border-warning:    #F59E0B;
+  --la-color-border-danger:     #CC4643;
+
+  /* ── Shadows ────────────────────────────────────── */
+  --la-shadow-xs:    0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --la-shadow-sm:    0 1px 2px rgba(3, 7, 18, 0.08);
+  --la-shadow-md:    0 0 0 1px #F1F3FA, 0 1px 2px -1px rgba(3,7,18,.08), 0 2px 4px 0 rgba(3,7,18,.04);
+  --la-shadow-float: 0 2px 8px rgba(3, 7, 18, 0.08), 0 8px 24px rgba(3, 7, 18, 0.08);
+  --la-shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.12);
+
+  /* ── Input ──────────────────────────────────────── */
+  --la-input-shadow-focus: 0 0 0 3px rgba(59, 130, 246, 0.12);
+
+  /* ── Spacing ────────────────────────────────────── */
+  --la-space-3xs:   2px;
+  --la-space-2xs:   6px;
+  --la-space-xs:    4px;
+  --la-space-sm:    8px;
+  --la-space-md:    12px;
+  --la-space-lg:    16px;
+  --la-space-xl:    24px;
+  --la-space-2xl:   32px;
+
+  /* ── Border radius ──────────────────────────────── */
+  --la-radius-sm:     10px;
+  --la-radius-md:     12px;
+  --la-radius-lg:     16px;
+  --la-radius-xl:     20px;
+  --la-radius-xl1:    24px;
+  --la-radius-xl2:    28px;
+  --la-radius-2xl:    32px;
+  --la-radius-pill:   9999px;
+  --la-radius-circle: 50%;
+
+  /* ── Spinner sizing ─────────────────────────────── */
+  --la-spinner-sm:    12px;
+
+  /* ── Focus ring ────────────────────────────────── */
+  --la-focus-ring-width:  2px;
+  --la-focus-ring-offset: 2px;
+
+  /* ── Checkbox ───────────────────────────────────── */
+  --la-checkbox-size:       16px;
+  --la-checkbox-icon-size:  11px;
+  --la-checkbox-offset:     1px;
+
+  /* ── Switch ─────────────────────────────────────── */
+  --la-switch-bg-off:       #E2E3E4;
+  --la-switch-bg-off-hover: #D1D5DB;
+
+  /* ── Toast sizing ───────────────────────────────── */
+  --la-toast-min-width: 260px;
+  --la-toast-max-width: 340px;
+
+  /* ── Button sizing ──────────────────────────────── */
+  --la-button-height-sm:      28px;
+  --la-button-height-default: 32px;
+  --la-button-height-lg:      44px;
+
+  /* ── Info hint sizing ───────────────────────────── */
+  --la-info-hint-height-sm:      16px;
+  --la-info-hint-height-default: 20px;
+  --la-info-hint-height-lg:      24px;
+  --la-info-hint-icon-sm:        12px;
+  --la-info-hint-icon-default:   14px;
+  --la-info-hint-icon-lg:        16px;
+
+  /* ── Typography ─────────────────────────────────── */
+  --la-font-family:         'Inter', system-ui, -apple-system, sans-serif;
+  --la-font-size-xs:        10px;
+  --la-font-size-sm:        11px;
+  --la-font-size-md:        13px;
+  --la-font-size-base:      13px;
+  --la-font-size-lg:        14px;
+  --la-font-size-xl:        16px;
+  --la-font-size-2xl:       18px;
+  --la-font-size-3xl:       20px;
+  --la-font-size-4xl:       24px;
+
+  --la-font-weight-normal:   400;
+  --la-font-weight-medium:   500;
+  --la-font-weight-semibold: 600;
+  --la-font-weight-bold:     700;
+
+  --la-line-height: 1.5;
+
+  /* ── Navigation ─────────────────────────────────── */
+  --la-nav-bg:              #FAFAFA;
+  --la-nav-bg-active:       #EEEEEE;
+  --la-nav-bg-hover:        #27272A;
+  --la-nav-icon-color:      #1E262B;
+
+  /* ── Sidebar ────────────────────────────────────── */
+  --la-sidebar-width:             220px;
+  --la-sidebar-collapsed-width:   56px;
+  --la-sidebar-collapsed-inset:   6px;
+  --la-nav-header-padding-h:       22px;
+  --la-nav-collapsed-header-padding: 22px;
+  --la-nav-padding-h:             12px;
+  --la-nav-padding-v:             8px;
+  --la-nav-item-padding-h:        9px;
+  --la-nav-item-padding-v:        9px;
+  --la-nav-item-gap:              4px;
+  --la-nav-item-radius:           10px;
+  --la-sidebar-collapsed-padding: 8px;
+  --la-nav-logo-size:             21px;
+  --la-nav-logo-wordmark-height:  14px;
+  --la-nav-logo-gap:              12px;
+  --la-nav-logo-padding-v:        0px;
+  --la-nav-expand-icon-size:      19px;
+  --la-nav-logo-collapsed-offset-x: 6px;
+  --la-nav-logo-collapsed-offset-y: 3px;
+  --la-sidebar-padding-top:        8px;
+  --la-nav-item-icon-size:        17px;
+  --la-nav-sub-height:            26px;
+  --la-nav-sub-padding-v:         6px;
+  --la-nav-sub-padding-h:         12px;
+
+  /* ── Page header ─────────────────────────────────── */
+  --la-ph-padding-left:   32px;
+  --la-ph-padding-right:  20px;
+  --la-ph-title-size:     18px;
+  --la-ph-title-weight:   600;
+  --la-ph-bg:             #FAFAFA;
+  --la-ph-height:         40px;
+  --la-ph-padding-v:      0px;
+  --la-ph-gap:            0px;
+
+  /* ── Main content area ───────────────────────────── */
+  --la-main-margin:       8px;
+  --la-main-radius:       var(--la-radius-md);
+  --la-main-shadow:       var(--la-shadow-md);
+  --la-aside-width:       320px;
+  --la-drawer-size:       var(--la-aside-width);
+
+  /* ── Animation durations ─────────────────────────── */
+  --la-dur-fast:    150ms;
+  --la-dur-base:    200ms;
+  --la-dur-modal:   330ms;
+  --la-dur-slow:    500ms;
+
+  /* ── Motion — easing curves ──────────────────────── */
+  --ease-out:       cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out:    cubic-bezier(0.77, 0, 0.175, 1);
+  --ease:           cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-spring-sm: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-snappy:    cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-drawer:    cubic-bezier(0.32, 0.72, 0, 1);
+
+  /* ── Motion — durations ──────────────────────────── */
+  --dur-instant:  100ms;
+  --dur-fast:     150ms;
+  --dur-base:     200ms;
+  --dur-modal:    250ms;
+  --dur-page:     350ms;
+
+  /* ── Motion — stagger ────────────────────────────── */
+  --stagger-sm: 30ms;
+  --stagger-md: 50ms;
+  --stagger-lg: 60ms;
+
+  /* ── Motion — scale presets ──────────────────────── */
+  --scale-press:  0.97;
+  --scale-enter:  0.96;
+  --scale-hover:  1.02;
+}

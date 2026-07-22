@@ -1,0 +1,781 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>la-document-page — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/" class="active">Pages</a>
+      </nav>
+    </div>
+  </header>
+
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+
+  <div class="page-container">
+
+    <nav class="docs-nav" id="docs-nav">
+      <h3 class="docs-nav-title">la-document-page</h3>
+
+      <div class="docs-nav-group">
+        <a href="#overview"   class="docs-nav-item" data-nav-id="overview">Overview</a>
+        <a href="#anatomy"    class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+        <a href="#controls"   class="docs-nav-item" data-nav-id="controls">Controls</a>
+        <a href="#preview"    class="docs-nav-item" data-nav-id="preview">Live preview</a>
+        <a href="#snapshots"  class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+      </div>
+
+      <div class="docs-nav-group">
+        <a href="#reference"       class="docs-nav-item" data-nav-id="reference">la-document-page</a>
+        <a href="#properties"      class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+        <a href="#slots"           class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+        <a href="#events"          class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+        <a href="#css-tokens"      class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+        <a href="#usage"           class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+        <a href="#notes"           class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+      </div>
+
+      <div class="docs-nav-group">
+        <span class="docs-nav-title">Elsewhere</span>
+        <a class="docs-nav-item" href="../pages/">Pages ←</a>
+        <a class="docs-nav-item" href="../index.html">Overview</a>
+        <a class="docs-nav-item" href="../components/">Components</a>
+      </div>
+    </nav>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-document-page</h1>
+          <p>Full-screen document detail surface. Two-panel layout: detail pane left (name, entity, About section, linked insights, actions), document preview right. The About section renders key terms (flat list for one-per-company docs) or obligations (party-grouped list for bilateral contracts) depending on the document type — the backend determines which renderer applies. Sprint 6 — Stage 1.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+          <p>The component fills its host element. Left detail pane scrolls independently; right preview pane is fixed within the viewport height.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Anatomy regions</div>
+          <table class="docs-table">
+            <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr><td>Detail pane</td><td><code>.detail-pane</code></td><td>Left column (1fr). Scrollable. Contains all document metadata, About content, linked insights, and actions.</td></tr>
+              <tr><td>Document header</td><td><code>.doc-header</code></td><td>Document title (<code>documentName</code>) with a status badge, entity name, and meta text (category · legalArea) in a single row below. Replace/Delete actions menu and status badge sit in the top-right. When <code>replacing</code> is true the menu swaps for an "Uploading…" indicator.</td></tr>
+              <tr><td>Flag banner</td><td><code>.flag-wrap</code> + <code>la-alert</code></td><td>Danger or warning <code>la-alert</code> shown for <code>flagged-expired</code>, <code>flagged-unsigned</code>, and <code>flagged-ai</code> statuses. Carries icon, title, and the <code>flagReason</code> copy.</td></tr>
+              <tr><td>About section</td><td><code>.detail-section</code> (About)</td><td>Backend-determined renderer: <code>key-terms</code> renders a flat sentence list; <code>obligations</code> renders party-grouped obligation bullets; <code>loading</code> shows a spinner while analysis runs; empty string hides the section entirely.</td></tr>
+              <tr><td>Details section</td><td><code>.detail-section</code> (Details)</td><td>Key–value rows for uploadedDate, fileSize, category, and legalArea. Hidden when all four are absent.</td></tr>
+              <tr><td>Linked insights</td><td><code>.detail-section</code> (Linked insights)</td><td>Clickable severity-icon rows for each <code>LinkedInsight</code> in the <code>insights</code> array. Section is hidden entirely when the array is empty. Consumer wires clicks to open <code>la-insight-modal</code>.</td></tr>
+              <tr><td>Preview pane</td><td><code>.preview-pane</code></td><td>Right column (1fr). Subtle surface. Shows a document-file placeholder for <code>ready</code> and flagged statuses; animated spinner for <code>processing</code>.</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Controls -->
+        <div id="controls" class="preview-header" style="margin-top:8px;">
+          <h1>Controls</h1>
+          <p>Drive the live preview below. Each control maps to a public property.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>documentStatus</label>
+              <div class="btn-group">
+                <button class="btn-toggle active" data-status="ready"            type="button">ready</button>
+                <button class="btn-toggle"        data-status="processing"       type="button">processing</button>
+                <button class="btn-toggle"        data-status="flagged-expired"  type="button">flagged-expired</button>
+                <button class="btn-toggle"        data-status="flagged-unsigned" type="button">flagged-unsigned</button>
+                <button class="btn-toggle"        data-status="flagged-ai"       type="button">flagged-ai</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>aboutType</label>
+              <div class="btn-group">
+                <button class="btn-toggle active" data-about-type="key-terms"   type="button">key-terms</button>
+                <button class="btn-toggle"        data-about-type="obligations" type="button">obligations</button>
+                <button class="btn-toggle"        data-about-type="loading"     type="button">loading</button>
+                <button class="btn-toggle"        data-about-type=""            type="button">—</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-divider"></div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-doc-name">documentName</label>
+              <input id="ctl-doc-name" type="text" value="Articles of Incorporation" style="width:240px;">
+            </div>
+            <div class="control-group">
+              <label for="ctl-entity">entity</label>
+              <input id="ctl-entity" type="text" value="" placeholder="e.g. Jane Lee" style="width:180px;">
+            </div>
+            <div class="control-group">
+              <label>deletable</label>
+              <div class="btn-group">
+                <button class="btn-toggle active" data-deletable="false" type="button">false</button>
+                <button class="btn-toggle"        data-deletable="true"  type="button">true</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-divider"></div>
+          <div class="controls-row">
+            <div class="control-group" style="flex:1;">
+              <label for="ctl-about-summary">aboutSummary</label>
+              <input id="ctl-about-summary" type="text" value="The founding document that establishes Acme Corp. as a Delaware C-corporation." style="width:100%;">
+            </div>
+          </div>
+          <div class="controls-divider"></div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label>insights preset</label>
+              <div class="btn-group">
+                <button class="btn-toggle active" data-insights="empty"    type="button">empty</button>
+                <button class="btn-toggle"        data-insights="two"      type="button">2 insights</button>
+                <button class="btn-toggle"        data-insights="four"     type="button">4 insights</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="preview" class="preview-header" style="margin-top:8px;">
+          <h1>Live preview</h1>
+          <p>Reflects the controls above. The component fills the available height.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden; position:relative;">
+            <la-document-page id="dp-live"
+              document-name="Articles of Incorporation"
+              document-status="ready"
+              category="Incorporation"
+              legal-area="Governance"
+              uploaded-date="12 Jan 2024"
+              file-size="142 KB"
+              about-type="key-terms"
+              about-summary="The founding document that establishes Acme Corp. as a Delaware C-corporation."
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+          <p>Fixed reference examples — key statuses and about renderer variants.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Ready — Key Terms renderer (one-per-company doc)</div>
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden;">
+            <la-document-page
+              document-name="Articles of Incorporation"
+              document-status="ready"
+              category="Incorporation"
+              legal-area="Governance"
+              uploaded-date="12 Jan 2024"
+              file-size="142 KB"
+              about-type="key-terms"
+              about-summary="The founding document that establishes Acme Corp. as a Delaware C-corporation."
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Ready — Obligations renderer (bilateral contract)</div>
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden;">
+            <la-document-page
+              id="snap-obligations"
+              document-name="Employment Contract"
+              document-status="ready"
+              entity="Jane Lee"
+              category="Employment"
+              legal-area="Employment"
+              uploaded-date="3 Mar 2024"
+              file-size="88 KB"
+              about-type="obligations"
+              about-summary="Jane Lee's employment contract with Acme Corp., effective 3 March 2024."
+              deletable
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Ready — About loading (analysis in progress)</div>
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden;">
+            <la-document-page
+              document-name="Shareholders' Agreement"
+              document-status="ready"
+              category="Corporate"
+              legal-area="Governance"
+              uploaded-date="15 Jan 2024"
+              file-size="210 KB"
+              about-type="loading"
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Processing — replacement in progress</div>
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden;">
+            <la-document-page
+              document-name="Employment Contract"
+              document-status="processing"
+              entity="Jane Lee"
+              category="Employment"
+              legal-area="Employment"
+              uploaded-date="3 Mar 2024"
+              file-size="88 KB"
+              about-type="obligations"
+              about-summary="Jane Lee's employment contract with Acme Corp., effective 3 March 2024."
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Flagged — expired</div>
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden;">
+            <la-document-page
+              document-name="Professional Indemnity Certificate"
+              document-status="flagged-expired"
+              flag-reason="Certificate expired 1 March 2026. Upload a current certificate to resolve the linked insight."
+              category="Insurance"
+              legal-area="Employment"
+              uploaded-date="28 Feb 2025"
+              file-size="64 KB"
+              about-type=""
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Flagged — missing signature</div>
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden;">
+            <la-document-page
+              document-name="Articles of Incorporation"
+              document-status="flagged-unsigned"
+              flag-reason="Founder signature is missing. Have all founders sign and re-upload."
+              category="Incorporation"
+              legal-area="Governance"
+              uploaded-date="12 Jan 2024"
+              file-size="142 KB"
+              about-type="key-terms"
+              about-summary="The founding document that establishes Acme Corp. as a Delaware C-corporation."
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Flagged — AI review</div>
+          <div class="preview-frame" style="padding:0; height:520px; overflow:hidden;">
+            <la-document-page
+              id="snap-flagged-ai"
+              document-name="Employment Contract"
+              document-status="flagged-ai"
+              flag-reason="IP assignment clause may not be enforceable. Check the linked insight."
+              entity="Jane Lee"
+              category="Employment"
+              legal-area="Employment"
+              uploaded-date="3 Mar 2024"
+              file-size="88 KB"
+              about-type="obligations"
+              about-summary="Jane Lee's employment contract with Acme Corp., effective 3 March 2024."
+              style="height:100%;display:block;"
+            ></la-document-page>
+          </div>
+        </div>
+
+        <!-- Documentation -->
+        <div class="docs">
+
+          <div id="reference" class="docs-section">
+            <h2>la-document-page</h2>
+            <p>Page component (<code>src/pages/la-document-page.ts</code>). Two-panel full-screen layout for a single document. Not subject to the <code>/ready</code> promotion gate — this docs draft is the canonical reference. Sprint 6 — Stage 1.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- Properties -->
+          <div id="properties" class="docs-section">
+            <h3>Properties</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>documentName</td>
+                  <td><span class="default">document-name</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">"Untitled document"</span></td>
+                  <td>Display name rendered in the document header.</td>
+                </tr>
+                <tr>
+                  <td>documentStatus</td>
+                  <td><span class="default">document-status</span></td>
+                  <td><span class="type">'ready' | 'processing' | 'flagged-expired' | 'flagged-unsigned' | 'flagged-ai'</span></td>
+                  <td><span class="default">'ready'</span></td>
+                  <td>Drives the status badge, flag banner, and preview pane state. <code>processing</code> shows a spinner in the preview pane; all flagged values show the flag banner in the detail pane.</td>
+                </tr>
+                <tr>
+                  <td>entity</td>
+                  <td><span class="default">entity</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Optional person or entity associated with this document (e.g. "Jane Lee"). Shown as a sub-line under the document name. Non-interactive in Sprint 6 — People page navigation wires in Sprint 8.</td>
+                </tr>
+                <tr>
+                  <td>deletable</td>
+                  <td><span class="default">deletable</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><span class="default">false</span></td>
+                  <td>Backend-gated. When <code>true</code>, the Delete item is rendered in the actions menu.</td>
+                </tr>
+                <tr>
+                  <td>entityClickable</td>
+                  <td><span class="default">entity-clickable</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><span class="default">false</span></td>
+                  <td>When <code>true</code>, the entity name in the header renders as an underlined link and fires <code>la-entity-click</code> on click. Use for Employment documents where the entity links back to the People page.</td>
+                </tr>
+                <tr>
+                  <td>replacing</td>
+                  <td><span class="default">replacing</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><span class="default">false</span></td>
+                  <td>When <code>true</code>, the actions menu is replaced with an "Uploading…" spinner indicator, preventing further Replace or Delete actions while the upload is in progress.</td>
+                </tr>
+                <tr>
+                  <td>flagReason</td>
+                  <td><span class="default">flag-reason</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Supplementary explanation inside the flag banner. Falls back to a generic default for each status type when empty.</td>
+                </tr>
+                <tr>
+                  <td>category</td>
+                  <td><span class="default">category</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Document category shown as a meta chip and in the Details section.</td>
+                </tr>
+                <tr>
+                  <td>legalArea</td>
+                  <td><span class="default">legal-area</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Legal area name shown as a meta chip and in the Details section.</td>
+                </tr>
+                <tr>
+                  <td>uploadedDate</td>
+                  <td><span class="default">uploaded-date</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Human-readable date string shown in the Details section.</td>
+                </tr>
+                <tr>
+                  <td>fileSize</td>
+                  <td><span class="default">file-size</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Human-readable file size string (e.g. "142 KB"). Shown in the Details section and in the preview pane sub-line.</td>
+                </tr>
+                <tr>
+                  <td>insights</td>
+                  <td>—</td>
+                  <td><span class="type">LinkedInsight[]</span></td>
+                  <td><span class="default">[]</span></td>
+                  <td>Linked insights for this document. Each item: <code>{ title: string; severity: 'urgent' | 'proactive' }</code>. Consumer wires clicks on insight rows to open <code>la-insight-modal</code>.</td>
+                </tr>
+                <tr>
+                  <td>aboutType</td>
+                  <td><span class="default">about-type</span></td>
+                  <td><span class="type">'key-terms' | 'obligations' | 'loading' | ''</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Selects the About renderer. Backend-determined — no frontend logic decides which applies. Empty string hides the About section entirely.</td>
+                </tr>
+                <tr>
+                  <td>aboutSummary</td>
+                  <td><span class="default">about-summary</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>One-to-two sentence summary shown above the key terms or obligations list.</td>
+                </tr>
+                <tr>
+                  <td>aboutItems</td>
+                  <td>—</td>
+                  <td><span class="type">AboutItem[]</span></td>
+                  <td><span class="default">[]</span></td>
+                  <td>Array of items for the About renderer. Key terms: <code>{ text: string }[]</code>. Obligations: <code>{ party: string; items: string[] }[]</code>. Mix of types is not supported — use the type that matches <code>aboutType</code>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- Slots -->
+          <div id="slots" class="docs-section">
+            <h3>Slots</h3>
+            <p class="docs-note">No slots. All content is driven by properties.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- Events -->
+          <div id="events" class="docs-section">
+            <h3>Events</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Event</th><th>Detail</th><th>When fired</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>la-insight-select</code></td>
+                  <td><code>{ title: string; severity: 'urgent' | 'proactive' }</code></td>
+                  <td>User clicks an insight row in the Linked insights section. Consumer opens <code>la-insight-modal</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>la-replace</code></td>
+                  <td><em>none</em></td>
+                  <td>User selects "Replace document" from the actions menu. Consumer opens a Replace modal and sets <code>replacing = true</code> during upload.</td>
+                </tr>
+                <tr>
+                  <td><code>la-delete</code></td>
+                  <td><em>none</em></td>
+                  <td>User selects "Delete document" from the actions menu. Consumer opens a Delete confirmation modal.</td>
+                </tr>
+                <tr>
+                  <td><code>la-entity-click</code></td>
+                  <td><code>{ entity: string }</code></td>
+                  <td>User clicks the entity name when <code>entityClickable</code> is true. Consumer navigates to the associated entity page (e.g. People page).</td>
+                </tr>
+              </tbody>
+            </table>
+            <p class="docs-note" style="margin-top:12px;">All events bubble and are composed — they cross the shadow boundary and can be caught on any ancestor element in the light DOM.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- CSS tokens -->
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Token</th><th>Used for</th></tr>
+              </thead>
+              <tbody>
+                <tr><td><code>--la-color-border-light</code></td><td>Section dividers, insight row borders, detail pane border-right</td></tr>
+                <tr><td><code>--la-color-border</code></td><td>Preview icon outline</td></tr>
+                <tr><td><code>--la-color-bg</code></td><td>Preview icon background</td></tr>
+                <tr><td><code>--la-color-bg-subtle</code></td><td>Preview pane background</td></tr>
+                <tr><td><code>--la-color-bg-muted</code></td><td>Preview icon folded-corner fill</td></tr>
+                <tr><td><code>--la-color-text</code></td><td>Document name, About summary, key-term items, obligation items, section labels</td></tr>
+                <tr><td><code>--la-color-text-muted</code></td><td>Meta text, meta separators, entity name, preview sub-line</td></tr>
+                <tr><td><code>--la-color-text-faint</code></td><td>Middle-dot meta separators (·)</td></tr>
+                <tr><td><code>--la-color-primary</code></td><td>Entity link (when entityClickable)</td></tr>
+                <tr><td><code>--la-color-urgent</code></td><td>Urgent insight icon</td></tr>
+                <tr><td><code>--la-color-proactive</code></td><td>Proactive insight icon</td></tr>
+                <tr><td><code>--la-color-processing</code></td><td>About spinner and preview spinner colour</td></tr>
+                <tr><td><code>--la-shadow-sm</code></td><td>Preview icon shadow</td></tr>
+                <tr><td><code>--la-radius-sm</code></td><td>Preview icon corners</td></tr>
+                <tr><td><code>--la-font-size-sm</code></td><td>Meta text, entity name, preview sub-line</td></tr>
+                <tr><td><code>--la-font-size-base</code></td><td>Section labels, About summary, key-term items, obligation items, insight titles, preview label</td></tr>
+                <tr><td><code>--la-font-size-lg</code></td><td>Insight severity icons; about/preview spinners</td></tr>
+                <tr><td><code>--la-font-size-2xl</code></td><td>Document name</td></tr>
+                <tr><td><code>--la-font-weight-semibold</code></td><td>Document name, section labels, obligation party names</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- Usage examples -->
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>Render inside <code>la-app-shell</code> — the shell provides the breadcrumbs, header, and sidebar. The page fills the <code>slot="main"</code> slot. No aside slot needed.</p>
+
+            <pre class="docs-code"><code>&lt;la-app-shell show-header page-title="Articles of Incorporation"&gt;
+  &lt;la-sidebar slot="sidebar"&gt;&lt;/la-sidebar&gt;
+  &lt;la-document-page
+    id="page"
+    slot="main"
+    style="display:block;height:100%;min-height:0;"
+  &gt;&lt;/la-document-page&gt;
+&lt;/la-app-shell&gt;
+
+&lt;script&gt;
+  var page = document.getElementById('page');
+  page.documentName = 'Articles of Incorporation';
+  page.documentStatus = 'ready';
+  page.category = 'Incorporation';
+  page.legalArea = 'Governance';
+  page.uploadedDate = '12 Jan 2024';
+  page.fileSize = '142 KB';
+  page.aboutType = 'key-terms';
+  page.aboutSummary = 'The founding document that establishes Acme Corp. as a Delaware C-corporation.';
+  page.aboutItems = [
+    { text: 'Incorporated in Delaware on 12 January 2024.' },
+    { text: 'Authorised share capital: 10,000,000 common shares at $0.0001 par value.' },
+  ];
+&lt;/script&gt;</code></pre>
+
+            <p style="margin-top:16px;">Wire actions and entity link:</p>
+
+            <pre class="docs-code"><code>// Replace flow — set replacing while upload is in progress
+page.addEventListener('la-replace', function() {
+  page.replacing = true;
+  // ... upload logic ...
+  page.replacing = false;
+});
+
+// Delete flow
+page.addEventListener('la-delete', function() {
+  // open confirmation modal
+});
+
+// Entity link (Sprint 8 — Employment documents only)
+page.entityClickable = true;
+page.addEventListener('la-entity-click', function(e) {
+  navigateTo('people.html'); // e.detail.entity contains the name
+});</code></pre>
+
+            <p style="margin-top:16px;">Wire insight rows to open <code>la-insight-modal</code>:</p>
+
+            <pre class="docs-code"><code>page.addEventListener('la-insight-select', function(e) {
+  modal.headline = e.detail.title;
+  modal.severity = e.detail.severity;
+  modal.open = true;
+});</code></pre>
+
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <!-- Notes -->
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul class="docs-list">
+              <li><strong>Page, not component</strong> · lives at <code>src/pages/la-document-page.ts</code>. Not subject to the <code>/ready</code> promotion gate; this draft is the canonical reference and stays at <code>dev/docs-drafts/</code>.</li>
+              <li><strong>Two About renderers, backend-selected</strong> · <code>key-terms</code> for one-per-company documents (Articles of Incorporation, Board Resolutions); <code>obligations</code> for bilateral contracts (Employment Contracts, IP Assignments). The renderer is set by the backend document-type classification — no frontend logic decides which to use.</li>
+              <li><strong>Entity is plain meta text</strong> · renders as muted text in the header meta row (e.g. "Jane Lee · Employment"). When <code>entityClickable</code> is true it becomes an underlined primary-colour link and fires <code>la-entity-click</code>. First wired in Sprint 8 for the Employment flow.</li>
+              <li><strong>deletable is backend-gated</strong> · set this prop only when the backend confirms the document can be deleted. The prop gates the Delete item in the actions menu; the consumer handles the confirmation modal and post-delete redirect.</li>
+              <li><strong>Actions are in the header menu</strong> · Replace and Delete are in a <code>la-menu</code> next to the status badge, not a bottom section. Set <code>replacing = true</code> while an upload is in progress to disable the menu and show an "Uploading…" indicator.</li>
+              <li><strong>Linked insights section hidden when empty</strong> · the section is not rendered at all when <code>insights</code> is an empty array. No fallback message is shown.</li>
+              <li><strong>Two-column layout is fixed</strong> · left detail pane is 600px, right preview pane fills remaining space. Flag banners use <code>la-alert</code>; spinners use <code>ph-spinner-gap</code> with CSS rotation.</li>
+              <li><strong>Preview pane is a placeholder</strong> · shows a document-file icon and "View original" button. Actual PDF/DOCX rendering is engineering's concern at integration time.</li>
+              <li><strong>"View original" button — engineering decision needed</strong> · the button is intended to open the raw uploaded file (PDF/DOCX) in a new tab or trigger a download, giving users access to the exact file as uploaded. If the preview pane renders the actual file directly, this button becomes redundant and should be removed. Engineering should confirm their preview approach before wiring it up.</li>
+            </ul>
+          </div>
+
+        </div><!-- /.docs -->
+
+      </div><!-- /.page-content-inner -->
+    </div><!-- /.page-content -->
+
+  </div><!-- /.page-container -->
+
+  <script>
+  (function () {
+    // ── Sidebar collapse ─────────────────────────────────
+    var nav    = document.getElementById('docs-nav');
+    var toggle = document.getElementById('nav-toggle');
+    var stored = localStorage.getItem('doc-nav-collapsed');
+    if (stored === 'true') { document.body.classList.add('nav-collapsed'); }
+    toggle.addEventListener('click', function () {
+      var collapsed = document.body.classList.toggle('nav-collapsed');
+      localStorage.setItem('doc-nav-collapsed', collapsed);
+    });
+
+    // ── Active nav on scroll ─────────────────────────────
+    var navItems = Array.from(document.querySelectorAll('[data-nav-id]'));
+    var sections = navItems.map(function (el) {
+      return document.getElementById(el.dataset.navId);
+    }).filter(Boolean);
+    function onScroll() {
+      var scrollY = window.scrollY + 80;
+      var active = sections[0];
+      sections.forEach(function (s) { if (s.offsetTop <= scrollY) active = s; });
+      navItems.forEach(function (el) {
+        el.classList.toggle('active', el.dataset.navId === active.id);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Live preview component ───────────────────────────
+    var live = document.getElementById('dp-live');
+
+    // Set key-terms about items on load
+    function setKeyTermsItems() {
+      live.aboutItems = [
+        { text: 'Incorporated in Delaware on 12 January 2024.' },
+        { text: 'Authorised share capital: 10,000,000 common shares at $0.0001 par value.' },
+        { text: 'Registered agent: Capitol Services Inc., Dover, Delaware.' },
+        { text: 'Initial directors: Alex Chen (sole director until first board meeting).' },
+      ];
+    }
+
+    function setObligationsItems() {
+      live.aboutItems = [
+        { party: 'Acme Corp.', items: [
+          'Pay a base salary of $120,000 per annum, reviewed annually.',
+          'Provide 15 days paid annual leave per calendar year.',
+        ]},
+        { party: 'Jane Lee', items: [
+          'Dedicate full working time to Acme Corp. duties.',
+          'Assign all IP created during employment to Acme Corp.',
+          'Observe a 6-month non-solicitation period after termination.',
+        ]},
+      ];
+    }
+
+    setKeyTermsItems();
+
+    // Status buttons
+    document.querySelectorAll('[data-status]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-status]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        live.documentStatus = btn.dataset.status;
+      });
+    });
+
+    // aboutType buttons
+    document.querySelectorAll('[data-about-type]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-about-type]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        var t = btn.dataset.aboutType;
+        live.aboutType = t;
+        if (t === 'obligations') {
+          live.documentName = 'Employment Contract';
+          live.entity = 'Jane Lee';
+          setObligationsItems();
+          document.getElementById('ctl-doc-name').value = 'Employment Contract';
+          document.getElementById('ctl-entity').value = 'Jane Lee';
+        } else if (t === 'key-terms') {
+          live.documentName = 'Articles of Incorporation';
+          live.entity = '';
+          setKeyTermsItems();
+          document.getElementById('ctl-doc-name').value = 'Articles of Incorporation';
+          document.getElementById('ctl-entity').value = '';
+        } else {
+          live.aboutItems = [];
+        }
+      });
+    });
+
+    // deletable buttons
+    document.querySelectorAll('[data-deletable]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-deletable]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        live.deletable = btn.dataset.deletable === 'true';
+      });
+    });
+
+    // insights preset buttons
+    var insightsPresets = {
+      empty: [],
+      two: [
+        { title: 'IP assignment clause needs countersignature', severity: 'urgent' },
+        { title: "Non-solicitation period exceeds Delaware's typical 3-month norm", severity: 'proactive' },
+      ],
+      four: [
+        { title: 'IP assignment clause needs countersignature', severity: 'urgent' },
+        { title: 'Employment contract not executed by both parties', severity: 'urgent' },
+        { title: "Non-solicitation period exceeds Delaware's typical 3-month norm", severity: 'proactive' },
+        { title: 'Annual salary review clause missing', severity: 'proactive' },
+      ],
+    };
+    document.querySelectorAll('[data-insights]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-insights]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        live.insights = insightsPresets[btn.dataset.insights];
+      });
+    });
+
+    // Text inputs
+    document.getElementById('ctl-doc-name').addEventListener('input', function() {
+      live.documentName = this.value;
+    });
+    document.getElementById('ctl-entity').addEventListener('input', function() {
+      live.entity = this.value;
+    });
+    document.getElementById('ctl-about-summary').addEventListener('input', function() {
+      live.aboutSummary = this.value;
+    });
+
+    // ── Snapshots — set array props ───────────────────────
+    // Obligations snapshot
+    var snapObl = document.getElementById('snap-obligations');
+    if (snapObl) {
+      snapObl.aboutItems = [
+        { party: 'Acme Corp.', items: [
+          'Pay a base salary of $120,000 per annum, reviewed annually.',
+          'Provide 15 days paid annual leave per calendar year.',
+        ]},
+        { party: 'Jane Lee', items: [
+          'Dedicate full working time to Acme Corp. duties.',
+          'Assign all IP created during employment to Acme Corp.',
+          'Observe a 6-month non-solicitation period after termination.',
+        ]},
+      ];
+      snapObl.insights = [
+        { title: 'IP assignment clause needs countersignature', severity: 'urgent' },
+        { title: "Non-solicitation period exceeds Delaware's typical 3-month norm", severity: 'proactive' },
+      ];
+    }
+
+    // Flagged-ai snapshot
+    var snapFlaggedAi = document.getElementById('snap-flagged-ai');
+    if (snapFlaggedAi) {
+      snapFlaggedAi.aboutItems = [
+        { party: 'Acme Corp.', items: [
+          'Pay a base salary of $120,000 per annum, reviewed annually.',
+          'Provide 15 days paid annual leave per calendar year.',
+        ]},
+        { party: 'Jane Lee', items: [
+          'Dedicate full working time to Acme Corp. duties.',
+          'Assign all IP created during employment to Acme Corp.',
+        ]},
+      ];
+      snapFlaggedAi.insights = [
+        { title: 'IP assignment clause needs countersignature', severity: 'urgent' },
+      ];
+    }
+
+  })();
+  </script>
+
+</body>
+</html>

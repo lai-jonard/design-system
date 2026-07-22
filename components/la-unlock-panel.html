@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-unlock-panel — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-unlock-panel</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#composes" class="docs-nav-item" data-nav-id="composes">Composes</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-unlock-panel</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-unlock-panel</h1>
+  <p>Typeform-style question runner for the unlock flow. The user answers one question at a time — sometimes a text field, sometimes a file upload, sometimes a choice — and the panel composes the system primitives for each. One <code>steps</code> array carries everything; one <code>la-unlock-action</code> event carries every interaction. Six panel states cover the lifecycle: <code>pre-start</code> · <code>active</code> · <code>processing</code> · <code>unlocked</code> · <code>next-prompt</code> · <code>dismissed</code>.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>The active state lays the question out top-down with generous breathing room. A progress block (counter + stepper bar paired together) sits at the top; the question is the centerpiece beneath it; the field block follows; actions right-align at the bottom. Pre-start carries its CTA at the bottom under the prep list; the active state's Submit button anchors the bottom of the panel.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — active step with one text field</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="anat-panel" state="active" area="Governance"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Vertical rhythm</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Progress block</td><td><code>.progress-block</code></td><td>Top of panel. "Step N of M" counter stacked above the <code>la-stepper</code> bar. Reads as a single progress unit.</td></tr>
+      <tr><td>Question</td><td><code>.question-title</code> ← <code>step.title</code></td><td>20px / 600 — the thing the user is being asked.</td></tr>
+      <tr><td>Description</td><td><code>.question-desc</code> ← <code>step.description</code> (optional)</td><td>Supporting context. Quiet secondary text.</td></tr>
+      <tr><td>Step error</td><td><code>la-alert variant="danger"</code> ← <code>step.error</code> (optional)</td><td>Renders only when the consumer sets a step-level error.</td></tr>
+      <tr><td>Field block</td><td><code>.fields</code></td><td>Renders each <code>step.fields[i]</code> via the matching primitive — see Composes.</td></tr>
+      <tr><td>Actions</td><td><code>.actions</code></td><td>At the bottom. Three regions: previous-step icon button (left, disabled on step 1), then Skip + Submit on the right. Skip hides when <code>step.skippable === false</code>; Submit hides on auto-advance choice steps.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Composes -->
+<div id="composes" class="preview-header" style="margin-top:8px;">
+  <h1>Composes</h1>
+  <p>The panel does not own input chrome. Every field type maps to a system primitive — when those primitives evolve, this panel inherits the changes for free.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Field type → primitive map</div>
+  <table class="docs-table">
+    <thead><tr><th>Field type</th><th>Renders as</th><th>Captures via</th></tr></thead>
+    <tbody>
+      <tr><td><code>'text'</code> · <code>'email'</code> · <code>'url'</code> · <code>'tel'</code> · <code>'number'</code></td><td><a href="./la-input.html"><code>la-input</code></a> with matching <code>type</code></td><td><code>la-change</code> event with <code>{value}</code></td></tr>
+      <tr><td><code>'file'</code></td><td><a href="./la-upload-box.html"><code>la-upload-box</code></a></td><td><code>la-change</code> with <code>{file}</code> · <code>la-remove</code></td></tr>
+      <tr><td><code>'choice'</code></td><td>Vertical stack of <a href="./la-checklist.html"><code>la-checklist variant="contained"</code></a></td><td>Click handler with single-select enforced internally</td></tr>
+      <tr><td><code>'service'</code></td><td><a href="./la-button.html"><code>la-button variant="primary" size="lg"</code></a> + manual fallback link</td><td>Click on Connect / manual link</td></tr>
+    </tbody>
+  </table>
+  <p style="margin-top:12px;">Surface chrome composes <a href="./la-panel.html"><code>la-panel</code></a> for pre-start, active, processing, and next-prompt — a white card on the page subtle bg. The success state is intentionally card-less: a centred <code>ph-fill ph-check-circle</code> in <code>--la-color-success</code> over a headline and sub-line, sitting directly on the subtle bg to contrast with the boxed flow. Step-level errors compose <a href="./la-alert.html"><code>la-alert variant="danger"</code></a>. The progress bar is <a href="./la-stepper.html"><code>la-stepper</code></a> driven by <code>steps</code>.</p>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below. The <strong>state</strong> control swaps the top-level branch; the <strong>step type</strong> control swaps the active-step example.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label>state</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-state="pre-start" type="button">pre-start</button>
+        <button class="btn-toggle" data-state="active" type="button">active</button>
+        <button class="btn-toggle" data-state="processing" type="button">processing</button>
+        <button class="btn-toggle" data-state="unlocked" type="button">unlocked</button>
+        <button class="btn-toggle" data-state="next-prompt" type="button">next-prompt</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls-divider"></div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label>active step example (<code>state="active"</code>)</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-example="text" type="button">text</button>
+        <button class="btn-toggle" data-example="file" type="button">file</button>
+        <button class="btn-toggle" data-example="choice" type="button">choice</button>
+        <button class="btn-toggle" data-example="form" type="button">multi-field</button>
+        <button class="btn-toggle" data-example="service" type="button">service</button>
+        <button class="btn-toggle" data-example="error" type="button">with error</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls-divider"></div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-area">area</label>
+      <input id="ctl-area" type="text" value="Governance">
+    </div>
+    <div class="control-group">
+      <label for="ctl-next-area">nextArea (next-prompt)</label>
+      <input id="ctl-next-area" type="text" value="Employment">
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the controls above. Interactions log below — the panel emits a single <code>la-unlock-action</code> event with an <code>action</code> string.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="up-live" style="max-width:560px;width:100%;"></la-unlock-panel>
+  </div>
+  <div id="event-log" style="padding:8px 24px; font-size:11px; color:var(--la-color-text-muted); font-family:monospace; min-height:28px; border-top:1px solid var(--la-color-border-light); background:var(--la-color-bg-subtle);" aria-live="polite">
+    <span style="color:var(--la-color-text-faint);">Event log — interact with the panel to see <code>la-unlock-action</code> fire</span>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Every render branch the framework hits.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">pre-start — checklist preview before the user begins</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-pre" state="pre-start" area="Governance" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">active — single text field (typeform feel)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-text" state="active" area="Governance" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">active — file upload</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-file" state="active" area="Governance" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">active — yes/no choice (auto-advances on selection)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-choice" state="active" area="Fundraising" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">active — multi-field form (Submit appears, validates required)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-form" state="active" area="Governance" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">active — service connection (OAuth)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-service" state="active" area="Employment" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">active — step-level error (la-alert variant="danger" above the field)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-error" state="active" area="Governance" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">processing — every step submitted, awaiting backend</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel id="snap-processing" state="processing" area="Governance" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">unlocked — centred icon-on-top moment (no card chrome)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel state="unlocked" area="Governance" style="max-width:560px;"></la-unlock-panel>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Full flow — Governance unlock walkthrough <span style="color:var(--la-color-text-muted); font-weight:var(--la-font-weight-normal); letter-spacing:0;">(use the controls below to step through pre-start → 5 questions → processing → unlocked → next-prompt)</span></div>
+  <div class="preview-frame" style="padding:32px; flex-direction:column; align-items:stretch; gap:16px;">
+    <la-unlock-panel id="walk-panel" style="max-width:560px;width:100%;align-self:center;"></la-unlock-panel>
+    <div style="display:flex; justify-content:center; gap:8px; padding:8px 0;">
+      <la-button id="walk-prev" variant="ghost" size="sm">Previous</la-button>
+      <span id="walk-position" style="display:inline-flex; align-items:center; padding:0 12px; font-size:11px; color:var(--la-color-text-muted); font-family:monospace;">stage 0</span>
+      <la-button id="walk-next" variant="primary" size="sm">Next</la-button>
+      <la-button id="walk-reset" variant="ghost" size="sm">Reset</la-button>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">next-prompt — recommended next-area suggestion</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-unlock-panel
+      id="snap-next"
+      state="next-prompt"
+      next-area="Employment"
+      next-description="Add your team and contracts. About 8 minutes."
+      style="max-width:560px;"
+    ></la-unlock-panel>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-unlock-panel</h2>
+    <p>Typeform-style question runner for the unlock flow — composes system primitives per field type and routes every interaction through one la-unlock-action event.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>unlockState</td>
+          <td><span class="default">state</span></td>
+          <td><span class="type">UnlockState</span></td>
+          <td><span class="default">&#39;pre-start&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>area</td>
+          <td><span class="default">area</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>checklistItems</td>
+          <td><span class="default">checklistItems</span></td>
+          <td><span class="type">string[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>steps</td>
+          <td><span class="default">steps</span></td>
+          <td><span class="type">UnlockStep[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>nextArea</td>
+          <td><span class="default">next-area</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>nextDescription</td>
+          <td><span class="default">next-description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_values</td>
+          <td>—</td>
+          <td><span class="type">Record&lt;string, unknown&gt;</span></td>
+          <td><span class="default">{}</span></td>
+          <td>Captured field values for the current active step. Reset on step change.</td>
+        </tr>
+      
+        <tr>
+          <td>_lastActiveId</td>
+          <td>—</td>
+          <td><span class="type">string | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>Tracks the active step id so we can clear `_values` when it changes.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-unlock-action</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div id="types" class="docs-section">
+  <h3>Types</h3>
+  <p style="margin-bottom:12px;"><strong>UnlockState</strong> — <code>'pre-start' | 'active' | 'processing' | 'unlocked' | 'next-prompt' | 'dismissed'</code></p>
+
+  <p style="margin-bottom:8px;"><strong>UnlockStep</strong></p>
+  <div class="docs-code"><span class="kw">interface</span> UnlockStep {
+  id:           <span class="type">string</span>;
+  title:        <span class="type">string</span>;             <span class="cm">// the question</span>
+  description?: <span class="type">string</span>;             <span class="cm">// supporting copy</span>
+  fields:       <span class="type">UnlockField[]</span>;
+  status:       <span class="type">'pending' | 'active' | 'complete' | 'skipped' | 'processing'</span>;
+  values?:      <span class="type">Record&lt;string, unknown&gt;</span>;  <span class="cm">// submitted values; consumer-managed</span>
+  error?:       <span class="type">string</span>;             <span class="cm">// step-level error; renders la-alert above fields</span>
+  skippable?:   <span class="type">boolean</span>;            <span class="cm">// default true</span>
+}</div>
+
+  <p style="margin-top:16px;margin-bottom:8px;"><strong>UnlockField</strong></p>
+  <div class="docs-code"><span class="kw">interface</span> UnlockField {
+  type:         <span class="type">UnlockFieldType</span>;    <span class="cm">// drives which primitive renders</span>
+  name:         <span class="type">string</span>;             <span class="cm">// key in submitted values map</span>
+  label?:       <span class="type">string</span>;             <span class="cm">// shown only when step has multiple fields</span>
+  placeholder?: <span class="type">string</span>;
+  hint?:        <span class="type">string</span>;
+  required?:    <span class="type">boolean</span>;
+  accept?:      <span class="type">string</span>;             <span class="cm">// 'file' — passed through to la-upload-box</span>
+  options?:     <span class="type">UnlockFieldOption[]</span>;<span class="cm"> // 'choice'</span>
+  provider?:    <span class="type">string</span>;             <span class="cm">// 'service' — "Connect to {provider}"</span>
+}</div>
+
+  <p style="margin-top:12px;"><strong>UnlockFieldType</strong> — <code>'text' | 'email' | 'url' | 'tel' | 'number' | 'file' | 'choice' | 'service'</code></p>
+  <p style="margin-top:4px;"><strong>UnlockFieldOption</strong> — <code>{ value: string; label: string; description?: string }</code></p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <p style="margin-bottom:16px;">The panel itself is layout chrome — type rhythm, spacing, dividers, colour. Every input chrome token lives on the primitive that renders it (la-input, la-upload-box, la-checklist) and is documented there.</p>
+
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Type</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-font-size-3xl</td><td>Question title (20px)</td></tr>
+          <tr><td>--la-font-size-xl</td><td>Pre-start title, unlocked headline (16px)</td></tr>
+          <tr><td>--la-font-size-lg</td><td>Next-prompt title (14px)</td></tr>
+          <tr><td>--la-font-size-base</td><td>Description, next-prompt description (13px)</td></tr>
+          <tr><td>--la-font-size-md</td><td>Counter (12px)</td></tr>
+          <tr><td>--la-font-size-sm</td><td>Service hint, manual fallback (11px)</td></tr>
+          <tr><td>--la-font-weight-semibold</td><td>Titles, headlines</td></tr>
+          <tr><td>--la-font-weight-medium</td><td>Counter</td></tr>
+          <tr><td>--la-line-height</td><td>Question and description line-height</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Spacing &amp; chrome</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-space-2xl</td><td>Question-to-fields gap, fields-to-actions gap</td></tr>
+          <tr><td>--la-space-xl</td><td>Actions-to-stepper gap</td></tr>
+          <tr><td>--la-space-lg</td><td>Field-to-field gap, header-to-content gap</td></tr>
+          <tr><td>--la-space-md</td><td>Choice tile gap, processing row gap</td></tr>
+          <tr><td>--la-space-sm</td><td>Action button gap, fine separations</td></tr>
+          <tr><td>--la-space-2xs / -3xs</td><td>Title-to-sub gaps</td></tr>
+          <tr><td>--la-color-bg</td><td>Card surface (pre-start, active, processing, next-prompt)</td></tr>
+          <tr><td>--la-radius-xl</td><td>Card corner radius</td></tr>
+          <tr><td>--la-space-xl</td><td>Card padding</td></tr>
+          <tr><td>--la-color-success</td><td>Unlocked-state check icon</td></tr>
+          <tr><td>--la-color-border-light</td><td>Stepper-area top border</td></tr>
+          <tr><td>--la-color-text / -secondary / -muted</td><td>Question, description, counter colour scale</td></tr>
+          <tr><td>--la-color-border-focus</td><td>Manual-fallback focus ring</td></tr>
+          <tr><td>--la-focus-ring-width / -offset</td><td>Focus ring geometry</td></tr>
+          <tr><td>--la-radius-sm</td><td>Focus ring corner</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;font-size:13px;color:var(--doc-text-3);">Motion: manual-fallback link transition uses <code>--dur-fast</code> × <code>--ease</code>. All input transitions live inside the composed primitives and respect <code>prefers-reduced-motion</code> automatically.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Define a step set</p>
+      <div class="docs-code">panel.steps = [
+  {
+    id: <span class="str">'cert'</span>,
+    title: <span class="str">'Upload your certificate of incorporation'</span>,
+    description: <span class="str">'PDF, DOC, or DOCX.'</span>,
+    fields: [{
+      type: <span class="str">'file'</span>,
+      name: <span class="str">'cert'</span>,
+      accept: <span class="str">'.pdf,.doc,.docx'</span>,
+      required: <span class="kw">true</span>,
+    }],
+    status: <span class="str">'active'</span>,
+  },
+  {
+    id: <span class="str">'raising'</span>,
+    title: <span class="str">'Are you currently fundraising?'</span>,
+    fields: [{
+      type: <span class="str">'choice'</span>,
+      name: <span class="str">'raising'</span>,
+      required: <span class="kw">true</span>,
+      options: [
+        { value: <span class="str">'yes'</span>, label: <span class="str">'Yes, actively'</span> },
+        { value: <span class="str">'soon'</span>, label: <span class="str">'In the next 6 months'</span> },
+        { value: <span class="str">'no'</span>,  label: <span class="str">'Not right now'</span> },
+      ],
+    }],
+    status: <span class="str">'pending'</span>,
+  },
+];</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Handle the single event</p>
+      <div class="docs-code">panel.addEventListener(<span class="str">'la-unlock-action'</span>, (e) =&gt; {
+  <span class="kw">const</span> { action, stepId, values } = e.detail;
+  <span class="kw">switch</span> (action) {
+    <span class="kw">case</span> <span class="str">'start'</span>:
+      panel.unlockState = <span class="str">'active'</span>;
+      <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="str">'submit'</span>:
+      submitStep(stepId, values).then(advance);
+      <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="str">'skip'</span>:
+      markSkipped(stepId);
+      advance();
+      <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="str">'previous'</span>:
+      <span class="cm">// On step 1, go back to pre-start; otherwise rewind one step.</span>
+      isFirstStep(stepId) ? showPreStart() : rewindOneStep(stepId);
+      <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="str">'service-connect'</span>:
+      kickOAuth(e.detail.provider);
+      <span class="kw">break</span>;
+    <span class="kw">case</span> <span class="str">'service-manual'</span>:
+      openManualForm(stepId);
+      <span class="kw">break</span>;
+  }
+});</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Multi-field form step</p>
+      <div class="docs-code">{
+  id: <span class="str">'agent'</span>,
+  title: <span class="str">'Add your registered agent'</span>,
+  fields: [
+    { type: <span class="str">'text'</span>,  name: <span class="str">'name'</span>,  label: <span class="str">'Agent name'</span>,  required: <span class="kw">true</span> },
+    { type: <span class="str">'text'</span>,  name: <span class="str">'state'</span>, label: <span class="str">'State'</span>,       required: <span class="kw">true</span> },
+    { type: <span class="str">'email'</span>, name: <span class="str">'email'</span>, label: <span class="str">'Email'</span> },
+  ],
+  status: <span class="str">'active'</span>,
+}</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Surface a backend rejection</p>
+      <div class="docs-code"><span class="cm">// Set step.error to render la-alert[danger] above the field</span>
+panel.steps = panel.steps.map((s) =&gt;
+  s.id === failedStepId
+    ? { ...s, status: <span class="str">'active'</span>, error: <span class="str">'This document was unreadable. Try a clearer scan.'</span> }
+    : s
+);</div>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>One question, full focus.</strong> Typeform-style. The active step's title is the centerpiece (20px / 600); everything else (counter, stepper) sits quietly around it. This is the rhythm that distinguishes the unlock flow from a generic form.</div>
+    <div class="docs-note"><strong>Auto-advance on single-choice steps.</strong> When the active step has exactly one field of <code>type: 'choice'</code>, clicking an option immediately fires <code>'submit'</code>. No Submit button — the click is the commit. For multi-field steps or non-choice fields, Submit is required.</div>
+    <div class="docs-note"><strong>Step-level errors live on the step.</strong> Set <code>step.error</code> to render an <code>la-alert variant="danger"</code> above the field block. There's no top-level "failed" state; failure is per-step state. Field values are preserved so the user can fix and resubmit.</div>
+    <div class="docs-note"><strong>Single event, eight actions.</strong> Every interaction routes through <code>la-unlock-action</code>. The consumer never wires per-button handlers — switch on <code>e.detail.action</code> and you have everything.</div>
+    <div class="docs-note"><strong>Backward navigation via the back-arrow icon button.</strong> Reverses the original Sprint 4 "no Previous button" decision (which scoped backward navigation to stepper-bar click-to-jump). The icon sits inline with Skip + Submit, pushed to the left edge, and emits <code>'previous'</code> with <code>{stepId}</code> of the step being left. Always enabled in active state — clicking back on step 1 should send the consumer back to <code>pre-start</code>, not nowhere. Bar click-to-jump (when wired on <code>la-stepper</code>) and the back-arrow are now both backward paths; the consumer decides whether to enable both or scope to the arrow.</div>
+    <div class="docs-note"><strong>State derives from steps.</strong> The active step is <code>steps.find(s =&gt; s.status === 'active')</code>; the stepper bar is derived from <code>steps.map(s =&gt; ({label: s.id, status: s.status}))</code>. The consumer never juggles two arrays.</div>
+    <div class="docs-note"><strong>Choice today, radio-group tomorrow.</strong> Choice fields render with <code>la-checklist[contained]</code> tiles + single-select enforced by the panel. When <code>la-radio-group</code> ships, swap the inner render — the public API of <code>la-unlock-panel</code> doesn't change.</div>
+    <div class="docs-note"><strong>File steps own their own remove path.</strong> <code>la-upload-box</code> handles file removal internally; the panel listens for <code>la-remove</code> to clear the captured value. The "I don't have these" fallback is folded into <code>'skip'</code> — semantically the same outcome.</div>
+    <div class="docs-note"><strong>Per-area step content arrives in Sprints 7–10.</strong> This component ships the framework; the actual questions, validation rules, and backend endpoints for Governance / Employment / IP / Fundraising L1 are wired in subsequent sprints.</div>
+    <div class="docs-note"><strong>Success state is card-less.</strong> Pre-start, active, processing, and next-prompt all sit inside an <code>la-panel</code> white card on the page subtle bg. The unlocked state breaks that frame — large centred icon-on-top, no card chrome — to read as a deliberate celebration moment, not just another step.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    // ── Step library — used by both the live preview and the snapshots ──
+    const STEPS = [
+      { id: 's1', title: 'Company info captured', fields: [], status: 'complete' },
+      { id: 's2', title: 'Bylaws uploaded',       fields: [], status: 'complete' },
+      { id: 's3', title: '',                       fields: [], status: 'active'  },
+      { id: 's4', title: 'Registered agent',      fields: [], status: 'pending' },
+      { id: 's5', title: 'Bylaws review',          fields: [], status: 'pending' },
+    ];
+
+    function buildSteps(activeIndex, activeStep) {
+      return STEPS.map((s, i) => {
+        if (i < activeIndex) return { ...s, status: 'complete' };
+        if (i === activeIndex) return { ...s, ...activeStep, status: 'active' };
+        return { ...s, status: 'pending' };
+      });
+    }
+
+    const TEXT_STEP = {
+      title: 'Who is your registered agent?',
+      description: 'The agent on file at your state of incorporation.',
+      fields: [{
+        type: 'text', name: 'agent', placeholder: 'e.g. Acme Corporate Services', required: true,
+      }],
+    };
+
+    const FILE_STEP = {
+      title: 'Upload your certificate of incorporation',
+      description: 'PDF, DOC, or DOCX. We extract the founding facts automatically.',
+      fields: [{
+        type: 'file', name: 'cert', accept: '.pdf,.doc,.docx', required: true,
+        hint: 'PDF, DOC, or DOCX up to 25 MB',
+      }],
+    };
+
+    const CHOICE_STEP = {
+      title: 'Are you currently fundraising?',
+      description: 'We use this to decide whether to set up DD readiness on Fundraising.',
+      fields: [{
+        type: 'choice', name: 'raising', required: true,
+        options: [
+          { value: 'yes',  label: 'Yes, actively',           description: "We'll set up DD readiness." },
+          { value: 'soon', label: 'In the next 6 months',    description: "We'll keep it ready in the wings." },
+          { value: 'no',   label: 'Not right now',           description: 'Skip the DD readiness setup.' },
+        ],
+      }],
+    };
+
+    const FORM_STEP = {
+      title: 'Add your registered agent',
+      description: 'You can update these details later from the Company Manual.',
+      fields: [
+        { type: 'text',  name: 'name',  label: 'Agent name',    placeholder: 'e.g. Acme Corporate Services', required: true },
+        { type: 'text',  name: 'state', label: 'State',         placeholder: 'e.g. Delaware',                 required: true },
+        { type: 'email', name: 'email', label: 'Email',         placeholder: 'agent@example.com' },
+      ],
+    };
+
+    const SERVICE_STEP = {
+      title: 'Connect your HR provider',
+      description: "We'll pull your team roster automatically.",
+      fields: [{
+        type: 'service', name: 'hr', provider: 'Gusto', required: true,
+        hint: "We'll redirect you to authorise read-only access.",
+      }],
+    };
+
+    const ERROR_STEP = {
+      title: 'Upload your certificate of incorporation',
+      description: 'PDF, DOC, or DOCX.',
+      fields: [{
+        type: 'file', name: 'cert', accept: '.pdf,.doc,.docx', required: true,
+      }],
+      error: "This document doesn't look like a certificate of incorporation. Try a clearer scan.",
+    };
+
+    const ALL_COMPLETE = STEPS.map((s) => ({ ...s, status: 'complete' }));
+
+    const CHECKLIST = [
+      'Certificate of incorporation',
+      'Bylaws',
+      'Director list',
+      'Registered agent details',
+    ];
+
+    // ── Live preview wiring ──
+    const live = document.getElementById('up-live');
+    const ctlArea = document.getElementById('ctl-area');
+    const ctlNextArea = document.getElementById('ctl-next-area');
+    const log = document.getElementById('event-log');
+    let state = 'pre-start';
+    let example = 'text';
+
+    function exampleStep() {
+      switch (example) {
+        case 'file':    return FILE_STEP;
+        case 'choice':  return CHOICE_STEP;
+        case 'form':    return FORM_STEP;
+        case 'service': return SERVICE_STEP;
+        case 'error':   return ERROR_STEP;
+        default:        return TEXT_STEP;
+      }
+    }
+
+    function syncLive() {
+      live.area = ctlArea.value;
+      live.nextArea = ctlNextArea.value;
+      live.nextDescription = 'Add your team and contracts. About 8 minutes.';
+      live.checklistItems = CHECKLIST;
+      live.unlockState = state;
+
+      if (state === 'active') {
+        live.steps = buildSteps(2, exampleStep());
+      } else if (state === 'processing') {
+        live.steps = ALL_COMPLETE;
+      } else {
+        live.steps = STEPS;
+      }
+    }
+    syncLive();
+
+    ctlArea.addEventListener('input', syncLive);
+    ctlNextArea.addEventListener('input', syncLive);
+
+    document.querySelectorAll('.btn-toggle[data-state]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.btn-toggle[data-state]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        state = btn.dataset.state;
+        syncLive();
+      });
+    });
+
+    document.querySelectorAll('.btn-toggle[data-example]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.btn-toggle[data-example]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        example = btn.dataset.example;
+        if (state === 'active') syncLive();
+      });
+    });
+
+    live.addEventListener('la-unlock-action', (e) => {
+      const stamp = new Date().toLocaleTimeString();
+      const detail = JSON.stringify(e.detail, (k, v) => v instanceof File ? `[File: ${v.name}]` : v);
+      log.textContent = stamp + '  ·  la-unlock-action → ' + detail;
+    });
+
+    // ── Snapshots ──
+    function setSnap(id, props) {
+      const el = document.getElementById(id);
+      if (!el) return;
+      Object.assign(el, props);
+    }
+
+    setSnap('anat-panel',     { steps: buildSteps(2, TEXT_STEP) });
+    setSnap('snap-pre',       { checklistItems: CHECKLIST });
+    setSnap('snap-text',      { steps: buildSteps(2, TEXT_STEP) });
+    setSnap('snap-file',      { steps: buildSteps(2, FILE_STEP) });
+    setSnap('snap-choice',    { steps: buildSteps(2, CHOICE_STEP) });
+    setSnap('snap-form',      { steps: buildSteps(2, FORM_STEP) });
+    setSnap('snap-service',   { steps: buildSteps(2, SERVICE_STEP) });
+    setSnap('snap-error',     { steps: buildSteps(2, ERROR_STEP) });
+    setSnap('snap-processing',{ steps: ALL_COMPLETE });
+
+    // ── Walkthrough — full Governance unlock flow ──
+    const GOV_STEPS = [
+      {
+        id: 'cert',
+        title: 'Upload your certificate of incorporation',
+        description: 'PDF, DOC, or DOCX. We extract the founding facts automatically.',
+        fields: [{
+          type: 'file', name: 'cert', accept: '.pdf,.doc,.docx', required: true,
+          hint: 'Up to 25 MB',
+        }],
+        status: 'pending',
+      },
+      {
+        id: 'bylaws',
+        title: 'Upload your bylaws',
+        description: "Your company's internal rules — governance structure, voting, officer duties.",
+        fields: [{
+          type: 'file', name: 'bylaws', accept: '.pdf,.doc,.docx', required: true,
+        }],
+        status: 'pending',
+      },
+      {
+        id: 'agent',
+        title: 'Add your registered agent',
+        description: 'You can update these details later from the Company Manual.',
+        fields: [
+          { type: 'text',  name: 'name',  label: 'Agent name',    placeholder: 'e.g. Acme Corporate Services', required: true },
+          { type: 'text',  name: 'state', label: 'State',         placeholder: 'e.g. Delaware',                 required: true },
+          { type: 'email', name: 'email', label: 'Email',         placeholder: 'agent@example.com' },
+        ],
+        status: 'pending',
+      },
+      {
+        id: 'directors',
+        title: 'Add your first director',
+        description: 'Names, roles, and contact details. You can add more from the Company Manual after unlock.',
+        fields: [
+          { type: 'text',  name: 'name',  label: 'Full name', placeholder: 'As shown on the formation document', required: true },
+          { type: 'text',  name: 'role',  label: 'Role',      placeholder: 'e.g. Co-founder & CEO',               required: true },
+          { type: 'email', name: 'email', label: 'Email',     placeholder: 'director@example.com' },
+        ],
+        status: 'pending',
+      },
+      {
+        id: 'raising',
+        title: 'Are you currently fundraising?',
+        description: "We use this to decide whether to set up DD readiness on Fundraising.",
+        fields: [{
+          type: 'choice', name: 'raising', required: true,
+          options: [
+            { value: 'yes',  label: 'Yes, actively',           description: "We'll set up DD readiness." },
+            { value: 'soon', label: 'In the next 6 months',    description: "We'll keep it ready in the wings." },
+            { value: 'no',   label: 'Not right now',           description: 'Skip the DD readiness setup.' },
+          ],
+        }],
+        status: 'pending',
+      },
+    ];
+
+    const GOV_CHECKLIST = [
+      'Certificate of incorporation',
+      'Bylaws',
+      'Registered agent details',
+      'Director names, roles, and emails',
+    ];
+
+    // Stages: 0 = pre-start, 1..5 = active step N, 6 = processing, 7 = unlocked, 8 = next-prompt
+    const TOTAL_STAGES = 9;
+    let walkStage = 0;
+
+    const walkPanel = document.getElementById('walk-panel');
+    const walkPrev = document.getElementById('walk-prev');
+    const walkNext = document.getElementById('walk-next');
+    const walkReset = document.getElementById('walk-reset');
+    const walkPosition = document.getElementById('walk-position');
+
+    function stageLabel(n) {
+      if (n === 0) return 'pre-start';
+      if (n >= 1 && n <= GOV_STEPS.length) return 'step ' + n + ' of ' + GOV_STEPS.length;
+      if (n === GOV_STEPS.length + 1) return 'processing';
+      if (n === GOV_STEPS.length + 2) return 'unlocked';
+      if (n === GOV_STEPS.length + 3) return 'next-prompt';
+      return 'stage ' + n;
+    }
+
+    function renderWalk() {
+      walkPanel.area = 'Governance';
+      walkPanel.nextArea = 'Employment';
+      walkPanel.nextDescription = 'Add your team and contracts. About 8 minutes.';
+      walkPanel.checklistItems = GOV_CHECKLIST;
+      walkPosition.textContent = stageLabel(walkStage);
+
+      if (walkStage === 0) {
+        walkPanel.unlockState = 'pre-start';
+        walkPanel.steps = GOV_STEPS.map((s) => ({ ...s, status: 'pending' }));
+      } else if (walkStage <= GOV_STEPS.length) {
+        const activeIndex = walkStage - 1;
+        walkPanel.unlockState = 'active';
+        walkPanel.steps = GOV_STEPS.map((s, i) => ({
+          ...s,
+          status: i < activeIndex ? 'complete' : i === activeIndex ? 'active' : 'pending',
+        }));
+      } else if (walkStage === GOV_STEPS.length + 1) {
+        walkPanel.unlockState = 'processing';
+        walkPanel.steps = GOV_STEPS.map((s) => ({ ...s, status: 'complete' }));
+      } else if (walkStage === GOV_STEPS.length + 2) {
+        walkPanel.unlockState = 'unlocked';
+        walkPanel.steps = GOV_STEPS.map((s) => ({ ...s, status: 'complete' }));
+      } else if (walkStage === GOV_STEPS.length + 3) {
+        walkPanel.unlockState = 'next-prompt';
+        walkPanel.steps = GOV_STEPS.map((s) => ({ ...s, status: 'complete' }));
+      }
+
+      walkPrev.disabled = walkStage === 0;
+      walkNext.disabled = walkStage === TOTAL_STAGES - 1;
+    }
+    renderWalk();
+
+    walkPrev.addEventListener('click', () => {
+      if (walkStage > 0) { walkStage--; renderWalk(); }
+    });
+    walkNext.addEventListener('click', () => {
+      if (walkStage < TOTAL_STAGES - 1) { walkStage++; renderWalk(); }
+    });
+    walkReset.addEventListener('click', () => {
+      walkStage = 0;
+      renderWalk();
+    });
+
+    walkPanel.addEventListener('la-unlock-action', (e) => {
+      const a = e.detail.action;
+      if (a === 'start' && walkStage === 0) walkStage = 1;
+      else if (a === 'submit' || a === 'skip') walkStage++;
+      else if (a === 'previous') walkStage--;
+      else if (a === 'service-connect' || a === 'service-manual') walkStage++;
+      else if (a === 'go-next' || a === 'dismiss') walkStage++;
+      if (walkStage > TOTAL_STAGES - 1) walkStage = TOTAL_STAGES - 1;
+      if (walkStage < 0) walkStage = 0;
+      renderWalk();
+    });
+  })();
+</script>
+
+
+</body>
+</html>

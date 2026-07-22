@@ -1,0 +1,1119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-insight-modal — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-insight-modal</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#grouped" class="docs-nav-item" data-nav-id="grouped">Grouped mode</a>
+    
+      <a href="#action-types" class="docs-nav-item" data-nav-id="action-types">Action types</a>
+    
+      <a href="#api" class="docs-nav-item" data-nav-id="api">API</a>
+    
+      <a href="#css-tokens" class="docs-nav-item" data-nav-id="css-tokens">CSS tokens</a>
+    
+      <a href="#notes" class="docs-nav-item" data-nav-id="notes">Notes</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-insight-modal</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-insight-modal</h1>
+<p>The detail and action surface for a single insight. <code style="font-family:monospace;font-size:11px;">la-insight-card</code> surfaces an issue at a glance; this modal takes over when the user wants the full story — explanation, all dates, entity context, source document, related insights, and the resolution action. Rendered as a fixed-position backdrop with a scrollable panel. Dismissable via close button, backdrop click, or the Dismiss footer button.</p>
+<p style="margin-top:8px;">Two resolution mechanics driven by <code style="font-family:monospace;font-size:11px;">action-type</code>: <strong>confirm</strong> (synchronous "Mark as complete" — for obligations the system cannot verify) and <strong>upload</strong> (inline <code style="font-family:monospace;font-size:11px;">la-upload</code> zone — for document issue and missing document insights).</p>
+<p style="margin-top:8px;">A <strong>grouped mode</strong> activates when the <code style="font-family:monospace;font-size:11px;">subItems</code> prop is set — for the same obligation applying to multiple entities (e.g. three unsigned employment contracts). An entity tab strip renders below the header; each tab carries its own resolution state. The group resolves when all tabs are resolved.</p>
+</div>
+
+<!-- ── Anatomy ───────────────────────────────────────────────────── -->
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Visual regions of the rendered panel. The backdrop is a fixed-position overlay — the sections below describe the floating panel inside it.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block;padding:24px;overflow:visible;">
+<la-button id="open-anatomy" variant="secondary">Open modal to view anatomy</la-button>
+
+<la-insight-modal
+  id="modal-anatomy"
+  severity="urgent"
+  source-type="legal"
+  headline="Sign Jane Lee's employment contract"
+  reason="Jane Lee's employment contract has not been signed. An unsigned contract creates legal exposure — it is unenforceable and a standard investor due diligence item."
+  guidance="Upload a countersigned copy. The system will verify the signature and resolve this issue."
+  action-type="confirm"
+></la-insight-modal>
+</div>
+</div>
+
+<!-- ── Controls ─────────────────────────────────────────────────── -->
+<div class="preview-header" id="controls" style="margin-top:8px;">
+<h1>Controls</h1>
+<p>Live preview. Adjust props and watch the modal update in real time. Open it to see the result.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block;padding:24px;overflow:visible;">
+
+  <la-insight-modal
+    id="live-modal"
+    severity="urgent"
+    source-type="legal"
+    headline="Sign Jane Lee's employment contract"
+    reason="Jane Lee's employment contract has not been signed. An unsigned contract creates legal exposure — it is unenforceable and a standard investor due diligence item."
+    guidance="Upload a countersigned copy. The system will verify the signature and resolve this issue."
+    action-type="confirm"
+  ></la-insight-modal>
+
+  <div style="display:flex;flex-wrap:wrap;gap:24px;align-items:flex-start;">
+
+    <div>
+      <div class="label" style="margin-bottom:6px;">Severity</div>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-severity="urgent">Urgent</button>
+        <button class="btn-toggle" data-severity="proactive">Proactive</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom:6px;">Source type</div>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-source-type="legal">Legal</button>
+        <button class="btn-toggle" data-source-type="best_practice">Best practice</button>
+        <button class="btn-toggle" data-source-type="">None</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom:6px;">Action type</div>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-action-type="confirm">Confirm</button>
+        <button class="btn-toggle" data-action-type="upload">Upload</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom:6px;">Resolved</div>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-resolved="false">No</button>
+        <button class="btn-toggle" data-resolved="true">Yes</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom:6px;">Upload state</div>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-upload-state="idle">Idle</button>
+        <button class="btn-toggle" data-upload-state="processing">Processing</button>
+        <button class="btn-toggle" data-upload-state="error">Error</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom:6px;">Entity</div>
+      <div class="btn-group">
+        <button class="btn-toggle" data-entity="jane">Jane Lee (person)</button>
+        <button class="btn-toggle" data-entity="acme">Acme Inc (company)</button>
+        <button class="btn-toggle active" data-entity="none">None</button>
+      </div>
+    </div>
+
+    <div>
+      <div class="label" style="margin-bottom:6px;">Source document</div>
+      <div class="btn-group">
+        <button class="btn-toggle" data-source-doc="true">Yes</button>
+        <button class="btn-toggle active" data-source-doc="false">No</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="margin-top:20px;">
+    <la-button id="open-live" variant="primary">Open modal</la-button>
+  </div>
+
+  <div style="margin-top:20px;">
+    <div class="label" style="margin-bottom:6px;">Event log</div>
+    <div id="event-log" style="font-family:monospace;font-size:11px;background:#0f172a;color:#94a3b8;padding:12px;border-radius:8px;min-height:60px;max-height:120px;overflow-y:auto;">— events will appear here —</div>
+  </div>
+
+</div>
+</div>
+
+<!-- ── Snapshots ─────────────────────────────────────────────────── -->
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Representative states. Each button opens a pre-configured modal.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block;padding:24px;overflow:visible;">
+<div style="display:flex;flex-wrap:wrap;gap:10px;">
+
+  <la-button id="snap-urgent" variant="secondary" size="sm">Urgent — full detail</la-button>
+  <la-button id="snap-proactive" variant="secondary" size="sm">Proactive — full detail</la-button>
+  <la-button id="snap-resolved-confirm" variant="secondary" size="sm">Resolved (confirm) — with Reopen</la-button>
+  <la-button id="snap-resolved-upload" variant="secondary" size="sm">Resolved (upload) — no Reopen</la-button>
+  <la-button id="snap-minimal" variant="secondary" size="sm">Minimal — headline + confirm only</la-button>
+  <la-button id="snap-related" variant="secondary" size="sm">With related insights</la-button>
+  <la-button id="snap-dates" variant="secondary" size="sm">Multiple dates</la-button>
+  <la-button id="snap-source-doc" variant="secondary" size="sm">With source document (CTA disabled)</la-button>
+  <la-button id="snap-upload-idle" variant="secondary" size="sm">Upload — idle</la-button>
+  <la-button id="snap-upload-processing" variant="secondary" size="sm">Upload — processing</la-button>
+  <la-button id="snap-upload-error" variant="secondary" size="sm">Upload — error</la-button>
+  <la-button id="snap-grouped-confirm" variant="secondary" size="sm">Grouped — 3 people (confirm)</la-button>
+  <la-button id="snap-grouped-upload" variant="secondary" size="sm">Grouped — 3 people (upload)</la-button>
+
+</div>
+</div>
+</div>
+
+<!-- Snapshot modals (hidden until triggered) -->
+<la-insight-modal id="modal-urgent" severity="urgent" source-type="legal"
+  headline="Sign Jane Lee's employment contract"
+  reason="Jane Lee's employment contract has not been signed. An unsigned contract creates legal exposure — it is unenforceable and a standard investor due diligence item."
+  guidance="Upload a countersigned copy. The system will verify the signature and resolve this issue."
+  action-type="confirm"></la-insight-modal>
+
+<la-insight-modal id="modal-proactive" severity="proactive" source-type="best_practice"
+  headline="Add a vesting cliff to co-founder agreements"
+  reason="Co-founder equity without a vesting cliff is a common red flag in early-stage due diligence. Investors expect a 1-year cliff to demonstrate founder commitment."
+  action-type="confirm"></la-insight-modal>
+
+<la-insight-modal id="modal-resolved-confirm" severity="urgent" source-type="legal"
+  headline="File your annual statement with the state"
+  reason="Annual statements confirm your company's registered details with the state. Failure to file results in late fees and potential dissolution."
+  action-type="confirm" resolved></la-insight-modal>
+
+<la-insight-modal id="modal-resolved-upload" severity="urgent" source-type="legal"
+  headline="Upload your articles of incorporation"
+  reason="Articles of incorporation establish your company's legal existence. Without them, the system cannot verify your corporate structure."
+  action-type="upload" resolved></la-insight-modal>
+
+<la-insight-modal id="modal-minimal" severity="proactive" source-type="legal"
+  headline="Register your IP assignment agreement"
+  action-type="confirm"></la-insight-modal>
+
+<la-insight-modal id="modal-related" severity="urgent" source-type="legal"
+  headline="Sign Jane Lee's employment contract"
+  reason="The employment contract lacks a countersignature. This document also has an IP assignment clause that is out of date."
+  action-type="confirm"></la-insight-modal>
+
+<la-insight-modal id="modal-dates" severity="urgent" source-type="legal"
+  headline="File your annual statement with the state"
+  reason="Your annual statement filing is overdue. The state will apply late fees if not filed within 30 days of the deadline."
+  action-type="confirm"></la-insight-modal>
+
+<la-insight-modal id="modal-source-doc" severity="urgent" source-type="legal"
+  headline="Countersign Jane Lee's employment contract"
+  reason="The employment contract was uploaded but has not been countersigned. The system detected a missing signature on the employer side."
+  action-type="confirm"></la-insight-modal>
+
+<la-insight-modal id="modal-upload-idle" severity="urgent" source-type="legal"
+  headline="Upload your articles of incorporation"
+  reason="Articles of incorporation are required to verify your corporate structure. Upload a certified copy from the state."
+  action-type="upload" upload-state="idle"></la-insight-modal>
+
+<la-insight-modal id="modal-upload-processing" severity="urgent" source-type="legal"
+  headline="Upload your articles of incorporation"
+  reason="Articles of incorporation are required to verify your corporate structure. Upload a certified copy from the state."
+  action-type="upload" upload-state="processing"></la-insight-modal>
+
+<la-insight-modal id="modal-upload-error" severity="urgent" source-type="legal"
+  headline="Upload your articles of incorporation"
+  reason="Articles of incorporation are required to verify your corporate structure. Upload a certified copy from the state."
+  action-type="upload" upload-state="error"
+  verification-error="The document you uploaded does not appear to be articles of incorporation. Please upload the correct document."></la-insight-modal>
+
+<la-insight-modal id="modal-grouped-confirm" severity="urgent" source-type="legal"
+  headline="Sign employment contracts"
+  reason="Employment contracts have not been countersigned for the employees listed below. Unsigned contracts create legal exposure and are a standard investor due diligence item."
+  action-type="confirm"></la-insight-modal>
+
+<la-insight-modal id="modal-grouped-upload" severity="urgent" source-type="legal"
+  headline="Upload countersigned employment agreements"
+  reason="Countersigned employment agreements have not been uploaded for the employees listed below. Upload a countersigned copy for each person — the system will verify the signature."
+  action-type="upload"></la-insight-modal>
+
+
+<!-- ── Grouped mode ──────────────────────────────────────────────── -->
+<div class="preview-header" id="grouped" style="margin-top:8px;">
+<h1>Grouped mode</h1>
+<p>Activated when the <code style="font-family:monospace;font-size:11px;">subItems</code> JS property is set. Applies when the same obligation covers multiple entities — for example, unsigned employment contracts across three employees.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Structure in grouped mode</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<ul style="font-size:13px;color:var(--la-color-text-secondary);margin:0;padding-left:20px;line-height:1.8;">
+  <li><strong>Entity tab strip</strong> — rendered below the header, one tab per sub-item. Active tab highlighted; resolved tab shows a check icon.</li>
+  <li><strong>Shared body sections</strong> — "Why this matters", source document, and related insights render once (obligation-level context, not per-entity).</li>
+  <li><strong>Tab panel</strong> — per-entity dates and resolution widget (confirm button or upload zone) replace the single-insight body sections.</li>
+  <li><strong>Footer</strong> — Dismiss only. Primary resolution action moves into each tab panel.</li>
+  <li><strong>Group resolved</strong> — when all tabs are resolved, the modal transitions to the standard success footer.</li>
+</ul>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Resolution flow</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<ol style="font-size:13px;color:var(--la-color-text-secondary);margin:0;padding-left:20px;line-height:1.8;">
+  <li>User opens modal — tab strip shows all entities.</li>
+  <li>User works through each tab — resolves each sub-item independently.</li>
+  <li>Resolved tabs show a check icon in the tab label.</li>
+  <li>When the last sub-item is resolved: <code style="font-family:monospace;font-size:11px;">la-insight-resolved</code> fires and the modal transitions to the success footer.</li>
+</ol>
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:8px 0 0;">Each individual resolution fires <code style="font-family:monospace;font-size:11px;">la-subitem-resolved</code> with <code style="font-family:monospace;font-size:11px;">{ subItemId }</code>. The consumer (LiveView) updates the backend after each event. Tab resolved state is tracked internally — no external state management needed.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Data shape</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<pre style="font-family:monospace;font-size:12px;color:var(--la-color-text-secondary);margin:0;line-height:1.6;">interface GroupSubItem {
+  id:     string;
+  entity: { name: string; type: 'person' | 'company'; id: string };
+  dates?: { date: string; label: string }[];
+}
+
+// Wire it — subItems is a JS property, not an attribute
+const modal = document.querySelector('la-insight-modal');
+modal.subItems = [
+  { id: 'si-1', entity: { name: 'Jane Lee',     type: 'person', id: 'p1' }, dates: [{ date: '30 May 2026', label: 'Deadline' }] },
+  { id: 'si-2', entity: { name: 'Bob Smith',    type: 'person', id: 'p2' }, dates: [{ date: '30 May 2026', label: 'Deadline' }] },
+  { id: 'si-3', entity: { name: 'Priya Kapoor', type: 'person', id: 'p3' } },
+];</pre>
+</div>
+</div>
+
+<!-- ── Action types ──────────────────────────────────────────────── -->
+<div class="preview-header" id="action-types" style="margin-top:8px;">
+<h1>Action types</h1>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">confirm — synchronous resolution</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0 0 4px;">Used for <strong>action_required</strong> insights — obligations the system cannot verify (e.g., filing an annual statement, registering a trademark). The "Mark as complete" footer CTA resolves the insight immediately. A "Reopen" CTA appears on the resolved modal so the user can correct accidental resolutions.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">upload — document resolution with processing</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0 0 4px;">Used for <strong>document_issue</strong> and <strong>missing_document</strong> insights. Renders an inline <code style="font-family:monospace;font-size:11px;">la-upload</code> zone in the modal body. The modal shows a processing state after server receipt; the user can dismiss and continue working. The global processing widget tracks the outcome. On success, the insight auto-resolves and cascade resolution re-evaluates all insights referencing the same document. On failure, the modal re-opens with a verification error and re-upload option. No Reopen CTA on the resolved state — the system-verified state is always correct.</p>
+</div>
+</div>
+
+
+<!-- ── API ───────────────────────────────────────────────────────── -->
+<div class="preview-header" id="api" style="margin-top:8px;">
+<h1>API</h1>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Properties</div>
+<div class="preview-frame" style="padding:0;overflow:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<thead><tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--la-color-text);">Prop</th>
+  <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--la-color-text);">Type</th>
+  <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--la-color-text);">Default</th>
+  <th style="padding:10px 16px;text-align:left;font-weight:600;color:var(--la-color-text);">Description</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">open</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">boolean</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">false</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Reflects as attribute. Controls backdrop visibility and panel scale-in animation.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">severity</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">InsightModalSeverity</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">'urgent'</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Reflects as attribute. Colours the severity label text. <code style="font-family:monospace;font-size:11px;">'urgent'</code> or <code style="font-family:monospace;font-size:11px;">'proactive'</code> — resolved state is a separate <code style="font-family:monospace;font-size:11px;">resolved</code> boolean.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">source-type</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">'legal' | 'best_practice' | ''</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">''</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Renders a ghost badge — "Legal" or "Best practice". Empty string omits the badge.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">headline</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">string</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">''</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Plain-English issue headline. Same text shown on the card.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">reason</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">string</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">''</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Expanded explanation — why this issue matters. Maps to the data-contract <code style="font-family:monospace;font-size:11px;">explanation</code> field. Renders under "Why this matters" section header.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">guidance</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">string</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">''</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Optional supplementary guidance — what to do. Renders under "What to do" section header when present. Not in the core data contract — omit if the backend does not send this field.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">entity</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ name, type, id } | undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);"><code style="font-family:monospace;font-size:11px;">type</code> is <code style="font-family:monospace;font-size:11px;">'person'</code> or <code style="font-family:monospace;font-size:11px;">'company'</code> — drives the Phosphor icon. Renders as a ghost badge in the meta row.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">dates</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ date, label }[] | undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">All key dates with context labels. Modal shows the full list (the card shows only the nearest). Deadline/due labels render with <code style="font-family:monospace;font-size:11px;">variant="danger"</code> badge; all others <code style="font-family:monospace;font-size:11px;">variant="neutral"</code>.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">source-document</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ name, id } | undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">The document this insight is derived from. Name is shown; the "View document" CTA is <strong>rendered disabled</strong> until Sprint 6 (Document System) ships. Pass <code style="font-family:monospace;font-size:11px;">id</code> now — Sprint 6 will wire the navigation.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">related-insights</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ id, headline, legalArea }[] | undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Other insights on the same source document. Rendered under "This document also has" as navigable links — clicking fires <code style="font-family:monospace;font-size:11px;">la-insight-navigate</code> with the target <code style="font-family:monospace;font-size:11px;">id</code>. Cross-area insights include a muted legal area label. A cascade note ("Uploading a corrected document will re-evaluate all issues") appears when <code style="font-family:monospace;font-size:11px;">action-type="upload"</code>.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">resolved</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">boolean</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">false</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Reflects as attribute. Swaps the footer: active footer (Dismiss + primary CTA) replaced by a success <code style="font-family:monospace;font-size:11px;">la-alert</code> with a Reopen button for <code style="font-family:monospace;font-size:11px;">confirm</code> insights (not for <code style="font-family:monospace;font-size:11px;">upload</code> — system-verified state is always correct).</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">action-type</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">InsightActionType</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">'confirm'</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Reflects as attribute. <code style="font-family:monospace;font-size:11px;">'confirm'</code> renders a "Mark as complete" footer CTA. <code style="font-family:monospace;font-size:11px;">'upload'</code> renders an inline <code style="font-family:monospace;font-size:11px;">la-upload</code> zone in the body; the footer primary CTA is suppressed.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">upload-state</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">InsightUploadState</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">'idle'</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Reflects as attribute. Only consulted when <code style="font-family:monospace;font-size:11px;">action-type="upload"</code>. <code style="font-family:monospace;font-size:11px;">'idle'</code> shows the drop zone; <code style="font-family:monospace;font-size:11px;">'processing'</code> passes the processing prop to <code style="font-family:monospace;font-size:11px;">la-upload</code>; <code style="font-family:monospace;font-size:11px;">'error'</code> shows a danger <code style="font-family:monospace;font-size:11px;">la-alert</code> above the drop zone.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">subItems</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">GroupSubItem[] | undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">undefined</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">JS property only. When set, activates grouped mode — renders an entity tab strip below the header, per-tab resolution, and moves the footer primary action into each tab panel. The top-level <code style="font-family:monospace;font-size:11px;">entity</code> and <code style="font-family:monospace;font-size:11px;">dates</code> props are ignored in grouped mode; each sub-item carries its own entity and dates.</td>
+</tr>
+<tr>
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">verification-error</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">string</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-muted);">''</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Specific error message shown when <code style="font-family:monospace;font-size:11px;">upload-state="error"</code>. Falls back to "Verification failed. Please re-upload."</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Events</div>
+<div class="preview-frame" style="padding:0;overflow:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<thead><tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <th style="padding:10px 16px;text-align:left;font-weight:600;">Event</th>
+  <th style="padding:10px 16px;text-align:left;font-weight:600;">Detail</th>
+  <th style="padding:10px 16px;text-align:left;font-weight:600;">When</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">la-insight-close</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">—</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Close button, Dismiss footer button, or backdrop click. Also fires on Escape (native dialog behaviour).</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">la-insight-resolved</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ headline }</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">User resolves a single insight (confirm or upload). In grouped mode, fires when the <em>last</em> sub-item is resolved. The component sets <code style="font-family:monospace;font-size:11px;">resolved = true</code> and transitions to the success footer.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">la-insight-reopen</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ headline }</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">User clicks "Reopen" on a resolved confirm-type modal. Consumer drives the backend call; component sets <code style="font-family:monospace;font-size:11px;">resolved = false</code>.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">la-insight-upload</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ source: 'local'|'drive', headline, subItemId?: string }</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">User selects or drops a file (local) or clicks the Google Drive button. In grouped mode, <code style="font-family:monospace;font-size:11px;">subItemId</code> identifies which entity's tab triggered the upload. Consumer drives the upload pipeline; set <code style="font-family:monospace;font-size:11px;">upload-state="processing"</code> on receipt, <code style="font-family:monospace;font-size:11px;">'error'</code> on failure, <code style="font-family:monospace;font-size:11px;">resolved</code> on success.</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">la-subitem-resolved</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ subItemId: string }</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Grouped mode only. Fires each time an individual entity's tab is resolved — before the group-level <code style="font-family:monospace;font-size:11px;">la-insight-resolved</code>. Consumer calls the backend to mark that sub-item resolved. Tab resolved state is tracked internally — no need to pass it back in.</td>
+</tr>
+<tr>
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">la-insight-navigate</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">{ id }</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">User clicks a related insight link. Consumer navigates to <code style="font-family:monospace;font-size:11px;">/insights/{id}</code> — closes this modal, opens the target insight's modal on its owning legal area page.</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Types</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<pre style="font-family:monospace;font-size:12px;color:var(--la-color-text-secondary);margin:0;line-height:1.6;">type InsightModalSeverity = 'urgent' | 'proactive';
+type InsightActionType    = 'confirm' | 'upload';
+type InsightUploadState   = 'idle' | 'processing' | 'error';
+
+interface InsightDocument {
+  name:   string;
+  status: 'ready' | 'processing' | 'missing';
+}
+
+interface GroupSubItem {
+  id:      string;
+  entity:  { name: string; type: 'person' | 'company'; id: string };
+  dates?:  { date: string; label: string }[];
+  // resolved and uploadState are internal — do not set from outside
+}</pre>
+</div>
+</div>
+
+
+<!-- ── CSS tokens ─────────────────────────────────────────────────── -->
+<div class="preview-header" id="css-tokens" style="margin-top:8px;">
+<h1>CSS tokens used</h1>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:0;overflow:auto;">
+<table style="width:100%;border-collapse:collapse;font-size:13px;">
+<thead><tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <th style="padding:10px 16px;text-align:left;font-weight:600;">Token</th>
+  <th style="padding:10px 16px;text-align:left;font-weight:600;">Where used</th>
+</tr></thead>
+<tbody>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-scrim</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Backdrop fill — shared with la-modal, la-drawer</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-shadow-lg</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Panel elevation</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-radius-xl</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Panel corner radius</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-urgent-text</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Severity label colour when <code style="font-family:monospace;font-size:11px;">severity="urgent"</code></td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-proactive-text</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Severity label colour when <code style="font-family:monospace;font-size:11px;">severity="proactive"</code></td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-border-light</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Footer top border, divider lines</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-primary</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Related insight link text colour</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-bg</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Panel background</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-bg-muted</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Source document row background; entity tab hover background</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-color-resolved-text</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Check icon colour on resolved entity tabs (grouped mode)</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-radius-md</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Entity tab top corners (grouped mode)</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-font-weight-medium</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Active entity tab label weight (grouped mode)</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--dur-fast, --ease-out</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Entity tab hover transition (grouped mode)</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-space-xl (24px)</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Header padding, body padding, footer padding (horizontal)</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-space-lg (16px)</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Body padding (vertical), footer padding (vertical)</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-space-md (12px)</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Header gap, footer gap</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-space-sm (8px)</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Footer button group gaps, source doc row padding, meta gap</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-space-2xs (6px)</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Severity label and section label bottom margin</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--la-space-3xs (2px)</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Related link vertical padding</td>
+</tr>
+<tr style="border-bottom:1px solid var(--la-color-border-light);">
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--dur-modal, --ease-out</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Backdrop fade, panel scale-in</td>
+</tr>
+<tr>
+  <td style="padding:10px 16px;font-family:monospace;font-size:11px;">--scale-enter</td>
+  <td style="padding:10px 16px;color:var(--la-color-text-secondary);">Panel scale origin (from motion.css)</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Gate 8 exceptions</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0;">Three hardcoded values outside the token scale — narrow-scope layout constants per CLAUDE.md Gate 8:</p>
+<ul style="font-size:13px;color:var(--la-color-text-secondary);margin:8px 0 0;padding-left:20px;line-height:1.8;">
+  <li><code style="font-family:monospace;font-size:11px;">max-width: 600px</code> — panel width cap, no overlay-width token</li>
+  <li><code style="font-family:monospace;font-size:11px;">max-height: 88vh</code> — viewport-relative cap, no vh token in the system</li>
+  <li><code style="font-family:monospace;font-size:11px;">gap: 20px</code> (body section gap) — between <code style="font-family:monospace;font-size:11px;">--la-space-lg</code> (16px) and <code style="font-family:monospace;font-size:11px;">--la-space-xl</code> (24px); visual tuning constant</li>
+</ul>
+</div>
+</div>
+
+
+<!-- ── Notes ─────────────────────────────────────────────────────── -->
+<div class="preview-header" id="notes" style="margin-top:8px;">
+<h1>Notes</h1>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Source document CTA — disabled until Sprint 6</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0;">The "View document" CTA renders as a disabled ghost button until Sprint 6 (Document System) builds <code style="font-family:monospace;font-size:11px;">/documents/{id}</code>. Pass <code style="font-family:monospace;font-size:11px;">source-document</code> now — the name is shown and the id is stored. Sprint 6 will wire the navigation without an API change.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Consumer drives upload state</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0;">The component fires <code style="font-family:monospace;font-size:11px;">la-insight-upload</code> when the user selects a file or clicks Google Drive. The consumer (LiveView) owns the upload pipeline — set <code style="font-family:monospace;font-size:11px;">upload-state="processing"</code> on receipt, <code style="font-family:monospace;font-size:11px;">'error'</code> on verification failure (pass <code style="font-family:monospace;font-size:11px;">verification-error</code> with the backend's message), and <code style="font-family:monospace;font-size:11px;">resolved</code> on success. The component does not manage async state internally beyond the confirm-completion animation.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Cascade resolution is a backend concern</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0;">When the user uploads through this modal, the backend re-evaluates all insights referencing the same document, regardless of legal area. Related insights that pass verification auto-resolve via LiveView server-push. The component's role is to show the cascade note ("Uploading a corrected document will re-evaluate all issues") and fire <code style="font-family:monospace;font-size:11px;">la-insight-upload</code> — the rest is backend propagation.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Reopen — confirm insights only</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0;">Confirm-completion insights (user-asserted) show "Reopen" in the resolved footer so accidental resolutions can be corrected. Document upload insights (system-verified) do not — the system's verified state is always authoritative. If the user uploaded the wrong document, they re-upload; the system recalculates.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Grouped mode — internal tab state</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0;">The resolved state of each entity tab is tracked internally — the consumer does not need to pass it back in. Each resolution fires <code style="font-family:monospace;font-size:11px;">la-subitem-resolved</code> immediately; the consumer calls the backend. If the page re-renders (e.g. LiveView push), the consumer can pre-populate initial resolved state by setting <code style="font-family:monospace;font-size:11px;">resolved: true</code> on any <code style="font-family:monospace;font-size:11px;">GroupSubItem</code> — the component respects the initial value on first render only.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Grouped mode — upload-state is shared</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<p style="font-size:13px;color:var(--la-color-text-secondary);margin:0;">The <code style="font-family:monospace;font-size:11px;">upload-state</code> prop is a single shared value in grouped mode — it reflects the state of whichever upload is currently in flight. The consumer should track which sub-item is being processed (via the <code style="font-family:monospace;font-size:11px;">subItemId</code> in <code style="font-family:monospace;font-size:11px;">la-insight-upload</code>) and update <code style="font-family:monospace;font-size:11px;">upload-state</code> accordingly.</p>
+</div>
+</div>
+
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-insight-modal</h2>
+    <p>The detail and action surface for a single insight. la-insight-card surfaces an issue at a glance; this modal takes over when the user wants the full story — explanation, all dates, entity context, source document, related insights, and the resolution action. Rendered as a fixed-position backdrop with a scrollable panel. Dismissable via close button, backdrop click, or the Dismiss footer button.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Whether the modal is visible</td>
+        </tr>
+      
+        <tr>
+          <td>severity</td>
+          <td><span class="default">severity</span></td>
+          <td><span class="type">InsightModalSeverity</span></td>
+          <td><span class="default">&#39;urgent&#39;</span></td>
+          <td>Severity of the insight</td>
+        </tr>
+      
+        <tr>
+          <td>sourceType</td>
+          <td><span class="default">source-type</span></td>
+          <td><span class="type">&#39;legal&#39; | &#39;best_practice&#39; | &#39;&#39;</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Source type — determines type tag label</td>
+        </tr>
+      
+        <tr>
+          <td>headline</td>
+          <td><span class="default">headline</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Main headline</td>
+        </tr>
+      
+        <tr>
+          <td>reason</td>
+          <td><span class="default">reason</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Why this is an issue (explanation / reason)</td>
+        </tr>
+      
+        <tr>
+          <td>guidance</td>
+          <td><span class="default">guidance</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>What to do about it</td>
+        </tr>
+      
+        <tr>
+          <td>entity</td>
+          <td><span class="default">entity</span></td>
+          <td><span class="type">{name: string; type: string; id: string} | undefined</span></td>
+          <td>—</td>
+          <td>Entity context</td>
+        </tr>
+      
+        <tr>
+          <td>dates</td>
+          <td><span class="default">dates</span></td>
+          <td><span class="type">{date: string; label: string}[] | undefined</span></td>
+          <td>—</td>
+          <td>All dates associated with this insight</td>
+        </tr>
+      
+        <tr>
+          <td>sourceDocument</td>
+          <td><span class="default">sourceDocument</span></td>
+          <td><span class="type">{name: string; id: string} | undefined</span></td>
+          <td>—</td>
+          <td>Source document (Sprint 6 — navigation CTA deferred)</td>
+        </tr>
+      
+        <tr>
+          <td>relatedInsights</td>
+          <td><span class="default">relatedInsights</span></td>
+          <td><span class="type">{id: string; headline: string; legalArea: string}[] | undefined</span></td>
+          <td>—</td>
+          <td>Related insights on the same document</td>
+        </tr>
+      
+        <tr>
+          <td>resolved</td>
+          <td><span class="default">resolved</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Whether the insight has been resolved</td>
+        </tr>
+      
+        <tr>
+          <td>documents</td>
+          <td><span class="default">documents</span></td>
+          <td><span class="type">InsightDocument[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Documents linked to this insight</td>
+        </tr>
+      
+        <tr>
+          <td>actionType</td>
+          <td><span class="default">action-type</span></td>
+          <td><span class="type">InsightActionType</span></td>
+          <td><span class="default">&#39;confirm&#39;</span></td>
+          <td>Resolution action the user takes inside the modal. `confirm` = synchronous "Mark Resolved". `upload` = inline upload zone (document_issue / missing_document insights).</td>
+        </tr>
+      
+        <tr>
+          <td>uploadState</td>
+          <td><span class="default">upload-state</span></td>
+          <td><span class="type">InsightUploadState</span></td>
+          <td><span class="default">&#39;idle&#39;</span></td>
+          <td>Upload sub-state — only consulted when `actionType` is `upload`. `idle` shows the drop zone; `processing` shows the uploading/verifying indicator; `error` shows verification error + re-upload.</td>
+        </tr>
+      
+        <tr>
+          <td>verificationError</td>
+          <td><span class="default">verification-error</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Specific verification error shown when `uploadState` is `error`</td>
+        </tr>
+      
+        <tr>
+          <td>subItems</td>
+          <td><span class="default">subItems</span></td>
+          <td><span class="type">GroupSubItem[] | undefined</span></td>
+          <td>—</td>
+          <td>Sub-items for grouped insights (same obligation, multiple entities). When set, renders an entity tab strip and per-tab resolution.</td>
+        </tr>
+      
+        <tr>
+          <td>_resolving</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_activeTab</td>
+          <td>—</td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_resolvedTabs</td>
+          <td>—</td>
+          <td><span class="type">Set&lt;string&gt;</span></td>
+          <td><span class="default">new Set()</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_resolvingSubItemId</td>
+          <td>—</td>
+          <td><span class="type">string | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_isGrouped</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-insight-close</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-insight-resolved</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-insight-upload</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-insight-navigate</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-subitem-resolved</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+(function () {
+  const liveModal = document.getElementById('live-modal');
+  const openLive = document.getElementById('open-live');
+  const openAnatomy = document.getElementById('open-anatomy');
+  const modalAnatomy = document.getElementById('modal-anatomy');
+  const eventLog = document.getElementById('event-log');
+
+  function logEvent(name, detail) {
+    const entry = document.createElement('div');
+    const time = new Date().toLocaleTimeString('en-AU', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
+    entry.style.cssText = 'color:#e2e8f0;padding:2px 0;';
+    entry.innerHTML = `<span style="color:#6b7280;">${time}</span> <span style="color:#7dd3fc;">${name}</span> <span style="color:#9ca3af;word-break:break-all;">${detail ? JSON.stringify(detail) : ''}</span>`;
+    if (eventLog.textContent.trim() === '— events will appear here —') eventLog.innerHTML = '';
+    eventLog.appendChild(entry);
+    eventLog.scrollTop = eventLog.scrollHeight;
+  }
+
+  liveModal.addEventListener('la-insight-close', () => logEvent('la-insight-close'));
+  liveModal.addEventListener('la-insight-resolved', e => logEvent('la-insight-resolved', e.detail));
+  liveModal.addEventListener('la-insight-reopen', e => logEvent('la-insight-reopen', e.detail));
+  liveModal.addEventListener('la-insight-upload', e => logEvent('la-insight-upload', e.detail));
+  liveModal.addEventListener('la-insight-navigate', e => logEvent('la-insight-navigate', e.detail));
+  liveModal.addEventListener('la-subitem-resolved', e => logEvent('la-subitem-resolved', e.detail));
+
+  openLive.addEventListener('click', () => { liveModal.open = true; });
+  openAnatomy.addEventListener('click', () => { modalAnatomy.open = true; });
+
+  // Controls
+  document.querySelectorAll('[data-severity]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-severity]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      liveModal.setAttribute('severity', btn.dataset.severity);
+    });
+  });
+
+  document.querySelectorAll('[data-source-type]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-source-type]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      liveModal.setAttribute('source-type', btn.dataset.sourceType);
+    });
+  });
+
+  document.querySelectorAll('[data-action-type]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-action-type]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      liveModal.setAttribute('action-type', btn.dataset.actionType);
+    });
+  });
+
+  document.querySelectorAll('[data-resolved]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-resolved]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      if (btn.dataset.resolved === 'true') liveModal.setAttribute('resolved', '');
+      else liveModal.removeAttribute('resolved');
+    });
+  });
+
+  document.querySelectorAll('[data-upload-state]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-upload-state]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      liveModal.setAttribute('upload-state', btn.dataset.uploadState);
+    });
+  });
+
+  const entityPresets = {
+    jane: {name: 'Jane Lee', type: 'person', id: 'e1'},
+    acme: {name: 'Acme Inc', type: 'company', id: 'e2'},
+    none: null,
+  };
+  document.querySelectorAll('[data-entity]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-entity]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      liveModal.entity = entityPresets[btn.dataset.entity];
+    });
+  });
+
+  document.querySelectorAll('[data-source-doc]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('[data-source-doc]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      liveModal.sourceDocument = btn.dataset.sourceDoc === 'true'
+        ? {name: 'Employment Agreement — Jane Lee.pdf', id: 'doc-1'}
+        : undefined;
+    });
+  });
+
+  // Snapshot triggers
+  const snapshots = [
+    ['snap-urgent', 'modal-urgent'],
+    ['snap-proactive', 'modal-proactive'],
+    ['snap-resolved-confirm', 'modal-resolved-confirm'],
+    ['snap-resolved-upload', 'modal-resolved-upload'],
+    ['snap-minimal', 'modal-minimal'],
+    ['snap-upload-idle', 'modal-upload-idle'],
+    ['snap-upload-processing', 'modal-upload-processing'],
+    ['snap-upload-error', 'modal-upload-error'],
+    ['snap-grouped-confirm', 'modal-grouped-confirm'],
+    ['snap-grouped-upload', 'modal-grouped-upload'],
+  ];
+
+  snapshots.forEach(([triggerId, modalId]) => {
+    const trigger = document.getElementById(triggerId);
+    const modal = document.getElementById(modalId);
+    if (trigger && modal) trigger.addEventListener('click', () => { modal.open = true; });
+  });
+
+  // Related + dates snapshots (set props via JS)
+  const modalRelated = document.getElementById('modal-related');
+  const modalDates = document.getElementById('modal-dates');
+  const modalSourceDoc = document.getElementById('modal-source-doc');
+
+  const groupedSubItems = [
+    { id: 'si-1', entity: { name: 'Jane Lee',     type: 'person', id: 'p1' }, dates: [{ date: '30 May 2026', label: 'Deadline' }] },
+    { id: 'si-2', entity: { name: 'Bob Smith',    type: 'person', id: 'p2' }, dates: [{ date: '30 May 2026', label: 'Deadline' }] },
+    { id: 'si-3', entity: { name: 'Priya Kapoor', type: 'person', id: 'p3' } },
+  ];
+
+  customElements.whenDefined('la-insight-modal').then(() => {
+    modalRelated.relatedInsights = [
+      {id: 'i2', headline: 'Update IP assignment clause in employment contract', legalArea: 'Employment'},
+      {id: 'i3', headline: 'Register IP filing with USPTO', legalArea: 'Governance'},
+    ];
+
+    modalDates.dates = [
+      {date: '2026-01-15', label: 'Overdue deadline'},
+      {date: '2026-05-30', label: 'Grace period ends'},
+      {date: '2026-12-31', label: 'Annual renewal'},
+    ];
+
+    modalSourceDoc.sourceDocument = {name: 'Employment Agreement — Jane Lee.pdf', id: 'doc-1'};
+
+    document.getElementById('modal-grouped-confirm').subItems = groupedSubItems;
+    document.getElementById('modal-grouped-upload').subItems = groupedSubItems;
+  });
+
+  document.getElementById('snap-related').addEventListener('click', () => { modalRelated.open = true; });
+  document.getElementById('snap-dates').addEventListener('click', () => { modalDates.open = true; });
+  document.getElementById('snap-source-doc').addEventListener('click', () => { modalSourceDoc.open = true; });
+})();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,119 @@
+/*
+  LawAdvisor AI — la-table default styling (light-DOM).
+  ───────────────────────────────────────────────────────────────────
+  la-table is a card-shell wrapper with horizontal scroll. The card
+  border/radius lives on the host element (shadow DOM). Consumers
+  write a real <table> inside it.
+
+  Expected structure:
+    <la-table>
+      <table>
+        <thead><tr><th data-sort="name">Name</th>…</tr></thead>
+        <tbody>
+          <tr><td>…</td></tr>
+          <tr class="success"><td>…</td></tr>
+          <tr class="pending"><td>…</td></tr>
+        </tbody>
+      </table>
+    </la-table>
+
+  Sortable columns: add data-sort="<key>" to any <th>. la-table.ts
+  injects a sort icon and emits la-sort-change with { column, direction }.
+
+  Import on any page that uses <la-table>:
+    <link rel="stylesheet" href="/dev/la-table.css">
+*/
+
+/* ── Table chrome ──────────────────────────────────────────────── */
+la-table table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  font-size: var(--la-font-size-base);
+  color: var(--la-color-text);
+}
+
+/* ── Header cells ──────────────────────────────────────────────── */
+la-table thead th {
+  font-size: var(--la-font-size-sm);
+  font-weight: var(--la-font-weight-semibold);
+  color: var(--la-color-text-muted);
+  text-align: left;
+  padding: var(--la-space-sm) var(--la-space-lg);
+  border-bottom: 1px solid var(--la-color-border-light);
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+}
+
+/* Corner radius — top */
+la-table thead tr:first-child th:first-child {
+  border-top-left-radius: calc(var(--la-radius-lg) - 1px);
+}
+la-table thead tr:first-child th:last-child {
+  border-top-right-radius: calc(var(--la-radius-lg) - 1px);
+}
+
+/* ── Sortable column headers ───────────────────────────────────── */
+la-table th[data-sort] {
+  cursor: pointer;
+  user-select: none;
+}
+la-table th[data-sort]:hover {
+  color: var(--la-color-text);
+}
+la-table th[data-sort][data-sort-dir] {
+  color: var(--la-color-text);
+}
+la-table th[data-sort] .la-sort-icon {
+  margin-left: var(--la-space-xs);
+  font-size: 10px;
+  opacity: 0.4;
+  vertical-align: middle;
+}
+la-table th[data-sort][data-sort-dir] .la-sort-icon {
+  opacity: 1;
+}
+
+/* ── Body cells ────────────────────────────────────────────────── */
+la-table tbody td {
+  padding: var(--la-space-md) var(--la-space-lg);
+  font-size: var(--la-font-size-base);
+  color: var(--la-color-text);
+  border-bottom: 1px solid var(--la-color-border-light);
+  vertical-align: middle;
+}
+
+/* Last-row border suppression + corner radius */
+la-table tbody tr:last-child td {
+  border-bottom: none;
+}
+la-table tbody tr:last-child td:first-child {
+  border-bottom-left-radius: calc(var(--la-radius-lg) - 1px);
+}
+la-table tbody tr:last-child td:last-child {
+  border-bottom-right-radius: calc(var(--la-radius-lg) - 1px);
+}
+
+/* ── Last column (actions) ─────────────────────────────────────── */
+la-table thead th:last-child,
+la-table tbody td:last-child {
+  text-align: right;
+}
+
+/* ── Row states ────────────────────────────────────────────────── */
+
+/* Hover */
+la-table tbody tr:hover td {
+  background: var(--la-color-bg-subtle);
+}
+
+/* Success — resolved / positive state */
+la-table tbody tr.success td,
+la-table tbody tr[data-success] td {
+  background: var(--la-color-surface-success);
+}
+
+/* Pending — awaiting confirmation, not an error */
+la-table tbody tr.pending td {
+  background: var(--la-color-bg-subtle);
+}

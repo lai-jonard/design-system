@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sign in — LawAdvisor AI</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../la-tokens-root.css">
+  <link rel="stylesheet" href="../la-base-root.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  <link rel="stylesheet" href="../motion.css">
+  <script src="../bundle.js"></script>
+  <style>
+    /* FOUC fix — hide custom elements until upgraded */
+    la-modal:not(:defined),
+    la-insight-modal:not(:defined),
+    la-sidebar:not(:defined),
+    la-app-shell:not(:defined),
+    la-dashboard:not(:defined),
+    la-legal-area-page:not(:defined),
+    la-data-room-page:not(:defined),
+    la-document-page:not(:defined),
+    la-actions-widget:not(:defined),
+    la-document-list:not(:defined),
+    la-processing-widget:not(:defined),
+    la-welcome-banner:not(:defined),
+    la-unlock-panel:not(:defined),
+    la-insight-card:not(:defined),
+    la-insight-list:not(:defined),
+    la-investor-card:not(:defined),
+    la-legal-area-widget:not(:defined),
+    la-dd-readiness:not(:defined),
+    la-upcoming-deadlines:not(:defined),
+    la-anticipation-teaser:not(:defined),
+    la-summary-line:not(:defined),
+    la-empty-state:not(:defined) { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; font-family: var(--la-font-family); }
+
+    /* ── Page ─────────────────────────────────────────── */
+    .page {
+      display: flex;
+      min-height: 100vh;
+      background: var(--la-color-bg);
+    }
+
+    /* ── Left panel (form) ─────────────────────────────── */
+    .panel {
+      width: 600px;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: var(--la-space-2xl);
+      min-height: 100vh;
+    }
+
+    /* ── Right panel ───────────────────────────────────── */
+    .right {
+      flex: 1;
+      padding: 4px;
+    }
+
+    .right-rect {
+      height: 100%;
+      background: var(--la-color-bg-subtle);
+      border-radius: 8px;
+    }
+
+    /* ── Responsive ────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .panel { width: 100%; }
+      .right { display: none; }
+    }
+
+    /* ── Logo ──────────────────────────────────────────── */
+    .logo { width: 32px; height: 32px; overflow: hidden; display: block; }
+
+    @keyframes laBarEnter {
+      from {
+        transform: translateX(48px) scaleX(1.5);
+        opacity: 0;
+      }
+      to {
+        transform: translateX(0) scaleX(1);
+        opacity: 1;
+      }
+    }
+
+    .la-logo path {
+      animation: laBarEnter 480ms cubic-bezier(0.25, 1, 0.4, 1) 1 both;
+    }
+    .la-logo path:nth-child(1) { animation-delay:   0ms; }
+    .la-logo path:nth-child(2) { animation-delay:  30ms; }
+    .la-logo path:nth-child(3) { animation-delay:  60ms; }
+    .la-logo path:nth-child(4) { animation-delay:  90ms; }
+    .la-logo path:nth-child(5) { animation-delay: 120ms; }
+    .la-logo path:nth-child(6) { animation-delay: 150ms; }
+    .la-logo path:nth-child(7) { animation-delay: 180ms; }
+    .la-logo path:nth-child(8) { animation-delay: 210ms; }
+
+    /* ── Staged entrance — after logo ──────────────────── */
+    @keyframes contentEnter {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .heading-block,
+    .form-block,
+    .footer {
+      animation: contentEnter 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .heading-block { animation-delay: 840ms; }
+    .form-block    { animation-delay: 960ms; }
+    .footer        { animation-delay: 1080ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .la-logo path,
+      .heading-block,
+      .form-block,
+      .footer { animation: none; }
+    }
+
+    /* ── Heading ───────────────────────────────────────── */
+    .heading-block { display: flex; flex-direction: column; gap: var(--la-space-sm); }
+
+    .heading {
+      font-size: 24px;
+      font-weight: var(--la-font-weight-semibold);
+      line-height: 1.33;
+      color: var(--la-color-text);
+    }
+
+    .subheading {
+      font-size: var(--la-font-size-lg);
+      font-weight: var(--la-font-weight-normal);
+      line-height: 1.5;
+      color: var(--la-color-text-muted);
+    }
+
+    /* ── Form ──────────────────────────────────────────── */
+    .form-block { display: flex; flex-direction: column; gap: var(--la-space-xl); }
+
+    .fields { display: flex; flex-direction: column; gap: var(--la-space-md); }
+
+    la-input { width: 100%; }
+
+    la-button[block] { width: 100%; }
+
+    /* ── Forgot password ───────────────────────────────── */
+    .forgot { display: block; text-align: right; font-size: var(--la-font-size-base); }
+
+    /* ── Divider ───────────────────────────────────────── */
+    .divider { display: flex; align-items: center; gap: 10px; }
+    .divider::before, .divider::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: var(--la-color-border-light);
+    }
+    .divider span { font-size: 12px; color: var(--la-color-text-faint); white-space: nowrap; }
+
+    .google-icon { width: 16px; height: 16px; flex-shrink: 0; display: block; }
+
+    /* ── Footer ────────────────────────────────────────── */
+    .footer {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: var(--la-space-xs);
+      font-size: var(--la-font-size-base);
+    }
+    .footer-text { font-size: var(--la-font-size-base); font-weight: var(--la-font-weight-normal); color: var(--la-color-text-muted); }
+
+    /* ── Content ───────────────────────────────────────── */
+    .content { width: 100%; max-width: 400px; display: flex; flex-direction: column; gap: var(--la-space-xl); }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div class="panel">
+      <div class="content">
+
+        <svg class="logo la-logo" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g class="la-group">
+            <path d="M0 2C0 0.895428 0.894944 0 1.99891 0H12.2156C13.3195 0 14.2145 0.895431 14.2145 2V44.3996H26.7881V77.9996C26.7881 79.1042 25.8932 79.9996 24.7892 79.9996H1.99891C0.894942 80 0 79.1046 0 78V2Z" fill="currentColor"/>
+            <path d="M24.8336 2C24.8336 0.895432 25.7285 0 26.8325 0H38.826C39.9299 0 40.8249 0.895431 40.8249 2V44.4H24.8336V2Z" fill="currentColor"/>
+            <path d="M33.4274 44.3996H46.2205V77.9996C46.2205 79.1042 45.3255 79.9996 44.2215 79.9996H35.4263C34.3224 79.9996 33.4274 79.1042 33.4274 77.9996V44.3996Z" fill="currentColor"/>
+            <path d="M46.4171 2C46.4171 0.895432 47.3121 0 48.416 0H54.8126C55.9165 0 56.8115 0.895431 56.8115 2V44.4H46.4171V2Z" fill="currentColor"/>
+            <path d="M51.9797 44.3996H63.9732V77.9996C63.9732 79.1042 63.0782 79.9996 61.9742 79.9996H53.9786C52.8746 79.9996 51.9797 79.1042 51.9797 77.9996V44.3996Z" fill="currentColor"/>
+            <path d="M62.4173 2C62.4173 0.895432 63.3122 0 64.4162 0H67.2147C68.3187 0 69.2136 0.895431 69.2136 2V44.4H62.4173V2Z" fill="currentColor"/>
+            <path d="M67.5632 44.3996H76.7582V77.9996C76.7582 79.1042 75.8632 79.9996 74.7593 79.9996H69.5621C68.4581 79.9996 67.5632 79.1042 67.5632 77.9996V44.3996Z" fill="currentColor"/>
+            <path d="M74.8028 2C74.8028 0.895432 75.6978 0 76.8017 0H78.0011C79.1051 0 80 0.895431 80 2V44.4H74.8028V2Z" fill="currentColor"/>
+          </g>
+        </svg>
+
+        <div class="heading-block">
+          <h1 class="heading">Welcome to LawAdvisor</h1>
+          <p class="subheading">Get your business legals in order today, take off tomorrow</p>
+        </div>
+
+        <div class="form-block">
+          <div class="fields">
+            <la-input label="Email address" type="email" placeholder="you@company.com"></la-input>
+            <la-input label="Password" type="password" placeholder="••••••••••"></la-input>
+            <a href="#" class="forgot">Forgot password?</a>
+            <la-button variant="primary" size="lg" block onclick="window.location.href='02-dashboard-ftue.html'">Sign in</la-button>
+          </div>
+
+          <div class="divider"><span>or</span></div>
+
+          <div class="fields">
+            <la-button variant="secondary" size="lg" block>
+              <svg slot="icon-left" class="google-icon" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+                <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+                <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+                <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+              </svg>
+              Continue with Google
+            </la-button>
+          </div>
+        </div>
+
+        <div class="footer">
+          <span class="footer-text">Don't have an account yet?</span>
+          <a href="#">Sign up</a>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="right-rect"></div>
+    </div>
+
+  </div>
+
+  <script>
+    function setVar(prop, val) {
+      document.documentElement.style.setProperty(prop, val);
+    }
+
+  </script>
+</body>
+</html>

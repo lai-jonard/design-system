@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-processing-widget — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-processing-widget</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#context" class="docs-nav-item" data-nav-id="context">In context</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-processing-widget</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-processing-widget</h1>
+  <p>Keeps users informed while documents are being uploaded and analysed. Floats bottom-right of the content area; renders nothing when <code>items</code> is empty. Composes <code>la-document-item</code> — the widget owns the tray chrome (title, collapse toggle) and dispatches <code>la-reupload</code> / <code>la-dismiss-item</code>; the rows themselves are standard document items.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>One surface, header above an animated items wrapper. Per-row actions live in the document item's <code>actions</code> slot, and the dismiss × is built-in via <code>la-document-item</code>'s <code>dismissible</code> prop.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — mixed state, all regions visible</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-anatomy"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Surface</td><td><code>part="surface"</code></td><td>Outer tray container. Hosts position it bottom-right of the content area; the part is exposed so consumers can target it externally.</td></tr>
+      <tr><td>Header — spinner</td><td><code>la-spinner</code> (size <code>sm</code>)</td><td>Visible only when at least one item is <code>processing</code>. Hidden once nothing is in flight.</td></tr>
+      <tr><td>Header — title</td><td><code>.title-text</code></td><td>Computed from item counts ("2 processing, 1 completed", "Processing complete", "1 item failed"). Not configurable.</td></tr>
+      <tr><td>Header — collapse toggle</td><td><code>la-icon-button</code> with <code>ph-caret-down</code></td><td>Hides / shows the items wrapper. Caret rotates 180°. State is internal — host has no prop for it.</td></tr>
+      <tr><td>Items wrapper</td><td><code>.items-wrapper</code></td><td>Animates open/closed via <code>grid-template-rows</code>. Crossfades opacity to avoid mid-collapse content jumps.</td></tr>
+      <tr><td>Item row</td><td><code>la-document-item</code> (<code>non-interactive</code>)</td><td>One per <code>items</code> entry. Click-through is suppressed — documents in flight are informational, not navigable.</td></tr>
+      <tr><td>Row action — Re-upload</td><td><code>la-button</code> (size <code>sm</code>) in <code>slot="actions"</code></td><td>Failed rows only. Fires <code>la-reupload</code> with the item detail. Host opens the upload component in the originating context, or in a minimal modal if that context is gone.</td></tr>
+      <tr><td>Row action — Dismiss</td><td>Built-in via <code>la-document-item</code>'s <code>dismissible</code> prop (renders a trailing <code>la-icon-button</code> with <code>ph-x</code> internally)</td><td>Completed and failed rows only. Never on processing rows. The widget passes <code>?dismissible=${item.status !== 'processing'}</code>; the item dispatches <code>la-dismiss</code>, the widget rebroadcasts as <code>la-dismiss-item</code> with the item detail.</td></tr>
+      <tr><td>Timeout alert</td><td><code>la-alert variant="info"</code> with <code>.timeout-alert</code></td><td>Renders inside <code>.items</code> above the rows when <code>timeout</code> is true. Collapses with the rows when the tray is toggled. No dismiss button by design — see Notes.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below. <code>items</code> swaps fixtures via the preset chips; <code>timeout</code> toggles the long-running-processing alert.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label>State preset</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-preset="active" type="button">Active</button>
+        <button class="btn-toggle" data-preset="completed" type="button">Completed</button>
+        <button class="btn-toggle" data-preset="failed" type="button">Failed</button>
+        <button class="btn-toggle" data-preset="mixed" type="button">Mixed</button>
+        <button class="btn-toggle" data-preset="empty" type="button">Empty</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>timeout</label>
+      <div class="btn-group" data-control="timeout">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the preset above. Re-upload and dismiss events appear in the log.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="min-height:80px; align-items:flex-start;">
+    <la-processing-widget id="live-widget"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Event log</div>
+  <div id="event-log" class="docs-code" style="min-height:64px;max-height:160px;overflow:auto;">
+    <span style="color:var(--doc-text-faint);">Click Re-upload or × on a completed/failed row to log events.</span>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed states for reference.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Active — items processing, no per-row dismiss</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-active"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Completed — every row finished, per-item × visible</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-completed"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Failed — Re-upload action with × dismiss</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-failed"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Mixed — processing, completed, and failed together</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-mixed"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Empty — items=[] renders nothing</div>
+  <div class="preview-frame" style="min-height:48px;">
+    <span style="font-size:12px;color:var(--doc-text-3);font-style:italic;">No output — empty array hides the widget entirely.</span>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Long filename — truncates at narrow widths</div>
+  <div class="preview-frame" style="align-items:flex-start; max-width:360px;">
+    <la-processing-widget id="pw-long"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Failed — no error message supplied (generic fallback)</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-noerror"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">No association — name only, no secondary line</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-no-association"></la-processing-widget>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Timeout — long-running processing acknowledgement</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-processing-widget id="pw-timeout" timeout></la-processing-widget>
+  </div>
+</div>
+
+<!-- In context -->
+<div id="context" class="preview-header" style="margin-top:8px;">
+  <h1>In context</h1>
+  <p>Natural habitat — floating bottom-right of the content area inside <code>la-app-shell</code>, above the page content.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Inside la-app-shell — sidebar + content + widget bottom-right</div>
+  <div class="preview-frame" style="padding:0;">
+    <div class="shell-frame" style="position:relative;">
+      <la-app-shell page-title="Employment" show-header="">
+        <la-sidebar
+          active-area="employment"
+          logo-src="../assets/brand/logo-mark.svg"
+          slot="sidebar"
+          unlocked-areas='["corp-gov", "employment", "fundraising"]'
+          user-initials="AC"
+          user-name="Alex Chen"
+          user-role="Acme Corp. · Founder"
+          wordmark-src="../assets/brand/logo-wordmark.svg"
+        ></la-sidebar>
+        <div class="shell-main" slot="main">Page content area</div>
+      </la-app-shell>
+      <div style="position:absolute; bottom:16px; right:16px; width:340px; z-index:100;">
+        <la-processing-widget id="pw-context"></la-processing-widget>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-processing-widget</h2>
+    <p>Keeps users informed while documents are being uploaded and analysed. Floats bottom-right of the content area; renders nothing when items is empty. Composes la-document-item — the widget owns the tray chrome (title, collapse toggle) and dispatches la-reupload / la-dismiss-item; the rows themselves are standard document items.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>items</td>
+          <td><span class="default">items</span></td>
+          <td><span class="type">ProcessingItem[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>timeout</td>
+          <td><span class="default">timeout</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_showDetails</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">true</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_processingCount</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_failedCount</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_allComplete</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-reupload</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-dismiss-item</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+  <h3>CSS tokens</h3>
+  <table class="docs-table">
+    <thead><tr><th>Token</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>--la-radius-xl1</td><td>Surface border radius (expanded)</td></tr>
+      <tr><td>--la-radius-2xl</td><td>Surface border radius (collapsed)</td></tr>
+      <tr><td>--la-color-bg</td><td>Surface background</td></tr>
+      <tr><td>--la-shadow-lg</td><td>Surface drop shadow</td></tr>
+      <tr><td>--la-space-sm</td><td>Surface padding (concentric with --la-radius-xl1); header gap; timeout-alert margin-bottom</td></tr>
+      <tr><td>--la-space-md</td><td>Title padding-left; spinner-to-text gap</td></tr>
+      <tr><td>--la-space-xs</td><td>Gap between item rows</td></tr>
+      <tr><td>--la-font-size-base</td><td>Title text size</td></tr>
+      <tr><td>--la-font-weight-semibold</td><td>Title font weight</td></tr>
+      <tr><td>--la-color-primary</td><td>Header spinner colour (matches in-row processing spinner — see Notes)</td></tr>
+      <tr><td>--dur-base</td><td>Caret rotation transition</td></tr>
+      <tr><td>--dur-modal</td><td>Surface border-radius and items height transition</td></tr>
+      <tr><td>--ease</td><td>Surface border-radius and caret easing</td></tr>
+      <tr><td>--ease-out</td><td>Items expand/collapse easing</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="usage">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — active items</p>
+      <div class="docs-code"><span class="kw">&lt;la-processing-widget&gt;&lt;/la-processing-widget&gt;</span>
+
+<span class="kw">const</span> widget = document.querySelector(
+  <span class="str">'la-processing-widget'</span>
+);
+widget.items = [
+  { name: <span class="str">'Contract.pdf'</span>, area: <span class="str">'Employment'</span>,
+    status: <span class="str">'processing'</span> },
+];</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Handle events</p>
+      <div class="docs-code">widget.addEventListener(<span class="str">'la-reupload'</span>, e =&gt; {
+  openUploadFor(e.detail);
+});
+widget.addEventListener(<span class="str">'la-dismiss-item'</span>, e =&gt; {
+  widget.items = widget.items.filter(
+    i =&gt; i !== e.detail
+  );
+});</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Float bottom-right of the content area</p>
+      <div class="docs-code"><span class="kw">&lt;la-app-shell&gt;</span>
+  <span class="kw">&lt;la-sidebar</span> <span class="at">slot</span>=<span class="str">"sidebar"</span><span class="kw">&gt;&lt;/la-sidebar&gt;</span>
+  <span class="kw">&lt;div</span> <span class="at">slot</span>=<span class="str">"main"</span><span class="kw">&gt;</span>...<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/la-app-shell&gt;</span>
+
+<span class="kw">&lt;div</span> <span class="at">style</span>=<span class="str">"position:fixed;</span>
+<span class="str">  bottom:16px; right:16px; width:340px;"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-processing-widget&gt;&lt;/la-processing-widget&gt;</span>
+<span class="kw">&lt;/div&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Failed item with error message</p>
+      <div class="docs-code">widget.items = [{
+  name: <span class="str">'Scan-corrupted.pdf'</span>,
+  area: <span class="str">'Employment'</span>,
+  status: <span class="str">'failed'</span>,
+  error: <span class="str">'File is unreadable.'</span>,
+}];</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Drive the timeout state</p>
+      <div class="docs-code"><span class="cm">// Consumer-driven threshold (typically ~45s)</span>
+<span class="kw">const</span> t = setTimeout(() =&gt; {
+  widget.timeout = <span class="kw">true</span>;
+}, 45000);
+
+<span class="cm">// Clear when items resolve</span>
+widget.addEventListener(<span class="str">'la-dismiss-item'</span>, () =&gt; {
+  <span class="kw">if</span> (widget.items.length === 0) {
+    clearTimeout(t);
+    widget.timeout = <span class="kw">false</span>;
+  }
+});</div>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="notes">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Renders nothing when empty.</strong> When <code>items</code> is an empty array the component returns <code>nothing</code> from Lit and produces no DOM. Mount eagerly and populate later — no separate visibility prop needed.</div>
+    <div class="docs-note"><strong>Dismiss is per item, terminal states only.</strong> The × appears on completed and failed rows. It is never rendered on processing rows — dismissing mid-process would orphan the eventual outcome (the backend's status broadcast for that document is dropped defensively once <code>dismissed_at</code> is set, per Sprint 1's processing-item ledger).</div>
+    <div class="docs-note"><strong>Re-upload is host-routed.</strong> The widget fires <code>la-reupload</code> with the item detail; it does not host an upload surface itself. The host opens the upload component in the row's originating context (the insight modal, add-person modal, etc.), or a minimal modal if that context is gone.</div>
+    <div class="docs-note"><strong>Title is computed.</strong> The header title is derived from item counts ("2 processing, 1 completed", "Processing complete", "1 item failed"). Not configurable via a prop.</div>
+    <div class="docs-note"><strong>Internal status mapping.</strong> The widget's external API uses <code>processing | completed | failed</code> — natural domain vocab. Internally it maps <code>completed → ready</code> before passing to <code>la-document-item</code>, because "ready" is the right word once the document is viewable in the library. Don't "fix" the mapping — the divergence is intentional.</div>
+    <div class="docs-note"><strong>Collapse toggle is by design.</strong> Diverges from Sprint 1 spec (always-expanded). LAI design owns this divergence — the toggle gives hosts UI customisability and aligns with future right-rail panels.</div>
+    <div class="docs-note"><strong>Timeout state has no dismiss button — by design.</strong> The widget today has no in-app re-entry surface (no persistent notification, no badge on the legal area). If a user dismissed the alert and walked away, they would have no way to learn when their docs finished. The "you can come back to check" copy plus the persistent widget body is the affordance. Add a dismiss button only when a re-entry surface exists.</div>
+    <div class="docs-note"><strong>Generic-error fallback.</strong> When a row is <code>failed</code> and <code>error</code> is empty, the widget supplies "We couldn't process this document. Try uploading it again." to <code>la-document-item</code>. Hosts that have a specific reason should pass it as <code>error</code>; the fallback only fires when nothing better is available.</div>
+    <div class="docs-note"><strong>Per-item dismiss is built-in via la-document-item.</strong> The widget passes <code>?dismissible=${item.status !== 'processing'}</code> to each row. The row renders its own trailing × via <code>la-icon-button</code> and emits <code>la-dismiss</code>; the widget catches that and rebroadcasts as <code>la-dismiss-item</code>. Consumers don't slot anything for dismiss — the row owns the affordance.</div>
+    <div class="docs-note"><strong>Spinner colour is <code>--la-color-primary</code>, not <code>--la-color-processing</code>.</strong> Both the header spinner and the in-row processing spinner inside <code>la-document-item</code> use primary (near-black) for a calm monochrome reading on white surfaces. This is a soft tension with CLAUDE.md's "primary on interactive elements only" rule — a spinner is a status indicator, neither interactive nor decorative. The visual call wins; the rule's spirit (don't use primary as brand decoration) is intact.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      const PRESETS = {
+        active: [
+          {name: 'Employment-Contract-JSmith.pdf', area: 'Employment', status: 'processing'},
+          {name: 'Board-Resolution-2026.pdf', area: 'Corp Governance', status: 'processing'},
+          {name: 'Privacy-Policy-v3.pdf', area: 'Data & Privacy', status: 'processing'},
+        ],
+        completed: [
+          {name: 'Employment-Contract-JSmith.pdf', area: 'Employment', status: 'completed'},
+          {name: 'Board-Resolution-2026.pdf', area: 'Corp Governance', status: 'completed'},
+        ],
+        failed: [
+          {name: 'Employment-Contract-JSmith.pdf', area: 'Employment', status: 'completed'},
+          {name: 'Scan-corrupted.pdf', area: 'Employment', status: 'failed', error: 'File is unreadable. Please upload a clearer copy.'},
+        ],
+        mixed: [
+          {name: 'Employment-Contract-JSmith.pdf', area: 'Employment', status: 'processing'},
+          {name: 'Board-Resolution-2026.pdf', area: 'Corp Governance', status: 'completed'},
+          {name: 'Scan-corrupted.pdf', area: 'Employment', status: 'failed', error: 'File is unreadable. Please upload a clearer copy.'},
+        ],
+        empty: [],
+      };
+
+      const liveWidget = document.getElementById('live-widget');
+      const eventLog = document.getElementById('event-log');
+
+      document.querySelectorAll('[data-preset]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-preset]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          liveWidget.items = PRESETS[btn.dataset.preset];
+        });
+      });
+
+      document.querySelectorAll('[data-control="timeout"] [data-bool]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-control="timeout"] [data-bool]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          if (btn.dataset.bool === 'true') liveWidget.setAttribute('timeout', '');
+          else liveWidget.removeAttribute('timeout');
+        });
+      });
+
+      liveWidget.items = PRESETS.active;
+
+      function logEvent(name, detail) {
+        const placeholder = eventLog.querySelector('span');
+        if (placeholder) eventLog.innerHTML = '';
+        const time = new Date().toLocaleTimeString();
+        const line = document.createElement('div');
+        line.textContent = `[${time}] ${name} → ${detail.name}`;
+        eventLog.prepend(line);
+      }
+      liveWidget.addEventListener('la-reupload', (e) => logEvent('la-reupload', e.detail));
+      liveWidget.addEventListener('la-dismiss-item', (e) => logEvent('la-dismiss-item', e.detail));
+
+      document.getElementById('pw-anatomy').items = PRESETS.mixed;
+      document.getElementById('pw-active').items = PRESETS.active;
+      document.getElementById('pw-completed').items = PRESETS.completed;
+      document.getElementById('pw-failed').items = PRESETS.failed;
+      document.getElementById('pw-mixed').items = PRESETS.mixed;
+      document.getElementById('pw-long').items = [
+        {name: 'A-Very-Long-Filename-That-Should-Truncate-Gracefully-At-Narrow-Widths.pdf', area: 'Employment', status: 'processing'},
+        {name: 'Board-Resolution-2026.pdf', area: 'Corp Governance', status: 'completed'},
+      ];
+      document.getElementById('pw-noerror').items = [
+        {name: 'Scan-corrupted.pdf', area: 'Employment', status: 'failed'},
+      ];
+      document.getElementById('pw-no-association').items = [
+        {name: 'Employment-Contract-JSmith.pdf', area: '', status: 'processing'},
+        {name: 'Board-Resolution-2026.pdf', area: '', status: 'completed'},
+        {name: 'Privacy-Policy-v3.pdf', area: '', status: 'completed'},
+      ];
+      document.getElementById('pw-timeout').items = [
+        {name: 'Employment-Contract-JSmith.pdf', area: 'Employment', status: 'processing'},
+        {name: 'Board-Resolution-2026.pdf', area: 'Corp Governance', status: 'processing'},
+      ];
+      document.getElementById('pw-context').items = PRESETS.mixed;
+    });
+  })();
+</script>
+
+
+</body>
+</html>

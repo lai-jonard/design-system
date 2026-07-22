@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-activity-item — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-activity-item</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-activity-item</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-activity-item</h1>
+  <p>A single event row in a chronological activity feed. Renders an icon circle, a connecting vertical line to the item below, an event description slot, and a timestamp. Stack multiple items to form a timeline — the connector lines chain automatically. Set <code>last</code> on the final item to suppress the trailing line.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>Two columns: the icon column on the left (circle + connector line), and the body on the right (event text + timestamp).</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — single item (last)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <div class="feed-wrap">
+      <la-activity-item time="1 hour ago" last>
+        <i slot="icon" class="ph-fill ph-eye"></i>
+        Viewed <a href="#" style="color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--la-color-border);">Cap Table (as of Jan 2026)</a>
+      </la-activity-item>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Icon circle</td>
+        <td><code>.icon-circle</code> + <code>slot="icon"</code></td>
+        <td>28 px circle housing a Phosphor icon. Background is <code>--la-color-bg</code> with a light border — intentionally neutral, no status colour.</td>
+      </tr>
+      <tr>
+        <td>Connector line</td>
+        <td><code>.icon-col::after</code></td>
+        <td>1.5 px vertical line from the bottom of the icon circle to the top of the next item's circle. Hidden when <code>last</code> is set.</td>
+      </tr>
+      <tr>
+        <td>Event text</td>
+        <td>Default slot</td>
+        <td>Primary description of the event. May include inline <code>&lt;a&gt;</code> links to referenced documents. 16 px / normal weight.</td>
+      </tr>
+      <tr>
+        <td>Timestamp</td>
+        <td><code>time</code> prop → <code>.time</code></td>
+        <td>Relative or absolute time string. 14 px / faint colour. Optional — omit for system events with no meaningful time.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed reference examples for typical feed compositions.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Active investor — document views + pack send + invite accepted</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-subtle);">
+    <div class="feed-wrap">
+      <la-activity-item time="1 hour ago">
+        <i slot="icon" class="ph-fill ph-eye"></i>
+        Viewed <a href="#" style="color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--la-color-border);">Cap Table (as of Jan 2026)</a>
+      </la-activity-item>
+      <la-activity-item time="2 hours ago">
+        <i slot="icon" class="ph-fill ph-eye"></i>
+        Viewed <a href="#" style="color:inherit;text-decoration:underline;text-underline-offset:2px;text-decoration-color:var(--la-color-border);">SAFE Agreement</a>
+      </la-activity-item>
+      <la-activity-item time="13 Apr 2026">
+        <i slot="icon" class="ph-fill ph-paper-plane-tilt"></i>
+        DD pack sent — 11 documents shared
+      </la-activity-item>
+      <la-activity-item time="10 Apr 2026" last>
+        <i slot="icon" class="ph-fill ph-envelope-simple"></i>
+        Invitation accepted
+      </la-activity-item>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Invited only — single event</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-subtle);">
+    <div class="feed-wrap">
+      <la-activity-item time="2 days ago" last>
+        <i slot="icon" class="ph-fill ph-envelope-simple"></i>
+        Invitation sent
+      </la-activity-item>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Access revoked — revocation + prior activity</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-subtle);">
+    <div class="feed-wrap">
+      <la-activity-item time="5 May 2026">
+        <i slot="icon" class="ph-fill ph-prohibit"></i>
+        Access revoked
+      </la-activity-item>
+      <la-activity-item time="20 Apr 2026">
+        <i slot="icon" class="ph-fill ph-paper-plane-tilt"></i>
+        DD pack sent — 11 documents shared
+      </la-activity-item>
+      <la-activity-item time="18 Apr 2026" last>
+        <i slot="icon" class="ph-fill ph-envelope-simple"></i>
+        Invitation accepted
+      </la-activity-item>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Without <code>last</code> — connector line continues (incorrect usage)</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-subtle);">
+    <div class="feed-wrap">
+      <la-activity-item time="10 Apr 2026">
+        <i slot="icon" class="ph-fill ph-envelope-simple"></i>
+        Invitation accepted — note the trailing line extending into empty space below
+      </la-activity-item>
+    </div>
+  </div>
+  <div style="padding:8px 24px;font-size:12px;color:var(--la-color-text-faint);background:var(--la-color-bg-subtle);border-top:1px solid var(--la-color-border-light);">Always set <code>last</code> on the final item — the connector line otherwise extends into empty space.</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-activity-item</h2>
+    <p>A single event row in a chronological activity feed — icon circle, connector line, event text, and timestamp. Compose to form a timeline.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>time</td>
+          <td><span class="default">time</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Timestamp string shown below the body (e.g. "2 hours ago")</td>
+        </tr>
+      
+        <tr>
+          <td>last</td>
+          <td><span class="default">last</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Suppresses the connecting line. Set on the final item.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>(default)</td>
+          <td>Event description text. May include inline `<a>` links.</td>
+        </tr>
+      
+        <tr>
+          <td>icon</td>
+          <td>Icon inside the circle. Use a Phosphor `<i>` tag.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+  
+
+  
+<div id="css-tokens" class="docs-section">
+  <h3>CSS custom properties</h3>
+  <p>No public CSS custom properties. All dimensions, colours, and spacing reference design tokens. The feed background (<code>--la-color-bg-subtle</code>) is the responsibility of the wrapping container, not the item.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+
+  <h4>Static HTML feed</h4>
+  <pre><code>&lt;div class="activity-feed"&gt;
+  &lt;la-activity-item time="1 hour ago"&gt;
+    &lt;i slot="icon" class="ph-fill ph-eye"&gt;&lt;/i&gt;
+    Viewed &lt;a href="../docs/cap-table"&gt;Cap Table (as of Jan 2026)&lt;/a&gt;
+  &lt;/la-activity-item&gt;
+
+  &lt;la-activity-item time="13 Apr 2026"&gt;
+    &lt;i slot="icon" class="ph-fill ph-paper-plane-tilt"&gt;&lt;/i&gt;
+    DD pack sent — 11 documents shared
+  &lt;/la-activity-item&gt;
+
+  &lt;la-activity-item time="10 Apr 2026" last&gt;
+    &lt;i slot="icon" class="ph-fill ph-envelope-simple"&gt;&lt;/i&gt;
+    Invitation accepted
+  &lt;/la-activity-item&gt;
+&lt;/div&gt;</code></pre>
+
+  <h4>Lit template from data array</h4>
+  <pre><code>// ActivityItemData: { icon: string; text: string; time: string }
+${items.map((item, i) =&gt; html\`
+  &lt;la-activity-item
+    .time=\${item.time}
+    ?last=\${i === items.length - 1}
+  &gt;
+    &lt;i slot="icon" class="\${item.icon}"&gt;&lt;/i&gt;
+    \${unsafeHTML(item.text)}
+  &lt;/la-activity-item&gt;
+\`)}</code></pre>
+
+  <h4>Recommended container styles</h4>
+  <pre><code>.activity-feed {
+  background: var(--la-color-bg-subtle);
+  border-radius: var(--la-radius-lg);
+  padding: var(--la-space-md) var(--la-space-lg);
+}</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <ul>
+    <li><strong>Always set <code>last</code></strong> on the final item. The connector line uses a CSS <code>::after</code> pseudo-element that extends to the bottom of the icon column — without <code>last</code>, it trails into empty space below the item.</li>
+    <li><strong>Feed background is external.</strong> The component itself has no background. Wrap items in a <code>.activity-feed</code> container (or similar) with <code>background: var(--la-color-bg-subtle)</code> and appropriate padding.</li>
+    <li><strong>Icon choice:</strong> Use filled Phosphor variants for event icons — <code>ph-fill ph-eye</code>, <code>ph-fill ph-paper-plane-tilt</code>, <code>ph-fill ph-envelope-simple</code>, <code>ph-fill ph-prohibit</code>. The filled weight reads better at 13 px inside the circle.</li>
+    <li><strong>HTML in text:</strong> When rendering from a data array using Lit, use <code>unsafeHTML(item.text)</code> for text that may contain inline links. Only use this with developer-controlled data — never with user-generated content.</li>
+    <li><strong>Ordering:</strong> Feeds display newest-first. The most recent event is always at the top of the stack.</li>
+  </ul>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-tabs — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-tabs</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#hierarchy" class="docs-nav-item" data-nav-id="hierarchy">Hierarchy</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#events-demo" class="docs-nav-item" data-nav-id="events-demo">Events</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-tabs</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-tabs</h1>
+<p>Single-selection tab list. One tab is active at a time; its associated panel is visible, the others are hidden. Four variants cover the navigational hierarchy — <code>segmented</code> (default, modern primary tabs), <code>underline</code> (older line-tab convention, kept for legacy chrome), <code>pill</code> (section-level sub-nav), and <code>vertical</code> (rail-as-layout for settings / deep nav). Three components compose the primitive — <code>la-tabs</code> owns active state, <code>la-tab</code> is a trigger, <code>la-tab-panel</code> is content. Full WAI-ARIA tablist keyboard model is built in (Arrow keys axis-aware, Home / End).</p>
+</div>
+
+<!-- Hierarchy — when to use which variant -->
+<div class="preview-header" id="hierarchy" style="margin-top:8px;">
+<h1>Hierarchy</h1>
+<p>Pick the variant that matches the navigational tier — most prominent at the top, smallest utility role at the bottom. Vertical sits orthogonally; it's a layout choice rather than a step on the prominence ladder.</p>
+</div>
+<div class="preview-group">
+<table class="docs-table">
+<thead><tr><th>Tier</th><th>Variant</th><th>Role</th><th>Typical surface</th></tr></thead>
+<tbody>
+<tr>
+<td>1</td>
+<td><code>segmented</code></td>
+<td><strong>Default tab pattern.</strong> Modern primary navigation between top-level views, plus view-mode toggles where a clear "switching" affordance helps.</td>
+<td>Top-level views — "Overview / Documents / Audit", entity detail pages, view-mode toggles like "Week / Month / Year"</td>
+</tr>
+<tr>
+<td>2</td>
+<td><code>underline</code></td>
+<td>Older line-tab convention. Still works — reach for it when matching legacy doc/admin chrome, or when a clear bottom-border separator helps page hierarchy read.</td>
+<td>Doc-style page tabs, classic admin chrome</td>
+</tr>
+<tr>
+<td>3</td>
+<td><code>pill</code></td>
+<td>Section-level. Sits inside a card or panel, navigating between subsections of one larger area.</td>
+<td>Card sub-nav, dashboard widget tabs, settings sub-sections</td>
+</tr>
+<tr>
+<td>—</td>
+<td><code>vertical</code></td>
+<td><strong>In-page tab pattern, vertical layout.</strong> Panels swap in place; no URL routing. Carries <code>role="tablist"</code> semantics. <em>Not</em> for app-shell navigation — that's <code>la-sidebar</code>'s job.</td>
+<td>Settings dialogs, tabbed inspectors inside cards/modals, deep nav inside a single page area</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="docs-note" style="margin-top:8px;line-height:1.6;">
+<p style="margin:0 0 8px;"><strong>Rules from the hierarchy:</strong></p>
+<ul style="margin:0; padding-left:20px;">
+<li><strong>Default to segmented.</strong> Reach for it first for any primary tab pattern. Drop to underline only when matching legacy chrome or when the bottom-border separator is doing real layout work.</li>
+<li><strong>Don't nest the same variant in itself.</strong> Segmented-inside-segmented reads as broken hierarchy. If you need second-level tabs inside a segmented tab's panel, drop down to <code>pill</code> to signal the level change.</li>
+<li><strong>Don't pair siblings of different tiers in the same band.</strong> Pick one tier per visual area.</li>
+<li><strong>Vertical isn't a step on the prominence ladder</strong> — it's a layout choice. Use it when the navigation needs to stay visible alongside content (settings, deep nav), not when you want a "smaller" tab style.</li>
+</ul>
+</div>
+
+<div class="docs-note" style="margin-top:8px;line-height:1.6;">
+<p style="margin:0 0 8px;"><strong>la-tabs[<code>variant=vertical</code>] vs la-sidebar — when to use which</strong></p>
+<p style="margin:0 0 8px;">Both are vertical lists with single selection, but they serve different scopes:</p>
+<ul style="margin:0 0 8px; padding-left:20px;">
+<li><strong>la-tabs[<code>vertical</code>]</strong> — in-page tab pattern. Panels swap in place; no URL routing. Lives <em>inside</em> a card, modal, settings dialog, or content area. Carries <code>role="tablist"</code> + tab/panel ARIA semantics. Variants surface in-page concerns (size, density).</li>
+<li><strong>la-sidebar</strong> — app-shell navigation. Items route to different views/URLs. Lives at the edge of the app. Has app-shell-specific variants (collapsed icon-only, brand area, footer slot, multi-section grouping).</li>
+</ul>
+<p style="margin:0;"><strong>Industry note:</strong> the same split exists across Material UI, Radix, Ant Design, Chakra, and most production SaaS apps (Linear, Stripe, Notion, Figma). App sidebars are always their own component; the tabs component supports vertical orientation for in-page use. The variant set on each is intentionally different — sidebar's collapsed-icon mode would be meaningless inside a settings panel, tab sizes would be meaningless on a full-height app rail.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Segmented anatomy first (the default), then underline. Pill and vertical share these parts with different visual treatments — see the snapshots below.</p>
+</div>
+
+<!-- Segmented anatomy -->
+<div class="preview-group">
+<div class="preview-label">Segmented control</div>
+<div class="preview-frame" style="padding:32px; display:block; font-size:14px;">
+<div class="anatomy-wrap">
+<div class="tabs-frame" style="flex-shrink:0;">
+<la-tabs active="month" id="anat-segmented">
+<la-tab slot="triggers" value="week">Week</la-tab>
+<la-tab slot="triggers" value="month">Month</la-tab>
+<la-tab slot="triggers" value="year">Year</la-tab>
+<la-tab-panel value="week"><div class="panel-body">Weekly view.</div></la-tab-panel>
+<la-tab-panel value="month"><div class="panel-body">Monthly view.</div></la-tab-panel>
+<la-tab-panel value="year"><div class="panel-body">Yearly view.</div></la-tab-panel>
+</la-tabs>
+</div>
+<ol class="anatomy-list" style="margin:0; padding:0; list-style:none; line-height:1.6;">
+<li><strong>Outer rail</strong> — bordered, rounded container with <code>role="tablist"</code>. Soft <code>--la-color-border-light</code> border on a muted <code>--la-color-bg-muted</code> fill. Holds all segments.</li>
+<li><strong>Inner padding</strong> — <code>--la-space-3xs</code> (2px) between rail border and segments so the active segment has breathing room from the edge.</li>
+<li><strong>Segment</strong> — single trigger with <code>role="tab"</code>. Equal-width via <code>flex: 1</code>. Inactive segments are transparent (inheriting the muted rail fill).</li>
+<li><strong>Active segment</strong> — white <code>--la-color-bg</code> fill + <code>--la-shadow-xs</code> for a subtle lift. The shadow is the selection signal, not colour alone.</li>
+<li><strong>Panel area</strong> — default slot on la-tabs, containing one la-tab-panel per value. Only the matching panel renders; others get the native <code>hidden</code> attribute.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<!-- Underline anatomy -->
+<div class="preview-group">
+<div class="preview-label">Underline (line tab)</div>
+<div class="preview-frame" style="padding:32px; display:block; font-size:14px;">
+<div class="anatomy-wrap">
+<div class="tabs-frame" style="max-width:440px; flex-shrink:0;">
+<la-tabs variant="underline" active="formation" id="anat-underline">
+<la-tab slot="triggers" value="formation">
+<i class="ph ph-file-text" slot="icon"></i>
+Formation
+</la-tab>
+<la-tab slot="triggers" value="board">Board</la-tab>
+<la-tab-panel value="formation"><div class="panel-body">Formation content lives here.</div></la-tab-panel>
+<la-tab-panel value="board"><div class="panel-body">Board content lives here.</div></la-tab-panel>
+</la-tabs>
+</div>
+<ol class="anatomy-list" style="margin:0; padding:0; list-style:none; line-height:1.6;">
+<li><strong>Tab rail</strong> — horizontal row with <code>role="tablist"</code>, bottom border in <code>--la-color-border-light</code>. Handles arrow-key navigation.</li>
+<li><strong>Tab trigger</strong> — la-tab with <code>role="tab"</code>. Host is the focusable element (no inner button). Tab label in the default slot; optional leading Phosphor icon in the <code>icon</code> slot.</li>
+<li><strong>Active indicator</strong> — 2px inset box-shadow beneath the active trigger. Avoids the layout shift that a <code>border-bottom</code> would cause between active and inactive triggers.</li>
+<li><strong>Panel area</strong> — default slot on la-tabs, containing one la-tab-panel per value. Only the matching panel renders.</li>
+<li><strong>Panel</strong> — la-tab-panel with <code>role="tabpanel"</code> and <code>tabindex="0"</code> so the panel region is keyboard-focusable when its content has no other focus target.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed reference cases — the four variants first, then default-variant edge cases.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Segmented — default, modern primary tabs</div>
+<div class="preview-frame" style="display:flex; justify-content:center; padding:24px; font-size:14px;">
+<div class="tabs-frame">
+<la-tabs active="month" id="snap-variant-segmented">
+<la-tab slot="triggers" value="week">Week</la-tab>
+<la-tab slot="triggers" value="month">Month</la-tab>
+<la-tab slot="triggers" value="year">Year</la-tab>
+<la-tab-panel value="week"><div class="panel-body">Weekly view.</div></la-tab-panel>
+<la-tab-panel value="month"><div class="panel-body">Monthly view.</div></la-tab-panel>
+<la-tab-panel value="year"><div class="panel-body">Yearly view.</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Segmented + <code>block</code> — fills container width with equal-width segments. Useful in modals, narrow panels, or any constrained layout where the iOS-toggle look fits better than content-driven sizing.</div>
+<div class="preview-frame" style="display:flex; justify-content:center; padding:24px; font-size:14px;">
+<div style="max-width:600px; width:100%;">
+<la-tabs block active="active" id="snap-segmented-block">
+<la-tab slot="triggers" value="active">Active</la-tab>
+<la-tab slot="triggers" value="archived">Archived</la-tab>
+<la-tab slot="triggers" value="all">All</la-tab>
+<la-tab-panel value="active"><div class="panel-body">Active items.</div></la-tab-panel>
+<la-tab-panel value="archived"><div class="panel-body">Archived items.</div></la-tab-panel>
+<la-tab-panel value="all"><div class="panel-body">All items.</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Segmented — stacked icon + label, both centered. Same outer layout, child <code>flex-direction</code> flips to column via inline style on each la-tab.</div>
+<div class="preview-frame" style="display:flex; justify-content:center; padding:24px; font-size:14px;">
+<div class="tabs-frame">
+<la-tabs active="day" id="snap-segmented-stacked">
+<la-tab slot="triggers" value="day" style="flex-direction:column; padding:var(--la-space-md) var(--la-space-lg); gap:var(--la-space-2xs);">
+<i class="ph ph-sun" slot="icon" style="font-size:20px;"></i>
+Day
+</la-tab>
+<la-tab slot="triggers" value="month" style="flex-direction:column; padding:var(--la-space-md) var(--la-space-lg); gap:var(--la-space-2xs);">
+<i class="ph ph-calendar" slot="icon" style="font-size:20px;"></i>
+Month
+</la-tab>
+<la-tab slot="triggers" value="year" style="flex-direction:column; padding:var(--la-space-md) var(--la-space-lg); gap:var(--la-space-2xs);">
+<i class="ph ph-clock-counter-clockwise" slot="icon" style="font-size:20px;"></i>
+Year
+</la-tab>
+<la-tab-panel value="day"><div class="panel-body">Day view.</div></la-tab-panel>
+<la-tab-panel value="month"><div class="panel-body">Month view.</div></la-tab-panel>
+<la-tab-panel value="year"><div class="panel-body">Year view.</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Underline — older line-tab convention, kept for legacy chrome</div>
+<div class="preview-frame" style="display:flex; justify-content:center; padding:24px; font-size:14px;">
+<div class="tabs-frame" style="max-width:520px;">
+<la-tabs active="overview" id="snap-variant-underline">
+<la-tab slot="triggers" value="overview">Overview</la-tab>
+<la-tab slot="triggers" value="documents">Documents</la-tab>
+<la-tab slot="triggers" value="audit">Audit</la-tab>
+<la-tab-panel value="overview"><div class="panel-body">Overview panel.</div></la-tab-panel>
+<la-tab-panel value="documents"><div class="panel-body">Documents panel.</div></la-tab-panel>
+<la-tab-panel value="audit"><div class="panel-body">Audit panel.</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Pill — section-level sub-nav inside a card or panel</div>
+<div class="preview-frame" style="display:flex; justify-content:center; padding:24px; font-size:14px;">
+<div class="tabs-frame" style="max-width:520px;">
+<la-tabs variant="pill" active="active" id="snap-variant-pill">
+<la-tab slot="triggers" value="active">Active</la-tab>
+<la-tab slot="triggers" value="archived">Archived</la-tab>
+<la-tab slot="triggers" value="all">All</la-tab>
+<la-tab-panel value="active"><div class="panel-body">Active items.</div></la-tab-panel>
+<la-tab-panel value="archived"><div class="panel-body">Archived items.</div></la-tab-panel>
+<la-tab-panel value="all"><div class="panel-body">All items.</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Pill — three sizes (<code>sm</code> 28px / <code>default</code> 32px / <code>lg</code> 44px). Match <code>la-button</code>'s metric grid so pill tabs and buttons line up in the same row.</div>
+<div class="preview-frame" style="display:flex; flex-direction:column; align-items:center; gap:16px; padding:24px; font-size:14px;">
+<la-tabs variant="pill" size="sm" active="active" id="snap-pill-sm">
+<la-tab slot="triggers" value="active">Active</la-tab>
+<la-tab slot="triggers" value="archived">Archived</la-tab>
+<la-tab slot="triggers" value="all">All</la-tab>
+<la-tab-panel value="active" hidden></la-tab-panel>
+<la-tab-panel value="archived" hidden></la-tab-panel>
+<la-tab-panel value="all" hidden></la-tab-panel>
+</la-tabs>
+<la-tabs variant="pill" active="active" id="snap-pill-default">
+<la-tab slot="triggers" value="active">Active</la-tab>
+<la-tab slot="triggers" value="archived">Archived</la-tab>
+<la-tab slot="triggers" value="all">All</la-tab>
+<la-tab-panel value="active" hidden></la-tab-panel>
+<la-tab-panel value="archived" hidden></la-tab-panel>
+<la-tab-panel value="all" hidden></la-tab-panel>
+</la-tabs>
+<la-tabs variant="pill" size="lg" active="active" id="snap-pill-lg">
+<la-tab slot="triggers" value="active">Active</la-tab>
+<la-tab slot="triggers" value="archived">Archived</la-tab>
+<la-tab slot="triggers" value="all">All</la-tab>
+<la-tab-panel value="active" hidden></la-tab-panel>
+<la-tab-panel value="archived" hidden></la-tab-panel>
+<la-tab-panel value="all" hidden></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Vertical — rail on the left, panels to the right (settings / deep nav). Arrow keys swap to ↑/↓. Frame stays left-aligned so the rail doesn't shift as panels change content widths.</div>
+<div class="preview-frame" style="display:block; padding:24px; font-size:14px;">
+<div class="tabs-frame" style="max-width:640px;">
+<la-tabs variant="vertical" active="profile" id="snap-variant-vertical">
+<la-tab slot="triggers" value="profile">
+<i class="ph ph-user-circle" slot="icon"></i>
+Profile
+</la-tab>
+<la-tab slot="triggers" value="security">
+<i class="ph ph-lock-key" slot="icon"></i>
+Security
+</la-tab>
+<la-tab slot="triggers" value="notifications">
+<i class="ph ph-bell" slot="icon"></i>
+Notifications
+</la-tab>
+<la-tab slot="triggers" value="billing">
+<i class="ph ph-credit-card" slot="icon"></i>
+Billing
+</la-tab>
+<la-tab-panel value="profile"><div class="panel-body">Profile settings panel.</div></la-tab-panel>
+<la-tab-panel value="security"><div class="panel-body">Security settings panel.</div></la-tab-panel>
+<la-tab-panel value="notifications"><div class="panel-body">Notification preferences panel.</div></la-tab-panel>
+<la-tab-panel value="billing"><div class="panel-body">Billing &amp; payment panel.</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">With icons — three tabs, leading Phosphor glyphs (renders as segmented, the new default)</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="tabs-frame" style="max-width:520px;">
+<la-tabs active="overview" id="snap-icons">
+<la-tab slot="triggers" value="overview">
+<i class="ph ph-house" slot="icon"></i>
+                  Overview
+                </la-tab>
+<la-tab slot="triggers" value="documents">
+<i class="ph ph-file-text" slot="icon"></i>
+                  Documents
+                </la-tab>
+<la-tab slot="triggers" value="history">
+<i class="ph ph-clock-counter-clockwise" slot="icon"></i>
+                  History
+                </la-tab>
+<la-tab-panel value="overview"><div class="panel-body">Overview panel.</div></la-tab-panel>
+<la-tab-panel value="documents"><div class="panel-body">Documents panel.</div></la-tab-panel>
+<la-tab-panel value="history"><div class="panel-body">History panel.</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Keyboard — click a tab to focus the rail, then ← / → to move, Home / End to jump</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="tabs-frame" style="max-width:520px;">
+<la-tabs active="one" id="snap-keyboard">
+<la-tab slot="triggers" value="one">One</la-tab>
+<la-tab slot="triggers" value="two">Two</la-tab>
+<la-tab slot="triggers" value="three">Three</la-tab>
+<la-tab slot="triggers" value="four">Four</la-tab>
+<la-tab-panel value="one"><div class="panel-body">Panel one</div></la-tab-panel>
+<la-tab-panel value="two"><div class="panel-body">Panel two</div></la-tab-panel>
+<la-tab-panel value="three"><div class="panel-body">Panel three</div></la-tab-panel>
+<la-tab-panel value="four"><div class="panel-body">Panel four</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">In context — document rows (mimics 13-company-manual Formation / Board)</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="tabs-frame" style="max-width:520px;">
+<la-tabs active="formation" id="snap-context-docs">
+<la-tab slot="triggers" value="formation">Formation</la-tab>
+<la-tab slot="triggers" value="board">Board</la-tab>
+<la-tab-panel value="formation">
+<div class="doc-row"><span class="doc-dot"></span><span class="doc-name">Articles of Incorporation</span><span class="doc-category">Corporate</span></div>
+<div class="doc-row"><span class="doc-dot"></span><span class="doc-name">Certificate of Incorporation</span><span class="doc-category">Corporate</span></div>
+<div class="doc-row"><span class="doc-dot"></span><span class="doc-name">Bylaws</span><span class="doc-category">Corporate</span></div>
+</la-tab-panel>
+<la-tab-panel value="board">
+<div class="doc-row"><span class="doc-dot"></span><span class="doc-name">Board Resolution — Share Issuance</span><span class="doc-category">Corporate</span></div>
+<div class="doc-row"><span class="doc-dot"></span><span class="doc-name">Shareholders' Agreement</span><span class="doc-category">Corporate</span></div>
+</la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">In context — la-list-item rows (mimics 18-people Contracts / Consulting)</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="tabs-frame" style="max-width:520px;">
+<la-tabs active="contracts" id="snap-context-people">
+<la-tab slot="triggers" value="contracts">Employment contracts</la-tab>
+<la-tab slot="triggers" value="consulting">Consulting agreements</la-tab>
+<la-tab-panel value="contracts">
+<la-list-item>
+<i class="ph ph-user" slot="icon"></i>
+                    Alex Chen
+                    <span slot="meta">CEO</span>
+</la-list-item>
+<la-list-item>
+<i class="ph ph-user" slot="icon"></i>
+                    Jordan Reyes
+                    <span slot="meta">CTO</span>
+</la-list-item>
+</la-tab-panel>
+<la-tab-panel value="consulting">
+<la-list-item>
+<i class="ph ph-user" slot="icon"></i>
+                    Morgan Lee
+                    <span slot="meta">Strategy</span>
+</la-list-item>
+</la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Long labels — underline rail overflows at narrow widths (v1 does not auto-scroll or collapse to a more-menu). Locked to <code>variant="underline"</code> since this overflow pattern is rail-specific.</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="tabs-frame" style="max-width:480px;">
+<la-tabs variant="underline" active="quarterly" id="snap-long">
+<la-tab slot="triggers" value="quarterly">Quarterly reports</la-tab>
+<la-tab slot="triggers" value="annual">Annual disclosures</la-tab>
+<la-tab slot="triggers" value="compliance">Compliance filings</la-tab>
+<la-tab-panel value="quarterly"><div class="panel-body">Quarterly</div></la-tab-panel>
+<la-tab-panel value="annual"><div class="panel-body">Annual</div></la-tab-panel>
+<la-tab-panel value="compliance"><div class="panel-body">Compliance</div></la-tab-panel>
+</la-tabs>
+</div>
+</div>
+</div>
+
+<div class="preview-header" id="events-demo" style="margin-top:8px;">
+<h1>Events</h1>
+<p>Every active-tab change fires <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-change</code> once. Re-clicking the already-active tab is a no-op.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="event-log" id="event-log"></div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-tabs</h2>
+    <p>Single-selection tab list. One tab is active at a time; its associated panel is visible, the others are hidden. Four variants cover the navigational hierarchy — segmented (default, modern primary tabs), underline (older line-tab convention, kept for legacy chrome), pill (section-level sub-nav), and vertical (rail-as-layout for settings / deep nav). Three components compose the primitive — la-tabs owns active state, la-tab is a trigger, la-tab-panel is content. Full WAI-ARIA tablist keyboard model (Arrow keys / Home / End) is built in.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>active</td>
+          <td><span class="default">active</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Currently active tab value — matches a `la-tab[value]` child. Reflected.</td>
+        </tr>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">TabsVariant</span></td>
+          <td><span class="default">&#39;segmented&#39;</span></td>
+          <td>Visual treatment + layout. Default `segmented` is the modern primary tab
+pattern — bordered group with a tinted rail and a lifted active segment.
+`underline` is the older line-tab convention, still supported for legacy
+page chrome. `pill` is for section-level sub-nav inside a card or panel.
+`vertical` is the layout variant — rail sits as a column to the left,
+panels render to the right (settings, deep nav).</td>
+        </tr>
+      
+        <tr>
+          <td>block</td>
+          <td><span class="default">block</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Full-width mode. When true, the rail fills its parent's width and child
+tabs distribute equally — useful in modals, constrained widths, and
+full-bleed app chrome where a fixed-size segmented control with equal
+segments is preferred. No-op for the vertical variant.</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">TabsSize</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>Tab size — matches la-button's metric grid so tabs and buttons sit on
+the same vertical alignment. `default` is 32px, `sm` is 28px, `lg` is
+44px. Currently surfaces variant-specific sizing on the pill variant;
+other variants stay at default.</td>
+        </tr>
+      
+        <tr>
+          <td>_resizeObserver</td>
+          <td>—</td>
+          <td><span class="type">ResizeObserver | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onResize</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onTabActivate</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onRailKeydown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Sizing &amp; typography</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-space-sm</td><td>Rail horizontal padding, tab vertical padding, icon gap</td></tr>
+<tr><td>--la-space-md</td><td>Tab horizontal padding, panel area top padding</td></tr>
+<tr><td>--la-space-xs</td><td>Icon-to-label gap inside a tab</td></tr>
+<tr><td>--la-font-size-md</td><td>Tab label</td></tr>
+<tr><td>--la-font-size-lg</td><td>Tab icon glyph</td></tr>
+<tr><td>--la-font-weight-medium</td><td>Inactive tab weight</td></tr>
+<tr><td>--la-font-weight-semibold</td><td>Active tab weight</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour &amp; motion</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-text-muted</td><td>Inactive tab text</td></tr>
+<tr><td>--la-color-text</td><td>Hover tab text</td></tr>
+<tr><td>--la-color-primary</td><td>Active tab text + 2px underline</td></tr>
+<tr><td>--la-color-border-light</td><td>Rail bottom border</td></tr>
+<tr><td>--la-color-border-focus</td><td>Focus ring colour</td></tr>
+<tr><td>--la-focus-ring-width</td><td>Focus ring width</td></tr>
+<tr><td>--la-focus-ring-offset</td><td>Focus ring offset (negated for inset ring)</td></tr>
+<tr><td>--dur-fast</td><td>Colour + underline transition duration</td></tr>
+<tr><td>--ease</td><td>Transition curve</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — two tabs</p>
+<div class="docs-code"><span class="kw">&lt;la-tabs</span> <span class="at">active</span>=<span class="str">"formation"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-tab</span> <span class="at">slot</span>=<span class="str">"triggers"</span> <span class="at">value</span>=<span class="str">"formation"</span><span class="kw">&gt;</span>Formation<span class="kw">&lt;/la-tab&gt;</span>
+<span class="kw">&lt;la-tab</span> <span class="at">slot</span>=<span class="str">"triggers"</span> <span class="at">value</span>=<span class="str">"board"</span><span class="kw">&gt;</span>Board<span class="kw">&lt;/la-tab&gt;</span>
+<span class="kw">&lt;la-tab-panel</span> <span class="at">value</span>=<span class="str">"formation"</span><span class="kw">&gt;</span>…<span class="kw">&lt;/la-tab-panel&gt;</span>
+<span class="kw">&lt;la-tab-panel</span> <span class="at">value</span>=<span class="str">"board"</span><span class="kw">&gt;</span>…<span class="kw">&lt;/la-tab-panel&gt;</span>
+<span class="kw">&lt;/la-tabs&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With icons — leading Phosphor glyph per tab</p>
+<div class="docs-code"><span class="kw">&lt;la-tab</span> <span class="at">slot</span>=<span class="str">"triggers"</span> <span class="at">value</span>=<span class="str">"overview"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-house"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Overview
+<span class="kw">&lt;/la-tab&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listening for active-change</p>
+<div class="docs-code"><span class="kw">const</span> tabs = document.querySelector(<span class="str">'la-tabs'</span>);
+tabs.addEventListener(<span class="str">'la-change'</span>, (e) =&gt; {
+  <span class="cm">// e.detail.value is the newly-active tab's value</span>
+  console.log(e.detail.value);
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Programmatic active — set from outside</p>
+<div class="docs-code"><span class="cm">// Attribute</span>
+tabs.setAttribute(<span class="str">'active'</span>, <span class="str">'board'</span>);
+
+<span class="cm">// Property</span>
+tabs.active = <span class="str">'board'</span>;</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Keyboard navigation — built in, no wiring</p>
+<div class="docs-code"><span class="cm">// Tab focuses the active trigger in the rail</span>
+<span class="cm">// ← / → cycles to previous / next, wraps at ends</span>
+<span class="cm">// Home / End jumps to first / last</span>
+<span class="cm">// Enter / Space activates the focused tab</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">In context — wrapping la-list-item rows</p>
+<div class="docs-code"><span class="kw">&lt;la-tabs</span> <span class="at">active</span>=<span class="str">"contracts"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-tab</span> <span class="at">slot</span>=<span class="str">"triggers"</span> <span class="at">value</span>=<span class="str">"contracts"</span><span class="kw">&gt;</span>Contracts<span class="kw">&lt;/la-tab&gt;</span>
+<span class="kw">&lt;la-tab</span> <span class="at">slot</span>=<span class="str">"triggers"</span> <span class="at">value</span>=<span class="str">"consulting"</span><span class="kw">&gt;</span>Consulting<span class="kw">&lt;/la-tab&gt;</span>
+<span class="kw">&lt;la-tab-panel</span> <span class="at">value</span>=<span class="str">"contracts"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-list-item&gt;</span>Alex Chen<span class="kw">&lt;/la-list-item&gt;</span>
+<span class="kw">&lt;la-list-item&gt;</span>Jordan Reyes<span class="kw">&lt;/la-list-item&gt;</span>
+<span class="kw">&lt;/la-tab-panel&gt;</span>
+<span class="kw">&lt;la-tab-panel</span> <span class="at">value</span>=<span class="str">"consulting"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-list-item&gt;</span>Morgan Lee<span class="kw">&lt;/la-list-item&gt;</span>
+<span class="kw">&lt;/la-tab-panel&gt;</span>
+<span class="kw">&lt;/la-tabs&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Three-component composition</strong> — <code style="font-family:monospace;font-size:11px;">la-tabs</code> owns state, <code style="font-family:monospace;font-size:11px;">la-tab</code> triggers, <code style="font-family:monospace;font-size:11px;">la-tab-panel</code> holds content. Each has a distinct ARIA role. Alternative single-component API was rejected to keep the roles explicit.</div>
+<div class="docs-note"><strong>WAI-ARIA keyboard model is built in</strong> — Arrow Left / Arrow Right cycle triggers with wrap, Home / End jump to first / last, Enter / Space activate. Roving tabindex (active tab = 0, others = -1) so Tab enters the rail once, not once per tab.</div>
+<div class="docs-note"><strong>Click-on-active is a no-op</strong> — re-clicking the already-active tab does not re-dispatch <code style="font-family:monospace;font-size:11px;">la-change</code>. Matches the WAI-ARIA tab convention and prevents event-listener spam.</div>
+<div class="docs-note"><strong>Active colour is <code style="font-family:monospace;font-size:11px;">--la-color-primary</code></strong> — aligns with the design system rule that the primary colour marks interactive / active state. The founder-flow prototype pages use a one-off cobalt blue; that's drift — the migration sweep will flip them to match.</div>
+<div class="docs-note"><strong>2px inset underline, not border-bottom</strong> — the active indicator is a <code style="font-family:monospace;font-size:11px;">box-shadow: inset 0 -2px 0</code>. Avoids the 2px layout shift between active and inactive triggers that a <code style="font-family:monospace;font-size:11px;">border-bottom</code> would cause.</div>
+<div class="docs-note"><strong>Long-label overflow</strong> — v1 keeps labels on one line and lets the rail container overflow at narrow widths. Auto-scroll controls and a more-menu are out of scope. Revisit if a real content-volume problem surfaces.</div>
+<div class="docs-note"><strong>Inset focus ring</strong> — the focus ring uses a negative <code style="font-family:monospace;font-size:11px;">outline-offset</code> to sit inside the trigger. Flush-to-siblings tabs would overlap with an outset ring. Matches the inset-ring decision made for <code style="font-family:monospace;font-size:11px;">la-list-item</code>.</div>
+<div class="docs-note"><strong>Panels are focusable</strong> — <code style="font-family:monospace;font-size:11px;">la-tab-panel</code> carries <code style="font-family:monospace;font-size:11px;">tabindex="0"</code>. WAI-ARIA recommends this so keyboard users can Tab into a panel when it contains no other focusable content. If your panel has its own focusable children, you can drop the host tabindex on that instance.</div>
+<div class="docs-note"><strong>No panel enter / exit motion</strong> — the active panel becomes visible instantly, others get the native <code style="font-family:monospace;font-size:11px;">hidden</code> attribute. Fade-in via <code style="font-family:monospace;font-size:11px;">motion.css</code>'s <code style="font-family:monospace;font-size:11px;">.anim-fade-in</code> utility can be added per-consumer if needed.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const eventLog = document.getElementById('event-log');
+    if (!eventLog) return;
+
+    function logEvent(text) {
+      const row = document.createElement('div');
+      row.className = 'event-row';
+      row.textContent = text + ' @ ' + new Date().toLocaleTimeString();
+      eventLog.prepend(row);
+    }
+
+    document.querySelectorAll('la-tabs').forEach((tabs) => {
+      tabs.addEventListener('la-change', (e) => {
+        logEvent('la-change → #' + tabs.id + ' value=' + e.detail.value);
+      });
+    });
+  })();
+</script>
+
+
+</body>
+</html>

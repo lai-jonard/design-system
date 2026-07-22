@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-stepper — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-stepper</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-stepper</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-stepper</h1>
+  <p>Quiet stepped progress indicator for linear flows. A horizontal bar segmented by step that fills with primary colour left-to-right as steps are completed; skipped steps appear as visible grey gaps in the primary fill. The finished bar — every segment primary — is the completion signal. No per-step animation, no labels — the surrounding flow names each step in its own copy.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>A single horizontal row of equal-width 32px × 2px pills with 1px corner radius. One segment per step, separated by an <code>--la-space-xs</code> gap. Shape stays flat; only background colour encodes status.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — a 5-step bar mid-flow (2 complete, 1 active, 2 pending)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-stepper id="pb-anatomy"></la-stepper>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">The visual language — one shape, four background colours</div>
+  <table class="docs-table">
+    <thead><tr><th>Status</th><th>Background</th><th>Reads as</th></tr></thead>
+    <tbody>
+      <tr><td><code>pending</code></td><td><code>--la-color-border-light</code></td><td>Light rail — the empty track ahead.</td></tr>
+      <tr><td><code>active</code></td><td><code>--la-color-primary</code></td><td>Solid primary. Indistinguishable from <code>complete</code> by design — the transition point shows the user's place.</td></tr>
+      <tr><td><code>complete</code></td><td><code>--la-color-primary</code></td><td>Solid primary. Step done.</td></tr>
+      <tr><td><code>skipped</code></td><td><code>--la-color-border</code></td><td>Solid muted — visible grey gap in the primary fill.</td></tr>
+      <tr><td><code>processing</code> (deferred)</td><td><code>--la-color-bg-muted</code></td><td>Muted-primary tint to read as "in progress but unresolved." Wired when the document-upload path lands.</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--doc-text-3);margin-top:12px;">Completion is reached when every segment is primary — the bar itself becomes the celebration. Per-step animation is intentionally absent; that moment belongs to <code>la-unlock-panel</code>.</p>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Each status in isolation, then three scenarios the unlock flow actually hits.</p>
+</div>
+
+<!-- Each status isolated -->
+<div class="preview-group">
+  <div class="preview-label">All statuses, side by side — pending · active · complete · skipped · (processing, deferred)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-stepper id="pb-all-statuses"></la-stepper>
+  </div>
+</div>
+
+<!-- Fresh arrival -->
+<div class="preview-group">
+  <div class="preview-label">Fresh arrival — first step active, all others pending</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-stepper id="pb-fresh"></la-stepper>
+  </div>
+</div>
+
+<!-- Mid-flow with a skip -->
+<div class="preview-group">
+  <div class="preview-label">Mid-flow — two complete, one skipped, now on step four</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-stepper id="pb-skipped"></la-stepper>
+  </div>
+</div>
+
+<!-- Completion -->
+<div class="preview-group">
+  <div class="preview-label">Completion — every segment primary-filled. The bar itself is the celebration.</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-stepper id="pb-complete"></la-stepper>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-stepper</h2>
+    <p>Quiet stepped progress indicator for linear flows — display-only, drives entirely off the steps property.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>steps</td>
+          <td><span class="default">steps</span></td>
+          <td><span class="type">StepperStep[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Ordered list of steps to render. Each step is a `{ label, status }`
+object. Each step renders as an equal-width segment in a horizontal
+bar; the bar fills left-to-right as steps are completed.
+
+- `pending` — light rail. The empty track ahead.
+- `active` — solid primary. Position is the last primary segment.
+- `complete` — solid primary. Indistinguishable from `active` by
+  design — the transition point shows the user's place.
+- `skipped` — solid muted. Visible grey gap in the primary fill.
+- `processing` — deferred; muted-primary tint until consumers wire
+  the document-upload path.
+
+The `label` is kept for accessibility (exposed via `aria-label` on
+each segment) and for future callers that may reintroduce visible
+text. The component does not render labels visually — the surrounding
+flow names each step in its own copy.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <p style="margin-bottom:16px;">Background-only palette. No borders, no green, no amber, no variant-tinted backgrounds — the chrome stays quiet so the surrounding flow can own attention.</p>
+
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Sizing</p>
+      <table class="docs-table">
+        <thead><tr><th>Token used</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-space-xs</td><td>Gap between segments</td></tr>
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:#777;margin-top:8px;">Segment dimensions hardcoded: <code>width: 32px</code>, <code>height: 2px</code>, <code>border-radius: 1px</code>. No tokens exist for these glyph-detail values; matches la-checkbox / la-data-table precedent.</p>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour (by status)</p>
+      <table class="docs-table">
+        <thead><tr><th>Status</th><th>Background</th></tr></thead>
+        <tbody>
+          <tr><td>pending</td><td>--la-color-border-light</td></tr>
+          <tr><td>active</td><td>--la-color-primary</td></tr>
+          <tr><td>complete</td><td>--la-color-primary</td></tr>
+          <tr><td>skipped</td><td>--la-color-border</td></tr>
+          <tr><td>processing (deferred)</td><td>--la-color-bg-muted</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;font-size:13px;color:var(--doc-text-3);">The <code>background-color</code> transition uses <code>--dur-fast</code> × <code>--ease</code> from <a href="../../motion.css"><code>motion.css</code></a>. <code>prefers-reduced-motion</code> collapses the transition to instant via an in-source media query.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — assign steps after mount</p>
+      <div class="docs-code"><span class="kw">&lt;la-stepper</span> <span class="at">id</span>=<span class="str">"pb"</span><span class="kw">&gt;&lt;/la-stepper&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+  <span class="kw">const</span> pb = document.getElementById(<span class="str">'pb'</span>);
+  pb.steps = [
+    { label: <span class="str">'Company info'</span>, status: <span class="str">'complete'</span> },
+    { label: <span class="str">'People'</span>,       status: <span class="str">'active'</span>   },
+    { label: <span class="str">'Documents'</span>,    status: <span class="str">'pending'</span>  },
+    { label: <span class="str">'Review'</span>,       status: <span class="str">'pending'</span>  },
+  ];
+<span class="kw">&lt;/script&gt;</span></div>
+      <p style="font-size:12px;color:#777;margin-top:6px;">Labels are for screen readers — they're not rendered visibly.</p>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Advance the bar on user action</p>
+      <div class="docs-code"><span class="kw">function</span> markStepComplete(i) {
+  pb.steps = pb.steps.map((s, idx) =&gt; ({
+    ...s,
+    status: idx &lt; i ? <span class="str">'complete'</span>
+           : idx === i ? <span class="str">'active'</span>
+           : <span class="str">'pending'</span>,
+  }));
+}</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Skipped — user opted out; flow continues</p>
+      <div class="docs-code">pb.steps = [
+  { label: <span class="str">'Company info'</span>, status: <span class="str">'complete'</span> },
+  { label: <span class="str">'People'</span>,       status: <span class="str">'skipped'</span>  },
+  { label: <span class="str">'Documents'</span>,    status: <span class="str">'active'</span>   },
+  { label: <span class="str">'Review'</span>,       status: <span class="str">'pending'</span>  },
+];</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Reassign, don't mutate</p>
+      <div class="docs-code"><span class="cm">// Won't trigger a re-render — mutation</span>
+pb.steps[0].status = <span class="str">'complete'</span>;
+
+<span class="cm">// Triggers re-render — fresh reference</span>
+pb.steps = [...pb.steps];</div>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Quiet infrastructure, not a celebration.</strong> Per-step micro-rewards dilute the completion moment. This component does the orientation + progress work; the celebration when a flow completes belongs to the consumer (e.g. <code>la-unlock-panel</code>). The bar stays visually calm throughout.</div>
+    <div class="docs-note"><strong>No visible labels.</strong> The surrounding flow already tells the user what each step is. Labels live in the <code>aria-label</code> of each circle for screen readers only. Decision traces to <a href="../../solves/260416-2-unlock-onboarding/unlock-onboarding.solve.md"><code>solves/260416-2-unlock-onboarding</code></a> line 37 and <a href="../../solves/260424-1-unlock-flow-progress/unlock-flow-progress.solve-log.md"><code>solves/260424-1-unlock-flow-progress</code></a>.</div>
+    <div class="docs-note"><strong>Reassign, don't mutate.</strong> <code>steps</code> is a Lit property watched by reference. <code>pb.steps[0].status = '…'</code> won't trigger a re-render — always reassign the whole array.</div>
+    <div class="docs-note"><strong>Segments, not connected line.</strong> Each pill reads as its own segment with a gap between — no connecting bar. Loose visual coupling mirrors the fact that steps can be skipped without breaking the flow; the gap is exactly where a skipped segment shows as muted grey within the primary fill.</div>
+    <div class="docs-note"><strong>Fixed-width segments, not flex-fill.</strong> Each pill is 32px wide; the bar hugs its content rather than stretching to the container. Keeps the stepper visually compact under the question copy in <code>la-unlock-panel</code> rather than fighting it for width.</div>
+    <div class="docs-note"><strong>Where it's used.</strong> Primary consumer is the unlock flow (<code>la-unlock-panel</code>). Option value preserved for future onboarding / KYC / sign-up flows that share the linear-step shape.</div>
+    <div class="docs-note"><strong>Open follow-ups.</strong> Backtracking affordance ("go back to step 2") and wiring the <code>processing</code> status for document-upload steps are tracked in <a href="../../solves/260424-1-unlock-flow-progress/unlock-flow-progress.solve.md"><code>solves/260424-1-unlock-flow-progress</code></a>. The la-progress-bar → la-stepper rename has landed.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    document.getElementById('pb-anatomy').steps = [
+      { label: '1', status: 'complete' },
+      { label: '2', status: 'complete' },
+      { label: '3', status: 'active' },
+      { label: '4', status: 'pending' },
+      { label: '5', status: 'pending' },
+    ];
+    document.getElementById('pb-all-statuses').steps = [
+      { label: 'pending',    status: 'pending'    },
+      { label: 'active',     status: 'active'     },
+      { label: 'complete',   status: 'complete'   },
+      { label: 'skipped',    status: 'skipped'    },
+      { label: 'processing', status: 'processing' },
+    ];
+    document.getElementById('pb-fresh').steps = [
+      { label: '1', status: 'active'  },
+      { label: '2', status: 'pending' },
+      { label: '3', status: 'pending' },
+      { label: '4', status: 'pending' },
+    ];
+    document.getElementById('pb-skipped').steps = [
+      { label: '1', status: 'complete' },
+      { label: '2', status: 'complete' },
+      { label: '3', status: 'skipped'  },
+      { label: '4', status: 'active'   },
+      { label: '5', status: 'pending'  },
+    ];
+    document.getElementById('pb-complete').steps = [
+      { label: '1', status: 'complete' },
+      { label: '2', status: 'complete' },
+      { label: '3', status: 'complete' },
+      { label: '4', status: 'complete' },
+    ];
+  })();
+</script>
+
+
+</body>
+</html>

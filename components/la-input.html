@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-input — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-input</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-input</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-input</h1>
+<p>Text input with label, hint, icon slots, required, error, and disabled states. Wraps a native <code style="font-family:monospace;color:#c3e88d;font-size:12px;">&lt;input&gt;</code> element and fires a <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-change</code> event on every keystroke. Padding adjusts automatically when icon slots are populated.</p>
+</div>
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Type</label>
+<select id="ctrl-type">
+<option selected="" value="text">text</option>
+<option value="email">email</option>
+<option value="password">password</option>
+<option value="search">search</option>
+<option value="tel">tel</option>
+<option value="url">url</option>
+<option value="number">number</option>
+</select>
+</div>
+<div class="control-group">
+<label>Label</label>
+<input id="ctrl-label" type="text" value="Company name"/>
+</div>
+<div class="control-group">
+<label>Placeholder</label>
+<input id="ctrl-placeholder" type="text" value="e.g. Acme Pty Ltd"/>
+</div>
+<div class="control-group">
+<label>Hint</label>
+<input id="ctrl-hint" placeholder="optional hint" type="text" value=""/>
+</div>
+</div>
+<div class="controls-row" style="margin-top:8px;">
+<div class="control-group">
+<label>Required</label>
+<div class="btn-group">
+<button class="btn-toggle" data-required="true">On</button>
+<button class="btn-toggle active" data-required="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Error</label>
+<div class="btn-group">
+<button class="btn-toggle" data-error="true">On</button>
+<button class="btn-toggle active" data-error="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Disabled</label>
+<div class="btn-group">
+<button class="btn-toggle" data-disabled="true">On</button>
+<button class="btn-toggle active" data-disabled="false">Off</button>
+</div>
+</div>
+</div>
+</div>
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" style="flex-direction:column; align-items:stretch; max-width:400px; gap:12px;">
+<la-input id="live-input" label="Company name" placeholder="e.g. Acme Pty Ltd"></la-input>
+<div id="event-log" style="font-family:monospace;font-size:11px;color:#9CA3AF;min-height:18px;"></div>
+</div>
+</div>
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+<div class="preview-group">
+<div class="preview-label">Default — no label</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input placeholder="Enter value"></la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Label + hint</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input hint="Must match your ASIC registration date" label="Incorporation date" placeholder="DD/MM/YYYY"></la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Required — asterisk appended to label</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input label="Company name" placeholder="e.g. Acme Pty Ltd" required=""></la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Error — border + hint turn danger</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input error="" hint="Enter a valid email address" label="Email address" placeholder="you@company.com" required="" value="not-an-email"></la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Disabled — dimmed, interaction blocked</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input disabled="" label="Jurisdiction" value="Australia"></la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Icon left — padding adjusts automatically</div>
+<div class="preview-frame" style="max-width:360px; flex-direction:column; gap:10px;">
+<la-input label="Email address" placeholder="you@company.com" type="email">
+<i class="ph ph-envelope" slot="icon-left"></i>
+</la-input>
+<la-input placeholder="Search documents…" type="search">
+<i class="ph ph-magnifying-glass" slot="icon-left"></i>
+</la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Icon right — password reveal (interactive)</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input id="snap-pw-input" label="Password" placeholder="Enter password" type="password">
+<i class="ph ph-eye" id="snap-pw-toggle" slot="icon-right" style="cursor:pointer; pointer-events:all;"></i>
+</la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Both icons — person + verified</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input label="Full name" placeholder="Jane Smith">
+<i class="ph ph-user" slot="icon-left"></i>
+<i class="ph ph-check-circle" slot="icon-right" style="color:#1F7C51;"></i>
+</la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Search — no label, icon-left</div>
+<div class="preview-frame" style="max-width:360px;">
+<la-input placeholder="Search documents…" type="search">
+<i class="ph ph-magnifying-glass" slot="icon-left"></i>
+</la-input>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">In context — modal form</div>
+<div class="preview-frame">
+<div style="width:440px; background:#fff; border-radius:12px; box-shadow:0 16px 48px rgba(0,0,0,0.12); padding:24px; display:flex; flex-direction:column; gap:16px;">
+<div style="font-size:16px; font-weight:600; color:#1E262B;">Add employee</div>
+<la-input label="Full name" placeholder="Jane Smith" required="">
+<i class="ph ph-user" slot="icon-left"></i>
+</la-input>
+<la-input label="Email address" placeholder="jane@company.com" required="" type="email">
+<i class="ph ph-envelope" slot="icon-left"></i>
+</la-input>
+<la-input hint="As it will appear on their employment contract" label="Job title" placeholder="e.g. Senior Engineer"></la-input>
+<la-input label="Start date" placeholder="DD/MM/YYYY" required=""></la-input>
+<div style="display:flex; gap:8px; justify-content:flex-end; margin-top:4px;">
+<la-button variant="secondary">Cancel</la-button>
+<la-button variant="primary">Add employee</la-button>
+</div>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-input</h2>
+    <p>Text input with label, hint, icon slots, required, error, and disabled states. Wraps a native <input> element and fires a la-change event on every keystroke. Padding adjusts automatically when icon slots are populated.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>_inputId</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="default">`la-input-${Math.random().toString(36).slice(2, 8)}`</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>type</td>
+          <td><span class="default">type</span></td>
+          <td><span class="type">InputType</span></td>
+          <td><span class="default">&#39;text&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>name</td>
+          <td><span class="default">name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>placeholder</td>
+          <td><span class="default">placeholder</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>value</td>
+          <td><span class="default">value</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>hint</td>
+          <td><span class="default">hint</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>required</td>
+          <td><span class="default">required</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>optional</td>
+          <td><span class="default">optional</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_hasIconLeft</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_hasIconRight</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Label &amp; hint</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-font-size-base</td><td>Label font size</td></tr>
+<tr><td>--la-font-weight-medium</td><td>Label font weight</td></tr>
+<tr><td>--la-color-text</td><td>Label colour</td></tr>
+<tr><td>--la-space-xs</td><td>Gap between label and input</td></tr>
+<tr><td>--la-font-size-sm</td><td>Hint font size</td></tr>
+<tr><td>--la-color-text-muted</td><td>Hint colour (default)</td></tr>
+<tr><td>--la-color-danger-text</td><td>Hint colour in error state</td></tr>
+<tr><td>--la-color-danger</td><td>Required asterisk colour</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Input field</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-font-size-base</td><td>Input font size</td></tr>
+<tr><td>--la-color-text</td><td>Input text colour</td></tr>
+<tr><td>--la-color-text-disabled</td><td>Placeholder colour</td></tr>
+<tr><td>--la-space-sm</td><td>Vertical padding + icon gap calc</td></tr>
+<tr><td>--la-space-md</td><td>Horizontal padding</td></tr>
+<tr><td>--la-radius-md</td><td>Border radius</td></tr>
+<tr><td>--la-color-border</td><td>Default border</td></tr>
+<tr><td>--la-color-border-focus</td><td>Focus border colour</td></tr>
+<tr><td>--la-color-border-danger</td><td>Error border colour</td></tr>
+<tr><td>--la-color-bg</td><td>Input background</td></tr>
+<tr><td>--la-input-shadow-focus</td><td>Focus glow (3px spread, 12% opacity blue)</td></tr>
+<tr><td>--la-color-text-muted</td><td>Icon colour</td></tr>
+<tr><td>--la-line-height</td><td>Line height</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — no label</p>
+<div class="docs-code"><span class="kw">&lt;la-input</span>
+<span class="at">placeholder</span>=<span class="str">"Enter value"</span>
+<span class="kw">&gt;&lt;/la-input&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Label + hint + required</p>
+<div class="docs-code"><span class="kw">&lt;la-input</span>
+<span class="at">label</span>=<span class="str">"Company name"</span>
+<span class="at">placeholder</span>=<span class="str">"e.g. Acme Pty Ltd"</span>
+<span class="at">hint</span>=<span class="str">"As registered with ASIC"</span>
+<span class="at">required</span>
+<span class="kw">&gt;&lt;/la-input&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Icon left — email</p>
+<div class="docs-code"><span class="kw">&lt;la-input</span>
+<span class="at">label</span>=<span class="str">"Email address"</span>
+<span class="at">type</span>=<span class="str">"email"</span>
+<span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon-left"</span> <span class="at">class</span>=<span class="str">"ph ph-envelope"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-input&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Icon right — password reveal</p>
+<div class="docs-code"><span class="kw">&lt;la-input</span> <span class="at">type</span>=<span class="str">"password"</span> <span class="at">id</span>=<span class="str">"pw"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon-right"</span>
+<span class="at">class</span>=<span class="str">"ph ph-eye"</span>
+<span class="at">style</span>=<span class="str">"cursor:pointer;pointer-events:all"</span>
+<span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-input&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listen for changes</p>
+<div class="docs-code"><span class="kw">const</span> input = document.querySelector(<span class="str">'la-input'</span>);
+input.addEventListener(<span class="str">'la-change'</span>, e =&gt; {
+  console.log(e.detail.value);
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Error state — validation</p>
+<div class="docs-code"><span class="kw">&lt;la-input</span>
+<span class="at">label</span>=<span class="str">"Email address"</span>
+<span class="at">hint</span>=<span class="str">"Enter a valid email address"</span>
+<span class="at">error</span>
+<span class="at">required</span>
+<span class="kw">&gt;&lt;/la-input&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Label association in shadow DOM</strong> — Each <code style="font-family:monospace;font-size:11px;">la-input</code> generates a unique <code style="font-family:monospace;font-size:11px;">id</code> for the inner <code style="font-family:monospace;font-size:11px;">&lt;input&gt;</code> and links it to the <code style="font-family:monospace;font-size:11px;">&lt;label&gt;</code> via <code style="font-family:monospace;font-size:11px;">for</code>. Click the label — focus lands on the input.</div>
+<div class="docs-note"><strong>Icon slot padding</strong> — Padding adjusts via CSS class toggling (<code style="font-family:monospace;font-size:11px;">.has-left</code> / <code style="font-family:monospace;font-size:11px;">.has-right</code>) driven by <code style="font-family:monospace;font-size:11px;">slotchange</code> events. No boolean props needed — place an element in the slot and the component handles the rest.</div>
+<div class="docs-note"><strong>Required asterisk</strong> — The <code style="font-family:monospace;font-size:11px;">*</code> is <code style="font-family:monospace;font-size:11px;">aria-hidden="true"</code>. Screen readers rely on the <code style="font-family:monospace;font-size:11px;">required</code> attribute forwarded to the inner <code style="font-family:monospace;font-size:11px;">&lt;input&gt;</code>, not the visual asterisk.</div>
+<div class="docs-note"><strong>Error and focus</strong> — When <code style="font-family:monospace;font-size:11px;">error</code> is set, the focus glow (<code style="font-family:monospace;font-size:11px;">--la-input-shadow-focus</code>) is suppressed so the red border reads clearly without a blue halo competing with it.</div>
+<div class="docs-note"><strong>Name for forms</strong> — Set <code style="font-family:monospace;font-size:11px;">name</code> when using inside a <code style="font-family:monospace;font-size:11px;">&lt;form&gt;</code>. Forwarded to the inner input for native form submission. Note: web component form participation requires <code style="font-family:monospace;font-size:11px;">ElementInternals</code> — use <code style="font-family:monospace;font-size:11px;">la-change</code> for controlled forms.</div>
+<div class="docs-note"><strong>Search — no label convention</strong> — Search inputs typically omit the label and rely on the icon and placeholder for context. Use <code style="font-family:monospace;font-size:11px;">type="search"</code> with an icon-left slot and no <code style="font-family:monospace;font-size:11px;">label</code> attribute.</div>
+<div class="docs-note"><strong>Modal forms</strong> — <code style="font-family:monospace;font-size:11px;">la-input</code> is designed for reuse in modals. Stack fields with <code style="font-family:monospace;font-size:11px;">gap: 16px</code> inside a flex column. Pair with <code style="font-family:monospace;font-size:11px;">la-button</code> for CTAs at the bottom of the form group.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveInput = document.getElementById('live-input');
+        const eventLog  = document.getElementById('event-log');
+
+        document.getElementById('ctrl-type').addEventListener('change', e => {
+          liveInput.setAttribute('type', e.target.value);
+        });
+        document.getElementById('ctrl-label').addEventListener('input', e => {
+          if (e.target.value) liveInput.setAttribute('label', e.target.value);
+          else liveInput.removeAttribute('label');
+        });
+        document.getElementById('ctrl-placeholder').addEventListener('input', e => {
+          liveInput.setAttribute('placeholder', e.target.value);
+        });
+        document.getElementById('ctrl-hint').addEventListener('input', e => {
+          if (e.target.value) liveInput.setAttribute('hint', e.target.value);
+          else liveInput.removeAttribute('hint');
+        });
+
+        document.querySelectorAll('[data-required]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-required]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            btn.dataset.required === 'true' ? liveInput.setAttribute('required', '') : liveInput.removeAttribute('required');
+          });
+        });
+        document.querySelectorAll('[data-error]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-error]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            btn.dataset.error === 'true' ? liveInput.setAttribute('error', '') : liveInput.removeAttribute('error');
+          });
+        });
+        document.querySelectorAll('[data-disabled]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-disabled]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            btn.dataset.disabled === 'true' ? liveInput.setAttribute('disabled', '') : liveInput.removeAttribute('disabled');
+          });
+        });
+
+        liveInput.addEventListener('la-change', e => {
+          eventLog.textContent = 'la-change → { value: "' + e.detail.value + '" }';
+        });
+
+        const snapPwToggle = document.getElementById('snap-pw-toggle');
+        const snapPwInput  = document.getElementById('snap-pw-input');
+        if (snapPwToggle && snapPwInput) {
+          snapPwToggle.addEventListener('click', () => {
+            const isPassword = snapPwInput.type === 'password';
+            snapPwInput.type = isPassword ? 'text' : 'password';
+            snapPwToggle.className = isPassword ? 'ph ph-eye-slash' : 'ph ph-eye';
+          });
+        }
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-document-item — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-document-item</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#lifecycle" class="docs-nav-item" data-nav-id="lifecycle">Status lifecycle</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-document-item</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-document-item</h1>
+  <p>Atomic document row used across every surface that lists documents — the library, processing tray, and data room. Covers four statuses (<code>none</code>, <code>ready</code>, <code>processing</code>, <code>failed</code>), accepts an <code>actions</code> slot for consumer-supplied buttons, and exposes a built-in trailing dismiss button via <code>dismissible</code>.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>One row, four regions: a status icon, the document text, an optional consumer actions slot, and an optional built-in dismiss button. The whole row is one focusable button when interactive; clicks inside the actions slot or on the dismiss button do not fire row selection.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — failed row with Re-upload slot and dismissible</div>
+  <div class="preview-frame" style="padding:32px;max-width:520px;">
+    <la-document-item
+      name="Scan-corrupted.pdf"
+      association="Employment"
+      status="failed"
+      error="File is unreadable. Please upload a clearer copy."
+      dismissible
+      style="width:100%;">
+      <la-button slot="actions" variant="secondary" size="sm">Re-upload</la-button>
+    </la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Row</td><td><code>&lt;button class="row"&gt;</code> (interactive) or <code>&lt;div class="row"&gt;</code> (when <code>non-interactive</code>)</td><td>Single focusable container. Hover surface is a <code>::before</code> pseudo-element so it animates on opacity, not background. <code>box-sizing: border-box</code> so width:100% includes padding (no horizontal overflow into ancestor clip rectangles).</td></tr>
+      <tr><td>Icon</td><td><code>.icon</code> with <code>ph-file-text</code> + status badge</td><td>File glyph; status badge overlays for <code>ready</code> (<code>ph-fill ph-check-circle</code>) and <code>failed</code> (<code>ph-fill ph-x-circle</code>). For <code>processing</code>, the file glyph is replaced by <code>la-spinner size="md"</code> at <code>--la-color-primary</code>.</td></tr>
+      <tr><td>Content</td><td><code>.content</code> — name, association, error</td><td>Name truncates with ellipsis; full filename surfaced via the native <code>title</code> attribute. Association is the optional secondary line. Error renders only when <code>status="failed"</code> and <code>error</code> is non-empty.</td></tr>
+      <tr><td>Actions</td><td><code>.actions</code> — <code>slot="actions"</code> + optional internal dismiss button</td><td>Consumer slot first, built-in dismiss after. When <code>dismissible</code>, the trailing button is an <code>la-icon-button</code> (default size, 32px) with <code>ph-x</code> and <code>data-dismiss="true"</code>.</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--doc-text-3);margin-top:12px;">No exposed <code>part="…"</code> attributes — external <code>::part</code> styling is not supported. Theme via the documented tokens instead.</p>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below. Each control maps to a public property.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-name">name</label>
+      <input id="ctl-name" type="text" value="Employment-Contract-JSmith.pdf">
+    </div>
+    <div class="control-group">
+      <label for="ctl-association">association</label>
+      <input id="ctl-association" type="text" placeholder="optional" value="">
+    </div>
+    <div class="control-group">
+      <label for="ctl-error">error</label>
+      <input id="ctl-error" type="text" placeholder="shown when status=failed" value="File is unreadable. Please upload a clearer copy.">
+    </div>
+  </div>
+
+  <div class="controls-row">
+    <div class="control-group">
+      <label>status</label>
+      <div class="btn-group" data-control="status">
+        <button class="btn-toggle active" data-status="none" type="button">none</button>
+        <button class="btn-toggle" data-status="ready" type="button">ready</button>
+        <button class="btn-toggle" data-status="processing" type="button">processing</button>
+        <button class="btn-toggle" data-status="failed" type="button">failed</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>non-interactive</label>
+      <div class="btn-group" data-control="non-interactive">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>dismissible</label>
+      <div class="btn-group" data-control="dismissible">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Wired to the controls above. The event log shows <code>la-select</code> and <code>la-dismiss</code> firings — observe that clicking the X fires <code>la-dismiss</code> only.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="flex-direction:column; align-items:stretch; max-width:520px; gap:16px;">
+    <la-document-item id="live-item" name="Employment-Contract-JSmith.pdf"></la-document-item>
+    <div id="event-log" style="font-family:ui-monospace,monospace;font-size:11px;color:var(--doc-text-3);min-height:18px;"></div>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed states for reference.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">None — name only (default)</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <la-document-item name="Employment-Contract-JSmith.pdf" style="width:100%;"></la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Ready — name only</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <la-document-item name="Board-Resolution-2026.pdf" status="ready" style="width:100%;"></la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Processing — name only</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <la-document-item name="Privacy-Policy-v3.pdf" status="processing" style="width:100%;"></la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Failed — danger background, error message, slotted Re-upload + Remove</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <la-document-item
+      name="Scan-corrupted.pdf"
+      association="Employment"
+      status="failed"
+      error="File is unreadable. Please upload a clearer copy."
+      style="width:100%;">
+      <la-button slot="actions" variant="secondary" size="sm">Re-upload</la-button>
+      <la-button slot="actions" variant="secondary" size="sm">Remove</la-button>
+    </la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">With association — optional secondary line</div>
+  <div class="preview-frame" style="max-width:520px; flex-direction:column; gap:4px; align-items:stretch;">
+    <la-document-item association="Employment" name="Employment-Contract-JSmith.pdf" status="ready"></la-document-item>
+    <la-document-item association="Corp Governance" name="Board-Resolution-2026.pdf" status="processing"></la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Stacked list — mixed statuses, no dividers</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <div style="display:flex; flex-direction:column; gap:0; padding:8px; width:100%;">
+      <la-document-item name="Employment-Contract-JSmith.pdf" status="ready"></la-document-item>
+      <la-document-item name="Board-Resolution-2026.pdf" status="processing"></la-document-item>
+      <la-document-item name="Privacy-Policy-v3.pdf"></la-document-item>
+      <la-document-item error="File is unreadable. Please upload a clearer copy." name="Scan-corrupted.pdf" status="failed">
+        <la-button slot="actions" variant="secondary" size="sm">Re-upload</la-button>
+        <la-button slot="actions" variant="secondary" size="sm">Remove</la-button>
+      </la-document-item>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Narrow container — long filename truncates</div>
+  <div class="preview-frame" style="width:320px; overflow:hidden;">
+    <div style="width:100%; overflow:hidden;">
+      <la-document-item name="A-Very-Long-Filename-That-Should-Truncate-Gracefully.pdf" status="processing"></la-document-item>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Dismissible — trailing built-in X</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <la-document-item name="Board-Resolution-2026.pdf" status="ready" dismissible style="width:100%;"></la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Dismissible + slotted Re-upload — slot stacks left, built-in X right</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <la-document-item
+      name="Scan-corrupted.pdf"
+      association="Employment"
+      status="failed"
+      error="File is unreadable. Please upload a clearer copy."
+      dismissible
+      style="width:100%;">
+      <la-button slot="actions" variant="secondary" size="sm">Re-upload</la-button>
+    </la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Dismissible on non-interactive row — only the X is clickable</div>
+  <div class="preview-frame" style="max-width:520px;">
+    <la-document-item
+      name="Privacy-Policy-v3.pdf"
+      association="Compliance"
+      status="processing"
+      non-interactive
+      dismissible
+      style="width:100%;"></la-document-item>
+  </div>
+</div>
+
+<!-- Status lifecycle -->
+<div id="lifecycle" class="preview-header" style="margin-top:8px;">
+  <h1>Status lifecycle</h1>
+  <p><code>ready</code> is transitory — shown briefly after processing completes, then the parent reverts to <code>none</code>. The component itself holds no timer; the consumer is responsible for the revert.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">processing → ready (3s) → none</div>
+  <div class="preview-frame" style="flex-direction:column; align-items:stretch; max-width:520px; gap:16px;">
+    <la-document-item association="Corp Governance" id="lifecycle-demo" name="Board-Resolution-2026.pdf"></la-document-item>
+    <div style="display:flex; align-items:center; gap:10px;">
+      <button id="lifecycle-replay" type="button" style="display:inline-flex;align-items:center;gap:5px;padding:4px 12px;font-size:12px;font-family:inherit;border:1px solid var(--doc-border);border-radius:var(--doc-r-sm);background:var(--doc-surface);cursor:pointer;color:var(--doc-text-2);">
+        <i aria-hidden="true" class="ph ph-arrow-counter-clockwise"></i> Replay
+      </button>
+      <span id="lifecycle-status" style="font-size:11px;font-family:ui-monospace,monospace;color:var(--doc-text-3);">status="none"</span>
+    </div>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-document-item</h2>
+    <p>Atomic document row used across every surface that lists documents — the library, processing tray, and data room. Covers four statuses (none, ready, processing, failed), accepts an actions slot for consumer-supplied buttons, and exposes a built-in trailing dismiss button via dismissible.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>name</td>
+          <td><span class="default">name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>association</td>
+          <td><span class="default">association</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>status</td>
+          <td><span class="default">status</span></td>
+          <td><span class="type">DocumentItemStatus</span></td>
+          <td><span class="default">&#39;none&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>nonInteractive</td>
+          <td><span class="default">non-interactive</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>dismissible</td>
+          <td><span class="default">dismissible</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>showPackToggle</td>
+          <td><span class="default">show-pack-toggle</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Show the "in default pack" toggle column</td>
+        </tr>
+      
+        <tr>
+          <td>inDefaultPack</td>
+          <td><span class="default">in-default-pack</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Whether this document is currently in the default DD pack</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-select</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-dismiss</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-pack-toggle</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+  <h3>CSS tokens</h3>
+  <p>All values come from the design token system defined in <code>src/styles/tokens.ts</code>.</p>
+  <table class="docs-table">
+    <thead><tr><th>Token</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td><code>--la-space-md</code></td><td>Row gap + horizontal padding</td></tr>
+      <tr><td><code>--la-space-sm</code></td><td>Row vertical padding + actions gap</td></tr>
+      <tr><td><code>--la-space-xs</code></td><td>Row right padding when <code>dismissible</code> (replaces the default <code>--la-space-md</code> on the right edge so the X has clean clearance without overflow)</td></tr>
+      <tr><td><code>--la-space-2xl</code></td><td>Icon container size</td></tr>
+      <tr><td><code>--la-radius-lg</code></td><td>Row border radius</td></tr>
+      <tr><td><code>--la-radius-md</code></td><td>Icon container border radius</td></tr>
+      <tr><td><code>--la-radius-circle</code></td><td>Status badge + spinner border radius</td></tr>
+      <tr><td><code>--la-color-bg</code></td><td>Status badge background + ring</td></tr>
+      <tr><td><code>--la-color-bg-muted</code></td><td>Row hover background</td></tr>
+      <tr><td><code>--la-color-surface-danger</code></td><td>Failed row background</td></tr>
+      <tr><td><code>--la-color-border-focus</code></td><td>Focus outline colour</td></tr>
+      <tr><td><code>--la-color-text</code></td><td>Name text colour</td></tr>
+      <tr><td><code>--la-color-text-muted</code></td><td>Icon glyph colour + association text</td></tr>
+      <tr><td><code>--la-color-urgent-text</code></td><td>Error text colour</td></tr>
+      <tr><td><code>--la-color-resolved</code></td><td>Ready badge icon colour</td></tr>
+      <tr><td><code>--la-color-urgent</code></td><td>Failed badge icon colour</td></tr>
+      <tr><td><code>--la-color-primary</code></td><td>Composed <code>la-spinner</code> colour (set on host via <code>color</code>)</td></tr>
+      <tr><td><code>--la-font-size-base</code></td><td>Name font size</td></tr>
+      <tr><td><code>--la-font-size-sm</code></td><td>Association + error font size</td></tr>
+      <tr><td><code>--la-font-size-2xl</code></td><td>Icon glyph size</td></tr>
+      <tr><td><code>--la-font-size-lg</code></td><td>Status badge size</td></tr>
+      <tr><td><code>--la-font-weight-normal</code></td><td>Name font weight</td></tr>
+      <tr><td><code>--dur-fast</code></td><td>Hover transition duration</td></tr>
+      <tr><td><code>--ease</code></td><td>Hover transition easing</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="usage">
+  <h3>Usage examples</h3>
+
+  <p style="margin-bottom:8px;color:var(--doc-text-2);font-size:12px;">Basic — name only</p>
+  <pre style="margin:0 0 16px 0;padding:12px 14px;background:var(--doc-surface-2);border-radius:var(--doc-r-sm);font-size:12px;font-family:ui-monospace,monospace;overflow:auto;"><code>&lt;la-document-item name="Contract.pdf"&gt;&lt;/la-document-item&gt;</code></pre>
+
+  <p style="margin-bottom:8px;color:var(--doc-text-2);font-size:12px;">Ready with association</p>
+  <pre style="margin:0 0 16px 0;padding:12px 14px;background:var(--doc-surface-2);border-radius:var(--doc-r-sm);font-size:12px;font-family:ui-monospace,monospace;overflow:auto;"><code>&lt;la-document-item
+  name="Board-Resolution.pdf"
+  association="Corp Governance"
+  status="ready"&gt;&lt;/la-document-item&gt;</code></pre>
+
+  <p style="margin-bottom:8px;color:var(--doc-text-2);font-size:12px;">Failed with error and slotted actions</p>
+  <pre style="margin:0 0 16px 0;padding:12px 14px;background:var(--doc-surface-2);border-radius:var(--doc-r-sm);font-size:12px;font-family:ui-monospace,monospace;overflow:auto;"><code>&lt;la-document-item
+  name="Scan-corrupted.pdf"
+  status="failed"
+  error="File is unreadable. Please upload a clearer copy."&gt;
+  &lt;la-button slot="actions" variant="secondary" size="sm"&gt;Re-upload&lt;/la-button&gt;
+&lt;/la-document-item&gt;</code></pre>
+
+  <p style="margin-bottom:8px;color:var(--doc-text-2);font-size:12px;">Dismissible row — built-in trailing X</p>
+  <pre style="margin:0 0 16px 0;padding:12px 14px;background:var(--doc-surface-2);border-radius:var(--doc-r-sm);font-size:12px;font-family:ui-monospace,monospace;overflow:auto;"><code>&lt;la-document-item
+  name="Doc.pdf"
+  status="ready"
+  dismissible
+  @la-dismiss="${onDismiss}"&gt;&lt;/la-document-item&gt;</code></pre>
+
+  <p style="margin-bottom:8px;color:var(--doc-text-2);font-size:12px;">Dismissible alongside Re-upload — slot left, X right</p>
+  <pre style="margin:0 0 16px 0;padding:12px 14px;background:var(--doc-surface-2);border-radius:var(--doc-r-sm);font-size:12px;font-family:ui-monospace,monospace;overflow:auto;"><code>&lt;la-document-item
+  name="Scan-corrupted.pdf"
+  status="failed"
+  error="File is unreadable. Please upload a clearer copy."
+  dismissible
+  @la-dismiss="${onDismiss}"&gt;
+  &lt;la-button slot="actions" variant="secondary" size="sm"&gt;Re-upload&lt;/la-button&gt;
+&lt;/la-document-item&gt;</code></pre>
+
+  <p style="margin-bottom:8px;color:var(--doc-text-2);font-size:12px;">Listen for selection</p>
+  <pre style="margin:0 0 16px 0;padding:12px 14px;background:var(--doc-surface-2);border-radius:var(--doc-r-sm);font-size:12px;font-family:ui-monospace,monospace;overflow:auto;"><code>const item = document.querySelector('la-document-item');
+item.addEventListener('la-select', () =&gt; {
+  // open document viewer
+});</code></pre>
+
+  <p style="margin-bottom:8px;color:var(--doc-text-2);font-size:12px;">Stacked list</p>
+  <pre style="margin:0;padding:12px 14px;background:var(--doc-surface-2);border-radius:var(--doc-r-sm);font-size:12px;font-family:ui-monospace,monospace;overflow:auto;"><code>&lt;div style="display:flex;flex-direction:column;gap:0;"&gt;
+  &lt;la-document-item name="Doc1.pdf" status="ready"&gt;&lt;/la-document-item&gt;
+  &lt;la-document-item name="Doc2.pdf" status="processing"&gt;&lt;/la-document-item&gt;
+&lt;/div&gt;</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="notes">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Actions slot isolation</strong> — Clicks inside the <code>actions</code> slot do not fire <code>la-select</code>. The component walks the composed event path and returns early if any node carries <code>slot="actions"</code>. Wire your action button handlers independently.</div>
+    <div class="docs-note"><strong>Dismissible suppresses la-select</strong> — When the built-in X is clicked, only <code>la-dismiss</code> fires. The handler calls <code>stopPropagation()</code>, and the row's path filter also short-circuits on <code>data-dismiss="true"</code>. Slot-isolation and dismiss-isolation compose: a slotted Retry stays independent of both row click and dismiss. See <a href="../decisions/50-document-item-dismissible-composition.md">decision 50</a> for the composition pattern.</div>
+    <div class="docs-note"><strong>Filename truncation</strong> — The <code>name</code> value is set as the native <code>title</code> attribute on the name span. Long filenames truncate with ellipsis in narrow containers and reveal the full name on hover.</div>
+    <div class="docs-note"><strong>Processing widget mapping</strong> — <code>la-processing-widget</code> uses a <code>completed</code> status in its own API, which it maps to <code>ready</code> before passing to <code>la-document-item</code>. This divergence is intentional — "ready" is the correct word once a document is viewable. Do not normalise it away.</div>
+    <div class="docs-note"><strong>Error message scope</strong> — Only rendered when <code>status="failed"</code> and <code>error</code> is non-empty. Setting <code>error</code> on any other status has no visual effect.</div>
+    <div class="docs-note"><strong>Keyboard behaviour</strong> — When interactive, the row is a native <code>&lt;button&gt;</code>. Enter and Space fire <code>la-select</code>. The built-in dismiss is its own focusable <code>la-icon-button</code> — Tab moves into and out of it cleanly. Focus rings use <code>:focus-visible</code> and are not suppressed.</div>
+    <div class="docs-note"><strong>ready is transitory</strong> — <code>status="ready"</code> is a brief confirmation after processing completes (~3s), after which the parent should revert to <code>none</code>. The component holds no internal timer — the consumer owns the revert. See the Status lifecycle demo above.</div>
+    <div class="docs-note"><strong>Re-upload vs Retry</strong> — use <strong>Re-upload</strong> when the failure means the user has to provide a new file (corrupted scan, wrong format, illegible). Use <strong>Retry</strong> when the existing file just needs another attempt at the same operation (transient network, parser timeout, server hiccup). The action verb should match what the user actually has to do — anything else is dishonest.</div>
+    <div class="docs-note"><strong>Spinner colour is <code>--la-color-primary</code>.</strong> The processing-state spinner uses primary (near-black) for a calm monochrome reading. See <a href="../decisions/53-spinner-primary-colour.md">decision 53</a> for the rationale and the soft tension with CLAUDE.md's "primary on interactive only" rule.</div>
+    <div class="docs-note"><strong><code>box-sizing: border-box</code> on the row</strong> — required so <code>width: 100%</code> matches the host width exactly. Without it, the row's padding extended past the host by the padding amount; ancestors with <code>overflow: hidden</code> (la-processing-widget tray) would clip the rightmost contents (the dismiss X). The fix is in source; consumers don't need to do anything.</div>
+    <div class="docs-note"><strong>Open gap — row icon size tokens</strong> — File glyph and status badge currently size off <code>--la-font-size-lg</code> by happenstance, and the composed <code>la-spinner</code> uses <code>md</code> (16px). An <code>--la-icon-row-*</code> token family is logged as a backlog item; sizing here will track that family if/when it lands. Not blocking v1.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    (function initControls() {
+      const live = document.getElementById('live-item');
+      const log = document.getElementById('event-log');
+      if (!live) return;
+
+      function setBoolAttr(name, on) {
+        if (on) live.setAttribute(name, '');
+        else live.removeAttribute(name);
+      }
+
+      document.getElementById('ctl-name').addEventListener('input', (e) => {
+        live.setAttribute('name', e.target.value);
+      });
+      document.getElementById('ctl-association').addEventListener('input', (e) => {
+        if (e.target.value) live.setAttribute('association', e.target.value);
+        else live.removeAttribute('association');
+      });
+      document.getElementById('ctl-error').addEventListener('input', (e) => {
+        if (e.target.value) live.setAttribute('error', e.target.value);
+        else live.removeAttribute('error');
+      });
+
+      document.querySelectorAll('[data-control="status"] [data-status]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-control="status"] [data-status]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          live.setAttribute('status', btn.dataset.status);
+        });
+      });
+
+      ['non-interactive', 'dismissible'].forEach((attr) => {
+        document.querySelectorAll(`[data-control="${attr}"] [data-bool]`).forEach((btn) => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll(`[data-control="${attr}"] [data-bool]`).forEach((b) => b.classList.remove('active'));
+            btn.classList.add('active');
+            setBoolAttr(attr, btn.dataset.bool === 'true');
+          });
+        });
+      });
+
+      function flash(msg) {
+        log.textContent = msg;
+        clearTimeout(flash._t);
+        flash._t = setTimeout(() => { log.textContent = ''; }, 2000);
+      }
+      live.addEventListener('la-select', () => flash('la-select fired'));
+      live.addEventListener('la-dismiss', () => flash('la-dismiss fired'));
+    })();
+
+    (function initLifecycle() {
+      const el = document.getElementById('lifecycle-demo');
+      const label = document.getElementById('lifecycle-status');
+      const btn = document.getElementById('lifecycle-replay');
+      if (!el || !label || !btn) return;
+
+      function run() {
+        btn.disabled = true;
+        el.setAttribute('status', 'processing');
+        label.textContent = 'status="processing"';
+        setTimeout(() => {
+          el.setAttribute('status', 'ready');
+          label.textContent = 'status="ready"';
+          setTimeout(() => {
+            el.setAttribute('status', 'none');
+            label.textContent = 'status="none"';
+            btn.disabled = false;
+          }, 3000);
+        }, 2000);
+      }
+
+      btn.addEventListener('click', run);
+      setTimeout(run, 400);
+    })();
+  })();
+</script>
+
+
+</body>
+</html>

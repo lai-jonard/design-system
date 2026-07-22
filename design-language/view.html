@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design language view — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 840px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      text-decoration: none;
+      margin-bottom: 32px;
+    }
+    .md-source:hover {
+      border-color: var(--doc-accent);
+      color: var(--doc-accent);
+    }
+
+    .md-loading, .md-error {
+      padding: 40px 0;
+      font-size: 14px;
+      color: var(--doc-text-3);
+    }
+    .md-error { color: var(--doc-text-2); }
+    .md-error strong { color: var(--doc-text); }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body {
+      color: var(--doc-text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.2px;
+      margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.1px;
+      margin: 48px 0 12px;
+      padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--doc-text);
+      margin: 28px 0 8px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--doc-text);
+      margin: 20px 0 6px;
+    }
+    .md-body p {
+      margin: 0 0 16px;
+      color: var(--doc-text-2);
+    }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol {
+      margin: 0 0 16px;
+      padding-left: 22px;
+      color: var(--doc-text-2);
+    }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul,
+    .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr {
+      border: none;
+      border-top: 1px solid var(--doc-border-light);
+      margin: 40px 0;
+    }
+
+    .md-body blockquote {
+      margin: 0 0 16px;
+      padding: 12px 16px;
+      background: var(--doc-accent-soft);
+      border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2);
+      font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light);
+      padding: 1px 6px;
+      border-radius: var(--doc-r-sm);
+      color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      padding: 16px 20px;
+      margin: 0 0 16px;
+      overflow-x: auto;
+      line-height: 1.6;
+    }
+    .md-body pre code {
+      background: transparent;
+      border: none;
+      padding: 0;
+      font-size: 13px;
+      color: var(--doc-text);
+    }
+
+    .md-body table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 0 0 20px;
+      font-size: 13px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left;
+      padding: 10px 14px;
+      background: var(--doc-surface-2);
+      color: var(--doc-text-3);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2);
+      vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+
+    .md-body img {
+      max-width: 100%;
+      border-radius: var(--doc-r-md);
+      border: 1px solid var(--doc-border);
+    }
+
+    /* Sidebar file list active styling */
+    .dl-nav-item { font-size: 12px; }
+    .dl-nav-item.active {
+      color: var(--doc-accent);
+      background: var(--doc-accent-soft);
+      border-left-color: var(--doc-accent);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item dl-nav-item" data-file="colour" href="view.html?file=colour">Colour</a>
+<a class="docs-nav-item dl-nav-item" data-file="typography" href="view.html?file=typography">Typography</a>
+<a class="docs-nav-item dl-nav-item" data-file="borders" href="view.html?file=borders">Borders</a>
+<a class="docs-nav-item dl-nav-item" data-file="iconography" href="view.html?file=iconography">Iconography</a>
+<a class="docs-nav-item dl-nav-item" data-file="motion" href="view.html?file=motion">Motion</a>
+<a class="docs-nav-item dl-nav-item" data-file="interaction" href="view.html?file=interaction">Interaction</a>
+</div>
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item dl-nav-item" data-file="layout" href="view.html?file=layout">Layout</a>
+<a class="docs-nav-item dl-nav-item" data-file="page-architecture" href="view.html?file=page-architecture">Page architecture</a>
+<a class="docs-nav-item dl-nav-item" data-file="responsive-design" href="view.html?file=responsive-design">Responsive design</a>
+</div>
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item dl-nav-item" data-file="copy-guidelines" href="view.html?file=copy-guidelines">Copy guidelines</a>
+</div>
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item dl-nav-item" data-file="components" href="view.html?file=components">Components</a>
+<a class="docs-nav-item dl-nav-item" data-file="la-app-shell" href="view.html?file=la-app-shell">la-app-shell</a>
+<a class="docs-nav-item dl-nav-item" data-file="la-sidebar" href="view.html?file=la-sidebar">la-sidebar</a>
+</div>
+<h3 class="docs-nav-title">Process</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item dl-nav-item" data-file="README" href="view.html?file=README">Overview (README)</a>
+<a class="docs-nav-item dl-nav-item" data-file="development-workflow" href="view.html?file=development-workflow">Development workflow</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../design-language.html">← All design language</a>
+<a class="docs-nav-item" href="../../../design-language/">Source folder ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+<a href="../design-language.html">Design language</a> ·
+          <span id="md-crumb-current">…</span>
+</div>
+<a class="md-source" id="md-source-link" target="_blank">
+<i aria-hidden="true" class="ph ph-file-text"></i>
+<span id="md-source-label">…</span>
+</a>
+<article class="md-body" id="md-body">
+<div class="md-loading">Loading…</div>
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

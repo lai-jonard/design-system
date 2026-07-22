@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Flag banners — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/" class="active">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title"><a href="../patterns/" style="color:inherit;text-decoration:none;">← Patterns</a></h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#examples" class="docs-nav-item" data-nav-id="examples">Examples</a>
+    
+      <a href="#rules" class="docs-nav-item" data-nav-id="rules">Rules</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../index.html">Overview</a>
+    <a class="docs-nav-item" href="../components/">Components</a>
+    <a class="docs-nav-item" href="../foundations/">Foundations</a>
+    <a class="docs-nav-item" href="../pages/">Pages</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+  <h1>Flag banners</h1>
+  <p>Persistent in-page alerts for flagged, processing, or failed document states. Use <code>la-alert</code> inline — not a toast, not a modal. Placed immediately below the page header, above main content.</p>
+</div>
+
+<div class="preview-header" id="examples" style="margin-top:8px;">
+  <h1>Examples</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Flagged by AI — warning variant</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <la-alert variant="warning">This document was flagged by our AI. Review the highlighted sections and re-upload a corrected version.</la-alert>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Processing — info variant</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <la-alert variant="info">Analysing document… This usually takes less than a minute.</la-alert>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Upload failed — danger variant</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <la-alert variant="danger">Upload failed. The file may be corrupted or unsupported. Try again.</la-alert>
+  </div>
+</div>
+
+<div class="preview-header" id="rules" style="margin-top:8px;">
+  <h1>Rules</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">
+      <li>Use <code style="font-family:monospace;font-size:12px;">la-alert</code> inline in the page — not a toast, not a modal.</li>
+      <li>Placed immediately below the page header, above main content.</li>
+      <li>Variants map to state: <code style="font-family:monospace;font-size:12px;">warning</code> for flagged-AI, <code style="font-family:monospace;font-size:12px;">info</code> for processing, <code style="font-family:monospace;font-size:12px;">danger</code> for failed actions.</li>
+      <li>Dismiss only when the underlying state is resolved — not on user click unless the flag is purely informational.</li>
+      <li>Always include a short explanation or action — never just a status label.</li>
+    </ul>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

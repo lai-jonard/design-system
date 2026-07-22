@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Insight modal — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/" class="active">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title"><a href="../patterns/" style="color:inherit;text-decoration:none;">← Patterns</a></h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#examples" class="docs-nav-item" data-nav-id="examples">Examples</a>
+    
+      <a href="#event-chain" class="docs-nav-item" data-nav-id="event-chain">Event chain</a>
+    
+      <a href="#rules" class="docs-nav-item" data-nav-id="rules">Rules</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../index.html">Overview</a>
+    <a class="docs-nav-item" href="../components/">Components</a>
+    <a class="docs-nav-item" href="../foundations/">Foundations</a>
+    <a class="docs-nav-item" href="../pages/">Pages</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+  <h1>Insight modal</h1>
+  <p>Clicking an insight row fires <code>la-insight-select</code>; the consumer populates and opens <code>la-insight-modal</code>. The modal overlays the page — it does not navigate. The consumer controls all state; the component never routes itself.</p>
+</div>
+
+<div class="preview-header" id="examples" style="margin-top:8px;">
+  <h1>Examples</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Insight card — click to open modal</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <la-insight-card
+      id="demo-insight"
+      type="missing_document"
+      heading="Missing document"
+      summary="The IP Assignment Agreement for Alex Chen is missing. This is required before any equity transfer."
+      source-name="IP Assignment Agreement"
+    ></la-insight-card>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Event log — <code>la-insight-select</code></div>
+  <div class="preview-frame" id="insight-event-log" style="min-height:48px;padding:14px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--la-color-text-muted);flex-direction:column;align-items:flex-start;gap:4px;">
+    <span style="color:var(--la-color-text-faint);">Click the insight card above to see the event fire.</span>
+  </div>
+</div>
+
+<la-insight-modal
+  id="demo-insight-modal"
+  heading="Missing document"
+  type="missing_document"
+  action-type="upload"
+  summary="The IP Assignment Agreement for Alex Chen is missing. This is required before any equity transfer."
+  source-name="IP Assignment Agreement"
+></la-insight-modal>
+
+<div class="preview-header" id="event-chain" style="margin-top:8px;">
+  <h1>Event chain</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <div style="background:var(--doc-surface-2);border:1px solid var(--doc-border);border-radius:8px;padding:16px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--doc-text-2);white-space:pre;line-height:1.7;">click insight row  → la-insight-select   → open modal
+"View document"    → la-insight-navigate → close + navigate
+upload action      → la-insight-upload   → processing → resolved
+X / backdrop       → la-insight-close    → close modal</div>
+  </div>
+</div>
+
+<div class="preview-header" id="rules" style="margin-top:8px;">
+  <h1>Rules</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">
+      <li>The modal overlays the page — it does not navigate.</li>
+      <li>The consumer catches events and controls modal state; the component never routes itself.</li>
+      <li>Close on X, backdrop click, or Escape.</li>
+      <li>Populate all props before setting <code style="font-family:monospace;font-size:12px;">open = true</code> — never show a partially populated modal.</li>
+    </ul>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+(function () {
+  const card = document.getElementById('demo-insight');
+  const modal = document.getElementById('demo-insight-modal');
+  const log = document.getElementById('insight-event-log');
+
+  function logEvent(name) {
+    const line = document.createElement('div');
+    const time = new Date().toLocaleTimeString('en-GB', { hour12: false });
+    line.textContent = time + '  ' + name;
+    if (log.querySelector('span')) log.innerHTML = '';
+    log.insertBefore(line, log.firstChild);
+    if (log.children.length > 6) log.removeChild(log.lastChild);
+  }
+
+  if (card) {
+    card.addEventListener('click', () => {
+      logEvent('la-insight-select  { type: "missing_document", sourceName: "IP Assignment Agreement" }');
+      if (modal) modal.open = true;
+    });
+    card.addEventListener('la-insight-select', (e) => {
+      logEvent('la-insight-select  ' + JSON.stringify(e.detail || {}));
+      if (modal) modal.open = true;
+    });
+  }
+
+  if (modal) {
+    modal.addEventListener('la-insight-close', () => {
+      logEvent('la-insight-close');
+    });
+    modal.addEventListener('la-insight-navigate', (e) => {
+      logEvent('la-insight-navigate  ' + JSON.stringify(e.detail || {}));
+      modal.open = false;
+    });
+  }
+})();
+</script>
+
+
+</body>
+</html>

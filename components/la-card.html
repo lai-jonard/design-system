@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-card — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-card</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-card</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-card</h1>
+<p>A surface container used to group related content. Provides a visual boundary (border + background + radius) without adding layout logic. Takes an optional <code style="font-family:monospace;color:#c3e88d;font-size:12px;">heading</code> prop for a titled header section.</p>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Heading</label>
+<input id="ctrl-heading" type="text" value="Card heading"/>
+</div>
+<div class="control-group">
+<label>Padding</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-padding="on">On</button>
+<button class="btn-toggle" data-padding="off">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Body content</label>
+<input id="ctrl-body" type="text" value="Card body content goes here."/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:120px; display:block; padding:32px;">
+<la-card heading="Card heading" id="live-card">
+<span id="live-body">Card body content goes here.</span>
+</la-card>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">With heading — default padding</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-card heading="Company overview">
+              A concise summary of the company sits here. One or two short sentences is plenty — cards are bounded, not a place for long prose.
+            </la-card>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Without heading — bare container</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-card>
+              A bare card with no heading. Useful when the card's purpose is clear from context or when the surrounding page already carries the title.
+            </la-card>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">No padding — edge-to-edge content</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-card heading="Documents" nopadding="">
+<div style="padding:12px 14px; border-bottom:1px solid var(--la-color-border-light, #ECEEF5);">Articles of Association</div>
+<div style="padding:12px 14px; border-bottom:1px solid var(--la-color-border-light, #ECEEF5);">Shareholder agreement</div>
+<div style="padding:12px 14px;">Directors' resolutions</div>
+</la-card>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Long heading and body — resilience</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-card heading="An unusually long heading that tests wrapping behaviour in the header row">
+              The body can hold several lines of content without the card reflowing its chrome. Borders, radius, and padding stay stable as content grows, so pages built from cards don't shift as data changes.
+            </la-card>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-card</h2>
+    <p>A surface container used to group related content. Provides a visual boundary (border + background + radius) without adding layout logic. Takes an optional heading prop for a titled header section.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>nopadding</td>
+          <td><span class="default">nopadding</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>. Override per-instance via <code style="font-family:monospace;font-size:11px;">style</code> or a wrapping CSS rule.</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Card background</td></tr>
+<tr><td>--la-color-border</td><td>Outer border</td></tr>
+<tr><td>--la-color-border-light</td><td>Divider between header and body</td></tr>
+<tr><td>--la-radius-lg</td><td>Corner radius</td></tr>
+<tr><td>--la-font-size-base</td><td>Heading font size</td></tr>
+<tr><td>--la-font-weight-semibold</td><td>Heading font weight</td></tr>
+</tbody>
+</table>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — heading + body</p>
+<div class="docs-code"><span class="kw">&lt;la-card</span> <span class="at">heading</span>=<span class="str">"Company overview"</span><span class="kw">&gt;</span>
+  A concise summary sits here.
+<span class="kw">&lt;/la-card&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Without heading — bare container</p>
+<div class="docs-code"><span class="kw">&lt;la-card&gt;</span>
+  Content without a title section.
+<span class="kw">&lt;/la-card&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Edge-to-edge list — nopadding</p>
+<div class="docs-code"><span class="kw">&lt;la-card</span> <span class="at">heading</span>=<span class="str">"Documents"</span> <span class="at">nopadding</span><span class="kw">&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">class</span>=<span class="str">"row"</span><span class="kw">&gt;</span>Articles of Association<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">class</span>=<span class="str">"row"</span><span class="kw">&gt;</span>Shareholder agreement<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/la-card&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Composed — card hosting other primitives</p>
+<div class="docs-code"><span class="kw">&lt;la-card</span> <span class="at">heading</span>=<span class="str">"Actions"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;p&gt;</span>Three items need review.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"primary"</span><span class="kw">&gt;</span>
+    Review now
+  <span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;/la-card&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Card vs panel</strong> — reach for <code style="font-family:monospace;font-size:11px;">la-card</code> when content needs a bounded, floating surface with a visible border. Reach for <code style="font-family:monospace;font-size:11px;">la-panel</code> when content should sit inside a layout without floating — a de-emphasised container that recedes into the page.</div>
+<div class="docs-note"><strong>No layout logic</strong> — <code style="font-family:monospace;font-size:11px;">la-card</code> is purely a surface. Stacking, gaps, and internal alignment are the consumer's responsibility. This keeps the primitive small and composable.</div>
+<div class="docs-note"><strong>Use <code style="font-family:monospace;font-size:11px;">nopadding</code> for self-spaced children</strong> — when the inner content is a list of rows that each own their padding (e.g. <code style="font-family:monospace;font-size:11px;">la-list-item</code>, <code style="font-family:monospace;font-size:11px;">la-document-item</code>), turn off card padding so rows reach the card's edge.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveCard   = document.getElementById('live-card');
+        const liveBody   = document.getElementById('live-body');
+        const headingInput = document.getElementById('ctrl-heading');
+        const bodyInput    = document.getElementById('ctrl-body');
+
+        // Heading input
+        headingInput.addEventListener('input', () => {
+          liveCard.setAttribute('heading', headingInput.value);
+        });
+
+        // Body input
+        bodyInput.addEventListener('input', () => {
+          liveBody.textContent = bodyInput.value || '';
+        });
+
+        // Padding toggles
+        document.querySelectorAll('[data-padding]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-padding]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.padding === 'off') {
+              liveCard.setAttribute('nopadding', '');
+            } else {
+              liveCard.removeAttribute('nopadding');
+            }
+          });
+        });
+  })();
+</script>
+
+
+</body>
+</html>

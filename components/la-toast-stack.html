@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-toast-stack — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-toast-stack</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#demo" class="docs-nav-item" data-nav-id="demo">Demo</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-toast-stack</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-toast-stack</h1>
+<p>Sonner-style stacked notification manager. Place once in your layout — it establishes the <code style="font-family:monospace;color:#c3e88d;font-size:12px;">aria-live</code> region and handles positioning, stacking, hover-expand, and auto-dismiss for all active toasts. Use the exported <code style="font-family:monospace;color:#c3e88d;font-size:12px;">toast()</code> function to trigger toasts from anywhere in the application.</p>
+</div>
+
+<div class="preview-header" id="demo" style="margin-top:8px;">
+<h1>Demo</h1>
+<p>The stack renders in the corner of this page. Add toasts below to see it in action.</p>
+</div>
+
+<div class="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Position</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-position="bottom-right">bottom-right</button>
+<button class="btn-toggle" data-position="bottom-center">bottom-center</button>
+<button class="btn-toggle" data-position="bottom-left">bottom-left</button>
+<button class="btn-toggle" data-position="top-right">top-right</button>
+<button class="btn-toggle" data-position="top-center">top-center</button>
+<button class="btn-toggle" data-position="top-left">top-left</button>
+</div>
+</div>
+<div class="control-group">
+<label>Max visible</label>
+<input id="ctrl-max-visible" max="5" min="1" step="1" style="width:60px;" type="number" value="3"/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-label">Add a toast</div>
+<div class="preview-frame" style="gap:8px; flex-wrap:wrap;">
+<la-button id="btn-default" variant="secondary">Default</la-button>
+<la-button id="btn-success" variant="secondary">Success</la-button>
+<la-button id="btn-warning" variant="secondary">Warning</la-button>
+<la-button id="btn-danger" variant="secondary">Danger</la-button>
+<la-button id="btn-message" variant="secondary">With message</la-button>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Event log — la-toast-dismiss</div>
+<div class="preview-frame" id="event-log" style="flex-direction:column; align-items:flex-start; gap:4px; min-height:52px;">
+<span id="event-log-empty" style="font-family:monospace; font-size:11px; color:#aaa;">No events yet — add and dismiss a toast above.</span>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-toast-stack</h2>
+    <p>Sonner-style stacked notification manager. Place once in your layout — it establishes the aria-live region and handles positioning, stacking, hover-expand, and auto-dismiss for all active toasts. Use the exported toast() function to trigger toasts from anywhere in the application.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>position</td>
+          <td><span class="default">position</span></td>
+          <td><span class="type">StackPosition</span></td>
+          <td><span class="default">&#39;bottom-right&#39;</span></td>
+          <td>Corner to anchor the stack</td>
+        </tr>
+      
+        <tr>
+          <td>maxVisible</td>
+          <td><span class="default">max-visible</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">3</span></td>
+          <td>Maximum number of toasts visible in the stacked view</td>
+        </tr>
+      
+        <tr>
+          <td>_items</td>
+          <td>—</td>
+          <td><span class="type">ToastItem[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_exitingItems</td>
+          <td>—</td>
+          <td><span class="type">ExitingItem[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_hovered</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_topItemHeight</td>
+          <td>—</td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">88</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_timers</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="default">new Map&lt;string, ReturnType&lt;typeof setTimeout&gt;&gt;()</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_topItemRO</td>
+          <td>—</td>
+          <td><span class="type">ResizeObserver | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-toast-dismiss</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>— when any toast closes; detail: { id: string }</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All tokens are defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-toast-max-width</td><td>Width of the stack and each toast card (340px)</td></tr>
+<tr><td>--la-space-xl</td><td>Offset from the viewport corner (24px)</td></tr>
+<tr><td>--dur-modal</td><td>Duration for stack height and toast transform transitions</td></tr>
+<tr><td>--ease</td><td>Easing for all stack transitions</td></tr>
+</tbody>
+</table>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Place once in layout</p>
+<div class="docs-code"><span class="cm">&lt;!-- Near the top of &lt;body&gt; --&gt;</span>
+<span class="kw">&lt;la-toast-stack&gt;&lt;/la-toast-stack&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — programmatic</p>
+<div class="docs-code"><span class="kw">import</span> { toast } <span class="kw">from</span> <span class="str">'./la-toast-stack.js'</span>;
+
+toast(<span class="str">'Changes saved.'</span>);</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With message</p>
+<div class="docs-code">toast(<span class="str">'Contract sent for signature.'</span>, {
+  message: <span class="str">'Anna Chen — Employment Contract 2026'</span>,
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Variant shorthands</p>
+<div class="docs-code">toast.success(<span class="str">'All documents reviewed.'</span>);
+toast.warning(<span class="str">'Signature pending.'</span>);
+toast.danger(<span class="str">'Upload failed.'</span>);</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listen for dismiss</p>
+<div class="docs-code"><span class="kw">const</span> stack = document.querySelector(<span class="str">'la-toast-stack'</span>);
+stack.addEventListener(<span class="str">'la-toast-dismiss'</span>, (e) =&gt; {
+  console.log(<span class="str">'dismissed:'</span>, e.detail.id);
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Custom position</p>
+<div class="docs-code"><span class="kw">&lt;la-toast-stack</span>
+<span class="at">position</span>=<span class="str">"top-right"</span>
+<span class="kw">&gt;&lt;/la-toast-stack&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Via element method directly</p>
+<div class="docs-code"><span class="kw">const</span> stack = document.querySelector(<span class="str">'la-toast-stack'</span>);
+stack.add({
+  title: <span class="str">'Changes saved.'</span>,
+  variant: <span class="str">'success'</span>,
+  duration: <span class="num">5000</span>,
+});</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Place the element for reliable screen reader support</strong> — the <code style="font-family:monospace;font-size:11px;">aria-live="polite"</code> region must be in the DOM before the first toast fires. The <code style="font-family:monospace;font-size:11px;">toast()</code> function auto-injects an element if none is found, but screen readers may miss the first announcement because the live region wasn't established at page load. Placing <code style="font-family:monospace;font-size:11px;">&lt;la-toast-stack&gt;</code> explicitly is the recommended pattern.</div>
+<div class="docs-note"><strong>Hover to expand</strong> — at rest, older toasts peek behind the newest (scaled down, staggered upward). Hovering the stack expands all toasts to their full height with spacing between them. Each toast can be read and dismissed individually in the expanded state.</div>
+<div class="docs-note"><strong>Position changes are live</strong> — updating the <code style="font-family:monospace;font-size:11px;">position</code> attribute or property moves the stack immediately. Any active toasts move with it. Useful when the layout shifts (e.g. a sidebar opens and the bottom-right corner becomes obscured).</div>
+<div class="docs-note"><strong>Max-visible queuing</strong> — toasts beyond <code style="font-family:monospace;font-size:11px;">maxVisible</code> are not discarded — they are held in the internal list and become visible as older ones are dismissed. The queue drains naturally; no explicit queue management is needed.</div>
+<div class="docs-note"><strong>Toast heights are measured at runtime</strong> — the stack uses a <code style="font-family:monospace;font-size:11px;">ResizeObserver</code> on the first item to track actual height for the hover-expand offset calculation. The fallback is 88px. No layout measurement is needed before calling <code style="font-family:monospace;font-size:11px;">add()</code>.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const docStack = document.getElementById('doc-stack');
+
+        // ── Position toggles ──────────────────────────────────────
+        document.querySelectorAll('[data-position]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-position]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            docStack.setAttribute('position', btn.dataset.position);
+          });
+        });
+
+        // ── Max visible ───────────────────────────────────────────
+        document.getElementById('ctrl-max-visible').addEventListener('input', (e) => {
+          const val = parseInt(e.target.value, 10);
+          if (!isNaN(val) && val > 0) docStack.maxVisible = val;
+        });
+
+        // ── Trigger buttons ───────────────────────────────────────
+        document.getElementById('btn-default').addEventListener('click', () => {
+          docStack.add({ title: 'Changes saved.' });
+        });
+        document.getElementById('btn-success').addEventListener('click', () => {
+          docStack.add({ title: 'All documents reviewed.', variant: 'success' });
+        });
+        document.getElementById('btn-warning').addEventListener('click', () => {
+          docStack.add({ title: 'Signature pending.', variant: 'warning' });
+        });
+        document.getElementById('btn-danger').addEventListener('click', () => {
+          docStack.add({ title: 'Upload failed.', variant: 'danger' });
+        });
+        document.getElementById('btn-message').addEventListener('click', () => {
+          docStack.add({
+            title: 'Contract sent for signature.',
+            message: 'Anna Chen — Employment Contract 2026',
+          });
+        });
+        // ── Event log ─────────────────────────────────────────────
+        docStack.addEventListener('la-toast-dismiss', (e) => {
+          const log = document.getElementById('event-log');
+          const empty = document.getElementById('event-log-empty');
+          if (empty) empty.remove();
+          const entry = document.createElement('div');
+          entry.style.cssText = 'font-family:monospace;font-size:11px;color:#555;';
+          entry.textContent = `la-toast-dismiss → id: "${e.detail.id}"`;
+          log.insertBefore(entry, log.firstChild);
+        });
+
+        // ── Sidebar collapse ──────────────────────────────────────
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pages — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 960px; gap: 40px; }
+
+    .pages-hero h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.2px;
+      margin-bottom: 10px;
+    }
+    .pages-hero p {
+      font-size: 14px;
+      color: var(--doc-text-2);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .component-tier {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .tier-label {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--doc-text-3);
+      letter-spacing: 0.1px;
+      padding-bottom: 10px;
+    }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .component-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 120ms ease, border-color 120ms ease;
+    }
+    .component-card:hover:not(.component-card--disabled) {
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      border-color: var(--doc-border-hover);
+    }
+    .component-card--disabled {
+      opacity: 0.5;
+      cursor: default;
+    }
+    .component-card-image {
+      height: 100px;
+      background: var(--doc-surface-2);
+      border-bottom: 1px solid var(--doc-border);
+    }
+    .component-card-body {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .component-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .component-card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--doc-text);
+    }
+    .component-card-desc {
+      font-size: 12px;
+      color: var(--doc-text-2);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .status-chip {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-chip--v1    { background: #d1fae5; color: #065f46; }
+    .status-chip--wip   { background: #fef3c7; color: #92400e; }
+    .status-chip--deferred { background: #f1f5f9; color: #64748b; }
+    .status-chip--idle  { background: #f1f5f9; color: #94a3b8; }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/" class="active">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="page-patterns" href="#page-patterns">Page patterns</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../index.html">Overview</a>
+<a class="docs-nav-item" href="../components/">Components</a>
+<a class="docs-nav-item" href="../foundations/">Foundations</a>
+<a class="docs-nav-item" href="../patterns/">Patterns</a>
+<a class="docs-nav-item" href="../../handoffs/readiness.md">Readiness dashboard ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="pages-hero" id="pages">
+<h1>Pages</h1>
+<p>Full-screen layouts and page-level patterns. Each entry documents the layout structure, component composition, states, and design decisions for a complete product surface.</p>
+</section>
+
+<div class="component-tier" id="page-patterns">
+<div class="tier-label">Page patterns</div>
+<div class="component-grid">
+
+<a class="component-card" href="../pages/la-document-page.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Document Page</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Two-panel document detail surface. Metadata, About section (key terms or obligations), linked insights, and preview pane. Sprint 6.</p>
+</div>
+</a>
+
+<a class="component-card" href="../components/la-legal-area-page.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Legal Area Page</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Health summary, insights, and document list for a legal area. Locked, unlocking, and standard states. Sprint 3–5.</p>
+</div>
+</a>
+
+<a class="component-card" href="../components/la-app-shell.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">App Shell</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Page chrome — sidebar, header, breadcrumbs, and content column. Narrow-viewport overlay drawer. Sprint 1.</p>
+</div>
+</a>
+
+<a class="component-card" href="../components/la-dashboard.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Dashboard</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Legal area widget grid. Post-L0 state (widget grid) and FTUE welcome form. Sprint 2.</p>
+</div>
+</a>
+
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Data Room Page</span>
+<span class="status-chip status-chip--deferred">Deferred</span>
+</div>
+<p class="component-card-desc">Data room page scaffold. Document tree, preview, and filter rail.</p>
+</div>
+</div>
+
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">DD Readiness</span>
+<span class="status-chip status-chip--deferred">Deferred</span>
+</div>
+<p class="component-card-desc">Readiness report for a due diligence exercise. Surfaces what's still missing.</p>
+</div>
+</div>
+
+</div>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

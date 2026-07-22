@@ -1,0 +1,6 @@
+Inter (variable) — Copyright (c) 2016 The Inter Project Authors.
+Licensed under the SIL Open Font License, Version 1.1.
+Source: https://rsms.me/inter/  ·  https://github.com/rsms/inter
+Full licence: https://openfontlicense.org  (also bundled in the Inter release under LICENSE.txt)
+Self-hosted in this repo so the design system renders in Inter regardless of whether
+the viewer has Inter installed locally. See decisions/85-self-host-inter-webfont.md.

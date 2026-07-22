@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page layouts — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+  .sub-hero h1 { font-size: 36px; font-weight: 600; color: var(--doc-text); letter-spacing: -0.3px; margin-bottom: 10px; }
+  .sub-hero p { font-size: 15px; color: var(--doc-text-2); max-width: 680px; line-height: 1.6; }
+  .sub-hero-crumb { font-size: 12px; color: var(--doc-text-3); margin-bottom: 12px; }
+  .sub-hero-crumb a { color: var(--doc-text-3); }
+  .layout-diagram {
+    background: var(--la-color-bg-subtle);
+    border: 1px solid var(--la-color-border-light);
+    border-radius: var(--la-radius-lg);
+    padding: var(--la-space-md);
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    color: var(--la-color-text-secondary);
+    line-height: 1.5;
+    white-space: pre;
+    overflow-x: auto;
+  }
+  .demo-shell { border: 1px solid var(--la-color-border-light); border-radius: var(--la-radius-lg); background: var(--la-color-bg-page); overflow: hidden; }
+  .demo-shell .demo-header { background: var(--la-color-bg-subtle); border-bottom: 1px solid var(--la-color-border-light); padding: var(--la-space-md) var(--la-space-xl); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); display: flex; align-items: center; gap: var(--la-space-md); }
+  .demo-shell .demo-body { padding: var(--la-space-xl); }
+  .demo-block { background: var(--la-color-bg); border: 1px solid var(--la-color-border-light); border-radius: var(--la-radius-md); padding: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+  .demo-block strong { color: var(--la-color-text); display: block; margin-bottom: var(--la-space-xs); font-weight: var(--la-font-weight-semibold); }
+  .spec-row { display: grid; grid-template-columns: 200px 1fr; gap: var(--la-space-md); align-items: start; padding: var(--la-space-sm) 0; border-bottom: 1px solid var(--la-color-border-light); font-size: var(--la-font-size-base); }
+  .spec-row:last-child { border-bottom: 0; }
+  .spec-row strong { font-weight: var(--la-font-weight-semibold); color: var(--la-color-text); }
+  .spec-row code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">Page layouts</h3>
+  <div class="docs-nav-group">
+    <a href="#overview"    class="docs-nav-item" data-nav-id="overview">Overview</a>
+    <a href="#shell"       class="docs-nav-item" data-nav-id="shell">App shell (Sprint 1)</a>
+    <a href="#dashboard"   class="docs-nav-item" data-nav-id="dashboard">Dashboard (Sprint 2)</a>
+    <a href="#legal-area"  class="docs-nav-item" data-nav-id="legal-area">Legal area page (Sprint 3)</a>
+    <a href="#unlock-host" class="docs-nav-item" data-nav-id="unlock-host">Unlock host page (Sprint 4)</a>
+    <a href="#standalone"  class="docs-nav-item" data-nav-id="standalone">Standalone (sign-in)</a>
+    <a href="#principles"  class="docs-nav-item" data-nav-id="principles">Shared principles</a>
+    <a href="#references"  class="docs-nav-item" data-nav-id="references">Cross-references</a>
+  </div>
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../foundations/">← All foundations</a>
+    <a class="docs-nav-item" href="../index.html">Design system home</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero" id="overview">
+  <div class="sub-hero-crumb"><a href="../foundations/">Foundations</a> / Page layouts</div>
+  <h1>Page layouts</h1>
+  <p>Concrete templates for the four surfaces sprints 1–4 build on top of <code>la-app-shell</code>: the dashboard, the legal area page, the unlock host page, and the standalone sign-in. Each template names the grid, the max-widths, the spacing scale, and what owns each region. Numbers come from the sprint handoffs and the design-language layout doc.</p>
+</section>
+
+<div class="docs">
+
+  <section class="docs-section" id="shell">
+    <h2>App shell (Sprint 1)</h2>
+    <p>Three regions: sidebar (left, fixed) · main (centre, scrollable) · aside (right, optional, drawer at narrow viewports). <code>la-app-shell</code> owns the chrome — header bar, breadcrumb, back button, aside toggle. The page composing it provides slot content.</p>
+    <div class="layout-diagram">┌────────┬────────────────────────────────────────────┬────────┐
+│        │ header   breadcrumbs   page title          │  ✕     │
+│        ├────────────────────────────────────────────┤        │
+│ sidebar│                                            │        │
+│        │            main (slot="main")              │ aside  │
+│ Dash   │                                            │ (slot= │
+│ Gov    │                                            │ "aside"│
+│ Empl   │                                            │ )      │
+│ Fund   │                                            │        │
+│        │                                            │        │
+└────────┴────────────────────────────────────────────┴────────┘
+ ↑ fixed ←────── scrolls independently ──────→ ↑ optional</div>
+    <div style="margin-top:16px;">
+      <div class="spec-row"><strong>Sidebar</strong><span><code>la-sidebar</code> — fixed width on desktop, collapses on narrower widths. Fully owned by the shell.</span></div>
+      <div class="spec-row"><strong>Main</strong><span><code>slot="main"</code>. The page-level component lives here (e.g. <code>la-dashboard</code>, <code>la-legal-area-page</code>).</span></div>
+      <div class="spec-row"><strong>Aside</strong><span><code>slot="aside"</code>. Visible inline at desktop; <code>la-app-shell</code> swaps to <code>la-drawer edge="right"</code> below ~1024px (ResizeObserver-driven). Public API unchanged — slot content moves between paths without re-mounting.</span></div>
+      <div class="spec-row"><strong>Header</strong><span>Breadcrumb, back button, aside toggle, page title — all owned by the shell. Set via attributes (<code>page-title</code>, <code>show-aside</code>, <code>show-header</code>).</span></div>
+      <div class="spec-row"><strong>Padding</strong><span>Main content padding: 40px (Sprint 1 standard). Aside content padding: 20px 8px.</span></div>
+    </div>
+    <p style="margin-top:16px;">See <a href="../components/la-app-shell.html"><code>la-app-shell</code></a> for the component reference.</p>
+  </section>
+
+  <section class="docs-section" id="dashboard">
+    <h2>Dashboard (Sprint 2)</h2>
+    <p>Single column, centred, fixed max-width. Two render modes — pre-L0 (welcome form alone) and post-L0 (widget grid). Three widgets in v1: Governance, Employment, Fundraising (IP Protection removed from 1st release).</p>
+    <div class="layout-diagram">                    ←────── max-width 1120px ──────→
+                    ┌────────────────────────────────────┐
+       padding-top  │                                    │
+            80px    │ welcome form (pre-L0)              │
+                    │   OR                               │
+                    │ ┌────────────┬────────────┬──────┐ │
+                    │ │ Governance │ Employment │Fund  │ │
+                    │ │  300×300   │  300×300   │ising │ │
+                    │ │            │            │300×  │ │
+                    │ │            │            │300   │ │
+                    │ └────────────┴────────────┴──────┘ │
+                    │     gap: 24px between widgets      │
+                    └────────────────────────────────────┘</div>
+    <div style="margin-top:16px;">
+      <div class="spec-row"><strong>Container</strong><span><code>max-width: 1120px; margin: 0 auto; padding-top: 80px;</code> — locked in Sprint 2 handoff.</span></div>
+      <div class="spec-row"><strong>Pre-L0 mode</strong><span><code>la-welcome-banner</code> alone. Replaces the widget grid until Corp Gov L0 is complete (backend state check).</span></div>
+      <div class="spec-row"><strong>Post-L0 grid</strong><span>Three widgets (Governance, Employment, Fundraising). Grid shape TBD in Sprint 10 reconciliation.</span></div>
+      <div class="spec-row"><strong>Widget size</strong><span>300×300 fixed — never fluid. The grid holds dimensions regardless of container width.</span></div>
+      <div class="spec-row"><strong>Responsive</strong><span>Desktop only in v1. Mobile/tablet deferred per Sprint 2 scope.</span></div>
+    </div>
+    <div class="demo-shell" style="margin-top:24px;">
+      <div class="demo-header"><strong style="font-size:11px;color:var(--la-color-text-muted);text-transform:uppercase;letter-spacing:0.5px;">Dashboard — post-L0 (illustrative)</strong></div>
+      <div class="demo-body" style="padding-top:80px;">
+        <div style="max-width:1120px;margin:0 auto;">
+          <div style="display:flex;gap:24px;flex-wrap:wrap;">
+            <la-legal-area-widget area="Governance" description="Founding documents, directors, registered agent." status="unlocked" urgent="2" proactive="3"></la-legal-area-widget>
+            <la-legal-area-widget area="Employment" description="People, contracts, equity." status="locked-unlockable" recommended></la-legal-area-widget>
+            <la-legal-area-widget area="Fundraising" description="Cap table, DD readiness, investor data." status="locked-not-unlockable" dependencies='["Governance"]'></la-legal-area-widget>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="docs-section" id="legal-area">
+    <h2>Legal area page (Sprint 3)</h2>
+    <p>Two-column inside the app shell's main slot — insights on the left, the actions widget on the right. The aside slot of <code>la-app-shell</code> stays separately reserved for sub-tab content (Sprint 7+). Both columns scroll inside <code>main</code>; the shell handles outer chrome.</p>
+    <div class="layout-diagram">┌────────┬─────────────────────────────────────────────┬────────┐
+│        │ Governance                                  │        │
+│sidebar │ ┌────────────────────────────┬───────────┐  │ aside  │
+│        │ │                            │           │  │ (sub-  │
+│        │ │  insights column           │  actions  │  │ tab    │
+│        │ │  (tabs: Urgent/Proactive)  │  widget   │  │ at S7+)│
+│        │ │  OR la-empty-state         │           │  │        │
+│        │ │  OR all-clean state        │           │  │        │
+│        │ │                            │           │  │        │
+│        │ └────────────────────────────┴───────────┘  │        │
+└────────┴─────────────────────────────────────────────┴────────┘</div>
+    <div style="margin-top:16px;">
+      <div class="spec-row"><strong>Inside main</strong><span><code>display: grid; grid-template-columns: 1fr 360px; gap: 24px; align-items: start;</code> — proportions match the prototype.</span></div>
+      <div class="spec-row"><strong>Insights column</strong><span><code>la-tabs</code> tabbed container (Urgent / Proactive); insight cards inside. Renders <code>la-empty-state variant="processing"</code> immediately post-unlock; <code>variant="clean"</code> when analysis finishes with no issues.</span></div>
+      <div class="spec-row"><strong>Actions column</strong><span><code>la-actions-widget</code> with per-area button labels (locked in Sprint 3, click handlers wired Sprint 7–9).</span></div>
+      <div class="spec-row"><strong>Page header</strong><span>Owned by <code>la-app-shell</code> — area name as breadcrumb-current, back-to-dashboard via the breadcrumb root.</span></div>
+      <div class="spec-row"><strong>Three states</strong><span>Processing (post-unlock, analysing) → Insights (populated) → All-clean (positive). Right column unchanged across states.</span></div>
+      <div class="spec-row"><strong>Responsive</strong><span>Desktop only in v1. The two columns are deferred from a tablet/mobile rework.</span></div>
+    </div>
+    <div class="demo-shell" style="margin-top:24px;">
+      <div class="demo-header"><strong style="font-size:11px;color:var(--la-color-text-muted);text-transform:uppercase;letter-spacing:0.5px;">Legal area page — processing state (illustrative)</strong></div>
+      <div class="demo-body">
+        <div style="display:grid;grid-template-columns:1fr 360px;gap:24px;align-items:start;max-width:1024px;margin:0 auto;">
+          <div class="demo-block" style="min-height:240px;display:flex;align-items:center;justify-content:center;">
+            <la-empty-state variant="processing" area="Governance"></la-empty-state>
+          </div>
+          <div class="demo-block">
+            <strong>Actions</strong>
+            <span>Actions widget loads here. Buttons disabled in Sprint 3.</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="docs-section" id="unlock-host">
+    <h2>Unlock host page (Sprint 4)</h2>
+    <p>Full-page blocking flow. The locked legal area page hosts <code>la-unlock-panel</code> as the only main-slot content — sidebar + breadcrumb stay visible, but the area's tabbed insights view is replaced entirely until the unlock completes.</p>
+    <div class="layout-diagram">┌────────┬─────────────────────────────────────────────┐
+│        │ Unlock Governance                           │
+│sidebar │ ┌─────────────────────────────────────────┐ │
+│        │ │                                         │ │
+│        │ │       la-unlock-panel                   │ │
+│        │ │       (single panel, all states)        │ │
+│        │ │                                         │ │
+│        │ │   pre-start → active → all-submitted    │ │
+│        │ │   ↓ failed → unlocked → next-prompt     │ │
+│        │ │                                         │ │
+│        │ └─────────────────────────────────────────┘ │
+└────────┴─────────────────────────────────────────────┘
+                       ↑ no aside · no other content</div>
+    <div style="margin-top:16px;">
+      <div class="spec-row"><strong>Sidebar</strong><span>Visible. Locked areas show lock icon; the area being unlocked shows as active.</span></div>
+      <div class="spec-row"><strong>Main slot</strong><span>Holds <code>la-unlock-panel</code> only. No sub-tabs, no actions widget, no insights — the unlock flow takes the full content area.</span></div>
+      <div class="spec-row"><strong>Aside slot</strong><span>Empty. Unlock is a focused task.</span></div>
+      <div class="spec-row"><strong>Width</strong><span>The panel fills the main slot; an inner max-width keeps line lengths readable. <code>la-unlock-panel</code> handles its own internal layout.</span></div>
+      <div class="spec-row"><strong>Exit</strong><span>Sprint 4 framework only — back-to-dashboard via breadcrumb. Per-area destinations on completion arrive in Sprints 7–10.</span></div>
+    </div>
+  </section>
+
+  <section class="docs-section" id="standalone">
+    <h2>Standalone (sign-in, magic-link landing)</h2>
+    <p>Off-shell layout. Sprint 1 sign-in is the canonical example — centred panel, no sidebar, no breadcrumb. Used for any surface where the user isn't signed in or hasn't entered the app proper.</p>
+    <div class="layout-diagram">┌──────────────────────────────────────────────────────────────┐
+│                                                              │
+│                                                              │
+│                       ┌────────────────┐                     │
+│                       │                │                     │
+│                       │   sign-in      │                     │
+│                       │   panel        │                     │
+│                       │                │                     │
+│                       │   email        │                     │
+│                       │   [magic link] │                     │
+│                       │   [Google]     │                     │
+│                       │                │                     │
+│                       └────────────────┘                     │
+│                                                              │
+│                                                              │
+└──────────────────────────────────────────────────────────────┘
+            ↑ centred · max-width ~480px · no chrome</div>
+    <div style="margin-top:16px;">
+      <div class="spec-row"><strong>Container</strong><span>Full viewport. <code>min-height: 100vh; display: flex; align-items: center; justify-content: center;</code></span></div>
+      <div class="spec-row"><strong>Panel</strong><span>Centred. Max-width ~480px. Provides the sign-in form and the OAuth alternative.</span></div>
+      <div class="spec-row"><strong>No app shell</strong><span>Sign-in is pre-app. The user isn't authenticated, so the sidebar / dashboard chrome is hidden.</span></div>
+    </div>
+  </section>
+
+  <section class="docs-section" id="principles">
+    <h2>Shared principles</h2>
+    <ul class="docs-list">
+      <li><strong>White first.</strong> Surfaces are white or near-white; the page background is <code>--la-color-bg-page</code>. No coloured section backgrounds.</li>
+      <li><strong>Borders structural, not decorative.</strong> <code>--la-color-border-light</code> for layout dividers; <code>--la-color-border</code> for interactive components.</li>
+      <li><strong>Shadows only on floating elements.</strong> Modals, dropdowns, toasts — never on static cards.</li>
+      <li><strong>Library-level max-width is 1280px</strong> (general content). Sprint 2 dashboard tightens to 1120px specifically; Sprint 3 legal area uses the natural width inside <code>la-app-shell</code>'s main slot. Don't widen beyond 1280px without a layout review.</li>
+      <li><strong>Card grids use <code>auto-fill</code>.</strong> Generic card layouts: <code>grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 14px;</code> — never fixed column counts. The Sprint 2 dashboard is the exception: fixed because the legal areas are a known set.</li>
+      <li><strong>Generous padding.</strong> Content is never crowded. Defaults — content area top padding 24px, horizontal 28px; Sprint 2 widens dashboard top padding to 80px.</li>
+      <li><strong>Responsive degrades cleanly.</strong> Desktop ≥1024px, tablet 768–1023, mobile &lt;768. Sprints 1–4 ship desktop only; tablet and mobile are deferred reworks. Container queries run at component level (<code>la-app-shell</code> aside drawer flip), media queries at page level.</li>
+    </ul>
+  </section>
+
+  <section class="docs-section" id="references">
+    <h2>Cross-references</h2>
+    <ul class="docs-list">
+      <li><a href="../components/la-app-shell.html">la-app-shell</a> — owns the shell layout for every signed-in surface</li>
+      <li><a href="../components/la-sidebar.html">la-sidebar</a> — left rail navigation</li>
+      <li><a href="../components/la-drawer.html">la-drawer</a> — aside overlay at narrow viewports</li>
+      <li><a href="../foundations/foundations-forms.html">Forms</a> — what lives inside the welcome form (Sprint 2) and the unlock multi-field steps (Sprint 4)</li>
+    </ul>
+  </section>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typography — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 880px; }
+
+    .sub-hero h1 {
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .sub-hero p {
+      font-size: 15px;
+      color: var(--doc-text-2);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+    .sub-hero-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .sub-hero-crumb a { color: var(--doc-text-3); }
+    .sub-hero-crumb a:hover { color: var(--doc-accent); }
+
+    /* Principle cards at the top */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .principle {
+      padding: 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+    .principle strong {
+      display: block;
+      color: var(--doc-text);
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    /* Size row — token + visual sample on one line */
+    .size-row {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .size-item {
+      display: flex;
+      align-items: baseline;
+      gap: 24px;
+      padding: 14px 18px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+    }
+    .size-item + .size-item { margin-top: -1px; }
+    .size-meta {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text-3);
+      width: 220px;
+      flex-shrink: 0;
+    }
+    .size-meta-name {
+      display: block;
+      color: var(--doc-text);
+    }
+    .size-meta-value {
+      display: block;
+      color: var(--doc-text-3);
+    }
+    .size-sample {
+      flex: 1;
+      color: var(--doc-text);
+    }
+
+    /* Weight row */
+    .weight-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .weight-item {
+      padding: 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+    }
+    .weight-sample {
+      font-size: 18px;
+      color: var(--doc-text);
+      margin-bottom: 8px;
+    }
+    .weight-meta {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+    .weight-meta-name { color: var(--doc-text); }
+
+    /* Role mapping table */
+    .role-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .role-example {
+      padding: 20px 24px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+    }
+    .role-example-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+      margin-bottom: 10px;
+    }
+    .role-example-demo { margin-bottom: 14px; }
+    .role-example-used-in {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      align-items: center;
+    }
+    .role-example-used-in strong {
+      color: var(--doc-text-2);
+      font-weight: 500;
+    }
+    .role-example-used-in code {
+      font-size: 11px;
+    }
+
+    /* Don'ts list */
+    .dont-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dont {
+      padding: 12px 16px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      color: #991b1b;
+      line-height: 1.55;
+    }
+    .dont strong { color: #7f1d1d; font-weight: 600; }
+    .dont code { background: rgba(127, 29, 29, 0.08); border-color: rgba(127, 29, 29, 0.2); color: #7f1d1d; }
+
+    /* Compact code block */
+    .code-block {
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      padding: 16px 20px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12.5px;
+      color: var(--doc-text);
+      line-height: 1.7;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .code-block .kw  { color: #7c3aed; }
+    .code-block .at  { color: #2563eb; }
+    .code-block .str { color: #15803d; }
+    .code-block .cm  { color: var(--doc-text-faint); font-style: italic; }
+
+    .source-ref {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .source-ref-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      text-decoration: none;
+      color: var(--doc-text);
+    }
+    .source-ref-item:hover {
+      border-color: var(--doc-accent);
+      color: var(--doc-text);
+    }
+    .source-ref-item code {
+      font-size: 12px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--doc-text-2);
+    }
+    .source-ref-item .source-ref-desc {
+      color: var(--doc-text-3);
+      font-size: 12px;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Typography</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="principles" href="#principles">Principles</a>
+<a class="docs-nav-item" data-nav-id="scale" href="#scale">The scale</a>
+<a class="docs-nav-item" data-nav-id="weights" href="#weights">Weights</a>
+<a class="docs-nav-item" data-nav-id="line-height" href="#line-height">Line height</a>
+<a class="docs-nav-item" data-nav-id="roles" href="#roles">Use in practice</a>
+<a class="docs-nav-item" data-nav-id="headings" href="#headings">Headings</a>
+<a class="docs-nav-item" data-nav-id="body" href="#body">Body copy</a>
+<a class="docs-nav-item" data-nav-id="labels" href="#labels">Labels &amp; meta</a>
+<a class="docs-nav-item" data-nav-id="code" href="#code">In code</a>
+<a class="docs-nav-item" data-nav-id="donts" href="#donts">Don'ts</a>
+<a class="docs-nav-item" data-nav-id="source" href="#source">Source references</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../foundations.html">← All foundations</a>
+<a class="docs-nav-item" href="../index.html">Design system home</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero">
+<div class="sub-hero-crumb">
+<a href="../foundations.html">Foundations</a> · Typography
+          </div>
+<h1>Typography</h1>
+<p>
+            Inter across the system. Hierarchy comes from size, weight, and grey scale — never
+            colour. The scale has nine steps; pick the smallest one that reads comfortably for
+            the role. If the value you need isn't on the scale, that's a design conversation,
+            not a new size.
+          </p>
+</section>
+<div class="docs">
+<!-- PRINCIPLES ─────────────────────────────────────────── -->
+<section class="docs-section" id="principles">
+<h2>Principles</h2>
+<p>
+              From <a href="../../../CLAUDE.md"><code>CLAUDE.md</code></a>'s design-language
+              rules and the way the system actually reads in product. Four non-negotiables.
+            </p>
+<div class="principle-grid">
+<div class="principle">
+<strong>Inter only</strong>
+                System-wide, loaded globally. <code>--la-font-family</code>. Monospace
+                (<code>ui-monospace</code>) is allowed for code, token names, and IDs — never
+                for body or headings.
+              </div>
+<div class="principle">
+<strong>Headings are weight 600 — never 700</strong>
+                Bold (700) is in the token scale for edge cases and direct imports, but every
+                heading in every component uses semibold. Bolder heading weight crowds
+                adjacent body copy.
+              </div>
+<div class="principle">
+<strong>Hierarchy through weight + grey scale</strong>
+                Never through colour. Blue/red/green mean something specific; using them for
+                emphasis dilutes their signal.
+              </div>
+<div class="principle">
+<strong>Two-register capitalisation, never all-caps</strong>
+                Structural labels (navigation, buttons, table headers) use Title Case.
+                Explanatory copy (insight headlines, helper text, empty states) uses sentence case.
+                See the <a href="../foundations/copy.html">Copy &amp; Capitalisation</a> page.
+              </div>
+</div>
+</section>
+<!-- SCALE ──────────────────────────────────────────────── -->
+<section class="docs-section" id="scale">
+<h2>The scale</h2>
+<p>
+              Nine steps from 10px to 24px. The scale favours tight increments at small sizes
+              (10/11/12/13/14) so you can pick the right density for dense chrome, then jumps
+              to 16/18/20/24 for hierarchy. Each token name maps to one value — never
+              override per-instance.
+            </p>
+<div class="size-row">
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-4xl</span>
+<span class="size-meta-value">24px</span>
+</span>
+<span class="size-sample" style="font-size:24px;font-weight:600;">The quick brown fox</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-3xl</span>
+<span class="size-meta-value">20px</span>
+</span>
+<span class="size-sample" style="font-size:20px;font-weight:600;">The quick brown fox</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-2xl</span>
+<span class="size-meta-value">18px</span>
+</span>
+<span class="size-sample" style="font-size:18px;font-weight:600;">The quick brown fox</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-xl</span>
+<span class="size-meta-value">16px</span>
+</span>
+<span class="size-sample" style="font-size:16px;font-weight:500;">The quick brown fox</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-lg</span>
+<span class="size-meta-value">14px</span>
+</span>
+<span class="size-sample" style="font-size:14px;font-weight:600;">The quick brown fox jumps over the lazy dog</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-base</span>
+<span class="size-meta-value">13px</span>
+</span>
+<span class="size-sample" style="font-size:13px;">Body copy — one to two sentences maximum, per the copy rules.</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-md</span>
+<span class="size-meta-value">12px</span>
+</span>
+<span class="size-sample" style="font-size:12px;">Dense chrome — table cells, inline controls, tight nav items.</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-sm</span>
+<span class="size-meta-value">11px</span>
+</span>
+<span class="size-sample" style="font-size:11px;color:var(--doc-text-3);">Meta text — captions, timestamps, secondary labels.</span>
+</div>
+<div class="size-item">
+<span class="size-meta">
+<span class="size-meta-name">--la-font-size-xs</span>
+<span class="size-meta-value">10px</span>
+</span>
+<span class="size-sample" style="font-size:10px;color:var(--doc-text-3);">Smallest legible step — status chips, badges.</span>
+</div>
+</div>
+</section>
+<!-- WEIGHTS ────────────────────────────────────────────── -->
+<section class="docs-section" id="weights">
+<h2>Weights</h2>
+<p>Four weights. In product, only three are in everyday use: <em>normal</em> for
+            body, <em>medium</em> for subtle emphasis and nav/button labels, <em>semibold</em>
+            for headings. Bold (700) is available for edge cases outside component UI (logo
+            lockups, hero moments) but never for standard headings.</p>
+<div class="weight-row">
+<div class="weight-item">
+<div class="weight-sample" style="font-weight:400;">The quick brown fox</div>
+<div class="weight-meta">
+<span class="weight-meta-name">--la-font-weight-normal</span> · 400
+                </div>
+</div>
+<div class="weight-item">
+<div class="weight-sample" style="font-weight:500;">The quick brown fox</div>
+<div class="weight-meta">
+<span class="weight-meta-name">--la-font-weight-medium</span> · 500
+                </div>
+</div>
+<div class="weight-item">
+<div class="weight-sample" style="font-weight:600;">The quick brown fox</div>
+<div class="weight-meta">
+<span class="weight-meta-name">--la-font-weight-semibold</span> · 600 · heading default
+                </div>
+</div>
+<div class="weight-item">
+<div class="weight-sample" style="font-weight:700;">The quick brown fox</div>
+<div class="weight-meta">
+<span class="weight-meta-name">--la-font-weight-bold</span> · 700 · avoid for UI
+                </div>
+</div>
+</div>
+</section>
+<!-- LINE HEIGHT ────────────────────────────────────────── -->
+<section class="docs-section" id="line-height">
+<h2>Line height</h2>
+<p>
+              One value, applied globally on <code>:host</code>:
+              <code>--la-line-height: 1.5</code>. Inherit it — don't override unless you're
+              dealing with a specific layout need (dense table rows, icons centred against
+              text).
+            </p>
+<p>
+              Tight body copy (&lt;1.4) looks crowded. Roomy copy (&gt;1.6) breaks up
+              headings. 1.5 sits in the common-sense middle for Inter at every size on the
+              scale.
+            </p>
+</section>
+<!-- ROLES ──────────────────────────────────────────────── -->
+<section class="docs-section" id="roles">
+<h2>Use in practice</h2>
+<p>
+              Sizes map to roles. The same size never does two different jobs across
+              components. Every example below cites a real component using the token.
+            </p>
+<div class="role-examples">
+<div class="role-example">
+<div class="role-example-label">Page title — 3xl (20px) / 600</div>
+<div class="role-example-demo" style="font-size:20px;font-weight:600;color:var(--doc-text);">Employment</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-legal-area-page</code>
+</div>
+</div>
+<div class="role-example">
+<div class="role-example-label">Modal / dialog heading — 2xl (18px) / 600</div>
+<div class="role-example-demo" style="font-size:18px;font-weight:600;color:var(--doc-text);">Review this issue</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-modal</code>, <code>la-insight-modal</code>
+</div>
+</div>
+<div class="role-example">
+<div class="role-example-label">Section header / alert — xl (16px) / 500–600</div>
+<div class="role-example-demo" style="font-size:16px;font-weight:500;color:var(--doc-text);">Documents</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-document-page</code>, <code>la-alert</code>, <code>la-icon-button</code> (icon size only)
+                </div>
+</div>
+<div class="role-example">
+<div class="role-example-label">Widget title / card headline — lg (14px) / 600</div>
+<div class="role-example-demo" style="font-size:14px;font-weight:600;color:var(--doc-text);">2 processing, 1 complete</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-processing-widget</code>, <code>la-insight-card</code> headline,
+                  <code>la-actions-widget</code>, <code>la-dd-readiness</code>,
+                  <code>la-anticipation-teaser</code>
+</div>
+</div>
+<div class="role-example">
+<div class="role-example-label">Body copy / row name — base (13px) / 400–500</div>
+<div class="role-example-demo" style="font-size:13px;color:var(--doc-text);">Employment-Contract-JSmith.pdf</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-document-item</code> name, <code>la-investor-card</code> name, body copy throughout
+                </div>
+</div>
+<div class="role-example">
+<div class="role-example-label">Dense chrome — md (12px) / 400–600</div>
+<div class="role-example-demo" style="font-size:12px;color:var(--doc-text);">Inline nav, table cells, button labels in tight contexts</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-button</code> default label, nav items, table rows
+                </div>
+</div>
+<div class="role-example">
+<div class="role-example-label">Meta / caption — sm (11px) / 400</div>
+<div class="role-example-demo" style="font-size:11px;color:var(--doc-text-3);">Employment · 22 Apr 2026</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-document-item</code> association, <code>la-list-item</code> meta, deadlines, timestamps
+                </div>
+</div>
+<div class="role-example">
+<div class="role-example-label">Chip / badge — xs (10px) / 600</div>
+<div class="role-example-demo">
+<span style="font-size:10px;font-weight:600;color:var(--doc-accent);background:var(--doc-accent-soft);padding:2px 8px;border-radius:99px;letter-spacing:0.2px;">Urgent</span>
+</div>
+<div class="role-example-used-in">
+<strong>Used in:</strong>
+<code>la-badge</code>, status-indicator-adjacent labels
+                </div>
+</div>
+</div>
+</section>
+<!-- HEADINGS ───────────────────────────────────────────── -->
+<section class="docs-section" id="headings">
+<h2>Headings</h2>
+<p>
+              Four levels, each with a clear job. Don't skip levels for visual effect — semantic
+              hierarchy drives accessibility and document outlines.
+            </p>
+<table class="docs-table">
+<thead>
+<tr><th>Level</th><th>Size token</th><th>Weight</th><th>Role</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>H1</td>
+<td>--la-font-size-3xl (20px) or -4xl (24px)</td>
+<td>600</td>
+<td>Page title. One per page. Rarely used inside components.</td>
+</tr>
+<tr>
+<td>H2</td>
+<td>--la-font-size-2xl (18px)</td>
+<td>600</td>
+<td>Major section heading — modal title, dialog heading, settings group.</td>
+</tr>
+<tr>
+<td>H3</td>
+<td>--la-font-size-xl (16px)</td>
+<td>500 or 600</td>
+<td>Sub-section inside a component — alert content, section of a widget.</td>
+</tr>
+<tr>
+<td>H4</td>
+<td>--la-font-size-lg (14px)</td>
+<td>600</td>
+<td>Widget titles, card headlines — the small-but-structural heading.</td>
+</tr>
+</tbody>
+</table>
+<div class="docs-note">
+<strong>One page title rule.</strong>
+              Every page has exactly one H1. In this system that's either the
+              <code>la-app-shell</code> page header or the route's page component — not
+              anything inside a widget. If you're tempted to add a second H1 to emphasise
+              something, use an H2 and raise the weight.
+            </div>
+</section>
+<!-- BODY ───────────────────────────────────────────────── -->
+<section class="docs-section" id="body">
+<h2>Body copy</h2>
+<p>Rules from <a href="../../../CLAUDE.md#copy-rules"><code>CLAUDE.md</code></a> — the ones that matter most for type.</p>
+<ul>
+<li><strong>One to two sentences max.</strong> If you need three, the surrounding
+                UI is missing an affordance or a link out.</li>
+<li><strong>Active voice.</strong> "We added a clause" not "A clause was added."</li>
+<li><strong>British English.</strong> Organisation, authorised, licence (noun),
+                colour.</li>
+<li><strong>Verb-first CTAs, sentence case.</strong> "Send for signature",
+                "Add employee", "View details".</li>
+<li><strong>Use the person's name.</strong> Never "the recipient" or "the employee"
+                when a name is known.</li>
+</ul>
+<p style="margin-top:16px;">
+              Body default: <code>--la-font-size-base</code> (13px), <code>font-weight: 400</code>,
+              colour <code>--la-color-text</code>. For secondary body (helper text below an
+              input, meta lines under a heading), drop to <code>--la-color-text-secondary</code> —
+              don't shrink the size unless the role actually changes.
+            </p>
+</section>
+<!-- LABELS ─────────────────────────────────────────────── -->
+<section class="docs-section" id="labels">
+<h2>Labels &amp; meta</h2>
+<p>
+              Two sizes do most of the small-text work: <code>--la-font-size-sm</code> (11px)
+              for meta and captions, <code>--la-font-size-xs</code> (10px) for chips and
+              badges. <strong>Don't</strong> reach lower — 9px and below fail a11y contrast on
+              typical product screens.
+            </p>
+<p>
+              Weight for labels: 600 when they need to pop off a surface (chips, eyebrows),
+              400 when they're descriptive (captions, timestamps). Colour drives emphasis:
+              <code>--la-color-text-muted</code> for most meta,
+              <code>--la-color-text-secondary</code> when the meta carries real meaning.
+            </p>
+</section>
+<!-- IN CODE ────────────────────────────────────────────── -->
+<section class="docs-section" id="code">
+<h2>In code</h2>
+<p>
+              Every Lit component imports <code>tokens</code> from
+              <code>src/styles/tokens.js</code> and includes it at the top of
+              <code>static override styles</code>. That puts the custom properties in scope
+              inside the shadow root.
+            </p>
+<div class="code-block"><span class="kw">import</span> {tokens} <span class="kw">from</span> <span class="str">'../styles/tokens.js'</span>;
+
+<span class="kw">static override</span> styles = [
+  tokens,
+  css`
+    .headline {
+      <span class="at">font-size</span>: <span class="kw">var</span>(--la-font-size-lg);
+      <span class="at">font-weight</span>: <span class="kw">var</span>(--la-font-weight-semibold);
+      <span class="at">color</span>: <span class="kw">var</span>(--la-color-text);
+    }
+    .body {
+      <span class="at">font-size</span>: <span class="kw">var</span>(--la-font-size-base);
+      <span class="at">color</span>: <span class="kw">var</span>(--la-color-text-secondary);
+    }
+    .meta {
+      <span class="at">font-size</span>: <span class="kw">var</span>(--la-font-size-sm);
+      <span class="at">color</span>: <span class="kw">var</span>(--la-color-text-muted);
+    }
+  `,
+];</div>
+</section>
+<!-- DON'TS ─────────────────────────────────────────────── -->
+<section class="docs-section" id="donts">
+<h2>Don'ts</h2>
+<div class="dont-list">
+<div class="dont">
+<strong>Don't use weight 700 for headings.</strong>
+                Semibold (600) is the heading weight system-wide. 700 only belongs in
+                external/marketing surfaces or logo lockups — never in component UI.
+              </div>
+<div class="dont">
+<strong>Don't use all-caps.</strong>
+                Not for labels, not for eyebrows, not for section headings. Use sentence case
+                and let size + weight + grey scale carry the hierarchy.
+              </div>
+<div class="dont">
+<strong>Don't use colour for hierarchy.</strong>
+                Blue, red, green, amber all have semantic roles (processing, danger, success,
+                warning). Using them to draw attention to a heading dilutes the real signal.
+              </div>
+<div class="dont">
+<strong>Don't hardcode <code>font-size: 13px</code>.</strong>
+                Use the token. If the value you need isn't on the scale, it's a design
+                conversation — not a new pixel.
+              </div>
+<div class="dont">
+<strong>Don't introduce new font sizes between the steps.</strong>
+                The scale is deliberately coarse above 14px. If you want something
+                "slightly bigger than 14", pick 16 — or challenge the design.
+              </div>
+</div>
+</section>
+<!-- SOURCE ─────────────────────────────────────────────── -->
+<section class="docs-section" id="source">
+<h2>Source references</h2>
+<p>The authoritative definitions — links open in the repo.</p>
+<div class="source-ref">
+<a class="source-ref-item" href="../../../src/styles/tokens.ts">
+<code>src/styles/tokens.ts</code>
+<span class="source-ref-desc">Font size / weight / line-height tokens (Typography block).</span>
+</a>
+<a class="source-ref-item" href="../../../CLAUDE.md">
+<code>CLAUDE.md § Design language</code>
+<span class="source-ref-desc">Typography rule: Inter, weight 600, never 700, never all-caps.</span>
+</a>
+<a class="source-ref-item" href="../../../CLAUDE.md">
+<code>CLAUDE.md § Copy rules</code>
+<span class="source-ref-desc">Body copy, CTAs, British English, active voice.</span>
+</a>
+<a class="source-ref-item" href="../../../design-language/typography.md">
+<code>design-language/typography.md</code>
+<span class="source-ref-desc">Long-form design-language notes (embedded below).</span>
+</a>
+</div>
+<div class="md-rationale" data-path="../../../design-language/typography.md"></div>
+</section>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

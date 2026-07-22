@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-app-shell — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-app-shell</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-app-shell</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-app-shell</h1>
+<p>The root layout container for every screen. Positions the sidebar on the left and a content area on the right. The sidebar and page header never scroll — only the main content area does. All pages render inside this shell.</p>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Default — sidebar expanded, no header</div>
+<div class="shell-frame">
+<la-app-shell>
+<la-sidebar active-area="dashboard" logo-src="../assets/brand/logo-mark.svg" slot="sidebar" unlocked-areas='["corp-gov"]' user-initials="AC" user-name="Alex Chen" user-role="Acme Corp. · Founder" wordmark-src="../assets/brand/logo-wordmark.svg"></la-sidebar>
+<div slot="main" style="padding-block:var(--la-space-2xl);font-size:13px;color:var(--doc-text-2);">Page content goes here.</div>
+</la-app-shell>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Page header — breadcrumbs and back button</div>
+<div class="shell-frame">
+<la-app-shell id="snap-bc" show-back="" show-header="">
+<la-sidebar active-area="corp-gov" active-subtab="company-manual" logo-src="../assets/brand/logo-mark.svg" slot="sidebar" unlocked-areas='["corp-gov","fundraising"]' user-initials="AC" user-name="Alex Chen" user-role="Acme Corp. · Founder" wordmark-src="../assets/brand/logo-wordmark.svg"></la-sidebar>
+<div slot="main" style="padding-block:var(--la-space-2xl);font-size:13px;color:var(--doc-text-2);">Page content goes here.</div>
+</la-app-shell>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Collapsed sidebar — icon-only mode</div>
+<div class="shell-frame">
+<la-app-shell id="snap-collapsed">
+<la-sidebar active-area="corp-gov" collapsed="" logo-src="../assets/brand/logo-mark.svg" slot="sidebar" unlocked-areas='["corp-gov","fundraising"]' user-initials="AC" user-name="Alex Chen" user-role="Acme Corp. · Founder" wordmark-src="../assets/brand/logo-wordmark.svg"></la-sidebar>
+<div slot="main" style="padding-block:var(--la-space-2xl);font-size:13px;color:var(--doc-text-2);">Page content goes here.</div>
+</la-app-shell>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Aside panel — open</div>
+<div class="shell-frame">
+<la-app-shell id="snap-aside" show-aside="" show-header="">
+<la-sidebar active-area="corp-gov" logo-src="../assets/brand/logo-mark.svg" slot="sidebar" unlocked-areas='["corp-gov","fundraising"]' user-initials="AC" user-name="Alex Chen" user-role="Acme Corp. · Founder" wordmark-src="../assets/brand/logo-wordmark.svg"></la-sidebar>
+<la-icon-button label="Toggle aside" onclick="document.getElementById('snap-aside').dispatchEvent(new CustomEvent('la-toggle-aside',{bubbles:true,composed:true}))" size="sm" slot="header-actions"><i class="ph ph-sidebar-simple"></i></la-icon-button>
+<div slot="aside" style="padding:20px;font-size:13px;color:var(--doc-text-2);">Aside panel content goes here.</div>
+<div slot="main" style="padding-block:var(--la-space-2xl);font-size:13px;color:var(--doc-text-2);">Page content goes here.</div>
+</la-app-shell>
+</div>
+</div>
+
+<div id="anatomy" style="margin-top:32px;margin-bottom:32px;">
+<div class="preview-header" style="margin-top:0;">
+<h1>Anatomy</h1>
+<p>The shell is a non-scrolling flex row: a fixed sidebar on the left and a content column on the right. The content column stacks the optional page header above a body row that splits into a scrollable main area and an optional aside panel.</p>
+</div>
+<div style="border:1.5px solid var(--doc-border);border-radius:var(--doc-r-lg);overflow:hidden;background:var(--doc-surface);margin-top:8px;">
+<div style="display:flex;min-height:260px;">
+<!-- Sidebar slot -->
+<div style="width:160px;flex-shrink:0;border-right:1.5px dashed var(--doc-border);padding:20px 16px;background:var(--doc-surface-2);display:flex;flex-direction:column;gap:8px;">
+<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--doc-accent);background:var(--doc-accent-soft);padding:2px 7px;border-radius:99px;letter-spacing:0.2px;">slot: sidebar</span>
+<p style="font-size:11px;color:var(--doc-text-3);line-height:1.6;margin:0;"><code style="font-size:10px;">la-sidebar</code><br/>Full height. Never scrolls. Collapsible.</p>
+</div>
+<!-- Content column -->
+<div style="flex:1;display:flex;flex-direction:column;min-width:0;">
+<!-- Page header (optional) -->
+<div style="border-bottom:1.5px dashed var(--doc-border);padding:16px 20px;background:var(--doc-surface-2);flex-shrink:0;display:flex;gap:40px;justify-content:space-between;align-items:flex-start;">
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div style="display:flex;align-items:center;gap:8px;">
+<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--doc-text-3);background:var(--doc-border);padding:2px 7px;border-radius:99px;letter-spacing:0.2px;">page header</span>
+<span style="font-size:10px;color:var(--doc-text-faint);">show-header</span>
+</div>
+<p style="font-size:11px;color:var(--doc-text-3);line-height:1.6;margin:0;"><code style="font-size:10px;">page-title</code> · <code style="font-size:10px;">breadcrumbs</code> · <code style="font-size:10px;">show-back</code><br/>Never scrolls. Optional — many pages manage their own title.</p>
+</div>
+<div style="flex-shrink:0;display:flex;flex-direction:column;gap:8px;text-align:right;align-items:flex-end;">
+<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--doc-accent);background:var(--doc-accent-soft);padding:2px 7px;border-radius:99px;letter-spacing:0.2px;">slot: header-actions</span>
+<p style="font-size:11px;color:var(--doc-text-3);line-height:1.6;margin:0;">Right-aligned. Buttons, widgets.</p>
+</div>
+</div>
+<!-- Body row -->
+<div style="flex:1;display:flex;min-height:0;">
+<!-- Main slot -->
+<div style="flex:1;padding:20px;display:flex;flex-direction:column;gap:8px;">
+<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--doc-accent);background:var(--doc-accent-soft);padding:2px 7px;border-radius:99px;letter-spacing:0.2px;align-self:flex-start;">slot: main</span>
+<p style="font-size:11px;color:var(--doc-text-3);line-height:1.6;margin:0;">Page content. The only independently scrolling region. <code style="font-size:10px;">overflow-y: auto</code>.</p>
+</div>
+<!-- Aside slot -->
+<div style="width:140px;flex-shrink:0;border-left:1.5px dashed var(--doc-border);padding:20px 16px;background:var(--doc-surface-2);display:flex;flex-direction:column;gap:8px;">
+<div style="display:flex;flex-direction:column;gap:4px;align-items:flex-start;">
+<span style="display:inline-block;font-size:10px;font-weight:600;color:var(--doc-accent);background:var(--doc-accent-soft);padding:2px 7px;border-radius:99px;letter-spacing:0.2px;">slot: aside</span>
+<span style="font-size:10px;color:var(--doc-text-faint);">show-aside</span>
+</div>
+<p style="font-size:11px;color:var(--doc-text-3);line-height:1.6;margin:0;">Inline at desktop. Slide-in overlay at tablet (≤ 1023px content width).</p>
+</div>
+</div><!-- /body row -->
+</div><!-- /content column -->
+</div><!-- /flex row -->
+</div><!-- /diagram -->
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-app-shell</h2>
+    <p>The root layout container for every screen. Positions the sidebar on the left and a content area on the right. The sidebar and page header never scroll — only the main content area does. All pages render inside this shell.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>pageTitle</td>
+          <td><span class="default">pageTitle</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Page title shown in the header (fallback when no breadcrumbs)</td>
+        </tr>
+      
+        <tr>
+          <td>breadcrumbs</td>
+          <td><span class="default">breadcrumbs</span></td>
+          <td><span class="type">BreadcrumbItem[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Breadcrumb trail — last item is current page (no link)</td>
+        </tr>
+      
+        <tr>
+          <td>showBack</td>
+          <td><span class="default">showBack</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>When true, shows a subtle back affordance in the header</td>
+        </tr>
+      
+        <tr>
+          <td>showHeader</td>
+          <td><span class="default">show-header</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>When true, renders the page header. Default is hidden.</td>
+        </tr>
+      
+        <tr>
+          <td>showAside</td>
+          <td><span class="default">show-aside</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>When true, renders the right aside panel (slot="aside")</td>
+        </tr>
+      
+        <tr>
+          <td>_asideOpen</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Tracks whether the aside overlay is open (tablet only)</td>
+        </tr>
+      
+        <tr>
+          <td>_isTablet</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Tracks whether the content area is narrow enough to use the drawer</td>
+        </tr>
+      
+        <tr>
+          <td>_onToggleAside</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_resizeObserver</td>
+          <td>—</td>
+          <td><span class="type">ResizeObserver | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-back</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All tokens are defined in <code>src/styles/tokens.ts</code> and can be overridden per-instance via CSS custom properties.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:var(--doc-text-3);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">Page header</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Default</th><th>Controls</th></tr></thead>
+<tbody>
+<tr><td>--la-ph-height</td><td><span class="default">40px</span></td><td>Header bar height</td></tr>
+<tr><td>--la-ph-padding-left</td><td><span class="default">32px</span></td><td>Left padding</td></tr>
+<tr><td>--la-ph-padding-right</td><td><span class="default">20px</span></td><td>Right padding</td></tr>
+<tr><td>--la-ph-bg</td><td><span class="default">#FAFAFA</span></td><td>Header background</td></tr>
+<tr><td>--la-ph-title-size</td><td><span class="default">18px</span></td><td>Page title font size</td></tr>
+<tr><td>--la-ph-title-weight</td><td><span class="default">600</span></td><td>Page title font weight</td></tr>
+<tr><td>--la-ph-gap</td><td><span class="default">0px</span></td><td>Gap below the header</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:var(--doc-text-3);text-transform:uppercase;letter-spacing:0.5px;font-weight:600;">Content area &amp; aside</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Default</th><th>Controls</th></tr></thead>
+<tbody>
+<tr><td>--la-main-margin</td><td><span class="default">8px</span></td><td>Margin around the main card</td></tr>
+<tr><td>--la-main-radius</td><td><span class="default">var(--la-radius-md)</span></td><td>Border radius of the main card</td></tr>
+<tr><td>--la-main-shadow</td><td><span class="default">var(--la-shadow-md)</span></td><td>Shadow on the main card</td></tr>
+<tr><td>--la-color-bg-page</td><td><span class="default">#FFFFFF</span></td><td>Main card background</td></tr>
+<tr><td>--la-aside-width</td><td><span class="default">320px</span></td><td>Aside panel width (desktop)</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:var(--doc-text-3);font-size:12px;">Sidebar and content only</p>
+<div class="docs-code"><span class="kw">&lt;la-app-shell</span>
+<span class="at">style</span>=<span class="str">"height:100vh"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-sidebar</span>
+<span class="at">slot</span>=<span class="str">"sidebar"</span> <span class="at">...</span><span class="kw">&gt;&lt;/la-sidebar&gt;</span>
+<span class="kw">&lt;la-page</span>
+<span class="at">slot</span>=<span class="str">"main"</span><span class="kw">&gt;&lt;/la-page&gt;</span>
+<span class="kw">&lt;/la-app-shell&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:var(--doc-text-3);font-size:12px;">With page header and breadcrumbs</p>
+<div class="docs-code"><span class="kw">&lt;la-app-shell</span>
+<span class="at">show-header</span> <span class="at">show-back</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-sidebar</span>
+<span class="at">slot</span>=<span class="str">"sidebar"</span> <span class="at">...</span><span class="kw">&gt;&lt;/la-sidebar&gt;</span>
+<span class="kw">&lt;la-page</span>
+<span class="at">slot</span>=<span class="str">"main"</span><span class="kw">&gt;&lt;/la-page&gt;</span>
+<span class="kw">&lt;/la-app-shell&gt;</span>
+<span class="cm">// Set breadcrumbs via JS:</span>
+shell.breadcrumbs = [
+  { label: <span class="str">'Dashboard'</span> },
+  { label: <span class="str">'Governance'</span> },
+  { label: <span class="str">'Documents'</span> },
+];</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:var(--doc-text-3);font-size:12px;">With aside panel and header actions</p>
+<div class="docs-code"><span class="kw">&lt;la-app-shell</span>
+<span class="at">show-header</span> <span class="at">show-aside</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-sidebar</span>
+<span class="at">slot</span>=<span class="str">"sidebar"</span> <span class="at">...</span><span class="kw">&gt;&lt;/la-sidebar&gt;</span>
+<span class="kw">&lt;la-button</span>
+<span class="at">slot</span>=<span class="str">"header-actions"</span><span class="kw">&gt;</span>Export<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;la-page</span>
+<span class="at">slot</span>=<span class="str">"main"</span><span class="kw">&gt;&lt;/la-page&gt;</span>
+<span class="kw">&lt;la-ai-chat</span>
+<span class="at">slot</span>=<span class="str">"aside"</span><span class="kw">&gt;&lt;/la-ai-chat&gt;</span>
+<span class="kw">&lt;/la-app-shell&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:var(--doc-text-3);font-size:12px;">Triggering aside from a child</p>
+<div class="docs-code"><span class="cm">// Any component inside the shell</span>
+<span class="cm">// can open the aside:</span>
+element.dispatchEvent(
+  <span class="kw">new</span> CustomEvent(
+    <span class="str">'la-toggle-aside'</span>,
+    {
+      bubbles: <span class="kw">true</span>,
+      composed: <span class="kw">true</span>,
+    }
+  )
+);</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Height requirement</strong> — <code>la-app-shell</code> is <code>display: flex; height: 100%</code>. The parent must provide an explicit height — typically <code>height: 100vh</code> on the body or a full-height wrapper.</div>
+<div class="docs-note"><strong>Container query, not viewport</strong> — The aside responsive breakpoint is a CSS container query on the content area (<code>container-name: app-shell-content</code>). The aside switches to overlay mode when the content area is ≤ 1023px wide, regardless of viewport size. A collapsed sidebar widens the content area and can shift the breakpoint without any JS.</div>
+<div class="docs-note"><strong>Breadcrumb array</strong> — Set via JS property only (not an HTML attribute) since the value is an array: <code>shell.breadcrumbs = [...]</code>. When <code>breadcrumbs</code> is non-empty, it overrides <code>pageTitle</code>.</div>
+<div class="docs-note"><strong>Aside overlay close</strong> — At tablet widths a close button (×) is automatically rendered at the top of the aside, and tapping the backdrop closes the panel. Both close via internal state — no event is emitted.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    // Seed snapshots — wait for la-app-shell to be registered
+        // (bundle.js is deferred, so it may not have run when this script executes)
+        customElements.whenDefined('la-app-shell').then(function() {
+          var snapBc = document.getElementById('snap-bc');
+          if (snapBc && snapBc.updateComplete) {
+            snapBc.updateComplete.then(function() {
+              snapBc.breadcrumbs = [
+                { label: 'Dashboard' },
+                { label: 'Governance' },
+                { label: 'Company Manual' },
+              ];
+            });
+          }
+
+          var snapAside = document.getElementById('snap-aside');
+          if (snapAside && snapAside.updateComplete) {
+            snapAside.updateComplete.then(function() {
+              snapAside.dispatchEvent(new CustomEvent('la-toggle-aside', { bubbles: true, composed: true }));
+            });
+          }
+
+          // Force-collapse overrides localStorage so the snapshot always renders collapsed
+          var snapCollapsed = document.getElementById('snap-collapsed');
+          if (snapCollapsed) {
+            var sidebarEl = snapCollapsed.querySelector('la-sidebar');
+            if (sidebarEl && sidebarEl.updateComplete) {
+              sidebarEl.updateComplete.then(function() { sidebarEl.collapsed = true; });
+            }
+          }
+        });
+
+        // Sidebar nav collapse — shared localStorage key
+  })();
+</script>
+
+
+</body>
+</html>

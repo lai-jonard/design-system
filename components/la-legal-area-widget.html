@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-legal-area-widget — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-legal-area-widget</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-legal-area-widget</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<style>
+  /* Constrain standalone widget previews to ~400×300 (width-cap; height
+     tracks via the widget's own 4:3 aspect-ratio). The 3-up dashboard
+     grid widgets are nested in an inner grid container, so they aren't
+     direct children of .preview-frame and stay full-bleed. */
+  .preview-frame > la-legal-area-widget { max-width: 400px; }
+</style>
+
+<div class="preview-header" id="overview">
+<h1>la-legal-area-widget</h1>
+<p>Dashboard tile for a single legal area. Three states — <code>unlocked</code>, <code>locked-unlockable</code>, <code>locked-not-unlockable</code> — render different chrome inside a fluid 4:3 landscape card (300 px wide minimum, height tracks via <code>aspect-ratio</code>). The unlocked state surfaces insight counts or a next-level CTA; the unlockable state surfaces the next action; the not-unlockable state names the dependency holding it back.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>One <code>la-panel</code> filling the host. The illustration region takes the slack at the top (<code>flex: 1</code>); title, description, counts/CTA stack at the bottom of the panel padding so the layout reads from the artwork down into the actionable content.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Anatomy — unlocked area with mixed counts</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="Governance" description="Founding documents, directors, registered agent." status="unlocked" urgent="2" proactive="3" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Regions</div>
+<table class="docs-table">
+<thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>Surface</td><td><code>la-panel::part(panel)</code></td><td>Fluid 4:3 landscape (min 300 px wide). White on <code>unlocked</code> + <code>locked-unlockable</code>; subtle grey (<code>la-panel</code> default) on <code>locked-not-unlockable</code>. <code>locked-unlockable</code> rests with <code>--la-shadow-card</code> emphasis ("next progression candidate"). Hover lifts unlocked → <code>--la-shadow-sm</code>, locked-unlockable → <code>--la-shadow-md</code>; locked-not-unlockable doesn't lift.</td></tr>
+<tr><td>Illustration</td><td><code>.illustration</code> ← <code>illustration</code> (URL)</td><td>Top region, <code>flex: 1</code>. On <code>locked-not-unlockable</code> the image gets <code>filter: grayscale(1)</code> + <code>mix-blend-mode: multiply</code> so its white halo dissolves into the grey card. Region collapses when no URL is passed.</td></tr>
+<tr><td>Title row</td><td><code>.title-row</code></td><td>Area name. Single child for now; reserved as a row so future siblings (badges, meta chips) can land without restructure.</td></tr>
+<tr><td>Subtitle</td><td><code>.subtitle</code> ← <code>description</code></td><td>One-line area summary. Quiet supporting copy. Clamped to 2 lines so long copy doesn't push the card height.</td></tr>
+<tr><td>Count row</td><td><code>.count-row</code> (unlocked, counts &gt; 0)</td><td>"N urgent · N proactive". Urgent uses <code>--la-color-urgent-text</code> + medium weight; proactive sits muted; mid-dot separator.</td></tr>
+<tr><td>All-good</td><td><code>.all-good</code> (unlocked, counts = 0, no <code>nextLevelLabel</code>)</td><td>Green check + "All good" — positive context instead of "0 urgent · 0 proactive".</td></tr>
+<tr><td>Next-level / Unlock action</td><td><code>la-button</code> (unlocked + <code>nextLevelLabel</code>, or locked-unlockable)</td><td>Primary <code>sm</code>. On unlocked it shows <code>nextLevelLabel</code> ("Continue with…"); on locked-unlockable it shows "Start with <code>area</code>". Click stops propagation and fires <code>la-area-unlock</code>.</td></tr>
+<tr><td>Dependency</td><td><code>.dependency-list</code> (locked-not-unlockable, deps present)</td><td>"Requires: A, B" in muted micro-text. Names what's blocking the unlock.</td></tr>
+</tbody>
+</table>
+</div>
+
+<div class="controls" id="controls" style="margin-top:8px;">
+<div class="controls-row">
+<div class="control-group">
+<label for="ctl-area">area</label>
+<input id="ctl-area" type="text" value="Governance">
+</div>
+<div class="control-group">
+<label for="ctl-description">description</label>
+<input id="ctl-description" type="text" value="Founding documents, directors, registered agent." style="width:320px;">
+</div>
+</div>
+
+<div class="controls-divider"></div>
+
+<div class="controls-row">
+<div class="control-group">
+<label>status</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-status="unlocked" type="button">unlocked</button>
+<button class="btn-toggle" data-status="locked-unlockable" type="button">locked-unlockable</button>
+<button class="btn-toggle" data-status="locked-not-unlockable" type="button">locked-not-unlockable</button>
+</div>
+</div>
+</div>
+
+<div class="controls-divider"></div>
+
+<div class="controls-row">
+<div class="control-group">
+<label for="ctl-urgent">urgent</label>
+<input id="ctl-urgent" type="number" min="0" value="2" style="width:80px;">
+</div>
+<div class="control-group">
+<label for="ctl-proactive">proactive</label>
+<input id="ctl-proactive" type="number" min="0" value="3" style="width:80px;">
+</div>
+<div class="control-group">
+<label for="ctl-next-level">next-level-label</label>
+<input id="ctl-next-level" type="text" value="" placeholder="e.g. Continue with Governance" style="width:240px;">
+</div>
+<div class="control-group">
+<label for="ctl-deps">dependencies (comma-separated)</label>
+<input id="ctl-deps" type="text" value="Governance" style="width:200px;">
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget id="live-widget"></la-legal-area-widget>
+</div>
+<div id="event-log" style="padding:8px 24px; font-size:11px; color:var(--la-color-text-muted); font-family:monospace; min-height:28px; border-top:1px solid var(--la-color-border-light); background:var(--la-color-bg-subtle);" aria-live="polite">
+<span style="color:var(--la-color-text-faint);">Event log — click the card or the unlock CTA</span>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Every state the dashboard grid renders.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Unlocked — urgent + proactive insights</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="Governance" description="Founding documents, directors, registered agent." status="unlocked" urgent="2" proactive="3" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Unlocked — urgent only</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="Employment" description="People, contracts, equity." status="unlocked" urgent="1" proactive="0" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Unlocked — next-level CTA ("Continue with…") instead of insight counts</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="Governance" description="Founding documents, directors, registered agent." status="unlocked" next-level-label="Continue with Governance" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Unlocked — all good (zero counts, no next-level CTA)</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="IP Protection" description="Assignments, filings, domain ownership." status="unlocked" urgent="0" proactive="0" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Locked — unlockable, no recommendation (rests with <code>--la-shadow-card</code> emphasis)</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="Employment" description="People, contracts, equity." status="locked-unlockable" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Locked — unlockable, longer area name (CTA reads "Start with…")</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="IP Protection" description="Assignments, filings, domain ownership." status="locked-unlockable" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Locked — not unlockable, dependency named (illustration desaturates + multiply-blends into the grey surface)</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget id="snap-locked-not-unlockable" area="Fundraising" description="Cap table, DD readiness, investor data." status="locked-not-unlockable" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Without illustration — region collapses, content rises to the top of the card</div>
+<div class="preview-frame" style="padding:32px;">
+<la-legal-area-widget area="Governance" description="Founding documents, directors, registered agent." status="unlocked" urgent="2" proactive="3"></la-legal-area-widget>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In context — dashboard 3-up grid (post-IP-deferral layout)</div>
+<div class="preview-frame" style="padding:40px;background:var(--la-color-bg-page);">
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:24px;width:100%;max-width:1120px;">
+<la-legal-area-widget area="Governance" description="Founding documents, directors, registered agent." status="unlocked" urgent="2" proactive="3" next-level-label="Continue with Governance" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+<la-legal-area-widget id="grid-employment" area="Employment" description="People, contracts, equity." status="locked-not-unlockable" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+<la-legal-area-widget id="grid-fundraising" area="Fundraising" description="Cap table, DD readiness, investor data." status="locked-not-unlockable" illustration="../assets/illustrations/empty state.png"></la-legal-area-widget>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-legal-area-widget</h2>
+    <p>Dashboard tile for a single legal area. Three states — unlocked, locked-unlockable, locked-not-unlockable — render different chrome inside a fluid 4:3 landscape card (300 px wide minimum, height tracks via <code>aspect-ratio</code>). The unlocked state surfaces insight counts or a next-level CTA; the unlockable state surfaces the next action; the not-unlockable state names the dependency holding it back.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>area</td>
+          <td><span class="default">area</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>illustration</td>
+          <td><span class="default">illustration</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>URL of the card illustration. Resolved by the host page — pass an
+absolute or page-relative path. Falls back to no image (the
+illustration region collapses and content rises to the top of the
+card). Treatment: full opacity on white surfaces (unlocked /
+locked-unlockable); grayscale + mix-blend-mode: multiply on the
+locked-not-unlockable grey surface.</td>
+        </tr>
+      
+        <tr>
+          <td>status</td>
+          <td><span class="default">status</span></td>
+          <td><span class="type">AreaStatus</span></td>
+          <td><span class="default">&#39;unlocked&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>urgent</td>
+          <td><span class="default">urgent</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>proactive</td>
+          <td><span class="default">proactive</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>dependencies</td>
+          <td><span class="default">dependencies</span></td>
+          <td><span class="type">string[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>nextLevelLabel</td>
+          <td><span class="default">next-level-label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-area-click</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-area-unlock</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All values come from the design token system in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:12px;color:#555;font-weight:600;">Surface &amp; size</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-radius-lg</td><td>Card corner radius (forwarded into <code>la-panel::part(panel)</code>)</td></tr>
+<tr><td>--la-color-border-light</td><td>Resting border</td></tr>
+<tr><td>--la-color-border</td><td>Hover border</td></tr>
+<tr><td>--la-color-bg</td><td>Hover surface fill</td></tr>
+<tr><td>--la-shadow-card</td><td><code>locked-unlockable</code> resting emphasis ("next progression candidate")</td></tr>
+<tr><td>--la-shadow-sm</td><td><code>unlocked</code> hover lift</td></tr>
+<tr><td>--la-shadow-md</td><td><code>locked-unlockable</code> hover lift</td></tr>
+<tr><td>--la-space-xl</td><td>Inner padding</td></tr>
+<tr><td>--la-color-border-focus / --la-focus-ring-width / --la-focus-ring-offset</td><td>Keyboard focus outline (forwarded via <code>la-panel::part(panel)</code>)</td></tr>
+<tr><td>--dur-fast / --ease</td><td>Hover transition (box-shadow only — GPU-safe)</td></tr>
+</tbody>
+</table>
+<p style="font-size:11px;color:#777;margin-top:8px;">Card uses <code>aspect-ratio: 4 / 3</code> with a <code>min-width: 300px</code> floor. No tokens for these dimensions — the parent grid drives width and the aspect-ratio derives the height.</p>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:12px;color:#555;font-weight:600;">Type &amp; counts</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-font-size-lg</td><td>Title size</td></tr>
+<tr><td>--la-font-weight-semibold</td><td>Title weight</td></tr>
+<tr><td>--la-font-size-md</td><td>Subtitle, all-good text</td></tr>
+<tr><td>--la-color-text-secondary</td><td>Subtitle colour</td></tr>
+<tr><td>--la-font-size-base</td><td>Count row size</td></tr>
+<tr><td>--la-color-urgent-text</td><td>Urgent count colour</td></tr>
+<tr><td>--la-font-weight-medium</td><td>Urgent count weight</td></tr>
+<tr><td>--la-color-text-muted</td><td>Proactive count, separator, dependency text</td></tr>
+<tr><td>--la-color-resolved</td><td>"All good" colour</td></tr>
+<tr><td>--la-font-size-xs</td><td>Dependency list size</td></tr>
+<tr><td>--la-space-xs / -sm</td><td>Inner gaps</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Dashboard 3-up grid — fluid columns</p>
+<div class="docs-code"><span class="kw">&lt;div</span> <span class="at">style</span>=<span class="str">"display:grid;grid-template-columns:repeat(3,1fr);gap:24px;"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-legal-area-widget</span>
+    <span class="at">area</span>=<span class="str">"Governance"</span>
+    <span class="at">description</span>=<span class="str">"Founding documents, directors, registered agent."</span>
+    <span class="at">status</span>=<span class="str">"unlocked"</span>
+    <span class="at">urgent</span>=<span class="str">"2"</span> <span class="at">proactive</span>=<span class="str">"3"</span>
+    <span class="at">next-level-label</span>=<span class="str">"Continue with Governance"</span>
+    <span class="at">illustration</span>=<span class="str">"/assets/illustrations/empty-state.png"</span>
+  <span class="kw">&gt;&lt;/la-legal-area-widget&gt;</span>
+  <span class="cm">&lt;!-- Employment, Fundraising follow in fixed order --&gt;</span>
+<span class="kw">&lt;/div&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Wire navigation — both events route to the area page</p>
+<div class="docs-code">grid.addEventListener(<span class="str">'la-area-click'</span>, (e) =&gt; {
+  router.go(<span class="str">`/legal-areas/${e.detail.area.toLowerCase()}`</span>);
+});
+
+<span class="cm">// la-area-unlock fires from both the locked-unlockable
+// "Start with [area]" CTA and the unlocked next-level CTA.
+// Both mean "user wants the next progression for this area".</span>
+grid.addEventListener(<span class="str">'la-area-unlock'</span>, (e) =&gt; {
+  router.go(<span class="str">`/legal-areas/${e.detail.area.toLowerCase()}`</span>);
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Locked-not-unlockable — name the dependency</p>
+<div class="docs-code"><span class="kw">&lt;la-legal-area-widget</span>
+  <span class="at">area</span>=<span class="str">"Fundraising"</span>
+  <span class="at">description</span>=<span class="str">"Cap table, DD readiness, investor data."</span>
+  <span class="at">status</span>=<span class="str">"locked-not-unlockable"</span>
+  <span class="at">dependencies</span>=<span class="str">'["Governance"]'</span>
+<span class="kw">&gt;&lt;/la-legal-area-widget&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Counts wire later (Sprint 5+)</p>
+<div class="docs-code"><span class="cm">// Sprint 2 ships the widget rendering. Insight counts get
+// wired to a real data source in Sprint 5 (Insight System) —
+// until then, urgent + proactive sit at 0 and the all-good
+// state shows.</span></div>
+</div>
+</div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Fluid 4:3 landscape, 300 px width floor.</strong> Width comes from the parent grid; height tracks via <code>aspect-ratio: 4 / 3</code>. The 300 px <code>min-width</code> stops the card collapsing below readable size; the dashboard grid is the responsive surface.</div>
+<div class="docs-note"><strong>Surface mapping.</strong> <code>unlocked</code> + <code>locked-unlockable</code> sit on white (<code>--la-color-bg</code>) so the illustration reads cleanly. <code>locked-not-unlockable</code> keeps the default <code>la-panel</code> grey — the multiply-blended illustration sinks into it.</div>
+<div class="docs-note"><strong><code>locked-unlockable</code> rests with shadow-card emphasis.</strong> The card a user can act on right now gets <code>--la-shadow-card</code> at rest, hover lifts it to <code>--la-shadow-md</code>. <code>unlocked</code> rests flat and lifts to <code>--la-shadow-sm</code>. Same emphasis pattern as the "next progression candidate" rule.</div>
+<div class="docs-note"><strong>Illustration treatment.</strong> Full opacity on white surfaces (<code>unlocked</code> + <code>locked-unlockable</code>); <code>filter: grayscale(1)</code> + <code>mix-blend-mode: multiply</code> on the <code>locked-not-unlockable</code> grey surface so the white halo dissolves into the card.</div>
+<div class="docs-note"><strong>Empty <code>illustration</code> collapses gracefully.</strong> When no URL is passed, the illustration region disappears entirely and content rises to the top of the card. Documented in the "Without illustration" snapshot.</div>
+<div class="docs-note"><strong>"All good" instead of "0 urgent · 0 proactive".</strong> When an unlocked area has zero counts <em>and</em> no <code>nextLevelLabel</code>, the card shows a green check and "All good" — positive context rather than visual silence. When a next-level CTA is set, the CTA wins the slot (decision 54).</div>
+<div class="docs-note"><strong>Next-level CTA on unlocked cards.</strong> Setting <code>nextLevelLabel</code> on an <code>unlocked</code> card renders a primary <code>la-button[size=sm]</code> ("Continue with…") and suppresses the "All good" line. CTA fires <code>la-area-unlock</code> like the locked-unlockable button.</div>
+<div class="docs-note"><strong>No level codes in user-facing copy.</strong> Pass full area names ("Continue with Governance", "Requires Governance") — never <code>L0</code>/<code>L1</code>/<code>L2</code> (decision 56). Internal taxonomy stays in code; user copy stays in plain area names.</div>
+<div class="docs-note"><strong><code>locked-not-unlockable</code> is dimmed but still fires events.</strong> The visual treatment via <code>la-panel ?dimmed</code> signals non-interactivity, but <code>la-area-click</code> still fires. Consumers decide what to do with the click — typical use is to ignore or route to a tooltip explaining the dependency.</div>
+<div class="docs-note"><strong>Single primary CTA per dashboard at a time.</strong> Visual emphasis comes from <code>--la-shadow-card</code> on the locked-unlockable card and the primary CTA inside it — not a separate "Recommended" badge. Earlier sprints proxied this via a <code>recommended</code> prop; that prop is gone, the surface emphasis is enough.</div>
+<div class="docs-note"><strong>Keyboard activation.</strong> The la-panel surface carries <code>tabindex="0"</code> + <code>role="button"</code> + an <code>aria-label</code> ("Open <code>area</code>"). Enter and Space fire <code>la-area-click</code>. Focus shows a 2 px outline using <code>--la-color-border-focus</code>.</div>
+<div class="docs-note"><strong>No icon in the title row.</strong> Areas are named in text only — no per-area icon. Keeps the dashboard grid visually consistent.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const live = document.getElementById('live-widget');
+    const ctlArea = document.getElementById('ctl-area');
+    const ctlDescription = document.getElementById('ctl-description');
+    const ctlUrgent = document.getElementById('ctl-urgent');
+    const ctlProactive = document.getElementById('ctl-proactive');
+    const ctlNextLevel = document.getElementById('ctl-next-level');
+    const ctlDeps = document.getElementById('ctl-deps');
+    const log = document.getElementById('event-log');
+    let status = 'unlocked';
+
+    live.illustration = '../assets/illustrations/empty state.png';
+
+    function sync() {
+      live.area = ctlArea.value;
+      live.description = ctlDescription.value;
+      live.status = status;
+      live.urgent = parseInt(ctlUrgent.value, 10) || 0;
+      live.proactive = parseInt(ctlProactive.value, 10) || 0;
+      live.nextLevelLabel = ctlNextLevel.value;
+      live.dependencies = ctlDeps.value
+        ? ctlDeps.value.split(',').map((s) => s.trim()).filter(Boolean)
+        : [];
+    }
+    sync();
+
+    [ctlArea, ctlDescription, ctlUrgent, ctlProactive, ctlNextLevel, ctlDeps].forEach((el) => {
+      el.addEventListener('input', sync);
+    });
+
+    document.querySelectorAll('.btn-toggle[data-status]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.btn-toggle[data-status]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        status = btn.dataset.status;
+        sync();
+      });
+    });
+
+    live.addEventListener('la-area-click', (e) => {
+      log.textContent = 'la-area-click → { area: "' + e.detail.area + '" }  ·  ' + new Date().toLocaleTimeString();
+    });
+    live.addEventListener('la-area-unlock', (e) => {
+      log.textContent = 'la-area-unlock → { area: "' + e.detail.area + '" }  ·  ' + new Date().toLocaleTimeString();
+    });
+
+    // Snapshots that need dependencies set via JS (attribute parsing also works,
+    // but JS keeps shape with how Lit consumers normally set arrays).
+    customElements.whenDefined('la-legal-area-widget').then(() => {
+      const lockedNotUnlockable = document.getElementById('snap-locked-not-unlockable');
+      if (lockedNotUnlockable) lockedNotUnlockable.dependencies = ['Governance'];
+
+      const gridEmployment = document.getElementById('grid-employment');
+      if (gridEmployment) gridEmployment.dependencies = ['Governance'];
+
+      const gridFundraising = document.getElementById('grid-fundraising');
+      if (gridFundraising) gridFundraising.dependencies = ['Governance'];
+    });
+  })();
+</script>
+
+
+</body>
+</html>

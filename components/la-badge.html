@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-badge — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-badge</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-badge</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-badge</h1>
+<p>A small inline label for status, category, severity, or count. Two types: <strong>badge</strong> (pill, for status labels) and <strong>counter</strong> (circle, for numerical counts). Always paired with content — never standalone.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Badge is a pill with slotted label content. Counter is a circle with a number.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:flex; gap:48px; align-items:center; justify-content:center; padding:48px 24px; flex-wrap:wrap;">
+<div style="display:flex; gap:24px; align-items:center;">
+<la-badge variant="warning">Expiring soon</la-badge>
+<la-badge type="counter" variant="danger">3</la-badge>
+</div>
+<ol style="list-style: decimal inside; padding:0; margin:0; font-size:13px; line-height:1.6; color:#374151; max-width:320px;">
+<li><strong>Pill container</strong> — badge type. Shared <code style="font-family:monospace;font-size:11px;">--la-color-bg-subtle</code> surface with a 1px <code style="font-family:monospace;font-size:11px;">--la-color-border-light</code> border and <code style="font-family:monospace;font-size:11px;">--la-radius-pill</code>. Variant sets the text colour; <code style="font-family:monospace;font-size:11px;">primary</code> overrides both bg and border to the solid primary colour.</li>
+<li style="margin-top:6px;"><strong>Label</strong> — default slot. A word or short phrase.</li>
+<li style="margin-top:6px;"><strong>Counter circle</strong> — counter type. Fixed 20px height, <code style="font-family:monospace;font-size:11px;">--la-radius-circle</code>, no border. Variant sets the fill; <code style="font-family:monospace;font-size:11px;">appearance</code> switches between solid (filled) and tinted-surface (ghost).</li>
+</ol>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Type</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-type="badge">badge</button>
+<button class="btn-toggle" data-type="counter">counter</button>
+</div>
+</div>
+<div class="control-group">
+<label>Variant</label>
+<div class="btn-group">
+<button class="btn-toggle" data-variant="danger">danger</button>
+<button class="btn-toggle" data-variant="warning">warning</button>
+<button class="btn-toggle" data-variant="success">success</button>
+<button class="btn-toggle active" data-variant="neutral">neutral</button>
+<button class="btn-toggle" data-variant="info">info</button>
+<button class="btn-toggle" data-variant="accent">accent</button>
+<button class="btn-toggle" data-variant="primary">primary</button>
+</div>
+</div>
+<div class="control-group" id="ctrl-appearance-group" style="display:none;">
+<label>Appearance</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-appearance="filled">filled</button>
+<button class="btn-toggle" data-appearance="ghost">ghost</button>
+</div>
+</div>
+<div class="control-group" id="ctrl-label-group">
+<label>Label text</label>
+<input id="ctrl-label" type="text" value="Neutral"/>
+</div>
+<div class="control-group" id="ctrl-icon-group">
+<label>Icon</label>
+<div class="btn-group">
+<button class="btn-toggle" data-icon="on">On</button>
+<button class="btn-toggle active" data-icon="off">Off</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px; justify-content:center; padding:24px;">
+<la-badge id="live-badge" variant="neutral">
+<i class="ph-fill ph-minus-circle" id="live-icon" slot="icon" style="display:none;"></i>
+<span id="live-label">Neutral</span>
+</la-badge>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Badge — all variants</div>
+<div class="preview-frame" style="gap:8px; padding:32px 24px; justify-content:center; flex-wrap:wrap;">
+<la-badge variant="danger">Danger</la-badge>
+<la-badge variant="warning">Warning</la-badge>
+<la-badge variant="success">Success</la-badge>
+<la-badge variant="neutral">Neutral</la-badge>
+<la-badge variant="info">Info</la-badge>
+<la-badge variant="accent">Accent</la-badge>
+<la-badge variant="primary">Primary</la-badge>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Badge — with icon (always use Phosphor fill weight)</div>
+<div class="preview-frame" style="gap:8px; padding:32px 24px; justify-content:center; flex-wrap:wrap;">
+<la-badge variant="danger"><i class="ph-fill ph-warning-octagon" slot="icon"></i>Urgent</la-badge>
+<la-badge variant="warning"><i class="ph-fill ph-warning-circle" slot="icon"></i>Expiring</la-badge>
+<la-badge variant="success"><i class="ph-fill ph-check-circle" slot="icon"></i>Resolved</la-badge>
+<la-badge variant="info"><i class="ph-fill ph-info" slot="icon"></i>Processing</la-badge>
+<la-badge variant="neutral"><i class="ph-fill ph-minus-circle" slot="icon"></i>Inactive</la-badge>
+<la-badge variant="accent"><i class="ph-fill ph-folder" slot="icon"></i>Category</la-badge>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Badge — with tooltip (explain unfamiliar statuses)</div>
+<div class="preview-frame" style="gap:8px; padding:48px 24px; justify-content:center; flex-wrap:wrap;">
+<la-tooltip appearance="light" tip="Needs your action within 24 hours.">
+<la-badge variant="danger"><i class="ph-fill ph-warning-octagon" slot="icon"></i>Urgent</la-badge>
+</la-tooltip>
+<la-tooltip appearance="light" tip="Deadline approaching — review this week.">
+<la-badge variant="warning"><i class="ph-fill ph-warning-circle" slot="icon"></i>Expiring</la-badge>
+</la-tooltip>
+<la-tooltip appearance="light" tip="Closed out. No further action needed.">
+<la-badge variant="success"><i class="ph-fill ph-check-circle" slot="icon"></i>Resolved</la-badge>
+</la-tooltip>
+<la-tooltip appearance="light" tip="We're analysing this in the background.">
+<la-badge variant="info"><i class="ph-fill ph-info" slot="icon"></i>Processing</la-badge>
+</la-tooltip>
+<la-tooltip appearance="light" tip="Due diligence window — read-only until opened.">
+<la-badge variant="accent"><i class="ph-fill ph-folder" slot="icon"></i>DD window</la-badge>
+</la-tooltip>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Counter — filled (all variants)</div>
+<div class="preview-frame" style="gap:12px; padding:32px 24px; justify-content:center; align-items:center; flex-wrap:wrap;">
+<la-badge type="counter" variant="danger">3</la-badge>
+<la-badge type="counter" variant="warning">7</la-badge>
+<la-badge type="counter" variant="success">4</la-badge>
+<la-badge type="counter" variant="neutral">12</la-badge>
+<la-badge type="counter" variant="info">2</la-badge>
+<la-badge type="counter" variant="primary">99</la-badge>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Counter — ghost (all variants)</div>
+<div class="preview-frame" style="gap:12px; padding:32px 24px; justify-content:center; align-items:center; flex-wrap:wrap;">
+<la-badge appearance="ghost" type="counter" variant="danger">3</la-badge>
+<la-badge appearance="ghost" type="counter" variant="warning">7</la-badge>
+<la-badge appearance="ghost" type="counter" variant="success">4</la-badge>
+<la-badge appearance="ghost" type="counter" variant="neutral">12</la-badge>
+<la-badge appearance="ghost" type="counter" variant="info">2</la-badge>
+<la-badge appearance="ghost" type="counter" variant="primary">99</la-badge>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Counter — single digit to large count</div>
+<div class="preview-frame" style="gap:16px; padding:32px 24px; justify-content:center; align-items:center; flex-wrap:wrap;">
+<la-badge type="counter" variant="primary">1</la-badge>
+<la-badge type="counter" variant="primary">9</la-badge>
+<la-badge type="counter" variant="primary">12</la-badge>
+<la-badge type="counter" variant="primary">99</la-badge>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-badge</h2>
+    <p>A small inline label for status, category, severity, or count. Two types: badge (pill, for status labels) and counter (circle, for numerical counts). Always paired with content — never standalone.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">BadgeVariant</span></td>
+          <td><span class="default">&#39;neutral&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>type</td>
+          <td><span class="default">type</span></td>
+          <td><span class="type">BadgeType</span></td>
+          <td><span class="default">&#39;badge&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>appearance</td>
+          <td><span class="default">appearance</span></td>
+          <td><span class="type">BadgeAppearance</span></td>
+          <td><span class="default">&#39;filled&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">BadgeSize</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Badge chrome &amp; typography</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg-subtle</td><td>Shared badge surface (all non-primary variants)</td></tr>
+<tr><td>--la-color-border-light</td><td>Shared 1px badge border</td></tr>
+<tr><td>--la-radius-pill</td><td>Badge pill radius</td></tr>
+<tr><td>--la-font-size-sm</td><td>Badge label text size</td></tr>
+<tr><td>--la-font-weight-normal</td><td>Badge label weight</td></tr>
+<tr><td>--la-radius-circle</td><td>Counter circle radius (50%)</td></tr>
+<tr><td>--la-font-size-xs</td><td>Counter number text size</td></tr>
+<tr><td>--la-font-weight-medium</td><td>Counter number weight</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Badge variant text colour</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Variant</th></tr></thead>
+<tbody>
+<tr><td>--la-color-urgent-text</td><td>danger</td></tr>
+<tr><td>--la-color-proactive-text</td><td>warning</td></tr>
+<tr><td>--la-color-resolved-text</td><td>success</td></tr>
+<tr><td>--la-color-locked-text</td><td>neutral</td></tr>
+<tr><td>--la-color-processing-text</td><td>info</td></tr>
+<tr><td>--la-color-doc</td><td>accent</td></tr>
+<tr><td>--la-color-primary + -fg (overrides chrome)</td><td>primary</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Counter filled colours</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Variant</th></tr></thead>
+<tbody>
+<tr><td>--la-color-danger / -fg</td><td>danger</td></tr>
+<tr><td>--la-color-warning + -text-invert</td><td>warning</td></tr>
+<tr><td>--la-color-success / -fg</td><td>success</td></tr>
+<tr><td>--la-color-neutral / -fg</td><td>neutral</td></tr>
+<tr><td>--la-color-info + -text-invert</td><td>info</td></tr>
+<tr><td>--la-color-primary / -fg</td><td>primary</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Counter ghost backgrounds</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Variant</th></tr></thead>
+<tbody>
+<tr><td>--la-color-surface-danger</td><td>danger</td></tr>
+<tr><td>--la-color-surface-warning</td><td>warning</td></tr>
+<tr><td>--la-color-surface-success</td><td>success</td></tr>
+<tr><td>--la-color-locked-bg</td><td>neutral</td></tr>
+<tr><td>--la-color-surface-info</td><td>info</td></tr>
+<tr><td>--la-color-bg-muted</td><td>primary</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Status label — urgent</p>
+<div class="docs-code"><span class="kw">&lt;la-badge</span> <span class="at">variant</span>=<span class="str">"danger"</span><span class="kw">&gt;</span>
+  Action required
+<span class="kw">&lt;/la-badge&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Category label</p>
+<div class="docs-code"><span class="kw">&lt;la-badge</span> <span class="at">variant</span>=<span class="str">"accent"</span><span class="kw">&gt;</span>
+  Doc Quality
+<span class="kw">&lt;/la-badge&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With icon — fill weight only</p>
+<div class="docs-code"><span class="kw">&lt;la-badge</span> <span class="at">variant</span>=<span class="str">"warning"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph-fill ph-warning-circle"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Expiring
+<span class="kw">&lt;/la-badge&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Counter — filled (unread count)</p>
+<div class="docs-code"><span class="kw">&lt;la-badge</span>
+<span class="at">type</span>=<span class="str">"counter"</span>
+<span class="at">variant</span>=<span class="str">"primary"</span><span class="kw">&gt;</span>
+  12
+<span class="kw">&lt;/la-badge&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Counter — ghost (subtle indicator)</p>
+<div class="docs-code"><span class="kw">&lt;la-badge</span>
+<span class="at">type</span>=<span class="str">"counter"</span>
+<span class="at">variant</span>=<span class="str">"neutral"</span>
+<span class="at">appearance</span>=<span class="str">"ghost"</span><span class="kw">&gt;</span>
+  3
+<span class="kw">&lt;/la-badge&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Counter — danger (urgent count)</p>
+<div class="docs-code"><span class="kw">&lt;la-badge</span>
+<span class="at">type</span>=<span class="str">"counter"</span>
+<span class="at">variant</span>=<span class="str">"danger"</span><span class="kw">&gt;</span>
+  5
+<span class="kw">&lt;/la-badge&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Badge is always paired with content, never standalone</strong> — a badge outside of a containing row, card, or title loses its meaning. The surrounding content is what it's labelling.</div>
+<div class="docs-note"><strong>Counter is a numerical count signal</strong> — use it for unread item counts, queue depths, and notification totals. For single-digit counts it renders as a perfect circle; for two or more digits the width grows to accommodate the number.</div>
+<div class="docs-note"><strong>Variant names carry accessible context</strong> — colour alone fails a11y. The semantic variant name (<code style="font-family:monospace;font-size:11px;">danger</code>, <code style="font-family:monospace;font-size:11px;">warning</code>, etc.) pairs with the colour so meaning is not colour-only. Logged in <code style="font-family:monospace;font-size:11px;">design-language/components.md</code> known divergences.</div>
+<div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">accent</code> is a category, not a status</strong> — use it for classification labels like "Doc Quality", "Legal Compliance". The other variants carry status or prominence meaning; accent carries domain meaning. Not applicable to counter type.</div>
+<div class="docs-note"><strong>Ghost appearance is for deemphasised counters</strong> — ghost uses the faint tinted surface for the variant colour rather than a solid fill, giving a softer presence. Use it when the count should not dominate the surrounding UI. Use filled (default) when the count is a primary signal such as an unread inbox badge.</div>
+<div class="docs-note"><strong>Icons use Phosphor fill weight</strong> — when slotting an icon on a badge, always use <code style="font-family:monospace;font-size:11px;">ph-fill</code>, never the outline <code style="font-family:monospace;font-size:11px;">ph</code> class. The filled glyph matches the badge's solid tinted surface.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveBadge = document.getElementById('live-badge');
+        const liveLabel = document.getElementById('live-label');
+        const labelInput = document.getElementById('ctrl-label');
+        const ctrlAppearanceGroup = document.getElementById('ctrl-appearance-group');
+        const ctrlLabelGroup = document.getElementById('ctrl-label-group');
+        const ctrlIconGroup = document.getElementById('ctrl-icon-group');
+
+        // Type toggles
+        document.querySelectorAll('[data-type]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-type]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const isCounter = btn.dataset.type === 'counter';
+            liveBadge.setAttribute('type', btn.dataset.type);
+            ctrlAppearanceGroup.style.display = isCounter ? '' : 'none';
+            ctrlLabelGroup.style.display = isCounter ? 'none' : '';
+            ctrlIconGroup.style.display = isCounter ? 'none' : '';
+            if (isCounter) {
+              liveLabel.textContent = '5';
+            } else {
+              liveLabel.textContent = labelInput.value || 'Neutral';
+            }
+            // accent not meaningful for counter — swap to neutral if currently accent
+            const currentVariant = document.querySelector('[data-variant].active')?.dataset.variant;
+            if (isCounter && currentVariant === 'accent') {
+              document.querySelectorAll('[data-variant]').forEach(b => b.classList.remove('active'));
+              document.querySelector('[data-variant="neutral"]').classList.add('active');
+              liveBadge.setAttribute('variant', 'neutral');
+            }
+          });
+        });
+
+        // Variant toggles
+        document.querySelectorAll('[data-variant]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-variant]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveBadge.setAttribute('variant', btn.dataset.variant);
+            const isCounter = liveBadge.getAttribute('type') === 'counter';
+            if (!isCounter && labelInput.dataset.customised !== 'true') {
+              const cap = btn.dataset.variant.charAt(0).toUpperCase() + btn.dataset.variant.slice(1);
+              labelInput.value = cap;
+              liveLabel.textContent = cap;
+            }
+          });
+        });
+
+        // Appearance toggles
+        document.querySelectorAll('[data-appearance]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-appearance]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveBadge.setAttribute('appearance', btn.dataset.appearance);
+          });
+        });
+
+        // Label text input
+        labelInput.addEventListener('input', () => {
+          labelInput.dataset.customised = 'true';
+          liveLabel.textContent = labelInput.value || '';
+        });
+
+        // Icon toggle
+        const liveIcon = document.getElementById('live-icon');
+        const iconMap = {
+          danger: 'ph-warning-octagon',
+          warning: 'ph-warning-circle',
+          success: 'ph-check-circle',
+          info: 'ph-info',
+          neutral: 'ph-minus-circle',
+          accent: 'ph-tag',
+          primary: 'ph-star',
+        };
+        const syncIcon = () => {
+          const currentVariant = document.querySelector('[data-variant].active')?.dataset.variant || 'neutral';
+          liveIcon.className = 'ph-fill ' + (iconMap[currentVariant] || 'ph-info');
+        };
+        document.querySelectorAll('[data-icon]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-icon]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.icon === 'on') {
+              syncIcon();
+              liveIcon.style.display = '';
+            } else {
+              liveIcon.style.display = 'none';
+            }
+          });
+        });
+        document.querySelectorAll('[data-variant]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            if (liveIcon.style.display !== 'none') syncIcon();
+          });
+        });
+  })();
+</script>
+
+
+</body>
+</html>

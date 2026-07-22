@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-icon-button — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-icon-button</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-icon-button</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-icon-button</h1>
+<p>Icon-only trigger for secondary actions in dense surfaces — widget headers, toolbars, sidebar collapse. Shares the <code style="font-family:monospace;color:#c3e88d;font-size:12px;">--la-button-height-*</code> scale with <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-button</code> so mixed rows align. Requires a <code style="font-family:monospace;color:#c3e88d;font-size:12px;">label</code> for screen readers.</p>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Variant</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-variant="default">default</button>
+<button class="btn-toggle" data-variant="primary">primary</button>
+<button class="btn-toggle" data-variant="outline">outline</button>
+<button class="btn-toggle" data-variant="danger">danger</button>
+</div>
+</div>
+<div class="control-group">
+<label>Size</label>
+<div class="btn-group">
+<button class="btn-toggle" data-size="sm">sm</button>
+<button class="btn-toggle active" data-size="default">default</button>
+<button class="btn-toggle" data-size="lg">lg</button>
+</div>
+</div>
+<div class="control-group">
+<label>Icon</label>
+<select id="ctrl-icon">
+<option value="ph ph-sidebar-simple">sidebar-simple</option>
+<option selected="" value="ph-bold ph-dots-three">dots-three (bold)</option>
+<option value="ph ph-plus">plus</option>
+<option value="ph ph-x">x</option>
+<option value="ph ph-caret-down">caret-down</option>
+<option value="ph ph-arrow-left">arrow-left</option>
+<option value="ph ph-magnifying-glass">magnifying-glass</option>
+<option value="ph ph-gear">gear</option>
+</select>
+</div>
+<div class="control-group">
+<label>Disabled</label>
+<div class="btn-group">
+<button class="btn-toggle" data-disabled="true">On</button>
+<button class="btn-toggle active" data-disabled="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Expanded</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-expanded="unset">unset</button>
+<button class="btn-toggle" data-expanded="true">true</button>
+<button class="btn-toggle" data-expanded="false">false</button>
+</div>
+</div>
+<div class="control-group">
+<label>Pressed</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-pressed="unset">unset</button>
+<button class="btn-toggle" data-pressed="true">true</button>
+<button class="btn-toggle" data-pressed="false">false</button>
+</div>
+</div>
+<div class="control-group">
+<label>Label (aria-label)</label>
+<input id="ctrl-label" type="text" value="More options"/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px;">
+<la-icon-button id="live-btn" label="More options"><i class="ph-bold ph-dots-three" id="live-icon"></i></la-icon-button>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Variants — default · primary · outline · danger</div>
+<div class="preview-frame" style="gap:8px; align-items:center;">
+<la-icon-button label="More options"><i class="ph-bold ph-dots-three"></i></la-icon-button>
+<la-icon-button label="Save" variant="primary"><i class="ph ph-check"></i></la-icon-button>
+<la-icon-button label="More options" variant="outline"><i class="ph-bold ph-dots-three"></i></la-icon-button>
+<la-icon-button label="Delete" variant="danger"><i class="ph ph-trash"></i></la-icon-button>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Sizes — sm (28px) · default (36px) · lg (44px)</div>
+<div class="preview-frame" style="gap:8px; align-items:center;">
+<la-icon-button label="Dismiss" size="sm"><i class="ph ph-x"></i></la-icon-button>
+<la-icon-button label="Dismiss"><i class="ph ph-x"></i></la-icon-button>
+<la-icon-button label="Dismiss" size="lg"><i class="ph ph-x"></i></la-icon-button>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Icon variety — different Phosphor glyphs at default size</div>
+<div class="preview-frame" style="gap:4px; align-items:center;">
+<la-icon-button label="Collapse sidebar"><i class="ph ph-sidebar-simple"></i></la-icon-button>
+<la-icon-button label="More options"><i class="ph-bold ph-dots-three"></i></la-icon-button>
+<la-icon-button label="Add document"><i class="ph ph-plus"></i></la-icon-button>
+<la-icon-button label="Dismiss"><i class="ph ph-x"></i></la-icon-button>
+<la-icon-button label="Expand"><i class="ph ph-caret-down"></i></la-icon-button>
+<la-icon-button label="Go back"><i class="ph ph-arrow-left"></i></la-icon-button>
+<la-icon-button label="Search"><i class="ph ph-magnifying-glass"></i></la-icon-button>
+<la-icon-button label="Settings"><i class="ph ph-gear"></i></la-icon-button>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Disabled — all sizes</div>
+<div class="preview-frame" style="gap:8px; align-items:center;">
+<la-icon-button disabled="" label="Unavailable" size="sm"><i class="ph ph-x"></i></la-icon-button>
+<la-icon-button disabled="" label="Unavailable"><i class="ph ph-x"></i></la-icon-button>
+<la-icon-button disabled="" label="Unavailable" size="lg"><i class="ph ph-x"></i></la-icon-button>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Pressed — toggle state (active background + full icon colour)</div>
+<div class="preview-frame" style="gap:16px; align-items:center;">
+<la-icon-button label="Show resolved items"><i class="ph ph-check-circle"></i></la-icon-button>
+<la-icon-button label="Hide resolved items" pressed><i class="ph-fill ph-check-circle"></i></la-icon-button>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In context — widget header dismiss pair</div>
+<div class="preview-frame" style="gap:4px;">
+<la-icon-button label="More options" size="sm"><i class="ph-bold ph-dots-three"></i></la-icon-button>
+<la-icon-button label="Dismiss widget" size="sm"><i class="ph ph-x"></i></la-icon-button>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">In context — inline toolbar</div>
+<div class="preview-frame" style="gap:4px;">
+<la-icon-button label="Bold" size="sm"><i class="ph ph-text-b"></i></la-icon-button>
+<la-icon-button label="Italic" size="sm"><i class="ph ph-text-italic"></i></la-icon-button>
+<la-icon-button label="Underline" size="sm"><i class="ph ph-text-underline"></i></la-icon-button>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-icon-button</h2>
+    <p>Icon-only trigger for secondary actions in dense surfaces — widget headers, toolbars, sidebar collapse. Shares the --la-button-height-* scale with la-button so mixed rows align. Requires a label for screen readers.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>expanded</td>
+          <td><span class="default">expanded</span></td>
+          <td><span class="type">boolean | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>pressed</td>
+          <td><span class="default">pressed</span></td>
+          <td><span class="type">boolean | undefined</span></td>
+          <td>—</td>
+          <td>Toggle state — set when the button acts as a two-state toggle. Reflects as attribute; drives `aria-pressed` and active visual.</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">&#39;default&#39; | &#39;sm&#39; | &#39;lg&#39;</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">&#39;default&#39; | &#39;primary&#39; | &#39;outline&#39; | &#39;danger&#39;</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All sizing and colour values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>. Override per-instance via <code style="font-family:monospace;font-size:11px;">style</code> or by targeting the <code style="font-family:monospace;font-size:11px;">::part(button)</code> element.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Sizing</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-button-height-sm</td><td>Small size (28px)</td></tr>
+<tr><td>--la-button-height-default</td><td>Default size (36px)</td></tr>
+<tr><td>--la-button-height-lg</td><td>Large size (44px)</td></tr>
+<tr><td>--la-font-size-lg</td><td>Icon glyph size (sm — 14px)</td></tr>
+<tr><td>--la-font-size-2xl</td><td>Icon glyph size (default — 18px)</td></tr>
+<tr><td>--la-font-size-3xl</td><td>Icon glyph size (lg — 20px)</td></tr>
+<tr><td>--la-radius-circle</td><td>Border radius (fully rounded — 50%)</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour &amp; motion</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-text-muted</td><td>Default resting icon</td></tr>
+<tr><td>--la-color-text</td><td>Default hover icon · outline hover icon · pressed icon</td></tr>
+<tr><td>--la-color-bg-muted</td><td>Default hover background · pressed hover background</td></tr>
+<tr><td>--la-color-bg-active</td><td>Pressed state background</td></tr>
+<tr><td>--la-color-primary / -fg / -hover</td><td>Primary variant bg, icon, hover</td></tr>
+<tr><td>--la-color-secondary-border</td><td>Outline variant border</td></tr>
+<tr><td>--la-color-secondary-hover</td><td>Outline variant hover bg</td></tr>
+<tr><td>--la-color-text-secondary</td><td>Outline variant resting icon</td></tr>
+<tr><td>--la-color-danger / -fg / -hover</td><td>Danger variant bg, icon, hover</td></tr>
+<tr><td>--la-color-border-focus</td><td>Focus ring colour</td></tr>
+<tr><td>--dur-fast / --ease</td><td>Hover transition</td></tr>
+<tr><td>--scale-press</td><td>Active press scale</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — dismiss action</p>
+<div class="docs-code"><span class="kw">&lt;la-icon-button</span> <span class="at">label</span>=<span class="str">"Dismiss"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-x"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Small — widget header</p>
+<div class="docs-code"><span class="kw">&lt;la-icon-button</span> <span class="at">size</span>=<span class="str">"sm"</span> <span class="at">label</span>=<span class="str">"More options"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph-bold ph-dots-three"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Pressed — on/off toggle</p>
+<div class="docs-code"><span class="kw">&lt;la-icon-button</span>
+<span class="at">label</span>=<span class="str">"Show resolved items"</span>
+<span class="at">pressed</span>
+<span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph-fill ph-check-circle"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Expanded — disclosure trigger</p>
+<div class="docs-code"><span class="kw">&lt;la-icon-button</span>
+<span class="at">label</span>=<span class="str">"Collapse sidebar"</span>
+<span class="at">expanded</span>
+<span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-sidebar-simple"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Disabled</p>
+<div class="docs-code"><span class="kw">&lt;la-icon-button</span>
+<span class="at">label</span>=<span class="str">"Unavailable"</span>
+<span class="at">disabled</span>
+<span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-x"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Click handler</p>
+<div class="docs-code"><span class="kw">const</span> btn = document.querySelector(<span class="str">'la-icon-button'</span>);
+btn.addEventListener(<span class="str">'click'</span>, () =&gt; {
+  <span class="cm">// toggle expanded state</span>
+  btn.expanded = !btn.expanded;
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Destructive — danger variant</p>
+<div class="docs-code"><span class="kw">&lt;la-icon-button</span>
+<span class="at">variant</span>=<span class="str">"danger"</span>
+<span class="at">label</span>=<span class="str">"Delete document"</span>
+<span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-trash"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Square corners — override the default circle</p>
+<div class="docs-code"><span class="cm">/* Target the inner &lt;button&gt; via part */</span>
+la-icon-button::part(button) {
+  border-radius: <span class="num">0</span>;
+}</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Fully rounded by default</strong> — <code style="font-family:monospace;font-size:11px;">la-icon-button</code> uses <code style="font-family:monospace;font-size:11px;">--la-radius-circle</code> (50%) so the button renders as a circle on every size. Override via <code style="font-family:monospace;font-size:11px;">::part(button)</code> if you need square corners (see usage example).</div>
+<div class="docs-note"><strong>Four variants</strong> — <code style="font-family:monospace;font-size:11px;">default</code> is the most common choice (transparent with hover fill, used in widget headers and toolbars). <code style="font-family:monospace;font-size:11px;">primary</code> and <code style="font-family:monospace;font-size:11px;">danger</code> are for high-emphasis actions — use sparingly. <code style="font-family:monospace;font-size:11px;">outline</code> sits between them for secondary emphasis.</div>
+<div class="docs-note"><strong>Bold weight for dots-three</strong> — Phosphor's <code style="font-family:monospace;font-size:11px;">ph-dots-three</code> renders too thin at our button sizes. Use <code style="font-family:monospace;font-size:11px;">ph-bold ph-dots-three</code> instead. Other Phosphor icons stay at regular weight. Logged in <a href="../../CLAUDE.md">CLAUDE.md</a>.</div>
+<div class="docs-note"><strong>Label is required</strong> — <code style="font-family:monospace;font-size:11px;">la-icon-button</code> has no visible text. Without a <code style="font-family:monospace;font-size:11px;">label</code> prop, screen readers announce nothing. The component warns in the console (<code style="font-family:monospace;font-size:11px;">[la-icon-button] Missing label</code>) on first render if the prop is omitted or empty — treat this as a required field.</div>
+<div class="docs-note"><strong>Sibling to la-button</strong> — use <a href="./la-button.html"><code style="font-family:monospace;font-size:11px;">la-button</code></a> for text-labelled actions. <code style="font-family:monospace;font-size:11px;">la-icon-button</code> is specifically for icon-only triggers in dense surfaces. If you need an icon <em>and</em> text, use <code style="font-family:monospace;font-size:11px;">la-button</code> with its <code style="font-family:monospace;font-size:11px;">icon-left</code> or <code style="font-family:monospace;font-size:11px;">icon-right</code> slot.</div>
+<div class="docs-note"><strong>Shared size scale</strong> — the three sizes use <code style="font-family:monospace;font-size:11px;">--la-button-height-*</code> tokens shared with <code style="font-family:monospace;font-size:11px;">la-button</code>. A <code style="font-family:monospace;font-size:11px;">size="sm"</code> text button and a <code style="font-family:monospace;font-size:11px;">size="sm"</code> icon button in the same row will align at 28px. Logged in <a href="../../decisions/12-button-padding-off-scale.md">decisions/12</a>.</div>
+<div class="docs-note"><strong>pressed vs expanded</strong> — use <code style="font-family:monospace;font-size:11px;">pressed</code> for binary on/off toggles (e.g. "Show resolved items", mute, bookmark). Sets <code style="font-family:monospace;font-size:11px;">aria-pressed</code> and applies <code style="font-family:monospace;font-size:11px;">--la-color-bg-active</code> as the background. Swap the icon between outline (<code style="font-family:monospace;font-size:11px;">ph ph-*</code>) and fill (<code style="font-family:monospace;font-size:11px;">ph-fill ph-*</code>) in the slot to reinforce the state visually. Use <code style="font-family:monospace;font-size:11px;">expanded</code> for disclosure triggers (dropdown, sidebar collapse) — it sets <code style="font-family:monospace;font-size:11px;">aria-expanded</code> and does not apply a persistent active background.</div>
+<div class="docs-note"><strong>Expanded attribute quirk</strong> — to set <code style="font-family:monospace;font-size:11px;">expanded=false</code> you need JS property assignment (<code style="font-family:monospace;font-size:11px;">el.expanded = false</code>). HTML attribute presence is always truthy, so <code style="font-family:monospace;font-size:11px;">expanded="false"</code> as an attribute does <em>not</em> work. Leave the attribute off for "not a toggle", or bind it dynamically in your framework.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveBtn   = document.getElementById('live-btn');
+        const liveIcon  = document.getElementById('live-icon');
+        const labelInput = document.getElementById('ctrl-label');
+        const iconSelect = document.getElementById('ctrl-icon');
+
+        // Variant toggles
+        document.querySelectorAll('[data-variant]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-variant]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.variant === 'default') {
+              liveBtn.removeAttribute('variant');
+            } else {
+              liveBtn.setAttribute('variant', btn.dataset.variant);
+            }
+          });
+        });
+
+        // Size toggles
+        document.querySelectorAll('[data-size]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-size]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.size === 'default') {
+              liveBtn.removeAttribute('size');
+            } else {
+              liveBtn.setAttribute('size', btn.dataset.size);
+            }
+          });
+        });
+
+        // Disabled toggles
+        document.querySelectorAll('[data-disabled]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-disabled]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.disabled === 'true') {
+              liveBtn.setAttribute('disabled', '');
+            } else {
+              liveBtn.removeAttribute('disabled');
+            }
+          });
+        });
+
+        // Pressed 3-way toggles
+        document.querySelectorAll('[data-pressed]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-pressed]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const val = btn.dataset.pressed;
+            if (val === 'unset') {
+              liveBtn.pressed = undefined;
+              liveBtn.removeAttribute('pressed');
+            } else if (val === 'true') {
+              liveBtn.pressed = true;
+            } else {
+              liveBtn.pressed = false;
+            }
+          });
+        });
+
+        // Expanded 3-way toggles (uses JS property for false, since HTML attr presence is truthy)
+        document.querySelectorAll('[data-expanded]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-expanded]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const val = btn.dataset.expanded;
+            if (val === 'unset') {
+              liveBtn.expanded = undefined;
+              liveBtn.removeAttribute('expanded');
+            } else if (val === 'true') {
+              liveBtn.expanded = true;
+            } else {
+              liveBtn.expanded = false;
+            }
+          });
+        });
+
+        // Icon dropdown — option values are full class strings (e.g. "ph ph-x" or "ph-bold ph-dots-three")
+        iconSelect.addEventListener('change', () => {
+          liveIcon.className = iconSelect.value;
+        });
+
+        // Label input
+        labelInput.addEventListener('input', () => {
+          liveBtn.setAttribute('label', labelInput.value || '');
+        });
+  })();
+</script>
+
+
+</body>
+</html>

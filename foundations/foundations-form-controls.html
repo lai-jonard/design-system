@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Native form controls — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<link rel="stylesheet" href="../la-tokens-root.css">
+<link rel="stylesheet" href="../la-base-root.css">
+<style>
+  .sub-hero h1 { font-size: 36px; font-weight: 600; color: var(--doc-text); letter-spacing: -0.3px; margin-bottom: 10px; }
+  .sub-hero p { font-size: 15px; color: var(--doc-text-2); max-width: 680px; line-height: 1.6; }
+  .sub-hero-crumb { font-size: 12px; color: var(--doc-text-3); margin-bottom: 12px; }
+  .sub-hero-crumb a { color: var(--doc-text-3); }
+  .preview-header { padding-bottom: 4px; }
+  .demo-row { display: flex; gap: var(--la-space-md); flex-wrap: wrap; align-items: flex-end; padding: var(--la-space-lg); background: var(--la-color-bg); border: 1px solid var(--la-color-border-light); border-radius: var(--la-radius-lg); }
+  .demo-stack { display: flex; flex-direction: column; gap: var(--la-space-sm); }
+  .demo-label { font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); font-weight: var(--la-font-weight-medium); }
+  .gap-callout { background: var(--la-color-surface-warning); border: 1px solid var(--la-color-border-warning); border-radius: var(--la-radius-md); padding: var(--la-space-md) var(--la-space-lg); font-size: var(--la-font-size-base); color: var(--la-color-text); margin: var(--la-space-md) 0; }
+  .gap-callout strong { color: var(--la-color-text); }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">Native form controls</h3>
+  <div class="docs-nav-group">
+    <a href="#overview"    class="docs-nav-item" data-nav-id="overview">Overview</a>
+    <a href="#input"       class="docs-nav-item" data-nav-id="input">&lt;input&gt;</a>
+    <a href="#textarea"    class="docs-nav-item" data-nav-id="textarea">&lt;textarea&gt;</a>
+    <a href="#select"      class="docs-nav-item" data-nav-id="select">&lt;select&gt;</a>
+    <a href="#button"      class="docs-nav-item" data-nav-id="button">&lt;button&gt;</a>
+    <a href="#label"       class="docs-nav-item" data-nav-id="label">&lt;label&gt;</a>
+    <a href="#radio"       class="docs-nav-item" data-nav-id="radio">&lt;input type="radio"&gt;</a>
+    <a href="#checkbox"    class="docs-nav-item" data-nav-id="checkbox">&lt;input type="checkbox"&gt;</a>
+    <a href="#fieldset"    class="docs-nav-item" data-nav-id="fieldset">&lt;fieldset&gt; / &lt;legend&gt;</a>
+    <a href="#gap-summary" class="docs-nav-item" data-nav-id="gap-summary">Coverage gap</a>
+  </div>
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../foundations/">← All foundations</a>
+    <a class="docs-nav-item" href="../index.html">Design system home</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero" id="overview">
+  <div class="sub-hero-crumb"><a href="../foundations/">Foundations</a> / Native form controls</div>
+  <h1>Native form controls</h1>
+  <p>What raw <code>&lt;input&gt;</code>, <code>&lt;textarea&gt;</code>, <code>&lt;select&gt;</code>, <code>&lt;button&gt;</code>, <code>&lt;label&gt;</code>, <code>&lt;input type="radio"&gt;</code>, and <code>&lt;input type="checkbox"&gt;</code> look like in pages that load <code>la-base-root.css</code> on top of <code>la-tokens-root.css</code>. <strong>Most of these are unstyled today</strong> — the base file currently covers content elements (anchors, headings, lists, code, etc.) but not form controls. Reach for an <code>la-*</code> primitive whenever one exists; the gaps are flagged in the right column of each section so engineering knows what they're getting.</p>
+</section>
+
+<div class="docs">
+
+  <section class="docs-section" id="gap-summary">
+    <h2>Coverage at a glance</h2>
+    <table class="docs-table">
+      <thead><tr><th>Element</th><th><code>la-base-root.css</code></th><th>System primitive</th><th>Recommendation</th></tr></thead>
+      <tbody>
+        <tr><td><code>&lt;input&gt;</code> (text/email/url/etc.)</td><td>Not styled</td><td><a href="../components/la-input.html"><code>la-input</code></a> 🟢</td><td>Always use the primitive.</td></tr>
+        <tr><td><code>&lt;textarea&gt;</code></td><td>Not styled</td><td><strong>None — gap</strong></td><td>Use native + add field-level styling locally; flag for primitive build.</td></tr>
+        <tr><td><code>&lt;select&gt;</code></td><td>Not styled</td><td><a href="../components/la-select.html"><code>la-select</code></a> + <code>la-option</code> 🟡</td><td>Use the primitive when not blocked by LiveView serialiser.</td></tr>
+        <tr><td><code>&lt;button&gt;</code></td><td>Not styled</td><td><a href="../components/la-button.html"><code>la-button</code></a> 🟢</td><td>Always use the primitive.</td></tr>
+        <tr><td><code>&lt;label&gt;</code></td><td>Not styled</td><td>Form-foundation pattern</td><td>See <a href="../foundations/foundations-forms.html">Forms</a>.</td></tr>
+        <tr><td><code>&lt;input type="radio"&gt;</code></td><td>Not styled</td><td><strong>None — gap</strong> (<code>la-radio-group</code> planned)</td><td>Native today. Schedule <code>/build la-radio-group</code>.</td></tr>
+        <tr><td><code>&lt;input type="checkbox"&gt;</code></td><td>Not styled</td><td><a href="../components/la-checkbox.html"><code>la-checkbox</code></a> 🟢</td><td>Always use the primitive.</td></tr>
+        <tr><td><code>&lt;fieldset&gt;</code> / <code>&lt;legend&gt;</code></td><td>Not styled</td><td>Use natively + restyle locally</td><td>See <a href="../foundations/foundations-forms.html">Forms — multi-field grouping</a>.</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section class="docs-section" id="input">
+    <h2>&lt;input&gt;</h2>
+    <p>The browser's native input. <strong>Not styled by <code>la-base-root.css</code></strong> — the system delegates this to <code>la-input</code>, which carries label, hint, error, icon-slot, and consistent chrome. Reach for the primitive.</p>
+    <div class="demo-row">
+      <div class="demo-stack">
+        <span class="demo-label">Native (browser default)</span>
+        <input type="text" placeholder="Native input">
+      </div>
+      <div class="demo-stack">
+        <span class="demo-label"><code>la-input</code> (recommended)</span>
+        <la-input placeholder="System primitive"></la-input>
+      </div>
+    </div>
+    <div class="gap-callout">
+      <strong>When you must use native.</strong> Some LiveView form serialisers expect raw <code>&lt;input&gt;</code> + <code>name</code> attributes. If you're stuck with native, document it in the surrounding component and queue the swap to <code>la-input</code> when the serialiser supports it.
+    </div>
+  </section>
+
+  <section class="docs-section" id="textarea">
+    <h2>&lt;textarea&gt;</h2>
+    <p>Long-form free text. <strong>No system primitive yet</strong> — Sprint 4's "short answer" steps stay on a single-line <code>la-input</code>; longer text inputs use native. The gap is logged.</p>
+    <div class="demo-row">
+      <div class="demo-stack" style="width:100%;max-width:480px;">
+        <span class="demo-label">Native textarea (current path)</span>
+        <textarea rows="3" placeholder="Tell us a bit about your situation…" style="font-family:inherit;font-size:var(--la-font-size-base);padding:var(--la-space-sm) var(--la-space-md);border:1px solid var(--la-color-border);border-radius:var(--la-radius-sm);resize:vertical;width:100%;box-sizing:border-box;line-height:1.5;color:var(--la-color-text);background:var(--la-color-bg);"></textarea>
+      </div>
+    </div>
+    <div class="gap-callout">
+      <strong>Gap to schedule.</strong> The system needs <code>la-textarea</code> with auto-grow, character counter, and the same label/hint/error rhythm as <code>la-input</code>. Not in Sprints 1–4 scope; queued for build when a long-form text step lands.
+    </div>
+  </section>
+
+  <section class="docs-section" id="select">
+    <h2>&lt;select&gt;</h2>
+    <p>Single-choice dropdown. <code>la-select</code> + <code>la-option</code> is the system primitive (currently 🟡, awaiting <code>/document</code> + <code>/ready</code>). The native control is acceptable inside an embedded LiveView form when the serialiser hasn't been migrated; otherwise use the primitive.</p>
+    <div class="demo-row">
+      <div class="demo-stack">
+        <span class="demo-label">Native select</span>
+        <select style="font-family:inherit;font-size:var(--la-font-size-base);padding:var(--la-space-xs) var(--la-space-md);border:1px solid var(--la-color-border);border-radius:var(--la-radius-sm);background:var(--la-color-bg);color:var(--la-color-text);">
+          <option value="">Select a state…</option>
+          <option value="DE">Delaware</option>
+          <option value="CA">California</option>
+          <option value="NY">New York</option>
+        </select>
+      </div>
+      <div class="demo-stack">
+        <span class="demo-label"><code>la-select</code> (recommended)</span>
+        <la-select placeholder="Select a state…">
+          <la-option value="DE">Delaware</la-option>
+          <la-option value="CA">California</la-option>
+          <la-option value="NY">New York</la-option>
+        </la-select>
+      </div>
+    </div>
+  </section>
+
+  <section class="docs-section" id="button">
+    <h2>&lt;button&gt;</h2>
+    <p>Native button is rarely the right choice. <code>la-button</code> carries five variants, three sizes, focus rings, hover states, motion, and full keyboard semantics. Use the primitive.</p>
+    <div class="demo-row">
+      <div class="demo-stack">
+        <span class="demo-label">Native button</span>
+        <button type="button" style="font-family:inherit;">Native button</button>
+      </div>
+      <div class="demo-stack">
+        <span class="demo-label"><code>la-button</code> (recommended)</span>
+        <la-button variant="primary">System primitive</la-button>
+      </div>
+    </div>
+    <div class="gap-callout">
+      <strong>Exception.</strong> Inline icon-only triggers inside dense docs chrome (the docs nav toggle, sidebar collapse) use <code>&lt;button&gt;</code> with locally-scoped styling. Don't replicate this for product surfaces.
+    </div>
+  </section>
+
+  <section class="docs-section" id="label">
+    <h2>&lt;label&gt;</h2>
+    <p>Always pair a label with its control. The system uses native <code>&lt;label&gt;</code> with <code>for</code> bound to the input id — that gives screen readers and click-to-focus behaviour for free. Style is owned by the form context, not by <code>la-base-root.css</code>.</p>
+    <div class="demo-row">
+      <div class="demo-stack" style="gap:var(--la-space-sm);">
+        <label for="lbl-demo" style="font-size:var(--la-font-size-base);font-weight:var(--la-font-weight-semibold);color:var(--la-color-text);">Company name</label>
+        <la-input id="lbl-demo" placeholder="Acme Pty Ltd"></la-input>
+      </div>
+    </div>
+    <p style="margin-top:12px;">See <a href="../foundations/foundations-forms.html#field">Forms — field anatomy</a> for the canonical label rhythm (size, weight, colour, required marker).</p>
+  </section>
+
+  <section class="docs-section" id="radio">
+    <h2>&lt;input type="radio"&gt;</h2>
+    <p>Single-choice from a small set. <strong>No system primitive yet</strong> — <code>la-radio-group</code> is logged as a known gap that the unlock flow's yes/no step needs (currently rendered as click-handler-on-spans, an anti-pattern flagged in <code>la-unlock-panel</code>).</p>
+    <div class="demo-row">
+      <div class="demo-stack" style="gap:var(--la-space-sm);">
+        <span class="demo-label">Native radio group (current path)</span>
+        <fieldset style="border:none;padding:0;margin:0;display:flex;flex-direction:column;gap:var(--la-space-xs);">
+          <label style="display:flex;align-items:center;gap:var(--la-space-sm);font-size:var(--la-font-size-base);">
+            <input type="radio" name="raising" value="yes"> Yes, we're actively raising
+          </label>
+          <label style="display:flex;align-items:center;gap:var(--la-space-sm);font-size:var(--la-font-size-base);">
+            <input type="radio" name="raising" value="no"> No, not right now
+          </label>
+          <label style="display:flex;align-items:center;gap:var(--la-space-sm);font-size:var(--la-font-size-base);">
+            <input type="radio" name="raising" value="soon"> Planning to in the next 6 months
+          </label>
+        </fieldset>
+      </div>
+    </div>
+    <div class="gap-callout">
+      <strong>Gap to schedule before Sprint 4 ships properly.</strong> The unlock-flow yes/no step currently renders clickable <code>&lt;span&gt;</code>s with no radio semantics. <code>la-radio</code> + <code>la-radio-group</code> is logged in <code>handoffs/readiness.md</code>. Sprint 8 (contract-first add-person modal) and future IP-filing steps both compound the demand.
+    </div>
+  </section>
+
+  <section class="docs-section" id="checkbox">
+    <h2>&lt;input type="checkbox"&gt;</h2>
+    <p><code>la-checkbox</code> is the system primitive. Native <code>&lt;input type="checkbox"&gt;</code> is acceptable only inside <code>la-data-table</code> selection columns where the table primitive owns the chrome.</p>
+    <div class="demo-row">
+      <div class="demo-stack" style="gap:var(--la-space-sm);">
+        <span class="demo-label">Native checkbox</span>
+        <label style="display:flex;align-items:center;gap:var(--la-space-sm);font-size:var(--la-font-size-base);">
+          <input type="checkbox"> Accept terms and conditions
+        </label>
+      </div>
+      <div class="demo-stack" style="gap:var(--la-space-sm);">
+        <span class="demo-label"><code>la-checkbox</code> (recommended)</span>
+        <la-checkbox label="Accept terms and conditions"></la-checkbox>
+      </div>
+    </div>
+  </section>
+
+  <section class="docs-section" id="fieldset">
+    <h2>&lt;fieldset&gt; / &lt;legend&gt;</h2>
+    <p>Group related fields. Native semantics — screen readers read the legend before each grouped field. Restyle locally with <code>border: none</code> + <code>padding: 0</code>; the legend can carry the same chrome as a form label.</p>
+    <div class="demo-row">
+      <div class="demo-stack" style="gap:var(--la-space-md);width:100%;max-width:480px;">
+        <fieldset style="border:none;padding:0;margin:0;">
+          <legend style="font-size:var(--la-font-size-base);font-weight:var(--la-font-weight-semibold);color:var(--la-color-text);padding:0;margin-bottom:var(--la-space-md);">Registered agent</legend>
+          <div style="display:flex;flex-direction:column;gap:var(--la-space-sm);">
+            <la-input placeholder="Agent name"></la-input>
+            <la-input placeholder="Agent email"></la-input>
+          </div>
+        </fieldset>
+      </div>
+    </div>
+    <p style="margin-top:12px;">See <a href="../foundations/foundations-forms.html#grouping">Forms — multi-field grouping</a> for full pattern.</p>
+  </section>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

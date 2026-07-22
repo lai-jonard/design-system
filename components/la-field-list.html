@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-field-list — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-field-list</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-field-list</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-field-list</h1>
+<p>A list of labelled key–value rows for document metadata, extracted facts, and entity details. Pass an array of <code>{ label, value }</code> objects via the <code>fields</code> property. Each row has a bottom border to aid scanning on longer lists; the last row's border is suppressed. Two layout modes: <strong>spread</strong> (default) for narrow panels, <strong>stack</strong> for wider surfaces.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>A <code>&lt;dl&gt;</code> wrapper with one row per field, each containing a label (<code>&lt;dt&gt;</code>) and a value (<code>&lt;dd&gt;</code>).</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:48px 40px; justify-content:center;">
+  <div style="width:100%; max-width:480px; display:flex; gap:48px; align-items:flex-start;">
+    <la-field-list id="anatomy-list" style="flex:1;"></la-field-list>
+    <ol style="list-style:decimal inside; padding:0; margin:0; font-size:13px; line-height:1.6; color:#374151; max-width:220px; flex-shrink:0;">
+      <li><strong>Row</strong> — <code>border-bottom: 1px --la-color-border-light</code>. Last row has no border.</li>
+      <li style="margin-top:6px;"><strong>Label</strong> (<code>&lt;dt&gt;</code>) — base size, muted colour.</li>
+      <li style="margin-top:6px;"><strong>Value</strong> (<code>&lt;dd&gt;</code>) — base size, normal weight, primary text colour.</li>
+    </ol>
+  </div>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Layout</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-layout="spread">spread</button>
+<button class="btn-toggle" data-layout="stack">stack</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="padding:32px 40px; justify-content:center;">
+<la-field-list id="live-list" style="width:100%;max-width:440px;"></la-field-list>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Spread layout (default) — document metadata</div>
+<div class="preview-frame" style="padding:32px 40px; justify-content:center;">
+<la-field-list id="snap-spread" style="width:100%;max-width:440px;"></la-field-list>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Stack layout — extracted company facts</div>
+<div class="preview-frame" style="padding:32px 40px; justify-content:center;">
+<la-field-list id="snap-stack" layout="stack" style="width:100%;max-width:520px;"></la-field-list>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Single row</div>
+<div class="preview-frame" style="padding:32px 40px; justify-content:center;">
+<la-field-list id="snap-single" style="width:100%;max-width:440px;"></la-field-list>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Long value — wraps naturally (stack layout)</div>
+<div class="preview-frame" style="padding:32px 40px; justify-content:center;">
+<la-field-list id="snap-long" layout="stack" style="width:100%;max-width:440px;"></la-field-list>
+</div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+  var docFields = [
+    { label: 'Uploaded',   value: '3 Mar 2024' },
+    { label: 'File size',  value: '88 KB' },
+    { label: 'Category',   value: 'Employment' },
+    { label: 'Legal area', value: 'Employment' },
+  ];
+
+  var companyFields = [
+    { label: 'Company name',         value: 'Acme Corp.' },
+    { label: 'Entity type',          value: 'Delaware C-Corp' },
+    { label: 'Date of incorporation', value: '12 Jan 2022' },
+    { label: 'State of incorporation', value: 'Delaware' },
+    { label: 'Registered agent',     value: 'National Registered Agents, Inc.' },
+  ];
+
+  document.getElementById('anatomy-list').fields = docFields;
+  document.getElementById('live-list').fields    = docFields;
+  document.getElementById('snap-spread').fields  = docFields;
+  document.getElementById('snap-stack').fields   = companyFields;
+  document.getElementById('snap-single').fields  = [{ label: 'Uploaded', value: '3 Mar 2024' }];
+  document.getElementById('snap-long').fields    = [
+    { label: 'Registered agent', value: 'National Registered Agents, Inc. — 160 Greentree Drive, Suite 101, Dover, Delaware 19904' },
+    { label: 'Entity type',      value: 'Delaware C-Corp' },
+  ];
+
+  // Layout toggle
+  document.querySelectorAll('[data-layout]').forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('[data-layout]').forEach(function(b) { b.classList.remove('active'); });
+      btn.classList.add('active');
+      var layout = btn.dataset.layout;
+      var live = document.getElementById('live-list');
+      live.layout = layout;
+      live.fields = layout === 'stack' ? companyFields : docFields;
+    });
+  });
+});
+</script>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-field-list</h2>
+    <p>A list of labelled key–value rows for document metadata, extracted facts, and entity details. Two layout modes: spread (label left, value right-aligned) for narrow panels, and stack (fixed-width label column) for wider surfaces.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>fields</td>
+          <td><span class="default">fields</span></td>
+          <td><span class="type">FieldItem[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Rows to render. Each item has a `label` and a `value`.</td>
+        </tr>
+      
+        <tr>
+          <td>layout</td>
+          <td><span class="default">layout</span></td>
+          <td><span class="type">&#39;spread&#39; | &#39;stack&#39;</span></td>
+          <td><span class="default">&#39;spread&#39;</span></td>
+          <td>Layout mode. `'spread'` (default) — label/value space-between. `'stack'` — fixed-width label column.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Row chrome</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-border-light</td><td>Row bottom border (suppressed on last row)</td></tr>
+<tr><td>--la-space-sm</td><td>Row vertical padding</td></tr>
+<tr><td>--la-space-md</td><td>Gap between label and value (stack layout)</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Typography</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-font-size-base</td><td>Label and value text size</td></tr>
+<tr><td>--la-color-text-muted</td><td>Label colour</td></tr>
+<tr><td>--la-color-text</td><td>Value colour</td></tr>
+<tr><td>--la-font-weight-normal</td><td>Value weight</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div class="docs-section" id="usage">
+<h3>Usage</h3>
+<pre class="code-block"><code>&lt;!-- Spread (default) — document metadata --&gt;
+&lt;la-field-list id="details"&gt;&lt;/la-field-list&gt;
+&lt;script&gt;
+  document.getElementById('details').fields = [
+    { label: 'Uploaded',   value: '3 Mar 2024' },
+    { label: 'File size',  value: '88 KB' },
+    { label: 'Category',   value: 'Employment' },
+    { label: 'Legal area', value: 'Employment' },
+  ];
+&lt;/script&gt;
+
+&lt;!-- Stack — company manual / wider surfaces --&gt;
+&lt;la-field-list id="basics" layout="stack"&gt;&lt;/la-field-list&gt;
+&lt;script&gt;
+  document.getElementById('basics').fields = [
+    { label: 'Company name', value: 'Acme Corp.' },
+    { label: 'Entity type',  value: 'Delaware C-Corp' },
+  ];
+&lt;/script&gt;</code></pre>
+</div>
+
+<div class="docs-section" id="notes">
+<h3>Notes</h3>
+<ul class="docs-list">
+  <li>Pass fields via the <code>.fields</code> JS property — not a string attribute. Each item is <code>{ label: string; value: string }</code>.</li>
+  <li>An empty <code>fields</code> array renders nothing — the component is invisible. Filter out absent fields before passing.</li>
+  <li>Use <strong>spread</strong> (default) in narrow panels where a right-aligned value creates clear left–right scanning. Use <strong>stack</strong> on wider surfaces where a fixed-width label column aids alignment across many rows.</li>
+  <li>The component renders a semantic <code>&lt;dl&gt;</code> / <code>&lt;dt&gt;</code> / <code>&lt;dd&gt;</code> structure — correct for key–value data.</li>
+</ul>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

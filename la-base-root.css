@@ -1,0 +1,244 @@
+/* ──────────────────────────────────────────────────────────
+   la-base-root.css — base element styles for light-DOM consumers
+
+   Sister file to la-tokens-root.css. Where la-tokens-root.css declares
+   *values* (--la-* custom properties), this file declares *applied styles*
+   for native HTML elements — the "how this element looks by default"
+   rules that should hold across the platform.
+
+   Use this for any element-level default that would otherwise drift if
+   each page redefined it: <a>, future <hr>, <code>, <kbd>, <mark>, etc.
+   Add new element rules below as the system grows — keep them in this
+   one file so designers know where to look.
+
+   Loading:
+     <link rel="stylesheet" href="/dev/la-tokens-root.css">  ← values first
+     <link rel="stylesheet" href="/dev/la-base-root.css">    ← then base
+
+   Tokens come from --la-* custom properties — la-tokens-root.css must
+   load first (or you must be inside a Lit component that imports tokens.ts).
+
+   ⚠️ KEEP IN SYNC if/when a parallel src/styles/base.ts Lit export is
+   added for shadow-DOM consumption. For now this file is light-DOM only.
+   ────────────────────────────────────────────────────────── */
+
+/* ── Inter (self-hosted) ──────────────────────────────────────
+   Inter is the design-system font (--la-font-family). Self-hosted here so
+   the platform renders in Inter regardless of whether the viewer has it
+   installed locally — before this, pages silently fell back to system-ui
+   (San Francisco / Segoe). One variable file per style covers 100–900.
+   @font-face is document-level, so this also reaches Lit shadow DOM.
+   Licence: SIL OFL-1.1 — see /assets/vendor/inter/OFL-NOTICE.txt.
+   Decision: decisions/85-self-host-inter-webfont.md
+   ──────────────────────────────────────────────────────────── */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('assets/vendor/inter/InterVariable.woff2') format('woff2');
+}
+@font-face {
+  font-family: 'Inter';
+  font-style: italic;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('assets/vendor/inter/InterVariable-Italic.woff2') format('woff2');
+}
+/* Use Inter's optical-size axis so text is optically corrected at every size. */
+:root { font-optical-sizing: auto; }
+
+/* Meow Script (self-hosted) — the adopted-signature face (--la-font-signature /
+   .sig-mark). SIL OFL-1.1, free for commercial use + embedding — replaces the old
+   reliance on proprietary OS fonts (Snell Roundhand / Brush Script MT). */
+@font-face {
+  font-family: 'Meow Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url('assets/vendor/meow-script/MeowScript-Regular.woff2') format('woff2');
+}
+
+/* ── Anchors ──────────────────────────────────────────────── */
+
+a {
+  color: var(--la-color-text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--la-color-border);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: var(--la-font-weight-normal);
+  transition: text-decoration-color var(--dur-fast) var(--ease);
+}
+a:hover {
+  text-decoration-color: var(--la-color-primary);
+}
+a:focus-visible {
+  outline: 2px solid var(--la-color-border-focus);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* Modifier — quieter still. For tertiary or dense-row links. */
+a.link-muted {
+  color: var(--la-color-text-muted);
+  font-weight: var(--la-font-weight-normal);
+  text-decoration-color: var(--la-color-border);
+}
+a.link-muted:hover {
+  text-decoration-color: var(--la-color-text);
+}
+
+/* Modifier — inline links inherit colour and size from surrounding text,
+   but the resting line stays on the same quiet --la-color-border as default
+   and muted variants. Keeps every link tone visually consistent at rest;
+   only the text colour shifts based on context.
+   Use for links that sit inside a paragraph of body copy. */
+a.link-inline {
+  color: currentColor;
+  font-weight: inherit;
+  font-size: inherit;
+  text-decoration-color: var(--la-color-border);
+}
+a.link-inline:hover {
+  text-decoration-color: var(--la-color-primary);
+}
+
+/* ── Headings ─────────────────────────────────────────────── */
+/* Global defaults — only apply where no higher-specificity rule wins.
+   Per CLAUDE.md typography rules: 600 only, never 700. */
+h1, h2, h3, h4, h5, h6 {
+  color: var(--la-color-text);
+  font-weight: var(--la-font-weight-semibold);
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin: var(--la-space-xl) 0 var(--la-space-md);
+  /* Even line lengths, no orphans on short headings. Balance only
+     runs on ≤6-line blocks (Chromium) — headings always qualify.
+     See decision 83. */
+  text-wrap: balance;
+}
+h1 { font-size: var(--la-font-size-4xl); }
+h2 { font-size: var(--la-font-size-3xl); }
+h3 { font-size: var(--la-font-size-2xl); }
+h4 { font-size: var(--la-font-size-xl); }
+h5 { font-size: var(--la-font-size-lg); }
+h6 { font-size: var(--la-font-size-md); }
+
+/* Body text — prevent a single dangling word on the last line. Works on
+   text of any length, no line-count cap (unlike balance). See decision 83. */
+p, li, blockquote, figcaption, dd {
+  text-wrap: pretty;
+}
+
+/* ── Horizontal rule ─────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid var(--la-color-border-light);
+  margin: var(--la-space-xl) 0;
+}
+
+/* ── Inline code ─────────────────────────────────────────── */
+/* Small radius (6px) — inline elements need a tighter corner than
+   --la-radius-sm (10px) provides. Token gap to address later. */
+code {
+  font-family: var(--la-font-family-mono);
+  font-size: 0.9em;
+  background: var(--la-color-bg-muted);
+  padding: 0.1em 0.35em;
+  border-radius: 6px;
+  color: var(--la-color-text);
+  /* No border — a 1px stroke on inline chips slices raggedly when a long
+     chip wraps mid-paragraph and disturbs the line rhythm. Background alone
+     marks the chip; clone keeps both wrapped halves rounded. */
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+}
+
+/* ── Keyboard chord ──────────────────────────────────────── */
+/* Soft chip — quiet muted background, no border. The smaller size and the
+   medium weight do the work of distinguishing kbd from surrounding copy. */
+kbd {
+  font-family: inherit;
+  font-size: 0.8em;
+  font-weight: var(--la-font-weight-medium);
+  font-variant-numeric: tabular-nums slashed-zero;
+  background: var(--la-color-bg-muted);
+  border: 1px solid var(--la-color-border-light);
+  padding: 1px 6px;
+  border-radius: 6px;
+  color: var(--la-color-text-muted);
+}
+
+/* ── Highlight ───────────────────────────────────────────── */
+mark {
+  background: var(--la-color-proactive-bg);
+  color: var(--la-color-proactive-text);
+  padding: 1px 2px;
+  border-radius: 2px;
+}
+
+/* ── Fine print ──────────────────────────────────────────── */
+small {
+  font-size: var(--la-font-size-sm);
+  color: var(--la-color-text-muted);
+}
+
+/* ── Abbreviations ───────────────────────────────────────── */
+/* Dotted underline mirrors links' muted line — quiet hint that the term
+   is interactive (hover for the title tooltip). */
+abbr {
+  text-decoration: underline dotted;
+  text-decoration-color: var(--la-color-border);
+  text-underline-offset: 2px;
+  cursor: help;
+}
+
+/* ── Sub & superscript ───────────────────────────────────── */
+/* Standard pattern — keeps line-height intact. */
+sub, sup {
+  font-size: 0.75em;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+sub { bottom: -0.25em; }
+sup { top: -0.5em; }
+
+/* ── Blockquote ──────────────────────────────────────────── */
+/* No vertical padding so the left rule aligns flush with the text — the
+   surrounding `margin` provides breathing room from the body copy. */
+blockquote {
+  border-left: 2px solid var(--la-color-border);
+  padding: 0 var(--la-space-md);
+  margin: var(--la-space-xl) 0;
+  color: var(--la-color-text-muted);
+}
+blockquote p:first-child { margin-top: 0; }
+blockquote p:last-child { margin-bottom: 0; }
+
+/* ── Lists ───────────────────────────────────────────────── */
+ul, ol {
+  padding-left: var(--la-space-xl);
+  margin: var(--la-space-md) 0;
+}
+li {
+  margin-bottom: var(--la-space-xs);
+}
+li:last-child { margin-bottom: 0; }
+
+/* ── Definition lists ────────────────────────────────────── */
+dl {
+  margin: var(--la-space-md) 0;
+}
+dt {
+  font-weight: var(--la-font-weight-semibold);
+  color: var(--la-color-text);
+  margin-top: var(--la-space-sm);
+}
+dt:first-child { margin-top: 0; }
+dd {
+  margin: 0 0 var(--la-space-sm) 0;
+  color: var(--la-color-text-secondary);
+}
+

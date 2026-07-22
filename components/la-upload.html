@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-upload — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-upload</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#context" class="docs-nav-item" data-nav-id="context">In context</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-upload</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-upload</h1>
+  <p>Dual-source upload zone for hosting contexts. Renders Browse files + Google Drive buttons above a drop zone, with a separate transfer-failure alert that hosts drive on network errors. Composes <code>la-upload-box</code> for the drop-zone surface itself — drag-and-drop, click-to-browse, type / size / multi-file validation, and file-rejection error state all live there.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>Three regions stacked vertically. Sources row + optional transfer-error alert + drop zone.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — idle, no transfer error</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload id="up-anatomy" style="width:100%;max-width:520px;"></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Sources row</td><td><code>.sources</code></td><td>Browse files (<code>la-button</code> secondary + <code>ph-folder-open</code>) and Google Drive (<code>la-button</code> secondary + <code>ph-google-drive-logo</code>). Both render as parallel entry points — neither is biased as primary. Browse triggers the inner drop zone's file dialog; Drive fires <code>la-upload-drive</code> for the host to handle OAuth.</td></tr>
+      <tr><td>Transfer-error alert</td><td><code>.transfer-error</code> (conditional)</td><td>Tinted-danger banner above the drop zone. Shown only when <code>transfer-error</code> is set. Carries the message text plus a Retry button that fires <code>la-retry-transfer</code>. Used for network / timeout failures the host detects after the file has left the browser.</td></tr>
+      <tr><td>Drop zone</td><td><code>la-upload-box</code> (composed)</td><td>Owns drag-and-drop, click-to-browse, file picker, type / size / multi-file validation, file-rejection error state, and the upload spinner during transfer. See <a href="la-upload-box.html"><code>la-upload-box</code></a> for full anatomy of the zone itself.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Each control drives a public property on <code>la-upload</code>.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-accept">accept</label>
+      <input id="ctl-accept" type="text" value=".pdf,.docx" placeholder=".pdf,.docx">
+    </div>
+    <div class="control-group">
+      <label for="ctl-max">max-size <span style="color:var(--doc-text-faint);">(bytes)</span></label>
+      <input id="ctl-max" type="number" value="52428800" min="0" step="1048576" style="width:140px;">
+    </div>
+  </div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-prompt">prompt</label>
+      <input id="ctl-prompt" type="text" value="Or drag a file here" style="width:280px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-hint">hint</label>
+      <input id="ctl-hint" type="text" value="" placeholder="Optional secondary line" style="width:280px;">
+    </div>
+  </div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label>compact</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-compact="false" type="button">false</button>
+        <button class="btn-toggle" data-compact="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>processing</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-processing="false" type="button">false</button>
+        <button class="btn-toggle" data-processing="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>transfer-error</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-transfer="false" type="button">false</button>
+        <button class="btn-toggle" data-transfer="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label for="ctl-tem">transfer-error-message</label>
+      <input id="ctl-tem" type="text" value="" placeholder="Default: Upload failed. Check your connection and try again." style="width:360px;">
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the controls above. Drive, Retry, file-change, and file-rejection events appear in the log.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload id="up-live" style="width:100%;max-width:520px;"></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Event log</div>
+  <div id="event-log" class="docs-code" style="min-height:64px;max-height:160px;overflow:auto;">
+    <span style="color:var(--doc-text-faint);">Click Browse / Google Drive / Retry, or drop a file to log events.</span>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed states for reference. For drop-zone internal states (file selected, processing, file rejection), see <a href="la-upload-box.html"><code>la-upload-box</code></a>.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Idle — default state, no host constraints</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload style="width:100%;max-width:520px;"></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Form context — accept + max-size + hint set by host</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      accept=".pdf,.docx"
+      max-size="52428800"
+      hint="PDF or DOCX, up to 50 MB."
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Cap-table slot — accept extended to PDF / DOCX / XLSX / CSV</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      accept=".pdf,.docx,.xlsx,.csv"
+      max-size="52428800"
+      hint="PDF, DOCX, XLSX, or CSV, up to 50 MB."
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Transfer error — host detected a network failure after the file left the browser</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      accept=".pdf,.docx"
+      max-size="52428800"
+      transfer-error
+      transfer-error-message="Upload interrupted. Check your connection and try again."
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Custom prompt — host overrides the default drop-zone copy</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      accept=".pdf"
+      prompt="Drop the signed contract here"
+      hint="PDF only."
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">File selected — pending state, filename + green check + remove ×</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      id="up-has-file"
+      accept=".pdf,.docx"
+      max-size="52428800"
+      hint="PDF or DOCX, up to 50 MB."
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Processing — host transferring the selected file</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      id="up-processing"
+      accept=".pdf,.docx"
+      max-size="52428800"
+      hint="PDF or DOCX, up to 50 MB."
+      processing
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">File rejected — wrong type dropped (.txt into a PDF/DOCX slot)</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      id="up-rejected"
+      accept=".pdf,.docx"
+      max-size="52428800"
+      hint="PDF or DOCX, up to 50 MB."
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Multi-file rejected — five files dropped at once (Sprint 1 is single-file only)</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload
+      id="up-multi"
+      accept=".pdf,.docx"
+      max-size="52428800"
+      hint="PDF or DOCX, up to 50 MB."
+      style="width:100%;max-width:520px;"
+    ></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Compact — idle, slim drop zone for space-constrained contexts (e.g. insight modal)</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload compact style="width:100%;max-width:520px;"></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Compact — file selected</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload id="up-compact-file" compact style="width:100%;max-width:520px;"></la-upload>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Compact — processing</div>
+  <div class="preview-frame" style="align-items:flex-start;">
+    <la-upload id="up-compact-processing" compact processing style="width:100%;max-width:520px;"></la-upload>
+  </div>
+</div>
+
+<!-- In context -->
+<div id="context" class="preview-header" style="margin-top:8px;">
+  <h1>In context</h1>
+  <p>Renders inline inside whatever container hosts it — insight modal, add-person modal, unlock-step document attachment, cap-table import. Below: simulated insight-modal evidence-upload host.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Inside an insight modal — evidence upload to resolve a flagged issue</div>
+  <div class="preview-frame" style="align-items:flex-start;justify-content:center;background:var(--la-color-bg-page);padding:48px;">
+    <div style="background:var(--la-color-bg);border-radius:var(--la-radius-xl);box-shadow:var(--la-shadow-md);padding:24px;width:100%;max-width:560px;display:flex;flex-direction:column;gap:16px;">
+      <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px;">
+        <div>
+          <div style="font-size:11px;font-weight:600;letter-spacing:0.4px;text-transform:uppercase;color:var(--la-color-warning-text);margin-bottom:6px;">Proactive</div>
+          <div style="font-size:18px;font-weight:600;color:var(--la-color-text);">Add the signed employment contract for J. Smith</div>
+          <div style="font-size:13px;color:var(--la-color-text-secondary);margin-top:6px;">A signed copy is required for our records. Drop it here or pull it from your Drive.</div>
+        </div>
+      </div>
+
+      <la-upload
+        id="up-context"
+        compact
+        accept=".pdf,.docx"
+        max-size="52428800"
+        hint="PDF or DOCX, up to 50 MB."
+      ></la-upload>
+
+      <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:8px;">
+        <la-button variant="ghost">Dismiss</la-button>
+        <la-button variant="primary" disabled>Resolve insight</la-button>
+      </div>
+    </div>
+  </div>
+  <div class="docs-note" style="margin-top:8px;"><strong>Example only.</strong> The surrounding modal scaffolding (heading, eyebrow, ghost/primary buttons) is hand-rolled inline to demonstrate <code>la-upload</code>'s composition in context. It is <em>not</em> a preview of <code>la-insight-modal</code> — the real insight-modal component design is separate and will not look like this. Treat this frame as a host-shape illustration, nothing more.</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-upload</h2>
+    <p>Dual-source upload zone for hosting contexts. Renders Browse files + Google Drive buttons above a drop zone, with a separate transfer-failure alert that hosts drive on network errors. Composes la-upload-box for the drop zone — drag-and-drop, click-to-browse, type / size / multi-file validation, and file-rejection error state all live there.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>accept</td>
+          <td><span class="default">accept</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>maxSize</td>
+          <td><span class="default">max-size</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>prompt</td>
+          <td><span class="default">prompt</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Or drag a file here&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>hint</td>
+          <td><span class="default">hint</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>compact</td>
+          <td><span class="default">compact</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>processing</td>
+          <td><span class="default">processing</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>transferError</td>
+          <td><span class="default">transfer-error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>transferErrorMessage</td>
+          <td><span class="default">transfer-error-message</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_box</td>
+          <td>—</td>
+          <td><span class="type">LaUploadBox | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-upload-drive</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-retry-transfer</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <table class="docs-table">
+    <thead><tr><th>Token</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>--la-space-sm</td><td>Sources-row gap; transfer-error alert gap-between-elements and vertical padding</td></tr>
+      <tr><td>--la-space-md</td><td>Sources-row bottom margin; transfer-error horizontal padding and gap-between-children</td></tr>
+      <tr><td>--la-color-surface-danger</td><td>Transfer-error alert background</td></tr>
+      <tr><td>--la-color-danger-text</td><td>Transfer-error alert text colour</td></tr>
+      <tr><td>--la-radius-md</td><td>Transfer-error alert border radius</td></tr>
+      <tr><td>--la-font-size-sm</td><td>Transfer-error alert text size</td></tr>
+    </tbody>
+  </table>
+  <div class="docs-note" style="margin-top:16px;">
+    <strong>Drop-zone tokens belong to <code>la-upload-box</code>.</strong> The radius, border, surface background, and state colours of the dashed drop zone itself are documented on the <a href="la-upload-box.html"><code>la-upload-box</code></a> page. This component only adds the surrounding sources row and transfer-error alert.
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — listen for a valid file</p>
+      <div class="docs-code"><span class="kw">&lt;la-upload</span>
+  <span class="at">accept</span>=<span class="str">".pdf,.docx"</span>
+  <span class="at">max-size</span>=<span class="str">"52428800"</span>
+  <span class="at">hint</span>=<span class="str">"PDF or DOCX, up to 50 MB."</span>
+<span class="kw">&gt;&lt;/la-upload&gt;</span>
+
+<span class="kw">const</span> upload = document.querySelector(<span class="str">'la-upload'</span>);
+upload.addEventListener(<span class="str">'la-change'</span>, e =&gt; {
+  startUpload(e.detail.file);
+});</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Drive OAuth — host owns the popup</p>
+      <div class="docs-code">upload.addEventListener(<span class="str">'la-upload-drive'</span>, () =&gt; {
+  openDriveOAuthPopup().then(token =&gt; {
+    openPicker(token).then(driveFile =&gt; {
+      startUpload(driveFile);
+    });
+  });
+});</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Transfer-failure flow</p>
+      <div class="docs-code">upload.processing = <span class="kw">true</span>;
+fetch(...).catch(() =&gt; {
+  upload.processing = <span class="kw">false</span>;
+  upload.transferError = <span class="kw">true</span>;
+  upload.transferErrorMessage =
+    <span class="str">'Upload interrupted. Check your connection and try again.'</span>;
+});
+
+upload.addEventListener(<span class="str">'la-retry-transfer'</span>, () =&gt; {
+  upload.transferError = <span class="kw">false</span>;
+  retry();
+});</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Handle file rejection</p>
+      <div class="docs-code">upload.addEventListener(<span class="str">'la-reject'</span>, e =&gt; {
+  <span class="kw">if</span> (e.detail.reason === <span class="str">'multi'</span>) {
+    <span class="kw">/* la-upload-box already shows the inline message */</span>
+  }
+  <span class="kw">if</span> (e.detail.reason === <span class="str">'size'</span>) {
+    <span class="kw">/* analytics, telemetry, etc. */</span>
+  }
+});</div>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Composition over inheritance.</strong> <code>la-upload</code> wraps <code>la-upload-box</code>. The drop zone, validation, file-rejection error state, and upload spinner all live in the inner box; this layer adds the Drive button and the transfer-failure alert. Reach for <code>la-upload-box</code> directly when you need the drop zone alone (no Drive button, no host-driven transfer-error). See <a href="../../decisions/48-upload-compose-not-extend.md"><code>decisions/48-upload-compose-not-extend.md</code></a>.</div>
+    <div class="docs-note"><strong>Drive OAuth is a host concern.</strong> The Drive button only fires <code>la-upload-drive</code>. The host owns the popup, picker, token caching, and silent re-consent on token expiry. Sprint 1 keeps Drive tokens local in the existing <code>LAI.GoogleApi</code> module — the component stays unaware.</div>
+    <div class="docs-note"><strong>Two error categories, never simultaneous.</strong> File-rejection (type / size / multi-file) is owned by <code>la-upload-box</code> and stays inside its own surface with a re-select affordance. Transfer-failure (network / timeout) is host-driven via <code>transfer-error</code> with its own Retry affordance above the zone. The two states model different failure modes and surface differently. See <a href="../../decisions/49-upload-two-tier-error-model.md"><code>decisions/49-upload-two-tier-error-model.md</code></a>.</div>
+    <div class="docs-note"><strong>Multi-file drop is rejected.</strong> Sprint 1 is single-file v1. Dropping more than one file fires <code>la-reject</code> with <code>detail.reason: 'multi'</code> and shows "Only one file can be uploaded at a time." in the drop zone.</div>
+    <div class="docs-note"><strong>Both source buttons are equal weight.</strong> Browse files and Google Drive both render as <code>variant="secondary"</code> — neither is biased as the primary action because they are parallel choices. The actual primary in any host context is whatever submit / resolve action the host modal owns.</div>
+    <div class="docs-note"><strong>Typical hosts.</strong> Insight-modal evidence upload, add-person avatar, cap-table import, unlock-step document attachment. Each host sets its own <code>accept</code> per Sprint 1 (PDF / DOCX default, PDF / DOCX / XLSX / CSV for cap table; 50 MB across the board).</div>
+    <div class="docs-note"><strong><code>compact</code> for space-constrained hosts.</strong> Setting <code>compact</code> switches the drop zone to a slim horizontal layout — icon and prompt inline on a single row, reduced padding, hint hidden. Passes through to <code>la-upload-box</code>. Use in modals and side panels where the standard tall drop zone would dominate the content area. All behaviour (drag-drop, file selection, processing state) is identical.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      const live = document.getElementById('up-live');
+      const eventLog = document.getElementById('event-log');
+
+      const ctlAccept = document.getElementById('ctl-accept');
+      const ctlMax = document.getElementById('ctl-max');
+      const ctlPrompt = document.getElementById('ctl-prompt');
+      const ctlHint = document.getElementById('ctl-hint');
+      const ctlTem = document.getElementById('ctl-tem');
+
+      let compact = false;
+      let processing = false;
+      let transferError = false;
+
+      function sync() {
+        live.compact = compact;
+        live.accept = ctlAccept.value;
+        live.maxSize = Number(ctlMax.value) || 0;
+        live.prompt = ctlPrompt.value;
+        live.hint = ctlHint.value;
+        live.processing = processing;
+        live.transferError = transferError;
+        live.transferErrorMessage = ctlTem.value;
+      }
+      sync();
+
+      ctlAccept.addEventListener('input', sync);
+      ctlMax.addEventListener('input', sync);
+      ctlPrompt.addEventListener('input', sync);
+      ctlHint.addEventListener('input', sync);
+      ctlTem.addEventListener('input', sync);
+
+      document.querySelectorAll('.btn-toggle[data-compact]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.btn-toggle[data-compact]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          compact = btn.dataset.compact === 'true';
+          sync();
+        });
+      });
+
+      document.querySelectorAll('.btn-toggle[data-processing]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.btn-toggle[data-processing]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          processing = btn.dataset.processing === 'true';
+          sync();
+        });
+      });
+
+      document.querySelectorAll('.btn-toggle[data-transfer]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('.btn-toggle[data-transfer]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          transferError = btn.dataset.transfer === 'true';
+          sync();
+        });
+      });
+
+      function logEvent(name, summary) {
+        const placeholder = eventLog.querySelector('span');
+        if (placeholder) eventLog.innerHTML = '';
+        const time = new Date().toLocaleTimeString();
+        const line = document.createElement('div');
+        line.textContent = `[${time}] ${name}${summary ? ' → ' + summary : ''}`;
+        eventLog.prepend(line);
+      }
+      live.addEventListener('la-upload-drive', () => logEvent('la-upload-drive'));
+      live.addEventListener('la-retry-transfer', () => logEvent('la-retry-transfer'));
+      live.addEventListener('la-change', (e) => logEvent('la-change', e.detail?.file?.name || ''));
+      live.addEventListener('la-reject', (e) => logEvent('la-reject', `reason: ${e.detail?.reason}`));
+
+      const anatomy = document.getElementById('up-anatomy');
+      anatomy.accept = '.pdf,.docx';
+      anatomy.maxSize = 52428800;
+      anatomy.hint = 'PDF or DOCX, up to 50 MB.';
+
+      function seedFile(uploadEl, fileName, fileType) {
+        const box = uploadEl.shadowRoot && uploadEl.shadowRoot.querySelector('la-upload-box');
+        if (!box) return;
+        const input = box.shadowRoot && box.shadowRoot.querySelector('input[type="file"]');
+        if (!input) return;
+        const dt = new DataTransfer();
+        dt.items.add(new File(['demo'], fileName, { type: fileType }));
+        input.files = dt.files;
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+
+      function seedMultiDrop(uploadEl, fileNames, fileType) {
+        const box = uploadEl.shadowRoot && uploadEl.shadowRoot.querySelector('la-upload-box');
+        if (!box) return;
+        const zone = box.shadowRoot && box.shadowRoot.querySelector('.zone');
+        if (!zone) return;
+        const dt = new DataTransfer();
+        fileNames.forEach((name) => dt.items.add(new File(['demo'], name, { type: fileType })));
+        const dropEvent = new DragEvent('drop', { bubbles: true, cancelable: true });
+        Object.defineProperty(dropEvent, 'dataTransfer', { value: dt });
+        zone.dispatchEvent(dropEvent);
+      }
+
+      requestAnimationFrame(() => {
+        seedFile(
+          document.getElementById('up-compact-file'),
+          'Shareholders-Agreement.pdf',
+          'application/pdf'
+        );
+        seedFile(
+          document.getElementById('up-compact-processing'),
+          'Shareholders-Agreement.pdf',
+          'application/pdf'
+        );
+        seedFile(
+          document.getElementById('up-has-file'),
+          'Employment-Contract-JSmith.pdf',
+          'application/pdf'
+        );
+        seedFile(
+          document.getElementById('up-processing'),
+          'Employment-Contract-JSmith.pdf',
+          'application/pdf'
+        );
+        seedFile(
+          document.getElementById('up-rejected'),
+          'meeting-notes.txt',
+          'text/plain'
+        );
+        seedMultiDrop(
+          document.getElementById('up-multi'),
+          [
+            'Employment-Contract-JSmith.pdf',
+            'Board-Resolution-2026.pdf',
+            'NDA-Acme.pdf',
+            'Privacy-Policy-v3.pdf',
+            'Cap-Table-Q1.pdf',
+          ],
+          'application/pdf'
+        );
+      });
+    });
+  })();
+</script>
+
+
+</body>
+</html>

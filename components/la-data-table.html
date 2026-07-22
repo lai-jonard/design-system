@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-data-table — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-data-table</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-data-table</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1 style="font-weight: var(--la-font-weight-normal);">la-data-table</h1>
+<p>A data-in table primitive. Takes <code style="font-family:monospace;font-size:11px;">columns</code> and <code style="font-family:monospace;font-size:11px;">rows</code> as properties and handles sort, selection, row-click, sticky header, density, empty and loading states. Fully controlled — the parent owns <code style="font-family:monospace;font-size:11px;">sort</code>, <code style="font-family:monospace;font-size:11px;">selected</code>, and <code style="font-family:monospace;font-size:11px;">loading</code>, re-passing them in response to events.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Data-table owns a scrollable wrap, a sortable header, a body of rows, and status-row fallbacks for empty and loading states.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:flex; gap:32px; align-items:flex-start; justify-content:center; padding:32px 24px; flex-wrap:wrap;">
+<div style="flex: 1 1 420px; min-width: 320px; max-width: 520px;">
+<la-data-table id="anatomy-table" selectable="multi"></la-data-table>
+</div>
+<ol style="list-style: decimal inside; padding:0; margin:0; font-size:13px; line-height:1.6; color:#374151; max-width:320px;">
+<li><strong>Scroll wrap</strong> — bordered container that owns horizontal and vertical overflow. Sticky header pins to its top edge.</li>
+<li style="margin-top:6px;"><strong>Header row</strong> — one <code style="font-family:monospace;font-size:11px;">&lt;th&gt;</code> per column. Sortable headers become clickable and show a sort glyph (<code style="font-family:monospace;font-size:11px;">ph-caret-up</code> / <code style="font-family:monospace;font-size:11px;">ph-caret-down</code> / <code style="font-family:monospace;font-size:11px;">ph-arrows-down-up</code>).</li>
+<li style="margin-top:6px;"><strong>Checkbox column</strong> — rendered only when <code style="font-family:monospace;font-size:11px;">selectable="multi"</code>. Header checkbox toggles select-all and shows an indeterminate state when some (not all) rows are selected.</li>
+<li style="margin-top:6px;"><strong>Body row</strong> — one <code style="font-family:monospace;font-size:11px;">&lt;tr&gt;</code> per row. Hover gets a subtle background; selected rows get a stronger active background.</li>
+<li style="margin-top:6px;"><strong>Status row</strong> — spans every column and replaces the body when <code style="font-family:monospace;font-size:11px;">loading</code> is true or <code style="font-family:monospace;font-size:11px;">rows</code> is empty. Defaults can be overridden via the <code style="font-family:monospace;font-size:11px;">loading</code> and <code style="font-family:monospace;font-size:11px;">empty</code> slots.</li>
+</ol>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Selection</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-selectable="none">none</button>
+<button class="btn-toggle" data-selectable="single">single</button>
+<button class="btn-toggle" data-selectable="multi">multi</button>
+</div>
+</div>
+<div class="control-group">
+<label>Density</label>
+<div class="btn-group">
+<button class="btn-toggle" data-density="compact">compact</button>
+<button class="btn-toggle active" data-density="default">default</button>
+<button class="btn-toggle" data-density="comfortable">comfortable</button>
+</div>
+</div>
+<div class="control-group">
+<label>Sortable columns</label>
+<div class="btn-group">
+<button class="btn-toggle" data-sortable="on">On</button>
+<button class="btn-toggle active" data-sortable="off">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Sticky header</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-sticky="true">On</button>
+<button class="btn-toggle" data-sticky="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Loading</label>
+<div class="btn-group">
+<button class="btn-toggle" data-loading="true">On</button>
+<button class="btn-toggle active" data-loading="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Row clickable</label>
+<div class="btn-group">
+<button class="btn-toggle" data-rowclick="true">On</button>
+<button class="btn-toggle active" data-rowclick="false">Off</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:120px; padding:24px; display:block;">
+<la-data-table id="live-table"></la-data-table>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Selection — single (click a row) and multi (checkbox column)</div>
+<div class="preview-frame" style="display:grid; grid-template-columns: 1fr 1fr; gap:16px; padding:24px; align-items:flex-start;">
+<la-data-table id="snap-single" selectable="single"></la-data-table>
+<la-data-table id="snap-multi" selectable="multi"></la-data-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Density — compact · default · comfortable</div>
+<div class="preview-frame" style="display:grid; grid-template-columns: 1fr 1fr 1fr; gap:16px; padding:24px; align-items:flex-start;">
+<la-data-table density="compact" id="snap-compact"></la-data-table>
+<la-data-table density="default" id="snap-default"></la-data-table>
+<la-data-table density="comfortable" id="snap-comfortable"></la-data-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Sticky header — scroll the frame to see the header pinned</div>
+<div class="preview-frame" style="padding:24px;">
+<div id="sticky-frame" style="max-height:260px; overflow:auto; border:1px solid var(--doc-border); border-radius:12px; width:100%;">
+<la-data-table id="snap-sticky"></la-data-table>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Empty state — default "No results"</div>
+<div class="preview-frame" style="padding:24px;">
+<la-data-table id="snap-empty"></la-data-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Loading — default skeleton rows</div>
+<div class="preview-frame" style="padding:24px;">
+<la-data-table id="snap-loading" loading=""></la-data-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Custom cell renderers — status as la-badge, right-aligned numeric, muted owner</div>
+<div class="preview-frame" style="padding:24px;">
+<la-data-table id="snap-custom"></la-data-table>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-data-table</h2>
+    <p>A data-in table primitive. Takes columns and rows as properties and handles sort, selection, row-click, sticky header, density, empty and loading states. Fully controlled — the parent owns sort , selected , and loading , re-passing them in response to events.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>columns</td>
+          <td>—</td>
+          <td><span class="type">DataTableColumn&lt;T&gt;[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>rows</td>
+          <td>—</td>
+          <td><span class="type">T[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>rowKey</td>
+          <td>—</td>
+          <td><span class="type">keyof T | ((row: T) =&gt; string)</span></td>
+          <td><span class="default">&#39;id&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>sort</td>
+          <td>—</td>
+          <td><span class="type">SortState</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>selected</td>
+          <td>—</td>
+          <td><span class="type">string[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>selectable</td>
+          <td><span class="default">selectable</span></td>
+          <td><span class="type">SelectionMode</span></td>
+          <td><span class="default">&#39;none&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>density</td>
+          <td><span class="default">density</span></td>
+          <td><span class="type">DataTableDensity</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>stickyHeader</td>
+          <td><span class="default">sticky-header</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">true</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>loading</td>
+          <td><span class="default">loading</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>rowClickable</td>
+          <td><span class="default">row-clickable</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-sort-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-row-click</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-selection-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Chrome &amp; typography</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Wrap background (body area)</td></tr>
+<tr><td>--la-color-bg-subtle</td><td>Header row background (also row hover)</td></tr>
+<tr><td>--la-color-border-light</td><td>Wrap border + row separators</td></tr>
+<tr><td>--la-radius-md</td><td>Wrap border radius</td></tr>
+<tr><td>--la-font-size-sm</td><td>Header text size</td></tr>
+<tr><td>--la-font-size-base</td><td>Body cell text size</td></tr>
+<tr><td>--la-font-weight-normal</td><td>Header text weight (per decision 39 — weight is not the signal here)</td></tr>
+<tr><td>--la-color-text</td><td>Body cell text</td></tr>
+<tr><td>--la-color-text-muted</td><td>Header text (resting)</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Density padding</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-space-2xs</td><td>Row vertical padding (compact)</td></tr>
+<tr><td>--la-space-md</td><td>Row horizontal padding (compact) · vertical padding (comfortable)</td></tr>
+<tr><td>--la-space-sm</td><td>Row vertical padding (default)</td></tr>
+<tr><td>--la-space-lg</td><td>Row horizontal padding (default)</td></tr>
+<tr><td>--la-space-xl</td><td>Row horizontal padding (comfortable)</td></tr>
+<tr><td>--la-space-2xl</td><td>Status-row (empty / loading) padding</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">State surfaces</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg-active</td><td>Selected row background</td></tr>
+<tr><td>--la-color-bg-muted</td><td>Skeleton row surface</td></tr>
+<tr><td>--la-color-text-muted</td><td>Status-row (empty / loading) text</td></tr>
+<tr><td>--la-color-border-focus</td><td>Header focus ring (sortable columns)</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Checkbox &amp; motion</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-checkbox-size</td><td>Checkbox width + height</td></tr>
+<tr><td>--la-checkbox-icon-size</td><td>Checkmark / indeterminate glyph size</td></tr>
+<tr><td>--la-color-primary</td><td>Checked + indeterminate checkbox fill</td></tr>
+<tr><td>--la-color-primary-fg</td><td>Checkmark colour</td></tr>
+<tr><td>--la-color-secondary-border</td><td>Unchecked checkbox border</td></tr>
+<tr><td>--dur-fast · --ease</td><td>Header hover, row hover, checkbox transitions</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<p style="margin-bottom:12px;color:#666;font-size:12px;">Columns and rows are properties, not attributes — assign in JS after the element renders.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — columns + rows only</p>
+<div class="docs-code"><span class="kw">&lt;la-data-table</span> <span class="at">id</span>=<span class="str">"docs-table"</span><span class="kw">&gt;&lt;/la-data-table&gt;</span>
+<span class="kw">&lt;script&gt;</span>
+<span class="kw">const</span> table = document.getElementById(<span class="str">'docs-table'</span>);
+  table.columns = [
+    { id: <span class="str">'name'</span>,    label: <span class="str">'Name'</span> },
+    { id: <span class="str">'owner'</span>,   label: <span class="str">'Owner'</span> },
+    { id: <span class="str">'updated'</span>, label: <span class="str">'Updated'</span> },
+  ];
+  table.rows = [
+    { id: <span class="str">'1'</span>, name: <span class="str">'Contract.pdf'</span>, owner: <span class="str">'Sarah'</span>, updated: <span class="str">'2026-04-22'</span> },
+    { id: <span class="str">'2'</span>, name: <span class="str">'NDA.pdf'</span>,      owner: <span class="str">'James'</span>,  updated: <span class="str">'2026-04-18'</span> },
+  ];
+<span class="kw">&lt;/script&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Controlled sort</p>
+<div class="docs-code"><span class="kw">const</span> table = document.getElementById(<span class="str">'docs-table'</span>);
+<span class="kw">let</span> sort = { columnId: <span class="str">'updated'</span>, direction: <span class="str">'desc'</span> };
+
+table.columns = cols.map(c =&gt; ({ ...c, sortable: <span class="kw">true</span> }));
+table.rows = applySort(data, sort);
+table.sort = sort;
+
+table.addEventListener(<span class="str">'la-sort-change'</span>, (e) =&gt; {
+  sort = e.detail;
+  table.sort = sort;
+  table.rows = applySort(data, sort);
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Multi-select with bulk actions</p>
+<div class="docs-code"><span class="kw">&lt;la-data-table</span> <span class="at">selectable</span>=<span class="str">"multi"</span> <span class="at">id</span>=<span class="str">"docs-table"</span><span class="kw">&gt;&lt;/la-data-table&gt;</span>
+<span class="kw">&lt;script&gt;</span>
+<span class="kw">const</span> table = document.getElementById(<span class="str">'docs-table'</span>);
+  table.columns = cols;
+  table.rows = rows;
+
+  table.addEventListener(<span class="str">'la-selection-change'</span>, (e) =&gt; {
+    table.selected = e.detail.selected;
+    updateBulkActionBar(e.detail.selected);
+  });
+<span class="kw">&lt;/script&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Custom cell — badge status</p>
+<div class="docs-code">table.columns = [
+  { id: <span class="str">'name'</span>, label: <span class="str">'Name'</span> },
+  {
+    id: <span class="str">'status'</span>,
+    label: <span class="str">'Status'</span>,
+    render: (row) =&gt; {
+      <span class="kw">const</span> badge = document.createElement(<span class="str">'la-badge'</span>);
+      badge.setAttribute(<span class="str">'variant'</span>, row.status);
+      badge.textContent = row.statusLabel;
+      <span class="kw">return</span> badge;
+    },
+  },
+];</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Controlled-only</strong> — the parent owns <code style="font-family:monospace;font-size:11px;">sort</code>, <code style="font-family:monospace;font-size:11px;">selected</code>, and <code style="font-family:monospace;font-size:11px;">loading</code>. The component emits events describing the next state; it does not self-mutate. This keeps it predictable under any store, SSR-safe, and trivial to unit-test.</div>
+<div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">rowKey</code> is required</strong> — every row must resolve to a stable string id, either via a <code style="font-family:monospace;font-size:11px;">keyof T</code> field (default: <code style="font-family:monospace;font-size:11px;">'id'</code>) or a <code style="font-family:monospace;font-size:11px;">(row) =&gt; string</code> function. Index-based tracking is not supported — selection and sort would desync as soon as rows reorder.</div>
+<div class="docs-note"><strong>Cell override — return a DOM node or a string</strong> — <code style="font-family:monospace;font-size:11px;">Column.render(row)</code> can return a <code style="font-family:monospace;font-size:11px;">string</code>, <code style="font-family:monospace;font-size:11px;">number</code>, <code style="font-family:monospace;font-size:11px;">Node</code>, or Lit <code style="font-family:monospace;font-size:11px;">TemplateResult</code>. Vanilla consumers typically use <code style="font-family:monospace;font-size:11px;">document.createElement</code>; Lit consumers use <code style="font-family:monospace;font-size:11px;">html\`\`</code> from the library.</div>
+<div class="docs-note"><strong>Sticky header requires the wrap to scroll</strong> — the header pins to the top of the component's own scrollable wrap. If you wrap the data-table inside a separately-scrolling ancestor, set <code style="font-family:monospace;font-size:11px;">stickyHeader</code> to <code style="font-family:monospace;font-size:11px;">false</code>, otherwise the header will stick to the inner wrap edge and confuse the user.</div>
+<div class="docs-note"><strong>Selection models</strong> — <code style="font-family:monospace;font-size:11px;">multi</code> renders a checkbox column and a header select-all with indeterminate state; <code style="font-family:monospace;font-size:11px;">single</code> highlights one row via click and fires <code style="font-family:monospace;font-size:11px;">la-selection-change</code> alongside <code style="font-family:monospace;font-size:11px;">la-row-click</code>; <code style="font-family:monospace;font-size:11px;">none</code> disables selection entirely. For pure navigation rows without selection, combine <code style="font-family:monospace;font-size:11px;">selectable="none"</code> with <code style="font-family:monospace;font-size:11px;">rowClickable</code>.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const SAMPLE_ROWS = [
+          {id: '1', document: 'Employment Agreement v3',     owner: 'Sarah Chen',    status: 'danger',  statusLabel: 'Urgent',    pages: 12, updated: '2026-04-22'},
+          {id: '2', document: 'NDA — Acme Corp.',            owner: 'James Wright',  status: 'info',    statusLabel: 'Processing',pages: 4,  updated: '2026-04-20'},
+          {id: '3', document: 'Share Purchase Agreement',    owner: 'Priya Shah',    status: 'success', statusLabel: 'Resolved',  pages: 48, updated: '2026-04-18'},
+          {id: '4', document: 'Data Processing Addendum',    owner: 'Marcus Allen',  status: 'warning', statusLabel: 'Expiring',  pages: 9,  updated: '2026-04-15'},
+          {id: '5', document: 'Master Services Agreement',   owner: 'Sarah Chen',    status: 'success', statusLabel: 'Resolved',  pages: 23, updated: '2026-04-12'},
+          {id: '6', document: 'Investor Subscription Form',  owner: 'James Wright',  status: 'neutral', statusLabel: 'Archived',  pages: 6,  updated: '2026-04-10'},
+        ];
+        const BASE_COLUMNS = [
+          {id: 'document', label: 'Document', width: '2fr'},
+          {id: 'owner',    label: 'Owner'},
+          {id: 'statusLabel', label: 'Status'},
+          {id: 'updated',  label: 'Updated'},
+        ];
+
+        // Anatomy table — multi-select with 3 rows selected, for visual reference
+        const anatomy = document.getElementById('anatomy-table');
+        anatomy.columns = BASE_COLUMNS.slice(0, 3);
+        anatomy.rows = SAMPLE_ROWS.slice(0, 4);
+        anatomy.selected = ['1', '2'];
+        anatomy.addEventListener('la-selection-change', (e) => { anatomy.selected = e.detail.selected; });
+
+        // Live preview — driven by controls
+        const live = document.getElementById('live-table');
+        live.columns = BASE_COLUMNS;
+        live.rows = SAMPLE_ROWS;
+        live.addEventListener('la-selection-change', (e) => { live.selected = e.detail.selected; });
+        let liveSort = null;
+        const applySort = (rows, sort) => {
+          if (!sort) return rows.slice();
+          const {columnId, direction} = sort;
+          const dir = direction === 'asc' ? 1 : -1;
+          return rows.slice().sort((a, b) => {
+            if (a[columnId] < b[columnId]) return -1 * dir;
+            if (a[columnId] > b[columnId]) return 1 * dir;
+            return 0;
+          });
+        };
+        live.addEventListener('la-sort-change', (e) => {
+          liveSort = e.detail;
+          live.sort = liveSort;
+          live.rows = applySort(SAMPLE_ROWS, liveSort);
+        });
+
+        // Selection toggles
+        document.querySelectorAll('[data-selectable]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-selectable]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            live.setAttribute('selectable', btn.dataset.selectable);
+            live.selected = [];
+          });
+        });
+
+        // Density toggles
+        document.querySelectorAll('[data-density]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-density]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            live.setAttribute('density', btn.dataset.density);
+          });
+        });
+
+        // Sortable helper — rewrites column defs to flip `sortable` on all columns
+        document.querySelectorAll('[data-sortable]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-sortable]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            const on = btn.dataset.sortable === 'on';
+            live.columns = BASE_COLUMNS.map(c => ({...c, sortable: on}));
+            if (!on) {
+              liveSort = null;
+              live.sort = null;
+              live.rows = SAMPLE_ROWS;
+            }
+          });
+        });
+
+        // Sticky header
+        document.querySelectorAll('[data-sticky]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-sticky]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.sticky === 'true') {
+              live.setAttribute('sticky-header', '');
+            } else {
+              live.removeAttribute('sticky-header');
+            }
+          });
+        });
+
+        // Loading
+        document.querySelectorAll('[data-loading]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-loading]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.loading === 'true') {
+              live.setAttribute('loading', '');
+            } else {
+              live.removeAttribute('loading');
+            }
+          });
+        });
+
+        // Row clickable
+        document.querySelectorAll('[data-rowclick]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-rowclick]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.rowclick === 'true') {
+              live.setAttribute('row-clickable', '');
+            } else {
+              live.removeAttribute('row-clickable');
+            }
+          });
+        });
+
+        // Snapshots — selection
+        const snapSingle = document.getElementById('snap-single');
+        snapSingle.columns = BASE_COLUMNS.slice(0, 3);
+        snapSingle.rows = SAMPLE_ROWS.slice(0, 4);
+        snapSingle.selected = ['2'];
+        snapSingle.addEventListener('la-selection-change', e => { snapSingle.selected = e.detail.selected; });
+
+        const snapMulti = document.getElementById('snap-multi');
+        snapMulti.columns = BASE_COLUMNS.slice(0, 3);
+        snapMulti.rows = SAMPLE_ROWS.slice(0, 4);
+        snapMulti.selected = ['1', '3'];
+        snapMulti.addEventListener('la-selection-change', e => { snapMulti.selected = e.detail.selected; });
+
+        // Snapshots — density
+        ['snap-compact', 'snap-default', 'snap-comfortable'].forEach(id => {
+          const el = document.getElementById(id);
+          el.columns = [
+            {id: 'document', label: 'Document', width: '2fr'},
+            {id: 'owner',    label: 'Owner'},
+          ];
+          el.rows = SAMPLE_ROWS.slice(0, 4);
+        });
+
+        // Snapshot — sticky
+        const snapSticky = document.getElementById('snap-sticky');
+        const MANY = [];
+        for (let i = 0; i < 4; i++) {
+          SAMPLE_ROWS.forEach(r => MANY.push({...r, id: `${r.id}-${i}`}));
+        }
+        snapSticky.columns = BASE_COLUMNS;
+        snapSticky.rows = MANY;
+
+        // Snapshot — empty
+        const snapEmpty = document.getElementById('snap-empty');
+        snapEmpty.columns = BASE_COLUMNS;
+        snapEmpty.rows = [];
+
+        // Snapshot — loading
+        const snapLoading = document.getElementById('snap-loading');
+        snapLoading.columns = BASE_COLUMNS;
+        snapLoading.rows = [];
+
+        // Snapshot — custom renderers
+        const snapCustom = document.getElementById('snap-custom');
+        snapCustom.columns = [
+          {
+            id: 'document',
+            label: 'Document',
+            width: '2fr',
+            render: (row) => row.document,
+          },
+          {
+            id: 'owner',
+            label: 'Owner',
+            render: (row) => {
+              const el = document.createElement('span');
+              el.style.color = 'var(--la-color-text-muted)';
+              el.textContent = row.owner;
+              return el;
+            },
+          },
+          {
+            id: 'status',
+            label: 'Status',
+            render: (row) => {
+              const badge = document.createElement('la-badge');
+              badge.setAttribute('variant', row.status);
+              const iconMap = {
+                danger:  'ph-warning-octagon',
+                warning: 'ph-warning-circle',
+                success: 'ph-check-circle',
+                info:    'ph-info',
+                neutral: 'ph-minus-circle',
+              };
+              const icon = document.createElement('i');
+              icon.setAttribute('slot', 'icon');
+              icon.className = `ph-fill ${iconMap[row.status] ?? 'ph-info'}`;
+              badge.appendChild(icon);
+              badge.appendChild(document.createTextNode(row.statusLabel));
+              return badge;
+            },
+          },
+          {
+            id: 'pages',
+            label: 'Pages',
+            align: 'right',
+            render: (row) => {
+              const el = document.createElement('span');
+              el.style.fontVariantNumeric = 'tabular-nums';
+              el.textContent = String(row.pages);
+              return el;
+            },
+          },
+          {
+            id: 'updated',
+            label: 'Updated',
+            render: (row) => row.updated,
+          },
+        ];
+        snapCustom.rows = SAMPLE_ROWS;
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Prototype — 02. Dashboard (FTUE — welcome form)</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  <link rel="stylesheet" href="../../../motion.css">
+  <script src="../../bundle.js" defer></script>
+  <style>
+    /* FOUC fix — hide custom elements until upgraded */
+    la-modal:not(:defined),
+    la-insight-modal:not(:defined),
+    la-sidebar:not(:defined),
+    la-app-shell:not(:defined),
+    la-dashboard:not(:defined),
+    la-legal-area-page:not(:defined),
+    la-data-room-page:not(:defined),
+    la-document-page:not(:defined),
+    la-actions-widget:not(:defined),
+    la-document-list:not(:defined),
+    la-processing-widget:not(:defined),
+    la-welcome-banner:not(:defined),
+    la-unlock-panel:not(:defined),
+    la-insight-card:not(:defined),
+    la-insight-list:not(:defined),
+    la-investor-card:not(:defined),
+    la-legal-area-widget:not(:defined),
+    la-dd-readiness:not(:defined),
+    la-upcoming-deadlines:not(:defined),
+    la-anticipation-teaser:not(:defined),
+    la-summary-line:not(:defined),
+    la-empty-state:not(:defined),
+    la-input:not(:defined),
+    la-select:not(:defined),
+    la-option:not(:defined),
+    la-button:not(:defined) { display: none !important; }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      display: flex;
+      font-family: var(--la-font-family);
+      font-size: var(--la-font-size-base);
+      background: var(--la-color-bg-subtle);
+    }
+    .proto-screen {
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+    }
+    la-app-shell {
+      display: flex;
+      width: 100%;
+      height: 100%;
+    }
+    .main-content {
+      padding: 144px 40px 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .welcome-form {
+      width: 100%;
+      max-width: 360px;
+      display: flex;
+      flex-direction: column;
+      gap: var(--la-space-xl);
+    }
+    .welcome-illustration {
+      width: 48px;
+      height: 48px;
+      align-self: center;
+      overflow: hidden;
+      display: block;
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+    .heading-block {
+      display: flex;
+      flex-direction: column;
+      gap: var(--la-space-sm);
+      text-align: center;
+    }
+    .heading-block h1 {
+      font-size: 24px;
+      font-weight: var(--la-font-weight-semibold);
+      color: var(--la-color-text);
+      letter-spacing: -0.2px;
+    }
+    .heading-block .subheading {
+      font-size: var(--la-font-size-lg);
+      font-weight: var(--la-font-weight-normal);
+      color: var(--la-color-text-muted);
+      line-height: 1.5;
+    }
+    .fields {
+      display: flex;
+      flex-direction: column;
+      gap: var(--la-space-lg);
+      margin-top: var(--la-space-xl);
+      position: relative;
+      z-index: 10;
+    }
+    la-input,
+    la-select {
+      width: 100%;
+    }
+    /* la-option padding lives on .row inside the shadow root — not on :host —
+       so the * { padding: 0 } reset above does not affect it. No override needed. */
+    @keyframes laBarEnter {
+      from { transform: translateX(48px) scaleX(1.5); opacity: 0; }
+      to   { transform: translateX(0) scaleX(1); opacity: 1; }
+    }
+    .la-logo path {
+      animation: laBarEnter 480ms cubic-bezier(0.25, 1, 0.4, 1) 1 both;
+    }
+    .la-logo path:nth-child(1) { animation-delay:   0ms; }
+    .la-logo path:nth-child(2) { animation-delay:  30ms; }
+    .la-logo path:nth-child(3) { animation-delay:  60ms; }
+    .la-logo path:nth-child(4) { animation-delay:  90ms; }
+    .la-logo path:nth-child(5) { animation-delay: 120ms; }
+    .la-logo path:nth-child(6) { animation-delay: 150ms; }
+    .la-logo path:nth-child(7) { animation-delay: 180ms; }
+    .la-logo path:nth-child(8) { animation-delay: 210ms; }
+    /* ── Staged entrance — after logo ──────────────────── */
+    @keyframes contentEnter {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .heading-block h1,
+    .heading-block .subheading,
+    .fields,
+    .cta-wrap {
+      animation: contentEnter 500ms cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .heading-block h1          { animation-delay:  840ms; }
+    .heading-block .subheading { animation-delay:  960ms; }
+    .fields                    { animation-delay: 1080ms; }
+    .cta-wrap                  { animation-delay: 1200ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .la-logo path,
+      .heading-block h1,
+      .heading-block .subheading,
+      .fields,
+      .cta-wrap { animation: none; }
+    }
+  </style>
+</head>
+<body>
+  <div class="proto-screen">
+    <la-app-shell id="shell" page-title="Dashboard">
+      <la-sidebar id="sidebar" slot="sidebar"></la-sidebar>
+      <div slot="main" class="main-content">
+        <form class="welcome-form" id="welcome-form" novalidate>
+          <svg class="welcome-illustration la-logo" viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <g class="la-group">
+              <path d="M0 2C0 0.895428 0.894944 0 1.99891 0H12.2156C13.3195 0 14.2145 0.895431 14.2145 2V44.3996H26.7881V77.9996C26.7881 79.1042 25.8932 79.9996 24.7892 79.9996H1.99891C0.894942 80 0 79.1046 0 78V2Z" fill="currentColor"/>
+              <path d="M24.8336 2C24.8336 0.895432 25.7285 0 26.8325 0H38.826C39.9299 0 40.8249 0.895431 40.8249 2V44.4H24.8336V2Z" fill="currentColor"/>
+              <path d="M33.4274 44.3996H46.2205V77.9996C46.2205 79.1042 45.3255 79.9996 44.2215 79.9996H35.4263C34.3224 79.9996 33.4274 79.1042 33.4274 77.9996V44.3996Z" fill="currentColor"/>
+              <path d="M46.4171 2C46.4171 0.895432 47.3121 0 48.416 0H54.8126C55.9165 0 56.8115 0.895431 56.8115 2V44.4H46.4171V2Z" fill="currentColor"/>
+              <path d="M51.9797 44.3996H63.9732V77.9996C63.9732 79.1042 63.0782 79.9996 61.9742 79.9996H53.9786C52.8746 79.9996 51.9797 79.1042 51.9797 77.9996V44.3996Z" fill="currentColor"/>
+              <path d="M62.4173 2C62.4173 0.895432 63.3122 0 64.4162 0H67.2147C68.3187 0 69.2136 0.895431 69.2136 2V44.4H62.4173V2Z" fill="currentColor"/>
+              <path d="M67.5632 44.3996H76.7582V77.9996C76.7582 79.1042 75.8632 79.9996 74.7593 79.9996H69.5621C68.4581 79.9996 67.5632 79.1042 67.5632 77.9996V44.3996Z" fill="currentColor"/>
+              <path d="M74.8028 2C74.8028 0.895432 75.6978 0 76.8017 0H78.0011C79.1051 0 80 0.895431 80 2V44.4H74.8028V2Z" fill="currentColor"/>
+            </g>
+          </svg>
+          <div class="heading-block">
+            <h1>Welcome to LawAdvisor AI</h1>
+            <p class="subheading">Let's set up your company so we can map your legal needs and surface the obligations that matter.</p>
+          </div>
+          <div class="fields">
+            <la-select
+              id="jurisdiction"
+              name="jurisdiction"
+              label="Jurisdiction"
+              placeholder="Select your jurisdiction"
+              required>
+              <la-option value="Delaware">Delaware</la-option>
+              <la-option value="California">California</la-option>
+              <la-option value="New York">New York</la-option>
+            </la-select>
+            <la-input
+              id="company-name"
+              name="company_name"
+              label="Company name"
+              placeholder="e.g. Acme Corp."
+              required></la-input>
+          </div>
+          <div class="cta-wrap"><la-button id="continue" variant="primary" size="md" block disabled>Continue</la-button></div>
+        </form>
+      </div>
+    </la-app-shell>
+  </div>
+
+  <script>
+  var EASE = 'cubic-bezier(0.4, 0, 0.2, 1)';
+
+  function navigateTo(url) {
+    var el = document.querySelector('.main-content');
+    if (!el) { window.location.href = url; return; }
+    el.style.transition = 'opacity 150ms ' + EASE + ', transform 150ms ' + EASE;
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(6px)';
+    setTimeout(function() { window.location.href = url; }, 150);
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sidebar — all areas locked at FTUE per Sprint 2 SD-8 (company setup incomplete)
+    var sidebar = document.getElementById('sidebar');
+    sidebar.activeArea = 'dashboard';
+    sidebar.unlockedAreas = [];
+    sidebar.userName = 'Alex Chen';
+    sidebar.userRole = '';
+    sidebar.userInitials = 'AC';
+
+    // Welcome form — jurisdiction + company name + blocking CTA
+    // Continue is disabled until both fields are populated.
+    var jurisdiction = document.getElementById('jurisdiction');
+    var companyName = document.getElementById('company-name');
+    var continueBtn = document.getElementById('continue');
+
+    function checkValid() {
+      var hasJurisdiction = !!(jurisdiction.value && jurisdiction.value.length > 0);
+      var hasName = !!(companyName.value && companyName.value.trim().length > 0);
+      continueBtn.disabled = !(hasJurisdiction && hasName);
+    }
+
+    jurisdiction.addEventListener('la-change', checkValid);
+    companyName.addEventListener('la-change', checkValid);
+    companyName.addEventListener('input', checkValid);
+
+    continueBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      if (continueBtn.disabled) return;
+      // Submit -> post-L0 dashboard. Real saga: LAI.Companies.Setup.setup_company/2
+      navigateTo('03-dashboard.html');
+    });
+  });
+  </script>
+</body>
+</html>

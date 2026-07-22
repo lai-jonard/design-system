@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-upload-box — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-upload-box</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-upload-box</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    
+    
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-upload-box</h1>
+<p>A single-file drop zone primitive. Accepts click-to-browse and drag-and-drop. Used in the unlock flow's document upload steps and any form that needs a file. Wrapped by <a href="./la-upload.html"><code>la-upload</code></a> when source-buttons (Browse / Drive) and a transfer-error alert are needed; consumed directly when the drop zone alone is enough.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Visual regions of the component, traced from the render tree.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="align-items:flex-start;">
+<la-upload-box accept=".pdf,.docx" hint="PDF, DOCX up to 10 MB" label="Certificate of Incorporation" style="width:420px;"></la-upload-box>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-upload-box</h2>
+    <p>A single-file drop zone primitive. Accepts click-to-browse and drag-and-drop. Used in the unlock flow's document upload steps and any form that needs a file. The has-file state composes la-document-item.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>_inputId</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="default">`la-upload-${Math.random().toString(36).slice(2, 8)}`</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>hint</td>
+          <td><span class="default">hint</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>accept</td>
+          <td><span class="default">accept</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>maxSize</td>
+          <td><span class="default">max-size</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>compact</td>
+          <td><span class="default">compact</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>processing</td>
+          <td><span class="default">processing</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>errorMessage</td>
+          <td><span class="default">error-message</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>prompt</td>
+          <td><span class="default">prompt</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Click to browse or drag a file here&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_file</td>
+          <td>—</td>
+          <td><span class="type">File | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_dragover</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-reject</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-remove</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>has-file state composes <code>la-document-item</code>.</strong> When the user selects a file, the zone's chrome no longer hand-rolls its own filename + remove-X. It renders an <code>&lt;la-document-item&gt;</code> with <code>status="none"</code> (no green check — the file has been <em>selected</em>, not yet processed), <code>association="File selected"</code>, <code>non-interactive</code>, and <code>dismissible</code>. <code>la-dismiss</code> wires to the box's <code>_remove</code>. While <code>processing</code>, status flips to <code>processing</code> and association becomes "Uploading…". See <a href="../decisions/50-document-item-dismissible-composition.md">decision 50</a>.</div>
+<div class="docs-note"><strong>has-file zone uses <code>--la-shadow-card</code>, not <code>--la-shadow-sm</code>.</strong> Plain white background + 1px border + soft three-layer card shadow. The border carries the edge, the shadow carries the elevation. See <a href="../decisions/51-shadow-card-token.md">decision 51</a> for when to reach for this token vs <code>--la-shadow-md</code> / <code>-float</code>.</div>
+<div class="docs-note"><strong>Error state has no separate retry button.</strong> The error treatment is inline (warning icon + message + hint) inside the zone, and the zone itself remains the click target — clicking anywhere re-opens the file picker, which clears the error on success. A separate "Choose another file" link inside the error zone would be redundant: cursor is already pointer, the dashed-border drop-zone affordance is intact.</div>
+<div class="docs-note"><strong>Drag-over visual is two-channel.</strong> Border switches to <code>--la-color-info</code> + background tints to <code>--la-color-processing-bg</code> + text colour to <code>--la-color-info-text</code>. Border-only switching (dashed→solid same colour) was invisible to most users.</div>
+<div class="docs-note"><strong>Drop multi-file rejects with reason <code>'multi'</code>.</strong> The drop handler actively detects <code>files.length &gt; 1</code> and dispatches <code>la-reject</code> with reason; the picker still allows native multi-select but the box ignores all but the first.</div>
+<div class="docs-note"><strong>Public method: <code>openPicker()</code>.</strong> Programmatically opens the file picker. Used by <a href="./la-upload.html"><code>la-upload</code></a>'s "Browse files" button to drive the inner box without reaching into shadow DOM.</div>
+<div class="docs-note"><strong>Docs incomplete — see source.</strong> The full Properties / Slots / Events / CSS tokens / Snapshots tables aren't published yet for this primitive. Reach for <a href="https://github.com/anthropics/lai-design-new/blob/main/src/primitives/la-upload-box.ts">la-upload-box.ts</a> directly for the canonical API surface (9 props, 3 events, has-file / processing / error / disabled / dragover states). A full <code>/document</code> pass is logged as future work.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveBox    = document.getElementById('live-upload');
+        const ctrlLabel  = document.getElementById('ctrl-label');
+        const ctrlHint   = document.getElementById('ctrl-hint');
+        const ctrlPrompt = document.getElementById('ctrl-prompt');
+
+        // Seed snapshot demos once the component is defined so "Selected" / "Processing" render statically.
+        customElements.whenDefined('la-upload-box').then(() => {
+          const selected = document.getElementById('snap-selected');
+          if (selected) selected._file = new File(['x'], 'Articles-of-Incorporation.pdf');
+          const processing = document.getElementById('snap-processing');
+          if (processing) processing._file = new File(['x'], 'Articles-of-Incorporation.pdf');
+        });
+
+        // Text inputs
+        ctrlLabel.addEventListener('input', () => { liveBox.setAttribute('label', ctrlLabel.value); });
+        ctrlHint.addEventListener('input', () => { liveBox.setAttribute('hint', ctrlHint.value); });
+        ctrlPrompt.addEventListener('input', () => { liveBox.setAttribute('prompt', ctrlPrompt.value); });
+
+        // Error toggle — preset a clear message when switched on
+        document.querySelectorAll('[data-error]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-error]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.error === 'true') {
+              liveBox.setAttribute('error', '');
+              liveBox.setAttribute('error-message', "This file type isn't supported. Try .pdf, .docx.");
+            } else {
+              liveBox.removeAttribute('error');
+              liveBox.removeAttribute('error-message');
+            }
+          });
+        });
+
+        // Processing toggle
+        document.querySelectorAll('[data-processing]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-processing]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.processing === 'true') {
+              liveBox.setAttribute('processing', '');
+            } else {
+              liveBox.removeAttribute('processing');
+            }
+          });
+        });
+
+        // Disabled toggle
+        document.querySelectorAll('[data-disabled]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-disabled]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.disabled === 'true') {
+              liveBox.setAttribute('disabled', '');
+            } else {
+              liveBox.removeAttribute('disabled');
+            }
+          });
+        });
+
+        // In-context modal trigger
+        const openBtn = document.getElementById('open-modal-btn');
+        const ctxModal = document.getElementById('ctx-modal');
+        if (openBtn && ctxModal) {
+          openBtn.addEventListener('click', () => { ctxModal.open = true; });
+        }
+  })();
+</script>
+
+
+</body>
+</html>

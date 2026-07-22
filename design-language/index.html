@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design language — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 1040px; }
+
+    .dl-hero h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.2px;
+      margin-bottom: 10px;
+    }
+    .dl-hero p {
+      font-size: 14px;
+      color: var(--doc-text-2);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .dl-group {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .dl-group-label {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--doc-text-3);
+      letter-spacing: 0.1px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--doc-border-light);
+    }
+    .dl-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 12px;
+    }
+    .dl-card {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      padding: 18px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      text-decoration: none;
+      color: var(--doc-text);
+      transition: border-color 140ms ease, box-shadow 140ms ease;
+    }
+    .dl-card:hover {
+      border-color: var(--doc-accent);
+      box-shadow: var(--doc-shadow-sm);
+      color: var(--doc-text);
+    }
+    .dl-card-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--doc-text);
+    }
+    .dl-card-file {
+      font-size: 11px;
+      color: var(--doc-text-3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .dl-card-desc {
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="visual" href="#visual">Visual language</a>
+<a class="docs-nav-item" data-nav-id="composition" href="#composition">Composition &amp; layout</a>
+<a class="docs-nav-item" data-nav-id="patterns" href="#patterns">Patterns</a>
+<a class="docs-nav-item" data-nav-id="writing" href="#writing">Writing</a>
+<a class="docs-nav-item" data-nav-id="components-notes" href="#components-notes">Component notes</a>
+<a class="docs-nav-item" data-nav-id="process" href="#process">Process</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Source</span>
+<a class="docs-nav-item" href="../../design-language/">design-language/ folder ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="dl-hero">
+<h1>Design language</h1>
+<p>
+            Logged decisions, rationale, and tastes that govern how the system looks and reads.
+            Each card opens the live <code>.md</code> file from
+            <a href="../../design-language/"><code>design-language/</code></a> — always current,
+            never duplicated here.
+          </p>
+</section>
+<div class="docs">
+<section class="dl-group" id="visual">
+<div class="dl-group-label">Visual language</div>
+<div class="dl-grid">
+<a class="dl-card" href="design-language/view.html?file=colour">
+<span class="dl-card-title">Colour</span>
+<span class="dl-card-file">colour.md</span>
+<span class="dl-card-desc">Semantic palette, tokens, when coloured surfaces are allowed and when they aren't.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=typography">
+<span class="dl-card-title">Typography</span>
+<span class="dl-card-file">typography.md</span>
+<span class="dl-card-desc">Why Inter, hierarchy rules, weight + grey scale not colour.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=borders">
+<span class="dl-card-title">Borders</span>
+<span class="dl-card-file">borders.md</span>
+<span class="dl-card-desc">Two categories of border tokens and when to reach for each.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=iconography">
+<span class="dl-card-title">Iconography</span>
+<span class="dl-card-file">iconography.md</span>
+<span class="dl-card-desc">Phosphor, regular vs fill, shadow-DOM setup, never hardcode colour.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=motion">
+<span class="dl-card-title">Motion</span>
+<span class="dl-card-file">motion.md</span>
+<span class="dl-card-desc">Easing, durations, stagger, GPU-safe rules; motion.css is the source of truth.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=interaction">
+<span class="dl-card-title">Interaction</span>
+<span class="dl-card-file">interaction.md</span>
+<span class="dl-card-desc">Hover, focus, active, click — how the system behaves under the pointer and keyboard.</span>
+</a>
+</div>
+</section>
+<section class="dl-group" id="composition">
+<div class="dl-group-label">Composition &amp; layout</div>
+<div class="dl-grid">
+<a class="dl-card" href="design-language/view.html?file=layout">
+<span class="dl-card-title">Layout</span>
+<span class="dl-card-file">layout.md</span>
+<span class="dl-card-desc">What belongs in this library vs the consuming app; composition rules.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=page-architecture">
+<span class="dl-card-title">Page architecture</span>
+<span class="dl-card-file">page-architecture.md</span>
+<span class="dl-card-desc">How pages are structured — shell, header, main, aside.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=responsive-design">
+<span class="dl-card-title">Responsive design</span>
+<span class="dl-card-file">responsive-design.md</span>
+<span class="dl-card-desc">Desktop-first; container queries over viewport breakpoints.</span>
+</a>
+</div>
+</section>
+<section class="dl-group" id="patterns">
+<div class="dl-group-label">Patterns</div>
+<div class="dl-grid">
+<a class="dl-card" href="design-language/view.html?file=ux-patterns">
+<span class="dl-card-title">UX patterns</span>
+<span class="dl-card-file">ux-patterns.md</span>
+<span class="dl-card-desc">Standardised interaction patterns — delete, upload, confirmation, person entity modal, and more.</span>
+</a>
+</div>
+</section>
+<section class="dl-group" id="writing">
+<div class="dl-group-label">Writing</div>
+<div class="dl-grid">
+<a class="dl-card" href="design-language/view.html?file=copy-guidelines">
+<span class="dl-card-title">Copy guidelines</span>
+<span class="dl-card-file">copy-guidelines.md</span>
+<span class="dl-card-desc">British English, active voice, sentence case, verb-first CTAs.</span>
+</a>
+</div>
+</section>
+<section class="dl-group" id="components-notes">
+<div class="dl-group-label">Component notes</div>
+<div class="dl-grid">
+<a class="dl-card" href="design-language/view.html?file=components">
+<span class="dl-card-title">Components</span>
+<span class="dl-card-file">components.md</span>
+<span class="dl-card-desc">Tier-1 primitives and Tier-2 composed components with logged problem statements.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=la-app-shell">
+<span class="dl-card-title">la-app-shell</span>
+<span class="dl-card-file">la-app-shell.md</span>
+<span class="dl-card-desc">Root layout — sidebar, page header, main, optional aside.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=la-sidebar">
+<span class="dl-card-title">la-sidebar</span>
+<span class="dl-card-file">la-sidebar.md</span>
+<span class="dl-card-desc">Navigation sidebar — logo, identity, nav areas, lock state.</span>
+</a>
+</div>
+</section>
+<section class="dl-group" id="process">
+<div class="dl-group-label">Process</div>
+<div class="dl-grid">
+<a class="dl-card" href="design-language/view.html?file=README">
+<span class="dl-card-title">Overview (README)</span>
+<span class="dl-card-file">README.md</span>
+<span class="dl-card-desc">What the design-language folder is, how to add to it, how it fits with CLAUDE.md.</span>
+</a>
+<a class="dl-card" href="design-language/view.html?file=development-workflow">
+<span class="dl-card-title">Development workflow</span>
+<span class="dl-card-file">development-workflow.md</span>
+<span class="dl-card-desc">How to develop and contribute to the design system.</span>
+</a>
+</div>
+</section>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

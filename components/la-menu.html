@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-menu — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-menu</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-menu</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<style>
+  /* Let floating panels escape the preview frame clip. */
+  .page-content-inner .preview-frame { overflow: visible; }
+</style>
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-menu</h1>
+  <p>Tertiary action surface — a 3-dot trigger button that reveals a floating list of labelled actions. Reach for <code>la-menu</code> when an action doesn't warrant a visible button and isn't the primary CTA: rename, delete, export, share, and similar context-specific commands. <code>la-menu-item</code> is the row primitive slotted inside it.</p>
+</div>
+
+<!-- Anatomy — la-menu -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">la-menu — trigger + panel</div>
+  <div class="preview-frame" style="padding:48px 32px 180px; position:relative;">
+    <la-menu open label="Card options">
+      <la-menu-item label="Edit" icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+      <la-menu-item label="Duplicate" icon="ph ph-copy" value="duplicate"></la-menu-item>
+      <la-menu-item label="Delete" icon="ph ph-trash" value="delete" variant="danger"></la-menu-item>
+    </la-menu>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">la-menu regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Trigger</td>
+        <td><code>la-icon-button</code></td>
+        <td>32×32 ghost icon button. Always <code>ph-bold ph-dots-three</code>. Carries <code>aria-label</code>, <code>aria-haspopup="menu"</code>, and <code>aria-expanded</code>. Hover + open-state: <code>--la-color-bg-muted</code> background.</td>
+      </tr>
+      <tr>
+        <td>Panel</td>
+        <td><code>.panel</code> <code>role="menu"</code></td>
+        <td>Floating surface positioned relative to the trigger. Scales in from the corner set by <code>origin</code>. Holds the default slot for <code>la-menu-item</code> children.</td>
+      </tr>
+      <tr>
+        <td>Slot</td>
+        <td><code>&lt;slot&gt;</code></td>
+        <td>Default slot inside the panel. Accepts <code>la-menu-item</code>, <code>la-menu-toggle</code>, and <code>la-menu-divider</code> children.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Anatomy — la-menu-item -->
+<div class="preview-group">
+  <div class="preview-label">la-menu-item</div>
+  <div class="preview-frame" style="padding:16px; max-width:220px;">
+    <la-menu-item label="Edit" icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Row</td>
+        <td><code>button.item</code> <code>role="menuitem"</code></td>
+        <td>Full-width button. 32px tall. Transparent background, <code>--la-color-bg-subtle</code> on hover. <code>--la-radius-sm</code>.</td>
+      </tr>
+      <tr>
+        <td>Icon</td>
+        <td><code>span.icon</code> (optional)</td>
+        <td>Phosphor icon at <code>--la-font-size-base</code>. Only rendered when the <code>icon</code> property is set. Inherits danger colour on <code>variant="danger"</code>.</td>
+      </tr>
+      <tr>
+        <td>Label</td>
+        <td><code>span.label</code></td>
+        <td>Display text. Always sentence case. Never truncated — keep labels short.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below. Each control maps to a public property.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label>origin</label>
+      <div class="btn-group" id="ctl-origin">
+        <button class="btn-toggle" data-value="top-left"    type="button">top-left</button>
+        <button class="btn-toggle active" data-value="top-right"   type="button">top-right</button>
+        <button class="btn-toggle" data-value="bottom-left"  type="button">bottom-left</button>
+        <button class="btn-toggle" data-value="bottom-right" type="button">bottom-right</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>open</label>
+      <div class="btn-group" id="ctl-open">
+        <button class="btn-toggle active" data-value="false" type="button">false</button>
+        <button class="btn-toggle" data-value="true" type="button">true</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls-divider"></div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label>item variant (first item)</label>
+      <div class="btn-group" id="ctl-variant">
+        <button class="btn-toggle active" data-value="default" type="button">default</button>
+        <button class="btn-toggle" data-value="danger"  type="button">danger</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>disabled (last item)</label>
+      <div class="btn-group" id="ctl-disabled">
+        <button class="btn-toggle active" data-value="false" type="button">false</button>
+        <button class="btn-toggle" data-value="true"  type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>icons</label>
+      <div class="btn-group" id="ctl-icons">
+        <button class="btn-toggle active" data-value="true"  type="button">on</button>
+        <button class="btn-toggle" data-value="false" type="button">off</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the controls above. Open the menu and select an item to see events fire.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px; min-height:200px; position:relative; display:flex; align-items:flex-start; justify-content:flex-end;">
+    <la-menu id="live-menu" label="Card options">
+      <la-menu-item id="live-item-1" label="Edit"      icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+      <la-menu-item id="live-item-2" label="Duplicate" icon="ph ph-copy"          value="duplicate"></la-menu-item>
+      <la-menu-item id="live-item-3" label="Delete"    icon="ph ph-trash"         value="delete" variant="danger"></la-menu-item>
+    </la-menu>
+  </div>
+  <div id="event-log" style="padding:8px 24px; font-size:11px; color:var(--la-color-text-muted); font-family:monospace; min-height:28px; border-top:1px solid var(--la-color-border-light); background:var(--la-color-bg-subtle);" aria-live="polite">
+    <span style="color:var(--la-color-text-faint);">Event log — open the menu and select an item</span>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed reference states — not wired to controls.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Default — 3 items with icons, top-right origin</div>
+  <div class="preview-frame" style="padding:16px 16px 180px; display:flex; justify-content:flex-end;">
+    <la-menu open label="More options">
+      <la-menu-item label="Edit"      icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+      <la-menu-item label="Duplicate" icon="ph ph-copy"          value="duplicate"></la-menu-item>
+      <la-menu-item label="Export"    icon="ph ph-export"        value="export"></la-menu-item>
+    </la-menu>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">With danger item — destructive action last</div>
+  <div class="preview-frame" style="padding:16px 16px 180px; display:flex; justify-content:flex-end;">
+    <la-menu open label="More options">
+      <la-menu-item label="Edit"      icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+      <la-menu-item label="Duplicate" icon="ph ph-copy"          value="duplicate"></la-menu-item>
+      <la-menu-item label="Delete"    icon="ph ph-trash"         value="delete" variant="danger"></la-menu-item>
+    </la-menu>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Text-only — no icons</div>
+  <div class="preview-frame" style="padding:16px 16px 160px; display:flex; justify-content:flex-end;">
+    <la-menu open label="More options">
+      <la-menu-item label="Mark as complete" value="complete"></la-menu-item>
+      <la-menu-item label="Reassign"         value="reassign"></la-menu-item>
+      <la-menu-item label="Archive"          value="archive"></la-menu-item>
+    </la-menu>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Disabled item — temporarily unavailable</div>
+  <div class="preview-frame" style="padding:16px 16px 180px; display:flex; justify-content:flex-end;">
+    <la-menu open label="More options">
+      <la-menu-item label="Edit"   icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+      <la-menu-item label="Export" icon="ph ph-export"        value="export" disabled></la-menu-item>
+      <la-menu-item label="Delete" icon="ph ph-trash"         value="delete" variant="danger"></la-menu-item>
+    </la-menu>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">With divider and toggle — mixed action + settings pattern</div>
+  <div class="preview-frame" style="padding:16px 16px 230px; display:flex; justify-content:flex-end;">
+    <la-menu open label="More options">
+      <la-menu-item label="Edit"   icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+      <la-menu-item label="Export" icon="ph ph-export"        value="export"></la-menu-item>
+      <la-menu-divider></la-menu-divider>
+      <la-menu-toggle label="Show resolved items" value="show-resolved"></la-menu-toggle>
+      <la-menu-divider></la-menu-divider>
+      <la-menu-item label="Delete" icon="ph ph-trash" value="delete" variant="danger"></la-menu-item>
+    </la-menu>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Origin variants — panel alignment and scale origin</div>
+  <div class="preview-frame" style="padding:32px; min-height:240px; display:grid; grid-template-columns:1fr 1fr; gap:48px 32px;">
+    <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start;">
+      <span style="font-size:11px; color:var(--doc-text-3); font-family:monospace;">origin="top-left"</span>
+      <la-menu open origin="top-left" label="More options">
+        <la-menu-item label="Edit"   icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+        <la-menu-item label="Delete" icon="ph ph-trash"         value="delete" variant="danger"></la-menu-item>
+      </la-menu>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-end;">
+      <span style="font-size:11px; color:var(--doc-text-3); font-family:monospace;">origin="top-right"</span>
+      <la-menu open origin="top-right" label="More options">
+        <la-menu-item label="Edit"   icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+        <la-menu-item label="Delete" icon="ph ph-trash"         value="delete" variant="danger"></la-menu-item>
+      </la-menu>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-start; padding-top:80px;">
+      <la-menu open origin="bottom-left" label="More options">
+        <la-menu-item label="Edit"   icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+        <la-menu-item label="Delete" icon="ph ph-trash"         value="delete" variant="danger"></la-menu-item>
+      </la-menu>
+      <span style="font-size:11px; color:var(--doc-text-3); font-family:monospace;">origin="bottom-left"</span>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:8px; align-items:flex-end; padding-top:80px;">
+      <la-menu open origin="bottom-right" label="More options">
+        <la-menu-item label="Edit"   icon="ph ph-pencil-simple" value="edit"></la-menu-item>
+        <la-menu-item label="Delete" icon="ph ph-trash"         value="delete" variant="danger"></la-menu-item>
+      </la-menu>
+      <span style="font-size:11px; color:var(--doc-text-3); font-family:monospace;">origin="bottom-right"</span>
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">In context — card header with 3-dot trigger at top-right</div>
+  <div class="preview-frame" style="padding:32px; min-height:200px; background:var(--la-color-bg-page);">
+    <div style="background:var(--la-color-bg); border:1px solid var(--la-color-border-light); border-radius:var(--la-radius-lg); padding:16px 20px; display:flex; align-items:flex-start; justify-content:space-between; width:300px; box-sizing:border-box;">
+      <div style="display:flex; flex-direction:column; gap:4px;">
+        <span style="font-size:var(--la-font-size-sm); font-weight:var(--la-font-weight-semibold); color:var(--la-color-text);">Employment agreement</span>
+        <span style="font-size:var(--la-font-size-xs); color:var(--la-color-text-muted);">Last updated 3 days ago</span>
+      </div>
+      <la-menu label="Document options">
+        <la-menu-item label="View"     icon="ph ph-eye"      value="view"></la-menu-item>
+        <la-menu-item label="Download" icon="ph ph-download" value="download"></la-menu-item>
+        <la-menu-item label="Remove"   icon="ph ph-trash"    value="remove" variant="danger"></la-menu-item>
+      </la-menu>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-menu</h2>
+    <p>Tertiary action surface — a 3-dot trigger that reveals a floating list of labelled actions. Use for rename, delete, export, and similar context-specific commands that don't warrant a visible button. la-menu-item is the row primitive slotted inside it.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;More options&#39;</span></td>
+          <td>Accessible label for the trigger button.</td>
+        </tr>
+      
+        <tr>
+          <td>origin</td>
+          <td><span class="default">origin</span></td>
+          <td><span class="type">Origin</span></td>
+          <td><span class="default">&#39;top-right&#39;</span></td>
+          <td>Which corner the panel scales from — set to match the trigger's position.</td>
+        </tr>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_triggerEl</td>
+          <td>—</td>
+          <td><span class="type">HTMLElement</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_phase</td>
+          <td>—</td>
+          <td><span class="type">Phase</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_closeTimer</td>
+          <td>—</td>
+          <td><span class="type">number | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onDocumentMousedown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onKeydown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onItemSelect</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onTriggerClick</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-menu-open</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-menu-close</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-divider"></div>
+
+<!-- CSS tokens -->
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <p style="margin-bottom:16px;">All visual values come from the design token system. The trigger is a composed <code>la-icon-button</code> — its interactive tokens (radius, icon size, hover background) are listed here for reference. The <code>::part(button)</code> selector applies the open-state highlight from <code>la-menu</code>'s shadow CSS.</p>
+
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Trigger (la-icon-button)</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-radius-circle</td><td>Trigger border-radius</td></tr>
+          <tr><td>--la-font-size-2xl</td><td>Trigger icon size</td></tr>
+          <tr><td>--la-color-text-muted</td><td>Trigger icon colour (resting)</td></tr>
+          <tr><td>--la-color-text</td><td>Trigger icon colour (hover and open)</td></tr>
+          <tr><td>--la-color-bg-muted</td><td>Trigger background on hover and when open</td></tr>
+          <tr><td>--la-focus-ring-width</td><td>Trigger focus outline width</td></tr>
+          <tr><td>--la-color-border-focus</td><td>Trigger focus outline colour</td></tr>
+          <tr><td>--la-focus-ring-offset</td><td>Trigger focus outline offset</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Panel</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-radius-md</td><td>Panel border-radius</td></tr>
+          <tr><td>--la-space-xs</td><td>Panel padding; gap between trigger and panel</td></tr>
+          <tr><td>--la-color-bg</td><td>Panel background</td></tr>
+          <tr><td>--la-shadow-popover</td><td>Panel shadow (floating element)</td></tr>
+          <tr><td>--dur-modal</td><td>Panel open transition duration</td></tr>
+          <tr><td>--dur-fast</td><td>Panel close transition duration</td></tr>
+          <tr><td>--ease-spring-sm</td><td>Panel open and close easing</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;font-size:13px;color:var(--doc-text-3);">The panel duplicates the <code>.t-dropdown</code> motion pattern from <a href="../../motion.css"><code>motion.css</code></a> inside the shadow root — page-scope CSS does not penetrate shadow DOM, so the rules are mirrored using the same motion tokens. Reduced-motion users see no panel transition.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Usage -->
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — listen on the menu for selection</p>
+      <div class="docs-code"><span class="kw">&lt;la-menu</span> <span class="at">label</span>=<span class="str">"Document options"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-menu-item</span> <span class="at">label</span>=<span class="str">"Edit"</span>      <span class="at">icon</span>=<span class="str">"ph ph-pencil-simple"</span> <span class="at">value</span>=<span class="str">"edit"</span><span class="kw">&gt;&lt;/la-menu-item&gt;</span>
+  <span class="kw">&lt;la-menu-item</span> <span class="at">label</span>=<span class="str">"Duplicate"</span> <span class="at">icon</span>=<span class="str">"ph ph-copy"</span>          <span class="at">value</span>=<span class="str">"duplicate"</span><span class="kw">&gt;&lt;/la-menu-item&gt;</span>
+  <span class="kw">&lt;la-menu-item</span> <span class="at">label</span>=<span class="str">"Delete"</span>    <span class="at">icon</span>=<span class="str">"ph ph-trash"</span>          <span class="at">value</span>=<span class="str">"delete"</span> <span class="at">variant</span>=<span class="str">"danger"</span><span class="kw">&gt;&lt;/la-menu-item&gt;</span>
+<span class="kw">&lt;/la-menu&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+  document.querySelector(<span class="str">'la-menu'</span>).addEventListener(<span class="str">'la-menu-select'</span>, e =&gt; {
+    console.log(e.detail.value); <span class="cm">// 'edit' | 'duplicate' | 'delete'</span>
+  });
+<span class="kw">&lt;/script&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Left-aligned trigger (trigger on the left side of a surface)</p>
+      <div class="docs-code"><span class="kw">&lt;la-menu</span> <span class="at">origin</span>=<span class="str">"top-left"</span> <span class="at">label</span>=<span class="str">"Row options"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-menu-item</span> <span class="at">label</span>=<span class="str">"Archive"</span> <span class="at">value</span>=<span class="str">"archive"</span><span class="kw">&gt;&lt;/la-menu-item&gt;</span>
+  <span class="kw">&lt;la-menu-item</span> <span class="at">label</span>=<span class="str">"Remove"</span>  <span class="at">value</span>=<span class="str">"remove"</span> <span class="at">variant</span>=<span class="str">"danger"</span><span class="kw">&gt;&lt;/la-menu-item&gt;</span>
+<span class="kw">&lt;/la-menu&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">With divider and toggle</p>
+      <div class="docs-code"><span class="kw">&lt;la-menu</span> <span class="at">label</span>=<span class="str">"More options"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-menu-item</span> <span class="at">label</span>=<span class="str">"Export"</span> <span class="at">icon</span>=<span class="str">"ph ph-export"</span> <span class="at">value</span>=<span class="str">"export"</span><span class="kw">&gt;&lt;/la-menu-item&gt;</span>
+  <span class="kw">&lt;la-menu-divider&gt;&lt;/la-menu-divider&gt;</span>
+  <span class="kw">&lt;la-menu-toggle</span>
+    <span class="at">label</span>=<span class="str">"Show resolved items"</span>
+    <span class="at">value</span>=<span class="str">"show-resolved"</span>
+  <span class="kw">&gt;&lt;/la-menu-toggle&gt;</span>
+<span class="kw">&lt;/la-menu&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+  document.querySelector(<span class="str">'la-menu'</span>).addEventListener(<span class="str">'la-menu-toggle-change'</span>, e =&gt; {
+    console.log(e.detail.value, e.detail.checked);
+  });
+<span class="kw">&lt;/script&gt;</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Partner: la-menu-item -->
+<div id="la-menu-item" class="docs-section">
+  <h3>Partner: la-menu-item</h3>
+  <p>Row primitive slotted inside <code>la-menu</code>. Renders a full-width <code>&lt;button role="menuitem"&gt;</code>. Fires <code>la-menu-select</code> on click and automatically closes the parent panel.</p>
+
+  <p style="margin-top:16px;margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Properties</p>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>label</td>
+        <td>label</td>
+        <td><span class="type">string</span></td>
+        <td><span class="default">''</span></td>
+        <td>Display text for the row. Also used as <code>detail.label</code> in the <code>la-menu-select</code> event. Sentence case always.</td>
+      </tr>
+      <tr>
+        <td>value</td>
+        <td>value</td>
+        <td><span class="type">string</span></td>
+        <td><span class="default">''</span></td>
+        <td>Identifier passed in <code>la-menu-select</code> detail. Falls back to <code>label</code> if not set — provide an explicit value when the label text is liable to change.</td>
+      </tr>
+      <tr>
+        <td>icon</td>
+        <td>icon</td>
+        <td><span class="type">string</span></td>
+        <td><span class="default">''</span></td>
+        <td>Phosphor icon class string, e.g. <code>'ph ph-pencil-simple'</code>. Optional — omit for text-only rows. If some items in a menu have icons, all should.</td>
+      </tr>
+      <tr>
+        <td>variant</td>
+        <td>variant</td>
+        <td><span class="type">'default' | 'danger'</span></td>
+        <td><span class="default">'default'</span></td>
+        <td>Use <code>danger</code> for destructive actions. Renders label and icon in <code>--la-color-danger-text</code> with a <code>--la-color-surface-danger</code> hover. Always place the danger item last.</td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td>disabled</td>
+        <td><span class="type">boolean</span></td>
+        <td><span class="default">false</span></td>
+        <td>Renders the item at 40% opacity and removes pointer events. Use for temporarily unavailable actions — prefer hiding the item entirely when it can never be available in the current context.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:16px;margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Events</p>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Detail</th><th>When fired</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>la-menu-select</code></td>
+        <td><code>{label: string, value: string}</code></td>
+        <td>On click. Bubbles and composed — listen on <code>la-menu</code> or any ancestor. Fires before <code>la-menu-close</code>.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:24px;margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">la-menu-toggle — toggle row</p>
+  <p style="font-size:13px;color:var(--doc-text-2);margin-bottom:8px;">A switch row for boolean settings. Uses <code>la-switch</code> internally. Does not close the panel on change — designed for in-menu settings that the user toggles multiple times. Fires <code>la-menu-toggle-change</code> with <code>{label, value, checked}</code>.</p>
+  <table class="docs-table">
+    <thead><tr><th>Property</th><th>Type</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      <tr><td>label</td><td><span class="type">string</span></td><td><span class="default">''</span></td><td>Row label and accessible name for the switch.</td></tr>
+      <tr><td>value</td><td><span class="type">string</span></td><td><span class="default">''</span></td><td>Identifier in the <code>la-menu-toggle-change</code> detail. Falls back to <code>label</code>.</td></tr>
+      <tr><td>checked</td><td><span class="type">boolean</span></td><td><span class="default">false</span></td><td>Controlled checked state.</td></tr>
+      <tr><td>disabled</td><td><span class="type">boolean</span></td><td><span class="default">false</span></td><td>40% opacity, pointer events removed.</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:24px;margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">la-menu-divider — horizontal rule</p>
+  <p style="font-size:13px;color:var(--doc-text-2);">Visual separator between menu sections. Renders an <code>&lt;hr role="separator"&gt;</code> with <code>--la-color-border-light</code> stroke and <code>--la-space-xs</code> vertical padding. No properties.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Notes -->
+<div id="notes" class="docs-section" style="padding-bottom:80px;">
+  <h3>Notes</h3>
+  <ul style="font-size:var(--la-font-size-sm); color:var(--doc-text-2); line-height:1.7; padding-left:20px; margin:0; display:flex; flex-direction:column; gap:6px;">
+    <li><strong>Danger last.</strong> Always put the destructive item at the bottom of the list. It should never be the first thing a user sees.</li>
+    <li><strong>Keep it short.</strong> 3–6 items is the comfortable range. More than that suggests the surface needs a different pattern.</li>
+    <li><strong>Icon consistency.</strong> If any item in a menu has an icon, all items should. Mixed icon/no-icon lists read unbalanced.</li>
+    <li><strong>Sentence case.</strong> "Export as PDF", not "EXPORT AS PDF" or "Export As PDF".</li>
+    <li><strong>Keyboard.</strong> Escape closes the panel and returns focus to the trigger. Click-outside closes without moving focus. Tab proceeds naturally through items — no arrow-key roving focus is implemented (appropriate for short lists).</li>
+    <li><strong>Origin default is <code>top-right</code>.</strong> Right for the majority of card and row 3-dot triggers. Switch to <code>top-left</code> when the trigger is on the left side of a surface, or <code>bottom-*</code> when near the viewport bottom.</li>
+    <li><strong>Disabled vs hidden.</strong> Prefer hiding items that can never be available in the current context. Disabled is for temporarily unavailable actions — always pair with context elsewhere so the user understands why.</li>
+  </ul>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveMenu  = document.getElementById('live-menu');
+    const liveItem1 = document.getElementById('live-item-1');
+    const liveItem2 = document.getElementById('live-item-2');
+    const liveItem3 = document.getElementById('live-item-3');
+    const log       = document.getElementById('event-log');
+
+    const ICONS = {
+      'live-item-1': 'ph ph-pencil-simple',
+      'live-item-2': 'ph ph-copy',
+      'live-item-3': 'ph ph-trash',
+    };
+
+    function bindChips(groupId, callback) {
+      const group = document.getElementById(groupId);
+      if (!group) return;
+      group.querySelectorAll('.btn-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          group.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          callback(btn.dataset.value);
+        });
+      });
+    }
+
+    bindChips('ctl-origin',   val => { liveMenu.origin = val; });
+    bindChips('ctl-open',     val => { liveMenu.open = val === 'true'; });
+    bindChips('ctl-variant',  val => { liveItem1.variant = val; });
+    bindChips('ctl-disabled', val => { liveItem3.disabled = val === 'true'; });
+    bindChips('ctl-icons', val => {
+      const on = val === 'true';
+      [liveItem1, liveItem2, liveItem3].forEach(item => {
+        item.icon = on ? ICONS[item.id] : '';
+      });
+    });
+
+    liveMenu.addEventListener('la-menu-open', () => {
+      log.textContent = 'la-menu-open';
+    });
+    liveMenu.addEventListener('la-menu-close', () => {
+      log.textContent = 'la-menu-close';
+    });
+    liveMenu.addEventListener('la-menu-select', e => {
+      log.textContent = 'la-menu-select → ' + JSON.stringify(e.detail);
+    });
+  })();
+</script>
+
+
+</body>
+</html>

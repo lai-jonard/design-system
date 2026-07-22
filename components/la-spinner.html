@@ -1,0 +1,739 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-spinner — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-spinner</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-spinner</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<style>
+  /* Demo surfaces — only purpose is to set `color` on a wrapper so that
+     currentColor in <la-spinner> inherits the right tint. Tokens only. */
+  .demo-row-muted {
+    color: var(--la-color-text-muted);
+    display: inline-flex;
+    align-items: center;
+    gap: var(--la-space-sm);
+    padding: var(--la-space-xs) 0;
+    font-size: var(--la-font-size-base);
+  }
+  .demo-tint {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--la-space-sm);
+    font-size: var(--la-font-size-base);
+  }
+  .demo-tint-info { color: var(--la-color-processing); }
+
+  /* Transition demo — default ⇄ loading. Mimics la-button[primary]
+     visually so we can show the transition without modifying la-button.
+     Motion: 200ms ease-out, opacity + scale only. */
+  .lai-btn-demo {
+    display: grid;
+    grid-template-areas: 'stack';
+    align-items: center;
+    height: var(--la-button-height-default);
+    padding: 0 var(--la-space-lg);
+    border-radius: var(--la-radius-md);
+    border: none;
+    background: var(--la-color-primary);
+    color: var(--la-color-primary-fg);
+    font-family: inherit;
+    font-size: var(--la-font-size-lg);
+    font-weight: var(--la-font-weight-normal);
+    line-height: var(--la-line-height);
+    cursor: pointer;
+    transition: background var(--dur-fast) var(--ease);
+  }
+  .lai-btn-demo:hover {
+    background: var(--la-color-primary-hover);
+  }
+  .lai-btn-demo[data-state='loading'] {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+  .lai-btn-default,
+  .lai-btn-loading {
+    grid-area: stack;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--la-space-2xs);
+    justify-self: center;
+    white-space: nowrap;
+    transition:
+      opacity 200ms var(--ease-out),
+      transform 200ms var(--ease-out);
+  }
+  .lai-btn-loading {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  .lai-btn-demo[data-state='loading'] .lai-btn-default {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  .lai-btn-demo[data-state='loading'] .lai-btn-loading {
+    opacity: 1;
+    transform: scale(1);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .lai-btn-default,
+    .lai-btn-loading {
+      transition: none;
+    }
+  }
+
+  /* Wrapper for label + button stack */
+  .lai-demo-cell {
+    display: flex;
+    flex-direction: column;
+    gap: var(--la-space-sm);
+    align-items: flex-start;
+  }
+  .lai-demo-cap {
+    font-size: var(--la-font-size-sm);
+    color: var(--la-color-text-muted);
+    letter-spacing: 0.2px;
+  }
+
+  /* Demo variant — no width preservation (will jump). For comparison only. */
+  .lai-btn-demo-jump {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--la-space-2xs);
+    height: var(--la-button-height-default);
+    padding: 0 var(--la-space-lg);
+    border-radius: var(--la-radius-md);
+    border: none;
+    background: var(--la-color-primary);
+    color: var(--la-color-primary-fg);
+    font-family: inherit;
+    font-size: var(--la-font-size-lg);
+    font-weight: var(--la-font-weight-normal);
+    line-height: var(--la-line-height);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: background var(--dur-fast) var(--ease);
+  }
+  .lai-btn-demo-jump:hover {
+    background: var(--la-color-primary-hover);
+  }
+  .lai-btn-demo-jump[data-state='loading'] {
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+</style>
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-spinner</h1>
+  <p>Indeterminate loading indicator — a small spinning ring used inside buttons, rows, and async-operation surfaces to communicate that work is in progress. Border colour inherits via <code>currentColor</code>; sizes follow the <code>--la-spinner-*</code> token scale.</p>
+  <p style="font-size:var(--la-font-size-base);color:var(--doc-text-3);margin-top:8px;">Full rationale: <a href="../../design-language/loading.md"><code>design-language/loading.md</code></a> §2.1–2.2. Family context: <a href="../../solves/260428-1-loading-states/loading-states.solve-output.md"><code>solves/260428-1-loading-states/</code></a>.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>An SVG with two concentric circles inside a <code>&lt;span role="status"&gt;</code>. The host <code>&lt;la-spinner&gt;</code> sets <code>display: inline-flex</code> so it sits naturally inline with adjacent text or icons.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — a single resting spinner</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-spinner size="lg" label="Loading"></la-spinner>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Internal structure</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>What it is</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Host</td>
+        <td><code>&lt;la-spinner&gt;</code> — sets <code>display: inline-flex</code>, forwards <code>currentColor</code> to the ring. <code>appearance="invert"</code> overrides the host colour to <code>--la-color-text-invert</code> for dark surfaces.</td>
+      </tr>
+      <tr>
+        <td>ARIA wrapper</td>
+        <td><code>&lt;span role="status" aria-label&gt;</code> — carries the live-region announcement so screen readers report the loading state.</td>
+      </tr>
+      <tr>
+        <td>Track</td>
+        <td>A faint full-circle stroke at <code>opacity: 0.2</code>. Always visible, anchors the visual so the arc has something to spin against.</td>
+      </tr>
+      <tr>
+        <td>Arc</td>
+        <td>The animated stroke. Two animations compose: the SVG rotates at 1.5s linear, while the arc length oscillates (5 → 70 → 5) at 1.4s ease-in-out. The result is a rotating segment that breathes.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Tune the live preview below. Every control drives a public property on the component.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label>Size</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-size="sm">sm</button>
+        <button class="btn-toggle" data-size="md">md</button>
+        <button class="btn-toggle" data-size="lg">lg</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Appearance</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-appearance="default">default</button>
+        <button class="btn-toggle" data-appearance="invert">invert</button>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <label>Label (aria-label)</label>
+      <input type="text" id="ctrl-label" value="Loading" />
+    </div>
+  </div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+  <div class="preview-frame" id="live-frame" style="min-height:80px;">
+    <la-spinner id="live-spinner" size="sm" label="Loading"></la-spinner>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed states for reference — sizes side by side, then four contexts demonstrating <code>currentColor</code> inheritance.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">All sizes — sm (12px) · md (16px) · lg (24px)</div>
+  <div class="preview-frame" style="gap:24px; align-items:center; padding:32px;">
+    <la-spinner size="sm" label="Loading"></la-spinner>
+    <la-spinner size="md" label="Loading"></la-spinner>
+    <la-spinner size="lg" label="Loading"></la-spinner>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Inside la-button — anticipates the future <code>la-button[loading]</code> prop</div>
+  <div class="preview-frame" style="gap:8px;">
+    <la-button variant="primary">
+      <la-spinner slot="icon-left" size="md" appearance="invert" label="Saving"></la-spinner>
+      Saving…
+    </la-button>
+    <la-button variant="secondary">
+      <la-spinner slot="icon-left" size="md" label="Sending"></la-spinner>
+      Sending…
+    </la-button>
+    <la-button variant="danger">
+      <la-spinner slot="icon-left" size="md" appearance="invert" label="Deleting"></la-spinner>
+      Deleting…
+    </la-button>
+    <la-button variant="ghost">
+      <la-spinner slot="icon-left" size="md" label="Loading"></la-spinner>
+      Loading…
+    </la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Three patterns — A, B, C <span style="color:var(--la-color-text-muted); font-weight:var(--la-font-weight-normal); letter-spacing:0;">(click each)</span></div>
+  <div class="preview-frame" style="gap:32px; align-items:flex-start; flex-wrap:wrap;">
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">A — label changes ("Save" → "Saving…")</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">Save</span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+          Saving…
+        </span>
+      </button>
+      <span style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted);">Vercel default. High-stakes actions.</span>
+    </div>
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">B — label stays, spinner added (recommended default)</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">Save</span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+          Save
+        </span>
+      </button>
+      <span style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted);">Linear, Stripe, GitHub, Material default.</span>
+    </div>
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">C — spinner only, no text</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">Save</span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+        </span>
+      </button>
+      <span style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted);">Wise default. Use only when surrounding context names the action.</span>
+    </div>
+
+  </div>
+  <p style="margin-top:var(--la-space-sm); font-size:var(--la-font-size-sm); color:var(--la-color-text-muted); max-width:680px; line-height:1.55;">
+    Recommended default for the system: <strong>B</strong>. A as opt-in for high-stakes actions (signing, compliance, document submission). C reserved for form submits in modals or icon-only buttons. Full guidance in <a href="../../design-language/loading.md"><code>design-language/loading.md</code></a> §4.
+  </p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Pattern A — icon configurations <span style="color:var(--la-color-text-muted); font-weight:var(--la-font-weight-normal); letter-spacing:0;">(how A handles existing icon slots)</span></div>
+  <div class="preview-frame" style="gap:32px; align-items:flex-start; flex-wrap:wrap;">
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">No icon</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">Save</span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+          Saving…
+        </span>
+      </button>
+    </div>
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">Left icon → spinner</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">
+          <i class="ph ph-floppy-disk" aria-hidden="true"></i>
+          Save
+        </span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+          Saving…
+        </span>
+      </button>
+    </div>
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">Right icon hides; spinner enters left</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">
+          Save
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+          Saving…
+        </span>
+      </button>
+    </div>
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">Both icons — left becomes spinner, right hides</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">
+          <i class="ph ph-paperclip" aria-hidden="true"></i>
+          Save
+          <i class="ph ph-arrow-right" aria-hidden="true"></i>
+        </span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+          Saving…
+        </span>
+      </button>
+    </div>
+
+  </div>
+  <p style="margin-top:var(--la-space-sm); font-size:var(--la-font-size-sm); color:var(--la-color-text-muted); max-width:680px; line-height:1.55;">
+    Crossfade + scale (1 ⇄ 0.96), 200ms <code>--ease-out</code>. GPU-safe (transform + opacity only). Reduced-motion: instant swap. The trailing icon hides during loading rather than staying — keeps the loading state visually consistent regardless of original layout.
+  </p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Width handling — preserved vs. not <span style="color:var(--la-color-text-muted); font-weight:var(--la-font-weight-normal); letter-spacing:0;">(both buttons content-sized; click each)</span></div>
+  <div class="preview-frame" style="gap:48px; align-items:flex-start; flex-wrap:wrap;">
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">Width preserved (grid-stack — recommended)</span>
+      <button class="lai-btn-demo" type="button">
+        <span class="lai-btn-default">Save</span>
+        <span class="lai-btn-loading">
+          <la-spinner size="md" appearance="invert" label="Saving"></la-spinner>
+          Saving…
+        </span>
+      </button>
+      <span style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted);">Sized to widest state ("Saving…"). No width jump on transition.</span>
+    </div>
+
+    <div class="lai-demo-cell">
+      <span class="lai-demo-cap">Width not preserved (instant content-swap — for comparison)</span>
+      <button class="lai-btn-demo-jump" id="demo-jump-btn" type="button">
+        <span class="default-content">Save</span>
+      </button>
+      <span style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted);">Width changes mid-action; adjacent layout shifts. Avoid.</span>
+    </div>
+
+  </div>
+  <p style="margin-top:var(--la-space-sm); font-size:var(--la-font-size-sm); color:var(--la-color-text-muted); max-width:680px; line-height:1.55;">
+    Both buttons are content-sized (no <code>width</code> set). The grid-stack pattern in the recommended version makes the button auto-size to whichever child is widest — so the loading state's <code>"Saving…"</code> determines the resting width, and the default state lives inside that width without growing or shrinking on transition. <code>la-button[loading]</code> will use this pattern internally so consumers don't have to think about it.
+  </p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">la-button sizes — sm · default · lg with paired spinner</div>
+  <div class="preview-frame" style="gap:12px; align-items:center;">
+    <la-button variant="primary" size="sm">
+      <la-spinner slot="icon-left" size="sm" appearance="invert" label="Saving"></la-spinner>
+      Saving…
+    </la-button>
+    <la-button variant="primary">
+      <la-spinner slot="icon-left" size="md" appearance="invert" label="Saving"></la-spinner>
+      Saving…
+    </la-button>
+    <la-button variant="primary" size="lg">
+      <la-spinner slot="icon-left" size="md" appearance="invert" label="Saving"></la-spinner>
+      Saving…
+    </la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Recommended pairings</div>
+  <div class="body">
+    <table class="docs-table">
+      <thead>
+        <tr><th>la-button size</th><th>Button height</th><th>Label text</th><th>la-spinner size</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><code>sm</code></td>
+          <td>28px</td>
+          <td>11px</td>
+          <td><code>sm</code> (12px)</td>
+        </tr>
+        <tr>
+          <td>default</td>
+          <td>32px</td>
+          <td>14px</td>
+          <td><code>md</code> (16px)</td>
+        </tr>
+        <tr>
+          <td><code>lg</code></td>
+          <td>44px</td>
+          <td>14px</td>
+          <td><code>md</code> (16px)</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Inside a row — text-muted inheritance (la-upload-box pattern)</div>
+  <div class="preview-frame" style="padding:24px;">
+    <div class="demo-row-muted">
+      <la-spinner size="md" label="Uploading"></la-spinner>
+      Uploading your document…
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Tinted — processing (la-processing-widget pattern)</div>
+  <div class="preview-frame" style="padding:24px;">
+    <div class="demo-tint demo-tint-info">
+      <la-spinner size="sm" label="Processing"></la-spinner>
+      2 processing, 1 complete
+    </div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">On dark background — <code>appearance="invert"</code></div>
+  <div class="preview-frame" style="background: var(--la-color-bg-invert); padding:32px; gap:32px; align-items:center;">
+    <la-spinner size="sm" appearance="invert" label="Loading"></la-spinner>
+    <la-spinner size="md" appearance="invert" label="Loading"></la-spinner>
+    <la-spinner size="lg" appearance="invert" label="Loading"></la-spinner>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-spinner</h2>
+    <p>Indeterminate loading indicator — a small spinning ring used inside buttons, rows, and async-operation surfaces to communicate that work is in progress.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">SpinnerSize</span></td>
+          <td><span class="default">&#39;sm&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>appearance</td>
+          <td><span class="default">appearance</span></td>
+          <td><span class="type">SpinnerAppearance</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Loading&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Token</th><th>Value</th><th>Where</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><code>--la-spinner-sm</code></td>
+        <td><code>12px</code></td>
+        <td>Default size — fits inline next to body text and inside button slots</td>
+      </tr>
+      <tr>
+        <td><code>--la-spinner-md</code></td>
+        <td><code>16px</code></td>
+        <td>Used inside <code>la-upload-box</code> and other compact row contexts</td>
+      </tr>
+      <tr>
+        <td><code>--la-spinner-lg</code></td>
+        <td><code>24px</code></td>
+        <td>Standalone or hero contexts where the spinner is the only feedback</td>
+      </tr>
+      <tr>
+        <td><code>--la-radius-circle</code></td>
+        <td><code>50%</code></td>
+        <td>Border radius applied to the ring</td>
+      </tr>
+    </tbody>
+  </table>
+  <p class="docs-note" style="margin-top:12px;">Source — <a href="../../src/styles/tokens.ts"><code>src/styles/tokens.ts</code></a> · Spinner sizing block.</p>
+</div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+
+  <h4 style="margin-top:16px;">Inside la-button (anticipates the loading prop)</h4>
+  <p>The spinner sits in the <code>icon-left</code> slot. Border inherits the button's foreground colour — white on filled variants, dark on ghost / secondary. This is the composition the future <code>la-button[loading]</code> prop will use internally.</p>
+  <pre class="docs-code"><code>&lt;la-button variant="primary"&gt;
+  &lt;la-spinner slot="icon-left" size="sm" label="Saving"&gt;&lt;/la-spinner&gt;
+  Saving…
+&lt;/la-button&gt;</code></pre>
+
+  <h4 style="margin-top:16px;">Inside la-upload-box</h4>
+  <p>While a file is uploading, <code>la-upload-box</code> renders a <code>la-spinner</code> at <code>size="md"</code>. The wrapping <code>.zone</code> sets <code>color: var(--la-color-text-muted)</code>, so the spinner inherits the muted tint without an explicit colour declaration.</p>
+  <pre class="docs-code"><code>&lt;la-spinner size="md" label="Uploading"&gt;&lt;/la-spinner&gt;</code></pre>
+
+  <h4 style="margin-top:16px;">Inside la-processing-widget</h4>
+  <p>The processing-widget header tints its spinner via the <code>--la-color-processing</code> blue. The widget sets <code>color</code> on a wrapper rule; the spinner inherits.</p>
+  <pre class="docs-code"><code>&lt;la-spinner size="sm" label="Processing"&gt;&lt;/la-spinner&gt;
+
+/* In the consuming component's CSS: */
+.title la-spinner { color: var(--la-color-processing); }</code></pre>
+</div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+
+  <h4 style="margin-top:16px;">currentColor inheritance</h4>
+  <p>Both the track and arc strokes use <code>currentColor</code>. To tint, set <code>color</code> on the <code>la-spinner</code> host or any ancestor. The primitive does not expose a <code>variant</code> prop — colour is a property of the surrounding context, not of the spinner itself.</p>
+
+  <h4 style="margin-top:16px;">Dark backgrounds — <code>appearance="invert"</code></h4>
+  <p>For dark surfaces, set <code>appearance="invert"</code>. The host colour switches to <code>--la-color-text-invert</code> (white), which both strokes inherit. Use this whenever the spinner sits on a dark backdrop and you don't want to manually set <code>color</code> on a wrapping element.</p>
+
+  <h4 style="margin-top:16px;">Reduced motion</h4>
+  <p>The spinning animation respects <code>prefers-reduced-motion</code> automatically — when the OS setting is on, the ring becomes static. Behaviour lives in <a href="../../src/primitives/la-spinner.ts"><code>la-spinner.ts</code></a>; nothing extra to wire up.</p>
+
+  <h4 style="margin-top:16px;">Family context</h4>
+  <p>la-spinner is slot 1 of the loading-states family. The remaining slots are documented in <a href="../foundations/loading.html"><code>foundations/loading</code></a> — <code>la-button[loading]</code> (slot 2), <code>la-skeleton</code> (slot 3), <code>la-thinking</code> (slot 4), and <code>la-progress</code> (slot 5).</p>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    var liveSpinner = document.getElementById('live-spinner');
+    var labelInput  = document.getElementById('ctrl-label');
+
+    // Size chips
+    document.querySelectorAll('.btn-toggle[data-size]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.btn-toggle[data-size]').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        liveSpinner.setAttribute('size', btn.dataset.size);
+      });
+    });
+
+    // Appearance chips
+    var liveFrame = document.getElementById('live-frame');
+    document.querySelectorAll('.btn-toggle[data-appearance]').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        document.querySelectorAll('.btn-toggle[data-appearance]').forEach(function (b) {
+          b.classList.remove('active');
+        });
+        btn.classList.add('active');
+        liveSpinner.setAttribute('appearance', btn.dataset.appearance);
+        // Tint the frame so the invert spinner is visible
+        if (liveFrame) {
+          liveFrame.style.background = btn.dataset.appearance === 'invert'
+            ? 'var(--la-color-bg-invert)'
+            : '';
+        }
+      });
+    });
+
+    // Label text input
+    if (labelInput) {
+      labelInput.addEventListener('input', function () {
+        liveSpinner.label = labelInput.value || 'Loading';
+      });
+    }
+
+    // Transition demo — click toggles loading state, auto-resets after 2s.
+    document.querySelectorAll('.lai-btn-demo').forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        btn.dataset.state = 'loading';
+        setTimeout(function () {
+          btn.dataset.state = '';
+        }, 2000);
+      });
+    });
+
+    // Width-not-preserved demo — DOM swap so the user can see the jump.
+    var jumpBtn = document.getElementById('demo-jump-btn');
+    if (jumpBtn) {
+      jumpBtn.addEventListener('click', function () {
+        if (jumpBtn.dataset.state === 'loading') return;
+        jumpBtn.dataset.state = 'loading';
+        jumpBtn.innerHTML =
+          '<la-spinner size="md" appearance="invert" label="Saving"></la-spinner>' +
+          '<span>Saving&hellip;</span>';
+        setTimeout(function () {
+          jumpBtn.dataset.state = '';
+          jumpBtn.innerHTML = '<span class="default-content">Save</span>';
+        }, 2000);
+      });
+    }
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-list-item — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-list-item</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#events-demo" class="docs-nav-item" data-nav-id="events-demo">Events</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-list-item</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-list-item</h1>
+<p>Three-column structural row for lists — icon, content, meta, and a trailing actions slot. Non-interactive by default; flip <code style="font-family:monospace;color:#c3e88d;font-size:12px;">clickable</code> to turn the row into a native button with hover, focus-visible, and keyboard activation. Clicks inside the <code style="font-family:monospace;font-size:11px;">actions</code> slot do not bubble to the row — consumers can place per-row action buttons without hijacking the main row click.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px; display:block;">
+<div class="anatomy-wrap">
+<div class="list-frame" style="max-width:320px; flex-shrink:0;">
+<la-list-item>
+<i class="ph ph-file-text" slot="icon"></i>
+                  Articles of Incorporation
+                  <span slot="meta">Corporate</span>
+<span slot="actions">
+<la-icon-button label="Edit" size="sm"><i class="ph ph-pencil-simple"></i></la-icon-button>
+</span>
+</la-list-item>
+</div>
+<ol class="anatomy-list" style="margin:0; padding:0; list-style:none; font-size:13px; line-height:1.6;">
+<li><strong>Row shell</strong> — flex container with <code style="font-family:monospace;font-size:11px;">align-items: center</code>, gap <code style="font-family:monospace;font-size:11px;">--la-space-sm</code>, padding <code style="font-family:monospace;font-size:11px;">--la-space-sm</code> × <code style="font-family:monospace;font-size:11px;">--la-space-md</code>. Renders as <code style="font-family:monospace;font-size:11px;">&lt;button&gt;</code> when <code style="font-family:monospace;font-size:11px;">clickable</code>, otherwise <code style="font-family:monospace;font-size:11px;">&lt;div&gt;</code>.</li>
+<li><strong>Icon</strong> — leading column. <code style="font-family:monospace;font-size:11px;">slot="icon"</code>. Auto-hides when empty. Typography size <code style="font-family:monospace;font-size:11px;">--la-font-size-lg</code>, colour <code style="font-family:monospace;font-size:11px;">--la-color-text-muted</code>.</li>
+<li><strong>Content</strong> — default slot. Flex-grows to fill available width, wraps when needed.</li>
+<li><strong>Meta</strong> — trailing text. <code style="font-family:monospace;font-size:11px;">slot="meta"</code>. Smaller (<code style="font-family:monospace;font-size:11px;">--la-font-size-sm</code>), muted, nowrap.</li>
+<li><strong>Actions</strong> — trailing button row. <code style="font-family:monospace;font-size:11px;">slot="actions"</code>. Click-stopped at the container — children do not bubble their click to the row.</li>
+<li><strong>Separator</strong> — 1px bottom border in <code style="font-family:monospace;font-size:11px;">--la-color-border-light</code>. Auto-removed on <code style="font-family:monospace;font-size:11px;">:last-child</code>.</li>
+</ol>
+</div>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Clickable</label>
+<div class="btn-group">
+<button class="btn-toggle" data-clickable="true">On</button>
+<button class="btn-toggle active" data-clickable="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Error</label>
+<div class="btn-group">
+<button class="btn-toggle" data-error="true">On</button>
+<button class="btn-toggle active" data-error="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Icon</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-icon="true">On</button>
+<button class="btn-toggle" data-icon="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Meta</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-meta="true">On</button>
+<button class="btn-toggle" data-meta="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Actions</label>
+<div class="btn-group">
+<button class="btn-toggle" data-actions="true">On</button>
+<button class="btn-toggle active" data-actions="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Content</label>
+<input id="ctrl-content" type="text" value="Articles of Incorporation"/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px; display:block; padding:24px;">
+<div class="list-frame" id="live-frame-inner" style="max-width:480px;">
+<la-list-item id="live-item"></la-list-item>
+</div>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+<div class="preview-group">
+<div class="preview-label">All four columns — icon · content · meta · actions</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:480px;">
+<la-list-item>
+<i class="ph ph-file-text" slot="icon"></i>
+                Articles of Incorporation
+                <span slot="meta">Corporate</span>
+<span slot="actions">
+<la-icon-button label="Edit" size="sm"><i class="ph ph-pencil-simple"></i></la-icon-button>
+<la-icon-button label="Remove" size="sm"><i class="ph ph-trash"></i></la-icon-button>
+</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Content only — default slot</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:480px;">
+<la-list-item>Articles of Incorporation</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Clickable — tab to focus, hover to fill, Enter or Space to activate</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:480px;">
+<la-list-item clickable="" id="snap-clickable">
+<i class="ph ph-file-text" slot="icon"></i>
+                Articles of Incorporation
+                <span slot="meta">Corporate</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Clickable + actions — action clicks do not bubble to the row click (see event log below)</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:480px;">
+<la-list-item clickable="" id="snap-click-actions">
+<i class="ph ph-file-text" slot="icon"></i>
+                Articles of Incorporation
+                <span slot="meta">Corporate</span>
+<span slot="actions">
+<la-icon-button label="Edit" size="sm"><i class="ph ph-pencil-simple"></i></la-icon-button>
+<la-icon-button label="Remove" size="sm"><i class="ph ph-trash"></i></la-icon-button>
+</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Error — danger-surface background</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:480px;">
+<la-list-item error="">
+<i class="ph ph-warning" slot="icon"></i>
+                Upload failed
+                <span slot="meta">Connection lost</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Error + clickable — error background wins over hover fill</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:480px;">
+<la-list-item clickable="" error="">
+<i class="ph ph-warning" slot="icon"></i>
+                Upload failed
+                <span slot="meta">Tap to retry</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Stacked list — bottom border auto-removed on <code style="font-family:monospace;font-size:11px;">:last-child</code></div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:480px;">
+<la-list-item>
+<i class="ph ph-user" slot="icon"></i>
+                Alex Chen
+                <span slot="meta">CEO</span>
+</la-list-item>
+<la-list-item>
+<i class="ph ph-user" slot="icon"></i>
+                Jordan Reyes
+                <span slot="meta">CTO</span>
+</la-list-item>
+<la-list-item>
+<i class="ph ph-user" slot="icon"></i>
+                Sam Obi
+                <span slot="meta">CPO</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">In context — person-row composition (avatar + name + role + actions)</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="list-frame" style="max-width:520px;">
+<la-list-item clickable="" id="snap-person-1">
+<div class="avatar" slot="icon">AC</div>
+                Alex Chen
+                <span slot="meta">Founder · CEO</span>
+<span slot="actions">
+<la-icon-button label="Edit" size="sm"><i class="ph ph-pencil-simple"></i></la-icon-button>
+<la-icon-button label="Remove" size="sm"><i class="ph ph-trash"></i></la-icon-button>
+</span>
+</la-list-item>
+<la-list-item clickable="" id="snap-person-2">
+<div class="avatar" slot="icon">JR</div>
+                Jordan Reyes
+                <span slot="meta">Founder · CTO</span>
+<span slot="actions">
+<la-icon-button label="Edit" size="sm"><i class="ph ph-pencil-simple"></i></la-icon-button>
+<la-icon-button label="Remove" size="sm"><i class="ph ph-trash"></i></la-icon-button>
+</span>
+</la-list-item>
+<la-list-item clickable="" id="snap-person-3">
+<div class="avatar" slot="icon">SO</div>
+                Sam Obi
+                <span slot="meta">Founder · CPO</span>
+<span slot="actions">
+<la-icon-button label="Edit" size="sm"><i class="ph ph-pencil-simple"></i></la-icon-button>
+<la-icon-button label="Remove" size="sm"><i class="ph ph-trash"></i></la-icon-button>
+</span>
+</la-list-item>
+</div>
+</div>
+</div>
+
+<div class="preview-header" id="events-demo" style="margin-top:8px;">
+<h1>Events</h1>
+<p>Row clicks and action-button clicks are logged separately — proves the <code style="font-family:monospace;color:#c3e88d;font-size:12px;">actions</code> slot does not bubble.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block; padding:24px;">
+<div class="event-log" id="event-log"></div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-list-item</h2>
+    <p>Three-column structural row for lists — icon, content, meta, and a trailing actions slot. Non-interactive by default; flip clickable to turn the row into a native button with hover, focus-visible, and keyboard activation. Clicks inside the actions slot do not bubble to the row — consumers can place per-row action buttons without hijacking the main row click.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Tints the row background with `--la-color-surface-danger`.</td>
+        </tr>
+      
+        <tr>
+          <td>clickable</td>
+          <td><span class="default">clickable</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>When true, the row renders as a native button — tab-focusable, keyboard-activated, hover + focus styles.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Layout &amp; typography</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-space-sm</td><td>Row vertical padding + column gap</td></tr>
+<tr><td>--la-space-md</td><td>Row horizontal padding</td></tr>
+<tr><td>--la-space-xs</td><td>Gap between actions</td></tr>
+<tr><td>--la-font-size-base</td><td>Content text</td></tr>
+<tr><td>--la-font-size-sm</td><td>Meta text</td></tr>
+<tr><td>--la-font-size-lg</td><td>Icon glyph</td></tr>
+<tr><td>--la-line-height</td><td>Content line height</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Surface, state &amp; motion</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-text</td><td>Default content colour</td></tr>
+<tr><td>--la-color-text-muted</td><td>Meta + icon colour</td></tr>
+<tr><td>--la-color-border-light</td><td>Row separator</td></tr>
+<tr><td>--la-color-bg-muted</td><td>Clickable hover fill (via <code style="font-family:monospace;font-size:11px;">::before</code>)</td></tr>
+<tr><td>--la-color-border-focus</td><td>Focus ring colour</td></tr>
+<tr><td>--la-focus-ring-width</td><td>Focus ring width</td></tr>
+<tr><td>--la-focus-ring-offset</td><td>Focus ring offset (negated for inset ring)</td></tr>
+<tr><td>--la-color-surface-danger</td><td>Error background</td></tr>
+<tr><td>--dur-fast</td><td>Hover fade duration</td></tr>
+<tr><td>--ease</td><td>Hover fade curve</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — content only</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item&gt;</span>
+  Articles of Incorporation
+<span class="kw">&lt;/la-list-item&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Icon + content + meta — typical three-column</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-file-text"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Articles of Incorporation
+  <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"meta"</span><span class="kw">&gt;</span>Corporate<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/la-list-item&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With actions — edit + remove icon buttons</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item&gt;</span>
+  Alex Chen
+  <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"meta"</span><span class="kw">&gt;</span>CEO<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"actions"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-icon-button</span> <span class="at">size</span>=<span class="str">"sm"</span> <span class="at">label</span>=<span class="str">"Edit"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-pencil-simple"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span>
+<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/la-list-item&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Clickable row — listen for native click</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item</span> <span class="at">clickable</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-file-text"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Articles of Incorporation
+<span class="kw">&lt;/la-list-item&gt;</span>
+<span class="kw">const</span> item = document.querySelector(<span class="str">'la-list-item'</span>);
+item.addEventListener(<span class="str">'click'</span>, () =&gt; {
+  <span class="cm">// open detail view, navigate, etc.</span>
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Person row — avatar + name + role + actions</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item</span> <span class="at">clickable</span><span class="kw">&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"avatar"</span><span class="kw">&gt;</span>AC<span class="kw">&lt;/div&gt;</span>
+  Alex Chen
+  <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"meta"</span><span class="kw">&gt;</span>Founder · CEO<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"actions"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-icon-button</span> <span class="at">size</span>=<span class="str">"sm"</span> <span class="at">label</span>=<span class="str">"Edit"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-pencil-simple"</span><span class="kw">&gt;&lt;/i&gt;</span>
+<span class="kw">&lt;/la-icon-button&gt;</span>
+<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/la-list-item&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Error row — failed upload feedback</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item</span> <span class="at">error</span><span class="kw">&gt;</span>
+<span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-warning"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Upload failed
+  <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"meta"</span><span class="kw">&gt;</span>Connection lost<span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/la-list-item&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Click-stop on the actions slot</strong> — clicks inside the <code style="font-family:monospace;font-size:11px;">actions</code> slot do not bubble to the row click. This lets you put per-row action buttons (edit, remove, more) without the row click firing whenever a user taps an action. The row click still fires for everything else — the content column, the icon, the meta.</div>
+<div class="docs-note"><strong>Interactive pattern matches la-document-item</strong> — when <code style="font-family:monospace;font-size:11px;">clickable</code>, the row is a native <code style="font-family:monospace;font-size:11px;">&lt;button&gt;</code> with a <code style="font-family:monospace;font-size:11px;">::before</code> pseudo-element hover fill (<code style="font-family:monospace;font-size:11px;">--la-color-bg-muted</code>) and a <code style="font-family:monospace;font-size:11px;">:focus-visible</code> ring. See <code style="font-family:monospace;font-size:11px;">decisions/16</code> (native-button rows) and <code style="font-family:monospace;font-size:11px;">decisions/17</code> (GPU-safe hover pseudo).</div>
+<div class="docs-note"><strong>Error background wins over hover fill</strong> — when <code style="font-family:monospace;font-size:11px;">error</code> is set, the danger-surface background stays visible even on hover. The pseudo-element hover fill is suppressed so the error signal is never obscured.</div>
+<div class="docs-note"><strong>Stacked lists just work</strong> — place multiple <code style="font-family:monospace;font-size:11px;">la-list-item</code>s back-to-back and the bottom separator appears between siblings; <code style="font-family:monospace;font-size:11px;">:last-child</code> auto-removes the final border. No separator primitive needed.</div>
+<div class="docs-note"><strong>Inset focus ring</strong> — the focus ring uses a negative <code style="font-family:monospace;font-size:11px;">outline-offset</code> to sit inside the row. Rows sit flush against siblings via <code style="font-family:monospace;font-size:11px;">border-bottom</code>, so an outset outline would overlap adjacent rows. This diverges from <code style="font-family:monospace;font-size:11px;">la-document-item</code>'s outset ring — intentional, driven by the container context.</div>
+<div class="docs-note"><strong>Composition note</strong> — <code style="font-family:monospace;font-size:11px;">la-list-item</code> covers director-row, person-row, and coverage-row patterns that appear across the founder-flow prototypes. Prefer it over handwritten <code style="font-family:monospace;font-size:11px;">&lt;div class="row"&gt;</code> chrome.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveItem = document.getElementById('live-item');
+        const contentInput = document.getElementById('ctrl-content');
+        const eventLog = document.getElementById('event-log');
+
+        const state = {
+          clickable: false,
+          error: false,
+          icon: true,
+          meta: true,
+          actions: false,
+          content: 'Articles of Incorporation',
+        };
+
+        function renderLive() {
+          let html = '';
+          if (state.icon) html += '<i slot="icon" class="ph ph-file-text"></i>';
+          html += state.content || 'Articles of Incorporation';
+          if (state.meta) html += '<span slot="meta">Corporate</span>';
+          if (state.actions) {
+            html += '<span slot="actions">' +
+              '<la-icon-button size="sm" label="Edit"><i class="ph ph-pencil-simple"></i></la-icon-button>' +
+              '<la-icon-button size="sm" label="Remove"><i class="ph ph-trash"></i></la-icon-button>' +
+              '</span>';
+          }
+          liveItem.innerHTML = html;
+
+          if (state.error) liveItem.setAttribute('error', '');
+          else liveItem.removeAttribute('error');
+
+          if (state.clickable) liveItem.setAttribute('clickable', '');
+          else liveItem.removeAttribute('clickable');
+
+          wireLiveListeners();
+        }
+
+        // Bind click + action listeners after each rebuild (new inner DOM)
+        function wireLiveListeners() {
+          liveItem.onclick = () => logEvent('row click → #live-item');
+          liveItem.querySelectorAll('la-icon-button').forEach(btn => {
+            btn.addEventListener('click', () => {
+              logEvent('action click → "' + btn.getAttribute('label') + '"');
+            });
+          });
+        }
+
+        function logEvent(text) {
+          const row = document.createElement('div');
+          row.className = 'event-row';
+          row.textContent = text + ' @ ' + new Date().toLocaleTimeString();
+          eventLog.prepend(row);
+        }
+
+        // Toggle group helper
+        function bindToggle(datasetKey) {
+          document.querySelectorAll('[data-' + datasetKey + ']').forEach(btn => {
+            btn.addEventListener('click', () => {
+              document.querySelectorAll('[data-' + datasetKey + ']').forEach(b => b.classList.remove('active'));
+              btn.classList.add('active');
+              state[datasetKey] = btn.dataset[datasetKey] === 'true';
+              renderLive();
+            });
+          });
+        }
+
+        bindToggle('clickable');
+        bindToggle('error');
+        bindToggle('icon');
+        bindToggle('meta');
+        bindToggle('actions');
+
+        contentInput.addEventListener('input', () => {
+          state.content = contentInput.value;
+          renderLive();
+        });
+
+        // Bind event log to snapshot rows as well
+        document.querySelectorAll('la-list-item[clickable]:not(#live-item)').forEach(el => {
+          el.addEventListener('click', () => {
+            logEvent('row click → #' + (el.id || '(no id)'));
+          });
+        });
+        document.querySelectorAll('la-list-item:not(#live-item) la-icon-button').forEach(btn => {
+          btn.addEventListener('click', () => {
+            logEvent('action click → "' + btn.getAttribute('label') + '"');
+          });
+        });
+
+        renderLive();
+  })();
+</script>
+
+
+</body>
+</html>

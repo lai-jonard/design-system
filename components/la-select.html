@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-select — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-select</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-select</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<style>
+  /* Page-scoped: let the floating panel escape the preview frame.
+     components.md:165 warns that an ancestor with overflow:hidden clips
+     the panel — .preview-frame is exactly that ancestor by default. */
+  .page-content-inner .preview-frame { overflow: visible; }
+  /* Reserve room below so an opened panel doesn't run into the next frame. */
+  .preview-frame--select { padding-bottom: 320px; }
+</style>
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-select</h1>
+  <p>Custom single-select combobox. Trigger chrome mirrors <code>la-input</code> (height, border, focus ring, error, label, hint) so a select sits naturally in a form row alongside inputs. Slotted <code>&lt;la-option&gt;</code> children carry the values; rich content (icons, multi-line) is allowed inside each option.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>A labelled trigger button with a chevron, plus a floating panel that holds the option list. The trigger is the focusable element when closed; opening moves focus into the active option.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — closed, with label and hint</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction" hint="Where the matter is filed." value="au">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+      <la-option value="sg">Singapore</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Label</td><td><code>&lt;label&gt;</code> (rendered when <code>label</code> set)</td><td>Form label. Includes a <code>*</code> mark when <code>required</code> is true.</td></tr>
+      <tr><td>Trigger</td><td><code>.trigger</code> button (<code>role="combobox"</code>)</td><td>Focusable, keyboard-driven. Toggles the panel on click. Mirrors <code>la-input</code>'s height, border, and focus ring.</td></tr>
+      <tr><td>Value text</td><td><code>.value</code> / <code>.value.placeholder</code></td><td>Selected option's label, or the placeholder copy when no value is set.</td></tr>
+      <tr><td>Caret</td><td><code>.caret</code> (<code>ph-caret-down</code>)</td><td>Chevron glyph. Rotates 180° when the panel is open.</td></tr>
+      <tr><td>Panel</td><td><code>.panel</code> (<code>role="listbox"</code>)</td><td>Floating container for the option list. Anchored to the trigger; flips above when there is more room above than below. Scrolls when its content exceeds 280px.</td></tr>
+      <tr><td>Options</td><td>default <code>&lt;slot&gt;</code></td><td>Receives light-DOM <code>&lt;la-option&gt;</code> children — see the partner section below.</td></tr>
+      <tr><td>Hint</td><td><code>.hint</code> (rendered when <code>hint</code> set)</td><td>Helper copy beneath the trigger. Switches to danger colour when <code>error</code> is true.</td></tr>
+    </tbody>
+  </table>
+  <p style="font-size:13px;color:var(--doc-text-3);margin-top:12px;">No exposed <code>part="…"</code> attributes — external <code>::part</code> styling is not supported. Theme via the documented tokens instead.</p>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below. Each control maps to a public property.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-label">label</label>
+      <input id="ctl-label" type="text" value="Jurisdiction">
+    </div>
+    <div class="control-group">
+      <label for="ctl-placeholder">placeholder</label>
+      <input id="ctl-placeholder" type="text" value="Select…">
+    </div>
+    <div class="control-group">
+      <label for="ctl-hint">hint</label>
+      <input id="ctl-hint" type="text" value="Where the matter is filed.">
+    </div>
+  </div>
+
+  <div class="controls-row">
+    <div class="control-group">
+      <label>value</label>
+      <div class="btn-group" data-control="value">
+        <button class="btn-toggle active" data-value="" type="button">(none)</button>
+        <button class="btn-toggle" data-value="uk" type="button">uk</button>
+        <button class="btn-toggle" data-value="au" type="button">au</button>
+        <button class="btn-toggle" data-value="us" type="button">us</button>
+        <button class="btn-toggle" data-value="sg" type="button">sg</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="controls-row">
+    <div class="control-group">
+      <label>required</label>
+      <div class="btn-group" data-control="required">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>disabled</label>
+      <div class="btn-group" data-control="disabled">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>error</label>
+      <div class="btn-group" data-control="error">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>open</label>
+      <div class="btn-group" data-control="open">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the controls above. The event log captures every <code>la-change</code> the component dispatches.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select id="sel-live">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+      <la-option value="sg">Singapore</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Event log — <code>la-change</code></div>
+  <div id="event-log" style="font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;background:var(--doc-surface);border:1px solid var(--doc-border-light);border-radius:8px;padding:12px;min-height:64px;max-height:160px;overflow:auto;color:var(--doc-text-2);"></div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Each state in isolation, plus a couple of context shots.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Default — placeholder, closed</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">With selected value</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction" value="au">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Required — label shows the asterisk</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction" required>
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Hint — helper copy beneath the trigger</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction" hint="Where the matter is filed.">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Error — danger border, hint switches to danger colour</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction" error hint="Pick a jurisdiction to continue.">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Disabled — non-interactive, opacity 0.4</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction" value="au" disabled>
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Long option list — panel scrolls past 280px</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction" id="sel-long">
+      <la-option value="ar">Argentina</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="br">Brazil</la-option>
+      <la-option value="ca">Canada</la-option>
+      <la-option value="de">Germany</la-option>
+      <la-option value="es">Spain</la-option>
+      <la-option value="fr">France</la-option>
+      <la-option value="hk">Hong Kong</la-option>
+      <la-option value="ie">Ireland</la-option>
+      <la-option value="in">India</la-option>
+      <la-option value="it">Italy</la-option>
+      <la-option value="jp">Japan</la-option>
+      <la-option value="mx">Mexico</la-option>
+      <la-option value="nl">Netherlands</la-option>
+      <la-option value="nz">New Zealand</la-option>
+      <la-option value="sg">Singapore</la-option>
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="us">United States</la-option>
+      <la-option value="za">South Africa</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Disabled option — skipped during keyboard navigation, click is a no-op</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-select label="Jurisdiction">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au" disabled>Australia (not available)</la-option>
+      <la-option value="us">United States</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Open — panel visible, listbox shape</div>
+  <div class="preview-frame preview-frame--select" style="padding:32px;max-width:420px;">
+    <la-select id="sel-open" label="Jurisdiction" value="au">
+      <la-option value="uk">United Kingdom</la-option>
+      <la-option value="au">Australia</la-option>
+      <la-option value="us">United States</la-option>
+      <la-option value="sg">Singapore</la-option>
+    </la-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">In a form row — alongside <code>la-input</code></div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-page);">
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;max-width:640px;margin:0 auto;">
+      <la-input label="Matter name" value="Acme — share-purchase agreement"></la-input>
+      <la-select label="Jurisdiction" value="au">
+        <la-option value="uk">United Kingdom</la-option>
+        <la-option value="au">Australia</la-option>
+        <la-option value="us">United States</la-option>
+        <la-option value="sg">Singapore</la-option>
+      </la-select>
+    </div>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-select</h2>
+    <p>Custom single-select combobox. Trigger chrome mirrors la-input (height, border, focus ring, error, label, hint) so a select sits naturally in a form row alongside inputs. Slotted la-option children carry the values; rich content is allowed inside each option.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>_id</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="default">`la-select-${Math.random().toString(36).slice(2, 8)}`</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>name</td>
+          <td><span class="default">name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>value</td>
+          <td><span class="default">value</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>placeholder</td>
+          <td><span class="default">placeholder</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Select…&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>hint</td>
+          <td><span class="default">hint</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>required</td>
+          <td><span class="default">required</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_origin</td>
+          <td>—</td>
+          <td><span class="type">Origin</span></td>
+          <td><span class="default">&#39;top-left&#39;</span></td>
+          <td>'top-left' = panel below trigger, scaling from top-left.
+'bottom-left' = panel above trigger (flipped), scaling from bottom-left.</td>
+        </tr>
+      
+        <tr>
+          <td>_phase</td>
+          <td>—</td>
+          <td><span class="type">&#39;&#39; | &#39;is-open&#39; | &#39;is-closing&#39;</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Animation phase — drives .is-open / .is-closing class on the panel.</td>
+        </tr>
+      
+        <tr>
+          <td>_closeTimer</td>
+          <td>—</td>
+          <td><span class="type">number | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_triggerId</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_panelId</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onKeydown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onTriggerClick</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onPanelClick</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onDocumentMousedown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onDocumentScroll</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onSlotChange</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-divider"></div>
+
+<!-- CSS tokens -->
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <p style="margin-bottom:16px;">All values live on the host as CSS custom properties from <code>tokens.ts</code>. The trigger reuses the input chrome tokens; the panel uses the elevation and motion tokens.</p>
+
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Trigger chrome</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-color-bg</td><td>Trigger background</td></tr>
+          <tr><td>--la-color-border</td><td>Trigger resting border</td></tr>
+          <tr><td>--la-color-border-focus</td><td>Trigger focus border</td></tr>
+          <tr><td>--la-color-border-danger</td><td>Trigger border in error state</td></tr>
+          <tr><td>--la-input-shadow-focus</td><td>Trigger focus ring (paired with focus border)</td></tr>
+          <tr><td>--la-color-text</td><td>Label, value text</td></tr>
+          <tr><td>--la-color-text-muted</td><td>Caret colour, hint colour</td></tr>
+          <tr><td>--la-color-text-disabled</td><td>Placeholder text</td></tr>
+          <tr><td>--la-color-danger</td><td>Required asterisk</td></tr>
+          <tr><td>--la-color-danger-text</td><td>Hint colour in error state</td></tr>
+          <tr><td>--la-radius-md</td><td>Trigger corner radius</td></tr>
+          <tr><td>--la-space-2xs / -xs / -sm / -md</td><td>Internal spacing (label gap, trigger padding, hint gap)</td></tr>
+          <tr><td>--la-font-size-base / -sm</td><td>Trigger text / hint text</td></tr>
+          <tr><td>--la-font-weight-normal</td><td>Label and trigger text weight</td></tr>
+          <tr><td>--la-line-height</td><td>Trigger line-height</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Panel + motion</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-color-bg</td><td>Panel background</td></tr>
+          <tr><td>--la-shadow-popover</td><td>Panel elevation — four-layer stack (hairline outline, contact, mid lift, ambient). Replaces the border.</td></tr>
+          <tr><td>--la-radius-md</td><td>Panel corner radius</td></tr>
+          <tr><td>--la-space-xs</td><td>Panel inner padding, gap to trigger</td></tr>
+          <tr><td>--dur-fast</td><td>Trigger / caret transitions, panel close</td></tr>
+          <tr><td>--dur-modal</td><td>Panel open</td></tr>
+          <tr><td>--ease</td><td>Trigger / caret easing</td></tr>
+          <tr><td>--ease-spring-sm</td><td>Panel open / close easing</td></tr>
+        </tbody>
+      </table>
+      <p style="margin-bottom:8px;margin-top:16px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Options (la-option)</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-color-bg-muted</td><td>Option hover / focus background</td></tr>
+          <tr><td>--la-color-bg-active</td><td>Selected option background</td></tr>
+          <tr><td>--la-color-border-focus</td><td>Focus-visible outline colour</td></tr>
+          <tr><td>--la-radius-sm</td><td>Option row corner radius</td></tr>
+          <tr><td>--la-space-sm / -md</td><td>Option row padding</td></tr>
+          <tr><td>--la-focus-ring-width / -offset</td><td>Focus-visible outline geometry</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <p style="margin-top:16px;font-size:13px;color:var(--doc-text-3);">The panel duplicates the <code>.t-dropdown</code> motion pattern from <a href="../../motion.css"><code>motion.css</code></a> inside the shadow root — page-scope CSS does not penetrate shadow DOM, so the rules are mirrored using the same motion tokens. Reduced-motion users see no panel transition.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Usage -->
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — listen for <code>la-change</code></p>
+      <div class="docs-code"><span class="kw">&lt;la-select</span> <span class="at">label</span>=<span class="str">"Jurisdiction"</span> <span class="at">id</span>=<span class="str">"jur"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-option</span> <span class="at">value</span>=<span class="str">"uk"</span><span class="kw">&gt;</span>United Kingdom<span class="kw">&lt;/la-option&gt;</span>
+  <span class="kw">&lt;la-option</span> <span class="at">value</span>=<span class="str">"au"</span><span class="kw">&gt;</span>Australia<span class="kw">&lt;/la-option&gt;</span>
+  <span class="kw">&lt;la-option</span> <span class="at">value</span>=<span class="str">"us"</span><span class="kw">&gt;</span>United States<span class="kw">&lt;/la-option&gt;</span>
+<span class="kw">&lt;/la-select&gt;</span>
+
+<span class="kw">&lt;script&gt;</span>
+  document.getElementById(<span class="str">'jur'</span>)
+    .addEventListener(<span class="str">'la-change'</span>, (e) =&gt; {
+      <span class="cm">// e.detail.value is the picked option's value</span>
+      console.log(<span class="str">'jurisdiction:'</span>, e.detail.value);
+    });
+<span class="kw">&lt;/script&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Controlled — consumer owns the value</p>
+      <div class="docs-code"><span class="kw">const</span> sel = document.getElementById(<span class="str">'jur'</span>);
+sel.value = state.jurisdiction;
+
+sel.addEventListener(<span class="str">'la-change'</span>, (e) =&gt; {
+  <span class="cm">// Update state, then assign back — keeps value the source of truth</span>
+  state.jurisdiction = e.detail.value;
+  sel.value = state.jurisdiction;
+});</div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">In a form row — beside <code>la-input</code></p>
+      <div class="docs-code"><span class="kw">&lt;div</span> <span class="at">style</span>=<span class="str">"display:grid;grid-template-columns:1fr 1fr;gap:16px;"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-input</span> <span class="at">label</span>=<span class="str">"Matter name"</span><span class="kw">&gt;&lt;/la-input&gt;</span>
+  <span class="kw">&lt;la-select</span> <span class="at">label</span>=<span class="str">"Jurisdiction"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;la-option</span> <span class="at">value</span>=<span class="str">"uk"</span><span class="kw">&gt;</span>United Kingdom<span class="kw">&lt;/la-option&gt;</span>
+    <span class="kw">&lt;la-option</span> <span class="at">value</span>=<span class="str">"au"</span><span class="kw">&gt;</span>Australia<span class="kw">&lt;/la-option&gt;</span>
+  <span class="kw">&lt;/la-select&gt;</span>
+<span class="kw">&lt;/div&gt;</span></div>
+      <p style="font-size:12px;color:#777;margin-top:6px;">Trigger height matches <code>la-input</code> — they sit on the same baseline.</p>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Partner: la-option -->
+<div id="la-option" class="docs-section">
+  <h3>Partner: la-option</h3>
+  <p>Slotted child of <code>la-select</code>. The host element is the focusable target — <code>la-select</code> uses managed focus (rather than <code>aria-activedescendant</code>) so the active option is also the DOM-focused element. <code>tabindex=-1</code> keeps options out of the document tab order; <code>la-select</code> calls <code>.focus()</code> programmatically as the user navigates.</p>
+
+  <p style="margin-top:16px;margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Properties</p>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>value</td>
+        <td><span class="default">value</span> (reflected)</td>
+        <td><span class="type">string</span></td>
+        <td><span class="default">""</span></td>
+        <td>Required — written into <code>la-select.value</code> when this option is chosen.</td>
+      </tr>
+      <tr>
+        <td>disabled</td>
+        <td><span class="default">disabled</span> (reflected)</td>
+        <td><span class="type">boolean</span></td>
+        <td><span class="default">false</span></td>
+        <td>Skipped during keyboard navigation; click is a no-op.</td>
+      </tr>
+      <tr>
+        <td>selected</td>
+        <td><span class="default">selected</span> (reflected)</td>
+        <td><span class="type">boolean</span></td>
+        <td><span class="default">false</span></td>
+        <td>Reflected by <code>la-select</code> when <code>value</code> matches. Do not set directly.</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:16px;margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Slot</p>
+  <table class="docs-table">
+    <thead><tr><th>Slot</th><th>Accepts</th><th>Notes</th></tr></thead>
+    <tbody>
+      <tr><td>(default)</td><td>Inline content</td><td>Plain text or rich content (icons, multi-line). The plain-text fallback is used for type-ahead matching via <code>textContent</code>.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="docs-note" style="margin-top:16px;"><strong>Events.</strong> <code>la-option</code> emits no events of its own. Selection always travels through the parent <code>la-select</code>'s <code>la-change</code>.</div>
+
+  <div class="docs-note" style="margin-top:8px;"><strong>Selection glyph.</strong> The check inline with the option label is <code>ph-check</code> (plain check, regular weight). Canon per <a href="../iconography.html">iconography.md § Form selection</a> — distinct from <code>ph-check-circle</code> which is reserved for the <em>success</em> status. See <a href="https://github.com/lawadvisor/lai-design-new/blob/main/decisions/59-listbox-selected-icon.md">decision 59</a>.</div>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Notes -->
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Why custom, not native <code>&lt;select&gt;</code>.</strong> Native renders the open dropdown via the OS, which means we can't style options, hover, selected state, or icons inside the panel — every product surface would render differently across macOS / Windows / Linux. Custom is more code but gives us full token control and a consistent feel.</div>
+
+    <div class="docs-note"><strong>Keyboard.</strong> ↑/↓ cycle through options, Home / End jump to first / last enabled, Enter or Space selects, Esc closes (focus returns to the trigger), Tab closes-and-progresses to the next focusable element. Type a printable character to jump to the next option starting with that letter — single-character match only, no buffer in v1.</div>
+
+    <div class="docs-note"><strong>Positioning.</strong> Panel floats below by default. When there's not enough space below (e.g. select sits near the viewport bottom), it flips above. Panel uses <code>position: absolute</code> inside the host's shadow DOM — an ancestor with <code>overflow: hidden</code> will clip it. v2 candidate: switch to the Popover API for top-layer rendering when an overflow-clip case appears.</div>
+
+    <div class="docs-note"><strong>Out of scope (deferred to v2 with a solve).</strong> Multi-select, search input inside the panel, <code>ElementInternals</code> form-association.</div>
+
+    <div class="docs-note"><strong>No exposed <code>part</code>.</strong> The trigger and panel are not addressable via <code>::part</code>. Theme by overriding the documented tokens on the host or an ancestor.</div>
+
+    <div class="docs-note"><strong>la-select vs filter-menu.</strong> Reach for <code>la-select</code> when picking <em>one</em> value in a form row. Reach for a filter-menu (overlay of <code>la-checkbox</code>) when picking multiple values from a toolbar — see the filter-menu snapshot inside <code>la-data-table</code>.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    document.addEventListener('DOMContentLoaded', function () {
+      const sel = document.getElementById('sel-live');
+      const log = document.getElementById('event-log');
+
+      // Pre-open the snapshot that demos the panel
+      const selOpen = document.getElementById('sel-open');
+      if (selOpen) {
+        // Defer so the component upgrades and lays out first
+        requestAnimationFrame(() => { selOpen.open = true; });
+      }
+
+      // Text controls
+      const textBindings = [
+        ['ctl-label', 'label'],
+        ['ctl-placeholder', 'placeholder'],
+        ['ctl-hint', 'hint'],
+      ];
+      textBindings.forEach(([inputId, prop]) => {
+        const input = document.getElementById(inputId);
+        if (!input) return;
+        const apply = () => { sel[prop] = input.value; };
+        input.addEventListener('input', apply);
+        apply();
+      });
+
+      // Chip group — value
+      const valueGroup = document.querySelector('[data-control="value"]');
+      if (valueGroup) {
+        valueGroup.addEventListener('click', (e) => {
+          const btn = e.target.closest('.btn-toggle');
+          if (!btn) return;
+          valueGroup.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          sel.value = btn.dataset.value || '';
+        });
+      }
+
+      // Boolean toggles
+      ['required', 'disabled', 'error', 'open'].forEach((prop) => {
+        const group = document.querySelector(`[data-control="${prop}"]`);
+        if (!group) return;
+        group.addEventListener('click', (e) => {
+          const btn = e.target.closest('.btn-toggle');
+          if (!btn) return;
+          group.querySelectorAll('.btn-toggle').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+          sel[prop] = btn.dataset.bool === 'true';
+        });
+      });
+
+      // Event log
+      sel.addEventListener('la-change', (e) => {
+        const time = new Date().toLocaleTimeString();
+        const line = document.createElement('div');
+        line.textContent = `[${time}]  la-change  →  { value: "${e.detail.value}" }`;
+        log.prepend(line);
+      });
+    });
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elements — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<link rel="stylesheet" href="../la-tokens-root.css">
+<link rel="stylesheet" href="../la-base-root.css">
+<style>
+  /* Local — eyebrow tag for priority and usage note above each element heading */
+  .priority-eyebrow {
+    font-size: 12px;
+    color: var(--doc-text-3);
+    font-weight: 400;
+    margin: 0 0 6px;
+  }
+  .priority-eyebrow strong { color: var(--doc-text); font-weight: 600; }
+
+  .sub-hero h1 {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--doc-text);
+    letter-spacing: -0.3px;
+    margin-bottom: 10px;
+  }
+  .sub-hero p {
+    font-size: 15px;
+    color: var(--doc-text-2);
+    max-width: 680px;
+    line-height: 1.6;
+  }
+  .sub-hero-crumb {
+    font-size: 12px;
+    color: var(--doc-text-3);
+    margin-bottom: 12px;
+  }
+  .sub-hero-crumb a { color: var(--doc-text-3); }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Elements</h3>
+
+<div class="docs-nav-group">
+<a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Essential</span>
+<a href="#anchors" class="docs-nav-item" data-nav-id="anchors">Anchors</a>
+<a href="#headings" class="docs-nav-item" data-nav-id="headings">Headings</a>
+<a href="#lists" class="docs-nav-item" data-nav-id="lists">Lists</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Common</span>
+<a href="#code" class="docs-nav-item" data-nav-id="code">Code</a>
+<a href="#small" class="docs-nav-item" data-nav-id="small">Fine print</a>
+<a href="#hr" class="docs-nav-item" data-nav-id="hr">Divider</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Useful</span>
+<a href="#deflist" class="docs-nav-item" data-nav-id="deflist">Definition list</a>
+<a href="#blockquote" class="docs-nav-item" data-nav-id="blockquote">Blockquote</a>
+<a href="#abbr" class="docs-nav-item" data-nav-id="abbr">Abbreviation</a>
+<a href="#mark" class="docs-nav-item" data-nav-id="mark">Highlight</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Niche</span>
+<a href="#kbd" class="docs-nav-item" data-nav-id="kbd">Keyboard</a>
+<a href="#supsub" class="docs-nav-item" data-nav-id="supsub">Sup &amp; sub</a>
+</div>
+
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../foundations/">← All foundations</a>
+<a class="docs-nav-item" href="../la-base-root.css">la-base-root.css ↗</a>
+<a class="docs-nav-item" href="../la-tokens-root.css">la-tokens-root.css ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero">
+<div class="sub-hero-crumb">
+<a href="../foundations/">Foundations</a> · Elements
+</div>
+</section>
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+<h1>Elements</h1>
+<p>The system styles a small set of native HTML elements directly so that plain markup looks right by default — no Lit component needed. These rules live in <a href="../la-base-root.css"><code>la-base-root.css</code></a> and apply globally wherever the file is loaded.</p>
+<p style="font-size:13px;color:var(--doc-text-3);margin-top:8px;">If an element needs interactivity, composition, or variants exposed as attributes, build a Lit primitive instead. Elements documented here are <strong>pure visual defaults</strong> — semantic markup wearing the system's voice.</p>
+<p style="font-size:13px;color:var(--doc-text-3);margin-top:8px;">Sections are ordered by how often each element appears in real product surfaces, from <strong>Essential</strong> (every page has them) down to <strong>Niche</strong> (specialised contexts only). Each section opens with a short eyebrow tag indicating its priority and typical use.</p>
+</div>
+
+<!-- ESSENTIAL -->
+
+<!-- Anchors -->
+<div id="anchors" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Essential</strong> · every page has links</p>
+<h1>Anchors &lt;a&gt;</h1>
+<p>Native links, styled by default. Three resting tones — the bare element, the <code>.link-muted</code> modifier for tertiary use, and <code>.link-inline</code> for links sitting mid-sentence.</p>
+<p style="font-size:13px;color:var(--doc-text-3);margin-top:8px;">Always underlined. Text colour stays muted at rest; only the line colour shifts on hover. The line is the affordance — colour is just the tone.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Default — &lt;a href="…"&gt;</div>
+<div class="preview-frame" style="padding:32px;font-size:14px;">
+<a href="#">View details</a>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Muted — &lt;a class="link-muted"&gt;</div>
+<div class="preview-frame" style="padding:32px;font-size:14px;">
+<a href="#" class="link-muted">Manage settings</a>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Inline — &lt;a class="link-inline"&gt; flowing in body copy</div>
+<div class="preview-frame" style="padding:32px;font-size:14px;line-height:1.6;color:var(--doc-text-2);flex-direction:column;align-items:stretch;gap:0;overflow:visible;">
+<p style="margin:0;">The shareholders' agreement was signed on 12 March 2026 following the board's unanimous approval, with both parties confirming receipt of the executed copies the same afternoon. You can open the <la-tooltip tip="Chronological log of every signature, edit, and access event on this document." appearance="light" position="top"><a href="#" class="link-inline">audit trail</a></la-tooltip> for the full sequence of signatures and timestamps, or jump into the <a href="#" class="link-inline">deal room</a> for the underlying due-diligence material. If anything in the <a href="#" class="link-inline">disclosure schedule</a> needs revision, raise it with the legal team before the post-completion review on Friday.</p>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Three resting tones — at a glance</div>
+<table class="docs-table">
+<thead><tr><th>Treatment</th><th>Text colour</th><th>Line colour (rest)</th><th>Line colour (hover)</th><th>Use</th></tr></thead>
+<tbody>
+<tr>
+<td><code>&lt;a&gt;</code></td>
+<td><code>--la-color-text-secondary</code></td>
+<td><code>--la-color-border</code></td>
+<td><code>--la-color-primary</code></td>
+<td>Standalone CTAs and navigation — "View details", "Read the full doc"</td>
+</tr>
+<tr>
+<td><code>.link-muted</code></td>
+<td><code>--la-color-text-muted</code></td>
+<td><code>--la-color-border</code></td>
+<td><code>--la-color-text</code></td>
+<td>Tertiary links inside dense rows or quiet navigation</td>
+</tr>
+<tr>
+<td><code>.link-inline</code></td>
+<td><code>currentColor</code></td>
+<td><code>currentColor</code></td>
+<td><code>--la-color-primary</code></td>
+<td>Links inside paragraph copy — inherits surrounding text colour and size</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+<div class="docs-note" style="margin-top:8px;"><strong>Behavioural extras (external indicator, button fallback, disabled state) are not in scope here.</strong> Native <code>&lt;a&gt;</code> covers most uses. For external links, add <code>target="_blank" rel="noopener noreferrer"</code> by hand.</div>
+
+<!-- Headings -->
+<div id="headings" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Essential</strong> · structures every page</p>
+<h1>Headings &lt;h1&gt;–&lt;h6&gt;</h1>
+<p>Baseline scale tied to <code>--la-font-size-*</code>. Weight is always 600 (semibold), never 700 — per CLAUDE.md typography rules. Existing per-page heading styles win on specificity, so this only kicks in for unscoped content.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;flex-direction:column;align-items:flex-start;gap:0;">
+<h1>The quick brown fox — h1, 24px / 600</h1>
+<h2>The quick brown fox — h2, 20px / 600</h2>
+<h3>The quick brown fox — h3, 18px / 600</h3>
+<h4>The quick brown fox — h4, 16px / 600</h4>
+<h5>The quick brown fox — h5, 14px / 600</h5>
+<h6>The quick brown fox — h6, 13px / 600</h6>
+</div>
+</div>
+
+<!-- Lists -->
+<div id="lists" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Essential</strong> · any long-form content</p>
+<h1>Lists &lt;ul&gt; / &lt;ol&gt; / &lt;li&gt;</h1>
+<p>Standard indent, comfortable line-height, hairline gap between items. Bullets and numbers stay native — no custom markers.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;flex-direction:column;align-items:stretch;gap:var(--la-space-lg);font-size:14px;color:var(--doc-text-2);">
+<ul>
+<li>Scout before you build</li>
+<li>Read real files for real tokens</li>
+<li>Stop at every alignment point</li>
+</ul>
+<ol>
+<li>Resolve the subject and context</li>
+<li>Read the source in full</li>
+<li>Propose the smallest plan that solves the problem</li>
+</ol>
+</div>
+</div>
+
+<!-- COMMON -->
+
+<!-- Inline code -->
+<div id="code" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Common</strong> · technical docs, tooltips, references</p>
+<h1>Inline code &lt;code&gt;</h1>
+<p>Monospace, subtle muted background, tight horizontal padding. Use for inline references to props, files, tokens, and short snippets.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Short — single sentence with a few references</div>
+<div class="preview-frame" style="padding:20px 24px;font-size:14px;line-height:1.5;color:var(--doc-text-2);">
+Reference <code>--la-color-primary</code> in your component, or import the bundle from <code>dev/bundle.js</code>. The <code>render()</code> method must include <code>${iconStyles}</code> if you use Phosphor icons.
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Elaborate — code references woven through walkthrough copy</div>
+<div class="preview-frame" style="padding:24px 28px;font-size:14px;line-height:1.6;color:var(--doc-text-2);flex-direction:column;align-items:stretch;gap:0;">
+<p style="margin:0 0 12px;">A new Lit component starts with two imports — <code>LitElement</code> from <code>lit</code> and <code>customElement</code> from <code>lit/decorators.js</code>. Decorate the class with <code>@customElement('la-name')</code>, declare reactive properties via <code>@property()</code>, and pull <code>tokens</code> from <code>src/styles/tokens.js</code> into the static <code>styles</code> array so design tokens reach the shadow root.</p>
+<p style="margin:0 0 12px;">Reference tokens through CSS custom properties — <code>var(--la-color-primary)</code> for primary action, <code>var(--la-space-md)</code> for spacing, <code>var(--la-radius-md)</code> for corners. Never hardcode hex codes or pixel values: if a token isn't on the scale, that's a design conversation in <code>tokens.ts</code>, not a one-off override.</p>
+<p style="margin:0;">Phosphor icons need two pieces inside shadow DOM. Include <code>${iconStyles}</code> at the top of <code>render()</code> so the <code>@font-face</code> rules reach the shadow tree, then use <code>&lt;i class="ph ph-file"&gt;</code> for each glyph. Outline weight (<code>ph</code>) for the resting state, fill (<code>ph-fill</code>) for active or selected — never both at once.</p>
+</div>
+</div>
+
+<!-- Small -->
+<div id="small" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Common</strong> · timestamps, captions, meta</p>
+<h1>Fine print &lt;small&gt;</h1>
+<p>One step down in size, muted colour. Use for captions, legal text, timestamps inside denser rows.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+Last updated <small>26 April 2026, 14:32 BST</small> — auto-saved.
+</div>
+</div>
+
+<!-- HR -->
+<div id="hr" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Common</strong> · section breaks in long-form content</p>
+<h1>Divider &lt;hr&gt;</h1>
+<p>Hairline rule using <code>--la-color-border-light</code>. The quietest separator — use it to break content into readable sections, never as decoration.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;flex-direction:column;align-items:stretch;gap:0;font-size:14px;color:var(--doc-text-2);">
+<p style="margin:0 0 var(--la-space-md);">The shareholders' agreement was signed on 12 March.</p>
+<hr>
+<p style="margin:var(--la-space-md) 0 0;">The audit trail is available in the deal room.</p>
+</div>
+</div>
+
+<!-- USEFUL -->
+
+<!-- Definition list -->
+<div id="deflist" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Useful</strong> · glossaries, term-definition pairs</p>
+<h1>Definition list &lt;dl&gt; / &lt;dt&gt; / &lt;dd&gt;</h1>
+<p>Term in semibold, definition in muted secondary. Use for term-definition pairs, glossaries, or labelled key-value rows where a table is overkill.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;flex-direction:column;align-items:stretch;gap:0;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+<dl>
+<dt>SPV</dt>
+<dd>Special Purpose Vehicle — a subsidiary set up to isolate financial risk on a single transaction.</dd>
+<dt>NDA</dt>
+<dd>Non-Disclosure Agreement — bilateral or unilateral confidentiality contract signed before sharing sensitive material.</dd>
+</dl>
+</div>
+</div>
+
+<!-- Blockquote -->
+<div id="blockquote" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Useful</strong> · direct quotes from documents or people</p>
+<h1>Blockquote &lt;blockquote&gt;</h1>
+<p>Left rule plus muted secondary text. Use for direct quotes from a person, document, or external source — keep it short and attributed.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In isolation</div>
+<div class="preview-frame" style="padding:32px;flex-direction:column;align-items:stretch;gap:0;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+<blockquote>The system runs on two core workflows, both codified as slash commands. <code>/build</code> takes a product request through scout → align → build with hard stops for user approval.</blockquote>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In context — surrounded by body copy</div>
+<div class="preview-frame" style="padding:24px 28px;flex-direction:column;align-items:stretch;gap:0;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+<p style="margin:0 0 12px;">The board met on 24 April to review the proposed workflow update. The minutes captured a clear statement from the chair, who had spent the morning reviewing every component handoff from the previous quarter:</p>
+<blockquote>Every component request now goes through the same scout-then-align flow before a single line of code is written. The cost of pausing to confirm is low; the cost of an unwanted change is high.</blockquote>
+<p style="margin:12px 0 0;">The board agreed unanimously. Legal will publish the formal policy update by Friday, with a follow-up review of the <a href="#" class="link-inline">design-language docs</a> scheduled for the end of next sprint.</p>
+</div>
+</div>
+
+<!-- Abbr -->
+<div id="abbr" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Useful</strong> · first-use of acronyms or jargon</p>
+<h1>Abbreviation &lt;abbr&gt;</h1>
+<p>Dotted underline, native browser tooltip on hover via <code>title</code>. Use for the first occurrence of acronyms or jargon when an explanation aids understanding.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+The <abbr title="Special Purpose Vehicle">SPV</abbr> entered into a <abbr title="Memorandum of Understanding">MoU</abbr> with the parent company on 14 March.
+</div>
+</div>
+
+<!-- Mark -->
+<div id="mark" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Useful</strong> · search-result matches, contextual emphasis</p>
+<h1>Highlight &lt;mark&gt;</h1>
+<p>Soft yellow background using <code>--la-color-proactive-bg</code> with <code>--la-color-proactive-text</code>. Use for search-result matches and contextual emphasis — never decoration.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+The shareholders' agreement was <mark>signed on 12 March</mark> following the board's <mark>unanimous approval</mark>.
+</div>
+</div>
+
+<!-- NICHE -->
+
+<!-- Keyboard -->
+<div id="kbd" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Niche</strong> · command palettes, keyboard-shortcut hints</p>
+<h1>Keyboard chord &lt;kbd&gt;</h1>
+<p>Soft chip in muted bg with hairline border. Inherits the body font (Inter) so the command glyph (⌘) aligns cleanly with adjacent letters; tabular numerals keep digits equal-width. Travels with text and surfaces alongside actions — buttons, menus, search inputs.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In a sentence</div>
+<div class="preview-frame" style="padding:32px;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+Press <kbd>⌘</kbd> + <kbd>K</kbd> to open the command palette, <kbd>Esc</kbd> to close, or <kbd>Enter</kbd> to select.
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In a button — trailing shortcut</div>
+<div class="preview-frame" style="padding:32px;">
+<la-button variant="secondary">Save <kbd>⌘S</kbd></la-button>
+<la-button variant="primary">Send for signature <kbd>⌘↵</kbd></la-button>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In a menu — command palette pattern</div>
+<div class="preview-frame" style="padding:32px;">
+<div style="background:var(--la-color-bg);border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-md);padding:var(--la-space-xs);width:300px;font-size:14px;color:var(--la-color-text);">
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--la-space-sm) var(--la-space-md);border-radius:var(--la-radius-md);background:var(--la-color-bg-muted);">
+<span>Search documents</span>
+<kbd>⌘K</kbd>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--la-space-sm) var(--la-space-md);border-radius:var(--la-radius-md);">
+<span>Open settings</span>
+<kbd>⌘,</kbd>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--la-space-sm) var(--la-space-md);border-radius:var(--la-radius-md);">
+<span>Toggle sidebar</span>
+<kbd>⌘B</kbd>
+</div>
+<div style="display:flex;align-items:center;justify-content:space-between;padding:var(--la-space-sm) var(--la-space-md);border-radius:var(--la-radius-md);">
+<span>New document</span>
+<kbd>⌘N</kbd>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">In an input — search box hint</div>
+<div class="preview-frame" style="padding:32px;">
+<div style="display:flex;align-items:center;width:320px;background:var(--la-color-bg);border:1px solid var(--la-color-border);border-radius:var(--la-radius-md);padding:var(--la-space-sm) var(--la-space-md);gap:var(--la-space-sm);">
+<i class="ph ph-magnifying-glass" style="color:var(--la-color-text-faint);font-size:16px;" aria-hidden="true"></i>
+<input type="text" placeholder="Search documents…" style="flex:1;border:none;outline:none;font-size:14px;font-family:inherit;background:transparent;color:var(--la-color-text);">
+<kbd>⌘K</kbd>
+</div>
+</div>
+</div>
+
+<!-- Sup / Sub -->
+<div id="supsub" class="preview-header" style="margin-top:8px;">
+<p class="priority-eyebrow"><strong>Niche</strong> · footnote markers, formula notation</p>
+<h1>Superscript &amp; subscript &lt;sup&gt; / &lt;sub&gt;</h1>
+<p>Standard typographic positioning that doesn't break the surrounding line-height. Use sparingly — footnote markers, formula notation.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="padding:32px;font-size:14px;line-height:1.6;color:var(--doc-text-2);">
+See clause 4.2<sup>1</sup> for the breach definition. The audit reference is RFC<sub>2024</sub>.
+</div>
+</div>
+
+<div class="docs-note" style="margin-top:8px;"><strong>Rule of thumb for what belongs here.</strong> Native semantic element + works with no JS + work is purely visual → drop it into <code>la-base-root.css</code> and add a section above. As soon as it needs interactivity, composition, or variants exposed as attributes, build a Lit primitive instead.</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

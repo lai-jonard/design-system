@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-modal — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-modal</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-modal</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-modal</h1>
+<p>Dialog overlay for confirmations, forms, and multi-step flows. Blocks the rest of the page with a backdrop and takes focus until dismissed. Closes on X button or backdrop click.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>A centered panel on a backdrop. Three regions: header, body, footer</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:flex; gap:32px; align-items:center; justify-content:center; padding:32px 24px; flex-wrap:wrap;">
+<!-- Mockup of the panel (not a live modal) -->
+<div style="width:100%; max-width:360px; background:#fff; border:1px solid #ECEEF5; border-radius:24px; padding:20px; box-shadow:0 16px 48px rgba(0,0,0,0.08);">
+<div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; margin-bottom:16px;">
+<div style="display:flex; flex-direction:column; gap:6px; min-width:0;">
+<div style="font-size:18px; font-weight:600; color:#1E262B; line-height:1.3;">Heading</div>
+<div style="font-size:13px; color:#4B5563; line-height:1.5;">Optional description — adds context below the heading.</div>
+</div>
+<button style="width:28px; height:28px; display:flex; align-items:center; justify-content:center; border:none; background:transparent; color:#6B7280; font-size:14px; padding:0; cursor:default; border-radius:6px;"><i class="ph ph-x"></i></button>
+</div>
+<div style="font-size:13px; color:#4B5563; line-height:1.5;">Body content — default slot</div>
+<div style="display:flex; justify-content:flex-end; gap:8px; margin-top:20px; padding-top:14px; border-top:1px solid #ECEEF5; font-size:12px; color:#6B7280;">Footer actions — named slot</div>
+</div>
+<ol style="list-style: decimal inside; padding:0; margin:0; font-size:13px; line-height:1.7; color:#374151; max-width:300px;">
+<li><strong>Heading</strong> — the <code style="font-family:monospace;font-size:11px;">heading</code> prop, semibold 18px.</li>
+<li><strong>Description</strong> — optional <code style="font-family:monospace;font-size:11px;">description</code> prop below the heading. Sized and coloured like body copy. Hidden entirely when empty.</li>
+<li><strong>Close button</strong> — <code style="font-family:monospace;font-size:11px;">la-icon-button size="sm"</code> with <code style="font-family:monospace;font-size:11px;">ph-x</code>. Dismisses the modal.</li>
+<li><strong>Body</strong> — the default slot. Any content: text, forms, lists, nested components. Scrolls internally when content exceeds available height.</li>
+<li><strong>Footer</strong> — the <code style="font-family:monospace;font-size:11px;">footer</code> named slot. Auto-hidden when empty via <code style="font-family:monospace;font-size:11px;">:empty</code>. Separator above only shows when the body is scrolling.</li>
+</ol>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Heading</label>
+<input id="ctrl-heading" type="text" value="Remove employee?"/>
+</div>
+<div class="control-group">
+<label>Description</label>
+<input id="ctrl-description" placeholder="Optional subtext below the heading" type="text" value=""/>
+</div>
+<div class="control-group">
+<label>Size</label>
+<div class="btn-group">
+<button class="btn-toggle" data-size="sm">sm</button>
+<button class="btn-toggle active" data-size="default">default</button>
+<button class="btn-toggle" data-size="lg">lg</button>
+</div>
+</div>
+<div class="control-group">
+<label>Action</label>
+<div class="btn-group">
+<button class="btn-toggle" id="open-live-modal">Open modal</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" style="min-height:80px; padding:24px; justify-content:center;">
+<span style="font-size:12px; color:#6B7280;">Click "Open modal" in the controls above to trigger the live instance.</span>
+</div>
+</div>
+<div class="preview-group" style="margin-top:-24px;">
+<div class="preview-label">Event log — <code style="font-family:monospace;font-size:11px;">close</code></div>
+<div class="preview-frame" id="event-log" style="min-height:48px;padding:14px 16px;font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px;color:#6B7280;flex-direction:column;align-items:flex-start;gap:4px;"></div>
+</div>
+
+<la-modal heading="Remove employee?" id="live-modal">
+<p style="font-size:13px;color:#4B5563;line-height:1.5;margin:0;">This will remove John Smith from the employment list. Any associated documents will remain but won't be linked. This can't be undone.</p>
+<div slot="footer">
+<la-button onclick="document.getElementById('live-modal').open=false" variant="secondary">Cancel</la-button>
+<la-button variant="danger">Remove employee</la-button>
+</div>
+</la-modal>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Three pre-configured modal instances. Click a trigger to open</p>
+</div>
+<div class="preview-group">
+<div class="preview-label">Configured instances — confirmation, form, large, long content</div>
+<div class="preview-frame" style="gap:12px; padding:32px 24px; justify-content:center; flex-wrap:wrap;">
+<la-button onclick="document.getElementById('snap-sm').open=true" variant="secondary">Open small (sm)</la-button>
+<la-button onclick="document.getElementById('snap-confirm').open=true" variant="secondary">Open confirmation</la-button>
+<la-button onclick="document.getElementById('snap-form').open=true" variant="secondary">Open form modal</la-button>
+<la-button onclick="document.getElementById('snap-large').open=true" variant="secondary">Open large modal</la-button>
+<la-button onclick="document.getElementById('snap-long').open=true" variant="secondary">Open long content</la-button>
+</div>
+</div>
+
+<la-modal heading="Share DD Pack" id="snap-sm" size="sm">
+<p style="font-size:13px;color:#4B5563;line-height:1.5;margin:0;">Use <code>size="sm"</code> (max-width 440px) for focused confirmations and short single-purpose flows — share actions, quick confirmations, wizard steps — where the default 560px feels wide for the content.</p>
+<div slot="footer">
+<la-button onclick="document.getElementById('snap-sm').open=false" variant="secondary">Cancel</la-button>
+<la-button variant="primary">Share DD Pack</la-button>
+</div>
+</la-modal>
+<la-modal description="John Smith will be removed from the employment list. This can't be undone." heading="Remove employee?" id="snap-confirm">
+<p style="font-size:13px;color:#4B5563;line-height:1.5;margin:0;">Any associated documents will remain but won't be linked to the employee record. Existing shared access to those documents will be revoked.</p>
+<div slot="footer">
+<la-button onclick="document.getElementById('snap-confirm').open=false" variant="secondary">Cancel</la-button>
+<la-button variant="danger">Remove employee</la-button>
+</div>
+</la-modal>
+<la-modal heading="Add employee" id="snap-form">
+<div style="display:flex;flex-direction:column;gap:16px;">
+<la-input label="Full name" placeholder="e.g. Jane Smith"></la-input>
+<la-input label="Role" placeholder="e.g. Senior Engineer"></la-input>
+<la-input label="Start date" placeholder="DD/MM/YYYY" type="text"></la-input>
+</div>
+<div slot="footer">
+<la-button onclick="document.getElementById('snap-form').open=false" variant="secondary">Cancel</la-button>
+<la-button variant="primary">Add employee</la-button>
+</div>
+</la-modal>
+<la-modal heading="Review employment contract" id="snap-large" size="lg">
+<p style="font-size:13px;color:#4B5563;line-height:1.7;margin:0;">This is where wider content like a document preview or a longer intake form lives. Large modals raise the panel max-width from 560px to 640px — same chrome, more horizontal breathing room for document-heavy tasks.</p>
+<div slot="footer">
+<la-button onclick="document.getElementById('snap-large').open=false" variant="secondary">Close</la-button>
+</div>
+</la-modal>
+<la-modal heading="Terms of service" id="snap-long">
+<div style="display:flex;flex-direction:column;gap:14px;font-size:13px;color:#4B5563;line-height:1.7;">
+<p style="margin:0;"><strong style="color:#1E262B;">1. Acceptance of terms.</strong> By accessing LawAdvisor AI, you agree to be bound by these terms. If you do not agree with any part of the terms, you may not access the service. Continued use after updates constitutes acceptance of the revised terms.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">2. Service description.</strong> LawAdvisor AI provides automated legal analysis, document review, and compliance tracking. The service is intended as a supplement to, not a replacement for, professional legal counsel. Nothing in the service constitutes legal advice.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">3. User accounts.</strong> You are responsible for maintaining the confidentiality of your account credentials and for all activity that occurs under your account. Notify us immediately of any unauthorised access. We are not liable for loss arising from unauthorised account use.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">4. Data and privacy.</strong> Documents, data, and information you upload remain your property. You grant us a limited licence to process that data solely to provide the service. We do not sell, rent, or share your data with third parties except as required by law or explicitly authorised by you.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">5. Acceptable use.</strong> You agree not to: misuse the service to infringe third-party rights, upload malicious content, attempt to reverse-engineer the platform, or use the service in violation of applicable law. We reserve the right to suspend accounts in breach.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">6. Fees and billing.</strong> Paid plans are billed in advance on a recurring basis. You may cancel at any time from your account settings. Cancellation takes effect at the end of the current billing period. Refunds are issued at our discretion.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">7. Intellectual property.</strong> The service, including all software, designs, and documentation, is our intellectual property. You are granted a limited, non-exclusive, non-transferable licence to use the service in accordance with these terms.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">8. Warranties and disclaimers.</strong> The service is provided "as is" without warranty of any kind. We do not guarantee accuracy, completeness, or fitness for a particular purpose. Use of the service is at your own risk.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">9. Limitation of liability.</strong> To the maximum extent permitted by law, our liability is limited to fees paid in the twelve months preceding the claim. We are not liable for indirect, consequential, or punitive damages.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">10. Termination.</strong> Either party may terminate this agreement at any time. Upon termination, you retain access to your data for 30 days before permanent deletion. We will delete your data on request at any time.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">11. Governing law.</strong> These terms are governed by the laws of the jurisdiction in which LawAdvisor AI is incorporated. Any disputes will be resolved in that jurisdiction's courts.</p>
+<p style="margin:0;"><strong style="color:#1E262B;">12. Changes to terms.</strong> We may revise these terms from time to time. Material changes will be communicated at least 30 days in advance. Continued use after the effective date constitutes acceptance of the revised terms.</p>
+</div>
+<div slot="footer">
+<la-button onclick="document.getElementById('snap-long').open=false" variant="secondary">Decline</la-button>
+<la-button onclick="document.getElementById('snap-long').open=false" variant="primary">Accept</la-button>
+</div>
+</la-modal>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-modal</h2>
+    <p>Dialog overlay for confirmations, forms, and multi-step flows. Blocks the rest of the page with a backdrop and takes focus until dismissed. Closes on X button or backdrop click.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">&#39;sm&#39; | &#39;default&#39; | &#39;lg&#39;</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_bodyObserver</td>
+          <td>—</td>
+          <td><span class="type">ResizeObserver | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onKeydown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>close</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Panel chrome</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Panel background</td></tr>
+<tr><td>--la-radius-xl2</td><td>Panel corner radius (24px)</td></tr>
+<tr><td>--la-shadow-lg</td><td>Panel drop shadow</td></tr>
+<tr><td>--la-color-scrim</td><td>Backdrop (20% black)</td></tr>
+<tr><td>--la-color-border-light</td><td>Footer separator rule</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Typography &amp; spacing</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-text</td><td>Heading colour</td></tr>
+<tr><td>--la-font-size-2xl</td><td>Heading size (18px)</td></tr>
+<tr><td>--la-font-weight-semibold</td><td>Heading weight (600)</td></tr>
+<tr><td>--la-color-text-muted</td><td>Close button colour</td></tr>
+<tr><td>--la-color-bg-muted</td><td>Close button hover</td></tr>
+<tr><td>--la-space-sm / md / lg / xl</td><td>Header / footer gaps, margins</td></tr>
+<tr><td>--la-radius-md</td><td>Close button hover radius</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic — heading + body</p>
+<div class="docs-code"><span class="kw">&lt;la-modal</span> <span class="at">heading</span>=<span class="str">"Rename document"</span> <span class="at">open</span><span class="kw">&gt;</span>
+<span class="kw">&lt;p&gt;</span>Enter a new name for this document.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;/la-modal&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Confirmation — destructive pattern</p>
+<div class="docs-code"><span class="kw">&lt;la-modal</span> <span class="at">heading</span>=<span class="str">"Remove employee?"</span> <span class="at">open</span><span class="kw">&gt;</span>
+<span class="kw">&lt;p&gt;</span>This can't be undone.<span class="kw">&lt;/p&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">slot</span>=<span class="str">"footer"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"secondary"</span><span class="kw">&gt;</span>Cancel<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"danger"</span><span class="kw">&gt;</span>Remove<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/la-modal&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With description — context under heading</p>
+<div class="docs-code"><span class="kw">&lt;la-modal</span>
+<span class="at">heading</span>=<span class="str">"Remove employee?"</span>
+<span class="at">description</span>=<span class="str">"This can't be undone."</span>
+<span class="at">open</span>
+<span class="kw">&gt;</span>
+<span class="kw">&lt;p&gt;</span>Any linked documents will be unassigned.<span class="kw">&lt;/p&gt;</span>
+<span class="cm">&lt;!-- footer --&gt;</span>
+<span class="kw">&lt;/la-modal&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">With form — intake pattern</p>
+<div class="docs-code"><span class="kw">&lt;la-modal</span> <span class="at">heading</span>=<span class="str">"Add employee"</span> <span class="at">open</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-input</span> <span class="at">label</span>=<span class="str">"Full name"</span><span class="kw">&gt;&lt;/la-input&gt;</span>
+<span class="kw">&lt;la-input</span> <span class="at">label</span>=<span class="str">"Role"</span><span class="kw">&gt;&lt;/la-input&gt;</span>
+<span class="kw">&lt;div</span> <span class="at">slot</span>=<span class="str">"footer"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"secondary"</span><span class="kw">&gt;</span>Cancel<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;la-button</span> <span class="at">variant</span>=<span class="str">"primary"</span><span class="kw">&gt;</span>Add<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/la-modal&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Large — document review</p>
+<div class="docs-code"><span class="kw">&lt;la-modal</span>
+<span class="at">heading</span>=<span class="str">"Review contract"</span>
+<span class="at">size</span>=<span class="str">"lg"</span>
+<span class="at">open</span>
+<span class="kw">&gt;</span>
+<span class="cm">&lt;!-- wider content --&gt;</span>
+<span class="kw">&lt;/la-modal&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Opening / closing programmatically</p>
+<div class="docs-code"><span class="kw">const</span> m = document.querySelector(<span class="str">'la-modal'</span>);
+m.open = <span class="kw">true</span>;  <span class="cm">// open</span>
+m.open = <span class="kw">false</span>; <span class="cm">// close</span>
+m.addEventListener(<span class="str">'close'</span>, () =&gt; {
+  <span class="cm">// handle dismiss — form reset, navigation, etc.</span>
+});</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Chrome rules</strong> — three sizes: <code style="font-family:monospace;font-size:11px;">sm</code> 440px (focused confirmations, share actions, short wizard steps), <code style="font-family:monospace;font-size:11px;">default</code> 560px, <code style="font-family:monospace;font-size:11px;">lg</code> 640px (document review, wider forms). All three share the same chrome: <code style="font-family:monospace;font-size:11px;">--la-radius-xl2</code> (24px) corners, <code style="font-family:monospace;font-size:11px;">--la-shadow-lg</code>. Header and footer stay pinned; only the body scrolls, capped at 90vh panel height. Backdrop uses <code style="font-family:monospace;font-size:11px;">--la-color-scrim</code> (<code style="font-family:monospace;font-size:11px;">rgba(0, 0, 0, 0.2)</code>) — shared across modals and any future overlay that dims the page. From <a href="../../design-language/layout.md">design-language/layout.md</a> Modals section.</div>
+<div class="docs-note"><strong>Footer separator is conditional</strong> — the rule above the footer only appears when the body content is scrollable (a <code style="font-family:monospace;font-size:11px;">[scrollable]</code> attribute is auto-toggled on the host via a ResizeObserver on the body). Short content = no separator; long content that requires scrolling = separator signals "more content above". Keeps chrome minimal when it isn't load-bearing.</div>
+<div class="docs-note"><strong>Close triggers</strong> — the X button in the header and clicking the backdrop. Both dispatch <code style="font-family:monospace;font-size:11px;">close</code> and set <code style="font-family:monospace;font-size:11px;">open = false</code>. For cancel/primary action buttons in the footer, the consumer wires their own close (<code style="font-family:monospace;font-size:11px;">onclick="…open = false"</code>).</div>
+<div class="docs-note"><strong>Open &amp; close animation</strong> — backdrop fades in/out; panel scales between <code style="font-family:monospace;font-size:11px;">--scale-enter</code> (0.96) and 1. Duration <code style="font-family:monospace;font-size:11px;">--dur-modal</code> (250ms), curve <code style="font-family:monospace;font-size:11px;">--ease-out</code>. Both directions driven by CSS transitions on <code style="font-family:monospace;font-size:11px;">opacity</code> and <code style="font-family:monospace;font-size:11px;">transform</code> — GPU-safe, no JS. The <code style="font-family:monospace;font-size:11px;">visibility</code> property flips instantly on open and after the transition on close, so the closed modal doesn't block clicks. Collapses to 0ms under <code style="font-family:monospace;font-size:11px;">prefers-reduced-motion: reduce</code>.</div>
+<div class="docs-note"><strong>Accessibility — closed in v1</strong> — the host sets <code style="font-family:monospace;font-size:11px;">role="dialog"</code> and <code style="font-family:monospace;font-size:11px;">aria-modal="true"</code> on connect, so screen readers announce the modal as a dialog. Escape closes the modal (global keydown listener, gated on <code style="font-family:monospace;font-size:11px;">open</code>). Close button uses <code style="font-family:monospace;font-size:11px;">la-icon-button</code> with an accessible label.</div>
+<div class="docs-note"><strong>Accessibility — still deferred</strong> — no focus trap inside the panel, no return-focus-to-trigger on close. Keyboard users can Tab out of the modal into the page behind it. Fix before using for keyboard-primary flows.</div>
+<div class="docs-note"><strong>Close icon will change</strong> — v1 uses the text character <code style="font-family:monospace;font-size:11px;">✕</code>. Per <a href="../../design-language/iconography.md">iconography.md</a> the canonical close icon is <code style="font-family:monospace;font-size:11px;">ph-x</code>. Source drift flagged for <code style="font-family:monospace;font-size:11px;">/ready</code>.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveModal = document.getElementById('live-modal');
+        const headingInput = document.getElementById('ctrl-heading');
+        const descriptionInput = document.getElementById('ctrl-description');
+        const openBtn = document.getElementById('open-live-modal');
+        const eventLog = document.getElementById('event-log');
+
+        // Heading text input
+        headingInput.addEventListener('input', () => {
+          liveModal.setAttribute('heading', headingInput.value);
+        });
+
+        // Description text input
+        descriptionInput.addEventListener('input', () => {
+          if (descriptionInput.value) {
+            liveModal.setAttribute('description', descriptionInput.value);
+          } else {
+            liveModal.removeAttribute('description');
+          }
+        });
+
+        // Size toggles
+        document.querySelectorAll('[data-size]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-size]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.size === 'default') {
+              liveModal.removeAttribute('size');
+            } else {
+              liveModal.setAttribute('size', btn.dataset.size);
+            }
+          });
+        });
+
+        // Open button
+        openBtn.addEventListener('click', () => {
+          liveModal.open = true;
+        });
+
+        // Event log — seed with a hint, then log each close
+        eventLog.innerHTML = '<span style="color:#9CA3AF;">Open the modal above and close it to see the close event fire.</span>';
+
+        function logEvent(name) {
+          const line = document.createElement('div');
+          const time = new Date().toLocaleTimeString('en-GB', { hour12: false });
+          line.textContent = time + '  ' + name;
+          if (eventLog.querySelector('span')) eventLog.innerHTML = '';
+          eventLog.insertBefore(line, eventLog.firstChild);
+          if (eventLog.children.length > 6) eventLog.removeChild(eventLog.lastChild);
+        }
+
+        liveModal.addEventListener('close', () => logEvent('close'));
+  })();
+</script>
+
+
+</body>
+</html>

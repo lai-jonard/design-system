@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-investor-card — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-investor-card</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-investor-card</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-investor-card</h1>
+  <p>Per-investor summary card for the data room investor list. Shows the investor's name, firm, a three-state access pill (Not Shared / Active / Revoked), an optional last-activity line, and an unread-message count. The whole card is a single click target — selecting it fires <code>la-investor-view</code> so the host opens the per-investor detail. There is no per-card action menu; investor actions live on the detail surface (<a href="../../decisions/70-investor-card-no-kebab-actions-in-detail-only.md">decision 70</a>).</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>A single clickable card: the body (name, firm, meta row) on the left, and an optional unread badge on the right.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Card — active investor with unread messages</div>
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-investor-card
+      investor-name="James Okafor"
+      firm="Meridian Capital"
+      status="active"
+      last-activity="Viewed 1 hour ago"
+      unread-count="2"
+    ></la-investor-card>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr>
+        <td>Card</td>
+        <td><code>.card</code> — a native <code>&lt;button&gt;</code></td>
+        <td>The clickable container. Hover shows a border + <code>--la-shadow-sm</code> lift; focus shows a ring. Fires <code>la-investor-view</code> on click or Enter / Space. <code>access-revoked</code> dims it to 60% opacity.</td>
+      </tr>
+      <tr>
+        <td>Name + firm</td>
+        <td><code>.body</code> → <code>.name</code> + <code>.firm</code></td>
+        <td>Investor name (medium weight) above the firm (muted). Both truncate with an ellipsis.</td>
+      </tr>
+      <tr>
+        <td>Meta row</td>
+        <td><code>.meta</code> → access pill + <code>.activity</code></td>
+        <td>The three-state access pill (composed <code>la-badge</code>) followed by an optional last-activity string.</td>
+      </tr>
+      <tr>
+        <td>Unread badge</td>
+        <td><code>.unread</code></td>
+        <td>Primary-coloured count pill, shown only when <code>unread-count</code> is greater than 0.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label>status</label>
+      <div class="btn-group">
+        <button class="btn-toggle" data-status="draft" type="button">draft</button>
+        <button class="btn-toggle" data-status="invited" type="button">invited</button>
+        <button class="btn-toggle active" data-status="active" type="button">active</button>
+        <button class="btn-toggle" data-status="reviewing" type="button">reviewing</button>
+        <button class="btn-toggle" data-status="stalled" type="button">stalled</button>
+        <button class="btn-toggle" data-status="complete" type="button">complete</button>
+        <button class="btn-toggle" data-status="access-revoked" type="button">access-revoked</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-name">investor-name</label>
+      <input id="ctl-name" type="text" value="James Okafor" style="width:180px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-firm">firm</label>
+      <input id="ctl-firm" type="text" value="Meridian Capital" style="width:160px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-activity">last-activity</label>
+      <input id="ctl-activity" type="text" value="Viewed 1 hour ago" style="width:200px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-unread">unread-count</label>
+      <input id="ctl-unread" type="number" value="2" min="0" style="width:90px;">
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the controls above. Click the card — <code>la-investor-view</code> fires in the log below.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px;max-width:420px;">
+    <la-investor-card
+      id="ic-live"
+      investor-name="James Okafor"
+      firm="Meridian Capital"
+      status="active"
+      last-activity="Viewed 1 hour ago"
+      unread-count="2"
+    ></la-investor-card>
+  </div>
+  <div id="event-log" style="padding:8px 24px;font-size:11px;color:var(--la-color-text-muted);font-family:monospace;min-height:28px;border-top:1px solid var(--la-color-border-light);background:var(--la-color-bg-subtle);" aria-live="polite">
+    <span style="color:var(--la-color-text-faint);">Event log — click the card to see <code>la-investor-view</code> fire</span>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed reference states. The seven lifecycle states map to three pill states.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Access pill — Not Shared (draft / invited) · Active (active / reviewing / stalled / complete) · Revoked</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;gap:8px;max-width:420px;">
+    <la-investor-card investor-name="Sarah Kim" firm="Nova Partners" status="draft"></la-investor-card>
+    <la-investor-card investor-name="Sarah Kim" firm="Nova Partners" status="invited" last-activity="Invited 2 days ago"></la-investor-card>
+    <la-investor-card investor-name="James Okafor" firm="Meridian Capital" status="active" last-activity="Viewed 1 hour ago" unread-count="2"></la-investor-card>
+    <la-investor-card investor-name="Marcus Webb" firm="Foundry Ventures" status="access-revoked" last-activity="Access revoked 5 May 2026"></la-investor-card>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Minimal — name + firm only</div>
+  <div class="preview-frame" style="padding:24px;max-width:420px;">
+    <la-investor-card investor-name="Jordan Lee" firm="Summit Partners" status="draft"></la-investor-card>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">In-context — investor list</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;gap:8px;background:var(--la-color-bg-subtle);max-width:420px;">
+    <la-investor-card investor-name="James Okafor" firm="Meridian Capital" status="active" last-activity="Viewed 1 hour ago" unread-count="2"></la-investor-card>
+    <la-investor-card investor-name="Priya Mehta" firm="Apex Ventures" status="reviewing" last-activity="Reviewing for 3 days"></la-investor-card>
+    <la-investor-card investor-name="Leo Tran" firm="Vertex Fund" status="complete" last-activity="Completed 12 Apr 2026"></la-investor-card>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-investor-card</h2>
+    <p>Per-investor summary card for the data room — name, firm, three-state access pill, last activity, and unread count. Whole-card click opens the detail.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>investorName</td>
+          <td><span class="default">investor-name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Investor name, shown as the card title</td>
+        </tr>
+      
+        <tr>
+          <td>firm</td>
+          <td><span class="default">firm</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Firm name, shown below the title</td>
+        </tr>
+      
+        <tr>
+          <td>status</td>
+          <td><span class="default">status</span></td>
+          <td><span class="type">InvestorStatus</span></td>
+          <td><span class="default">&#39;invited&#39;</span></td>
+          <td>Lifecycle state; drives the access pill and revoked dimming</td>
+        </tr>
+      
+        <tr>
+          <td>lastActivity</td>
+          <td><span class="default">last-activity</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Optional free-text activity summary</td>
+        </tr>
+      
+        <tr>
+          <td>unreadCount</td>
+          <td><span class="default">unread-count</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>Unread messages from this investor; shows a badge when > 0</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-investor-view</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>Card clicked / activated; detail: { name }</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div id="css-tokens" class="docs-section">
+  <h3>CSS custom properties</h3>
+  <p>No public CSS custom properties. All colour, spacing, radius, and shadow values resolve to design tokens — <code>--la-color-bg</code>, <code>--la-color-border</code> / <code>-border-light</code>, <code>--la-radius-lg</code> / <code>-pill</code>, <code>--la-shadow-sm</code>, <code>--la-color-text</code> / <code>-text-muted</code> / <code>-text-faint</code>, <code>--la-color-primary</code> / <code>-primary-fg</code>, and the focus-ring tokens.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+
+  <h4>Single card</h4>
+  <pre><code>&lt;la-investor-card
+  investor-name="James Okafor"
+  firm="Meridian Capital"
+  status="active"
+  last-activity="Viewed 1 hour ago"
+  unread-count="2"
+  @la-investor-view=${e =&gt; openInvestor(e.detail.name)}
+&gt;&lt;/la-investor-card&gt;</code></pre>
+
+  <h4>List from a data array (Lit)</h4>
+  <pre><code>${investors.map(inv =&gt; html\`
+  &lt;la-investor-card
+    .investorName=\${inv.name}
+    .firm=\${inv.firm}
+    .status=\${inv.status}
+    .lastActivity=\${inv.lastActivity}
+    .unreadCount=\${inv.unreadCount}
+    @la-investor-view=\${() =&gt; select(inv)}
+  &gt;&lt;/la-investor-card&gt;
+\`)}</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <ul>
+    <li><strong>Whole-card click:</strong> the card is a native <code>&lt;button&gt;</code> with Enter / Space activation. There is no per-card action menu — investor actions (share, revoke, remove, nudge) live on the per-investor detail surface, per <a href="../../decisions/70-investor-card-no-kebab-actions-in-detail-only.md">decision 70</a>.</li>
+    <li><strong>Three-state access pill:</strong> the seven lifecycle states collapse to Not Shared / Active / Revoked (Pattern 15). The pill is the card's status signal; <code>access-revoked</code> additionally dims the whole card to 60% opacity.</li>
+    <li><strong>Progressive meta:</strong> last activity appears only when set; the unread badge appears only when <code>unread-count &gt; 0</code>.</li>
+    <li><strong>Soft motion divergence:</strong> the hover transition animates <code>border-color</code> and <code>box-shadow</code> (not the strict transform/opacity set) — the established hover-affordance pattern shared with <code>la-legal-area-widget</code>. A <code>prefers-reduced-motion</code> guard collapses it.</li>
+  </ul>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    var live = document.getElementById('ic-live');
+
+    var fieldMap = {
+      'ctl-name':     'investor-name',
+      'ctl-firm':     'firm',
+      'ctl-activity': 'last-activity',
+      'ctl-unread':   'unread-count',
+    };
+    Object.keys(fieldMap).forEach(function(id) {
+      var el = document.getElementById(id);
+      if (!el) return;
+      el.addEventListener('input', function() { live.setAttribute(fieldMap[id], el.value); });
+    });
+
+    document.querySelectorAll('[data-status]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-status]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        live.setAttribute('status', btn.dataset.status);
+      });
+    });
+
+    var log = document.getElementById('event-log');
+    live.addEventListener('la-investor-view', function(e) {
+      var time = new Date().toLocaleTimeString('en-GB', { hour12: false });
+      log.innerHTML = '<span style="color:var(--la-color-text);">' + time +
+        '  la-investor-view → { name: "' + (e.detail && e.detail.name) + '" }</span>';
+    });
+  })();
+</script>
+
+
+</body>
+</html>

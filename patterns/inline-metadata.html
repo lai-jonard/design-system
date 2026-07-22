@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Inline metadata — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+  .sep {
+    color: var(--la-color-text-faint, #9CA3AF);
+    user-select: none;
+  }
+  .meta-row {
+    font-size: 13px;
+    color: var(--la-color-text-secondary, #4B5563);
+    line-height: 1.6;
+  }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/" class="active">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title"><a href="../patterns/" style="color:inherit;text-decoration:none;">← Patterns</a></h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#examples" class="docs-nav-item" data-nav-id="examples">Examples</a>
+    
+      <a href="#rules" class="docs-nav-item" data-nav-id="rules">Rules</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../index.html">Overview</a>
+    <a class="docs-nav-item" href="../components/">Components</a>
+    <a class="docs-nav-item" href="../foundations/">Foundations</a>
+    <a class="docs-nav-item" href="../pages/">Pages</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+  <h1>Inline metadata</h1>
+  <p>Middle dot (·) separator for horizontal label runs in document headers, list rows, or cards. Separator is a discrete DOM node — lighter than surrounding text so it recedes and labels stand out.</p>
+</div>
+
+<div class="preview-header" id="examples" style="margin-top:8px;">
+  <h1>Examples</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Document header — entity, area, date</div>
+  <div class="preview-frame" style="padding:24px 32px;">
+    <p class="meta-row" style="margin:0;">
+      <span>Acme Corp.</span><span class="sep"> · </span><span>Employment</span><span class="sep"> · </span><span>3 Mar 2024</span>
+    </p>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Document row — name, format, size</div>
+  <div class="preview-frame" style="padding:24px 32px;">
+    <p class="meta-row" style="margin:0;">
+      <span>Consulting Agreement</span><span class="sep"> · </span><span>PDF</span><span class="sep"> · </span><span>240 KB</span>
+    </p>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Implementation — discrete DOM nodes for each separator</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <div style="background:var(--doc-surface-2);border:1px solid var(--doc-border);border-radius:8px;padding:14px 18px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--doc-text-2);line-height:1.8;white-space:pre-wrap;">&lt;span&gt;Acme Corp.&lt;/span&gt;
+&lt;span class="sep"&gt; · &lt;/span&gt;
+&lt;span&gt;Employment&lt;/span&gt;
+&lt;span class="sep"&gt; · &lt;/span&gt;
+&lt;span&gt;3 Mar 2024&lt;/span&gt;</div>
+    <p style="margin:8px 0 0;font-size:12px;color:var(--la-color-text-muted);line-height:1.5;">Style <code style="font-family:monospace;font-size:11px;">.sep</code> with <code style="font-family:monospace;font-size:11px;">color: var(--la-color-text-faint)</code> and <code style="font-family:monospace;font-size:11px;">user-select: none</code>.</p>
+  </div>
+</div>
+
+<div class="preview-header" id="rules" style="margin-top:8px;">
+  <h1>Rules</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">
+      <li>Separator: middle dot U+00B7 (·) — never slash, pipe, dash, or vertical rule.</li>
+      <li>Colour: <code style="font-family:monospace;font-size:12px;">--la-color-text-faint</code> — lighter than surrounding text so the dot recedes.</li>
+      <li><code style="font-family:monospace;font-size:12px;">user-select: none</code> on separator spans — excluded from copy/paste.</li>
+      <li>Never orphan a dot — only render a separator when the preceding item is present.</li>
+      <li>Never hardcode <code style="font-family:monospace;font-size:12px;">·</code> inside a string literal — keep separators as discrete DOM nodes so conditional visibility is handled in the template.</li>
+    </ul>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

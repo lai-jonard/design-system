@@ -1,0 +1,601 @@
+/*
+ * motion.css — Fieldwork animation system
+ * Based on animations.dev / transitions.dev / Emil Kowalski principles
+ * Native CSS only — no framework, no hosting required
+ *
+ * Default rule: animate transform + opacity only (GPU-safe).
+ * Exception: filter: blur() is permitted for state-swap moments ≤200ms
+ *   (digit / text / icon swaps). Never use blur on hovers, parallel motion,
+ *   or anything that runs longer than --dur-base.
+ */
+
+/* ─── Easing curves ──────────────────────────────────────────────────────────
+ *
+ * Rule of thumb:
+ *   --ease-out        → element entering the screen (user-initiated)
+ *   --ease-in-out     → element moving/morphing while on screen
+ *   --ease            → hover, colour, opacity micro-transitions
+ *   --ease-spring     → button press, toggles, quick feedback
+ *   --ease-spring-sm  → modal/drawer entrance (smooth, not bouncy)
+ *   --ease-drawer     → panels, sidebars sliding in
+ *   Never use ease-in for UI — feels sluggish.
+ */
+:root {
+  --ease-out:       cubic-bezier(0.23, 1, 0.32, 1);        /* default for most UI */
+  --ease-in-out:    cubic-bezier(0.77, 0, 0.175, 1);        /* on-screen movement  */
+  --ease:           cubic-bezier(0.4, 0, 0.2, 1);           /* hover / colour      */
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);      /* bouncy feedback     */
+  --ease-spring-sm: cubic-bezier(0.22, 1, 0.36, 1);         /* modal entrance      */
+  --ease-snappy:    cubic-bezier(0.16, 1, 0.3, 1);          /* icon toggles        */
+  --ease-drawer:    cubic-bezier(0.32, 0.72, 0, 1);         /* sidebar / drawer    */
+
+  /* ─── Durations ─────────────────────────────────────────────────────────────
+   *
+   *   --dur-instant   → state changes that should feel immediate (100ms)
+   *   --dur-fast      → hovers, micro-interactions (150ms)
+   *   --dur-base      → dropdowns, tooltips, small popovers (200ms)
+   *   --dur-modal     → modals, panels, drawers (250ms)
+   *   --dur-page      → page-level transitions (350ms)
+   *   Max recommended: 300ms for repeated UI. Never exceed 500ms for actions
+   *   users trigger multiple times per session.
+   */
+  --dur-instant:  100ms;
+  --dur-fast:     150ms;
+  --dur-base:     200ms;
+  --dur-modal:    250ms;
+  --dur-page:     350ms;
+
+  /* ─── Stagger ────────────────────────────────────────────────────────────────
+   * 30–60ms between list items. Above 100ms feels like a slideshow.
+   */
+  --stagger-sm: 30ms;
+  --stagger-md: 50ms;
+  --stagger-lg: 60ms;
+
+  /* ─── Scale presets ──────────────────────────────────────────────────────────
+   * Never start from scale(0) — minimum 0.9 + opacity for natural feel.
+   * Button press: 0.97. Modal entrance: 0.96.
+   */
+  --scale-press:  0.97;
+  --scale-enter:  0.96;
+  --scale-hover:  1.02;
+}
+
+/* ─── Reduced motion ─────────────────────────────────────────────────────────
+ * All durations collapse to near-zero. Transforms still apply (no jump),
+ * but animations are imperceptible.
+ */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms;
+    --dur-fast:    0ms;
+    --dur-base:    0ms;
+    --dur-modal:   0ms;
+    --dur-page:    0ms;
+    --stagger-sm:  0ms;
+    --stagger-md:  0ms;
+    --stagger-lg:  0ms;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * KEYFRAMES
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Fade + rise — general enter (toasts, popovers, cards) */
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Fade + drop — entering from above (dropdowns) */
+@keyframes fade-down {
+  from { opacity: 0; transform: translateY(-6px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Scale + fade — modal / dialog entrance */
+@keyframes scale-in {
+  from { opacity: 0; transform: scale(var(--scale-enter)); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* Slide in from left — sidebar / drawer */
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Slide in from right — panels */
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+/* Simple fade */
+@keyframes fade-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to   { opacity: 0; }
+}
+
+@keyframes scale-out {
+  from { opacity: 1; transform: scale(1); }
+  to   { opacity: 0; transform: scale(var(--scale-enter, 0.96)); }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * UTILITY CLASSES
+ * Apply these directly to elements. GPU-safe (transform + opacity only).
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+.anim-fade-up {
+  animation: fade-up var(--dur-base) var(--ease-out) both;
+}
+.anim-fade-down {
+  animation: fade-down var(--dur-fast) var(--ease-out) both;
+}
+.anim-scale-in {
+  animation: scale-in var(--dur-modal) var(--ease-spring-sm) both;
+}
+.anim-slide-right {
+  animation: slide-right var(--dur-modal) var(--ease-drawer) both;
+}
+.anim-slide-left {
+  animation: slide-left var(--dur-modal) var(--ease-drawer) both;
+}
+.anim-fade-in {
+  animation: fade-in var(--dur-base) var(--ease) both;
+}
+
+/* Stagger helpers — add to parent, children pick up delay via nth-child */
+.anim-stagger > * { animation-fill-mode: both; }
+.anim-stagger > *:nth-child(1)  { animation-delay: calc(var(--stagger-md) * 0); }
+.anim-stagger > *:nth-child(2)  { animation-delay: calc(var(--stagger-md) * 1); }
+.anim-stagger > *:nth-child(3)  { animation-delay: calc(var(--stagger-md) * 2); }
+.anim-stagger > *:nth-child(4)  { animation-delay: calc(var(--stagger-md) * 3); }
+.anim-stagger > *:nth-child(5)  { animation-delay: calc(var(--stagger-md) * 4); }
+.anim-stagger > *:nth-child(6)  { animation-delay: calc(var(--stagger-md) * 5); }
+.anim-stagger > *:nth-child(7)  { animation-delay: calc(var(--stagger-md) * 6); }
+.anim-stagger > *:nth-child(8)  { animation-delay: calc(var(--stagger-md) * 7); }
+
+/* Press state — any interactive element */
+.anim-press:active {
+  transform: scale(var(--scale-press));
+  transition: transform var(--dur-instant) var(--ease-spring);
+}
+
+/* Hover lift */
+.anim-hover:hover {
+  transform: translateY(-1px);
+  transition: transform var(--dur-fast) var(--ease-out);
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * TRANSITIONS.DEV PATTERNS
+ *
+ * Reversible, state-driven transitions adapted from https://transitions.dev/
+ * (Emil Kowalski). These complement .anim-* utilities:
+ *   .anim-*  — single-shot enter animations (fade-up, scale-in, …)
+ *   .t-*     — reversible state transitions toggled by data-attribute or class
+ *
+ * Where transitions.dev values match our scale, we alias to our tokens so
+ * lineage is visible. Where they don't (custom spring curves, longer state-
+ * change durations), we keep the literal value scoped to the pattern.
+ *
+ * Per-pattern tokens live on :root so any instance can be tuned inline:
+ *   <span class="t-badge" style="--badge-pop-dur: 350ms">…</span>
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+
+/* ─── Notification badge ─────────────────────────────────────────────────────
+ * Diagonal slide + spring pop. Place .t-badge inside a position:relative
+ * trigger; toggle data-open="true|false" to open/close. Only the badge moves.
+ */
+:root {
+  --badge-slide-dur:      260ms;
+  --badge-pop-dur:        500ms;
+  --badge-pop-close-dur:  180ms;
+  --badge-fade-dur:       400ms;
+  --badge-fade-close-dur: 180ms;
+  --badge-blur:           2px;
+  --badge-offset-x:       -8.2px;
+  --badge-offset-y:       12.4px;
+  --badge-slide-ease:     var(--ease-spring-sm);
+  --badge-pop-ease:       cubic-bezier(0.34, 1.36, 0.64, 1);
+  --badge-close-ease:     var(--ease);
+}
+
+@keyframes t-badge-slide-in {
+  from { transform: translate(var(--badge-offset-x), var(--badge-offset-y)); }
+  to   { transform: translate(0, 0); }
+}
+
+.t-badge {
+  position: absolute;
+  top: -6px;
+  right: -8px;
+  pointer-events: none;
+  will-change: transform;
+}
+.t-badge[data-open="true"] {
+  animation: t-badge-slide-in var(--badge-slide-dur) var(--badge-slide-ease);
+}
+.t-badge-dot {
+  display: block;
+  transform-origin: center;
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+  transition:
+    transform var(--badge-pop-dur)  var(--badge-pop-ease),
+    opacity   var(--badge-fade-dur) var(--badge-pop-ease),
+    filter    var(--badge-pop-dur)  var(--badge-pop-ease);
+  will-change: transform, opacity, filter;
+}
+.t-badge[data-open="false"] .t-badge-dot {
+  transform: scale(0);
+  opacity: 0;
+  filter: blur(var(--badge-blur));
+  transition:
+    transform var(--badge-pop-close-dur)  var(--badge-close-ease),
+    opacity   var(--badge-fade-close-dur) var(--badge-close-ease),
+    filter    var(--badge-pop-close-dur)  var(--badge-close-ease);
+}
+
+
+/* ─── Number / digit pop-in ──────────────────────────────────────────────────
+ * Each digit translates + blurs in. Pair with data-stagger="1|2|…" on
+ * adjacent digits to walk the entry across the number.
+ */
+:root {
+  --digit-dur:      500ms;
+  --digit-distance: 8px;
+  --digit-stagger:  70ms;
+  --digit-blur:     2px;
+  --digit-ease:     cubic-bezier(0.34, 1.45, 0.64, 1);
+  --digit-dir-x:    0;
+  --digit-dir-y:    1;
+}
+
+@keyframes t-digit-pop-in {
+  0% {
+    transform: translate(
+      calc(var(--digit-distance) * var(--digit-dir-x)),
+      calc(var(--digit-distance) * var(--digit-dir-y))
+    );
+    opacity: 0;
+    filter: blur(var(--digit-blur));
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+    filter: blur(0);
+  }
+}
+
+.t-digit-group { display: inline-flex; align-items: baseline; }
+.t-digit       { display: inline-block; will-change: transform, opacity, filter; }
+.t-digit-group.is-animating .t-digit {
+  animation: t-digit-pop-in var(--digit-dur) var(--digit-ease) both;
+}
+.t-digit-group.is-animating .t-digit[data-stagger="1"] { animation-delay: var(--digit-stagger); }
+.t-digit-group.is-animating .t-digit[data-stagger="2"] { animation-delay: calc(var(--digit-stagger) * 2); }
+.t-digit-group.is-animating .t-digit[data-stagger="3"] { animation-delay: calc(var(--digit-stagger) * 3); }
+.t-digit-group.is-animating .t-digit[data-stagger="4"] { animation-delay: calc(var(--digit-stagger) * 4); }
+
+
+/* ─── Text state swap ────────────────────────────────────────────────────────
+ * Three-phase JS sequence: add .is-exit (old text up + blur out),
+ * swap textContent, add .is-enter-start (jump below, no transition),
+ * force reflow, remove .is-enter-start (new text settles in).
+ */
+:root {
+  --text-swap-dur:         var(--dur-base);
+  --text-swap-translate-y: 8px;
+  --text-swap-blur:        2px;
+  --text-swap-ease:        ease-out;
+}
+
+.t-text-swap {
+  display: inline-block;
+  transform: translateY(0);
+  filter: blur(0);
+  opacity: 1;
+  transition:
+    transform var(--text-swap-dur) var(--text-swap-ease),
+    filter    var(--text-swap-dur) var(--text-swap-ease),
+    opacity   var(--text-swap-dur) var(--text-swap-ease);
+  will-change: transform, filter, opacity;
+}
+.t-text-swap.is-exit {
+  transform: translateY(calc(var(--text-swap-translate-y) * -1));
+  filter: blur(var(--text-swap-blur));
+  opacity: 0;
+}
+.t-text-swap.is-enter-start {
+  transform: translateY(var(--text-swap-translate-y));
+  filter: blur(var(--text-swap-blur));
+  opacity: 0;
+  transition: none;
+}
+
+
+/* ─── Icon swap ──────────────────────────────────────────────────────────────
+ * Two .t-icon children share one grid cell; toggle data-state="a|b" on the
+ * .t-icon-swap parent to fade + scale + blur between them.
+ */
+:root {
+  --icon-swap-dur:         var(--dur-base);
+  --icon-swap-blur:        2px;
+  --icon-swap-start-scale: 0.25;
+  --icon-swap-ease:        ease-in-out;
+}
+
+.t-icon-swap { position: relative; display: inline-grid; }
+.t-icon-swap .t-icon {
+  grid-area: 1 / 1;
+  transition:
+    opacity   var(--icon-swap-dur) var(--icon-swap-ease),
+    filter    var(--icon-swap-dur) var(--icon-swap-ease),
+    transform var(--icon-swap-dur) var(--icon-swap-ease);
+  will-change: opacity, filter, transform;
+}
+.t-icon-swap[data-state="a"] .t-icon[data-icon="a"],
+.t-icon-swap[data-state="b"] .t-icon[data-icon="b"] {
+  opacity: 1;
+  filter: blur(0);
+  transform: scale(1);
+}
+.t-icon-swap[data-state="a"] .t-icon[data-icon="b"],
+.t-icon-swap[data-state="b"] .t-icon[data-icon="a"] {
+  opacity: 0;
+  filter: blur(var(--icon-swap-blur));
+  transform: scale(var(--icon-swap-start-scale));
+}
+
+
+/* ─── Menu dropdown ──────────────────────────────────────────────────────────
+ * Origin-aware. Set data-origin to one of:
+ *   top-left | top-center | top-right | bottom-left | bottom-center | bottom-right
+ * State: add .is-open to show, swap to .is-closing, remove after close-dur.
+ */
+:root {
+  --dropdown-open-dur:     var(--dur-modal);
+  --dropdown-close-dur:    var(--dur-fast);
+  --dropdown-pre-scale:    0.97;
+  --dropdown-closing-scale: 0.99;
+  --dropdown-ease:         var(--ease-spring-sm);
+}
+
+.t-dropdown {
+  transform-origin: top left;
+  transform: scale(var(--dropdown-pre-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--dropdown-open-dur) var(--dropdown-ease),
+    opacity   var(--dropdown-open-dur) var(--dropdown-ease);
+  will-change: transform, opacity;
+}
+.t-dropdown[data-origin="top-right"]     { transform-origin: top right; }
+.t-dropdown[data-origin="top-center"]    { transform-origin: top center; }
+.t-dropdown[data-origin="bottom-left"]   { transform-origin: bottom left; }
+.t-dropdown[data-origin="bottom-center"] { transform-origin: bottom center; }
+.t-dropdown[data-origin="bottom-right"]  { transform-origin: bottom right; }
+.t-dropdown.is-open {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.t-dropdown.is-closing {
+  transform: scale(var(--dropdown-closing-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--dropdown-close-dur) var(--dropdown-ease),
+    opacity   var(--dropdown-close-dur) var(--dropdown-ease);
+}
+
+
+/* ─── Modal open / close ─────────────────────────────────────────────────────
+ * State-driven counterpart to .anim-scale-in. Add .is-open to open, swap to
+ * .is-closing for exit, remove .is-closing after --modal-close-dur.
+ */
+:root {
+  --modal-open-dur:   var(--dur-modal);
+  --modal-close-dur:  var(--dur-fast);
+  --modal-scale:      var(--scale-enter);
+  --modal-scale-close: var(--scale-enter);
+  --modal-ease:       var(--ease-spring-sm);
+}
+
+.t-modal {
+  transform-origin: center;
+  transform: scale(var(--modal-scale));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--modal-open-dur) var(--modal-ease),
+    opacity   var(--modal-open-dur) var(--modal-ease);
+  will-change: transform, opacity;
+}
+.t-modal.is-open {
+  transform: scale(1);
+  opacity: 1;
+  pointer-events: auto;
+}
+.t-modal.is-closing {
+  transform: scale(var(--modal-scale-close));
+  opacity: 0;
+  pointer-events: none;
+  transition:
+    transform var(--modal-close-dur) var(--modal-ease),
+    opacity   var(--modal-close-dur) var(--modal-ease);
+}
+
+
+/* ─── Panel reveal ───────────────────────────────────────────────────────────
+ * Cross-fades, slides, and blurs together so a short travel still reads as a
+ * full open/close. Set --panel-translate-y to half the panel height (or
+ * whatever travel distance suits). Wrap in overflow:hidden if you need
+ * full clipping when closed.
+ */
+:root {
+  --panel-open-dur:    400ms;
+  --panel-close-dur:   var(--dur-page);
+  --panel-translate-y: calc(187px * 0.5);
+  --panel-blur:        2px;
+  --panel-ease:        var(--ease-spring-sm);
+}
+
+.t-panel-slide {
+  transform: translateY(var(--panel-translate-y));
+  opacity: 0;
+  filter: blur(var(--panel-blur));
+  pointer-events: none;
+  transition:
+    transform var(--panel-close-dur) var(--panel-ease),
+    opacity   var(--panel-close-dur) var(--panel-ease),
+    filter    var(--panel-close-dur) var(--panel-ease);
+  will-change: transform, opacity, filter;
+}
+.t-panel-slide[data-open="true"] {
+  transform: translateY(0);
+  opacity: 1;
+  filter: blur(0);
+  pointer-events: auto;
+  transition:
+    transform var(--panel-open-dur) var(--panel-ease),
+    opacity   var(--panel-open-dur) var(--panel-ease),
+    filter    var(--panel-open-dur) var(--panel-ease);
+}
+
+
+/* ─── Page side-by-side ──────────────────────────────────────────────────────
+ * Two pages stacked absolutely; toggle data-page="1|2" on the wrapper.
+ * Page 1 exits left, page 2 exits right. Disable the outgoing slide by
+ * setting --page-exit-enabled: 0 (e.g. for accessibility prefers).
+ */
+:root {
+  --page-slide-dur:      var(--dur-base);
+  --page-fade-dur:       var(--dur-base);
+  --page-slide-distance: 8px;
+  --page-blur:           3px;
+  --page-stagger:        0ms;
+  --page-exit-enabled:   1;
+  --page-slide-ease:     var(--ease-spring-sm);
+  --page-fade-ease:      var(--ease-spring-sm);
+}
+
+.t-page-slide { position: relative; }
+.t-page-slide .t-page[data-page-id="1"] { --t-page-from-x: calc(var(--page-slide-distance) * -1); }
+.t-page-slide .t-page[data-page-id="2"] { --t-page-from-x: var(--page-slide-distance); }
+.t-page-slide .t-page {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateX(calc(var(--t-page-from-x, 0px) * var(--page-exit-enabled)));
+  filter: blur(calc(var(--page-blur) * var(--page-exit-enabled)));
+  transition:
+    opacity   var(--page-fade-dur)  var(--page-fade-ease),
+    transform var(--page-slide-dur) var(--page-slide-ease),
+    filter    var(--page-slide-dur) var(--page-slide-ease);
+  will-change: opacity, transform, filter;
+}
+.t-page-slide[data-page="1"] .t-page[data-page-id="1"],
+.t-page-slide[data-page="2"] .t-page[data-page-id="2"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(0);
+  filter: blur(0);
+  transition-delay: var(--page-stagger);
+}
+
+
+/* ─── Reduced motion ──────────────────────────────────────────────────────────
+ * All .t-* patterns collapse to instant state changes.
+ */
+@media (prefers-reduced-motion: reduce) {
+  .t-badge, .t-badge-dot,
+  .t-digit-group .t-digit,
+  .t-text-swap,
+  .t-icon-swap .t-icon,
+  .t-dropdown,
+  .t-modal,
+  .t-panel-slide,
+  .t-page-slide .t-page {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════════════════════════════
+ * COMPONENT DEFAULTS
+ * Wire motion tokens into existing Fieldwork components.
+ * ═══════════════════════════════════════════════════════════════════════════ */
+
+/* Sidebar collapse/expand */
+la-sidebar {
+  transition:
+    width    var(--dur-modal) var(--ease-drawer),
+    min-width var(--dur-modal) var(--ease-drawer);
+}
+
+/* App body margin responds to sidebar */
+.app-body {
+  transition: margin-left var(--dur-modal) var(--ease-drawer);
+}
+
+/* Nav items */
+.nav-item {
+  transition:
+    background var(--dur-fast) var(--ease),
+    color       var(--dur-fast) var(--ease);
+}
+
+/* Buttons */
+.btn {
+  transition:
+    background var(--dur-fast) var(--ease),
+    box-shadow  var(--dur-fast) var(--ease),
+    transform   var(--dur-instant) var(--ease-spring);
+}
+.btn:active { transform: scale(var(--scale-press)); }
+
+/* Cards / insight cards */
+.card, .insight-card, la-insight-card {
+  transition:
+    box-shadow  var(--dur-fast) var(--ease-out),
+    transform   var(--dur-fast) var(--ease-out),
+    border-color var(--dur-fast) var(--ease);
+}
+
+/* Toasts — enter from bottom-right */
+la-toast {
+  animation: fade-up var(--dur-base) var(--ease-out) both;
+}
+
+/* Modals / dialogs */
+.modal, .modal-overlay, [role="dialog"] {
+  animation: scale-in var(--dur-modal) var(--ease-spring-sm) both;
+}
+
+/* Badges */
+.badge {
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+}
+
+/* Step strip transitions */
+la-step-strip {
+  transition: all var(--dur-base) var(--ease);
+}

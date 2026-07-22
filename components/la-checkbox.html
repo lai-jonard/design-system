@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-checkbox — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-checkbox</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-checkbox</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1 style="font-weight: var(--la-font-weight-normal);">la-checkbox</h1>
+<p>A bare form checkbox. Native <code style="font-family:monospace;font-size:11px;">&lt;input type="checkbox"&gt;</code> wrapped in a tiny Lit element, tokenised to the system palette, with an indeterminate state. Use it for form inputs, filters, bulk actions, and table row selection. Reach for <code style="font-family:monospace;font-size:11px;">la-choice</code> instead when you need a full row with a label + optional description — la-checkbox is just the square.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>A single native input, re-skinned inside the shadow root. The three visual states — unchecked, checked, indeterminate — all share the same box; the glyph inside is drawn with a CSS mask.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:flex; gap:48px; align-items:center; justify-content:center; padding:48px 24px; flex-wrap:wrap;">
+<div style="display:flex; gap:24px; align-items:center;">
+<la-checkbox label="Unchecked example"></la-checkbox>
+<la-checkbox checked="" label="Checked example"></la-checkbox>
+<la-checkbox indeterminate="" label="Indeterminate example"></la-checkbox>
+</div>
+<ol style="list-style: decimal inside; padding:0; margin:0; font-size:13px; line-height:1.6; color:#374151; max-width:320px;">
+<li><strong>Input box</strong> — 16px square. Border token <code style="font-family:monospace;font-size:11px;">--la-color-secondary-border</code> at rest, <code style="font-family:monospace;font-size:11px;">--la-color-primary</code> when checked or indeterminate.</li>
+<li style="margin-top:6px;"><strong>Checkmark glyph</strong> — SVG mask drawn in <code style="font-family:monospace;font-size:11px;">--la-color-primary-fg</code>, sized via <code style="font-family:monospace;font-size:11px;">--la-checkbox-icon-size</code>. Rendered only when <code style="font-family:monospace;font-size:11px;">checked</code>.</li>
+<li style="margin-top:6px;"><strong>Indeterminate bar</strong> — a 2px horizontal dash in the primary foreground colour. Rendered when <code style="font-family:monospace;font-size:11px;">indeterminate</code> — precedes a definite checked/unchecked decision (typical: "some, not all" row selection).</li>
+<li style="margin-top:6px;"><strong>Focus ring</strong> — <code style="font-family:monospace;font-size:11px;">--la-focus-ring-width</code> outline in <code style="font-family:monospace;font-size:11px;">--la-color-border-focus</code> on keyboard focus (<code style="font-family:monospace;font-size:11px;">:focus-visible</code>). Matches the rest of the system's focus treatment.</li>
+</ol>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Checked</label>
+<div class="btn-group">
+<button class="btn-toggle" data-checked="true">On</button>
+<button class="btn-toggle active" data-checked="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Indeterminate</label>
+<div class="btn-group">
+<button class="btn-toggle" data-indet="true">On</button>
+<button class="btn-toggle active" data-indet="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Disabled</label>
+<div class="btn-group">
+<button class="btn-toggle" data-disabled="true">On</button>
+<button class="btn-toggle active" data-disabled="false">Off</button>
+</div>
+</div>
+<div class="control-group">
+<label>Label (aria)</label>
+<input id="ctrl-label" type="text" value="Select item"/>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px; justify-content:center; padding:24px; gap:24px;">
+<la-checkbox id="live-cb" label="Select item"></la-checkbox>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Event log — toggle the live checkbox to see la-change fire</div>
+<div class="preview-frame" style="padding:16px 24px;">
+<pre id="event-log" style="margin:0; font-family:ui-monospace,Menlo,monospace; font-size:12px; color:#4B5563; white-space:pre; line-height:1.6; min-height:48px; width:100%;">(events will appear here)</pre>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">All states — unchecked · checked · indeterminate · disabled · disabled+checked</div>
+<div class="preview-frame" style="gap:24px; padding:32px 24px; justify-content:center; align-items:center;">
+<la-checkbox label="Unchecked"></la-checkbox>
+<la-checkbox checked="" label="Checked"></la-checkbox>
+<la-checkbox indeterminate="" label="Indeterminate"></la-checkbox>
+<la-checkbox disabled="" label="Disabled"></la-checkbox>
+<la-checkbox checked="" disabled="" label="Disabled checked"></la-checkbox>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Composed inside la-data-table — multi-select. Header checkbox is the select-all; row checkboxes are individual selection.</div>
+<div class="preview-frame" style="padding:24px;">
+<la-data-table id="snap-in-table" selectable="multi"></la-data-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Inside a filter menu — dense rows inside an overlay. This is where la-checkbox earns its keep: quick-toggle items, not onboarding rows. Use la-choice if rows need descriptions or cushioned padding.</div>
+<div class="preview-frame" style="padding:40px 24px; justify-content:center; background: var(--doc-surface-3, #ECECEE);">
+<div aria-label="Filter by status" role="menu" style="
+              background: var(--la-color-bg);
+              border: 1px solid var(--la-color-border-light);
+              border-radius: var(--la-radius-md);
+              box-shadow: var(--la-shadow-md);
+              padding: var(--la-space-sm) 0;
+              min-width: 260px;
+              font-size: var(--la-font-size-base);
+            ">
+<div style="
+                padding: var(--la-space-sm) var(--la-space-lg);
+                font-size: var(--la-font-size-sm);
+                color: var(--la-color-text-muted);
+                text-transform: none;
+              ">Filter by status</div>
+<label aria-checked="true" role="menuitemcheckbox" style="
+                display: flex;
+                align-items: center;
+                gap: var(--la-space-sm);
+                padding: var(--la-space-sm) var(--la-space-lg);
+                cursor: pointer;
+                color: var(--la-color-text);
+              ">
+<la-checkbox checked="" label="Active"></la-checkbox>
+<span>Active</span>
+</label>
+<label aria-checked="false" role="menuitemcheckbox" style="
+                display: flex;
+                align-items: center;
+                gap: var(--la-space-sm);
+                padding: var(--la-space-sm) var(--la-space-lg);
+                cursor: pointer;
+                color: var(--la-color-text);
+              ">
+<la-checkbox label="Archived"></la-checkbox>
+<span>Archived</span>
+</label>
+<label aria-checked="false" role="menuitemcheckbox" style="
+                display: flex;
+                align-items: center;
+                gap: var(--la-space-sm);
+                padding: var(--la-space-sm) var(--la-space-lg);
+                cursor: pointer;
+                color: var(--la-color-text);
+              ">
+<la-checkbox label="Draft"></la-checkbox>
+<span>Draft</span>
+</label>
+<div style="
+                height: 1px;
+                background: var(--la-color-border-light);
+                margin: var(--la-space-sm) 0;
+              "></div>
+<label aria-checked="false" role="menuitemcheckbox" style="
+                display: flex;
+                align-items: center;
+                gap: var(--la-space-sm);
+                padding: var(--la-space-sm) var(--la-space-lg);
+                cursor: pointer;
+                color: var(--la-color-text-muted);
+              ">
+<la-checkbox label="Include deleted"></la-checkbox>
+<span>Include deleted</span>
+</label>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-checkbox</h2>
+    <p>A bare form checkbox. Native <input type="checkbox"> wrapped in a tiny Lit element, tokenised to the system palette, with an indeterminate state. Use it for form inputs, filters, bulk actions, and table row selection. Reach for la-choice instead when you need a full row with a label + optional description — la-checkbox is just the square.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>checked</td>
+          <td><span class="default">checked</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>indeterminate</td>
+          <td><span class="default">indeterminate</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>input</td>
+          <td>—</td>
+          <td><span class="type">HTMLInputElement</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All visual values come from the design token system defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Sizing</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-checkbox-size</td><td>Outer box width + height (16px)</td></tr>
+<tr><td>--la-checkbox-icon-size</td><td>Checkmark + indeterminate glyph size (11px)</td></tr>
+<tr><td>--la-radius-sm</td><td>Outer box corner radius</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Resting fill</td></tr>
+<tr><td>--la-color-secondary-border</td><td>Resting border</td></tr>
+<tr><td>--la-color-text-muted</td><td>Hover border</td></tr>
+<tr><td>--la-color-primary</td><td>Checked + indeterminate fill</td></tr>
+<tr><td>--la-color-primary-fg</td><td>Checkmark + dash glyph colour</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Focus &amp; motion</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-border-focus</td><td>Focus ring colour</td></tr>
+<tr><td>--la-focus-ring-width</td><td>Focus ring width</td></tr>
+<tr><td>--la-focus-ring-offset</td><td>Focus ring offset</td></tr>
+<tr><td>--dur-fast · --ease</td><td>Background + border-colour transitions</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Standalone — aria-label only</p>
+<div class="docs-code"><span class="kw">&lt;la-checkbox</span>
+<span class="at">label</span>=<span class="str">"Include archived"</span>
+<span class="at">checked</span><span class="kw">&gt;&lt;/la-checkbox&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Indeterminate — select-all in a partial selection</p>
+<div class="docs-code"><span class="kw">&lt;la-checkbox</span>
+<span class="at">label</span>=<span class="str">"Select all rows"</span>
+<span class="at">.indeterminate</span>=<span class="str">${someSelected}</span>
+<span class="at">.checked</span>=<span class="str">${allSelected}</span>
+<span class="at">@la-change</span>=<span class="str">${toggleAll}</span><span class="kw">&gt;&lt;/la-checkbox&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Inside la-data-table</p>
+<div class="docs-code"><span class="kw">&lt;la-data-table</span>
+<span class="at">selectable</span>=<span class="str">"multi"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;/la-data-table&gt;</span>
+<span class="at">&lt;!-- la-data-table composes la-checkbox --&gt;</span>
+<span class="at">&lt;!-- for header + row selection --&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>la-checkbox vs la-choice</strong> — <code style="font-family:monospace;font-size:11px;">la-choice</code> is a <em>statement</em> (the row is the component — onboarding, consent, settings), <code style="font-family:monospace;font-size:11px;">la-checkbox</code> is a <em>control</em> (the row is owned by something else — table, menu, toolbar, form grid). Full decision table in <a href="../../design-language/components.md">design-language/components.md</a>.</div>
+<div class="docs-note"><strong>Indeterminate is a visual state</strong> — pair it with a separate <code style="font-family:monospace;font-size:11px;">checked</code> value when "some, not all" items are selected. On user toggle, indeterminate is cleared and <code style="font-family:monospace;font-size:11px;">checked</code> is set — the component does not self-manage the tri-state logic; consumers decide whether the next state is "all on" or "all off".</div>
+<div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">la-change</code> fires on user toggle only</strong> — programmatically setting <code style="font-family:monospace;font-size:11px;">.checked = true</code> does not dispatch an event. This matches the native <code style="font-family:monospace;font-size:11px;">change</code> convention and prevents feedback loops in controlled patterns.</div>
+<div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">disabled</code> forwards to the inner input</strong> — reflects to the host for the visual dim (<code style="font-family:monospace;font-size:11px;">opacity: 0.4</code>, pointer-events blocked) and is passed through to the native <code style="font-family:monospace;font-size:11px;">&lt;input&gt;</code> so Tab and Space/Enter are also blocked, not just clicks.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveCb = document.getElementById('live-cb');
+        const labelInput = document.getElementById('ctrl-label');
+        const log = document.getElementById('event-log');
+        const logLines = [];
+
+        // Checked toggle
+        document.querySelectorAll('[data-checked]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-checked]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.checked === 'true') {
+              liveCb.setAttribute('checked', '');
+            } else {
+              liveCb.removeAttribute('checked');
+            }
+          });
+        });
+
+        // Indeterminate toggle
+        document.querySelectorAll('[data-indet]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-indet]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.indet === 'true') {
+              liveCb.setAttribute('indeterminate', '');
+            } else {
+              liveCb.removeAttribute('indeterminate');
+            }
+          });
+        });
+
+        // Disabled toggle
+        document.querySelectorAll('[data-disabled]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-disabled]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.disabled === 'true') {
+              liveCb.setAttribute('disabled', '');
+            } else {
+              liveCb.removeAttribute('disabled');
+            }
+          });
+        });
+
+        // Label input
+        labelInput.addEventListener('input', () => {
+          liveCb.setAttribute('label', labelInput.value || '');
+        });
+
+        // Event log — bind to every la-checkbox on the page so the log reflects
+        // interactions with controls, snapshots, and the data-table demo.
+        document.querySelectorAll('la-checkbox').forEach(cb => {
+          cb.addEventListener('la-change', (e) => {
+            const time = new Date().toLocaleTimeString();
+            const lbl = cb.getAttribute('label') || '(unlabelled)';
+            logLines.unshift(`[${time}] ${lbl} · la-change · ${JSON.stringify(e.detail)}`);
+            log.textContent = logLines.slice(0, 12).join('\n');
+          });
+        });
+
+        // Data-table snapshot
+        const snapTable = document.getElementById('snap-in-table');
+        snapTable.columns = [
+          {id: 'document', label: 'Document', width: '2fr'},
+          {id: 'owner',    label: 'Owner'},
+          {id: 'updated',  label: 'Updated'},
+        ];
+        snapTable.rows = [
+          {id: '1', document: 'Employment Agreement v3', owner: 'Sarah Chen',    updated: '2026-04-22'},
+          {id: '2', document: 'NDA — Acme Corp.',        owner: 'James Wright',  updated: '2026-04-20'},
+          {id: '3', document: 'Share Purchase Agreement',owner: 'Priya Shah',    updated: '2026-04-18'},
+        ];
+        snapTable.selected = ['1'];
+        snapTable.addEventListener('la-selection-change', (e) => {
+          snapTable.selected = e.detail.selected;
+        });
+  })();
+</script>
+
+
+</body>
+</html>

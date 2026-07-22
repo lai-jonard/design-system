@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-table — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<link rel="stylesheet" href="../la-table.css">
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-table</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-table</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1 style="font-weight: var(--la-font-weight-normal);">la-table</h1>
+<p>A horizontal-scroll wrapper around a consumer-provided <code style="font-family:monospace;font-size:11px;">&lt;table&gt;</code>. HTML parsing strips table-structure tokens before they reach shadow DOM, so the table lives in the light DOM, slotted inside <code style="font-family:monospace;font-size:11px;">la-table</code>. Load <code style="font-family:monospace;font-size:11px;">la-table.css</code> in the page head — it targets <code style="font-family:monospace;font-size:11px;">la-table table</code> selectors in the light DOM and applies all default styles.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Full-width table: muted header row, comfortable body cells, bottom border suppressed on the last row.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;">
+<la-table>
+<table>
+<thead>
+<tr>
+<th style="padding-left:24px;">Document</th>
+<th>Party</th>
+<th>Status</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="padding-left:24px;">Employment Agreement — Alex Chen</td>
+<td>Acme Corp.</td>
+<td><la-badge variant="success">Verified</la-badge></td>
+<td>12 May 2026</td>
+</tr>
+<tr>
+<td style="padding-left:24px;">Shareholder Loan Agreement</td>
+<td>Acme Corp.</td>
+<td><la-badge variant="warning">Expiring</la-badge></td>
+<td>3 May 2026</td>
+</tr>
+<tr>
+<td style="padding-left:24px;">NDA — River Kim</td>
+<td>River Kim</td>
+<td><la-badge variant="info">Processing</la-badge></td>
+<td>1 May 2026</td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+<div style="padding:16px 24px;font-size:12px;color:#4B5563;line-height:1.7;border-top:1px solid var(--la-color-border-light,#E5E7EB);">
+<ol style="list-style:decimal inside;padding:0;margin:0;display:flex;flex-direction:column;gap:4px;">
+<li><strong>Header row</strong> — <code style="font-family:monospace;font-size:11px;">thead th</code>: smaller font-size, muted colour, bottom border.</li>
+<li><strong>Body cell</strong> — <code style="font-family:monospace;font-size:11px;">tbody td</code>: comfortable padding, full-width bottom border. Hover tints the row <code style="font-family:monospace;font-size:11px;">--la-color-bg-subtle</code>.</li>
+<li><strong>Last row</strong> — border-bottom suppressed on <code style="font-family:monospace;font-size:11px;">tr:last-child td</code> so the table blends into a bordered card without a double-line.</li>
+<li><strong>Badge cells</strong> — <code style="font-family:monospace;font-size:11px;">la-badge</code> components drop directly inside <code style="font-family:monospace;font-size:11px;">&lt;td&gt;</code>; vertical-align is set to <code style="font-family:monospace;font-size:11px;">middle</code> so they align with text.</li>
+</ol>
+</div>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Row 2 state</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-row-state="default">Default</button>
+<button class="btn-toggle" data-row-state="success">Success</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;">
+<la-table>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Party</th>
+<th>Status</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Employment Agreement — Alex Chen</td>
+<td>Acme Corp.</td>
+<td><la-badge variant="success">Verified</la-badge></td>
+<td>12 May 2026</td>
+</tr>
+<tr id="live-row">
+<td>Shareholder Loan Agreement</td>
+<td>Acme Corp.</td>
+<td id="live-badge"><la-badge variant="warning">Expiring</la-badge></td>
+<td>3 May 2026</td>
+</tr>
+<tr>
+<td>NDA — River Kim</td>
+<td>River Kim</td>
+<td><la-badge variant="info">Processing</la-badge></td>
+<td>1 May 2026</td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Default — header row + body rows, last row has no bottom border</div>
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;">
+<la-table>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Party</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Articles of Incorporation</td>
+<td>Acme Corp.</td>
+<td>10 May 2026</td>
+</tr>
+<tr>
+<td>Board Resolution — Share Issuance</td>
+<td>Acme Corp.</td>
+<td>2 May 2026</td>
+</tr>
+<tr>
+<td>Shareholders' Agreement</td>
+<td>Acme Corp.</td>
+<td>28 Apr 2026</td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Success row — <code style="font-family:monospace;font-size:11px;">class="success"</code> on <code style="font-family:monospace;font-size:11px;">&lt;tr&gt;</code> tints the row with <code style="font-family:monospace;font-size:11px;">--la-color-surface-success</code></div>
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;">
+<la-table>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Status</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Employment Agreement — Alex Chen</td>
+<td><la-badge variant="info">Processing</la-badge></td>
+<td>12 May 2026</td>
+</tr>
+<tr class="success">
+<td>IP Assignment — Jamie Lee</td>
+<td><la-badge variant="success">Verified</la-badge></td>
+<td>10 May 2026</td>
+</tr>
+<tr>
+<td>Consulting Agreement — River Kim</td>
+<td><la-badge variant="urgent">Missing</la-badge></td>
+<td>—</td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Success row — <code style="font-family:monospace;font-size:11px;">data-success</code> attribute form (equivalent; use whichever fits your template)</div>
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;">
+<la-table>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Status</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr data-success>
+<td>Articles of Incorporation</td>
+<td><la-badge variant="success">Verified</la-badge></td>
+<td>10 May 2026</td>
+</tr>
+<tr>
+<td>Board Resolution — Share Issuance</td>
+<td><la-badge variant="info">Processing</la-badge></td>
+<td>2 May 2026</td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Mixed states — success rows alongside default rows in the same table</div>
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;">
+<la-table>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Party</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr class="success">
+<td>Articles of Incorporation</td>
+<td>Acme Corp.</td>
+<td><la-badge variant="success">Verified</la-badge></td>
+</tr>
+<tr class="success">
+<td>IP Assignment — Alex Chen</td>
+<td>Alex Chen</td>
+<td><la-badge variant="success">Verified</la-badge></td>
+</tr>
+<tr>
+<td>Board Resolution — Share Issuance</td>
+<td>Acme Corp.</td>
+<td><la-badge variant="info">Processing</la-badge></td>
+</tr>
+<tr>
+<td>Shareholders' Agreement</td>
+<td>Acme Corp.</td>
+<td><la-badge variant="urgent">Missing</la-badge></td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Horizontal scroll — wide tables overflow within the wrapper; the card boundary stays fixed</div>
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;max-width:480px;">
+<la-table>
+<table style="min-width:720px;">
+<thead>
+<tr>
+<th>Document</th>
+<th>Counterparty</th>
+<th>Executed</th>
+<th>Expiry</th>
+<th>Status</th>
+<th>Owner</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Employment Agreement — Alex Chen</td>
+<td>Acme Corp.</td>
+<td>1 Mar 2026</td>
+<td>—</td>
+<td><la-badge variant="success">Verified</la-badge></td>
+<td>Jamie Lee</td>
+</tr>
+<tr>
+<td>Shareholder Loan Agreement</td>
+<td>Nova Partners</td>
+<td>15 Jan 2026</td>
+<td>15 Jan 2027</td>
+<td><la-badge variant="warning">Expiring</la-badge></td>
+<td>Alex Chen</td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">No rows — empty body; header still renders, consumer provides empty state copy</div>
+<div class="preview-frame" style="display:block;padding:0;overflow:visible;">
+<la-table>
+<table>
+<thead>
+<tr>
+<th>Document</th>
+<th>Status</th>
+<th>Updated</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td colspan="3" style="text-align:center;color:var(--la-color-text-muted);padding:32px 24px;border-bottom:none;">No documents on file.</td>
+</tr>
+</tbody>
+</table>
+</la-table>
+</div>
+</div>
+
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-table</h2>
+    <p>A horizontal-scroll wrapper around a consumer-provided <code style="font-family:monospace;font-size:11px;">&lt;table&gt;</code>. HTML parsing strips stray <code style="font-family:monospace;font-size:11px;">&lt;thead&gt;</code>/<code style="font-family:monospace;font-size:11px;">&lt;tbody&gt;</code>/<code style="font-family:monospace;font-size:11px;">&lt;tr&gt;</code>/<code style="font-family:monospace;font-size:11px;">&lt;th&gt;</code>/<code style="font-family:monospace;font-size:11px;">&lt;td&gt;</code> tokens before they reach shadow DOM, so la-table cannot host table structure directly — consumers nest a real <code style="font-family:monospace;font-size:11px;">&lt;table&gt;</code> inside. Load <code style="font-family:monospace;font-size:11px;">la-tokens-root.css</code> and <code style="font-family:monospace;font-size:11px;">la-table.css</code> once in the page and the nested table inherits the full visual rhythm: muted header row, comfortable body padding, hover highlight, and success-row tint.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>_sortCol</td>
+          <td>—</td>
+          <td><span class="type">string | null</span></td>
+          <td><span class="default">null</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_sortDir</td>
+          <td>—</td>
+          <td><span class="type">&#39;asc&#39; | &#39;desc&#39;</span></td>
+          <td><span class="default">&#39;asc&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-sort-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{ column: string, direction: 'asc' | 'desc' }</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Minimal — default visual rhythm</p>
+<div class="docs-code"><span class="kw">&lt;la-table&gt;</span>
+  <span class="kw">&lt;table&gt;</span>
+    <span class="kw">&lt;thead&gt;&lt;tr&gt;</span>
+      <span class="kw">&lt;th&gt;</span>Document<span class="kw">&lt;/th&gt;</span>
+      <span class="kw">&lt;th&gt;</span>Status<span class="kw">&lt;/th&gt;</span>
+    <span class="kw">&lt;/tr&gt;&lt;/thead&gt;</span>
+    <span class="kw">&lt;tbody&gt;</span>
+      <span class="kw">&lt;tr&gt;</span>
+        <span class="kw">&lt;td&gt;</span>Articles of Incorporation<span class="kw">&lt;/td&gt;</span>
+        <span class="kw">&lt;td&gt;&lt;la-badge</span> <span class="at">variant</span>=<span class="str">"success"</span><span class="kw">&gt;</span>Verified<span class="kw">&lt;/la-badge&gt;&lt;/td&gt;</span>
+      <span class="kw">&lt;/tr&gt;</span>
+    <span class="kw">&lt;/tbody&gt;</span>
+  <span class="kw">&lt;/table&gt;</span>
+<span class="kw">&lt;/la-table&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Success row — mark verified/resolved rows</p>
+<div class="docs-code"><span class="kw">&lt;tr</span> <span class="at">class</span>=<span class="str">"success"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;td&gt;</span>IP Assignment — Jamie Lee<span class="kw">&lt;/td&gt;</span>
+  <span class="kw">&lt;td&gt;&lt;la-badge</span> <span class="at">variant</span>=<span class="str">"success"</span><span class="kw">&gt;</span>Verified<span class="kw">&lt;/la-badge&gt;&lt;/td&gt;</span>
+<span class="kw">&lt;/tr&gt;</span>
+<span class="at">&lt;!-- or attribute form: --&gt;</span>
+<span class="kw">&lt;tr</span> <span class="at">data-success</span><span class="kw">&gt;</span>…<span class="kw">&lt;/tr&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Required stylesheet imports</p>
+<div class="docs-code"><span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="str">"stylesheet"</span>
+      <span class="at">href</span>=<span class="str">"/la-tokens-root.css"</span><span class="kw">&gt;</span>
+<span class="kw">&lt;link</span> <span class="at">rel</span>=<span class="str">"stylesheet"</span>
+      <span class="at">href</span>=<span class="str">"/la-table.css"</span><span class="kw">&gt;</span></div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Why not shadow DOM?</strong> — HTML parsers treat <code style="font-family:monospace;font-size:11px;">&lt;thead&gt;</code>, <code style="font-family:monospace;font-size:11px;">&lt;tbody&gt;</code>, <code style="font-family:monospace;font-size:11px;">&lt;tr&gt;</code>, <code style="font-family:monospace;font-size:11px;">&lt;th&gt;</code>, and <code style="font-family:monospace;font-size:11px;">&lt;td&gt;</code> as invalid outside of a <code style="font-family:monospace;font-size:11px;">&lt;table&gt;</code> and silently hoist or drop them before they reach the custom element. The wrapper pattern is the only reliable way to accept table children in a web component.</div>
+<div class="docs-note"><strong>Success row — class vs attribute</strong> — both <code style="font-family:monospace;font-size:11px;">.success</code> and <code style="font-family:monospace;font-size:11px;">[data-success]</code> apply the tint. The class form is convenient for JS toggling; the attribute form reads cleanly in static markup or server-rendered templates. Either works; pick one consistently per table.</div>
+<div class="docs-note"><strong>Hover is CSS-only</strong> — <code style="font-family:monospace;font-size:11px;">tbody tr:hover td</code> tints the row with <code style="font-family:monospace;font-size:11px;">--la-color-bg-subtle</code>. No JS needed. Success rows honour the hover rule too — they tint over the success background on hover.</div>
+<div class="docs-note"><strong>Horizontal scroll</strong> — <code style="font-family:monospace;font-size:11px;">la-table</code> sets <code style="font-family:monospace;font-size:11px;">overflow-x: auto</code> on its internal wrapper. Set <code style="font-family:monospace;font-size:11px;">min-width</code> on the inner <code style="font-family:monospace;font-size:11px;">&lt;table&gt;</code> when columns should never collapse below a readable width.</div>
+<div class="docs-note"><strong>Empty state</strong> — <code style="font-family:monospace;font-size:11px;">la-table</code> has no built-in empty state. Render a single <code style="font-family:monospace;font-size:11px;">&lt;tr&gt;&lt;td colspan="N"&gt;</code> with your empty-state copy, or conditionally swap the entire component for <code style="font-family:monospace;font-size:11px;">la-empty-state</code>.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveRow = document.getElementById('live-row');
+    const liveBadge = document.getElementById('live-badge');
+
+    document.querySelectorAll('[data-row-state]').forEach(btn => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-row-state]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (btn.dataset.rowState === 'success') {
+          liveRow.classList.add('success');
+          liveBadge.innerHTML = '<la-badge variant="success">Verified</la-badge>';
+        } else {
+          liveRow.classList.remove('success');
+          liveBadge.innerHTML = '<la-badge variant="warning">Expiring</la-badge>';
+        }
+      });
+    });
+  })();
+</script>
+
+
+</body>
+</html>

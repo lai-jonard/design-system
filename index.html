@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview — LawAdvisor AI Design System</title>
+  <script src="bundle.js" defer></script>
+  <link rel="stylesheet" href="docs-shell.css">
+  <link rel="stylesheet" href="assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* Landing-page-specific styles */
+    .page-content-inner { max-width: 960px; gap: 56px; }
+
+    /* Hero */
+    .landing-hero h1 {
+      font-size: 40px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+    }
+    .landing-hero p {
+      font-size: 16px;
+      color: var(--doc-text-2);
+      max-width: 640px;
+      line-height: 1.6;
+    }
+
+    /* Section blocks */
+    .landing-section h2 {
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--doc-text);
+      margin-bottom: 12px;
+      letter-spacing: -0.1px;
+    }
+    .landing-section p {
+      font-size: 14px;
+      color: var(--doc-text-2);
+      line-height: 1.65;
+      max-width: 720px;
+      margin-bottom: 12px;
+    }
+
+    /* Card grid — used for Getting Started + Explore */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .card {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 24px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-lg);
+      text-decoration: none;
+      color: var(--doc-text);
+      transition: border-color 140ms ease, box-shadow 140ms ease,
+        transform 140ms ease;
+    }
+    .card:hover {
+      border-color: var(--doc-accent);
+      box-shadow: var(--doc-shadow-md);
+      transform: translateY(-1px);
+      color: var(--doc-text);
+    }
+    .card-eyebrow {
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--doc-accent);
+      letter-spacing: 0.4px;
+    }
+    .card-title {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--doc-text);
+    }
+    .card-desc {
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+    .card-link {
+      margin-top: auto;
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--doc-accent);
+      padding-top: 6px;
+    }
+
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="index.html" class="active">Overview</a>
+        <a href="foundations/">Foundations</a>
+        <a href="components/">Components</a>
+        <a href="pages/">Pages</a>
+        <a href="patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="what-is-this" href="#what-is-this">What is this</a>
+<a class="docs-nav-item" data-nav-id="getting-started" href="#getting-started">Getting started</a>
+<a class="docs-nav-item" data-nav-id="explore" href="#explore">Explore</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="components/">Components →</a>
+<a class="docs-nav-item" href="foundations/">Foundations →</a>
+<a class="docs-nav-item" href="pages/">Pages →</a>
+<a class="docs-nav-item" href="patterns/">Patterns →</a>
+<a class="docs-nav-item" href="../../handoffs/readiness.md">Readiness dashboard ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="landing-hero">
+<h1>LawAdvisor AI — Design System</h1>
+<p>
+            A Lit-based component library and the shared language behind every LawAdvisor AI product surface.
+            Everything here — primitives, composed components, pages, and the rules that tie them together —
+            is token-driven and designed to read the same way in code and in prose.
+          </p>
+</section>
+
+<section class="landing-section docs-section" id="what-is-this">
+<h2>What is this</h2>
+<p>
+            This is the single source of truth for LawAdvisor AI's UI. If a colour, spacing, radius, motion curve,
+            or interaction pattern shows up in a product screen, it starts here. Component source lives under
+            <code>src/</code>; published docs under <code>docs-src/components/</code> (with in-progress drafts
+            at <code>dev/docs-drafts/</code>); the rules that govern them in
+            <a href="../../CLAUDE.md">CLAUDE.md</a> and <a href="../../design-language/">design-language/</a>.
+          </p>
+<p>
+            The intent is that a designer, engineer, or AI agent can land on any component page, read in under
+            a minute what it does and when to use it, and find the surrounding context (PRD, decisions,
+            readiness) one click away.
+          </p>
+</section>
+
+<section class="landing-section docs-section" id="getting-started">
+<h2>Getting started</h2>
+<p>Three entry points — pick the one that matches what you're here for.</p>
+<div class="card-grid">
+<a class="card" href="foundations.html">
+<span class="card-eyebrow">For designers</span>
+<span class="card-title">Start with foundations</span>
+<span class="card-desc">
+                Tone, colour, spacing, typography, motion, and responsive principles — the decisions that
+                govern every component. Read this first if you're designing new surfaces.
+              </span>
+<span class="card-link">Read foundations →</span>
+</a>
+<a class="card" href="components.html">
+<span class="card-eyebrow">For engineers</span>
+<span class="card-title">Jump to components</span>
+<span class="card-desc">
+                Every primitive and composed component has a preview with live states, an API table, and
+                pointers to source and decisions. Token-driven — no hardcoded values.
+              </span>
+<span class="card-link">Browse components →</span>
+</a>
+<a class="card" href="../../CLAUDE.md">
+<span class="card-eyebrow">For AI agents</span>
+<span class="card-title">Read CLAUDE.md</span>
+<span class="card-desc">
+                Project-wide instructions: how to build components, the <code>/build</code> and
+                <code>/audit</code> workflows, token discipline, copy rules, and what <em>not</em> to touch.
+              </span>
+<span class="card-link">Open CLAUDE.md →</span>
+</a>
+</div>
+</section>
+
+<section class="landing-section docs-section" id="explore">
+<h2>Explore</h2>
+<div class="card-grid">
+<a class="card" href="foundations.html">
+<span class="card-eyebrow">Reference</span>
+<span class="card-title">Foundations</span>
+<span class="card-desc">
+                One long page covering tone, accessibility, colour, spacing, radius, typography, motion,
+                icons, responsive, and troubleshooting.
+              </span>
+<span class="card-link">Open →</span>
+</a>
+<a class="card" href="components.html">
+<span class="card-eyebrow">Catalogue</span>
+<span class="card-title">Component docs</span>
+<span class="card-desc">
+                Every component with live variants, states, and a "For implementation" pointer list.
+                Primary workspace for visual iteration.
+              </span>
+<span class="card-link">Browse catalogue →</span>
+</a>
+<a class="card" href="../../handoffs/readiness.md">
+<span class="card-eyebrow">Status</span>
+<span class="card-title">Readiness dashboard</span>
+<span class="card-desc">
+                Per-component status — ready, in progress, deferred — with notes on what's missing
+                to reach v1.
+              </span>
+<span class="card-link">See readiness →</span>
+</a>
+<a class="card" href="../../decisions/">
+<span class="card-eyebrow">History</span>
+<span class="card-title">Locked decisions</span>
+<span class="card-desc">
+                Numbered log of decisions that affect more than one component — concentric radii,
+                widget icon buttons, insight click behaviour, and more.
+              </span>
+<span class="card-link">Browse decisions →</span>
+</a>
+</div>
+</section>
+
+<section class="landing-section docs-section" style="margin-top: 8px;">
+<h2>Components</h2>
+<p>
+            The full component catalogue — primitives, composed components, and page patterns
+            grouped by purpose — lives on its own page so it stays easy to scan.
+          </p>
+<div class="card-grid" style="margin-top: 16px;">
+<a class="card" href="components.html">
+<span class="card-eyebrow">Catalogue</span>
+<span class="card-title">Browse components</span>
+<span class="card-desc">
+                Every primitive, composed component, and page pattern — categorised, with status
+                chips mirroring the readiness dashboard.
+              </span>
+<span class="card-link">Open components →</span>
+</a>
+</div>
+</section>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="js/doc-shell.js" defer></script>
+  
+</body>
+</html>

@@ -1,0 +1,4 @@
+Meow Script — Copyright The Meow Script Project Authors (Eduardo Tunni).
+Licensed under the SIL Open Font License, Version 1.1.
+Source: https://fonts.google.com/specimen/Meow+Script
+Self-hosted as the signature-mark face (.sig-mark / --la-font-signature).

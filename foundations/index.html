@@ -1,0 +1,1263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foundations — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 880px; }
+    .foundations-hero h1 {
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .foundations-hero p {
+      font-size: 15px;
+      color: var(--doc-text-2);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* Inline swatch / token visualisations */
+    .swatch-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .swatch {
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      overflow: hidden;
+      background: var(--doc-surface);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .swatch-preview {
+      height: 56px;
+      border-bottom: 1px solid var(--doc-border);
+    }
+    .swatch-meta {
+      padding: 8px 10px;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .swatch-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text);
+      display: block;
+    }
+    .swatch-value {
+      color: var(--doc-text-3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+
+    /* Token table — used in the Colour section to list every token with usage. */
+    .token-chip {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      vertical-align: middle;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .token-table td .hex {
+      color: var(--doc-text-3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+    .token-table td .name {
+      color: var(--doc-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+    .token-table td.use {
+      color: var(--doc-text-2);
+      line-height: 1.5;
+      font-family: var(--doc-font);
+      white-space: normal;
+    }
+    /* Inline annotation showing which core primitive (or other token) a
+       semantic token aliases. Sits beside the hex column. */
+    .alias-of {
+      font-size: 11px;
+      color: var(--doc-text-3);
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+    .alias-of code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--doc-text-2);
+    }
+    /* Pull-out callout used inside the colour section to flag the
+       actions-vs-signals rule. */
+    .docs-rule-callout {
+      border-left: 3px solid var(--doc-accent);
+      padding: 12px 14px;
+      background: var(--doc-surface-2);
+      border-radius: 0 var(--doc-r-md) var(--doc-r-md) 0;
+      margin: 16px 0;
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+    .docs-rule-callout strong { color: var(--doc-text); }
+
+    .scale-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .scale-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .scale-bar {
+      background: var(--doc-accent);
+      height: 16px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .scale-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text);
+      width: 160px;
+      flex-shrink: 0;
+    }
+    .scale-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text-3);
+    }
+
+    .radius-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .shadow-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .shadow-demo {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 20px;
+      background: var(--doc-surface-2);
+      border-radius: var(--doc-r-md);
+    }
+    .shadow-box {
+      width: 80px;
+      height: 60px;
+      flex-shrink: 0;
+      background: var(--doc-surface);
+      border-radius: var(--doc-r-md);
+    }
+    .shadow-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      min-width: 0;
+    }
+    .shadow-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text);
+    }
+    .shadow-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      word-break: break-all;
+    }
+    .radius-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+    }
+    .radius-box {
+      width: 64px;
+      height: 48px;
+      background: var(--doc-accent);
+    }
+
+    .type-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .type-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 12px 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .type-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text-3);
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    /* Section block with link-out */
+    .more-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--doc-accent);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="process" href="#process">How we work</a>
+<a class="docs-nav-item" data-nav-id="tone" href="#tone">Tone &amp; voice</a>
+<a class="docs-nav-item" data-nav-id="accessibility" href="#accessibility">Accessibility</a>
+<a class="docs-nav-item" data-nav-id="colour" href="#colour">Colour</a>
+<a class="docs-nav-item" data-nav-id="spacing" href="#spacing">Spacing</a>
+<a class="docs-nav-item" data-nav-id="radius" href="#radius">Radius</a>
+<a class="docs-nav-item" data-nav-id="shadows" href="#shadows">Shadows</a>
+<a class="docs-nav-item" data-nav-id="borders" href="#borders">Borders</a>
+<a class="docs-nav-item" data-nav-id="typography" href="#typography">Typography</a>
+<a class="docs-nav-item" data-nav-id="motion" href="#motion">Motion</a>
+<a class="docs-nav-item" data-nav-id="icons" href="#icons">Icons</a>
+<a class="docs-nav-item" data-nav-id="interaction" href="#interaction">Interaction</a>
+<a class="docs-nav-item" data-nav-id="responsive" href="#responsive">Responsive</a>
+<a class="docs-nav-item" data-nav-id="layout" href="#layout">Layout</a>
+<a class="docs-nav-item" data-nav-id="page-architecture" href="#page-architecture">Page architecture</a>
+<a class="docs-nav-item" data-nav-id="troubleshooting" href="#troubleshooting">Troubleshooting</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Sub-pages</span>
+<a class="docs-nav-item" href="../foundations/elements.html">Elements →</a>
+<a class="docs-nav-item" href="../foundations/typography.html">Typography →</a>
+<a class="docs-nav-item" href="../foundations/copy.html">Copy &amp; Capitalisation →</a>
+<a class="docs-nav-item" href="../foundations/loading.html">Loading →</a>
+<a class="docs-nav-item" href="../foundations/foundations-forms.html">Forms →</a>
+<a class="docs-nav-item" href="../foundations/foundations-form-controls.html">Form controls →</a>
+<a class="docs-nav-item" href="../foundations/foundations-page-layouts.html">Page layouts →</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../index.html">Overview</a>
+<a class="docs-nav-item" href="../components/">Components</a>
+<a class="docs-nav-item" href="../pages/">Pages</a>
+<a class="docs-nav-item" href="../patterns/">Patterns</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Source files</span>
+<a class="docs-nav-item" href="../../src/styles/tokens.ts">tokens.ts ↗</a>
+<a class="docs-nav-item" href="../../motion.css">motion.css ↗</a>
+<a class="docs-nav-item" href="../../CLAUDE.md">CLAUDE.md ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="foundations-hero">
+<h1>Foundations</h1>
+<p>
+            The rules that govern every component. Read this once and the rest of the system
+            makes sense. Every value on this page references a real token — the source of
+            truth is <a href="../../src/styles/tokens.ts"><code>src/styles/tokens.ts</code></a>.
+          </p>
+</section>
+<div class="docs">
+<!-- HOW WE WORK ─────────────────────────────────────────── -->
+<section class="docs-section" id="process">
+<h2>How we work</h2>
+<p>
+              The system runs on two core workflows, both codified as slash commands.
+              <code>/build</code> takes a product request through <em>scout → align → build</em> with
+              hard stops for user approval. <code>/audit</code> runs eight gates against an existing
+              component and flags what's missing to reach v1.
+            </p>
+<p>
+              Every component lives as three artefacts: Lit source in <code>src/</code>, a docs page
+              under <code>docs-src/components/</code> (with in-progress drafts staged at
+              <code>dev/docs-drafts/</code>), and a problem statement in
+              <a href="../../design-language/components.md"><code>design-language/components.md</code></a>.
+              Readiness status is tracked in
+              <a href="../../handoffs/readiness.md"><code>handoffs/readiness.md</code></a>.
+              Cross-component decisions get numbered files in
+              <a href="../../decisions/"><code>decisions/</code></a>.
+            </p>
+<div class="md-rationale" data-path="../../design-language/development-workflow.md"></div>
+</section>
+<!-- TONE ────────────────────────────────────────────────── -->
+<section class="docs-section" id="tone">
+<h2>Tone &amp; voice</h2>
+<p><strong>Calm authority.</strong> Steady and confident, never urgent. British English.
+            Active voice. Verb-first CTAs in Title Case — <em>"Send for Signature", "Add Employee",
+            "View Details"</em> — not noun phrases, never ALL CAPS. Explanatory copy (insight headlines,
+            helper text, empty states) uses sentence case. See the
+            <a href="../foundations/copy.html">Copy &amp; Capitalisation</a> page for the full rule.</p>
+<p>No jargon: "start" not "commence", "check" not "verify", "send" not "submit".
+            Empty states invite action. Success moments are brief ("Done.", "All sorted."). Errors
+            are honest and unflustered.</p>
+<a class="more-link" href="../../CLAUDE.md#copy-rules">Full copy rules in CLAUDE.md →</a>
+<div class="md-rationale" data-path="../../design-language/copy-guidelines.md"></div>
+</section>
+<!-- ACCESSIBILITY ───────────────────────────────────────── -->
+<section class="docs-section" id="accessibility">
+<h2>Accessibility</h2>
+<p>Baseline expectations for every component. These are Gate 7 of <code>/audit</code> —
+            a component can't reach 🟢 without passing them.</p>
+<ul>
+<li>Semantic elements — <code>&lt;button&gt;</code>, <code>&lt;a&gt;</code>,
+                <code>&lt;input&gt;</code> — over <code>&lt;div&gt;</code> with a click handler.</li>
+<li>Icon-only buttons must carry an <code>aria-label</code>. <code>la-icon-button</code>
+                requires its <code>label</code> prop.</li>
+<li>Form controls need a visible label, <code>aria-label</code>, or
+                <code>aria-labelledby</code>.</li>
+<li>Visible focus style always. Never <code>outline: none</code> without an
+                equivalent replacement.</li>
+<li>Colour plus something else — icon, copy, position — for meaning. Never colour alone.</li>
+<li>Motion respects <code>prefers-reduced-motion</code>. The rule lives in
+                <code>motion.css</code> and the shared spinner styles.</li>
+</ul>
+</section>
+<!-- COLOUR ──────────────────────────────────────────────── -->
+<section class="docs-section" id="colour">
+<h2>Colour</h2>
+<p>Two layers. <strong>Core primitives</strong> (the 17 hexes below, organised by hue) are the only
+            place a hex literal lives. <strong>Semantic tokens</strong> (everything else — <code>--la-color-danger</code>,
+            <code>--la-color-bg-subtle</code>, …) are <code>var()</code> aliases that resolve to a primitive.
+            Always reach for the semantic name in components — the primitive layer exists so the relationship
+            between intent (danger) and hue (red) is explicit and editable in one place.</p>
+<p>Other rules: the primary action colour (<code>--la-color-primary</code>) only appears on interactive
+            elements. Coloured surfaces signal state; they don't decorate. Never hardcode hex —
+            always reference a token.</p>
+<h3>Core palette</h3>
+<p>Hue scales. Add a primitive only when ≥2 semantic tokens resolve to the same value;
+            single-consumer values stay inline. Naming follows numeric scale (<code>-50</code> tint,
+            <code>-500</code> base, <code>-700</code> darker) so adding <code>-300</code> or <code>-900</code> later
+            is non-breaking.</p>
+<div class="swatch-row">
+<div class="swatch"><div class="swatch-preview" style="background:#FDF3F3;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-50</span><span class="swatch-value">#FDF3F3</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#CC4643;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-500</span><span class="swatch-value">#CC4643</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#A92F2C;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-700</span><span class="swatch-value">#A92F2C</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#FFFBEB;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-50</span><span class="swatch-value">#FFFBEB</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#F59E0B;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-500</span><span class="swatch-value">#F59E0B</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#B45309;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-700</span><span class="swatch-value">#B45309</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#EFFAF3;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-50</span><span class="swatch-value">#EFFAF3</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#1F7C51;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-500</span><span class="swatch-value">#1F7C51</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#32A66E;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-600</span><span class="swatch-value">#32A66E</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#196343;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-700</span><span class="swatch-value">#196343</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#EEFBFD;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-50</span><span class="swatch-value">#EEFBFD</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#0482C5;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-500</span><span class="swatch-value">#0482C5</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#3B82F6;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-600</span><span class="swatch-value">#3B82F6</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#1B6683;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-700</span><span class="swatch-value">#1B6683</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#F0E8FE;"></div><div class="swatch-meta"><span class="swatch-name">--la-purple-50</span><span class="swatch-value">#F0E8FE</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#6B3FA0;"></div><div class="swatch-meta"><span class="swatch-name">--la-purple-500</span><span class="swatch-value">#6B3FA0</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#FFFFFF;"></div><div class="swatch-meta"><span class="swatch-name">--la-white</span><span class="swatch-value">#FFFFFF</span></div></div>
+</div>
+<div class="docs-rule-callout">
+<strong>Actions vs Signals.</strong> <code>success</code> and <code>danger</code> get the full action grammar
+(<code>-hover/-fg/-text</code>) because they live on buttons. <code>warning</code> and <code>info</code>
+carry only base + <code>-text</code> because they live on alerts and badges, not buttons. If you
+need a "warning button", reach for <code>--la-color-proactive</code> + a custom design conversation —
+don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
+</div>
+<h3>Status — urgent</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#CC4643;"></span></td>
+<td><span class="name">--la-color-urgent</span></td>
+<td><span class="hex">#CC4643</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
+<td class="use">The "you must act now" signal — overdue items, breach states, blocking errors. Used solid on alert icons, badges, and the urgent dot in legal-area rows.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FDF3F3;"></span></td>
+<td><span class="name">--la-color-urgent-bg</span></td>
+<td><span class="hex">#FDF3F3</span> <span class="alias-of">→ <code>--la-red-50</code></span></td>
+<td class="use">Tinted surface paired with <span class="hex">--la-color-urgent-text</span> on alerts and urgent legal-area row highlights.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#A92F2C;"></span></td>
+<td><span class="name">--la-color-urgent-text</span></td>
+<td><span class="hex">#A92F2C</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
+<td class="use">Readable text on <span class="hex">--la-color-urgent-bg</span> — kept dark enough for AA contrast on the tinted surface.</td>
+</tr>
+</tbody>
+</table>
+<h3>Status — proactive</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#F59E0B;"></span></td>
+<td><span class="name">--la-color-proactive</span></td>
+<td><span class="hex">#F59E0B</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
+<td class="use">Heads-up colour — "this needs attention but isn't blocking yet". Pending reviews, upcoming deadlines, soft warnings.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFBEB;"></span></td>
+<td><span class="name">--la-color-proactive-bg</span></td>
+<td><span class="hex">#FFFBEB</span> <span class="alias-of">→ <code>--la-amber-50</code></span></td>
+<td class="use">Surface for proactive alerts and row highlights — pairs with <span class="hex">--la-color-proactive-text</span>.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#B45309;"></span></td>
+<td><span class="name">--la-color-proactive-text</span></td>
+<td><span class="hex">#B45309</span> <span class="alias-of">→ <code>--la-amber-700</code></span></td>
+<td class="use">Readable amber-on-amber for body text inside proactive surfaces.</td>
+</tr>
+</tbody>
+</table>
+<h3>Status — resolved</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#1F7C51;"></span></td>
+<td><span class="name">--la-color-resolved</span></td>
+<td><span class="hex">#1F7C51</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
+<td class="use">Done, signed, sorted. Success badges, signed-document chips, resolved insight markers.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#EFFAF3;"></span></td>
+<td><span class="name">--la-color-resolved-bg</span></td>
+<td><span class="hex">#EFFAF3</span> <span class="alias-of">→ <code>--la-green-50</code></span></td>
+<td class="use">Surface for success messages and resolved-state rows.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#196343;"></span></td>
+<td><span class="name">--la-color-resolved-text</span></td>
+<td><span class="hex">#196343</span> <span class="alias-of">→ <code>--la-green-700</code></span></td>
+<td class="use">Readable green text on <span class="hex">--la-color-resolved-bg</span>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Status — processing</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#0482C5;"></span></td>
+<td><span class="name">--la-color-processing</span></td>
+<td><span class="hex">#0482C5</span> <span class="alias-of">→ <code>--la-blue-500</code></span></td>
+<td class="use">"We're working on it" — automated jobs, document analysis in flight, processing widgets.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#EEFBFD;"></span></td>
+<td><span class="name">--la-color-processing-bg</span></td>
+<td><span class="hex">#EEFBFD</span> <span class="alias-of">→ <code>--la-blue-50</code></span></td>
+<td class="use">Surface for processing widgets and live-status rows.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#1B6683;"></span></td>
+<td><span class="name">--la-color-processing-text</span></td>
+<td><span class="hex">#1B6683</span> <span class="alias-of">→ <code>--la-blue-700</code></span></td>
+<td class="use">Readable text on <span class="hex">--la-color-processing-bg</span>.</td>
+</tr>
+</tbody>
+</table>
+<h3>Status — doc &amp; locked</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#6B3FA0;"></span></td>
+<td><span class="name">--la-color-doc</span></td>
+<td><span class="hex">#6B3FA0</span> <span class="alias-of">→ <code>--la-purple-500</code></span></td>
+<td class="use">Document classification — distinguishes document chips from generic status badges (e.g. "Contract", "Filed").</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#F0E8FE;"></span></td>
+<td><span class="name">--la-color-doc-bg</span></td>
+<td><span class="hex">#F0E8FE</span> <span class="alias-of">→ <code>--la-purple-50</code></span></td>
+<td class="use">Tinted surface for document chips and category labels.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#F1F5F9;"></span></td>
+<td><span class="name">--la-color-locked-bg</span></td>
+<td><span class="hex">#F1F5F9</span></td>
+<td class="use">Soft inset background for gated content panels (la-unlock-panel).</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#6B7280;"></span></td>
+<td><span class="name">--la-color-locked-text</span></td>
+<td><span class="hex">#6B7280</span> <span class="alias-of">→ <code>--la-color-text-muted</code></span></td>
+<td class="use">Muted label text on locked panels — soft enough to read as "not yet active" without disappearing.</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions — primary</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#18181B;"></span></td>
+<td><span class="name">--la-color-primary</span></td>
+<td><span class="hex">#18181B</span></td>
+<td class="use">Primary action — only on interactive elements (buttons, active states, links). Never decorative. Marks "the next obvious step" on every screen.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#27272A;"></span></td>
+<td><span class="name">--la-color-primary-hover</span></td>
+<td><span class="hex">#27272A</span></td>
+<td class="use">Hover state of primary buttons and active rails.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-primary-fg</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td class="use">Text and icons sitting on top of solid <span class="hex">--la-color-primary</span> surfaces.</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions — secondary</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-secondary-bg</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td class="use">Resting fill for secondary buttons and outlined controls.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#1E262B;"></span></td>
+<td><span class="name">--la-color-secondary-text</span></td>
+<td><span class="hex">#1E262B</span> <span class="alias-of">→ <code>--la-color-text</code></span></td>
+<td class="use">Label colour on secondary buttons — full strength dark text on white.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#E2E3E4;"></span></td>
+<td><span class="name">--la-color-secondary-border</span></td>
+<td><span class="hex">#E2E3E4</span></td>
+<td class="use">1px outline of secondary buttons — slightly heavier than the universal border for clear button affordance.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#F3F4F5;"></span></td>
+<td><span class="name">--la-color-secondary-hover</span></td>
+<td><span class="hex">#F3F4F5</span></td>
+<td class="use">Hover fill for secondary buttons and ghost interactions.</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions — success</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#1F7C51;"></span></td>
+<td><span class="name">--la-color-success</span></td>
+<td><span class="hex">#1F7C51</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
+<td class="use">Solid success buttons (Sign, Approve) and success accent on icons.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#196343;"></span></td>
+<td><span class="name">--la-color-success-hover</span></td>
+<td><span class="hex">#196343</span> <span class="alias-of">→ <code>--la-green-700</code></span></td>
+<td class="use">Hover state for solid success buttons.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-success-fg</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td class="use">Text on solid success surfaces.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#1F7C51;"></span></td>
+<td><span class="name">--la-color-success-text</span></td>
+<td><span class="hex">#1F7C51</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
+<td class="use">Readable text on tinted success surfaces (alerts, success-row highlights).</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions — danger</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#CC4643;"></span></td>
+<td><span class="name">--la-color-danger</span></td>
+<td><span class="hex">#CC4643</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
+<td class="use">Solid destructive buttons (Delete, Revoke, Remove). The same hue as <span class="hex">--la-color-urgent</span> — irreversible action and urgent state share weight.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#A92F2C;"></span></td>
+<td><span class="name">--la-color-danger-hover</span></td>
+<td><span class="hex">#A92F2C</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
+<td class="use">Hover state for solid danger buttons.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-danger-fg</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td class="use">Text on solid danger surfaces.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#A92F2C;"></span></td>
+<td><span class="name">--la-color-danger-text</span></td>
+<td><span class="hex">#A92F2C</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
+<td class="use">Readable text on tinted danger surfaces (alerts, ghost-danger button hover).</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions — neutral</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#374151;"></span></td>
+<td><span class="name">--la-color-neutral</span></td>
+<td><span class="hex">#374151</span></td>
+<td class="use">Neutral CTA — softer than primary's near-black. Used where primary feels too heavy or where two solid CTAs sit side by side.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#2E3644;"></span></td>
+<td><span class="name">--la-color-neutral-hover</span></td>
+<td><span class="hex">#2E3644</span></td>
+<td class="use">Hover state for neutral buttons.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-neutral-fg</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td class="use">Text on solid neutral surfaces.</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions — warning &amp; info</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#F59E0B;"></span></td>
+<td><span class="name">--la-color-warning</span></td>
+<td><span class="hex">#F59E0B</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
+<td class="use">Warning accent — non-blocking attention on icons and badges.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#B45309;"></span></td>
+<td><span class="name">--la-color-warning-text</span></td>
+<td><span class="hex">#B45309</span> <span class="alias-of">→ <code>--la-amber-700</code></span></td>
+<td class="use">Readable warning text on tinted-warning surfaces.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#0482C5;"></span></td>
+<td><span class="name">--la-color-info</span></td>
+<td><span class="hex">#0482C5</span> <span class="alias-of">→ <code>--la-blue-500</code></span></td>
+<td class="use">Info accent — neutral informational signal (icons, badges, processing).</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#1B6683;"></span></td>
+<td><span class="name">--la-color-info-text</span></td>
+<td><span class="hex">#1B6683</span> <span class="alias-of">→ <code>--la-blue-700</code></span></td>
+<td class="use">Readable info text on tinted-info surfaces.</td>
+</tr>
+</tbody>
+</table>
+<h3>Surfaces — page &amp; cards</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-bg</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td class="use">Plain white — the default surface for cards, widgets, modals.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FAFAFA;"></span></td>
+<td><span class="name">--la-color-bg-subtle</span></td>
+<td><span class="hex">#FAFAFA</span></td>
+<td class="use">Page chrome — page header, tab bar, sidebar background. Subtle depth separation from white cards without using a shadow.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#F5F5F5;"></span></td>
+<td><span class="name">--la-color-bg-muted</span></td>
+<td><span class="hex">#F5F5F5</span></td>
+<td class="use">Hover fill for interactive rows — sidebar nav, document items, list rows.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-bg-page</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-color-bg</code></span></td>
+<td class="use">Semantic name for the page-level body background. Same value as <span class="hex">--la-color-bg</span>.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FCFCFC;"></span></td>
+<td><span class="name">--la-color-bg-surface</span></td>
+<td><span class="hex">#FCFCFC</span></td>
+<td class="use">Slightly off-white for aside panels and secondary content shells — a hair separation from pure white.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#EBEBEB;"></span></td>
+<td><span class="name">--la-color-bg-active</span></td>
+<td><span class="hex">#EBEBEB</span></td>
+<td class="use">Active selection background — the selected nav item, the pressed state of a row.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#171717;"></span></td>
+<td><span class="name">--la-color-bg-invert</span></td>
+<td><span class="hex">#171717</span></td>
+<td class="use">Dark surface for inverted contexts — dark toasts, tooltips, code blocks.</td>
+</tr>
+</tbody>
+</table>
+<h3>Surfaces — tinted states</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#EFFAF3;"></span></td>
+<td><span class="name">--la-color-surface-success</span></td>
+<td><span class="hex">#EFFAF3</span> <span class="alias-of">→ <code>--la-green-50</code></span></td>
+<td class="use">Success alert background, success-row highlights, ghost-success button hover.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFBEB;"></span></td>
+<td><span class="name">--la-color-surface-warning</span></td>
+<td><span class="hex">#FFFBEB</span> <span class="alias-of">→ <code>--la-amber-50</code></span></td>
+<td class="use">Warning alert background, notification bars.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FDF3F3;"></span></td>
+<td><span class="name">--la-color-surface-danger</span></td>
+<td><span class="hex">#FDF3F3</span> <span class="alias-of">→ <code>--la-red-50</code></span></td>
+<td class="use">Danger alert background, ghost-danger button hover.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#EEFBFD;"></span></td>
+<td><span class="name">--la-color-surface-info</span></td>
+<td><span class="hex">#EEFBFD</span> <span class="alias-of">→ <code>--la-blue-50</code></span></td>
+<td class="use">Info alert background, processing-state surfaces.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:rgba(0,0,0,0.2);"></span></td>
+<td><span class="name">--la-color-scrim</span></td>
+<td><span class="hex">rgba(0,0,0,0.2)</span></td>
+<td class="use">Modal and sheet backdrop — dims the page behind a surface so the overlay reads as primary. Translucent.</td>
+</tr>
+</tbody>
+</table>
+<h3>Text</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#1E262B;"></span></td>
+<td><span class="name">--la-color-text</span></td>
+<td><span class="hex">#1E262B</span></td>
+<td class="use">Primary readable text — body copy, headings, table values.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#4B5563;"></span></td>
+<td><span class="name">--la-color-text-secondary</span></td>
+<td><span class="hex">#4B5563</span></td>
+<td class="use">Supporting copy and secondary labels — paragraph text under a heading, form helper text.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#6B7280;"></span></td>
+<td><span class="name">--la-color-text-muted</span></td>
+<td><span class="hex">#6B7280</span></td>
+<td class="use">Captions, meta, dates — not the main message but still legible.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#9CA3AF;"></span></td>
+<td><span class="name">--la-color-text-faint</span></td>
+<td><span class="hex">#9CA3AF</span></td>
+<td class="use">Hint copy and placeholder text — recedes into the background.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#D1D5DB;"></span></td>
+<td><span class="name">--la-color-text-disabled</span></td>
+<td><span class="hex">#D1D5DB</span></td>
+<td class="use">Disabled label text — paired with <code>opacity: 0.4</code> on interactive elements.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#FFFFFF;"></span></td>
+<td><span class="name">--la-color-text-invert</span></td>
+<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td class="use">Text on dark/inverted surfaces — toasts, tooltips, dark mode chrome.</td>
+</tr>
+</tbody>
+</table>
+<h3>Borders</h3>
+<table class="docs-table token-table">
+<thead>
+<tr><th style="width:36px;"></th><th>Token</th><th>Hex</th><th>Where &amp; why</th></tr>
+</thead>
+<tbody>
+<tr>
+<td><span class="token-chip" style="background:#DADDEC;"></span></td>
+<td><span class="name">--la-color-border</span></td>
+<td><span class="hex">#DADDEC</span></td>
+<td class="use">Default interactive border — buttons, inputs, cards, toasts.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#ECEEF5;"></span></td>
+<td><span class="name">--la-color-border-light</span></td>
+<td><span class="hex">#ECEEF5</span></td>
+<td class="use">Structural dividers — table rows, panel edges, section lines. Quieter than the interactive border.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#3B82F6;"></span></td>
+<td><span class="name">--la-color-border-focus</span></td>
+<td><span class="hex">#3B82F6</span> <span class="alias-of">→ <code>--la-blue-600</code></span></td>
+<td class="use">Focus ring on form controls — paired with <span class="hex">--la-input-shadow-focus</span>.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#18181B;"></span></td>
+<td><span class="name">--la-color-border-active</span></td>
+<td><span class="hex">#18181B</span></td>
+<td class="use">Active/selected outline — sidebar nav rail, active tab, selected card.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#32A66E;"></span></td>
+<td><span class="name">--la-color-border-success</span></td>
+<td><span class="hex">#32A66E</span> <span class="alias-of">→ <code>--la-green-600</code></span></td>
+<td class="use">Success alert border, ghost-success button hover border.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#F59E0B;"></span></td>
+<td><span class="name">--la-color-border-warning</span></td>
+<td><span class="hex">#F59E0B</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
+<td class="use">Warning alert border.</td>
+</tr>
+<tr>
+<td><span class="token-chip" style="background:#CC4643;"></span></td>
+<td><span class="name">--la-color-border-danger</span></td>
+<td><span class="hex">#CC4643</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
+<td class="use">Danger alert border, ghost-danger button hover border.</td>
+</tr>
+</tbody>
+</table>
+<a class="more-link" href="../../src/styles/tokens.ts">Source: tokens.ts →</a>
+<div class="md-rationale" data-path="../../design-language/colour.md"></div>
+</section>
+<!-- SPACING ─────────────────────────────────────────────── -->
+<section class="docs-section" id="spacing">
+<h2>Spacing</h2>
+<p>Six-step scale. If the value you need isn't on the scale, that's a design
+            conversation — not a hardcoded pixel.</p>
+<div class="scale-row">
+<div class="scale-item">
+<span class="scale-name">--la-space-xs</span>
+<div class="scale-bar" style="width:4px;"></div>
+<span class="scale-value">4px</span>
+</div>
+<div class="scale-item">
+<span class="scale-name">--la-space-sm</span>
+<div class="scale-bar" style="width:8px;"></div>
+<span class="scale-value">8px</span>
+</div>
+<div class="scale-item">
+<span class="scale-name">--la-space-md</span>
+<div class="scale-bar" style="width:12px;"></div>
+<span class="scale-value">12px</span>
+</div>
+<div class="scale-item">
+<span class="scale-name">--la-space-lg</span>
+<div class="scale-bar" style="width:16px;"></div>
+<span class="scale-value">16px</span>
+</div>
+<div class="scale-item">
+<span class="scale-name">--la-space-xl</span>
+<div class="scale-bar" style="width:24px;"></div>
+<span class="scale-value">24px</span>
+</div>
+<div class="scale-item">
+<span class="scale-name">--la-space-2xl</span>
+<div class="scale-bar" style="width:32px;"></div>
+<span class="scale-value">32px</span>
+</div>
+</div>
+</section>
+<!-- RADIUS ──────────────────────────────────────────────── -->
+<section class="docs-section" id="radius">
+<h2>Radius</h2>
+<p>Corner radii follow the concentric rule — a panel's outer radius equals its padding
+            plus the radius of the children inside it. Nested shapes share a centre; the eye
+            reads one considered system instead of two rounded things.</p>
+<div class="radius-row">
+<div class="radius-demo">
+<div class="radius-box" style="border-radius:6px;"></div>
+<span>--la-radius-sm<br/>6px</span>
+</div>
+<div class="radius-demo">
+<div class="radius-box" style="border-radius:8px;"></div>
+<span>--la-radius-md<br/>8px</span>
+</div>
+<div class="radius-demo">
+<div class="radius-box" style="border-radius:12px;"></div>
+<span>--la-radius-lg<br/>12px</span>
+</div>
+<div class="radius-demo">
+<div class="radius-box" style="border-radius:16px;"></div>
+<span>--la-radius-xl<br/>16px</span>
+</div>
+<div class="radius-demo">
+<div class="radius-box" style="border-radius:28px;"></div>
+<span>--la-radius-2xl<br/>28px</span>
+</div>
+<div class="radius-demo">
+<div class="radius-box" style="border-radius:9999px;width:64px;height:24px;"></div>
+<span>--la-radius-pill<br/>9999px</span>
+</div>
+<div class="radius-demo">
+<div class="radius-box" style="border-radius:50%;width:56px;height:56px;"></div>
+<span>--la-radius-circle<br/>50%</span>
+</div>
+</div>
+<a class="more-link" href="../../decisions/06-panel-concentric-radius.md">Concentric radius decision →</a>
+</section>
+<!-- SHADOWS ─────────────────────────────────────────────── -->
+<section class="docs-section" id="shadows">
+<h2>Shadows</h2>
+<p>Three elevation steps. Per CLAUDE.md, shadows only appear on <strong>floating
+            elements</strong> — modals, dropdowns, toasts, ambient trays. Never on static cards
+            sitting inside a container; that's what borders and surface tints are for.</p>
+<div class="shadow-row">
+<div class="shadow-demo">
+<div class="shadow-box" style="box-shadow: 0 1px 2px rgba(3,7,18,0.08);"></div>
+<span class="shadow-meta">
+<span class="shadow-name">--la-shadow-sm</span>
+<span class="shadow-value">0 1px 2px rgba(3,7,18,0.08)</span>
+</span>
+</div>
+<div class="shadow-demo">
+<div class="shadow-box" style="box-shadow: 0 0 0 1px #F1F3FA, 0 1px 2px -1px rgba(3,7,18,0.08), 0 2px 4px 0 rgba(3,7,18,0.04);"></div>
+<span class="shadow-meta">
+<span class="shadow-name">--la-shadow-md</span>
+<span class="shadow-value">0 0 0 1px #F1F3FA, 0 1px 2px -1px rgba(3,7,18,.08), 0 2px 4px 0 rgba(3,7,18,.04)</span>
+</span>
+</div>
+<div class="shadow-demo">
+<div class="shadow-box" style="box-shadow: 0 16px 48px rgba(0,0,0,0.12);"></div>
+<span class="shadow-meta">
+<span class="shadow-name">--la-shadow-lg</span>
+<span class="shadow-value">0 16px 48px rgba(0,0,0,0.12)</span>
+</span>
+</div>
+</div>
+</section>
+<!-- BORDERS ─────────────────────────────────────────────── -->
+<section class="docs-section" id="borders">
+<h2>Borders</h2>
+<p>
+              Two categories of border tokens with different purposes — structural dividers
+              and emphasis. Source of truth is
+              <a href="../../src/styles/tokens.ts"><code>tokens.ts</code></a>; full rationale
+              below from <code>design-language/borders.md</code>.
+            </p>
+<div class="md-rationale" data-path="../../design-language/borders.md"></div>
+</section>
+<!-- TYPOGRAPHY ──────────────────────────────────────────── -->
+<section class="docs-section" id="typography">
+<h2>Typography</h2>
+<p>Inter, loaded globally. Headings are <code>font-weight: 600</code> — never 700.
+            Hierarchy comes from weight + grey scale, never colour. No all-caps outside
+            narrow system chrome (eyebrow labels, table headers).</p>
+<div class="type-row">
+<div class="type-item">
+<span class="type-label">--la-font-size-4xl / 24px</span>
+<span style="font-size:24px;font-weight:600;">The quick brown fox</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-3xl / 20px</span>
+<span style="font-size:20px;font-weight:600;">The quick brown fox</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-2xl / 18px</span>
+<span style="font-size:18px;font-weight:600;">The quick brown fox</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-xl / 16px</span>
+<span style="font-size:16px;font-weight:500;">The quick brown fox</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-lg / 14px</span>
+<span style="font-size:14px;">The quick brown fox jumps over the lazy dog.</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-base / 13px</span>
+<span style="font-size:13px;">Body copy — 1–2 sentences max, per the copy rules.</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-md / 12px</span>
+<span style="font-size:12px;">Dense chrome — table cells, inline controls.</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-sm / 11px</span>
+<span style="font-size:11px;color:var(--doc-text-3);">Meta, captions, secondary text.</span>
+</div>
+<div class="type-item">
+<span class="type-label">--la-font-size-xs / 10px</span>
+<span style="font-size:10px;color:var(--doc-text-3);">Smallest legible step — status chips, badges.</span>
+</div>
+</div>
+<p style="margin-top:16px;">
+              Weight tokens: <code>--la-font-weight-normal</code> (400),
+              <code>--la-font-weight-medium</code> (500),
+              <code>--la-font-weight-semibold</code> (600),
+              <code>--la-font-weight-bold</code> (700).
+              Base line-height <code>--la-line-height</code> (1.5).
+            </p>
+<a class="more-link" href="foundations/typography.html">Read the full Typography page — use cases, heading mapping, don'ts, source references →</a>
+</section>
+<!-- MOTION ──────────────────────────────────────────────── -->
+<section class="docs-section" id="motion">
+<h2>Motion</h2>
+<p>Source of truth is <a href="../../motion.css"><code>motion.css</code></a>.
+            Utility classes + tokens handle every animation — never handwritten keyframes,
+            never <code>ease-in</code>.</p>
+<ul>
+<li><strong>GPU-safe only</strong> — animate <code>transform</code> and
+                <code>opacity</code>. Never <code>height</code>, <code>width</code>,
+                <code>top</code>, <code>left</code>, <code>background</code>, or
+                <code>color</code>.</li>
+<li><strong>Never scale from zero</strong> — minimum starting scale is 0.96.</li>
+<li><strong>Max 300ms</strong> for repeated interactions, 500ms for anything
+                triggered often.</li>
+<li><strong>Stagger:</strong> 40–60ms between list items.</li>
+<li><strong>Reduced motion:</strong> motion.css automatically collapses all
+                durations to 0ms when <code>prefers-reduced-motion</code> is set.</li>
+</ul>
+<h3>Easing</h3>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Curve</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>--ease-out</td><td>cubic-bezier(0.23, 1, 0.32, 1)</td><td>Enters — elements arriving on screen.</td></tr>
+<tr><td>--ease</td><td>cubic-bezier(0.4, 0, 0.2, 1)</td><td>Hovers and micro-interactions.</td></tr>
+<tr><td>--ease-in-out</td><td>cubic-bezier(0.77, 0, 0.175, 1)</td><td>Two-phase transitions where both ends matter.</td></tr>
+<tr><td>--ease-spring</td><td>cubic-bezier(0.34, 1.56, 0.64, 1)</td><td>Playful emphasis — bounce on landing.</td></tr>
+<tr><td>--ease-spring-sm</td><td>cubic-bezier(0.22, 1, 0.36, 1)</td><td>Subtle spring for small UI nudges.</td></tr>
+<tr><td>--ease-snappy</td><td>cubic-bezier(0.16, 1, 0.3, 1)</td><td>Fast, decisive — dismissals, confirmations.</td></tr>
+<tr><td>--ease-drawer</td><td>cubic-bezier(0.32, 0.72, 0, 1)</td><td>Drawers, sidebars, sheets that slide.</td></tr>
+</tbody>
+</table>
+<h3>Durations</h3>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>--dur-instant</td><td>100ms</td><td>Tooltips, feedback too small to read as motion.</td></tr>
+<tr><td>--dur-fast</td><td>150ms</td><td>Hovers, press feedback.</td></tr>
+<tr><td>--dur-base</td><td>200ms</td><td>Standard in/out transitions.</td></tr>
+<tr><td>--dur-modal</td><td>250ms</td><td>Modals, dialogs, overlays.</td></tr>
+<tr><td>--dur-page</td><td>350ms</td><td>Page or layout-level transitions.</td></tr>
+</tbody>
+</table>
+<div class="docs-warning">
+<strong>Duplicate duration scale in tokens.ts.</strong>
+              A legacy <code>--la-dur-fast/base/modal/slow</code> set still exists alongside
+              <code>--dur-*</code>. Use <code>--dur-*</code> for new code; a cleanup pass on the
+              legacy set is pending.
+            </div>
+<h3>Stagger &amp; scale presets</h3>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Value</th><th>Use</th></tr></thead>
+<tbody>
+<tr><td>--stagger-sm</td><td>30ms</td><td>Tight lists, badges.</td></tr>
+<tr><td>--stagger-md</td><td>50ms</td><td>Default list stagger.</td></tr>
+<tr><td>--stagger-lg</td><td>60ms</td><td>Roomy stagger — hero rows, big cards.</td></tr>
+<tr><td>--scale-press</td><td>0.97</td><td>Button press.</td></tr>
+<tr><td>--scale-enter</td><td>0.96</td><td>Minimum enter scale — never lower.</td></tr>
+<tr><td>--scale-hover</td><td>1.02</td><td>Subtle lift on hover.</td></tr>
+</tbody>
+</table>
+<a class="more-link" href="../../motion.css">Open motion.css →</a>
+<div class="md-rationale" data-path="../../design-language/motion.md"></div>
+</section>
+<!-- ICONS ───────────────────────────────────────────────── -->
+<section class="docs-section" id="icons">
+<h2>Icons</h2>
+<p><a href="https://phosphoricons.com/" target="_blank">Phosphor</a> only.
+            Regular for resting state (<code>ph ph-file</code>), fill for active or
+            emphasised (<code>ph-fill ph-check-circle</code>), bold for weighted
+            typographic use.</p>
+<p><strong>Icons always inherit colour from their parent — never hardcode.</strong>
+            Set <code>color</code> on the container; the glyph follows. Pair colour with
+            something else (position, copy, weight) for meaning — never colour alone, per the
+            accessibility baseline.</p>
+<p>Any component using icons inside shadow DOM must include
+            <code>${iconStyles}</code> at the top of <code>render()</code> so the Phosphor
+            CSS reaches the shadow root.</p>
+<div class="docs-note">
+<strong>Preview pages</strong> must also link the Phosphor CSS in
+              <code>&lt;head&gt;</code> — the <code>@font-face</code> registers globally,
+              while <code>iconStyles</code> covers the component's shadow tree.
+            </div>
+<div class="md-rationale" data-path="../../design-language/iconography.md"></div>
+</section>
+<!-- INTERACTION ─────────────────────────────────────────── -->
+<section class="docs-section" id="interaction">
+<h2>Interaction</h2>
+<p>
+              How the system behaves under pointer and keyboard — hover, focus, active,
+              disabled, cursor rules. Pulled from <code>design-language/interaction.md</code>.
+            </p>
+<div class="md-rationale" data-path="../../design-language/interaction.md"></div>
+</section>
+<!-- RESPONSIVE ──────────────────────────────────────────── -->
+<section class="docs-section" id="responsive">
+<h2>Responsive</h2>
+<p>We build for desktop first, degrade cleanly to tablet, adapt to mobile. Component-level
+            layout uses <strong>container queries</strong> where possible rather than viewport
+            breakpoints — widgets should react to their own width, not the window's.</p>
+<ul>
+<li><code>container-type: inline-size</code> on the host, then
+                <code>@container (max-width: 420px) {…}</code> inside.</li>
+<li>Truncate long text with <code>text-overflow: ellipsis</code> on any row
+                that stacks inside a variable-width container.</li>
+<li>Use <code>flex-shrink: 0</code> on fixed-dimension children (icons, avatars,
+                spinners) so they don't deform when siblings grow.</li>
+<li>Full-page layouts use media queries in the page component itself, not in
+                downstream atoms.</li>
+</ul>
+<div class="docs-warning">
+<strong>Gotcha:</strong> <code>container-type: inline-size</code> creates a
+              containing block for absolutely positioned children. Use <code>position: fixed</code>
+              for overlays that need to escape, or hoist them out of the container.
+            </div>
+<div class="md-rationale" data-path="../../design-language/responsive-design.md"></div>
+</section>
+<!-- LAYOUT ──────────────────────────────────────────────── -->
+<section class="docs-section" id="layout">
+<h2>Layout</h2>
+<p>
+              What this library owns vs what the consuming app owns. Composition rules.
+              Pulled from <code>design-language/layout.md</code>.
+            </p>
+<div class="md-rationale" data-path="../../design-language/layout.md"></div>
+</section>
+<!-- PAGE ARCHITECTURE ───────────────────────────────────── -->
+<section class="docs-section" id="page-architecture">
+<h2>Page architecture</h2>
+<p>
+              How pages are structured in apps built with this system — shell, header,
+              main, aside. Pulled from <code>design-language/page-architecture.md</code>.
+            </p>
+<div class="md-rationale" data-path="../../design-language/page-architecture.md"></div>
+</section>
+<!-- TROUBLESHOOTING ─────────────────────────────────────── -->
+<section class="docs-section" id="troubleshooting">
+<h2>Troubleshooting</h2>
+<h3>Icons not rendering inside a component</h3>
+<p>Two-part setup. The page <code>&lt;head&gt;</code> must link the Phosphor CSS
+            (registers <code>@font-face</code> globally). The component's <code>render()</code>
+            must include <code>${iconStyles}</code> (applies the <code>.ph.ph-*</code> class
+            rules inside the shadow root).</p>
+<h3>"npm run dev" not loading the bundle</h3>
+<p>The server root is <code>dev/</code>. Docs drafts at <code>dev/docs-drafts/</code> link
+            <code>../bundle.js</code>. Earlier prototype pages may use <code>../../dev/bundle.js</code>;
+            update to the shorter path when you next touch them.</p>
+<h3>Hardcoded px or hex sneaking back in</h3>
+<p>Both <code>/audit</code> Gate 8 and <code>CLAUDE.md</code> prohibit this.
+            If the value you need isn't in <a href="../../src/styles/tokens.ts"><code>tokens.ts</code></a>,
+            add a token — don't inline the pixel. Intrinsic component dimensions (a 14px
+            spinner, a 32px icon tile) live inside the primitive; everything else references
+            a token.</p>
+<h3>Motion looks wrong in Firefox or Safari</h3>
+<p>Probably animating a layout property by accident. GPU-safe only —
+            <code>transform</code> and <code>opacity</code>. Check the <em>Motion</em>
+            section above for the full rule set.</p>
+</section>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

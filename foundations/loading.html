@@ -1,0 +1,879 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Loading — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 880px; }
+
+    .sub-hero h1 {
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .sub-hero p {
+      font-size: 15px;
+      color: var(--doc-text-2);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+    .sub-hero-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .sub-hero-crumb a { color: var(--doc-text-3); }
+    .sub-hero-crumb a:hover { color: var(--doc-accent); }
+
+    /* Principle cards */
+    .principle-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+    .principle {
+      padding: 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+    .principle strong {
+      display: block;
+      color: var(--doc-text);
+      font-weight: 600;
+      margin-bottom: 4px;
+      font-size: 13px;
+    }
+
+    /* Live motion demos */
+    .demo-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .demo-tile {
+      padding: 24px 16px 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 12px;
+    }
+    .demo-stage {
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+    .demo-meta {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+      text-align: center;
+    }
+    .demo-meta strong { color: var(--doc-text); display: block; margin-bottom: 2px; }
+
+    /* Spinner demo — uses spinnerStyles equivalent */
+    @keyframes lai-spin {
+      to { transform: rotate(360deg); }
+    }
+    .lai-spinner-demo {
+      width: 16px;
+      height: 16px;
+      border: 2px solid #0482C5;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: lai-spin 0.8s linear infinite;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lai-spinner-demo { animation: none; }
+    }
+
+    /* Shimmer demo — proposed .t-shimmer */
+    @keyframes lai-shimmer {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .lai-skeleton-demo {
+      width: 80%;
+      height: 14px;
+      background: #F1F5F9;
+      border-radius: 4px;
+      animation: lai-shimmer 1.6s ease-in-out infinite;
+    }
+    .lai-skeleton-demo + .lai-skeleton-demo {
+      margin-top: 8px;
+      width: 60%;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .lai-skeleton-demo { animation: none; opacity: 0.8; }
+    }
+
+    /* Pulse demo — proposed .t-pulse */
+    @keyframes lai-pulse {
+      0%, 100% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.4); opacity: 0.6; }
+    }
+    .lai-thinking-demo {
+      display: inline-flex;
+      gap: 6px;
+      align-items: center;
+    }
+    .lai-thinking-demo span {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #4B5563;
+      animation: lai-pulse 1.2s ease-in-out infinite;
+    }
+    .lai-thinking-demo span:nth-child(2) { animation-delay: 0.15s; }
+    .lai-thinking-demo span:nth-child(3) { animation-delay: 0.3s; }
+    @media (prefers-reduced-motion: reduce) {
+      .lai-thinking-demo span { animation: none; }
+    }
+
+    /* Determinate progress demo */
+    .lai-progress-demo {
+      width: 100%;
+      height: 4px;
+      background: #ECEEF5;
+      border-radius: 9999px;
+      overflow: hidden;
+    }
+    .lai-progress-demo > span {
+      display: block;
+      width: 100%;
+      height: 100%;
+      background: #18181B;
+      transform-origin: left center;
+      transform: scaleX(0.64);
+      transition: transform 200ms cubic-bezier(0.23, 1, 0.32, 1);
+    }
+
+    /* Status chips */
+    .chip {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 9999px;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.2px;
+      vertical-align: middle;
+    }
+    .chip-built { background: #EFFAF3; color: #196343; }
+    .chip-locked { background: #FFFBEB; color: #B45309; }
+    .chip-informal { background: #FEF3C7; color: #92400E; }
+
+    /* Decision tree */
+    .decision-tree {
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      padding: 20px 24px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12.5px;
+      color: var(--doc-text);
+      line-height: 1.8;
+      overflow-x: auto;
+      white-space: pre;
+    }
+    .decision-tree .q  { color: var(--doc-text); font-weight: 600; }
+    .decision-tree .a  { color: #15803d; }
+    .decision-tree .n  { color: var(--doc-text-3); }
+    .decision-tree .note { color: var(--doc-text-3); font-style: italic; }
+
+    /* Taxonomy entries */
+    .taxonomy-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .tax-entry {
+      padding: 14px 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+    }
+    .tax-entry-head {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 6px;
+      flex-wrap: wrap;
+    }
+    .tax-entry-head .tax-num {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+    .tax-entry-head .tax-name {
+      font-weight: 600;
+      color: var(--doc-text);
+      font-size: 14px;
+    }
+    .tax-entry p {
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+      margin: 0;
+    }
+    .tax-entry code {
+      font-size: 12px;
+    }
+
+    /* la-progress spec block */
+    .spec-block {
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      padding: 20px 24px;
+    }
+    .spec-block dl {
+      display: grid;
+      grid-template-columns: 140px 1fr;
+      gap: 8px 20px;
+      margin: 0;
+      font-size: 13px;
+    }
+    .spec-block dt {
+      color: var(--doc-text-3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+    .spec-block dd {
+      margin: 0;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+    .spec-block dd code { font-size: 12px; }
+
+    /* Don't cards */
+    .dont-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .dont {
+      padding: 12px 16px;
+      background: #fef2f2;
+      border: 1px solid #fecaca;
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      color: #991b1b;
+      line-height: 1.55;
+    }
+    .dont strong { color: #7f1d1d; font-weight: 600; }
+    .dont code { background: rgba(127, 29, 29, 0.08); border-color: rgba(127, 29, 29, 0.2); color: #7f1d1d; }
+
+    /* Source ref */
+    .source-ref {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .source-ref-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      text-decoration: none;
+      color: var(--doc-text);
+    }
+    .source-ref-item:hover { border-color: var(--doc-accent); color: var(--doc-text); }
+    .source-ref-item code {
+      font-size: 12px;
+      background: transparent;
+      border: none;
+      padding: 0;
+      color: var(--doc-text-2);
+    }
+    .source-ref-item .source-ref-desc {
+      color: var(--doc-text-3);
+      font-size: 12px;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Loading</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="principles" href="#principles">Principles</a>
+<a class="docs-nav-item" data-nav-id="thresholds" href="#thresholds">Thresholds</a>
+<a class="docs-nav-item" data-nav-id="decision-tree" href="#decision-tree">Decision tree</a>
+<a class="docs-nav-item" data-nav-id="taxonomy" href="#taxonomy">Taxonomy</a>
+<a class="docs-nav-item" data-nav-id="readiness" href="#readiness">Component readiness</a>
+<a class="docs-nav-item" data-nav-id="family-decisions" href="#family-decisions">Family decisions</a>
+<a class="docs-nav-item" data-nav-id="la-progress" href="#la-progress">la-progress spec</a>
+<a class="docs-nav-item" data-nav-id="motion" href="#motion">Motion demos</a>
+<a class="docs-nav-item" data-nav-id="copy" href="#copy">Copy patterns</a>
+<a class="docs-nav-item" data-nav-id="accessibility" href="#accessibility">Accessibility</a>
+<a class="docs-nav-item" data-nav-id="anti-patterns" href="#anti-patterns">Anti-patterns</a>
+<a class="docs-nav-item" data-nav-id="source" href="#source">Source references</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="./">← All foundations</a>
+<a class="docs-nav-item" href="../">Design system home</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero">
+<div class="sub-hero-crumb">
+<a href="./">Foundations</a> · Loading
+          </div>
+<h1>Loading</h1>
+<p>
+            The system pattern for "the user has waited and we owe them feedback." Covers every place
+            we communicate "something is happening" — from a 200ms button press to a 30-second AI
+            document analysis. This page is the decision layer above the components — pick a category
+            here first, then build, not the other way round.
+          </p>
+</section>
+<div class="docs">
+
+<!-- PRINCIPLES ─────────────────────────────────────────── -->
+<section class="docs-section" id="principles">
+<h2>Principles</h2>
+<p>
+              Five rules, each with its <em>because</em>. They govern every loading decision in the
+              product.
+            </p>
+<div class="principle-grid">
+<div class="principle">
+<strong>Match the indicator to the wait, not the action</strong>
+                A 60ms click and a 30s analysis are different problems. The indicator reflects how
+                long the wait is and whether we know its length — not what the user clicked.
+              </div>
+<div class="principle">
+<strong>The first 1000ms is psychological, not visual</strong>
+                Never show a loading state for under 300ms — it flickers. Once shown, hold ~400ms
+                minimum. The design system records this rule; engineering owns the runtime.
+              </div>
+<div class="principle">
+<strong>Skeleton for content, spinner for action</strong>
+                Skeletons let the user see the page take shape — right for content fetches.
+                Spinners answer "did my click land?" — right for buttons. Don't mix the two.
+              </div>
+<div class="principle">
+<strong>Show progress whenever you can show progress</strong>
+                If the system knows how far through it is — bytes, count, percent — use a determinate
+                indicator. Indeterminate spinners are a fallback, not a default.
+              </div>
+<div class="principle">
+<strong>Loading owes the user a recovery path</strong>
+                Every loading state must have a designed timeout / failure variant. A spinner with
+                no failure path is a trap.
+              </div>
+</div>
+</section>
+
+<!-- THRESHOLDS ─────────────────────────────────────────── -->
+<section class="docs-section" id="thresholds">
+<h2>Thresholds</h2>
+<p>
+              Industry research (Nielsen, Apple HIG) is consistent. The right indicator depends
+              on the wait, not the action.
+            </p>
+<table class="docs-table">
+<thead>
+<tr><th>Wait</th><th>Perceived as</th><th>Indicator</th></tr>
+</thead>
+<tbody>
+<tr><td>&lt; 100 ms</td><td>Instant</td><td>None</td></tr>
+<tr><td>100–1000 ms</td><td>Responsive but waiting</td><td>None — premature spinners feel slower</td></tr>
+<tr><td>1–10 s</td><td>Definite wait</td><td>Spinner / skeleton / inline progress</td></tr>
+<tr><td>&gt; 10 s</td><td>Long task</td><td><strong>Determinate</strong> progress + time estimate</td></tr>
+<tr><td>&gt; 30 s</td><td>Background task</td><td>Defer to a widget the user can leave (<code>la-processing-widget</code>)</td></tr>
+</tbody>
+</table>
+<div class="docs-rule-callout">
+<strong>The rule that matters.</strong> Never show a loading state for under 300ms — it
+              flickers and makes fast operations feel broken. Either no indicator at all, or a
+              minimum visible duration (~400ms) once you commit to showing one. <em>The design
+              system records this rule; it does not ship the infrastructure</em> — runtime flicker
+              policy is engineering's call.
+            </div>
+</section>
+
+<!-- DECISION TREE ──────────────────────────────────────── -->
+<section class="docs-section" id="decision-tree">
+<h2>Decision tree</h2>
+<p>
+              When you hit a wait and don't know which indicator to use, walk this. If two paths
+              apply, the more specific wins (skeleton over spinner for content; determinate over
+              indeterminate when count is known).
+            </p>
+<div class="decision-tree"><span class="q">Is the wait &lt; 300ms?</span>
+  <span class="a">Yes</span> → no indicator
+  <span class="n">No  </span>→ continue
+
+<span class="q">Did the user just click something specific (button, row action)?</span>
+  <span class="a">Yes</span> → inline spinner (§ Taxonomy 1 / 2)
+  <span class="n">No  </span>→ continue
+
+<span class="q">Are we populating an empty content area?</span>
+  <span class="a">Yes</span> → skeleton (§ Taxonomy 3)
+  <span class="n">No  </span>→ continue
+
+<span class="q">Is this a route transition?</span>
+  <span class="a">Yes</span> → render a skeleton on the destination page  <span class="note">(the
+            page taking shape is the feedback)</span>
+  <span class="n">No  </span>→ continue
+
+<span class="q">Do we know the percentage / count?</span>
+  <span class="a">Yes</span> → determinate <code>la-progress</code> (§ la-progress spec)
+  <span class="n">No  </span>→ continue
+
+<span class="q">Will the wait exceed 10 seconds and the user can leave?</span>
+  <span class="a">Yes</span> → <code>la-processing-widget</code> (§ Taxonomy 4)
+  <span class="n">No  </span>→ continue
+
+<span class="q">Is this an AI generation?</span>
+  <span class="a">Yes</span> → <code>la-thinking</code>  <span class="note">(name locked, pattern in
+            flight via sub-solve)</span>
+  <span class="n">No  </span>→ reach for inline spinner with timeout fallback</div>
+</section>
+
+<!-- TAXONOMY ───────────────────────────────────────────── -->
+<section class="docs-section" id="taxonomy">
+<h2>Taxonomy</h2>
+<p>
+              Seven loading surfaces in the product. Each entry pairs a real wait scenario with the
+              right component (built or locked).
+            </p>
+<div class="taxonomy-list">
+
+<div class="tax-entry">
+<div class="tax-entry-head">
+<span class="tax-num">1</span>
+<span class="tax-name">Inline action spinner</span>
+<span class="chip chip-locked">Locked — slot 1</span>
+</div>
+<p>Small spinner inside a button or interactive cell — "I received your click, I'm working on
+                  it." <code>la-button</code> gains a <code>loading</code> boolean prop. Sub-solve
+                  <code>button-loading-state</code> next.</p>
+</div>
+
+<div class="tax-entry">
+<div class="tax-entry-head">
+<span class="tax-num">2</span>
+<span class="tax-name">Inline cell / row spinner</span>
+<span class="chip chip-informal">Informal pattern</span>
+</div>
+<p>Spinner inside a row, cell, or list item — when one item is mutating (rename, delete,
+                  reprocess) but the rest are not. Used informally via the shared
+                  <code>spinnerStyles</code>; no primitive yet.</p>
+</div>
+
+<div class="tax-entry">
+<div class="tax-entry-head">
+<span class="tax-num">3</span>
+<span class="tax-name">Skeleton placeholder</span>
+<span class="chip chip-locked">Locked name — slot 2</span>
+</div>
+<p>Light-grey blocks shaped like the final content. Used for the first paint of a populated
+                  region — insights list, document list, table data on tab switch. Primitive will be
+                  <code>la-skeleton</code>; sub-solve <code>skeleton-primitive</code> next.</p>
+</div>
+
+<div class="tax-entry">
+<div class="tax-entry-head">
+<span class="tax-num">4</span>
+<span class="tax-name">Async operation widget — <code>la-processing-widget</code></span>
+<span class="chip chip-built">Built</span>
+</div>
+<p>Floating, persistent widget that tracks long-running async operations (document upload, AI
+                  analysis). Survives navigation. The only loading surface that does — if the wait is
+                  &gt;10s and the user might want to keep working, route here.</p>
+</div>
+
+<div class="tax-entry">
+<div class="tax-entry-head">
+<span class="tax-num">5</span>
+<span class="tax-name">Stepped progress — <code>la-stepper</code></span>
+<span class="chip chip-built">Built</span>
+</div>
+<p>Horizontal multi-segment bar showing position in a known-length linear flow (unlock wizard,
+                  KYC, sign-up). Display-only. Communicates <em>position in a flow</em>, not
+                  <em>progress within a step</em>.</p>
+</div>
+
+<div class="tax-entry">
+<div class="tax-entry-head">
+<span class="tax-num">6</span>
+<span class="tax-name">Determinate progress — <code>la-progress</code></span>
+<span class="chip chip-locked">Locked spec</span>
+</div>
+<p>Horizontal bar that fills 0 → 100% as a known-quantity task progresses. File bytes,
+                  bulk action ("Resolving 12 of 47"), export percentage. Build-ready spec below.</p>
+</div>
+
+<div class="tax-entry">
+<div class="tax-entry-head">
+<span class="tax-num">7</span>
+<span class="tax-name">AI thinking — <code>la-thinking</code></span>
+<span class="chip chip-locked">Locked name</span>
+</div>
+<p>Indicator while an AI response is being generated. Distinct from
+                  <code>la-processing-widget</code> — foreground and synchronous-feeling, not a
+                  background task. Sub-solve <code>ai-thinking-state</code> next.</p>
+</div>
+
+</div>
+</section>
+
+<!-- READINESS ──────────────────────────────────────────── -->
+<section class="docs-section" id="readiness">
+<h2>Component readiness</h2>
+<p>
+              Order reflects the build queue. Items 1–4 are this cycle; the rest are existing
+              inventory or deferred.
+            </p>
+<table class="docs-table">
+<thead>
+<tr><th style="width:32px;">#</th><th>Surface</th><th>Component</th><th>Status</th></tr>
+</thead>
+<tbody>
+<tr><td>1</td><td>Inline action spinner</td><td><code>la-button</code> (loading prop)</td><td><span class="chip chip-locked">Locked</span> — sub-solve <code>button-loading-state</code> next</td></tr>
+<tr><td>2</td><td>Skeleton</td><td><code>la-skeleton</code></td><td><span class="chip chip-locked">Locked name</span> — sub-solve <code>skeleton-primitive</code> next</td></tr>
+<tr><td>3</td><td>AI thinking</td><td><code>la-thinking</code></td><td><span class="chip chip-locked">Locked name</span> — sub-solve <code>ai-thinking-state</code> next</td></tr>
+<tr><td>4</td><td>Determinate progress</td><td><code>la-progress</code></td><td><span class="chip chip-locked">Locked spec</span> — build-ready below</td></tr>
+<tr><td>—</td><td>Async operation widget</td><td><code>la-processing-widget</code></td><td><span class="chip chip-built">Built</span> — timeout state pending</td></tr>
+<tr><td>—</td><td>Stepped progress</td><td><code>la-stepper</code></td><td><span class="chip chip-built">Built</span></td></tr>
+<tr><td>—</td><td>Inline cell / row spinner</td><td><code>spinnerStyles</code> (informal)</td><td><span class="chip chip-informal">Informal</span> — no primitive</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- FAMILY DECISIONS ───────────────────────────────────── -->
+<section class="docs-section" id="family-decisions">
+<h2>Family decisions, locked</h2>
+<p>
+              Cross-cutting calls every loading component must respect. Settled in the
+              <a href="../../solves/260428-1-loading-states/loading-states.solve-output.md">loading-states meta-solve</a>;
+              re-opening costs a new solve.
+            </p>
+<table class="docs-table">
+<thead>
+<tr><th>Decision</th><th>Locked</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Build queue (in order)</td>
+<td><code>la-button.loading</code> → <code>la-skeleton</code> → <code>la-thinking</code> → <code>la-progress</code></td>
+</tr>
+<tr>
+<td>Min-visible duration</td>
+<td>Written guidance only (300ms threshold to show; 400ms minimum once shown). No shared controller — engineering owns runtime.</td>
+</tr>
+<tr>
+<td>Motion home</td>
+<td><code>.t-shimmer</code> and <code>.t-pulse</code> live in <code>motion.css</code>. <code>spinnerStyles</code> in <code>src/styles/animations.ts</code> is the canonical spinner. Components import; never fork.</td>
+</tr>
+<tr>
+<td>Family naming</td>
+<td><code>la-button.loading</code> · <code>la-skeleton</code> · <code>la-thinking</code> · <code>la-progress</code> · <code>.t-shimmer</code> · <code>.t-pulse</code></td>
+</tr>
+<tr>
+<td>Sub-solves to spawn</td>
+<td><code>button-loading-state</code>, <code>skeleton-primitive</code>, <code>ai-thinking-state</code>. <code>la-progress</code> settles inline (below).</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<!-- LA-PROGRESS SPEC ───────────────────────────────────── -->
+<section class="docs-section" id="la-progress">
+<h2>la-progress — inline spec</h2>
+<p>
+              Build-ready. No interim solve needed. Distinct from <code>la-stepper</code>
+              (segmented / discrete) by name and shape.
+            </p>
+<div class="spec-block">
+<dl>
+<dt>Tag</dt>
+<dd><code>la-progress</code></dd>
+
+<dt>API</dt>
+<dd><code>value: number</code> (0–100). Optional <code>label</code> slot.
+                  Optional <code>description</code> slot for "12 of 47 items".</dd>
+
+<dt>Visual</dt>
+<dd>4px tall, full-width, <code>--la-radius-pill</code>.
+                  Track: <code>--la-color-border-light</code>. Fill: <code>--la-color-primary</code>.</dd>
+
+<dt>Motion</dt>
+<dd>Fill via <code>transform: scaleX(value / 100)</code>, 200ms <code>--ease-out</code>
+                  per value change. GPU-safe.</dd>
+
+<dt>Accessibility</dt>
+<dd><code>role="progressbar"</code> + <code>aria-valuenow</code> /
+                  <code>aria-valuemin="0"</code> / <code>aria-valuemax="100"</code>.
+                  <code>aria-label</code> or <code>aria-labelledby</code> required on host.</dd>
+
+<dt>Reduced motion</dt>
+<dd>Skip the transition; jump to value.</dd>
+
+<dt>First consumer</dt>
+<dd><code>la-upload-box</code> — currently shows only a spinner during upload but
+                  knows bytes; can show determinate.</dd>
+
+<dt>Out of scope</dt>
+<dd>Striped/animated fill while running. Indeterminate mode. Each is a separate decision
+                  if ever needed.</dd>
+</dl>
+<div style="margin-top: 20px;">
+<div style="font-size: 11px; color: var(--doc-text-3); margin-bottom: 8px; font-family: ui-monospace, SFMono-Regular, Menlo, monospace;">value = 64</div>
+<div class="lai-progress-demo"><span></span></div>
+</div>
+</div>
+</section>
+
+<!-- MOTION DEMOS ───────────────────────────────────────── -->
+<section class="docs-section" id="motion">
+<h2>Motion demos</h2>
+<p>
+              Live previews of the three shared motion utilities. All three respect
+              <code>prefers-reduced-motion</code> automatically — animations collapse to a static
+              state when the OS setting is on.
+            </p>
+<div class="demo-row">
+<div class="demo-tile">
+<div class="demo-stage">
+<span class="lai-spinner-demo"></span>
+</div>
+<div class="demo-meta">
+<strong>spinnerStyles</strong>
+                  src/styles/animations.ts<br/>
+                  800ms linear · 12px <code>--la-spinner-sm</code>
+                </div>
+</div>
+<div class="demo-tile">
+<div class="demo-stage" style="flex-direction: column; gap: 4px;">
+<div class="lai-skeleton-demo"></div>
+<div class="lai-skeleton-demo"></div>
+</div>
+<div class="demo-meta">
+<strong>.t-shimmer</strong>
+                  motion.css (locked)<br/>
+                  ~1.6s · ease-in-out · opacity pulse
+                </div>
+</div>
+<div class="demo-tile">
+<div class="demo-stage">
+<span class="lai-thinking-demo">
+<span></span><span></span><span></span>
+</span>
+</div>
+<div class="demo-meta">
+<strong>.t-pulse</strong>
+                  motion.css (locked)<br/>
+                  1.2s · scale + opacity · 150ms stagger
+                </div>
+</div>
+</div>
+<div class="docs-note">
+<strong>Components import; they never fork.</strong> If a new motion is genuinely
+              needed, it goes through a <code>decisions/</code> record — never into a component
+              file.
+            </div>
+</section>
+
+<!-- COPY ────────────────────────────────────────────────── -->
+<section class="docs-section" id="copy">
+<h2>Copy patterns</h2>
+<p>
+              Present continuous, ellipsis at end, time estimate when known. British English,
+              sentence case, "we" voice. Extends <code>copy-guidelines.md</code>.
+            </p>
+<table class="docs-table">
+<thead>
+<tr><th>State</th><th>Copy</th></tr>
+</thead>
+<tbody>
+<tr><td>Generic loading</td><td>"Loading…"</td></tr>
+<tr><td>Workspace bootstrap</td><td>"Loading your workspace…"</td></tr>
+<tr><td>Content fetch</td><td>(no copy — skeleton speaks)</td></tr>
+<tr><td>Document upload</td><td>"Uploading your document…"</td></tr>
+<tr><td>AI analysis</td><td>"Analysing your document. This usually takes 10–30 seconds."</td></tr>
+<tr><td>Bulk action</td><td>"Resolving 12 of 47 insights…"</td></tr>
+<tr><td>Export</td><td>"Generating PDF — 64%"</td></tr>
+<tr><td>AI thinking (synchronous)</td><td>"Thinking…"</td></tr>
+<tr><td>Timeout</td><td>"This is taking a little longer than usual. We'll keep going."</td></tr>
+<tr><td>Failure</td><td>"We couldn't [verb] this. Try again." (see feedback-moments)</td></tr>
+</tbody>
+</table>
+<div class="docs-rule-callout">
+<strong>Don't:</strong> "Please wait" (paternalistic) · "Loading data" (vague — what data?) ·
+              "Working…" (corporate filler) · all-caps · exclamation marks.
+            </div>
+</section>
+
+<!-- ACCESSIBILITY ──────────────────────────────────────── -->
+<section class="docs-section" id="accessibility">
+<h2>Accessibility</h2>
+<p>The required ARIA pattern by surface. These are baseline expectations — Gate 7 of
+              <code>/audit</code>.</p>
+<table class="docs-table">
+<thead>
+<tr><th>Surface</th><th>Required ARIA</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Spinners (button-loading, processing-widget, future thinking)</td>
+<td><code>role="status"</code> + <code>aria-label</code> describing what is loading</td>
+</tr>
+<tr>
+<td>Loading content regions (skeleton-wrapped)</td>
+<td><code>aria-busy="true"</code> on the region while skeletons are visible</td>
+</tr>
+<tr>
+<td>Determinate progress (<code>la-progress</code>)</td>
+<td><code>role="progressbar"</code> + <code>aria-valuenow</code> /
+                  <code>aria-valuemin="0"</code> / <code>aria-valuemax="100"</code> +
+                  <code>aria-label</code> or <code>aria-labelledby</code></td>
+</tr>
+<tr>
+<td>Any loading state</td>
+<td>Focus must not move when the loading state appears or disappears — keep the
+                  user where they were</td>
+</tr>
+</tbody>
+</table>
+</section>
+
+<!-- ANTI-PATTERNS ──────────────────────────────────────── -->
+<section class="docs-section" id="anti-patterns">
+<h2>Anti-patterns</h2>
+<p>Concrete failure modes — each observed in adjacent SaaS products.</p>
+<div class="dont-list">
+<div class="dont">
+<strong>Spinner-in-the-void.</strong>
+                A spinner centred on a blank page with no surrounding content. Replace with a
+                skeleton matching the eventual layout, or a top progress bar on the populated
+                previous page.
+              </div>
+<div class="dont">
+<strong>Double indicator.</strong>
+                A skeleton AND a spinner. A processing-widget AND an inline button spinner for the
+                same action. Pick one — the more specific wins.
+              </div>
+<div class="dont">
+<strong>Mismatched skeleton.</strong>
+                A 3-row skeleton followed by a 12-row populated list. The skeleton must
+                approximate the real layout; otherwise the page jumps and feels broken.
+              </div>
+<div class="dont">
+<strong>Eager indicator.</strong>
+                A spinner on every action regardless of duration. A 60ms call should not flash a
+                spinner — either no indicator or a 300ms+ delay before showing one.
+              </div>
+<div class="dont">
+<strong>Flicker indicator.</strong>
+                A spinner that disappears in 80ms because the request returned faster than
+                expected. Once committed, hold ~400ms minimum.
+              </div>
+<div class="dont">
+<strong>Trapped spinner.</strong>
+                A loading state with no timeout and no failure variant. Every loading surface must
+                have a designed failure path.
+              </div>
+<div class="dont">
+<strong>Decorative spinner.</strong>
+                A spinner on a static surface that isn't actually loading anything ("just to look
+                active"). Spinners are a literal claim that work is happening; lying breaks trust.
+              </div>
+</div>
+</section>
+
+<!-- SOURCE ─────────────────────────────────────────────── -->
+<section class="docs-section" id="source">
+<h2>Source references</h2>
+<p>The authoritative definitions — links open in the repo.</p>
+<div class="source-ref">
+<a class="source-ref-item" href="../../design-language/loading.md">
+<code>design-language/loading.md</code>
+<span class="source-ref-desc">Long-form pattern doc with rationale and decision history.</span>
+</a>
+<a class="source-ref-item" href="../../solves/260428-1-loading-states/loading-states.solve-output.md">
+<code>solves/260428-1-loading-states/</code>
+<span class="source-ref-desc">Meta-solve roadmap — build queue, naming, sub-solves.</span>
+</a>
+<a class="source-ref-item" href="../../solves/260416-9-feedback-moments/feedback-moments.solve-output.md">
+<code>solves/260416-9-feedback-moments/</code>
+<span class="source-ref-desc">Adjacent solve — toast taxonomy, processing-widget timeout copy.</span>
+</a>
+<a class="source-ref-item" href="../../src/styles/animations.ts">
+<code>src/styles/animations.ts</code>
+<span class="source-ref-desc">Shared <code>spinnerStyles</code> — the canonical spinner.</span>
+</a>
+<a class="source-ref-item" href="../../motion.css">
+<code>motion.css</code>
+<span class="source-ref-desc">Home of <code>.t-shimmer</code> and <code>.t-pulse</code> motion utilities.</span>
+</a>
+<a class="source-ref-item" href="../../CLAUDE.md">
+<code>CLAUDE.md § Animation standards</code>
+<span class="source-ref-desc">GPU-safe rule, prefers-reduced-motion, max durations.</span>
+</a>
+</div>
+</section>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

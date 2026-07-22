@@ -1,0 +1,525 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-choice — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-choice</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#variants" class="docs-nav-item" data-nav-id="variants">Variants</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#multi" class="docs-nav-item" data-nav-id="multi">Groups</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-choice</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-choice</h1>
+  <p>A single checkbox row in two variants: <code>default</code> for inline form use, and <code>contained</code> for selection tiles — a bordered, tappable surface used in the unlock flow question steps. Used standalone for single booleans, or grouped for single-select (<code>choice</code>) and multi-select (<code>multi-choice</code>) patterns.</p>
+</div>
+
+<!-- Variants -->
+<div id="variants" class="preview-header" style="margin-top:8px;">
+  <h1>Variants</h1>
+  <p>Two visual treatments. Same underlying behaviour — <code>checked</code> property, <code>la-change</code> event.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">default — inline checkbox row</div>
+  <div class="preview-frame preview-frame--stack" style="padding: 24px; gap: 12px; max-width: 480px;">
+    <la-choice>I agree to the terms and conditions</la-choice>
+    <la-choice checked>Send me product updates</la-choice>
+    <la-choice description="You can change this at any time in settings.">Enable email notifications</la-choice>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">contained — selection tile</div>
+  <div class="preview-frame preview-frame--stack" style="padding: 24px; gap: 8px; max-width: 480px;">
+    <la-choice variant="contained">Yes</la-choice>
+    <la-choice variant="contained" checked>No</la-choice>
+    <la-choice variant="contained" description="We'll pre-fill from Companies House.">Yes — it's a UK company</la-choice>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">contained + filled — success-surface checked state (pre-raise checklist, confirmation steps)</div>
+  <div class="preview-frame preview-frame--stack" style="padding: 24px; gap: 8px; max-width: 480px;">
+    <la-choice variant="contained" filled>Unchecked — same as contained at rest</la-choice>
+    <la-choice variant="contained" filled checked>Checked — success surface fill replaces primary border</la-choice>
+    <la-choice variant="contained" filled checked description="Signed by all founders before product contributions.">IP Assignment Agreement confirmed</la-choice>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">invalid state — error highlight</div>
+  <div class="preview-frame preview-frame--stack" style="padding: 24px; gap: 8px; max-width: 480px;">
+    <la-choice invalid>This field is required</la-choice>
+    <la-choice variant="contained" invalid>Option A</la-choice>
+  </div>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label>variant</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-variant="default" type="button">default</button>
+        <button class="btn-toggle" data-variant="contained" type="button">contained</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>checked</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-checked="false" type="button">false</button>
+        <button class="btn-toggle" data-checked="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>invalid</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-invalid="false" type="button">false</button>
+        <button class="btn-toggle" data-invalid="true" type="button">true</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls-divider"></div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-label">label (slot)</label>
+      <input id="ctl-label" type="text" value="Accept the terms and conditions" style="width:300px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-desc">description</label>
+      <input id="ctl-desc" type="text" value="" placeholder="Optional secondary line" style="width:280px;">
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the controls above. Click the tile — <code>la-change</code> fires in the log below.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px; max-width: 480px;">
+    <la-choice id="cl-live">Accept the terms and conditions</la-choice>
+  </div>
+  <div id="event-log" style="padding:8px 24px; font-size:11px; color:var(--la-color-text-muted); font-family:monospace; min-height:28px; border-top:1px solid var(--la-color-border-light); background:var(--la-color-bg-subtle);" aria-live="polite">
+    <span style="color:var(--la-color-text-faint);">Event log — click to see <code>la-change</code> fire</span>
+  </div>
+</div>
+
+<!-- Groups -->
+<div id="multi" class="preview-header" style="margin-top:8px;">
+  <h1>Groups</h1>
+  <p>Multiple <code>contained</code> tiles composed together. The parent manages selection state — tiles are stateless checkboxes. Two patterns: single-select (radio behaviour) and multi-select (each tile independent). Both are field types in <code>la-unlock-panel</code>.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">multi-choice — select all that apply</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px; max-width:480px;">
+    <p style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted); margin-bottom:var(--la-space-xs);">Which documents do you already have? <em>Select all that apply.</em></p>
+    <div id="multi-group" style="display:flex; flex-direction:column; gap:var(--la-space-sm);" role="group" aria-label="Documents available">
+      <la-choice variant="contained" data-value="cert">Certificate of Incorporation</la-choice>
+      <la-choice variant="contained" data-value="bylaws" checked>Bylaws</la-choice>
+      <la-choice variant="contained" data-value="ip" checked>IP Assignment Agreement</la-choice>
+      <la-choice variant="contained" data-value="nda">NDA template</la-choice>
+    </div>
+    <div id="multi-result" style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted); font-family:monospace; min-height:18px;"></div>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">single-select (choice) — mutually exclusive, radio-group behaviour</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px; max-width:480px;">
+    <p style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted); margin-bottom:var(--la-space-xs);">Are you planning to raise funding?</p>
+    <div id="single-group" style="display:flex; flex-direction:column; gap:var(--la-space-sm);" role="radiogroup" aria-label="Funding plans">
+      <la-choice variant="contained" data-value="yes">Yes</la-choice>
+      <la-choice variant="contained" data-value="no">No</la-choice>
+      <la-choice variant="contained" data-value="unsure" description="We'll ask you again once you're further along.">Not sure yet</la-choice>
+    </div>
+    <div id="single-result" style="font-size:var(--la-font-size-sm); color:var(--la-color-text-muted); font-family:monospace; min-height:18px;"></div>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed reference states — all combinations at a glance.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">default — all states</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px; gap:12px; max-width:480px;">
+    <la-choice>Unchecked</la-choice>
+    <la-choice checked>Checked</la-choice>
+    <la-choice invalid>Invalid (unchecked)</la-choice>
+    <la-choice description="A secondary description line.">With description</la-choice>
+    <la-choice checked description="A secondary description line.">Checked with description</la-choice>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">contained — all states</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px; gap:8px; max-width:480px;">
+    <la-choice variant="contained">Unchecked</la-choice>
+    <la-choice variant="contained" checked>Checked</la-choice>
+    <la-choice variant="contained" invalid>Invalid (unchecked)</la-choice>
+    <la-choice variant="contained" description="A secondary description line.">With description</la-choice>
+    <la-choice variant="contained" checked description="A secondary description line.">Checked with description</la-choice>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">In context — unlock panel requirements list</div>
+  <div class="preview-frame" style="max-width:480px; padding:24px;">
+    <div style="width:100%; background:var(--doc-surface); border:1px solid var(--doc-border); border-radius:12px; padding:24px; display:flex; flex-direction:column; gap:10px;">
+      <div style="font-size:15px; font-weight:600; color:var(--doc-text); margin-bottom:2px;">Before we can proceed</div>
+      <div style="font-size:13px; color:var(--doc-text-2); margin-bottom:6px;">Complete the following steps to continue.</div>
+      <la-choice checked>Company details confirmed</la-choice>
+      <la-choice checked>Primary contact added</la-choice>
+      <la-choice>Employment contracts uploaded</la-choice>
+      <la-choice>Payroll data connected</la-choice>
+      <la-choice>Legal representative assigned</la-choice>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-choice</h2>
+    <p>A single checkbox row in two variants: default for inline form use, and contained for selection tiles. Used standalone for single booleans, or grouped for single-select and multi-select patterns.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">ChoiceVariant</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>checked</td>
+          <td><span class="default">checked</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>invalid</td>
+          <td><span class="default">invalid</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>filled</td>
+          <td><span class="default">filled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_handleClick</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_handleKeydown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+  <h3>CSS tokens</h3>
+  <table class="docs-table">
+    <thead><tr><th>Token</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>--la-color-text</td><td>Label text colour</td></tr>
+      <tr><td>--la-color-text-muted</td><td>Description text colour</td></tr>
+      <tr><td>--la-color-bg-subtle</td><td>Background fill for contained variant</td></tr>
+      <tr><td>--la-color-secondary-hover</td><td>Hover fill overlay for contained variant (::before)</td></tr>
+      <tr><td>--la-color-primary</td><td>Border colour for checked contained variant</td></tr>
+      <tr><td>--la-color-surface-success</td><td>Background fill for checked contained + filled variant (replaces primary border)</td></tr>
+      <tr><td>--la-color-border-danger</td><td>Invalid ring around the checkbox wrapper</td></tr>
+      <tr><td>--la-color-danger-text</td><td>Label colour in invalid state</td></tr>
+      <tr><td>--la-radius-xl</td><td>Container corner radius (contained variant)</td></tr>
+      <tr><td>--la-radius-sm</td><td>Checkbox wrapper corner radius (used for invalid/focus ring)</td></tr>
+      <tr><td>--la-font-size-base</td><td>Label text size</td></tr>
+      <tr><td>--la-font-size-sm</td><td>Description text size</td></tr>
+      <tr><td>--la-font-weight-normal</td><td>Label font weight</td></tr>
+      <tr><td>--la-space-md</td><td>Gap between checkbox and label; contained padding</td></tr>
+      <tr><td>--la-line-height</td><td>Label and description line height</td></tr>
+      <tr><td>--la-checkbox-offset</td><td>Vertical alignment offset for the checkbox within the row</td></tr>
+      <tr><td>--dur-fast</td><td>Hover transition duration on contained variant</td></tr>
+      <tr><td>--ease</td><td>Hover transition easing on contained variant</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="usage">
+  <h3>Usage examples</h3>
+
+  <h4 style="margin-bottom:8px; font-size:var(--la-font-size-sm); color:var(--la-color-text-secondary);">Single boolean (default)</h4>
+  <pre style="background:var(--la-color-bg-subtle); border:1px solid var(--la-color-border-light); border-radius:var(--la-radius-md); padding:16px; font-size:12px; overflow-x:auto; margin-bottom:24px;"><code>&lt;la-choice
+  ?checked=${this.agreed}
+  @la-change=${(e) => this.agreed = e.detail.checked}
+&gt;
+  I agree to the terms and conditions
+&lt;/la-choice&gt;</code></pre>
+
+  <h4 style="margin-bottom:8px; font-size:var(--la-font-size-sm); color:var(--la-color-text-secondary);">Single-select group (choice field type) — radio behaviour, parent manages exclusivity</h4>
+  <pre style="background:var(--la-color-bg-subtle); border:1px solid var(--la-color-border-light); border-radius:var(--la-radius-md); padding:16px; font-size:12px; overflow-x:auto; margin-bottom:24px;"><code>&lt;div role="radiogroup"&gt;
+  ${options.map(opt => html`
+    &lt;la-choice
+      variant="contained"
+      ?checked=${selected === opt.value}
+      @la-change=${(e) => { if (e.detail.checked) selected = opt.value; }}
+    &gt;${opt.label}&lt;/la-choice&gt;
+  `)}
+&lt;/div&gt;</code></pre>
+
+  <h4 style="margin-bottom:8px; font-size:var(--la-font-size-sm); color:var(--la-color-text-secondary);">Multi-select group (multi-choice field type) — each tile toggles independently</h4>
+  <pre style="background:var(--la-color-bg-subtle); border:1px solid var(--la-color-border-light); border-radius:var(--la-radius-md); padding:16px; font-size:12px; overflow-x:auto;"><code>&lt;div role="group"&gt;
+  ${options.map(opt => html`
+    &lt;la-choice
+      variant="contained"
+      ?checked=${selected.includes(opt.value)}
+      @la-change=${() => {
+        selected = selected.includes(opt.value)
+          ? selected.filter(v => v !== opt.value)
+          : [...selected, opt.value];
+      }}
+    &gt;${opt.label}&lt;/la-choice&gt;
+  `)}
+&lt;/div&gt;</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div class="docs-section" id="notes">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Self-managed toggle</strong> — Clicking toggles <code style="font-family:monospace;font-size:11px;">checked</code> internally and fires <code style="font-family:monospace;font-size:11px;">la-change</code>. For controlled patterns (single-select groups), listen to <code style="font-family:monospace;font-size:11px;">la-change</code> and set <code style="font-family:monospace;font-size:11px;">checked</code> from the parent. The two are not in conflict.</div>
+    <div class="docs-note"><strong>Inner checkbox is decorative</strong> — <code style="font-family:monospace;font-size:11px;">la-checkbox</code> is wrapped with <code style="font-family:monospace;font-size:11px;">pointer-events: none</code> and <code style="font-family:monospace;font-size:11px;">aria-hidden="true"</code>. The host element carries <code style="font-family:monospace;font-size:11px;">role="checkbox"</code> and <code style="font-family:monospace;font-size:11px;">aria-checked</code> — it is the only accessible and interactive element in the component.</div>
+    <div class="docs-note"><strong>Invalid is not checked</strong> — <code style="font-family:monospace;font-size:11px;">invalid</code> and <code style="font-family:monospace;font-size:11px;">checked</code> are independent boolean attributes. A row can be invalid and unchecked (unmet condition), invalid and checked (edge case), or neither. The invalid state signals a problem; it does not block the click toggle.</div>
+    <div class="docs-note"><strong>Group roles</strong> — Add <code style="font-family:monospace;font-size:11px;">role="radiogroup"</code> to the wrapper for single-select groups so screen readers understand mutual exclusivity. Add <code style="font-family:monospace;font-size:11px;">role="group"</code> for multi-select. The individual tiles always carry <code style="font-family:monospace;font-size:11px;">role="checkbox"</code> — the parent role contextualises them.</div>
+    <div class="docs-note"><strong>filled modifier</strong> — add <code style="font-family:monospace;font-size:11px;">filled</code> to a <code style="font-family:monospace;font-size:11px;">contained</code> tile when the checked state should feel like a positive completion rather than a selection. At rest the tile is identical to contained. When checked, the primary border is replaced with a <code style="font-family:monospace;font-size:11px;">--la-color-surface-success</code> fill and no border — a softer, greener signal used in pre-raise checklists and confirmation steps where each item marks progress done.</div>
+    <div class="docs-note"><strong>la-choice vs la-checkbox</strong> — <code style="font-family:monospace;font-size:11px;">la-choice</code> is a <em>statement</em> (the row is the component — onboarding, consent, unlock steps). <code style="font-family:monospace;font-size:11px;">la-checkbox</code> is a <em>control</em> (the row is owned by a table, menu, toolbar, or form grid). Full decision table in <a href="../../design-language/components.md">design-language/components.md</a>.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    var liveEl = document.getElementById('cl-live');
+    var labelInput = document.getElementById('ctl-label');
+    var descInput  = document.getElementById('ctl-desc');
+    var log = document.getElementById('event-log');
+
+    function syncLive() {
+      liveEl.textContent = labelInput.value;
+      liveEl.description = descInput.value;
+    }
+    labelInput.addEventListener('input', syncLive);
+    descInput.addEventListener('input', syncLive);
+
+    // Variant buttons
+    document.querySelectorAll('[data-variant]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-variant]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        liveEl.variant = btn.getAttribute('data-variant');
+      });
+    });
+
+    // Checked buttons
+    document.querySelectorAll('[data-checked]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-checked]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        liveEl.checked = btn.getAttribute('data-checked') === 'true';
+      });
+    });
+
+    // Invalid buttons
+    document.querySelectorAll('[data-invalid]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-invalid]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        liveEl.invalid = btn.getAttribute('data-invalid') === 'true';
+      });
+    });
+
+    liveEl.addEventListener('la-change', function(e) {
+      log.innerHTML = '<code>la-change</code> → <code>{ checked: ' + e.detail.checked + ' }</code>';
+      document.querySelectorAll('[data-checked]').forEach(function(b) { b.classList.remove('active'); });
+      document.querySelector('[data-checked="' + e.detail.checked + '"]').classList.add('active');
+    });
+
+    // Multi-select group
+    var multiItems = document.querySelectorAll('#multi-group la-choice');
+    var multiResult = document.getElementById('multi-result');
+
+    function updateMultiResult() {
+      var selected = Array.from(multiItems)
+        .filter(function(el) { return el.checked; })
+        .map(function(el) { return el.getAttribute('data-value'); });
+      multiResult.textContent = 'selected: ' + JSON.stringify(selected);
+    }
+    multiItems.forEach(function(item) { item.addEventListener('la-change', updateMultiResult); });
+    updateMultiResult();
+
+    // Single-select group
+    var singleItems = document.querySelectorAll('#single-group la-choice');
+    var singleResult = document.getElementById('single-result');
+
+    function updateSingleResult() {
+      var selected = Array.from(singleItems).find(function(el) { return el.checked; });
+      singleResult.textContent = 'selected: ' + (selected ? '"' + selected.getAttribute('data-value') + '"' : 'null');
+    }
+    singleItems.forEach(function(item) {
+      item.addEventListener('la-change', function(e) {
+        if (e.detail.checked) {
+          singleItems.forEach(function(other) { if (other !== item) other.checked = false; });
+        }
+        updateSingleResult();
+      });
+    });
+    updateSingleResult();
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-actions-widget — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-actions-widget</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-actions-widget</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-actions-widget</h1>
+<p>A card-style list of recommended next actions for a legal area. Each row shows an icon and a verb-first label. Lives in the <code style="font-family:monospace;color:#c3e88d;font-size:12px;">slot="aside"</code> of <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-app-shell</code> on legal area pages. Fires a <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-action</code> event when the user clicks a row.</p>
+</div>
+
+<div class="controls" id="controls">
+<div class="controls-row">
+<div class="control-group">
+<label>Scenario</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-scenario="employment">Employment (3)</button>
+<button class="btn-toggle" data-scenario="ip">IP (2)</button>
+<button class="btn-toggle" data-scenario="single">Single</button>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group" style="margin-top:-12px;">
+<div class="preview-frame" id="live-frame" style="min-height:80px; align-items:flex-start;">
+<div style="width:100%; max-width:320px;">
+<la-actions-widget id="live-widget"></la-actions-widget>
+</div>
+</div>
+<div id="event-log" style="margin-top:8px; padding:10px 14px; background:#1a1a2e; border-radius:6px; font-family:monospace; font-size:11px; color:#a0a0b0; min-height:32px; display:flex; flex-direction:column; gap:4px;">
+<span style="color:#555; font-style:italic;">Click an action card — la-action events appear here</span>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+<div class="preview-group">
+<div class="preview-label">Employment — 3 actions (primary use case)</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="width:100%; max-width:320px;">
+<la-actions-widget id="snap-employment"></la-actions-widget>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">IP — 2 actions</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="width:100%; max-width:320px;">
+<la-actions-widget id="snap-ip"></la-actions-widget>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Single action — minimum content</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="width:100%; max-width:320px;">
+<la-actions-widget id="snap-single"></la-actions-widget>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">In context — narrow aside panel (~280px)</div>
+<div class="preview-frame" style="align-items:flex-start;">
+<div style="width:280px; background:#f8f9fb; border-radius:8px; padding:16px;">
+<la-actions-widget id="snap-context"></la-actions-widget>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-actions-widget</h2>
+    <p>A card-style list of recommended next actions for a legal area. Each action shows an icon and a verb-first label. Lives in the aside slot of la-app-shell on legal area pages. Fires a la-action event when the user clicks a row.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>actions</td>
+          <td><span class="default">actions</span></td>
+          <td><span class="type">ActionData[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Actions&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>subtitle</td>
+          <td><span class="default">subtitle</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">All values come from the design token system in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code>.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Widget container</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Container background</td></tr>
+<tr><td>--la-radius-xl2</td><td>Container corner radius</td></tr>
+<tr><td>--la-space-sm</td><td>Container vertical padding · items list padding</td></tr>
+<tr><td>--la-font-size-base</td><td>Heading + subtitle size</td></tr>
+<tr><td>--la-font-weight-normal</td><td>Heading weight</td></tr>
+<tr><td>--la-color-text</td><td>Heading colour</td></tr>
+<tr><td>--la-color-text-faint</td><td>Subtitle colour</td></tr>
+<tr><td>--la-space-lg</td><td>Heading left padding</td></tr>
+<tr><td>--la-space-md</td><td>Heading right padding · items gap</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Action item row</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Row background (resting)</td></tr>
+<tr><td>--la-color-bg-subtle</td><td>Row background (hover / focus)</td></tr>
+<tr><td>--la-radius-lg</td><td>Row corner radius</td></tr>
+<tr><td>--la-space-sm</td><td>Row vertical padding</td></tr>
+<tr><td>--la-space-md</td><td>Row horizontal padding · icon gap</td></tr>
+<tr><td>--la-space-2xl</td><td>Icon container size</td></tr>
+<tr><td>--la-radius-md</td><td>Icon container radius</td></tr>
+<tr><td>--la-font-size-2xl</td><td>Icon glyph size</td></tr>
+<tr><td>--la-font-size-base</td><td>Label size</td></tr>
+<tr><td>--la-font-weight-normal</td><td>Label weight</td></tr>
+<tr><td>--la-color-text</td><td>Label colour</td></tr>
+<tr><td>--la-color-text-muted</td><td>Icon colour</td></tr>
+<tr><td>--la-color-border-focus</td><td>Focus ring colour</td></tr>
+<tr><td>--la-focus-ring-width</td><td>Focus ring width</td></tr>
+<tr><td>--la-focus-ring-offset</td><td>Focus ring offset</td></tr>
+<tr><td>--dur-fast / --ease</td><td>Background hover transition</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic setup</p>
+<div class="docs-code"><span class="kw">const</span> widget = document.querySelector(<span class="str">'la-actions-widget'</span>);
+widget.actions = [
+  {
+    label: <span class="str">'Add employee'</span>,
+    description: <span class="str">'Register a new employee and set their role.'</span>,
+    icon: <span class="str">'ph ph-user-plus'</span>,
+  },
+  {
+    label: <span class="str">'Manage people'</span>,
+    description: <span class="str">'Review and update employee records.'</span>,
+    icon: <span class="str">'ph ph-users'</span>,
+  },
+];</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listening for la-action</p>
+<div class="docs-code">widget.addEventListener(<span class="str">'la-action'</span>, (e) =&gt; {
+  <span class="cm">// e.detail is the ActionItem that was clicked</span>
+  console.log(e.detail.label);
+});
+
+<span class="cm">// or listen on any ancestor — event bubbles</span>
+document.addEventListener(<span class="str">'la-action'</span>, (e) =&gt; {
+  handleAction(e.detail);
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">In the aside panel</p>
+<div class="docs-code"><span class="cm">&lt;!-- Legal area aside --&gt;</span>
+<span class="kw">&lt;aside&gt;</span>
+<span class="kw">&lt;la-actions-widget</span> <span class="at">id</span>=<span class="str">"actions"</span><span class="kw">&gt;&lt;/la-actions-widget&gt;</span>
+<span class="kw">&lt;la-document-list</span> <span class="at">id</span>=<span class="str">"docs"</span><span class="kw">&gt;&lt;/la-document-list&gt;</span>
+<span class="kw">&lt;/aside&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Empty state — no actions</p>
+<div class="docs-code"><span class="cm">// Passing an empty array renders the widget
+// shell with no cards — pair with la-empty-state
+// at the consumer level if needed.</span>
+widget.actions = [];</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>JS property only</strong> — <code style="font-family:monospace;font-size:11px;">actions</code> is an array and cannot be set via HTML attribute. Always assign it as a JavaScript property: <code style="font-family:monospace;font-size:11px;">widget.actions = [...]</code>. Setting <code style="font-family:monospace;font-size:11px;">actions="..."</code> in HTML will not work.</div>
+<div class="docs-note"><strong>Only <code style="font-family:monospace;font-size:11px;">label</code> is required</strong> — <code style="font-family:monospace;font-size:11px;">description</code> and <code style="font-family:monospace;font-size:11px;">icon</code> are optional. <code style="font-family:monospace;font-size:11px;">description</code> is stored and included in the <code style="font-family:monospace;font-size:11px;">la-action</code> event detail but is not rendered visually — each row shows icon + label only.</div>
+<div class="docs-note"><strong>Icon strings are Phosphor classes</strong> — pass the full class string as you would write it in HTML: <code style="font-family:monospace;font-size:11px;">"ph ph-user-plus"</code>, <code style="font-family:monospace;font-size:11px;">"ph-fill ph-check"</code>, or <code style="font-family:monospace;font-size:11px;">"ph-bold ph-dots-three"</code>. The component renders <code style="font-family:monospace;font-size:11px;">&lt;i class={icon}&gt;</code> inside the shadow DOM where Phosphor CSS is already loaded.</div>
+<div class="docs-note"><strong>Icon convention — action type, not subject</strong> — icons should represent what the user is doing, not the subject matter. Use <code style="font-family:monospace;font-size:11px;">ph-upload-simple</code> for any upload action, <code style="font-family:monospace;font-size:11px;">ph-file-arrow-up</code> for filing or submitting a document, <code style="font-family:monospace;font-size:11px;">ph-arrow-right</code> for transferring or moving something, <code style="font-family:monospace;font-size:11px;">ph-user-plus</code> for adding a person. Avoid subject-specific icons like <code style="font-family:monospace;font-size:11px;">ph-trademark</code> or <code style="font-family:monospace;font-size:11px;">ph-globe</code> — these read as decorative rather than actionable.</div>
+<div class="docs-note"><strong>Copy rules for actions</strong> — labels must be verb-first and sentence case: "Add employee", "Review share structure", "Register trademark". Descriptions should be 5–15 words of plain context — why this action matters now, not what the button does. Follow British English throughout.</div>
+<div class="docs-note"><strong>Lives in the aside panel</strong> — <code style="font-family:monospace;font-size:11px;">la-actions-widget</code> sits in the <code style="font-family:monospace;font-size:11px;">slot="aside"</code> of <code style="font-family:monospace;font-size:11px;">la-app-shell</code> on legal area pages. On desktop it is always visible; on tablet it appears as an overlay drawer. See the aside panel pattern in <a href="../../design-language/components.md" style="color:inherit;">design-language/components.md</a>.</div>
+<div class="docs-note"><strong>la-action bubbles and is composed</strong> — the event crosses the shadow boundary, so you can listen at the page level or on any ancestor element. Use <code style="font-family:monospace;font-size:11px;">e.detail.label</code> to route to the correct handler.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const SCENARIOS = {
+          employment: [
+            { label: 'Add employee',    description: 'Register a new employee and set their role.',           icon: 'ph ph-user-plus'       },
+            { label: 'Add contractor',  description: 'Onboard a contractor with a fixed-term engagement.',   icon: 'ph ph-briefcase'       },
+            { label: 'Manage people',   description: 'Review and update employee records and contracts.',     icon: 'ph ph-users'           },
+          ],
+          ip: [
+            { label: 'Register trademark', description: 'Start the trademark registration process for your brand.',  icon: 'ph ph-certificate'  },
+            { label: 'Add IP asset',       description: 'Log a new patent, copyright, or trade secret.',             icon: 'ph ph-shield-plus'  },
+          ],
+          single: [
+            { label: 'Upload document', description: 'Add a file to this legal area.', icon: 'ph ph-upload-simple' },
+          ],
+        };
+
+        const liveWidget = document.getElementById('live-widget');
+        const eventLog   = document.getElementById('event-log');
+        let logEmpty     = true;
+
+        // Set initial scenario
+        liveWidget.actions = SCENARIOS.employment;
+
+        // Scenario preset toggles
+        document.querySelectorAll('[data-scenario]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-scenario]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            liveWidget.actions = SCENARIOS[btn.dataset.scenario];
+          });
+        });
+
+        // Event log
+        liveWidget.addEventListener('la-action', (e) => {
+          if (logEmpty) {
+            eventLog.innerHTML = '';
+            logEmpty = false;
+          }
+          const line = document.createElement('div');
+          line.style.cssText = 'display:flex; gap:8px; align-items:baseline;';
+          line.innerHTML = `<span style="color:#7c7c9a;">la-action</span> <span style="color:#c3e88d;">${e.detail.label}</span> <span style="color:#555; font-size:10px;">${e.detail.icon}</span>`;
+          eventLog.prepend(line);
+          if (eventLog.children.length > 5) eventLog.removeChild(eventLog.lastChild);
+        });
+
+        // Snapshot data
+        document.getElementById('snap-employment').actions = SCENARIOS.employment;
+        document.getElementById('snap-ip').actions         = SCENARIOS.ip;
+        document.getElementById('snap-single').actions     = SCENARIOS.single;
+document.getElementById('snap-context').actions    = SCENARIOS.employment;
+  })();
+</script>
+
+
+</body>
+</html>

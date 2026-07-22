@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-switch — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-switch</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-switch</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    
+    
+    
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-switch</h1>
+<p>A binary on/off toggle. Wraps a native <code style="font-family:monospace;font-size:11px;">&lt;input type="checkbox" role="switch"&gt;</code> so form submission and screen-reader semantics come free; visuals are a pill track with a sliding circular thumb, all token-driven. Use for settings, feature flags, and any stateful preference that flips instantly on click. For multi-select lists or form fields that need an indeterminate state, reach for <code style="font-family:monospace;font-size:11px;">la-checkbox</code> instead.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Visual regions of the rendered switch</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:flex;gap:32px;align-items:center;padding:48px;justify-content:center;">
+<la-switch label="Off"></la-switch>
+<la-switch checked="" label="On"></la-switch>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-switch</h2>
+    <p>A binary on/off toggle. Wraps a native <input type="checkbox" role="switch"> so form submission and screen-reader semantics come free; visuals are a pill track with a sliding circular thumb, all token-driven. Use for settings, feature flags, and any stateful preference that flips instantly on click. For multi-select lists or form fields that need an indeterminate state, reach for la-checkbox instead.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>checked</td>
+          <td><span class="default">checked</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const liveSwitch = document.getElementById('live-switch');
+        const eventLog = document.getElementById('event-log');
+
+        function logEvent(name, detail) {
+          const entry = document.createElement('div');
+          const time = new Date().toLocaleTimeString('en-AU', {hour: '2-digit', minute: '2-digit', second: '2-digit'});
+          entry.style.cssText = 'color:#e2e8f0;padding:2px 0;';
+          entry.innerHTML = `<span style="color:#6b7280;">${time}</span> <span style="color:#7dd3fc;">${name}</span> <span style="color:#9ca3af;">${JSON.stringify(detail)}</span>`;
+          if (eventLog.textContent.trim() === '— events will appear here —') eventLog.innerHTML = '';
+          eventLog.appendChild(entry);
+          eventLog.scrollTop = eventLog.scrollHeight;
+        }
+
+        liveSwitch.addEventListener('la-change', e => logEvent('la-change', e.detail));
+
+        // State chips
+        document.querySelectorAll('[data-state]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-state]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.state === 'on') {
+              liveSwitch.setAttribute('checked', '');
+            } else {
+              liveSwitch.removeAttribute('checked');
+            }
+          });
+        });
+
+        // Disabled chips
+        document.querySelectorAll('[data-disabled]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-disabled]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if (btn.dataset.disabled === 'true') {
+              liveSwitch.setAttribute('disabled', '');
+            } else {
+              liveSwitch.removeAttribute('disabled');
+            }
+          });
+        });
+  })();
+</script>
+
+
+</body>
+</html>

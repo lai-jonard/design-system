@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Person entity modal — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+  .person-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--la-radius-circle, 9999px);
+    background: var(--la-color-bg-active, #E5E7EB);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--la-color-text-secondary, #4B5563);
+    flex-shrink: 0;
+  }
+  .person-modal-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--la-space-sm, 8px);
+    padding-bottom: var(--la-space-xl, 24px);
+    text-align: center;
+  }
+  .person-name {
+    font-size: var(--la-font-size-2xl, 18px);
+    font-weight: 600;
+    color: var(--la-color-text, #1E262B);
+    line-height: 1.2;
+  }
+  .person-subtitle {
+    font-size: var(--la-font-size-base, 14px);
+    color: var(--la-color-text-muted, #6B7280);
+    line-height: 1.4;
+  }
+  .person-section-label {
+    font-size: var(--la-font-size-sm, 12px);
+    font-weight: 400;
+    color: var(--la-color-text-muted, #6B7280);
+    padding: 0 0 6px 2px;
+  }
+  .footer-contents {
+    display: contents;
+  }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/" class="active">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title"><a href="../patterns/" style="color:inherit;text-decoration:none;">← Patterns</a></h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#examples" class="docs-nav-item" data-nav-id="examples">Examples</a>
+    
+      <a href="#accessibility" class="docs-nav-item" data-nav-id="accessibility">Accessibility</a>
+    
+      <a href="#rules" class="docs-nav-item" data-nav-id="rules">Rules</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../index.html">Overview</a>
+    <a class="docs-nav-item" href="../components/">Components</a>
+    <a class="docs-nav-item" href="../foundations/">Foundations</a>
+    <a class="docs-nav-item" href="../pages/">Pages</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+  <h1>Person entity modal</h1>
+  <p>Detail, add, and confirm modal states for a named person — used in Founders (Company Manual) and People (Employment). Clicking a person row opens a detail modal; the remove trigger within that modal opens a confirmation modal.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <div style="background:var(--doc-surface-2);border:1px solid var(--doc-border);border-radius:8px;padding:16px 20px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--doc-text-2);white-space:pre;line-height:1.7;">       ┌──────────────┐
+       │      AC      │  ← 48×48, --la-radius-circle, --la-color-bg-active
+       └──────────────┘
+        Alex Chen          ← --la-font-size-2xl, semibold
+        Founder &amp; CEO      ← --la-font-size-base, normal, muted</div>
+  </div>
+</div>
+
+<div class="preview-header" id="examples" style="margin-top:8px;">
+  <h1>Examples</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">People list — click a row to open the detail modal</div>
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <la-person-list id="demo-person-list">
+      <la-person-item name="Alex Chen" subtitle="Founder &amp; CEO" id="person-alex"></la-person-item>
+      <la-person-item name="Jamie Lee" subtitle="Founder" id="person-jamie"></la-person-item>
+    </la-person-list>
+  </div>
+</div>
+
+<!-- Detail modal: Alex Chen -->
+<la-modal heading="" aria-label="Alex Chen" id="detail-alex">
+  <div class="person-modal-header">
+    <div class="person-avatar" id="detail-alex-avatar">AC</div>
+    <div class="person-name">Alex Chen</div>
+    <div class="person-subtitle">Founder &amp; CEO</div>
+  </div>
+  <div class="person-section-label">Documents</div>
+  <la-document-list>
+    <la-document-item name="IP Assignment Agreement" status="ready"></la-document-item>
+    <la-document-item name="Founder Vesting Agreement" status="ready"></la-document-item>
+  </la-document-list>
+  <div slot="footer">
+    <div class="footer-contents">
+      <la-button variant="ghost" style="--la-button-text-color:var(--la-color-danger-text);margin-right:auto;" onclick="document.getElementById('detail-alex').open=false;document.getElementById('confirm-remove-alex').open=true;">Remove founder</la-button>
+      <la-button variant="ghost" onclick="document.getElementById('detail-alex').open=false">Close</la-button>
+    </div>
+  </div>
+</la-modal>
+
+<!-- Detail modal: Jamie Lee -->
+<la-modal heading="" aria-label="Jamie Lee" id="detail-jamie">
+  <div class="person-modal-header">
+    <div class="person-avatar">JL</div>
+    <div class="person-name">Jamie Lee</div>
+    <div class="person-subtitle">Founder</div>
+  </div>
+  <div class="person-section-label">Documents</div>
+  <la-document-list>
+    <la-document-item name="IP Assignment Agreement" status="ready"></la-document-item>
+  </la-document-list>
+  <div slot="footer">
+    <div class="footer-contents">
+      <la-button variant="ghost" style="--la-button-text-color:var(--la-color-danger-text);margin-right:auto;" onclick="document.getElementById('detail-jamie').open=false;document.getElementById('confirm-remove-jamie').open=true;">Remove founder</la-button>
+      <la-button variant="ghost" onclick="document.getElementById('detail-jamie').open=false">Close</la-button>
+    </div>
+  </div>
+</la-modal>
+
+<!-- Confirmation modals -->
+<la-modal heading="Remove founder?" id="confirm-remove-alex">
+  <p style="font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;margin:0;">Alex Chen will be removed from the founders list. This cannot be undone.</p>
+  <div slot="footer">
+    <la-button variant="ghost" onclick="document.getElementById('confirm-remove-alex').open=false">Cancel</la-button>
+    <la-button variant="danger" onclick="document.getElementById('confirm-remove-alex').open=false">Remove</la-button>
+  </div>
+</la-modal>
+
+<la-modal heading="Remove founder?" id="confirm-remove-jamie">
+  <p style="font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;margin:0;">Jamie Lee will be removed from the founders list. This cannot be undone.</p>
+  <div slot="footer">
+    <la-button variant="ghost" onclick="document.getElementById('confirm-remove-jamie').open=false">Cancel</la-button>
+    <la-button variant="danger" onclick="document.getElementById('confirm-remove-jamie').open=false">Remove</la-button>
+  </div>
+</la-modal>
+
+<div class="preview-group">
+  <div class="preview-label">Add modal — live name preview and avatar initials</div>
+  <div class="preview-frame" style="justify-content:center; padding:32px 24px;">
+    <la-button variant="secondary" onclick="document.getElementById('add-founder-modal').open=true">Add founder</la-button>
+  </div>
+</div>
+
+<la-modal heading="Add founder" id="add-founder-modal">
+  <div class="person-modal-header">
+    <div class="person-avatar" id="add-avatar">—</div>
+    <div class="person-name" id="add-name-preview" style="color:var(--la-color-text-disabled,#9CA3AF);">Enter a name below</div>
+    <div class="person-subtitle">Founder</div>
+  </div>
+  <la-input label="Full name" placeholder="e.g. Alex Chen" id="add-name-input"></la-input>
+  <div slot="footer">
+    <la-button variant="ghost" onclick="document.getElementById('add-founder-modal').open=false">Cancel</la-button>
+    <la-button variant="primary" id="add-founder-btn" disabled>Add founder</la-button>
+  </div>
+</la-modal>
+
+<div class="preview-header" id="accessibility" style="margin-top:8px;">
+  <h1>Accessibility</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;gap:12px;">
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">
+      <li>Set <code style="font-family:monospace;font-size:12px;">heading=""</code> to suppress the visible title bar — the person's name in the body serves as the visual heading.</li>
+      <li>Set <code style="font-family:monospace;font-size:12px;">aria-label</code> on the modal element to the person's name.</li>
+      <li>Screen readers announce the dialog name on open, then read body content sequentially.</li>
+    </ul>
+    <div style="background:var(--doc-surface-2);border:1px solid var(--doc-border);border-radius:8px;padding:12px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--doc-text-2);line-height:1.7;">modal.setAttribute('aria-label', person.name);</div>
+  </div>
+</div>
+
+<div class="preview-header" id="rules" style="margin-top:8px;">
+  <h1>Rules</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">
+      <li>Ghost + <code style="font-family:monospace;font-size:12px;">--la-color-danger-text</code> for the remove trigger in the detail modal — not filled danger.</li>
+      <li>Filled <code style="font-family:monospace;font-size:12px;">danger</code> variant is reserved for the confirmation step only.</li>
+      <li>Subtitle in the add modal is always visible — never hidden, even before a name is entered.</li>
+      <li>Use <code style="font-family:monospace;font-size:12px;">display: contents</code> on the footer wrapper div so <code style="font-family:monospace;font-size:12px;">margin-right: auto</code> works correctly to push the remove button to the left.</li>
+      <li>Avatar initials update live as the user types in the add modal.</li>
+    </ul>
+    <div style="margin-top:16px;background:var(--doc-surface-2);border:1px solid var(--doc-border);border-radius:8px;padding:12px 16px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12px;color:var(--doc-text-2);line-height:1.7;white-space:pre;">click la-person-item row
+  → populate + open detail modal
+
+click "Remove" in detail modal
+  → close detail modal
+  → open confirmation modal
+
+click "Remove" in confirmation modal
+  → remove from data array
+  → re-render la-person-list</div>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+(function () {
+  // Open detail modals on row click
+  const alexItem = document.getElementById('person-alex');
+  const jamieItem = document.getElementById('person-jamie');
+
+  if (alexItem) {
+    alexItem.addEventListener('click', () => {
+      document.getElementById('detail-alex').open = true;
+    });
+    alexItem.addEventListener('la-select', () => {
+      document.getElementById('detail-alex').open = true;
+    });
+  }
+  if (jamieItem) {
+    jamieItem.addEventListener('click', () => {
+      document.getElementById('detail-jamie').open = true;
+    });
+    jamieItem.addEventListener('la-select', () => {
+      document.getElementById('detail-jamie').open = true;
+    });
+  }
+
+  // Add modal — live preview
+  const nameInput = document.getElementById('add-name-input');
+  const namePreview = document.getElementById('add-name-preview');
+  const avatarEl = document.getElementById('add-avatar');
+  const addBtn = document.getElementById('add-founder-btn');
+
+  function getInitials(name) {
+    const parts = name.trim().split(/\s+/);
+    if (parts.length === 0 || !parts[0]) return '—';
+    if (parts.length === 1) return parts[0][0].toUpperCase();
+    return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  }
+
+  if (nameInput) {
+    nameInput.addEventListener('input', (e) => {
+      const val = e.target ? e.target.value : (nameInput.value || '');
+      if (val && val.trim()) {
+        namePreview.textContent = val;
+        namePreview.style.color = 'var(--la-color-text)';
+        avatarEl.textContent = getInitials(val);
+        addBtn.disabled = false;
+      } else {
+        namePreview.textContent = 'Enter a name below';
+        namePreview.style.color = 'var(--la-color-text-disabled, #9CA3AF)';
+        avatarEl.textContent = '—';
+        addBtn.disabled = true;
+      }
+    });
+    // Also handle la-input custom event
+    nameInput.addEventListener('la-change', (e) => {
+      const val = e.detail?.value || '';
+      if (val && val.trim()) {
+        namePreview.textContent = val;
+        namePreview.style.color = 'var(--la-color-text)';
+        avatarEl.textContent = getInitials(val);
+        addBtn.disabled = false;
+      } else {
+        namePreview.textContent = 'Enter a name below';
+        namePreview.style.color = 'var(--la-color-text-disabled, #9CA3AF)';
+        avatarEl.textContent = '—';
+        addBtn.disabled = true;
+      }
+    });
+  }
+
+  // Reset add modal on close
+  const addModal = document.getElementById('add-founder-modal');
+  if (addModal) {
+    addModal.addEventListener('close', () => {
+      if (nameInput) nameInput.value = '';
+      if (namePreview) {
+        namePreview.textContent = 'Enter a name below';
+        namePreview.style.color = 'var(--la-color-text-disabled, #9CA3AF)';
+      }
+      if (avatarEl) avatarEl.textContent = '—';
+      if (addBtn) addBtn.disabled = true;
+    });
+  }
+})();
+</script>
+
+
+</body>
+</html>

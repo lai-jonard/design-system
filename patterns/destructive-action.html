@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Destructive action — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/" class="active">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title"><a href="../patterns/" style="color:inherit;text-decoration:none;">← Patterns</a></h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#examples" class="docs-nav-item" data-nav-id="examples">Examples</a>
+    
+      <a href="#rules" class="docs-nav-item" data-nav-id="rules">Rules</a>
+    
+      <a href="#copy" class="docs-nav-item" data-nav-id="copy">Copy</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../index.html">Overview</a>
+    <a class="docs-nav-item" href="../components/">Components</a>
+    <a class="docs-nav-item" href="../foundations/">Foundations</a>
+    <a class="docs-nav-item" href="../pages/">Pages</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+  <h1>Destructive action</h1>
+  <p>Two-step delete flow — trigger opens a confirmation modal, never deletes immediately. The delete button is ghost or secondary as a trigger; only the <code>danger</code> variant appears inside the confirmation footer.</p>
+</div>
+
+<div class="preview-header" id="examples" style="margin-top:8px;">
+  <h1>Examples</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Trigger — ghost button opens confirmation modal</div>
+  <div class="preview-frame" style="justify-content:center; padding:32px 24px;">
+    <la-button variant="ghost" id="delete-trigger" style="--la-button-text-color: var(--la-color-danger-text);">Delete document</la-button>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Confirmation modal — Cancel (ghost) left, Delete (danger) right</div>
+  <div class="preview-frame" style="justify-content:center; padding:32px 24px; min-height:80px;">
+    <la-button variant="secondary" onclick="document.getElementById('destruct-modal').open=true">Preview confirmation modal</la-button>
+  </div>
+</div>
+
+<la-modal heading="Delete document?" id="destruct-modal">
+  <p style="font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;margin:0;">This document will be permanently deleted. Related insights will be updated.</p>
+  <div slot="footer">
+    <la-button variant="ghost" onclick="document.getElementById('destruct-modal').open=false">Cancel</la-button>
+    <la-button variant="danger" onclick="document.getElementById('destruct-modal').open=false">Delete</la-button>
+  </div>
+</la-modal>
+
+<div class="preview-header" id="rules" style="margin-top:8px;">
+  <h1>Rules</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">
+      <li>Never delete immediately on click — always a confirmation modal.</li>
+      <li><code style="font-family:monospace;font-size:12px;">deletable</code> prop must be <code style="font-family:monospace;font-size:12px;">true</code> before showing the trigger. Never show a delete button the user cannot use.</li>
+      <li>Delete button is ghost or secondary as a trigger; only the <code style="font-family:monospace;font-size:12px;">danger</code> variant appears inside the confirmation footer.</li>
+      <li>On confirm, navigate to the parent page — never leave the user on a now-empty page.</li>
+      <li>Body copy acknowledges downstream effects: "Related insights will be updated."</li>
+    </ul>
+  </div>
+</div>
+
+<div class="preview-header" id="copy" style="margin-top:8px;">
+  <h1>Copy</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <dl style="display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;font-size:13px;color:var(--la-color-text-secondary);margin:0;">
+      <dt style="color:var(--la-color-text-muted);font-size:12px;padding-top:1px;">CTA</dt>
+      <dd style="margin:0;">"Delete" — never "Remove", "Erase", or "Yes, delete"</dd>
+      <dt style="color:var(--la-color-text-muted);font-size:12px;padding-top:1px;">Cancel</dt>
+      <dd style="margin:0;">"Cancel" — never "No", "Go back", or "Keep"</dd>
+      <dt style="color:var(--la-color-text-muted);font-size:12px;padding-top:1px;">Body</dt>
+      <dd style="margin:0;">One sentence. "This document will be permanently deleted. Related insights will be updated."</dd>
+    </dl>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+(function () {
+  const trigger = document.getElementById('delete-trigger');
+  const modal = document.getElementById('destruct-modal');
+  trigger.addEventListener('click', () => { modal.open = true; });
+})();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,1271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>la-chat — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <style>
+    /* ── Assembled demo ───────────────────────────────── */
+    .chat-demo {
+      display: flex;
+      flex-direction: column;
+      height: 480px;
+      max-width: 540px;
+      background: var(--la-color-bg);
+      border: 1px solid var(--la-color-border-light);
+      border-radius: var(--la-radius-xl2);
+      overflow: hidden;
+    }
+
+    .chat-demo-thread {
+      flex: 1;
+      overflow-y: auto;
+      padding: var(--la-space-xl) var(--la-space-lg);
+      display: flex;
+      flex-direction: column;
+      gap: var(--la-space-lg);
+      scrollbar-width: thin;
+      scrollbar-color: var(--la-color-border-light) transparent;
+    }
+
+    .chat-demo-footer {
+      flex-shrink: 0;
+      padding: var(--la-space-md) var(--la-space-lg) var(--la-space-lg);
+      border-top: 1px solid var(--la-color-border-light);
+      background: var(--la-color-bg);
+    }
+
+    /* ── Snapshot rows ────────────────────────────────── */
+    .msg-row {
+      display: flex;
+      flex-direction: column;
+      gap: var(--la-space-sm);
+      max-width: 540px;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../../index.html">Overview</a>
+        <a href="../../index.html">Foundations</a>
+        <a href="../../index.html" class="active">Components</a>
+      </nav>
+    </div>
+  </header>
+
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+
+  <div class="page-container">
+
+    <nav class="docs-nav" id="docs-nav">
+      <h3 class="docs-nav-title">Chat</h3>
+      <div class="docs-nav-group">
+        <a href="#overview"    class="docs-nav-item" data-nav-id="overview">Overview</a>
+        <a href="#demo"        class="docs-nav-item" data-nav-id="demo">Assembled demo</a>
+      </div>
+      <div class="docs-nav-group">
+        <a href="#message"     class="docs-nav-item" data-nav-id="message">la-chat-message</a>
+        <a href="#msg-anatomy" class="docs-nav-item docs-nav-item--subsection">Anatomy</a>
+        <a href="#msg-snapshots" class="docs-nav-item docs-nav-item--subsection">Snapshots</a>
+        <a href="#msg-props"   class="docs-nav-item docs-nav-item--subsection">Properties</a>
+        <a href="#msg-events"  class="docs-nav-item docs-nav-item--subsection">Events &amp; slots</a>
+      </div>
+      <div class="docs-nav-group">
+        <a href="#attachment"  class="docs-nav-item" data-nav-id="attachment">la-chat-attachment</a>
+        <a href="#att-props"   class="docs-nav-item docs-nav-item--subsection">Properties</a>
+      </div>
+      <div class="docs-nav-group">
+        <a href="#chip"        class="docs-nav-item" data-nav-id="chip">la-chat-attachment-chip</a>
+        <a href="#chip-props"  class="docs-nav-item docs-nav-item--subsection">Properties &amp; events</a>
+      </div>
+      <div class="docs-nav-group">
+        <a href="#input"       class="docs-nav-item" data-nav-id="input">la-chat-input</a>
+        <a href="#inp-anatomy" class="docs-nav-item docs-nav-item--subsection">Anatomy</a>
+        <a href="#inp-preview" class="docs-nav-item docs-nav-item--subsection">Live preview</a>
+        <a href="#inp-props"   class="docs-nav-item docs-nav-item--subsection">Properties</a>
+        <a href="#inp-events"  class="docs-nav-item docs-nav-item--subsection">Events</a>
+      </div>
+      <div class="docs-nav-group">
+        <a href="#la-chat"         class="docs-nav-item" data-nav-id="la-chat">la-chat</a>
+        <a href="#chat-demo"       class="docs-nav-item docs-nav-item--subsection">Live demo</a>
+        <a href="#chat-props"      class="docs-nav-item docs-nav-item--subsection">Properties</a>
+        <a href="#chat-events"     class="docs-nav-item docs-nav-item--subsection">Events &amp; slots</a>
+        <a href="#chat-states"     class="docs-nav-item docs-nav-item--subsection">State variants</a>
+      </div>
+      <div class="docs-nav-group">
+        <a href="#usage"       class="docs-nav-item" data-nav-id="usage">Usage examples</a>
+        <a href="#notes"       class="docs-nav-item" data-nav-id="notes">Notes</a>
+      </div>
+    </nav>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>Chat</h1>
+          <p>Two primitives that assemble into a conversational AI interface. <code>la-chat-message</code> renders individual messages — user bubbles (right, dark) and assistant responses (left, plain). <code>la-chat-input</code> is the composer bar with an auto-growing textarea, send button, and loading state. Neither component owns state — the host page drives the conversation.</p>
+        </div>
+
+        <!-- Assembled demo -->
+        <div id="demo" class="preview-header" style="margin-top:8px;">
+          <h1>Assembled demo</h1>
+          <p>Type a message and press Enter or Send. A simulated assistant response appears after a short delay.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <div class="chat-demo">
+              <div class="chat-demo-thread" id="demo-thread">
+                <la-chat-message sender="assistant">
+                  Hi Alex. Based on your vault, I can see IP assignment agreements for two of your three engineers. Jamie Lee, who joined in March, doesn't appear to have signed one yet — I'd prioritise this before approaching investors.
+                </la-chat-message>
+                <la-chat-message sender="user">
+                  How urgent is that? We have meetings next week.
+                </la-chat-message>
+                <la-chat-message sender="assistant">
+                  Pretty urgent — IP ownership is one of the first things investors check in early due diligence. Without it, any contributions Jamie made could be contested. It should only take a day to resolve if Jamie is available to sign.
+                </la-chat-message>
+              </div>
+              <div class="chat-demo-footer">
+                <la-chat-input id="demo-input" placeholder="Ask a follow-up…"></la-chat-input>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- la-chat-message -->
+        <div id="message" class="preview-header" style="margin-top:8px;">
+          <h1>la-chat-message</h1>
+          <p>A single conversational turn. Adapts layout and visual style based on the <code>sender</code> attribute — <code>"assistant"</code> messages are left-aligned with a small indicator circle; <code>"user"</code> messages are right-aligned with a dark inverted bubble.</p>
+        </div>
+
+        <div id="msg-anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Anatomy — assistant message</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div style="max-width:480px;">
+              <la-chat-message sender="assistant">
+                A contract is signed by both parties when the last signatory countersigns. Until then, it remains an offer only.
+              </la-chat-message>
+            </div>
+          </div>
+          <table class="docs-table">
+            <thead><tr><th>Region</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Indicator circle</td>
+                <td>24 px circle with sparkle icon — marks the assistant sender. Hidden on user messages.</td>
+              </tr>
+              <tr>
+                <td>Bubble — assistant</td>
+                <td>No background. Text renders at base size, line-height 1.65, max-width 88% of the container.</td>
+              </tr>
+              <tr>
+                <td>Bubble — user</td>
+                <td><code>--la-color-bg-invert</code> background, <code>--la-color-text-invert</code> text. Right-aligned. Max-width 75%.</td>
+              </tr>
+              <tr>
+                <td>Timestamp</td>
+                <td>Optional. Rendered in <code>--la-font-size-xs</code> / <code>--la-color-text-faint</code> below the bubble.</td>
+              </tr>
+              <tr>
+                <td>Typing indicator</td>
+                <td>Three animated dots. Replaces slot content when <code>typing</code> is set.</td>
+              </tr>
+              <tr>
+                <td>Streaming cursor</td>
+                <td>Blinking 2 px beam appended to slot content when <code>streaming</code> is set.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="msg-snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Assistant — default</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div style="max-width:480px;">
+              <la-chat-message sender="assistant">
+                Your Articles of Incorporation look correct. The registered agent address matches the Secretary of State records.
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">User — default</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div style="max-width:480px;display:flex;flex-direction:column;align-items:stretch;">
+              <la-chat-message sender="user">
+                What documents do investors usually ask for in a seed round?
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Assistant — typing (waiting for response)</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div style="max-width:480px;">
+              <la-chat-message sender="assistant" typing></la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Assistant — streaming (response generating)</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div style="max-width:480px;">
+              <la-chat-message sender="assistant" streaming>
+                Seed-round investors typically ask for a cap table, financial projections, and the pitch deck
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">With timestamp</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div class="msg-row" style="max-width:480px;">
+              <la-chat-message sender="user" timestamp="2:14 pm">
+                Can you draft the IP assignment for Jamie?
+              </la-chat-message>
+              <la-chat-message sender="assistant" timestamp="2:14 pm">
+                Sure — I'll need Jamie's full legal name and start date to populate the agreement correctly. Do you have those to hand?
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Full thread — messages in sequence</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <div style="background:var(--la-color-bg);border-radius:var(--la-radius-xl2);padding:var(--la-space-xl) var(--la-space-lg);display:flex;flex-direction:column;gap:var(--la-space-lg);max-width:480px;">
+              <la-chat-message sender="assistant">
+                I've reviewed your Employment section. Two employees are missing signed NDAs — Priya Mehta and Leo Tran. This is flagged as a blocker in most investor checklists.
+              </la-chat-message>
+              <la-chat-message sender="user">
+                They're contractors, not full-time. Does that change anything?
+              </la-chat-message>
+              <la-chat-message sender="assistant">
+                Yes — contractors typically sign a services agreement with an NDA and IP clause built in rather than a standalone NDA. Check whether their contracts include those clauses. If not, a simple amendment covers it.
+              </la-chat-message>
+              <la-chat-message sender="user">
+                How do I add that amendment in LawAdvisor?
+              </la-chat-message>
+              <la-chat-message sender="assistant" typing></la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Human-to-human — single contact message (name set)</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div style="max-width:480px;">
+              <la-chat-message sender="assistant" name="James Okafor">
+                Hi Alex — I've had a chance to review the DD pack. The cap table looks clean. Quick question on the IP assignment for Jamie Lee — can you confirm it was signed before any product contributions were made?
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Human-to-human — full conversation (founder ↔ investor)</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <div style="background:var(--la-color-bg);border-radius:var(--la-radius-xl2);padding:var(--la-space-xl) var(--la-space-lg);display:flex;flex-direction:column;gap:var(--la-space-lg);max-width:480px;">
+              <la-chat-message sender="assistant" name="James Okafor" timestamp="10:04 am">
+                Hi Alex — I've had a chance to review the DD pack. The cap table looks clean. Quick question on the IP assignment for Jamie Lee — can you confirm it was signed before any product contributions were made?
+              </la-chat-message>
+              <la-chat-message sender="user" timestamp="10:11 am">
+                Hi James — yes, it was signed on Jamie's first day, 3rd March. We've uploaded a copy to the data room as well.
+              </la-chat-message>
+              <la-chat-message sender="assistant" name="James Okafor" timestamp="10:15 am">
+                Perfect. That's all I needed on that front. I'll have our team review the financials this week and follow up with any questions.
+              </la-chat-message>
+              <la-chat-message sender="user" timestamp="10:17 am">
+                Sounds good. Let me know if anything else comes up.
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Document attachment — single file</div>
+          <div class="preview-frame" style="padding:32px;">
+            <div style="max-width:480px;">
+              <la-chat-message sender="user">
+                Here's the IP assignment you asked for.
+                <la-chat-attachment slot="attachments"
+                  name="IP Assignment Agreement — Jamie Lee"
+                  category="Employment"
+                  association="Acme Corp."
+                  status="ready">
+                </la-chat-attachment>
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Document attachments — multiple files, DD pack context</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <div style="background:var(--la-color-bg);border-radius:var(--la-radius-xl2);padding:var(--la-space-xl) var(--la-space-lg);display:flex;flex-direction:column;gap:var(--la-space-lg);max-width:480px;">
+              <la-chat-message sender="assistant" name="James Okafor">
+                Thanks Alex. Could you share the cap table and the latest SAFE agreement? Our legal team would like to review them before our next call.
+              </la-chat-message>
+              <la-chat-message sender="user">
+                Of course — I've just shared them from the data room.
+                <la-chat-attachment slot="attachments"
+                  name="Cap Table (as of Jan 2026)"
+                  category="Fundraising"
+                  association="Acme Corp."
+                  status="ready">
+                </la-chat-attachment>
+                <la-chat-attachment slot="attachments"
+                  name="SAFE Agreement"
+                  category="Fundraising"
+                  association="Acme Corp."
+                  status="ready">
+                </la-chat-attachment>
+              </la-chat-message>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Attachment status states — none · ready · processing · failed</div>
+          <div class="preview-frame" style="padding:24px;display:flex;flex-direction:column;gap:var(--la-space-sm);max-width:480px;">
+            <la-chat-attachment name="Articles of Incorporation" category="Governance" association="Acme Corp."></la-chat-attachment>
+            <la-chat-attachment name="Cap Table (as of Jan 2026)" category="Fundraising" association="Acme Corp." status="ready"></la-chat-attachment>
+            <la-chat-attachment name="Financial Projections 2026–2028" category="Fundraising" association="Acme Corp." status="processing"></la-chat-attachment>
+            <la-chat-attachment name="Employment Agreement — Alex Chen" category="Employment" association="Acme Corp." status="failed"></la-chat-attachment>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">With href — navigable to document</div>
+          <div class="preview-frame" style="padding:24px;max-width:480px;">
+            <la-chat-attachment
+              name="Pitch Deck — April 2026"
+              category="Fundraising"
+              association="Acme Corp."
+              status="ready"
+              href="#"
+            ></la-chat-attachment>
+          </div>
+        </div>
+
+        <!-- la-chat-message Props -->
+        <div class="docs">
+
+          <div id="msg-props" class="docs-section">
+            <h3>Properties</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>sender</td>
+                  <td><span class="default">sender</span></td>
+                  <td><span class="type">'user' | 'assistant'</span></td>
+                  <td><code>'assistant'</code></td>
+                  <td>Determines layout direction and visual style. <code>assistant</code>: left-aligned with indicator circle. <code>user</code>: right-aligned with dark inverted bubble.</td>
+                </tr>
+                <tr>
+                  <td>name</td>
+                  <td><span class="default">name</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Display name of the sender. When set on an <code>assistant</code>-side message, replaces the sparkle icon with two-letter initials and shows the name above the bubble. Use for human-to-human conversations.</td>
+                </tr>
+                <tr>
+                  <td>timestamp</td>
+                  <td><span class="default">timestamp</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Optional label shown beneath the bubble. Pass a relative string ("2 min ago") or absolute time ("2:14 pm") — the component renders it as-is.</td>
+                </tr>
+                <tr>
+                  <td>typing</td>
+                  <td><span class="default">typing</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><code>false</code></td>
+                  <td>Replaces slot content with three animated dots. Use while waiting for the first token of a response. Screened by <code>prefers-reduced-motion</code>.</td>
+                </tr>
+                <tr>
+                  <td>streaming</td>
+                  <td><span class="default">streaming</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><code>false</code></td>
+                  <td>Appends a blinking cursor after slot content. Use while the assistant is actively generating text. Set to <code>false</code> when generation ends. Screened by <code>prefers-reduced-motion</code>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="msg-events" class="docs-section">
+            <h3>Slots &amp; events</h3>
+            <table class="docs-table">
+              <thead><tr><th>Slot</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><em>default</em></td>
+                  <td>Message text or inline HTML. Hidden when <code>typing</code> is set.</td>
+                </tr>
+                <tr>
+                  <td><code>attachments</code></td>
+                  <td>One or more <code>&lt;la-chat-attachment&gt;</code> elements. Rendered below the bubble in a stacked column. The wrapper is hidden when the slot is empty — no extra spacing is introduced.</td>
+                </tr>
+              </tbody>
+            </table>
+            <p style="margin-top:8px;">No events. <code>la-chat-message</code> is presentational — it holds and displays a message. Interaction (copy, retry, react) lives in the host page.</p>
+          </div>
+
+        </div><!-- /.docs -->
+
+        <!-- la-chat-attachment -->
+        <div id="attachment" class="preview-header" style="margin-top:24px;">
+          <h1>la-chat-attachment</h1>
+          <p>Compact document reference card for use inside <code>la-chat-message</code> via <code>slot="attachments"</code>. Reuses the <code>ready | processing | failed | none</code> status vocabulary from <code>la-document-item</code>. When <code>href</code> is set, the card renders as an <code>&lt;a&gt;</code> that opens the document in a new tab.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Anatomy</div>
+          <div class="preview-frame" style="padding:24px;max-width:480px;">
+            <la-chat-attachment
+              name="Cap Table (as of Jan 2026)"
+              category="Fundraising"
+              association="Acme Corp."
+              status="ready"
+              href="#"
+            ></la-chat-attachment>
+          </div>
+          <table class="docs-table">
+            <thead><tr><th>Region</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Icon container</td>
+                <td>32 × 32 px rounded square with <code>--la-color-bg-subtle</code>. Holds <code>ph-file-text</code> at xl size, or a spinner when <code>status="processing"</code>.</td>
+              </tr>
+              <tr>
+                <td>Status badge</td>
+                <td>13 px filled icon overlaid bottom-right of the icon container. Green check-circle for <code>ready</code>, red x-circle for <code>failed</code>. Not shown for <code>none</code> or <code>processing</code>.</td>
+              </tr>
+              <tr>
+                <td>Document name</td>
+                <td>Medium weight, truncated with ellipsis. Full name available via the <code>title</code> attribute tooltip.</td>
+              </tr>
+              <tr>
+                <td>Sub-label</td>
+                <td><code>category</code> and <code>association</code> joined with " · ". Shown only when at least one is set.</td>
+              </tr>
+              <tr>
+                <td>Chevron</td>
+                <td>Right-arrow icon. Shown only when <code>href</code> is set, signalling the card is navigable.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="docs">
+
+          <div id="att-props" class="docs-section">
+            <h3>Properties — la-chat-attachment</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td><span class="default">name</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Document title. Truncated with ellipsis if it overflows; full title shown via native <code>title</code> tooltip.</td>
+                </tr>
+                <tr>
+                  <td>category</td>
+                  <td><span class="default">category</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Optional category label — e.g. "Fundraising", "Governance". Shown in the sub-label line.</td>
+                </tr>
+                <tr>
+                  <td>association</td>
+                  <td><span class="default">association</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Optional entity name the document belongs to. Mirrors the <code>association</code> field on <code>la-document-item</code>. Shown in the sub-label line.</td>
+                </tr>
+                <tr>
+                  <td>status</td>
+                  <td><span class="default">status</span></td>
+                  <td><span class="type">'none' | 'ready' | 'processing' | 'failed'</span></td>
+                  <td><code>'none'</code></td>
+                  <td>Processing state. <code>none</code> — no badge. <code>ready</code> — green check-circle. <code>processing</code> — spinner replaces file icon. <code>failed</code> — red x-circle. Matches <code>la-document-item</code> vocabulary.</td>
+                </tr>
+                <tr>
+                  <td>href</td>
+                  <td><span class="default">href</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>When set, renders the card as an <code>&lt;a&gt;</code> with this href (opens in a new tab). A right-chevron is shown. When empty, the card is a non-interactive <code>&lt;div&gt;</code>.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div><!-- /.docs -->
+
+        <!-- la-chat-attachment-chip -->
+        <div id="chip" class="preview-header" style="margin-top:24px;">
+          <h1>la-chat-attachment-chip</h1>
+          <p>Staged-attachment pill for the compose bar. The compose-state counterpart to <code>la-chat-attachment</code> — shown above the textarea as the founder selects documents before sending. Renders as a compact pill with a file icon, truncated name, and a dismiss button. Fires <code>la-remove</code> when dismissed so the host can remove it from the staged list.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Single chip</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg);">
+            <la-chat-attachment-chip name="Cap Table (as of Jan 2026)" category="Fundraising"></la-chat-attachment-chip>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Multiple chips — as they appear above the textarea</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg);">
+            <div style="display:flex;flex-wrap:wrap;gap:var(--la-space-xs);">
+              <la-chat-attachment-chip name="Cap Table (as of Jan 2026)" category="Fundraising"></la-chat-attachment-chip>
+              <la-chat-attachment-chip name="SAFE Agreement" category="Fundraising"></la-chat-attachment-chip>
+              <la-chat-attachment-chip name="IP Assignment Agreement — Jamie Lee" category="Employment"></la-chat-attachment-chip>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Long name — truncated with ellipsis</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg);">
+            <la-chat-attachment-chip name="Board Resolution — Special Meeting of the Board of Directors — Authorisation of Share Issuance" category="Governance"></la-chat-attachment-chip>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context — staged in the compose bar</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg);">
+            <la-chat-input
+              id="chip-demo-input"
+              style="max-width:540px;"
+              placeholder="Add a note…"
+            ></la-chat-input>
+          </div>
+        </div>
+
+        <div class="docs">
+          <div id="chip-props" class="docs-section">
+            <h3>Properties &amp; events</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>name</td>
+                  <td><span class="default">name</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Document name shown in the pill. Truncated with ellipsis if it overflows. Full name accessible via native <code>title</code> tooltip.</td>
+                </tr>
+                <tr>
+                  <td>category</td>
+                  <td><span class="default">category</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Optional category metadata (e.g. "Fundraising"). Not displayed in the chip — available in the <code>la-remove</code> event detail so the host can identify which document was dismissed.</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="docs-table" style="margin-top:16px;">
+              <thead><tr><th>Event</th><th>Detail</th><th>When</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>la-remove</code></td>
+                  <td><code>{ name: string, category: string }</code></td>
+                  <td>User clicks the × dismiss button. Remove the matching entry from your staged files array and update <code>la-chat-input</code>'s <code>files</code> property.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><!-- /.docs -->
+
+        <!-- la-chat-input -->
+        <div id="input" class="preview-header" style="margin-top:24px;">
+          <h1>la-chat-input</h1>
+          <p>Composer bar for the chat interface. Auto-growing textarea with a primary send button. Handles Enter-to-send (Shift+Enter inserts a newline). Resets after dispatch. Provides a <code>loading</code> state that shows a spinner and disables input while a response is in-flight.</p>
+        </div>
+
+        <div id="inp-anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Default</div>
+          <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-subtle);">
+            <la-chat-input style="max-width:480px;"></la-chat-input>
+          </div>
+          <table class="docs-table">
+            <thead><tr><th>Region</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Shell</td>
+                <td>White pill container with <code>--la-shadow-xs</code>. On focus-within: border shifts to <code>--la-color-border-focus</code> (blue) and gains <code>--la-input-shadow-focus</code> glow.</td>
+              </tr>
+              <tr>
+                <td>Attach button</td>
+                <td><code>la-icon-button size="sm"</code> with <code>ph-plus</code> icon, wrapped in <code>la-tooltip size="sm" tip="Add file"</code>. Disabled and tooltip reads "Max N files" once <code>max-files</code> is reached. Fires <code>la-attach</code> — the host opens its own picker.</td>
+              </tr>
+              <tr>
+                <td>Textarea</td>
+                <td>Starts at one row, auto-grows to max 180 px. No visible resize handle. Enter submits; Shift+Enter inserts a newline.</td>
+              </tr>
+              <tr>
+                <td>Send button</td>
+                <td><code>la-icon-button variant="primary"</code> with <code>ph-arrow-up</code> icon. Disabled when textarea is empty, component is disabled, or loading.</td>
+              </tr>
+              <tr>
+                <td>Spinner</td>
+                <td>Replaces send button when <code>loading</code> is set. Textarea is also disabled during loading.</td>
+              </tr>
+              <tr>
+                <td>Hint</td>
+                <td>Optional sub-label. Shown below the shell when <code>hint</code> is set.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- la-chat-input Live preview -->
+        <div id="inp-preview" class="preview-header" style="margin-top:8px;">
+          <h1>Live preview</h1>
+          <p>Adjust state with the controls below.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-placeholder">placeholder</label>
+              <input id="ctl-placeholder" type="text" value="Ask a question…" style="width:220px;">
+            </div>
+            <div class="control-group">
+              <label for="ctl-hint">hint</label>
+              <input id="ctl-hint" type="text" value="" placeholder="(empty)" style="width:220px;">
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label>disabled</label>
+              <div class="btn-group">
+                <button class="btn-toggle active" data-disabled="false" type="button">false</button>
+                <button class="btn-toggle"        data-disabled="true"  type="button">true</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>loading</label>
+              <div class="btn-group">
+                <button class="btn-toggle active" data-loading="false" type="button">false</button>
+                <button class="btn-toggle"        data-loading="true"  type="button">true</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat-input id="inp-live" style="max-width:480px;"></la-chat-input>
+          </div>
+          <div class="preview-label" id="inp-last-submit" style="display:none;">Last submit: <code id="inp-value"></code></div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Loading state</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat-input loading style="max-width:480px;"></la-chat-input>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Disabled state</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat-input disabled style="max-width:480px;"></la-chat-input>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">With hint</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat-input hint="AI can make mistakes — check important information." style="max-width:480px;"></la-chat-input>
+          </div>
+        </div>
+
+        <!-- la-chat-input Props -->
+        <div class="docs">
+
+          <div id="inp-props" class="docs-section">
+            <h3>Properties</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>placeholder</td>
+                  <td><span class="default">placeholder</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>'Ask a question…'</code></td>
+                  <td>Placeholder text for the textarea.</td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td><span class="default">disabled</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><code>false</code></td>
+                  <td>Disables the textarea and send button. Use when the feature is unavailable (e.g. feature locked, no session). Distinct from <code>loading</code>.</td>
+                </tr>
+                <tr>
+                  <td>loading</td>
+                  <td><span class="default">loading</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><code>false</code></td>
+                  <td>Replaces the send button with a spinner and disables the textarea. Use while a response is in-flight. Set to <code>false</code> once the response is complete.</td>
+                </tr>
+                <tr>
+                  <td>hint</td>
+                  <td><span class="default">hint</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Optional helper text rendered below the shell in <code>--la-font-size-xs</code> / <code>--la-color-text-faint</code>.</td>
+                </tr>
+                <tr>
+                  <td>maxFiles</td>
+                  <td><span class="default">max-files</span></td>
+                  <td><span class="type">number</span></td>
+                  <td><code>5</code></td>
+                  <td>Maximum number of staged attachments. Attach button is disabled once reached and the tooltip updates to "Max N files".</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="inp-events" class="docs-section">
+            <h3>Events</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Event</th><th>Detail</th><th>When</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><code>la-submit</code></td>
+                  <td><code>{ value: string }</code></td>
+                  <td>User presses Enter (without Shift) or clicks the send button. The input resets immediately after dispatch — read <code>event.detail.value</code> in the handler.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div><!-- /.docs -->
+
+        <!-- la-chat composed component -->
+        <div id="la-chat" class="preview-header" style="margin-top:24px;">
+          <h1>la-chat</h1>
+          <p>Composed shell that manages the thread + input bar in a single element. Pass a <code>messages</code> array and handle <code>la-send</code> — the component renders each message, auto-scrolls to the bottom on update, and exposes slots for empty state, notice banners, and read-only replacements.</p>
+        </div>
+
+        <!-- Live demo -->
+        <div id="chat-demo" class="preview-header" style="margin-top:8px;">
+          <h1>Live demo</h1>
+          <p>Type a message and press Enter. Replies simulate a 1.4 s server round-trip.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat
+              id="chat-live"
+              style="height:420px;max-width:540px;border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-xl);"
+              placeholder="Ask a follow-up…"
+              empty-message="No messages yet. Send one to get started."
+            ></la-chat>
+          </div>
+        </div>
+
+        <!-- State variants -->
+        <div id="chat-states" class="preview-header" style="margin-top:8px;">
+          <h1>State variants</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">With messages — founder ↔ investor thread</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat
+              id="chat-thread"
+              style="height:380px;max-width:540px;border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-xl);"
+              placeholder="Reply…"
+            ></la-chat>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">With attachment — document shared in thread</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat
+              id="chat-attachment"
+              style="height:340px;max-width:540px;border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-xl);"
+              placeholder="Reply…"
+            ></la-chat>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Sending state — message in flight</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat
+              id="chat-sending"
+              loading
+              style="height:280px;max-width:540px;border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-xl);"
+            ></la-chat>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Read-only — access revoked (default notice)</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat
+              id="chat-readonly"
+              readonly
+              notice="Access revoked. Re-share the DD pack to resume this conversation."
+              style="height:280px;max-width:540px;border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-xl);"
+            ></la-chat>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Empty state — no messages yet</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <la-chat
+              style="height:280px;max-width:540px;border:1px solid var(--la-color-border-light);border-radius:var(--la-radius-xl);"
+              empty-message="Share the DD pack with this investor to start a conversation."
+              placeholder="Type a message…"
+            ></la-chat>
+          </div>
+        </div>
+
+        <!-- Properties table -->
+        <div class="docs">
+
+          <div id="chat-props" class="docs-section">
+            <h3>Properties</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>messages</td>
+                  <td>—</td>
+                  <td><span class="type">ChatMessage[]</span></td>
+                  <td><code>[]</code></td>
+                  <td>Array of message objects. Each renders as one <code>la-chat-message</code>. Component auto-scrolls to bottom on update.</td>
+                </tr>
+                <tr>
+                  <td>placeholder</td>
+                  <td><span class="default">placeholder</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>'Type a message…'</code></td>
+                  <td>Forwarded to <code>la-chat-input</code>.</td>
+                </tr>
+                <tr>
+                  <td>disabled</td>
+                  <td><span class="default">disabled</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><code>false</code></td>
+                  <td>Disables the compose input. Input is still visible but grayed out.</td>
+                </tr>
+                <tr>
+                  <td>readonly</td>
+                  <td><span class="default">readonly</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><code>false</code></td>
+                  <td>Hides the compose input and shows the notice in its place. Use for revoked or pre-share states.</td>
+                </tr>
+                <tr>
+                  <td>notice</td>
+                  <td><span class="default">notice</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>'This thread is read-only.'</code></td>
+                  <td>Text shown in the read-only footer when <code>readonly</code> is set and <code>slot="notice"</code> is empty.</td>
+                </tr>
+                <tr>
+                  <td>loading</td>
+                  <td><span class="default">loading</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><code>false</code></td>
+                  <td>Forwarded to <code>la-chat-input</code>. Shows spinner, disables textarea while message is in-flight.</td>
+                </tr>
+                <tr>
+                  <td>hint</td>
+                  <td><span class="default">hint</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>''</code></td>
+                  <td>Forwarded to <code>la-chat-input</code>.</td>
+                </tr>
+                <tr>
+                  <td>emptyMessage</td>
+                  <td><span class="default">empty-message</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><code>'No messages yet.'</code></td>
+                  <td>Shown in the thread when <code>messages</code> is empty and <code>slot="empty"</code> is not provided.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="chat-events" class="docs-section">
+            <h3>Events &amp; slots</h3>
+            <table class="docs-table">
+              <thead><tr><th>Event</th><th>Detail</th><th>When</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>la-send</code></td>
+                  <td><code>{ value: string, files: Array }</code></td>
+                  <td>User submits a message (Enter or send button). Forwards <code>la-submit</code> detail from <code>la-chat-input</code>.</td>
+                </tr>
+                <tr>
+                  <td><code>la-attach</code></td>
+                  <td>—</td>
+                  <td>User clicks the attach button in <code>la-chat-input</code>. Host should open its own file/document picker.</td>
+                </tr>
+                <tr>
+                  <td><code>la-retry</code></td>
+                  <td><code>{ message: ChatMessage }</code></td>
+                  <td>User clicks "Retry" on a failed message. Detail includes the original message object.</td>
+                </tr>
+              </tbody>
+            </table>
+            <table class="docs-table" style="margin-top:16px;">
+              <thead><tr><th>Slot</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><code>empty</code></td>
+                  <td>Replaces the default empty-state copy inside the thread. Use for custom illustrations or call-to-action copy.</td>
+                </tr>
+                <tr>
+                  <td><code>footer-before</code></td>
+                  <td>Inserted above the compose input in the footer area. Use for info banners or context labels.</td>
+                </tr>
+                <tr>
+                  <td><code>notice</code></td>
+                  <td>Replaces the default read-only notice text when <code>readonly</code> is set. Use for custom locked-state messaging with inline links.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+        </div><!-- /.docs -->
+
+        <!-- Usage examples -->
+        <div id="usage" class="preview-header" style="margin-top:24px;">
+          <h1>Usage examples</h1>
+        </div>
+
+        <div class="docs">
+          <div class="docs-section">
+            <h4>Minimal assembled chat</h4>
+            <pre><code>&lt;div class="chat-shell"&gt;
+  &lt;div class="thread" id="thread"&gt;
+    &lt;la-chat-message sender="assistant"&gt;
+      How can I help you today?
+    &lt;/la-chat-message&gt;
+  &lt;/div&gt;
+  &lt;la-chat-input id="input" placeholder="Ask a question…"&gt;&lt;/la-chat-input&gt;
+&lt;/div&gt;
+
+&lt;script&gt;
+  var input = document.getElementById('input');
+  var thread = document.getElementById('thread');
+
+  input.addEventListener('la-submit', async function(e) {
+    // 1 — append user message
+    var userMsg = document.createElement('la-chat-message');
+    userMsg.sender = 'user';
+    userMsg.textContent = e.detail.value;
+    thread.appendChild(userMsg);
+
+    // 2 — show typing indicator
+    input.loading = true;
+    var typing = document.createElement('la-chat-message');
+    typing.sender = 'assistant';
+    typing.typing = true;
+    thread.appendChild(typing);
+
+    // 3 — fetch response, replace typing with result
+    var response = await fetchAIResponse(e.detail.value);
+    typing.remove();
+    var reply = document.createElement('la-chat-message');
+    reply.sender = 'assistant';
+    reply.textContent = response;
+    thread.appendChild(reply);
+    input.loading = false;
+  });
+&lt;/script&gt;</code></pre>
+
+            <h4>Streaming response</h4>
+            <pre><code>// Replace the typing message with a streaming one once the first token arrives
+typing.remove();
+var reply = document.createElement('la-chat-message');
+reply.sender = 'assistant';
+reply.streaming = true;
+thread.appendChild(reply);
+
+for await (var chunk of stream) {
+  reply.textContent += chunk;
+}
+reply.streaming = false;
+input.loading = false;</code></pre>
+
+            <h4>In a Lit template</h4>
+            <pre><code>html\`
+  &lt;la-chat-message
+    sender=${msg.sender}
+    ?streaming=${msg.isStreaming}
+    ?typing=${msg.isTyping}
+    .timestamp=${msg.time}
+  &gt;${msg.text}&lt;/la-chat-message&gt;
+\`</code></pre>
+          </div>
+        </div>
+
+        <!-- Notes -->
+        <div id="notes" class="preview-header" style="margin-top:8px;">
+          <h1>Notes</h1>
+        </div>
+
+        <div class="docs">
+          <div class="docs-section">
+            <ul>
+              <li><strong>Stateless by design:</strong> Neither component manages a message list. The host page owns the conversation array and renders messages. This keeps the components composable and testable in isolation.</li>
+              <li><strong>Auto-grow textarea:</strong> <code>la-chat-input</code> grows to a max of 180 px before scrolling. The component resets height after submit — no post-submit cleanup needed in the host page.</li>
+              <li><strong><code>typing</code> vs <code>streaming</code>:</strong> Use <code>typing</code> while waiting for the first token (no content yet). Switch to <code>streaming</code> once tokens arrive and content is being appended. Both are screened by <code>prefers-reduced-motion</code>.</li>
+              <li><strong>ARIA:</strong> The typing indicator has <code>role="status"</code> so screen readers announce when the assistant starts responding. The streaming cursor is <code>aria-hidden</code>. Add <code>aria-label</code> to the thread container for overall context.</li>
+              <li><strong>Sender attribute:</strong> Named <code>sender</code> rather than <code>role</code> to avoid collision with the HTML <code>role</code> ARIA attribute.</li>
+              <li><strong>Attachments and document status:</strong> <code>la-chat-attachment</code> shares the same <code>ready | processing | failed | none</code> status vocabulary as <code>la-document-item</code> so status can be passed through directly from DD pack data. Multiple attachments stack in order. If an attachment needs a click handler rather than a static href, wrap it in a <code>&lt;button&gt;</code> or listen to <code>click</code> in the host page.</li>
+              <li><strong>Human conversations:</strong> Set <code>name</code> on left-side messages to switch from the AI sparkle to initials. The same <code>sender="user"</code> / <code>sender="assistant"</code> layout logic applies — "user" is always the current viewer, "assistant" is the other party (AI or human).</li>
+            </ul>
+          </div>
+        </div>
+
+      </div><!-- .page-content-inner -->
+    </div><!-- .page-content -->
+  </div><!-- .page-container -->
+
+  <script>
+    // ── Assembled demo ─────────────────────────────────────────────
+    var demoThread = document.getElementById('demo-thread');
+    var demoInput  = document.getElementById('demo-input');
+
+    var MOCK_REPLIES = [
+      "That's a good question. In most jurisdictions, advisors accessing sensitive IP should sign both an NDA and an IP assignment (or contribution agreement). Without these, there's a risk their suggestions or enhancements could fall outside your IP chain of title.",
+      "To add an amendment in LawAdvisor, open the relevant employment or services record, select 'Add Document', and choose 'Contract Amendment' from the template list. Fill in the NDA and IP clauses and send it for signature.",
+      "A standard seed-round DD pack typically includes: cap table, articles of incorporation, board resolutions, financial projections (12–24 months), pitch deck, and any existing investor agreements (SAFEs or notes).",
+      "Yes — the structure of your agreements matters here. I'd recommend flagging this with your counsel before the investor meeting next week so you can confirm the specific clause language is enforceable in your jurisdiction.",
+    ];
+    var replyIndex = 0;
+
+    demoInput.addEventListener('la-submit', function(e) {
+      // Append user message
+      var userMsg = document.createElement('la-chat-message');
+      userMsg.setAttribute('sender', 'user');
+      userMsg.textContent = e.detail.value;
+      demoThread.appendChild(userMsg);
+      scrollThread();
+
+      // Show typing indicator
+      demoInput.loading = true;
+      var typingMsg = document.createElement('la-chat-message');
+      typingMsg.setAttribute('sender', 'assistant');
+      typingMsg.setAttribute('typing', '');
+      demoThread.appendChild(typingMsg);
+      scrollThread();
+
+      // Simulate response after 1.4s
+      setTimeout(function() {
+        typingMsg.remove();
+        var reply = document.createElement('la-chat-message');
+        reply.setAttribute('sender', 'assistant');
+        reply.textContent = MOCK_REPLIES[replyIndex % MOCK_REPLIES.length];
+        replyIndex++;
+        demoThread.appendChild(reply);
+        demoInput.loading = false;
+        scrollThread();
+      }, 1400);
+    });
+
+    function scrollThread() {
+      setTimeout(function() {
+        demoThread.scrollTop = demoThread.scrollHeight;
+      }, 10);
+    }
+
+    // ── la-chat-input live preview ──────────────────────────────────
+    var live = document.getElementById('inp-live');
+
+    document.getElementById('ctl-placeholder').addEventListener('input', function() {
+      live.placeholder = this.value;
+    });
+
+    document.getElementById('ctl-hint').addEventListener('input', function() {
+      live.hint = this.value;
+    });
+
+    document.querySelectorAll('[data-disabled]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-disabled]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        live.disabled = btn.dataset.disabled === 'true';
+      });
+    });
+
+    document.querySelectorAll('[data-loading]').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        document.querySelectorAll('[data-loading]').forEach(function(b) { b.classList.remove('active'); });
+        btn.classList.add('active');
+        live.loading = btn.dataset.loading === 'true';
+      });
+    });
+
+    live.addEventListener('la-submit', function(e) {
+      var label = document.getElementById('inp-last-submit');
+      label.style.display = '';
+      document.getElementById('inp-value').textContent = e.detail.value;
+    });
+
+    // ── la-chat-attachment-chip context demo ────────────────────────
+    customElements.whenDefined('la-chat-input').then(function() {
+      var chipInput = document.getElementById('chip-demo-input');
+      if (!chipInput) return;
+      chipInput.files = [
+        { id: 'f1', name: 'Cap Table (as of Jan 2026)' },
+        { id: 'f2', name: 'SAFE Agreement' },
+      ];
+      chipInput.addEventListener('la-file-remove', function(e) {
+        chipInput.files = chipInput.files.filter(function(f) { return f.id !== e.detail.id; });
+      });
+    });
+
+    // ── la-chat live demo ───────────────────────────────────────────
+    var chatLive = document.getElementById('chat-live');
+    var CHAT_REPLIES = [
+      "That's a good point. Most seed investors will want to see the cap table, SAFE agreement, and your last board resolution at minimum.",
+      "IP assignment agreements protect your ownership chain — without them signed by every contributor, investors may flag it as a risk.",
+      "The standard YC SAFE is a safe starting point. Make sure the valuation cap and discount rate reflect your current round terms.",
+      "A good rule of thumb: share everything a diligent investor would find anyway. Transparency early saves time in the final stretch.",
+    ];
+    var chatReplyIdx = 0;
+    chatLive.messages = [];
+
+    chatLive.addEventListener('la-send', function(e) {
+      var msgs = chatLive.messages.slice();
+      msgs.push({ sender: 'user', text: e.detail.value, timestamp: 'Just now', status: 'sent' });
+      msgs.push({ sender: 'assistant', typing: true });
+      chatLive.messages = msgs;
+      chatLive.loading = true;
+
+      setTimeout(function() {
+        var updated = chatLive.messages.slice();
+        updated[updated.length - 1] = {
+          sender: 'assistant',
+          text: CHAT_REPLIES[chatReplyIdx % CHAT_REPLIES.length],
+          timestamp: 'Just now',
+        };
+        chatReplyIdx++;
+        chatLive.messages = updated;
+        chatLive.loading = false;
+      }, 1400);
+    });
+
+    // ── Populated thread demo ───────────────────────────────────────
+    var chatThread = document.getElementById('chat-thread');
+    chatThread.messages = [
+      { sender: 'assistant', name: 'James Okafor', text: 'Hi Alex — I\'ve reviewed the DD pack. The cap table looks clean. Quick question on the IP assignment for Jamie Lee — can you confirm it was signed before any product contributions were made?', timestamp: '10:04 am' },
+      { sender: 'user', text: 'Hi James — yes, it was signed on Jamie\'s first day, 3rd March. We\'ve uploaded a copy to the data room as well.', timestamp: '10:11 am', status: 'sent' },
+      { sender: 'assistant', name: 'James Okafor', text: 'Perfect. That\'s all I needed on that front. I\'ll have our team review the financials this week and follow up with any questions.', timestamp: '10:15 am' },
+    ];
+
+    // ── Attachment demo ─────────────────────────────────────────────
+    var chatAttachment = document.getElementById('chat-attachment');
+    chatAttachment.messages = [
+      { sender: 'assistant', name: 'James Okafor', text: 'Could you share the cap table and the latest SAFE agreement? Our legal team would like to review them.' },
+      {
+        sender: 'user',
+        text: 'Of course — sharing them now from the data room.',
+        status: 'sent',
+        attachments: [
+          { name: 'Cap Table (as of Jan 2026)', category: 'Fundraising', association: 'Acme Corp.', status: 'ready' },
+          { name: 'SAFE Agreement', category: 'Fundraising', association: 'Acme Corp.', status: 'ready' },
+        ],
+      },
+    ];
+
+    // ── Sending demo ────────────────────────────────────────────────
+    var chatSending = document.getElementById('chat-sending');
+    chatSending.messages = [
+      { sender: 'user', text: 'Here are the documents you requested.', status: 'sending', attachments: [
+        { name: 'Financial Projections 2026–2028', category: 'Fundraising', association: 'Acme Corp.', status: 'ready' },
+      ]},
+    ];
+
+    // ── Read-only demo ──────────────────────────────────────────────
+    var chatReadonly = document.getElementById('chat-readonly');
+    chatReadonly.messages = [
+      { sender: 'assistant', name: 'James Okafor', text: 'Thanks for sharing the updated projections. I\'ll be in touch.', timestamp: '2 days ago' },
+      { sender: 'user', text: 'Great — let me know if anything else comes up.', timestamp: '2 days ago', status: 'sent' },
+    ];
+
+    // ── Nav scroll spy ──────────────────────────────────────────────
+    var navItems = document.querySelectorAll('.docs-nav-item[data-nav-id]');
+    var observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          navItems.forEach(function(n) { n.classList.remove('active'); });
+          var active = document.querySelector('[data-nav-id="' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, {rootMargin: '-20% 0px -70% 0px'});
+    document.querySelectorAll('[id]').forEach(function(el) { observer.observe(el); });
+  </script>
+</body>
+</html>

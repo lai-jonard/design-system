@@ -1,0 +1,769 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Components — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 960px; gap: 40px; }
+
+    .components-hero h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.2px;
+      margin-bottom: 10px;
+    }
+    .components-hero p {
+      font-size: 14px;
+      color: var(--doc-text-2);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .component-tier {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .tier-label {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--doc-text-3);
+      letter-spacing: 0.1px;
+      padding-bottom: 10px;
+    }
+    .component-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 16px;
+    }
+
+    /* ── Filter bar — sticky search + status chips ── */
+    .filter-bar {
+      position: sticky;
+      top: var(--doc-topbar-h, 56px);
+      z-index: 5;
+      background: var(--doc-bg, #FAFAFA);
+      padding: 14px 0 12px;
+      margin-bottom: -8px;
+      border-bottom: 1px solid var(--doc-surface-3, #ECECEE);
+      display: flex;
+      gap: 12px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .filter-search-wrap {
+      flex: 1;
+      min-width: 220px;
+      position: relative;
+    }
+    .filter-search-wrap > i {
+      position: absolute;
+      left: 12px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #9CA3AF;
+      font-size: 14px;
+      pointer-events: none;
+    }
+    .filter-search {
+      width: 100%;
+      padding: 8px 12px 8px 34px;
+      border: 1px solid var(--doc-surface-3, #ECECEE);
+      border-radius: 8px;
+      font-size: 13px;
+      font-family: inherit;
+      background: #FFFFFF;
+      color: #1E262B;
+    }
+    .filter-search:focus {
+      outline: none;
+      border-color: #18181B;
+    }
+    .filter-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .filter-chip {
+      padding: 5px 10px;
+      border: 1px solid var(--doc-surface-3, #ECECEE);
+      border-radius: 999px;
+      background: transparent;
+      font-size: 12px;
+      font-family: inherit;
+      cursor: pointer;
+      color: #4B5563;
+      transition: background 120ms ease, color 120ms ease, border-color 120ms ease;
+    }
+    .filter-chip:hover {
+      color: #1E262B;
+    }
+    .filter-chip.active {
+      background: #18181B;
+      color: #FFFFFF;
+      border-color: #18181B;
+    }
+    .filter-empty {
+      display: none;
+      padding: 24px 0;
+      font-size: 13px;
+      color: #6B7280;
+      font-style: italic;
+    }
+    .filter-empty.is-visible {
+      display: block;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="actions" href="#actions">Actions</a>
+<a class="docs-nav-item" data-nav-id="forms" href="#forms">Forms</a>
+<a class="docs-nav-item" data-nav-id="fallbacks" href="#fallbacks">Fallbacks</a>
+<a class="docs-nav-item" data-nav-id="layout-structure" href="#layout-structure">Layout and structure</a>
+<a class="docs-nav-item" data-nav-id="overlays" href="#overlays">Overlays</a>
+<a class="docs-nav-item" data-nav-id="insights" href="#insights">Insights</a>
+<a class="docs-nav-item" data-nav-id="media-visuals" href="#media-visuals">Media and visuals</a>
+<a class="docs-nav-item" data-nav-id="patterns" href="#patterns">Patterns</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../index.html">Overview</a>
+<a class="docs-nav-item" href="../foundations/">Foundations</a>
+<a class="docs-nav-item" href="../pages/">Pages</a>
+<a class="docs-nav-item" href="../patterns/">Patterns</a>
+<a class="docs-nav-item" href="../../handoffs/readiness.md">Readiness dashboard ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="components-hero" id="components">
+<h1>Components</h1>
+<p>
+            Every primitive, composed component, and page pattern in the library —
+            grouped by purpose. Each card links to an isolated preview with live states,
+            an API table, and pointers to source, design-language, and decisions.
+            Status chips mirror <a href="../../handoffs/readiness.md">the readiness dashboard</a>.
+          </p>
+</section>
+
+<div class="filter-bar" role="search">
+<div class="filter-search-wrap">
+<i aria-hidden="true" class="ph ph-magnifying-glass"></i>
+<input autocomplete="off" class="filter-search" id="filter-search" placeholder="Search components by name or description…" type="search"/>
+</div>
+<div aria-label="Filter by status" class="filter-chips" role="tablist">
+<button class="filter-chip active" data-status-filter="all" type="button">All</button>
+<button class="filter-chip" data-status-filter="v1" type="button">v1 ready</button>
+<button class="filter-chip" data-status-filter="progress" type="button">In progress</button>
+<button class="filter-chip" data-status-filter="idle" type="button">Not started</button>
+<button class="filter-chip" data-status-filter="deferred" type="button">Deferred</button>
+</div>
+</div>
+
+<div class="filter-empty" id="filter-empty">
+          No components match your search. Try a different name or clear the status filter.
+        </div>
+
+<div class="component-tier" id="actions">
+<div class="tier-label">Actions</div>
+<div class="component-grid">
+<a class="component-card" href="./la-button.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Button</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Primary trigger for an action. Supports primary, secondary, and destructive variants across three sizes.</p>
+</div>
+</a>
+<a class="component-card" href="./la-icon-button.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Icon Button</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Compact icon-only trigger for secondary actions inside dense surfaces like widget headers.</p>
+</div>
+</a>
+<a class="component-card" href="./la-spinner.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Spinner</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Indeterminate loading indicator. Used inside buttons, rows, and async-operation surfaces to signal work in progress.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="forms">
+<div class="tier-label">Forms</div>
+<div class="component-grid">
+<a class="component-card" href="./la-input.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Input</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Single-line text field with label, hint, and error support.</p>
+</div>
+</a>
+<a class="component-card" href="./la-select.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Select</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Single-select combobox. Trigger chrome mirrors la-input so it sits naturally in form rows; slotted la-option children carry the values.</p>
+</div>
+</a>
+<a class="component-card" href="./la-checkbox.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Checkbox</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Bare form checkbox with indeterminate support. Used standalone, inside forms, and composed into la-data-table for row selection.</p>
+</div>
+</a>
+<a class="component-card" href="./la-switch.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Switch</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Binary on/off toggle for settings, feature flags, and preferences that flip instantly. Native role="switch" for screen-reader semantics.</p>
+</div>
+</a>
+<a class="component-card" href="./la-choice.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Choice</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Selectable option row — inline checkbox or contained tile. Used for single-select and multi-select question steps in the unlock flow.</p>
+</div>
+</a>
+<a class="component-card" href="./la-upload-box.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Upload Box</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Single-file drop zone with click-to-browse and drag-and-drop. Used in the unlock flow's document upload steps.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="fallbacks">
+<div class="tier-label">Fallbacks</div>
+<div class="component-grid">
+<a class="component-card" href="./la-panel.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Panel</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">De-emphasised content container. Less prominent than a card — sits inside a layout without floating.</p>
+</div>
+</a>
+<a class="component-card" href="./la-card.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Card</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">General-purpose content card. Use for any bounded block of content.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="layout-structure">
+<div class="tier-label">Layout and structure</div>
+<div class="component-grid">
+<a class="component-card" href="./la-list-item.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">List Item</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">Single row for lists, with leading media, content, and trailing actions.</p>
+</div>
+</a>
+<a class="component-card" href="./la-table.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Table</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Structured data table with sortable columns and row actions.</p>
+</div>
+</a>
+<a class="component-card" href="./la-data-table.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Data Table</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Data-in table primitive. Columns and rows as properties; handles sort, selection, row-click, sticky header, density, empty and loading states.</p>
+</div>
+</a>
+<a class="component-card" href="./la-field-list.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Field List</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Key–value row list for document metadata, extracted facts, and entity details. Spread layout for narrow panels; stack layout for wider surfaces.</p>
+</div>
+</a>
+<a class="component-card" href="./la-document-item.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Document Item</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Atomic document row used across every surface that lists documents. Four statuses, optional actions slot, built-in dismiss via dismissible.</p>
+</div>
+</a>
+<a class="component-card" href="./la-app-shell.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">App Shell</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Root layout — sidebar, header, main, and optional aside. Every screen sits inside this.</p>
+</div>
+</a>
+<a class="component-card" href="./la-sidebar.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Sidebar</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Primary navigation rail. Lists legal areas and their states; collapses to icon-only mode.</p>
+</div>
+</a>
+<a class="component-card" href="./la-breadcrumb.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Breadcrumb</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Depth signal in the page header. Shows hierarchy location and provides a one-click path back up the tree.</p>
+</div>
+</a>
+<a class="component-card" href="./la-tabs.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Tabs</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Single-selection tab list — segmented (default), underline, pill, and vertical variants. Sliding active indicator, full ARIA tablist keyboard, block + size attributes.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="overlays">
+<div class="tier-label">Overlays</div>
+<div class="component-grid">
+<a class="component-card" href="./la-modal.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Modal</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Blocking dialog that takes focus. Use for confirmations or concentrated tasks.</p>
+</div>
+</a>
+<a class="component-card" href="./la-drawer.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Drawer</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Edge-anchored dismissible panel. Use for detail inspectors and mobile navigation.</p>
+</div>
+</a>
+<a class="component-card" href="./la-toast-stack.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Toast stack</span>
+<span class="status-chip status-chip--idle">Not started</span>
+</div>
+<p class="component-card-desc">Sonner-style stacked notification manager. Place once; use the <code style="font-family:monospace;font-size:11px;">toast()</code> API to trigger from anywhere.</p>
+</div>
+</a>
+<a class="component-card" href="./la-toast.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Toast</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Transient feedback notification, auto-dismissing. Use for success or info moments.</p>
+</div>
+</a>
+<a class="component-card" href="./la-tooltip.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Tooltip</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Display helpful information in a small overlay when users hover or focus on an element.</p>
+</div>
+</a>
+<a class="component-card" href="./la-info-hint.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Info Hint</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Inline info icon that reveals a light tooltip on hover or focus. Use to unpack jargon, stats, or non-obvious rules.</p>
+</div>
+</a>
+<a class="component-card" href="./la-alert.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Alert</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Inline banner for page-level messages — warnings, errors, or contextual notes.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="insights">
+<div class="tier-label">Insights</div>
+<div class="component-grid">
+<a class="component-card" href="./la-insight-card.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Insight Card</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Structured insight with severity, summary, and a primary action.</p>
+</div>
+</a>
+<a class="component-card" href="./la-insight-list.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Insight List</span>
+<span class="status-chip status-chip--idle">Not started</span>
+</div>
+<p class="component-card-desc">Vertical list of insight cards grouped by severity.</p>
+</div>
+</a>
+<a class="component-card" href="./la-insight-modal.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Insight Modal</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Expanded view of an insight with reason, guidance, and confirm or upload resolution.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="media-visuals">
+<div class="tier-label">Media and visuals</div>
+<div class="component-grid">
+<a class="component-card" href="./la-badge.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Badge</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Small label for status, categorisation, or counts.</p>
+</div>
+</a>
+<a class="component-card" href="./la-stepper.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Stepper</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Quiet stepped progress indicator for linear flows. A row of fixed-width pills fills with primary colour as steps complete; muted pills mark skipped steps.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="aside-panel">
+<div class="tier-label">Aside panel</div>
+<div class="component-grid">
+<a class="component-card" href="./la-actions-widget.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Actions Widget</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Grouped list of recommended next actions, contextual to the current legal area.</p>
+</div>
+</a>
+<a class="component-card" href="./la-document-list.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Document List</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Vertical stack of document items for the aside panel, grouped by category.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="patterns">
+<div class="tier-label">Patterns</div>
+<div class="component-grid">
+<a class="component-card" href="./la-empty-state.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Empty State</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Legal area insights-column state surface. Two variants: processing (spinner after unlock) and clean (tick when no insights are open).</p>
+</div>
+</a>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Welcome Banner</span>
+<span class="status-chip status-chip--idle">Not started</span>
+</div>
+<p class="component-card-desc">Large hero banner introducing the user to a page or new area.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Anticipation Teaser</span>
+<span class="status-chip status-chip--idle">Not started</span>
+</div>
+<p class="component-card-desc">Preview of value the user will unlock with a future action. Signals what comes next.</p>
+</div>
+</div>
+<a class="component-card" href="./la-processing-widget.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Processing Widget</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Floating tray, bottom-right of the content area, reporting on documents being uploaded and analysed. Per-item dismiss, host-driven timeout state.</p>
+</div>
+</a>
+<a class="component-card" href="./la-upload.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Upload</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Dual-source upload zone for hosting contexts. Browse files + Google Drive buttons above the drop zone, with a host-driven transfer-failure alert.</p>
+</div>
+</a>
+<a class="component-card" href="./la-unlock-panel.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Unlock Panel</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Typeform-style question runner that walks the user through unlocking a legal area, one step at a time.</p>
+</div>
+</a>
+<a class="component-card" href="./la-legal-area-widget.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Legal Area Widget</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">Dashboard tile for a single legal area — illustration on top, counts or next-level CTA below. Three states: unlocked, locked-unlockable (rests with shadow-card emphasis), locked-not-unlockable (dependency named).</p>
+</div>
+</a>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Investor Card</span>
+<span class="status-chip status-chip--idle">Not started</span>
+</div>
+<p class="component-card-desc">Summary card for an investor — commitments, status, and entry point.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Login</span>
+<span class="status-chip status-chip--idle">Not started</span>
+</div>
+<p class="component-card-desc">Login screen pattern. Handles email and SSO entry states.</p>
+</div>
+</div>
+</div>
+</div>
+<p style="font-size:13px; color:var(--doc-text-2); margin-top:24px;">Full-screen page layouts (Document Page, Data Room Page) are documented in <a href="../pages/" style="color:var(--doc-link);">Pages →</a></p>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+<script>
+(function initGridFilter() {
+  document.querySelectorAll('.component-grid').forEach(grid => {
+    const cards = Array.from(grid.children).filter(el =>
+      el.classList.contains('component-card')
+    );
+    cards.sort((a, b) => {
+      const at = (a.querySelector('.component-card-title')?.textContent || '').trim();
+      const bt = (b.querySelector('.component-card-title')?.textContent || '').trim();
+      return at.localeCompare(bt);
+    });
+    cards.forEach(card => grid.appendChild(card));
+  });
+
+  const state = { query: '', status: 'all' };
+  const searchInput = document.getElementById('filter-search');
+  const chips = document.querySelectorAll('[data-status-filter]');
+  const emptyMsg = document.getElementById('filter-empty');
+
+  function statusOfCard(card) {
+    const chip = card.querySelector('.status-chip');
+    if (!chip) return '';
+    const mod = Array.from(chip.classList).find(c => c.startsWith('status-chip--'));
+    return mod ? mod.replace('status-chip--', '') : '';
+  }
+
+  function applyFilter() {
+    const q = state.query.toLowerCase().trim();
+    const s = state.status;
+    let visibleCount = 0;
+
+    document.querySelectorAll('.component-card').forEach(card => {
+      const title = (card.querySelector('.component-card-title')?.textContent || '').toLowerCase();
+      const desc = (card.querySelector('.component-card-desc')?.textContent || '').toLowerCase();
+      const matchQ = !q || title.includes(q) || desc.includes(q);
+      const matchS = s === 'all' || statusOfCard(card) === s;
+      const show = matchQ && matchS;
+      card.style.display = show ? '' : 'none';
+      if (show) visibleCount++;
+    });
+
+    document.querySelectorAll('.component-tier').forEach(tier => {
+      const any = Array.from(tier.querySelectorAll('.component-card'))
+        .some(c => c.style.display !== 'none');
+      tier.style.display = any ? '' : 'none';
+    });
+
+    emptyMsg?.classList.toggle('is-visible', visibleCount === 0);
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', () => {
+      state.query = searchInput.value;
+      applyFilter();
+    });
+  }
+
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      state.status = chip.dataset.statusFilter;
+      applyFilter();
+    });
+  });
+
+  applyFilter();
+})();
+</script>
+
+</body>
+</html>

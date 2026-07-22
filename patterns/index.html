@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Patterns — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 960px; gap: 40px; }
+
+    .patterns-hero h1 {
+      font-size: 32px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.2px;
+      margin-bottom: 10px;
+    }
+    .patterns-hero p {
+      font-size: 14px;
+      color: var(--doc-text-2);
+      line-height: 1.6;
+      max-width: 680px;
+    }
+
+    .pattern-tier {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .tier-label {
+      font-size: 11px;
+      font-weight: 400;
+      color: var(--doc-text-3);
+      letter-spacing: 0.1px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--doc-border-light);
+    }
+    .pattern-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 12px;
+    }
+    .pattern-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: 10px;
+      overflow: hidden;
+      text-decoration: none;
+      color: inherit;
+      transition: box-shadow 120ms ease, border-color 120ms ease;
+    }
+    .pattern-card:hover {
+      box-shadow: 0 2px 8px rgba(0,0,0,.08);
+      border-color: var(--doc-border-hover);
+    }
+    .pattern-card-body {
+      padding: 14px 16px 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .pattern-card-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .pattern-card-title {
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--doc-text);
+    }
+    .pattern-card-desc {
+      font-size: 12px;
+      color: var(--doc-text-2);
+      line-height: 1.5;
+      margin: 0;
+    }
+    .status-chip {
+      font-size: 10px;
+      font-weight: 500;
+      padding: 2px 7px;
+      border-radius: 20px;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .status-chip--v1 { background: #d1fae5; color: #065f46; }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/" class="active">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="interaction" href="#interaction">Interaction</a>
+<a class="docs-nav-item" data-nav-id="people" href="#people">People</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../index.html">Overview</a>
+<a class="docs-nav-item" href="../components/">Components</a>
+<a class="docs-nav-item" href="../foundations/">Foundations</a>
+<a class="docs-nav-item" href="../pages/">Pages</a>
+<a class="docs-nav-item" href="../../handoffs/readiness.md">Readiness dashboard ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="patterns-hero" id="patterns">
+<h1>Patterns</h1>
+<p>Standardised interaction patterns used across LawAdvisor AI. Every pattern here has shipped in at least one sprint prototype and reflects how we handle the interaction — not how we'd like to handle it hypothetically.</p>
+</section>
+
+<div class="pattern-tier" id="interaction">
+<div class="tier-label">Interaction</div>
+<div class="pattern-grid">
+
+<a class="pattern-card" href="../patterns/destructive-action.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Destructive action</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Two-step delete flow — trigger opens a confirmation modal, never deletes immediately.</p>
+</div>
+</a>
+
+<a class="pattern-card" href="../patterns/upload-replace.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Upload / Replace</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Adding a new document or replacing an existing one. Upload modal, processing state, success and failure transitions.</p>
+</div>
+</a>
+
+<a class="pattern-card" href="../patterns/confirmation-modal.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Confirmation modal</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Any hard-to-reverse action. Single heading, one-sentence body, two-button footer with consistent button order.</p>
+</div>
+</a>
+
+<a class="pattern-card" href="../patterns/insight-modal.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Insight row → modal</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Clicking an insight row fires la-insight-select. Consumer populates and opens la-insight-modal.</p>
+</div>
+</a>
+
+<a class="pattern-card" href="../patterns/empty-states.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Empty states</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Inviting, actionable empty states. Placement, copy tone, and when to show inline vs. full-panel.</p>
+</div>
+</a>
+
+<a class="pattern-card" href="../patterns/flag-banners.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Flag banners</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Persistent in-page alerts for flagged or processing document states. Placement, variants, and dismissal rules.</p>
+</div>
+</a>
+
+<a class="pattern-card" href="../patterns/processing-states.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Processing states</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">How the UI behaves while a document or action is processing. Spinner placement, copy, and state transitions.</p>
+</div>
+</a>
+
+<a class="pattern-card" href="../patterns/inline-metadata.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Inline metadata</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Middle dot (·) as the separator for horizontal label runs. Implementation rules and conditional visibility.</p>
+</div>
+</a>
+
+</div>
+</div>
+
+<div class="pattern-tier" id="people">
+<div class="tier-label">People</div>
+<div class="pattern-grid">
+
+<a class="pattern-card" href="../patterns/person-entity-modal.html">
+<div class="pattern-card-body">
+<div class="pattern-card-head"><span class="pattern-card-title">Person entity modal</span><span class="status-chip status-chip--v1">v1 ready</span></div>
+<p class="pattern-card-desc">Detail, add, and confirm modal states for a named person. Header anatomy, footer conventions, accessibility.</p>
+</div>
+</a>
+
+</div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

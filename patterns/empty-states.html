@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Empty states — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/" class="active">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title"><a href="../patterns/" style="color:inherit;text-decoration:none;">← Patterns</a></h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#examples" class="docs-nav-item" data-nav-id="examples">Examples</a>
+    
+      <a href="#rules" class="docs-nav-item" data-nav-id="rules">Rules</a>
+    
+      <a href="#copy" class="docs-nav-item" data-nav-id="copy">Copy</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <span class="docs-nav-title">Elsewhere</span>
+    <a class="docs-nav-item" href="../index.html">Overview</a>
+    <a class="docs-nav-item" href="../components/">Components</a>
+    <a class="docs-nav-item" href="../foundations/">Foundations</a>
+    <a class="docs-nav-item" href="../pages/">Pages</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+  <h1>Empty states</h1>
+  <p>What to show when a list, section, or page has no content yet. Always use <code>la-empty-state</code> — never a raw paragraph or blank space. Include a CTA when a direct next action exists.</p>
+</div>
+
+<div class="preview-header" id="examples" style="margin-top:8px;">
+  <h1>Examples</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">No documents yet — primary CTA</div>
+  <div class="preview-frame preview-frame--stack" style="padding:32px 24px;">
+    <la-empty-state
+      heading="No documents yet"
+      description="Upload your formation documents to get started."
+      icon="ph ph-file-text"
+    >
+      <la-button variant="primary" slot="action">Upload document</la-button>
+    </la-empty-state>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">No founders added — secondary CTA</div>
+  <div class="preview-frame preview-frame--stack" style="padding:32px 24px;">
+    <la-empty-state
+      heading="No founders added"
+      description="Add the people who founded this company."
+      icon="ph ph-users"
+    >
+      <la-button variant="secondary" slot="action">Add founder</la-button>
+    </la-empty-state>
+  </div>
+</div>
+
+<div class="preview-header" id="rules" style="margin-top:8px;">
+  <h1>Rules</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;">
+    <ul style="margin:0;padding-left:20px;display:flex;flex-direction:column;gap:8px;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">
+      <li>Always use <code style="font-family:monospace;font-size:12px;">la-empty-state</code> — never a raw paragraph or blank space.</li>
+      <li>Include a CTA when a direct next action exists.</li>
+      <li>For locked areas, use the locked variant with no CTA.</li>
+      <li>Never use "No results found" — use the noun: "No documents yet", "No founders added".</li>
+    </ul>
+  </div>
+</div>
+
+<div class="preview-header" id="copy" style="margin-top:8px;">
+  <h1>Copy</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame preview-frame--stack" style="padding:24px;gap:12px;">
+    <p style="margin:0;font-size:13px;color:var(--la-color-text-secondary);line-height:1.6;">Inviting and actionable. Tell users what they'll gain, not what's missing.</p>
+    <div style="display:grid;grid-template-columns:max-content 1fr;gap:6px 16px;font-size:13px;color:var(--la-color-text-secondary);">
+      <span style="color:var(--la-color-text-muted);font-size:12px;">Good</span>
+      <span>"No documents yet. Upload your formation docs to get started."</span>
+      <span style="color:var(--la-color-text-muted);font-size:12px;">Avoid</span>
+      <span>"Nothing here." / "No results found." / "This section is empty."</span>
+    </div>
+  </div>
+</div>
+
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

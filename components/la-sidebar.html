@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-sidebar — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-sidebar</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-sidebar</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-sidebar</h1>
+<p>The primary navigation rail. Placed in the <code style="font-family:monospace;color:#c3e88d;font-size:12px;">sidebar</code> slot of <code style="font-family:monospace;color:#c3e88d;font-size:12px;">la-app-shell</code>. Shows the logo, legal area links with lock states, optional sub-tabs, and the signed-in user. Collapses to icon-only mode — state is persisted to <code style="font-family:monospace;color:#c3e88d;font-size:12px;">localStorage</code> automatically.</p>
+</div>
+
+<div class="controls" id="controls">
+<!-- Row 1: Nav state -->
+<div class="controls-row">
+<div class="control-group">
+<label>Active area</label>
+<select id="c-active">
+<option value="dashboard">dashboard</option>
+<option selected="" value="corp-gov">corp-gov</option>
+<option value="employment">employment</option>
+<option value="ip-protection">ip-protection</option>
+<option value="fundraising">fundraising</option>
+</select>
+</div>
+<div class="control-group">
+<label>Active sub-tab</label>
+<select id="c-subtab">
+<option selected="" value="">none</option>
+<option value="company-manual">company-manual</option>
+<option value="people">people</option>
+<option value="portfolio">portfolio</option>
+<option value="cap-table">cap-table</option>
+<option value="data-room">data-room</option>
+</select>
+</div>
+<div class="control-group">
+<label>Sidebar state</label>
+<div class="btn-group">
+<button class="btn-toggle active" id="btn-expanded" onclick="setSidebarState('expanded')">Expanded</button>
+<button class="btn-toggle" id="btn-collapsed" onclick="setSidebarState('collapsed')">Collapsed</button>
+</div>
+</div>
+</div>
+<!-- Row 2: Unlocked areas -->
+<div class="control-group" style="width:100%">
+<label>Unlocked areas</label>
+<div class="unlock-grid">
+<label class="unlock-chip checked" id="chip-corp-gov">
+<input checked="" onchange="updateUnlocked()" type="checkbox" value="corp-gov"/>
+<i class="ph ph-buildings"></i> Governance
+              </label>
+<label class="unlock-chip" id="chip-employment">
+<input onchange="updateUnlocked()" type="checkbox" value="employment"/>
+<i class="ph ph-users"></i> Employment
+              </label>
+<label class="unlock-chip" id="chip-ip-protection">
+<input onchange="updateUnlocked()" type="checkbox" value="ip-protection"/>
+<i class="ph ph-lightbulb"></i> IP Protection
+              </label>
+<label class="unlock-chip" id="chip-fundraising">
+<input onchange="updateUnlocked()" type="checkbox" value="fundraising"/>
+<i class="ph ph-trend-up"></i> Fundraising
+              </label>
+<button onclick="unlockAll()" style="padding:4px 10px;border-radius:20px;border:1px solid var(--doc-border);background:#fff;color:var(--doc-text-2);font-size:12px;font-family:inherit;cursor:pointer;">Unlock all</button>
+<button onclick="lockAll()" style="padding:4px 10px;border-radius:20px;border:1px solid var(--doc-border);background:#fff;color:var(--doc-text-2);font-size:12px;font-family:inherit;cursor:pointer;">Lock all</button>
+</div>
+</div>
+<!-- Row 3: User info -->
+<div class="controls-row">
+<div class="control-group">
+<label>User name</label>
+<input id="c-username" type="text" value="Alex Chen"/>
+</div>
+<div class="control-group">
+<label>User role</label>
+<input id="c-userrole" type="text" value="Acme Corp. · Founder"/>
+</div>
+<div class="control-group">
+<label>Initials</label>
+<input id="c-initials" maxlength="3" style="width:60px" type="text" value="AC"/>
+</div>
+</div>
+</div>
+
+<div class="sidebar-shell" style="margin-top:-12px;">
+<la-sidebar active-area="corp-gov" id="demo" unlocked-areas='["corp-gov"]' user-initials="AC" user-name="Alex Chen" user-role="Acme Corp. · Founder"></la-sidebar>
+<div class="sidebar-shell-content">
+<i class="ph ph-cursor-click"></i>
+<span>Click nav items or the collapse button</span>
+</div>
+</div>
+
+<div class="event-log">
+<div class="event-log-header">
+            Events
+            <button class="event-log-clear" onclick="clearLog()">Clear</button>
+</div>
+<div class="event-entries" id="event-log">
+<div class="event-empty">No events yet — interact with the sidebar above</div>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:40px;">
+<h1>Snapshots</h1>
+<p>Fixed reference states</p>
+</div>
+<div class="snapshot-row">
+<div class="snapshot-card">
+<div class="snapshot-card-label">Dashboard · all locked</div>
+<div class="snapshot-shell">
+<la-sidebar active-area="dashboard" unlocked-areas="[]"></la-sidebar>
+</div>
+</div>
+<div class="snapshot-card">
+<div class="snapshot-card-label">Corp Gov · sub-tab active</div>
+<div class="snapshot-shell">
+<la-sidebar active-area="corp-gov" active-subtab="company-manual" unlocked-areas='["corp-gov","fundraising"]'></la-sidebar>
+</div>
+</div>
+<div class="snapshot-card">
+<div class="snapshot-card-label">All unlocked · Fundraising active</div>
+<div class="snapshot-shell">
+<la-sidebar active-area="fundraising" unlocked-areas='["corp-gov","employment","ip-protection","fundraising"]'></la-sidebar>
+</div>
+</div>
+<div class="snapshot-card">
+<div class="snapshot-card-label">Collapsed · Corp Gov active</div>
+<div class="snapshot-shell">
+<la-sidebar active-area="corp-gov" collapsed="" unlocked-areas='["corp-gov","fundraising"]'></la-sidebar>
+</div>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-sidebar</h2>
+    <p>The primary navigation rail. Placed in the sidebar slot of la-app-shell . Shows the logo, legal area links with lock states, optional sub-tabs, and the signed-in user. Collapses to icon-only mode — state is persisted to localStorage automatically.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>activeArea</td>
+          <td><span class="default">activeArea</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;dashboard&#39;</span></td>
+          <td>Currently active legal area id</td>
+        </tr>
+      
+        <tr>
+          <td>activeSubtab</td>
+          <td><span class="default">activeSubtab</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Currently active sub-tab id</td>
+        </tr>
+      
+        <tr>
+          <td>unlockedAreas</td>
+          <td><span class="default">unlockedAreas</span></td>
+          <td><span class="type">string[]</span></td>
+          <td><span class="default">[&#39;governance&#39;]</span></td>
+          <td>Unlocked legal area ids. Dashboard is always accessible.</td>
+        </tr>
+      
+        <tr>
+          <td>collapsed</td>
+          <td><span class="default">collapsed</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Collapsed (icon-only) mode — persisted to localStorage</td>
+        </tr>
+      
+        <tr>
+          <td>logoSrc</td>
+          <td><span class="default">logo-src</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;/assets/brand/logo-mark.svg&#39;</span></td>
+          <td>Path to logo mark SVG. Falls back to text mark if not set.</td>
+        </tr>
+      
+        <tr>
+          <td>wordmarkSrc</td>
+          <td><span class="default">wordmark-src</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;/assets/brand/logo-wordmark.svg&#39;</span></td>
+          <td>Path to wordmark SVG. Falls back to text if not set.</td>
+        </tr>
+      
+        <tr>
+          <td>userInitials</td>
+          <td><span class="default">userInitials</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;AC&#39;</span></td>
+          <td>User initials for avatar</td>
+        </tr>
+      
+        <tr>
+          <td>userName</td>
+          <td><span class="default">userName</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Alex Chen&#39;</span></td>
+          <td>User display name</td>
+        </tr>
+      
+        <tr>
+          <td>userRole</td>
+          <td><span class="default">userRole</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Vanta Labs · Founder&#39;</span></td>
+          <td>User role / company shown below name</td>
+        </tr>
+      
+        <tr>
+          <td>_snapped</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_userMenuOpen</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_userMenuClosing</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_closeMenuTimeout</td>
+          <td>—</td>
+          <td><span class="type">ReturnType&lt;typeof setTimeout&gt; | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_handleDocClick</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-sidebar-toggle</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-nav-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+<h3>CSS tokens</h3>
+<p style="margin-bottom:16px;">These tokens are defined in <code style="font-family:monospace;color:#c3e88d;font-size:11px;">src/styles/tokens.ts</code> and used directly in the component's shadow styles. Override per-instance by setting the CSS variable on the element.</p>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Layout</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th><th>Default</th></tr></thead>
+<tbody>
+<tr><td>--la-sidebar-width</td><td>Expanded width</td><td>220px</td></tr>
+<tr><td>--la-sidebar-collapsed-width</td><td>Collapsed (icon-only) width</td><td>56px</td></tr>
+<tr><td>--la-nav-padding-h</td><td>Nav section horizontal padding</td><td>12px</td></tr>
+<tr><td>--la-nav-padding-v</td><td>Nav section vertical padding</td><td>8px</td></tr>
+<tr><td>--la-nav-item-radius</td><td>Nav item border radius</td><td>10px</td></tr>
+<tr><td>--la-nav-item-gap</td><td>Gap between nav items</td><td>4px</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Colour</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-nav-bg</td><td>Sidebar background</td></tr>
+<tr><td>--la-color-bg-active</td><td>Active / selected nav item background</td></tr>
+<tr><td>--la-color-bg-muted</td><td>Hover background on nav items</td></tr>
+<tr><td>--la-color-text-secondary</td><td>Default nav label colour</td></tr>
+<tr><td>--la-color-text-muted</td><td>Locked area label colour</td></tr>
+<tr><td>--la-color-border</td><td>Sub-tab rail line</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="usage">
+<h3>Usage examples</h3>
+<div class="docs-grid">
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Basic placement in la-app-shell</p>
+<div class="docs-code"><span class="kw">&lt;la-app-shell</span> <span class="at">show-header</span><span class="kw">&gt;</span>
+<span class="kw">&lt;la-sidebar</span>
+<span class="at">slot</span>=<span class="str">"sidebar"</span>
+<span class="at">active-area</span>=<span class="str">"corp-gov"</span>
+<span class="at">unlocked-areas</span>=<span class="str">'["corp-gov"]'</span>
+<span class="at">user-name</span>=<span class="str">"Alex Chen"</span>
+<span class="at">user-role</span>=<span class="str">"Acme Corp. · Founder"</span>
+<span class="at">user-initials</span>=<span class="str">"AC"</span>
+<span class="kw">&gt;&lt;/la-sidebar&gt;</span>
+<span class="kw">&lt;/la-app-shell&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Routing on la-nav-change</p>
+<div class="docs-code"><span class="kw">const</span> sidebar = document.querySelector(<span class="str">'la-sidebar'</span>);
+
+sidebar.addEventListener(<span class="str">'la-nav-change'</span>, (e) =&gt; {
+  <span class="kw">const</span> { area, subtab } = e.detail;
+
+  <span class="kw">if</span> (subtab === <span class="str">'company-manual'</span>) {
+    router.go(<span class="str">'/governance/manual'</span>);
+  } <span class="kw">else if</span> (area) {
+    router.go(<span class="str">`/legal-areas/${area}`</span>);
+  }
+});</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Updating unlocked areas dynamically</p>
+<div class="docs-code"><span class="kw">const</span> sidebar = document.querySelector(<span class="str">'la-sidebar'</span>);
+
+<span class="cm">// After user completes corp-gov onboarding:</span>
+sidebar.unlockedAreas = [
+  <span class="str">'corp-gov'</span>,
+  <span class="str">'employment'</span>,
+];</div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Responding to collapse toggle</p>
+<div class="docs-code">sidebar.addEventListener(
+  <span class="str">'la-sidebar-toggle'</span>,
+  (e) =&gt; {
+    <span class="cm">// e.detail.collapsed — true = now collapsed</span>
+    appShell.setAttribute(
+      <span class="str">'sidebar-collapsed'</span>,
+      e.detail.collapsed
+    );
+  }
+);</div>
+</div>
+</div>
+</div><div class="docs-divider"></div><div class="docs-section" id="notes">
+<h3>Notes</h3>
+<div style="display:flex;flex-direction:column;gap:8px;">
+<div class="docs-note"><strong>Fixed nav items</strong> — The five areas (Dashboard, Governance, Employment, IP Protection, Fundraising) and their sub-tabs are defined inside the component. They are not slot-configurable. This keeps routing logic predictable and ensures area ids are a stable contract between the sidebar, <code style="font-family:monospace;font-size:11px;">la-app-shell</code>, and the host application.</div>
+<div class="docs-note"><strong>Dashboard is always unlocked</strong> — Even with an empty <code style="font-family:monospace;font-size:11px;">unlockedAreas</code> array, the Dashboard item is always accessible. All other areas show a padlock icon and remain clickable when locked — the host should respond to the <code style="font-family:monospace;font-size:11px;">la-nav-change</code> event with an unlock prompt or upsell screen.</div>
+<div class="docs-note"><strong>Collapsed state persists automatically</strong> — The sidebar writes to <code style="font-family:monospace;font-size:11px;">localStorage</code> under the key <code style="font-family:monospace;font-size:11px;">la-sidebar-collapsed</code> whenever the collapse button is toggled. On load, the persisted value overrides whatever is set on the <code style="font-family:monospace;font-size:11px;">collapsed</code> property. Clear this key to reset to the default.</div>
+<div class="docs-note"><strong>Collapse animation timing</strong> — On collapse, icon positions snap to centre after the label-fade duration (<code style="font-family:monospace;font-size:11px;">--dur-fast</code>) so the transition appears sequenced (labels fade first, then icons snap). On expand, icons snap immediately so they spread outward as the sidebar widens.</div>
+<div class="docs-note"><strong>Icon fill convention</strong> — Active nav items use the Phosphor fill variant (<code style="font-family:monospace;font-size:11px;">ph-fill ph-icon-name</code>); resting items use the outline variant. This is handled internally — no configuration needed.</div>
+</div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    var demo = null;
+
+        document.addEventListener('DOMContentLoaded', function() {
+          demo = document.getElementById('demo');
+
+          // ── Controls → sidebar ──────────────────────────────────────
+
+          document.getElementById('c-active').addEventListener('change', function() {
+            demo.activeArea = this.value;
+            demo.activeSubtab = '';
+            document.getElementById('c-subtab').value = '';
+          });
+
+          document.getElementById('c-subtab').addEventListener('change', function() {
+            demo.activeSubtab = this.value;
+          });
+
+          document.getElementById('c-username').addEventListener('input', function() {
+            demo.userName = this.value;
+          });
+
+          document.getElementById('c-userrole').addEventListener('input', function() {
+            demo.userRole = this.value;
+          });
+
+          document.getElementById('c-initials').addEventListener('input', function() {
+            demo.userInitials = this.value;
+          });
+
+          // ── Sidebar → controls (bi-directional sync) ────────────────
+
+          demo.addEventListener('la-nav-change', function(e) {
+            logEvent('la-nav-change', e.detail);
+            if (e.detail.area) {
+              demo.activeArea = e.detail.area;
+              demo.activeSubtab = '';
+              document.getElementById('c-active').value = e.detail.area;
+              document.getElementById('c-subtab').value = '';
+            }
+            if (e.detail.subtab) {
+              demo.activeSubtab = e.detail.subtab;
+              document.getElementById('c-subtab').value = e.detail.subtab;
+            }
+          });
+
+          demo.addEventListener('la-sidebar-toggle', function(e) {
+            logEvent('la-sidebar-toggle', e.detail);
+            syncStateButtons(e.detail.collapsed ? 'collapsed' : 'expanded');
+          });
+        });
+
+        // ── State buttons ─────────────────────────────────────────────
+
+        function setSidebarState(state) {
+          if (!demo) return;
+          demo.collapsed = (state === 'collapsed');
+          syncStateButtons(state);
+        }
+
+        function syncStateButtons(state) {
+          document.getElementById('btn-expanded').classList.toggle('active', state === 'expanded');
+          document.getElementById('btn-collapsed').classList.toggle('active', state === 'collapsed');
+        }
+
+        // ── Unlock chips ──────────────────────────────────────────────
+
+        function updateUnlocked() {
+          var checked = Array.from(
+            document.querySelectorAll('.unlock-grid input[type="checkbox"]:checked')
+          ).map(function(el) { return el.value; });
+          if (demo) demo.unlockedAreas = checked;
+          syncChipStyles();
+        }
+
+        function syncChipStyles() {
+          document.querySelectorAll('.unlock-chip').forEach(function(chip) {
+            chip.classList.toggle('checked', chip.querySelector('input').checked);
+          });
+        }
+
+        function unlockAll() {
+          document.querySelectorAll('.unlock-grid input[type="checkbox"]').forEach(function(cb) { cb.checked = true; });
+          updateUnlocked();
+        }
+
+        function lockAll() {
+          document.querySelectorAll('.unlock-grid input[type="checkbox"]').forEach(function(cb) { cb.checked = false; });
+          updateUnlocked();
+        }
+
+        // ── Event log ─────────────────────────────────────────────────
+
+        function logEvent(name, detail) {
+          var container = document.getElementById('event-log');
+          var empty = container.querySelector('.event-empty');
+          if (empty) empty.remove();
+
+          var entry = document.createElement('div');
+          entry.className = 'event-entry';
+          entry.innerHTML = '<span class="ev-name">' + name + '</span><span class="ev-detail">' + JSON.stringify(detail) + '</span>';
+          container.insertBefore(entry, container.firstChild);
+
+          var entries = container.querySelectorAll('.event-entry');
+          if (entries.length > 20) entries[entries.length - 1].remove();
+        }
+
+        function clearLog() {
+          document.getElementById('event-log').innerHTML = '<div class="event-empty">No events yet — interact with the sidebar above</div>';
+        }
+
+        // ── Docs nav collapse ─────────────────────────────────────────
+  })();
+</script>
+
+
+</body>
+</html>

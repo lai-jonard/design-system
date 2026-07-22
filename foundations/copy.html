@@ -1,0 +1,682 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copy &amp; Capitalisation — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 880px; }
+
+    .sub-hero h1 {
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .sub-hero p {
+      font-size: 15px;
+      color: var(--doc-text-2);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+    .sub-hero-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .sub-hero-crumb a { color: var(--doc-text-3); }
+    .sub-hero-crumb a:hover { color: var(--doc-accent); }
+
+    /* Register cards */
+    .register-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-top: 4px;
+    }
+    @media (max-width: 640px) {
+      .register-grid { grid-template-columns: 1fr; }
+    }
+    .register-card {
+      padding: 20px 24px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+    }
+    .register-card-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--doc-text);
+      margin-bottom: 4px;
+    }
+    .register-card-rule {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 16px;
+      line-height: 1.5;
+    }
+    .register-examples {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .register-example {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      font-size: 13px;
+    }
+    .register-example-label {
+      font-size: 11px;
+      color: var(--doc-text-3);
+      width: 130px;
+      flex-shrink: 0;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .register-example-text {
+      color: var(--doc-text);
+    }
+
+    /* Quick-ref table rows */
+    .qr-table td:first-child {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text-2);
+      white-space: nowrap;
+    }
+    .qr-table .badge-title {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 600;
+      background: #18181B;
+      color: #fff;
+    }
+    .qr-table .badge-sentence {
+      display: inline-block;
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 11px;
+      font-weight: 500;
+      background: var(--doc-surface-2);
+      color: var(--doc-text-2);
+      border: 1px solid var(--doc-border);
+    }
+
+    /* Do / Don't comparison */
+    .compare-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 640px) {
+      .compare-grid { grid-template-columns: 1fr; }
+    }
+    .compare-col-label {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+      padding: 0 2px;
+    }
+    .compare-col-label.do { color: #1F7C51; }
+    .compare-col-label.dont { color: #CC4643; }
+    .compare-list {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .compare-item {
+      padding: 10px 14px;
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      line-height: 1.5;
+      border: 1px solid transparent;
+    }
+    .compare-item.do {
+      background: #EFFAF3;
+      border-color: #c3e6d0;
+      color: #196343;
+    }
+    .compare-item.dont {
+      background: #FDF3F3;
+      border-color: #fecaca;
+      color: #991b1b;
+    }
+    .compare-item .context {
+      font-size: 11px;
+      opacity: 0.7;
+      margin-top: 2px;
+    }
+
+    /* Source references */
+    .source-ref {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .source-ref-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 12px 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      font-size: 13px;
+      text-decoration: none;
+      color: var(--doc-text);
+    }
+    .source-ref-item:hover {
+      border-color: var(--doc-accent);
+    }
+    .source-ref-item .source-ref-desc {
+      color: var(--doc-text-3);
+      font-size: 12px;
+    }
+
+    .docs-rule-callout {
+      border-left: 3px solid var(--doc-accent);
+      padding: 12px 14px;
+      background: var(--doc-surface-2);
+      border-radius: 0 var(--doc-r-md) var(--doc-r-md) 0;
+      margin: 16px 0;
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+    .docs-rule-callout strong { color: var(--doc-text); }
+
+    .more-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--doc-accent);
+      font-weight: 500;
+    }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+  
+
+  <div class="page-container">
+    
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Copy &amp; Capitalisation</h3>
+<div class="docs-nav-group">
+  <a class="docs-nav-item" data-nav-id="rule"        href="#rule">The rule</a>
+  <a class="docs-nav-item" data-nav-id="title-case"  href="#title-case">Title Case</a>
+  <a class="docs-nav-item" data-nav-id="sentence"    href="#sentence">Sentence case</a>
+  <a class="docs-nav-item" data-nav-id="quick-ref"   href="#quick-ref">Quick reference</a>
+  <a class="docs-nav-item" data-nav-id="edge-cases"  href="#edge-cases">Edge cases</a>
+  <a class="docs-nav-item" data-nav-id="donts"       href="#donts">Do's and don'ts</a>
+  <a class="docs-nav-item" data-nav-id="voice"       href="#voice">Tone &amp; voice</a>
+  <a class="docs-nav-item" data-nav-id="research"    href="#research">Research context</a>
+  <a class="docs-nav-item" data-nav-id="source"      href="#source">Sources</a>
+</div>
+<div class="docs-nav-group">
+  <span class="docs-nav-title">Elsewhere</span>
+  <a class="docs-nav-item" href="../foundations/">← All foundations</a>
+  <a class="docs-nav-item" href="../foundations/typography.html">Typography →</a>
+  <a class="docs-nav-item" href="../index.html">Design system home</a>
+</div>
+<div class="docs-nav-group">
+  <span class="docs-nav-title">Source files</span>
+  <a class="docs-nav-item" href="../../CLAUDE.md">CLAUDE.md ↗</a>
+  <a class="docs-nav-item" href="../../design-language/copy-guidelines.md">copy-guidelines.md ↗</a>
+</div>
+</nav>
+
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero">
+  <div class="sub-hero-crumb">
+    <a href="../foundations/">Foundations</a> · Copy &amp; Capitalisation
+  </div>
+  <h1>Copy &amp; Capitalisation</h1>
+  <p>
+    LawAdvisor uses a two-register capitalisation system. The core question for any
+    string is: does this copy <em>name</em> a product surface or control, or does it
+    <em>explain</em> something to the user? Names get Title Case. Explanations get
+    sentence case.
+  </p>
+</section>
+
+<div class="docs">
+
+<!-- THE RULE ─────────────────────────────────────────────── -->
+<section class="docs-section" id="rule">
+  <h2>The rule</h2>
+  <p>
+    One question decides the register for every string in the product:
+  </p>
+  <div class="docs-rule-callout">
+    <strong>Does this copy name a product surface or control?</strong> → Title Case.<br>
+    <strong>Does this copy explain something to the user?</strong> → Sentence case.
+  </div>
+  <p>
+    This is a deliberate divergence from design systems that recommend sentence case
+    everywhere. LawAdvisor's vocabulary includes genuine proper nouns — legal documents,
+    commercial product areas — where Title Case is standard professional practice.
+    Forcing sentence case on "Cap Table" or "Due Diligence Pack" would feel wrong
+    in a legal context. The two-register system formalises what the product already does
+    naturally.
+  </p>
+
+  <div class="register-grid">
+    <div class="register-card">
+      <div class="register-card-title">Title Case — structural labels</div>
+      <div class="register-card-rule">Names a surface, feature, or control. Every principal word capitalised.</div>
+      <div class="register-examples">
+        <div class="register-example">
+          <span class="register-example-label">Navigation</span>
+          <span class="register-example-text">Governance, Employment</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">Product area</span>
+          <span class="register-example-text">Cap Table, Due Diligence Pack</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">CTA button</span>
+          <span class="register-example-text">Send Invite, Mark Resolved</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">Modal title</span>
+          <span class="register-example-text">Data Room Settings</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">Table header</span>
+          <span class="register-example-text">Document Name, Last Modified</span>
+        </div>
+      </div>
+    </div>
+    <div class="register-card">
+      <div class="register-card-title">Sentence case — explanatory copy</div>
+      <div class="register-card-rule">Explains something to the user. First word only capitalised.</div>
+      <div class="register-examples">
+        <div class="register-example">
+          <span class="register-example-label">Insight headline</span>
+          <span class="register-example-text">Cap table has unconfirmed entries</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">Helper text</span>
+          <span class="register-example-text">Upload evidence before sharing this pack</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">Subheading</span>
+          <span class="register-example-text">Why this matters</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">Modal title*</span>
+          <span class="register-example-text">Articles of incorporation missing founder signatures</span>
+        </div>
+        <div class="register-example">
+          <span class="register-example-label">Empty state</span>
+          <span class="register-example-text">No documents yet. Upload your first to get started.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="font-size:12px;color:var(--doc-text-3);margin-top:8px;">
+    * Modal titles that <em>describe content</em> (not a feature name) stay sentence case — see <a href="#edge-cases">Edge cases</a>.
+  </p>
+</section>
+
+<!-- TITLE CASE ───────────────────────────────────────────── -->
+<section class="docs-section" id="title-case">
+  <h2>Title Case</h2>
+  <p>
+    Use when the copy <strong>names</strong> a product surface, legal artefact, or interactive control.
+    Capitalise every principal word. Articles, prepositions, and conjunctions (a, an, the, for, and, but, of, in)
+    stay lowercase unless they open the label.
+  </p>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Element</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Navigation items</td><td>Governance, Employment, Fundraising</td></tr>
+      <tr><td>Product area names</td><td>Cap Table, Due Diligence Pack, Company Manual</td></tr>
+      <tr><td>Modal titles — feature/screen names</td><td>Data Room Settings, Add Employee</td></tr>
+      <tr><td>Table column headers</td><td>Document Name, Last Modified, Status</td></tr>
+      <tr><td>Tab labels / filter chips</td><td>Urgent, Proactive, Resolved</td></tr>
+      <tr><td>Short action CTAs (buttons)</td><td>Send Invite, Mark Resolved, Review Unconfirmed Entries</td></tr>
+      <tr><td>Legal proper nouns (always)</td><td>Cap Table, Shareholders' Agreement, Articles of Incorporation</td></tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>Verb-first CTAs.</strong> Button labels always start with a verb: "Send Invite", not "Invite Send".
+    Never noun phrases ("Invitation"), never ALL CAPS, never jargon ("Submit" → "Send", "Verify" → "Check",
+    "Commence" → "Start").
+  </p>
+</section>
+
+<!-- SENTENCE CASE ────────────────────────────────────────── -->
+<section class="docs-section" id="sentence">
+  <h2>Sentence case</h2>
+  <p>
+    Use when the copy <strong>explains</strong> something to the user. Capitalise only the first word
+    and any proper nouns within the text.
+  </p>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Element</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Insight headlines</td><td>Cap table has unconfirmed entries</td></tr>
+      <tr><td>Insight modal titles (when the title <em>is</em> the description)</td><td>Articles of incorporation missing founder signatures</td></tr>
+      <tr><td>Helper text / hints</td><td>Upload evidence before sharing this pack</td></tr>
+      <tr><td>"Why this matters" subheadings</td><td>Why this matters</td></tr>
+      <tr><td>Empty state text</td><td>No documents yet. Upload your first to get started.</td></tr>
+      <tr><td>Section explanations</td><td>Some shareholders need supporting documents</td></tr>
+      <tr><td>Body copy, error messages</td><td>We couldn't save your changes. Check your connection and try again.</td></tr>
+      <tr><td>Success moments</td><td>Done. · All sorted. · Document sent.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- QUICK REFERENCE ──────────────────────────────────────── -->
+<section class="docs-section" id="quick-ref">
+  <h2>Quick reference</h2>
+  <table class="docs-table qr-table">
+    <thead>
+      <tr><th>Element</th><th>Register</th><th>Example</th></tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Navigation item</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Governance</td>
+      </tr>
+      <tr>
+        <td>Product area name</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Due Diligence Pack</td>
+      </tr>
+      <tr>
+        <td>Tab / filter label</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Urgent · Proactive · Resolved</td>
+      </tr>
+      <tr>
+        <td>Table column header</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Document Name · Last Modified</td>
+      </tr>
+      <tr>
+        <td>Button CTA</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Send Invite · Mark Resolved · Add Employee</td>
+      </tr>
+      <tr>
+        <td>Modal title — feature name</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Data Room Settings</td>
+      </tr>
+      <tr>
+        <td>Badge label</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Active · Stalled · Complete</td>
+      </tr>
+      <tr>
+        <td>Legal proper noun</td>
+        <td><span class="badge-title">Title Case</span></td>
+        <td>Cap Table · Shareholders' Agreement</td>
+      </tr>
+      <tr>
+        <td>Insight headline</td>
+        <td><span class="badge-sentence">Sentence case</span></td>
+        <td>Cap table has unconfirmed entries</td>
+      </tr>
+      <tr>
+        <td>Modal title — content description</td>
+        <td><span class="badge-sentence">Sentence case</span></td>
+        <td>Articles of incorporation missing founder signatures</td>
+      </tr>
+      <tr>
+        <td>Helper text / hint</td>
+        <td><span class="badge-sentence">Sentence case</span></td>
+        <td>Upload evidence before sharing this pack</td>
+      </tr>
+      <tr>
+        <td>Section explanation / subheading</td>
+        <td><span class="badge-sentence">Sentence case</span></td>
+        <td>Why this matters</td>
+      </tr>
+      <tr>
+        <td>Empty state</td>
+        <td><span class="badge-sentence">Sentence case</span></td>
+        <td>No documents yet. Upload your first to get started.</td>
+      </tr>
+      <tr>
+        <td>Body copy / error / success</td>
+        <td><span class="badge-sentence">Sentence case</span></td>
+        <td>We couldn't save your changes. Try again.</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- EDGE CASES ───────────────────────────────────────────── -->
+<section class="docs-section" id="edge-cases">
+  <h2>Edge cases</h2>
+
+  <h3>Modal titles</h3>
+  <p>
+    Modal titles follow the content, not the chrome. A modal that opens a named feature
+    ("Data Room Settings", "Add Employee") gets Title Case. A modal whose title
+    <em>is</em> the insight description gets sentence case — the title describes an event,
+    not a surface.
+  </p>
+  <table class="docs-table">
+    <thead><tr><th>Modal purpose</th><th>Title example</th><th>Register</th></tr></thead>
+    <tbody>
+      <tr><td>Named feature screen</td><td>Data Room Settings</td><td>Title Case</td></tr>
+      <tr><td>Insight description</td><td>Articles of incorporation missing founder signatures</td><td>Sentence case</td></tr>
+      <tr><td>Named action flow</td><td>Add Employee</td><td>Title Case</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Legal proper nouns</h3>
+  <p>
+    Legal documents and commercial terms are proper nouns regardless of context. "Cap Table",
+    "Shareholders' Agreement", "Articles of Incorporation", "Due Diligence Pack" are always
+    Title Case — even when they appear mid-sentence in explanatory copy.
+  </p>
+  <p>
+    <strong>Correct:</strong> <em>"Your Cap Table has unconfirmed entries"</em> — "Cap Table" stays Title Case
+    even though the rest is sentence case.
+  </p>
+
+  <h3>Badge labels</h3>
+  <p>
+    Badges are single words. The case distinction is moot — treat them as Title Case
+    for consistency: "Active", "Stalled", "Complete", "Invited".
+  </p>
+
+  <h3>Loading and progress labels</h3>
+  <p>
+    Single-word progress indicators ("Resolving…", "Uploading…", "Saving…") are one word —
+    no case decision needed. They are not CTAs; don't apply the verb-first rule.
+  </p>
+</section>
+
+<!-- DO'S AND DON'TS ──────────────────────────────────────── -->
+<section class="docs-section" id="donts">
+  <h2>Do's and don'ts</h2>
+
+  <div class="compare-grid">
+    <div>
+      <div class="compare-col-label do">DO</div>
+      <div class="compare-list">
+        <div class="compare-item do">Send Invite<div class="context">Button CTA — verb-first, Title Case</div></div>
+        <div class="compare-item do">Mark Resolved<div class="context">Button CTA — Title Case</div></div>
+        <div class="compare-item do">Cap table has unconfirmed entries<div class="context">Insight headline — sentence case</div></div>
+        <div class="compare-item do">Why this matters<div class="context">Modal subheading — sentence case</div></div>
+        <div class="compare-item do">Due Diligence Pack<div class="context">Product area name — always Title Case</div></div>
+        <div class="compare-item do">Data Room Settings<div class="context">Modal title (feature name) — Title Case</div></div>
+        <div class="compare-item do">No documents yet. Upload your first to get started.<div class="context">Empty state — sentence case, inviting, actionable</div></div>
+      </div>
+    </div>
+    <div>
+      <div class="compare-col-label dont">DON'T</div>
+      <div class="compare-list">
+        <div class="compare-item dont">SEND INVITE<div class="context">Never all-caps</div></div>
+        <div class="compare-item dont">mark resolved<div class="context">Button CTAs always Title Case</div></div>
+        <div class="compare-item dont">Cap Table Has Unconfirmed Entries<div class="context">Insight headlines are explanatory — sentence case</div></div>
+        <div class="compare-item dont">WHY THIS MATTERS<div class="context">Never all-caps for subheadings</div></div>
+        <div class="compare-item dont">due diligence pack<div class="context">Legal proper nouns are always Title Case</div></div>
+        <div class="compare-item dont">Articles Of Incorporation Missing Founder Signatures<div class="context">Insight modal title is a description — sentence case</div></div>
+        <div class="compare-item dont">No Data Available<div class="context">Empty states: inviting and actionable, not system-speak</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TONE AND VOICE ───────────────────────────────────────── -->
+<section class="docs-section" id="voice">
+  <h2>Tone &amp; voice</h2>
+  <p>
+    <strong>Calm authority.</strong> Steady and confident, never urgent. The product is a
+    co-founder who happens to know the law — not a compliance system issuing warnings.
+  </p>
+  <table class="docs-table">
+    <thead><tr><th>Rule</th><th>Instead of</th><th>Use</th></tr></thead>
+    <tbody>
+      <tr><td>Active voice</td><td>Your settings have been updated</td><td>We updated your settings</td></tr>
+      <tr><td>No jargon — start</td><td>Commence</td><td>Start</td></tr>
+      <tr><td>No jargon — check</td><td>Verify</td><td>Check</td></tr>
+      <tr><td>No jargon — send</td><td>Submit</td><td>Send</td></tr>
+      <tr><td>No jargon — use</td><td>Utilise</td><td>Use</td></tr>
+      <tr><td>No jargon — end</td><td>Terminate</td><td>End</td></tr>
+      <tr><td>No jargon — before</td><td>Prior to</td><td>Before</td></tr>
+      <tr><td>Say "we"</td><td>LawAdvisor has detected…</td><td>We found…</td></tr>
+      <tr><td>Use the person's name</td><td>The recipient / the employee</td><td>Alex / Jamie</td></tr>
+      <tr><td>Empty states</td><td>No data available</td><td>No documents yet. Upload your first to get started.</td></tr>
+      <tr><td>Success moments</td><td>Your document has been successfully submitted for processing.</td><td>Done. · All sorted. · Document sent.</td></tr>
+      <tr><td>Errors</td><td>An unexpected error occurred. Error code: 500.</td><td>We couldn't save your changes. Check your connection and try again.</td></tr>
+    </tbody>
+  </table>
+  <p>
+    <strong>British English always.</strong> Authorised, organisation, licence (noun),
+    colour, behaviour, defence. Body copy: 1–2 sentences maximum.
+  </p>
+</section>
+
+<!-- RESEARCH CONTEXT ─────────────────────────────────────── -->
+<section class="docs-section" id="research">
+  <h2>Research context</h2>
+  <p>
+    Major design systems — Material Design, Microsoft Fluent, PatternFly — recommend sentence
+    case throughout for simplicity and localisation. LawAdvisor diverges intentionally for
+    two reasons:
+  </p>
+  <ol>
+    <li>
+      <strong>Legal vocabulary includes genuine proper nouns.</strong> "Cap Table",
+      "Shareholders' Agreement", "Articles of Incorporation" are named legal instruments.
+      Sentence-casing them ("cap table") is grammatically incorrect in a professional context
+      and would undermine the product's authority.
+    </li>
+    <li>
+      <strong>The split-register rule is already implicit in the product.</strong> Navigation,
+      tabs, and button labels have always used capitalised forms. Formalising the boundary
+      — names vs explains — gives the team a rule to apply consistently rather than a pattern
+      to guess at.
+    </li>
+  </ol>
+  <p>
+    The primary risk of a split-register system is inconsistency. The mitigation is the rule
+    itself: a single, answerable question ("does this name or explain?") that any designer or
+    engineer can resolve without a style guide lookup.
+  </p>
+  <p>
+    Full research summary is in
+    <a href="../../design-language/copy-guidelines.md"><code>design-language/copy-guidelines.md</code></a>
+    under "Why this pattern — research context".
+  </p>
+</section>
+
+<!-- SOURCES ──────────────────────────────────────────────── -->
+<section class="docs-section" id="source">
+  <h2>Sources</h2>
+  <div class="source-ref">
+    <a class="source-ref-item" href="https://learn.microsoft.com/en-us/style-guide/capitalization" target="_blank" rel="noopener">
+      <span style="font-size:18px;">📘</span>
+      <span>
+        Microsoft Style Guide — Capitalisation
+        <span class="source-ref-desc">Sentence case as default for UI; Title Case for product names and feature titles.</span>
+      </span>
+    </a>
+    <a class="source-ref-item" href="https://www.patternfly.org/ux-writing/capitalization/" target="_blank" rel="noopener">
+      <span style="font-size:18px;">📗</span>
+      <span>
+        PatternFly — Capitalisation
+        <span class="source-ref-desc">Red Hat / IBM enterprise system: sentence case throughout with a warning that inconsistency creates cognitive load.</span>
+      </span>
+    </a>
+    <a class="source-ref-item" href="https://m1.material.io/style/writing.html" target="_blank" rel="noopener">
+      <span style="font-size:18px;">📙</span>
+      <span>
+        Material Design — Writing
+        <span class="source-ref-desc">Sentence case for buttons, nav items, and labels; Title Case only for proper nouns.</span>
+      </span>
+    </a>
+    <a class="source-ref-item" href="https://developer.apple.com/design/human-interface-guidelines/writing" target="_blank" rel="noopener">
+      <span style="font-size:18px;">📓</span>
+      <span>
+        Apple Human Interface Guidelines — Writing
+        <span class="source-ref-desc">Context-dependent; macOS menu commands historically Title Case, iOS trending toward sentence case. General trend across Apple platforms is toward sentence case.</span>
+      </span>
+    </a>
+    <a class="source-ref-item" href="https://nielsendesignsystem.com/foundations/writing-guidelines/" target="_blank" rel="noopener">
+      <span style="font-size:18px;">📒</span>
+      <span>
+        Nielsen Design System — Writing Guidelines
+        <span class="source-ref-desc">Sentence case as default across UI elements including navigation and buttons.</span>
+      </span>
+    </a>
+  </div>
+</section>
+
+</div><!-- .docs -->
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>
