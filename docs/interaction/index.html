@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Interaction — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item active" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Interaction
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/interaction.md
+</span>
+<article class="md-body">
+  <h1>Interaction</h1>
+<h2>Buttons (<code>la-button</code>)</h2>
+<h3>Variants</h3>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Background</th>
+<th>Text</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>primary</code></td>
+<td><code>--la-color-primary</code></td>
+<td>white</td>
+<td>The main action on a screen. One per view.</td>
+</tr>
+<tr>
+<td><code>secondary</code></td>
+<td>white</td>
+<td><code>--la-color-text</code></td>
+<td>Cancel, back, or secondary actions</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>green tint</td>
+<td>green</td>
+<td>Approve, confirm, complete</td>
+</tr>
+<tr>
+<td><code>danger</code></td>
+<td>red tint</td>
+<td>red</td>
+<td>Destructive — delete, remove, reject</td>
+</tr>
+<tr>
+<td><code>ghost</code></td>
+<td>transparent</td>
+<td><code>--la-color-text</code></td>
+<td>Low-prominence links or tertiary actions</td>
+</tr>
+</tbody>
+</table>
+<h3>Sizes</h3>
+<ul>
+<li>Default: <code>font-size: var(--la-font-size-md)</code>, <code>padding: 6px 16px</code></li>
+<li><code>sm</code>: use in compact contexts like table rows or tight panels</li>
+</ul>
+<h3>Disabled state</h3>
+<p><code>opacity: 0.4</code> on the element — no separate disabled token. Preserves variant identity so a disabled danger button still reads as danger.</p>
+<h3>CTA copy rules</h3>
+<ul>
+<li>Verb-first, Title Case: &quot;Send for Signature&quot;, &quot;Add Employee&quot;, &quot;View Details&quot;, &quot;Mark Resolved&quot;</li>
+<li>No jargon: &quot;send&quot; not &quot;submit&quot;, &quot;check&quot; not &quot;verify&quot;, &quot;start&quot; not &quot;commence&quot;</li>
+<li>One primary CTA per view — never show two primary-variant buttons simultaneously. Use secondary or ghost for additional actions.</li>
+<li>Full capitalisation rule: see <a href="../../docs/copy-guidelines/#capitalisation"><code>design-language/copy-guidelines.md</code> — Capitalisation</a>.</li>
+</ul>
+<hr>
+<h2>Badges (<code>la-badge</code>)</h2>
+<p>Used inline to communicate status or category. Always sentence case, 1–2 words max.</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>danger</code></td>
+<td>Urgent — action required</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td>Proactive — should be addressed</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td>Resolved / positive state</td>
+</tr>
+<tr>
+<td><code>neutral</code></td>
+<td>Locked, inactive, unknown</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td>Processing, in-progress</td>
+</tr>
+<tr>
+<td><code>accent</code></td>
+<td>Category label (not a status)</td>
+</tr>
+<tr>
+<td><code>primary</code></td>
+<td>Prominent label / default counter colour</td>
+</tr>
+</tbody>
+</table>
+<p>Counter type (circle) is a separate shape used for numerical counts — unread items, queue depth, notification totals. Use <code>appearance=&quot;ghost&quot;</code> when the count should sit quietly in the UI; default (filled) for primary signals.</p>
+<hr>
+<h2>Checklist items (<code>la-checklist-item</code>)</h2>
+<p>Presentational only — not a form input. Shows checked/unchecked state for onboarding and unlock flows. Does not emit events.</p>
+<hr>
+<h2>Progress steps (<code>la-stepper</code>)</h2>
+<p>Multi-step flows use numbered step indicators. Each step has a status:</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Visual</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pending</code></td>
+<td>Empty circle</td>
+<td>Not yet reached</td>
+</tr>
+<tr>
+<td><code>active</code></td>
+<td>Highlighted</td>
+<td>Current step</td>
+</tr>
+<tr>
+<td><code>complete</code></td>
+<td>Filled</td>
+<td>Done</td>
+</tr>
+<tr>
+<td><code>processing</code></td>
+<td>Animated</td>
+<td>In progress, awaiting result</td>
+</tr>
+<tr>
+<td><code>skipped</code></td>
+<td>Muted</td>
+<td>Deliberately bypassed</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>Error colour</td>
+<td>Needs attention</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Hover states</h2>
+<ul>
+<li><strong>Primary:</strong> darkens to <code>--la-color-primary-hover</code></li>
+<li><strong>Secondary:</strong> light grey background</li>
+<li><strong>Success/Danger:</strong> switch to semantic surface + semantic border colour on hover (signals intent before the user commits)</li>
+</ul>
+<p><strong>Rule:</strong> never remove a border on hover. Border changes on hover are semantic signals — removing them causes layout shift and loses meaning.</p>
+<hr>
+<h2>Focus states</h2>
+<p>Inputs and interactive controls use <code>--la-color-border-focus</code> (<code>#3B82F6</code>) as the focus ring. Never suppress <code>:focus-visible</code> outlines.</p>
+<h2>Optical alignment — icon + text buttons</h2>
+<p>Geometric centring makes a trailing/leading icon look pushed too far to its edge. Give the icon side ≈2px less padding than the text side so the button reads as balanced:</p>
+<pre><code>/* trailing icon: &quot;Send for Signature →&quot; */
+padding-left: 16px;
+padding-right: 14px;  /* icon side = text side − 2px */
+</code></pre>
+<p>For a lopsided glyph (caret, star, play triangle), fix the SVG's viewBox rather than nudging with margin where you can. See decision 83.</p>
+<h2>Minimum hit area</h2>
+<p>Interactive controls target a <strong>32×32px minimum hit area</strong> for our dense desktop context. Where the visible glyph is smaller (checkbox, <code>ph-dots-three</code> menu, close button), extend the hit area with a pseudo-element rather than enlarging the glyph:</p>
+<pre><code>.control { position: relative; }
+.control::after {
+  content: &quot;&quot;; position: absolute; inset: 50% auto auto 50%;
+  width: 32px; height: 32px; transform: translate(-50%, -50%);
+}
+</code></pre>
+<p>32px clears the WCAG 2.5.8 (AA) 24px floor. Two interactive elements must never have overlapping hit areas — shrink the pseudo-element before it collides. Revisit toward 40/44px if a touch or mobile surface becomes a real target. See decision 83.</p>
+<hr>
+<h2>Widgets (<code>la-widget</code>)</h2>
+<ul>
+<li><code>highlighted</code> — primary colour border, use for recommended or active widgets</li>
+<li><code>clickable</code> — pointer cursor, use when the whole widget is interactive</li>
+<li><code>dimmed</code> — reduced opacity, use for locked or unavailable states</li>
+</ul>
+<hr>
+<h2>Modals</h2>
+<h3>Opening</h3>
+<ol>
+<li>Set backdrop <code>display: flex</code></li>
+<li>Apply <code>animation: fade-in</code> to backdrop</li>
+<li>Remove → reflow → re-add <code>.anim-scale-in</code> on inner panel</li>
+</ol>
+<h3>Closing</h3>
+<ul>
+<li>X button (top right)</li>
+<li>Cancel button (footer)</li>
+<li>Click backdrop</li>
+<li>Escape key</li>
+</ul>
+<h3>Multi-step modals</h3>
+<p>Replace <code>innerHTML</code> of the inner panel rather than stacking separate modals. Re-trigger <code>.anim-scale-in</code> on each step so the user feels forward progress.</p>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

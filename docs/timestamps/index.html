@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Timestamps — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item active" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Timestamps
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/timestamps.md
+</span>
+<article class="md-body">
+  <h1>Timestamps</h1>
+<p>Guidelines for displaying dates and times across LawAdvisor AI product surfaces.</p>
+<hr>
+<h2>The core rule</h2>
+<p><strong>Use relative time when recency is the signal. Use exact time when the specific moment matters. Never show a tooltip on a timestamp that already displays exact information.</strong></p>
+<hr>
+<h2>Display formats</h2>
+<h3>Relative time</h3>
+<p>Use when the primary signal is <em>how recent</em> something is, not <em>when exactly</em> it happened.</p>
+<table>
+<thead>
+<tr>
+<th>Age</th>
+<th>Format</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&lt; 1 minute</td>
+<td>Just now</td>
+<td>&quot;Just now&quot;</td>
+</tr>
+<tr>
+<td>1–59 minutes</td>
+<td>N minutes ago</td>
+<td>&quot;14 minutes ago&quot;</td>
+</tr>
+<tr>
+<td>1–23 hours</td>
+<td>N hours ago</td>
+<td>&quot;3 hours ago&quot;</td>
+</tr>
+<tr>
+<td>1 day</td>
+<td>Yesterday</td>
+<td>&quot;Yesterday&quot;</td>
+</tr>
+<tr>
+<td>2–6 days</td>
+<td>N days ago</td>
+<td>&quot;4 days ago&quot;</td>
+</tr>
+<tr>
+<td>7+ days</td>
+<td>Exact date</td>
+<td>See exact formats below</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Always pair relative time with a <code>la-tooltip</code> showing the full datetime.</strong> Relative time is lossy — the tooltip restores precision on demand without cluttering the layout.</p>
+<pre><code class="language-html">&lt;la-tooltip tip=&quot;12 May 2026, 2:14 pm&quot; appearance=&quot;light&quot; size=&quot;sm&quot;&gt;
+  &lt;span class=&quot;timestamp&quot;&gt;2 hours ago&lt;/span&gt;
+&lt;/la-tooltip&gt;
+</code></pre>
+<h3>Exact time (same-day)</h3>
+<p>Use when the specific hour matters and the date is already established by context (e.g. within a conversation thread where a date separator is shown above).</p>
+<p>Format: <code>2:14 pm</code></p>
+<p><strong>No tooltip.</strong> The displayed value is already precise.</p>
+<h3>Exact date + time</h3>
+<p>Use when the full temporal context matters — older messages, activity logs, audit trails.</p>
+<p>Format: <code>12 May 2026, 2:14 pm</code></p>
+<p><strong>No tooltip.</strong> The full information is already visible. Adding a tooltip repeating the same value adds no signal and creates noise.</p>
+<h3>Date only</h3>
+<p>Use when time doesn't matter — date separators in threads, event dates, document update dates.</p>
+<p>Format: <code>12 May 2026</code></p>
+<hr>
+<h2>Tooltip rule — summary</h2>
+<table>
+<thead>
+<tr>
+<th>Display format</th>
+<th>Tooltip?</th>
+<th>Why</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&quot;2 hours ago&quot;</td>
+<td>✓ Yes — show exact datetime</td>
+<td>Relative text hides precision; tooltip restores it</td>
+</tr>
+<tr>
+<td>&quot;Yesterday&quot;</td>
+<td>✓ Yes — show exact date + time</td>
+<td>Same — relative label is ambiguous after midnight</td>
+</tr>
+<tr>
+<td>&quot;2:14 pm&quot;</td>
+<td>✗ No</td>
+<td>Time is already shown</td>
+</tr>
+<tr>
+<td>&quot;12 May 2026, 2:14 pm&quot;</td>
+<td>✗ No</td>
+<td>Full datetime is already shown — tooltip would repeat it</td>
+</tr>
+<tr>
+<td>&quot;12 May 2026&quot;</td>
+<td>✗ No (usually)</td>
+<td>Date is explicit; add only if the time is also relevant</td>
+</tr>
+</tbody>
+</table>
+<p>The <code>la-chat-message</code> component exposes <code>timestamp-title</code> for the tooltip value. Only set it when the <code>timestamp</code> prop shows relative text. Leave it empty when showing exact datetimes.</p>
+<hr>
+<h2>Where each format is used</h2>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Format</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Activity feed items</td>
+<td>Relative (+ tooltip)</td>
+<td>Feed is scanned for recency; exact time on demand</td>
+</tr>
+<tr>
+<td>Chat messages (current session)</td>
+<td>Exact time — <code>2:14 pm</code></td>
+<td>Within a dated session; specific minute matters</td>
+</tr>
+<tr>
+<td>Chat messages (older)</td>
+<td>Exact date + time — <code>12 May 2026, 2:14 pm</code></td>
+<td>Full context needed; no tooltip required</td>
+</tr>
+<tr>
+<td>Investor dashboard card (last activity)</td>
+<td>Relative (+ tooltip)</td>
+<td>Recency is the primary signal for engagement</td>
+</tr>
+<tr>
+<td>Document updated date</td>
+<td>Short date — <code>12 May 2026</code></td>
+<td>Date-level precision sufficient</td>
+</tr>
+<tr>
+<td>Notification badges</td>
+<td>Relative</td>
+<td>Scanned at a glance</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Copy conventions</h2>
+<ul>
+<li>Use 12-hour time with lowercase am/pm: <code>2:14 pm</code> not <code>14:14</code> or <code>2:14 PM</code></li>
+<li>Use abbreviated month: <code>12 May 2026</code> not <code>12/05/2026</code> or <code>May 12, 2026</code></li>
+<li>Separator between date and time: comma + space — <code>12 May 2026, 2:14 pm</code></li>
+<li>&quot;Just now&quot; not &quot;now&quot; or &quot;moments ago&quot;</li>
+<li>Use plain numerals — no ordinals (<code>12</code> not <code>12th</code>)</li>
+</ul>
+<hr>
+<h2>Related</h2>
+<ul>
+<li>Decision 70 — when to add a tooltip to a timestamp</li>
+<li><code>la-chat-message</code> — <code>timestamp</code> and <code>timestamp-title</code> properties</li>
+</ul>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

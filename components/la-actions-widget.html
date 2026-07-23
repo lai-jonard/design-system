@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-actions-widget</h3>
 
@@ -64,6 +71,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -295,7 +305,7 @@ widget.actions = [];</div>
 <div class="docs-note"><strong>Icon strings are Phosphor classes</strong> — pass the full class string as you would write it in HTML: <code style="font-family:monospace;font-size:11px;">"ph ph-user-plus"</code>, <code style="font-family:monospace;font-size:11px;">"ph-fill ph-check"</code>, or <code style="font-family:monospace;font-size:11px;">"ph-bold ph-dots-three"</code>. The component renders <code style="font-family:monospace;font-size:11px;">&lt;i class={icon}&gt;</code> inside the shadow DOM where Phosphor CSS is already loaded.</div>
 <div class="docs-note"><strong>Icon convention — action type, not subject</strong> — icons should represent what the user is doing, not the subject matter. Use <code style="font-family:monospace;font-size:11px;">ph-upload-simple</code> for any upload action, <code style="font-family:monospace;font-size:11px;">ph-file-arrow-up</code> for filing or submitting a document, <code style="font-family:monospace;font-size:11px;">ph-arrow-right</code> for transferring or moving something, <code style="font-family:monospace;font-size:11px;">ph-user-plus</code> for adding a person. Avoid subject-specific icons like <code style="font-family:monospace;font-size:11px;">ph-trademark</code> or <code style="font-family:monospace;font-size:11px;">ph-globe</code> — these read as decorative rather than actionable.</div>
 <div class="docs-note"><strong>Copy rules for actions</strong> — labels must be verb-first and sentence case: "Add employee", "Review share structure", "Register trademark". Descriptions should be 5–15 words of plain context — why this action matters now, not what the button does. Follow British English throughout.</div>
-<div class="docs-note"><strong>Lives in the aside panel</strong> — <code style="font-family:monospace;font-size:11px;">la-actions-widget</code> sits in the <code style="font-family:monospace;font-size:11px;">slot="aside"</code> of <code style="font-family:monospace;font-size:11px;">la-app-shell</code> on legal area pages. On desktop it is always visible; on tablet it appears as an overlay drawer. See the aside panel pattern in <a href="../../design-language/components.md" style="color:inherit;">design-language/components.md</a>.</div>
+<div class="docs-note"><strong>Lives in the aside panel</strong> — <code style="font-family:monospace;font-size:11px;">la-actions-widget</code> sits in the <code style="font-family:monospace;font-size:11px;">slot="aside"</code> of <code style="font-family:monospace;font-size:11px;">la-app-shell</code> on legal area pages. On desktop it is always visible; on tablet it appears as an overlay drawer. See the aside panel pattern in <a href="../docs/components/" style="color:inherit;">design-language/components.md</a>.</div>
 <div class="docs-note"><strong>la-action bubbles and is composed</strong> — the event crosses the shadow boundary, so you can listen at the page level or on any ancestor element. Use <code style="font-family:monospace;font-size:11px;">e.detail.label</code> to route to the correct handler.</div>
 </div>
 </div>

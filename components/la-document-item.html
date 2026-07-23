@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-document-item</h3>
 
@@ -70,6 +77,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -530,14 +540,14 @@ item.addEventListener('la-select', () =&gt; {
   <h3>Notes</h3>
   <div style="display:flex;flex-direction:column;gap:8px;">
     <div class="docs-note"><strong>Actions slot isolation</strong> — Clicks inside the <code>actions</code> slot do not fire <code>la-select</code>. The component walks the composed event path and returns early if any node carries <code>slot="actions"</code>. Wire your action button handlers independently.</div>
-    <div class="docs-note"><strong>Dismissible suppresses la-select</strong> — When the built-in X is clicked, only <code>la-dismiss</code> fires. The handler calls <code>stopPropagation()</code>, and the row's path filter also short-circuits on <code>data-dismiss="true"</code>. Slot-isolation and dismiss-isolation compose: a slotted Retry stays independent of both row click and dismiss. See <a href="../decisions/50-document-item-dismissible-composition.md">decision 50</a> for the composition pattern.</div>
+    <div class="docs-note"><strong>Dismissible suppresses la-select</strong> — When the built-in X is clicked, only <code>la-dismiss</code> fires. The handler calls <code>stopPropagation()</code>, and the row's path filter also short-circuits on <code>data-dismiss="true"</code>. Slot-isolation and dismiss-isolation compose: a slotted Retry stays independent of both row click and dismiss. See decision 50 for the composition pattern.</div>
     <div class="docs-note"><strong>Filename truncation</strong> — The <code>name</code> value is set as the native <code>title</code> attribute on the name span. Long filenames truncate with ellipsis in narrow containers and reveal the full name on hover.</div>
     <div class="docs-note"><strong>Processing widget mapping</strong> — <code>la-processing-widget</code> uses a <code>completed</code> status in its own API, which it maps to <code>ready</code> before passing to <code>la-document-item</code>. This divergence is intentional — "ready" is the correct word once a document is viewable. Do not normalise it away.</div>
     <div class="docs-note"><strong>Error message scope</strong> — Only rendered when <code>status="failed"</code> and <code>error</code> is non-empty. Setting <code>error</code> on any other status has no visual effect.</div>
     <div class="docs-note"><strong>Keyboard behaviour</strong> — When interactive, the row is a native <code>&lt;button&gt;</code>. Enter and Space fire <code>la-select</code>. The built-in dismiss is its own focusable <code>la-icon-button</code> — Tab moves into and out of it cleanly. Focus rings use <code>:focus-visible</code> and are not suppressed.</div>
     <div class="docs-note"><strong>ready is transitory</strong> — <code>status="ready"</code> is a brief confirmation after processing completes (~3s), after which the parent should revert to <code>none</code>. The component holds no internal timer — the consumer owns the revert. See the Status lifecycle demo above.</div>
     <div class="docs-note"><strong>Re-upload vs Retry</strong> — use <strong>Re-upload</strong> when the failure means the user has to provide a new file (corrupted scan, wrong format, illegible). Use <strong>Retry</strong> when the existing file just needs another attempt at the same operation (transient network, parser timeout, server hiccup). The action verb should match what the user actually has to do — anything else is dishonest.</div>
-    <div class="docs-note"><strong>Spinner colour is <code>--la-color-primary</code>.</strong> The processing-state spinner uses primary (near-black) for a calm monochrome reading. See <a href="../decisions/53-spinner-primary-colour.md">decision 53</a> for the rationale and the soft tension with CLAUDE.md's "primary on interactive only" rule.</div>
+    <div class="docs-note"><strong>Spinner colour is <code>--la-color-primary</code>.</strong> The processing-state spinner uses primary (near-black) for a calm monochrome reading. See decision 53 for the rationale and the soft tension with CLAUDE.md's "primary on interactive only" rule.</div>
     <div class="docs-note"><strong><code>box-sizing: border-box</code> on the row</strong> — required so <code>width: 100%</code> matches the host width exactly. Without it, the row's padding extended past the host by the padding amount; ancestors with <code>overflow: hidden</code> (la-processing-widget tray) would clip the rightmost contents (the dismiss X). The fix is in source; consumers don't need to do anything.</div>
     <div class="docs-note"><strong>Open gap — row icon size tokens</strong> — File glyph and status badge currently size off <code>--la-font-size-lg</code> by happenstance, and the composed <code>la-spinner</code> uses <code>md</code> (16px). An <code>--la-icon-row-*</code> token family is logged as a backlog item; sizing here will track that family if/when it lands. Not blocking v1.</div>
   </div>

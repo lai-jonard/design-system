@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-choice</h3>
 
@@ -70,6 +77,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -426,7 +436,7 @@
     <div class="docs-note"><strong>Invalid is not checked</strong> — <code style="font-family:monospace;font-size:11px;">invalid</code> and <code style="font-family:monospace;font-size:11px;">checked</code> are independent boolean attributes. A row can be invalid and unchecked (unmet condition), invalid and checked (edge case), or neither. The invalid state signals a problem; it does not block the click toggle.</div>
     <div class="docs-note"><strong>Group roles</strong> — Add <code style="font-family:monospace;font-size:11px;">role="radiogroup"</code> to the wrapper for single-select groups so screen readers understand mutual exclusivity. Add <code style="font-family:monospace;font-size:11px;">role="group"</code> for multi-select. The individual tiles always carry <code style="font-family:monospace;font-size:11px;">role="checkbox"</code> — the parent role contextualises them.</div>
     <div class="docs-note"><strong>filled modifier</strong> — add <code style="font-family:monospace;font-size:11px;">filled</code> to a <code style="font-family:monospace;font-size:11px;">contained</code> tile when the checked state should feel like a positive completion rather than a selection. At rest the tile is identical to contained. When checked, the primary border is replaced with a <code style="font-family:monospace;font-size:11px;">--la-color-surface-success</code> fill and no border — a softer, greener signal used in pre-raise checklists and confirmation steps where each item marks progress done.</div>
-    <div class="docs-note"><strong>la-choice vs la-checkbox</strong> — <code style="font-family:monospace;font-size:11px;">la-choice</code> is a <em>statement</em> (the row is the component — onboarding, consent, unlock steps). <code style="font-family:monospace;font-size:11px;">la-checkbox</code> is a <em>control</em> (the row is owned by a table, menu, toolbar, or form grid). Full decision table in <a href="../../design-language/components.md">design-language/components.md</a>.</div>
+    <div class="docs-note"><strong>la-choice vs la-checkbox</strong> — <code style="font-family:monospace;font-size:11px;">la-choice</code> is a <em>statement</em> (the row is the component — onboarding, consent, unlock steps). <code style="font-family:monospace;font-size:11px;">la-checkbox</code> is a <em>control</em> (the row is owned by a table, menu, toolbar, or form grid). Full decision table in <a href="../docs/components/">design-language/components.md</a>.</div>
   </div>
 </div>
 

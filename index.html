@@ -102,11 +102,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="index.html" class="active">Overview</a>
+        <a href="docs/">Docs</a>
         <a href="foundations/">Foundations</a>
         <a href="components/">Components</a>
         <a href="pages/">Pages</a>
@@ -115,14 +120,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="docs/">Docs</a>
+        <a href="foundations/">Foundations</a>
+        <a href="components/">Components</a>
+        <a href="pages/">Pages</a>
+        <a href="patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
 <h3 class="docs-nav-title">On this page</h3>
 <div class="docs-nav-group">
@@ -136,10 +143,12 @@
 <a class="docs-nav-item" href="foundations/">Foundations →</a>
 <a class="docs-nav-item" href="pages/">Pages →</a>
 <a class="docs-nav-item" href="patterns/">Patterns →</a>
-<a class="docs-nav-item" href="../../handoffs/readiness.md">Readiness dashboard ↗</a>
 </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -159,8 +168,8 @@
             This is the single source of truth for LawAdvisor AI's UI. If a colour, spacing, radius, motion curve,
             or interaction pattern shows up in a product screen, it starts here. Component source lives under
             <code>src/</code>; published docs under <code>docs-src/components/</code> (with in-progress drafts
-            at <code>dev/docs-drafts/</code>); the rules that govern them in
-            <a href="../../CLAUDE.md">CLAUDE.md</a> and <a href="../../design-language/">design-language/</a>.
+            at <code>dev/docs-drafts/</code>); the rules that govern them in the
+            <a href="docs/">Docs guide</a>.
           </p>
 <p>
             The intent is that a designer, engineer, or AI agent can land on any component page, read in under
@@ -171,9 +180,9 @@
 
 <section class="landing-section docs-section" id="getting-started">
 <h2>Getting started</h2>
-<p>Three entry points — pick the one that matches what you're here for.</p>
+<p>Two entry points — pick the one that matches what you're here for.</p>
 <div class="card-grid">
-<a class="card" href="foundations.html">
+<a class="card" href="foundations/">
 <span class="card-eyebrow">For designers</span>
 <span class="card-title">Start with foundations</span>
 <span class="card-desc">
@@ -182,7 +191,7 @@
               </span>
 <span class="card-link">Read foundations →</span>
 </a>
-<a class="card" href="components.html">
+<a class="card" href="components/">
 <span class="card-eyebrow">For engineers</span>
 <span class="card-title">Jump to components</span>
 <span class="card-desc">
@@ -191,22 +200,13 @@
               </span>
 <span class="card-link">Browse components →</span>
 </a>
-<a class="card" href="../../CLAUDE.md">
-<span class="card-eyebrow">For AI agents</span>
-<span class="card-title">Read CLAUDE.md</span>
-<span class="card-desc">
-                Project-wide instructions: how to build components, the <code>/build</code> and
-                <code>/audit</code> workflows, token discipline, copy rules, and what <em>not</em> to touch.
-              </span>
-<span class="card-link">Open CLAUDE.md →</span>
-</a>
 </div>
 </section>
 
 <section class="landing-section docs-section" id="explore">
 <h2>Explore</h2>
 <div class="card-grid">
-<a class="card" href="foundations.html">
+<a class="card" href="foundations/">
 <span class="card-eyebrow">Reference</span>
 <span class="card-title">Foundations</span>
 <span class="card-desc">
@@ -215,7 +215,7 @@
               </span>
 <span class="card-link">Open →</span>
 </a>
-<a class="card" href="components.html">
+<a class="card" href="components/">
 <span class="card-eyebrow">Catalogue</span>
 <span class="card-title">Component docs</span>
 <span class="card-desc">
@@ -223,24 +223,6 @@
                 Primary workspace for visual iteration.
               </span>
 <span class="card-link">Browse catalogue →</span>
-</a>
-<a class="card" href="../../handoffs/readiness.md">
-<span class="card-eyebrow">Status</span>
-<span class="card-title">Readiness dashboard</span>
-<span class="card-desc">
-                Per-component status — ready, in progress, deferred — with notes on what's missing
-                to reach v1.
-              </span>
-<span class="card-link">See readiness →</span>
-</a>
-<a class="card" href="../../decisions/">
-<span class="card-eyebrow">History</span>
-<span class="card-title">Locked decisions</span>
-<span class="card-desc">
-                Numbered log of decisions that affect more than one component — concentric radii,
-                widget icon buttons, insight click behaviour, and more.
-              </span>
-<span class="card-link">Browse decisions →</span>
 </a>
 </div>
 </section>
@@ -252,7 +234,7 @@
             grouped by purpose — lives on its own page so it stays easy to scan.
           </p>
 <div class="card-grid" style="margin-top: 16px;">
-<a class="card" href="components.html">
+<a class="card" href="components/">
 <span class="card-eyebrow">Catalogue</span>
 <span class="card-title">Browse components</span>
 <span class="card-desc">

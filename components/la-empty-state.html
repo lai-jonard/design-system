@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-empty-state</h3>
 
@@ -68,6 +75,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -469,7 +479,7 @@ es.illustration = page.illustrationUrl;</div>
           <div id="notes" class="docs-section">
             <h3>Notes</h3>
             <div style="display:flex;flex-direction:column;gap:8px;">
-              <div class="docs-note"><strong>Processing first, clean second.</strong> The legal area page renders <code>variant="processing"</code> immediately after unlock. <code>variant="clean"</code> is reserved for "analysis is complete and no issues found." Sprint 3 decision — see <a href="../../handoffs/stage-1-foundations/sprint-3-legal-area-page.md"><code>sprint-3-legal-area-page.md</code></a>.</div>
+              <div class="docs-note"><strong>Processing first, clean second.</strong> The legal area page renders <code>variant="processing"</code> immediately after unlock. <code>variant="clean"</code> is reserved for "analysis is complete and no issues found." Sprint 3 decision — see <code>sprint-3-legal-area-page.md</code>.</div>
               <div class="docs-note"><strong>Illustration replaces the icon.</strong> When <code>illustration</code> is set, the <code>ph-fill ph-check-circle</code> icon is replaced by a 120×120 <code>&lt;img&gt;</code>. The illustration only applies to the <code>clean</code> variant — the <code>processing</code> variant always shows the spinner.</div>
               <div class="docs-note"><strong>Centre-aligned by design.</strong> The host applies <code>text-align: center</code>. Drop it into any container with horizontal room and it lays out correctly without further wrapping.</div>
               <div class="docs-note"><strong>Spinner is GPU-safe.</strong> The shared <code>spin</code> keyframe animates <code>transform: rotate</code> only. Respects <code>prefers-reduced-motion</code> via an in-shadow <code>@media</code> guard.</div>

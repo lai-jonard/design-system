@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-tooltip</h3>
 
@@ -66,6 +73,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -352,7 +362,7 @@ size to its content on a single line.</td>
 <div class="docs-note"><strong>size="sm" for icon button labels</strong> — icon-only buttons use <code style="font-family:monospace;font-size:11px;">size="sm"</code> so the tooltip reads as a compact action label rather than an explanatory paragraph. Default size is for longer contextual tips (field guidance, status expansions, wrapping copy).</div>
 <div class="docs-note"><strong>Position near viewport edges</strong> — the tip is absolutely positioned and centered on the trigger. If the trigger is at the right edge of the layout, use <code style="font-family:monospace;font-size:11px;">position="left"</code> so the tip extends into the content area. <code style="font-family:monospace;font-size:11px;">position="top"</code> centered on a right-edge button can extend past the viewport boundary.</div>
 <div class="docs-note"><strong>Prefer la-info-hint for inline info glyphs</strong> — <a href="./la-info-hint.html"><code style="font-family:monospace;font-size:11px;">la-info-hint</code></a> is a purpose-built composition of <code style="font-family:monospace;font-size:11px;">la-tooltip appearance="light"</code> on an info icon, with three sizes and a proper button role. Use it over wrapping <code style="font-family:monospace;font-size:11px;">la-tooltip</code> around a bare icon glyph — the info-hint handles keyboard access and sizing correctly.</div>
-<div class="docs-note"><strong>Known a11y gaps (deferred)</strong> — no <code style="font-family:monospace;font-size:11px;">aria-describedby</code> wired between the trigger and tip; no <code style="font-family:monospace;font-size:11px;">prefers-reduced-motion</code> override for the show/hide transition. Both are deferred v1 gaps, flagged in <a href="../../design-language/components.md"><code style="font-family:monospace;font-size:11px;">components.md</code></a>.</div>
+<div class="docs-note"><strong>Known a11y gaps (deferred)</strong> — no <code style="font-family:monospace;font-size:11px;">aria-describedby</code> wired between the trigger and tip; no <code style="font-family:monospace;font-size:11px;">prefers-reduced-motion</code> override for the show/hide transition. Both are deferred v1 gaps, flagged in <a href="../docs/components/"><code style="font-family:monospace;font-size:11px;">components.md</code></a>.</div>
 </div>
 </div>
 

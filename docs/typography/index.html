@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Typography — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item active" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Typography
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/typography.md
+</span>
+<article class="md-body">
+  <h1>Typography</h1>
+<h2>Typeface</h2>
+<p><strong>Inter</strong> — loaded from Google Fonts at weights 400, 500, 600.</p>
+<p>Why Inter: humanist sans that reads well at small sizes. Essential for dense legal data, long description text, and compact status labels.</p>
+<hr>
+<h2>Weight scale</h2>
+<table>
+<thead>
+<tr>
+<th>Weight</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Regular</td>
+<td>400</td>
+<td>Body copy, descriptions, table cell content</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>500</td>
+<td>Labels, secondary headings, nav items, badge text</td>
+</tr>
+<tr>
+<td>Semibold</td>
+<td>600</td>
+<td>Page titles, card headings, section headers, CTAs</td>
+</tr>
+</tbody>
+</table>
+<h3>Rule: headings are semibold, not bold</h3>
+<p>700 weight at 16–22px reads as heavy and aggressive in a legal product where trust and calm matter. 600 gives structure and hierarchy without visual shouting.</p>
+<p><strong>Exception:</strong> <code>&lt;strong&gt;</code> tags inside notification bars and alert copy — inline emphasis within body text.</p>
+<hr>
+<h2>Size scale</h2>
+<p>The base body size is <code>--la-font-size-base</code> — see decision 15. <code>--la-font-size-lg</code> is a deliberate step up for labels and prominent copy that need more presence than base; never the default. Numeric values live in <a href="../src/styles/tokens.ts">src/styles/tokens.ts</a> — this table only describes which token plays which role.</p>
+<table>
+<thead>
+<tr>
+<th>Usage</th>
+<th>Size token</th>
+<th>Weight</th>
+<th>Colour token</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page / hero heading</td>
+<td><code>--la-font-size-4xl</code></td>
+<td>600</td>
+<td><code>--la-color-text</code></td>
+</tr>
+<tr>
+<td>Section heading</td>
+<td><code>--la-font-size-3xl</code> / <code>-2xl</code></td>
+<td>600</td>
+<td><code>--la-color-text</code></td>
+</tr>
+<tr>
+<td>Card / group heading</td>
+<td><code>--la-font-size-xl</code> / <code>-lg</code></td>
+<td>600</td>
+<td><code>--la-color-text</code></td>
+</tr>
+<tr>
+<td>Body (primary)</td>
+<td><code>--la-font-size-base</code></td>
+<td>400</td>
+<td><code>--la-color-text</code></td>
+</tr>
+<tr>
+<td>Body (step-up)</td>
+<td><code>--la-font-size-lg</code></td>
+<td>400</td>
+<td><code>--la-color-text</code></td>
+</tr>
+<tr>
+<td>Label / badge text</td>
+<td><code>--la-font-size-base</code></td>
+<td>500</td>
+<td>varies</td>
+</tr>
+<tr>
+<td>Status / micro label</td>
+<td><code>--la-font-size-sm</code></td>
+<td>500</td>
+<td>varies</td>
+</tr>
+<tr>
+<td>Caption / meta</td>
+<td><code>--la-font-size-sm</code></td>
+<td>400</td>
+<td><code>--la-color-text-muted</code></td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Text colour tokens</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-text</code></td>
+<td>Primary readable text, headings</td>
+</tr>
+<tr>
+<td><code>--la-color-text-muted</code></td>
+<td>Secondary / supporting copy, subtitles</td>
+</tr>
+<tr>
+<td><code>--la-color-text-faint</code></td>
+<td>Muted — captions, dates, disabled labels</td>
+</tr>
+<tr>
+<td><code>--la-color-text-disabled</code></td>
+<td>Disabled state text</td>
+</tr>
+</tbody>
+</table>
+<p>Never use raw hex for text colours — always reference a token.</p>
+<hr>
+<h2>Line height</h2>
+<ul>
+<li>Body copy: <code>1.5</code></li>
+<li>Single-line labels and badges: <code>normal</code></li>
+<li>Legal / document text (if used): <code>1.7</code> — generous for readability</li>
+</ul>
+<hr>
+<h2>Patterns</h2>
+<h3>Status badges</h3>
+<p><code>--la-font-size-sm</code> × <code>--la-font-weight-medium</code>, sentence case. Never all-caps. Keep copy to 1–2 words.</p>
+<h3>Card headings</h3>
+<p><code>--la-font-size-lg</code> × <code>--la-font-weight-semibold</code> × <code>--la-color-text</code>. No uppercase.</p>
+<h3>Meta / timestamp</h3>
+<p><code>--la-font-size-sm</code> × <code>--la-font-weight-normal</code> × <code>--la-color-text-muted</code>. Appears below or beside the primary label.</p>
+<h3>Links / anchors</h3>
+<p>Always use the foundation anchor style from <code>la-base-root.css</code> — never write custom colour, text-decoration, or font-weight rules on <code>&lt;a&gt;</code> elements.</p>
+<ul>
+<li><strong>Colour:</strong> <code>--la-color-text-secondary</code> at rest</li>
+<li><strong>Decoration:</strong> <code>underline</code>, <code>text-decoration-color: --la-color-border</code>, <code>thickness: 1px</code>, <code>offset: 2px</code></li>
+<li><strong>Hover:</strong> decoration colour shifts to <code>--la-color-primary</code></li>
+<li><strong>Weight:</strong> <code>--la-font-weight-normal</code></li>
+</ul>
+<p>For inline links that need layout overrides (e.g. <code>text-align: right</code>, <code>display: block</code>), add only structural rules to the class — never visual ones. Example:</p>
+<pre><code class="language-css">/* ✅ layout only — visual treatment comes from la-base-root.css */
+.forgot { display: block; text-align: right; }
+
+/* ❌ don't do this */
+.forgot { color: var(--la-color-primary); text-decoration: none; font-weight: var(--la-font-weight-medium); }
+</code></pre>
+<p>In light-DOM pages, link <code>la-base-root.css</code> after <code>la-tokens-root.css</code> and the styles apply automatically to all <code>&lt;a&gt;</code> elements.</p>
+<h3>Text wrapping</h3>
+<p>Applied platform-wide from the base styles — you rarely need to set these yourself.</p>
+<ul>
+<li><strong>Headings</strong> use <code>text-wrap: balance</code> — even line lengths, no orphaned last word. Balance only runs on short blocks (≤6 lines in Chromium), which headings always satisfy. Set on <code>h1–h6</code> in <code>la-base-root.css</code>.</li>
+<li><strong>Body text</strong> uses <code>text-wrap: pretty</code> — prevents a single dangling word on the last line, at any length. Set on <code>p, li, blockquote, figcaption, dd</code> in <code>la-base-root.css</code>, and inherited across shadow roots via <code>text-wrap: pretty</code> on the <code>:host</code> base in <code>tokens.ts</code>.</li>
+<li><strong>Don't</strong> apply <code>balance</code> to long paragraphs (silently ignored) or to code/pre blocks. <code>pretty</code> is the safe default for short-to-medium copy; leave 10+-line text on the browser default.</li>
+</ul>
+<p>See decision 83.</p>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

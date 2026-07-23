@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Docs — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 1040px; }
+
+    .docs-hero h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin-bottom: 10px;
+    }
+    .docs-hero p {
+      font-size: 15px; color: var(--doc-text-2); line-height: 1.6; max-width: 680px;
+    }
+
+    .guide-group {
+      display: flex; flex-direction: column; gap: 14px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .guide-group-label {
+      font-size: 11px; font-weight: 400; color: var(--doc-text-3);
+      letter-spacing: 0.1px; padding-bottom: 10px;
+      border-bottom: 1px solid var(--doc-border-light);
+    }
+    .guide-grid {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 12px;
+    }
+    .guide-card {
+      display: flex; flex-direction: column; gap: 6px; padding: 18px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); text-decoration: none; color: var(--doc-text);
+      transition: border-color 140ms ease, box-shadow 140ms ease;
+    }
+    .guide-card:hover {
+      border-color: var(--doc-accent); box-shadow: var(--doc-shadow-sm); color: var(--doc-text);
+    }
+    .guide-card-title { font-size: 14px; font-weight: 600; color: var(--doc-text); }
+    .guide-card-desc { font-size: 13px; color: var(--doc-text-2); line-height: 1.55; }
+
+    .docs { display: flex; flex-direction: column; gap: 40px; }
+
+    /* Featured link to the visual workflow overview. */
+    .docs-featured {
+      display: flex; align-items: center; gap: 18px;
+      background: var(--doc-accent); color: #fff;
+      border-radius: var(--doc-r-lg); padding: 22px 24px;
+      text-decoration: none; margin-bottom: 8px;
+      transition: opacity 140ms ease;
+    }
+    .docs-featured:hover { opacity: 0.92; color: #fff; }
+    .docs-featured i { font-size: 28px; flex: 0 0 auto; }
+    .docs-featured .ft-body { display: flex; flex-direction: column; gap: 3px; flex: 1; }
+    .docs-featured .ft-title { font-size: 16px; font-weight: 600; }
+    .docs-featured .ft-desc { font-size: 13px; color: rgba(255,255,255,0.75); line-height: 1.5; }
+    .docs-featured .ft-go { font-size: 13px; font-weight: 500; white-space: nowrap; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/" class="active">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/" class="active">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../docs/workflow/">Design workflow</a>
+</div>
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="#principles-process">Principles &amp; process</a>
+
+<a class="docs-nav-item" href="#visual-language">Visual language</a>
+
+<a class="docs-nav-item" href="#composition-layout">Composition &amp; layout</a>
+
+<a class="docs-nav-item" href="#writing">Writing</a>
+
+<a class="docs-nav-item" href="#patterns-usability">Patterns &amp; usability</a>
+
+<a class="docs-nav-item" href="#component-notes">Component notes</a>
+
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../foundations/">Foundations →</a>
+<a class="docs-nav-item" href="../components/">Components →</a>
+</div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="docs-hero">
+<h1>Docs</h1>
+<p>
+  The written design language behind LawAdvisor AI — the principles, visual rules, layout
+  and writing standards, and component notes that govern every surface. Start anywhere;
+  each page is the working reference, kept in step with the code.
+</p>
+</section>
+<a class="docs-featured" href="../docs/workflow/">
+<i class="ph ph-compass" aria-hidden="true"></i>
+<span class="ft-body">
+<span class="ft-title">How we design</span>
+<span class="ft-desc">A visual overview of the design workflow — the six layers, the build pipeline, and how work reaches engineering. Good for sharing with stakeholders.</span>
+</span>
+<span class="ft-go">View →</span>
+</a>
+<div class="docs">
+
+<section class="guide-group" id="principles-process">
+<div class="guide-group-label">Principles &amp; process</div>
+<div class="guide-grid">
+
+<a class="guide-card" href="../docs/overview/">
+<span class="guide-card-title">Overview</span>
+<span class="guide-card-desc">What the design language is, how it is organised, and how it fits with CLAUDE.md.</span>
+</a>
+
+<a class="guide-card" href="../docs/playbook/">
+<span class="guide-card-title">Playbook</span>
+<span class="guide-card-desc">The working method — how we decide, build, and keep the system coherent.</span>
+</a>
+
+<a class="guide-card" href="../docs/development-workflow/">
+<span class="guide-card-title">Development workflow</span>
+<span class="guide-card-desc">The build chain, the dev loop, and the decisions-and-evolution log.</span>
+</a>
+
+<a class="guide-card" href="../docs/prototype-standards/">
+<span class="guide-card-title">Prototype standards</span>
+<span class="guide-card-desc">The gate a prototype passes before it becomes a published reference.</span>
+</a>
+
+</div>
+</section>
+
+<section class="guide-group" id="visual-language">
+<div class="guide-group-label">Visual language</div>
+<div class="guide-grid">
+
+<a class="guide-card" href="../docs/colour/">
+<span class="guide-card-title">Colour</span>
+<span class="guide-card-desc">Semantic palette, tokens, and when coloured surfaces are allowed.</span>
+</a>
+
+<a class="guide-card" href="../docs/typography/">
+<span class="guide-card-title">Typography</span>
+<span class="guide-card-desc">Why Inter, hierarchy through weight and grey scale, never colour.</span>
+</a>
+
+<a class="guide-card" href="../docs/borders/">
+<span class="guide-card-title">Borders</span>
+<span class="guide-card-desc">Two categories of border token and when to reach for each.</span>
+</a>
+
+<a class="guide-card" href="../docs/iconography/">
+<span class="guide-card-title">Iconography</span>
+<span class="guide-card-desc">Phosphor, regular vs fill, shadow-DOM setup, never hardcode colour.</span>
+</a>
+
+<a class="guide-card" href="../docs/motion/">
+<span class="guide-card-title">Motion</span>
+<span class="guide-card-desc">Easing, durations, stagger, GPU-safe rules; motion.css is the source of truth.</span>
+</a>
+
+<a class="guide-card" href="../docs/interaction/">
+<span class="guide-card-title">Interaction</span>
+<span class="guide-card-desc">Hover, focus, active, click — behaviour under pointer and keyboard.</span>
+</a>
+
+<a class="guide-card" href="../docs/loading/">
+<span class="guide-card-title">Loading</span>
+<span class="guide-card-desc">When to show spinners, skeletons, and progress — and when not to.</span>
+</a>
+
+</div>
+</section>
+
+<section class="guide-group" id="composition-layout">
+<div class="guide-group-label">Composition &amp; layout</div>
+<div class="guide-grid">
+
+<a class="guide-card" href="../docs/layout/">
+<span class="guide-card-title">Layout</span>
+<span class="guide-card-desc">What belongs in this library vs the consuming app; composition rules.</span>
+</a>
+
+<a class="guide-card" href="../docs/page-architecture/">
+<span class="guide-card-title">Page architecture</span>
+<span class="guide-card-desc">How pages are structured — shell, header, main, aside.</span>
+</a>
+
+<a class="guide-card" href="../docs/responsive-design/">
+<span class="guide-card-title">Responsive design</span>
+<span class="guide-card-desc">Desktop-first; container queries over viewport breakpoints.</span>
+</a>
+
+</div>
+</section>
+
+<section class="guide-group" id="writing">
+<div class="guide-group-label">Writing</div>
+<div class="guide-grid">
+
+<a class="guide-card" href="../docs/copy-guidelines/">
+<span class="guide-card-title">Copy guidelines</span>
+<span class="guide-card-desc">British English, active voice, sentence case, verb-first CTAs.</span>
+</a>
+
+<a class="guide-card" href="../docs/timestamps/">
+<span class="guide-card-title">Timestamps</span>
+<span class="guide-card-desc">How we format dates and relative times across surfaces.</span>
+</a>
+
+</div>
+</section>
+
+<section class="guide-group" id="patterns-usability">
+<div class="guide-group-label">Patterns &amp; usability</div>
+<div class="guide-grid">
+
+<a class="guide-card" href="../docs/ux-patterns/">
+<span class="guide-card-title">UX patterns</span>
+<span class="guide-card-desc">Standardised interaction patterns — delete, upload, confirmation, and more.</span>
+</a>
+
+<a class="guide-card" href="../docs/usability-heuristics/">
+<span class="guide-card-title">Usability heuristics</span>
+<span class="guide-card-desc">The 12 heuristics we audit against before a surface ships.</span>
+</a>
+
+<a class="guide-card" href="../docs/ai-ux-guidelines/">
+<span class="guide-card-title">AI UX guidelines</span>
+<span class="guide-card-desc">How AI-driven surfaces should behave, explain themselves, and fail.</span>
+</a>
+
+</div>
+</section>
+
+<section class="guide-group" id="component-notes">
+<div class="guide-group-label">Component notes</div>
+<div class="guide-grid">
+
+<a class="guide-card" href="../docs/components/">
+<span class="guide-card-title">Components</span>
+<span class="guide-card-desc">Tier-1 primitives and Tier-2 composed components with logged problem statements.</span>
+</a>
+
+<a class="guide-card" href="../docs/la-app-shell/">
+<span class="guide-card-title">la-app-shell</span>
+<span class="guide-card-desc">Root layout — sidebar, page header, main, optional aside.</span>
+</a>
+
+<a class="guide-card" href="../docs/la-sidebar/">
+<span class="guide-card-title">la-sidebar</span>
+<span class="guide-card-desc">Navigation sidebar — logo, identity, nav areas, lock state.</span>
+</a>
+
+</div>
+</section>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

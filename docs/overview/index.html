@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Overview — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item active" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Overview
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/README.md
+</span>
+<article class="md-body">
+  <h1>Design Language — LawAdvisor AI</h1>
+<p>This folder documents the design rationale, patterns, and standards for the LawAdvisor AI design system. It is the living reference for how things look and why — used when creating new flows, screens, or components.</p>
+<h2>When to update</h2>
+<p>Update this documentation automatically when:</p>
+<ul>
+<li>A new visual pattern is established (e.g. how we handle empty states)</li>
+<li>A token decision is made (e.g. a new colour, a border rule)</li>
+<li>A component behaviour is defined (e.g. how modals animate)</li>
+<li>A rule is corrected or refined (e.g. &quot;we tried X but switched to Y because...&quot;)</li>
+<li>A spacing or layout standard is set</li>
+</ul>
+<p>Do not update for one-off tweaks that are screen-specific and unlikely to generalise.</p>
+<hr>
+<h2>Files</h2>
+<table>
+<thead>
+<tr>
+<th>File</th>
+<th>Covers</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="../../docs/playbook/">playbook.md</a></td>
+<td>The recipe — how new ideas become components, how decisions get logged, how work hands off</td>
+</tr>
+<tr>
+<td><a href="../../docs/typography/">typography.md</a></td>
+<td>Type scale, weights, font, heading rules</td>
+</tr>
+<tr>
+<td><a href="../../docs/colour/">colour.md</a></td>
+<td>Token system, colour usage rules, surface/border/action tokens</td>
+</tr>
+<tr>
+<td><a href="../../docs/layout/">layout.md</a></td>
+<td>Max-width, spacing, panels, page structure</td>
+</tr>
+<tr>
+<td><a href="../../docs/components/">components.md</a></td>
+<td>Component architecture, base vs composite, naming</td>
+</tr>
+<tr>
+<td><a href="../../docs/interaction/">interaction.md</a></td>
+<td>Button variants, states, hover, disabled patterns</td>
+</tr>
+<tr>
+<td><a href="../../docs/motion/">motion.md</a></td>
+<td>Animation standards, entrance sequences, tab navigation</td>
+</tr>
+<tr>
+<td><a href="../../docs/borders/">borders.md</a></td>
+<td>Border token usage — layout vs interactive distinction</td>
+</tr>
+<tr>
+<td><a href="../../docs/la-app-shell/">la-app-shell.md</a></td>
+<td>App shell layout container — slots, properties, responsive behaviour</td>
+</tr>
+<tr>
+<td><a href="../../docs/la-sidebar/">la-sidebar.md</a></td>
+<td>Navigation sidebar — properties and events</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Relationship to CLAUDE.md and source files</h2>
+<p><code>CLAUDE.md</code> at the project root is the <strong>canonical foundation</strong> — token values, typography rules, animation standards, copy rules, and the Lit component library structure.</p>
+<p>This <code>design-language/</code> folder is the <strong>rationale and decision layer</strong> on top of it — the <em>why</em> behind decisions, known divergences from defaults, and patterns that emerged from building specific screens and flows. It is a living document updated as the system evolves.</p>
+<h3>Known divergences from defaults</h3>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Default</th>
+<th>Decision</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Disabled state</td>
+<td>Token-based disabled bg</td>
+<td><code>opacity: 0.4</code> on the element — preserves variant identity</td>
+</tr>
+<tr>
+<td>Border distinction</td>
+<td>Single <code>--border</code> token</td>
+<td>Two tokens: <code>--la-color-border</code> (interactive) + <code>--la-color-border-light</code> (structural)</td>
+</tr>
+<tr>
+<td>Neutral/dark button</td>
+<td>Not defined</td>
+<td><code>--la-color-neutral</code> (#374151) added — dark slate for confirm-weight actions</td>
+</tr>
+<tr>
+<td>Heading weight</td>
+<td>Not specified</td>
+<td>600 semibold only — 700 is too heavy for legal product tone</td>
+</tr>
+<tr>
+<td>Tab bar border</td>
+<td>Not specified</td>
+<td>Removed — padding gap is sufficient separator</td>
+</tr>
+<tr>
+<td>Icon weight in notif bars</td>
+<td>Fill for active/selected</td>
+<td>Fill used for default type icons in notification bars</td>
+</tr>
+</tbody>
+</table>
+<h3>When to check which source</h3>
+<ul>
+<li><strong>Building a new component</strong> → check <code>CLAUDE.md</code> for tokens and rules, then this folder for architecture patterns</li>
+<li><strong>Designing a new screen or flow</strong> → check <code>layout.md</code> and <code>components.md</code> here</li>
+<li><strong>Copy / UX writing</strong> → <code>CLAUDE.md</code> copy rules section is the source of truth</li>
+</ul>
+<hr>
+<h2>Core principles</h2>
+<ul>
+<li><strong>Tokens over hardcoding.</strong> Every colour, size, radius, and spacing value must use a CSS variable. Never hardcode a hex or pixel value directly in a component.</li>
+<li><strong>Semibold headings.</strong> Weight 600, never 700. Bold is reserved for emphasis within body copy only.</li>
+<li><strong>Verb-first CTAs.</strong> All button labels start with a verb, sentence case. &quot;Approve and Propagate&quot;, not &quot;Amendment Approval&quot;.</li>
+<li><strong>Layout vs interactive borders.</strong> Two distinct border tokens — lighter for structure, standard for UI controls.</li>
+<li><strong>Purposeful animation.</strong> Motion communicates state change, not decoration. Entrance animations skip on tab navigation.</li>
+<li><strong>Base before composite.</strong> Primitive components live in <code>_base/</code>. Complex, layout-aware components live in <code>_components/</code>.</li>
+</ul>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

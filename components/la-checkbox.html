@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-checkbox</h3>
 
@@ -66,6 +73,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -399,7 +409,7 @@
 </div><div class="docs-divider"></div><div class="docs-section" id="notes">
 <h3>Notes</h3>
 <div style="display:flex;flex-direction:column;gap:8px;">
-<div class="docs-note"><strong>la-checkbox vs la-choice</strong> — <code style="font-family:monospace;font-size:11px;">la-choice</code> is a <em>statement</em> (the row is the component — onboarding, consent, settings), <code style="font-family:monospace;font-size:11px;">la-checkbox</code> is a <em>control</em> (the row is owned by something else — table, menu, toolbar, form grid). Full decision table in <a href="../../design-language/components.md">design-language/components.md</a>.</div>
+<div class="docs-note"><strong>la-checkbox vs la-choice</strong> — <code style="font-family:monospace;font-size:11px;">la-choice</code> is a <em>statement</em> (the row is the component — onboarding, consent, settings), <code style="font-family:monospace;font-size:11px;">la-checkbox</code> is a <em>control</em> (the row is owned by something else — table, menu, toolbar, form grid). Full decision table in <a href="../docs/components/">design-language/components.md</a>.</div>
 <div class="docs-note"><strong>Indeterminate is a visual state</strong> — pair it with a separate <code style="font-family:monospace;font-size:11px;">checked</code> value when "some, not all" items are selected. On user toggle, indeterminate is cleared and <code style="font-family:monospace;font-size:11px;">checked</code> is set — the component does not self-manage the tri-state logic; consumers decide whether the next state is "all on" or "all off".</div>
 <div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">la-change</code> fires on user toggle only</strong> — programmatically setting <code style="font-family:monospace;font-size:11px;">.checked = true</code> does not dispatch an event. This matches the native <code style="font-family:monospace;font-size:11px;">change</code> convention and prevents feedback loops in controlled patterns.</div>
 <div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">disabled</code> forwards to the inner input</strong> — reflects to the host for the visual dim (<code style="font-family:monospace;font-size:11px;">opacity: 0.4</code>, pointer-events blocked) and is passed through to the native <code style="font-family:monospace;font-size:11px;">&lt;input&gt;</code> so Tab and Space/Enter are also blocked, not just clicks.</div>

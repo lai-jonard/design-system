@@ -1,16 +1,52 @@
 // Shared docs-shell behaviour — nav collapse + active section highlighting.
 
 (function () {
-  // Sidebar collapse
   const toggle = document.getElementById('nav-toggle');
+  const scrim = document.getElementById('nav-scrim');
+  const drawer = document.getElementById('doc-drawer');
+  const mobile = window.matchMedia('(max-width: 860px)');
+  const isMobile = () => mobile.matches;
+
+  // Desktop collapse state is persisted; it has no effect on mobile
+  // (the CSS neutralises it — the drawer is the mobile model).
+  if (localStorage.getItem('doc-nav-collapsed') === 'true') {
+    document.body.classList.add('nav-collapsed');
+  }
+
+  function openDrawer() {
+    document.body.classList.add('drawer-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  }
+  function closeDrawer() {
+    document.body.classList.remove('drawer-open');
+    if (toggle) toggle.setAttribute('aria-expanded', 'false');
+  }
+
   if (toggle) {
-    const saved = localStorage.getItem('doc-nav-collapsed') === 'true';
-    if (saved) document.body.classList.add('nav-collapsed');
     toggle.addEventListener('click', () => {
-      const now = document.body.classList.toggle('nav-collapsed');
-      localStorage.setItem('doc-nav-collapsed', String(now));
+      if (isMobile()) {
+        document.body.classList.contains('drawer-open') ? closeDrawer() : openDrawer();
+      } else {
+        const now = document.body.classList.toggle('nav-collapsed');
+        localStorage.setItem('doc-nav-collapsed', String(now));
+      }
     });
   }
+
+  if (scrim) scrim.addEventListener('click', closeDrawer);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeDrawer();
+  });
+  // Tapping any link inside the mobile drawer closes it.
+  if (drawer) {
+    drawer.addEventListener('click', (e) => {
+      if (isMobile() && e.target.closest('a')) closeDrawer();
+    });
+  }
+  // Growing back to desktop clears any open-drawer state.
+  mobile.addEventListener('change', (e) => {
+    if (!e.matches) closeDrawer();
+  });
 
   // Active nav on scroll — highlight the section closest to the top.
   const navItems = document.querySelectorAll('.docs-nav-item[data-nav-id]');

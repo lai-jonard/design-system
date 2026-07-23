@@ -57,6 +57,19 @@
       color: var(--doc-text-3);
       font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
     }
+    /* OKLCH value, shown muted beneath the hex. */
+    .swatch-oklch {
+      display: block;
+      color: var(--doc-text-faint);
+      font-size: 10px;
+      margin-top: 1px;
+    }
+    .hex-oklch {
+      display: block;
+      color: var(--doc-text-faint);
+      font-size: 11px;
+      margin-top: 2px;
+    }
 
     /* Token table — used in the Colour section to list every token with usage. */
     .token-chip {
@@ -248,11 +261,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/" class="active">Foundations</a>
         <a href="../components/">Components</a>
         <a href="../pages/">Pages</a>
@@ -261,14 +279,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
 <h3 class="docs-nav-title">On this page</h3>
 <div class="docs-nav-group">
@@ -308,12 +328,13 @@
 </div>
 <div class="docs-nav-group">
 <span class="docs-nav-title">Source files</span>
-<a class="docs-nav-item" href="../../src/styles/tokens.ts">tokens.ts ↗</a>
-<a class="docs-nav-item" href="../../motion.css">motion.css ↗</a>
-<a class="docs-nav-item" href="../../CLAUDE.md">CLAUDE.md ↗</a>
+<a class="docs-nav-item" href="../motion.css">motion.css ↗</a>
 </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -323,7 +344,7 @@
 <p>
             The rules that govern every component. Read this once and the rest of the system
             makes sense. Every value on this page references a real token — the source of
-            truth is <a href="../../src/styles/tokens.ts"><code>src/styles/tokens.ts</code></a>.
+            truth is <code>src/styles/tokens.ts</code>.
           </p>
 </section>
 <div class="docs">
@@ -340,13 +361,13 @@
               Every component lives as three artefacts: Lit source in <code>src/</code>, a docs page
               under <code>docs-src/components/</code> (with in-progress drafts staged at
               <code>dev/docs-drafts/</code>), and a problem statement in
-              <a href="../../design-language/components.md"><code>design-language/components.md</code></a>.
+              <a href="../docs/components/"><code>design-language/components.md</code></a>.
               Readiness status is tracked in
-              <a href="../../handoffs/readiness.md"><code>handoffs/readiness.md</code></a>.
+              <code>handoffs/readiness.md</code>.
               Cross-component decisions get numbered files in
-              <a href="../../decisions/"><code>decisions/</code></a>.
+              <code>decisions/</code>.
             </p>
-<div class="md-rationale" data-path="../../design-language/development-workflow.md"></div>
+<a class="more-link" href="../docs/development-workflow/">Full rationale: Development workflow →</a>
 </section>
 <!-- TONE ────────────────────────────────────────────────── -->
 <section class="docs-section" id="tone">
@@ -359,8 +380,7 @@
 <p>No jargon: "start" not "commence", "check" not "verify", "send" not "submit".
             Empty states invite action. Success moments are brief ("Done.", "All sorted."). Errors
             are honest and unflustered.</p>
-<a class="more-link" href="../../CLAUDE.md#copy-rules">Full copy rules in CLAUDE.md →</a>
-<div class="md-rationale" data-path="../../design-language/copy-guidelines.md"></div>
+<a class="more-link" href="../docs/copy-guidelines/">Full rationale: Copy guidelines →</a>
 </section>
 <!-- ACCESSIBILITY ───────────────────────────────────────── -->
 <section class="docs-section" id="accessibility">
@@ -398,23 +418,23 @@
             <code>-500</code> base, <code>-700</code> darker) so adding <code>-300</code> or <code>-900</code> later
             is non-breaking.</p>
 <div class="swatch-row">
-<div class="swatch"><div class="swatch-preview" style="background:#FDF3F3;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-50</span><span class="swatch-value">#FDF3F3</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#CC4643;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-500</span><span class="swatch-value">#CC4643</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#A92F2C;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-700</span><span class="swatch-value">#A92F2C</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#FFFBEB;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-50</span><span class="swatch-value">#FFFBEB</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#F59E0B;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-500</span><span class="swatch-value">#F59E0B</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#B45309;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-700</span><span class="swatch-value">#B45309</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#EFFAF3;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-50</span><span class="swatch-value">#EFFAF3</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#1F7C51;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-500</span><span class="swatch-value">#1F7C51</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#32A66E;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-600</span><span class="swatch-value">#32A66E</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#196343;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-700</span><span class="swatch-value">#196343</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#EEFBFD;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-50</span><span class="swatch-value">#EEFBFD</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#0482C5;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-500</span><span class="swatch-value">#0482C5</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#3B82F6;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-600</span><span class="swatch-value">#3B82F6</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#1B6683;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-700</span><span class="swatch-value">#1B6683</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#F0E8FE;"></div><div class="swatch-meta"><span class="swatch-name">--la-purple-50</span><span class="swatch-value">#F0E8FE</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#6B3FA0;"></div><div class="swatch-meta"><span class="swatch-name">--la-purple-500</span><span class="swatch-value">#6B3FA0</span></div></div>
-<div class="swatch"><div class="swatch-preview" style="background:#FFFFFF;"></div><div class="swatch-meta"><span class="swatch-name">--la-white</span><span class="swatch-value">#FFFFFF</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#FDF3F3;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-50</span><span class="swatch-value">#FDF3F3</span><span class="swatch-value swatch-oklch">oklch(0.972 0.011 17.342)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#CC4643;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-500</span><span class="swatch-value">#CC4643</span><span class="swatch-value swatch-oklch">oklch(0.581 0.171 25.273)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#A92F2C;"></div><div class="swatch-meta"><span class="swatch-name">--la-red-700</span><span class="swatch-value">#A92F2C</span><span class="swatch-value swatch-oklch">oklch(0.493 0.159 26.346)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#FFFBEB;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-50</span><span class="swatch-value">#FFFBEB</span><span class="swatch-value swatch-oklch">oklch(0.987 0.021 95.277)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#F59E0B;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-500</span><span class="swatch-value">#F59E0B</span><span class="swatch-value swatch-oklch">oklch(0.769 0.165 70.08)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#B45309;"></div><div class="swatch-meta"><span class="swatch-name">--la-amber-700</span><span class="swatch-value">#B45309</span><span class="swatch-value swatch-oklch">oklch(0.555 0.146 48.998)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#EFFAF3;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-50</span><span class="swatch-value">#EFFAF3</span><span class="swatch-value swatch-oklch">oklch(0.975 0.015 158.255)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#1F7C51;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-500</span><span class="swatch-value">#1F7C51</span><span class="swatch-value swatch-oklch">oklch(0.522 0.109 158.297)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#32A66E;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-600</span><span class="swatch-value">#32A66E</span><span class="swatch-value swatch-oklch">oklch(0.647 0.133 157.808)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#196343;"></div><div class="swatch-meta"><span class="swatch-name">--la-green-700</span><span class="swatch-value">#196343</span><span class="swatch-value swatch-oklch">oklch(0.446 0.089 160.23)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#EEFBFD;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-50</span><span class="swatch-value">#EEFBFD</span><span class="swatch-value swatch-oklch">oklch(0.979 0.014 207.878)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#0482C5;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-500</span><span class="swatch-value">#0482C5</span><span class="swatch-value swatch-oklch">oklch(0.582 0.138 242.423)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#3B82F6;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-600</span><span class="swatch-value">#3B82F6</span><span class="swatch-value swatch-oklch">oklch(0.623 0.188 259.815)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#1B6683;"></div><div class="swatch-meta"><span class="swatch-name">--la-blue-700</span><span class="swatch-value">#1B6683</span><span class="swatch-value swatch-oklch">oklch(0.479 0.084 228.87)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#F0E8FE;"></div><div class="swatch-meta"><span class="swatch-name">--la-purple-50</span><span class="swatch-value">#F0E8FE</span><span class="swatch-value swatch-oklch">oklch(0.944 0.031 302.303)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#6B3FA0;"></div><div class="swatch-meta"><span class="swatch-name">--la-purple-500</span><span class="swatch-value">#6B3FA0</span><span class="swatch-value swatch-oklch">oklch(0.469 0.152 301.701)</span></div></div>
+<div class="swatch"><div class="swatch-preview" style="background:#FFFFFF;"></div><div class="swatch-meta"><span class="swatch-name">--la-white</span><span class="swatch-value">#FFFFFF</span><span class="swatch-value swatch-oklch">oklch(1 0 0)</span></div></div>
 </div>
 <div class="docs-rule-callout">
 <strong>Actions vs Signals.</strong> <code>success</code> and <code>danger</code> get the full action grammar
@@ -432,19 +452,19 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#CC4643;"></span></td>
 <td><span class="name">--la-color-urgent</span></td>
-<td><span class="hex">#CC4643</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
+<td><span class="hex">#CC4643</span><span class="hex hex-oklch">oklch(0.581 0.171 25.273)</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
 <td class="use">The "you must act now" signal — overdue items, breach states, blocking errors. Used solid on alert icons, badges, and the urgent dot in legal-area rows.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FDF3F3;"></span></td>
 <td><span class="name">--la-color-urgent-bg</span></td>
-<td><span class="hex">#FDF3F3</span> <span class="alias-of">→ <code>--la-red-50</code></span></td>
+<td><span class="hex">#FDF3F3</span><span class="hex hex-oklch">oklch(0.972 0.011 17.342)</span> <span class="alias-of">→ <code>--la-red-50</code></span></td>
 <td class="use">Tinted surface paired with <span class="hex">--la-color-urgent-text</span> on alerts and urgent legal-area row highlights.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#A92F2C;"></span></td>
 <td><span class="name">--la-color-urgent-text</span></td>
-<td><span class="hex">#A92F2C</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
+<td><span class="hex">#A92F2C</span><span class="hex hex-oklch">oklch(0.493 0.159 26.346)</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
 <td class="use">Readable text on <span class="hex">--la-color-urgent-bg</span> — kept dark enough for AA contrast on the tinted surface.</td>
 </tr>
 </tbody>
@@ -458,19 +478,19 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#F59E0B;"></span></td>
 <td><span class="name">--la-color-proactive</span></td>
-<td><span class="hex">#F59E0B</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
+<td><span class="hex">#F59E0B</span><span class="hex hex-oklch">oklch(0.769 0.165 70.08)</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
 <td class="use">Heads-up colour — "this needs attention but isn't blocking yet". Pending reviews, upcoming deadlines, soft warnings.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFBEB;"></span></td>
 <td><span class="name">--la-color-proactive-bg</span></td>
-<td><span class="hex">#FFFBEB</span> <span class="alias-of">→ <code>--la-amber-50</code></span></td>
+<td><span class="hex">#FFFBEB</span><span class="hex hex-oklch">oklch(0.987 0.021 95.277)</span> <span class="alias-of">→ <code>--la-amber-50</code></span></td>
 <td class="use">Surface for proactive alerts and row highlights — pairs with <span class="hex">--la-color-proactive-text</span>.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#B45309;"></span></td>
 <td><span class="name">--la-color-proactive-text</span></td>
-<td><span class="hex">#B45309</span> <span class="alias-of">→ <code>--la-amber-700</code></span></td>
+<td><span class="hex">#B45309</span><span class="hex hex-oklch">oklch(0.555 0.146 48.998)</span> <span class="alias-of">→ <code>--la-amber-700</code></span></td>
 <td class="use">Readable amber-on-amber for body text inside proactive surfaces.</td>
 </tr>
 </tbody>
@@ -484,19 +504,19 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#1F7C51;"></span></td>
 <td><span class="name">--la-color-resolved</span></td>
-<td><span class="hex">#1F7C51</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
+<td><span class="hex">#1F7C51</span><span class="hex hex-oklch">oklch(0.522 0.109 158.297)</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
 <td class="use">Done, signed, sorted. Success badges, signed-document chips, resolved insight markers.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#EFFAF3;"></span></td>
 <td><span class="name">--la-color-resolved-bg</span></td>
-<td><span class="hex">#EFFAF3</span> <span class="alias-of">→ <code>--la-green-50</code></span></td>
+<td><span class="hex">#EFFAF3</span><span class="hex hex-oklch">oklch(0.975 0.015 158.255)</span> <span class="alias-of">→ <code>--la-green-50</code></span></td>
 <td class="use">Surface for success messages and resolved-state rows.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#196343;"></span></td>
 <td><span class="name">--la-color-resolved-text</span></td>
-<td><span class="hex">#196343</span> <span class="alias-of">→ <code>--la-green-700</code></span></td>
+<td><span class="hex">#196343</span><span class="hex hex-oklch">oklch(0.446 0.089 160.23)</span> <span class="alias-of">→ <code>--la-green-700</code></span></td>
 <td class="use">Readable green text on <span class="hex">--la-color-resolved-bg</span>.</td>
 </tr>
 </tbody>
@@ -510,19 +530,19 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#0482C5;"></span></td>
 <td><span class="name">--la-color-processing</span></td>
-<td><span class="hex">#0482C5</span> <span class="alias-of">→ <code>--la-blue-500</code></span></td>
+<td><span class="hex">#0482C5</span><span class="hex hex-oklch">oklch(0.582 0.138 242.423)</span> <span class="alias-of">→ <code>--la-blue-500</code></span></td>
 <td class="use">"We're working on it" — automated jobs, document analysis in flight, processing widgets.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#EEFBFD;"></span></td>
 <td><span class="name">--la-color-processing-bg</span></td>
-<td><span class="hex">#EEFBFD</span> <span class="alias-of">→ <code>--la-blue-50</code></span></td>
+<td><span class="hex">#EEFBFD</span><span class="hex hex-oklch">oklch(0.979 0.014 207.878)</span> <span class="alias-of">→ <code>--la-blue-50</code></span></td>
 <td class="use">Surface for processing widgets and live-status rows.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#1B6683;"></span></td>
 <td><span class="name">--la-color-processing-text</span></td>
-<td><span class="hex">#1B6683</span> <span class="alias-of">→ <code>--la-blue-700</code></span></td>
+<td><span class="hex">#1B6683</span><span class="hex hex-oklch">oklch(0.479 0.084 228.87)</span> <span class="alias-of">→ <code>--la-blue-700</code></span></td>
 <td class="use">Readable text on <span class="hex">--la-color-processing-bg</span>.</td>
 </tr>
 </tbody>
@@ -536,25 +556,25 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#6B3FA0;"></span></td>
 <td><span class="name">--la-color-doc</span></td>
-<td><span class="hex">#6B3FA0</span> <span class="alias-of">→ <code>--la-purple-500</code></span></td>
+<td><span class="hex">#6B3FA0</span><span class="hex hex-oklch">oklch(0.469 0.152 301.701)</span> <span class="alias-of">→ <code>--la-purple-500</code></span></td>
 <td class="use">Document classification — distinguishes document chips from generic status badges (e.g. "Contract", "Filed").</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#F0E8FE;"></span></td>
 <td><span class="name">--la-color-doc-bg</span></td>
-<td><span class="hex">#F0E8FE</span> <span class="alias-of">→ <code>--la-purple-50</code></span></td>
+<td><span class="hex">#F0E8FE</span><span class="hex hex-oklch">oklch(0.944 0.031 302.303)</span> <span class="alias-of">→ <code>--la-purple-50</code></span></td>
 <td class="use">Tinted surface for document chips and category labels.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#F1F5F9;"></span></td>
 <td><span class="name">--la-color-locked-bg</span></td>
-<td><span class="hex">#F1F5F9</span></td>
+<td><span class="hex">#F1F5F9</span><span class="hex hex-oklch">oklch(0.968 0.007 247.896)</span></td>
 <td class="use">Soft inset background for gated content panels (la-unlock-panel).</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#6B7280;"></span></td>
 <td><span class="name">--la-color-locked-text</span></td>
-<td><span class="hex">#6B7280</span> <span class="alias-of">→ <code>--la-color-text-muted</code></span></td>
+<td><span class="hex">#6B7280</span><span class="hex hex-oklch">oklch(0.551 0.023 264.364)</span> <span class="alias-of">→ <code>--la-color-text-muted</code></span></td>
 <td class="use">Muted label text on locked panels — soft enough to read as "not yet active" without disappearing.</td>
 </tr>
 </tbody>
@@ -568,19 +588,19 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#18181B;"></span></td>
 <td><span class="name">--la-color-primary</span></td>
-<td><span class="hex">#18181B</span></td>
+<td><span class="hex">#18181B</span><span class="hex hex-oklch">oklch(0.21 0.006 285.885)</span></td>
 <td class="use">Primary action — only on interactive elements (buttons, active states, links). Never decorative. Marks "the next obvious step" on every screen.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#27272A;"></span></td>
 <td><span class="name">--la-color-primary-hover</span></td>
-<td><span class="hex">#27272A</span></td>
+<td><span class="hex">#27272A</span><span class="hex hex-oklch">oklch(0.274 0.005 286.033)</span></td>
 <td class="use">Hover state of primary buttons and active rails.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-primary-fg</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-white</code></span></td>
 <td class="use">Text and icons sitting on top of solid <span class="hex">--la-color-primary</span> surfaces.</td>
 </tr>
 </tbody>
@@ -594,25 +614,25 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-secondary-bg</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-white</code></span></td>
 <td class="use">Resting fill for secondary buttons and outlined controls.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#1E262B;"></span></td>
 <td><span class="name">--la-color-secondary-text</span></td>
-<td><span class="hex">#1E262B</span> <span class="alias-of">→ <code>--la-color-text</code></span></td>
+<td><span class="hex">#1E262B</span><span class="hex hex-oklch">oklch(0.263 0.015 235.56)</span> <span class="alias-of">→ <code>--la-color-text</code></span></td>
 <td class="use">Label colour on secondary buttons — full strength dark text on white.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#E2E3E4;"></span></td>
 <td><span class="name">--la-color-secondary-border</span></td>
-<td><span class="hex">#E2E3E4</span></td>
+<td><span class="hex">#E2E3E4</span><span class="hex hex-oklch">oklch(0.915 0.002 247.841)</span></td>
 <td class="use">1px outline of secondary buttons — slightly heavier than the universal border for clear button affordance.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#F3F4F5;"></span></td>
 <td><span class="name">--la-color-secondary-hover</span></td>
-<td><span class="hex">#F3F4F5</span></td>
+<td><span class="hex">#F3F4F5</span><span class="hex hex-oklch">oklch(0.967 0.002 247.839)</span></td>
 <td class="use">Hover fill for secondary buttons and ghost interactions.</td>
 </tr>
 </tbody>
@@ -626,25 +646,25 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#1F7C51;"></span></td>
 <td><span class="name">--la-color-success</span></td>
-<td><span class="hex">#1F7C51</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
+<td><span class="hex">#1F7C51</span><span class="hex hex-oklch">oklch(0.522 0.109 158.297)</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
 <td class="use">Solid success buttons (Sign, Approve) and success accent on icons.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#196343;"></span></td>
 <td><span class="name">--la-color-success-hover</span></td>
-<td><span class="hex">#196343</span> <span class="alias-of">→ <code>--la-green-700</code></span></td>
+<td><span class="hex">#196343</span><span class="hex hex-oklch">oklch(0.446 0.089 160.23)</span> <span class="alias-of">→ <code>--la-green-700</code></span></td>
 <td class="use">Hover state for solid success buttons.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-success-fg</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-white</code></span></td>
 <td class="use">Text on solid success surfaces.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#1F7C51;"></span></td>
 <td><span class="name">--la-color-success-text</span></td>
-<td><span class="hex">#1F7C51</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
+<td><span class="hex">#1F7C51</span><span class="hex hex-oklch">oklch(0.522 0.109 158.297)</span> <span class="alias-of">→ <code>--la-green-500</code></span></td>
 <td class="use">Readable text on tinted success surfaces (alerts, success-row highlights).</td>
 </tr>
 </tbody>
@@ -658,25 +678,25 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#CC4643;"></span></td>
 <td><span class="name">--la-color-danger</span></td>
-<td><span class="hex">#CC4643</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
+<td><span class="hex">#CC4643</span><span class="hex hex-oklch">oklch(0.581 0.171 25.273)</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
 <td class="use">Solid destructive buttons (Delete, Revoke, Remove). The same hue as <span class="hex">--la-color-urgent</span> — irreversible action and urgent state share weight.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#A92F2C;"></span></td>
 <td><span class="name">--la-color-danger-hover</span></td>
-<td><span class="hex">#A92F2C</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
+<td><span class="hex">#A92F2C</span><span class="hex hex-oklch">oklch(0.493 0.159 26.346)</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
 <td class="use">Hover state for solid danger buttons.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-danger-fg</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-white</code></span></td>
 <td class="use">Text on solid danger surfaces.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#A92F2C;"></span></td>
 <td><span class="name">--la-color-danger-text</span></td>
-<td><span class="hex">#A92F2C</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
+<td><span class="hex">#A92F2C</span><span class="hex hex-oklch">oklch(0.493 0.159 26.346)</span> <span class="alias-of">→ <code>--la-red-700</code></span></td>
 <td class="use">Readable text on tinted danger surfaces (alerts, ghost-danger button hover).</td>
 </tr>
 </tbody>
@@ -690,19 +710,19 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#374151;"></span></td>
 <td><span class="name">--la-color-neutral</span></td>
-<td><span class="hex">#374151</span></td>
+<td><span class="hex">#374151</span><span class="hex hex-oklch">oklch(0.373 0.031 259.733)</span></td>
 <td class="use">Neutral CTA — softer than primary's near-black. Used where primary feels too heavy or where two solid CTAs sit side by side.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#2E3644;"></span></td>
 <td><span class="name">--la-color-neutral-hover</span></td>
-<td><span class="hex">#2E3644</span></td>
+<td><span class="hex">#2E3644</span><span class="hex hex-oklch">oklch(0.331 0.027 261.562)</span></td>
 <td class="use">Hover state for neutral buttons.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-neutral-fg</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-white</code></span></td>
 <td class="use">Text on solid neutral surfaces.</td>
 </tr>
 </tbody>
@@ -716,25 +736,25 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#F59E0B;"></span></td>
 <td><span class="name">--la-color-warning</span></td>
-<td><span class="hex">#F59E0B</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
+<td><span class="hex">#F59E0B</span><span class="hex hex-oklch">oklch(0.769 0.165 70.08)</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
 <td class="use">Warning accent — non-blocking attention on icons and badges.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#B45309;"></span></td>
 <td><span class="name">--la-color-warning-text</span></td>
-<td><span class="hex">#B45309</span> <span class="alias-of">→ <code>--la-amber-700</code></span></td>
+<td><span class="hex">#B45309</span><span class="hex hex-oklch">oklch(0.555 0.146 48.998)</span> <span class="alias-of">→ <code>--la-amber-700</code></span></td>
 <td class="use">Readable warning text on tinted-warning surfaces.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#0482C5;"></span></td>
 <td><span class="name">--la-color-info</span></td>
-<td><span class="hex">#0482C5</span> <span class="alias-of">→ <code>--la-blue-500</code></span></td>
+<td><span class="hex">#0482C5</span><span class="hex hex-oklch">oklch(0.582 0.138 242.423)</span> <span class="alias-of">→ <code>--la-blue-500</code></span></td>
 <td class="use">Info accent — neutral informational signal (icons, badges, processing).</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#1B6683;"></span></td>
 <td><span class="name">--la-color-info-text</span></td>
-<td><span class="hex">#1B6683</span> <span class="alias-of">→ <code>--la-blue-700</code></span></td>
+<td><span class="hex">#1B6683</span><span class="hex hex-oklch">oklch(0.479 0.084 228.87)</span> <span class="alias-of">→ <code>--la-blue-700</code></span></td>
 <td class="use">Readable info text on tinted-info surfaces.</td>
 </tr>
 </tbody>
@@ -748,43 +768,43 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-bg</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-white</code></span></td>
 <td class="use">Plain white — the default surface for cards, widgets, modals.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FAFAFA;"></span></td>
 <td><span class="name">--la-color-bg-subtle</span></td>
-<td><span class="hex">#FAFAFA</span></td>
+<td><span class="hex">#FAFAFA</span><span class="hex hex-oklch">oklch(0.985 0 0)</span></td>
 <td class="use">Page chrome — page header, tab bar, sidebar background. Subtle depth separation from white cards without using a shadow.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#F5F5F5;"></span></td>
 <td><span class="name">--la-color-bg-muted</span></td>
-<td><span class="hex">#F5F5F5</span></td>
+<td><span class="hex">#F5F5F5</span><span class="hex hex-oklch">oklch(0.97 0 0)</span></td>
 <td class="use">Hover fill for interactive rows — sidebar nav, document items, list rows.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-bg-page</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-color-bg</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-color-bg</code></span></td>
 <td class="use">Semantic name for the page-level body background. Same value as <span class="hex">--la-color-bg</span>.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FCFCFC;"></span></td>
 <td><span class="name">--la-color-bg-surface</span></td>
-<td><span class="hex">#FCFCFC</span></td>
+<td><span class="hex">#FCFCFC</span><span class="hex hex-oklch">oklch(0.991 0 0)</span></td>
 <td class="use">Slightly off-white for aside panels and secondary content shells — a hair separation from pure white.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#EBEBEB;"></span></td>
 <td><span class="name">--la-color-bg-active</span></td>
-<td><span class="hex">#EBEBEB</span></td>
+<td><span class="hex">#EBEBEB</span><span class="hex hex-oklch">oklch(0.94 0 0)</span></td>
 <td class="use">Active selection background — the selected nav item, the pressed state of a row.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#171717;"></span></td>
 <td><span class="name">--la-color-bg-invert</span></td>
-<td><span class="hex">#171717</span></td>
+<td><span class="hex">#171717</span><span class="hex hex-oklch">oklch(0.205 0 0)</span></td>
 <td class="use">Dark surface for inverted contexts — dark toasts, tooltips, code blocks.</td>
 </tr>
 </tbody>
@@ -798,25 +818,25 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#EFFAF3;"></span></td>
 <td><span class="name">--la-color-surface-success</span></td>
-<td><span class="hex">#EFFAF3</span> <span class="alias-of">→ <code>--la-green-50</code></span></td>
+<td><span class="hex">#EFFAF3</span><span class="hex hex-oklch">oklch(0.975 0.015 158.255)</span> <span class="alias-of">→ <code>--la-green-50</code></span></td>
 <td class="use">Success alert background, success-row highlights, ghost-success button hover.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFBEB;"></span></td>
 <td><span class="name">--la-color-surface-warning</span></td>
-<td><span class="hex">#FFFBEB</span> <span class="alias-of">→ <code>--la-amber-50</code></span></td>
+<td><span class="hex">#FFFBEB</span><span class="hex hex-oklch">oklch(0.987 0.021 95.277)</span> <span class="alias-of">→ <code>--la-amber-50</code></span></td>
 <td class="use">Warning alert background, notification bars.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FDF3F3;"></span></td>
 <td><span class="name">--la-color-surface-danger</span></td>
-<td><span class="hex">#FDF3F3</span> <span class="alias-of">→ <code>--la-red-50</code></span></td>
+<td><span class="hex">#FDF3F3</span><span class="hex hex-oklch">oklch(0.972 0.011 17.342)</span> <span class="alias-of">→ <code>--la-red-50</code></span></td>
 <td class="use">Danger alert background, ghost-danger button hover.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#EEFBFD;"></span></td>
 <td><span class="name">--la-color-surface-info</span></td>
-<td><span class="hex">#EEFBFD</span> <span class="alias-of">→ <code>--la-blue-50</code></span></td>
+<td><span class="hex">#EEFBFD</span><span class="hex hex-oklch">oklch(0.979 0.014 207.878)</span> <span class="alias-of">→ <code>--la-blue-50</code></span></td>
 <td class="use">Info alert background, processing-state surfaces.</td>
 </tr>
 <tr>
@@ -836,37 +856,37 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#1E262B;"></span></td>
 <td><span class="name">--la-color-text</span></td>
-<td><span class="hex">#1E262B</span></td>
+<td><span class="hex">#1E262B</span><span class="hex hex-oklch">oklch(0.263 0.015 235.56)</span></td>
 <td class="use">Primary readable text — body copy, headings, table values.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#4B5563;"></span></td>
 <td><span class="name">--la-color-text-secondary</span></td>
-<td><span class="hex">#4B5563</span></td>
+<td><span class="hex">#4B5563</span><span class="hex hex-oklch">oklch(0.446 0.026 256.802)</span></td>
 <td class="use">Supporting copy and secondary labels — paragraph text under a heading, form helper text.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#6B7280;"></span></td>
 <td><span class="name">--la-color-text-muted</span></td>
-<td><span class="hex">#6B7280</span></td>
+<td><span class="hex">#6B7280</span><span class="hex hex-oklch">oklch(0.551 0.023 264.364)</span></td>
 <td class="use">Captions, meta, dates — not the main message but still legible.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#9CA3AF;"></span></td>
 <td><span class="name">--la-color-text-faint</span></td>
-<td><span class="hex">#9CA3AF</span></td>
+<td><span class="hex">#9CA3AF</span><span class="hex hex-oklch">oklch(0.714 0.019 261.325)</span></td>
 <td class="use">Hint copy and placeholder text — recedes into the background.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#D1D5DB;"></span></td>
 <td><span class="name">--la-color-text-disabled</span></td>
-<td><span class="hex">#D1D5DB</span></td>
+<td><span class="hex">#D1D5DB</span><span class="hex hex-oklch">oklch(0.872 0.009 258.338)</span></td>
 <td class="use">Disabled label text — paired with <code>opacity: 0.4</code> on interactive elements.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#FFFFFF;"></span></td>
 <td><span class="name">--la-color-text-invert</span></td>
-<td><span class="hex">#FFFFFF</span> <span class="alias-of">→ <code>--la-white</code></span></td>
+<td><span class="hex">#FFFFFF</span><span class="hex hex-oklch">oklch(1 0 0)</span> <span class="alias-of">→ <code>--la-white</code></span></td>
 <td class="use">Text on dark/inverted surfaces — toasts, tooltips, dark mode chrome.</td>
 </tr>
 </tbody>
@@ -880,49 +900,49 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr>
 <td><span class="token-chip" style="background:#DADDEC;"></span></td>
 <td><span class="name">--la-color-border</span></td>
-<td><span class="hex">#DADDEC</span></td>
+<td><span class="hex">#DADDEC</span><span class="hex hex-oklch">oklch(0.9 0.021 276.933)</span></td>
 <td class="use">Default interactive border — buttons, inputs, cards, toasts.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#ECEEF5;"></span></td>
 <td><span class="name">--la-color-border-light</span></td>
-<td><span class="hex">#ECEEF5</span></td>
+<td><span class="hex">#ECEEF5</span><span class="hex hex-oklch">oklch(0.95 0.01 273.354)</span></td>
 <td class="use">Structural dividers — table rows, panel edges, section lines. Quieter than the interactive border.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#3B82F6;"></span></td>
 <td><span class="name">--la-color-border-focus</span></td>
-<td><span class="hex">#3B82F6</span> <span class="alias-of">→ <code>--la-blue-600</code></span></td>
+<td><span class="hex">#3B82F6</span><span class="hex hex-oklch">oklch(0.623 0.188 259.815)</span> <span class="alias-of">→ <code>--la-blue-600</code></span></td>
 <td class="use">Focus ring on form controls — paired with <span class="hex">--la-input-shadow-focus</span>.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#18181B;"></span></td>
 <td><span class="name">--la-color-border-active</span></td>
-<td><span class="hex">#18181B</span></td>
+<td><span class="hex">#18181B</span><span class="hex hex-oklch">oklch(0.21 0.006 285.885)</span></td>
 <td class="use">Active/selected outline — sidebar nav rail, active tab, selected card.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#32A66E;"></span></td>
 <td><span class="name">--la-color-border-success</span></td>
-<td><span class="hex">#32A66E</span> <span class="alias-of">→ <code>--la-green-600</code></span></td>
+<td><span class="hex">#32A66E</span><span class="hex hex-oklch">oklch(0.647 0.133 157.808)</span> <span class="alias-of">→ <code>--la-green-600</code></span></td>
 <td class="use">Success alert border, ghost-success button hover border.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#F59E0B;"></span></td>
 <td><span class="name">--la-color-border-warning</span></td>
-<td><span class="hex">#F59E0B</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
+<td><span class="hex">#F59E0B</span><span class="hex hex-oklch">oklch(0.769 0.165 70.08)</span> <span class="alias-of">→ <code>--la-amber-500</code></span></td>
 <td class="use">Warning alert border.</td>
 </tr>
 <tr>
 <td><span class="token-chip" style="background:#CC4643;"></span></td>
 <td><span class="name">--la-color-border-danger</span></td>
-<td><span class="hex">#CC4643</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
+<td><span class="hex">#CC4643</span><span class="hex hex-oklch">oklch(0.581 0.171 25.273)</span> <span class="alias-of">→ <code>--la-red-500</code></span></td>
 <td class="use">Danger alert border, ghost-danger button hover border.</td>
 </tr>
 </tbody>
 </table>
-<a class="more-link" href="../../src/styles/tokens.ts">Source: tokens.ts →</a>
-<div class="md-rationale" data-path="../../design-language/colour.md"></div>
+Source: tokens.ts
+<a class="more-link" href="../docs/colour/">Full rationale: Colour →</a>
 </section>
 <!-- SPACING ─────────────────────────────────────────────── -->
 <section class="docs-section" id="spacing">
@@ -998,7 +1018,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <span>--la-radius-circle<br/>50%</span>
 </div>
 </div>
-<a class="more-link" href="../../decisions/06-panel-concentric-radius.md">Concentric radius decision →</a>
+Concentric radius decision
 </section>
 <!-- SHADOWS ─────────────────────────────────────────────── -->
 <section class="docs-section" id="shadows">
@@ -1036,10 +1056,10 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <p>
               Two categories of border tokens with different purposes — structural dividers
               and emphasis. Source of truth is
-              <a href="../../src/styles/tokens.ts"><code>tokens.ts</code></a>; full rationale
+              <code>tokens.ts</code>; full rationale
               below from <code>design-language/borders.md</code>.
             </p>
-<div class="md-rationale" data-path="../../design-language/borders.md"></div>
+<a class="more-link" href="../docs/borders/">Full rationale: Borders →</a>
 </section>
 <!-- TYPOGRAPHY ──────────────────────────────────────────── -->
 <section class="docs-section" id="typography">
@@ -1097,7 +1117,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <!-- MOTION ──────────────────────────────────────────────── -->
 <section class="docs-section" id="motion">
 <h2>Motion</h2>
-<p>Source of truth is <a href="../../motion.css"><code>motion.css</code></a>.
+<p>Source of truth is <a href="../motion.css"><code>motion.css</code></a>.
             Utility classes + tokens handle every animation — never handwritten keyframes,
             never <code>ease-in</code>.</p>
 <ul>
@@ -1154,8 +1174,8 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
 <tr><td>--scale-hover</td><td>1.02</td><td>Subtle lift on hover.</td></tr>
 </tbody>
 </table>
-<a class="more-link" href="../../motion.css">Open motion.css →</a>
-<div class="md-rationale" data-path="../../design-language/motion.md"></div>
+<a class="more-link" href="../motion.css">Open motion.css →</a>
+<a class="more-link" href="../docs/motion/">Full rationale: Motion →</a>
 </section>
 <!-- ICONS ───────────────────────────────────────────────── -->
 <section class="docs-section" id="icons">
@@ -1176,7 +1196,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
               <code>&lt;head&gt;</code> — the <code>@font-face</code> registers globally,
               while <code>iconStyles</code> covers the component's shadow tree.
             </div>
-<div class="md-rationale" data-path="../../design-language/iconography.md"></div>
+<a class="more-link" href="../docs/iconography/">Full rationale: Iconography →</a>
 </section>
 <!-- INTERACTION ─────────────────────────────────────────── -->
 <section class="docs-section" id="interaction">
@@ -1185,7 +1205,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
               How the system behaves under pointer and keyboard — hover, focus, active,
               disabled, cursor rules. Pulled from <code>design-language/interaction.md</code>.
             </p>
-<div class="md-rationale" data-path="../../design-language/interaction.md"></div>
+<a class="more-link" href="../docs/interaction/">Full rationale: Interaction →</a>
 </section>
 <!-- RESPONSIVE ──────────────────────────────────────────── -->
 <section class="docs-section" id="responsive">
@@ -1208,7 +1228,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
               containing block for absolutely positioned children. Use <code>position: fixed</code>
               for overlays that need to escape, or hoist them out of the container.
             </div>
-<div class="md-rationale" data-path="../../design-language/responsive-design.md"></div>
+<a class="more-link" href="../docs/responsive-design/">Full rationale: Responsive design →</a>
 </section>
 <!-- LAYOUT ──────────────────────────────────────────────── -->
 <section class="docs-section" id="layout">
@@ -1217,7 +1237,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
               What this library owns vs what the consuming app owns. Composition rules.
               Pulled from <code>design-language/layout.md</code>.
             </p>
-<div class="md-rationale" data-path="../../design-language/layout.md"></div>
+<a class="more-link" href="../docs/layout/">Full rationale: Layout →</a>
 </section>
 <!-- PAGE ARCHITECTURE ───────────────────────────────────── -->
 <section class="docs-section" id="page-architecture">
@@ -1226,7 +1246,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
               How pages are structured in apps built with this system — shell, header,
               main, aside. Pulled from <code>design-language/page-architecture.md</code>.
             </p>
-<div class="md-rationale" data-path="../../design-language/page-architecture.md"></div>
+<a class="more-link" href="../docs/page-architecture/">Full rationale: Page architecture →</a>
 </section>
 <!-- TROUBLESHOOTING ─────────────────────────────────────── -->
 <section class="docs-section" id="troubleshooting">
@@ -1242,7 +1262,7 @@ don't add the missing <code>-hover</code>/<code>-fg</code> tokens silently.
             update to the shorter path when you next touch them.</p>
 <h3>Hardcoded px or hex sneaking back in</h3>
 <p>Both <code>/audit</code> Gate 8 and <code>CLAUDE.md</code> prohibit this.
-            If the value you need isn't in <a href="../../src/styles/tokens.ts"><code>tokens.ts</code></a>,
+            If the value you need isn't in <code>tokens.ts</code>,
             add a token — don't inline the pixel. Intrinsic component dimensions (a 14px
             spinner, a 32px icon tile) live inside the primitive; everything else references
             a token.</p>

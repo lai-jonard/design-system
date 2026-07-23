@@ -189,6 +189,14 @@
     .code-block .str { color: #15803d; }
     .code-block .cm  { color: var(--doc-text-faint); font-style: italic; }
 
+    .more-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--doc-accent);
+      font-weight: 500;
+    }
+
     .source-ref {
       display: flex;
       flex-direction: column;
@@ -228,11 +236,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/" class="active">Foundations</a>
         <a href="../components/">Components</a>
         <a href="../pages/">Pages</a>
@@ -241,14 +254,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
 <h3 class="docs-nav-title">Typography</h3>
 <div class="docs-nav-group">
@@ -266,18 +281,21 @@
 </div>
 <div class="docs-nav-group">
 <span class="docs-nav-title">Elsewhere</span>
-<a class="docs-nav-item" href="../foundations.html">← All foundations</a>
+<a class="docs-nav-item" href="../foundations/">← All foundations</a>
 <a class="docs-nav-item" href="../index.html">Design system home</a>
 </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
         
 <section class="sub-hero">
 <div class="sub-hero-crumb">
-<a href="../foundations.html">Foundations</a> · Typography
+<a href="../foundations/">Foundations</a> · Typography
           </div>
 <h1>Typography</h1>
 <p>
@@ -292,7 +310,7 @@
 <section class="docs-section" id="principles">
 <h2>Principles</h2>
 <p>
-              From <a href="../../../CLAUDE.md"><code>CLAUDE.md</code></a>'s design-language
+              From <code>CLAUDE.md</code>'s design-language
               rules and the way the system actually reads in product. Four non-negotiables.
             </p>
 <div class="principle-grid">
@@ -572,7 +590,7 @@
 <!-- BODY ───────────────────────────────────────────────── -->
 <section class="docs-section" id="body">
 <h2>Body copy</h2>
-<p>Rules from <a href="../../../CLAUDE.md#copy-rules"><code>CLAUDE.md</code></a> — the ones that matter most for type.</p>
+<p>Rules from <code>CLAUDE.md</code> — the ones that matter most for type.</p>
 <ul>
 <li><strong>One to two sentences max.</strong> If you need three, the surrounding
                 UI is missing an affordance or a link out.</li>
@@ -673,24 +691,24 @@
 <h2>Source references</h2>
 <p>The authoritative definitions — links open in the repo.</p>
 <div class="source-ref">
-<a class="source-ref-item" href="../../../src/styles/tokens.ts">
+<span class="source-ref-item">
 <code>src/styles/tokens.ts</code>
 <span class="source-ref-desc">Font size / weight / line-height tokens (Typography block).</span>
-</a>
-<a class="source-ref-item" href="../../../CLAUDE.md">
+</span>
+<span class="source-ref-item">
 <code>CLAUDE.md § Design language</code>
 <span class="source-ref-desc">Typography rule: Inter, weight 600, never 700, never all-caps.</span>
-</a>
-<a class="source-ref-item" href="../../../CLAUDE.md">
+</span>
+<span class="source-ref-item">
 <code>CLAUDE.md § Copy rules</code>
 <span class="source-ref-desc">Body copy, CTAs, British English, active voice.</span>
-</a>
-<a class="source-ref-item" href="../../../design-language/typography.md">
+</span>
+<a class="source-ref-item" href="../docs/typography/">
 <code>design-language/typography.md</code>
-<span class="source-ref-desc">Long-form design-language notes (embedded below).</span>
+<span class="source-ref-desc">Long-form design-language notes — see the full guide page.</span>
 </a>
 </div>
-<div class="md-rationale" data-path="../../../design-language/typography.md"></div>
+<a class="more-link" href="../docs/typography/">Full rationale: Typography →</a>
 </section>
 </div>
 

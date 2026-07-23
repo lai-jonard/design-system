@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Colour — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item active" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Colour
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/colour.md
+</span>
+<article class="md-body">
+  <h1>Colour</h1>
+<h2>Token system</h2>
+<p>All colours are defined as CSS custom properties in <code>src/styles/tokens.ts</code> — the source of truth. Two <code>:root</code> mirrors for light-DOM pages (<code>dev/la-tokens-root.css</code>, <code>docs-src/tokens.css</code>) are <strong>generated</strong> from it on every build; never edit them by hand. Never hardcode a colour in a component or screen — always reference a token.</p>
+<p>Two layers: <strong>core primitives</strong> (<code>--la-red-500</code>, <code>--la-indigo-50</code>, …) are the only place a colour value lives; <strong>semantic tokens</strong> (everything below) are <code>var()</code> aliases onto them. Always reach for the semantic name in components.</p>
+<h3>Colour model: OKLCH</h3>
+<p>Colour tokens are authored in <strong><code>oklch()</code></strong> (perceptually uniform: equal L = equal brightness, stable hue across a ramp). Each token carries its original hex as an inline comment for Figma cross-reference — <code>oklch(…); /* #HEX · … */</code>. New colour values should be written in oklch. Effect alphas (shadow rgba, scrim, focus ring) stay as <code>rgba()</code> for now. See decision 84.</p>
+<p><strong>Contrast:</strong> check with <strong>APCA</strong> (Lc ≥ 75 body text, ≥ 60 non-body). Fix a failing pair by adjusting <strong>lightness (L) only</strong> — chroma has negligible effect on contrast.</p>
+<hr>
+<h2>Surfaces</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-bg</code></td>
+<td><code>#FFFFFF</code><br><span class="tok-oklch">oklch(1 0 0)</span></td>
+<td>Default card, widget, and modal background</td>
+</tr>
+<tr>
+<td><code>--la-color-bg-subtle</code></td>
+<td><code>#FAFAFA</code><br><span class="tok-oklch">oklch(0.985 0 0)</span></td>
+<td>Page chrome — page header, tab bar, sidebar bg</td>
+</tr>
+<tr>
+<td><code>--la-color-bg-muted</code></td>
+<td><code>#F5F5F5</code><br><span class="tok-oklch">oklch(0.97 0 0)</span></td>
+<td>Hover background for interactive rows</td>
+</tr>
+<tr>
+<td><code>--la-color-bg-surface</code></td>
+<td><code>#FCFCFC</code><br><span class="tok-oklch">oklch(0.991 0 0)</span></td>
+<td>Aside panels, secondary content shells</td>
+</tr>
+<tr>
+<td><code>--la-color-bg-active</code></td>
+<td><code>#F0F0F0</code><br><span class="tok-oklch">oklch(0.955 0 0)</span></td>
+<td>Active/selected background — nav item, pressed row</td>
+</tr>
+<tr>
+<td><code>--la-color-bg-invert</code></td>
+<td><code>#171717</code><br><span class="tok-oklch">oklch(0.205 0 0)</span></td>
+<td>Dark surfaces — dark toasts, tooltips, code blocks</td>
+</tr>
+<tr>
+<td><code>--la-color-locked-bg</code></td>
+<td><code>#F1F5F9</code><br><span class="tok-oklch">oklch(0.968 0.007 247.896)</span></td>
+<td>Soft inset background for gated content panels</td>
+</tr>
+</tbody>
+</table>
+<p><code>--la-color-bg-page</code> aliases <code>--la-color-bg</code> — the semantic name for page-level body background.</p>
+<p><strong>Why <code>--la-color-bg-subtle</code> for the page header and tab bar:</strong> creates a subtle depth separation from card content without using a shadow or border. The header feels part of the chrome, not part of the content.</p>
+<hr>
+<h2>Content (text)</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-text</code></td>
+<td><code>#1E262B</code><br><span class="tok-oklch">oklch(0.263 0.015 235.56)</span></td>
+<td>Primary readable text — body copy, headings, table values</td>
+</tr>
+<tr>
+<td><code>--la-color-text-secondary</code></td>
+<td><code>#4B5563</code><br><span class="tok-oklch">oklch(0.446 0.026 256.802)</span></td>
+<td>Supporting copy and secondary labels</td>
+</tr>
+<tr>
+<td><code>--la-color-text-muted</code></td>
+<td><code>#6B7280</code><br><span class="tok-oklch">oklch(0.551 0.023 264.364)</span></td>
+<td>Captions, meta, dates</td>
+</tr>
+<tr>
+<td><code>--la-color-text-faint</code></td>
+<td><code>#9CA3AF</code><br><span class="tok-oklch">oklch(0.714 0.019 261.325)</span></td>
+<td>Hint copy and placeholder text</td>
+</tr>
+<tr>
+<td><code>--la-color-text-disabled</code></td>
+<td><code>#D1D5DB</code><br><span class="tok-oklch">oklch(0.872 0.009 258.338)</span></td>
+<td>Disabled label text</td>
+</tr>
+<tr>
+<td><code>--la-color-text-invert</code></td>
+<td><code>#FFFFFF</code><br><span class="tok-oklch">oklch(1 0 0)</span></td>
+<td>Text on dark/inverted surfaces</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Action colours</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-primary</code></td>
+<td><code>#18181B</code><br><span class="tok-oklch">oklch(0.21 0.006 285.885)</span></td>
+<td>Primary action — buttons, active states. Interactive elements only, never decorative</td>
+</tr>
+<tr>
+<td><code>--la-color-primary-hover</code></td>
+<td><code>#27272A</code><br><span class="tok-oklch">oklch(0.274 0.005 286.033)</span></td>
+<td>Primary hover state</td>
+</tr>
+<tr>
+<td><code>--la-color-accent</code></td>
+<td><code>#405CD0</code><br><span class="tok-oklch">oklch(0.521 0.182 268.945)</span></td>
+<td>Brand accent blue — links, attention colour, accent interactive elements</td>
+</tr>
+<tr>
+<td><code>--la-color-accent-hover</code></td>
+<td><code>#374ABF</code><br><span class="tok-oklch">oklch(0.469 0.183 270.49)</span></td>
+<td>Accent hover state</td>
+</tr>
+<tr>
+<td><code>--la-color-neutral</code></td>
+<td><code>#374151</code><br><span class="tok-oklch">oklch(0.373 0.031 259.733)</span></td>
+<td>Neutral / dark CTA — where primary feels too heavy</td>
+</tr>
+<tr>
+<td><code>--la-color-neutral-hover</code></td>
+<td><code>#2E3644</code><br><span class="tok-oklch">oklch(0.331 0.027 261.562)</span></td>
+<td>Neutral hover</td>
+</tr>
+<tr>
+<td><code>--la-color-neutral-fg</code></td>
+<td><code>#FFFFFF</code><br><span class="tok-oklch">oklch(1 0 0)</span></td>
+<td>Text on neutral buttons</td>
+</tr>
+<tr>
+<td><code>--la-color-success</code></td>
+<td><code>#1F7C51</code><br><span class="tok-oklch">oklch(0.522 0.109 158.297)</span></td>
+<td>Solid success buttons (Sign, Approve), success text and icons</td>
+</tr>
+<tr>
+<td><code>--la-color-success-hover</code></td>
+<td><code>#196343</code><br><span class="tok-oklch">oklch(0.446 0.089 160.23)</span></td>
+<td>Success hover</td>
+</tr>
+<tr>
+<td><code>--la-color-danger</code></td>
+<td><code>#CC4643</code><br><span class="tok-oklch">oklch(0.581 0.171 25.273)</span></td>
+<td>Solid destructive buttons (Delete, Revoke)</td>
+</tr>
+<tr>
+<td><code>--la-color-danger-hover</code></td>
+<td><code>#A92F2C</code><br><span class="tok-oklch">oklch(0.493 0.159 26.346)</span></td>
+<td>Danger hover</td>
+</tr>
+<tr>
+<td><code>--la-color-warning</code></td>
+<td><code>#F59E0B</code><br><span class="tok-oklch">oklch(0.769 0.165 70.08)</span></td>
+<td>Warning signal — icons and badges. Signal, not action: no hover/fg by design</td>
+</tr>
+<tr>
+<td><code>--la-color-warning-text</code></td>
+<td><code>#B45309</code><br><span class="tok-oklch">oklch(0.555 0.146 48.998)</span></td>
+<td>Warning readable text on tinted surfaces</td>
+</tr>
+<tr>
+<td><code>--la-color-info</code></td>
+<td><code>#0482C5</code><br><span class="tok-oklch">oklch(0.582 0.138 242.423)</span></td>
+<td>Info signal — icons and badges. Signal, not action</td>
+</tr>
+<tr>
+<td><code>--la-color-info-text</code></td>
+<td><code>#1B6683</code><br><span class="tok-oklch">oklch(0.479 0.084 228.87)</span></td>
+<td>Info readable text on tinted surfaces</td>
+</tr>
+</tbody>
+</table>
+<p><code>success</code> and <code>danger</code> also carry <code>-fg</code> (text on solid fills) and <code>-text</code> (readable text on tinted surfaces) — the full action grammar. <code>warning</code> and <code>info</code> deliberately don't: they live on alerts and badges, not buttons.</p>
+<h3>Primary vs neutral vs accent</h3>
+<p>Three &quot;dark CTA&quot; eras, all still in the file for a reason:</p>
+<ul>
+<li><strong><code>--la-color-primary</code> (<code>#18181B</code>)</strong> is the near-black primary action — it marks &quot;the next obvious step&quot;.</li>
+<li><strong><code>--la-color-neutral</code> (<code>#374151</code>)</strong> is the softer dark slate, used where primary's near-black feels too heavy or where two solid CTAs sit side by side. (Historically it replaced an even harsher <code>#121212</code> — too blunt for a product that aims for calm and trust.)</li>
+<li><strong><code>--la-color-accent</code> (<code>#405CD0</code>)</strong> is the brand indigo for links and attention moments alongside the near-black primary.</li>
+</ul>
+<hr>
+<h2>Semantic surfaces</h2>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-surface-success</code></td>
+<td><code>#EFFAF3</code><br><span class="tok-oklch">oklch(0.975 0.015 158.255)</span></td>
+<td>Success backgrounds — alerts, row highlights, ghost-success hover</td>
+</tr>
+<tr>
+<td><code>--la-color-surface-warning</code></td>
+<td><code>#FFFBEB</code><br><span class="tok-oklch">oklch(0.987 0.021 95.277)</span></td>
+<td>Warning backgrounds — notification bars, alerts</td>
+</tr>
+<tr>
+<td><code>--la-color-surface-danger</code></td>
+<td><code>#FDF3F3</code><br><span class="tok-oklch">oklch(0.972 0.011 17.342)</span></td>
+<td>Danger backgrounds — alerts, ghost-danger hover</td>
+</tr>
+<tr>
+<td><code>--la-color-surface-info</code></td>
+<td><code>#EEFBFD</code><br><span class="tok-oklch">oklch(0.979 0.014 207.878)</span></td>
+<td>Info backgrounds — alerts, processing-state surfaces</td>
+</tr>
+</tbody>
+</table>
+<p>For active/selected backgrounds use <code>--la-color-bg-active</code> (see Surfaces).</p>
+<hr>
+<h2>Borders</h2>
+<p>See <a href="../../docs/borders/">borders.md</a> for the full border system. Summary:</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-border</code></td>
+<td><code>#DADDEC</code><br><span class="tok-oklch">oklch(0.9 0.021 276.933)</span></td>
+<td>Interactive components — buttons, inputs, cards, toasts</td>
+</tr>
+<tr>
+<td><code>--la-color-border-light</code></td>
+<td><code>#ECEEF5</code><br><span class="tok-oklch">oklch(0.95 0.01 273.354)</span></td>
+<td>Structural dividers — table rows, panel edges, section lines</td>
+</tr>
+<tr>
+<td><code>--la-color-border-active</code></td>
+<td><code>#18181B</code><br><span class="tok-oklch">oklch(0.21 0.006 285.885)</span></td>
+<td>Active/selected outline — sidebar rail, active tab, selected card</td>
+</tr>
+<tr>
+<td><code>--la-color-border-success</code></td>
+<td><code>#32A66E</code><br><span class="tok-oklch">oklch(0.647 0.133 157.808)</span></td>
+<td>Success border (alerts, hover on success buttons)</td>
+</tr>
+<tr>
+<td><code>--la-color-border-danger</code></td>
+<td><code>#CC4643</code><br><span class="tok-oklch">oklch(0.581 0.171 25.273)</span></td>
+<td>Danger border (alerts, hover on danger buttons)</td>
+</tr>
+<tr>
+<td><code>--la-color-border-warning</code></td>
+<td><code>#F59E0B</code><br><span class="tok-oklch">oklch(0.769 0.165 70.08)</span></td>
+<td>Warning border</td>
+</tr>
+<tr>
+<td><code>--la-color-border-focus</code></td>
+<td><code>#3B82F6</code><br><span class="tok-oklch">oklch(0.623 0.188 259.815)</span></td>
+<td>Focus ring on inputs</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Hover states on ghost/tinted buttons</h2>
+<p>Ghost buttons (danger, success variants) use their semantic surface colour on hover, paired with their semantic border:</p>
+<ul>
+<li><strong>Danger hover:</strong> background <code>--la-color-surface-danger</code> + border <code>--la-color-border-danger</code></li>
+<li><strong>Success hover:</strong> background <code>--la-color-surface-success</code> + border <code>--la-color-border-success</code></li>
+</ul>
+<p><strong>Why:</strong> the hover state confirms the semantic intent before the user commits. The surface tint + coloured border creates a clear &quot;you are about to do something [dangerous/positive]&quot; signal.</p>
+<hr>
+<h2>Interactive-only rule</h2>
+<p><code>--la-color-primary</code> and <code>--la-color-accent</code> appear on <strong>interactive elements only</strong> — buttons, active states, links, tab underlines — never as background fills, illustration colours, or decorative accents. This keeps the next actionable step visually unmistakable.</p>
+<hr>
+<h2>Disabled state</h2>
+<p>All interactive elements at disabled state use <code>opacity: 0.4</code> on the element itself — no separate disabled token. This keeps the colour intent visible while clearly communicating unavailability.</p>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

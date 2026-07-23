@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-investor-card</h3>
 
@@ -68,6 +75,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -76,7 +86,7 @@
 <!-- Overview -->
 <div id="overview" class="preview-header">
   <h1>la-investor-card</h1>
-  <p>Per-investor summary card for the data room investor list. Shows the investor's name, firm, a three-state access pill (Not Shared / Active / Revoked), an optional last-activity line, and an unread-message count. The whole card is a single click target — selecting it fires <code>la-investor-view</code> so the host opens the per-investor detail. There is no per-card action menu; investor actions live on the detail surface (<a href="../../decisions/70-investor-card-no-kebab-actions-in-detail-only.md">decision 70</a>).</p>
+  <p>Per-investor summary card for the data room investor list. Shows the investor's name, firm, a three-state access pill (Not Shared / Active / Revoked), an optional last-activity line, and an unread-message count. The whole card is a single click target — selecting it fires <code>la-investor-view</code> so the host opens the per-investor detail. There is no per-card action menu; investor actions live on the detail surface (decision 70).</p>
 </div>
 
 <!-- Anatomy -->
@@ -356,7 +366,7 @@
 <div id="notes" class="docs-section">
   <h3>Notes</h3>
   <ul>
-    <li><strong>Whole-card click:</strong> the card is a native <code>&lt;button&gt;</code> with Enter / Space activation. There is no per-card action menu — investor actions (share, revoke, remove, nudge) live on the per-investor detail surface, per <a href="../../decisions/70-investor-card-no-kebab-actions-in-detail-only.md">decision 70</a>.</li>
+    <li><strong>Whole-card click:</strong> the card is a native <code>&lt;button&gt;</code> with Enter / Space activation. There is no per-card action menu — investor actions (share, revoke, remove, nudge) live on the per-investor detail surface, per decision 70.</li>
     <li><strong>Three-state access pill:</strong> the seven lifecycle states collapse to Not Shared / Active / Revoked (Pattern 15). The pill is the card's status signal; <code>access-revoked</code> additionally dims the whole card to 60% opacity.</li>
     <li><strong>Progressive meta:</strong> last activity appears only when set; the unread badge appears only when <code>unread-count &gt; 0</code>.</li>
     <li><strong>Soft motion divergence:</strong> the hover transition animates <code>border-color</code> and <code>box-shadow</code> (not the strict transform/opacity set) — the established hover-affordance pattern shared with <code>la-legal-area-widget</code>. A <code>prefers-reduced-motion</code> guard collapses it.</li>

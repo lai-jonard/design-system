@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prototype standards — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item active" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Prototype standards
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/prototype-standards.md
+</span>
+<article class="md-body">
+  <h1>Prototype standards</h1>
+<p>The publish gate for flow and page prototypes. A prototype in <code>dev/prototypes/&lt;flow&gt;/</code> moves into the published docs site (<code>/founder-flow/*.html</code> or equivalent) only when it passes every gate below.</p>
+<hr>
+<h2>What this is</h2>
+<p>Prototypes are the structural source of truth engineers read during handoff. They consume layout and composition from a prototype page, then build the functional backing in their own repo. That only works if a &quot;published&quot; prototype is guaranteed to use only published components, style only through tokens, and respect the same standards we apply to components.</p>
+<p>Until a prototype passes, it stays in <code>dev/prototypes/</code> as a work-in-progress. It may still be shared and demoed — it just doesn't become the reference.</p>
+<hr>
+<h2>Two surfaces, one rule</h2>
+<table>
+<thead>
+<tr>
+<th>Path</th>
+<th>Purpose</th>
+<th>Gate</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>dev/prototypes/&lt;flow&gt;/</code></td>
+<td>WIP flow/page mockups — exploration, review, demos</td>
+<td>None — anything goes</td>
+</tr>
+<tr>
+<td><code>/founder-flow/*.html</code> (and future flows)</td>
+<td>Published prototypes — engineering's source of truth</td>
+<td>Must pass every gate below</td>
+</tr>
+</tbody>
+</table>
+<p>Moving between them is a one-line change in <a href="../.eleventy.cjs"><code>.eleventy.cjs</code></a>: add the file to the <code>FOUNDER_FLOW_PAGES</code> passthrough list and rebuild (<code>npm run docs</code>).</p>
+<hr>
+<h2>The 8 gates</h2>
+<p>Mirrors the 8 gates used by <code>/audit</code> and <code>/ready</code>, adapted for page-level artefacts.</p>
+<h3>Gate 1 — Source</h3>
+<p>The prototype HTML exists at <code>dev/prototypes/&lt;flow&gt;/&lt;NN&gt;-&lt;name&gt;.html</code>. Filename is numbered for flow order. No orphan files.</p>
+<h3>Gate 2 — Components</h3>
+<p>Every <code>&lt;la-*&gt;</code> tag used in the prototype is <strong>published</strong>. A component is published when it has:</p>
+<ul>
+<li>A page in <a href="../docs-src/components/"><code>docs-src/components/</code></a></li>
+<li>An entry in <a href="../../docs/components/"><code>components.md</code></a></li>
+<li>A <code>🟢</code> or <code>🟡</code> row in <code>handoffs/readiness.md</code></li>
+</ul>
+<p>Any <code>&lt;la-*&gt;</code> that fails this check blocks the prototype. Publish the component first, then retry.</p>
+<p>No hand-rolled chrome. No inline <code>&lt;div&gt;</code> styled to look like a button, badge, or card — if the design needs one, it's a missing component, not a prototype problem.</p>
+<h3>Gate 3 — Design language</h3>
+<p>Any novel page-level pattern (new layout shape, new composition) is documented in <a href="../../docs/page-architecture/"><code>page-architecture.md</code></a> before the prototype publishes. If the pattern is a one-off, either generalise it or justify it in the prototype's own header comment.</p>
+<h3>Gate 4 — Behaviour</h3>
+<p>Interactions, state transitions, and motion go through <a href="../motion.css"><code>motion.css</code></a> easings and durations. No <code>ease-in</code>. GPU-safe only — animate <code>transform</code> and <code>opacity</code>, never <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, <code>background</code>, or <code>color</code>. Keyboard interactions work on native semantic elements.</p>
+<h3>Gate 5 — Responsive</h3>
+<p>Layout reflows across breakpoints per <a href="../../docs/responsive-design/"><code>responsive-design.md</code></a>. No horizontal scroll at standard widths. Test at least: 1440, 1024, 768.</p>
+<h3>Gate 6 — Content resilience</h3>
+<p>No &quot;Lorem ipsum&quot;. Use realistic sample content — long names, multi-line descriptions, missing values, edge cases. The prototype should not visibly break when a name is 40 characters instead of 10.</p>
+<h3>Gate 7 — Accessibility</h3>
+<ul>
+<li>WCAG 2.1 AA contrast across all text</li>
+<li>Keyboard navigation works end-to-end, tab order is correct</li>
+<li>Visible focus states on every interactive element</li>
+<li>ARIA landmarks: <code>main</code>, <code>nav</code>, <code>header</code>, <code>aside</code> where appropriate</li>
+<li>Colour-plus-something for meaning — never colour alone</li>
+</ul>
+<h3>Gate 8 — Standards compliance</h3>
+<p><strong>Tokens.</strong> No hex values in the prototype's own <code>&lt;style&gt;</code> block. All colour comes from <code>--la-color-*</code>. Padding, gap, margin use <code>--la-space-*</code>. Radius uses <code>--la-radius-*</code>. Font size uses <code>--la-font-size-*</code>; weight uses <code>--la-font-weight-*</code> per decision 39 (400 default, 500 only when weight change is the state signal, 600 for headings, never 700).</p>
+<p><strong>Raw <code>px</code> values.</strong> Permitted only on layout-position properties (<code>width</code>, <code>min-width</code>, <code>max-width</code>, <code>height</code> where the dimension doesn't map to a token — e.g. a <code>--signin-panel-width: 711px</code> layout constant). Not permitted for padding, gap, margin, font-size, border-radius.</p>
+<p><strong>Copy.</strong> Every visible string respects <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> — British English, two-register capitalisation (Title Case for structural labels and CTAs, sentence case for explanatory copy), verb-first CTAs, 1–2 sentences max in body copy.</p>
+<p><strong>Assets.</strong> Paths are absolute so the Eleventy passthrough works without rewrites:</p>
+<ul>
+<li><code>/bundle.js</code></li>
+<li><code>/assets/vendor/phosphor/regular/style.css</code></li>
+<li><code>/motion.css</code></li>
+</ul>
+<p><strong>Links.</strong> No dead links. If the flow crosses into a WIP page, link state should make that obvious (disabled, &quot;coming soon&quot;, etc.) rather than silently 404.</p>
+<p><strong>Anchor link styling.</strong> Prototype pages do not load <code>la-base-root.css</code>, so the global anchor styles do not apply automatically. Any <code>&lt;a&gt;</code> element inside prototype-page CSS must replicate the foundation spec manually:</p>
+<pre><code class="language-css">a {
+  color: var(--la-color-text-secondary);
+  text-decoration: underline;
+  text-decoration-color: var(--la-color-border);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 2px;
+  font-weight: var(--la-font-weight-normal);
+  transition: text-decoration-color var(--dur-fast) var(--ease);
+}
+a:hover { text-decoration-color: var(--la-color-primary); }
+</code></pre>
+<p>Scope the rule narrowly (e.g. <code>.rule-disclosure-body a</code>) rather than a bare <code>a {}</code> selector to avoid clobbering navigation links. Full token spec lives in <a href="../../docs/typography/#links--anchors"><code>typography.md</code> — Links / anchors</a>.</p>
+<hr>
+<h2>Stricter than the component gate</h2>
+<p>A component can ship with a logged divergence — e.g. <code>la-breadcrumb</code> declares a known below-AA contrast on ancestor items, recorded in <a href="../../docs/components/"><code>components.md</code></a>. Prototypes can't. If a prototype needs a divergence, <strong>the component absorbs it first</strong>, and the prototype inherits it cleanly through the component.</p>
+<p>This keeps prototypes readable as a single artefact: no footnotes, no exceptions to chase across files.</p>
+<hr>
+<h2>Publishing mechanics</h2>
+<p>When a prototype passes all 8 gates:</p>
+<ol>
+<li>Add the file to the <code>FOUNDER_FLOW_PAGES</code> list in <a href="../.eleventy.cjs"><code>.eleventy.cjs</code></a> (or create a new passthrough block for a new flow)</li>
+<li><code>npm run docs</code> to rebuild</li>
+<li><code>npm run docs:serve</code> and load the page at the new URL to confirm</li>
+<li>Commit — the prototype is now published</li>
+</ol>
+<p>To unpublish: remove from the passthrough list, rebuild. The source file stays in <code>dev/prototypes/</code>.</p>
+<hr>
+<h2>Checklist</h2>
+<p>Keep this near your tab group when publishing a prototype:</p>
+<ul>
+<li>[ ] Gate 1 — file at expected path</li>
+<li>[ ] Gate 2 — every <code>la-*</code> is published</li>
+<li>[ ] Gate 3 — novel patterns documented or generalised</li>
+<li>[ ] Gate 4 — motion via <code>motion.css</code>, GPU-safe</li>
+<li>[ ] Gate 5 — responsive at 1440 / 1024 / 768</li>
+<li>[ ] Gate 6 — realistic content, no Lorem ipsum</li>
+<li>[ ] Gate 7 — a11y: contrast, keyboard, focus, ARIA, colour+something</li>
+<li>[ ] Gate 8 — no hex, no off-scale <code>px</code>, absolute asset paths, no dead links, copy passes</li>
+</ul>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

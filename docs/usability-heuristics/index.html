@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Usability heuristics — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item active" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Usability heuristics
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/usability-heuristics.md
+</span>
+<article class="md-body">
+  <h1>LawAdvisor AI — Usability heuristics</h1>
+<p><strong>Version 1.0 · April 2026</strong></p>
+<p>A working set of usability heuristics for evaluating LawAdvisor AI screens, components, and flows. Use it during <code>/ready</code> and at sprint end to flag whether a surface actually <em>works</em> — separate from whether it looks on-brand.</p>
+<p><strong>Scope:</strong> Every component, page, and prototype that a founder will see. Applies to primitives (where relevant), composed components, page-level surfaces, and end-to-end flows.</p>
+<p><strong>This doc is a tool, not a manifesto.</strong> It's checked, ticked, and pasted into handoffs. If a heuristic doesn't fit the surface under review, mark it N/A and move on.</p>
+<p><strong>Companion docs (don't duplicate, cross-reference):</strong></p>
+<ul>
+<li><code>design-context/design-principles.md</code> — 10 operating principles + Design Posture Checklist (brand posture, not usability evaluation)</li>
+<li><a href="../../docs/ai-ux-guidelines/"><code>design-language/ai-ux-guidelines.md</code></a> — AI-specific patterns and copy standards (citations, disclosure, severity, confidence)</li>
+<li><a href="../../docs/interaction/"><code>design-language/interaction.md</code></a> — interaction-state rules (focus, hover, disabled)</li>
+<li><a href="../../docs/copy-guidelines/"><code>design-language/copy-guidelines.md</code></a> — voice and copy rules</li>
+</ul>
+<p><strong>Sources synthesised:</strong></p>
+<ul>
+<li><a href="https://www.nngroup.com/articles/ten-usability-heuristics/">Nielsen Norman Group — 10 Usability Heuristics</a> (Nielsen 1994, refined 2020)</li>
+<li><a href="https://www.cs.umd.edu/users/ben/goldenrules.html">Shneiderman's 8 Golden Rules of Interface Design</a></li>
+<li><a href="https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/">Microsoft — Guidelines for Human-AI Interaction (18 HAX guidelines)</a></li>
+<li><a href="https://pair.withgoogle.com/guidebook">Google People + AI Guidebook (PAIR)</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/machine-learning">Apple HIG — Machine Learning</a></li>
+<li><a href="https://www.nngroup.com/articles/how-to-rate-the-severity-of-usability-problems/">Jakob Nielsen — How to rate the severity of usability problems</a></li>
+</ul>
+<hr>
+<h2>Part 1: How to use this doc</h2>
+<h3>When to run an audit</h3>
+<table>
+<thead>
+<tr>
+<th>Trigger</th>
+<th>Scope</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>/ready &lt;name&gt;</code> — per-component handoff</td>
+<td>Applicable heuristics only (mark N/A liberally for primitives)</td>
+<td>Ticked checklist inline in <code>handoffs/readiness.md</code> notes column</td>
+</tr>
+<tr>
+<td>Sprint end — per-flow audit</td>
+<td>All 12 heuristics applied to the prototype or page</td>
+<td>Written audit appended to the sprint handoff under &quot;Heuristic audit&quot; section</td>
+</tr>
+</tbody>
+</table>
+<p>A primitive button does not need <em>Confidence calibration</em> or <em>Provenance always visible</em>. A page that surfaces AI insights does. Use judgement — N/A is not failure, it's scoping.</p>
+<h3>Severity scale</h3>
+<p>Four tiers, named to match house voice. Inspired by Nielsen's 0–4 scale but renamed.</p>
+<table>
+<thead>
+<tr>
+<th>Tier</th>
+<th>What it means</th>
+<th>What happens</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Critical</strong></td>
+<td>Founder loses trust, takes the wrong legal action, churns, or shares something embarrassing externally</td>
+<td>Blocks handoff. Fix or revert before 🟢.</td>
+</tr>
+<tr>
+<td><strong>Major</strong></td>
+<td>Founder gets confused, frustrated, or builds workarounds</td>
+<td>Blocks handoff unless logged with a mitigation plan</td>
+</tr>
+<tr>
+<td><strong>Minor</strong></td>
+<td>Doesn't block workflow but adds friction or doubt</td>
+<td>Non-blocking. Logged in <code>readiness.md</code> notes.</td>
+</tr>
+<tr>
+<td><strong>Polish</strong></td>
+<td>Aesthetic or micro-copy refinement</td>
+<td>Optional. Pick up in the next pass.</td>
+</tr>
+</tbody>
+</table>
+<p>If every finding lands at <em>Polish</em>, the audit was too soft — or the heuristics need sharpening. Flag for v2.</p>
+<h3>Audit output format</h3>
+<p><strong>Per-component (lightweight):</strong> tick the applicable boxes in the checklist (Part 4). Anything unticked gets a one-line note in <code>readiness.md</code> with severity.</p>
+<p><strong>Per-flow (full):</strong></p>
+<pre><code>### Heuristic audit — [flow name] — [date]
+
+H4 (Consistency): Major — disclosure language varies between insight cards and DD readiness. Recommend standardising on &quot;we found&quot;.
+H5 (Anxiety hygiene): Minor — &quot;Urgent&quot; red banner on the unlock entry violates calm-authority rule. Recommend severity tag on insight, neutral framing on the entry banner.
+H10 (Provenance): Critical — DD readiness band displayed without drill-down. Founder cannot trace the score back to issues. Block handoff.
+</code></pre>
+<p>One line per finding. Heuristic number, severity, finding, recommended fix. No essays.</p>
+<h3>Who runs it</h3>
+<table>
+<thead>
+<tr>
+<th>Audit</th>
+<th>Default reviewer</th>
+<th>Escalation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Per-component (<code>/ready</code>)</td>
+<td>Designer self-review</td>
+<td>Engineering pairs only on Critical findings</td>
+</tr>
+<tr>
+<td>Per-flow (sprint end)</td>
+<td>Designer self-review</td>
+<td>PM + engineering review the written audit before handoff call</td>
+</tr>
+</tbody>
+</table>
+<p>External heuristic reviews are out of scope for v1. Revisit when the team has 3+ designers.</p>
+<hr>
+<h2>Part 2: Foundation — Nielsen at a glance</h2>
+<p><a href="https://www.nngroup.com/articles/ten-usability-heuristics/">Nielsen's 10 heuristics</a> are shared vocabulary across the UX field, not our rulebook. The LawAdvisor heuristics in Part 3 fuse them with our operating principles, reframe them where they conflict, and add five novel heuristics for concerns Nielsen does not cover (legal anxiety, AI uncertainty, progressive unlock, founder-effort reciprocity, calibrated honesty).</p>
+<table>
+<thead>
+<tr>
+<th>#</th>
+<th>Nielsen heuristic</th>
+<th>Our equivalent</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Visibility of system status</td>
+<td>H1, H2</td>
+</tr>
+<tr>
+<td>2</td>
+<td>Match between system and the real world</td>
+<td>H1</td>
+</tr>
+<tr>
+<td>3</td>
+<td>User control and freedom</td>
+<td>H3</td>
+</tr>
+<tr>
+<td>4</td>
+<td>Consistency and standards</td>
+<td>H4</td>
+</tr>
+<tr>
+<td>5</td>
+<td>Error prevention</td>
+<td>H12</td>
+</tr>
+<tr>
+<td>6</td>
+<td>Recognition rather than recall</td>
+<td>H10</td>
+</tr>
+<tr>
+<td>7</td>
+<td>Flexibility and efficiency of use</td>
+<td>H8 <em>(reframed)</em></td>
+</tr>
+<tr>
+<td>8</td>
+<td>Aesthetic and minimalist design</td>
+<td>Covered by <code>design-language/</code> system rules — not an evaluable heuristic for us</td>
+</tr>
+<tr>
+<td>9</td>
+<td>Help users recognise, diagnose, and recover from errors</td>
+<td>H3</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Help and documentation</td>
+<td>H7 <em>(reframed — direct conflict with operating principle 10 &quot;Self-explanatory system&quot;)</em></td>
+</tr>
+</tbody>
+</table>
+<p>When a teammate says &quot;this fails Nielsen #4,&quot; translate to H4 (<em>Consistency with the system, not the industry</em>). Nielsen's labels are fine for shorthand; our heuristics are what we audit against.</p>
+<hr>
+<h2>Part 3: The 12 LawAdvisor heuristics</h2>
+<p>Each entry: <strong>what it is</strong> → <strong>origin</strong> → <strong>how we apply it</strong> → <strong>pass/fail examples</strong> → <strong>don'ts</strong>. Cross-references to existing patterns and principles where overlap exists — read those for the deeper context.</p>
+<hr>
+<h3>3.1 Reflect the founder's situation, not the system's</h3>
+<p><strong>What it is:</strong> The interface speaks the founder's reality — deals, deadlines, employees, anxiety — not the system's internal vocabulary (modules, levels, pipelines, scores).</p>
+<p><strong>Origin:</strong> Fuses Nielsen #1 (visibility of system status) + Nielsen #2 (match between system and real world) + operating principle 1 (&quot;you're not exposed&quot;).</p>
+<p><strong>Reference:</strong> <a href="https://www.nngroup.com/articles/match-system-real-world/">Nielsen — Match Between System and Real World</a>.</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Section headers, status labels, and CTAs use founder-side language (&quot;Worth sorting before you raise&quot;) not system-side language (&quot;L2 blocker, P0&quot;).</li>
+<li>Internal mechanics (level numbers, sprint tags, pipeline states) never surface.</li>
+<li>Founder-facing severity is <em>Urgent / Proactive / Resolved</em> (per <code>design-context/design-principles.md</code>). System-facing severity is High/Medium/Low (per <code>ai-ux-guidelines.md</code> §2.9). They map but don't bleed.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DD Readiness</td>
+<td>&quot;Almost there. 3 things left to clear up.&quot;</td>
+<td>&quot;Compliance score: 72%&quot;</td>
+</tr>
+<tr>
+<td>Locked legal area</td>
+<td>&quot;Unlock Employment to surface employee-related risks.&quot;</td>
+<td>&quot;L1 unlocked. L2 prerequisites: corp-gov.unlocked == true&quot;</td>
+</tr>
+<tr>
+<td>Insight badge</td>
+<td>&quot;Worth sorting before you raise&quot;</td>
+<td>&quot;P0 blocker — DD risk&quot;</td>
+</tr>
+<tr>
+<td>Processing widget</td>
+<td>&quot;We're taking another look now that you've added Founders Agreement.&quot;</td>
+<td>&quot;Scan triggered. Module: Employment. State: re-analysing.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't expose level numbers, sprint references, or pipeline state to the founder.</li>
+<li>Don't use &quot;score&quot; or &quot;grade&quot; framing for AI judgements (see H6 — Confidence calibration).</li>
+<li>Don't import lawyer jargon (&quot;force majeure clause analysis underway&quot;). Translate or drop.</li>
+</ul>
+<hr>
+<h3>3.2 State legibility</h3>
+<p><strong>What it is:</strong> The founder always knows what is locked, processing, surfaced, resolved, or stale — without inferring. Every state has explicit visual and copy treatment.</p>
+<p><strong>Origin:</strong> Novel. The progressive-unlock model and AI re-scan loop create state combinations general usability heuristics don't frame well. Adjacent to Nielsen #1 (visibility of system status) but more specific to our state machine.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/memory">Shape of AI — Memory</a> · <code>design-language/ai-ux-guidelines.md</code> §2.10 (Re-scan transparency) · <code>decisions/18-ready-status-transitory.md</code> (the <code>none → processing → ready → none</code> lifecycle as a worked example).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Every component has explicit empty, processing, populated, and stale states — no implicit &quot;just hide it when there's nothing.&quot;</li>
+<li>Re-scans surface what triggered them and what changed (cross-link to <code>ai-ux-guidelines.md</code> §2.10).</li>
+<li>Locked legal areas show <em>why</em> they are locked and <em>what unlocks them</em> — not just a padlock icon.</li>
+<li>Resolved items remain visible as a record of work done (operating principle 4 — &quot;progress is the story&quot;).</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Issue counter changes after re-scan</td>
+<td>&quot;Found after reviewing Founders Agreement.&quot; indicator on the new insight</td>
+<td>Counter silently goes from 5 → 6 with no explanation</td>
+</tr>
+<tr>
+<td>Locked area</td>
+<td>&quot;Complete Corp Governance to unlock IP Protection.&quot;</td>
+<td>A grey card with a padlock and no copy</td>
+</tr>
+<tr>
+<td>Processing widget</td>
+<td>Shows file name, area, and &quot;we're reviewing&quot; label per item</td>
+<td>&quot;Processing 3 documents…&quot; with no detail</td>
+</tr>
+<tr>
+<td>Insight resolved</td>
+<td>Card stays visible with a &quot;Resolved&quot; badge and the action that resolved it</td>
+<td>Card disappears from the list with no record</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't change counts, severity, or content silently.</li>
+<li>Don't conflate &quot;empty&quot; with &quot;not yet started&quot; — they need different copy.</li>
+<li>Don't use only iconography to express state. Icon + label, always.</li>
+</ul>
+<hr>
+<h3>3.3 Reversibility without panic</h3>
+<p><strong>What it is:</strong> Every AI-surfaced item — every insight, extraction, readiness signal — can be dismissed, resolved, escalated, or undone. None of those actions costs the founder anything. The system rewards exploration.</p>
+<p><strong>Origin:</strong> Reframes Nielsen #3 (user control and freedom) + Nielsen #9 (recognise, diagnose, recover from errors) through operating principle 6 (&quot;every insight drives action&quot;). Also Shneiderman's 4th rule — &quot;Permit easy reversal of actions.&quot;</p>
+<p><strong>Reference:</strong> <a href="https://www.nngroup.com/articles/user-control-and-freedom/">Nielsen — User Control and Freedom</a> · <code>design-language/ai-ux-guidelines.md</code> §2.8 (Feedback loop) · §1.6 (Human oversight &amp; agency).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Every insight has a &quot;Mark as not relevant&quot; / &quot;This isn't right&quot; action with structured reason codes.</li>
+<li>Resolved or dismissed items can be restored.</li>
+<li>Destructive actions (delete document, retract insight) carry an undo window proportional to consequence (see H12 — Error prevention scales with risk).</li>
+<li>Feedback is acknowledged (&quot;Thanks — we'll use this to improve&quot;), never silently swallowed.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dismiss insight</td>
+<td>&quot;Mark as not relevant&quot; with reason picker; insight moves to &quot;Dismissed&quot; with one-click restore</td>
+<td>&quot;Hide&quot; action with no reason capture and no restore</td>
+</tr>
+<tr>
+<td>Delete document</td>
+<td>Confirmation includes dependent-insight count; 30-day undo window</td>
+<td>One-click delete; insights vanish silently</td>
+</tr>
+<tr>
+<td>Disagree with severity</td>
+<td>&quot;This isn't right&quot; feedback with reason codes flowing to product team</td>
+<td>Thumbs-down only; no signal of what was wrong</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't make AI outputs feel permanent or final. The founder has the last word.</li>
+<li>Don't punish exploration with friction (no excessive &quot;are you sure&quot; modals on low-risk actions — see H12).</li>
+<li>Don't strip context from undo. &quot;Undo delete&quot; should restore the document <em>and</em> its dependent insights.</li>
+</ul>
+<hr>
+<h3>3.4 Consistency with the system, not the industry</h3>
+<p><strong>What it is:</strong> Same severity language, same iconography, same disclosure phrasing, same interaction patterns across every surface — even when industry conventions (red-alert urgency, percentage scores, gauge meters, exclamation icons) tempt otherwise.</p>
+<p><strong>Origin:</strong> Nielsen #4 (consistency and standards) + operating principle &quot;Tokens over hardcoding&quot; + Shneiderman's 1st rule — &quot;Strive for consistency.&quot;</p>
+<p><strong>Reference:</strong> <a href="https://www.nngroup.com/articles/consistency-and-standards/">Nielsen — Consistency and Standards</a> · <code>design-language/ai-ux-guidelines.md</code> §2.7 (Iconography), §2.5 (Disclosure) · <code>decisions/08-widget-vs-system-feedback.md</code> (shadow signals floating, not decoration).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>One sparkle icon for AI-generated content, one consistent colour token, used at the feature boundary (not inside every card).</li>
+<li>Severity language is fixed: <em>Urgent / Proactive / Resolved</em> externally; <em>High / Medium / Low</em> internally — never mixed.</li>
+<li>Disclosure phrasing is fixed: &quot;we found&quot; / &quot;we pulled out&quot; / &quot;we reviewed&quot; — not &quot;AI insights&quot; / &quot;AI extracted&quot; / &quot;ML analysis&quot;.</li>
+<li>Visual chrome matches function: shadow = floating (modal, dropdown, toast); no shadow = part of the page (panel, widget, card). See <code>decisions/08</code>.</li>
+<li>Tokens enforce this — never hardcode hex, px, or font-size.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AI marker</td>
+<td>One sparkle icon at section header (&quot;Risks we found&quot;)</td>
+<td>Sparkle on every card + a different &quot;AI&quot; badge inside cards</td>
+</tr>
+<tr>
+<td>Severity</td>
+<td>&quot;Urgent&quot; badge with red-orange token across all surfaces</td>
+<td>&quot;Critical&quot; on insight cards, &quot;Urgent&quot; on dashboard, &quot;High&quot; in modal</td>
+</tr>
+<tr>
+<td>Floating element</td>
+<td>Modal carries <code>--la-shadow-md</code>; widget carries no shadow</td>
+<td>Every panel carries a shadow because &quot;it looks polished&quot;</td>
+</tr>
+<tr>
+<td>Confidence</td>
+<td>Bands (&quot;Almost there&quot;) consistent across DD Readiness and unlock progress</td>
+<td>DD Readiness uses bands; unlock uses a percentage</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't import third-party UI patterns wholesale (Material gauges, traffic-light status). Adopt only what survives the operating principles.</li>
+<li>Don't introduce a second AI icon, a second severity scale, or a second disclosure verb because &quot;this surface needed something different.&quot; If it really does, that's a system-level conversation, not a per-component override.</li>
+</ul>
+<hr>
+<h3>3.5 Anxiety hygiene</h3>
+<p><strong>What it is:</strong> Communicate urgency without alarm. Calm authority over fire-alarm chrome. The founder should feel a competent advisor has flagged something — not that the building is on fire.</p>
+<p><strong>Origin:</strong> Novel. Operating principles 1 (&quot;you're not exposed&quot;) and the voice rule &quot;must-do items feel urgent without making the founder feel like their company is on fire&quot; (<code>design-context/design-principles.md</code>) imply this rule but don't make it auditable. This heuristic is the audit form.</p>
+<p><strong>Reference:</strong> <code>design-context/design-principles.md</code> (operating principle 1 + voice character) · <code>design-language/copy-guidelines.md</code> · <code>design-language/ai-ux-guidelines.md</code> §2.4 (Caveat) · §2.9 (Severity signaling).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Urgency is conveyed by clear, calm language and severity tag — not by red banners, siren icons, or all-caps copy.</li>
+<li>The phrase &quot;URGENT&quot; and exclamation marks are reserved for genuine emergency states (none currently exist in v1 scope).</li>
+<li>Caveats are placed where decisions happen, not buried in footers, and are written as a co-founder would speak — never as a barrister (see <code>ai-ux-guidelines.md</code> §2.4).</li>
+<li>Empty states feel positive and inviting, not just blank (&quot;All governance obligations are met&quot; — not &quot;No issues found&quot;).</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High-severity insight</td>
+<td>&quot;Worth sorting this before you raise.&quot; with red-orange severity tag</td>
+<td>Red banner with siren icon and &quot;URGENT — IMMEDIATE ACTION REQUIRED&quot;</td>
+</tr>
+<tr>
+<td>Caveat copy</td>
+<td>&quot;Worth checking with your lawyer before acting on this.&quot;</td>
+<td>&quot;This output does not constitute legal advice and should not be relied upon.&quot;</td>
+</tr>
+<tr>
+<td>Clean state</td>
+<td>&quot;All governance obligations are met.&quot;</td>
+<td>&quot;No issues found.&quot;</td>
+</tr>
+<tr>
+<td>DD readiness — early state</td>
+<td>&quot;You're early — let's work through the essentials first.&quot;</td>
+<td>&quot;Critical compliance gaps detected.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't use &quot;Critical / Urgent / Warning&quot; as headline copy in normal product flows. Reserve for true emergencies.</li>
+<li>Don't stack severity signals (red colour + red icon + red text + exclamation mark + caps). Pick one signal and trust it.</li>
+<li>Don't use legal-disclaimer register in caveats. The founder hears &quot;lawyer&quot; and stops reading.</li>
+</ul>
+<hr>
+<h3>3.6 Confidence calibration</h3>
+<p><strong>What it is:</strong> The interface signals AI uncertainty in calibrated bands and qualified language — never raw percentages, never silent overconfidence, never fabricated certainty.</p>
+<p><strong>Origin:</strong> Novel (AI-specific). Crystallises <code>ai-ux-guidelines.md</code> §2.9 (Severity Signaling) and §2.11 (Aggregate Confidence) into an evaluable rule. Cross-references PAIR Confidence and Apple HIG ML calibration guidance.</p>
+<p><strong>Reference:</strong> <code>design-language/ai-ux-guidelines.md</code> §2.9, §2.11 — read those for the band/severity systems · <a href="https://pair.withgoogle.com/chapter/errors-failing/">Google PAIR — Confidence</a> · <a href="https://developer.apple.com/design/human-interface-guidelines/machine-learning">Apple HIG — Machine Learning</a>.</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Aggregate AI judgements (DD Readiness) are expressed as a band (&quot;Almost there&quot;) plus a remaining-issue count — never as a percentage or a grade.</li>
+<li>Per-item severity is one of three calibrated tiers, with caveat copy that matches the tier (<code>ai-ux-guidelines.md</code> §2.9).</li>
+<li>When the AI is unsure of severity, it defaults to Medium — not High.</li>
+<li>When the AI cannot be confident at all, see H11 (Honest absence) — say so explicitly.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DD Readiness</td>
+<td>&quot;Almost there. 3 things left to clear up.&quot; (band + count)</td>
+<td>&quot;78% ready&quot; or &quot;Compliance grade: B+&quot;</td>
+</tr>
+<tr>
+<td>Insight severity</td>
+<td>&quot;Worth a look&quot; with Medium severity tag</td>
+<td>&quot;78% confidence this is a problem&quot;</td>
+</tr>
+<tr>
+<td>Ambiguous finding</td>
+<td>&quot;We spotted this but it might not apply — worth a quick check.&quot;</td>
+<td>A confident insight stated as fact, no qualifier</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't display raw confidence percentages anywhere founder-facing.</li>
+<li>Don't grade AI output (no &quot;B+&quot;, no stars, no traffic lights for confidence).</li>
+<li>Don't default unsure findings to High severity — overconfidence is more damaging than underconfidence in legal contexts.</li>
+</ul>
+<hr>
+<h3>3.7 Self-explanation over instruction</h3>
+<p><strong>What it is:</strong> The product teaches itself through structure, copy, and progressive disclosure. There are no tutorials, tooltips, or guided tours. The next action is the explanation.</p>
+<p><strong>Origin:</strong> Reframes Nielsen #10 (help and documentation). <strong>Resolves the direct conflict with operating principle 10 (&quot;Self-explanatory system&quot;).</strong> Nielsen says: provide help docs. We say: the product is the help doc. Both can be true — what we mean is <em>no separate help layer</em>; the structure carries the teaching.</p>
+<p><strong>Reference:</strong> <code>design-context/design-principles.md</code> (operating principle 10) · <code>design-language/copy-guidelines.md</code>.</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Empty states explain what the surface is for and the next action (&quot;No documents yet. Add one to get started.&quot; + visible Add CTA).</li>
+<li>Locked areas explain what they cover and how to unlock them — in copy, not a tooltip.</li>
+<li>Component labels are verbs in sentence case (&quot;Add document&quot;, not &quot;+&quot;). The label <em>is</em> the instruction.</li>
+<li>Progressive disclosure: complex flows reveal step-by-step, with the next action always visible. The founder doesn't need to memorise where they are.</li>
+<li>Question-mark icons that open help modals are forbidden. If a label needs explanation, rewrite the label.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Empty state</td>
+<td>&quot;No documents yet. Add one to get started.&quot; with visible &quot;Add document&quot; CTA</td>
+<td>Empty area with a question-mark icon that opens a &quot;How it works&quot; modal</td>
+</tr>
+<tr>
+<td>Locked area</td>
+<td>&quot;Unlock Employment to surface employee-related risks. You'll need: signed employment contracts, employee handbook, contractor agreements.&quot;</td>
+<td>A padlock icon with a &quot;Take a tour&quot; overlay</td>
+</tr>
+<tr>
+<td>First-run</td>
+<td>The unlock wizard's first step <em>is</em> the onboarding. No separate tutorial.</td>
+<td>A four-screen &quot;Welcome to LawAdvisor&quot; carousel before the founder can do anything</td>
+</tr>
+<tr>
+<td>Feature explanation</td>
+<td>The &quot;Risks we found&quot; section header and the cards beneath teach the concept by example</td>
+<td>An info icon next to &quot;Risks we found&quot; that opens &quot;What are AI insights?&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't add tooltips, info-icons, or modal explainers to teach features. Rewrite the surface so it teaches itself.</li>
+<li>Don't ship a guided product tour. We don't do tours.</li>
+<li>Don't write empty states that say &quot;No data&quot; — say what would appear here and how to make it appear.</li>
+</ul>
+<hr>
+<h3>3.8 Momentum over flexibility</h3>
+<p><strong>What it is:</strong> Default to the single right path. Reveal alternatives only when the founder asks for them. Power-user shortcuts exist but must not add cognitive load to first-time users.</p>
+<p><strong>Origin:</strong> Reframes Nielsen #7 (flexibility and efficiency of use) through operating principle 9 (Momentum). <strong>Resolves the partial conflict</strong> — Nielsen pushes flexibility, our principle pushes constraint. We side with momentum because the founder persona is anxious and time-poor; choices cost more than they help.</p>
+<p><strong>Reference:</strong> <code>design-context/design-principles.md</code> (operating principle 9 — Momentum) · <code>decisions/25-absorb-banner-into-alert.md</code> (worked example of momentum thinking, <em>and</em> its limit — see Part 5).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>One primary CTA per view. Secondary actions are visually subordinate.</li>
+<li>The recommended path is visually emphasised; alternatives are reachable but not equally weighted.</li>
+<li>Keyboard shortcuts and power-user features may exist but are not surfaced in the UI as choices for first-time users.</li>
+<li>When two paths feel necessary, ask: is there a real product difference, or is this a designer convenience? If the latter, fold them.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Unlock entry</td>
+<td>One &quot;Unlock Employment&quot; primary CTA; &quot;Skip for now&quot; as a ghost link</td>
+<td>Three equal-weight buttons: &quot;Quick unlock&quot;, &quot;Detailed unlock&quot;, &quot;Custom unlock&quot;</td>
+</tr>
+<tr>
+<td>Document upload</td>
+<td>One &quot;Add document&quot; CTA; drag-drop also works but isn't surfaced as a separate option</td>
+<td>A &quot;Choose method&quot; picker offering five upload paths</td>
+</tr>
+<tr>
+<td>Settings</td>
+<td>Recommended defaults pre-selected; advanced toggles hidden under &quot;More&quot;</td>
+<td>Every preference exposed as a top-level toggle on first-run</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't surface power-user options as primary affordances on the first-run path.</li>
+<li>Don't fold two genuinely different surfaces into one component for momentum's sake — <code>decisions/25</code> is the cautionary tale. Hero announcements and inline status strips look similar but serve different jobs; forcing them into one primitive compromised both.</li>
+<li>Don't ask the founder to choose between options when the system has a defensible default.</li>
+</ul>
+<hr>
+<h3>3.9 Effort-to-value reciprocity</h3>
+<p><strong>What it is:</strong> Every founder input — every uploaded document, answered question, dismissed insight — visibly produces value within the same session. Effort precedes value, but never by more than one screen.</p>
+<p><strong>Origin:</strong> Novel. Binds operating principles 6 (&quot;every insight drives action&quot;) and 7 (&quot;progressive value delivery&quot;) into an evaluable rule. Principle 7 states the goal; this heuristic makes it audit-able.</p>
+<p><strong>Reference:</strong> <code>design-context/design-principles.md</code> (operating principles 6 and 7) · <code>decisions/03-unlock-wizard-architecture.md</code> (the unlock wizard's stateless+staged design enables real-time value during multi-step input — see Part 5).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>AI insights surface as documents finish processing, not at flow end.</li>
+<li>Every wizard step shows what the previous step produced — if it produced nothing, the step shouldn't have asked for input.</li>
+<li>Re-scans run automatically when new documents are added; the founder sees what changed (cross-link H2 — State legibility).</li>
+<li>Multi-step forms produce intermediate value or commit progress visibly — the founder is never afraid of losing what they've done.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document upload</td>
+<td>Insight appears on the dashboard ~30 seconds after upload, badged with &quot;Found in [doc] just now&quot;</td>
+<td>A six-step unlock wizard that produces nothing visible until step 6</td>
+</tr>
+<tr>
+<td>Question answered in unlock</td>
+<td>Next step adapts based on the answer; if irrelevant downstream questions are now skipped, the founder sees that</td>
+<td>The wizard collects 12 answers and only shows their effect after submission</td>
+</tr>
+<tr>
+<td>Dismiss &quot;not relevant&quot;</td>
+<td>Acknowledgement + visible removal from the list + improvement signal</td>
+<td>Insight reappears next session with no acknowledgement of the feedback</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't ask for input the system can't act on yet. If the founder uploads a document we won't analyse for two weeks, say so — don't pretend.</li>
+<li>Don't gate all value behind flow completion. Streaming value is the philosophy; batched value is a regression.</li>
+<li>Don't ask the same question twice across surfaces. If the founder told us their entity type at signup, every other surface knows it.</li>
+</ul>
+<hr>
+<h3>3.10 Provenance always visible</h3>
+<p><strong>What it is:</strong> The founder can always trace an AI claim back to a document, page, and timestamp without leaving context. No insight, term, or readiness signal exists without a citation.</p>
+<p><strong>Origin:</strong> Fuses Nielsen #6 (recognition rather than recall) + operating principle 8 (transparency) + AI guideline 1.2 (explainability). Citations are the antidote to AI black-box anxiety.</p>
+<p><strong>Reference:</strong> <code>design-language/ai-ux-guidelines.md</code> §2.2 (Citations — P0), §2.3 (Footprints — P0) — read those for the deep specification. This heuristic is the eval form.</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Every insight links to a specific page in a specific document — not just &quot;the document&quot; generally.</li>
+<li>Citations are visible inline, never behind a hover, tooltip, or modal.</li>
+<li>Aggregate signals (DD Readiness) drill down to citable issues, each citing its sources.</li>
+<li>When a citation can't be resolved, say so explicitly — see H11 (Honest absence).</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insight card</td>
+<td>&quot;From Founders Agreement, p.4&quot; inline</td>
+<td>&quot;Source: multiple documents&quot; with no drill-down</td>
+</tr>
+<tr>
+<td>Extracted term</td>
+<td>Specific clause highlighted in source on click</td>
+<td>Term extracted with no source highlight</td>
+</tr>
+<tr>
+<td>DD Readiness</td>
+<td>Drill from band to issues to citations</td>
+<td>Band displayed without drill-down</td>
+</tr>
+<tr>
+<td>Multi-source claim</td>
+<td>&quot;From 2 documents&quot; with a click-to-expand list</td>
+<td>&quot;Multiple sources&quot; plain text</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't hide citations behind tooltips or hover states.</li>
+<li>Don't surface an insight without a citation. If we can't cite it, we don't show it.</li>
+<li>Don't link to &quot;the document&quot; in general — always to the page.</li>
+</ul>
+<hr>
+<h3>3.11 Honest absence</h3>
+<p><strong>What it is:</strong> When the system cannot find, cite, or be confident — say so, and say what's still useful. Never fabricate. Never hide the gap. A clear &quot;we don't know&quot; is a feature, not a failure.</p>
+<p><strong>Origin:</strong> Novel. A legal-AI-specific gap Nielsen does not address. Reinforced by <a href="https://www.microsoft.com/en-us/haxtoolkit/guideline/encourage-granular-feedback/">Microsoft HAX guideline 15</a> (encourage granular feedback) and AI principle 1.2 (explainability — &quot;when the AI can't explain itself, say so — don't fabricate a citation&quot;).</p>
+<p><strong>Reference:</strong> <code>design-language/ai-ux-guidelines.md</code> §1.2 (Explainability), §2.2 (Citations — missing-citation handling), §2.4 (Caveat).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>When the AI cannot cite a source, the surface says so plainly — it does not fabricate or omit.</li>
+<li>Jurisdiction-specific gaps are surfaced explicitly (&quot;We didn't find anything specific to [jurisdiction] — worth double-checking.&quot;).</li>
+<li>Empty result states distinguish between &quot;we looked and found nothing&quot; and &quot;we haven't looked yet&quot; — they are not the same finding.</li>
+<li>Confidence dips communicate the dip (&quot;We spotted this but it might not apply&quot;), not silence.</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Missing citation</td>
+<td>&quot;We found this but couldn't link it to a specific page.&quot;</td>
+<td>A confident insight with a placeholder citation, or no citation at all</td>
+</tr>
+<tr>
+<td>Jurisdiction gap</td>
+<td>&quot;We didn't find anything specific to [jurisdiction] — worth double-checking.&quot;</td>
+<td>Generic insight with no jurisdiction qualifier</td>
+</tr>
+<tr>
+<td>Empty result</td>
+<td>&quot;We've reviewed your documents. Nothing flagged in this area yet.&quot;</td>
+<td>Empty state indistinguishable from &quot;this area hasn't been scanned&quot;</td>
+</tr>
+<tr>
+<td>Low confidence</td>
+<td>&quot;We spotted this but it might not apply — worth a quick check.&quot;</td>
+<td>Stated as fact at standard severity</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't fabricate citations or invent confidence. The founder will check, and trust collapses.</li>
+<li>Don't leave a gap silent. Silence reads as &quot;the system didn't bother.&quot;</li>
+<li>Don't conflate &quot;we looked and found nothing&quot; with &quot;we haven't looked.&quot; They mean different things to the founder.</li>
+</ul>
+<hr>
+<h3>3.12 Error prevention scales with risk</h3>
+<p><strong>What it is:</strong> Friction is calibrated to consequence. Low-risk actions (dismiss, mark resolved) are friction-free. Irreversible or shareable actions (delete, export, send) carry proportional checks.</p>
+<p><strong>Origin:</strong> Reframes Nielsen #5 (error prevention). Avoids the failure mode of confirmation-modal-on-everything, which trains the founder to click through dismissively.</p>
+<p><strong>Reference:</strong> <a href="https://www.nngroup.com/articles/slips/">Nielsen — Error Prevention</a> · <code>design-language/ai-ux-guidelines.md</code> §1.6 (Human oversight — &quot;When we ship actions in the future, friction scales with risk.&quot;).</p>
+<p><strong>How we apply it:</strong></p>
+<ul>
+<li>Reversible low-risk actions: no confirmation. Single click. (Dismiss insight, mark resolved, collapse a section.)</li>
+<li>Reversible higher-risk actions: confirmation if the action affects multiple items. (Bulk dismiss, bulk delete documents from a single legal area.)</li>
+<li>Irreversible or externally-shareable actions: confirmation with explicit consequence preview. (Permanent delete, export to lawyer, share insights.)</li>
+<li>Undo windows on destructive actions where reversibility is technically possible (see H3 — Reversibility without panic).</li>
+</ul>
+<p><strong>Pass / fail examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Action</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Dismiss insight</td>
+<td>One click, moves to &quot;Dismissed&quot;, restorable</td>
+<td>Confirmation modal &quot;Are you sure?&quot;</td>
+</tr>
+<tr>
+<td>Delete document</td>
+<td>Confirmation showing dependent-insight count + 30-day undo window</td>
+<td>One-click delete; insights vanish silently</td>
+</tr>
+<tr>
+<td>Export DD readiness summary</td>
+<td>Preview of what's included + AI disclosure note + one confirm</td>
+<td>Direct download with no preview</td>
+</tr>
+<tr>
+<td>Mark all as resolved</td>
+<td>Confirmation if N &gt; 5; no confirmation if N = 1</td>
+<td>Same flow regardless of count</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't put confirmation modals on every action. Confirmation fatigue is its own failure.</li>
+<li>Don't let irreversible actions happen on a single click without preview.</li>
+<li>Don't strip AI disclosure from exports (see H10 — Provenance always visible).</li>
+</ul>
+<hr>
+<h2>Part 4: Audit checklist</h2>
+<p>Use during <code>/ready</code> and at sprint end. Tick = confident pass. Anything else = action item with severity assigned.</p>
+<h3>Per-component audit</h3>
+<p>For primitives, mark N/A liberally — most heuristics apply at composed-component or page level.</p>
+<ul>
+<li>[ ] <strong>H1</strong> — Copy uses founder-side language. No level numbers, sprint references, or pipeline state surface.</li>
+<li>[ ] <strong>H2</strong> — Every state (empty, processing, populated, stale, locked, resolved) has explicit visual + copy treatment. No silent count changes.</li>
+<li>[ ] <strong>H3</strong> — AI-surfaced items can be dismissed, restored, or marked-as-resolved. Destructive actions carry undo windows.</li>
+<li>[ ] <strong>H4</strong> — Severity language, iconography, and disclosure phrasing match the system standard. No new AI icons, no new severity scales, no decorative shadows on non-floating elements.</li>
+<li>[ ] <strong>H5</strong> — Urgency conveyed by clear language + severity tag, not by red banners, sirens, or all-caps.</li>
+<li>[ ] <strong>H6</strong> — Aggregate AI judgements expressed as bands + counts. No raw percentages, no grades.</li>
+<li>[ ] <strong>H7</strong> — Empty states, locked states, and labels teach the surface. No tooltips, info-modals, or guided tours.</li>
+<li>[ ] <strong>H8</strong> — One primary CTA per view. Recommended path visually emphasised. No &quot;choose your workflow&quot; pickers.</li>
+<li>[ ] <strong>H9</strong> — Founder input produces visible value within the same session. No batched-value flows.</li>
+<li>[ ] <strong>H10</strong> — AI claims cite source, page, timestamp. Citations inline, not behind hover.</li>
+<li>[ ] <strong>H11</strong> — Missing citations, jurisdiction gaps, and low confidence are stated plainly. No fabrication.</li>
+<li>[ ] <strong>H12</strong> — Friction calibrated to consequence. No confirmation modals on reversible single-item actions; previews on irreversible/shareable actions.</li>
+</ul>
+<h3>Polish checks (cross-cutting)</h3>
+<ul>
+<li>[ ] <strong>Hit area</strong> — Interactive controls have a ≥32×32px hit area; smaller glyphs (checkbox, dots-menu, close) extend it with a pseudo-element, with no overlap between neighbours. See decision 83 and <code>interaction.md</code>.</li>
+<li>[ ] <strong>Concentric radius</strong> — Nested rounded surfaces follow <code>outer = inner + padding</code>. See <code>borders.md</code>.</li>
+</ul>
+<h3>Per-flow audit (sprint end)</h3>
+<p>Run all 12 against the prototype or page. Output as written audit with severity-tagged findings (see Part 1 — Audit output format).</p>
+<h3>Voice gut-check (cross-cutting)</h3>
+<p>For every piece of copy on the surface, run <a href="../../docs/copy-guidelines/"><code>design-language/copy-guidelines.md</code></a> and <code>ai-ux-guidelines.md</code> Part 4 — voice gut-check. If a caveat sounds like a barrister or a system alert, rewrite.</p>
+<hr>
+<h2>Part 5: Worked examples</h2>
+<p>Three audits drawn from existing decisions. Demonstrates the doc as a tool — what a finding looks like, what severity gets assigned, what the recommended fix reads like.</p>
+<h3>Example 1 — Unlock wizard architecture (decision 03)</h3>
+<p><strong>Surface:</strong> <code>la-unlock-panel</code> lifecycle states (pre-start → active → all-submitted → unlocked → next-prompt).</p>
+<p><strong>Audit findings:</strong></p>
+<blockquote>
+<p><strong>H2 (State legibility): Pass.</strong> The component renders five distinct lifecycle states explicitly (<code>pre-start</code>, <code>active</code>, <code>all-submitted</code>, <code>unlocked</code>, <code>next-prompt</code>), each with its own copy and visual treatment. No state is implicit. The transition through <code>all-submitted → unlocked</code> is timed and visible — the founder sees processing happen, not a silent flip.</p>
+<p><strong>H9 (Effort-to-value reciprocity): Pass.</strong> Step-by-step input produces immediate progression through the panel. The stateless component design (per <code>decisions/03</code>) means the host can wire each answered step to a real-time AI re-scan — value can surface mid-flow without architectural changes.</p>
+<p><strong>H8 (Momentum over flexibility): Minor.</strong> The wizard offers <code>submit / skip / yes / no</code> per step, which is appropriate. However, the prototype currently does not surface a &quot;save and continue later&quot; affordance. <strong>Recommendation:</strong> add as a ghost link on every step at <em>Major</em> severity, since founder sessions are interrupted. <em>Severity flagged for v2; non-blocking for current handoff.</em></p>
+</blockquote>
+<p><strong>Lesson:</strong> the heuristic check confirms an architectural decision (statelessness) was the right call for <em>Effort-to-value reciprocity</em> — and surfaces a follow-up product question (interruption recovery) the architecture decision didn't need to address.</p>
+<h3>Example 2 — Widget vs system feedback (decision 08)</h3>
+<p><strong>Surface:</strong> <code>la-widget</code> (panels) and system-feedback components (<code>la-processing-widget</code>, <code>la-toast</code>).</p>
+<p><strong>Audit findings:</strong></p>
+<blockquote>
+<p><strong>H4 (Consistency with the system): Pass — and the right diagnosis.</strong> The decision moves shadow from a property of every panel to a property of <em>category</em>: floating elements (modals, dropdowns, toasts, processing widget) carry shadow; permanent panels do not. This restores visual hierarchy — if it has a shadow, it's floating. The earlier hardcoded shadow on <code>la-widget</code> violated the system's house rule and flattened the visual distinction. <strong>No findings on the audited surface.</strong> The decision itself is the heuristic in practice.</p>
+</blockquote>
+<p><strong>Lesson:</strong> decisions logged in <code>decisions/</code> often <em>are</em> the audit trail for H4. Reading them backwards — what rule did this enforce? — is a fast way to spot heuristic alignment.</p>
+<h3>Example 3 — <code>la-banner</code> absorbed into <code>la-alert</code>, then walked back (decision 25)</h3>
+<p><strong>Surface:</strong> <code>la-alert</code> (with the proposed <code>size=&quot;lg&quot;</code> + <code>welcome</code> variant); <code>la-welcome-banner</code>.</p>
+<p><strong>Audit findings (at the time of the absorb):</strong></p>
+<blockquote>
+<p><strong>H8 (Momentum over flexibility): Pass — initially correct.</strong> Two near-identical primitives (<code>la-banner</code>, <code>la-alert</code>) with 70% overlap were folded into one. Consumers no longer had to choose between them.</p>
+<p><strong>H4 (Consistency with the system): Major — discovered post-absorb.</strong> The folded <code>la-alert</code> had to serve both inline status strips (small, dense) and hero/welcome announcements (large, prominent). The visual treatment that held up at default size did not hold up at <code>size=&quot;lg&quot;</code>. The single component compromised both contexts.</p>
+<p><strong>Walkback decision:</strong> drop <code>size=&quot;lg&quot;</code> and <code>welcome</code> variant from <code>la-alert</code>. Keep <code>la-banner</code> retired. Rewrite <code>la-welcome-banner</code> as its own composed component. <em>(Decision recorded in <code>decisions/25</code> — same-day update.)</em></p>
+</blockquote>
+<p><strong>Lesson:</strong> <em>Momentum over flexibility</em> favours one component over two — but only when the contexts are genuinely the same. Hero announcements and inline status strips are different jobs. The fix is to honour H8 by keeping consumers from choosing between near-identical primitives, while honouring H4 by giving genuinely different surfaces their own treatment. Both can be true.</p>
+<hr>
+<h2>Change log</h2>
+<ul>
+<li><strong>v1.0 (April 2026)</strong> — Initial draft. Twelve heuristics: three direct fusions of Nielsen + LawAdvisor principles (H1, H4, H10), four reframings where Nielsen and LawAdvisor principles tension (H3, H7, H8, H12), and five novel heuristics (H2 state legibility, H5 anxiety hygiene, H6 confidence calibration, H9 effort-to-value reciprocity, H11 honest absence). Severity scale: Critical / Major / Minor / Polish. Eval framework: per-component during <code>/ready</code>, per-flow at sprint end. Worked examples drawn from <code>decisions/03</code>, <code>decisions/08</code>, <code>decisions/25</code>.</li>
+</ul>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

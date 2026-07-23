@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-upload-box</h3>
 
@@ -62,6 +69,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -257,8 +267,8 @@
 <div class="docs-section" id="notes">
 <h3>Notes</h3>
 <div style="display:flex;flex-direction:column;gap:8px;">
-<div class="docs-note"><strong>has-file state composes <code>la-document-item</code>.</strong> When the user selects a file, the zone's chrome no longer hand-rolls its own filename + remove-X. It renders an <code>&lt;la-document-item&gt;</code> with <code>status="none"</code> (no green check — the file has been <em>selected</em>, not yet processed), <code>association="File selected"</code>, <code>non-interactive</code>, and <code>dismissible</code>. <code>la-dismiss</code> wires to the box's <code>_remove</code>. While <code>processing</code>, status flips to <code>processing</code> and association becomes "Uploading…". See <a href="../decisions/50-document-item-dismissible-composition.md">decision 50</a>.</div>
-<div class="docs-note"><strong>has-file zone uses <code>--la-shadow-card</code>, not <code>--la-shadow-sm</code>.</strong> Plain white background + 1px border + soft three-layer card shadow. The border carries the edge, the shadow carries the elevation. See <a href="../decisions/51-shadow-card-token.md">decision 51</a> for when to reach for this token vs <code>--la-shadow-md</code> / <code>-float</code>.</div>
+<div class="docs-note"><strong>has-file state composes <code>la-document-item</code>.</strong> When the user selects a file, the zone's chrome no longer hand-rolls its own filename + remove-X. It renders an <code>&lt;la-document-item&gt;</code> with <code>status="none"</code> (no green check — the file has been <em>selected</em>, not yet processed), <code>association="File selected"</code>, <code>non-interactive</code>, and <code>dismissible</code>. <code>la-dismiss</code> wires to the box's <code>_remove</code>. While <code>processing</code>, status flips to <code>processing</code> and association becomes "Uploading…". See decision 50.</div>
+<div class="docs-note"><strong>has-file zone uses <code>--la-shadow-card</code>, not <code>--la-shadow-sm</code>.</strong> Plain white background + 1px border + soft three-layer card shadow. The border carries the edge, the shadow carries the elevation. See decision 51 for when to reach for this token vs <code>--la-shadow-md</code> / <code>-float</code>.</div>
 <div class="docs-note"><strong>Error state has no separate retry button.</strong> The error treatment is inline (warning icon + message + hint) inside the zone, and the zone itself remains the click target — clicking anywhere re-opens the file picker, which clears the error on success. A separate "Choose another file" link inside the error zone would be redundant: cursor is already pointer, the dashed-border drop-zone affordance is intact.</div>
 <div class="docs-note"><strong>Drag-over visual is two-channel.</strong> Border switches to <code>--la-color-info</code> + background tints to <code>--la-color-processing-bg</code> + text colour to <code>--la-color-info-text</code>. Border-only switching (dashed→solid same colour) was invisible to most users.</div>
 <div class="docs-note"><strong>Drop multi-file rejects with reason <code>'multi'</code>.</strong> The drop handler actively detects <code>files.length &gt; 1</code> and dispatches <code>la-reject</code> with reason; the picker still allows native multi-select but the box ignores all but the first.</div>

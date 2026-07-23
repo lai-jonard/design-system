@@ -111,11 +111,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/">Components</a>
         <a href="../pages/" class="active">Pages</a>
@@ -124,14 +129,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/" class="active">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
 <h3 class="docs-nav-title">On this page</h3>
 <div class="docs-nav-group">
@@ -143,10 +150,12 @@
 <a class="docs-nav-item" href="../components/">Components</a>
 <a class="docs-nav-item" href="../foundations/">Foundations</a>
 <a class="docs-nav-item" href="../patterns/">Patterns</a>
-<a class="docs-nav-item" href="../../handoffs/readiness.md">Readiness dashboard ↗</a>
 </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -171,7 +180,7 @@
 </div>
 </a>
 
-<a class="component-card" href="../components/la-legal-area-page.html">
+<div class="component-card">
 <div aria-hidden="true" class="component-card-image"></div>
 <div class="component-card-body">
 <div class="component-card-head">
@@ -180,7 +189,7 @@
 </div>
 <p class="component-card-desc">Health summary, insights, and document list for a legal area. Locked, unlocking, and standard states. Sprint 3–5.</p>
 </div>
-</a>
+</div>
 
 <a class="component-card" href="../components/la-app-shell.html">
 <div aria-hidden="true" class="component-card-image"></div>
@@ -193,7 +202,7 @@
 </div>
 </a>
 
-<a class="component-card" href="../components/la-dashboard.html">
+<div class="component-card">
 <div aria-hidden="true" class="component-card-image"></div>
 <div class="component-card-body">
 <div class="component-card-head">
@@ -202,7 +211,7 @@
 </div>
 <p class="component-card-desc">Legal area widget grid. Post-L0 state (widget grid) and FTUE welcome form. Sprint 2.</p>
 </div>
-</a>
+</div>
 
 <div class="component-card component-card--disabled">
 <div aria-hidden="true" class="component-card-image"></div>

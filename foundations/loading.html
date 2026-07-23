@@ -318,11 +318,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/" class="active">Foundations</a>
         <a href="../components/">Components</a>
         <a href="../pages/">Pages</a>
@@ -331,14 +336,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
 <h3 class="docs-nav-title">Loading</h3>
 <div class="docs-nav-group">
@@ -362,6 +369,9 @@
 </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -599,7 +609,7 @@
 <h2>Family decisions, locked</h2>
 <p>
               Cross-cutting calls every loading component must respect. Settled in the
-              <a href="../../solves/260428-1-loading-states/loading-states.solve-output.md">loading-states meta-solve</a>;
+              loading-states meta-solve;
               re-opening costs a new solve.
             </p>
 <table class="docs-table">
@@ -840,30 +850,30 @@
 <h2>Source references</h2>
 <p>The authoritative definitions — links open in the repo.</p>
 <div class="source-ref">
-<a class="source-ref-item" href="../../design-language/loading.md">
+<a class="source-ref-item" href="../docs/loading/">
 <code>design-language/loading.md</code>
 <span class="source-ref-desc">Long-form pattern doc with rationale and decision history.</span>
 </a>
-<a class="source-ref-item" href="../../solves/260428-1-loading-states/loading-states.solve-output.md">
+<span class="source-ref-item">
 <code>solves/260428-1-loading-states/</code>
 <span class="source-ref-desc">Meta-solve roadmap — build queue, naming, sub-solves.</span>
-</a>
-<a class="source-ref-item" href="../../solves/260416-9-feedback-moments/feedback-moments.solve-output.md">
+</span>
+<span class="source-ref-item">
 <code>solves/260416-9-feedback-moments/</code>
 <span class="source-ref-desc">Adjacent solve — toast taxonomy, processing-widget timeout copy.</span>
-</a>
-<a class="source-ref-item" href="../../src/styles/animations.ts">
+</span>
+<span class="source-ref-item">
 <code>src/styles/animations.ts</code>
 <span class="source-ref-desc">Shared <code>spinnerStyles</code> — the canonical spinner.</span>
-</a>
-<a class="source-ref-item" href="../../motion.css">
+</span>
+<a class="source-ref-item" href="../motion.css">
 <code>motion.css</code>
 <span class="source-ref-desc">Home of <code>.t-shimmer</code> and <code>.t-pulse</code> motion utilities.</span>
 </a>
-<a class="source-ref-item" href="../../CLAUDE.md">
+<span class="source-ref-item">
 <code>CLAUDE.md § Animation standards</code>
 <span class="source-ref-desc">GPU-safe rule, prefers-reduced-motion, max durations.</span>
-</a>
+</span>
 </div>
 </section>
 

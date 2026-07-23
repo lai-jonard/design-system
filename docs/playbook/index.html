@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Playbook — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item active" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Playbook
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/playbook.md
+</span>
+<article class="md-body">
+  <h1>Playbook — How the LAI Design System grows</h1>
+<p>This is the recipe for how new ideas enter the design system, how they become components, how decisions get logged, and how work hands off to engineering. It's the single page a new collaborator reads to understand the workflow — sitting alongside <code>CLAUDE.md</code> (the boiled-down non-negotiables: token, copy, motion, code), the rest of <a href="."><code>design-language/</code></a> (the rationale layer with worked-out detail — <a href="../../docs/components/"><code>components.md</code></a> for taxonomy, <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> for tone and voice, <a href="../../docs/motion/"><code>motion.md</code></a> for animation), and <code>handoffs/README.md</code> (the engineering pipeline).</p>
+<p>If you're picking up a new design task and you don't know whether to solve, build, or just sketch — start here.</p>
+<hr>
+<h2>1. The mental model</h2>
+<p>Six layers, each with a clear job:</p>
+<table>
+<thead>
+<tr>
+<th>Layer</th>
+<th>Lives in</th>
+<th>Job</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Tokens</strong></td>
+<td><a href="../src/styles/tokens.ts"><code>src/styles/tokens.ts</code></a></td>
+<td>Colour, radius, spacing, type, motion. Single source of truth. Hardcoded values are a rule violation.</td>
+</tr>
+<tr>
+<td><strong>Primitives</strong></td>
+<td><a href="../src/primitives/"><code>src/primitives/</code></a></td>
+<td>Reusable building blocks (button, input, badge, drawer). No domain knowledge.</td>
+</tr>
+<tr>
+<td><strong>Composed components</strong></td>
+<td><a href="../src/components/"><code>src/components/</code></a></td>
+<td>Domain-aware compositions (insight-card, unlock-panel, document-list). Each entry is in the Tier 2 table in <a href="../../docs/components/">components.md</a> with a logged &quot;what problem does this solve&quot;.</td>
+</tr>
+<tr>
+<td><strong>Page templates</strong></td>
+<td><a href="../src/pages/"><code>src/pages/</code></a></td>
+<td>Layout shells (app-shell, dashboard, legal-area-page). The structural canvases the product surfaces sit on.</td>
+</tr>
+<tr>
+<td><strong>Prototypes</strong></td>
+<td><code>dev/prototypes/&lt;flow&gt;/</code></td>
+<td>Flow-level explorations — full user journeys assembled from primitives and components. Promoted to published references via the 8-gate prototype standard.</td>
+</tr>
+<tr>
+<td><strong>Flows</strong></td>
+<td>(logical, not a folder)</td>
+<td>A user journey across pages: onboarding, unlock, document review. Prototypes test these.</td>
+</tr>
+</tbody>
+</table>
+<p>The boundary that matters most is <strong>primitive vs composed component</strong>. Primitives have no domain knowledge — <code>la-badge</code> doesn't know it's a &quot;legal area badge&quot;. Composed components do — <code>la-legal-area-widget</code> knows it counts urgent insights. Cross that line carefully: a composed component should never end up reused outside its domain, but a primitive should be reusable across products (KYC, sign-up, future verticals).</p>
+<hr>
+<h2>2. The recipe (one-page, scannable)</h2>
+<p>A new product need or design question appears. Walk this:</p>
+<pre><code>1. Is this a question or a settled call?
+   • Question with multiple valid answers → /solve
+   • Settled call needing a record → write a decision (see §3)
+   • Settled call ready to build → skip to step 4
+
+2. /solve framed the problem, output a brief.
+   Did the brief settle the question?
+   • Yes → continue to step 3
+   • No → keep the solve open, refine
+
+3. Does it need new UI?
+   • New visual pattern, no component → log under &quot;Known divergences&quot; in
+     design-language/README.md or in the relevant area .md
+   • New component → apply the rubric (§4), log Tier 2 entry in components.md
+
+4. /build the component.
+   Scout (read-only) → align (propose plan, wait) → build under constraints.
+   Two stops, no scope creep.
+
+5. /audit at any time to inventory state.
+   Passive report — no edits beyond readiness.md row.
+
+6. /document when the API is settled.
+   Drafts dev/docs-drafts/la-&lt;name&gt;.html. Iterate.
+
+7. /ready when the component is finished.
+   Walks 9 gates, promotes draft to docs-src/, updates catalogue chip,
+   flips readiness, prompts for new rules and decisions, updates sprint
+   handoff. This is the last mile.
+
+8. Decision recorded in decisions/NN-*.md (always append, never edit).
+
+9. Sprint handoff bundle in handoffs/stage-N/&lt;sprint&gt;.md updated.
+   Engineering builds from there.
+</code></pre>
+<p>Most components don't need a solve. Most solves don't need to spawn new components. Most decisions don't need their own file. Use the lightest tool that works.</p>
+<hr>
+<h2>3. When to solve, decide, or just build</h2>
+<p>Three patterns, three different tools. Pick by the shape of the question, not by habit.</p>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>When</th>
+<th>What it produces</th>
+<th>What it costs</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>/solve</strong></td>
+<td>The question has multiple valid answers and we need to think it through.</td>
+<td>A solve workspace at <code>solves/YYMMDD-N-slug/</code> with three files: <code>*.solve.md</code> (problem + scope), <code>*.solve-log.md</code> (live journal), <code>*.solve-output.md</code> (distilled brief).</td>
+<td>A session of focused thinking. Don't solve trivial calls.</td>
+</tr>
+<tr>
+<td><strong>decision</strong></td>
+<td>The call is made, but it'll bind future work and someone will need to know why.</td>
+<td>A new file <code>decisions/NN-&lt;slug&gt;.md</code>, append-only. Picks up the next number.</td>
+<td>Five minutes of writing. Cheap.</td>
+</tr>
+<tr>
+<td><strong>/build</strong></td>
+<td>The answer is settled and there's a component to make.</td>
+<td>A new or modified component in <code>src/</code>. Run <code>/document</code> and <code>/ready</code> after.</td>
+<td>A real implementation pass.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rules of thumb:</strong></p>
+<ul>
+<li>If you're tempted to solve a question that's already answered elsewhere, look first — <code>decisions/</code>, <code>solves/</code>, <code>design-language/</code> may already have it.</li>
+<li>If you're about to write a decision that contradicts an earlier one, the new entry should link the superseded one. Never edit closed decisions.</li>
+<li>If a <code>/build</code> exposes a question you weren't expecting, <strong>stop</strong>, open a <code>/solve</code>. Don't keep building through ambiguity.</li>
+</ul>
+<hr>
+<h2>4. The component decision rubric</h2>
+<p>Every Tier 2 entry in <a href="../../docs/components/">components.md</a> starts with the question <em>&quot;What problem is this component solving?&quot;</em> — but that's the prompt, not the rubric. Use these criteria to judge whether the answer warrants a component:</p>
+<p>A pattern becomes a component when <strong>two or more</strong> of the following are true:</p>
+<ol>
+<li><strong>Used in 2+ contexts</strong> — already appears, or will appear, in more than one consumer.</li>
+<li><strong>Distinct visual shape</strong> — has its own identifiable anatomy, not just a styled <code>&lt;div&gt;</code>.</li>
+<li><strong>Owns a state machine</strong> — has internal state (open/closed, loading, selected, etc.) or behaviour worth encapsulating.</li>
+<li><strong>Reusable across products</strong> — plausibly useful in a future vertical (KYC, sign-up, investor flow).</li>
+</ol>
+<p>If only one is true, <strong>inline it in the consumer</strong>. Premature componentisation creates ghost APIs that no one uses. If we later find the inlined pattern reappearing, we promote it then — that's cheaper than maintaining a never-reused primitive.</p>
+<p>Edge cases:</p>
+<ul>
+<li><strong>One consumer, distinct shape, no state machine</strong> → inline. (Example: a one-off banner specific to a single onboarding step.)</li>
+<li><strong>Two consumers, identical visual, no state</strong> → token + utility class is enough; no component needed.</li>
+<li><strong>One consumer today, planned second consumer this quarter</strong> → component. Plan beats inertia.</li>
+</ul>
+<hr>
+<h2>5. The exploration → component pipeline</h2>
+<p>Prototypes are how we test ideas at flow-scale before deciding what becomes a component. They live in <code>dev/prototypes/&lt;flow&gt;/&lt;NN&gt;-&lt;name&gt;.html</code> and assemble real primitives and composed components against realistic content.</p>
+<p>The promotion gate is the <strong>8-gate prototype standard</strong> (<a href="../../docs/prototype-standards/"><code>prototype-standards.md</code></a>):</p>
+<ol>
+<li>Source — file exists at the canonical path</li>
+<li>Components — every <code>&lt;la-*&gt;</code> tag is published</li>
+<li>Design language — novel patterns are documented or justified</li>
+<li>Behaviour — motion via <code>motion.css</code>, GPU-safe, keyboard navigable</li>
+<li>Responsive — reflows clean at 1440 / 1024 / 768</li>
+<li>Content resilience — realistic sample data, no Lorem ipsum</li>
+<li>Accessibility — WCAG AA, keyboard, focus, ARIA, colour-plus-something</li>
+<li>Standards compliance — tokens only, asset paths absolute, copy guidelines</li>
+</ol>
+<p>A prototype that passes all eight is a published reference — it can be cited from sprint handoffs and engineering can lean on it. A prototype that doesn't pass stays in <code>dev/prototypes/</code> as exploration only.</p>
+<p><strong>Lessons from prototypes feed the Tier 2 table in <a href="../../docs/components/">components.md</a>.</strong> When a prototype repeatedly reaches for the same shape (a checklist, a teaser banner, an empty-state surface), that's the signal to promote the shape to a composed component via the rubric in §4.</p>
+<blockquote>
+<p>Note: this is a separate &quot;8 gates&quot; from the 9 readiness gates in <code>/ready</code>. Don't mix them up. Prototype gates are about the prototype as a whole; readiness gates are about a component's docs and state coverage.</p>
+</blockquote>
+<hr>
+<h2>6. Slash-commands reference (designer POV)</h2>
+<p>The engineer set up five custom commands under <a href="../.claude/commands/"><code>.claude/commands/</code></a> that automate the workflow. This is what each does <em>for me, the designer</em>. (Engineer to QA the technical detail of this section.)</p>
+<h3><code>/solve &lt;topic&gt;</code> — frame a question</h3>
+<p>Opens a solve workspace at <code>solves/YYMMDD-N-slug/</code> with three files. Used when a design question has multiple valid answers and we want to think through the boundaries.</p>
+<ul>
+<li>Frames the problem rigorously rather than jumping to solutions.</li>
+<li>Captures constraints, principles (with their <em>because</em>), open questions, references.</li>
+<li>Verifies framing by handing the solve file to a sub-agent with no other context — if the sub-agent can produce sensible output, framing is sufficient. If not, the solve file has gaps.</li>
+<li>Use when in doubt. Cheap to open, cheaper than building wrong.</li>
+</ul>
+<p>The output (<code>*.solve-output.md</code>) is the distilled brief that becomes the input to <code>/build</code>, or the source for a <code>decisions/</code> entry.</p>
+<h3><code>/build &lt;name&gt;</code> — scout, align, then build</h3>
+<p>Builds a new component or modifies an existing one. Three hard stops:</p>
+<ol>
+<li>After scout — present findings, wait for acknowledgement</li>
+<li>After alignment proposal — wait for go-ahead</li>
+<li>After build — suggest <code>/document</code>, do not self-declare done</li>
+</ol>
+<p>Builds the component source and routes straight to <code>/document</code> — there's no separate sandbox step.</p>
+<p>Reads real tokens from <code>tokens.ts</code> — won't carry over invented token names from a prompt. Refuses to introduce new primitives without explicit approval. Does not touch handoff artefacts; that's <code>/ready</code>'s job.</p>
+<h3><code>/audit &lt;name&gt;</code> — passive state report</h3>
+<p>Inventories an existing component against the readiness gates. <strong>Reports only — does not fix.</strong> Updates the row in <code>handoffs/readiness.md</code>, nothing else.</p>
+<p>Use it when:</p>
+<ul>
+<li>A legacy component pre-dates the workflow and we want to know where it stands.</li>
+<li>Something looks off and we want a quick gap report before deciding whether to <code>/ready</code>.</li>
+<li>Periodic sweeps (e.g. cycle-end) to catch drift.</li>
+</ul>
+<p>The report orders gaps easiest-first, so we know what's quick wins vs. deeper work.</p>
+<h3><code>/document &lt;name&gt;</code> — draft the docs page</h3>
+<p>Drafts the public-facing documentation page at <code>dev/docs-drafts/la-&lt;name&gt;.html</code>. Stays in <code>dev/</code> so we can iterate via <code>npm run dev</code> without touching the published surface.</p>
+<ul>
+<li>Pulls API truth from the component source (every <code>@property</code>, <code>&lt;slot&gt;</code>, <code>dispatchEvent</code>).</li>
+<li>Pulls control structure from the component itself.</li>
+<li>Pulls curated copy from <code>design-language/</code> — never invents copy.</li>
+<li>Anatomy section mirrors the render tree; placeholder regions get flagged, not invented.</li>
+</ul>
+<p>Drafts are not published. <code>/ready</code> promotes them to <code>docs-src/components/</code>.</p>
+<h3><code>/ready &lt;name&gt;</code> — promote, lock, hand off</h3>
+<p>The last mile. Walks <strong>nine gates</strong> (the 8 from <code>/audit</code> plus Gate 9: docs draft exists), and only when all pass does it:</p>
+<ol>
+<li>Promote <code>dev/docs-drafts/&lt;name&gt;.html</code> → <code>docs-src/components/&lt;name&gt;.html</code> (Eleventy template format).</li>
+<li>Delete the draft.</li>
+<li>Update the catalogue chip in <code>docs-src/components/index.html</code>.</li>
+<li>Flip the row in <code>readiness.md</code> to 🟢.</li>
+<li>Prompt for any new design-language rules or decisions to log — appends to <code>design-language/*.md</code> or creates <code>decisions/NN-*.md</code>.</li>
+<li>Update the active sprint handoff in <code>handoffs/stage-N-&lt;name&gt;/</code>.</li>
+</ol>
+<p>The self-audit step is strict: every claim must trace to a file actually read in this session. A single yellow gate keeps the status at 🟡, not 🟢.</p>
+<p>If Gate 9 fails (no draft exists), the command refuses to flip to 🟢. Run <code>/document</code> first.</p>
+<hr>
+<h2>7. Handoff to engineering</h2>
+<p>Two scopes — per-component and per-sprint.</p>
+<p><strong>Per-component</strong>: when <code>/ready</code> flips a component to 🟢, the handoff artefacts are emitted automatically:</p>
+<ul>
+<li>Published docs at <code>docs-src/components/la-&lt;name&gt;.html</code> (rendered by <code>npm run docs</code>).</li>
+<li>Updated row in <code>handoffs/readiness.md</code> with notes on what's in / out / where catches exist.</li>
+<li>Any new rule appended to a <code>design-language/*.md</code> file.</li>
+<li>Any new decision in <code>decisions/NN-*.md</code>.</li>
+<li>Updated sprint matrix in <code>handoffs/stage-N/&lt;sprint&gt;.md</code>.</li>
+</ul>
+<p><strong>Per-sprint</strong>: each sprint folder under <code>handoffs/stage-N/</code> is a thin wrapper that points at real artefacts (solves, decisions, prototypes, ready components). The sprint doc itself contains:</p>
+<ul>
+<li>Scope and goal</li>
+<li>Component readiness matrix</li>
+<li>Edge cases answered</li>
+<li>Open questions log</li>
+<li>Changelog of what landed</li>
+</ul>
+<p>Engineering reads the sprint doc, follows the pointers, and builds. The handoff call is a checkpoint, not a transmission — by the time we sit down, the bundle should already answer most questions.</p>
+<p>For the broader pipeline (roles, who writes what), see <code>handoffs/README.md</code>.</p>
+<hr>
+<h2>8. Documentation surfaces</h2>
+<p>Knowing where to put information is half the work. Use this map when something needs to be written down.</p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Path</th>
+<th>What goes here</th>
+<th>Who edits</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Canonical foundation</td>
+<td><code>CLAUDE.md</code></td>
+<td>Token rules, copy rules, motion rules, component anatomy — the boiled-down non-negotiables. Each section here has a deeper counterpart in <code>design-language/</code>.</td>
+<td>Engineer + designer</td>
+</tr>
+<tr>
+<td>Setup &amp; dev workflow</td>
+<td><a href="../../docs/overview/"><code>README.md</code></a></td>
+<td>How to run the project, build chain, docs-drafts structure.</td>
+<td>Engineer</td>
+</tr>
+<tr>
+<td>Workflow recipe</td>
+<td>This file</td>
+<td>How the system grows over time. Process, not visual rules.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Component taxonomy</td>
+<td><a href="../../docs/components/"><code>design-language/components.md</code></a></td>
+<td>Tier 1 (primitives), Tier 2 (composed) tables with problem statements.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Tone, voice, copy</td>
+<td><a href="../../docs/copy-guidelines/"><code>design-language/copy-guidelines.md</code></a></td>
+<td>British English, jargon substitutions, contextual patterns (empty / success / error states), CTA rules, date and number formatting. The full rules with concrete examples. CLAUDE.md § Copy rules is the summary.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Type, colour, layout</td>
+<td><a href="../../docs/typography/"><code>typography.md</code></a>, <a href="../../docs/colour/"><code>colour.md</code></a>, <a href="../../docs/layout/"><code>layout.md</code></a>, <a href="../../docs/borders/"><code>borders.md</code></a></td>
+<td>Visual rules with rationale. CLAUDE.md token list is the summary.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Motion</td>
+<td><a href="../../docs/motion/"><code>design-language/motion.md</code></a></td>
+<td>Animation patterns and rationale. <code>motion.css</code> is the source of truth for tokens and utilities.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Iconography</td>
+<td><a href="../../docs/iconography/"><code>design-language/iconography.md</code></a></td>
+<td>Canonical icon → meaning mapping. Status variants, weight rules.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Interaction patterns</td>
+<td><a href="../../docs/interaction/"><code>design-language/interaction.md</code></a></td>
+<td>Hover, focus, disabled, multi-step modal flows.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Responsive</td>
+<td><a href="../../docs/responsive-design/"><code>design-language/responsive-design.md</code></a></td>
+<td>Breakpoint rules and layout reflow.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Usability heuristics</td>
+<td><a href="../../docs/usability-heuristics/"><code>design-language/usability-heuristics.md</code></a></td>
+<td>UX audit rules used in <code>/ready</code> Gate checks.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>AI UX</td>
+<td><a href="../../docs/ai-ux-guidelines/"><code>design-language/ai-ux-guidelines.md</code></a></td>
+<td>AI-specific UX patterns.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Prototype standard</td>
+<td><a href="../../docs/prototype-standards/"><code>design-language/prototype-standards.md</code></a></td>
+<td>The 8 promotion gates for prototypes.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Page templates</td>
+<td><a href="../../docs/page-architecture/"><code>design-language/page-architecture.md</code></a> + per-page <code>la-&lt;name&gt;.md</code></td>
+<td>Layout grammar, breakpoints, page-level rationale.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Solves</td>
+<td><code>solves/YYMMDD-N-slug/</code></td>
+<td>Open design questions, live journals, distilled briefs.</td>
+<td>Designer</td>
+</tr>
+<tr>
+<td>Decisions</td>
+<td><code>decisions/NN-*.md</code></td>
+<td>Locked calls future work must respect. Append-only. Numbered.</td>
+<td>Designer (engineer can contribute)</td>
+</tr>
+<tr>
+<td>Sprint handoffs</td>
+<td><code>handoffs/stage-N-&lt;name&gt;/</code></td>
+<td>Engineering bundles per sprint.</td>
+<td>Designer (engineer reviews)</td>
+</tr>
+<tr>
+<td>Readiness dashboard</td>
+<td><code>handoffs/readiness.md</code></td>
+<td>Status per component / page. Updated by <code>/ready</code> and <code>/audit</code>.</td>
+<td>Slash commands (do not hand-edit)</td>
+</tr>
+<tr>
+<td>Published docs</td>
+<td><code>docs-src/components/la-&lt;name&gt;.html</code></td>
+<td>Public-facing component docs. Promoted by <code>/ready</code>.</td>
+<td>Slash commands</td>
+</tr>
+<tr>
+<td>Tokens</td>
+<td><a href="../src/styles/tokens.ts"><code>src/styles/tokens.ts</code></a></td>
+<td>Source of truth for every visual value.</td>
+<td>Engineer</td>
+</tr>
+</tbody>
+</table>
+<p>Two surfaces don't exist yet but should:</p>
+<ul>
+<li><strong><code>solves/README.md</code></strong> — onboarding for the solve workflow. When to open one, what each of the three files is for, when to close.</li>
+<li><strong><code>decisions/_template.md</code></strong> — concrete template so new entries follow a consistent shape. (Forty-one decisions exist with informal but consistent format; codifying it removes friction.)</li>
+</ul>
+<p>Both are tracked in the Cycle 4 plan.</p>
+<hr>
+<h2>9. When things break the recipe</h2>
+<p>Edge cases the recipe doesn't cover cleanly. When you hit one, treat the recipe as the default and the deviation as a deliberate, logged choice.</p>
+<p><strong>A pattern doesn't fit Tier 1 or Tier 2.</strong>
+Open a solve. Don't force-fit. Sometimes the answer is &quot;this isn't a component, it's a layout&quot; or &quot;this belongs in the page template, not as its own composition.&quot;</p>
+<p><strong>A new decision contradicts an earlier one.</strong>
+Write a fresh <code>decisions/NN-*.md</code> and link the superseded entry at the top of the new file. Never edit a closed decision — the historical record matters. The most recent decision wins; older ones note &quot;superseded by NN&quot;.</p>
+<p><strong>A 🟢 component needs to evolve.</strong>
+Convention: flip the readiness back to 🟡 with a note pointing at the change, log a fresh decision record explaining what's changing and why, then run <code>/build</code> (modify) → <code>/document</code> → <code>/ready</code> to relock at 🟢. Don't silently mutate a 🟢 component — engineering may already be building against it.</p>
+<p><strong>A solve produces sub-questions that need their own solves.</strong>
+Open them as separate solve workspaces with their own <code>YYMMDD-N</code> prefix. Cross-link in both directions. Keeping solves narrow keeps them tractable.</p>
+<p><strong>A prototype passes seven of the eight gates.</strong>
+That's still a prototype, not a published reference. Either close the gap or stop calling it published. Half-published is a future regression vector.</p>
+<p><strong>Engineering finds an inconsistency at handoff.</strong>
+That's why the handoff call exists. Capture in <code>handoffs/stage-N/questions-log.md</code>, then either resolve into a fresh decision record (if it's a call we own) or fold back into a solve (if it's a question we hadn't seen).</p>
+<hr>
+<h2>10. Lessons feeding back</h2>
+<p>The recipe should improve over time, not stay frozen. Two mechanisms:</p>
+<p><strong>Per-sprint retro.</strong> At the end of each sprint, append a short <em>&quot;if I ran this again&quot;</em> section to <code>handoffs/stage-N/&lt;sprint&gt;.md</code>. One paragraph. What surprised us, what we'd cut, what we'd surface earlier. These are the raw material for the next playbook revision.</p>
+<p><strong>Quarterly playbook review.</strong> Read this file end-to-end against what we actually did the last three months. Anywhere the recipe diverged from reality, either update the recipe or flag the divergence as a known exception. The playbook should never be more idealised than the practice.</p>
+<p><strong>Designer-engineer pairing checkpoint.</strong> Schedule a recurring half-hour with the engineer who owns the slash-commands and infrastructure. The recipe goes stale fastest at the seams (where designer process meets engineer tooling) — the pairing slot keeps both sides current with the other's reality.</p>
+<p><strong>Visual regression sweep (light).</strong> Once per cycle, walk the published docs pages of every 🟢 component and screenshot them against the previous cycle. Drift catches you faster than a full Chromatic-style infra and is cheap enough to keep running.</p>
+<hr>
+<h2>Quick reference</h2>
+<p>If you remember nothing else from this file:</p>
+<ul>
+<li><strong>Tokens before pixels.</strong> Every visual value is a CSS variable. No exceptions.</li>
+<li><strong>Solve before build</strong> when the question is open. Build before solve when the answer is clear.</li>
+<li><strong>Two yes on the rubric</strong> before a pattern becomes a component.</li>
+<li><strong>Decisions are append-only</strong>, numbered, never edited after closure.</li>
+<li><strong>Readiness flips happen only via <code>/ready</code></strong>, never by hand-editing <code>readiness.md</code>.</li>
+<li><strong>Drafts live in <code>dev/</code>, published lives in <code>docs-src/</code>.</strong> <code>/ready</code> is the only thing that crosses the line.</li>
+</ul>
+<p>When the recipe contradicts what feels right, the recipe is the default but not the rule. Diverge deliberately, log the divergence.</p>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

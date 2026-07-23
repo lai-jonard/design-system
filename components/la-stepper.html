@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-stepper</h3>
 
@@ -64,6 +71,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -229,7 +239,7 @@ flow names each step in its own copy.</td>
     </div>
   </div>
 
-  <p style="margin-top:16px;font-size:13px;color:var(--doc-text-3);">The <code>background-color</code> transition uses <code>--dur-fast</code> × <code>--ease</code> from <a href="../../motion.css"><code>motion.css</code></a>. <code>prefers-reduced-motion</code> collapses the transition to instant via an in-source media query.</p>
+  <p style="margin-top:16px;font-size:13px;color:var(--doc-text-3);">The <code>background-color</code> transition uses <code>--dur-fast</code> × <code>--ease</code> from <a href="../motion.css"><code>motion.css</code></a>. <code>prefers-reduced-motion</code> collapses the transition to instant via an in-source media query.</p>
 </div>
 
 <div class="docs-divider"></div>
@@ -289,12 +299,12 @@ pb.steps = [...pb.steps];</div>
   <h3>Notes</h3>
   <div style="display:flex;flex-direction:column;gap:8px;">
     <div class="docs-note"><strong>Quiet infrastructure, not a celebration.</strong> Per-step micro-rewards dilute the completion moment. This component does the orientation + progress work; the celebration when a flow completes belongs to the consumer (e.g. <code>la-unlock-panel</code>). The bar stays visually calm throughout.</div>
-    <div class="docs-note"><strong>No visible labels.</strong> The surrounding flow already tells the user what each step is. Labels live in the <code>aria-label</code> of each circle for screen readers only. Decision traces to <a href="../../solves/260416-2-unlock-onboarding/unlock-onboarding.solve.md"><code>solves/260416-2-unlock-onboarding</code></a> line 37 and <a href="../../solves/260424-1-unlock-flow-progress/unlock-flow-progress.solve-log.md"><code>solves/260424-1-unlock-flow-progress</code></a>.</div>
+    <div class="docs-note"><strong>No visible labels.</strong> The surrounding flow already tells the user what each step is. Labels live in the <code>aria-label</code> of each circle for screen readers only. Decision traces to <code>solves/260416-2-unlock-onboarding</code> line 37 and <code>solves/260424-1-unlock-flow-progress</code>.</div>
     <div class="docs-note"><strong>Reassign, don't mutate.</strong> <code>steps</code> is a Lit property watched by reference. <code>pb.steps[0].status = '…'</code> won't trigger a re-render — always reassign the whole array.</div>
     <div class="docs-note"><strong>Segments, not connected line.</strong> Each pill reads as its own segment with a gap between — no connecting bar. Loose visual coupling mirrors the fact that steps can be skipped without breaking the flow; the gap is exactly where a skipped segment shows as muted grey within the primary fill.</div>
     <div class="docs-note"><strong>Fixed-width segments, not flex-fill.</strong> Each pill is 32px wide; the bar hugs its content rather than stretching to the container. Keeps the stepper visually compact under the question copy in <code>la-unlock-panel</code> rather than fighting it for width.</div>
     <div class="docs-note"><strong>Where it's used.</strong> Primary consumer is the unlock flow (<code>la-unlock-panel</code>). Option value preserved for future onboarding / KYC / sign-up flows that share the linear-step shape.</div>
-    <div class="docs-note"><strong>Open follow-ups.</strong> Backtracking affordance ("go back to step 2") and wiring the <code>processing</code> status for document-upload steps are tracked in <a href="../../solves/260424-1-unlock-flow-progress/unlock-flow-progress.solve.md"><code>solves/260424-1-unlock-flow-progress</code></a>. The la-progress-bar → la-stepper rename has landed.</div>
+    <div class="docs-note"><strong>Open follow-ups.</strong> Backtracking affordance ("go back to step 2") and wiring the <code>processing</code> status for document-upload steps are tracked in <code>solves/260424-1-unlock-flow-progress</code>. The la-progress-bar → la-stepper rename has landed.</div>
   </div>
 </div>
 

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Borders — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item active" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Borders
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/borders.md
+</span>
+<article class="md-body">
+  <h1>Borders</h1>
+<h2>The two-token system</h2>
+<p>Borders in this system are split into two categories with separate tokens. This is one of the most important layout rules.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Category</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-border</code></td>
+<td><code>#DADDEC</code></td>
+<td>Interactive — UI controls</td>
+</tr>
+<tr>
+<td><code>--la-color-border-light</code></td>
+<td><code>#ECEEF5</code></td>
+<td>Structural — page layout</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2><code>--la-color-border</code> — interactive components</h2>
+<p>Used on anything the user directly interacts with or focuses on. The slightly darker value ensures these borders remain legible against surface backgrounds and meet contrast expectations for form controls.</p>
+<p><strong>Use on:</strong></p>
+<ul>
+<li>Buttons (secondary, danger ghost, success ghost)</li>
+<li>Text inputs, selects, checkboxes</li>
+<li>Modals and drawers (outer ring)</li>
+<li>Toast notifications</li>
+<li>Cards with clickable or hoverable states</li>
+<li>Dropdown menus</li>
+</ul>
+<hr>
+<h2><code>--la-color-border-light</code> — structural dividers</h2>
+<p>Used on chrome and structural elements that divide areas of the layout. These borders should recede — they frame content without competing with it.</p>
+<p><strong>Use on:</strong></p>
+<ul>
+<li>Table row dividers (<code>th</code> bottom, <code>td</code> bottom)</li>
+<li>Panel left/right edges</li>
+<li>Section dividers within panels (<code>border-bottom</code> on headers)</li>
+<li>Step strips and breadbars</li>
+<li>Page-level horizontal rules</li>
+</ul>
+<p><strong>Why a separate lighter token:</strong> the table row borders were the original pain point — <code>#DADDEC</code> on every row felt visually noisy, especially in dense contract tables. Dropping to <code>#ECEEF5</code> lets the data breathe. The principle extends to all structural chrome: borders that exist only to separate regions should be quieter than borders on things you interact with.</p>
+<hr>
+<h2>Semantic borders</h2>
+<p>These pair with their corresponding surface and action colours. Used in context-specific states only.</p>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Value</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-color-border-success</code></td>
+<td><code>#32A66E</code></td>
+<td>Success hover on ghost buttons, success alert outlines</td>
+</tr>
+<tr>
+<td><code>--la-color-border-danger</code></td>
+<td><code>#CC4643</code></td>
+<td>Danger hover on ghost buttons, danger alert outlines</td>
+</tr>
+<tr>
+<td><code>--la-color-border-warning</code></td>
+<td><code>#F59E0B</code></td>
+<td>Warning notification bars, warning alert outlines</td>
+</tr>
+<tr>
+<td><code>--la-color-border-focus</code></td>
+<td><code>#3B82F6</code></td>
+<td>Input focus ring</td>
+</tr>
+<tr>
+<td><code>--la-color-border-active</code></td>
+<td><code>#18181B</code></td>
+<td>Active/selected outline — sidebar rail, active tab, selected card</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Hover border rule for ghost buttons</h2>
+<p>On hover, ghost buttons (danger, success) switch their border from <code>--la-color-border</code> to the semantic border colour. This signals intent before action:</p>
+<pre><code class="language-css">.btn-danger-ghost:hover  { background: var(--la-color-surface-danger);  border-color: var(--la-color-border-danger); }
+.btn-success-ghost:hover { background: var(--la-color-surface-success); border-color: var(--la-color-border-success); }
+</code></pre>
+<p>The border is always kept on hover — never removed. Removing borders on hover creates a layout shift and makes the button feel unstable.</p>
+<hr>
+<h2>Border width</h2>
+<ul>
+<li><strong>1px</strong> — standard for all borders</li>
+<li><strong>1.5px</strong> — table header bottom rule only (slightly heavier to mark the boundary between header and data)</li>
+<li><strong>Dashed borders</strong> — reserved for <strong>drop / upload / add targets only</strong> (see below). Never for structural chrome, content cards, controls, or passive empty states.</li>
+</ul>
+<hr>
+<h2>When to use a dashed border</h2>
+<p><strong>Dashed = a surface that accepts something — a drop zone, upload slot, or &quot;add&quot; target.</strong>
+The test: <em>can I drop or add something into this box right now?</em> If yes → dashed. If it's just
+empty, or it's real content / chrome → <strong>solid</strong>.</p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>Border</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upload / drop zone, &quot;Add X&quot; slot, signature-placement spot</td>
+<td><strong>Dashed</strong></td>
+</tr>
+<tr>
+<td>Passive empty state (&quot;No deals yet&quot;, &quot;no items yet&quot;)</td>
+<td><strong>Solid hairline</strong> (<code>--la-color-border-light</code>), optionally on a subtle tint — calm, not provisional</td>
+</tr>
+<tr>
+<td>Content card, populated row</td>
+<td>Solid <code>--la-color-border</code></td>
+</tr>
+<tr>
+<td>Structural divider / chrome</td>
+<td>Solid <code>--la-color-border-light</code></td>
+</tr>
+<tr>
+<td>Buttons, inputs, tabs</td>
+<td>Solid <code>--la-color-border</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>States of a drop target:</strong></p>
+<ul>
+<li><strong>Resting</strong> — dashed, <code>--la-color-border</code>.</li>
+<li><strong>Active</strong> (hover / drag-over) — border → <code>--la-color-border-active</code>, faint tinted fill (&quot;release here&quot;).</li>
+<li><strong>Filled</strong> — flips to a <strong>solid</strong> border; the dash only ever signalled &quot;empty, drop here&quot;.</li>
+</ul>
+<p>This mirrors the mainstream convention (Figma/Drive/Trello drop targets are dashed; Linear/Stripe
+render passive empty states as solid hairlines or tinted panels, reserving the dash for add/drop).</p>
+<h2>Dashed border — standard treatment (rendering)</h2>
+<p>CSS <code>border: dashed</code> can't control dash length, gap, cap style, or stroke alignment, so the
+standard dashed border is rendered as an <strong>SVG <code>rect</code> overlay</strong>:</p>
+<ul>
+<li><strong>Dash 3 · gap 5 · round dashcaps · 1px centred stroke</strong>, colour <code>--la-color-border</code>.</li>
+<li><strong>Corner radius follows the host shape</strong> — the overlay's <code>rx</code>/<code>ry</code> read a <code>--dash-radius</code> variable, which the host sets to the same token it uses for its own <code>border-radius</code>, so the dashes always trace the element's corners.</li>
+<li>The stroke is <strong>non-scaling</strong> (<code>vector-effect=&quot;non-scaling-stroke&quot;</code>), so the 1px width and the 3/5 rhythm stay constant on responsive/full-width elements.</li>
+</ul>
+<p><strong>Reusable utility:</strong> <code>dev/prototypes/dash-border.css</code> (class <code>.dash-border</code>). Tunable per host via
+<code>--dash-len</code> / <code>--dash-gap</code> / <code>--dash-width</code> / <code>--dash-color</code> / <code>--dash-radius</code>; add <code>.is-active</code> for the
+drag-over state. Usage:</p>
+<pre><code class="language-html">&lt;!-- host: position: relative; --dash-radius: var(--la-radius-lg); border-radius: var(--dash-radius); --&gt;
+&lt;svg class=&quot;dash-border&quot; preserveAspectRatio=&quot;none&quot; aria-hidden=&quot;true&quot;&gt;
+  &lt;rect x=&quot;0&quot; y=&quot;0&quot; width=&quot;100%&quot; height=&quot;100%&quot; vector-effect=&quot;non-scaling-stroke&quot;&gt;&lt;/rect&gt;
+&lt;/svg&gt;
+</code></pre>
+<p>When the dashed border moves into a component (e.g. <code>la-upload</code> drop zone), bake the same
+SVG-overlay treatment in rather than reverting to <code>border: dashed</code>.</p>
+<hr>
+<h2>No border on filled buttons</h2>
+<p>Primary, neutral, and dark buttons use <code>border-color</code> matching their background, making the border invisible. This is intentional — filled buttons do not need a visible border to feel solid. The border exists in the DOM only so that button sizes remain consistent when switching between filled and outlined variants.</p>
+<h2>Concentric radius on nested surfaces</h2>
+<p>When a rounded element sits inside another rounded element, the corners must stay concentric — parallel curves, not a tight corner fighting a loose one. Mismatched nested radii are the single most common thing that makes a layout feel subtly off.</p>
+<p><strong>Rule:</strong> <code>outer radius = inner radius + padding between them</code>.</p>
+<pre><code>/* card padding: --la-space-sm (8px), inner button radius: --la-radius-sm */
+card    → border-radius: calc(var(--la-radius-sm) + var(--la-space-sm));
+button  → border-radius: var(--la-radius-sm);
+</code></pre>
+<p>Applies when the surfaces are close together. Once the padding is large (≳24px) the layers read as separate surfaces — pick each radius independently from the scale rather than forcing the maths. Check this on any card-with-inner-control: <code>la-insight-card</code>, <code>la-panel</code>, <code>la-offer-banner</code>.</p>
+<p>See decision 83.</p>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

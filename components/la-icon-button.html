@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-icon-button</h3>
 
@@ -64,6 +71,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -407,10 +417,10 @@ la-icon-button::part(button) {
 <div style="display:flex;flex-direction:column;gap:8px;">
 <div class="docs-note"><strong>Fully rounded by default</strong> — <code style="font-family:monospace;font-size:11px;">la-icon-button</code> uses <code style="font-family:monospace;font-size:11px;">--la-radius-circle</code> (50%) so the button renders as a circle on every size. Override via <code style="font-family:monospace;font-size:11px;">::part(button)</code> if you need square corners (see usage example).</div>
 <div class="docs-note"><strong>Four variants</strong> — <code style="font-family:monospace;font-size:11px;">default</code> is the most common choice (transparent with hover fill, used in widget headers and toolbars). <code style="font-family:monospace;font-size:11px;">primary</code> and <code style="font-family:monospace;font-size:11px;">danger</code> are for high-emphasis actions — use sparingly. <code style="font-family:monospace;font-size:11px;">outline</code> sits between them for secondary emphasis.</div>
-<div class="docs-note"><strong>Bold weight for dots-three</strong> — Phosphor's <code style="font-family:monospace;font-size:11px;">ph-dots-three</code> renders too thin at our button sizes. Use <code style="font-family:monospace;font-size:11px;">ph-bold ph-dots-three</code> instead. Other Phosphor icons stay at regular weight. Logged in <a href="../../CLAUDE.md">CLAUDE.md</a>.</div>
+<div class="docs-note"><strong>Bold weight for dots-three</strong> — Phosphor's <code style="font-family:monospace;font-size:11px;">ph-dots-three</code> renders too thin at our button sizes. Use <code style="font-family:monospace;font-size:11px;">ph-bold ph-dots-three</code> instead. Other Phosphor icons stay at regular weight. Logged in CLAUDE.md.</div>
 <div class="docs-note"><strong>Label is required</strong> — <code style="font-family:monospace;font-size:11px;">la-icon-button</code> has no visible text. Without a <code style="font-family:monospace;font-size:11px;">label</code> prop, screen readers announce nothing. The component warns in the console (<code style="font-family:monospace;font-size:11px;">[la-icon-button] Missing label</code>) on first render if the prop is omitted or empty — treat this as a required field.</div>
 <div class="docs-note"><strong>Sibling to la-button</strong> — use <a href="./la-button.html"><code style="font-family:monospace;font-size:11px;">la-button</code></a> for text-labelled actions. <code style="font-family:monospace;font-size:11px;">la-icon-button</code> is specifically for icon-only triggers in dense surfaces. If you need an icon <em>and</em> text, use <code style="font-family:monospace;font-size:11px;">la-button</code> with its <code style="font-family:monospace;font-size:11px;">icon-left</code> or <code style="font-family:monospace;font-size:11px;">icon-right</code> slot.</div>
-<div class="docs-note"><strong>Shared size scale</strong> — the three sizes use <code style="font-family:monospace;font-size:11px;">--la-button-height-*</code> tokens shared with <code style="font-family:monospace;font-size:11px;">la-button</code>. A <code style="font-family:monospace;font-size:11px;">size="sm"</code> text button and a <code style="font-family:monospace;font-size:11px;">size="sm"</code> icon button in the same row will align at 28px. Logged in <a href="../../decisions/12-button-padding-off-scale.md">decisions/12</a>.</div>
+<div class="docs-note"><strong>Shared size scale</strong> — the three sizes use <code style="font-family:monospace;font-size:11px;">--la-button-height-*</code> tokens shared with <code style="font-family:monospace;font-size:11px;">la-button</code>. A <code style="font-family:monospace;font-size:11px;">size="sm"</code> text button and a <code style="font-family:monospace;font-size:11px;">size="sm"</code> icon button in the same row will align at 28px. Logged in decisions/12.</div>
 <div class="docs-note"><strong>pressed vs expanded</strong> — use <code style="font-family:monospace;font-size:11px;">pressed</code> for binary on/off toggles (e.g. "Show resolved items", mute, bookmark). Sets <code style="font-family:monospace;font-size:11px;">aria-pressed</code> and applies <code style="font-family:monospace;font-size:11px;">--la-color-bg-active</code> as the background. Swap the icon between outline (<code style="font-family:monospace;font-size:11px;">ph ph-*</code>) and fill (<code style="font-family:monospace;font-size:11px;">ph-fill ph-*</code>) in the slot to reinforce the state visually. Use <code style="font-family:monospace;font-size:11px;">expanded</code> for disclosure triggers (dropdown, sidebar collapse) — it sets <code style="font-family:monospace;font-size:11px;">aria-expanded</code> and does not apply a persistent active background.</div>
 <div class="docs-note"><strong>Expanded attribute quirk</strong> — to set <code style="font-family:monospace;font-size:11px;">expanded=false</code> you need JS property assignment (<code style="font-family:monospace;font-size:11px;">el.expanded = false</code>). HTML attribute presence is always truthy, so <code style="font-family:monospace;font-size:11px;">expanded="false"</code> as an attribute does <em>not</em> work. Leave the attribute off for "not a toggle", or bind it dynamically in your framework.</div>
 </div>

@@ -28,13 +28,14 @@
    */const s=globalThis;let i$2 = class i extends y$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0;}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const r=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=D(r,this.renderRoot,this.renderOptions);}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(true);}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(false);}render(){return E}};i$2._$litElement$=true,i$2["finalized"]=true,s.litElementHydrateSupport?.({LitElement:i$2});const o$2=s.litElementPolyfillSupport;o$2?.({LitElement:i$2});(s.litElementVersions??=[]).push("4.2.2");
 
   /*
-    ⚠️ KEEP IN SYNC with dev/la-tokens-root.css
+    SOURCE OF TRUTH for every la-* token.
 
-    This file scopes the la-* token set to :host inside every Lit component's
+    This file scopes the token set to :host inside every Lit component's
     shadow root. Light-DOM pages (prototypes, docs, previews) can't read those
-    shadow-scoped values, so the same token names and values are mirrored at
-    :root in dev/la-tokens-root.css. When you change or add a token here,
-    update dev/la-tokens-root.css to match.
+    shadow-scoped values, so the same set is exposed at :root in two GENERATED
+    mirrors — dev/la-tokens-root.css and docs-src/tokens.css — written by
+    scripts/generate-token-css.cjs on every npm build (`prebuild` hook).
+    Never edit the mirrors by hand; edit here and run `npm run build`.
   */
   const tokens = i$5 `
   :host {

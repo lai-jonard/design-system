@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Iconography — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item active" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Iconography
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/iconography.md
+</span>
+<article class="md-body">
+  <h1>Iconography</h1>
+<h2>Library</h2>
+<p><strong>Phosphor Icons</strong> — loaded via the local vendor files.</p>
+<pre><code class="language-html">&lt;!-- Page-level (both weights must be loaded at document level — shadow DOM imports via `iconStyles` do not reach slotted light-DOM icons) --&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../assets/vendor/phosphor/regular/style.css&quot;&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;../assets/vendor/phosphor/fill/style.css&quot;&gt;
+</code></pre>
+<p>Usage:</p>
+<pre><code class="language-html">&lt;i class=&quot;ph ph-house&quot;&gt;&lt;/i&gt;           &lt;!-- Regular (default) --&gt;
+&lt;i class=&quot;ph-fill ph-house&quot;&gt;&lt;/i&gt;      &lt;!-- Fill (tinted surfaces, active/selected) --&gt;
+&lt;i class=&quot;ph-bold ph-dots-three&quot;&gt;&lt;/i&gt; &lt;!-- Bold (only for glyphs too thin at small sizes) --&gt;
+</code></pre>
+<hr>
+<h2>Weight rules</h2>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Class</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Default / resting</td>
+<td><code>ph</code></td>
+<td>Icons at rest — most buttons, nav items at rest, inline content icons</td>
+</tr>
+<tr>
+<td>Active / selected</td>
+<td><code>ph-fill</code></td>
+<td>Toggled on, currently-selected nav item</td>
+</tr>
+<tr>
+<td><strong>Tinted surface</strong></td>
+<td><strong><code>ph-fill</code></strong></td>
+<td><strong>Always — inside <code>la-badge</code>, <code>la-alert</code>, <code>la-toast</code>, and any future status-tinted component. The filled glyph matches the solid tinted surface and reads as one visual block; an outline icon against a tinted background feels visually disconnected</strong></td>
+</tr>
+<tr>
+<td>Bold</td>
+<td><code>ph-bold</code></td>
+<td>Only for glyphs that render too thin at small sizes — currently <code>ph-dots-three</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Colour rule:</strong> icons always inherit <code>color</code> from their parent — never hardcode an icon colour directly.</p>
+<hr>
+<h2>Sizing</h2>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>Size</th>
+<th>Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Inline with body text</td>
+<td>16px</td>
+<td><code>--la-font-size-xl</code></td>
+</tr>
+<tr>
+<td>Button with icon</td>
+<td>14px</td>
+<td><code>--la-font-size-lg</code></td>
+</tr>
+<tr>
+<td>Badge / label icon</td>
+<td>13px</td>
+<td><code>--la-font-size-md</code> — slightly larger than the 11px badge label for presence</td>
+</tr>
+<tr>
+<td>Empty state</td>
+<td>32px</td>
+<td>Hero-scale</td>
+</tr>
+</tbody>
+</table>
+<p>Icons inherit <code>font-size</code> from the parent element. Override only when the icon sits outside a standard text context.</p>
+<hr>
+<h2>Status &amp; variant icons</h2>
+<p>Canonical icon per variant across <strong>every status-tinted component</strong> (<code>la-badge</code>, <code>la-alert</code>, future <code>la-toast</code>). If a component uses a status variant, reach for the icon in this table — don't invent a new one. Always pair with <code>ph-fill</code> on tinted surfaces.</p>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Canonical icon</th>
+<th>Reasoning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>danger</code></td>
+<td><code>ph-warning-octagon</code></td>
+<td>Octagon = stop-sign shape; reads as &quot;urgent action required&quot;</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td><code>ph-warning-circle</code></td>
+<td>Circle reads softer — &quot;heads up, not critical&quot;</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td><code>ph-check-circle</code></td>
+<td>Standard across UIs — confirmed / resolved</td>
+</tr>
+<tr>
+<td><code>info</code></td>
+<td><code>ph-info</code></td>
+<td>Plain info glyph — &quot;informational / in-progress / awaiting&quot;</td>
+</tr>
+<tr>
+<td><code>neutral</code></td>
+<td><code>ph-minus-circle</code></td>
+<td>&quot;Inactive / unavailable / no action&quot; — reach for <code>ph-lock</code> specifically when the meaning is <em>locked</em> (legal area not yet unlocked)</td>
+</tr>
+<tr>
+<td><code>accent</code></td>
+<td><strong>context-specific</strong></td>
+<td>Accent = category, not status. Default to <code>ph-tag</code> when no better glyph fits; override with a specific category glyph (e.g. <code>ph-file-text</code> for doc type, <code>ph-buildings</code> for org type)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rule:</strong> if a new component introduces an icon that isn't in this table or the reference below, log it here before shipping. A drift between components (e.g. one uses <code>ph-warning-circle</code> for danger, another uses <code>ph-warning-octagon</code>) is a design-system bug — every audit catches it.</p>
+<hr>
+<h2>Common icons reference</h2>
+<p>Organised by category — same icons as before, now grouped so the file scales as the library grows.</p>
+<h3>Status &amp; feedback</h3>
+<table>
+<thead>
+<tr>
+<th>Meaning</th>
+<th>Icon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Success / confirm / resolved</td>
+<td><code>ph-check-circle</code></td>
+</tr>
+<tr>
+<td>Warning (attention, not critical)</td>
+<td><code>ph-warning-circle</code></td>
+</tr>
+<tr>
+<td>Danger (urgent, critical)</td>
+<td><code>ph-warning-octagon</code></td>
+</tr>
+<tr>
+<td>Info (informational / in-progress)</td>
+<td><code>ph-info</code></td>
+</tr>
+<tr>
+<td>Pending / processing (time-based)</td>
+<td><code>ph-clock</code></td>
+</tr>
+<tr>
+<td>Error (failed operation)</td>
+<td><code>ph-x-circle</code></td>
+</tr>
+<tr>
+<td>Inactive / disabled</td>
+<td><code>ph-minus-circle</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Navigation</h3>
+<table>
+<thead>
+<tr>
+<th>Meaning</th>
+<th>Icon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Back</td>
+<td><code>ph-arrow-left</code></td>
+</tr>
+<tr>
+<td>Forward / next</td>
+<td><code>ph-arrow-right</code></td>
+</tr>
+<tr>
+<td>Close / dismiss</td>
+<td><code>ph-x</code></td>
+</tr>
+<tr>
+<td>More options</td>
+<td><code>ph-dots-three</code> (use <code>ph-bold</code> weight — default ph is too thin)</td>
+</tr>
+</tbody>
+</table>
+<h3>Actions</h3>
+<table>
+<thead>
+<tr>
+<th>Meaning</th>
+<th>Icon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Add / new</td>
+<td><code>ph-plus</code></td>
+</tr>
+<tr>
+<td>Edit</td>
+<td><code>ph-pencil</code></td>
+</tr>
+<tr>
+<td>Delete</td>
+<td><code>ph-trash</code></td>
+</tr>
+<tr>
+<td>Send</td>
+<td><code>ph-paper-plane-tilt</code></td>
+</tr>
+<tr>
+<td>Download</td>
+<td><code>ph-download-simple</code></td>
+</tr>
+<tr>
+<td>Upload</td>
+<td><code>ph-upload-simple</code></td>
+</tr>
+<tr>
+<td>Search</td>
+<td><code>ph-magnifying-glass</code></td>
+</tr>
+<tr>
+<td>Settings</td>
+<td><code>ph-gear</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Form selection</h3>
+<p>Glyphs that mark a chosen item inside a list / picker / option group. Distinct from the status canon — selection is <em>structural</em> (which item is chosen), status is <em>semantic</em> (success / resolved / done). Reach for the plain <code>ph-check</code>, never <code>ph-check-circle</code>, to keep the two signals separable.</p>
+<table>
+<thead>
+<tr>
+<th>Meaning</th>
+<th>Icon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Listbox option selected (la-select / la-option)</td>
+<td><code>ph-check</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Weight:</strong> default <code>ph</code> (regular). Inline with the option label; never standalone.</p>
+<h3>Sort (data tables)</h3>
+<p>Canonical glyphs for sort affordances in <code>la-data-table</code> and any future sortable data primitive. All three sit in the same header cell — the idle glyph becomes the direction glyph when the column is active.</p>
+<table>
+<thead>
+<tr>
+<th>Meaning</th>
+<th>Icon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sortable, not sorted (idle affordance)</td>
+<td><code>ph-arrows-down-up</code></td>
+</tr>
+<tr>
+<td>Sorted ascending</td>
+<td><code>ph-caret-up</code></td>
+</tr>
+<tr>
+<td>Sorted descending</td>
+<td><code>ph-caret-down</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Weight:</strong> default <code>ph</code> (regular). Do not use <code>ph-fill</code> — sort carets are header hints, not tinted-surface glyphs.</p>
+<p><strong>Size:</strong> inherits from the header cell (<code>--la-font-size-md</code> in data-table). The icon is <code>aria-hidden=&quot;true&quot;</code>; screen readers read the <code>aria-sort</code> attribute on the <code>&lt;th&gt;</code> instead.</p>
+<h3>Content &amp; state</h3>
+<table>
+<thead>
+<tr>
+<th>Meaning</th>
+<th>Icon</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Document</td>
+<td><code>ph-file-text</code></td>
+</tr>
+<tr>
+<td>Lock (explicitly locked state)</td>
+<td><code>ph-lock</code></td>
+</tr>
+<tr>
+<td>Unlock</td>
+<td><code>ph-lock-open</code></td>
+</tr>
+<tr>
+<td>Category / tag</td>
+<td><code>ph-tag</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Document page — status badge</h3>
+<p>The document status appears as a <code>la-badge</code> in the header meta row alongside entity, category, and legal area. The Phosphor icon goes in the <code>icon</code> slot. Never a standalone icon or icon button — the label text is required to disambiguate &quot;Analysed&quot; from the resolved-insight <code>ph-check-circle</code> that appears on insight cards.</p>
+<table>
+<thead>
+<tr>
+<th>Status</th>
+<th>Badge variant</th>
+<th>Icon</th>
+<th>Icon weight</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Analysed (ready)</td>
+<td><code>success</code></td>
+<td><code>ph-check-circle</code></td>
+<td>fill</td>
+</tr>
+<tr>
+<td>Processing</td>
+<td><code>info</code></td>
+<td><code>ph-spinner-gap</code> (CSS <code>spin</code> animation)</td>
+<td>regular</td>
+</tr>
+<tr>
+<td>Expired / Missing signature</td>
+<td><code>danger</code></td>
+<td><code>ph-warning-circle</code></td>
+<td>fill</td>
+</tr>
+<tr>
+<td>Flagged by AI</td>
+<td><code>warning</code></td>
+<td><code>ph-warning</code></td>
+<td>fill</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Note on <code>danger</code> badge icon:</strong> <code>ph-warning-circle</code> (circle) is used here instead of the canonical <code>ph-warning-octagon</code> (stop sign) — the <code>la-alert</code> banner below the header already carries the full-weight danger signal; the badge is a softer label. This is an intentional divergence from the status variant canon.</p>
+<hr>
+<h2>Workflow</h2>
+<p>The four workflow commands each interact with this file:</p>
+<ul>
+<li><strong><code>/build</code></strong> — reads this file during scout; uses canonical icons during build; flags any new icon usage for <code>/ready</code> to log</li>
+<li><strong><code>/document</code></strong> — reads this file during scout; icons in docs snapshots and usage examples must match the canonical mapping</li>
+<li><strong><code>/audit</code></strong> — Gate 8 checks source and preview icon usage against this file; drift is reported as a standards-compliance violation</li>
+<li><strong><code>/ready</code></strong> — the only command that edits this file. When a new icon/meaning emerges, <code>/ready</code> Step 4 (&quot;capture new rules&quot;) is where it lands</li>
+</ul>
+<p>Treat this file as the single source of truth for icon meaning across the system. If it's stale, fix it before adding new icons that would compound the drift.</p>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

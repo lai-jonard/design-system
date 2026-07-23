@@ -15,11 +15,16 @@
 
   <header class="doc-topbar">
     <div class="doc-topbar-inner">
-      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
-        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
-      </a>
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
       <nav class="doc-topnav">
-        <a href="../index.html">Overview</a>
+        <a href="../docs/">Docs</a>
         <a href="../foundations/">Foundations</a>
         <a href="../components/" class="active">Components</a>
         <a href="../pages/">Pages</a>
@@ -28,14 +33,16 @@
     </div>
   </header>
 
-  
-  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
-    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
-  </button>
-  
-
   <div class="page-container">
-    
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
 <nav class="docs-nav" id="docs-nav">
   <h3 class="docs-nav-title">la-upload</h3>
 
@@ -70,6 +77,9 @@
   </div>
 </nav>
 
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
 
     <div class="page-content">
       <div class="page-content-inner">
@@ -566,9 +576,9 @@ upload.addEventListener(<span class="str">'la-retry-transfer'</span>, () =&gt; {
 <div id="notes" class="docs-section">
   <h3>Notes</h3>
   <div style="display:flex;flex-direction:column;gap:8px;">
-    <div class="docs-note"><strong>Composition over inheritance.</strong> <code>la-upload</code> wraps <code>la-upload-box</code>. The drop zone, validation, file-rejection error state, and upload spinner all live in the inner box; this layer adds the Drive button and the transfer-failure alert. Reach for <code>la-upload-box</code> directly when you need the drop zone alone (no Drive button, no host-driven transfer-error). See <a href="../../decisions/48-upload-compose-not-extend.md"><code>decisions/48-upload-compose-not-extend.md</code></a>.</div>
+    <div class="docs-note"><strong>Composition over inheritance.</strong> <code>la-upload</code> wraps <code>la-upload-box</code>. The drop zone, validation, file-rejection error state, and upload spinner all live in the inner box; this layer adds the Drive button and the transfer-failure alert. Reach for <code>la-upload-box</code> directly when you need the drop zone alone (no Drive button, no host-driven transfer-error). See <code>decisions/48-upload-compose-not-extend.md</code>.</div>
     <div class="docs-note"><strong>Drive OAuth is a host concern.</strong> The Drive button only fires <code>la-upload-drive</code>. The host owns the popup, picker, token caching, and silent re-consent on token expiry. Sprint 1 keeps Drive tokens local in the existing <code>LAI.GoogleApi</code> module — the component stays unaware.</div>
-    <div class="docs-note"><strong>Two error categories, never simultaneous.</strong> File-rejection (type / size / multi-file) is owned by <code>la-upload-box</code> and stays inside its own surface with a re-select affordance. Transfer-failure (network / timeout) is host-driven via <code>transfer-error</code> with its own Retry affordance above the zone. The two states model different failure modes and surface differently. See <a href="../../decisions/49-upload-two-tier-error-model.md"><code>decisions/49-upload-two-tier-error-model.md</code></a>.</div>
+    <div class="docs-note"><strong>Two error categories, never simultaneous.</strong> File-rejection (type / size / multi-file) is owned by <code>la-upload-box</code> and stays inside its own surface with a re-select affordance. Transfer-failure (network / timeout) is host-driven via <code>transfer-error</code> with its own Retry affordance above the zone. The two states model different failure modes and surface differently. See <code>decisions/49-upload-two-tier-error-model.md</code>.</div>
     <div class="docs-note"><strong>Multi-file drop is rejected.</strong> Sprint 1 is single-file v1. Dropping more than one file fires <code>la-reject</code> with <code>detail.reason: 'multi'</code> and shows "Only one file can be uploaded at a time." in the drop zone.</div>
     <div class="docs-note"><strong>Both source buttons are equal weight.</strong> Browse files and Google Drive both render as <code>variant="secondary"</code> — neither is biased as the primary action because they are parallel choices. The actual primary in any host context is whatever submit / resolve action the host modal owns.</div>
     <div class="docs-note"><strong>Typical hosts.</strong> Insight-modal evidence upload, add-person avatar, cap-table import, unlock-step document attachment. Each host sets its own <code>accept</code> per Sprint 1 (PDF / DOCX default, PDF / DOCX / XLSX / CSV for cap table; 50 MB across the board).</div>

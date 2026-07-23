@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsive design — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item active" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Responsive design
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/responsive-design.md
+</span>
+<article class="md-body">
+  <h1>Responsive design</h1>
+<p>Guidelines for making layouts work across screen sizes.</p>
+<hr>
+<h2>Breakpoints</h2>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Width</th>
+<th>Context</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mobile</td>
+<td>&lt; 768px</td>
+<td>Single-column layout, stacked cards</td>
+</tr>
+<tr>
+<td>Tablet</td>
+<td>768px - 1023px</td>
+<td>Simplified grid, collapsible sidebar</td>
+</tr>
+<tr>
+<td>Desktop</td>
+<td>&gt;= 1024px</td>
+<td>Full layout with sidebar and multi-column grids</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Component-level responsiveness — prefer container queries</h2>
+<p>For components that need to adapt visually based on the space their parent gives them (not the viewport), use a <strong>container query</strong> on <code>:host</code>, not a media query.</p>
+<pre><code class="language-css">:host {
+  display: block;
+  container-type: inline-size;
+}
+
+/* Narrow container — stack rather than sit side-by-side */
+@container (max-width: 240px) {
+  .alert {
+    flex-direction: column;
+  }
+}
+</code></pre>
+<p><strong>Why:</strong> a component placed inside a narrow sidebar behaves differently to the same component placed in a wide main column. Media queries only know the viewport — they can't tell the sidebar from the main. Container queries let the component respond to its real, local context without any props or viewport checks.</p>
+<p><strong>First used by:</strong> <code>la-alert</code> — stacks icon above body below 240px container width. Pattern to follow for any future component whose layout should adapt to local container size (cards, widgets, list items).</p>
+<p><strong>Don't reach for it when</strong> the breakpoint is about the <em>whole page</em> layout (sidebar collapse, dashboard reflow) — that's a media-query concern and lives at the layout level, not the component.</p>
+<hr>
+<h2>Grid patterns</h2>
+<ul>
+<li>Use <code>auto-fill</code> / <code>auto-fit</code> with <code>minmax()</code> for card grids — never fixed column counts.</li>
+<li>Cards reflow naturally as the viewport narrows.</li>
+</ul>
+<pre><code class="language-css">display: grid;
+grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+gap: 14px;
+</code></pre>
+<ul>
+<li>Full-width components (lists, panels) span all columns with <code>grid-column: 1 / -1</code>.</li>
+</ul>
+<hr>
+<h2>Layout shifts at breakpoints</h2>
+<h3>Dashboard</h3>
+<ul>
+<li><strong>Desktop (&gt;= 1024px):</strong> flex row — sidebar + main content side by side</li>
+<li><strong>Tablet / mobile (&lt; 768px):</strong> column stack — sidebar collapses, content fills full width</li>
+</ul>
+<h3>Two-column layouts (e.g. data room)</h3>
+<ul>
+<li><strong>Desktop:</strong> <code>grid-template-columns: 1fr 1fr</code></li>
+<li><strong>Below 800px:</strong> single column — panels stack vertically</li>
+</ul>
+<h3>Sidebar</h3>
+<ul>
+<li><strong>Desktop:</strong> always visible, fixed width</li>
+<li><strong>Tablet:</strong> collapsible, toggled via hamburger icon</li>
+<li><strong>Mobile:</strong> hidden by default, slides in as overlay</li>
+</ul>
+<hr>
+<h2>Touch targets</h2>
+<ul>
+<li>Minimum <strong>44px</strong> height and width for all interactive elements on touch devices.</li>
+<li>Applies to buttons, links, list items, checkboxes, and any tappable surface.</li>
+<li>Spacing between adjacent touch targets should prevent accidental taps.</li>
+</ul>
+<hr>
+<h2>Content rules</h2>
+<ul>
+<li><strong>No horizontal scroll</strong> — content must fit viewport width at every breakpoint.</li>
+<li><strong>Content max-width remains 1280px</strong> — centred with <code>margin: 0 auto</code> on wide screens.</li>
+<li><strong>Images and media</strong> scale down with <code>max-width: 100%</code>.</li>
+<li><strong>Tables</strong> use horizontal scroll within their container if they overflow, but the page itself never scrolls horizontally.</li>
+</ul>
+<hr>
+<h2>Test widths</h2>
+<p>Always check layouts at these widths:</p>
+<table>
+<thead>
+<tr>
+<th>Width</th>
+<th>Represents</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>375px</td>
+<td>Mobile (iPhone SE / small Android)</td>
+</tr>
+<tr>
+<td>768px</td>
+<td>Tablet (iPad portrait)</td>
+</tr>
+<tr>
+<td>1280px</td>
+<td>Desktop (standard laptop)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Component-specific breakpoints</h2>
+<p>Occasionally a component needs a sub-breakpoint inside a system band. Log those here so they don't drift.</p>
+<table>
+<thead>
+<tr>
+<th>Component</th>
+<th>Breakpoint</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>la-drawer</code></td>
+<td>480px viewport</td>
+<td>Right and left drawers become <code>width: 100vw</code> (corner radius collapses to 0). Top/bottom drawers are already full-width at every viewport, so the rule doesn't apply to them.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Rule:</strong> introduce a component-specific breakpoint only when the system mobile/tablet/desktop bands don't carry the right distinction. Log the pixel value + purpose here; never leave the literal undocumented in a single component file. See decisions/ for architectural rationale.</p>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

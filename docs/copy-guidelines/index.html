@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Copy guidelines — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item active" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Copy guidelines
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/copy-guidelines.md
+</span>
+<article class="md-body">
+  <h1>Copy guidelines</h1>
+<p>Rules for all user-facing text in the design system and products built with it.</p>
+<hr>
+<h2>Language</h2>
+<ul>
+<li><strong>British English always</strong> — authorised, organisation, licence (noun), colour, behaviour, defence</li>
+<li><strong>Active voice always</strong> — &quot;We updated your settings&quot; not &quot;Your settings have been updated&quot;</li>
+<li><strong>Never all-caps.</strong> See capitalisation rules below.</li>
+</ul>
+<hr>
+<h2>Capitalisation</h2>
+<p>LawAdvisor uses a two-register system. The key question is: <strong>does this copy name a surface or control, or does it explain something to the user?</strong></p>
+<h3>Title Case — structural labels</h3>
+<p>Use when the copy <em>names</em> a product surface, control, or legal artefact. Every principal word capitalised.</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Navigation items</td>
+<td>Governance, Employment, Fundraising</td>
+</tr>
+<tr>
+<td>Product area names</td>
+<td>Cap Table, Due Diligence Pack, Company Manual</td>
+</tr>
+<tr>
+<td>Modal titles (feature/screen names)</td>
+<td>Data Room Settings, Add Employee</td>
+</tr>
+<tr>
+<td>Table column headers</td>
+<td>Document Name, Last Modified, Status</td>
+</tr>
+<tr>
+<td>Tab labels</td>
+<td>Urgent, Proactive, Resolved</td>
+</tr>
+<tr>
+<td>Short action CTAs (buttons)</td>
+<td>Send Invite, Mark Resolved, Review Unconfirmed Entries</td>
+</tr>
+</tbody>
+</table>
+<h3>Sentence case — guidance and explanatory copy</h3>
+<p>Use when the copy <em>explains</em> something to the user. First word capitalised, the rest lowercase.</p>
+<table>
+<thead>
+<tr>
+<th>Element</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insight headlines</td>
+<td>Cap table has unconfirmed entries</td>
+</tr>
+<tr>
+<td>Insight modal titles (when the title <em>is</em> the description)</td>
+<td>Articles of incorporation missing founder signatures</td>
+</tr>
+<tr>
+<td>Helper text / hints</td>
+<td>Upload evidence before sharing this pack</td>
+</tr>
+<tr>
+<td>&quot;Why this matters&quot; subheadings</td>
+<td>Why this matters</td>
+</tr>
+<tr>
+<td>Empty state text</td>
+<td>No documents yet. Upload your first to get started.</td>
+</tr>
+<tr>
+<td>Section explanations</td>
+<td>Some shareholders need supporting documents</td>
+</tr>
+<tr>
+<td>Body copy, error messages, success moments</td>
+<td>We couldn't save your changes. Check your connection and try again.</td>
+</tr>
+</tbody>
+</table>
+<h3>Edge cases</h3>
+<ul>
+<li><strong>Legal proper nouns</strong> are always Title Case regardless of context — &quot;Cap Table&quot;, &quot;Shareholders' Agreement&quot;, &quot;Articles of Incorporation&quot; are named documents, not style choices.</li>
+<li><strong>Modal titles that describe content</strong> (not a feature name) stay sentence case — insight titles fall here.</li>
+<li><strong>Badge labels</strong> are one word — case is moot. Treat as Title Case for consistency.</li>
+<li><strong>Loading / progress labels</strong> (&quot;Resolving…&quot;, &quot;Uploading…&quot;) are one word — no case decision needed.</li>
+</ul>
+<h3>Why this pattern — research context</h3>
+<p>Major design systems (Material Design, Microsoft Fluent, PatternFly) recommend sentence case everywhere for simplicity and localisation. LawAdvisor diverges intentionally: the product vocabulary includes genuine proper nouns (legal documents, commercial terms) where Title Case is standard professional practice. The split-register rule formalises this rather than leaving it implicit.</p>
+<p><strong>Sources:</strong></p>
+<ul>
+<li><a href="https://learn.microsoft.com/en-us/style-guide/capitalization">Microsoft Style Guide — Capitalisation</a></li>
+<li><a href="https://www.patternfly.org/ux-writing/capitalization/">PatternFly — Capitalisation</a></li>
+<li><a href="https://m1.material.io/style/writing.html">Material Design — Writing</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/writing">Apple HIG — Writing</a></li>
+<li><a href="https://nielsendesignsystem.com/foundations/writing-guidelines/">Nielsen Design System — Writing Guidelines</a></li>
+</ul>
+<hr>
+<h2>Calls to action</h2>
+<ul>
+<li><strong>Verb-first, Title Case:</strong> &quot;Send for Signature&quot;, &quot;Add Employee&quot;, &quot;View Details&quot;</li>
+<li><strong>No jargon</strong> — use plain language the user already knows:</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>Instead of</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>commence</td>
+<td>start</td>
+</tr>
+<tr>
+<td>verify</td>
+<td>check</td>
+</tr>
+<tr>
+<td>submit</td>
+<td>send</td>
+</tr>
+<tr>
+<td>utilise</td>
+<td>use</td>
+</tr>
+<tr>
+<td>terminate</td>
+<td>end</td>
+</tr>
+<tr>
+<td>prior to</td>
+<td>before</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>One primary CTA per view</strong> — never show two primary buttons simultaneously. Use secondary or ghost for additional actions.</li>
+</ul>
+<hr>
+<h2>Tone and voice</h2>
+<ul>
+<li><strong>Say &quot;we&quot;</strong> in product UI — never refer to the product name in third person</li>
+<li><strong>Always use the person's name</strong> — never &quot;the recipient&quot;, &quot;the employee&quot;, or &quot;the user&quot;</li>
+<li><strong>Body copy: 1-2 sentences max</strong> — if it needs more, the UI is doing too much in one place</li>
+</ul>
+<hr>
+<h2>Contextual copy patterns</h2>
+<h3>Insight explanations (modal &quot;Why this matters&quot;)</h3>
+<p>Written by the AI legal engine. The explanation surfaces in the insight modal only — the card shows no explanation text.</p>
+<p><strong>Ceiling: 3 sentences, 60 words.</strong> Structure: (1) what the problem is, (2) why it creates legal or commercial risk, (3) what it affects or what to do next. One paragraph, no lists.</p>
+<blockquote>
+<p>&quot;A shareholders' agreement defines how decisions are made and what happens if a founder leaves. Without one, each founder's rights in a dispute fall back to company law defaults — which rarely match what was agreed. Most investors require a SHA to be in place before closing a pre-seed or seed round.&quot;</p>
+</blockquote>
+<p>Never write more than 3 sentences. Do not explain what a document type is in general terms — focus on the specific risk for this company. Avoid hedging language (&quot;may&quot;, &quot;could potentially&quot;).</p>
+<h3>Empty states</h3>
+<p>Inviting and actionable. Tell the user what to do next, not just that nothing is here.</p>
+<blockquote>
+<p>&quot;No documents yet. Upload your first file to get started.&quot;</p>
+</blockquote>
+<p>Never: &quot;No data available.&quot;</p>
+<h3>Success moments</h3>
+<p>Brief, affirming. The user did the thing — acknowledge it and move on.</p>
+<blockquote>
+<p>&quot;Done.&quot;
+&quot;All sorted.&quot;
+&quot;Document sent.&quot;</p>
+</blockquote>
+<p>Never: &quot;Your document has been successfully submitted for processing.&quot;</p>
+<h3>Error states</h3>
+<p>Honest, helpful, unflustered. Say what happened, then say what the user can do.</p>
+<blockquote>
+<p>&quot;We couldn't save your changes. Check your connection and try again.&quot;</p>
+</blockquote>
+<p>Never: &quot;An unexpected error occurred. Error code: 500.&quot;</p>
+<hr>
+<h2>Formatting</h2>
+<ul>
+<li><strong>Dates:</strong> 15 Apr 2026 (day month year, no commas, abbreviated month)</li>
+<li><strong>Numbers:</strong> use commas for thousands (1,000) and full stops for decimals (3.5)</li>
+<li><strong>Lists:</strong> use sentence fragments, no full stops unless the item is a complete sentence</li>
+</ul>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

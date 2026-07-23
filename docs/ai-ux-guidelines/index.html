@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI UX guidelines — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item active" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · AI UX guidelines
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/ai-ux-guidelines.md
+</span>
+<article class="md-body">
+  <h1>LawAdvisor AI — UX Guidelines</h1>
+<p><strong>Version 1.1 · April 2026</strong></p>
+<p>A working reference for how LawAdvisor AI surfaces are designed, written, and evaluated. Use it as a spec when building new AI features, and as a checklist when auditing existing ones.</p>
+<p><strong>Scope:</strong> Sprints 1–10. Our AI is backend-driven — the UI surfaces results rather than exposing the model. The four client-facing AI outputs covered here are:</p>
+<ul>
+<li><strong>Insights</strong> (Sprint 5) — AI-generated cards surfacing legal problems and suggested actions, with severity tags, deadlines, and source references back to document pages.</li>
+<li><strong>Document analysis</strong> (Sprint 6) — key terms and obligations extracted from uploaded documents, entity associations, linked insights.</li>
+<li><strong>Auto-level analysis</strong> — background re-scanning when new documents are uploaded, surfaced via the processing widget.</li>
+<li><strong>DD Readiness</strong> (Sprint 10) — an AI-driven indicator showing how close a founder is to being fundraise-ready, severity-gated with a remaining issues count.</li>
+</ul>
+<p>Patterns relevant to future surfaces (chat, agents, drafting) are flagged <strong>Deferred</strong> so we don't lose track of them.</p>
+<p><strong>Sources referenced throughout:</strong></p>
+<ul>
+<li><a href="https://www.shapeof.ai">The Shape of AI</a> — UX pattern library by Emily Campbell</li>
+<li><a href="https://www.microsoft.com/en-us/ai/principles-and-approach">Microsoft Responsible AI Principles</a></li>
+<li><a href="https://www.ibm.com/design/ai/">IBM Design for AI</a></li>
+<li><a href="https://pair.withgoogle.com/guidebook">Google People + AI Guidebook</a></li>
+<li><a href="https://developer.apple.com/design/human-interface-guidelines/machine-learning">Apple HIG — Machine Learning</a></li>
+<li><a href="https://artificialintelligenceact.eu/">EU AI Act — high-risk system obligations</a> (relevant as we sell into legal)</li>
+<li><a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/">ICO Guidance on AI and data protection</a> (UK context)</li>
+</ul>
+<hr>
+<h2>Part 1: Core principles</h2>
+<p>Six non-negotiables. These are our ethical floor — everything below must respect them.</p>
+<h3>1.1 Accountability</h3>
+<p>The AI augments the founder. It never makes the final legal call. Every AI-driven workflow has a human owner on the LawAdvisor side (PM or engineering lead), and every founder can override, dismiss, or escalate any AI output.</p>
+<p><strong>In practice:</strong></p>
+<ul>
+<li>Every Insight, extracted term, and DD Readiness signal must be dismissable or correctable by the founder.</li>
+<li>Feedback signals (&quot;this is wrong&quot;, &quot;this isn't relevant&quot;) flow back to the product team, not just engineering telemetry.</li>
+<li>Internal ownership is documented per AI surface — who reviews failures, who decides when to pull a feature.</li>
+</ul>
+<p><strong>Reference:</strong> Microsoft Responsible AI — Accountability · IBM Design for AI — Accountability focal area.</p>
+<h3>1.2 Explainability</h3>
+<p>A founder must always be able to trace <em>why</em> the AI surfaced something. No AI output appears without a reference trail back to the source.</p>
+<p><strong>In practice:</strong></p>
+<ul>
+<li>Every Insight links to the source document and page.</li>
+<li>Every extracted term highlights the clause it came from.</li>
+<li>DD Readiness signals break down into the underlying issues that produced them.</li>
+<li>When the AI can't explain itself (low confidence, unclear source), say so — don't fabricate a citation.</li>
+</ul>
+<p><strong>Reference:</strong> Microsoft Responsible AI — Transparency · <a href="https://pair.withgoogle.com/chapter/explainability-trust/">Google PAIR — Explainability + Trust</a>.</p>
+<h3>1.3 Fairness &amp; bias minimisation</h3>
+<p>Legal AI bias disadvantages users by jurisdiction, business type, or practice area. We check for it actively.</p>
+<p><strong>In practice:</strong></p>
+<ul>
+<li>Regular sampling of Insights and DD Readiness outputs across jurisdictions and company structures.</li>
+<li>Feedback mechanism on every AI surface lets founders flag skewed or irrelevant output.</li>
+<li>Training/tuning datasets are documented — we know what went in.</li>
+</ul>
+<p><strong>Reference:</strong> <a href="https://www.microsoft.com/en-us/research/project/ai-fairness-checklist/">Microsoft — Fairness Checklist (AIF360 related)</a> · <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/guidance-on-ai-and-data-protection/how-do-we-ensure-fairness-in-ai/">ICO — Fairness in AI</a>.</p>
+<h3>1.4 Data rights &amp; confidentiality</h3>
+<p>Founders share commercially sensitive material. Data control is a core feature, not a compliance checkbox.</p>
+<p><strong>In practice:</strong></p>
+<ul>
+<li>Uploaded document content is never used to train shared models without explicit firm-level consent.</li>
+<li>Settings surface what the AI has scanned and lets founders delete it.</li>
+<li>GDPR + applicable regional regimes (UK GDPR, AU Privacy Act) fully respected.</li>
+<li>Legal professional privilege implications flagged to legal counsel before any cross-firm feature ships.</li>
+</ul>
+<p><strong>Reference:</strong> <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/">ICO — AI and data protection</a> · <a href="https://artificialintelligenceact.eu/article/10/">EU AI Act Art. 10</a> (data governance).</p>
+<h3>1.5 Transparency &amp; disclosure</h3>
+<p>Founders always know when output is AI-generated. This is especially important because founders might forward our output to investors, lawyers, or counterparties.</p>
+<p><strong>In practice:</strong></p>
+<ul>
+<li>Every AI-generated card, term, or indicator carries a consistent AI label.</li>
+<li>Action-specific verbs over generic badges (&quot;Risks found by AI&quot;, &quot;Terms identified by AI&quot;) — see Pattern 2.6.</li>
+<li>Exports and shares of AI output retain the disclosure.</li>
+</ul>
+<p><strong>Reference:</strong> Shape of AI — <a href="https://www.shapeof.ai/pattern/disclosure">Disclosure</a> · <a href="https://artificialintelligenceact.eu/article/50/">EU AI Act Art. 50</a> (transparency obligations).</p>
+<h3>1.6 Human oversight &amp; agency</h3>
+<p>The AI never closes the loop on a legal issue — the founder does. The AI surfaces; the founder decides.</p>
+<p><strong>In practice:</strong></p>
+<ul>
+<li>No AI action in sprints 1–10 is irreversible.</li>
+<li>Founders can dismiss, resolve, or escalate any Insight.</li>
+<li>The auto re-scan process is visible — never silent — and its outputs can be questioned.</li>
+<li>When we ship actions in the future (filing, sending, committing), friction scales with risk.</li>
+</ul>
+<p><strong>Reference:</strong> <a href="https://artificialintelligenceact.eu/article/14/">EU AI Act Art. 14</a> (human oversight) · <a href="https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/">Microsoft — Human-AI Interaction Guidelines</a>.</p>
+<hr>
+<h2>Part 2: Patterns we use</h2>
+<p>Organised by <a href="https://www.shapeof.ai">Shape of AI</a> taxonomy. Each pattern has: what it is, how we use it, our copy examples, and a reference link. Patterns not relevant to sprints 1–10 are listed under <strong>Deferred</strong> at the end.</p>
+<hr>
+<h3>2.1 Attachments (Tuners)</h3>
+<p><strong>What it is:</strong> Users ground the AI in specific documents rather than relying on general model knowledge. Reduces hallucination.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/attachments">Shape of AI — Attachments</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Document upload is the primary input to our AI. No Insight exists without an associated document.</li>
+<li>Upload surface shows what file types are supported, what happens after upload, and where the output will appear.</li>
+<li>Founders can see every document the AI has ingested in a single place.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>✅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upload CTA</td>
+<td>&quot;Add document&quot;</td>
+</tr>
+<tr>
+<td>Empty state</td>
+<td>&quot;No documents yet. Add one to get started.&quot;</td>
+</tr>
+<tr>
+<td>Processing</td>
+<td>&quot;We're reviewing your documents.&quot;</td>
+</tr>
+<tr>
+<td>Post-upload affirmation</td>
+<td>&quot;Got it. We'll let you know what we find.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't say &quot;Submit&quot; or &quot;Upload&quot; on the CTA — &quot;Add document&quot; is our standard.</li>
+<li>Don't quote time estimates (&quot;This takes ~3 minutes&quot;). Let processing speak for itself via the widget.</li>
+</ul>
+<hr>
+<h3>2.2 Citations (Governors) — <strong>P0</strong></h3>
+<p><strong>What it is:</strong> Every AI claim traces back to the source material. Non-negotiable for any product surfacing legal information.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/citations">Shape of AI — Citations</a> · <a href="https://pair.withgoogle.com/chapter/explainability-trust/">Google PAIR — Explainability</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Every Insight card deep-links to the exact page of the document it references. Not the document — the <strong>page</strong>.</li>
+<li>Extracted terms (Document analysis) highlight the specific clause in the source.</li>
+<li>DD Readiness breaks down into citable issues, each of which cites its document(s).</li>
+<li>When a citation is missing or ambiguous, we say so explicitly — we don't hide the gap.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Citation label</td>
+<td>&quot;From Founders Agreement, p.4&quot;</td>
+<td>&quot;Source&quot;</td>
+</tr>
+<tr>
+<td>Multi-source</td>
+<td>&quot;From 2 documents&quot; (click to expand)</td>
+<td>&quot;Multiple sources&quot;</td>
+</tr>
+<tr>
+<td>Missing citation</td>
+<td>&quot;We found this but couldn't link it to a specific page.&quot;</td>
+<td><em>(silent)</em></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design standard:</strong></p>
+<ul>
+<li>Link format: <code>[Document name, p.X]</code> — always include page number when available.</li>
+<li>Clicking a citation opens the document at that page with the referenced passage highlighted.</li>
+<li>Citations are visually subordinate to the insight content but always visible — never behind a hover or tooltip.</li>
+</ul>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't surface an Insight with no citation. If we can't cite it, we don't show it.</li>
+<li>Don't link to &quot;the document&quot; generally — always link to the page.</li>
+</ul>
+<hr>
+<h3>2.3 Footprints (Trust Builders) — <strong>P0</strong></h3>
+<p><strong>What it is:</strong> The audit trail from an AI output back through the steps and data that produced it.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/footprints">Shape of AI — Footprints</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Every Insight shows: <em>what document triggered it, what clause, what the AI identified, what severity was assigned, when it was generated</em>.</li>
+<li>Document analysis shows what was extracted and from where.</li>
+<li>The processing widget shows what's being analysed right now and what's finished.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>✅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Footprint header</td>
+<td>&quot;Why we flagged this&quot;</td>
+</tr>
+<tr>
+<td>Trigger description</td>
+<td>&quot;Spotted in your Shareholders Agreement uploaded on 12 April.&quot;</td>
+</tr>
+<tr>
+<td>Generation timestamp</td>
+<td>&quot;Found on 15 April.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Design standard:</strong></p>
+<ul>
+<li>Footprints are reviewable (a log), not just a live trace.</li>
+<li>When the source document is deleted, dependent Insights are either removed or clearly marked &quot;source no longer available.&quot;</li>
+<li>Founders can export their footprint trail for any Insight (useful when sharing with a lawyer).</li>
+</ul>
+<hr>
+<h3>2.4 Caveat (Trust Builders) — <strong>P0</strong></h3>
+<p><strong>What it is:</strong> Contextual notes about the AI's limitations, placed at the point of decision-making — not in a footer.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/caveat">Shape of AI — Caveat</a> · <a href="https://pair.withgoogle.com/chapter/mental-models/">Google PAIR — Mental Models</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Every Insight severity has calibrated caveat language (see Pattern 2.9 — Severity Signaling).</li>
+<li>DD Readiness carries a caveat about what it does and doesn't cover.</li>
+<li>Extracted terms carry a caveat that they need human review before being treated as authoritative.</li>
+</ul>
+<p><strong>Voice note:</strong> Caveats follow the LawAdvisor voice — calm, plain-English, guidance not authority. The doc we inherited from suggests &quot;precise, measured, avoid humour&quot; — <strong>we don't adopt that register</strong>. It sounds like a barrister. Ours sounds like a capable co-founder.</p>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>✅ (ours)</th>
+<th>❌ (barrister register)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insight footer</td>
+<td>&quot;Worth checking with your lawyer before acting on this.&quot;</td>
+<td>&quot;This output does not constitute legal advice.&quot;</td>
+</tr>
+<tr>
+<td>DD Readiness</td>
+<td>&quot;This gives you a rough picture — your lawyer or investor may weigh things differently.&quot;</td>
+<td>&quot;Readiness scores are indicative only and should not be relied upon.&quot;</td>
+</tr>
+<tr>
+<td>Extracted terms</td>
+<td>&quot;Have a quick read to make sure we got this right.&quot;</td>
+<td>&quot;Extracted content should be verified for accuracy.&quot;</td>
+</tr>
+<tr>
+<td>Jurisdiction gap</td>
+<td>&quot;We didn't find anything specific to [jurisdiction] — worth double-checking.&quot;</td>
+<td>&quot;Jurisdictional variance may apply.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't bury caveats in a footer disclaimer. Place them where the decision happens.</li>
+<li>Don't use &quot;may not&quot; hedging (&quot;This may or may not be accurate&quot;). It undermines everything.</li>
+<li>Don't over-caveat. If every card has three warnings, founders stop reading them.</li>
+</ul>
+<hr>
+<h3>2.5 Disclosure (Trust Builders) — <strong>P0</strong></h3>
+<p><strong>What it is:</strong> Consistent labelling of AI-generated content across the product.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/disclosure">Shape of AI — Disclosure</a> · <a href="https://artificialintelligenceact.eu/article/50/">EU AI Act Art. 50</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Action-specific verbs rather than a generic &quot;AI&quot; badge.</li>
+<li>Disclosure persists on export, share, and print.</li>
+<li>Every AI surface has a visible sparkle icon (see Pattern 2.7 — Iconography).</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Surface</th>
+<th>✅</th>
+<th>❌</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Insights section header</td>
+<td>&quot;Risks we found&quot; with sparkle icon</td>
+<td>&quot;AI Insights&quot;</td>
+</tr>
+<tr>
+<td>Extracted terms</td>
+<td>&quot;Terms we pulled out&quot; with sparkle icon</td>
+<td>&quot;AI-extracted Terms&quot;</td>
+</tr>
+<tr>
+<td>DD Readiness</td>
+<td>&quot;Your DD readiness&quot; with sparkle icon</td>
+<td>&quot;AI-generated Readiness Score&quot;</td>
+</tr>
+<tr>
+<td>Processing widget</td>
+<td>&quot;We're reviewing your documents&quot;</td>
+<td>&quot;AI is analysing&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Pattern:</strong> We say &quot;we&quot; (the LawAdvisor product) rather than &quot;AI&quot; as the actor, but the sparkle icon makes the AI provenance unambiguous. This matches our voice (&quot;smart co-founder who handles the legal side&quot;) without hiding what's happening.</p>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't use &quot;AI&quot; as a user-facing noun if &quot;we&quot; + sparkle icon conveys the same thing.</li>
+<li>Don't remove disclosure on exports or shares. If a founder forwards an Insights summary, the AI label travels with it.</li>
+</ul>
+<hr>
+<h3>2.6 Consent &amp; data ownership (Trust Builders) — <strong>P0</strong></h3>
+<p><strong>What it is:</strong> Clear, visible controls for what the AI accesses, retains, and uses.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/consent">Shape of AI — Consent</a> · <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/">ICO — AI and data protection</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Consent wording appears at document upload — not buried in ToS.</li>
+<li>Settings area shows: documents the AI has scanned, data retention state, and whether content is used for model improvement.</li>
+<li>Delete is honoured — not just flagged. When a founder deletes a document, dependent AI outputs are removed.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>✅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Upload consent</td>
+<td>&quot;We'll review this to find risks specific to your business. You can delete it anytime.&quot;</td>
+</tr>
+<tr>
+<td>Settings header</td>
+<td>&quot;What we have on file&quot;</td>
+</tr>
+<tr>
+<td>Delete confirmation</td>
+<td>&quot;Delete this document? Anything we found in it will also be removed.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't pre-tick consent boxes.</li>
+<li>Don't treat deletion as &quot;mark as deleted.&quot; Actually remove the content from the AI's working set.</li>
+</ul>
+<hr>
+<h3>2.7 Iconography (Identifiers)</h3>
+<p><strong>What it is:</strong> Consistent visual signalling of AI-powered content across the interface.</p>
+<p><strong>Reference:</strong> <a href="https://www.shapeof.ai/pattern/iconography">Shape of AI — Iconography</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>One AI icon (sparkle) used consistently — on Insight cards, extracted term chips, DD Readiness, processing widget.</li>
+<li>Same colour token across all instances (see design system).</li>
+<li>Icon appears at the feature boundary, not on every element inside.</li>
+</ul>
+<p><strong>Pattern:</strong></p>
+<ul>
+<li>✅ Sparkle icon next to &quot;Risks we found&quot; section header.</li>
+<li>❌ Sparkle icon on every individual Insight card within that section.</li>
+</ul>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't introduce a second AI icon for different features. One icon, consistent.</li>
+<li>Don't animate the icon ambiently. It's a marker, not a distraction.</li>
+</ul>
+<hr>
+<h3>2.8 Feedback loop — <strong>P0, new pattern</strong></h3>
+<p><strong>What it is:</strong> A way for founders to signal when the AI got it wrong. Not in the Shape of AI taxonomy but essential for our context.</p>
+<p><strong>Reference:</strong> <a href="https://pair.withgoogle.com/chapter/feedback-controls/">Google PAIR — Feedback + Control</a> · <a href="https://www.microsoft.com/en-us/haxtoolkit/guideline/encourage-granular-feedback/">Microsoft — Human-AI Interaction Guideline 15</a>.</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Every Insight card has a &quot;Not relevant&quot; / &quot;This isn't right&quot; action.</li>
+<li>Feedback is captured in a structured way (reason codes + free text) and surfaced to the product team.</li>
+<li>Founders get a quick acknowledgement — they don't hear silence.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>✅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Feedback action</td>
+<td>&quot;Mark as not relevant&quot;</td>
+</tr>
+<tr>
+<td>Reason picker</td>
+<td>&quot;Why? (helps us improve)&quot; with options: <em>&quot;Doesn't apply to us&quot;</em>, <em>&quot;We've already handled this&quot;</em>, <em>&quot;This is wrong&quot;</em>, <em>&quot;Other&quot;</em></td>
+</tr>
+<tr>
+<td>Acknowledgement</td>
+<td>&quot;Thanks — we'll use this to improve.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't use a thumbs-up/down alone without a reason code — it tells us something is wrong but not what.</li>
+<li>Don't silently swallow feedback. Acknowledge it.</li>
+</ul>
+<hr>
+<h3>2.9 Severity signaling — <strong>P0, new pattern</strong></h3>
+<p><strong>What it is:</strong> How we express the severity and confidence of an AI-surfaced issue. Our Insights carry severity tags and DD Readiness is severity-gated, so this needs a standard.</p>
+<p><strong>Reference:</strong> <a href="https://pair.withgoogle.com/chapter/errors-failing/">Google PAIR — Confidence</a> · <a href="https://developer.apple.com/design/human-interface-guidelines/machine-learning">Apple HIG — Machine Learning</a> (calibrating confidence).</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>Three severity levels: <strong>High</strong> (needs attention soon), <strong>Medium</strong> (worth reviewing), <strong>Low</strong> (informational).</li>
+<li>Severity is calibrated by: potential impact × confidence that the issue applies.</li>
+<li>Severity drives visual treatment (colour, icon) and caveat wording.</li>
+<li>When the AI is unsure of severity, it defaults to Medium — not High.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Severity</th>
+<th>Label</th>
+<th>Caveat example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>High</td>
+<td>&quot;Needs attention&quot;</td>
+<td>&quot;Worth sorting this before you raise.&quot;</td>
+</tr>
+<tr>
+<td>Medium</td>
+<td>&quot;Worth a look&quot;</td>
+<td>&quot;Have a read when you've got a moment.&quot;</td>
+</tr>
+<tr>
+<td>Low</td>
+<td>&quot;For your awareness&quot;</td>
+<td>&quot;Nothing urgent — just so you know.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't use &quot;Critical&quot; / &quot;Urgent&quot; / &quot;Warning&quot; — urgency erodes trust (per voice rules).</li>
+<li>Don't mix severity language with deadline language. A High-severity item isn't the same as a 7-day deadline — both can exist independently.</li>
+<li>Don't show raw confidence percentages (&quot;78% confident&quot;) — they falsely suggest precision.</li>
+</ul>
+<hr>
+<h3>2.10 Re-scan transparency — <strong>P0, new pattern</strong></h3>
+<p><strong>What it is:</strong> Our auto-level analysis re-scans existing documents when new ones are uploaded. Silent re-scans are a trust landmine — founders see issue counts change without explanation.</p>
+<p><strong>Reference:</strong> <a href="https://pair.withgoogle.com/chapter/explainability-trust/">Google PAIR — System Behaviour Updates</a> · Shape of AI — <a href="https://www.shapeof.ai/pattern/memory">Memory</a> (related but not exact).</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>The processing widget surfaces what's being re-scanned, not just &quot;analysing.&quot;</li>
+<li>When an Insight is added/removed/changed as a result of re-scan, the founder sees a change indicator.</li>
+<li>History of re-scans is visible in the footprint trail.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Context</th>
+<th>✅</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Re-scan in progress</td>
+<td>&quot;We're taking another look now that you've added [Document].&quot;</td>
+</tr>
+<tr>
+<td>New issue surfaced by re-scan</td>
+<td>&quot;Found after reviewing [Document].&quot;</td>
+</tr>
+<tr>
+<td>Issue resolved by re-scan</td>
+<td>&quot;Resolved after your [Document] was added.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't change issue counts silently. Always show what changed and why.</li>
+<li>Don't lump re-scan into a generic &quot;processing&quot; state. Be specific about what triggered it.</li>
+</ul>
+<hr>
+<h3>2.11 Aggregate confidence (DD Readiness) — <strong>P0, new pattern</strong></h3>
+<p><strong>What it is:</strong> DD Readiness rolls up many underlying signals into one indicator. A single number (&quot;72% ready&quot;) implies precision we don't have. We need a standard for how to express aggregate AI judgments.</p>
+<p><strong>Reference:</strong> <a href="https://pair.withgoogle.com/chapter/explainability-trust/">Google PAIR — Summary Metrics</a> · Apple HIG — Machine Learning (expressing uncertainty).</p>
+<p><strong>How we use it:</strong></p>
+<ul>
+<li>DD Readiness is expressed as a <strong>band</strong> with a <strong>remaining issue count</strong>, not a raw percentage.</li>
+<li>Bands: <em>Just getting started</em> → <em>Making progress</em> → <em>Almost there</em> → <em>Ready</em>.</li>
+<li>The indicator always shows: band, count of remaining issues, and one-line framing.</li>
+<li>Founders can drill down into the issues that make up the band.</li>
+</ul>
+<p><strong>Copy examples:</strong></p>
+<table>
+<thead>
+<tr>
+<th>Band</th>
+<th>Framing</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Just getting started</td>
+<td>&quot;You're early — let's work through the essentials first.&quot;</td>
+</tr>
+<tr>
+<td>Making progress</td>
+<td>&quot;Good progress. [N] things still need sorting.&quot;</td>
+</tr>
+<tr>
+<td>Almost there</td>
+<td>&quot;Nearly ready. [N] things left to clear up.&quot;</td>
+</tr>
+<tr>
+<td>Ready</td>
+<td>&quot;You're in good shape.&quot;</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don'ts:</strong></p>
+<ul>
+<li>Don't show a raw percentage. It invites investor conversations like &quot;you're only 72%?&quot; that the AI can't defend.</li>
+<li>Don't use &quot;score&quot; language (&quot;Readiness score: B+&quot;). This isn't a grade.</li>
+<li>Don't conceal the underlying issues. The band is a shortcut, not a black box.</li>
+</ul>
+<hr>
+<h2>Part 3: Deferred patterns</h2>
+<p>Relevant to future surfaces (chat, agents, drafting, search). Listed here so we don't lose track. <strong>Not in scope for sprints 1–10.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Shape of AI link</th>
+<th>Revisit when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Suggestions / Templates / Follow Up / Initial CTA / Example Gallery</td>
+<td><a href="https://www.shapeof.ai/pattern-category/wayfinders">Wayfinders</a></td>
+<td>Chat surface scoped</td>
+</tr>
+<tr>
+<td>Summary / Synthesis / Inline Action / Expand / Transform / Madlibs</td>
+<td><a href="https://www.shapeof.ai/pattern-category/inputs">Inputs</a></td>
+<td>Drafting or user-triggered summarisation ships</td>
+</tr>
+<tr>
+<td>Connectors / Modes / Voice &amp; Tone / Memory / Memory Controls</td>
+<td><a href="https://www.shapeof.ai/pattern-category/tuners">Tuners</a></td>
+<td>External data sources or user-configurable AI ships</td>
+</tr>
+<tr>
+<td>Verification / Action Plan / Controls / Draft Mode / Stream of Thought / Cost Estimates</td>
+<td><a href="https://www.shapeof.ai/pattern-category/governors">Governors</a></td>
+<td>Agentic workflows or AI-taken actions ship</td>
+</tr>
+<tr>
+<td>Watermark</td>
+<td><a href="https://www.shapeof.ai/pattern-category/trust-builders">Trust Builders</a></td>
+<td>AI produces client-deliverable documents</td>
+</tr>
+<tr>
+<td>Name / Avatar / Personality</td>
+<td><a href="https://www.shapeof.ai/pattern-category/identifiers">Identifiers</a></td>
+<td>Chat assistant with a persona ships</td>
+</tr>
+<tr>
+<td>Conversation design (all of IBM's framework)</td>
+<td><a href="https://www.ibm.com/design/ai/conversation/">IBM Conversational UX</a></td>
+<td>Chat surface scoped</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Part 4: Audit checklist</h2>
+<p>Use this to evaluate any existing or new AI flow. Pass = the answer is a confident yes. Anything else is an action item.</p>
+<h3>Insights</h3>
+<ul>
+<li>[ ] Every Insight card carries a sparkle icon and action-specific disclosure language</li>
+<li>[ ] Every Insight links to a specific document <strong>page</strong> (not the document broadly)</li>
+<li>[ ] When a citation can't be resolved, the card says so rather than hiding the gap</li>
+<li>[ ] Severity uses our three-band system (High / Medium / Low) with calibrated caveat copy</li>
+<li>[ ] Founders can dismiss or mark-as-resolved every Insight</li>
+<li>[ ] Every Insight has a &quot;Not relevant&quot; / &quot;This isn't right&quot; feedback action with reason codes</li>
+<li>[ ] The footprint trail shows <em>why</em> the Insight was flagged, <em>when</em>, and from <em>what</em></li>
+<li>[ ] Caveat copy sounds like a calm co-founder, not a barrister (see voice test below)</li>
+<li>[ ] Exported or shared Insights retain their AI disclosure</li>
+</ul>
+<h3>Document analysis</h3>
+<ul>
+<li>[ ] Extracted terms carry sparkle icon and action-specific disclosure</li>
+<li>[ ] Each extracted term highlights the specific clause in the source document</li>
+<li>[ ] Terms carry a &quot;have a quick read to make sure we got this right&quot; caveat</li>
+<li>[ ] Founders can flag an extraction as wrong, with reason codes</li>
+<li>[ ] Deleting the source document removes dependent extractions</li>
+</ul>
+<h3>Auto-level analysis (processing widget)</h3>
+<ul>
+<li>[ ] The widget tells founders <em>what document</em> triggered the re-scan, not just &quot;processing&quot;</li>
+<li>[ ] Issue count changes are accompanied by a visible reason (new finding / resolved finding)</li>
+<li>[ ] Founders can see a history of re-scans in the footprint trail</li>
+<li>[ ] Re-scan does not silently change severity or citations without indication</li>
+</ul>
+<h3>DD Readiness</h3>
+<ul>
+<li>[ ] Expressed as a band + remaining issue count, <strong>not</strong> a raw percentage</li>
+<li>[ ] Band label and framing follow our four-band standard</li>
+<li>[ ] Founders can drill into the underlying issues</li>
+<li>[ ] Caveat explains that investors / lawyers may weigh things differently</li>
+<li>[ ] Sparkle icon and disclosure present</li>
+</ul>
+<h3>Cross-cutting</h3>
+<ul>
+<li>[ ] Upload flow shows consent wording in-context (not buried in ToS)</li>
+<li>[ ] Settings area shows &quot;what we have on file&quot; and allows deletion</li>
+<li>[ ] Deleted documents are actually removed from the AI's working set within a defined window</li>
+<li>[ ] All caveat copy passes the voice gut-check (see below)</li>
+</ul>
+<h3>Voice gut-check (from UX writing skill)</h3>
+<p>For every piece of AI-surface copy:</p>
+<ol>
+<li>Would a calm, capable co-founder say this?</li>
+<li>Does it add stress, distance, or authority?</li>
+<li>Can a founder scan it in 2 seconds?</li>
+<li>Is there a next step if something needs action?</li>
+<li>Does it sound like a legal document or system alert?</li>
+</ol>
+<p>If 2 or 5 are yes, rewrite. If 1, 3, 4 are no, rewrite.</p>
+<hr>
+<h2>Appendix: Reading list</h2>
+<p>Background reading for anyone picking up this doc cold.</p>
+<p><strong>Start here:</strong></p>
+<ul>
+<li>Shape of AI — <a href="https://www.shapeof.ai">the full pattern library</a>, especially Governors and Trust Builders</li>
+<li>Google PAIR Guidebook — <a href="https://pair.withgoogle.com/chapter/explainability-trust/">Explainability + Trust chapter</a></li>
+</ul>
+<p><strong>Go deeper:</strong></p>
+<ul>
+<li>Microsoft — <a href="https://www.microsoft.com/en-us/research/project/guidelines-for-human-ai-interaction/">Guidelines for Human-AI Interaction (18 guidelines)</a></li>
+<li>IBM Design for AI — <a href="https://www.ibm.com/design/ai/fundamentals/">Fundamentals</a></li>
+<li>Apple HIG — <a href="https://developer.apple.com/design/human-interface-guidelines/machine-learning">Machine Learning</a></li>
+</ul>
+<p><strong>Regulatory context:</strong></p>
+<ul>
+<li>EU AI Act — <a href="https://artificialintelligenceact.eu/">full text + article index</a></li>
+<li>ICO — <a href="https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/artificial-intelligence/">AI and data protection guidance (UK)</a></li>
+<li>NIST AI Risk Management Framework — <a href="https://www.nist.gov/itl/ai-risk-management-framework">AI RMF 1.0</a></li>
+</ul>
+<hr>
+<h2>Change log</h2>
+<ul>
+<li><strong>v1.1 (April 2026)</strong> — Rewritten for sprints 1–10 scope. Cut deferred patterns to an appendix. Added four new patterns (Feedback Loop, Severity Signaling, Re-scan Transparency, Aggregate Confidence). Replaced &quot;Personality&quot; guidance with a pointer to the UX writing skill. Added external references throughout.</li>
+<li><strong>v1.0 (April 2026)</strong> — Initial draft synthesised from Shape of AI, Microsoft, IBM.</li>
+</ul>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

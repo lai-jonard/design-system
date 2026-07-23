@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-app-shell — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item active" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · la-app-shell
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/la-app-shell.md
+</span>
+<article class="md-body">
+  <h1>la-app-shell</h1>
+<p>The root layout container for every screen. Positions the sidebar on the left and a content area on the right. All pages render inside this shell.</p>
+<hr>
+<h2>Layout structure</h2>
+<pre><code>la-app-shell
+├── sidebar slot          ← la-sidebar goes here
+└── content area
+    ├── page header       ← shown when show-header is set
+    │   ├── back button   ← shown when show-back is set
+    │   ├── breadcrumbs / page title
+    │   └── header-actions slot
+    └── body row
+        ├── main slot     ← scrollable page content
+        └── aside slot    ← optional right panel (show-aside)
+</code></pre>
+<ul>
+<li>The sidebar and page header never scroll.</li>
+<li>The main content area scrolls independently (overflow-y: auto).</li>
+<li>No horizontal scroll anywhere in the shell.</li>
+</ul>
+<hr>
+<h2>Slots</h2>
+<table>
+<thead>
+<tr>
+<th>Slot</th>
+<th>Required</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>sidebar</code></td>
+<td>Yes (practically)</td>
+<td>Place <code>&lt;la-sidebar&gt;</code> here</td>
+</tr>
+<tr>
+<td><code>main</code></td>
+<td>Yes</td>
+<td>The page content</td>
+</tr>
+<tr>
+<td><code>header-actions</code></td>
+<td>No</td>
+<td>Right-aligned content in the page header — buttons, processing widgets, etc. Only rendered when <code>show-header</code> is set</td>
+</tr>
+<tr>
+<td><code>aside</code></td>
+<td>No</td>
+<td>Right panel content — widgets, tools, details. Only rendered when <code>show-aside</code> is set</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Properties</h2>
+<table>
+<thead>
+<tr>
+<th>Property</th>
+<th>Attribute</th>
+<th>Type</th>
+<th>Default</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pageTitle</code></td>
+<td><code>page-title</code></td>
+<td><code>string</code></td>
+<td><code>''</code></td>
+<td>Text shown in the page header when no breadcrumbs are set</td>
+</tr>
+<tr>
+<td><code>breadcrumbs</code></td>
+<td>—</td>
+<td><code>BreadcrumbItem[]</code></td>
+<td><code>[]</code></td>
+<td>Breadcrumb trail — set via JS property. Last item is the current page (rendered as plain text, not a link)</td>
+</tr>
+<tr>
+<td><code>showBack</code></td>
+<td><code>show-back</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Shows a back arrow button at the left of the page header</td>
+</tr>
+<tr>
+<td><code>showHeader</code></td>
+<td><code>show-header</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Renders the page header bar. Hidden by default</td>
+</tr>
+<tr>
+<td><code>showAside</code></td>
+<td><code>show-aside</code></td>
+<td><code>boolean</code></td>
+<td><code>false</code></td>
+<td>Renders the aside panel slot</td>
+</tr>
+</tbody>
+</table>
+<h3>BreadcrumbItem</h3>
+<pre><code class="language-ts">interface BreadcrumbItem {
+  label: string;
+  href?: string;   // if present, renders as an &lt;a&gt; tag; otherwise a &lt;button&gt;
+}
+</code></pre>
+<hr>
+<h2>Events</h2>
+<h3>Emitted</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Detail</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>la-back</code></td>
+<td>—</td>
+<td>Back button is clicked</td>
+</tr>
+<tr>
+<td><code>la-breadcrumb</code></td>
+<td><code>{ label: string, index: number }</code></td>
+<td>A breadcrumb item (not the last) is clicked</td>
+</tr>
+</tbody>
+</table>
+<h3>Listened for</h3>
+<table>
+<thead>
+<tr>
+<th>Event</th>
+<th>Source</th>
+<th>Effect</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>la-toggle-aside</code></td>
+<td>Any descendant</td>
+<td>Toggles the aside panel open/closed</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Methods</h2>
+<table>
+<thead>
+<tr>
+<th>Method</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>openAside()</code></td>
+<td>Programmatically opens the aside overlay. Useful for testing or triggering from external controls</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>CSS tokens</h2>
+<p>All tokens are defined in <code>src/styles/tokens.ts</code> and can be overridden per-instance with CSS custom properties.</p>
+<h3>Page header</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Default</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-ph-height</code></td>
+<td><code>40px</code></td>
+<td>Header bar height</td>
+</tr>
+<tr>
+<td><code>--la-ph-padding-left</code></td>
+<td><code>32px</code></td>
+<td>Left padding of the header</td>
+</tr>
+<tr>
+<td><code>--la-ph-padding-right</code></td>
+<td><code>20px</code></td>
+<td>Right padding of the header</td>
+</tr>
+<tr>
+<td><code>--la-ph-bg</code></td>
+<td><code>#FAFAFA</code></td>
+<td>Header background colour</td>
+</tr>
+<tr>
+<td><code>--la-ph-title-size</code></td>
+<td><code>18px</code></td>
+<td>Page title font size</td>
+</tr>
+<tr>
+<td><code>--la-ph-title-weight</code></td>
+<td><code>600</code></td>
+<td>Page title font weight</td>
+</tr>
+<tr>
+<td><code>--la-ph-gap</code></td>
+<td><code>0px</code></td>
+<td>Gap between header and main content</td>
+</tr>
+</tbody>
+</table>
+<h3>Main content area</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Default</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-main-margin</code></td>
+<td><code>8px</code></td>
+<td>Margin around the main content card (and aside card)</td>
+</tr>
+<tr>
+<td><code>--la-main-radius</code></td>
+<td><code>var(--la-radius-md)</code></td>
+<td>Border radius of the main content card</td>
+</tr>
+<tr>
+<td><code>--la-main-shadow</code></td>
+<td><code>var(--la-shadow-md)</code></td>
+<td>Shadow on the main content card</td>
+</tr>
+</tbody>
+</table>
+<h4>Flat body chrome (unlock pattern)</h4>
+<p>For focused flows like the unlock prototypes, the inner body card can be flattened so the panel sits directly on the host's <code>--la-color-bg-subtle</code>. Override the four chrome tokens at the host level:</p>
+<pre><code class="language-css">la-app-shell {
+  --la-main-margin: 0;
+  --la-main-radius: 0;
+  --la-main-shadow: none;
+  --la-color-bg-page: transparent;
+}
+</code></pre>
+<p>Use this when:</p>
+<ul>
+<li>the slot content is a single self-contained card (e.g. <code>la-unlock-panel</code>) that brings its own chrome, and</li>
+<li>the page is a focused single-task flow (no aside, no actions widget, no insights list).</li>
+</ul>
+<p>The sidebar and page header stay visible — the override only flattens the inner body card. The <code>.main-content</code> slot wrapper should add its own flex centering (<code>display: flex; align-items: center; justify-content: center; height: 100%</code>) so the slot child lands in the middle of the available content area. Reference: <a href="../dev/prototypes/founder-flow/"><code>dev/prototypes/founder-flow/05/09/16/20-*-unlock.html</code></a> and decision 46.</p>
+<h3>Aside panel</h3>
+<table>
+<thead>
+<tr>
+<th>Token</th>
+<th>Default</th>
+<th>Controls</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>--la-aside-width</code></td>
+<td><code>320px</code></td>
+<td>Fixed width of the aside panel (desktop)</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>Breadcrumb behaviour</h2>
+<p>Set breadcrumbs via the JS property (not an attribute) since the value is an array:</p>
+<pre><code class="language-js">document.querySelector('la-app-shell').breadcrumbs = [
+  { label: 'Dashboard' },
+  { label: 'Governance' },
+  { label: 'Insights' },
+];
+</code></pre>
+<ul>
+<li>All items except the last render as interactive links or buttons.</li>
+<li>Items with <code>href</code> render as <code>&lt;a&gt;</code> tags. Items without <code>href</code> dispatch a <code>la-breadcrumb</code> event on click.</li>
+<li>The last item is always plain text (current page — no interaction).</li>
+<li>When <code>breadcrumbs</code> is empty, <code>pageTitle</code> is shown instead.</li>
+</ul>
+<hr>
+<h2>Aside panel — responsive behaviour</h2>
+<p>The aside panel behaves differently depending on the available content width.</p>
+<p><strong>Desktop (content area &gt; 1023px)</strong></p>
+<ul>
+<li>Aside renders inline, side-by-side with main content.</li>
+<li>No toggle or close button needed.</li>
+</ul>
+<p><strong>Tablet (content area ≤ 1023px)</strong></p>
+<ul>
+<li>Aside becomes an overlay panel that slides in from the right.</li>
+<li>A backdrop appears behind it.</li>
+<li>A close button (×) appears at the top of the aside.</li>
+<li>Clicking the backdrop closes the aside.</li>
+<li>Any child component can trigger the toggle by dispatching <code>la-toggle-aside</code> (bubbles, composed).</li>
+</ul>
+<p>The breakpoint is a CSS container query on the content area, not the viewport — so the layout responds to the actual available space regardless of sidebar state.</p>
+<hr>
+<h2>Usage</h2>
+<h3>Basic — sidebar and content only</h3>
+<pre><code class="language-html">&lt;la-app-shell style=&quot;width: 100vw; height: 100vh;&quot;&gt;
+  &lt;la-sidebar slot=&quot;sidebar&quot; ...&gt;&lt;/la-sidebar&gt;
+  &lt;la-governance-page slot=&quot;main&quot;&gt;&lt;/la-governance-page&gt;
+&lt;/la-app-shell&gt;
+</code></pre>
+<h3>With page header and breadcrumbs</h3>
+<pre><code class="language-html">&lt;la-app-shell show-header show-back&gt;
+  &lt;la-sidebar slot=&quot;sidebar&quot; ...&gt;&lt;/la-sidebar&gt;
+  &lt;la-document-page slot=&quot;main&quot;&gt;&lt;/la-document-page&gt;
+&lt;/la-app-shell&gt;
+
+&lt;script&gt;
+  document.querySelector('la-app-shell').breadcrumbs = [
+    { label: 'Dashboard' },
+    { label: 'Governance' },
+    { label: 'Documents' },
+    { label: 'Articles of Incorporation' },
+  ];
+&lt;/script&gt;
+</code></pre>
+<h3>With aside panel and header actions</h3>
+<pre><code class="language-html">&lt;la-app-shell show-header show-aside&gt;
+  &lt;la-sidebar slot=&quot;sidebar&quot; ...&gt;&lt;/la-sidebar&gt;
+  &lt;la-button slot=&quot;header-actions&quot; variant=&quot;primary&quot;&gt;Export&lt;/la-button&gt;
+  &lt;la-insights-list slot=&quot;main&quot;&gt;&lt;/la-insights-list&gt;
+  &lt;la-ai-chat slot=&quot;aside&quot;&gt;&lt;/la-ai-chat&gt;
+&lt;/la-app-shell&gt;
+</code></pre>
+<hr>
+<h2>Notes</h2>
+<ul>
+<li><code>la-app-shell</code> needs an explicit height to fill the viewport — it is <code>display: flex; height: 100%</code>. Typically the parent gives it <code>height: 100vh</code> or it sits inside a full-height wrapper.</li>
+<li>In docs pages, the shell is rendered inside a fixed-height <code>.shell-frame</code> div — this is just for the docs demo, not how it would be used in production.</li>
+<li>DialKit can be loaded manually on any docs page by adding <code>&lt;script src=&quot;../dialkit.js&quot;&gt;&lt;/script&gt;</code> — it is not auto-injected.</li>
+</ul>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

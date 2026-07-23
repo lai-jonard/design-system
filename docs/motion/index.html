@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Motion — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .md-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .md-crumb a { color: var(--doc-text-3); text-decoration: none; }
+    .md-crumb a:hover { color: var(--doc-accent); }
+
+    .md-source {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-sm);
+      padding: 4px 10px;
+      margin-bottom: 32px;
+    }
+
+    /* ── Rendered markdown body ─────────────────────────── */
+    .md-body { color: var(--doc-text); font-size: 15px; line-height: 1.7; }
+    .md-body > *:first-child { margin-top: 0; }
+    .md-body > *:last-child { margin-bottom: 0; }
+
+    .md-body h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin: 0 0 12px;
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h2 {
+      font-size: 22px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.1px; margin: 48px 0 12px; padding-top: 16px;
+      border-top: 1px solid var(--doc-border-light);
+      scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h3 {
+      font-size: 16px; font-weight: 600; color: var(--doc-text);
+      margin: 28px 0 8px; scroll-margin-top: calc(var(--doc-topbar-h) + 24px);
+    }
+    .md-body h4 { font-size: 14px; font-weight: 600; color: var(--doc-text); margin: 20px 0 6px; }
+    .md-body p { margin: 0 0 16px; color: var(--doc-text-2); }
+    .md-body strong { color: var(--doc-text); font-weight: 600; }
+    .md-body em { color: var(--doc-text-2); }
+    .md-body a { color: var(--doc-accent); text-decoration: underline; text-underline-offset: 2px; }
+    .md-body a:hover { color: var(--doc-text); }
+
+    .md-body ul, .md-body ol { margin: 0 0 16px; padding-left: 22px; color: var(--doc-text-2); }
+    .md-body li { margin-bottom: 6px; }
+    .md-body li > ul, .md-body li > ol { margin-top: 6px; margin-bottom: 0; }
+
+    .md-body hr { border: none; border-top: 1px solid var(--doc-border-light); margin: 40px 0; }
+
+    .md-body blockquote {
+      margin: 0 0 16px; padding: 12px 16px;
+      background: var(--doc-accent-soft); border-left: 3px solid var(--doc-accent);
+      border-radius: 0 var(--doc-r-sm) var(--doc-r-sm) 0;
+      color: var(--doc-text-2); font-size: 14px;
+    }
+    .md-body blockquote p:last-child { margin-bottom: 0; }
+
+    .md-body code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 0.9em; background: var(--doc-surface);
+      border: 1px solid var(--doc-border-light); padding: 1px 6px;
+      border-radius: var(--doc-r-sm); color: var(--doc-text);
+    }
+    .md-body pre {
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); padding: 16px 20px; margin: 0 0 16px;
+      overflow-x: auto; line-height: 1.6;
+    }
+    .md-body pre code { background: transparent; border: none; padding: 0; font-size: 13px; color: var(--doc-text); }
+
+    .md-body table {
+      width: 100%; border-collapse: collapse; margin: 0 0 20px; font-size: 13px;
+      background: var(--doc-surface); border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md); overflow: hidden;
+    }
+    .md-body thead th {
+      text-align: left; padding: 10px 14px; background: var(--doc-surface-2);
+      color: var(--doc-text-3); font-size: 11px; font-weight: 600;
+      letter-spacing: 0.2px; border-bottom: 1px solid var(--doc-border);
+    }
+    .md-body tbody td {
+      padding: 10px 14px; border-bottom: 1px solid var(--doc-border-light);
+      color: var(--doc-text-2); vertical-align: top;
+    }
+    .md-body tbody tr:last-child td { border-bottom: none; }
+    .md-body img { max-width: 100%; border-radius: var(--doc-r-md); border: 1px solid var(--doc-border); }
+
+    /* OKLCH value shown muted beneath a hex in colour tables. */
+    .md-body .tok-oklch {
+      display: inline-block;
+      margin-top: 3px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      color: var(--doc-text-3);
+    }
+
+    /* Sidebar active state */
+    .docs-nav-item.active {
+      color: var(--doc-accent); background: var(--doc-accent-soft);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+</div>
+
+<h3 class="docs-nav-title">Principles &amp; process</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/overview/">Overview</a>
+
+<a class="docs-nav-item" href="../../docs/playbook/">Playbook</a>
+
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow</a>
+
+<a class="docs-nav-item" href="../../docs/prototype-standards/">Prototype standards</a>
+
+</div>
+
+<h3 class="docs-nav-title">Visual language</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/colour/">Colour</a>
+
+<a class="docs-nav-item" href="../../docs/typography/">Typography</a>
+
+<a class="docs-nav-item" href="../../docs/borders/">Borders</a>
+
+<a class="docs-nav-item" href="../../docs/iconography/">Iconography</a>
+
+<a class="docs-nav-item active" href="../../docs/motion/">Motion</a>
+
+<a class="docs-nav-item" href="../../docs/interaction/">Interaction</a>
+
+<a class="docs-nav-item" href="../../docs/loading/">Loading</a>
+
+</div>
+
+<h3 class="docs-nav-title">Composition &amp; layout</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/layout/">Layout</a>
+
+<a class="docs-nav-item" href="../../docs/page-architecture/">Page architecture</a>
+
+<a class="docs-nav-item" href="../../docs/responsive-design/">Responsive design</a>
+
+</div>
+
+<h3 class="docs-nav-title">Writing</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/copy-guidelines/">Copy guidelines</a>
+
+<a class="docs-nav-item" href="../../docs/timestamps/">Timestamps</a>
+
+</div>
+
+<h3 class="docs-nav-title">Patterns &amp; usability</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/ux-patterns/">UX patterns</a>
+
+<a class="docs-nav-item" href="../../docs/usability-heuristics/">Usability heuristics</a>
+
+<a class="docs-nav-item" href="../../docs/ai-ux-guidelines/">AI UX guidelines</a>
+
+</div>
+
+<h3 class="docs-nav-title">Component notes</h3>
+<div class="docs-nav-group">
+
+<a class="docs-nav-item" href="../../docs/components/">Components</a>
+
+<a class="docs-nav-item" href="../../docs/la-app-shell/">la-app-shell</a>
+
+<a class="docs-nav-item" href="../../docs/la-sidebar/">la-sidebar</a>
+
+</div>
+
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb">
+  <a href="../../docs/">Docs</a> · Motion
+</div>
+<span class="md-source">
+  <i aria-hidden="true" class="ph ph-file-text"></i>
+  design-language/motion.md
+</span>
+<article class="md-body">
+  <h1>Motion</h1>
+<h2>Source of truth</h2>
+<p>All animation tokens, keyframes, and utility classes live in <code>motion.css</code> at the project root. Never define keyframes or duration values inline — always use the classes and tokens from <code>motion.css</code>.</p>
+<p>Link it on every docs page:</p>
+<pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;../../motion.css&quot; /&gt;
+</code></pre>
+<hr>
+<h2>Core rules</h2>
+<ul>
+<li><strong>GPU-safe only.</strong> Animate <code>transform</code> and <code>opacity</code> exclusively. Never animate <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, <code>background</code>, or <code>color</code> directly.</li>
+<li><strong>Never use <code>ease-in</code>.</strong> Feels sluggish for elements users are watching appear. Use <code>--ease-out</code> for entrances, <code>--ease</code> for hovers and micro-interactions.</li>
+<li><strong>Never scale from zero.</strong> Minimum starting scale is <code>0.96</code>. Zero-scale entrances look like the UI is popping into existence, not arriving.</li>
+<li><strong>Max 300ms for repeated interactions.</strong> Never exceed 500ms for anything triggered multiple times per session.</li>
+<li><strong>Stagger: 40–60ms</strong> between list items. Above 100ms feels like a slideshow.</li>
+<li><strong>Always respect <code>prefers-reduced-motion</code>.</strong> <code>motion.css</code> collapses the duration vars at <code>:root</code> to <code>0ms</code> automatically — but only for elements whose styles are in the document tree. <strong>Shadow-DOM components must declare their own <code>@media (prefers-reduced-motion: reduce)</code> block inside their <code>static styles</code></strong>, because <code>tokens.ts</code> re-declares the duration vars on <code>:host</code> and shadows the <code>:root</code> override. Either zero the durations on <code>:host</code> under the reduce query, or set <code>transition: none</code> / <code>animation: none</code> on the affected selectors. Pattern reference: <code>la-button</code>, <code>la-modal</code>, <code>la-toast</code>, <code>la-stepper</code> (decision 47 is a stepper-specific call but the reduce block in its source is the canonical example).</li>
+</ul>
+<hr>
+<h2>Utility classes</h2>
+<table>
+<thead>
+<tr>
+<th>Class</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.anim-fade-up</code></td>
+<td>Default entrance — cards, rows, list items on load</td>
+</tr>
+<tr>
+<td><code>.anim-fade-down</code></td>
+<td>Alert / notification bars entering from top</td>
+</tr>
+<tr>
+<td><code>.anim-fade-in</code></td>
+<td>Simple opacity entrance, no transform</td>
+</tr>
+<tr>
+<td><code>.anim-scale-in</code></td>
+<td>Modal / dialog inner panel</td>
+</tr>
+<tr>
+<td><code>.anim-slide-right</code></td>
+<td>Panel / drawer sliding in from left</td>
+</tr>
+<tr>
+<td><code>.anim-stagger</code></td>
+<td>Parent container — triggers stagger on children</td>
+</tr>
+<tr>
+<td><code>.anim-press</code></td>
+<td>Button press feedback</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2>When to use each</h2>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Approach</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Page load — cards, rows</td>
+<td><code>.anim-stagger</code> on parent + <code>.anim-fade-up</code> on each child</td>
+</tr>
+<tr>
+<td>Alert / banner from top</td>
+<td><code>.anim-fade-down</code></td>
+</tr>
+<tr>
+<td>Modal entrance</td>
+<td><code>fade-in</code> on backdrop (JS) + <code>.anim-scale-in</code> on inner panel</td>
+</tr>
+<tr>
+<td>Panel / drawer</td>
+<td><code>.anim-slide-right</code></td>
+</tr>
+<tr>
+<td>JS-revealed element</td>
+<td>Remove class → reflow → re-add class</td>
+</tr>
+<tr>
+<td>JS-injected list items</td>
+<td>Add <code>.anim-fade-up</code> + set <code>animationDelay = i * 40 + 'ms'</code></td>
+</tr>
+</tbody>
+</table>
+<h3>Re-trigger pattern</h3>
+<pre><code class="language-js">el.classList.remove('anim-fade-up');
+void el.offsetWidth; // force reflow
+el.classList.add('anim-fade-up');
+</code></pre>
+<h3>Stagger injected items</h3>
+<pre><code class="language-js">items.forEach((el, i) =&gt; {
+  el.classList.add('anim-fade-up');
+  el.style.animationDelay = (i * 40) + 'ms';
+});
+</code></pre>
+<hr>
+<h2>Entrance sequencing on screens</h2>
+<p>When building full screens, animate in a deliberate order: <strong>chrome → navigation → content</strong>.</p>
+<p>The header and nav establish where the user is before content arrives. If content appeared first, the page feels unanchored.</p>
+<p>Suggested delays:</p>
+<ul>
+<li>Header: 0ms (immediate)</li>
+<li>Navigation/tabs: 80ms</li>
+<li>First content item: 160ms</li>
+<li>Each subsequent item: +60–80ms stagger</li>
+</ul>
+<hr>
+<h2>Tab / page navigation</h2>
+<p>Suppress entrance animations when navigating between tabs or pages — the user expects an instant content swap, not a re-entrance sequence.</p>
+<pre><code class="language-js">// Before navigating
+sessionStorage.setItem('la-tab-nav', '1');
+
+// At page load
+if (sessionStorage.getItem('la-tab-nav')) {
+  sessionStorage.removeItem('la-tab-nav');
+  const s = document.createElement('style');
+  s.textContent = '*, *::before, *::after { animation-duration: 0ms !important; }';
+  document.head.appendChild(s);
+  requestAnimationFrame(() =&gt; requestAnimationFrame(() =&gt; s.remove()));
+}
+</code></pre>
+
+</article>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>
