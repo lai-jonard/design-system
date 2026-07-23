@@ -34,61 +34,130 @@
     }
     .wf-section-head p { font-size: 14px; color: var(--doc-text-2); line-height: 1.6; max-width: 700px; }
 
-    /* ── Layer stack ─────────────────────────────────────────── */
-    .wf-layers { position: relative; display: flex; flex-direction: column; gap: 10px; }
-    .wf-layers::before {
-      content: ""; position: absolute; left: 18px; top: 20px; bottom: 20px;
-      width: 2px; background: var(--doc-hairline);
+    /* ── Layer stack — isometric, foundations at the bottom ──── */
+    .wf-stack-wrap {
+      display: grid; grid-template-columns: minmax(0, 1fr) 300px;
+      gap: 32px; align-items: center;
     }
-    .wf-layer {
-      position: relative; display: grid; grid-template-columns: 38px 1fr;
-      gap: 16px; align-items: center;
-      background: var(--doc-surface); border-radius: var(--doc-r-lg);
-      padding: 16px 20px; box-shadow: 0 0 0 1px rgba(0,0,0,0.04);
+    .wf-stack {
+      position: relative; height: 500px; margin-top: 24px;
+      perspective: 1400px; perspective-origin: 50% 20%;
     }
-    .wf-layer-num {
-      width: 38px; height: 38px; border-radius: 50%;
+    .wf-stack-inner {
+      position: absolute; inset: 0;
+      transform-style: preserve-3d;
+      transform: rotateX(58deg) rotateZ(-45deg);
+    }
+    .wf-plate {
+      position: absolute; left: 50%; top: 64%;
+      width: 250px; height: 250px; margin: -125px 0 0 -125px;
+      border-radius: 26px;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07), 0 10px 30px rgba(3, 7, 18, 0.05);
+      transform: translateZ(calc(var(--i) * 40px));
+      transition: transform 220ms cubic-bezier(0.32, 0.72, 0, 1),
+        background 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
       display: flex; align-items: center; justify-content: center;
-      background: var(--doc-surface-2); color: var(--doc-text);
-      font-size: 13px; font-weight: 600; z-index: 1;
+      cursor: pointer;
     }
-    .wf-layer:first-child .wf-layer-num { background: var(--doc-accent); color: #fff; }
-    .wf-layer-body { display: flex; flex-direction: column; gap: 2px; }
-    .wf-layer-title { font-size: 15px; font-weight: 600; color: var(--doc-text); }
-    .wf-layer-title code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; color: var(--doc-text-3); font-weight: 400; margin-left: 8px; }
-    .wf-layer-desc { font-size: 13px; color: var(--doc-text-2); line-height: 1.5; }
-    .wf-stack-caption {
-      display: flex; justify-content: space-between; font-size: 11px;
-      color: var(--doc-text-faint); margin: 6px 2px 0 56px;
+    .wf-plate span {
+      font-size: 13px; font-weight: 500; color: var(--doc-text-3);
+      letter-spacing: 0.2px; transition: color 160ms ease;
+      pointer-events: none;
+    }
+    .wf-plate.active {
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow: 0 0 0 1.5px var(--doc-accent), 0 16px 40px rgba(3, 7, 18, 0.10);
+      transform: translateZ(calc(var(--i) * 40px + 18px));
+    }
+    .wf-plate.active span { color: var(--doc-text); font-weight: 600; }
+    .wf-stack:hover .wf-plate:not(.active) { opacity: 0.85; }
+
+    /* Side panel — accordion: click a layer to expand it in place */
+    .wf-stack-side { display: flex; flex-direction: column; gap: 6px; }
+    .wf-stack-item {
+      background: var(--doc-surface-2); border-radius: 18px;
+      transition: background 140ms ease, box-shadow 140ms ease;
+    }
+    .wf-stack-item.active {
+      background: var(--doc-surface);
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.06);
+    }
+    .wf-stack-label {
+      display: flex; align-items: center; gap: 10px; width: 100%;
+      border: none; background: transparent;
+      padding: 10px 16px; font-size: 13px; font-weight: 500;
+      color: var(--doc-text-2); cursor: pointer; text-align: left;
+      font-family: inherit; border-radius: 18px;
+      transition: color 140ms ease;
+    }
+    .wf-stack-label .n {
+      font-size: 11px; color: var(--doc-text-faint);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    .wf-stack-label:hover { color: var(--doc-text); }
+    .wf-stack-item.active .wf-stack-label { color: var(--doc-text); font-weight: 600; }
+    .wf-stack-label:focus-visible { outline: 2px solid var(--doc-accent); outline-offset: 2px; }
+    .wf-stack-body {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows 220ms cubic-bezier(0.32, 0.72, 0, 1);
+    }
+    .wf-stack-item.active .wf-stack-body { grid-template-rows: 1fr; }
+    .wf-stack-body-inner { overflow: hidden; min-height: 0; }
+    .wf-stack-body-text {
+      padding: 0 16px 12px; font-size: 13px; color: var(--doc-text-2); line-height: 1.55;
+    }
+    .wf-stack-body-text code {
+      display: block; margin-bottom: 4px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px; color: var(--doc-text-3);
     }
 
-    /* ── Pipeline flow ───────────────────────────────────────── */
+    @media (max-width: 860px) {
+      .wf-stack-wrap { grid-template-columns: 1fr; gap: 8px; }
+      .wf-stack { height: 380px; }
+      .wf-plate { width: 200px; height: 200px; margin: -100px 0 0 -100px; transform: translateZ(calc(var(--i) * 32px)); }
+      .wf-plate.active { transform: translateZ(calc(var(--i) * 32px + 14px)); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .wf-plate, .wf-plate span, .wf-stack-label { transition: none; }
+    }
+
+    /* ── Pipeline — vertical timeline ────────────────────────── */
     .wf-flow {
-      display: flex; flex-wrap: wrap; align-items: stretch; gap: 8px;
+      position: relative; max-width: 560px; margin: 0 auto;
+      display: flex; flex-direction: column; gap: 40px;
+    }
+    .wf-flow::before {
+      content: ""; position: absolute; left: 19px; top: 20px; bottom: 20px;
+      width: 2px; background: var(--doc-hairline);
     }
     .wf-step {
-      flex: 1 1 150px; min-width: 150px;
+      position: relative; display: grid; grid-template-columns: 40px 1fr;
+      gap: 20px; align-items: flex-start;
+    }
+    .wf-step-icon {
+      width: 40px; height: 40px; border-radius: 50%;
+      background: var(--doc-surface); box-shadow: 0 0 0 1px rgba(0,0,0,0.06);
+      display: flex; align-items: center; justify-content: center; z-index: 1;
+    }
+    .wf-step i { font-size: 18px; color: var(--doc-text); }
+    .wf-step-body {
       background: var(--doc-surface); border-radius: var(--doc-r-lg);
-      padding: 18px 16px; box-shadow: 0 0 0 1px rgba(0,0,0,0.04);
-      display: flex; flex-direction: column; gap: 8px;
+      padding: 18px 20px; box-shadow: 0 0 0 1px rgba(0,0,0,0.04);
+      display: flex; flex-direction: column; gap: 6px;
     }
-    .wf-step i { font-size: 20px; color: var(--doc-text); }
-    .wf-step-name { font-size: 13px; font-weight: 600; color: var(--doc-text); }
-    .wf-step-name code { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
-    .wf-step-desc { font-size: 12px; color: var(--doc-text-2); line-height: 1.5; }
-    .wf-arrow {
-      display: flex; align-items: center; color: var(--doc-text-faint); font-size: 18px;
-      flex: 0 0 auto;
-    }
-    .wf-flow-notes { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+    .wf-step-name { font-size: 14px; font-weight: 600; color: var(--doc-text); }
+    .wf-step-desc { font-size: 13px; color: var(--doc-text-2); line-height: 1.55; }
+    .wf-flow-notes { display: flex; flex-direction: column; gap: 10px; max-width: 560px; margin: 28px auto 0; }
     .wf-note {
-      display: inline-flex; align-items: center; gap: 8px;
-      background: var(--doc-surface-2); border-radius: var(--doc-r-pill, 999px);
-      padding: 7px 14px; font-size: 12px; color: var(--doc-text-2);
+      display: flex; align-items: baseline; gap: 8px;
+      font-size: 12px; color: var(--doc-text-3); line-height: 1.5;
     }
     .wf-note i { color: var(--doc-text-3); font-size: 14px; }
     .wf-feedback {
-      display: inline-flex; align-items: center; gap: 8px; margin-top: 14px;
+      display: flex; align-items: center; gap: 8px;
+      max-width: 560px; margin: 14px auto 0;
       font-size: 12px; color: var(--doc-text-3);
     }
     .wf-feedback i { font-size: 15px; }
@@ -120,8 +189,6 @@
 
     @media (max-width: 720px) {
       .wf-lanes { grid-template-columns: 1fr; }
-      .wf-flow { flex-direction: column; align-items: stretch; }
-      .wf-arrow { justify-content: center; transform: rotate(90deg); }
     }
   </style>
 
@@ -162,6 +229,7 @@
 <h3 class="docs-nav-title">Start here</h3>
 <div class="docs-nav-group">
 <a class="docs-nav-item active" href="../../docs/workflow/">Design workflow</a>
+<a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
 </div>
 
 <h3 class="docs-nav-title">Principles &amp; process</h3>
@@ -249,12 +317,10 @@
         
 <section class="wf-hero">
 <div class="eyebrow">How we design</div>
-<h1>The design workflow</h1>
+<h1>Design workflow</h1>
 <p>
-  How ideas become interface at LawAdvisor AI — from a single design token to a full product
-  journey, and how that work reaches engineering. The system is built for <strong>calm
-  authority</strong>: every visual value is defined once, every non-obvious call is written down,
-  and nothing ships without passing the same gates.
+  This page explains how design work happens in this system: the layers everything is built on,
+  the steps work goes through from PRD to handoff, and what engineering receives at the end.
 </p>
 </section>
 
@@ -263,114 +329,137 @@
 <!-- ── Layers ────────────────────────────────────────────── -->
 <section class="wf-section" id="layers">
 <div class="wf-section-head">
-<h2>Six layers, one system</h2>
-<p>Everything in the library sits in one of six layers. Each builds on the one below it — so a
-change to a token ripples predictably all the way up to the screens people use.</p>
+<h2>The six layers</h2>
+<p>Everything in the library sits in one of six layers. Each layer builds on the ones below it,
+so a change lower down carries through to everything above.</p>
 </div>
-<div class="wf-layers">
-<div class="wf-layer">
-<div class="wf-layer-num">1</div>
-<div class="wf-layer-body">
-<div class="wf-layer-title">Tokens <code>src/styles/tokens.ts</code></div>
-<div class="wf-layer-desc">Colour, type, spacing, radius, motion — defined once. The single source of truth. Nothing hardcodes a value.</div>
-</div>
-</div>
-<div class="wf-layer">
-<div class="wf-layer-num">2</div>
-<div class="wf-layer-body">
-<div class="wf-layer-title">Primitives <code>src/primitives/</code></div>
-<div class="wf-layer-desc">Reusable building blocks — button, input, badge, drawer. No domain knowledge; usable across any product.</div>
+<div class="wf-stack-wrap">
+<div class="wf-stack" aria-hidden="true">
+<div class="wf-stack-inner">
+<div class="wf-plate active" style="--i: 0;" data-layer="1"><span>Tokens</span></div>
+<div class="wf-plate" style="--i: 1;" data-layer="2"><span>Design language & decisions</span></div>
+<div class="wf-plate" style="--i: 2;" data-layer="3"><span>Primitives</span></div>
+<div class="wf-plate" style="--i: 3;" data-layer="4"><span>Composed components</span></div>
+<div class="wf-plate" style="--i: 4;" data-layer="5"><span>Page templates</span></div>
+<div class="wf-plate" style="--i: 5;" data-layer="6"><span>Prototypes</span></div>
 </div>
 </div>
-<div class="wf-layer">
-<div class="wf-layer-num">3</div>
-<div class="wf-layer-body">
-<div class="wf-layer-title">Composed components <code>src/components/</code></div>
-<div class="wf-layer-desc">Domain-aware compositions — insight card, unlock panel, document list. Each answers a logged "what problem does this solve".</div>
+<div class="wf-stack-side">
+<div class="wf-stack-item" data-layer="6">
+<button type="button" class="wf-stack-label" aria-expanded="false"><span class="n">6</span> Prototypes</button>
+<div class="wf-stack-body"><div class="wf-stack-body-inner">
+<div class="wf-stack-body-text"><code>dev/prototypes/</code>Clickable end-to-end journeys — onboarding, document review, signing — assembled from the real components with realistic content. What a founder or investor actually clicks through, tested before anything is finalised.</div>
+</div></div>
+</div>
+<div class="wf-stack-item" data-layer="5">
+<button type="button" class="wf-stack-label" aria-expanded="false"><span class="n">5</span> Page templates</button>
+<div class="wf-stack-body"><div class="wf-stack-body-inner">
+<div class="wf-stack-body-text"><code>src/pages/</code>Layout shells — app shell, dashboard, legal-area page. They define where content sits; the components fill them.</div>
+</div></div>
+</div>
+<div class="wf-stack-item" data-layer="4">
+<button type="button" class="wf-stack-label" aria-expanded="false"><span class="n">4</span> Composed components</button>
+<div class="wf-stack-body"><div class="wf-stack-body-inner">
+<div class="wf-stack-body-text"><code>src/components/</code>Product-specific compositions — insight card, unlock panel, document list. Each one has a logged reason for existing.</div>
+</div></div>
+</div>
+<div class="wf-stack-item" data-layer="3">
+<button type="button" class="wf-stack-label" aria-expanded="false"><span class="n">3</span> Primitives</button>
+<div class="wf-stack-body"><div class="wf-stack-body-inner">
+<div class="wf-stack-body-text"><code>src/primitives/</code>Generic building blocks — button, input, badge, drawer. They carry no product knowledge, so they work in any context.</div>
+</div></div>
+</div>
+<div class="wf-stack-item" data-layer="2">
+<button type="button" class="wf-stack-label" aria-expanded="false"><span class="n">2</span> Design language & decisions</button>
+<div class="wf-stack-body"><div class="wf-stack-body-inner">
+<div class="wf-stack-body-text"><code>design-language/ · decisions/</code>The written rules and the numbered log of settled calls — the recorded taste. Everything above is designed against these.</div>
+</div></div>
+</div>
+<div class="wf-stack-item active" data-layer="1">
+<button type="button" class="wf-stack-label" aria-expanded="true"><span class="n">1</span> Tokens</button>
+<div class="wf-stack-body"><div class="wf-stack-body-inner">
+<div class="wf-stack-body-text"><code>src/styles/tokens.ts</code>Colour, type, spacing, radius, and motion values, defined once. Components reference these — no hardcoded values anywhere.</div>
+</div></div>
 </div>
 </div>
-<div class="wf-layer">
-<div class="wf-layer-num">4</div>
-<div class="wf-layer-body">
-<div class="wf-layer-title">Page templates <code>src/pages/</code></div>
-<div class="wf-layer-desc">The structural canvases — app shell, dashboard, legal-area page — that product surfaces sit on.</div>
 </div>
-</div>
-<div class="wf-layer">
-<div class="wf-layer-num">5</div>
-<div class="wf-layer-body">
-<div class="wf-layer-title">Prototypes <code>dev/prototypes/</code></div>
-<div class="wf-layer-desc">Full journeys assembled from real components against realistic content — where ideas are tested before they harden.</div>
-</div>
-</div>
-<div class="wf-layer">
-<div class="wf-layer-num">6</div>
-<div class="wf-layer-body">
-<div class="wf-layer-title">Flows</div>
-<div class="wf-layer-desc">A journey across pages — onboarding, unlock, document review. The thing a founder or investor actually experiences.</div>
-</div>
-</div>
-</div>
-<div class="wf-stack-caption">
-<span>Foundation — defined once</span>
-<span>What people experience</span>
 </div>
 </section>
 
 <!-- ── Pipeline ──────────────────────────────────────────── -->
 <section class="wf-section" id="pipeline">
 <div class="wf-section-head">
-<h2>How an idea becomes interface</h2>
-<p>A new product need walks the same path every time. Each step has a clear owner and a clear
-output, and nothing skips a gate.</p>
+<h2>From PRD to handoff</h2>
+<p>When a PRD comes in, the work runs through the same steps. Each one produces a concrete
+output before the next starts.</p>
 </div>
 <div class="wf-flow">
 <div class="wf-step">
-<i class="ph ph-lightbulb" aria-hidden="true"></i>
+<div class="wf-step-icon"><i class="ph ph-users-three" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">Kickoff</div>
+<div class="wf-step-desc">Product and design meet, go through the requirements, and walk the entire flow the PRD describes.</div>
+</div>
+</div>
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-lightbulb" aria-hidden="true"></i></div>
+<div class="wf-step-body">
 <div class="wf-step-name">Solve</div>
-<div class="wf-step-desc">Frame an open question and think through the options before committing.</div>
+<div class="wf-step-desc">For new components or patterns only — write the question down and weigh the options. Skipped when documented components already cover the need.</div>
 </div>
-<div class="wf-arrow"><i class="ph ph-arrow-right" aria-hidden="true"></i></div>
-<div class="wf-step">
-<i class="ph ph-cube" aria-hidden="true"></i>
-<div class="wf-step-name">Build</div>
-<div class="wf-step-desc">Scout, align on a plan, then build under the token and copy rules.</div>
 </div>
-<div class="wf-arrow"><i class="ph ph-arrow-right" aria-hidden="true"></i></div>
 <div class="wf-step">
-<i class="ph ph-file-text" aria-hidden="true"></i>
+<div class="wf-step-icon"><i class="ph ph-cube" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">Prototype</div>
+<div class="wf-step-desc">Design the flow end to end as a working prototype — assembled from the layers below — components on tokens, following the design language and the logged decisions.</div>
+</div>
+</div>
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-file-text" aria-hidden="true"></i></div>
+<div class="wf-step-body">
 <div class="wf-step-name">Document</div>
-<div class="wf-step-desc">Draft the component's docs — anatomy, states, and API — from the source itself.</div>
+<div class="wf-step-desc">Write docs for anything new and draft the handoff bundle.</div>
 </div>
-<div class="wf-arrow"><i class="ph ph-arrow-right" aria-hidden="true"></i></div>
-<div class="wf-step">
-<i class="ph ph-seal-check" aria-hidden="true"></i>
-<div class="wf-step-name">Ready</div>
-<div class="wf-step-desc">Pass nine quality gates, then publish and lock the component.</div>
 </div>
-<div class="wf-arrow"><i class="ph ph-arrow-right" aria-hidden="true"></i></div>
 <div class="wf-step">
-<i class="ph ph-handshake" aria-hidden="true"></i>
-<div class="wf-step-name">Hand off</div>
-<div class="wf-step-desc">Bundle the docs, decisions, and prototype so engineering can build.</div>
+<div class="wf-step-icon"><i class="ph ph-chats" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">Feedback</div>
+<div class="wf-step-desc">Product and engineering review the prototype and the draft handoff.</div>
+</div>
+</div>
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-pencil-simple-line" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">Refine</div>
+<div class="wf-step-desc">Work the feedback into the prototype, along with any tweaks to taste. Each settled tweak is logged as a decision.</div>
+</div>
+</div>
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-handshake" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">Ready &amp; hand off</div>
+<div class="wf-step-desc">Once everyone is aligned, the work is marked ready and the bundle goes to engineering.</div>
+</div>
 </div>
 </div>
 <div class="wf-flow-notes">
-<span class="wf-note"><i class="ph ph-bookmark-simple" aria-hidden="true"></i> Every locked call is written to <strong style="color:var(--doc-text)">Decisions</strong> — append-only</span>
-<span class="wf-note"><i class="ph ph-gauge" aria-hidden="true"></i> Component state tracked on the <strong style="color:var(--doc-text)">Readiness</strong> dashboard</span>
+<span class="wf-note"><i class="ph ph-bookmark-simple" aria-hidden="true"></i> Every settled call — including tweaks made to taste — is logged as a numbered decision and applied to future work</span>
+<span class="wf-note"><i class="ph ph-gauge" aria-hidden="true"></i> Each component’s state is tracked on the readiness dashboard</span>
 </div>
 <div class="wf-feedback">
 <i class="ph ph-arrow-u-up-left" aria-hidden="true"></i>
-Lessons and new questions from each step feed back into the next Solve.
+New questions raised during prototyping or feedback go back into a solve.
 </div>
 </section>
 
 <!-- ── Handoff ───────────────────────────────────────────── -->
 <section class="wf-section" id="handoff">
 <div class="wf-section-head">
-<h2>From product to engineering</h2>
-<p>Design sits between product and engineering. Each side hands over a clear artefact, and nothing
-is duplicated — the handoff is a thin wrapper that points at work that already exists.</p>
+<h2>Who hands what to whom</h2>
+<p>Design sits between product and engineering. Each side hands over a defined set of artefacts —
+the handoff document itself just points at work that already exists.</p>
 </div>
 <div class="wf-lanes">
 <div class="wf-lane">
@@ -407,16 +496,16 @@ is duplicated — the handoff is a thin wrapper that points at work that already
 <!-- ── Principles ────────────────────────────────────────── -->
 <section class="wf-section" id="principles">
 <div class="wf-section-head">
-<h2>The rules underneath</h2>
-<p>A handful of non-negotiables keep the system coherent as it grows.</p>
+<h2>The standing rules</h2>
+<p>A few fixed rules apply to all of the above.</p>
 </div>
 <div class="wf-principles">
-<div class="wf-principle"><i class="ph ph-palette" aria-hidden="true"></i><span><strong>Tokens before pixels.</strong> Every visual value is a variable — no exceptions.</span></div>
-<div class="wf-principle"><i class="ph ph-compass" aria-hidden="true"></i><span><strong>Solve before build</strong> when the question is open; build first when the answer is clear.</span></div>
-<div class="wf-principle"><i class="ph ph-check-square" aria-hidden="true"></i><span><strong>Two yeses on the rubric</strong> before a pattern earns its own component.</span></div>
-<div class="wf-principle"><i class="ph ph-lock-simple" aria-hidden="true"></i><span><strong>Decisions are append-only</strong> — numbered, never edited after closure.</span></div>
-<div class="wf-principle"><i class="ph ph-feather" aria-hidden="true"></i><span><strong>Calm authority.</strong> Steady and confident, never urgent or loud.</span></div>
-<div class="wf-principle"><i class="ph ph-textbox" aria-hidden="true"></i><span><strong>Plain, active copy.</strong> Say "we", use the person's name, no jargon.</span></div>
+<div class="wf-principle"><i class="ph ph-palette" aria-hidden="true"></i><span><strong>Tokens before pixels.</strong> Every visual value comes from a token — the rare exceptions are logged, never silent.</span></div>
+<div class="wf-principle"><i class="ph ph-compass" aria-hidden="true"></i><span><strong>Solve before build</strong> when a question is still open; build directly when the answer is clear.</span></div>
+<div class="wf-principle"><i class="ph ph-check-square" aria-hidden="true"></i><span><strong>Two yeses on the rubric</strong> before a repeated pattern becomes its own component.</span></div>
+<div class="wf-principle"><i class="ph ph-lock-simple" aria-hidden="true"></i><span><strong>Decisions are append-only</strong> — numbered, and never edited once closed.</span></div>
+<div class="wf-principle"><i class="ph ph-feather" aria-hidden="true"></i><span><strong>Calm visual tone.</strong> Steady and quiet — no urgency, no decoration.</span></div>
+<div class="wf-principle"><i class="ph ph-textbox" aria-hidden="true"></i><span><strong>Plain, active copy.</strong> We say "we", use the person's name, and avoid jargon.</span></div>
 </div>
 </section>
 
@@ -428,5 +517,28 @@ is duplicated — the handoff is a thin wrapper that points at work that already
 
   <script src="../../js/doc-shell.js" defer></script>
   
+<script>
+(function () {
+  var items = Array.prototype.slice.call(document.querySelectorAll('.wf-stack-item'));
+  var plates = Array.prototype.slice.call(document.querySelectorAll('.wf-plate'));
+  function activate(layer) {
+    items.forEach(function (it) {
+      var on = it.dataset.layer === layer;
+      it.classList.toggle('active', on);
+      it.querySelector('.wf-stack-label').setAttribute('aria-expanded', String(on));
+    });
+    plates.forEach(function (p) { p.classList.toggle('active', p.dataset.layer === layer); });
+  }
+  items.forEach(function (it) {
+    it.querySelector('.wf-stack-label').addEventListener('click', function () {
+      activate(it.dataset.layer);
+    });
+  });
+  plates.forEach(function (p) {
+    p.addEventListener('click', function () { activate(p.dataset.layer); });
+  });
+})();
+</script>
+
 </body>
 </html>

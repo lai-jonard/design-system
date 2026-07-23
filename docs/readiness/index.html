@@ -1,0 +1,835 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Component readiness — LawAdvisor AI Design System</title>
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 860px; }
+
+    .rd-hero h1 {
+      font-size: 32px; font-weight: 600; color: var(--doc-text);
+      letter-spacing: -0.2px; margin-bottom: 10px;
+    }
+    .rd-hero p { font-size: 14px; color: var(--doc-text-2); line-height: 1.6; max-width: 680px; }
+
+    /* Summary chips */
+    .rd-summary { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .rd-chip {
+      display: inline-flex; align-items: center; gap: 7px;
+      background: var(--doc-surface); border-radius: var(--doc-r-pill, 999px);
+      padding: 6px 14px; font-size: 12px; color: var(--doc-text-2);
+      box-shadow: 0 0 0 1px rgba(0,0,0,0.05);
+    }
+    .rd-chip strong { color: var(--doc-text); font-weight: 600; }
+    .rd-chip i { font-size: 14px; }
+
+    /* Tier groups */
+    .rd-group { scroll-margin-top: calc(var(--doc-topbar-h) + 24px); }
+    .rd-group-label {
+      font-size: 11px; color: var(--doc-text-3); letter-spacing: 0.1px;
+      padding-bottom: 10px; border-bottom: 1px solid var(--doc-hairline);
+      margin-bottom: 6px;
+    }
+
+    /* Rows */
+    .rd-list { display: flex; flex-direction: column; }
+    .rd-row {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr) auto auto;
+      gap: 12px; align-items: center;
+      padding: 9px 10px; border-radius: var(--doc-r-md);
+      text-decoration: none; color: var(--doc-text);
+    }
+    a.rd-row:hover { background: var(--doc-surface-2); color: var(--doc-text); }
+    .rd-row i { font-size: 16px; line-height: 1; }
+    .rd-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 13px; color: var(--doc-text);
+      overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+    }
+    .rd-name .rd-docnote { font-family: inherit; font-size: 11px; color: var(--doc-text-faint); margin-left: 8px; }
+    .rd-status { font-size: 12px; color: var(--doc-text-2); white-space: nowrap; }
+    .rd-date { font-size: 11px; color: var(--doc-text-faint); white-space: nowrap; min-width: 76px; text-align: right; }
+
+    /* Status colours — la tokens (loaded via tokens.css) */
+    .st-ready i    { color: var(--la-color-success); }
+    .st-progress i { color: var(--la-color-warning); }
+    .st-deferred i { color: var(--la-color-danger); }
+    .st-untracked i { color: var(--la-color-text-faint); }
+    .st-untracked .rd-status { color: var(--doc-text-faint); }
+
+    .rd-foot { font-size: 12px; color: var(--doc-text-3); line-height: 1.6; }
+
+    .docs { display: flex; flex-direction: column; gap: 36px; }
+
+    @media (max-width: 560px) {
+      .rd-date { display: none; }
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+<a class="docs-nav-item active" href="../../docs/readiness/">Component readiness</a>
+</div>
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="#primitives">Primitives</a>
+<a class="docs-nav-item" href="#composed">Composed components</a>
+<a class="docs-nav-item" href="#pages">Page templates</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../../components/">Component docs →</a>
+</div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="rd-hero">
+<h1>Component readiness</h1>
+<p>
+  Every component in the library and where it stands — ready to build from, still in progress,
+  or deferred. Regenerated from the readiness dashboard on every docs build.
+</p>
+<div class="rd-summary">
+<span class="rd-chip st-ready"><i class="ph-fill ph-check-circle" aria-hidden="true"></i> <strong>55</strong> ready</span>
+<span class="rd-chip st-progress"><i class="ph-fill ph-clock" aria-hidden="true"></i> <strong>0</strong> in progress</span>
+<span class="rd-chip st-deferred"><i class="ph-fill ph-minus-circle" aria-hidden="true"></i> <strong>2</strong> deferred</span>
+<span class="rd-chip st-untracked"><i class="ph ph-circle-dashed" aria-hidden="true"></i> <strong>14</strong> untracked</span>
+</div>
+</section>
+
+<div class="docs">
+
+<section class="rd-group" id="primitives">
+<div class="rd-group-label">Primitives</div>
+<div class="rd-list">
+
+
+<a class="rd-row st-ready" href="../../components/la-activity-item.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-activity-item</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-alert.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-alert</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-avatar.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-avatar</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-badge.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-badge</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-06</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-breadcrumb.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-breadcrumb</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-23</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-button.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-button</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-28</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-card.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-card</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-22</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-chat.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-chat-attachment<span class="rd-docnote">docs in la-chat</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-chat.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-chat-attachment-chip<span class="rd-docnote">docs in la-chat</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-chat.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-chat-input<span class="rd-docnote">docs in la-chat</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-chat.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-chat-message<span class="rd-docnote">docs in la-chat</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-checkbox.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-checkbox</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-24</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-choice.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-choice</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-data-table.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-data-table</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-24</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-drawer.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-drawer</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-23</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-field-list.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-field-list</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-12</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-icon-button.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-icon-button</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-input.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-input</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-22</span>
+</a>
+
+
+
+<a class="rd-row st-untracked" href="../../components/la-list-item.html">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-list-item</span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-menu.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-menu</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-menu.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-menu-divider<span class="rd-docnote">docs in la-menu</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-menu.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-menu-item<span class="rd-docnote">docs in la-menu</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-menu.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-menu-toggle<span class="rd-docnote">docs in la-menu</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-modal.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-modal</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<div class="rd-row st-ready">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-option<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-05</span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-panel.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-panel</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-23</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-person-item<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-person-list<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-select.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-select</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-05</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-spinner.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-spinner</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-28</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-stepper.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-stepper</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-29</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-switch.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-switch</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-24</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-tab<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-tab-panel<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-table.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-table</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-24</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-tabs.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-tabs</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-27</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-textarea<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-toast.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-toast</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-23</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-tooltip.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-tooltip</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-upload-box.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-upload-box</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-23</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-version-picker<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+</div>
+</section>
+
+<section class="rd-group" id="composed">
+<div class="rd-group-label">Composed components</div>
+<div class="rd-list">
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-action-item<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-actions-widget.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-actions-widget</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-anticipation-teaser<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-chat.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-chat</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<div class="rd-row st-deferred">
+<i class="ph-fill ph-minus-circle" aria-hidden="true"></i>
+<span class="rd-name">la-dd-readiness<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Deferred</span>
+<span class="rd-date">2026-04-17</span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-document-item.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-document-item</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-30</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-document-list.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-document-list</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-empty-state.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-empty-state</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-06</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-info-hint.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-info-hint</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-23</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-insight-card.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-insight-card</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</a>
+
+
+
+<a class="rd-row st-untracked" href="../../components/la-insight-list.html">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-insight-list</span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-insight-modal.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-insight-modal</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-08</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-investor-card.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-investor-card</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-investor-sidebar<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<div class="rd-row st-ready">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-journey-steps<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-legal-area-widget.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-legal-area-widget</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-06</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-pdf-preview<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-processing-widget.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-processing-widget</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-30</span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-sidebar.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-sidebar</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-summary-line<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</div>
+
+
+
+<a class="rd-row st-untracked" href="../../components/la-toast-stack.html">
+<i class="ph ph-circle-dashed" aria-hidden="true"></i>
+<span class="rd-name">la-toast-stack</span>
+<span class="rd-status">Untracked</span>
+<span class="rd-date"></span>
+</a>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-unlock-panel.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-unlock-panel</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-29</span>
+</a>
+
+
+
+<div class="rd-row st-deferred">
+<i class="ph-fill ph-minus-circle" aria-hidden="true"></i>
+<span class="rd-name">la-upcoming-deadlines<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Deferred</span>
+<span class="rd-date">2026-04-17</span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../components/la-upload.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-upload</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-30</span>
+</a>
+
+
+
+<div class="rd-row st-untracked">
+<i class="ph ph-archive" aria-hidden="true"></i>
+<span class="rd-name">la-welcome-banner<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">Retired</span>
+<span class="rd-date">2026-05-05</span>
+</div>
+
+
+</div>
+</section>
+
+<section class="rd-group" id="pages">
+<div class="rd-group-label">Page templates</div>
+<div class="rd-list">
+
+
+<a class="rd-row st-ready" href="../../components/la-app-shell.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-app-shell</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-04-23</span>
+</a>
+
+
+
+<div class="rd-row st-ready">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-dashboard<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-06</span>
+</div>
+
+
+
+<div class="rd-row st-ready">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-data-room-page<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</div>
+
+
+
+<a class="rd-row st-ready" href="../../pages/la-document-page.html">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-document-page</span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-12</span>
+</a>
+
+
+
+<div class="rd-row st-ready">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-investors-page<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-06-04</span>
+</div>
+
+
+
+<div class="rd-row st-ready">
+<i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+<span class="rd-name">la-legal-area-page<span class="rd-docnote">no docs yet</span></span>
+<span class="rd-status">v1 ready</span>
+<span class="rd-date">2026-05-07</span>
+</div>
+
+
+</div>
+</section>
+
+
+<p class="rd-foot">
+  Rows link to the component's published docs where they exist. Status comes from the
+  readiness dashboard (maintained by the /audit and /ready workflow); "untracked" means the
+  component exists in source but has no dashboard row yet.
+</p>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>
