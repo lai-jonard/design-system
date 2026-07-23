@@ -239,15 +239,15 @@
   design-language/colour.md
 </span>
 <article class="md-body">
-  <h1>Colour</h1>
-<h2>Token system</h2>
+  <h1 id="colour">Colour</h1>
+<h2 id="token-system">Token system</h2>
 <p>All colours are defined as CSS custom properties in <code>src/styles/tokens.ts</code> — the source of truth. Two <code>:root</code> mirrors for light-DOM pages (<code>dev/la-tokens-root.css</code>, <code>docs-src/tokens.css</code>) are <strong>generated</strong> from it on every build; never edit them by hand. Never hardcode a colour in a component or screen — always reference a token.</p>
 <p>Two layers: <strong>core primitives</strong> (<code>--la-red-500</code>, <code>--la-indigo-50</code>, …) are the only place a colour value lives; <strong>semantic tokens</strong> (everything below) are <code>var()</code> aliases onto them. Always reach for the semantic name in components.</p>
-<h3>Colour model: OKLCH</h3>
+<h3 id="colour-model-oklch">Colour model: OKLCH</h3>
 <p>Colour tokens are authored in <strong><code>oklch()</code></strong> (perceptually uniform: equal L = equal brightness, stable hue across a ramp). Each token carries its original hex as an inline comment for Figma cross-reference — <code>oklch(…); /* #HEX · … */</code>. New colour values should be written in oklch. Effect alphas (shadow rgba, scrim, focus ring) stay as <code>rgba()</code> for now. See decision 84.</p>
 <p><strong>Contrast:</strong> check with <strong>APCA</strong> (Lc ≥ 75 body text, ≥ 60 non-body). Fix a failing pair by adjusting <strong>lightness (L) only</strong> — chroma has negligible effect on contrast.</p>
 <hr>
-<h2>Surfaces</h2>
+<h2 id="surfaces">Surfaces</h2>
 <table>
 <thead>
 <tr>
@@ -297,7 +297,7 @@
 <p><code>--la-color-bg-page</code> aliases <code>--la-color-bg</code> — the semantic name for page-level body background.</p>
 <p><strong>Why <code>--la-color-bg-subtle</code> for the page header and tab bar:</strong> creates a subtle depth separation from card content without using a shadow or border. The header feels part of the chrome, not part of the content.</p>
 <hr>
-<h2>Content (text)</h2>
+<h2 id="content-text">Content (text)</h2>
 <table>
 <thead>
 <tr>
@@ -340,7 +340,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Action colours</h2>
+<h2 id="action-colours">Action colours</h2>
 <table>
 <thead>
 <tr>
@@ -428,7 +428,7 @@
 </tbody>
 </table>
 <p><code>success</code> and <code>danger</code> also carry <code>-fg</code> (text on solid fills) and <code>-text</code> (readable text on tinted surfaces) — the full action grammar. <code>warning</code> and <code>info</code> deliberately don't: they live on alerts and badges, not buttons.</p>
-<h3>Primary vs neutral vs accent</h3>
+<h3 id="primary-vs-neutral-vs-accent">Primary vs neutral vs accent</h3>
 <p>Three &quot;dark CTA&quot; eras, all still in the file for a reason:</p>
 <ul>
 <li><strong><code>--la-color-primary</code> (<code>#18181B</code>)</strong> is the near-black primary action — it marks &quot;the next obvious step&quot;.</li>
@@ -436,7 +436,7 @@
 <li><strong><code>--la-color-accent</code> (<code>#405CD0</code>)</strong> is the brand indigo for links and attention moments alongside the near-black primary.</li>
 </ul>
 <hr>
-<h2>Semantic surfaces</h2>
+<h2 id="semantic-surfaces">Semantic surfaces</h2>
 <table>
 <thead>
 <tr>
@@ -470,7 +470,7 @@
 </table>
 <p>For active/selected backgrounds use <code>--la-color-bg-active</code> (see Surfaces).</p>
 <hr>
-<h2>Borders</h2>
+<h2 id="borders">Borders</h2>
 <p>See <a href="../../docs/borders/">borders.md</a> for the full border system. Summary:</p>
 <table>
 <thead>
@@ -519,7 +519,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Hover states on ghost/tinted buttons</h2>
+<h2 id="hover-states-on-ghosttinted-buttons">Hover states on ghost/tinted buttons</h2>
 <p>Ghost buttons (danger, success variants) use their semantic surface colour on hover, paired with their semantic border:</p>
 <ul>
 <li><strong>Danger hover:</strong> background <code>--la-color-surface-danger</code> + border <code>--la-color-border-danger</code></li>
@@ -527,10 +527,10 @@
 </ul>
 <p><strong>Why:</strong> the hover state confirms the semantic intent before the user commits. The surface tint + coloured border creates a clear &quot;you are about to do something [dangerous/positive]&quot; signal.</p>
 <hr>
-<h2>Interactive-only rule</h2>
+<h2 id="interactive-only-rule">Interactive-only rule</h2>
 <p><code>--la-color-primary</code> and <code>--la-color-accent</code> appear on <strong>interactive elements only</strong> — buttons, active states, links, tab underlines — never as background fills, illustration colours, or decorative accents. This keeps the next actionable step visually unmistakable.</p>
 <hr>
-<h2>Disabled state</h2>
+<h2 id="disabled-state">Disabled state</h2>
 <p>All interactive elements at disabled state use <code>opacity: 0.4</code> on the element itself — no separate disabled token. This keeps the colour intent visible while clearly communicating unavailability.</p>
 
 </article>

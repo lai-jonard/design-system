@@ -239,8 +239,8 @@
   design-language/iconography.md
 </span>
 <article class="md-body">
-  <h1>Iconography</h1>
-<h2>Library</h2>
+  <h1 id="iconography">Iconography</h1>
+<h2 id="library">Library</h2>
 <p><strong>Phosphor Icons</strong> — loaded via the local vendor files.</p>
 <pre><code class="language-html">&lt;!-- Page-level (both weights must be loaded at document level — shadow DOM imports via `iconStyles` do not reach slotted light-DOM icons) --&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;../assets/vendor/phosphor/regular/style.css&quot;&gt;
@@ -252,7 +252,7 @@
 &lt;i class=&quot;ph-bold ph-dots-three&quot;&gt;&lt;/i&gt; &lt;!-- Bold (only for glyphs too thin at small sizes) --&gt;
 </code></pre>
 <hr>
-<h2>Weight rules</h2>
+<h2 id="weight-rules">Weight rules</h2>
 <table>
 <thead>
 <tr>
@@ -286,7 +286,7 @@
 </table>
 <p><strong>Colour rule:</strong> icons always inherit <code>color</code> from their parent — never hardcode an icon colour directly.</p>
 <hr>
-<h2>Sizing</h2>
+<h2 id="sizing">Sizing</h2>
 <table>
 <thead>
 <tr>
@@ -320,7 +320,7 @@
 </table>
 <p>Icons inherit <code>font-size</code> from the parent element. Override only when the icon sits outside a standard text context.</p>
 <hr>
-<h2>Status &amp; variant icons</h2>
+<h2 id="status--variant-icons">Status &amp; variant icons</h2>
 <p>Canonical icon per variant across <strong>every status-tinted component</strong> (<code>la-badge</code>, <code>la-alert</code>, future <code>la-toast</code>). If a component uses a status variant, reach for the icon in this table — don't invent a new one. Always pair with <code>ph-fill</code> on tinted surfaces.</p>
 <table>
 <thead>
@@ -365,9 +365,9 @@
 </table>
 <p><strong>Rule:</strong> if a new component introduces an icon that isn't in this table or the reference below, log it here before shipping. A drift between components (e.g. one uses <code>ph-warning-circle</code> for danger, another uses <code>ph-warning-octagon</code>) is a design-system bug — every audit catches it.</p>
 <hr>
-<h2>Common icons reference</h2>
+<h2 id="common-icons-reference">Common icons reference</h2>
 <p>Organised by category — same icons as before, now grouped so the file scales as the library grows.</p>
-<h3>Status &amp; feedback</h3>
+<h3 id="status--feedback">Status &amp; feedback</h3>
 <table>
 <thead>
 <tr>
@@ -406,7 +406,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Navigation</h3>
+<h3 id="navigation">Navigation</h3>
 <table>
 <thead>
 <tr>
@@ -433,7 +433,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Actions</h3>
+<h3 id="actions">Actions</h3>
 <table>
 <thead>
 <tr>
@@ -476,7 +476,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Form selection</h3>
+<h3 id="form-selection">Form selection</h3>
 <p>Glyphs that mark a chosen item inside a list / picker / option group. Distinct from the status canon — selection is <em>structural</em> (which item is chosen), status is <em>semantic</em> (success / resolved / done). Reach for the plain <code>ph-check</code>, never <code>ph-check-circle</code>, to keep the two signals separable.</p>
 <table>
 <thead>
@@ -493,7 +493,7 @@
 </tbody>
 </table>
 <p><strong>Weight:</strong> default <code>ph</code> (regular). Inline with the option label; never standalone.</p>
-<h3>Sort (data tables)</h3>
+<h3 id="sort-data-tables">Sort (data tables)</h3>
 <p>Canonical glyphs for sort affordances in <code>la-data-table</code> and any future sortable data primitive. All three sit in the same header cell — the idle glyph becomes the direction glyph when the column is active.</p>
 <table>
 <thead>
@@ -519,7 +519,7 @@
 </table>
 <p><strong>Weight:</strong> default <code>ph</code> (regular). Do not use <code>ph-fill</code> — sort carets are header hints, not tinted-surface glyphs.</p>
 <p><strong>Size:</strong> inherits from the header cell (<code>--la-font-size-md</code> in data-table). The icon is <code>aria-hidden=&quot;true&quot;</code>; screen readers read the <code>aria-sort</code> attribute on the <code>&lt;th&gt;</code> instead.</p>
-<h3>Content &amp; state</h3>
+<h3 id="content--state">Content &amp; state</h3>
 <table>
 <thead>
 <tr>
@@ -546,7 +546,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Document page — status badge</h3>
+<h3 id="document-page--status-badge">Document page — status badge</h3>
 <p>The document status appears as a <code>la-badge</code> in the header meta row alongside entity, category, and legal area. The Phosphor icon goes in the <code>icon</code> slot. Never a standalone icon or icon button — the label text is required to disambiguate &quot;Analysed&quot; from the resolved-insight <code>ph-check-circle</code> that appears on insight cards.</p>
 <table>
 <thead>
@@ -586,7 +586,7 @@
 </table>
 <p><strong>Note on <code>danger</code> badge icon:</strong> <code>ph-warning-circle</code> (circle) is used here instead of the canonical <code>ph-warning-octagon</code> (stop sign) — the <code>la-alert</code> banner below the header already carries the full-weight danger signal; the badge is a softer label. This is an intentional divergence from the status variant canon.</p>
 <hr>
-<h2>Workflow</h2>
+<h2 id="workflow">Workflow</h2>
 <p>The four workflow commands each interact with this file:</p>
 <ul>
 <li><strong><code>/build</code></strong> — reads this file during scout; uses canonical icons during build; flags any new icon usage for <code>/ready</code> to log</li>

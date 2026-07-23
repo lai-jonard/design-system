@@ -233,9 +233,9 @@
   design-language/README.md
 </span>
 <article class="md-body">
-  <h1>Design Language — LawAdvisor AI</h1>
+  <h1 id="design-language--lawadvisor-ai">Design Language — LawAdvisor AI</h1>
 <p>This folder documents the design rationale, patterns, and standards for the LawAdvisor AI design system. It is the living reference for how things look and why — used when creating new flows, screens, or components.</p>
-<h2>When to update</h2>
+<h2 id="when-to-update">When to update</h2>
 <p>Update this documentation automatically when:</p>
 <ul>
 <li>A new visual pattern is established (e.g. how we handle empty states)</li>
@@ -246,7 +246,7 @@
 </ul>
 <p>Do not update for one-off tweaks that are screen-specific and unlikely to generalise.</p>
 <hr>
-<h2>Files</h2>
+<h2 id="files">Files</h2>
 <table>
 <thead>
 <tr>
@@ -298,10 +298,10 @@
 </tbody>
 </table>
 <hr>
-<h2>Relationship to CLAUDE.md and source files</h2>
+<h2 id="relationship-to-claudemd-and-source-files">Relationship to CLAUDE.md and source files</h2>
 <p><code>CLAUDE.md</code> at the project root is the <strong>canonical foundation</strong> — token values, typography rules, animation standards, copy rules, and the Lit component library structure.</p>
 <p>This <code>design-language/</code> folder is the <strong>rationale and decision layer</strong> on top of it — the <em>why</em> behind decisions, known divergences from defaults, and patterns that emerged from building specific screens and flows. It is a living document updated as the system evolves.</p>
-<h3>Known divergences from defaults</h3>
+<h3 id="known-divergences-from-defaults">Known divergences from defaults</h3>
 <table>
 <thead>
 <tr>
@@ -343,14 +343,14 @@
 </tr>
 </tbody>
 </table>
-<h3>When to check which source</h3>
+<h3 id="when-to-check-which-source">When to check which source</h3>
 <ul>
 <li><strong>Building a new component</strong> → check <code>CLAUDE.md</code> for tokens and rules, then this folder for architecture patterns</li>
 <li><strong>Designing a new screen or flow</strong> → check <code>layout.md</code> and <code>components.md</code> here</li>
 <li><strong>Copy / UX writing</strong> → <code>CLAUDE.md</code> copy rules section is the source of truth</li>
 </ul>
 <hr>
-<h2>Core principles</h2>
+<h2 id="core-principles">Core principles</h2>
 <ul>
 <li><strong>Tokens over hardcoding.</strong> Every colour, size, radius, and spacing value must use a CSS variable. Never hardcode a hex or pixel value directly in a component.</li>
 <li><strong>Semibold headings.</strong> Weight 600, never 700. Bold is reserved for emphasis within body copy only.</li>

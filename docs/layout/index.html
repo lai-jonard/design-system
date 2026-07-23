@@ -231,17 +231,17 @@
   design-language/layout.md
 </span>
 <article class="md-body">
-  <h1>Layout</h1>
-<h2>What this library provides</h2>
+  <h1 id="layout">Layout</h1>
+<h2 id="what-this-library-provides">What this library provides</h2>
 <p>This is a component library, not an app shell. Layout components (sidebar, page header, tabs) are not part of this library — they live in the consuming application. What this library provides are <strong>self-contained components</strong> that work inside any layout.</p>
 <p>These principles describe how screens and flows built with this library should be structured.</p>
 <hr>
-<h2>Content max-width</h2>
+<h2 id="content-max-width">Content max-width</h2>
 <p><strong>900px</strong>, centred with <code>margin: 0 auto</code> (or <code>margin-inline: auto</code>).</p>
 <p>Applies to the main content column of every page — dashboards, legal area pages, list/document pages. The aside in <code>la-app-shell</code> is a separate slot and sits outside this constraint. 900px keeps line lengths comfortable, works for both card grids and tables, and is consistent across all content types.</p>
 <p>The 900px standard was settled during Sprint 2 dashboard work (2026-05-06) after reviewing actual widths across all prototype pages. Previous docs said 1280px — that was aspirational and never matched the components.</p>
 <hr>
-<h2>Spacing scale</h2>
+<h2 id="spacing-scale">Spacing scale</h2>
 <table>
 <thead>
 <tr>
@@ -277,7 +277,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Two-panel layout</h2>
+<h2 id="two-panel-layout">Two-panel layout</h2>
 <p>For screens where a user works with a document or detail view alongside a control panel (e.g. review, negotiation, unlock flow).</p>
 <pre><code>[container]         display: flex
 ├── [left panel]    fixed width ~380–580px, scrollable
@@ -289,7 +289,7 @@
 <li>Divider: <code>border-right: 1px solid var(--la-color-border-light)</code></li>
 </ul>
 <hr>
-<h2>Card-based layout</h2>
+<h2 id="card-based-layout">Card-based layout</h2>
 <p>The default layout pattern for dashboard and area pages. Cards sit on a page background (<code>--la-color-bg-subtle</code>) and are the primary content surface.</p>
 <ul>
 <li>Specialised cards (e.g. <code>la-insight-card</code>, <code>la-investor-card</code>) own their own chrome. Use <code>la-card</code> as a generic fallback for ad-hoc titled sections, or <code>la-panel</code> for de-emphasised content that shouldn't float</li>
@@ -297,7 +297,7 @@
 <li>Full-width components (lists, panels) use <code>grid-column: 1 / -1</code></li>
 </ul>
 <hr>
-<h2>Modals</h2>
+<h2 id="modals">Modals</h2>
 <ul>
 <li>Max-width: 560px (standard), 640px (form/intake modals)</li>
 <li>Border-radius: <code>--la-radius-xl2</code> (24px)</li>
@@ -308,7 +308,7 @@
 <li>Close: X button, cancel button, click backdrop, or Escape key</li>
 </ul>
 <hr>
-<h2>Component placement principles</h2>
+<h2 id="component-placement-principles">Component placement principles</h2>
 <ul>
 <li><strong>White space first</strong> — components are never crowded. Give them room.</li>
 <li><strong>No coloured section backgrounds</strong> — surfaces are white or near-white only</li>
@@ -316,7 +316,7 @@
 <li><strong>Shadows only on floating elements</strong> — modals, dropdowns, toasts</li>
 </ul>
 <hr>
-<h2>Responsive breakpoints</h2>
+<h2 id="responsive-breakpoints">Responsive breakpoints</h2>
 <table>
 <thead>
 <tr>
@@ -343,7 +343,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Grid patterns</h3>
+<h3 id="grid-patterns">Grid patterns</h3>
 <ul>
 <li>Use <code>auto-fill</code> / <code>auto-fit</code> with <code>minmax()</code> for card grids — never fixed column counts.</li>
 <li>Cards reflow naturally as the viewport shrinks.</li>
@@ -352,13 +352,13 @@
 grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 gap: 14px;
 </code></pre>
-<h3>Layout shifts</h3>
+<h3 id="layout-shifts">Layout shifts</h3>
 <ul>
 <li><strong>Dashboard:</strong> flex row on desktop, column stack at 768px</li>
 <li><strong>Two-column layouts (e.g. data room):</strong> <code>grid-template-columns: 1fr 1fr</code> on desktop, single column below 800px</li>
 <li><strong>Sidebar:</strong> always visible on desktop, collapsible on tablet, overlay on mobile</li>
 </ul>
-<h3>Aside panel at tablet widths (768–1023px)</h3>
+<h3 id="aside-panel-at-tablet-widths-7681023px">Aside panel at tablet widths (768–1023px)</h3>
 <p>The <code>la-app-shell</code> aside (fixed-width right panel containing actions and documents) squeezes the main content uncomfortably at tablet. Evaluated options:</p>
 <table>
 <thead>
@@ -421,9 +421,9 @@ The entry point into the overlay should not be a generic &quot;open panel&quot; 
 </ul>
 <p><strong>Aside framing principle — coach, not form:</strong>
 Even though the aside is collecting data, it should never feel like a form. Each item should carry a <em>why</em>: &quot;We're missing your funding history — adding it would sharpen this insight significantly.&quot; Progress indicators and completion states reinforce the behaviour. Empty state: inviting and explanatory, not blank.</p>
-<h3>Touch targets</h3>
+<h3 id="touch-targets">Touch targets</h3>
 <p>Minimum <strong>44px</strong> for all interactive elements on touch devices. No horizontal scroll — content must fit viewport width.</p>
-<h3>Test widths</h3>
+<h3 id="test-widths">Test widths</h3>
 <p>Always check at: <strong>375px</strong> (mobile), <strong>768px</strong> (tablet), <strong>1280px</strong> (desktop).</p>
 
 </article>

@@ -233,10 +233,10 @@
   design-language/development-workflow.md
 </span>
 <article class="md-body">
-  <h1>Development workflow</h1>
+  <h1 id="development-workflow">Development workflow</h1>
 <p>How to develop and contribute to the design system.</p>
 <hr>
-<h2>Local development</h2>
+<h2 id="local-development">Local development</h2>
 <p>Run the full dev environment with a single command:</p>
 <pre><code class="language-bash">npm run dev
 </code></pre>
@@ -248,7 +248,7 @@
 </ol>
 <p>Save a <code>.ts</code> file and the browser reloads automatically within a couple of seconds.</p>
 <hr>
-<h2>Build chain</h2>
+<h2 id="build-chain">Build chain</h2>
 <pre><code>src/*.ts  --[tsc]--&gt;  dist/*.js  --[rollup]--&gt;  dev/bundle.js  --[wds]--&gt;  browser reload
 </code></pre>
 <ul>
@@ -257,18 +257,18 @@
 <li>Docs pages load <code>bundle.js</code> as an IIFE (no ES module complexity in HTML)</li>
 </ul>
 <hr>
-<h2>One-off build</h2>
+<h2 id="one-off-build">One-off build</h2>
 <p>For commits or CI, run both steps:</p>
 <pre><code class="language-bash">npm run build &amp;&amp; npm run build:bundle
 </code></pre>
 <hr>
-<h2>Docs pages</h2>
+<h2 id="docs-pages">Docs pages</h2>
 <p>Every component has a docs draft in <code>dev/docs-drafts/la-&lt;name&gt;.html</code> (output of <code>/document</code>) which is promoted to <code>docs-src/components/la-&lt;name&gt;.html</code> (the published Eleventy source) by <code>/ready</code>.</p>
 <ul>
 <li>Open drafts at <code>http://localhost:8000/docs-drafts/la-&lt;name&gt;.html</code> while iterating</li>
 <li>Each docs page loads <code>../bundle.js</code> to register all components</li>
 </ul>
-<h3>Icons in docs pages</h3>
+<h3 id="icons-in-docs-pages">Icons in docs pages</h3>
 <p>Every docs page <code>&lt;head&gt;</code> must include Phosphor CSS to register the icon font globally:</p>
 <pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;../assets/vendor/phosphor/regular/style.css&quot;&gt;
 &lt;link rel=&quot;stylesheet&quot; href=&quot;../assets/vendor/phosphor/fill/style.css&quot;&gt;
@@ -276,13 +276,13 @@
 </code></pre>
 <p>Inside Lit components, shadow DOM does not inherit page stylesheets. Any component using <code>ph-*</code> icons must import <code>${iconStyles}</code> from <code>'../styles/icons.js'</code> and include it at the top of <code>render()</code>. Browsers cache the font — no extra network cost per component.</p>
 <hr>
-<h2>DialKit</h2>
+<h2 id="dialkit">DialKit</h2>
 <p><code>dialkit/dialkit.js</code> is a floating panel for live CSS variable tuning. Inject it into any docs page to tweak tokens in the browser without touching source files:</p>
 <pre><code class="language-html">&lt;script src=&quot;../../dialkit/dialkit.js&quot;&gt;&lt;/script&gt;
 </code></pre>
 <p>Override <code>window.DIALKIT_DIALS</code> before the script loads to customise which dials appear per page.</p>
 <hr>
-<h2>Adding a new component</h2>
+<h2 id="adding-a-new-component">Adding a new component</h2>
 <ol>
 <li>Create the <code>.ts</code> file in the appropriate folder:
 <ul>
@@ -302,21 +302,21 @@
 <li>If the component is Tier 2 (specialised), log the rationale in <code>design-language/components.md</code></li>
 </ol>
 <hr>
-<h2>Decisions &amp; evolution</h2>
+<h2 id="decisions--evolution">Decisions &amp; evolution</h2>
 <p>How the workflow itself has changed over time. Each entry: the rule, why it exists, and how to apply it. Promote to a dedicated file if this section exceeds ~10 entries.</p>
-<h3>Solves are for composed components and flows, not primitives — 2026-04-24</h3>
+<h3 id="solves-are-for-composed-components-and-flows-not-primitives--2026-04-24">Solves are for composed components and flows, not primitives — 2026-04-24</h3>
 <p>Primitives (<code>src/primitives/</code>) skip straight to <code>/build → /audit → /ready</code> plus atomic <code>decisions/NN-*.md</code>. Composed components (<code>src/components/</code>) and flow/page work get a preceding <code>solves/yymmdd-N-topic/</code> workspace when the problem is still mushy.</p>
 <p><strong>Why:</strong> Primitives are narrowly scoped — the questions are atomic (&quot;what weight, what radius, what reflects&quot;). A three-file solve workspace is overkill for a decision that fits in three lines. Composed components and flows span multiple screens and interactions; that shape needs a workspace.</p>
 <p><strong>How to apply:</strong> If the problem fits one primitive and you can state the decision in a sentence, go straight to <code>decisions/</code> once it's locked. If the problem spans multiple components, touches UX flow, or needs iteration through drafts, open a solve first. Distilled conclusions get promoted from the solve to <code>decisions/</code> as they firm up.</p>
-<h3>Published vs dev — the docs site is the source of truth — 2026-04-24</h3>
+<h3 id="published-vs-dev--the-docs-site-is-the-source-of-truth--2026-04-24">Published vs dev — the docs site is the source of truth — 2026-04-24</h3>
 <p>A component is <strong>published</strong> when it has JSDoc in source, a page in <code>docs-src/components/</code>, an entry in <code>design-language/components.md</code>, and a row in <code>handoffs/readiness.md</code>. Pre-publish work lives in <code>dev/docs-drafts/</code> and doesn't count yet.</p>
 <p><strong>Why:</strong> <code>dev/</code> is the workbench — anything goes, iterate freely. <code>docs-src/</code> is the public surface engineering and product read. Without a clear line between the two, stale demos get treated as spec and drift accumulates. The line is: &quot;does it appear on the docs site when I run <code>npm run docs</code>?&quot; If yes, it's published.</p>
 <p><strong>How to apply:</strong> Components graduate from <code>dev/docs-drafts/</code> to <code>docs-src/components/</code> when they pass the <code>/ready</code> gates. Before that, they're WIP and not for external reference. Unrelated to <code>npm publish</code> — this is the docs-visibility bar.</p>
-<h3>Prototype publish gate — 2026-04-24</h3>
+<h3 id="prototype-publish-gate--2026-04-24">Prototype publish gate — 2026-04-24</h3>
 <p>Prototypes (flow/page mockups in <code>dev/prototypes/</code>) move into the published docs site (<code>/founder-flow/*.html</code> and equivalent) only after passing every gate in <a href="../../docs/prototype-standards/"><code>prototype-standards.md</code></a>.</p>
 <p><strong>Why:</strong> Prototypes are engineering's structural source of truth during handoff — layout, composition, spacing, interactions. That only works if a published prototype is guaranteed to use only published components, style only through tokens, and respect the same standards we apply to components. WIP prototypes demoed as reference lead to drift.</p>
 <p><strong>How to apply:</strong> While iterating, keep prototypes in <code>dev/prototypes/&lt;flow&gt;/</code>. When ready to publish, walk the 8-gate checklist in <code>prototype-standards.md</code>. When it passes, add the file to the passthrough list in <code>.eleventy.cjs</code> and run <code>npm run docs</code>. Anything blocked by an unpublished component waits — publish the component first.</p>
-<h3>Component docs: stage in <code>dev/docs-drafts/</code>, publish on <code>/ready</code> — 2026-04-24</h3>
+<h3 id="component-docs-stage-in-devdocs-drafts-publish-on-ready--2026-04-24">Component docs: stage in <code>dev/docs-drafts/</code>, publish on <code>/ready</code> — 2026-04-24</h3>
 <p><code>/document</code> writes draft docs pages to <code>dev/docs-drafts/la-&lt;name&gt;.html</code> as standalone HTML. <code>/ready</code> (Gate 9) verifies the draft exists, promotes it to <code>docs-src/components/la-&lt;name&gt;.html</code> in Eleventy-template form, updates the catalogue chip and href, and flips readiness to 🟢. The draft file is deleted after the promotion lands.</p>
 <p><strong>Why:</strong> <code>dev/</code> is the workbench, <code>docs-src/</code> is the published surface. A draft sitting in <code>docs-src/</code> would already appear on the served site, which muddies the &quot;published&quot; boundary the rest of the workflow relies on. Staging preserves that boundary — drafts are visible under <code>npm run dev</code> but hidden from the built docs site until <code>/ready</code> runs.</p>
 <p><strong>How to apply:</strong> After <code>/build</code>, run <code>/document &lt;name&gt;</code> to draft the docs page — it lands in <code>dev/docs-drafts/</code>. Iterate on the draft there (viewable at <code>http://localhost:8000/docs-drafts/la-&lt;name&gt;.html</code> under <code>npm run dev</code>). When ready, run <code>/ready &lt;name&gt;</code> — it runs the 9 gates, promotes the draft to <code>docs-src/</code>, updates the catalogue, flips readiness. Then <code>npm run docs</code> to rebuild the site.</p>

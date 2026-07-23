@@ -231,32 +231,32 @@
   design-language/components.md
 </span>
 <article class="md-body">
-  <h1>Components</h1>
-<h2>Working agreement</h2>
+  <h1 id="components">Components</h1>
+<h2 id="working-agreement">Working agreement</h2>
 <p>Before any <strong>specialised component</strong> is built, the design intent must be defined and logged here.</p>
 <p>The question is always: <strong>what problem is this component solving?</strong></p>
 <p>The answer gets logged in the Tier 2 table before building starts. This is a one-question check — it doesn't block the build, it just ensures the rationale isn't lost.</p>
 <p>Base components (Tier 1) are exempt — they follow established conventions and only need rationale logged when we deliberately diverge.</p>
 <hr>
-<h2>Component taxonomy</h2>
+<h2 id="component-taxonomy">Component taxonomy</h2>
 <p>There are two tiers of component in this library. Understanding which tier a component belongs to determines how it should be designed, documented, and used.</p>
 <hr>
-<h3>Tier 1 — Base components (<code>src/primitives/</code>)</h3>
+<h3 id="tier-1--base-components-srcprimitives">Tier 1 — Base components (<code>src/primitives/</code>)</h3>
 <p>Standard UI controls that map directly to established web patterns. These are atoms — single-responsibility, stateless where possible, and not specific to LawAdvisor's product logic.</p>
 <p><strong>Rationale approach:</strong> These follow established conventions. Use <a href="https://component.gallery/components/">component.gallery</a> as the reference for intended behaviour. No product-specific rationale needed unless we deliberately diverge from convention.</p>
 <hr>
-<h3><code>la-activity-item</code></h3>
+<h3 id="la-activity-item"><code>la-activity-item</code></h3>
 <p>A single event row in a chronological activity feed — icon circle, a vertical connector line to the next item, a body slot for the event description (may contain inline <code>&lt;a&gt;</code> links), and a timestamp. Compose multiple items in any container; the connector lines chain them into a timeline. Set <code>last</code> on the final item to suppress its connector. Presentational — no events. Used in the per-investor Activity tab (Sprint 12).</p>
 <p><strong>Props:</strong> <code>time</code> (timestamp string), <code>last</code> (boolean — suppresses connector on the final item)
 <strong>Slots:</strong> default (event text), <code>icon</code> (Phosphor <code>&lt;i&gt;</code> inside the circle)
 <strong>Events:</strong> none — presentational only</p>
 <hr>
-<h3><code>la-avatar</code></h3>
+<h3 id="la-avatar"><code>la-avatar</code></h3>
 <p>Initials avatar for people and entities. Derives two-letter initials automatically from <code>name</code> (first letter of the first two words), with an <code>initials</code> override for entities or edge cases. Three fixed sizes — sm (32px), md (40px), lg (48px) — map to product contexts (compact lists / person rows / detail headers). Purely presentational and decorative (<code>aria-hidden</code>); the adjacent visible name carries the accessible identity. Used across investor surfaces (Sprint 12) and the share modal.</p>
 <p><strong>Props:</strong> <code>name</code> (auto-derives initials), <code>initials</code> (override), <code>size</code> (<code>'sm' | 'md' | 'lg'</code>, default <code>md</code>)
 <strong>Slots:</strong> none · <strong>Events:</strong> none</p>
 <hr>
-<h3><code>la-badge</code></h3>
+<h3 id="la-badge"><code>la-badge</code></h3>
 <p>A small inline primitive with two types. <strong>Badge</strong> (pill) communicates status, category, or severity at a glance; always paired with content, never standalone. <strong>Counter</strong> (circle) communicates a numerical count — unread items, queue depth, notification totals.</p>
 <p><strong>Types:</strong> <code>badge</code> (default), <code>counter</code>
 <strong>Variants:</strong> <code>danger</code>, <code>warning</code>, <code>success</code>, <code>neutral</code>, <code>info</code>, <code>accent</code>, <code>primary</code>
@@ -321,14 +321,14 @@
 </table>
 <p><strong>With tooltip:</strong> when a status concept may be unfamiliar to users (e.g. &quot;DD window&quot;, &quot;Processing&quot;), wrap the badge in <code>la-tooltip</code> with <code>appearance=&quot;light&quot;</code> to give context in one sentence. Dark tooltips feel too heavy against small badges.</p>
 <hr>
-<h3><code>la-breadcrumb</code></h3>
+<h3 id="la-breadcrumb"><code>la-breadcrumb</code></h3>
 <p>A depth signal rendered in the page header. Shows the user's location in the navigation hierarchy and provides a one-click path back up the tree. Used inside <code>la-app-shell</code> via the <code>breadcrumbs</code> prop — not rendered standalone.</p>
 <p><strong>Props:</strong> <code>items</code> (<code>BreadcrumbItem[]</code>) — ordered array from root to current page. Each item is <code>{ label: string; href?: string }</code>. Last item is the current page (no link).</p>
 <p><strong>Collapse behaviour:</strong> At 4 or more items, the trail collapses to <code>root / ••• / parent / current</code>. Tapping <code>•••</code> (an <code>la-icon-button</code>) expands the full trail. Collapsing resets automatically when <code>items</code> changes.</p>
 <p><strong>Colour:</strong> Ancestor links use <code>--la-color-text-faint</code>; the current page label uses <code>--la-color-text-muted</code>. Both are below WCAG AA at small text sizes — accepted divergence for navigational support copy. Hover on ancestor links resolves to <code>--la-color-text</code> (passes AA).</p>
 <p><strong>Docs-only</strong> — see <code>docs-src/components/la-breadcrumb.html</code>.</p>
 <hr>
-<h3><code>la-button</code></h3>
+<h3 id="la-button"><code>la-button</code></h3>
 <p>The primary interactive control. Every call-to-action uses this. Always verb-first label, sentence case.</p>
 <p><strong>Variants:</strong> <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>danger</code>, <code>ghost</code>
 <strong>Sizes:</strong> <code>sm</code> (28px), default (36px), <code>lg</code> (44px)</p>
@@ -417,9 +417,9 @@
 </tbody>
 </table>
 <p><strong>Auto-route by icon-left:</strong> the spinner placement adapts to the button's content. Buttons with an <code>icon-left</code> slot show the spinner <em>in place of</em> the icon during loading (label stays). Buttons without an icon-left show the spinner <em>centred in the label area</em> (label fades). In both cases the button keeps its resting width — no phantom space, no jump on toggle. Pattern C with <code>hide-label</code> collapses the leading area entirely and centres the spinner regardless of icon presence.</p>
-<p><strong>Pairing with <code>la-spinner</code>:</strong> la-button embeds <a href="../src/primitives/la-spinner.ts"><code>la-spinner</code></a> internally. Spinner size and appearance are auto-mapped — sm-button → sm-spinner; default + lg → md-spinner; primary/success/danger variants → <code>appearance=&quot;invert&quot;</code>; secondary/ghost → <code>appearance=&quot;default&quot;</code>. Consumers never set spinner props directly.</p>
+<p><strong>Pairing with <code>la-spinner</code>:</strong> la-button embeds <code>la-spinner</code> internally. Spinner size and appearance are auto-mapped — sm-button → sm-spinner; default + lg → md-spinner; primary/success/danger variants → <code>appearance=&quot;invert&quot;</code>; secondary/ghost → <code>appearance=&quot;default&quot;</code>. Consumers never set spinner props directly.</p>
 <hr>
-<h3><code>la-icon-button</code></h3>
+<h3 id="la-icon-button"><code>la-icon-button</code></h3>
 <p>An icon-only button for secondary actions in dense surfaces — widget headers, toolbars, sidebar toggles. Shares the <code>--la-button-height-*</code> size scale with <code>la-button</code> so mixed rows align at any size. Requires a <code>label</code> prop for screen readers (no visible text).</p>
 <p><strong>Variants:</strong> <code>default</code>, <code>primary</code>, <code>outline</code>, <code>danger</code>
 <strong>Sizes:</strong> <code>sm</code> (28px), default (36px), <code>lg</code> (44px)</p>
@@ -473,7 +473,7 @@
 </table>
 <p>Use <code>la-button</code> with its <code>icon-left</code> or <code>icon-right</code> slot when you need an icon <em>and</em> a text label. <code>la-icon-button</code> is specifically for icon-only triggers.</p>
 <hr>
-<h3><code>la-input</code></h3>
+<h3 id="la-input"><code>la-input</code></h3>
 <p>A text input for forms and modal dialogs. Wraps a native <code>&lt;input&gt;</code> element with a consistent label, hint, icon slot, and state system. Single size — layout is determined by the container.</p>
 <p><strong>Types:</strong> <code>text</code>, <code>email</code>, <code>password</code>, <code>search</code>, <code>tel</code>, <code>url</code>, <code>number</code></p>
 <table>
@@ -509,14 +509,14 @@
 <p><strong>Icon slots:</strong> <code>icon-left</code> for context (envelope, person, lock), <code>icon-right</code> for actions (password reveal) or status (validation check). Padding adjusts automatically — no extra props needed.</p>
 <p>Search inputs are a separate component (<code>la-search-input</code>, not yet built). Use <code>type=&quot;search&quot;</code> on <code>la-input</code> as a temporary measure only — the native clear button is not styled.</p>
 <hr>
-<h3><code>la-menu</code> + <code>la-menu-item</code> + <code>la-menu-toggle</code> + <code>la-menu-divider</code></h3>
-<p>Tertiary action surface — a 3-dot trigger button that reveals a floating list of actions. <code>la-menu</code> owns the trigger, panel, and open/close lifecycle. <code>la-menu-item</code> is the action row primitive: label, optional icon, and a <code>danger</code> variant. <code>la-menu-toggle</code> is a switch row for boolean in-menu settings (does not close the panel on change). <code>la-menu-divider</code> is a visual separator between sections. Status: 🟢 v1 ready (2026-05-07) — full reference at <a href="../docs-src/components/la-menu.html">docs-src/components/la-menu.html</a>.</p>
+<h3 id="la-menu--la-menu-item--la-menu-toggle--la-menu-divider"><code>la-menu</code> + <code>la-menu-item</code> + <code>la-menu-toggle</code> + <code>la-menu-divider</code></h3>
+<p>Tertiary action surface — a 3-dot trigger button that reveals a floating list of actions. <code>la-menu</code> owns the trigger, panel, and open/close lifecycle. <code>la-menu-item</code> is the action row primitive: label, optional icon, and a <code>danger</code> variant. <code>la-menu-toggle</code> is a switch row for boolean in-menu settings (does not close the panel on change). <code>la-menu-divider</code> is a visual separator between sections. Status: 🟢 v1 ready (2026-05-07) — full reference at <a href="../../components/la-menu.html">docs-src/components/la-menu.html</a>.</p>
 <p><strong>Problem solved:</strong> Every page or card surface needs a consistent home for tertiary actions (rename, delete, export, etc.). Before this, teams were inventing ad-hoc popouts with inconsistent styling, shadow, and keyboard behaviour. <code>la-menu</code> is the one canonical answer — reach for it whenever an action doesn't warrant a visible button and isn't the primary CTA.</p>
 <p><strong><code>origin</code> property:</strong> Controls which corner the panel scales from. Set to match the trigger's position on the page — <code>top-right</code> (default) for a 3-dot button in the top-right of a card, <code>bottom-right</code> if the trigger is near the viewport bottom.</p>
 <p><strong>Events:</strong> <code>la-menu-open</code> / <code>la-menu-close</code> (from <code>la-menu</code>), <code>la-menu-select</code> with <code>{label, value}</code> (from <code>la-menu-item</code>, bubbles), <code>la-menu-toggle-change</code> with <code>{label, value, checked}</code> (from <code>la-menu-toggle</code>, bubbles — does not trigger panel close).</p>
 <hr>
-<h3><code>la-select</code></h3>
-<p>Custom single-select combobox. Trigger chrome mirrors <code>la-input</code> (height, border, focus ring, error, label, hint) so a select sits naturally in a form row alongside inputs. Slotted <code>&lt;la-option&gt;</code> children carry the values; rich content (icons, multi-line) is allowed inside each option. Status: 🟢 v1 ready (2026-05-05) — full reference at <a href="../docs-src/components/la-select.html">docs-src/components/la-select.html</a>.</p>
+<h3 id="la-select"><code>la-select</code></h3>
+<p>Custom single-select combobox. Trigger chrome mirrors <code>la-input</code> (height, border, focus ring, error, label, hint) so a select sits naturally in a form row alongside inputs. Slotted <code>&lt;la-option&gt;</code> children carry the values; rich content (icons, multi-line) is allowed inside each option. Status: 🟢 v1 ready (2026-05-05) — full reference at <a href="../../components/la-select.html">docs-src/components/la-select.html</a>.</p>
 <p><strong>Why custom (not native <code>&lt;select&gt;</code>):</strong> native renders the open dropdown via the OS, which means we can't style options, hover, selected state, or icons inside the panel — every product surface would render differently across macOS / Windows / Linux. Custom is more code but gives us full token control and a consistent feel.</p>
 <table>
 <thead>
@@ -558,7 +558,7 @@
 <p><strong>Positioning:</strong> panel floats below by default. When there's not enough space below (e.g. select sits near the viewport bottom), it flips above. Panel uses <code>position: absolute</code> inside the host's shadow DOM — an ancestor with <code>overflow: hidden</code> will clip it. v2 candidate: switch to the Popover API for top-layer rendering when an overflow-clip case appears.</p>
 <p><strong>Out of scope (deferred to v2 with a solve):</strong> multi-select, search input inside the panel, <code>ElementInternals</code> form-association.</p>
 <hr>
-<h3>la-select vs filter-menu — when to reach for which</h3>
+<h3 id="la-select-vs-filter-menu--when-to-reach-for-which">la-select vs filter-menu — when to reach for which</h3>
 <table>
 <thead>
 <tr>
@@ -587,29 +587,29 @@
 </table>
 <p>If the answer is &quot;single + form-row,&quot; reach for <code>la-select</code>. If it's &quot;multiple + toolbar/filter,&quot; compose <code>la-checkbox</code> rows inside an overlay (no current dropdown primitive for this — pattern is documented in <code>la-data-table</code>'s filter-menu snapshot).</p>
 <hr>
-<h3><code>la-stepper</code></h3>
+<h3 id="la-stepper"><code>la-stepper</code></h3>
 <p>A stepped progress indicator for multi-step flows. Shows where the user is in a sequence and what's been completed, skipped, or failed. Used in the unlock flow.</p>
 <p><strong>Step statuses:</strong> <code>pending</code>, <code>active</code>, <code>complete</code>, <code>processing</code>, <code>skipped</code>, <code>failed</code></p>
 <p>Each step is a numbered circle. Use when a process has a defined sequence with discrete steps the user must move through in order.</p>
 <hr>
-<h3><code>la-spinner</code></h3>
+<h3 id="la-spinner"><code>la-spinner</code></h3>
 <p>Indeterminate loading indicator — a small spinning ring used inside buttons, rows, and async-operation surfaces to communicate that work is in progress. Distinct from <code>la-stepper</code> (linear flows with discrete steps) and <code>la-progress</code> (determinate, known-quantity tasks). Slot 1 of the loading-states family — see <a href="../../docs/loading/"><code>design-language/loading.md</code></a> for the family roadmap.</p>
 <p><strong>Props:</strong> <code>size</code> (<code>'sm' | 'md' | 'lg'</code>, default <code>'sm'</code>), <code>appearance</code> (<code>'default' | 'invert'</code>, default <code>'default'</code>), <code>label</code> (string, default <code>'Loading'</code>).</p>
 <p><strong>Sizes:</strong> sm 12px · md 16px · lg 24px. Pairing with <code>la-button</code>: sm-button → sm spinner; default-button and lg-button → md spinner.</p>
 <p><strong>Appearance:</strong> <code>default</code> inherits colour via <code>currentColor</code> from any ancestor. <code>invert</code> overrides to <code>--la-color-text-invert</code> (white) for dark backgrounds — use on filled <code>primary</code> / <code>danger</code> button variants where the foreground is white.</p>
 <p>Use indeterminate (this primitive) when the system can't tell how much work remains; reach for <code>la-progress</code> when bytes / count / percentage are known.</p>
 <hr>
-<h3><code>la-card</code></h3>
+<h3 id="la-card"><code>la-card</code></h3>
 <p>A surface container used to group related content. Provides a visual boundary (border + background + radius) without adding layout logic. Takes an optional <code>heading</code> prop for a titled header section.</p>
 <p><strong>Props:</strong> <code>heading</code> (string), <code>nopadding</code> (boolean)</p>
 <p>Use <code>nopadding</code> when the content inside the card manages its own spacing (e.g. a list that needs edge-to-edge rows).</p>
 <hr>
-<h3><code>la-list-item</code></h3>
+<h3 id="la-list-item"><code>la-list-item</code></h3>
 <p>A single row within a list. Handles layout for icon + content + meta pattern. Draws a bottom border between items automatically; last child has no border.</p>
 <p><strong>Props:</strong> <code>error</code> (boolean — highlights row in red tint)</p>
 <p>Use inside <code>la-card</code> or any list container when rows have a consistent icon + label + metadata structure.</p>
 <hr>
-<h3><code>la-choice</code></h3>
+<h3 id="la-choice"><code>la-choice</code></h3>
 <p>A selectable option row with a label slot and optional description. Clicking toggles <code>checked</code> internally and fires a <code>la-change</code> event. Used in onboarding and unlock flows for single boolean choices, single-select question steps (<code>choice</code>), and multi-select question steps (<code>multi-choice</code>). Composes <code>la-checkbox</code> internally — the inner checkbox is purely visual (<code>pointer-events: none</code>, <code>aria-hidden=&quot;true&quot;</code>); the host element is the sole accessible control.</p>
 <p><strong>Props:</strong> <code>checked</code> (boolean) · <code>invalid</code> (boolean) · <code>description</code> (string) · <code>variant</code> ('default' | 'contained')</p>
 <p><strong>Events:</strong> <code>la-change</code> — <code>{ checked: boolean }</code> — fires on click or Space/Enter keypress, bubbles and is composed.</p>
@@ -620,9 +620,9 @@
 </ul>
 <p><strong>States:</strong> <code>invalid</code> applies a danger ring to the checkbox wrapper and danger text colour to the label. Independent from <code>checked</code> — a row can be both, either, or neither.</p>
 <p><strong>Groups:</strong> For single-select (<code>choice</code>) behaviour, wrap in <code>role=&quot;radiogroup&quot;</code> and enforce exclusivity in the parent <code>la-change</code> handler. For multi-select (<code>multi-choice</code>) behaviour, wrap in <code>role=&quot;group&quot;</code> and let each tile toggle independently. Both patterns are field types in <code>la-unlock-panel</code>.</p>
-<p>Docs: <a href="../docs-src/components/la-choice.html"><code>docs-src/components/la-choice.html</code></a>. Renamed from <code>la-checklist</code> — see decision 64.</p>
+<p>Docs: <a href="../../components/la-choice.html"><code>docs-src/components/la-choice.html</code></a>. Renamed from <code>la-checklist</code> — see decision 64.</p>
 <hr>
-<h3><code>la-checkbox</code></h3>
+<h3 id="la-checkbox"><code>la-checkbox</code></h3>
 <p>A bare form checkbox — native <code>&lt;input type=&quot;checkbox&quot;&gt;</code> wrapped in a tiny Lit element, tokenised, with an indeterminate state. No label, no description, no row chrome. Used where the surrounding UI owns the labelling.</p>
 <p><strong>Props:</strong> <code>checked</code> (boolean) · <code>indeterminate</code> (boolean) · <code>disabled</code> (boolean) · <code>label</code> (string — aria-label)</p>
 <p><strong>Events:</strong> <code>la-change</code> — <code>{ checked: boolean }</code> — fires on user toggle only, not programmatic updates.</p>
@@ -634,7 +634,7 @@
 <li>Dense form grids where labels live in external grid cells</li>
 </ul>
 <hr>
-<h3><code>la-switch</code></h3>
+<h3 id="la-switch"><code>la-switch</code></h3>
 <p>A binary on/off toggle. Wraps a native <code>&lt;input type=&quot;checkbox&quot; role=&quot;switch&quot;&gt;</code> styled as a pill track + circular thumb. Form submission and screen-reader semantics (role=&quot;switch&quot;, aria-checked) come from the platform; visuals come from tokens.</p>
 <p><strong>Props:</strong> <code>checked</code> (boolean) · <code>disabled</code> (boolean) · <code>label</code> (string — aria-label for the input)</p>
 <p><strong>Events:</strong> <code>la-change</code> — <code>{ checked: boolean }</code> — fires on user toggle only, not programmatic updates.</p>
@@ -651,7 +651,7 @@
 <li><strong>Dedicated track-bg tokens.</strong> Off-state track uses <code>--la-switch-bg-off</code> (#E2E3E4) and <code>--la-switch-bg-off-hover</code> (#D1D5DB) — the shared <code>--la-color-bg-*</code> scale tops out at a warm light grey that doesn't give the switch enough presence against white surfaces. On-state reuses <code>--la-color-primary</code> / <code>-primary-hover</code> from the shared scale.</li>
 </ul>
 <hr>
-<h3>la-switch vs la-checkbox — when to use which</h3>
+<h3 id="la-switch-vs-la-checkbox--when-to-use-which">la-switch vs la-checkbox — when to use which</h3>
 <table>
 <thead>
 <tr>
@@ -679,7 +679,7 @@
 </tbody>
 </table>
 <hr>
-<h3>la-checkbox vs la-choice — when to use which</h3>
+<h3 id="la-checkbox-vs-la-choice--when-to-use-which">la-checkbox vs la-choice — when to use which</h3>
 <p>The rule: <strong>la-choice is a statement. la-checkbox is a control.</strong></p>
 <table>
 <thead>
@@ -729,12 +729,12 @@
 </table>
 <p><strong>Edge case to watch:</strong> a filter-menu row &quot;looks like&quot; a choice item (checkbox + text). The context decides — menu rows are persistent-overlay-dense, choice rows are cushioned-persistent-inline. Using la-choice in a menu would make the menu feel heavy.</p>
 <hr>
-<h3><code>la-panel</code></h3>
+<h3 id="la-panel"><code>la-panel</code></h3>
 <p>A generic content container with a subtle background, used for secondary information blocks within a layout. Less prominent than <code>la-card</code> — sits inside a page rather than being the primary content surface.</p>
 <p><strong>Props:</strong> <code>heading</code> (string — optional label rendered above slotted content), <code>clickable</code> (boolean — adds pointer cursor), <code>dimmed</code> (boolean — reduces opacity to 0.7)</p>
 <p>Use <code>dimmed</code> for locked or unavailable states. Use <code>clickable</code> when the panel should indicate interactivity — wire a native click listener on the host; wrap in a <code>&lt;button&gt;</code> or <code>&lt;a&gt;</code> if keyboard semantics are required.</p>
 <hr>
-<h3><code>la-tooltip</code></h3>
+<h3 id="la-tooltip"><code>la-tooltip</code></h3>
 <p>A hover- or focus-revealed tip that anchors to any element. Use for short, supplementary context — the meaning of an icon-only button, format guidance on a field, or a label's expansion.</p>
 <p><strong>Props:</strong> <code>tip</code> (string — the tip text), <code>position</code> (<code>'top' | 'bottom' | 'left' | 'right'</code> — which side of the trigger the tip appears on), <code>appearance</code> (<code>'dark' | 'light'</code> — inverted surface by default, white surface with border + subtle shadow for <code>light</code>), <code>maxWidth</code> (string — any CSS length; when set, switches the tip from <code>nowrap</code> to wrapping at <code>width: max-content</code> capped by the value)</p>
 <p><strong>Appearance pairing:</strong> Use <code>dark</code> for transient action labels on icon buttons (the louder default). Use <code>light</code> for quieter inline contextual help — the <code>la-info-hint</code> component wraps this appearance by default.</p>
@@ -742,7 +742,7 @@
 <p><strong>Keyboard reveal:</strong> The tip is revealed on <code>:host(:hover)</code> and <code>:host(:focus-within)</code>, so keyboard users see it when they Tab into a focusable trigger. Slot a focusable element (<code>&lt;button&gt;</code>, <code>&lt;a&gt;</code>, or anything with <code>tabindex</code>) — non-interactive text won't trigger focus-within.</p>
 <p><strong>v1 a11y gaps (deferred):</strong> No <code>aria-describedby</code> wiring between trigger and tip, so screen-reader users do not hear the content. No <code>prefers-reduced-motion</code> override. Do not place critical information inside a tooltip until these close.</p>
 <hr>
-<h3><code>la-alert</code></h3>
+<h3 id="la-alert"><code>la-alert</code></h3>
 <p>Inline alert bar for state-driven, contextual messages. Persistent — not dismissible. Stays visible until the state it describes changes. For transient feedback that auto-dismisses, reach for <code>la-toast</code>. (Welcome / onboarding hero surfaces previously pointed at <code>la-welcome-banner</code>; that component was descoped from Sprint 2 on 2026-05-05 — no canonical home in any current sprint solve. Source remains in the tree if a future sprint adopts the welcome-first proposal.)</p>
 <p><strong>Props:</strong> <code>variant</code> (<code>'info' | 'success' | 'warning' | 'danger' | 'neutral'</code> — sets the surface + text colour pair)</p>
 <p><strong>Slots:</strong> <code>icon</code> (optional leading glyph — always use Phosphor <strong>fill</strong> weight <code>ph-fill ph-*</code> to match the solid tinted surface), default (message body — wraps naturally)</p>
@@ -780,7 +780,7 @@
 <p><strong>Icon-text optical alignment:</strong> the icon's line-box is matched to the body's single-line line-box so the two characters share the same optical centre — crisp single-line alignment without breaking multi-line top-alignment.</p>
 <p><strong>v1 a11y gap (deferred):</strong> no <code>role=&quot;alert&quot;</code> or <code>role=&quot;status&quot;</code> on the host, so screen readers will not announce the alert when it appears. Do not use for SR-critical messages until this is added.</p>
 <hr>
-<h3><code>la-toast</code></h3>
+<h3 id="la-toast"><code>la-toast</code></h3>
 <p>Transient notification for outcome feedback. Auto-dismisses after a set duration (default 3s) or on close-button click. Use for past-tense moments — &quot;Document uploaded.&quot;, &quot;Changes saved.&quot;, &quot;Contract sent for signature.&quot; For persistent state that needs user attention, reach for <code>la-alert</code>. For stacked multi-toast management (positioning, staggered motion, swipe-to-dismiss), place <code>la-toast-stack</code> once in the layout and trigger via the <code>toast()</code> API — <code>la-toast</code> is the primitive underneath it.</p>
 <p><strong>Props:</strong> <code>variant</code> (<code>'default' | 'success' | 'warning' | 'danger'</code>), <code>title</code> (primary text), <code>message</code> (optional second line), <code>open</code> (visibility, reflected), <code>duration</code> (auto-dismiss in ms; <code>0</code> disables when <code>la-toast-stack</code> owns the timer)</p>
 <p><strong>Slots:</strong> <code>icon</code> (leading glyph — Phosphor <code>ph-fill</code> weight, variant-coloured), default (fallback for <code>message</code> when inline markup is required)</p>
@@ -816,7 +816,7 @@
 <p><strong>Motion:</strong> owned by <code>la-toast-stack</code> (via Web Animations API — entry, stacking, and exit are imperative on the stack, not the toast). <code>la-toast</code> has no intrinsic enter/exit animation by design — standalone usage snaps in/out and is not the intended consumption path. Reduced-motion is handled in the stack's branch.</p>
 <p><strong>a11y:</strong> <code>role=&quot;status&quot;</code> + <code>aria-live=&quot;polite&quot;</code> auto-set on connect for <code>default</code>/<code>success</code>/<code>warning</code> so screen readers announce without interrupting. <code>variant=&quot;danger&quot;</code> upgrades to <code>role=&quot;alert&quot;</code> + <code>aria-live=&quot;assertive&quot;</code>. Close button uses <code>la-icon-button</code> with <code>label=&quot;Dismiss&quot;</code>.</p>
 <hr>
-<h3><code>la-modal</code></h3>
+<h3 id="la-modal"><code>la-modal</code></h3>
 <p>Dialog overlay for confirmations, forms, multi-step flows, and document review. Blocks the rest of the page with a scrim, takes visual focus via scale + fade animation. Persistent until the user dismisses — closes on the X button or backdrop click.</p>
 <p><strong>Props:</strong> <code>open</code> (boolean — controls visibility, reflected), <code>heading</code> (string — the title), <code>description</code> (string — optional subtext below the heading, muted), <code>size</code> (<code>'default' | 'lg'</code> — 560px / 640px max-width)</p>
 <p><strong>Slots:</strong> default (body content — scrolls internally when content exceeds panel height), <code>footer</code> (action row — auto-hidden via <code>:empty</code> when nothing is slotted)</p>
@@ -852,7 +852,7 @@
 <p><strong>a11y — closed in v1:</strong> host sets <code>role=&quot;dialog&quot;</code> + <code>aria-modal=&quot;true&quot;</code> on connect; Escape key closes; close button uses <code>la-icon-button</code> with accessible label.</p>
 <p><strong>a11y — still deferred:</strong> no focus trap inside the panel, no return-focus-to-trigger on close. Tab can move focus into the page behind the modal. Fix before using for keyboard-primary flows. <code>la-drawer</code> already ships both — use it as the reference implementation when upgrading <code>la-modal</code>.</p>
 <hr>
-<h3><code>la-drawer</code></h3>
+<h3 id="la-drawer"><code>la-drawer</code></h3>
 <p>Edge-anchored dismissible overlay panel. Slides in from any edge (right, left, top, bottom). Used for detail inspectors (right), mobile navigation (left), and any secondary surface that appears over the page without taking focus permanently. For centre-anchored confirmations or forms, reach for <code>la-modal</code>. For stackable transient feedback, reach for <code>la-toast</code> / <code>la-toast-stack</code>.</p>
 <p><strong>Props:</strong> <code>open</code> (boolean — controls visibility, reflected), <code>edge</code> (<code>'right' | 'left' | 'top' | 'bottom'</code> — default <code>'right'</code>, reflected), <code>size</code> (string — CSS size like <code>&quot;320px&quot;</code> or <code>&quot;50vw&quot;</code>; falls back to <code>--la-drawer-size</code> when unset), <code>heading</code> (string — optional title), <code>description</code> (string — optional muted subtext), <code>label</code> (string — <code>aria-label</code> when no heading), <code>backdropDismiss</code> (<code>backdrop-dismiss</code> — opt-in backdrop-click close, off by default), <code>noScrollLock</code> (<code>no-scroll-lock</code> — opt-out of page scroll lock, on by default)</p>
 <p><strong>Slots:</strong> default (body content — scrolls internally), <code>header</code> (replaces heading block; close button always stays), <code>footer</code> (action row — auto-hidden via <code>:empty</code>)</p>
@@ -893,7 +893,7 @@
 <p><strong>Close button uses <code>la-icon-button size=&quot;sm&quot;</code> with <code>ph-x</code></strong> — follows the iconography canonical close mapping.</p>
 <p><strong>a11y — closed in v1:</strong> host sets <code>role=&quot;dialog&quot;</code> + <code>aria-modal=&quot;true&quot;</code> on connect; Escape closes; close button uses <code>la-icon-button</code> with accessible label; focus trap + restoration both implemented (unlike <code>la-modal</code>).</p>
 <hr>
-<h3><code>la-table</code></h3>
+<h3 id="la-table"><code>la-table</code></h3>
 <p>A presentational scroll-wrap around a consumer-provided <code>&lt;table&gt;</code>. The component owns horizontal overflow and a single <code>&lt;slot&gt;</code>; everything inside (the <code>&lt;table&gt;</code>, <code>&lt;thead&gt;</code>, <code>&lt;tr&gt;</code>, <code>&lt;th&gt;</code>, <code>&lt;td&gt;</code>) is authored in light DOM by the consumer. Default row/cell styling is supplied by the shared <code>dev/la-table.css</code> stylesheet.</p>
 <p><strong>Props:</strong> none. <strong>Slots:</strong> default (must contain a real <code>&lt;table&gt;</code> element). <strong>Events:</strong> none.</p>
 <p><strong>Required consumer markup — real <code>&lt;table&gt;</code> inside:</strong></p>
@@ -916,7 +916,7 @@
 <li><code>dev/la-table.css</code> — default chrome for <code>la-table table</code>, <code>thead th</code>, <code>tbody td</code>, <code>:hover</code>, <code>tr.success</code>, last-row border suppression. All tokenised.</li>
 </ul>
 <p><strong>Row state via class:</strong> <code>tr.success</code> adds a tinted <code>--la-color-surface-success</code> background for positive row states (e.g. a document that just finished processing). No other row classes in v1 — consumers add their own.</p>
-<h3><code>la-data-table</code></h3>
+<h3 id="la-data-table"><code>la-data-table</code></h3>
 <p>A data-driven table primitive. Consumer passes <code>columns</code> and <code>rows</code> as properties; the component owns sort, selection, row-click dispatch, sticky header, density, and the empty / loading states. Everything is controlled — sort and selected arrays flow in via properties and flow out via events, so the consumer owns the state.</p>
 <p><strong>Props:</strong></p>
 <ul>
@@ -945,7 +945,7 @@
 <p><strong>Gate 8 noted exceptions:</strong> <code>width: 40px</code> on the checkbox cell + <code>&lt;col&gt;</code> and <code>height: 12px</code> on skeleton rows are hardcoded — no current token for checkbox-column width or skeleton-row height. Matches the <code>la-checkbox</code> / <code>la-upload-box</code> precedent for glyph-detail pixel values.</p>
 <p><strong>Known v1 limits:</strong> no virtualisation (every row renders), no column resize / reorder, no inline filter UI (sort only), no row expansion / subrows, no selection-preserving re-sort beyond what the consumer maintains via <code>selected</code> + <code>rowKey</code>. These are explicit deferrals — the primitive is for &quot;dataset rendering,&quot; not &quot;full spreadsheet.&quot;</p>
 <hr>
-<h3><code>la-table</code> vs <code>la-data-table</code> — when to reach for which</h3>
+<h3 id="la-table-vs-la-data-table--when-to-reach-for-which"><code>la-table</code> vs <code>la-data-table</code> — when to reach for which</h3>
 <p><strong>Rule of thumb:</strong> write markup if the rows are static or under 10; pass data if the rows are a dataset.</p>
 <table>
 <thead>
@@ -979,7 +979,7 @@
 </table>
 <p><code>la-table</code> is a positioning wrapper; <code>la-data-table</code> is a data-driven component. They solve different problems and neither subsumes the other.</p>
 <hr>
-<h3><code>la-tabs</code></h3>
+<h3 id="la-tabs"><code>la-tabs</code></h3>
 <p>Single-selection tab list. One tab is active at a time; its associated panel renders, others are hidden. Three components compose the primitive — <code>la-tabs</code> owns active state and keyboard, <code>la-tab</code> is a trigger, <code>la-tab-panel</code> is a content region.</p>
 <p><strong>Variants</strong> (<code>variant</code> on <code>la-tabs</code>):</p>
 <table>
@@ -1054,7 +1054,7 @@
 <p><strong>v1 a11y baseline</strong> — full ARIA tablist semantics (<code>role</code>, <code>aria-selected</code>, <code>aria-controls</code>, <code>aria-labelledby</code>, <code>aria-orientation</code>), roving tabindex, focus rings on all variants, multi-channel active state (colour + indicator). Reduced-motion auto-respected via <code>--dur-base</code> token cascade.</p>
 <p><strong>Known v1 limits</strong> — no explicit mobile / narrow-width handling: long labels overflow horizontal rails (intentional, documented in &quot;Long labels&quot; snapshot, locked to <code>variant=&quot;underline&quot;</code> because the overflow shape is rail-specific). No auto-scroll, no collapse-to-more-menu in v1. Disabled state on individual tabs not yet wired.</p>
 <hr>
-<h3><code>la-upload-box</code></h3>
+<h3 id="la-upload-box"><code>la-upload-box</code></h3>
 <p>Single-file drop zone for forms and action flows. Combines click-to-browse and drag-and-drop in one surface with inline states for pending selection, upload progress, and validation errors. Used in the unlock flow document steps and inside <code>la-insight-modal</code> when the resolution is upload-driven.</p>
 <p><strong>Props:</strong> <code>label</code> (optional field label above the zone), <code>prompt</code> (main zone prompt, defaults to &quot;Click to browse or drag a file here&quot;), <code>hint</code> (secondary line under the prompt), <code>accept</code> (file-type filter — extensions or MIME globs), <code>max-size</code> (bytes), <code>disabled</code>, <code>error</code>, <code>error-message</code>, <code>processing</code>.</p>
 <p><strong>Events:</strong> <code>la-change</code> (file picked and valid), <code>la-reject</code> (file failed <code>accept</code> or <code>max-size</code>, detail carries <code>reason: 'type' | 'size'</code>), <code>la-remove</code> (user cleared a pending file via the top-right close button).</p>
@@ -1064,30 +1064,30 @@
 <p><strong>Single-file only.</strong> Multi-file support is not in v1. Stack multiple instances if a form needs several uploads.</p>
 <p><strong>v1 a11y baseline:</strong> native <code>&lt;input type=&quot;file&quot;&gt;</code> with a <code>&lt;label for&gt;</code> binding, zone has <code>role=&quot;button&quot;</code> + <code>tabindex</code> + Enter/Space activation, <code>aria-disabled</code> on the zone, <code>aria-hidden</code> on decorative icons, <code>aria-label=&quot;Uploading&quot;</code> on the spinner <code>role=&quot;status&quot;</code>. Remove button inherits <code>la-icon-button</code>'s required-label enforcement.</p>
 <hr>
-<h3><code>la-chat-message</code></h3>
+<h3 id="la-chat-message"><code>la-chat-message</code></h3>
 <p>Single conversational turn. Adapts layout and visual treatment based on <code>sender</code> — <code>'user'</code> (right-aligned, inverted bubble) or <code>'assistant'</code> (left-aligned, no background). When <code>name</code> is set on an assistant-side message, replaces the sparkle indicator with two-letter initials and shows the name above the bubble — use for human-to-human threads (e.g. founder ↔ investor DD messaging). Typing indicator (<code>typing</code>) and streaming cursor (<code>streaming</code>) are screened by <code>prefers-reduced-motion</code>. Attachments slotted via <code>slot=&quot;attachments&quot;</code> using <code>la-chat-attachment</code>. Docs at <code>dev/docs-drafts/la-chat.html</code>.</p>
 <p><strong>Props:</strong> <code>sender</code> (<code>'user' | 'assistant'</code>), <code>name</code>, <code>timestamp</code>, <code>typing</code>, <code>streaming</code>, <code>status</code> (<code>'sent' | 'sending' | 'failed'</code>) — <code>sending</code> shows an italic &quot;Sending…&quot; timestamp; <code>failed</code> shows &quot;Couldn't send · Retry&quot; below the bubble
 <strong>Slots:</strong> default (message text), <code>attachments</code> (one or more <code>la-chat-attachment</code>)
 <strong>Events:</strong> <code>la-retry</code> — fires when the user clicks Retry on a failed message (no detail); host re-sends the payload</p>
 <hr>
-<h3><code>la-chat-attachment</code></h3>
+<h3 id="la-chat-attachment"><code>la-chat-attachment</code></h3>
 <p>Compact document reference card for use inside <code>la-chat-message</code> via <code>slot=&quot;attachments&quot;</code>. Read-state counterpart to <code>la-chat-attachment-chip</code> (compose state). Reuses the <code>ready | processing | failed | none</code> status vocabulary from <code>la-document-item</code>. Renders as <code>&lt;a&gt;</code> when <code>href</code> is set. Docs at <code>dev/docs-drafts/la-chat.html</code>.</p>
 <p><strong>Props:</strong> <code>name</code>, <code>category</code>, <code>association</code>, <code>status</code> (<code>'none' | 'ready' | 'processing' | 'failed'</code>), <code>href</code>, <code>removable</code> — when set, shows a × button and fires <code>la-remove</code>; use in compose-area chip strips
 <strong>Events:</strong> <code>la-remove</code> — fires on × click when <code>removable</code> is set; host removes the attachment from the staged list</p>
 <hr>
-<h3><code>la-chat-attachment-chip</code></h3>
+<h3 id="la-chat-attachment-chip"><code>la-chat-attachment-chip</code></h3>
 <p>Staged attachment chip for the compose bar — the compose-state counterpart to <code>la-chat-attachment</code> (thread/read state). Renders as a pill with a file icon, truncated document name, and a dismiss button. Fires <code>la-remove</code> with <code>{ name, category }</code> when the × is clicked. Hosts the chip strip in their layout above the textarea; the component is intentionally unopinionated about positioning.</p>
 <p><strong>Problem it solves:</strong> Every chat compose surface that supports attachments needs a way to show what's staged before send. A dedicated primitive keeps this out of prototype CSS and makes the staged-vs-sent distinction explicit in the component vocabulary (<code>la-chat-attachment-chip</code> = draft, <code>la-chat-attachment</code> = sent). Sprint 16 DD Communication prototype was the first consumer.</p>
 <p><strong>Props:</strong> <code>name</code> (document title, truncated with ellipsis), <code>category</code> (metadata, passed in <code>la-remove</code> detail — not displayed in the chip)
 <strong>Events:</strong> <code>la-remove</code> (<code>{ name: string, category: string }</code>) — fires on × click; host is responsible for removing from staged list</p>
 <hr>
-<h3><code>la-chat-input</code></h3>
+<h3 id="la-chat-input"><code>la-chat-input</code></h3>
 <p>Composer bar with auto-growing textarea, send button, and loading state. Enter-to-send (Shift+Enter inserts newline). Resets after dispatch. Loading state replaces send button with a spinner and disables textarea. Does not manage attachment staging — hosts compose the full layout (chip strip above, <code>la-chat-input</code> below). Docs at <code>dev/docs-drafts/la-chat.html</code>.</p>
 <p><strong>Props:</strong> <code>placeholder</code>, <code>disabled</code>, <code>loading</code>, <code>hint</code>, <code>files</code> (<code>Array&lt;{ id: string, name: string }&gt;</code>) — staged attachments shown as chips above the textarea; the component renders the chip strip and remove buttons but does not manage the array (host does)
 <strong>Events:</strong> <code>la-submit</code> (<code>{ value: string, files: Array&lt;{id, name}&gt; }</code>), <code>la-attach</code> (no detail — fires when attach button is clicked; host opens its own picker), <code>la-file-remove</code> (<code>{ id: string }</code> — fires when a chip × is clicked; host removes the entry from <code>files</code>)</p>
 <hr>
 <p><strong>When to log rationale:</strong> Only when we deliberately diverge from the standard convention. Log the divergence and why in the table below.</p>
-<h4>Known base component divergences</h4>
+<h4 id="known-base-component-divergences">Known base component divergences</h4>
 <table>
 <thead>
 <tr>
@@ -1131,7 +1131,7 @@
 </tbody>
 </table>
 <hr>
-<h3>Tier 2 — Specialised components (<code>src/components/</code>, <code>src/pages/</code>)</h3>
+<h3 id="tier-2--specialised-components-srccomponents-srcpages">Tier 2 — Specialised components (<code>src/components/</code>, <code>src/pages/</code>)</h3>
 <p>Product-specific components built from base components and design tokens. These are molecules and organisms — they know about LawAdvisor's data shapes, legal area logic, and product workflows.</p>
 <p><strong>Rationale approach:</strong> Every specialised component must have a logged use case. What problem is it solving? What triggered its creation? Log this here whenever one is created or significantly changed.</p>
 <table>
@@ -1206,7 +1206,7 @@
 <tr>
 <td>Empty state</td>
 <td><code>la-empty-state</code></td>
-<td>Signal the state of the legal area insights column — <code>processing</code> immediately after unlock (spinner + fixed copy), <code>clean</code> when no insights are open (tick + configurable sub-line). Display-only; no slots, no events. Docs at <a href="../docs-src/components/la-empty-state.html">docs-src/components/la-empty-state.html</a>.</td>
+<td>Signal the state of the legal area insights column — <code>processing</code> immediately after unlock (spinner + fixed copy), <code>clean</code> when no insights are open (tick + configurable sub-line). Display-only; no slots, no events. Docs at <a href="../../components/la-empty-state.html">docs-src/components/la-empty-state.html</a>.</td>
 </tr>
 <tr>
 <td><s>Welcome banner</s></td>
@@ -1270,12 +1270,12 @@
 </tr>
 </tbody>
 </table>
-<h3>Component-specific notes</h3>
+<h3 id="component-specific-notes">Component-specific notes</h3>
 <ul>
 <li><strong><code>la-processing-widget</code> status vocabulary</strong> — the widget's external API uses <code>processing | completed | failed</code> (the natural domain vocab for upload workflows, matching Sprint 1 PRD). Internally it maps <code>completed</code> → <code>ready</code> before passing to <code>la-document-item</code>, because &quot;ready&quot; is the right word once the document is viewable in the library. Don't &quot;fix&quot; the mapping — the divergence is intentional.</li>
 </ul>
 <hr>
-<h2>Insight improvement aside — design pattern</h2>
+<h2 id="insight-improvement-aside--design-pattern">Insight improvement aside — design pattern</h2>
 <p>The aside panel on the legal area page (and other insight-based views) follows a specific pattern: it is an <strong>intake coach</strong>, not a form.</p>
 <p><strong>What it does:</strong> Collects context, data, and documents from founders to improve the quality of their insights. Current content: actions to add context, and related documents to browse or upload. Future: step-by-step guided plans.</p>
 <p><strong>Mental model:</strong> The founder reads their insight (consumption mode), then opens the aside to improve it (intake mode). These modes don't coexist — founders context-switch cleanly.</p>
@@ -1294,7 +1294,7 @@
 <li><code>la-document-list</code> — related documents that are inputs to the insight</li>
 </ul>
 <hr>
-<h2>Naming convention</h2>
+<h2 id="naming-convention">Naming convention</h2>
 <p>All components are prefixed <code>la-</code> (LawAdvisor). This:</p>
 <ul>
 <li>Avoids collision with native HTML elements</li>
@@ -1302,24 +1302,24 @@
 <li>Groups all library components together in tooling</li>
 </ul>
 <hr>
-<h2>Component API patterns (Lit)</h2>
-<h3>Properties vs attributes</h3>
+<h2 id="component-api-patterns-lit">Component API patterns (Lit)</h2>
+<h3 id="properties-vs-attributes">Properties vs attributes</h3>
 <ul>
 <li>Use <code>@property()</code> for data passed from JS (arrays, objects, booleans)</li>
 <li>Use <code>@property({ type: String, reflect: true })</code> when the attribute should be readable in CSS or DevTools</li>
 <li>Boolean attributes follow HTML spec: presence = true, absence = false</li>
 </ul>
-<h3>Slots</h3>
+<h3 id="slots">Slots</h3>
 <p>Use named slots for structural content, default slot for body content:</p>
 <pre><code class="language-html">&lt;la-panel&gt;
   &lt;span slot=&quot;title&quot;&gt;Panel title&lt;/span&gt;
   Content goes here
 &lt;/la-panel&gt;
 </code></pre>
-<h3>Events</h3>
+<h3 id="events">Events</h3>
 <p>Dispatch <code>CustomEvent</code> with <code>bubbles: true</code> for coordination with parent components. Document all events in the component's rationale entry.</p>
 <hr>
-<h2>Docs pages</h2>
+<h2 id="docs-pages">Docs pages</h2>
 <p>Every component has a docs draft at <code>dev/docs-drafts/la-&lt;name&gt;.html</code> that gets promoted to <code>docs-src/components/la-&lt;name&gt;.html</code> by <code>/ready</code>. Iterate the draft live via <code>npm run dev</code> at <code>http://localhost:8000/docs-drafts/la-&lt;name&gt;.html</code>.</p>
 
 </article>

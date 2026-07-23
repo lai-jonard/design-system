@@ -231,10 +231,10 @@
   design-language/responsive-design.md
 </span>
 <article class="md-body">
-  <h1>Responsive design</h1>
+  <h1 id="responsive-design">Responsive design</h1>
 <p>Guidelines for making layouts work across screen sizes.</p>
 <hr>
-<h2>Breakpoints</h2>
+<h2 id="breakpoints">Breakpoints</h2>
 <table>
 <thead>
 <tr>
@@ -262,7 +262,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Component-level responsiveness — prefer container queries</h2>
+<h2 id="component-level-responsiveness--prefer-container-queries">Component-level responsiveness — prefer container queries</h2>
 <p>For components that need to adapt visually based on the space their parent gives them (not the viewport), use a <strong>container query</strong> on <code>:host</code>, not a media query.</p>
 <pre><code class="language-css">:host {
   display: block;
@@ -280,7 +280,7 @@
 <p><strong>First used by:</strong> <code>la-alert</code> — stacks icon above body below 240px container width. Pattern to follow for any future component whose layout should adapt to local container size (cards, widgets, list items).</p>
 <p><strong>Don't reach for it when</strong> the breakpoint is about the <em>whole page</em> layout (sidebar collapse, dashboard reflow) — that's a media-query concern and lives at the layout level, not the component.</p>
 <hr>
-<h2>Grid patterns</h2>
+<h2 id="grid-patterns">Grid patterns</h2>
 <ul>
 <li>Use <code>auto-fill</code> / <code>auto-fit</code> with <code>minmax()</code> for card grids — never fixed column counts.</li>
 <li>Cards reflow naturally as the viewport narrows.</li>
@@ -293,32 +293,32 @@ gap: 14px;
 <li>Full-width components (lists, panels) span all columns with <code>grid-column: 1 / -1</code>.</li>
 </ul>
 <hr>
-<h2>Layout shifts at breakpoints</h2>
-<h3>Dashboard</h3>
+<h2 id="layout-shifts-at-breakpoints">Layout shifts at breakpoints</h2>
+<h3 id="dashboard">Dashboard</h3>
 <ul>
 <li><strong>Desktop (&gt;= 1024px):</strong> flex row — sidebar + main content side by side</li>
 <li><strong>Tablet / mobile (&lt; 768px):</strong> column stack — sidebar collapses, content fills full width</li>
 </ul>
-<h3>Two-column layouts (e.g. data room)</h3>
+<h3 id="two-column-layouts-eg-data-room">Two-column layouts (e.g. data room)</h3>
 <ul>
 <li><strong>Desktop:</strong> <code>grid-template-columns: 1fr 1fr</code></li>
 <li><strong>Below 800px:</strong> single column — panels stack vertically</li>
 </ul>
-<h3>Sidebar</h3>
+<h3 id="sidebar">Sidebar</h3>
 <ul>
 <li><strong>Desktop:</strong> always visible, fixed width</li>
 <li><strong>Tablet:</strong> collapsible, toggled via hamburger icon</li>
 <li><strong>Mobile:</strong> hidden by default, slides in as overlay</li>
 </ul>
 <hr>
-<h2>Touch targets</h2>
+<h2 id="touch-targets">Touch targets</h2>
 <ul>
 <li>Minimum <strong>44px</strong> height and width for all interactive elements on touch devices.</li>
 <li>Applies to buttons, links, list items, checkboxes, and any tappable surface.</li>
 <li>Spacing between adjacent touch targets should prevent accidental taps.</li>
 </ul>
 <hr>
-<h2>Content rules</h2>
+<h2 id="content-rules">Content rules</h2>
 <ul>
 <li><strong>No horizontal scroll</strong> — content must fit viewport width at every breakpoint.</li>
 <li><strong>Content max-width remains 1280px</strong> — centred with <code>margin: 0 auto</code> on wide screens.</li>
@@ -326,7 +326,7 @@ gap: 14px;
 <li><strong>Tables</strong> use horizontal scroll within their container if they overflow, but the page itself never scrolls horizontally.</li>
 </ul>
 <hr>
-<h2>Test widths</h2>
+<h2 id="test-widths">Test widths</h2>
 <p>Always check layouts at these widths:</p>
 <table>
 <thead>
@@ -351,7 +351,7 @@ gap: 14px;
 </tbody>
 </table>
 <hr>
-<h2>Component-specific breakpoints</h2>
+<h2 id="component-specific-breakpoints">Component-specific breakpoints</h2>
 <p>Occasionally a component needs a sub-breakpoint inside a system band. Log those here so they don't drift.</p>
 <table>
 <thead>

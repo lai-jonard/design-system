@@ -229,19 +229,19 @@
   design-language/copy-guidelines.md
 </span>
 <article class="md-body">
-  <h1>Copy guidelines</h1>
+  <h1 id="copy-guidelines">Copy guidelines</h1>
 <p>Rules for all user-facing text in the design system and products built with it.</p>
 <hr>
-<h2>Language</h2>
+<h2 id="language">Language</h2>
 <ul>
 <li><strong>British English always</strong> — authorised, organisation, licence (noun), colour, behaviour, defence</li>
 <li><strong>Active voice always</strong> — &quot;We updated your settings&quot; not &quot;Your settings have been updated&quot;</li>
 <li><strong>Never all-caps.</strong> See capitalisation rules below.</li>
 </ul>
 <hr>
-<h2>Capitalisation</h2>
+<h2 id="capitalisation">Capitalisation</h2>
 <p>LawAdvisor uses a two-register system. The key question is: <strong>does this copy name a surface or control, or does it explain something to the user?</strong></p>
-<h3>Title Case — structural labels</h3>
+<h3 id="title-case--structural-labels">Title Case — structural labels</h3>
 <p>Use when the copy <em>names</em> a product surface, control, or legal artefact. Every principal word capitalised.</p>
 <table>
 <thead>
@@ -277,7 +277,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Sentence case — guidance and explanatory copy</h3>
+<h3 id="sentence-case--guidance-and-explanatory-copy">Sentence case — guidance and explanatory copy</h3>
 <p>Use when the copy <em>explains</em> something to the user. First word capitalised, the rest lowercase.</p>
 <table>
 <thead>
@@ -317,14 +317,14 @@
 </tr>
 </tbody>
 </table>
-<h3>Edge cases</h3>
+<h3 id="edge-cases">Edge cases</h3>
 <ul>
 <li><strong>Legal proper nouns</strong> are always Title Case regardless of context — &quot;Cap Table&quot;, &quot;Shareholders' Agreement&quot;, &quot;Articles of Incorporation&quot; are named documents, not style choices.</li>
 <li><strong>Modal titles that describe content</strong> (not a feature name) stay sentence case — insight titles fall here.</li>
 <li><strong>Badge labels</strong> are one word — case is moot. Treat as Title Case for consistency.</li>
 <li><strong>Loading / progress labels</strong> (&quot;Resolving…&quot;, &quot;Uploading…&quot;) are one word — no case decision needed.</li>
 </ul>
-<h3>Why this pattern — research context</h3>
+<h3 id="why-this-pattern--research-context">Why this pattern — research context</h3>
 <p>Major design systems (Material Design, Microsoft Fluent, PatternFly) recommend sentence case everywhere for simplicity and localisation. LawAdvisor diverges intentionally: the product vocabulary includes genuine proper nouns (legal documents, commercial terms) where Title Case is standard professional practice. The split-register rule formalises this rather than leaving it implicit.</p>
 <p><strong>Sources:</strong></p>
 <ul>
@@ -335,7 +335,7 @@
 <li><a href="https://nielsendesignsystem.com/foundations/writing-guidelines/">Nielsen Design System — Writing Guidelines</a></li>
 </ul>
 <hr>
-<h2>Calls to action</h2>
+<h2 id="calls-to-action">Calls to action</h2>
 <ul>
 <li><strong>Verb-first, Title Case:</strong> &quot;Send for Signature&quot;, &quot;Add Employee&quot;, &quot;View Details&quot;</li>
 <li><strong>No jargon</strong> — use plain language the user already knows:</li>
@@ -378,28 +378,28 @@
 <li><strong>One primary CTA per view</strong> — never show two primary buttons simultaneously. Use secondary or ghost for additional actions.</li>
 </ul>
 <hr>
-<h2>Tone and voice</h2>
+<h2 id="tone-and-voice">Tone and voice</h2>
 <ul>
 <li><strong>Say &quot;we&quot;</strong> in product UI — never refer to the product name in third person</li>
 <li><strong>Always use the person's name</strong> — never &quot;the recipient&quot;, &quot;the employee&quot;, or &quot;the user&quot;</li>
 <li><strong>Body copy: 1-2 sentences max</strong> — if it needs more, the UI is doing too much in one place</li>
 </ul>
 <hr>
-<h2>Contextual copy patterns</h2>
-<h3>Insight explanations (modal &quot;Why this matters&quot;)</h3>
+<h2 id="contextual-copy-patterns">Contextual copy patterns</h2>
+<h3 id="insight-explanations-modal-quotwhy-this-mattersquot">Insight explanations (modal &quot;Why this matters&quot;)</h3>
 <p>Written by the AI legal engine. The explanation surfaces in the insight modal only — the card shows no explanation text.</p>
 <p><strong>Ceiling: 3 sentences, 60 words.</strong> Structure: (1) what the problem is, (2) why it creates legal or commercial risk, (3) what it affects or what to do next. One paragraph, no lists.</p>
 <blockquote>
 <p>&quot;A shareholders' agreement defines how decisions are made and what happens if a founder leaves. Without one, each founder's rights in a dispute fall back to company law defaults — which rarely match what was agreed. Most investors require a SHA to be in place before closing a pre-seed or seed round.&quot;</p>
 </blockquote>
 <p>Never write more than 3 sentences. Do not explain what a document type is in general terms — focus on the specific risk for this company. Avoid hedging language (&quot;may&quot;, &quot;could potentially&quot;).</p>
-<h3>Empty states</h3>
+<h3 id="empty-states">Empty states</h3>
 <p>Inviting and actionable. Tell the user what to do next, not just that nothing is here.</p>
 <blockquote>
 <p>&quot;No documents yet. Upload your first file to get started.&quot;</p>
 </blockquote>
 <p>Never: &quot;No data available.&quot;</p>
-<h3>Success moments</h3>
+<h3 id="success-moments">Success moments</h3>
 <p>Brief, affirming. The user did the thing — acknowledge it and move on.</p>
 <blockquote>
 <p>&quot;Done.&quot;
@@ -407,14 +407,14 @@
 &quot;Document sent.&quot;</p>
 </blockquote>
 <p>Never: &quot;Your document has been successfully submitted for processing.&quot;</p>
-<h3>Error states</h3>
+<h3 id="error-states">Error states</h3>
 <p>Honest, helpful, unflustered. Say what happened, then say what the user can do.</p>
 <blockquote>
 <p>&quot;We couldn't save your changes. Check your connection and try again.&quot;</p>
 </blockquote>
 <p>Never: &quot;An unexpected error occurred. Error code: 500.&quot;</p>
 <hr>
-<h2>Formatting</h2>
+<h2 id="formatting">Formatting</h2>
 <ul>
 <li><strong>Dates:</strong> 15 Apr 2026 (day month year, no commas, abbreviated month)</li>
 <li><strong>Numbers:</strong> use commas for thousands (1,000) and full stops for decimals (3.5)</li>

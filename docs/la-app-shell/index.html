@@ -231,10 +231,10 @@
   design-language/la-app-shell.md
 </span>
 <article class="md-body">
-  <h1>la-app-shell</h1>
+  <h1 id="la-app-shell">la-app-shell</h1>
 <p>The root layout container for every screen. Positions the sidebar on the left and a content area on the right. All pages render inside this shell.</p>
 <hr>
-<h2>Layout structure</h2>
+<h2 id="layout-structure">Layout structure</h2>
 <pre><code>la-app-shell
 ├── sidebar slot          ← la-sidebar goes here
 └── content area
@@ -252,7 +252,7 @@
 <li>No horizontal scroll anywhere in the shell.</li>
 </ul>
 <hr>
-<h2>Slots</h2>
+<h2 id="slots">Slots</h2>
 <table>
 <thead>
 <tr>
@@ -285,7 +285,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Properties</h2>
+<h2 id="properties">Properties</h2>
 <table>
 <thead>
 <tr>
@@ -334,15 +334,15 @@
 </tr>
 </tbody>
 </table>
-<h3>BreadcrumbItem</h3>
+<h3 id="breadcrumbitem">BreadcrumbItem</h3>
 <pre><code class="language-ts">interface BreadcrumbItem {
   label: string;
   href?: string;   // if present, renders as an &lt;a&gt; tag; otherwise a &lt;button&gt;
 }
 </code></pre>
 <hr>
-<h2>Events</h2>
-<h3>Emitted</h3>
+<h2 id="events">Events</h2>
+<h3 id="emitted">Emitted</h3>
 <table>
 <thead>
 <tr>
@@ -364,7 +364,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Listened for</h3>
+<h3 id="listened-for">Listened for</h3>
 <table>
 <thead>
 <tr>
@@ -382,7 +382,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Methods</h2>
+<h2 id="methods">Methods</h2>
 <table>
 <thead>
 <tr>
@@ -398,9 +398,9 @@
 </tbody>
 </table>
 <hr>
-<h2>CSS tokens</h2>
+<h2 id="css-tokens">CSS tokens</h2>
 <p>All tokens are defined in <code>src/styles/tokens.ts</code> and can be overridden per-instance with CSS custom properties.</p>
-<h3>Page header</h3>
+<h3 id="page-header">Page header</h3>
 <table>
 <thead>
 <tr>
@@ -447,7 +447,7 @@
 </tr>
 </tbody>
 </table>
-<h3>Main content area</h3>
+<h3 id="main-content-area">Main content area</h3>
 <table>
 <thead>
 <tr>
@@ -474,7 +474,7 @@
 </tr>
 </tbody>
 </table>
-<h4>Flat body chrome (unlock pattern)</h4>
+<h4 id="flat-body-chrome-unlock-pattern">Flat body chrome (unlock pattern)</h4>
 <p>For focused flows like the unlock prototypes, the inner body card can be flattened so the panel sits directly on the host's <code>--la-color-bg-subtle</code>. Override the four chrome tokens at the host level:</p>
 <pre><code class="language-css">la-app-shell {
   --la-main-margin: 0;
@@ -488,8 +488,8 @@
 <li>the slot content is a single self-contained card (e.g. <code>la-unlock-panel</code>) that brings its own chrome, and</li>
 <li>the page is a focused single-task flow (no aside, no actions widget, no insights list).</li>
 </ul>
-<p>The sidebar and page header stay visible — the override only flattens the inner body card. The <code>.main-content</code> slot wrapper should add its own flex centering (<code>display: flex; align-items: center; justify-content: center; height: 100%</code>) so the slot child lands in the middle of the available content area. Reference: <a href="../dev/prototypes/founder-flow/"><code>dev/prototypes/founder-flow/05/09/16/20-*-unlock.html</code></a> and decision 46.</p>
-<h3>Aside panel</h3>
+<p>The sidebar and page header stay visible — the override only flattens the inner body card. The <code>.main-content</code> slot wrapper should add its own flex centering (<code>display: flex; align-items: center; justify-content: center; height: 100%</code>) so the slot child lands in the middle of the available content area. Reference: <code>dev/prototypes/founder-flow/05/09/16/20-*-unlock.html</code> and decision 46.</p>
+<h3 id="aside-panel">Aside panel</h3>
 <table>
 <thead>
 <tr>
@@ -507,7 +507,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Breadcrumb behaviour</h2>
+<h2 id="breadcrumb-behaviour">Breadcrumb behaviour</h2>
 <p>Set breadcrumbs via the JS property (not an attribute) since the value is an array:</p>
 <pre><code class="language-js">document.querySelector('la-app-shell').breadcrumbs = [
   { label: 'Dashboard' },
@@ -522,7 +522,7 @@
 <li>When <code>breadcrumbs</code> is empty, <code>pageTitle</code> is shown instead.</li>
 </ul>
 <hr>
-<h2>Aside panel — responsive behaviour</h2>
+<h2 id="aside-panel--responsive-behaviour">Aside panel — responsive behaviour</h2>
 <p>The aside panel behaves differently depending on the available content width.</p>
 <p><strong>Desktop (content area &gt; 1023px)</strong></p>
 <ul>
@@ -539,14 +539,14 @@
 </ul>
 <p>The breakpoint is a CSS container query on the content area, not the viewport — so the layout responds to the actual available space regardless of sidebar state.</p>
 <hr>
-<h2>Usage</h2>
-<h3>Basic — sidebar and content only</h3>
+<h2 id="usage">Usage</h2>
+<h3 id="basic--sidebar-and-content-only">Basic — sidebar and content only</h3>
 <pre><code class="language-html">&lt;la-app-shell style=&quot;width: 100vw; height: 100vh;&quot;&gt;
   &lt;la-sidebar slot=&quot;sidebar&quot; ...&gt;&lt;/la-sidebar&gt;
   &lt;la-governance-page slot=&quot;main&quot;&gt;&lt;/la-governance-page&gt;
 &lt;/la-app-shell&gt;
 </code></pre>
-<h3>With page header and breadcrumbs</h3>
+<h3 id="with-page-header-and-breadcrumbs">With page header and breadcrumbs</h3>
 <pre><code class="language-html">&lt;la-app-shell show-header show-back&gt;
   &lt;la-sidebar slot=&quot;sidebar&quot; ...&gt;&lt;/la-sidebar&gt;
   &lt;la-document-page slot=&quot;main&quot;&gt;&lt;/la-document-page&gt;
@@ -561,7 +561,7 @@
   ];
 &lt;/script&gt;
 </code></pre>
-<h3>With aside panel and header actions</h3>
+<h3 id="with-aside-panel-and-header-actions">With aside panel and header actions</h3>
 <pre><code class="language-html">&lt;la-app-shell show-header show-aside&gt;
   &lt;la-sidebar slot=&quot;sidebar&quot; ...&gt;&lt;/la-sidebar&gt;
   &lt;la-button slot=&quot;header-actions&quot; variant=&quot;primary&quot;&gt;Export&lt;/la-button&gt;
@@ -570,7 +570,7 @@
 &lt;/la-app-shell&gt;
 </code></pre>
 <hr>
-<h2>Notes</h2>
+<h2 id="notes">Notes</h2>
 <ul>
 <li><code>la-app-shell</code> needs an explicit height to fill the viewport — it is <code>display: flex; height: 100%</code>. Typically the parent gives it <code>height: 100vh</code> or it sits inside a full-height wrapper.</li>
 <li>In docs pages, the shell is rendered inside a fixed-height <code>.shell-frame</code> div — this is just for the docs demo, not how it would be used in production.</li>

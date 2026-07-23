@@ -229,14 +229,14 @@
   design-language/timestamps.md
 </span>
 <article class="md-body">
-  <h1>Timestamps</h1>
+  <h1 id="timestamps">Timestamps</h1>
 <p>Guidelines for displaying dates and times across LawAdvisor AI product surfaces.</p>
 <hr>
-<h2>The core rule</h2>
+<h2 id="the-core-rule">The core rule</h2>
 <p><strong>Use relative time when recency is the signal. Use exact time when the specific moment matters. Never show a tooltip on a timestamp that already displays exact information.</strong></p>
 <hr>
-<h2>Display formats</h2>
-<h3>Relative time</h3>
+<h2 id="display-formats">Display formats</h2>
+<h3 id="relative-time">Relative time</h3>
 <p>Use when the primary signal is <em>how recent</em> something is, not <em>when exactly</em> it happened.</p>
 <table>
 <thead>
@@ -284,19 +284,19 @@
   &lt;span class=&quot;timestamp&quot;&gt;2 hours ago&lt;/span&gt;
 &lt;/la-tooltip&gt;
 </code></pre>
-<h3>Exact time (same-day)</h3>
+<h3 id="exact-time-same-day">Exact time (same-day)</h3>
 <p>Use when the specific hour matters and the date is already established by context (e.g. within a conversation thread where a date separator is shown above).</p>
 <p>Format: <code>2:14 pm</code></p>
 <p><strong>No tooltip.</strong> The displayed value is already precise.</p>
-<h3>Exact date + time</h3>
+<h3 id="exact-date--time">Exact date + time</h3>
 <p>Use when the full temporal context matters — older messages, activity logs, audit trails.</p>
 <p>Format: <code>12 May 2026, 2:14 pm</code></p>
 <p><strong>No tooltip.</strong> The full information is already visible. Adding a tooltip repeating the same value adds no signal and creates noise.</p>
-<h3>Date only</h3>
+<h3 id="date-only">Date only</h3>
 <p>Use when time doesn't matter — date separators in threads, event dates, document update dates.</p>
 <p>Format: <code>12 May 2026</code></p>
 <hr>
-<h2>Tooltip rule — summary</h2>
+<h2 id="tooltip-rule--summary">Tooltip rule — summary</h2>
 <table>
 <thead>
 <tr>
@@ -335,7 +335,7 @@
 </table>
 <p>The <code>la-chat-message</code> component exposes <code>timestamp-title</code> for the tooltip value. Only set it when the <code>timestamp</code> prop shows relative text. Leave it empty when showing exact datetimes.</p>
 <hr>
-<h2>Where each format is used</h2>
+<h2 id="where-each-format-is-used">Where each format is used</h2>
 <table>
 <thead>
 <tr>
@@ -378,7 +378,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Copy conventions</h2>
+<h2 id="copy-conventions">Copy conventions</h2>
 <ul>
 <li>Use 12-hour time with lowercase am/pm: <code>2:14 pm</code> not <code>14:14</code> or <code>2:14 PM</code></li>
 <li>Use abbreviated month: <code>12 May 2026</code> not <code>12/05/2026</code> or <code>May 12, 2026</code></li>
@@ -387,7 +387,7 @@
 <li>Use plain numerals — no ordinals (<code>12</code> not <code>12th</code>)</li>
 </ul>
 <hr>
-<h2>Related</h2>
+<h2 id="related">Related</h2>
 <ul>
 <li>Decision 70 — when to add a tooltip to a timestamp</li>
 <li><code>la-chat-message</code> — <code>timestamp</code> and <code>timestamp-title</code> properties</li>

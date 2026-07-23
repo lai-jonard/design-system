@@ -251,12 +251,12 @@ related:</p>
 <li>design-language/interaction.md</li>
 </ul>
 <hr>
-<h1>Loading indicators — standard</h1>
+<h1 id="loading-indicators--standard">Loading indicators — standard</h1>
 <p>The system pattern for &quot;the user has waited and we owe them feedback.&quot; Covers every place we communicate &quot;something is happening&quot; — from a 200ms button press to a 30-second AI document analysis to a full-page bootstrap.</p>
 <p>This doc is the <strong>decision layer</strong> above the components. The components themselves (<code>la-stepper</code>, <code>la-processing-widget</code>, the shared <code>spinnerStyles</code>) are the implementation. New loading work should pick a category here first, then build, not the other way round.</p>
 <p><strong>Source of locked decisions.</strong> The build queue, family naming, motion home, and sub-solve list were settled in <code>solves/260428-1-loading-states</code>. Decisions are baked inline below — read that solve for full rationale.</p>
 <hr>
-<h2>1. Principles</h2>
+<h2 id="1-principles">1. Principles</h2>
 <p>Five principles, each with its <strong>because</strong>.</p>
 <p><strong>1. Match the indicator to the wait, not to the action.</strong>
 A 60ms button click and a 30s AI analysis are different problems. The indicator must reflect <em>how long the user is waiting</em> and <em>whether we know how long it will take</em>, not what they clicked. Same click, different scope of wait, different indicator.</p>
@@ -309,12 +309,12 @@ If the system knows how far through it is (file bytes, step count, percentage), 
 <p><strong>5. The indicator owes the user a recovery path if it can fail.</strong>
 Every loading state must have a designed timeout/failure variant. A spinner with no failure path is a trap. The recovery path lives in the component, not in the loading doc — but if the component lacks one, that is a blocker for <code>/ready</code>.</p>
 <hr>
-<h2>2. Loading taxonomy</h2>
+<h2 id="2-loading-taxonomy">2. Loading taxonomy</h2>
 <p>Eight loading surfaces in the product. For each: what it is, when it appears, the right component (or the gap if it's missing).</p>
-<h3>2.1 Inline action spinner</h3>
+<h3 id="21-inline-action-spinner">2.1 Inline action spinner</h3>
 <p><strong>What:</strong> A small spinner inside an interactive element — most often inside a button — communicating &quot;I received your click, I'm working on it.&quot; Replaces or sits alongside the label.</p>
 <p><strong>When:</strong> Save, Send for Signature, Resolve, Approve, Add Employee, anything where the user clicked and is waiting on a server round-trip of 300ms–3s.</p>
-<p><strong>Component status:</strong> <strong>Locked — slot 1 in build queue.</strong> <code>la-button</code> will gain a <code>loading</code> boolean prop. Sub-solve <code>button-loading-state</code> (to be spawned) settles the exact API: width preservation strategy, double-submit prevention, relationship to <code>disabled</code>. Reuses the shared <a href="../src/styles/animations.ts"><code>spinnerStyles</code></a> — no new keyframes.</p>
+<p><strong>Component status:</strong> <strong>Locked — slot 1 in build queue.</strong> <code>la-button</code> will gain a <code>loading</code> boolean prop. Sub-solve <code>button-loading-state</code> (to be spawned) settles the exact API: width preservation strategy, double-submit prevention, relationship to <code>disabled</code>. Reuses the shared <code>spinnerStyles</code> — no new keyframes.</p>
 <p><strong>Locked behaviour from meta-solve:</strong></p>
 <ul>
 <li><code>loading</code> boolean — when true, shows a 12px spinner (<code>--la-spinner-sm</code>), hides the label or replaces icon, sets <code>aria-busy=&quot;true&quot;</code></li>
@@ -324,26 +324,26 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 </ul>
 <p><strong>Token:</strong> <code>--la-spinner-sm: 12px</code>. Border colour inherits — primary spinner on primary fill becomes white, secondary spinner stays neutral.</p>
 <hr>
-<h3>2.2 Inline cell / row spinner</h3>
+<h3 id="22-inline-cell--row-spinner">2.2 Inline cell / row spinner</h3>
 <p><strong>What:</strong> A spinner that lives inside a row, cell, or list item — used when one item in a list is mutating (rename, delete, reprocess) but the rest are not.</p>
 <p><strong>When:</strong> Document re-analysis, row-level retry in <code>la-processing-widget</code>, individual list item action.</p>
-<p><strong>Component status:</strong> Pattern exists informally. Used in <a href="../src/components/la-processing-widget.ts"><code>la-processing-widget</code></a> and <a href="../src/primitives/la-upload-box.ts"><code>la-upload-box</code></a> via the shared <a href="../src/styles/animations.ts"><code>spinnerStyles</code></a>. No primitive wrapping it; consumers compose <code>&lt;span class=&quot;spinner&quot; role=&quot;status&quot; aria-label=&quot;…&quot;&gt;</code> directly.</p>
+<p><strong>Component status:</strong> Pattern exists informally. Used in <code>la-processing-widget</code> and <code>la-upload-box</code> via the shared <code>spinnerStyles</code>. No primitive wrapping it; consumers compose <code>&lt;span class=&quot;spinner&quot; role=&quot;status&quot; aria-label=&quot;…&quot;&gt;</code> directly.</p>
 <p><strong>Rule:</strong> The spinner replaces the row's leading icon, not the label. The row text stays readable so the user can tell <em>which</em> row is processing.</p>
 <hr>
-<h3>2.3 Skeleton placeholder</h3>
+<h3 id="23-skeleton-placeholder">2.3 Skeleton placeholder</h3>
 <p><strong>What:</strong> Light-grey blocks shaped like the final content. The user sees the layout take shape, then content fills in.</p>
 <p><strong>When:</strong> Initial fetch of a content area — insights list on dashboard load, document list on legal-area page open, table data on tab switch. The &quot;first paint of a populated region.&quot;</p>
 <p><strong>Component status:</strong> <strong>Locked name — slot 2 in build queue.</strong> Primitive will be <code>la-skeleton</code>. Sub-solve <code>skeleton-primitive</code> (to be spawned) settles variants (text / block / circle minimum), sizing API, multi-line text rendering shape, shimmer-on/off rules, and anti-pattern guards.</p>
 <p><strong>Locked behaviour from meta-solve:</strong></p>
 <ul>
-<li>Shimmer motion uses the shared <strong><code>.t-shimmer</code></strong> utility class in <a href="../motion.css"><code>motion.css</code></a> — components import it; they don't define their own keyframes</li>
+<li>Shimmer motion uses the shared <strong><code>.t-shimmer</code></strong> utility class in <code>motion.css</code> — components import it; they don't define their own keyframes</li>
 <li><code>prefers-reduced-motion</code> flattens animation (handled by <code>motion.css</code>)</li>
 <li>Token: <code>--la-color-bg-muted</code> for the placeholder fill</li>
 <li>Skeleton shape <strong>must mirror the final content layout</strong> — a 3-line card skeleton followed by a 1-line card is jank, not a feature</li>
 </ul>
 <p><strong>Anti-pattern:</strong> A generic grey rectangle with a spinner on top. Pick one — skeleton OR spinner — never both stacked.</p>
 <hr>
-<h3>2.4 Top-of-page route progress</h3>
+<h3 id="24-top-of-page-route-progress">2.4 Top-of-page route progress</h3>
 <p><strong>What:</strong> A 2px primary-colour bar that runs across the top of the viewport during route transitions. Common in Linear, GitHub, YouTube. Indeterminate, fast.</p>
 <p><strong>When:</strong> Page navigation that involves a data fetch — sidebar item click, breadcrumb up, dashboard → legal-area-page.</p>
 <p><strong>Component status:</strong> <strong>Deferred this cycle.</strong> Useful for SPA navigation, but the routing patterns in the product aren't settled enough to design against. Remains a documented gap; revisit in a later cycle.</p>
@@ -355,7 +355,7 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <li>Skipped entirely if route resolves in &lt;300ms</li>
 </ul>
 <hr>
-<h3>2.5 Full-page bootstrap loader</h3>
+<h3 id="25-full-page-bootstrap-loader">2.5 Full-page bootstrap loader</h3>
 <p><strong>What:</strong> The screen shown after sign-in, before the app shell paints. Held only as long as it takes to fetch the user's organisation, legal areas, and initial dashboard data.</p>
 <p><strong>When:</strong> Cold app boot only. Never on subsequent navigation.</p>
 <p><strong>Component status:</strong> <strong>Deferred this cycle.</strong> Once-per-session moment, lower frequency, lower leverage than the four queued primitives. Engineering surface, not a primitive. Revisit in a later cycle.</p>
@@ -367,10 +367,10 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <li>Hard timeout at 8s — if bootstrap hasn't completed, switch to a recovery screen (&quot;We're having trouble loading your workspace. Try again or contact support.&quot;)</li>
 </ul>
 <hr>
-<h3>2.6 Async operation widget — <code>la-processing-widget</code></h3>
+<h3 id="26-async-operation-widget--la-processing-widget">2.6 Async operation widget — <code>la-processing-widget</code></h3>
 <p><strong>What:</strong> A floating, persistent widget that tracks one or more long-running async operations (typically document upload + AI analysis). Lists each item with its status and lets the user dismiss, retry, or remove.</p>
 <p><strong>When:</strong> Document upload, AI legal analysis, anything that takes 5–60s and the user can leave. The widget continues to track the work as the user moves around the product.</p>
-<p><strong>Component status:</strong> <strong>Built.</strong> <a href="../src/components/la-processing-widget.ts"><code>la-processing-widget</code></a> — handles <code>processing | complete | failed</code> per item, collapsible header, dismiss/retry/remove events.</p>
+<p><strong>Component status:</strong> <strong>Built.</strong> <code>la-processing-widget</code> — handles <code>processing | complete | failed</code> per item, collapsible header, dismiss/retry/remove events.</p>
 <p><strong>Known gaps</strong> (from feedback-moments solve):</p>
 <ul>
 <li>No designed <strong>timeout</strong> state — if analysis takes longer than expected, the spinner spins forever</li>
@@ -378,13 +378,13 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 </ul>
 <p><strong>Rule:</strong> This is the only loading surface that survives navigation. If the wait is &gt;10s and the user might want to keep working, route to this widget.</p>
 <hr>
-<h3>2.7 Stepped progress — <code>la-stepper</code></h3>
+<h3 id="27-stepped-progress--la-stepper">2.7 Stepped progress — <code>la-stepper</code></h3>
 <p><strong>What:</strong> A horizontal multi-segment bar showing the user's position in a known-length linear flow. Each segment is one step.</p>
 <p><strong>When:</strong> Multi-step wizards — unlock flow today, plus any future onboarding, KYC, sign-up.</p>
-<p><strong>Component status:</strong> <strong>Built.</strong> <a href="../src/primitives/la-stepper.ts"><code>la-stepper</code></a> — 5 statuses (<code>pending | active | complete | skipped | processing</code>), display-only, no events. See decision 42 / unlock-flow-progress solve for status vocabulary rationale.</p>
+<p><strong>Component status:</strong> <strong>Built.</strong> <code>la-stepper</code> — 5 statuses (<code>pending | active | complete | skipped | processing</code>), display-only, no events. See decision 42 / unlock-flow-progress solve for status vocabulary rationale.</p>
 <p><strong>Rule:</strong> The stepper itself is <em>not</em> a loading indicator at the step level — the step body owns its own loading state (typically a button spinner or a <code>la-processing-widget</code>). The stepper communicates <em>position in a flow</em>, not <em>progress within a step</em>.</p>
 <hr>
-<h3>2.8 Determinate progress — <code>la-progress</code></h3>
+<h3 id="28-determinate-progress--la-progress">2.8 Determinate progress — <code>la-progress</code></h3>
 <p><strong>What:</strong> A horizontal bar that fills 0 → 100% as a known-quantity task progresses. File bytes uploaded, items processed in a batch, export percentage.</p>
 <p><strong>When:</strong> File upload (bytes known), bulk action (&quot;Resolving 12 of 47 insights&quot;), export (&quot;Generating PDF — 64%&quot;).</p>
 <p><strong>Component status:</strong> <strong>Locked spec — slot 4 in build queue.</strong> Build-ready; no interim solve needed. Distinct from <code>la-stepper</code> (segmented/discrete) by name and shape.</p>
@@ -398,21 +398,21 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <li><strong>Reduced motion:</strong> skip transition; jump to value.</li>
 <li><strong>Out of scope (separate decision if ever needed):</strong> striped/animated fill while running, indeterminate mode.</li>
 </ul>
-<p><strong>First consumer:</strong> <a href="../src/primitives/la-upload-box.ts"><code>la-upload-box</code></a> — currently shows only a spinner during upload but knows bytes; can show determinate.</p>
+<p><strong>First consumer:</strong> <code>la-upload-box</code> — currently shows only a spinner during upload but knows bytes; can show determinate.</p>
 <p><strong>Note on naming:</strong> the prior file <code>la-progress-bar.ts</code> was renamed to <code>la-stepper.ts</code> precisely because the segmented behaviour was a stepper, not a progress bar. The name <code>la-progress</code> is now used for this determinate primitive.</p>
 <hr>
-<h3>2.9 AI thinking / streaming state — <code>la-thinking</code></h3>
+<h3 id="29-ai-thinking--streaming-state--la-thinking">2.9 AI thinking / streaming state — <code>la-thinking</code></h3>
 <p><strong>What:</strong> Indicator shown while an AI response is being generated — typically a pulsing dot, a &quot;thinking…&quot; pill, or token streaming.</p>
 <p><strong>When:</strong> Any AI surface — insight generation, document Q&amp;A, drafting assistance. Distinct from <code>la-processing-widget</code> because the user is actively waiting in-place for the response, not leaving to come back.</p>
 <p><strong>Component status:</strong> <strong>Locked name — slot 3 in build queue.</strong> Primitive will be <code>la-thinking</code>. Sub-solve <code>ai-thinking-state</code> (to be spawned) settles the visual default — design space spans pulsing dot, &quot;Thinking…&quot; pill, shimmer over the response area, token-streaming cursor.</p>
 <p><strong>Locked behaviour from meta-solve:</strong></p>
 <ul>
-<li>Pulse motion uses the shared <strong><code>.t-pulse</code></strong> utility class in <a href="../motion.css"><code>motion.css</code></a>; shimmer (when used) reuses <strong><code>.t-shimmer</code></strong></li>
+<li>Pulse motion uses the shared <strong><code>.t-pulse</code></strong> utility class in <code>motion.css</code>; shimmer (when used) reuses <strong><code>.t-shimmer</code></strong></li>
 <li>Cross-cuts every AI surface (chat, insights, document Q&amp;A, suggested actions) — primitive must support a clear opt-out for surfaces that already stream tokens</li>
 </ul>
 <p><strong>Why this matters for a legal-AI product:</strong> AI latency is a structural property of every page that uses an LLM. A consistent, non-anxious thinking-state pattern is more important here than in a non-AI product. See <a href="../../docs/ai-ux-guidelines/"><code>design-language/ai-ux-guidelines.md</code></a> for adjacent rules.</p>
 <hr>
-<h2>3. Decision tree</h2>
+<h2 id="3-decision-tree">3. Decision tree</h2>
 <p>When you hit a wait and don't know which indicator to use, walk this:</p>
 <pre><code>Is the wait &lt;300ms?
   └─ Yes → no indicator
@@ -445,7 +445,7 @@ Is this an AI generation?
 </code></pre>
 <p>If two paths apply, the more specific one wins (skeleton over spinner for content; determinate over indeterminate when count is known).</p>
 <hr>
-<h2>4. Copy patterns</h2>
+<h2 id="4-copy-patterns">4. Copy patterns</h2>
 <p>Pulled from feedback-moments, extended for loading-specific cases.</p>
 <p><strong>Rule:</strong> present continuous, ellipsis at end, time estimate when known.</p>
 <table>
@@ -505,7 +505,7 @@ Is this an AI generation?
 <li>&quot;Working…&quot; — corporate filler</li>
 <li>All-caps or exclamation marks — never urgent</li>
 </ul>
-<h3>Action button patterns</h3>
+<h3 id="action-button-patterns">Action button patterns</h3>
 <p>For buttons specifically, three valid patterns. The system has a default; consumers can opt into the others when context warrants.</p>
 <p><strong>Pattern A — change label to present continuous</strong></p>
 <p>The label converts to its <code>-ing</code> form with an ellipsis. Multi-word labels simplify to the primary verb.</p>
@@ -574,7 +574,7 @@ Is this an AI generation?
 </ul>
 <p><strong>Pattern A as opt-in</strong> for high-stakes legal actions where present-continuous communicates better. <strong>Pattern C as secondary</strong> for minimalist contexts — form submits in modals, icon-only buttons, dense flows where the surrounding chrome already names the action. C fits the system's calm-authority voice well; we use it more sparingly than B but not so rarely that it's exotic. The exact API for these opt-ins (likely <code>loading-label=&quot;Saving…&quot;</code> for A, <code>loading-mode=&quot;icon-only&quot;</code> for C) is settled in the <code>button-loading-state</code> sub-solve when it spawns.</p>
 <hr>
-<h2>5. Accessibility &amp; motion</h2>
+<h2 id="5-accessibility--motion">5. Accessibility &amp; motion</h2>
 <p><strong>Accessibility:</strong></p>
 <ul>
 <li>Every spinner element gets <code>role=&quot;status&quot;</code> and <code>aria-label=&quot;…&quot;</code> (or visible label) so screen readers announce the loading state</li>
@@ -585,19 +585,19 @@ Is this an AI generation?
 <p><strong>Motion (motion.css rules apply):</strong></p>
 <ul>
 <li>GPU-safe only — <code>transform</code> and <code>opacity</code>. Never <code>width</code> for skeleton fill or progress fill (use <code>transform: scaleX(…)</code>).</li>
-<li><strong>Shared utilities live in <a href="../motion.css"><code>motion.css</code></a>:</strong>
+<li><strong>Shared utilities live in <code>motion.css</code>:</strong>
 <ul>
 <li><code>.t-shimmer</code> — skeleton shimmer (also reusable by <code>la-thinking</code> if shimmer-on-response-area is the chosen pattern)</li>
 <li><code>.t-pulse</code> — AI thinking pulse</li>
 <li>Components import the class; they don't define their own keyframes. New keyframes require a decision record.</li>
 </ul>
 </li>
-<li><strong>Shared spinner</strong> lives in <a href="../src/styles/animations.ts"><code>spinnerStyles</code></a>, 800ms linear; every spinner-bearing primitive imports it</li>
+<li><strong>Shared spinner</strong> lives in <code>spinnerStyles</code>, 800ms linear; every spinner-bearing primitive imports it</li>
 <li>Progress fill update: 200ms <code>--ease-out</code> per value change</li>
 <li><code>prefers-reduced-motion</code>: spinners freeze (already handled in <code>spinnerStyles</code>), <code>.t-shimmer</code> and <code>.t-pulse</code> collapse to static (handled in <code>motion.css</code>), progress jumps without animation</li>
 </ul>
 <hr>
-<h2>6. Anti-patterns</h2>
+<h2 id="6-anti-patterns">6. Anti-patterns</h2>
 <p>Concrete failure modes to avoid. Each is a real pattern observed in adjacent SaaS products.</p>
 <p><strong>Spinner-in-the-void.</strong> A spinner centred on a blank page with no surrounding content. The user has no anchor for what's loading. Replace with a skeleton that matches the eventual layout, or a top progress bar on the populated previous page.</p>
 <p><strong>Double indicator.</strong> A skeleton AND a spinner. A <code>la-processing-widget</code> AND an inline button spinner for the same action. Pick one — the more specific wins. Two indicators for the same wait look like a bug.</p>
@@ -608,7 +608,7 @@ Is this an AI generation?
 <p><strong>Decorative spinner.</strong> A spinner on a static surface that isn't actually loading anything (&quot;just to look active&quot;). Spinners are a literal claim that work is happening; lying breaks trust.</p>
 <p><strong>Auto-dismissed bootstrap.</strong> A full-page loader that times out silently and shows an empty app. If bootstrap fails, <em>say so</em> — see §2.5 for the 8s recovery rule.</p>
 <hr>
-<h2>7. Component readiness</h2>
+<h2 id="7-component-readiness">7. Component readiness</h2>
 <p>Cross-reference of the loading taxonomy against the actual inventory. Order reflects the locked build queue from the meta-solve.</p>
 <table>
 <thead>
@@ -679,23 +679,23 @@ Is this an AI generation?
 <p>🟠 = locked decision, build queued. 🟢 = built. 🟡 = informal pattern in use. ⚪ = deferred this cycle.</p>
 <p>Order in the four 🟠 rows is the build queue. The three 🟢 / 🟡 rows are existing inventory; the two ⚪ rows are out of scope for this cycle but kept visible.</p>
 <hr>
-<h2>8. Sub-solves and open questions</h2>
+<h2 id="8-sub-solves-and-open-questions">8. Sub-solves and open questions</h2>
 <p>The five blocking opens this doc originally surfaced were settled in the loading-states meta-solve. What remains is two things: the three sub-solves the meta-solve queued, and three advisory opens that need product/engineering input.</p>
-<h3>Sub-solves to spawn (in build-queue order)</h3>
+<h3 id="sub-solves-to-spawn-in-build-queue-order">Sub-solves to spawn (in build-queue order)</h3>
 <ol>
 <li><strong><code>button-loading-state</code></strong> — settles the exact API on <code>la-button</code> (boolean vs. enum, width preservation, disabled coupling, label-swap behaviour). Seed framing exists from prior conversation; reuse on spawn.</li>
 <li><strong><code>skeleton-primitive</code></strong> — settles <code>la-skeleton</code> variants (text/block/circle), sizing API, multi-line text shape, shimmer-on/off rules, anti-pattern guards.</li>
 <li><strong><code>ai-thinking-state</code></strong> — settles <code>la-thinking</code> visual default (pulsing dot vs. &quot;Thinking…&quot; pill vs. shimmer vs. token stream) plus opt-out for surfaces already streaming tokens.</li>
 </ol>
 <p><code>la-progress</code> does not need a sub-solve — its spec is in §2.8 and is build-ready.</p>
-<h3>Advisory opens (for handoff conversation, not this doc to settle)</h3>
+<h3 id="advisory-opens-for-handoff-conversation-not-this-doc-to-settle">Advisory opens (for handoff conversation, not this doc to settle)</h3>
 <ol>
 <li><strong>Migration ownership.</strong> When <code>la-button</code> gains a <code>loading</code> prop, who updates the existing async-CTA call sites — designer flags, engineering executes, or pair? Process question.</li>
 <li><strong><code>la-processing-widget</code> timeout threshold.</strong> From feedback-moments solve: suggested 45s default, unverified against real upload + analysis durations. Stays scoped to that solve; this doc surfaces the link.</li>
 <li><strong>Where family-wide rules live long-term.</strong> This doc absorbs the locked decisions today; a <code>decisions/NN-loading-family-naming.md</code> record is recommended for the locked names so the canonical record outlives the meta-solve workspace.</li>
 </ol>
 <hr>
-<h2>9. Where this doc lives in the recipe</h2>
+<h2 id="9-where-this-doc-lives-in-the-recipe">9. Where this doc lives in the recipe</h2>
 <p>This is a <code>design-language/</code> standard, not a <code>/solve</code> and not a single decision. It's the <em>map</em> future loading work plans against. It should be:</p>
 <ul>
 <li>Updated when a new gap is closed (a 🔴 row flips 🟢)</li>

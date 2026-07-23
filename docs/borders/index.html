@@ -239,8 +239,8 @@
   design-language/borders.md
 </span>
 <article class="md-body">
-  <h1>Borders</h1>
-<h2>The two-token system</h2>
+  <h1 id="borders">Borders</h1>
+<h2 id="the-two-token-system">The two-token system</h2>
 <p>Borders in this system are split into two categories with separate tokens. This is one of the most important layout rules.</p>
 <table>
 <thead>
@@ -264,7 +264,7 @@
 </tbody>
 </table>
 <hr>
-<h2><code>--la-color-border</code> — interactive components</h2>
+<h2 id="--la-color-border--interactive-components"><code>--la-color-border</code> — interactive components</h2>
 <p>Used on anything the user directly interacts with or focuses on. The slightly darker value ensures these borders remain legible against surface backgrounds and meet contrast expectations for form controls.</p>
 <p><strong>Use on:</strong></p>
 <ul>
@@ -276,7 +276,7 @@
 <li>Dropdown menus</li>
 </ul>
 <hr>
-<h2><code>--la-color-border-light</code> — structural dividers</h2>
+<h2 id="--la-color-border-light--structural-dividers"><code>--la-color-border-light</code> — structural dividers</h2>
 <p>Used on chrome and structural elements that divide areas of the layout. These borders should recede — they frame content without competing with it.</p>
 <p><strong>Use on:</strong></p>
 <ul>
@@ -288,7 +288,7 @@
 </ul>
 <p><strong>Why a separate lighter token:</strong> the table row borders were the original pain point — <code>#DADDEC</code> on every row felt visually noisy, especially in dense contract tables. Dropping to <code>#ECEEF5</code> lets the data breathe. The principle extends to all structural chrome: borders that exist only to separate regions should be quieter than borders on things you interact with.</p>
 <hr>
-<h2>Semantic borders</h2>
+<h2 id="semantic-borders">Semantic borders</h2>
 <p>These pair with their corresponding surface and action colours. Used in context-specific states only.</p>
 <table>
 <thead>
@@ -327,21 +327,21 @@
 </tbody>
 </table>
 <hr>
-<h2>Hover border rule for ghost buttons</h2>
+<h2 id="hover-border-rule-for-ghost-buttons">Hover border rule for ghost buttons</h2>
 <p>On hover, ghost buttons (danger, success) switch their border from <code>--la-color-border</code> to the semantic border colour. This signals intent before action:</p>
 <pre><code class="language-css">.btn-danger-ghost:hover  { background: var(--la-color-surface-danger);  border-color: var(--la-color-border-danger); }
 .btn-success-ghost:hover { background: var(--la-color-surface-success); border-color: var(--la-color-border-success); }
 </code></pre>
 <p>The border is always kept on hover — never removed. Removing borders on hover creates a layout shift and makes the button feel unstable.</p>
 <hr>
-<h2>Border width</h2>
+<h2 id="border-width">Border width</h2>
 <ul>
 <li><strong>1px</strong> — standard for all borders</li>
 <li><strong>1.5px</strong> — table header bottom rule only (slightly heavier to mark the boundary between header and data)</li>
 <li><strong>Dashed borders</strong> — reserved for <strong>drop / upload / add targets only</strong> (see below). Never for structural chrome, content cards, controls, or passive empty states.</li>
 </ul>
 <hr>
-<h2>When to use a dashed border</h2>
+<h2 id="when-to-use-a-dashed-border">When to use a dashed border</h2>
 <p><strong>Dashed = a surface that accepts something — a drop zone, upload slot, or &quot;add&quot; target.</strong>
 The test: <em>can I drop or add something into this box right now?</em> If yes → dashed. If it's just
 empty, or it's real content / chrome → <strong>solid</strong>.</p>
@@ -383,7 +383,7 @@ empty, or it's real content / chrome → <strong>solid</strong>.</p>
 </ul>
 <p>This mirrors the mainstream convention (Figma/Drive/Trello drop targets are dashed; Linear/Stripe
 render passive empty states as solid hairlines or tinted panels, reserving the dash for add/drop).</p>
-<h2>Dashed border — standard treatment (rendering)</h2>
+<h2 id="dashed-border--standard-treatment-rendering">Dashed border — standard treatment (rendering)</h2>
 <p>CSS <code>border: dashed</code> can't control dash length, gap, cap style, or stroke alignment, so the
 standard dashed border is rendered as an <strong>SVG <code>rect</code> overlay</strong>:</p>
 <ul>
@@ -402,9 +402,9 @@ drag-over state. Usage:</p>
 <p>When the dashed border moves into a component (e.g. <code>la-upload</code> drop zone), bake the same
 SVG-overlay treatment in rather than reverting to <code>border: dashed</code>.</p>
 <hr>
-<h2>No border on filled buttons</h2>
+<h2 id="no-border-on-filled-buttons">No border on filled buttons</h2>
 <p>Primary, neutral, and dark buttons use <code>border-color</code> matching their background, making the border invisible. This is intentional — filled buttons do not need a visible border to feel solid. The border exists in the DOM only so that button sizes remain consistent when switching between filled and outlined variants.</p>
-<h2>Concentric radius on nested surfaces</h2>
+<h2 id="concentric-radius-on-nested-surfaces">Concentric radius on nested surfaces</h2>
 <p>When a rounded element sits inside another rounded element, the corners must stay concentric — parallel curves, not a tight corner fighting a loose one. Mismatched nested radii are the single most common thing that makes a layout feel subtly off.</p>
 <p><strong>Rule:</strong> <code>outer radius = inner radius + padding between them</code>.</p>
 <pre><code>/* card padding: --la-space-sm (8px), inner button radius: --la-radius-sm */

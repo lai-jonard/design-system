@@ -231,10 +231,10 @@
   design-language/page-architecture.md
 </span>
 <article class="md-body">
-  <h1>Page architecture</h1>
+  <h1 id="page-architecture">Page architecture</h1>
 <p>How pages are structured in apps built with this design system.</p>
 <hr>
-<h2>App shell</h2>
+<h2 id="app-shell">App shell</h2>
 <p>The top-level layout is provided by <code>la-app-shell</code>. It contains two zones:</p>
 <pre><code>[app-shell]
 ├── [sidebar]         fixed, always visible, collapsible
@@ -248,7 +248,7 @@
 <li>No horizontal scroll — content must fit within the viewport width.</li>
 </ul>
 <hr>
-<h2>Sidebar (<code>la-sidebar</code>)</h2>
+<h2 id="sidebar-la-sidebar">Sidebar (<code>la-sidebar</code>)</h2>
 <ul>
 <li>Always present on desktop. Collapsible to icon-only state.</li>
 <li>Shows the active legal area with a highlighted background.</li>
@@ -256,14 +256,14 @@
 <li>Locked areas show as dimmed with a lock icon — still visible, not hidden.</li>
 </ul>
 <hr>
-<h2>Page header</h2>
+<h2 id="page-header">Page header</h2>
 <p>The header sits at the top of the content area and contains:</p>
 <ol>
 <li><strong>Breadcrumbs</strong> — a clickable trail showing the user's location. Every item is a link except the last (current page).</li>
 <li><strong>Back button</strong> — optional, shown when the page has a clear parent to return to.</li>
 <li><strong>Header actions slot</strong> — right-aligned area for page-level actions (e.g. &quot;Export&quot;, &quot;Add document&quot;).</li>
 </ol>
-<h3>Breadcrumb pattern</h3>
+<h3 id="breadcrumb-pattern">Breadcrumb pattern</h3>
 <pre><code>Dashboard / Governance / Insights
 </code></pre>
 <ul>
@@ -272,7 +272,7 @@
 <li>Use <code>/</code> as the visual separator.</li>
 </ul>
 <hr>
-<h2>Page hierarchy</h2>
+<h2 id="page-hierarchy">Page hierarchy</h2>
 <p>The navigation follows a consistent depth pattern:</p>
 <pre><code>Dashboard
 └── Legal area (e.g. Governance)
@@ -286,7 +286,7 @@
 <li><strong>Detail views</strong> — focused view of a single item (modal or full page)</li>
 </ul>
 <hr>
-<h2>Scroll behaviour</h2>
+<h2 id="scroll-behaviour">Scroll behaviour</h2>
 <ul>
 <li><strong>Sidebar:</strong> fixed, does not scroll with content. If sidebar content overflows, it scrolls internally.</li>
 <li><strong>Page header:</strong> fixed at top of content area, always visible.</li>

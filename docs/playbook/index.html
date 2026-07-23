@@ -233,11 +233,11 @@
   design-language/playbook.md
 </span>
 <article class="md-body">
-  <h1>Playbook — How the LAI Design System grows</h1>
+  <h1 id="playbook--how-the-lai-design-system-grows">Playbook — How the LAI Design System grows</h1>
 <p>This is the recipe for how new ideas enter the design system, how they become components, how decisions get logged, and how work hands off to engineering. It's the single page a new collaborator reads to understand the workflow — sitting alongside <code>CLAUDE.md</code> (the boiled-down non-negotiables: token, copy, motion, code), the rest of <a href="."><code>design-language/</code></a> (the rationale layer with worked-out detail — <a href="../../docs/components/"><code>components.md</code></a> for taxonomy, <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> for tone and voice, <a href="../../docs/motion/"><code>motion.md</code></a> for animation), and <code>handoffs/README.md</code> (the engineering pipeline).</p>
 <p>If you're picking up a new design task and you don't know whether to solve, build, or just sketch — start here.</p>
 <hr>
-<h2>1. The mental model</h2>
+<h2 id="1-the-mental-model">1. The mental model</h2>
 <p>Six layers, each with a clear job:</p>
 <table>
 <thead>
@@ -250,22 +250,22 @@
 <tbody>
 <tr>
 <td><strong>Tokens</strong></td>
-<td><a href="../src/styles/tokens.ts"><code>src/styles/tokens.ts</code></a></td>
+<td><code>src/styles/tokens.ts</code></td>
 <td>Colour, radius, spacing, type, motion. Single source of truth. Hardcoded values are a rule violation.</td>
 </tr>
 <tr>
 <td><strong>Primitives</strong></td>
-<td><a href="../src/primitives/"><code>src/primitives/</code></a></td>
+<td><code>src/primitives/</code></td>
 <td>Reusable building blocks (button, input, badge, drawer). No domain knowledge.</td>
 </tr>
 <tr>
 <td><strong>Composed components</strong></td>
-<td><a href="../src/components/"><code>src/components/</code></a></td>
+<td><code>src/components/</code></td>
 <td>Domain-aware compositions (insight-card, unlock-panel, document-list). Each entry is in the Tier 2 table in <a href="../../docs/components/">components.md</a> with a logged &quot;what problem does this solve&quot;.</td>
 </tr>
 <tr>
 <td><strong>Page templates</strong></td>
-<td><a href="../src/pages/"><code>src/pages/</code></a></td>
+<td><code>src/pages/</code></td>
 <td>Layout shells (app-shell, dashboard, legal-area-page). The structural canvases the product surfaces sit on.</td>
 </tr>
 <tr>
@@ -282,7 +282,7 @@
 </table>
 <p>The boundary that matters most is <strong>primitive vs composed component</strong>. Primitives have no domain knowledge — <code>la-badge</code> doesn't know it's a &quot;legal area badge&quot;. Composed components do — <code>la-legal-area-widget</code> knows it counts urgent insights. Cross that line carefully: a composed component should never end up reused outside its domain, but a primitive should be reusable across products (KYC, sign-up, future verticals).</p>
 <hr>
-<h2>2. The recipe (one-page, scannable)</h2>
+<h2 id="2-the-recipe-one-page-scannable">2. The recipe (one-page, scannable)</h2>
 <p>A new product need or design question appears. Walk this:</p>
 <pre><code>1. Is this a question or a settled call?
    • Question with multiple valid answers → /solve
@@ -321,7 +321,7 @@
 </code></pre>
 <p>Most components don't need a solve. Most solves don't need to spawn new components. Most decisions don't need their own file. Use the lightest tool that works.</p>
 <hr>
-<h2>3. When to solve, decide, or just build</h2>
+<h2 id="3-when-to-solve-decide-or-just-build">3. When to solve, decide, or just build</h2>
 <p>Three patterns, three different tools. Pick by the shape of the question, not by habit.</p>
 <table>
 <thead>
@@ -360,7 +360,7 @@
 <li>If a <code>/build</code> exposes a question you weren't expecting, <strong>stop</strong>, open a <code>/solve</code>. Don't keep building through ambiguity.</li>
 </ul>
 <hr>
-<h2>4. The component decision rubric</h2>
+<h2 id="4-the-component-decision-rubric">4. The component decision rubric</h2>
 <p>Every Tier 2 entry in <a href="../../docs/components/">components.md</a> starts with the question <em>&quot;What problem is this component solving?&quot;</em> — but that's the prompt, not the rubric. Use these criteria to judge whether the answer warrants a component:</p>
 <p>A pattern becomes a component when <strong>two or more</strong> of the following are true:</p>
 <ol>
@@ -377,7 +377,7 @@
 <li><strong>One consumer today, planned second consumer this quarter</strong> → component. Plan beats inertia.</li>
 </ul>
 <hr>
-<h2>5. The exploration → component pipeline</h2>
+<h2 id="5-the-exploration--component-pipeline">5. The exploration → component pipeline</h2>
 <p>Prototypes are how we test ideas at flow-scale before deciding what becomes a component. They live in <code>dev/prototypes/&lt;flow&gt;/&lt;NN&gt;-&lt;name&gt;.html</code> and assemble real primitives and composed components against realistic content.</p>
 <p>The promotion gate is the <strong>8-gate prototype standard</strong> (<a href="../../docs/prototype-standards/"><code>prototype-standards.md</code></a>):</p>
 <ol>
@@ -396,9 +396,9 @@
 <p>Note: this is a separate &quot;8 gates&quot; from the 9 readiness gates in <code>/ready</code>. Don't mix them up. Prototype gates are about the prototype as a whole; readiness gates are about a component's docs and state coverage.</p>
 </blockquote>
 <hr>
-<h2>6. Slash-commands reference (designer POV)</h2>
-<p>The engineer set up five custom commands under <a href="../.claude/commands/"><code>.claude/commands/</code></a> that automate the workflow. This is what each does <em>for me, the designer</em>. (Engineer to QA the technical detail of this section.)</p>
-<h3><code>/solve &lt;topic&gt;</code> — frame a question</h3>
+<h2 id="6-slash-commands-reference-designer-pov">6. Slash-commands reference (designer POV)</h2>
+<p>The engineer set up five custom commands under <code>.claude/commands/</code> that automate the workflow. This is what each does <em>for me, the designer</em>. (Engineer to QA the technical detail of this section.)</p>
+<h3 id="solve-lttopicgt--frame-a-question"><code>/solve &lt;topic&gt;</code> — frame a question</h3>
 <p>Opens a solve workspace at <code>solves/YYMMDD-N-slug/</code> with three files. Used when a design question has multiple valid answers and we want to think through the boundaries.</p>
 <ul>
 <li>Frames the problem rigorously rather than jumping to solutions.</li>
@@ -407,7 +407,7 @@
 <li>Use when in doubt. Cheap to open, cheaper than building wrong.</li>
 </ul>
 <p>The output (<code>*.solve-output.md</code>) is the distilled brief that becomes the input to <code>/build</code>, or the source for a <code>decisions/</code> entry.</p>
-<h3><code>/build &lt;name&gt;</code> — scout, align, then build</h3>
+<h3 id="build-ltnamegt--scout-align-then-build"><code>/build &lt;name&gt;</code> — scout, align, then build</h3>
 <p>Builds a new component or modifies an existing one. Three hard stops:</p>
 <ol>
 <li>After scout — present findings, wait for acknowledgement</li>
@@ -416,7 +416,7 @@
 </ol>
 <p>Builds the component source and routes straight to <code>/document</code> — there's no separate sandbox step.</p>
 <p>Reads real tokens from <code>tokens.ts</code> — won't carry over invented token names from a prompt. Refuses to introduce new primitives without explicit approval. Does not touch handoff artefacts; that's <code>/ready</code>'s job.</p>
-<h3><code>/audit &lt;name&gt;</code> — passive state report</h3>
+<h3 id="audit-ltnamegt--passive-state-report"><code>/audit &lt;name&gt;</code> — passive state report</h3>
 <p>Inventories an existing component against the readiness gates. <strong>Reports only — does not fix.</strong> Updates the row in <code>handoffs/readiness.md</code>, nothing else.</p>
 <p>Use it when:</p>
 <ul>
@@ -425,7 +425,7 @@
 <li>Periodic sweeps (e.g. cycle-end) to catch drift.</li>
 </ul>
 <p>The report orders gaps easiest-first, so we know what's quick wins vs. deeper work.</p>
-<h3><code>/document &lt;name&gt;</code> — draft the docs page</h3>
+<h3 id="document-ltnamegt--draft-the-docs-page"><code>/document &lt;name&gt;</code> — draft the docs page</h3>
 <p>Drafts the public-facing documentation page at <code>dev/docs-drafts/la-&lt;name&gt;.html</code>. Stays in <code>dev/</code> so we can iterate via <code>npm run dev</code> without touching the published surface.</p>
 <ul>
 <li>Pulls API truth from the component source (every <code>@property</code>, <code>&lt;slot&gt;</code>, <code>dispatchEvent</code>).</li>
@@ -434,7 +434,7 @@
 <li>Anatomy section mirrors the render tree; placeholder regions get flagged, not invented.</li>
 </ul>
 <p>Drafts are not published. <code>/ready</code> promotes them to <code>docs-src/components/</code>.</p>
-<h3><code>/ready &lt;name&gt;</code> — promote, lock, hand off</h3>
+<h3 id="ready-ltnamegt--promote-lock-hand-off"><code>/ready &lt;name&gt;</code> — promote, lock, hand off</h3>
 <p>The last mile. Walks <strong>nine gates</strong> (the 8 from <code>/audit</code> plus Gate 9: docs draft exists), and only when all pass does it:</p>
 <ol>
 <li>Promote <code>dev/docs-drafts/&lt;name&gt;.html</code> → <code>docs-src/components/&lt;name&gt;.html</code> (Eleventy template format).</li>
@@ -447,7 +447,7 @@
 <p>The self-audit step is strict: every claim must trace to a file actually read in this session. A single yellow gate keeps the status at 🟡, not 🟢.</p>
 <p>If Gate 9 fails (no draft exists), the command refuses to flip to 🟢. Run <code>/document</code> first.</p>
 <hr>
-<h2>7. Handoff to engineering</h2>
+<h2 id="7-handoff-to-engineering">7. Handoff to engineering</h2>
 <p>Two scopes — per-component and per-sprint.</p>
 <p><strong>Per-component</strong>: when <code>/ready</code> flips a component to 🟢, the handoff artefacts are emitted automatically:</p>
 <ul>
@@ -468,7 +468,7 @@
 <p>Engineering reads the sprint doc, follows the pointers, and builds. The handoff call is a checkpoint, not a transmission — by the time we sit down, the bundle should already answer most questions.</p>
 <p>For the broader pipeline (roles, who writes what), see <code>handoffs/README.md</code>.</p>
 <hr>
-<h2>8. Documentation surfaces</h2>
+<h2 id="8-documentation-surfaces">8. Documentation surfaces</h2>
 <p>Knowing where to put information is half the work. Use this map when something needs to be written down.</p>
 <table>
 <thead>
@@ -596,7 +596,7 @@
 </tr>
 <tr>
 <td>Tokens</td>
-<td><a href="../src/styles/tokens.ts"><code>src/styles/tokens.ts</code></a></td>
+<td><code>src/styles/tokens.ts</code></td>
 <td>Source of truth for every visual value.</td>
 <td>Engineer</td>
 </tr>
@@ -609,7 +609,7 @@
 </ul>
 <p>Both are tracked in the Cycle 4 plan.</p>
 <hr>
-<h2>9. When things break the recipe</h2>
+<h2 id="9-when-things-break-the-recipe">9. When things break the recipe</h2>
 <p>Edge cases the recipe doesn't cover cleanly. When you hit one, treat the recipe as the default and the deviation as a deliberate, logged choice.</p>
 <p><strong>A pattern doesn't fit Tier 1 or Tier 2.</strong>
 Open a solve. Don't force-fit. Sometimes the answer is &quot;this isn't a component, it's a layout&quot; or &quot;this belongs in the page template, not as its own composition.&quot;</p>
@@ -624,14 +624,14 @@ That's still a prototype, not a published reference. Either close the gap or sto
 <p><strong>Engineering finds an inconsistency at handoff.</strong>
 That's why the handoff call exists. Capture in <code>handoffs/stage-N/questions-log.md</code>, then either resolve into a fresh decision record (if it's a call we own) or fold back into a solve (if it's a question we hadn't seen).</p>
 <hr>
-<h2>10. Lessons feeding back</h2>
+<h2 id="10-lessons-feeding-back">10. Lessons feeding back</h2>
 <p>The recipe should improve over time, not stay frozen. Two mechanisms:</p>
 <p><strong>Per-sprint retro.</strong> At the end of each sprint, append a short <em>&quot;if I ran this again&quot;</em> section to <code>handoffs/stage-N/&lt;sprint&gt;.md</code>. One paragraph. What surprised us, what we'd cut, what we'd surface earlier. These are the raw material for the next playbook revision.</p>
 <p><strong>Quarterly playbook review.</strong> Read this file end-to-end against what we actually did the last three months. Anywhere the recipe diverged from reality, either update the recipe or flag the divergence as a known exception. The playbook should never be more idealised than the practice.</p>
 <p><strong>Designer-engineer pairing checkpoint.</strong> Schedule a recurring half-hour with the engineer who owns the slash-commands and infrastructure. The recipe goes stale fastest at the seams (where designer process meets engineer tooling) — the pairing slot keeps both sides current with the other's reality.</p>
 <p><strong>Visual regression sweep (light).</strong> Once per cycle, walk the published docs pages of every 🟢 component and screenshot them against the previous cycle. Drift catches you faster than a full Chromatic-style infra and is cheap enough to keep running.</p>
 <hr>
-<h2>Quick reference</h2>
+<h2 id="quick-reference">Quick reference</h2>
 <p>If you remember nothing else from this file:</p>
 <ul>
 <li><strong>Tokens before pixels.</strong> Every visual value is a CSS variable. No exceptions.</li>

@@ -231,11 +231,11 @@
   design-language/ux-patterns.md
 </span>
 <article class="md-body">
-  <h1>UX Patterns</h1>
+  <h1 id="ux-patterns">UX Patterns</h1>
 <p>Standardised interaction patterns used across LawAdvisor AI. Every pattern here has shipped in at least one sprint prototype and reflects how we handle the interaction — not how we'd like to handle it hypothetically.</p>
 <p>When a new interaction arises that doesn't fit an existing pattern, document the decision here before shipping.</p>
 <hr>
-<h2>1. Destructive action — Delete</h2>
+<h2 id="1-destructive-action--delete">1. Destructive action — Delete</h2>
 <p><strong>When:</strong> permanently removing a document, entity, or record that cannot be undone.</p>
 <p><strong>How it works:</strong></p>
 <ol>
@@ -261,10 +261,10 @@
 <p><strong>Components used:</strong> <code>la-modal</code>, <code>la-button</code> (secondary + danger)</p>
 <p><strong>Prototyped in:</strong> <code>20-document-page.html</code> (Delete flow), <code>06-corp-gov-standard.html</code></p>
 <hr>
-<h2>2. Upload / Replace flow</h2>
+<h2 id="2-upload--replace-flow">2. Upload / Replace flow</h2>
 <p><strong>When:</strong> adding a new document or replacing an existing one with a corrected version.</p>
 <p><strong>How it works:</strong></p>
-<h3>Replace (existing document)</h3>
+<h3 id="replace-existing-document">Replace (existing document)</h3>
 <ol>
 <li>&quot;Replace document&quot; button is always shown on the document page (regardless of <code>deletable</code>).</li>
 <li>Clicking opens a <strong>Replace modal</strong> (<code>la-modal</code> wrapping <code>la-upload</code>). Heading: &quot;Replace document&quot;.</li>
@@ -274,7 +274,7 @@
 <li>After upload completes (simulated 2s in prototype), <code>documentStatus</code> returns to <code>'ready'</code> and <code>aboutSummary</code> updates to confirm the new version.</li>
 <li>If upload fails, <code>documentStatus</code> → <code>'flagged-ai'</code> with a <code>flagReason</code> that explains the failure and invites retry. The original document is unchanged.</li>
 </ol>
-<h3>Add (new document, no existing)</h3>
+<h3 id="add-new-document-no-existing">Add (new document, no existing)</h3>
 <ul>
 <li>Upload surface is shown inline on the legal area page (not in a modal).</li>
 <li>After upload, document appears in the list with <code>'processing'</code> status. Legal area insight count may change.</li>
@@ -285,7 +285,7 @@
 <p><strong>Components used:</strong> <code>la-modal</code>, <code>la-upload</code>, <code>la-button</code>, <code>la-document-page</code> (status prop)</p>
 <p><strong>Prototyped in:</strong> <code>20-document-page.html</code> (Replace flow), <code>09-fundraising-unlock.html</code></p>
 <hr>
-<h2>3. Confirmation modal</h2>
+<h2 id="3-confirmation-modal">3. Confirmation modal</h2>
 <p><strong>When:</strong> any action that is hard to reverse, affects records, or has downstream consequences.</p>
 <p><strong>Pattern:</strong></p>
 <ul>
@@ -300,7 +300,7 @@
 </code></pre>
 <p><strong>Never:</strong> more than two buttons in a confirmation footer. If there are three options, one of them belongs elsewhere.</p>
 <hr>
-<h2>4. Insight row → Insight modal</h2>
+<h2 id="4-insight-row--insight-modal">4. Insight row → Insight modal</h2>
 <p><strong>When:</strong> user wants to understand or act on a specific insight.</p>
 <p><strong>How it works:</strong></p>
 <ol>
@@ -322,7 +322,7 @@ click X / backdrop → la-insight-close → close modal
 <p><strong>Components used:</strong> <code>la-insight-modal</code>, <code>la-insight-card</code>, <code>la-legal-area-widget</code>, <code>la-document-page</code></p>
 <p><strong>Prototyped in:</strong> <code>06-corp-gov-standard.html</code>, <code>07-insight-modal.html</code>, <code>20-document-page.html</code></p>
 <hr>
-<h2>5. Two-panel document page layout</h2>
+<h2 id="5-two-panel-document-page-layout">5. Two-panel document page layout</h2>
 <p><strong>When:</strong> showing a document's details alongside its file preview.</p>
 <p><strong>Layout:</strong></p>
 <ul>
@@ -349,7 +349,7 @@ click X / backdrop → la-insight-close → close modal
 <p><strong>Component:</strong> <code>la-document-page</code></p>
 <p><strong>Prototyped in:</strong> <code>20-document-page.html</code></p>
 <hr>
-<h2>6. Legal area page layout</h2>
+<h2 id="6-legal-area-page-layout">6. Legal area page layout</h2>
 <p><strong>When:</strong> showing a legal area's health summary, insights, and document list.</p>
 <p><strong>Layout:</strong></p>
 <ul>
@@ -367,7 +367,7 @@ click X / backdrop → la-insight-close → close modal
 </ul>
 <p><strong>Prototyped in:</strong> <code>06-corp-gov-standard.html</code>, <code>04-corp-gov-locked.html</code>, <code>05-corp-gov-unlock.html</code></p>
 <hr>
-<h2>7. Page breadcrumb navigation</h2>
+<h2 id="7-page-breadcrumb-navigation">7. Page breadcrumb navigation</h2>
 <p><strong>When:</strong> user is on a page that is 2+ levels deep from the dashboard.</p>
 <p><strong>Structure (always three levels max):</strong></p>
 <pre><code>Dashboard  &gt;  [Legal Area]  &gt;  [Document or sub-page]
@@ -387,7 +387,7 @@ click X / backdrop → la-insight-close → close modal
 </code></pre>
 <p><strong>Page title</strong> (shown in the app shell header) mirrors the last breadcrumb label.</p>
 <hr>
-<h2>8. Empty states</h2>
+<h2 id="8-empty-states">8. Empty states</h2>
 <p><strong>When:</strong> a list or section has no content to show yet.</p>
 <p><strong>Rules:</strong></p>
 <ul>
@@ -404,7 +404,7 @@ click X / backdrop → la-insight-close → close modal
 <li>People list before first person is added</li>
 </ul>
 <hr>
-<h2>9. Flag banners</h2>
+<h2 id="9-flag-banners">9. Flag banners</h2>
 <p><strong>When:</strong> a document has a status that needs attention beyond a normal insight.</p>
 <p><strong>Surfaces:</strong></p>
 <ul>
@@ -421,7 +421,7 @@ click X / backdrop → la-insight-close → close modal
 </ul>
 <p><strong>Component:</strong> <code>la-document-page</code> renders the banner internally based on <code>documentStatus</code> and <code>flagReason</code> props.</p>
 <hr>
-<h2>10. Processing / loading states</h2>
+<h2 id="10-processing--loading-states">10. Processing / loading states</h2>
 <p><strong>When:</strong> an async operation is in flight (upload, AI analysis, data fetch).</p>
 <p><strong>Rules:</strong></p>
 <ul>
@@ -436,13 +436,13 @@ click X / backdrop → la-insight-close → close modal
      → flagged-ai (error banner + original content restored)
 </code></pre>
 <hr>
-<h2>11. Key–value field lists (<code>la-field-list</code>)</h2>
+<h2 id="11-keyvalue-field-lists-la-field-list">11. Key–value field lists (<code>la-field-list</code>)</h2>
 <p><strong>When:</strong> displaying structured metadata — document details, extracted entity facts, company information, or any set of labelled data points.</p>
 <p><strong>Component:</strong> <code>la-field-list</code> — pass a <code>fields</code> array of <code>{ label, value }</code> objects.</p>
-<h3>Hierarchy through colour, not weight</h3>
+<h3 id="hierarchy-through-colour-not-weight">Hierarchy through colour, not weight</h3>
 <p>Labels (left / top column) use <code>--la-color-text-muted</code>. Values (right / bottom column) use <code>--la-color-text</code>. Both sides use the same font size (<code>--la-font-size-base</code>) and normal weight (<code>--la-font-weight-normal</code>). The distinction is purely chromatic — muted label, primary-text value. Never bold or medium the value.</p>
 <p>This mirrors the document page's general hierarchy rule: <strong>colour does the work, weight stays calm.</strong></p>
-<h3>Layout modes</h3>
+<h3 id="layout-modes">Layout modes</h3>
 <table>
 <thead>
 <tr>
@@ -465,7 +465,7 @@ click X / backdrop → la-insight-close → close modal
 </tbody>
 </table>
 <p>Row borders (<code>--la-color-border-light</code>) aid scanning on longer lists. The last row's border is suppressed.</p>
-<h3>Rules</h3>
+<h3 id="rules">Rules</h3>
 <ul>
 <li>Hierarchy is colour only — never bold or capitalise labels.</li>
 <li>Pass fields via the <code>.fields</code> JS property — not a string attribute.</li>
@@ -473,7 +473,7 @@ click X / backdrop → la-insight-close → close modal
 <li>Use <code>spread</code> in the document page sidebar; use <code>stack</code> for company manual or entity detail pages.</li>
 </ul>
 <hr>
-<h2>12. Inline metadata strings — middle dot separator</h2>
+<h2 id="12-inline-metadata-strings--middle-dot-separator">12. Inline metadata strings — middle dot separator</h2>
 <p><strong>When:</strong> displaying a horizontal run of short text labels (category, legal area, date, file size, entity name) in a single line — typically in document headers, list rows, or cards.</p>
 <p><strong>Rule:</strong> use a middle dot (<code>·</code> — U+00B7) as the separator between adjacent items. Never use a slash (<code>/</code>), pipe (<code>|</code>), dash (<code>—</code>), or a vertical rule element.</p>
 <p><strong>Implementation:</strong></p>
@@ -488,11 +488,11 @@ click X / backdrop → la-insight-close → close modal
 </code></pre>
 <p><strong>Do not use</strong> hardcoded <code>·</code> character directly inside a string literal like <code>&quot;Employment · Governance&quot;</code> — always keep separators as discrete DOM nodes so conditional visibility is handled in the template, not by string manipulation.</p>
 <hr>
-<h2>13. Person entity modal</h2>
+<h2 id="13-person-entity-modal">13. Person entity modal</h2>
 <p><strong>When:</strong> showing the details of a named person (founder, employee, advisor, or any people-entity) in response to clicking their row in a <code>la-person-list</code>.</p>
 <p>This pattern covers two modal states in the same flow: the <strong>detail modal</strong> (read view) and the <strong>add modal</strong> (creation view). Both share the same header anatomy.</p>
 <hr>
-<h3>Header anatomy</h3>
+<h3 id="header-anatomy">Header anatomy</h3>
 <p>The modal has no visible title. The person's identity is the header.</p>
 <pre><code>         ┌──────────────┐
          │      AC      │  ← 48 × 48 avatar circle, initials auto-derived
@@ -513,7 +513,7 @@ click X / backdrop → la-insight-close → close modal
 </code></pre>
 <p>Screen readers announce the dialog name on open, then read all body content sequentially. The visible title bar is removed entirely.</p>
 <hr>
-<h3>Detail modal body</h3>
+<h3 id="detail-modal-body">Detail modal body</h3>
 <p>Below the header, show the person's associated content. The exact sections depend on context:</p>
 <ul>
 <li><strong>Founders / Governance:</strong> documents list (<code>la-document-item</code> rows) with a normal-weight, muted section label (&quot;Documents&quot;) indented to align with document item content (<code>padding-inline-start: --la-space-md</code>)</li>
@@ -521,7 +521,7 @@ click X / backdrop → la-insight-close → close modal
 </ul>
 <p>Keep section labels at <code>--la-font-size-sm</code>, <code>--la-font-weight-normal</code>, <code>--la-color-text-muted</code>. Never semibold — the label should recede, not compete with the content.</p>
 <hr>
-<h3>Add modal</h3>
+<h3 id="add-modal">Add modal</h3>
 <p>Same header anatomy, but the name and subtitle start as placeholder text:</p>
 <ul>
 <li>Name slot shows &quot;Enter a name below&quot; in <code>--la-color-text-disabled</code> — most receded text token</li>
@@ -531,7 +531,7 @@ click X / backdrop → la-insight-close → close modal
 </ul>
 <p>The <code>la-input</code> field sits below the header, inside the modal body.</p>
 <hr>
-<h3>Footer — detail modal</h3>
+<h3 id="footer--detail-modal">Footer — detail modal</h3>
 <p>Destructive action is isolated on the left. Close is on the right.</p>
 <pre><code>[ Remove [noun] ]                    [ Close ]
   ghost + --la-color-danger-text       ghost
@@ -550,20 +550,20 @@ click X / backdrop → la-insight-close → close modal
 &lt;/div&gt;
 </code></pre>
 <hr>
-<h3>Footer — add modal</h3>
+<h3 id="footer--add-modal">Footer — add modal</h3>
 <p>Standard two-button footer, right-aligned (modal default):</p>
 <pre><code>                         [ Cancel ]  [ Add [noun] ]
                            ghost       primary, disabled until name entered
 </code></pre>
 <hr>
-<h3>Footer — confirmation modal</h3>
+<h3 id="footer--confirmation-modal">Footer — confirmation modal</h3>
 <p>Destructive confirm is on the left. Cancel is on the right.</p>
 <pre><code>[ Remove ]                           [ Cancel ]
   danger variant                       ghost
   margin-right: auto
 </code></pre>
 <hr>
-<h3>Triggering the flow</h3>
+<h3 id="triggering-the-flow">Triggering the flow</h3>
 <pre><code>click la-person-item row
   → fire la-select event ({ name, subtitle })
   → populate and open detail modal
@@ -580,10 +580,10 @@ click &quot;Remove&quot; in confirmation modal
 <p><strong>Components used:</strong> <code>la-modal</code>, <code>la-person-list</code>, <code>la-person-item</code>, <code>la-button</code>, <code>la-input</code>, <code>la-menu</code> + <code>la-menu-item</code> (kebab on person row)</p>
 <p><strong>Prototyped in:</strong> <code>13-company-manual.html</code> (founders), <code>18-people.html</code> (employment)</p>
 <hr>
-<h2>14. Scrollable content — fade to background</h2>
+<h2 id="14-scrollable-content--fade-to-background">14. Scrollable content — fade to background</h2>
 <p><strong>Rule:</strong> Any contained, bounded scroll area uses a gradient fade at its trailing edge to signal that content continues beyond the visible boundary. No hard border or divider line.</p>
 <p><strong>Rationale:</strong> A border says &quot;here is a wall.&quot; A gradient fade says &quot;there is more.&quot; Borders add visual weight and work against the calm, low-noise aesthetic. The gradient is subtle by design — it disappears entirely when there's nothing more to show.</p>
-<h3>When it applies</h3>
+<h3 id="when-it-applies">When it applies</h3>
 <table>
 <thead>
 <tr>
@@ -616,7 +616,7 @@ click &quot;Remove&quot; in confirmation modal
 <li>Horizontal data table overflow (<code>la-data-table</code>) — handled separately</li>
 <li>Sidebars with distinct background colours — gradient colour would need to match the surface</li>
 </ul>
-<h3>Implementation — with a footer sibling</h3>
+<h3 id="implementation--with-a-footer-sibling">Implementation — with a footer sibling</h3>
 <p>When the scrollable area has a static footer below it (<code>la-modal</code>, <code>la-drawer</code>, <code>la-insight-modal</code>):</p>
 <pre><code class="language-css">.footer {
   position: relative; /* establishes containing block for ::before */
@@ -633,7 +633,7 @@ click &quot;Remove&quot; in confirmation modal
 }
 </code></pre>
 <p>For <code>la-modal</code> the gradient is gated behind <code>[scrollable]</code> (JS detects body overflow). For <code>la-drawer</code> it is always present — drawers consistently contain substantial content.</p>
-<h3>Implementation — self-contained scroll panel (no footer)</h3>
+<h3 id="implementation--self-contained-scroll-panel-no-footer">Implementation — self-contained scroll panel (no footer)</h3>
 <p>When the scrollable element has no footer sibling (<code>la-select</code>), add a <code>&lt;div class=&quot;scroll-fade&quot;&gt;</code> as the last child of the panel in the shadow template:</p>
 <pre><code class="language-css">.scroll-fade {
   display: none;
@@ -647,13 +647,13 @@ click &quot;Remove&quot; in confirmation modal
 .panel[data-scrollable] .scroll-fade { display: block; }
 </code></pre>
 <p>JS sets <code>data-scrollable</code> when <code>panel.scrollHeight &gt; panel.clientHeight</code>, checked on open and on scroll.</p>
-<h3>Gradient value</h3>
+<h3 id="gradient-value">Gradient value</h3>
 <p>Always fade <strong>to <code>var(--la-color-bg)</code></strong> (white). Components on non-white backgrounds require a matching target colour — handle case by case.</p>
 <hr>
 <hr>
-<h2>Pattern 15 — Three-state access pill (sharing status)</h2>
+<h2 id="pattern-15--three-state-access-pill-sharing-status">Pattern 15 — Three-state access pill (sharing status)</h2>
 <p>Used on the investor detail page header and investor list cards to communicate whether a DD pack has been shared with a specific investor. A composed pattern using <code>la-badge</code> + <code>la-tooltip</code>.</p>
-<h3>Three states</h3>
+<h3 id="three-states">Three states</h3>
 <table>
 <thead>
 <tr>
@@ -680,14 +680,14 @@ click &quot;Remove&quot; in confirmation modal
 </tr>
 </tbody>
 </table>
-<h3>Status mapping</h3>
+<h3 id="status-mapping">Status mapping</h3>
 <p>The three pill states map from the more granular engagement status used internally:</p>
 <ul>
 <li><strong>Not Shared</strong> → <code>draft</code>, <code>invited</code></li>
 <li><strong>Active</strong> → <code>active</code>, <code>reviewing</code>, <code>stalled</code>, <code>complete</code></li>
 <li><strong>Revoked</strong> → <code>access-revoked</code></li>
 </ul>
-<h3>Usage</h3>
+<h3 id="usage">Usage</h3>
 <pre><code class="language-html">&lt;la-tooltip tip=&quot;Access is live — this investor can view the DD pack.&quot;
             appearance=&quot;light&quot;
             position=&quot;bottom&quot;
@@ -698,7 +698,7 @@ click &quot;Remove&quot; in confirmation modal
 &lt;/la-tooltip&gt;
 </code></pre>
 <p>Always use <code>appearance=&quot;light&quot;</code> — this is supplementary context on an already-labelled element, not an action label. Do not use <code>size=&quot;sm&quot;</code>. Use <code>max-width=&quot;220px&quot;</code> to allow longer tip text to wrap cleanly.</p>
-<h3>Contextual CTA alongside the pill</h3>
+<h3 id="contextual-cta-alongside-the-pill">Contextual CTA alongside the pill</h3>
 <p>The pill always sits next to a single contextual CTA in the header <code>investor-header-end</code> slot. The CTA is determined by the pill state:</p>
 <ul>
 <li>Not Shared → &quot;Share DD Pack&quot; (primary button)</li>
@@ -706,7 +706,7 @@ click &quot;Remove&quot; in confirmation modal
 <li>Revoked → &quot;Re-share&quot; (secondary button)</li>
 </ul>
 <hr>
-<h2>Changelog</h2>
+<h2 id="changelog">Changelog</h2>
 <table>
 <thead>
 <tr>

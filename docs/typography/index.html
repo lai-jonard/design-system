@@ -239,12 +239,12 @@
   design-language/typography.md
 </span>
 <article class="md-body">
-  <h1>Typography</h1>
-<h2>Typeface</h2>
+  <h1 id="typography">Typography</h1>
+<h2 id="typeface">Typeface</h2>
 <p><strong>Inter</strong> — loaded from Google Fonts at weights 400, 500, 600.</p>
 <p>Why Inter: humanist sans that reads well at small sizes. Essential for dense legal data, long description text, and compact status labels.</p>
 <hr>
-<h2>Weight scale</h2>
+<h2 id="weight-scale">Weight scale</h2>
 <table>
 <thead>
 <tr>
@@ -271,12 +271,12 @@
 </tr>
 </tbody>
 </table>
-<h3>Rule: headings are semibold, not bold</h3>
+<h3 id="rule-headings-are-semibold-not-bold">Rule: headings are semibold, not bold</h3>
 <p>700 weight at 16–22px reads as heavy and aggressive in a legal product where trust and calm matter. 600 gives structure and hierarchy without visual shouting.</p>
 <p><strong>Exception:</strong> <code>&lt;strong&gt;</code> tags inside notification bars and alert copy — inline emphasis within body text.</p>
 <hr>
-<h2>Size scale</h2>
-<p>The base body size is <code>--la-font-size-base</code> — see decision 15. <code>--la-font-size-lg</code> is a deliberate step up for labels and prominent copy that need more presence than base; never the default. Numeric values live in <a href="../src/styles/tokens.ts">src/styles/tokens.ts</a> — this table only describes which token plays which role.</p>
+<h2 id="size-scale">Size scale</h2>
+<p>The base body size is <code>--la-font-size-base</code> — see decision 15. <code>--la-font-size-lg</code> is a deliberate step up for labels and prominent copy that need more presence than base; never the default. Numeric values live in src/styles/tokens.ts — this table only describes which token plays which role.</p>
 <table>
 <thead>
 <tr>
@@ -338,7 +338,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Text colour tokens</h2>
+<h2 id="text-colour-tokens">Text colour tokens</h2>
 <table>
 <thead>
 <tr>
@@ -367,21 +367,21 @@
 </table>
 <p>Never use raw hex for text colours — always reference a token.</p>
 <hr>
-<h2>Line height</h2>
+<h2 id="line-height">Line height</h2>
 <ul>
 <li>Body copy: <code>1.5</code></li>
 <li>Single-line labels and badges: <code>normal</code></li>
 <li>Legal / document text (if used): <code>1.7</code> — generous for readability</li>
 </ul>
 <hr>
-<h2>Patterns</h2>
-<h3>Status badges</h3>
+<h2 id="patterns">Patterns</h2>
+<h3 id="status-badges">Status badges</h3>
 <p><code>--la-font-size-sm</code> × <code>--la-font-weight-medium</code>, sentence case. Never all-caps. Keep copy to 1–2 words.</p>
-<h3>Card headings</h3>
+<h3 id="card-headings">Card headings</h3>
 <p><code>--la-font-size-lg</code> × <code>--la-font-weight-semibold</code> × <code>--la-color-text</code>. No uppercase.</p>
-<h3>Meta / timestamp</h3>
+<h3 id="meta--timestamp">Meta / timestamp</h3>
 <p><code>--la-font-size-sm</code> × <code>--la-font-weight-normal</code> × <code>--la-color-text-muted</code>. Appears below or beside the primary label.</p>
-<h3>Links / anchors</h3>
+<h3 id="links--anchors">Links / anchors</h3>
 <p>Always use the foundation anchor style from <code>la-base-root.css</code> — never write custom colour, text-decoration, or font-weight rules on <code>&lt;a&gt;</code> elements.</p>
 <ul>
 <li><strong>Colour:</strong> <code>--la-color-text-secondary</code> at rest</li>
@@ -397,7 +397,7 @@
 .forgot { color: var(--la-color-primary); text-decoration: none; font-weight: var(--la-font-weight-medium); }
 </code></pre>
 <p>In light-DOM pages, link <code>la-base-root.css</code> after <code>la-tokens-root.css</code> and the styles apply automatically to all <code>&lt;a&gt;</code> elements.</p>
-<h3>Text wrapping</h3>
+<h3 id="text-wrapping">Text wrapping</h3>
 <p>Applied platform-wide from the base styles — you rarely need to set these yourself.</p>
 <ul>
 <li><strong>Headings</strong> use <code>text-wrap: balance</code> — even line lengths, no orphaned last word. Balance only runs on short blocks (≤6 lines in Chromium), which headings always satisfy. Set on <code>h1–h6</code> in <code>la-base-root.css</code>.</li>

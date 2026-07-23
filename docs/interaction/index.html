@@ -239,9 +239,9 @@
   design-language/interaction.md
 </span>
 <article class="md-body">
-  <h1>Interaction</h1>
-<h2>Buttons (<code>la-button</code>)</h2>
-<h3>Variants</h3>
+  <h1 id="interaction">Interaction</h1>
+<h2 id="buttons-la-button">Buttons (<code>la-button</code>)</h2>
+<h3 id="variants">Variants</h3>
 <table>
 <thead>
 <tr>
@@ -284,14 +284,14 @@
 </tr>
 </tbody>
 </table>
-<h3>Sizes</h3>
+<h3 id="sizes">Sizes</h3>
 <ul>
 <li>Default: <code>font-size: var(--la-font-size-md)</code>, <code>padding: 6px 16px</code></li>
 <li><code>sm</code>: use in compact contexts like table rows or tight panels</li>
 </ul>
-<h3>Disabled state</h3>
+<h3 id="disabled-state">Disabled state</h3>
 <p><code>opacity: 0.4</code> on the element — no separate disabled token. Preserves variant identity so a disabled danger button still reads as danger.</p>
-<h3>CTA copy rules</h3>
+<h3 id="cta-copy-rules">CTA copy rules</h3>
 <ul>
 <li>Verb-first, Title Case: &quot;Send for Signature&quot;, &quot;Add Employee&quot;, &quot;View Details&quot;, &quot;Mark Resolved&quot;</li>
 <li>No jargon: &quot;send&quot; not &quot;submit&quot;, &quot;check&quot; not &quot;verify&quot;, &quot;start&quot; not &quot;commence&quot;</li>
@@ -299,7 +299,7 @@
 <li>Full capitalisation rule: see <a href="../../docs/copy-guidelines/#capitalisation"><code>design-language/copy-guidelines.md</code> — Capitalisation</a>.</li>
 </ul>
 <hr>
-<h2>Badges (<code>la-badge</code>)</h2>
+<h2 id="badges-la-badge">Badges (<code>la-badge</code>)</h2>
 <p>Used inline to communicate status or category. Always sentence case, 1–2 words max.</p>
 <table>
 <thead>
@@ -341,10 +341,10 @@
 </table>
 <p>Counter type (circle) is a separate shape used for numerical counts — unread items, queue depth, notification totals. Use <code>appearance=&quot;ghost&quot;</code> when the count should sit quietly in the UI; default (filled) for primary signals.</p>
 <hr>
-<h2>Checklist items (<code>la-checklist-item</code>)</h2>
+<h2 id="checklist-items-la-checklist-item">Checklist items (<code>la-checklist-item</code>)</h2>
 <p>Presentational only — not a form input. Shows checked/unchecked state for onboarding and unlock flows. Does not emit events.</p>
 <hr>
-<h2>Progress steps (<code>la-stepper</code>)</h2>
+<h2 id="progress-steps-la-stepper">Progress steps (<code>la-stepper</code>)</h2>
 <p>Multi-step flows use numbered step indicators. Each step has a status:</p>
 <table>
 <thead>
@@ -388,7 +388,7 @@
 </tbody>
 </table>
 <hr>
-<h2>Hover states</h2>
+<h2 id="hover-states">Hover states</h2>
 <ul>
 <li><strong>Primary:</strong> darkens to <code>--la-color-primary-hover</code></li>
 <li><strong>Secondary:</strong> light grey background</li>
@@ -396,16 +396,16 @@
 </ul>
 <p><strong>Rule:</strong> never remove a border on hover. Border changes on hover are semantic signals — removing them causes layout shift and loses meaning.</p>
 <hr>
-<h2>Focus states</h2>
+<h2 id="focus-states">Focus states</h2>
 <p>Inputs and interactive controls use <code>--la-color-border-focus</code> (<code>#3B82F6</code>) as the focus ring. Never suppress <code>:focus-visible</code> outlines.</p>
-<h2>Optical alignment — icon + text buttons</h2>
+<h2 id="optical-alignment--icon--text-buttons">Optical alignment — icon + text buttons</h2>
 <p>Geometric centring makes a trailing/leading icon look pushed too far to its edge. Give the icon side ≈2px less padding than the text side so the button reads as balanced:</p>
 <pre><code>/* trailing icon: &quot;Send for Signature →&quot; */
 padding-left: 16px;
 padding-right: 14px;  /* icon side = text side − 2px */
 </code></pre>
 <p>For a lopsided glyph (caret, star, play triangle), fix the SVG's viewBox rather than nudging with margin where you can. See decision 83.</p>
-<h2>Minimum hit area</h2>
+<h2 id="minimum-hit-area">Minimum hit area</h2>
 <p>Interactive controls target a <strong>32×32px minimum hit area</strong> for our dense desktop context. Where the visible glyph is smaller (checkbox, <code>ph-dots-three</code> menu, close button), extend the hit area with a pseudo-element rather than enlarging the glyph:</p>
 <pre><code>.control { position: relative; }
 .control::after {
@@ -415,28 +415,28 @@ padding-right: 14px;  /* icon side = text side − 2px */
 </code></pre>
 <p>32px clears the WCAG 2.5.8 (AA) 24px floor. Two interactive elements must never have overlapping hit areas — shrink the pseudo-element before it collides. Revisit toward 40/44px if a touch or mobile surface becomes a real target. See decision 83.</p>
 <hr>
-<h2>Widgets (<code>la-widget</code>)</h2>
+<h2 id="widgets-la-widget">Widgets (<code>la-widget</code>)</h2>
 <ul>
 <li><code>highlighted</code> — primary colour border, use for recommended or active widgets</li>
 <li><code>clickable</code> — pointer cursor, use when the whole widget is interactive</li>
 <li><code>dimmed</code> — reduced opacity, use for locked or unavailable states</li>
 </ul>
 <hr>
-<h2>Modals</h2>
-<h3>Opening</h3>
+<h2 id="modals">Modals</h2>
+<h3 id="opening">Opening</h3>
 <ol>
 <li>Set backdrop <code>display: flex</code></li>
 <li>Apply <code>animation: fade-in</code> to backdrop</li>
 <li>Remove → reflow → re-add <code>.anim-scale-in</code> on inner panel</li>
 </ol>
-<h3>Closing</h3>
+<h3 id="closing">Closing</h3>
 <ul>
 <li>X button (top right)</li>
 <li>Cancel button (footer)</li>
 <li>Click backdrop</li>
 <li>Escape key</li>
 </ul>
-<h3>Multi-step modals</h3>
+<h3 id="multi-step-modals">Multi-step modals</h3>
 <p>Replace <code>innerHTML</code> of the inner panel rather than stacking separate modals. Re-trigger <code>.anim-scale-in</code> on each step so the user feels forward progress.</p>
 
 </article>

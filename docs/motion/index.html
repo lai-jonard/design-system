@@ -239,14 +239,14 @@
   design-language/motion.md
 </span>
 <article class="md-body">
-  <h1>Motion</h1>
-<h2>Source of truth</h2>
+  <h1 id="motion">Motion</h1>
+<h2 id="source-of-truth">Source of truth</h2>
 <p>All animation tokens, keyframes, and utility classes live in <code>motion.css</code> at the project root. Never define keyframes or duration values inline — always use the classes and tokens from <code>motion.css</code>.</p>
 <p>Link it on every docs page:</p>
 <pre><code class="language-html">&lt;link rel=&quot;stylesheet&quot; href=&quot;../../motion.css&quot; /&gt;
 </code></pre>
 <hr>
-<h2>Core rules</h2>
+<h2 id="core-rules">Core rules</h2>
 <ul>
 <li><strong>GPU-safe only.</strong> Animate <code>transform</code> and <code>opacity</code> exclusively. Never animate <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, <code>background</code>, or <code>color</code> directly.</li>
 <li><strong>Never use <code>ease-in</code>.</strong> Feels sluggish for elements users are watching appear. Use <code>--ease-out</code> for entrances, <code>--ease</code> for hovers and micro-interactions.</li>
@@ -256,7 +256,7 @@
 <li><strong>Always respect <code>prefers-reduced-motion</code>.</strong> <code>motion.css</code> collapses the duration vars at <code>:root</code> to <code>0ms</code> automatically — but only for elements whose styles are in the document tree. <strong>Shadow-DOM components must declare their own <code>@media (prefers-reduced-motion: reduce)</code> block inside their <code>static styles</code></strong>, because <code>tokens.ts</code> re-declares the duration vars on <code>:host</code> and shadows the <code>:root</code> override. Either zero the durations on <code>:host</code> under the reduce query, or set <code>transition: none</code> / <code>animation: none</code> on the affected selectors. Pattern reference: <code>la-button</code>, <code>la-modal</code>, <code>la-toast</code>, <code>la-stepper</code> (decision 47 is a stepper-specific call but the reduce block in its source is the canonical example).</li>
 </ul>
 <hr>
-<h2>Utility classes</h2>
+<h2 id="utility-classes">Utility classes</h2>
 <table>
 <thead>
 <tr>
@@ -296,7 +296,7 @@
 </tbody>
 </table>
 <hr>
-<h2>When to use each</h2>
+<h2 id="when-to-use-each">When to use each</h2>
 <table>
 <thead>
 <tr>
@@ -331,19 +331,19 @@
 </tr>
 </tbody>
 </table>
-<h3>Re-trigger pattern</h3>
+<h3 id="re-trigger-pattern">Re-trigger pattern</h3>
 <pre><code class="language-js">el.classList.remove('anim-fade-up');
 void el.offsetWidth; // force reflow
 el.classList.add('anim-fade-up');
 </code></pre>
-<h3>Stagger injected items</h3>
+<h3 id="stagger-injected-items">Stagger injected items</h3>
 <pre><code class="language-js">items.forEach((el, i) =&gt; {
   el.classList.add('anim-fade-up');
   el.style.animationDelay = (i * 40) + 'ms';
 });
 </code></pre>
 <hr>
-<h2>Entrance sequencing on screens</h2>
+<h2 id="entrance-sequencing-on-screens">Entrance sequencing on screens</h2>
 <p>When building full screens, animate in a deliberate order: <strong>chrome → navigation → content</strong>.</p>
 <p>The header and nav establish where the user is before content arrives. If content appeared first, the page feels unanchored.</p>
 <p>Suggested delays:</p>
@@ -354,7 +354,7 @@ el.classList.add('anim-fade-up');
 <li>Each subsequent item: +60–80ms stagger</li>
 </ul>
 <hr>
-<h2>Tab / page navigation</h2>
+<h2 id="tab--page-navigation">Tab / page navigation</h2>
 <p>Suppress entrance animations when navigating between tabs or pages — the user expects an instant content swap, not a re-entrance sequence.</p>
 <pre><code class="language-js">// Before navigating
 sessionStorage.setItem('la-tab-nav', '1');

@@ -233,14 +233,14 @@
   design-language/prototype-standards.md
 </span>
 <article class="md-body">
-  <h1>Prototype standards</h1>
+  <h1 id="prototype-standards">Prototype standards</h1>
 <p>The publish gate for flow and page prototypes. A prototype in <code>dev/prototypes/&lt;flow&gt;/</code> moves into the published docs site (<code>/founder-flow/*.html</code> or equivalent) only when it passes every gate below.</p>
 <hr>
-<h2>What this is</h2>
+<h2 id="what-this-is">What this is</h2>
 <p>Prototypes are the structural source of truth engineers read during handoff. They consume layout and composition from a prototype page, then build the functional backing in their own repo. That only works if a &quot;published&quot; prototype is guaranteed to use only published components, style only through tokens, and respect the same standards we apply to components.</p>
 <p>Until a prototype passes, it stays in <code>dev/prototypes/</code> as a work-in-progress. It may still be shared and demoed — it just doesn't become the reference.</p>
 <hr>
-<h2>Two surfaces, one rule</h2>
+<h2 id="two-surfaces-one-rule">Two surfaces, one rule</h2>
 <table>
 <thead>
 <tr>
@@ -262,30 +262,30 @@
 </tr>
 </tbody>
 </table>
-<p>Moving between them is a one-line change in <a href="../.eleventy.cjs"><code>.eleventy.cjs</code></a>: add the file to the <code>FOUNDER_FLOW_PAGES</code> passthrough list and rebuild (<code>npm run docs</code>).</p>
+<p>Moving between them is a one-line change in <code>.eleventy.cjs</code>: add the file to the <code>FOUNDER_FLOW_PAGES</code> passthrough list and rebuild (<code>npm run docs</code>).</p>
 <hr>
-<h2>The 8 gates</h2>
+<h2 id="the-8-gates">The 8 gates</h2>
 <p>Mirrors the 8 gates used by <code>/audit</code> and <code>/ready</code>, adapted for page-level artefacts.</p>
-<h3>Gate 1 — Source</h3>
+<h3 id="gate-1--source">Gate 1 — Source</h3>
 <p>The prototype HTML exists at <code>dev/prototypes/&lt;flow&gt;/&lt;NN&gt;-&lt;name&gt;.html</code>. Filename is numbered for flow order. No orphan files.</p>
-<h3>Gate 2 — Components</h3>
+<h3 id="gate-2--components">Gate 2 — Components</h3>
 <p>Every <code>&lt;la-*&gt;</code> tag used in the prototype is <strong>published</strong>. A component is published when it has:</p>
 <ul>
-<li>A page in <a href="../docs-src/components/"><code>docs-src/components/</code></a></li>
+<li>A page in <code>docs-src/components/</code></li>
 <li>An entry in <a href="../../docs/components/"><code>components.md</code></a></li>
 <li>A <code>🟢</code> or <code>🟡</code> row in <code>handoffs/readiness.md</code></li>
 </ul>
 <p>Any <code>&lt;la-*&gt;</code> that fails this check blocks the prototype. Publish the component first, then retry.</p>
 <p>No hand-rolled chrome. No inline <code>&lt;div&gt;</code> styled to look like a button, badge, or card — if the design needs one, it's a missing component, not a prototype problem.</p>
-<h3>Gate 3 — Design language</h3>
+<h3 id="gate-3--design-language">Gate 3 — Design language</h3>
 <p>Any novel page-level pattern (new layout shape, new composition) is documented in <a href="../../docs/page-architecture/"><code>page-architecture.md</code></a> before the prototype publishes. If the pattern is a one-off, either generalise it or justify it in the prototype's own header comment.</p>
-<h3>Gate 4 — Behaviour</h3>
-<p>Interactions, state transitions, and motion go through <a href="../motion.css"><code>motion.css</code></a> easings and durations. No <code>ease-in</code>. GPU-safe only — animate <code>transform</code> and <code>opacity</code>, never <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, <code>background</code>, or <code>color</code>. Keyboard interactions work on native semantic elements.</p>
-<h3>Gate 5 — Responsive</h3>
+<h3 id="gate-4--behaviour">Gate 4 — Behaviour</h3>
+<p>Interactions, state transitions, and motion go through <code>motion.css</code> easings and durations. No <code>ease-in</code>. GPU-safe only — animate <code>transform</code> and <code>opacity</code>, never <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, <code>background</code>, or <code>color</code>. Keyboard interactions work on native semantic elements.</p>
+<h3 id="gate-5--responsive">Gate 5 — Responsive</h3>
 <p>Layout reflows across breakpoints per <a href="../../docs/responsive-design/"><code>responsive-design.md</code></a>. No horizontal scroll at standard widths. Test at least: 1440, 1024, 768.</p>
-<h3>Gate 6 — Content resilience</h3>
+<h3 id="gate-6--content-resilience">Gate 6 — Content resilience</h3>
 <p>No &quot;Lorem ipsum&quot;. Use realistic sample content — long names, multi-line descriptions, missing values, edge cases. The prototype should not visibly break when a name is 40 characters instead of 10.</p>
-<h3>Gate 7 — Accessibility</h3>
+<h3 id="gate-7--accessibility">Gate 7 — Accessibility</h3>
 <ul>
 <li>WCAG 2.1 AA contrast across all text</li>
 <li>Keyboard navigation works end-to-end, tab order is correct</li>
@@ -293,7 +293,7 @@
 <li>ARIA landmarks: <code>main</code>, <code>nav</code>, <code>header</code>, <code>aside</code> where appropriate</li>
 <li>Colour-plus-something for meaning — never colour alone</li>
 </ul>
-<h3>Gate 8 — Standards compliance</h3>
+<h3 id="gate-8--standards-compliance">Gate 8 — Standards compliance</h3>
 <p><strong>Tokens.</strong> No hex values in the prototype's own <code>&lt;style&gt;</code> block. All colour comes from <code>--la-color-*</code>. Padding, gap, margin use <code>--la-space-*</code>. Radius uses <code>--la-radius-*</code>. Font size uses <code>--la-font-size-*</code>; weight uses <code>--la-font-weight-*</code> per decision 39 (400 default, 500 only when weight change is the state signal, 600 for headings, never 700).</p>
 <p><strong>Raw <code>px</code> values.</strong> Permitted only on layout-position properties (<code>width</code>, <code>min-width</code>, <code>max-width</code>, <code>height</code> where the dimension doesn't map to a token — e.g. a <code>--signin-panel-width: 711px</code> layout constant). Not permitted for padding, gap, margin, font-size, border-radius.</p>
 <p><strong>Copy.</strong> Every visible string respects <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> — British English, two-register capitalisation (Title Case for structural labels and CTAs, sentence case for explanatory copy), verb-first CTAs, 1–2 sentences max in body copy.</p>
@@ -318,21 +318,21 @@ a:hover { text-decoration-color: var(--la-color-primary); }
 </code></pre>
 <p>Scope the rule narrowly (e.g. <code>.rule-disclosure-body a</code>) rather than a bare <code>a {}</code> selector to avoid clobbering navigation links. Full token spec lives in <a href="../../docs/typography/#links--anchors"><code>typography.md</code> — Links / anchors</a>.</p>
 <hr>
-<h2>Stricter than the component gate</h2>
+<h2 id="stricter-than-the-component-gate">Stricter than the component gate</h2>
 <p>A component can ship with a logged divergence — e.g. <code>la-breadcrumb</code> declares a known below-AA contrast on ancestor items, recorded in <a href="../../docs/components/"><code>components.md</code></a>. Prototypes can't. If a prototype needs a divergence, <strong>the component absorbs it first</strong>, and the prototype inherits it cleanly through the component.</p>
 <p>This keeps prototypes readable as a single artefact: no footnotes, no exceptions to chase across files.</p>
 <hr>
-<h2>Publishing mechanics</h2>
+<h2 id="publishing-mechanics">Publishing mechanics</h2>
 <p>When a prototype passes all 8 gates:</p>
 <ol>
-<li>Add the file to the <code>FOUNDER_FLOW_PAGES</code> list in <a href="../.eleventy.cjs"><code>.eleventy.cjs</code></a> (or create a new passthrough block for a new flow)</li>
+<li>Add the file to the <code>FOUNDER_FLOW_PAGES</code> list in <code>.eleventy.cjs</code> (or create a new passthrough block for a new flow)</li>
 <li><code>npm run docs</code> to rebuild</li>
 <li><code>npm run docs:serve</code> and load the page at the new URL to confirm</li>
 <li>Commit — the prototype is now published</li>
 </ol>
 <p>To unpublish: remove from the passthrough list, rebuild. The source file stays in <code>dev/prototypes/</code>.</p>
 <hr>
-<h2>Checklist</h2>
+<h2 id="checklist">Checklist</h2>
 <p>Keep this near your tab group when publishing a prototype:</p>
 <ul>
 <li>[ ] Gate 1 — file at expected path</li>
