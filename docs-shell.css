@@ -136,8 +136,8 @@ a:hover { color: var(--doc-accent); }
   gap: 4px;
 }
 .doc-topnav a {
-  padding: 6px 12px;
-  border-radius: var(--doc-r-md);
+  padding: 6px 14px;
+  border-radius: 999px;
   font-size: 13px;
   font-weight: 500;
   color: var(--doc-text-2);
@@ -167,7 +167,7 @@ a:hover { color: var(--doc-accent); }
   top: var(--doc-topbar-h);
   width: var(--doc-nav-w);
   height: calc(100vh - var(--doc-topbar-h));
-  background: var(--doc-surface);
+  background: var(--doc-bg);
   border-right: 1px solid var(--doc-border);
   padding: 24px 0;
   overflow-y: auto;
@@ -206,7 +206,7 @@ body.nav-collapsed .docs-nav {
   display: flex;
   flex-direction: column;
   gap: 0;
-  margin-bottom: 20px;
+  margin-bottom: 36px;
 }
 
 .docs-nav-item {
@@ -220,11 +220,11 @@ body.nav-collapsed .docs-nav {
 }
 .docs-nav-item:hover {
   color: var(--doc-text);
-  background: var(--doc-surface-2);
+  background: var(--doc-surface-3);
 }
 .docs-nav-item.active {
   color: var(--doc-text);
-  background: var(--doc-surface-2);
+  background: var(--doc-surface-3);
   font-weight: 500;
 }
 .docs-nav-item--subsection {
@@ -287,7 +287,7 @@ body.nav-collapsed .page-content {
     width: 280px;
     max-width: 84vw;
     height: calc(100vh - var(--doc-topbar-h));
-    background: var(--doc-surface);
+    background: var(--doc-bg);
     overflow-y: auto;
     z-index: 40;
     transform: translateX(-100%);
@@ -806,6 +806,30 @@ code {
 .component-card-image::before {
   content: 'Preview';
 }
+/* Live preview variant — hosts the real rendered component, non-interactive.
+   Resets the placeholder's PREVIEW-text styling so it doesn't leak into
+   the rendered component (uppercase, faint colour, 11px). */
+.component-card-image--live {
+  position: relative;
+  pointer-events: none; padding: 20px; gap: 8px;
+  text-transform: none; letter-spacing: normal;
+  font-size: var(--la-font-size-base); color: var(--la-color-text);
+}
+.component-card-image--live::before { content: none; }
+.card-preview-frame { width: min(78%, 280px); }
+.card-preview-frame--wide { width: 92%; }
+/* Scaled mini-viewport for large components (app shell, widgets, overlays).
+   The transform also captures position:fixed overlays inside the card. */
+.card-preview-viewport {
+  position: absolute; inset: 0; overflow: hidden; border-radius: inherit;
+}
+.card-preview-scale {
+  width: 200%; height: 200%;
+  transform: scale(0.5); transform-origin: top left;
+  display: flex; align-items: center; justify-content: center;
+}
+.card-preview-scale--fill { display: block; }
+.card-preview-scale--40 { width: 250%; height: 250%; transform: scale(0.4); }
 .component-card-body {
   padding: 12px 14px 14px;
   display: flex;

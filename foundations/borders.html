@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Borders — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 880px; }
+    .foundations-hero h1 {
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .foundations-hero p {
+      font-size: 15px;
+      color: var(--doc-text-2);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+
+    /* Inline swatch / token visualisations */
+    .swatch-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 8px;
+    }
+    .swatch {
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      overflow: hidden;
+      background: var(--doc-surface);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .swatch-preview {
+      height: 56px;
+      border-bottom: 1px solid var(--doc-border);
+    }
+    .swatch-meta {
+      padding: 8px 10px;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+    .swatch-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text);
+      display: block;
+    }
+    .swatch-value {
+      color: var(--doc-text-3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    }
+    /* OKLCH value, shown muted beneath the hex. */
+    .swatch-oklch {
+      display: block;
+      color: var(--doc-text-faint);
+      font-size: 10px;
+      margin-top: 1px;
+    }
+    .hex-oklch {
+      display: block;
+      color: var(--doc-text-faint);
+      font-size: 11px;
+      margin-top: 2px;
+    }
+
+    /* Token table — used in the Colour section to list every token with usage. */
+    .token-chip {
+      display: inline-block;
+      width: 18px;
+      height: 18px;
+      border-radius: 4px;
+      border: 1px solid rgba(0, 0, 0, 0.08);
+      vertical-align: middle;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .token-table td .hex {
+      color: var(--doc-text-3);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+    .token-table td .name {
+      color: var(--doc-text);
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+    }
+    .token-table td.use {
+      color: var(--doc-text-2);
+      line-height: 1.5;
+      font-family: var(--doc-font);
+      white-space: normal;
+    }
+    /* Inline annotation showing which core primitive (or other token) a
+       semantic token aliases. Sits beside the hex column. */
+    .alias-of {
+      font-size: 11px;
+      color: var(--doc-text-3);
+      margin-left: 6px;
+      white-space: nowrap;
+    }
+    .alias-of code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 11px;
+      background: none;
+      border: none;
+      padding: 0;
+      color: var(--doc-text-2);
+    }
+    /* Pull-out callout used inside the colour section to flag the
+       actions-vs-signals rule. */
+    .docs-rule-callout {
+      border-left: 3px solid var(--doc-accent);
+      padding: 12px 14px;
+      background: var(--doc-surface-2);
+      border-radius: 0 var(--doc-r-md) var(--doc-r-md) 0;
+      margin: 16px 0;
+      font-size: 13px;
+      color: var(--doc-text-2);
+      line-height: 1.55;
+    }
+    .docs-rule-callout strong { color: var(--doc-text); }
+
+    .scale-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .scale-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 8px 12px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .scale-bar {
+      background: var(--doc-accent);
+      height: 16px;
+      border-radius: 3px;
+      flex-shrink: 0;
+    }
+    .scale-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text);
+      width: 160px;
+      flex-shrink: 0;
+    }
+    .scale-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text-3);
+    }
+
+    .radius-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 12px;
+    }
+
+    .shadow-row {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .shadow-demo {
+      display: flex;
+      align-items: center;
+      gap: 24px;
+      padding: 20px;
+      background: var(--doc-surface-2);
+      border-radius: var(--doc-r-md);
+    }
+    .shadow-box {
+      width: 80px;
+      height: 60px;
+      flex-shrink: 0;
+      background: var(--doc-surface);
+      border-radius: var(--doc-r-md);
+    }
+    .shadow-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      font-size: 12px;
+      min-width: 0;
+    }
+    .shadow-name {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text);
+    }
+    .shadow-value {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+      word-break: break-all;
+    }
+    .radius-demo {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      padding: 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+      font-size: 11px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      color: var(--doc-text-3);
+    }
+    .radius-box {
+      width: 64px;
+      height: 48px;
+      background: var(--doc-accent);
+    }
+
+    .type-row {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .type-item {
+      display: flex;
+      align-items: baseline;
+      gap: 16px;
+      padding: 12px 16px;
+      background: var(--doc-surface);
+      border: 1px solid var(--doc-border);
+      border-radius: var(--doc-r-md);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .type-label {
+      font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+      font-size: 12px;
+      color: var(--doc-text-3);
+      width: 200px;
+      flex-shrink: 0;
+    }
+
+    /* Section block with link-out */
+    .more-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 13px;
+      color: var(--doc-accent);
+      font-weight: 500;
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Foundations</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../foundations/">← All foundations</a>
+</div>
+<h3 class="docs-nav-title">Topics</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../foundations/process.html">How we work</a>
+<a class="docs-nav-item" href="../foundations/tone.html">Tone & voice</a>
+<a class="docs-nav-item" href="../foundations/accessibility.html">Accessibility</a>
+<a class="docs-nav-item" href="../foundations/colour.html">Colour</a>
+<a class="docs-nav-item" href="../foundations/spacing.html">Spacing</a>
+<a class="docs-nav-item" href="../foundations/radius.html">Radius</a>
+<a class="docs-nav-item" href="../foundations/shadows.html">Shadows</a>
+<a class="docs-nav-item active" href="../foundations/borders.html">Borders</a>
+<a class="docs-nav-item" href="../foundations/typography.html">Typography</a>
+<a class="docs-nav-item" href="../foundations/motion.html">Motion</a>
+<a class="docs-nav-item" href="../foundations/icons.html">Icons</a>
+<a class="docs-nav-item" href="../foundations/interaction.html">Interaction</a>
+<a class="docs-nav-item" href="../foundations/responsive.html">Responsive</a>
+<a class="docs-nav-item" href="../foundations/layout.html">Layout</a>
+<a class="docs-nav-item" href="../foundations/page-architecture.html">Page architecture</a>
+<a class="docs-nav-item" href="../foundations/troubleshooting.html">Troubleshooting</a>
+</div>
+<h3 class="docs-nav-title">Deep dives</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../foundations/elements.html">Elements</a>
+<a class="docs-nav-item" href="../foundations/typography.html">Typography</a>
+<a class="docs-nav-item" href="../foundations/copy.html">Copy &amp; Capitalisation</a>
+<a class="docs-nav-item" href="../foundations/loading.html">Loading</a>
+<a class="docs-nav-item" href="../foundations/foundations-forms.html">Forms</a>
+<a class="docs-nav-item" href="../foundations/foundations-form-controls.html">Form controls</a>
+<a class="docs-nav-item" href="../foundations/foundations-page-layouts.html">Page layouts</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Elsewhere</span>
+<a class="docs-nav-item" href="../index.html">Overview</a>
+<a class="docs-nav-item" href="../components/">Components</a>
+</div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<div class="md-crumb" style="font-size:12px;color:var(--doc-text-3);margin-bottom:4px;"><a href="../foundations/" style="color:var(--doc-text-3);text-decoration:none;">Foundations</a> · Borders</div>
+<div class="docs">
+<section class="docs-section" id="borders">
+<h2>Borders</h2>
+<p>
+              Two categories of border tokens with different purposes — structural dividers
+              and emphasis. Source of truth is
+              <code>tokens.ts</code>; full rationale
+              below from <code>design-language/borders.md</code>.
+            </p>
+<a class="more-link" href="../docs/borders/">Full rationale: Borders →</a>
+</section>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

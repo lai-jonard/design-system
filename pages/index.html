@@ -69,6 +69,7 @@
       background: var(--doc-surface-2);
       border-bottom: 1px solid var(--doc-border);
     }
+    .component-card-image--live { height: 180px; padding: 0; }
     .component-card-body {
       padding: 14px 16px 16px;
       display: flex;
@@ -170,7 +171,7 @@
 <div class="component-grid">
 
 <a class="component-card" href="../pages/la-document-page.html">
-<div aria-hidden="true" class="component-card-image"></div>
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-viewport"><div class="card-preview-scale card-preview-scale--fill card-preview-scale--40"><la-document-page id="pv-docpage" style="display:block;width:100%;height:100%"></la-document-page></div></div></div>
 <div class="component-card-body">
 <div class="component-card-head">
 <span class="component-card-title">Document Page</span>
@@ -181,7 +182,7 @@
 </a>
 
 <div class="component-card">
-<div aria-hidden="true" class="component-card-image"></div>
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-viewport"><div class="card-preview-scale card-preview-scale--fill card-preview-scale--40"><la-legal-area-page id="pv-lap" style="display:block;width:100%;height:100%"></la-legal-area-page></div></div></div>
 <div class="component-card-body">
 <div class="component-card-head">
 <span class="component-card-title">Legal Area Page</span>
@@ -192,7 +193,7 @@
 </div>
 
 <a class="component-card" href="../components/la-app-shell.html">
-<div aria-hidden="true" class="component-card-image"></div>
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-viewport"><div class="card-preview-scale card-preview-scale--fill card-preview-scale--40"><la-app-shell page-title="Governance" show-header style="width:100%;height:100%"><div slot="main" style="padding:24px;color:var(--la-color-text-secondary)">Board, filings, and company records.</div></la-app-shell></div></div></div>
 <div class="component-card-body">
 <div class="component-card-head">
 <span class="component-card-title">App Shell</span>
@@ -203,7 +204,7 @@
 </a>
 
 <div class="component-card">
-<div aria-hidden="true" class="component-card-image"></div>
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-viewport"><div class="card-preview-scale card-preview-scale--fill card-preview-scale--40"><la-dashboard id="pv-dash" style="display:block;width:100%;height:100%"></la-dashboard></div></div></div>
 <div class="component-card-body">
 <div class="component-card-head">
 <span class="component-card-title">Dashboard</span>
@@ -244,5 +245,22 @@
 
   <script src="../js/doc-shell.js" defer></script>
   
+<script>
+(function () {
+  var dp = document.getElementById('pv-docpage');
+  if (dp) { dp.documentName = 'SAFE — Acme Corp.pdf'; dp.entity = 'Acme Corp.'; dp.category = 'Fundraising'; dp.legalArea = 'Fundraising'; }
+  var lap = document.getElementById('pv-lap');
+  if (lap) { lap.area = 'Governance'; lap.subtitle = 'Board, filings, and company records.'; lap.pageState = 'all-clean'; }
+  var da = document.getElementById('pv-dash');
+  if (da) da.showWelcome = true;
+  function freeze() {
+    document.querySelectorAll('.component-card-image--live').forEach(function (el) {
+      if (el.getAnimations) el.getAnimations({ subtree: true }).forEach(function (a) { a.pause(); });
+    });
+  }
+  window.addEventListener('load', function () { setTimeout(freeze, 300); setTimeout(freeze, 1500); });
+})();
+</script>
+
 </body>
 </html>
