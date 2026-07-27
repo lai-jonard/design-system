@@ -12,33 +12,43 @@
   <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
   
 <style>
-  .page-content-inner { max-width: 900px; }
+  .page-content-inner { max-width: 960px; }
 
   .ai-hero h1 {
-    font-size: 32px; font-weight: 600; color: var(--doc-text);
-    letter-spacing: -0.2px; margin-bottom: 10px;
+    margin-bottom: 10px; color: var(--doc-text);
+    font-size: 32px; font-weight: 600; letter-spacing: -0.2px;
   }
   .ai-hero p {
-    font-size: 15px; color: var(--doc-text-2); line-height: 1.65; max-width: 720px;
+    max-width: 760px; color: var(--doc-text-2);
+    font-size: 15px; line-height: 1.65;
   }
   .ai-status {
-    display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
-    padding: 6px 12px; border-radius: var(--doc-r-pill, 999px);
-    background: var(--la-color-surface-warning); color: var(--la-color-warning-text);
+    display: inline-flex; align-items: center; gap: 7px;
+    margin-top: 16px; padding: 7px 12px;
+    border: 1px solid var(--la-color-border-warning);
+    border-radius: var(--doc-r-pill, 999px);
+    background: var(--la-color-surface-warning);
+    color: var(--la-color-warning-text);
     font-size: 12px; font-weight: 500;
   }
 
-  .ai-docs { display: flex; flex-direction: column; gap: 40px; }
+  .ai-docs { display: flex; flex-direction: column; gap: 48px; }
   .ai-section { scroll-margin-top: calc(var(--doc-topbar-h) + 24px); }
   .ai-section h2 {
-    font-size: 21px; font-weight: 600; color: var(--doc-text); margin-bottom: 9px;
+    margin-bottom: 9px; color: var(--doc-text);
+    font-size: 22px; font-weight: 600;
   }
   .ai-section > p {
-    font-size: 14px; color: var(--doc-text-2); line-height: 1.65; max-width: 720px;
+    max-width: 760px; color: var(--doc-text-2);
+    font-size: 14px; line-height: 1.65;
+  }
+  .ai-kicker {
+    display: block; margin-bottom: 7px; color: var(--doc-text-3);
+    font-size: 11px; font-weight: 600; letter-spacing: 0.03em;
   }
 
   .ai-metrics {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
     gap: 10px; margin-top: 18px;
   }
   .ai-metric {
@@ -46,42 +56,172 @@
     border-radius: var(--doc-r-md); background: var(--doc-surface);
   }
   .ai-metric strong {
-    display: block; color: var(--doc-text); font-size: 22px;
-    font-weight: 600; line-height: 1.1; margin-bottom: 5px;
+    display: block; margin-bottom: 5px; color: var(--doc-text);
+    font-size: 22px; font-weight: 600; line-height: 1.1;
   }
-  .ai-metric span { color: var(--doc-text-3); font-size: 12px; }
+  .ai-metric span { color: var(--doc-text-3); font-size: 12px; line-height: 1.4; }
 
-  .ai-layers { display: grid; gap: 8px; margin-top: 18px; }
-  .ai-layer {
-    display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px;
-    padding: 14px 16px; border-radius: var(--doc-r-md); background: var(--doc-surface-2);
+  .ai-callout {
+    display: grid; grid-template-columns: 20px minmax(0, 1fr); gap: 10px;
+    margin-top: 16px; padding: 14px 16px;
+    border-radius: var(--doc-r-md); background: var(--doc-surface-2);
   }
-  .ai-layer i { color: var(--doc-text-3); font-size: 18px; margin-top: 1px; }
-  .ai-layer strong { display: block; color: var(--doc-text); font-size: 13px; margin-bottom: 3px; }
-  .ai-layer span { color: var(--doc-text-2); font-size: 12px; line-height: 1.5; }
+  .ai-callout i { margin-top: 1px; color: var(--doc-text-3); font-size: 17px; }
+  .ai-callout p { margin: 0; color: var(--doc-text-2); font-size: 12px; line-height: 1.6; }
+  .ai-callout strong { color: var(--doc-text); font-weight: 600; }
 
-  .ai-outcomes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .ai-grid {
+    display: grid; grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px; margin-top: 18px;
+  }
+  .ai-card {
+    padding: 18px; border: 1px solid var(--doc-border);
+    border-radius: var(--doc-r-md); background: var(--doc-surface);
+  }
+  .ai-card-head {
+    display: flex; align-items: center; gap: 9px; margin-bottom: 8px;
+  }
+  .ai-card-head i { color: var(--doc-text-3); font-size: 18px; }
+  .ai-card h3 { margin: 0; color: var(--doc-text); font-size: 14px; font-weight: 600; }
+  .ai-card p { margin: 0; color: var(--doc-text-2); font-size: 12px; line-height: 1.55; }
+  .ai-card code { color: var(--doc-text); font-size: 11px; }
+
+  .ai-pipeline {
+    display: grid; grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 8px; margin-top: 18px;
+  }
+  .ai-step {
+    position: relative; min-height: 112px; padding: 15px;
+    border: 1px solid var(--doc-border); border-radius: var(--doc-r-md);
+    background: var(--doc-surface);
+  }
+  .ai-step::after {
+    content: "→"; position: absolute; top: 42px; right: -8px;
+    z-index: 1; color: var(--doc-text-3); font-size: 13px;
+  }
+  .ai-step:nth-child(4)::after,
+  .ai-step:nth-child(8)::after { display: none; }
+  .ai-step b {
+    display: flex; align-items: center; justify-content: center;
+    width: 22px; height: 22px; margin-bottom: 10px;
+    border-radius: 50%; background: var(--doc-surface-2);
+    color: var(--doc-text); font-size: 10px; font-weight: 600;
+  }
+  .ai-step strong { display: block; margin-bottom: 4px; color: var(--doc-text); font-size: 12px; }
+  .ai-step span { display: block; color: var(--doc-text-3); font-size: 11px; line-height: 1.45; }
+
+  .ai-outcomes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
   .ai-outcome {
-    padding: 6px 10px; border-radius: var(--doc-r-pill, 999px);
-    border: 1px solid var(--doc-border); background: var(--doc-surface);
-    color: var(--doc-text-2); font: 500 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+    padding: 6px 10px; border: 1px solid var(--doc-border);
+    border-radius: var(--doc-r-pill, 999px); background: var(--doc-surface);
+    color: var(--doc-text-2);
+    font: 500 11px ui-monospace, SFMono-Regular, Menlo, monospace;
   }
+
+  .ai-table-wrap {
+    overflow-x: auto; margin-top: 18px;
+    border: 1px solid var(--doc-border); border-radius: var(--doc-r-md);
+    background: var(--doc-surface);
+  }
+  .ai-table { width: 100%; border-collapse: collapse; min-width: 680px; }
+  .ai-table th,
+  .ai-table td {
+    padding: 12px 14px; border-bottom: 1px solid var(--doc-border);
+    text-align: left; vertical-align: top;
+  }
+  .ai-table tr:last-child td { border-bottom: 0; }
+  .ai-table th {
+    color: var(--doc-text-3); background: var(--doc-surface-2);
+    font-size: 11px; font-weight: 500;
+  }
+  .ai-table td { color: var(--doc-text-2); font-size: 12px; line-height: 1.5; }
+  .ai-table td:first-child { color: var(--doc-text); font-weight: 500; white-space: nowrap; }
+
+  .ai-score {
+    display: grid; grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 10px; margin-top: 18px;
+  }
+  .ai-score-card {
+    padding: 18px; border: 1px solid var(--doc-border);
+    border-radius: var(--doc-r-md); background: var(--doc-surface);
+  }
+  .ai-score-card strong {
+    display: block; margin-bottom: 5px; color: var(--doc-text);
+    font-size: 18px; font-weight: 600;
+  }
+  .ai-score-card span { color: var(--doc-text-3); font-size: 11px; line-height: 1.45; }
 
   .ai-log {
-    margin-top: 18px; padding: 20px; border: 1px solid var(--doc-border);
-    border-radius: var(--doc-r-lg); background: var(--doc-surface);
+    margin-top: 18px; padding: 20px;
+    border: 1px solid var(--doc-border); border-radius: var(--doc-r-lg);
+    background: var(--doc-surface);
   }
-  .ai-log-meta { color: var(--doc-text-3); font-size: 11px; margin-bottom: 6px; }
-  .ai-log h3 { color: var(--doc-text); font-size: 15px; font-weight: 600; margin-bottom: 9px; }
-  .ai-log ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+  .ai-log + .ai-log { margin-top: 10px; }
+  .ai-log-meta { margin-bottom: 6px; color: var(--doc-text-3); font-size: 11px; }
+  .ai-log h3 { margin-bottom: 9px; color: var(--doc-text); font-size: 15px; font-weight: 600; }
+  .ai-log ul { display: grid; gap: 6px; margin: 0; padding-left: 18px; }
   .ai-log li { color: var(--doc-text-2); font-size: 13px; line-height: 1.5; }
 
-  .ai-source {
-    margin-top: 14px; padding: 12px 14px; border-radius: var(--doc-r-md);
-    background: var(--doc-surface-2); color: var(--doc-text-2);
-    font-size: 12px; line-height: 1.6;
+  .ai-folder {
+    margin-top: 18px; padding: 18px; overflow-x: auto;
+    border: 1px solid var(--doc-border); border-radius: var(--doc-r-md);
+    background: var(--doc-surface-2);
+    color: var(--doc-text-2);
+    font: 11px/1.7 ui-monospace, SFMono-Regular, Menlo, monospace;
+    white-space: pre;
   }
-  .ai-source code { color: var(--doc-text); }
+  .ai-folder strong { color: var(--doc-text); font-weight: 600; }
+
+  .ai-timeline {
+    position: relative; display: grid; gap: 0; margin-top: 18px;
+    border: 1px solid var(--doc-border); border-radius: var(--doc-r-lg);
+    background: var(--doc-surface); overflow: hidden;
+  }
+  .ai-phase {
+    display: grid; grid-template-columns: 136px minmax(0, 1fr) 120px;
+    gap: 16px; padding: 18px; border-bottom: 1px solid var(--doc-border);
+  }
+  .ai-phase:last-child { border-bottom: 0; }
+  .ai-phase time { color: var(--doc-text-3); font-size: 11px; line-height: 1.45; }
+  .ai-phase h3 { margin: 0 0 5px; color: var(--doc-text); font-size: 13px; font-weight: 600; }
+  .ai-phase p { margin: 0; color: var(--doc-text-2); font-size: 12px; line-height: 1.55; }
+  .ai-phase-status {
+    justify-self: end; align-self: start; padding: 5px 8px;
+    border: 1px solid var(--doc-border); border-radius: var(--doc-r-pill, 999px);
+    color: var(--doc-text-3); background: var(--doc-surface-2);
+    font-size: 10px; font-weight: 500; white-space: nowrap;
+  }
+
+  .ai-fine-tune {
+    display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 10px; margin-top: 18px;
+  }
+  .ai-fine-tune > div {
+    padding: 18px; border-radius: var(--doc-r-md);
+    background: var(--doc-surface-2);
+  }
+  .ai-fine-tune h3 { margin: 0 0 7px; color: var(--doc-text); font-size: 13px; font-weight: 600; }
+  .ai-fine-tune p { margin: 0; color: var(--doc-text-2); font-size: 12px; line-height: 1.55; }
+
+  @media (max-width: 760px) {
+    .ai-grid,
+    .ai-fine-tune { grid-template-columns: 1fr; }
+    .ai-pipeline { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .ai-step:nth-child(2)::after,
+    .ai-step:nth-child(6)::after { display: none; }
+    .ai-step:nth-child(4)::after { display: block; }
+    .ai-score { grid-template-columns: 1fr; }
+    .ai-phase { grid-template-columns: 1fr; gap: 7px; }
+    .ai-phase-status { justify-self: start; }
+  }
+
+  @media (max-width: 480px) {
+    .ai-hero h1 { font-size: 27px; }
+    .ai-docs { gap: 40px; }
+    .ai-pipeline { grid-template-columns: 1fr; }
+    .ai-step { min-height: 0; }
+    .ai-step::after { display: none !important; }
+  }
 </style>
 
 </head>
@@ -127,14 +267,18 @@
 <h3 class="docs-nav-title">On this page</h3>
 <div class="docs-nav-group">
 <a class="docs-nav-item" href="#current-state">Current state</a>
-<a class="docs-nav-item" href="#context-layers">Context layers</a>
-<a class="docs-nav-item" href="#decision-gate">Decision gate</a>
-<a class="docs-nav-item" href="#improvements-log">Improvements log</a>
+<a class="docs-nav-item" href="#system">What we built</a>
+<a class="docs-nav-item" href="#workflow">Agentic workflow</a>
+<a class="docs-nav-item" href="#learning">Governed learning</a>
+<a class="docs-nav-item" href="#validation">Evidence and evals</a>
+<a class="docs-nav-item" href="#repository-map">Repository map</a>
+<a class="docs-nav-item" href="#next-phase">Next phase</a>
+<a class="docs-nav-item" href="#timeline">Timeline</a>
 </div>
 <div class="docs-nav-group">
 <span class="docs-nav-title">Related</span>
 <a class="docs-nav-item" href="../../components/">Components →</a>
-<a class="docs-nav-item" href="../../docs/typography/">Typography →</a>
+<a class="docs-nav-item" href="../../docs/development-workflow/">Development workflow →</a>
 </div>
 </nav>
 
@@ -148,69 +292,98 @@
 <section class="ai-hero">
 <h1>Agent design intelligence</h1>
 <p>
-  The structured context that helps an AI agent choose the right component, typography role,
-  composition, or escalation path. This page records improvements to that context over time;
-  canonical design guidance and human approval remain authoritative.
+  A shared, evidence-backed decision system for Codex, Claude Code, Cursor, Antigravity, and future
+  agents. It helps an agent understand the product job, select approved components and patterns,
+  compose complete screens, test its decisions, and learn without silently rewriting design policy.
 </p>
-<span class="ai-status"><i class="ph-fill ph-clock" aria-hidden="true"></i> Foundation draft — human review pending</span>
+<span class="ai-status"><i class="ph-fill ph-clock" aria-hidden="true"></i> Foundation draft · first screen pilot passed · human review in progress</span>
 </section>
 
 <div class="ai-docs">
 <section class="ai-section" id="current-state">
-<h2>Current state</h2>
+<span class="ai-kicker">Checkpoint · 27 July 2026</span>
+<h2>Where we are now</h2>
 <p>
-  The first foundation pass covers the full source library. Generated API facts stay separate
-  from drafted semantic judgement, so pending guidance cannot silently become policy.
+  The architecture and first foundation draft are implemented. The complete component library is
+  represented, the readiness gate runs, cross-agent evals are recorded, and the first blinded
+  screen experiment is complete. Human approval—not generation—is now the main constraint.
 </p>
 <div class="ai-metrics">
-<div class="ai-metric"><strong>72</strong><span>Component records</span></div>
-<div class="ai-metric"><strong>17</strong><span>Typography roles</span></div>
-<div class="ai-metric"><strong>118</strong><span>Text-slot mappings</span></div>
+<div class="ai-metric"><strong>72</strong><span>Component-intelligence records</span></div>
+<div class="ai-metric"><strong>17</strong><span>Semantic typography roles</span></div>
+<div class="ai-metric"><strong>118</strong><span>Component text-slot mappings</span></div>
 <div class="ai-metric"><strong>55</strong><span>Composition relations</span></div>
-<div class="ai-metric"><strong>7</strong><span>Canonical patterns</span></div>
+<div class="ai-metric"><strong>7</strong><span>Indexed canonical patterns</span></div>
+<div class="ai-metric"><strong>151</strong><span>Human reviews still pending</span></div>
 </div>
-<div class="ai-source">
-  <strong>151 reviews pending.</strong>
-  Strict acceptance remains closed until a human approves or rejects them.
-  64 components are conditional and 8 are blocked.
-</div>
-</section>
-
-<section class="ai-section" id="context-layers">
-<h2>Context layers</h2>
-<p>Agents retrieve only the layers needed for the current design decision.</p>
-<div class="ai-layers">
-<div class="ai-layer">
-<i class="ph ph-circles-three" aria-hidden="true"></i>
-<div><strong>Component intelligence</strong><span>Problem solved, use and avoid conditions, API facts, readiness, alternatives, states, and evidence.</span></div>
-</div>
-<div class="ai-layer">
-<i class="ph ph-text-aa" aria-hidden="true"></i>
-<div><strong>Semantic typography</strong><span>Interface meaning maps to approved text roles; roles map to existing tokens.</span></div>
-</div>
-<div class="ai-layer">
-<i class="ph ph-tree-structure" aria-hidden="true"></i>
-<div><strong>Composition intelligence</strong><span>Parent, child, alternative, state ownership, and existing pattern relationships.</span></div>
-</div>
-<div class="ai-layer">
+<div class="ai-callout">
 <i class="ph ph-shield-check" aria-hidden="true"></i>
-<div><strong>Governed readiness</strong><span>Pending or unsafe context blocks autonomous selection instead of allowing a plausible guess.</span></div>
-</div>
-</div>
-<div class="ai-source">
-  Implementation guide:
-  <code>tooling/product-design-harness/SCREEN-DESIGN-FOUNDATION-PLAN.md</code>
+<p><strong>Current boundary.</strong> Sixty-four component records are conditional and eight are blocked. Draft coverage lets an agent find the right question; it does not yet grant autonomous approval.</p>
 </div>
 </section>
 
-<section class="ai-section" id="decision-gate">
-<h2>“Can it decide now?”</h2>
+<section class="ai-section" id="system">
+<span class="ai-kicker">Implemented</span>
+<h2>What we built</h2>
 <p>
-  Before composing a screen, the agent checks product facts, consequences, states, permissions,
-  domain semantics, component readiness, approved patterns, typography, responsive behaviour,
-  accessibility, and source conflicts.
+  One shared system replaces duplicated agent instructions. Agent-specific files handle discovery;
+  product and design decisions stay in repository-owned context.
 </p>
-<div class="ai-outcomes">
+<div class="ai-grid">
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-signpost" aria-hidden="true"></i><h3>Shared agent entry point</h3></div>
+<p><code>AGENTS.md</code> gives every agent the same project map, constraints, authority order, build workflow, and approval boundary.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-plugs-connected" aria-hidden="true"></i><h3>Thin native adapters</h3></div>
+<p>Codex, Claude Code, Cursor, and Antigravity discover the same canonical skill through their native folder and rule formats.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-funnel" aria-hidden="true"></i><h3>One product-design skill</h3></div>
+<p>Seventy overlapping project skills moved to a reference archive. One routed skill now loads only the canonical sources needed by the task.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-circles-three-plus" aria-hidden="true"></i><h3>Component intelligence</h3></div>
+<p>Every primitive, composed component, and page has API facts plus reviewable use, avoid, state, content, readiness, and alternative semantics.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-text-aa" aria-hidden="true"></i><h3>Typography intelligence</h3></div>
+<p>Agents choose semantic roles such as page title, field label, metadata, and validation message; roles resolve to the existing token system.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-tree-structure" aria-hidden="true"></i><h3>Composition intelligence</h3></div>
+<p>Parent, child, adjacency, alternatives, state ownership, regions, and approved page patterns are queryable without duplicating canon.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-test-tube" aria-hidden="true"></i><h3>Exemplars and evals</h3></div>
+<p>Three detailed exemplars preserve decisions worth repeating and mistakes to avoid. Six fixtures test retrieval, restraint, states, copy, and layout.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-package" aria-hidden="true"></i><h3>Reusable harness</h3></div>
+<p>Project-neutral schemas, validators, initialisation, evidence collection, review packets, and eval runners can seed the same workflow elsewhere.</p>
+</article>
+</div>
+</section>
+
+<section class="ai-section" id="workflow">
+<span class="ai-kicker">Runtime</span>
+<h2>How an agent decides</h2>
+<p>
+  Product truth and the explicit brief come first. Within design decision-making, approved
+  intelligence is the primary source. The normal product-design workflow detects missing context
+  and acts as a fallback—it does not overrule sufficient intelligence.
+</p>
+<div class="ai-pipeline" aria-label="Agent design workflow">
+<div class="ai-step"><b>1</b><strong>Frame the job</strong><span>User, object, entry, exit, consequence, permissions, and scope.</span></div>
+<div class="ai-step"><b>2</b><strong>Retrieve intelligence</strong><span>Components, text roles, composition, exemplars, and product canon.</span></div>
+<div class="ai-step"><b>3</b><strong>Check readiness</strong><span>Prove the approved context is sufficient before selecting a design.</span></div>
+<div class="ai-step"><b>4</b><strong>Compose the flow</strong><span>Regions, states, transitions, responsive behaviour, and accessibility.</span></div>
+<div class="ai-step"><b>5</b><strong>Render and inspect</strong><span>Desktop, narrow layouts, keyboard path, focus, states, and console.</span></div>
+<div class="ai-step"><b>6</b><strong>Evaluate</strong><span>Deterministic checks plus human correction count and quality review.</span></div>
+<div class="ai-step"><b>7</b><strong>Capture evidence</strong><span>Exact observation, provenance, candidate lesson, and counterexample.</span></div>
+<div class="ai-step"><b>8</b><strong>Approve learning</strong><span>A human accepts, narrows, edits, or rejects before canon changes.</span></div>
+</div>
+<div class="ai-outcomes" aria-label="Decision readiness outcomes">
 <span class="ai-outcome">DECIDE</span>
 <span class="ai-outcome">DECIDE_WITH_CONSTRAINTS</span>
 <span class="ai-outcome">ASK</span>
@@ -219,18 +392,183 @@
 </div>
 </section>
 
-<section class="ai-section" id="improvements-log">
-<h2>Improvements log</h2>
-<p>Add concise, newest-first entries here as the context system evolves. Keep implementation detail in the linked plan or source.</p>
+<section class="ai-section" id="learning">
+<span class="ai-kicker">Self-learning, governed</span>
+<h2>How the system improves safely</h2>
+<p>
+  Annotated Figma screens, corrected diffs, reversions, review comments, failed evals, and model
+  outputs begin as evidence—not rules. The best unit is a complete flow, annotated screen by screen,
+  with reusable component lessons extracted afterwards.
+</p>
+<div class="ai-table-wrap">
+<table class="ai-table">
+<thead><tr><th>Level</th><th>What it teaches</th><th>Promotion boundary</th></tr></thead>
+<tbody>
+<tr><td>Flow</td><td>Intent, sequence, state transitions, consequences, permissions, recovery, and success.</td><td>Primary unit for each learning cycle.</td></tr>
+<tr><td>Screen</td><td>Hierarchy, information priority, component composition, responsive transformation, and accessibility.</td><td>One screen remains scoped evidence.</td></tr>
+<tr><td>Component</td><td>Use and avoid conditions, variants, content contracts, state ownership, and alternatives.</td><td>Extract only after the lesson repeats.</td></tr>
+<tr><td>Feature or sprint</td><td>Groups product sources, approved designs, corrections, and outcomes.</td><td>Review cadence, not a universal rule unit.</td></tr>
+</tbody>
+</table>
+</div>
+<div class="ai-callout">
+<i class="ph ph-git-diff" aria-hidden="true"></i>
+<p><strong>Highest-value example:</strong> original screen → human annotation → corrected screen → why the correction works → where it should not apply. A counterexample teaches the boundary as clearly as the preferred design.</p>
+</div>
+</section>
+
+<section class="ai-section" id="validation">
+<span class="ai-kicker">Measured evidence</span>
+<h2>Exemplars, evals, and the first pilot</h2>
+<p>
+  The repository now tests both deterministic rules and design judgement. Results retain the agent,
+  model, configuration, source references, scores, and raw output.
+</p>
+<div class="ai-score">
+<div class="ai-score-card"><strong>3</strong><span>Curated exemplars with both “worth repeating” and “mistakes to avoid”.</span></div>
+<div class="ai-score-card"><strong>16</strong><span>Scored model-backed baseline or guided runs across Codex and Claude Code.</span></div>
+<div class="ai-score-card"><strong>24</strong><span>Total matrix records, including honest unavailable records for Cursor and Antigravity.</span></div>
+</div>
 <article class="ai-log">
-<div class="ai-log-meta">27 July 2026 · Foundation intelligence</div>
-<h3>Made component and typography selection explicit</h3>
+<div class="ai-log-meta">Rule-retrieval matrix · 27 July 2026</div>
+<h3>Guided context materially improved source-backed decisions</h3>
 <ul>
-<li>Catalogued all 72 source components and separated generated API facts from reviewable semantic guidance.</li>
-<li>Added semantic typography roles, text-slot mappings, composition relationships, and canonical pattern references.</li>
-<li>Added a small context compiler and deterministic decision-readiness gate with safe refusal outcomes.</li>
-<li>Added portable schemas, project initialisation, validation, and positive and negative decision fixtures.</li>
-<li>Preserved the existing skill, rules, tokens, components, adapters, and human approval workflow.</li>
+<li>Codex guided runs reached 100% rule adherence and scope discipline across the four core fixtures; evidence use averaged 93.75%.</li>
+<li>Claude Code guided runs passed all four core fixtures with 100% rule adherence, scope discipline, and evidence use.</li>
+<li>Failed or partial results opened evidence candidates instead of silently changing rules.</li>
+</ul>
+</article>
+<article class="ai-log">
+<div class="ai-log-meta">Blinded screen comparison · 27 July 2026</div>
+<h3>Foundation direction passed; screen craft needs deeper context</h3>
+<ul>
+<li>The intelligence-assisted design was preferred for component choice and state completeness.</li>
+<li>The baseline was preferred for hierarchy and typography, responsive behaviour, accessibility, and total corrections.</li>
+<li>The pilot passed for continued use, with intelligence remaining primary and the normal workflow acting only as a fallback.</li>
+<li>Next context targets: screen-level hierarchy, responsive composition contracts, and component-specific accessibility checks.</li>
+</ul>
+</article>
+</section>
+
+<section class="ai-section" id="repository-map">
+<span class="ai-kicker">Portable structure</span>
+<h2>Repository map</h2>
+<p>
+  Runtime adapters, project-owned intelligence, portable tooling, evidence, and canonical guidance
+  stay separate so the system can move to another project without carrying LawAdvisor product context.
+</p>
+<div class="ai-folder"><strong>AGENTS.md</strong>                         shared bootstrap and authority order
+<strong>.agents/skills/product-design/</strong>      one routed skill + approved exemplars
+<strong>.agent-system/context/</strong>              project-owned component, type, composition, readiness
+<strong>.agent-system/evidence/</strong>             raw observations + human review packets
+<strong>.agent-system/evals/</strong>                raw model runs + normalised results
+<strong>tooling/product-design-harness/</strong>     portable schemas, builders, validators, runners
+<strong>tooling/evals/</strong>                      fixtures, retrieval registry, rubric, holdouts
+<strong>design-language/ + decisions/</strong>       human-approved canonical guidance
+<strong>.codex/ · .claude/ · .cursor/ · .agents/</strong> thin native discovery adapters</div>
+</section>
+
+<section class="ai-section" id="next-phase">
+<span class="ai-kicker">Next phase</span>
+<h2>From foundations to flow intelligence</h2>
+<p>
+  The next phase uses real delivery work to deepen the weak screen-level layers while completing
+  human review of the foundations.
+</p>
+<div class="ai-grid">
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-hand-tap" aria-hidden="true"></i><h3>Complete foundation review</h3></div>
+<p>Review the 72 components in eight coherent batches, approve the 17 typography roles separately, then resolve composition and overlap decisions.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-arrows-out-line-vertical" aria-hidden="true"></i><h3>Strengthen screen composition</h3></div>
+<p>Add hierarchy precedence, responsive region transformations, action relocation, narrow-screen invariants, focus order, and live-state contracts.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-file-diff" aria-hidden="true"></i><h3>Capture negotiation</h3></div>
+<p>Use the current redline, round-trip review, agreement, and signing feature as the first complete live flow corpus without slowing delivery.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-flask" aria-hidden="true"></i><h3>Run an unrelated holdout</h3></div>
+<p>Use a Delaware C-Corporation formation flow to test whether intelligence transfers to a form-heavy US-market journey.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-figma-logo" aria-hidden="true"></i><h3>Ingest annotated Figma evidence</h3></div>
+<p>Capture preferences, requirements, counterexamples, approved corrections, provenance, and scope in a consistent reviewable format.</p>
+</article>
+<article class="ai-card">
+<div class="ai-card-head"><i class="ph ph-robot" aria-hidden="true"></i><h3>Verify agent portability</h3></div>
+<p>Run the accepted context and holdouts through Codex, Claude Code, Cursor, and Antigravity, then seed a clean second project.</p>
+</article>
+</div>
+</section>
+
+<section class="ai-section" id="timeline">
+<span class="ai-kicker">Delivery roadmap</span>
+<h2>Timeline to high-value training data</h2>
+<p>
+  The repository context should create meaningful design value within two weeks and a strong
+  operational training corpus within four to six weeks. Fine-tuning is a later, evidence-triggered
+  decision—not the next milestone.
+</p>
+<div class="ai-timeline">
+<article class="ai-phase">
+<time>27 July–2 August</time>
+<div><h3>Negotiation delivery and lightweight capture</h3><p>Prioritise the live feature. Compile its flow contract, capture approved screens and reachable states, and record corrections without expanding scope.</p></div>
+<span class="ai-phase-status">Now</span>
+</article>
+<article class="ai-phase">
+<time>3–9 August</time>
+<div><h3>Batch 1, typography, and screen-level context</h3><p>Review action and form components, approve typography roles, curate negotiation evidence, and add hierarchy, responsive, and accessibility evals.</p></div>
+<span class="ai-phase-status">Noticeable value</span>
+</article>
+<article class="ai-phase">
+<time>10–23 August</time>
+<div><h3>Generalisation test</h3><p>Review component Batches 2–5, resolve major overlaps, and run the blinded Delaware incorporation holdout.</p></div>
+<span class="ai-phase-status">Transfer evidence</span>
+</article>
+<article class="ai-phase">
+<time>24 August–6 September</time>
+<div><h3>Foundation acceptance</h3><p>Complete Batches 6–8, close pending reviews, run strict acceptance, verify all agent adapters, and package the portable harness.</p></div>
+<span class="ai-phase-status">Great-value corpus</span>
+</article>
+<article class="ai-phase">
+<time>September–October</time>
+<div><h3>Breadth through approved flows</h3><p>Add roughly one annotated flow per week, targeting 5–8 flows, 40–80 approved screens, 75–150 correction pairs, and 20–40 holdout evals.</p></div>
+<span class="ai-phase-status">Dependable coverage</span>
+</article>
+<article class="ai-phase">
+<time>November onward</time>
+<div><h3>Assess fine-tuning only if retrieval plateaus</h3><p>Consider it after 200–500 approved examples across 15–25 flow families, stable annotations, strong holdouts, and repeated errors that context retrieval cannot solve.</p></div>
+<span class="ai-phase-status">Optional</span>
+</article>
+</div>
+<div class="ai-fine-tune">
+<div><h3>What creates value now</h3><p>Canonical context, rendered examples, counterexamples, evals, correction pairs, and a strict human approval boundary.</p></div>
+<div><h3>What fine-tuning may solve later</h3><p>Residual consistency problems after approved retrieval and decision context are already mature—not missing product facts or weak governance.</p></div>
+</div>
+</section>
+
+<section class="ai-section" id="improvements-log">
+<span class="ai-kicker">Change record</span>
+<h2>Improvements log</h2>
+<article class="ai-log">
+<div class="ai-log-meta">27 July 2026 · Screen-design foundations and pilot</div>
+<h3>Made screen decisions explicit and testable</h3>
+<ul>
+<li>Added full-library component intelligence, semantic typography, composition relationships, and deterministic readiness outcomes.</li>
+<li>Added portable foundation schemas, builders, validators, fixtures, and strict acceptance gates.</li>
+<li>Ran the first blinded screen comparison and recorded the human result as governed evidence.</li>
+</ul>
+</article>
+<article class="ai-log">
+<div class="ai-log-meta">27 July 2026 · Cross-agent consolidation</div>
+<h3>Created one governed product-design system</h3>
+<ul>
+<li>Added the shared bootstrap, one routed skill, and native adapters for Codex, Claude Code, Cursor, and Antigravity.</li>
+<li>Archived overlapping skills without losing the source library.</li>
+<li>Added exemplars, cross-agent evals, evidence collection, review packets, and the reusable project harness.</li>
+<li>Kept canonical learning behind explicit human approval.</li>
 </ul>
 </article>
 </section>
