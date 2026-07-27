@@ -585,8 +585,10 @@ la-toast {
   animation: fade-up var(--dur-base) var(--ease-out) both;
 }
 
-/* Modals / dialogs */
-.modal, .modal-overlay, [role="dialog"] {
+/* Modals / dialogs. la-modal is excluded: it animates its own panel, and the
+   `both` fill would leave a transform on the host — which turns the host into
+   the containing block for its position:fixed backdrop and breaks the overlay. */
+.modal, .modal-overlay, [role="dialog"]:not(la-modal) {
   animation: scale-in var(--dur-modal) var(--ease-spring-sm) both;
 }
 

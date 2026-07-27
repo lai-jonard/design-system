@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>la-data-room-page — LawAdvisor AI Design System</title>
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <style>
+    /* Full-height preview frame for the page component */
+    .page-preview-frame {
+      height: 520px;
+      border: 1px solid var(--la-color-border-light);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--la-color-bg-subtle);
+      display: flex;
+    }
+    .page-preview-frame > la-data-room-page {
+      flex: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+        <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+      </a>
+      <nav class="doc-topnav">
+        <a href="../index.html">Overview</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/" class="active">Pages</a>
+      </nav>
+    </div>
+  </header>
+
+  <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation">
+    <i class="ph ph-sidebar-simple" aria-hidden="true"></i>
+  </button>
+
+  <div class="page-container">
+
+    <nav class="docs-nav" id="docs-nav">
+      <h3 class="docs-nav-title">la-data-room-page</h3>
+
+      <div class="docs-nav-group">
+        <a href="#overview"   class="docs-nav-item" data-nav-id="overview">Overview</a>
+        <a href="#anatomy"    class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+        <a href="#snapshots"  class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+      </div>
+
+      <div class="docs-nav-group">
+        <a href="#reference"   class="docs-nav-item" data-nav-id="reference">la-data-room-page</a>
+        <a href="#properties"  class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+        <a href="#events"      class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+        <a href="#interfaces"  class="docs-nav-item docs-nav-item--subsection" data-nav-id="interfaces">Interfaces</a>
+        <a href="#usage"       class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+        <a href="#notes"       class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+      </div>
+
+      <div class="docs-nav-group">
+        <span class="docs-nav-title">Elsewhere</span>
+        <a class="docs-nav-item" href="../pages/">Pages ←</a>
+        <a class="docs-nav-item" href="../index.html">Overview</a>
+        <a class="docs-nav-item" href="../components/">Components</a>
+      </div>
+    </nav>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-data-room-page</h1>
+          <p>The Data Room document library. A read-only, cross-area view of the founder's collected documents, grouped by legal area — Governance and Employment only, per decision 75. Browsing only: uploads happen on the legal area pages, not here. Investor management lives in <code>la-investors-page</code>, a separate sub-tab (decisions 71, 82).</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+          <p>A single scrollable content column (840px max-width, centred). Page header with a ready-count subtitle, then one document section per legal area.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Anatomy — both areas populated</div>
+          <div class="page-preview-frame">
+            <la-data-room-page id="drp-anatomy"></la-data-room-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Layout regions</div>
+          <table class="docs-table">
+            <thead><tr><th>Region</th><th>Class</th><th>Role</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>Content column</td>
+                <td><code>.content</code></td>
+                <td>840px max-width, centred. The host scrolls (<code>overflow-y: auto</code>); the column carries the vertical rhythm (<code>--la-space-2xl</code> gaps).</td>
+              </tr>
+              <tr>
+                <td>Page header</td>
+                <td><code>.page-header</code></td>
+                <td>"Data Room" title plus the ready-count subtitle — "N documents ready to share". The count includes only Governance and Employment documents with <code>status: 'ready'</code>.</td>
+              </tr>
+              <tr>
+                <td>Area section</td>
+                <td><code>.section</code></td>
+                <td>One per legal area, in canonical order: Governance (<code>ph-buildings</code>), then Employment (<code>ph-briefcase</code>). Section label = icon + area name. A section with no documents is not rendered at all.</td>
+              </tr>
+              <tr>
+                <td>Document list</td>
+                <td><code>la-document-list</code></td>
+                <td>Composed per section with <code>heading=""</code> and the area's documents. Row chrome, status badges, and selection behaviour all come from <code>la-document-list</code> / <code>la-document-item</code>.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+          <p>Fixed reference examples — both areas, a single area, and the empty render path.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Single area — only Governance documents present (Employment section hidden)</div>
+          <div class="page-preview-frame">
+            <la-data-room-page id="drp-single"></la-data-room-page>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">Empty — no documents. Header renders with a zero count; no sections, no empty-state guidance (see Notes)</div>
+          <div class="page-preview-frame" style="height:240px;">
+            <la-data-room-page id="drp-empty"></la-data-room-page>
+          </div>
+        </div>
+
+        <!-- Documentation -->
+        <div class="docs">
+
+          <div id="reference" class="docs-section">
+            <h2>la-data-room-page</h2>
+            <p>Page-level component. Owns the grouped-library layout only — no selection state, no modals, no uploads. The parent application passes the full document set; the component filters by <code>category</code> and derives the ready count. Designed to be placed directly inside an <code>la-app-shell</code> main slot.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="properties" class="docs-section">
+            <h3>Properties</h3>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>documents</td>
+                  <td>—</td>
+                  <td><span class="type">DocumentData[]</span></td>
+                  <td><code>[]</code></td>
+                  <td>All vault documents. Each is grouped by its <code>category</code> (<code>'Governance'</code> | <code>'Employment'</code>); documents with any other category are ignored.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="events" class="docs-section">
+            <h3>Events</h3>
+            <p>The page fires no events of its own. Row interactions come from the composed <code>la-document-list</code> / <code>la-document-item</code> children — <code>la-select</code> bubbles up through the page (<code>bubbles: true, composed: true</code>), so listen on the page element or above to route to the document detail view.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="interfaces" class="docs-section">
+            <h3>Interfaces</h3>
+
+            <h4>DocumentData</h4>
+            <p>Imported from <code>la-document-list</code> — one shared row shape across every document surface.</p>
+            <pre><code>interface DocumentData {
+  name: string;
+  association?: string;     // e.g. "Acme Corp." or a person's name
+  status?: DocumentItemStatus; // 'ready' | 'processing' | 'failed' | 'none'
+  error?: string;           // failed-row message
+  category?: string;        // 'Governance' | 'Employment' — drives grouping here
+  inDefaultPack?: boolean;  // DD-pack membership (unused on this page)
+}</code></pre>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+
+            <h4>Basic wiring in a prototype</h4>
+            <pre><code>&lt;la-data-room-page id="drp"&gt;&lt;/la-data-room-page&gt;
+
+&lt;script&gt;
+  document.getElementById('drp').documents = [
+    { name: 'Articles of Incorporation', status: 'ready', association: 'Acme Corp.', category: 'Governance' },
+    { name: 'Board Resolution — Share Issuance', status: 'ready', association: 'Acme Corp.', category: 'Governance' },
+    { name: 'Employment Agreement — Alex Chen', status: 'ready', association: 'Alex Chen', category: 'Employment' },
+  ];
+&lt;/script&gt;</code></pre>
+
+            <h4>Lit template</h4>
+            <pre><code>html`&lt;la-data-room-page
+  .documents=${this.vaultDocuments}
+  @la-select=${e =&gt; this._openDocument(e.detail)}
+&gt;&lt;/la-data-room-page&gt;`</code></pre>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>Scope is decision 75</strong> — Governance + Employment sections only. No Fundraising section, no default-pack tab, no missing-document tracking. Bringing any of those back is a product decision, not a page tweak.</li>
+              <li><strong>Read-only by design</strong> — no upload affordance here. Documents are added on the legal area pages; the Data Room is the cross-area view of what's been collected.</li>
+              <li><strong>Investors are a separate page</strong> — investor list, DD-pack sharing, and per-investor detail live in <code>la-investors-page</code> (decisions 71, 82). An earlier draft of this page combined both; the split is deliberate.</li>
+              <li><strong>Height:</strong> <code>:host</code> is <code>display: block; height: 100%; overflow-y: auto</code>. The parent container must have a defined height. Place directly inside an <code>la-app-shell</code> main slot or a flex container with a fixed height.</li>
+              <li><strong>Empty sections disappear:</strong> an area with zero documents renders nothing — no empty section header. With no documents at all, the page shows only the header with "0 documents ready to share" and no further guidance. Logged as a Minor heuristic finding (H2/H7 — empty state doesn't teach the surface); acceptable while the page is only reachable after documents exist, revisit if the route opens earlier.</li>
+              <li><strong>Ready count is filtered:</strong> the subtitle counts only Governance and Employment documents with <code>status: 'ready'</code> — processing and failed rows appear in their sections but don't count.</li>
+            </ul>
+          </div>
+
+        </div><!-- .docs -->
+      </div><!-- .page-content-inner -->
+    </div><!-- .page-content -->
+  </div><!-- .page-container -->
+
+  <script>
+  (function () {
+    // ── Sidebar collapse ─────────────────────────────────
+    var toggle = document.getElementById('nav-toggle');
+    var stored = localStorage.getItem('doc-nav-collapsed');
+    if (stored === 'true') { document.body.classList.add('nav-collapsed'); }
+    toggle.addEventListener('click', function () {
+      var collapsed = document.body.classList.toggle('nav-collapsed');
+      localStorage.setItem('doc-nav-collapsed', collapsed);
+    });
+
+    // ── Active nav on scroll ─────────────────────────────
+    var navItems = Array.from(document.querySelectorAll('[data-nav-id]'));
+    var sections = navItems.map(function (el) {
+      return document.getElementById(el.dataset.navId);
+    }).filter(Boolean);
+    function onScroll() {
+      var scrollY = window.scrollY + 80;
+      var active = sections[0];
+      sections.forEach(function (s) { if (s.offsetTop <= scrollY) active = s; });
+      navItems.forEach(function (el) {
+        el.classList.toggle('active', el.dataset.navId === active.id);
+      });
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // ── Fixture data ─────────────────────────────────────
+    var GOV_DOCS = [
+      { name: 'Articles of Incorporation',         status: 'ready',      association: 'Acme Corp.', category: 'Governance' },
+      { name: 'Certificate of Incorporation',      status: 'ready',      association: 'Acme Corp.', category: 'Governance' },
+      { name: 'Board Resolution — Share Issuance', status: 'ready',      association: 'Acme Corp.', category: 'Governance' },
+      { name: 'Cap Table (as of Jan 2026)',        status: 'processing', association: 'Acme Corp.', category: 'Governance' },
+    ];
+    var EMP_DOCS = [
+      { name: 'Employment Agreement — Alex Chen',  status: 'ready', association: 'Alex Chen', category: 'Employment' },
+      { name: 'Employment Agreement — Jamie Lee',  status: 'ready', association: 'Jamie Lee', category: 'Employment' },
+      { name: 'IP Assignment Agreement',           status: 'ready', association: 'Alex Chen', category: 'Employment' },
+    ];
+
+    // ── Wire up each preview instance once defined ───────
+    customElements.whenDefined('la-data-room-page').then(function () {
+      var anatomy = document.getElementById('drp-anatomy');
+      if (anatomy) { anatomy.documents = GOV_DOCS.concat(EMP_DOCS); }
+
+      var single = document.getElementById('drp-single');
+      if (single) { single.documents = GOV_DOCS.slice(); }
+
+      var empty = document.getElementById('drp-empty');
+      if (empty) { empty.documents = []; }
+    });
+  })();
+  </script>
+
+</body>
+</html>

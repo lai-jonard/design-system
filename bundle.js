@@ -550,6 +550,30 @@
         color: var(--la-color-primary-fg);
       }
 
+      /* ── Badge ghost — tinted status surface, no border ──
+         For inert status tags (e.g. document signature states). The shared
+         grey+border chrome reads as a pressable chip; the tint reads as
+         state. Mirrors the counter's ghost appearance. */
+      :host([type='badge'][appearance='ghost']) span {
+        border: 0;
+        padding: 2px 8px; /* absorb the removed 1px border */
+      }
+      :host([type='badge'][appearance='ghost'][variant='success']) span {
+        background: var(--la-color-surface-success);
+      }
+      :host([type='badge'][appearance='ghost'][variant='danger']) span {
+        background: var(--la-color-surface-danger);
+      }
+      :host([type='badge'][appearance='ghost'][variant='warning']) span {
+        background: var(--la-color-surface-warning);
+      }
+      :host([type='badge'][appearance='ghost'][variant='info']) span {
+        background: var(--la-color-surface-info);
+      }
+      :host([type='badge'][appearance='ghost'][variant='neutral']) span {
+        background: var(--la-color-bg-muted);
+      }
+
       /* ── Counter filled variants ── */
       :host([type='counter'][variant='danger']) span {
         background: var(--la-color-danger);
@@ -1436,7 +1460,11 @@
         display: block;
       }
       .card {
-        border: 1px solid var(--la-color-border);
+        /* Canonical resting content-card surface: white on the light
+           --la-color-border-light hairline (decision 89). Matches the
+           composed cards (investor card, legal-area widget) that already
+           use the lighter border — one card surface across the system. */
+        border: 1px solid var(--la-color-border-light);
         border-radius: var(--la-radius-lg);
         background: var(--la-color-bg);
         overflow: hidden;
@@ -5289,6 +5317,10 @@
           this.heading = '';
           this.description = '';
           this.size = 'default';
+          /** 'success' renders a centred confirmation moment — medallion icon
+           *  (slot "icon", seal-check by default), centred heading, body, and
+           *  footer. Used for the one celebratory beat a flow earns. */
+          this.variant = 'default';
           this._onKeydown = (e) => {
               if (e.key === 'Escape' && this.open) {
                   e.stopPropagation();
@@ -5351,20 +5383,28 @@
         <div class="panel">
           <div class="header">
             <div class="header-content">
-              <slot name="header">
-                <div class="heading-block">
-                  <div class="heading">${this.heading}</div>
-                  ${this.description
-            ? b `<div class="description">${this.description}</div>`
-            : A}
-                </div>
-              </slot>
+              ${this.variant === 'success'
+            ? A
+            : b `<slot name="header">
+                    <div class="heading-block">
+                      <div class="heading">${this.heading}</div>
+                      ${this.description
+                ? b `<div class="description">${this.description}</div>`
+                : A}
+                    </div>
+                  </slot>`}
             </div>
             <la-icon-button size="sm" label="Close" @click=${this._close}>
               <i class="ph ph-x"></i>
             </la-icon-button>
           </div>
-          <div class="body"><slot></slot></div>
+          <div class="body">
+            ${this.variant === 'success'
+            ? b `<div class="moment-icon"><slot name="icon"><i class="ph-fill ph-seal-check"></i></slot></div>
+                  <div class="moment-heading">${this.heading}</div>`
+            : A}
+            <slot></slot>
+          </div>
           <div class="footer"><slot name="footer"></slot></div>
         </div>
       </div>
@@ -5489,6 +5529,45 @@
       .footer:empty {
         display: none;
       }
+      /* Success variant — centred confirmation moment. The heading moves out
+         of the header row into the body, under a tinted medallion. */
+      /* Flex-centred so page-level resets on slotted content (e.g. margin: 0)
+         can't knock the copy block off centre. */
+      :host([variant='success']) .body {
+        text-align: center;
+        padding-bottom: var(--la-space-xl);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      :host([variant='success']) .body slot:not([name])::slotted(*) {
+        max-width: 380px;
+        color: var(--la-color-text-secondary);
+        font-size: var(--la-font-size-base);
+        line-height: 1.5;
+      }
+      :host([variant='success']) .footer {
+        justify-content: center;
+        padding-bottom: var(--la-space-2xl);
+      }
+      .moment-icon {
+        width: 56px;
+        height: 56px;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-surface-success);
+        color: var(--la-color-success-text);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 28px;
+        margin-top: var(--la-space-md);
+      }
+      .moment-heading {
+        font-size: var(--la-font-size-2xl);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+        margin: var(--la-space-lg) 0 var(--la-space-sm);
+      }
       /* Fade when body is scrollable — gradient over the bottom of body content. */
       :host([scrollable]) .footer {
         padding-top: var(--la-space-xl);
@@ -5517,6 +5596,9 @@
   __decorate$H([
       n({ reflect: true })
   ], exports.LaModal.prototype, "size", void 0);
+  __decorate$H([
+      n({ reflect: true })
+  ], exports.LaModal.prototype, "variant", void 0);
   exports.LaModal = __decorate$H([
       t('la-modal')
   ], exports.LaModal);
@@ -10422,12 +10504,19 @@
         background: var(--la-color-bg);
         border-radius: var(--la-radius-lg);
         border: none;
-        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.03), 0px 2px 8px 0px rgba(0, 0, 0, 0.05);
+        /* Ring + soft lift, and the deeper lift on hover, as shadow presets —
+           same substitution PR #17 made for the cap-table cards
+           (rule/no-hardcoded-values). NOTE: this card carries a *resting*
+           shadow with border: none, which may conflict with decision 89
+           (resting content cards = hairline, no shadow). That's a material
+           visual change, not a token swap, so it's flagged as evidence rather
+           than changed here. */
+        box-shadow: var(--la-shadow-md);
         transition: box-shadow var(--dur-base) var(--ease);
         outline: none;
       }
       .card:hover {
-        box-shadow: 0px 0px 0px 1px rgba(0, 0, 0, 0.02), 0px 8px 24px 0px rgba(0, 0, 0, 0.10);
+        box-shadow: var(--la-shadow-float);
       }
       .card:focus-visible {
         outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
@@ -12212,7 +12301,10 @@
           return b `
       <div class="state-wrap">
         <la-panel>
-          <div class="pre-title">Unlock ${this.area}</div>
+          <!-- "Start with {area}", never "Unlock {area}" — decision 56 /
+               rule/no-gating-vocabulary. Gating language is engineering
+               vocabulary; to a founder it reads as a paywall. -->
+          <div class="pre-title">Start with ${this.area}</div>
           <div class="pre-sub">Gather these items before you begin</div>
           ${this.checklistItems.length
             ? b `
@@ -12697,6 +12789,12 @@
           this.dependencies = [];
           this.nextLevelLabel = '';
       }
+      /** Reflect illustration presence onto the host so CSS can gate the
+       *  3:4 portrait ratio (property isn't reflected — it may be set as a
+       *  JS property, not an attribute). */
+      willUpdate() {
+          this.toggleAttribute('has-illustration', !!this.illustration);
+      }
       _handleClick() {
           this.dispatchEvent(new CustomEvent('la-area-click', {
               detail: { area: this.area },
@@ -12792,12 +12890,17 @@
       :host {
         display: block;
         cursor: pointer;
-        /* Fluid portrait card — 3:4 aspect ratio (300×400 px at the
-           dashboard's 932 px column). Width comes from the parent grid;
-           height tracks via aspect-ratio. The 300 px width floor keeps
-           cards readable at narrow widths. */
         width: 100%;
         min-width: 280px;
+      }
+      /* Fluid portrait card — 3:4 aspect ratio (300×400 px at the
+         dashboard's 932 px column) — but ONLY when an illustration needs
+         the room. Without one the card hugs its content, as the
+         illustration property's contract promises ("the illustration
+         region collapses and content rises"). No consumer currently
+         passes an illustration, so the ratio was rendering every
+         dashboard card as a mostly-empty portrait box. */
+      :host([has-illustration]) {
         aspect-ratio: 3 / 4;
       }
       la-panel {
@@ -14318,21 +14421,23 @@
           this.lastActivity = '';
           this.unreadCount = 0;
       }
-      /** Maps the lifecycle states onto the access pill. */
+      /** Maps the lifecycle states onto the access pill. Ghost appearance —
+       *  status tags must not read as pressable (decision 86), and must match
+       *  the same status shown on the deal detail header. */
       _pill() {
           switch (this.status) {
               case 'invite-sent':
-                  return b `<la-badge variant="warning" size="sm"><i class="ph-fill ph-paper-plane-tilt" slot="icon"></i>Invite Sent</la-badge>`;
+                  return b `<la-badge variant="warning" size="sm" appearance="ghost"><i class="ph-fill ph-paper-plane-tilt" slot="icon"></i>Invite Sent</la-badge>`;
               case 'accepted':
-                  return b `<la-badge variant="success" size="sm"><i class="ph-fill ph-check-circle" slot="icon"></i>Accepted</la-badge>`;
+                  return b `<la-badge variant="success" size="sm" appearance="ghost"><i class="ph-fill ph-check-circle" slot="icon"></i>Accepted</la-badge>`;
               case 'inbound':
-                  return b `<la-badge variant="success" size="sm"><i class="ph-fill ph-tray-arrow-down" slot="icon"></i>Shared with you</la-badge>`;
+                  return b `<la-badge variant="success" size="sm" appearance="ghost"><i class="ph-fill ph-tray-arrow-down" slot="icon"></i>Shared with you</la-badge>`;
               case 'access-revoked':
-                  return b `<la-badge variant="warning" size="sm"><i class="ph-fill ph-prohibit" slot="icon"></i>Revoked</la-badge>`;
+                  return b `<la-badge variant="danger" size="sm" appearance="ghost"><i class="ph-fill ph-prohibit" slot="icon"></i>Revoked</la-badge>`;
               case 'active':
-                  return b `<la-badge variant="success" size="sm"><i class="ph-fill ph-check-circle" slot="icon"></i>Active</la-badge>`;
+                  return b `<la-badge variant="success" size="sm" appearance="ghost"><i class="ph-fill ph-check-circle" slot="icon"></i>Active</la-badge>`;
               default: // draft, invited
-                  return b `<la-badge variant="neutral" size="sm">Not Shared</la-badge>`;
+                  return b `<la-badge variant="neutral" size="sm" appearance="ghost">Not Shared</la-badge>`;
           }
       }
       _view() {

@@ -216,6 +216,7 @@
 <div class="docs-nav-group">
 <a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
 <a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
+<a class="docs-nav-item" href="../../docs/agent-design-intelligence/">Agent design intelligence</a>
 </div>
 </nav>
 
@@ -236,8 +237,11 @@
 <article class="md-body">
   <h1 id="design-language--lawadvisor-ai">Design Language — LawAdvisor AI</h1>
 <p>This folder documents the design rationale, patterns, and standards for the LawAdvisor AI design system. It is the living reference for how things look and why — used when creating new flows, screens, or components.</p>
+<blockquote>
+<p><strong>Doing user-facing work?</strong> Start at <code>.agents/skills/product-design/SKILL.md</code> — the single routed entry point. It resolves the request mode (shape / implement / review / copy / harden) and routes into the docs below, so you load what the task needs rather than reading everything. Enforced and frequently-cited rules have stable IDs in <code>rules.md</code>. See decision 90.</p>
+</blockquote>
 <h2 id="when-to-update">When to update</h2>
-<p>Update this documentation automatically when:</p>
+<p>Propose an update to this documentation when:</p>
 <ul>
 <li>A new visual pattern is established (e.g. how we handle empty states)</li>
 <li>A token decision is made (e.g. a new colour, a border rule)</li>
@@ -245,7 +249,9 @@
 <li>A rule is corrected or refined (e.g. &quot;we tried X but switched to Y because...&quot;)</li>
 <li>A spacing or layout standard is set</li>
 </ul>
-<p>Do not update for one-off tweaks that are screen-specific and unlikely to generalise.</p>
+<p>Do not update for one-off tweaks that are screen-specific and unlikely to generalise.
+Corrections, review comments, eval failures, and annotated screenshots enter
+<code>.agent-system/evidence/</code> first. A human approves every canonical guidance change.</p>
 <hr>
 <h2 id="files">Files</h2>
 <table>
@@ -256,6 +262,18 @@
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>rules.md</td>
+<td><strong>Rule registry</strong> — stable <code>rule/…</code> IDs for enforced and frequently-cited rules, each with scope, source, enforcement level, and a ✅/❌ example</td>
+</tr>
+<tr>
+<td>glossary.md</td>
+<td><strong>Canonical product names</strong> — exact strings and casing for areas, documents, statuses and personas; banned vocabulary with its authority; unsettled terms as open questions</td>
+</tr>
+<tr>
+<td>design-brief.md</td>
+<td><strong>The why</strong> — product positioning, who we design for, the business reason behind each visual rule, deliberate deferrals, and Taste</td>
+</tr>
 <tr>
 <td><a href="../../docs/playbook/">playbook.md</a></td>
 <td>The recipe — how new ideas become components, how decisions get logged, how work hands off</td>
@@ -299,8 +317,10 @@
 </tbody>
 </table>
 <hr>
-<h2 id="relationship-to-claudemd-and-source-files">Relationship to CLAUDE.md and source files</h2>
-<p><code>CLAUDE.md</code> at the project root is the <strong>canonical foundation</strong> — token values, typography rules, animation standards, copy rules, and the Lit component library structure.</p>
+<h2 id="relationship-to-agentsmd-and-source-files">Relationship to AGENTS.md and source files</h2>
+<p><code>AGENTS.md</code> at the project root is the shared agent bootstrap and map. It points to the canonical
+owners rather than duplicating them: token values live in <code>src/styles/tokens.ts</code>, copy in
+<code>copy-guidelines.md</code>, motion in <code>motion.css</code>, and settled rationale in <code>decisions/</code>.</p>
 <p>This <code>design-language/</code> folder is the <strong>rationale and decision layer</strong> on top of it — the <em>why</em> behind decisions, known divergences from defaults, and patterns that emerged from building specific screens and flows. It is a living document updated as the system evolves.</p>
 <h3 id="known-divergences-from-defaults">Known divergences from defaults</h3>
 <table>
@@ -346,16 +366,17 @@
 </table>
 <h3 id="when-to-check-which-source">When to check which source</h3>
 <ul>
-<li><strong>Building a new component</strong> → check <code>CLAUDE.md</code> for tokens and rules, then this folder for architecture patterns</li>
+<li><strong>Building a new component</strong> → start with <code>AGENTS.md</code>, then load the specific token, rule, and architecture sources it routes to</li>
 <li><strong>Designing a new screen or flow</strong> → check <code>layout.md</code> and <code>components.md</code> here</li>
-<li><strong>Copy / UX writing</strong> → <code>CLAUDE.md</code> copy rules section is the source of truth</li>
+<li><strong>Copy / UX writing</strong> → <code>copy-guidelines.md</code> is the source of truth</li>
 </ul>
 <hr>
 <h2 id="core-principles">Core principles</h2>
 <ul>
 <li><strong>Tokens over hardcoding.</strong> Every colour, size, radius, and spacing value must use a CSS variable. Never hardcode a hex or pixel value directly in a component.</li>
 <li><strong>Semibold headings.</strong> Weight 600, never 700. Bold is reserved for emphasis within body copy only.</li>
-<li><strong>Verb-first CTAs.</strong> All button labels start with a verb, sentence case. &quot;Approve and Propagate&quot;, not &quot;Amendment Approval&quot;.</li>
+<li><strong>Verb-first CTAs.</strong> All button labels start with a verb in the Title Case structural register.
+&quot;Approve and Propagate&quot;, not &quot;Amendment Approval&quot;.</li>
 <li><strong>Layout vs interactive borders.</strong> Two distinct border tokens — lighter for structure, standard for UI controls.</li>
 <li><strong>Purposeful animation.</strong> Motion communicates state change, not decoration. Entrance animations skip on tab navigation.</li>
 <li><strong>Base before composite.</strong> Primitive components live in <code>_base/</code>. Complex, layout-aware components live in <code>_components/</code>.</li>

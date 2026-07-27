@@ -41,7 +41,7 @@
       gap: 32px; align-items: center;
     }
     .wf-stack {
-      position: relative; height: 500px; margin-top: 24px;
+      position: relative; height: 560px; margin-top: 24px;
       perspective: 1400px; perspective-origin: 50% 20%;
     }
     .wf-stack-inner {
@@ -55,7 +55,7 @@
       border-radius: 26px;
       background: rgba(255, 255, 255, 0.72);
       box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.07), 0 10px 30px rgba(3, 7, 18, 0.05);
-      transform: translateZ(calc(var(--i) * 40px));
+      transform: translateZ(calc(var(--i) * 58px));
       transition: transform 220ms cubic-bezier(0.32, 0.72, 0, 1),
         background 160ms ease, box-shadow 160ms ease, opacity 160ms ease;
       display: flex; align-items: center; justify-content: center;
@@ -69,10 +69,12 @@
     .wf-plate.active {
       background: rgba(255, 255, 255, 0.96);
       box-shadow: 0 0 0 1.5px var(--doc-accent), 0 16px 40px rgba(3, 7, 18, 0.10);
-      transform: translateZ(calc(var(--i) * 40px + 18px));
+      transform: translateZ(calc(var(--i) * 58px + 18px));
     }
     .wf-plate.active span { color: var(--doc-text); font-weight: 600; }
     .wf-stack:hover .wf-plate:not(.active) { opacity: 0.85; }
+    .wf-stack .wf-plate.above-active,
+    .wf-stack:hover .wf-plate.above-active { opacity: 0.1; }
 
     /* Side panel — accordion: click a layer to expand it in place */
     .wf-stack-side { display: flex; flex-direction: column; gap: 6px; }
@@ -117,8 +119,8 @@
     @media (max-width: 860px) {
       .wf-stack-wrap { grid-template-columns: 1fr; gap: 8px; }
       .wf-stack { height: 380px; }
-      .wf-plate { width: 200px; height: 200px; margin: -100px 0 0 -100px; transform: translateZ(calc(var(--i) * 32px)); }
-      .wf-plate.active { transform: translateZ(calc(var(--i) * 32px + 14px)); }
+      .wf-plate { width: 200px; height: 200px; margin: -100px 0 0 -100px; transform: translateZ(calc(var(--i) * 46px)); }
+      .wf-plate.active { transform: translateZ(calc(var(--i) * 46px + 14px)); }
     }
     @media (prefers-reduced-motion: reduce) {
       .wf-plate, .wf-plate span, .wf-stack-label { transition: none; }
@@ -231,6 +233,7 @@
 <div class="docs-nav-group">
 <a class="docs-nav-item active" href="../../docs/workflow/">Design workflow</a>
 <a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
+<a class="docs-nav-item" href="../../docs/agent-design-intelligence/">Agent design intelligence</a>
 </div>
 
 <h3 class="docs-nav-title">Principles &amp; process</h3>
@@ -455,6 +458,50 @@ New questions raised during prototyping or feedback go back into a solve.
 </div>
 </section>
 
+<!-- ── Shipping ──────────────────────────────────────────── -->
+<section class="wf-section" id="shipping">
+<div class="wf-section-head">
+<h2>How the work ships</h2>
+<p>Everything above moves through GitHub on a fixed rhythm, so anyone can tell what state the
+work is in without asking. Engineering reads the repo directly — work-in-progress included —
+and finalises against the handoff document.</p>
+</div>
+<div class="wf-flow">
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-git-branch" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">One branch per sprint</div>
+<div class="wf-step-desc">Named for the sprint (<code>sprint-19-esignature</code>). All of the sprint's work lands there, pushed at least daily — engineering can watch it for early starts.</div>
+</div>
+</div>
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-git-commit" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">Decision-sized commits</div>
+<div class="wf-step-desc">A component, its docs, and its logged decision travel together in one commit. Anything that breaks later traces back to a single design move.</div>
+</div>
+</div>
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-git-pull-request" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">A pull request closes the sprint</div>
+<div class="wf-step-desc">The PR body carries the review pointers; automated checks verify the build, prototype links, and content rules before it merges.</div>
+</div>
+</div>
+<div class="wf-step">
+<div class="wf-step-icon"><i class="ph ph-tag" aria-hidden="true"></i></div>
+<div class="wf-step-body">
+<div class="wf-step-name">A tag marks the handoff</div>
+<div class="wf-step-desc">On merge, a tag (<code>sprint-19/handoff-v3.0</code>) pins the exact state the handoff document describes — it stays findable after branches are deleted.</div>
+</div>
+</div>
+</div>
+<div class="wf-flow-notes">
+<span class="wf-note"><i class="ph ph-robot" aria-hidden="true"></i> Automated checks own the mechanical rules — fresh builds, working prototype links, no real company names. Decisions, handoffs, and reviews stay human.</span>
+<span class="wf-note"><i class="ph ph-globe" aria-hidden="true"></i> This site is published from the repo on demand — it's a reference that can update daily, not a release.</span>
+</div>
+</section>
+
 <!-- ── Handoff ───────────────────────────────────────────── -->
 <section class="wf-section" id="handoff">
 <div class="wf-section-head">
@@ -528,7 +575,10 @@ the handoff document itself just points at work that already exists.</p>
       it.classList.toggle('active', on);
       it.querySelector('.wf-stack-label').setAttribute('aria-expanded', String(on));
     });
-    plates.forEach(function (p) { p.classList.toggle('active', p.dataset.layer === layer); });
+    plates.forEach(function (p) {
+      p.classList.toggle('active', p.dataset.layer === layer);
+      p.classList.toggle('above-active', Number(p.dataset.layer) > Number(layer));
+    });
   }
   items.forEach(function (it) {
     it.querySelector('.wf-stack-label').addEventListener('click', function () {

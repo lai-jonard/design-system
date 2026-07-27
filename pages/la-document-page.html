@@ -583,7 +583,7 @@ page.addEventListener('la-entity-click', function(e) {
           <div id="notes" class="docs-section">
             <h3>Notes</h3>
             <ul class="docs-list">
-              <li><strong>Page, not component</strong> · lives at <code>src/pages/la-document-page.ts</code>. Not subject to the <code>/ready</code> promotion gate; this draft is the canonical reference and stays at <code>dev/docs-drafts/</code>.</li>
+              <li><strong>Page, not component</strong> · lives at <code>src/pages/la-document-page.ts</code>. Pages run a lighter readiness pass than the component 8-gate; this published page (<code>docs-src/pages/la-document-page.html</code>) is the canonical reference.</li>
               <li><strong>Two About renderers, backend-selected</strong> · <code>key-terms</code> for one-per-company documents (Articles of Incorporation, Board Resolutions); <code>obligations</code> for bilateral contracts (Employment Contracts, IP Assignments). The renderer is set by the backend document-type classification — no frontend logic decides which to use.</li>
               <li><strong>Entity is plain meta text</strong> · renders as muted text in the header meta row (e.g. "Jane Lee · Employment"). When <code>entityClickable</code> is true it becomes an underlined primary-colour link and fires <code>la-entity-click</code>. First wired in Sprint 8 for the Employment flow.</li>
               <li><strong>deletable is backend-gated</strong> · set this prop only when the backend confirms the document can be deleted. The prop gates the Delete item in the actions menu; the consumer handles the confirmation modal and post-delete redirect.</li>

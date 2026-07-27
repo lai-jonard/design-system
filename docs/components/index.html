@@ -214,6 +214,7 @@
 <div class="docs-nav-group">
 <a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
 <a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
+<a class="docs-nav-item" href="../../docs/agent-design-intelligence/">Agent design intelligence</a>
 </div>
 </nav>
 
@@ -261,8 +262,13 @@
 <p>A small inline primitive with two types. <strong>Badge</strong> (pill) communicates status, category, or severity at a glance; always paired with content, never standalone. <strong>Counter</strong> (circle) communicates a numerical count — unread items, queue depth, notification totals.</p>
 <p><strong>Types:</strong> <code>badge</code> (default), <code>counter</code>
 <strong>Variants:</strong> <code>danger</code>, <code>warning</code>, <code>success</code>, <code>neutral</code>, <code>info</code>, <code>accent</code>, <code>primary</code>
-<strong>Appearance (counter only):</strong> <code>filled</code> (default), <code>ghost</code></p>
-<p><strong>Badge chrome is shared across variants</strong> — all non-primary badge variants use <code>--la-color-bg-subtle</code> surface with a 1px <code>--la-color-border-light</code> border. Only the text colour changes per variant, so the variant distinction reads through typography rather than loud background fills. <code>primary</code> is the single exception — it overrides both bg and border to the solid primary colour (used sparingly for prominent labels). See decision log for rationale.</p>
+<strong>Appearance:</strong> <code>filled</code> (default), <code>ghost</code>. For badges, use <code>ghost</code> for inert status tags; for
+counters, it provides the tinted numerical treatment.</p>
+<p><strong>Filled badge chrome is shared across variants</strong> — all non-primary filled badge variants use
+<code>--la-color-bg-subtle</code> with a 1px <code>--la-color-border-light</code> border. Use this appearance only when
+the bordered chip treatment has a clear semantic purpose. Inert status tags use <code>ghost</code>: a tinted
+status surface with no border, so they do not look pressable (<code>rule/ghost-status-badges</code>).
+<code>primary</code> is the single filled exception and should be used sparingly for prominent labels.</p>
 <p><strong>Counter chrome is variant-filled</strong> — counters use solid variant colours (filled) or tinted <code>--la-color-surface-*</code> fills (ghost). No border. This keeps counters visually louder than badges, appropriate for numerical signals.</p>
 <table>
 <thead>
@@ -330,7 +336,8 @@
 <p><strong>Docs-only</strong> — see <code>docs-src/components/la-breadcrumb.html</code>.</p>
 <hr>
 <h3 id="la-button"><code>la-button</code></h3>
-<p>The primary interactive control. Every call-to-action uses this. Always verb-first label, sentence case.</p>
+<p>The primary interactive control. Every call-to-action uses this. Always use a verb-first label in
+the Title Case structural register.</p>
 <p><strong>Variants:</strong> <code>primary</code>, <code>secondary</code>, <code>success</code>, <code>danger</code>, <code>ghost</code>
 <strong>Sizes:</strong> <code>sm</code> (28px), default (36px), <code>lg</code> (44px)</p>
 <table>

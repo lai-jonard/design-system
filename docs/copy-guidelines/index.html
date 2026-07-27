@@ -212,6 +212,7 @@
 <div class="docs-nav-group">
 <a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
 <a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
+<a class="docs-nav-item" href="../../docs/agent-design-intelligence/">Agent design intelligence</a>
 </div>
 </nav>
 
@@ -387,6 +388,21 @@
 </ul>
 <hr>
 <h2 id="contextual-copy-patterns">Contextual copy patterns</h2>
+<h3 id="page-and-section-descriptions-must-be-generic-to-the-surface">Page and section descriptions must be generic to the surface</h3>
+<p>A page subtitle or section description describes <em>what the surface always is</em> — it must read
+true for every state and every instance, never one specific case. Before writing one, check:
+is this generic to the section, or specific to a use case?</p>
+<ul>
+<li><strong>Generic (correct):</strong> &quot;The investors you're working with, and the deal documents they've
+shared.&quot; — true whether a deal is active, revoked, or awaiting.</li>
+<li><strong>Too specific (wrong):</strong> &quot;Meridian Capital invited you, so their investment offer is already
+here. Review the SAFE and side letter, then respond.&quot; — names one investor, one moment, and
+carries urgency; it only fits one state and goes stale in every other.</li>
+</ul>
+<p>If the content is <strong>specific or time-sensitive</strong> (&quot;review and respond&quot;, &quot;access withdrawn&quot;),
+it belongs in a <strong>UI message</strong> (<code>la-alert</code> / banner) or a status element, not a description.
+The test: <em>would this still be true after the situation changes?</em> If not, it's a message, not a
+description. (Rule from the investor-pack page, 2026-07-24.)</p>
 <h3 id="insight-explanations-modal-quotwhy-this-mattersquot">Insight explanations (modal &quot;Why this matters&quot;)</h3>
 <p>Written by the AI legal engine. The explanation surfaces in the insight modal only — the card shows no explanation text.</p>
 <p><strong>Ceiling: 3 sentences, 60 words.</strong> Structure: (1) what the problem is, (2) why it creates legal or commercial risk, (3) what it affects or what to do next. One paragraph, no lists.</p>
@@ -421,6 +437,82 @@
 <li><strong>Numbers:</strong> use commas for thousands (1,000) and full stops for decimals (3.5)</li>
 <li><strong>Lists:</strong> use sentence fragments, no full stops unless the item is a complete sentence</li>
 </ul>
+<hr>
+<h2 id="document-signature-status">Document signature status</h2>
+<p>One vocabulary for the document signing state machine, everywhere it appears
+(document headers, deal lists, data room rows):</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Badge label</th>
+<th>Variant</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Nobody has signed</td>
+<td>Awaiting signatures</td>
+<td>neutral</td>
+</tr>
+<tr>
+<td>Some have signed</td>
+<td>Partially signed</td>
+<td>neutral</td>
+</tr>
+<tr>
+<td>Everyone has signed</td>
+<td>Fully signed</td>
+<td>success</td>
+</tr>
+</tbody>
+</table>
+<p>&quot;Fully signed&quot; is the state label — the legal ladder is <em>unexecuted → partially
+executed → (fully) executed</em>, but we use the plain terms in the UI (no-jargon rule). &quot;Executed copy&quot; remains the artefact name on the
+download action only. Never mix in synonyms (&quot;Executed&quot;, &quot;Complete&quot;) as state labels.</p>
+<p><strong>Status badges are tinted, not chrome.</strong> Inert status tags use
+<code>la-badge appearance=&quot;ghost&quot;</code> (tinted surface, no border) — the shared grey+border
+badge chrome reads as a pressable chip.</p>
+<p><strong>The evidence line pairs with the badge</strong> (document header sub-line). The badge
+answers <em>is it done?</em>; the evidence answers <em>waiting on whom?</em> — confirmed
+2026-07-24:</p>
+<table>
+<thead>
+<tr>
+<th>Signatures</th>
+<th>Badge</th>
+<th>Evidence line</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>None</td>
+<td>Awaiting signatures</td>
+<td><strong>recipient</strong> sees <code>Sent by {counterparty}</code> (who owns the deal); the <strong>sender/owner</strong> sees no evidence line</td>
+</tr>
+<tr>
+<td>One (of two)</td>
+<td>Partially signed</td>
+<td><code>Awaiting {name}</code> — name who's blocking</td>
+</tr>
+<tr>
+<td>All</td>
+<td>Fully signed</td>
+<td><code>Signed by {names} · {execution date}</code></td>
+</tr>
+</tbody>
+</table>
+<p>Scaling for 3+ signers: fully signed 2–3 → <code>Signed by Alex Tan, Jordan Lee and Sam Reyes · 12 May 2026</code>; 4+ → <code>Signed by Alex Tan and 4 others · 12 May 2026</code>; several still missing → <code>3 of 5 signed</code>.</p>
+<p><strong>The date is the execution date</strong> — the date the <em>last</em> party signs, i.e. when
+the document became fully executed and binding. Per-signer dates (who signed
+when) live on the document's appended signature page, so the header shows the one
+meaningful date. The full roster always lives on that page too (decision 86) —
+the header line may truncate, the document never does.</p>
+<p><strong>Both signing orders are modelled as separate screens</strong> (order-agnostic, per the
+PRD): each persona has an <em>awaiting</em> landing (they signed first — &quot;Partially
+signed · Awaiting {counterparty}&quot;) and an <em>executed</em> landing (both signed — &quot;Fully
+signed&quot;), mirroring each other. A signature from a nobody-signed start lands on
+<em>awaiting</em>, never jumps straight to <em>fully signed</em>.</p>
 
 </article>
 

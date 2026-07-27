@@ -216,6 +216,7 @@
 <div class="docs-nav-group">
 <a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
 <a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
+<a class="docs-nav-item" href="../../docs/agent-design-intelligence/">Agent design intelligence</a>
 </div>
 </nav>
 
@@ -235,7 +236,7 @@
 </span>
 <article class="md-body">
   <h1 id="playbook--how-the-lai-design-system-grows">Playbook — How the LAI Design System grows</h1>
-<p>This is the recipe for how new ideas enter the design system, how they become components, how decisions get logged, and how work hands off to engineering. It's the single page a new collaborator reads to understand the workflow — sitting alongside <code>CLAUDE.md</code> (the boiled-down non-negotiables: token, copy, motion, code), the rest of <a href="."><code>design-language/</code></a> (the rationale layer with worked-out detail — <a href="../../docs/components/"><code>components.md</code></a> for taxonomy, <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> for tone and voice, <a href="../../docs/motion/"><code>motion.md</code></a> for animation), and <code>handoffs/README.md</code> (the engineering pipeline).</p>
+<p>This is the recipe for how new ideas enter the design system, how they become components, how decisions get logged, and how work hands off to engineering. It's the single page a new collaborator reads to understand the workflow — sitting alongside <code>AGENTS.md</code> (the shared agent bootstrap and canonical map), the rest of <a href="."><code>design-language/</code></a> (the rationale layer with worked-out detail — <a href="../../docs/components/"><code>components.md</code></a> for taxonomy, <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> for tone and voice, <a href="../../docs/motion/"><code>motion.md</code></a> for animation), and <code>handoffs/README.md</code> (the engineering pipeline).</p>
 <p>If you're picking up a new design task and you don't know whether to solve, build, or just sketch — start here.</p>
 <hr>
 <h2 id="1-the-mental-model">1. The mental model</h2>
@@ -482,9 +483,9 @@
 </thead>
 <tbody>
 <tr>
-<td>Canonical foundation</td>
-<td><code>CLAUDE.md</code></td>
-<td>Token rules, copy rules, motion rules, component anatomy — the boiled-down non-negotiables. Each section here has a deeper counterpart in <code>design-language/</code>.</td>
+<td>Shared agent bootstrap</td>
+<td><code>AGENTS.md</code></td>
+<td>Trigger, authority order, canonical map, working constraints, and governed-learning boundary.</td>
 <td>Engineer + designer</td>
 </tr>
 <tr>
@@ -508,13 +509,13 @@
 <tr>
 <td>Tone, voice, copy</td>
 <td><a href="../../docs/copy-guidelines/"><code>design-language/copy-guidelines.md</code></a></td>
-<td>British English, jargon substitutions, contextual patterns (empty / success / error states), CTA rules, date and number formatting. The full rules with concrete examples. CLAUDE.md § Copy rules is the summary.</td>
+<td>British English, jargon substitutions, contextual patterns (empty / success / error states), CTA rules, date and number formatting.</td>
 <td>Designer</td>
 </tr>
 <tr>
 <td>Type, colour, layout</td>
 <td><a href="../../docs/typography/"><code>typography.md</code></a>, <a href="../../docs/colour/"><code>colour.md</code></a>, <a href="../../docs/layout/"><code>layout.md</code></a>, <a href="../../docs/borders/"><code>borders.md</code></a></td>
-<td>Visual rules with rationale. CLAUDE.md token list is the summary.</td>
+<td>Visual rules with rationale; <code>src/styles/tokens.ts</code> owns token values.</td>
 <td>Designer</td>
 </tr>
 <tr>

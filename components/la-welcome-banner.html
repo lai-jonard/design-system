@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-welcome-banner — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-welcome-banner</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-welcome-banner</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-welcome-banner</h1>
+  <p>First-time hero on the dashboard. A single calm surface that names what we're about to do, sets the time expectation, and offers one obvious next step. Visible until the user finishes Corp Gov L0 — once L0 is complete the dashboard swaps to the four-widget grid and this surface is gone. <strong>Status note:</strong> descoped from Sprint 2 (2026-05-05) — the canonical pre-L0 surface is a welcome <em>form</em>, not a banner. This page documents the component as built, for a future sprint that adopts the welcome-first proposal.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>One plain white surface, three regions stacked vertically: heading, description, then a single primary call-to-action.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy — defaults shown</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-page);">
+    <la-welcome-banner></la-welcome-banner>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Surface</td><td><code>.welcome</code></td><td>Outer container — plain white surface (<code>--la-color-bg</code>), no border, no shadow. Contrast against the page background is the only chrome; generous <code>--la-space-2xl</code> padding gives it room to breathe. Sits inside the dashboard content shell.</td></tr>
+      <tr><td>Heading</td><td><code>.heading</code> ← <code>heading</code> prop</td><td>The greeting. 18px / 600. Names the product and orients the user.</td></tr>
+      <tr><td>Description</td><td><code>.desc</code> ← <code>description</code> prop</td><td>One-to-two sentences of secondary text. Names the first task, the time it takes, and the value it returns. <code>\n</code> in the string renders as a line break (<code>white-space: pre-line</code>).</td></tr>
+      <tr><td>CTA</td><td><code>la-button[variant="primary"]</code> ← <code>ctaLabel</code> prop</td><td>The single next step. Verb-first. Click fires <code>la-welcome-cta</code>. An empty <code>ctaLabel</code> renders no button — the banner becomes informational.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below. Each control maps to a public property.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-heading">heading</label>
+      <input id="ctl-heading" type="text" value="Welcome to LawAdvisorAI" style="width:280px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-cta">ctaLabel</label>
+      <input id="ctl-cta" type="text" value="Start with Corporate Governance" style="width:280px;">
+    </div>
+    <div class="control-group">
+      <label>dismissed</label>
+      <div class="btn-group">
+        <button class="btn-toggle active" data-dismissed="false" type="button">false</button>
+        <button class="btn-toggle" data-dismissed="true" type="button">true</button>
+      </div>
+    </div>
+  </div>
+  <div class="controls-divider"></div>
+  <div class="controls-row">
+    <div class="control-group" style="flex:1;">
+      <label for="ctl-description">description</label>
+      <input id="ctl-description" type="text" value="Let's start by reviewing your corporate governance. This takes about 10 minutes and gives you immediate insights into your company's legal health." style="width:100%;">
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>Reflects the controls above. Click the CTA — its event fires in the log below.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-page);">
+    <la-welcome-banner id="wb-live"></la-welcome-banner>
+  </div>
+  <div id="event-log" style="padding:8px 24px; font-size:11px; color:var(--la-color-text-muted); font-family:monospace; min-height:28px; border-top:1px solid var(--la-color-border-light); background:var(--la-color-bg-subtle);" aria-live="polite">
+    <span style="color:var(--la-color-text-faint);">Event log — click the CTA to see <code>la-welcome-cta</code> fire</span>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Fixed reference examples — defaults, custom copy, the informational (no-CTA) branch, and the dismissed render path.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Default — Corp Gov L0 entry point</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-page);">
+    <la-welcome-banner></la-welcome-banner>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Custom copy — different first task</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-page);">
+    <la-welcome-banner
+      heading="Welcome back, Jonard"
+      description="You're three steps away from a complete governance picture. We'll pick up where you left off."
+      cta-label="Resume governance review"
+    ></la-welcome-banner>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Informational — empty cta-label renders no button</div>
+  <div class="preview-frame" style="padding:32px;background:var(--la-color-bg-page);">
+    <la-welcome-banner
+      heading="We're reviewing your documents"
+      description="Insights will appear on the dashboard as each document finishes."
+      cta-label=""
+    ></la-welcome-banner>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Dismissed — renders nothing (the banner has been replaced by the widget grid)</div>
+  <div class="preview-frame" style="padding:32px;">
+    <la-welcome-banner dismissed></la-welcome-banner>
+    <p style="font-size:12px;color:var(--doc-text-3);margin-top:8px;">The element is in the DOM but renders <code>nothing</code> — no surface, no whitespace.</p>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-welcome-banner</h2>
+    <p>First-time hero on the dashboard. A single calm surface that names what we're about to do, sets the time expectation, and offers one obvious next step. Descoped from Sprint 2 — no consumer in the canonical founder flow; kept as reference for a future welcome-first proposal.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>dismissed</td>
+          <td><span class="default">dismissed</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Welcome to LawAdvisorAI&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&quot;Let&#39;s start by reviewing your corporate governance. This takes about 10 minutes and gives you immediate insights into your company&#39;s legal health.&quot;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>ctaLabel</td>
+          <td><span class="default">ctaLabel</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Start with Corporate Governance&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-welcome-cta</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<!-- CSS tokens -->
+<div id="css-tokens" class="docs-section">
+  <h3>CSS tokens</h3>
+  <p style="margin-bottom:16px;">Quiet chrome that sits inside the dashboard content shell. No border, no shadow — the plain white surface against the page background is the only chrome.</p>
+
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Surface</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-color-bg</td><td>Surface fill — plain white against the page background</td></tr>
+          <tr><td>--la-radius-xl</td><td>Outer corner radius — sits comfortably with content cards</td></tr>
+          <tr><td>--la-space-2xl</td><td>Inner padding — generous breathing room</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;font-size:11px;color:#555;text-transform:uppercase;letter-spacing:0.6px;font-weight:600;">Type</p>
+      <table class="docs-table">
+        <thead><tr><th>Token</th><th>Role</th></tr></thead>
+        <tbody>
+          <tr><td>--la-font-size-2xl</td><td>Heading size (18px / 600)</td></tr>
+          <tr><td>--la-font-weight-semibold</td><td>Heading weight — never 700</td></tr>
+          <tr><td>--la-space-2xs</td><td>Heading-to-description gap (6px)</td></tr>
+          <tr><td>--la-font-size-base</td><td>Description size (13px)</td></tr>
+          <tr><td>--la-color-text-secondary</td><td>Description colour</td></tr>
+          <tr><td>--la-space-md</td><td>Description-to-CTA gap — applied only when a CTA follows (<code>.desc:not(:last-child)</code>)</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Usage -->
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <div class="docs-grid">
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Default — the FTUE entry point</p>
+      <div class="docs-code"><span class="kw">&lt;la-welcome-banner</span> <span class="at">@la-welcome-cta</span>=<span class="str">"${startUnlock}"</span><span class="kw">&gt;&lt;/la-welcome-banner&gt;</span></div>
+      <p style="font-size:12px;color:#777;margin-top:6px;">Defaults assume Corp Gov L0 as the first task — change the props for any future first-task variation.</p>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Custom copy</p>
+      <div class="docs-code"><span class="kw">&lt;la-welcome-banner</span>
+  <span class="at">heading</span>=<span class="str">"Welcome back, Jonard"</span>
+  <span class="at">description</span>=<span class="str">"You're three steps from a complete picture."</span>
+  <span class="at">cta-label</span>=<span class="str">"Resume governance review"</span>
+<span class="kw">&gt;&lt;/la-welcome-banner&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Pair with the dashboard layout (Sprint 2 single-column 1120px max-width)</p>
+      <div class="docs-code"><span class="kw">&lt;main</span> <span class="at">class</span>=<span class="str">"dashboard-shell"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-welcome-banner</span> <span class="at">@la-welcome-cta</span>=<span class="str">"${startUnlock}"</span><span class="kw">&gt;&lt;/la-welcome-banner&gt;</span>
+  <span class="cm">&lt;!-- four locked legal-area widgets follow --&gt;</span>
+<span class="kw">&lt;/main&gt;</span></div>
+    </div>
+    <div>
+      <p style="margin-bottom:8px;color:#666;font-size:12px;">Hide in place — usually you'd unmount instead</p>
+      <div class="docs-code"><span class="kw">&lt;la-welcome-banner</span> <span class="at">dismissed</span><span class="kw">&gt;&lt;/la-welcome-banner&gt;</span></div>
+      <p style="font-size:12px;color:#777;margin-top:6px;">Sprint 2 swaps this surface out of the DOM once Corp Gov L0 succeeds — <code>dismissed</code> covers cases where the element stays mounted.</p>
+    </div>
+  </div>
+</div>
+
+<div class="docs-divider"></div>
+
+<!-- Notes -->
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>Descoped from Sprint 2 (2026-05-05).</strong> No canonical home in any current sprint solve — the pre-L0 surface is a welcome <em>form</em> (jurisdiction + company name + Continue), not a banner. Source stays in the tree; this page is the reference if a future sprint adopts the welcome-first proposal. See the component's entry in <code>handoffs/readiness.md</code>.</div>
+    <div class="docs-note"><strong>FTUE only.</strong> Visible while Corp Gov L0 is incomplete (backend state check, not visit count). Once L0 succeeds the dashboard re-renders into the four-widget grid and the banner is gone.</div>
+    <div class="docs-note"><strong>Self-contained, not an alert variant.</strong> Decision 25 walked back an attempt to absorb welcome into <code>la-alert size="lg"</code>. The dashboard greeting carries different rhythm (heading + description + single CTA) than the inline alerting pattern <code>la-alert</code> serves; keeping them separate prevents one component growing two opposing centres of gravity.</div>
+    <div class="docs-note"><strong>One CTA only.</strong> The banner shows the next obvious step — adding a secondary action would dilute it. If you need two paths, that's a design conversation, not an extra slot. An empty <code>ctaLabel</code> drops the button entirely for informational use.</div>
+    <div class="docs-note"><strong>British English, sentence case, verb-first.</strong> Default copy follows the house copy rules. Custom copy must too.</div>
+    <div class="docs-note"><strong>Composes <code>la-button</code>.</strong> The CTA is a real button, not a styled span. Hover, focus-visible, keyboard activation, and disabled state all come for free.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const live = document.getElementById('wb-live');
+    const ctlHeading = document.getElementById('ctl-heading');
+    const ctlDescription = document.getElementById('ctl-description');
+    const ctlCta = document.getElementById('ctl-cta');
+    const log = document.getElementById('event-log');
+    let dismissed = false;
+
+    function sync() {
+      live.heading = ctlHeading.value;
+      live.description = ctlDescription.value;
+      live.ctaLabel = ctlCta.value;
+      live.dismissed = dismissed;
+    }
+    sync();
+
+    ctlHeading.addEventListener('input', sync);
+    ctlDescription.addEventListener('input', sync);
+    ctlCta.addEventListener('input', sync);
+
+    document.querySelectorAll('.btn-toggle[data-dismissed]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('.btn-toggle[data-dismissed]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        dismissed = btn.dataset.dismissed === 'true';
+        sync();
+      });
+    });
+
+    live.addEventListener('la-welcome-cta', () => {
+      log.textContent = 'la-welcome-cta → fired at ' + new Date().toLocaleTimeString();
+    });
+  })();
+</script>
+
+
+</body>
+</html>

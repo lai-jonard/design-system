@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agent design intelligence — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../../assets/brand/favicon.svg">
+  <script src="../../bundle.js" defer></script>
+  <link rel="stylesheet" href="../../docs-shell.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+  .page-content-inner { max-width: 900px; }
+
+  .ai-hero h1 {
+    font-size: 32px; font-weight: 600; color: var(--doc-text);
+    letter-spacing: -0.2px; margin-bottom: 10px;
+  }
+  .ai-hero p {
+    font-size: 15px; color: var(--doc-text-2); line-height: 1.65; max-width: 720px;
+  }
+  .ai-status {
+    display: inline-flex; align-items: center; gap: 7px; margin-top: 16px;
+    padding: 6px 12px; border-radius: var(--doc-r-pill, 999px);
+    background: var(--la-color-surface-warning); color: var(--la-color-warning-text);
+    font-size: 12px; font-weight: 500;
+  }
+
+  .ai-docs { display: flex; flex-direction: column; gap: 40px; }
+  .ai-section { scroll-margin-top: calc(var(--doc-topbar-h) + 24px); }
+  .ai-section h2 {
+    font-size: 21px; font-weight: 600; color: var(--doc-text); margin-bottom: 9px;
+  }
+  .ai-section > p {
+    font-size: 14px; color: var(--doc-text-2); line-height: 1.65; max-width: 720px;
+  }
+
+  .ai-metrics {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 10px; margin-top: 18px;
+  }
+  .ai-metric {
+    padding: 16px; border: 1px solid var(--doc-border);
+    border-radius: var(--doc-r-md); background: var(--doc-surface);
+  }
+  .ai-metric strong {
+    display: block; color: var(--doc-text); font-size: 22px;
+    font-weight: 600; line-height: 1.1; margin-bottom: 5px;
+  }
+  .ai-metric span { color: var(--doc-text-3); font-size: 12px; }
+
+  .ai-layers { display: grid; gap: 8px; margin-top: 18px; }
+  .ai-layer {
+    display: grid; grid-template-columns: 30px minmax(0, 1fr); gap: 12px;
+    padding: 14px 16px; border-radius: var(--doc-r-md); background: var(--doc-surface-2);
+  }
+  .ai-layer i { color: var(--doc-text-3); font-size: 18px; margin-top: 1px; }
+  .ai-layer strong { display: block; color: var(--doc-text); font-size: 13px; margin-bottom: 3px; }
+  .ai-layer span { color: var(--doc-text-2); font-size: 12px; line-height: 1.5; }
+
+  .ai-outcomes { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .ai-outcome {
+    padding: 6px 10px; border-radius: var(--doc-r-pill, 999px);
+    border: 1px solid var(--doc-border); background: var(--doc-surface);
+    color: var(--doc-text-2); font: 500 11px ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+
+  .ai-log {
+    margin-top: 18px; padding: 20px; border: 1px solid var(--doc-border);
+    border-radius: var(--doc-r-lg); background: var(--doc-surface);
+  }
+  .ai-log-meta { color: var(--doc-text-3); font-size: 11px; margin-bottom: 6px; }
+  .ai-log h3 { color: var(--doc-text); font-size: 15px; font-weight: 600; margin-bottom: 9px; }
+  .ai-log ul { margin: 0; padding-left: 18px; display: grid; gap: 6px; }
+  .ai-log li { color: var(--doc-text-2); font-size: 13px; line-height: 1.5; }
+
+  .ai-source {
+    margin-top: 14px; padding: 12px 14px; border-radius: var(--doc-r-md);
+    background: var(--doc-surface-2); color: var(--doc-text-2);
+    font-size: 12px; line-height: 1.6;
+  }
+  .ai-source code { color: var(--doc-text); }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../../docs/" class="active">Docs</a>
+        <a href="../../foundations/">Foundations</a>
+        <a href="../../components/">Components</a>
+        <a href="../../pages/">Pages</a>
+        <a href="../../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">Start here</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
+<a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
+<a class="docs-nav-item active" href="../../docs/agent-design-intelligence/">Agent design intelligence</a>
+</div>
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" href="#current-state">Current state</a>
+<a class="docs-nav-item" href="#context-layers">Context layers</a>
+<a class="docs-nav-item" href="#decision-gate">Decision gate</a>
+<a class="docs-nav-item" href="#improvements-log">Improvements log</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Related</span>
+<a class="docs-nav-item" href="../../components/">Components →</a>
+<a class="docs-nav-item" href="../../docs/typography/">Typography →</a>
+</div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="ai-hero">
+<h1>Agent design intelligence</h1>
+<p>
+  The structured context that helps an AI agent choose the right component, typography role,
+  composition, or escalation path. This page records improvements to that context over time;
+  canonical design guidance and human approval remain authoritative.
+</p>
+<span class="ai-status"><i class="ph-fill ph-clock" aria-hidden="true"></i> Foundation draft — human review pending</span>
+</section>
+
+<div class="ai-docs">
+<section class="ai-section" id="current-state">
+<h2>Current state</h2>
+<p>
+  The first foundation pass covers the full source library. Generated API facts stay separate
+  from drafted semantic judgement, so pending guidance cannot silently become policy.
+</p>
+<div class="ai-metrics">
+<div class="ai-metric"><strong>72</strong><span>Component records</span></div>
+<div class="ai-metric"><strong>17</strong><span>Typography roles</span></div>
+<div class="ai-metric"><strong>118</strong><span>Text-slot mappings</span></div>
+<div class="ai-metric"><strong>55</strong><span>Composition relations</span></div>
+<div class="ai-metric"><strong>7</strong><span>Canonical patterns</span></div>
+</div>
+<div class="ai-source">
+  <strong>151 reviews pending.</strong>
+  Strict acceptance remains closed until a human approves or rejects them.
+  64 components are conditional and 8 are blocked.
+</div>
+</section>
+
+<section class="ai-section" id="context-layers">
+<h2>Context layers</h2>
+<p>Agents retrieve only the layers needed for the current design decision.</p>
+<div class="ai-layers">
+<div class="ai-layer">
+<i class="ph ph-circles-three" aria-hidden="true"></i>
+<div><strong>Component intelligence</strong><span>Problem solved, use and avoid conditions, API facts, readiness, alternatives, states, and evidence.</span></div>
+</div>
+<div class="ai-layer">
+<i class="ph ph-text-aa" aria-hidden="true"></i>
+<div><strong>Semantic typography</strong><span>Interface meaning maps to approved text roles; roles map to existing tokens.</span></div>
+</div>
+<div class="ai-layer">
+<i class="ph ph-tree-structure" aria-hidden="true"></i>
+<div><strong>Composition intelligence</strong><span>Parent, child, alternative, state ownership, and existing pattern relationships.</span></div>
+</div>
+<div class="ai-layer">
+<i class="ph ph-shield-check" aria-hidden="true"></i>
+<div><strong>Governed readiness</strong><span>Pending or unsafe context blocks autonomous selection instead of allowing a plausible guess.</span></div>
+</div>
+</div>
+<div class="ai-source">
+  Implementation guide:
+  <code>tooling/product-design-harness/SCREEN-DESIGN-FOUNDATION-PLAN.md</code>
+</div>
+</section>
+
+<section class="ai-section" id="decision-gate">
+<h2>“Can it decide now?”</h2>
+<p>
+  Before composing a screen, the agent checks product facts, consequences, states, permissions,
+  domain semantics, component readiness, approved patterns, typography, responsive behaviour,
+  accessibility, and source conflicts.
+</p>
+<div class="ai-outcomes">
+<span class="ai-outcome">DECIDE</span>
+<span class="ai-outcome">DECIDE_WITH_CONSTRAINTS</span>
+<span class="ai-outcome">ASK</span>
+<span class="ai-outcome">ESCALATE</span>
+<span class="ai-outcome">BLOCK</span>
+</div>
+</section>
+
+<section class="ai-section" id="improvements-log">
+<h2>Improvements log</h2>
+<p>Add concise, newest-first entries here as the context system evolves. Keep implementation detail in the linked plan or source.</p>
+<article class="ai-log">
+<div class="ai-log-meta">27 July 2026 · Foundation intelligence</div>
+<h3>Made component and typography selection explicit</h3>
+<ul>
+<li>Catalogued all 72 source components and separated generated API facts from reviewable semantic guidance.</li>
+<li>Added semantic typography roles, text-slot mappings, composition relationships, and canonical pattern references.</li>
+<li>Added a small context compiler and deterministic decision-readiness gate with safe refusal outcomes.</li>
+<li>Added portable schemas, project initialisation, validation, and positive and negative decision fixtures.</li>
+<li>Preserved the existing skill, rules, tokens, components, adapters, and human approval workflow.</li>
+</ul>
+</article>
+</section>
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

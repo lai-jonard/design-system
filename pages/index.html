@@ -215,16 +215,16 @@
 </div>
 </div>
 
-<div class="component-card component-card--disabled">
-<div aria-hidden="true" class="component-card-image"></div>
+<a class="component-card" href="../pages/la-data-room-page.html">
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-viewport"><div class="card-preview-scale card-preview-scale--fill card-preview-scale--40"><la-data-room-page id="pv-droom" style="display:block;width:100%;height:100%"></la-data-room-page></div></div></div>
 <div class="component-card-body">
 <div class="component-card-head">
 <span class="component-card-title">Data Room Page</span>
-<span class="status-chip status-chip--deferred">Deferred</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
 </div>
-<p class="component-card-desc">Data room page scaffold. Document tree, preview, and filter rail.</p>
+<p class="component-card-desc">Read-only document library grouped by legal area — Governance and Employment. Ready-count header, browsing only. Sprints 11–16.</p>
 </div>
-</div>
+</a>
 
 <div class="component-card component-card--disabled">
 <div aria-hidden="true" class="component-card-image"></div>
@@ -254,6 +254,14 @@
   if (lap) { lap.area = 'Governance'; lap.subtitle = 'Board, filings, and company records.'; lap.pageState = 'all-clean'; }
   var da = document.getElementById('pv-dash');
   if (da) da.showWelcome = true;
+  var dr = document.getElementById('pv-droom');
+  if (dr) {
+    dr.documents = [
+      { name: 'Articles of Incorporation', status: 'ready', association: 'Acme Corp.', category: 'Governance' },
+      { name: 'Board Resolution — Share Issuance', status: 'ready', association: 'Acme Corp.', category: 'Governance' },
+      { name: 'Employment Agreement — Alex Chen', status: 'ready', association: 'Alex Chen', category: 'Employment' },
+    ];
+  }
   function freeze() {
     document.querySelectorAll('.component-card-image--live').forEach(function (el) {
       if (el.getAnimations) el.getAnimations({ subtree: true }).forEach(function (a) { a.pause(); });

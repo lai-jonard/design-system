@@ -216,6 +216,7 @@
 <div class="docs-nav-group">
 <a class="docs-nav-item" href="../../docs/workflow/">Design workflow</a>
 <a class="docs-nav-item" href="../../docs/readiness/">Component readiness</a>
+<a class="docs-nav-item" href="../../docs/agent-design-intelligence/">Agent design intelligence</a>
 </div>
 </nav>
 
@@ -303,8 +304,155 @@
 <li>If the component is Tier 2 (specialised), log the rationale in <code>design-language/components.md</code></li>
 </ol>
 <hr>
+<h2 id="git--github--the-sprint-pipeline">Git &amp; GitHub — the sprint pipeline</h2>
+<p>How work moves through the repo (decision 87). One maintainer, but three audiences: engineering
+reads the repo and PRs directly (WIP included — they finalise against the handoff document),
+QA/PM/stakeholders read the published mirror, and a second designer translates this work into a
+separate prototyping repo.</p>
+<h3 id="sprint-start">Sprint start</h3>
+<pre><code class="language-bash">git checkout main &amp;&amp; git pull &amp;&amp; git checkout -b sprint-19-esignature
+</code></pre>
+<p>One branch per sprint, named for the sprint. Never reuse a branch after its PR merges.</p>
+<h3 id="during-the-sprint">During the sprint</h3>
+<p>Commit per <strong>decision-sized unit</strong> — a component, its docs, and its decision file travel
+together, message prefixed with the sprint:</p>
+<pre><code class="language-bash">git commit -m &quot;s19: tinted ghost badges for signature status (decision 86)&quot;
+</code></pre>
+<p>Push at least daily (backup + engineering can watch WIP). <code>npm run dev</code> keeps builds fresh
+while you work; the <code>prebuild</code> hook regenerates the token/motion mirrors automatically.</p>
+<h3 id="sprint-closeout-checklist">Sprint closeout checklist</h3>
+<ol>
+<li>Heuristics sweep on the flow (<code>design-language/usability-heuristics.md</code>)</li>
+<li><code>/ready</code> any new components → <code>docs-src/</code> + <code>handoffs/readiness.md</code> rows</li>
+<li>Handoff doc version bump + changelog entry (<code>handoffs/stage-N-*/</code>)</li>
+<li><code>npm run build &amp;&amp; npm run build:bundle &amp;&amp; npm run docs</code></li>
+<li><code>python3 scripts/audit-prototypes.py</code> — broken links / assets / orphans</li>
+<li>Commit, open the PR (<code>gh pr create</code>) with review pointers, merge</li>
+<li>Tag the handoff so it survives branch deletion: <code>git tag sprint-19/handoff-v3.0 &amp;&amp; git push --tags</code></li>
+<li>Publish the mirror when the docs are worth sharing: <code>npm run publish:docs</code></li>
+</ol>
+<h3 id="what-ci-checks-github-actions-every-pr">What CI checks (GitHub Actions, every PR)</h3>
+<ul>
+<li><strong>Generated files are fresh</strong> — CI rebuilds (<code>build</code>, <code>build:bundle</code>, <code>docs</code>) and fails on
+any diff. If it fails: run step 4 above and commit the result.</li>
+<li><strong>Prototype audit</strong> — no broken navigation links or missing assets in <code>dev/prototypes/</code>.</li>
+<li><strong>No real company names</strong> in prototype/docs markup. Documented scoped exceptions carry a
+<code>no-real-names-ok</code> marker on the same line.</li>
+</ul>
+<p>CI owns the mechanical invariants only. Decision logging, handoff versioning, heuristics
+reviews, and PR bodies stay manual — they are the design work itself.</p>
+<h3 id="the-published-mirror">The published mirror</h3>
+<p><code>npm run publish:docs</code> builds the site, rewrites paths, and pushes to the Pages mirror
+(<code>lai-jonard/design-system</code>) — a deliberate manual step, because the mirror is a curated share
+surface for QA/PM/stakeholders. <code>handoffs/</code>, <code>decisions/</code>, and <code>CLAUDE.md</code> never ship to it.
+It's fine to publish daily; it's a reference, not a release.</p>
+<hr>
+<h2 id="the-correction-loop--where-feedback-gets-written-down">The correction loop — where feedback gets written down</h2>
+<p>Every correction the designer makes to AI-drafted work (or to their own earlier work) first lands
+as evidence in <code>.agent-system/evidence/inbox/</code>, with provenance and the observed fact separated
+from any proposed generalisation. Drafts carry an explicit <strong>&quot;open taste questions&quot;</strong> list wherever
+the author wasn't sure.</p>
+<p>The evidence collector builds a review packet; it never edits canonical guidance. A human decides
+whether an item is one-task evidence, a scoped preference, a reusable pattern, a rule, or a
+rejection. Only accepted items are routed below. This keeps the memory durable without turning one
+comment, screenshot, or model output into policy.</p>
+<p>Routing after human acceptance — by what kind of correction it is:</p>
+<table>
+<thead>
+<tr>
+<th>The correction is…</th>
+<th>It gets written to</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A settled rule (&quot;never X&quot;, &quot;always Y&quot;)</td>
+<td><code>decisions/NN-*.md</code> + the relevant <code>design-language/</code> doc</td>
+<td>Tinted ghost badges for status (decision 86)</td>
+</tr>
+<tr>
+<td>A rule that will be <strong>cited, enforced, or tested</strong></td>
+<td>Also add an entry to <code>design-language/rules.md</code> (stable <code>rule/…</code> ID)</td>
+<td><code>rule/one-card-surface</code> (decision 89)</td>
+</tr>
+<tr>
+<td>A rule a <strong>machine can check</strong></td>
+<td>A check in <code>scripts/design-audit.py</code> + a fixture in <code>tooling/evals/</code></td>
+<td><code>rule/no-hardcoded-values</code></td>
+</tr>
+<tr>
+<td>A screen/flow composition pattern (how to build)</td>
+<td>The narrowest relevant <code>design-language/</code> document, normally <code>page-architecture.md</code> plus the specific surface doc</td>
+<td>How a document-first review header is composed</td>
+</tr>
+<tr>
+<td>Copy or vocabulary</td>
+<td><code>design-language/copy-guidelines.md</code></td>
+<td>Signature-status vocabulary</td>
+</tr>
+<tr>
+<td>Taste or preference (not yet a rule)</td>
+<td><code>design-language/design-brief.md</code> § Taste</td>
+<td>Space over chrome; evidence over labels</td>
+</tr>
+<tr>
+<td>Business context or goals</td>
+<td><code>design-language/design-brief.md</code></td>
+<td>Who the buyer is; what's deferred</td>
+</tr>
+<tr>
+<td>A mistake worth remembering (ours or an agent's)</td>
+<td><code>.agents/skills/product-design/exemplars/pr-*.md</code></td>
+<td><code>fill-mode: both</code> trapping a fixed backdrop</td>
+</tr>
+<tr>
+<td>A decision we <strong>can't</strong> make yet</td>
+<td><code>.agents/skills/product-design/coverage-gaps.md</code> (with an owner)</td>
+<td>Ceremony failure state — unspecified by HQ</td>
+</tr>
+<tr>
+<td>How an agent should approach the work (mode, routing)</td>
+<td><code>.agents/skills/product-design/SKILL.md</code></td>
+<td>Copy mode must not widen into a redesign</td>
+</tr>
+<tr>
+<td>Workflow / process</td>
+<td>This file's Decisions &amp; evolution section (+ <code>decisions/</code> if load-bearing)</td>
+<td>Branch-per-sprint (decision 87)</td>
+</tr>
+<tr>
+<td>Session-level working preference</td>
+<td>The current agent's local memory only; never canonical without review</td>
+<td>Preferred dev commands</td>
+</tr>
+</tbody>
+</table>
+<p>Rule of thumb: if a future draft would repeat the mistake without the note, it must be written
+down — in the most specific home that a future author (human or AI) will actually load when
+doing that kind of work.</p>
+<p><strong>Never promote one screenshot, one shipped file, or one comment into a universal rule.</strong> A rule
+earns an ID and a check once it has survived being applied more than once; until then it's taste
+(<code>design-brief.md</code>) or an open gap (<code>coverage-gaps.md</code>). See
+decision 90.</p>
+<hr>
 <h2 id="decisions--evolution">Decisions &amp; evolution</h2>
 <p>How the workflow itself has changed over time. Each entry: the rule, why it exists, and how to apply it. Promote to a dedicated file if this section exceeds ~10 entries.</p>
+<h3 id="one-governed-product-design-harness-across-agents--2026-07-27">One governed product-design harness across agents — 2026-07-27</h3>
+<p>Full architecture and rationale in
+decision 91.</p>
+<p><strong>Why:</strong> Claude-only bootstrap content, 71 overlapping discoverable skills, and duplicated
+LawAdvisor guidance created retrieval noise and agent-specific drift. Direct self-learning would
+replace that drift with a more dangerous failure: unreviewed observations becoming policy.</p>
+<p><strong>How to apply:</strong> Keep <code>AGENTS.md</code> as the shared map and <code>product-design</code> as the single entry point.
+Adapters stay thin. Capture corrected diffs, comments, eval failures, and Figma annotations in the
+evidence inbox; generate a review packet; update canonical sources only after human acceptance.
+Use the portable harness to install the same workflow in other projects, then supply that project's
+own context and fixtures.</p>
+<h3 id="git-standard-branch-per-sprint-pr-even-solo-tagged-handoffs--2026-07-24">Git standard: branch-per-sprint, PR-even-solo, tagged handoffs — 2026-07-24</h3>
+<p>Full pipeline in the &quot;Git &amp; GitHub&quot; section above; rationale in decision 87.</p>
+<p><strong>Why:</strong> Solo maintenance made ceremony easy to skip — a stale-named branch carried unrelated PRs, sprints landed as single 70-file commits, and generated files went stale whenever a build step was forgotten. The failure modes were mechanical, so the fix is mechanical: naming rules, a checklist, and CI for the invariants.</p>
+<p><strong>How to apply:</strong> Branch per sprint; commit per decision-sized unit with an <code>sNN:</code> prefix; PR + tag at closeout; let CI catch stale generated files, broken prototype links, and real-name leaks. Keep judgement calls (decisions, handoffs, heuristics) manual.</p>
 <h3 id="solves-are-for-composed-components-and-flows-not-primitives--2026-04-24">Solves are for composed components and flows, not primitives — 2026-04-24</h3>
 <p>Primitives (<code>src/primitives/</code>) skip straight to <code>/build → /audit → /ready</code> plus atomic <code>decisions/NN-*.md</code>. Composed components (<code>src/components/</code>) and flow/page work get a preceding <code>solves/yymmdd-N-topic/</code> workspace when the problem is still mushy.</p>
 <p><strong>Why:</strong> Primitives are narrowly scoped — the questions are atomic (&quot;what weight, what radius, what reflects&quot;). A three-file solve workspace is overkill for a decision that fits in three lines. Composed components and flows span multiple screens and interactions; that shape needs a workspace.</p>
