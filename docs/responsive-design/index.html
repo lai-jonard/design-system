@@ -235,6 +235,10 @@
 <article class="md-body">
   <h1 id="responsive-design">Responsive design</h1>
 <p>Guidelines for making layouts work across screen sizes.</p>
+<p><strong>Addressable rule:</strong> <code>rule/responsive-layout-contract</code>
+(decision 92). This page owns the detailed
+breakpoints and implementation guidance; the registry entry provides the stable ID used in
+reviews and handoffs.</p>
 <hr>
 <h2 id="breakpoints">Breakpoints</h2>
 <table>
@@ -368,6 +372,11 @@ gap: 14px;
 <td><code>la-drawer</code></td>
 <td>480px viewport</td>
 <td>Right and left drawers become <code>width: 100vw</code> (corner radius collapses to 0). Top/bottom drawers are already full-width at every viewport, so the rule doesn't apply to them.</td>
+</tr>
+<tr>
+<td><code>la-person-item</code></td>
+<td>420px container</td>
+<td>Moves trailing status/actions beneath the person identity so names and roles remain legible in narrow lists.</td>
 </tr>
 </tbody>
 </table>

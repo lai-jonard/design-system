@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-pdf-preview — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-pdf-preview</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-pdf-preview</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div id="overview" class="preview-header">
+  <h1>la-pdf-preview</h1>
+  <p>Inline PDF preview shared by document review and signing surfaces. It wraps the browser-native PDF viewer rather than introducing a PDF library, and accepts a rendered page image for environments that cannot display PDFs inline.</p>
+</div>
+
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>The host fills its container. A scroll region contains the PDF object; the fallback image or empty state occupies the same region.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Anatomy regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Scroll region</td><td><code>.scroll</code></td><td>Owns vertical overflow and allows the preview to fill a constrained page pane.</td></tr>
+      <tr><td>PDF object</td><td><code>&lt;object type="application/pdf"&gt;</code></td><td>Browser-native renderer. The component appends <code>#toolbar=0&amp;navpanes=0&amp;view=FitH</code>.</td></tr>
+      <tr><td>Fallback image</td><td><code>.fallback</code></td><td>Rendered page image used when the browser has no inline PDF viewer.</td></tr>
+      <tr><td>Empty state</td><td><code>.empty</code></td><td>Shown when <code>src</code> is empty, or as an open-document fallback when no image is supplied.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Document preview with rendered fallback</div>
+  <div class="preview-frame" style="width:min(100%,720px);height:640px;padding:0;align-items:stretch;">
+    <la-pdf-preview
+      src="../assets/sample-docs/shareholders-agreement-acme-preview.pdf"
+      fallback-image="/assets/sample-docs/shareholders-agreement-acme-preview.png"
+      label="Shareholders' Agreement"></la-pdf-preview>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">No preview source</div>
+  <div class="preview-frame" style="width:min(100%,720px);height:360px;padding:0;align-items:stretch;">
+    <la-pdf-preview label="Unavailable document"></la-pdf-preview>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-pdf-preview</h2>
+    <p>Inline PDF preview shared by document review and signing surfaces. Uses the browser-native PDF viewer with a rendered page-image fallback.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>src</td>
+          <td><span class="default">src</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>URL of the PDF to display.</td>
+        </tr>
+      
+        <tr>
+          <td>fallbackImage</td>
+          <td><span class="default">fallback-image</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Image URL shown when the browser has no inline PDF viewer (fallback).</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Document preview&#39;</span></td>
+          <td>Accessible label — used as the object's aria-label and the fallback image alt.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+  <pre><code>&lt;la-pdf-preview
+  src="../documents/shareholders-agreement.pdf"
+  fallback-image="/previews/shareholders-agreement-page-1.png"
+  label="Shareholders' Agreement"&gt;
+&lt;/la-pdf-preview&gt;</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <div style="display:flex;flex-direction:column;gap:8px;">
+    <div class="docs-note"><strong>No PDF dependency</strong> — the product serves a preview PDF and the browser draws it. Do not add PDF.js or another renderer without a product-level reason.</div>
+    <div class="docs-note"><strong>Always provide a useful label</strong> — <code>label</code> becomes the PDF object's accessible name and the fallback image alt text.</div>
+    <div class="docs-note"><strong>Provide a fallback for prototype and automation surfaces</strong> — headless browsers and embedded webviews may not load the native PDF plugin. A rendered first-page image keeps the state visually testable.</div>
+    <div class="docs-note"><strong>Mobile uses the rendered fallback</strong> — below 768px, the fallback image replaces the embedded PDF object because native viewers are not reliably usable inside a narrow pane.</div>
+    <div class="docs-note"><strong>Processing does not own the preview</strong> — hosts such as <code>la-document-page</code> should keep an available PDF visible while analysis runs and communicate processing through status UI.</div>
+  </div>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

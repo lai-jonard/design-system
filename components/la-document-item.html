@@ -298,6 +298,23 @@
   </div>
 </div>
 
+<div class="preview-group">
+  <div class="preview-label">Default DD pack selection — plus when excluded, check when selected</div>
+  <div class="preview-frame" style="max-width:520px; flex-direction:column; gap:4px; align-items:stretch;">
+    <la-document-item
+      name="Articles of Incorporation"
+      association="Acme Corp."
+      status="ready"
+      show-pack-toggle
+      in-default-pack></la-document-item>
+    <la-document-item
+      name="Shareholders' Agreement"
+      association="Acme Corp."
+      status="ready"
+      show-pack-toggle></la-document-item>
+  </div>
+</div>
+
 <!-- Status lifecycle -->
 <div id="lifecycle" class="preview-header" style="margin-top:8px;">
   <h1>Status lifecycle</h1>
@@ -394,7 +411,7 @@
           <td><span class="default">show-pack-toggle</span></td>
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
-          <td>Show the "in default pack" toggle column</td>
+          <td>Show the default-pack selection button</td>
         </tr>
       
         <tr>
@@ -546,6 +563,7 @@ item.addEventListener('la-select', () =&gt; {
     <div class="docs-note"><strong>Processing widget mapping</strong> — <code>la-processing-widget</code> uses a <code>completed</code> status in its own API, which it maps to <code>ready</code> before passing to <code>la-document-item</code>. This divergence is intentional — "ready" is the correct word once a document is viewable. Do not normalise it away.</div>
     <div class="docs-note"><strong>Error message scope</strong> — Only rendered when <code>status="failed"</code> and <code>error</code> is non-empty. Setting <code>error</code> on any other status has no visual effect.</div>
     <div class="docs-note"><strong>Keyboard behaviour</strong> — When interactive, the row is a native <code>&lt;button&gt;</code>. Enter and Space fire <code>la-select</code>. The built-in dismiss is its own focusable <code>la-icon-button</code> — Tab moves into and out of it cleanly. Focus rings use <code>:focus-visible</code> and are not suppressed.</div>
+    <div class="docs-note"><strong>Default-pack selection is a pressed button, not a switch</strong> — Set <code>show-pack-toggle</code> to render a trailing <code>la-icon-button</code>. Unselected uses <code>ph-plus</code>; selected uses plain <code>ph-check</code> (decision 59) and <code>aria-pressed="true"</code>. The label names both the action and document. In this mode the row itself is a non-interactive <code>&lt;div&gt;</code>, avoiding nested buttons.</div>
     <div class="docs-note"><strong>ready is transitory</strong> — <code>status="ready"</code> is a brief confirmation after processing completes (~3s), after which the parent should revert to <code>none</code>. The component holds no internal timer — the consumer owns the revert. See the Status lifecycle demo above.</div>
     <div class="docs-note"><strong>Re-upload vs Retry</strong> — use <strong>Re-upload</strong> when the failure means the user has to provide a new file (corrupted scan, wrong format, illegible). Use <strong>Retry</strong> when the existing file just needs another attempt at the same operation (transient network, parser timeout, server hiccup). The action verb should match what the user actually has to do — anything else is dishonest.</div>
     <div class="docs-note"><strong>Spinner colour is <code>--la-color-primary</code>.</strong> The processing-state spinner uses primary (near-black) for a calm monochrome reading. See decision 53 for the rationale and the soft tension with CLAUDE.md's "primary on interactive only" rule.</div>

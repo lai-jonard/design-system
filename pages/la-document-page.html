@@ -87,7 +87,7 @@
               <tr><td>About section</td><td><code>.detail-section</code> (About)</td><td>Backend-determined renderer: <code>key-terms</code> renders a flat sentence list; <code>obligations</code> renders party-grouped obligation bullets; <code>loading</code> shows a spinner while analysis runs; empty string hides the section entirely.</td></tr>
               <tr><td>Details section</td><td><code>.detail-section</code> (Details)</td><td>Key–value rows for uploadedDate, fileSize, category, and legalArea. Hidden when all four are absent.</td></tr>
               <tr><td>Linked insights</td><td><code>.detail-section</code> (Linked insights)</td><td>Clickable severity-icon rows for each <code>LinkedInsight</code> in the <code>insights</code> array. Section is hidden entirely when the array is empty. Consumer wires clicks to open <code>la-insight-modal</code>.</td></tr>
-              <tr><td>Preview pane</td><td><code>.preview-pane</code></td><td>Right column (1fr). Subtle surface. Shows a document-file placeholder for <code>ready</code> and flagged statuses; animated spinner for <code>processing</code>.</td></tr>
+              <tr><td>Preview pane</td><td><code>.preview-pane</code></td><td>Right column (1fr). When <code>previewSrc</code> is set, composes <code>la-pdf-preview</code> for every status, including processing. Without a source, processing shows a fallback spinner and other statuses show the file placeholder.</td></tr>
             </tbody>
           </table>
         </div>
@@ -342,7 +342,7 @@
                   <td><span class="default">document-status</span></td>
                   <td><span class="type">'ready' | 'processing' | 'flagged-expired' | 'flagged-unsigned' | 'flagged-ai'</span></td>
                   <td><span class="default">'ready'</span></td>
-                  <td>Drives the status badge, flag banner, and preview pane state. <code>processing</code> shows a spinner in the preview pane; all flagged values show the flag banner in the detail pane.</td>
+                  <td>Drives the status badge and flag banner. Processing keeps an available PDF preview visible; it shows the fallback spinner only when <code>previewSrc</code> is empty.</td>
                 </tr>
                 <tr>
                   <td>entity</td>
@@ -434,6 +434,27 @@
                   <td><span class="type">AboutItem[]</span></td>
                   <td><span class="default">[]</span></td>
                   <td>Array of items for the About renderer. Key terms: <code>{ text: string }[]</code>. Obligations: <code>{ party: string; items: string[] }[]</code>. Mix of types is not supported — use the type that matches <code>aboutType</code>.</td>
+                </tr>
+                <tr>
+                  <td>previewSrc</td>
+                  <td><span class="default">preview-src</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>PDF URL passed to <code>la-pdf-preview</code>. When present it takes precedence over the processing placeholder.</td>
+                </tr>
+                <tr>
+                  <td>previewFallback</td>
+                  <td><span class="default">preview-fallback</span></td>
+                  <td><span class="type">string</span></td>
+                  <td><span class="default">''</span></td>
+                  <td>Rendered page image shown when the browser cannot display the PDF inline.</td>
+                </tr>
+                <tr>
+                  <td>hideDetails</td>
+                  <td><span class="default">hide-details</span></td>
+                  <td><span class="type">boolean</span></td>
+                  <td><span class="default">false</span></td>
+                  <td>Suppresses the Details metadata section when the header already carries the necessary context.</td>
                 </tr>
               </tbody>
             </table>
@@ -590,8 +611,8 @@ page.addEventListener('la-entity-click', function(e) {
               <li><strong>Actions are in the header menu</strong> · Replace and Delete are in a <code>la-menu</code> next to the status badge, not a bottom section. Set <code>replacing = true</code> while an upload is in progress to disable the menu and show an "Uploading…" indicator.</li>
               <li><strong>Linked insights section hidden when empty</strong> · the section is not rendered at all when <code>insights</code> is an empty array. No fallback message is shown.</li>
               <li><strong>Two-column layout is fixed</strong> · left detail pane is 600px, right preview pane fills remaining space. Flag banners use <code>la-alert</code>; spinners use <code>ph-spinner-gap</code> with CSS rotation.</li>
-              <li><strong>Preview pane is a placeholder</strong> · shows a document-file icon and "View original" button. Actual PDF/DOCX rendering is engineering's concern at integration time.</li>
-              <li><strong>"View original" button — engineering decision needed</strong> · the button is intended to open the raw uploaded file (PDF/DOCX) in a new tab or trigger a download, giving users access to the exact file as uploaded. If the preview pane renders the actual file directly, this button becomes redundant and should be removed. Engineering should confirm their preview approach before wiring it up.</li>
+              <li><strong>PDF preview is shared</strong> · set <code>previewSrc</code> to compose <code>la-pdf-preview</code>. It stays visible while <code>documentStatus="processing"</code>, so analysis status does not blank a document the browser can already render. Set <code>previewFallback</code> for headless or plugin-free environments.</li>
+              <li><strong>Fallbacks remain explicit</strong> · processing without a preview source shows a spinner and “The preview will appear when the file is ready.” Other statuses without a source retain the file placeholder and View original action.</li>
             </ul>
           </div>
 

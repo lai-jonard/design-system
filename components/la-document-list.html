@@ -105,6 +105,12 @@
 </div>
 </div>
 <div class="preview-group">
+<div class="preview-label">Default DD pack selection</div>
+<div class="preview-frame" style="max-width:480px; align-items:stretch;">
+<la-document-list id="snap-pack" heading="" show-pack-toggle style="width:100%;"></la-document-list>
+</div>
+</div>
+<div class="preview-group">
 <div class="preview-label">Empty — no documents</div>
 <div class="preview-frame" style="max-width:480px; align-items:stretch;">
 <la-document-list heading="Documents" id="snap-empty" style="width:100%;"></la-document-list>
@@ -156,7 +162,7 @@
           <td><span class="default">show-pack-toggle</span></td>
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
-          <td>Show the "Default pack" toggle column on each row</td>
+          <td>Show the default-pack selection button on each row</td>
         </tr>
       
         <tr>
@@ -226,6 +232,12 @@ list.documents = [
 });</div>
 </div>
 <div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Listen for pack selection changes</p>
+<div class="docs-code">list.addEventListener(<span class="str">'la-pack-change'</span>, (e) =&gt; {
+  console.log(e.detail.name, e.detail.inDefaultPack);
+});</div>
+</div>
+<div>
 <p style="margin-bottom:8px;color:#666;font-size:12px;">Custom heading</p>
 <div class="docs-code"><span class="kw">&lt;la-document-list</span>
 <span class="at">heading</span>=<span class="str">"Related documents"</span>
@@ -239,6 +251,7 @@ list.documents = [
 <div class="docs-note"><strong>Category grouping</strong> — Category labels are shown automatically when two or more distinct non-empty categories exist in the array. A single category or all uncategorised items renders a flat list with no labels.</div>
 <div class="docs-note"><strong>la-select bubbles</strong> — Row selection events bubble up from the composed <code style="font-family:monospace;font-size:11px;">la-document-item</code> elements. The event target is the individual <code style="font-family:monospace;font-size:11px;">la-document-item</code>. Use <code style="font-family:monospace;font-size:11px;">e.target.getAttribute('name')</code> to identify which document was selected.</div>
 <div class="docs-note"><strong>Per-item actions</strong> — <code style="font-family:monospace;font-size:11px;">la-document-item</code> exposes an <code style="font-family:monospace;font-size:11px;">actions</code> slot for injecting buttons into each row. <code style="font-family:monospace;font-size:11px;">la-document-list</code> does not forward this slot — if per-item actions are needed, use <code style="font-family:monospace;font-size:11px;">la-document-item</code> directly. The Company Manual uses name-only mode; grouped action patterns are deferred.</div>
+<div class="docs-note"><strong>Default-pack selection</strong> — Set <code style="font-family:monospace;font-size:11px;">show-pack-toggle</code> to render a trailing pressed icon button on every row. The unselected state uses <code>ph-plus</code>; selected uses the plain <code>ph-check</code> from decision 59. The control exposes <code>aria-pressed</code>, has a document-specific accessible name, and emits <code>la-pack-change</code>. Pack rows render as non-interactive containers so the selection button is never nested inside a row button.</div>
 </div>
 </div>
 
@@ -274,6 +287,11 @@ list.documents = [
             { name: 'Board-Resolution-2026.pdf', association: 'Corp Governance', status: 'processing' },
             { name: 'Privacy-Policy-v3.pdf', association: 'Data & Privacy', status: 'none' },
             { name: 'Scan-corrupted.pdf', association: 'Employment', status: 'failed' },
+          ];
+
+          document.getElementById('snap-pack').documents = [
+            { name: 'Articles of Incorporation', association: 'Acme Corp.', category: 'Governance', status: 'ready', inDefaultPack: true },
+            { name: "Shareholders' Agreement", association: 'Acme Corp.', category: 'Governance', status: 'ready', inDefaultPack: false },
           ];
 
           document.getElementById('snap-empty').documents = [];

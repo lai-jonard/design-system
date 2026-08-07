@@ -517,6 +517,47 @@ the Title Case structural register.</p>
 <p><strong>Icon slots:</strong> <code>icon-left</code> for context (envelope, person, lock), <code>icon-right</code> for actions (password reveal) or status (validation check). Padding adjusts automatically — no extra props needed.</p>
 <p>Search inputs are a separate component (<code>la-search-input</code>, not yet built). Use <code>type=&quot;search&quot;</code> on <code>la-input</code> as a temporary measure only — the native clear button is not styled.</p>
 <hr>
+<h3 id="la-date-input"><code>la-date-input</code></h3>
+<p>A segmented text-entry component for a <strong>known single date</strong>. It removes browser-specific native date chrome while retaining fast keyboard entry, explicit format guidance, whole-date validation, and an ISO <code>YYYY-MM-DD</code> value for storage.</p>
+<p><strong>Problem solved:</strong> Founders need to enter exact dates they already know (for example, an expected investment closing date) without guessing the locale format or navigating a calendar. Native <code>type=&quot;date&quot;</code> controls are inconsistent across browsers, while a free-text field makes invalid and ambiguous dates too easy.</p>
+<table>
+<thead>
+<tr>
+<th>Prop</th>
+<th>When to use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>value</code></td>
+<td>Controlled ISO date (<code>YYYY-MM-DD</code>). Empty while entry is partial or invalid.</td>
+</tr>
+<tr>
+<td><code>locale</code></td>
+<td>Determines the visible segment order and formatted constraint messages. Defaults to <code>en-US</code>.</td>
+</tr>
+<tr>
+<td><code>label</code> / <code>aria-label</code></td>
+<td>Name the date. Use <code>aria-label</code> when the surrounding question already provides the visible label.</td>
+</tr>
+<tr>
+<td><code>hint</code></td>
+<td>Optional supporting guidance. The component always falls back to the locale format.</td>
+</tr>
+<tr>
+<td><code>min</code> / <code>max</code></td>
+<td>ISO boundaries for the valid date.</td>
+</tr>
+<tr>
+<td><code>required</code> / <code>optional</code> / <code>disabled</code> / <code>error</code></td>
+<td>Mirror <code>la-input</code>.</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Event:</strong> <code>la-change</code> — <code>{ value: string, valid: boolean, complete: boolean }</code>. The value is ISO only when the full date and constraints are valid.</p>
+<p><strong>Keyboard:</strong> Numeric entry auto-advances only after a segment is complete. <code>/</code> or <code>-</code> advances explicitly; Backspace from an empty segment returns to the previous one; Left/Right move between segment boundaries. Pasting a complete numeric date follows the visible locale order.</p>
+<p><strong>Composition boundary:</strong> This component never opens a calendar. A future <code>la-date-picker</code> should use <code>la-date-input</code> as its typed-entry surface and own calendar disclosure, focus management, and surrounding-date selection. A future <code>la-date-range</code> should compose two labelled date inputs (and optionally a shared picker), then own start/end ordering and range-specific validation. Do not add picker or range state to <code>la-date-input</code>.</p>
+<hr>
 <h3 id="la-menu--la-menu-item--la-menu-toggle--la-menu-divider"><code>la-menu</code> + <code>la-menu-item</code> + <code>la-menu-toggle</code> + <code>la-menu-divider</code></h3>
 <p>Tertiary action surface — a 3-dot trigger button that reveals a floating list of actions. <code>la-menu</code> owns the trigger, panel, and open/close lifecycle. <code>la-menu-item</code> is the action row primitive: label, optional icon, and a <code>danger</code> variant. <code>la-menu-toggle</code> is a switch row for boolean in-menu settings (does not close the panel on change). <code>la-menu-divider</code> is a visual separator between sections. Status: 🟢 v1 ready (2026-05-07) — full reference at <a href="../../components/la-menu.html">docs-src/components/la-menu.html</a>.</p>
 <p><strong>Problem solved:</strong> Every page or card surface needs a consistent home for tertiary actions (rename, delete, export, etc.). Before this, teams were inventing ad-hoc popouts with inconsistent styling, shadow, and keyboard behaviour. <code>la-menu</code> is the one canonical answer — reach for it whenever an action doesn't warrant a visible button and isn't the primary CTA.</p>
@@ -1265,6 +1306,11 @@ the Title Case structural register.</p>
 <td>Data room page</td>
 <td><code>la-data-room-page</code></td>
 <td>Data room is a distinct layout (investor grid + document library) that doesn't fit la-legal-area-page</td>
+</tr>
+<tr>
+<td>Clause preview</td>
+<td><code>la-clause-preview</code> <em>(candidate — prototype-stage, Sprints 21–22)</em></td>
+<td>The negotiation redline surface needs <strong>clause-level interaction</strong> — click a clause to propose changes, hover between clauses to insert one, render per-clause highlight states (edited / deleted / added / commented). <code>la-pdf-preview</code> can't do any of that: a PDF is an opaque raster to the DOM. So negotiation renders the contract as a <strong>clause-segmented DOM document</strong> — the one surface in the product where the document body is HTML, not PDF (the executed version post-signing returns to <code>la-pdf-preview</code>). Lives as prototype markup + CSS in <code>dev/prototypes/</code> for Sprints 21–22; promote to a component when the investor-side surface (Sprint 22) confirms the second consumer and stabilises the clause/thread API. Highlight states map to existing semantic tokens (see sprint-21 design log) — no new tokens.</td>
 </tr>
 <tr>
 <td>Info hint</td>

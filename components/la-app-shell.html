@@ -262,7 +262,39 @@
         </tr>
       
         <tr>
+          <td>_isNarrowNav</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Tracks whether navigation is presented as an overlay</td>
+        </tr>
+      
+        <tr>
+          <td>_navOpen</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Tracks whether the narrow navigation overlay is open</td>
+        </tr>
+      
+        <tr>
           <td>_onToggleAside</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onNavChange</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onSidebarDismiss</td>
           <td>—</td>
           <td>—</td>
           <td>—</td>
@@ -273,6 +305,14 @@
           <td>_resizeObserver</td>
           <td>—</td>
           <td><span class="type">ResizeObserver | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_sidebarWasCollapsed</td>
+          <td>—</td>
+          <td><span class="type">boolean | undefined</span></td>
           <td>—</td>
           <td>—</td>
         </tr>
@@ -404,7 +444,9 @@ element.dispatchEvent(
 <h3>Notes</h3>
 <div style="display:flex;flex-direction:column;gap:8px;">
 <div class="docs-note"><strong>Height requirement</strong> — <code>la-app-shell</code> is <code>display: flex; height: 100%</code>. The parent must provide an explicit height — typically <code>height: 100vh</code> on the body or a full-height wrapper.</div>
-<div class="docs-note"><strong>Container query, not viewport</strong> — The aside responsive breakpoint is a CSS container query on the content area (<code>container-name: app-shell-content</code>). The aside switches to overlay mode when the content area is ≤ 1023px wide, regardless of viewport size. A collapsed sidebar widens the content area and can shift the breakpoint without any JS.</div>
+<div class="docs-note"><strong>Responsive navigation</strong> — Below 1024px, the sidebar becomes an off-canvas overlay opened by a 44px navigation button, with the LawAdvisor mark and wordmark retained in the compact bar. Selecting a destination or tapping the backdrop closes it; returning to desktop restores the user's previous collapsed state.</div>
+<div class="docs-note"><strong>Mobile content panel</strong> — Below 768px, the panel's outer margin collapses to zero and its bottom corners become square so the surface uses the full viewport. The main slot's internal padding remains unchanged.</div>
+<div class="docs-note"><strong>Aside breakpoint</strong> — A <code>ResizeObserver</code> watches the shell content width. At ≤ 1023px the aside moves into <code>la-drawer</code>; above that width it remains inline, without changing the public API.</div>
 <div class="docs-note"><strong>Breadcrumb array</strong> — Set via JS property only (not an HTML attribute) since the value is an array: <code>shell.breadcrumbs = [...]</code>. When <code>breadcrumbs</code> is non-empty, it overrides <code>pageTitle</code>.</div>
 <div class="docs-note"><strong>Aside overlay close</strong> — At tablet widths a close button (×) is automatically rendered at the top of the aside, and tapping the backdrop closes the panel. Both close via internal state — no event is emitted.</div>
 </div>

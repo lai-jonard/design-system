@@ -460,7 +460,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */function e$1(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$2(n,s,{get(){return o(this)}})}}
 
-  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -627,19 +627,19 @@
       }
     `,
   ];
-  __decorate$16([
+  __decorate$17([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "variant", void 0);
-  __decorate$16([
+  __decorate$17([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "type", void 0);
-  __decorate$16([
+  __decorate$17([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "appearance", void 0);
-  __decorate$16([
+  __decorate$17([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
-  exports.LaBadge = __decorate$16([
+  exports.LaBadge = __decorate$17([
       t('la-badge')
   ], exports.LaBadge);
 
@@ -649,7 +649,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const o=o=>o??A;
 
-  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -775,29 +775,29 @@
       }
     `,
   ];
-  __decorate$15([
+  __decorate$16([
       n()
   ], exports.LaIconButton.prototype, "label", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean })
   ], exports.LaIconButton.prototype, "expanded", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "pressed", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "size", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "variant", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "disabled", void 0);
-  exports.LaIconButton = __decorate$15([
+  exports.LaIconButton = __decorate$16([
       t('la-icon-button')
   ], exports.LaIconButton);
 
-  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -926,17 +926,17 @@
 
     `,
   ];
-  __decorate$14([
+  __decorate$15([
       n({ type: Array })
   ], exports.LaBreadcrumb.prototype, "items", void 0);
-  __decorate$14([
+  __decorate$15([
       r()
   ], exports.LaBreadcrumb.prototype, "_expanded", void 0);
-  exports.LaBreadcrumb = __decorate$14([
+  exports.LaBreadcrumb = __decorate$15([
       t('la-breadcrumb')
   ], exports.LaBreadcrumb);
 
-  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1044,20 +1044,20 @@
       }
     `,
   ];
-  __decorate$13([
+  __decorate$14([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "size", void 0);
-  __decorate$13([
+  __decorate$14([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "appearance", void 0);
-  __decorate$13([
+  __decorate$14([
       n()
   ], exports.LaSpinner.prototype, "label", void 0);
-  exports.LaSpinner = __decorate$13([
+  exports.LaSpinner = __decorate$14([
       t('la-spinner')
   ], exports.LaSpinner);
 
-  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1399,38 +1399,38 @@
       }
     `,
   ];
-  __decorate$12([
+  __decorate$13([
       n({ reflect: true })
   ], exports.LaButton.prototype, "variant", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ reflect: true })
   ], exports.LaButton.prototype, "size", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "pill", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "block", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ attribute: 'loading-label' })
   ], exports.LaButton.prototype, "loadingLabel", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaButton.prototype, "hideLabel", void 0);
-  __decorate$12([
+  __decorate$13([
       r()
   ], exports.LaButton.prototype, "_hasIconLeft", void 0);
-  exports.LaButton = __decorate$12([
+  exports.LaButton = __decorate$13([
       t('la-button')
   ], exports.LaButton);
 
-  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1483,17 +1483,17 @@
       }
     `,
   ];
-  __decorate$11([
+  __decorate$12([
       n()
   ], exports.LaCard.prototype, "heading", void 0);
-  __decorate$11([
+  __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaCard.prototype, "nopadding", void 0);
-  exports.LaCard = __decorate$11([
+  exports.LaCard = __decorate$12([
       t('la-card')
   ], exports.LaCard);
 
-  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1544,20 +1544,20 @@
       }
     `,
   ];
-  __decorate$10([
+  __decorate$11([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "clickable", void 0);
-  __decorate$10([
+  __decorate$11([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "dimmed", void 0);
-  __decorate$10([
+  __decorate$11([
       n()
   ], exports.LaPanel.prototype, "heading", void 0);
-  exports.LaPanel = __decorate$10([
+  exports.LaPanel = __decorate$11([
       t('la-panel')
   ], exports.LaPanel);
 
-  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1701,17 +1701,17 @@
       }
     `,
   ];
-  __decorate$$([
+  __decorate$10([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "error", void 0);
-  __decorate$$([
+  __decorate$10([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "clickable", void 0);
-  exports.LaListItem = __decorate$$([
+  exports.LaListItem = __decorate$10([
       t('la-list-item')
   ], exports.LaListItem);
 
-  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1817,26 +1817,26 @@
       }
     `,
   ];
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "checked", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "indeterminate", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "disabled", void 0);
-  __decorate$_([
+  __decorate$$([
       n()
   ], exports.LaCheckbox.prototype, "label", void 0);
-  __decorate$_([
+  __decorate$$([
       e$1('input')
   ], exports.LaCheckbox.prototype, "input", void 0);
-  exports.LaCheckbox = __decorate$_([
+  exports.LaCheckbox = __decorate$$([
       t('la-checkbox')
   ], exports.LaCheckbox);
 
-  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1972,20 +1972,20 @@
       }
     `,
   ];
-  __decorate$Z([
+  __decorate$_([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "checked", void 0);
-  __decorate$Z([
+  __decorate$_([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "disabled", void 0);
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaSwitch.prototype, "label", void 0);
-  exports.LaSwitch = __decorate$Z([
+  exports.LaSwitch = __decorate$_([
       t('la-switch')
   ], exports.LaSwitch);
 
-  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2138,26 +2138,26 @@
       }
     `,
   ];
-  __decorate$Y([
+  __decorate$Z([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "variant", void 0);
-  __decorate$Y([
+  __decorate$Z([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "checked", void 0);
-  __decorate$Y([
+  __decorate$Z([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "invalid", void 0);
-  __decorate$Y([
+  __decorate$Z([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "filled", void 0);
-  __decorate$Y([
+  __decorate$Z([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
-  exports.LaChoice = __decorate$Y([
+  exports.LaChoice = __decorate$Z([
       t('la-choice')
   ], exports.LaChoice);
 
-  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2271,14 +2271,14 @@
       }
     `,
   ];
-  __decorate$X([
+  __decorate$Y([
       n({ type: Array })
   ], exports.LaStepper.prototype, "steps", void 0);
-  exports.LaStepper = __decorate$X([
+  exports.LaStepper = __decorate$Y([
       t('la-stepper')
   ], exports.LaStepper);
 
-  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2291,6 +2291,9 @@
           this.type = 'text';
           this.name = '';
           this.placeholder = '';
+          this.inputmode = 'text';
+          this.autocomplete = 'off';
+          this.ariaLabel = '';
           this.value = '';
           this.label = '';
           this.hint = '';
@@ -2332,6 +2335,9 @@
           type=${this.type}
           name=${this.name}
           placeholder=${this.placeholder}
+          inputmode=${this.inputmode}
+          autocomplete=${this.autocomplete}
+          aria-label=${this.ariaLabel || this.label || this.placeholder}
           .value=${this.value}
           ?disabled=${this.disabled}
           ?required=${this.required}
@@ -2428,45 +2434,432 @@
       }
     `,
   ];
-  __decorate$W([
+  __decorate$X([
       n({ reflect: true })
   ], exports.LaInput.prototype, "type", void 0);
-  __decorate$W([
+  __decorate$X([
       n()
   ], exports.LaInput.prototype, "name", void 0);
-  __decorate$W([
+  __decorate$X([
       n()
   ], exports.LaInput.prototype, "placeholder", void 0);
-  __decorate$W([
+  __decorate$X([
+      n({ reflect: true })
+  ], exports.LaInput.prototype, "inputmode", void 0);
+  __decorate$X([
+      n()
+  ], exports.LaInput.prototype, "autocomplete", void 0);
+  __decorate$X([
+      n({ attribute: 'aria-label' })
+  ], exports.LaInput.prototype, "ariaLabel", void 0);
+  __decorate$X([
       n()
   ], exports.LaInput.prototype, "value", void 0);
-  __decorate$W([
+  __decorate$X([
       n()
   ], exports.LaInput.prototype, "label", void 0);
-  __decorate$W([
+  __decorate$X([
       n()
   ], exports.LaInput.prototype, "hint", void 0);
-  __decorate$W([
+  __decorate$X([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "required", void 0);
-  __decorate$W([
+  __decorate$X([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "optional", void 0);
-  __decorate$W([
+  __decorate$X([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "disabled", void 0);
-  __decorate$W([
+  __decorate$X([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "error", void 0);
-  __decorate$W([
+  __decorate$X([
       r()
   ], exports.LaInput.prototype, "_hasIconLeft", void 0);
-  __decorate$W([
+  __decorate$X([
       r()
   ], exports.LaInput.prototype, "_hasIconRight", void 0);
-  exports.LaInput = __decorate$W([
+  exports.LaInput = __decorate$X([
       t('la-input')
   ], exports.LaInput);
+
+  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * Direct, segmented entry for a known calendar date.
+   *
+   * This component deliberately does not open a calendar. A future date picker
+   * can compose it as its text-entry surface, while a date range can compose two
+   * instances and own start/end validation.
+   */
+  exports.LaDateInput = class LaDateInput extends i$2 {
+      constructor() {
+          super(...arguments);
+          this._dateValue = '';
+          this.locale = 'en-US';
+          this.label = '';
+          this.hint = '';
+          this.min = '';
+          this.max = '';
+          this.ariaLabel = '';
+          this.required = false;
+          this.optional = false;
+          this.disabled = false;
+          this.error = false;
+          this._month = '';
+          this._day = '';
+          this._year = '';
+          this._message = '';
+          this._settingValue = false;
+          this._hintId = `la-date-hint-${Math.random().toString(36).slice(2, 8)}`;
+      }
+      get value() { return this._dateValue; }
+      set value(next) {
+          this._dateValue = next || '';
+          this._syncFromValue();
+      }
+      willUpdate(changed) {
+          if (changed.has('_dateValue') && !this._settingValue)
+              this._syncFromValue();
+          this._settingValue = false;
+      }
+      _order() {
+          try {
+              const parts = new Intl.DateTimeFormat(this.locale, {
+                  year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC',
+              }).formatToParts(new Date(Date.UTC(2006, 10, 22)));
+              const order = parts
+                  .map(part => part.type)
+                  .filter((part) => part === 'month' || part === 'day' || part === 'year');
+              if (order.length === 3)
+                  return order;
+          }
+          catch (_) {
+              // Fall through to the documented component default.
+          }
+          return ['month', 'day', 'year'];
+      }
+      _formatHint() {
+          return this._order().map(part => part === 'year' ? 'YYYY' : part === 'month' ? 'MM' : 'DD').join('/');
+      }
+      _syncFromValue() {
+          const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(this._dateValue || '');
+          this._year = match ? match[1] : '';
+          this._month = match ? match[2] : '';
+          this._day = match ? match[3] : '';
+          this._message = '';
+      }
+      _partValue(part) {
+          return part === 'month' ? this._month : part === 'day' ? this._day : this._year;
+      }
+      _setPart(part, value) {
+          if (part === 'month')
+              this._month = value;
+          else if (part === 'day')
+              this._day = value;
+          else
+              this._year = value;
+      }
+      _segment(part, index) {
+          const maxLength = part === 'year' ? 4 : 2;
+          const label = part.charAt(0).toUpperCase() + part.slice(1);
+          return b `
+      <input
+        class=${maxLength === 4 ? 'part-4' : 'part-2'}
+        data-part=${part}
+        type="text"
+        inputmode="numeric"
+        autocomplete="off"
+        maxlength=${maxLength}
+        placeholder=${part === 'year' ? 'YYYY' : part === 'month' ? 'MM' : 'DD'}
+        aria-label=${label}
+        aria-describedby=${this._hintId}
+        aria-invalid=${this._invalid() ? 'true' : 'false'}
+        .value=${this._partValue(part)}
+        ?disabled=${this.disabled}
+        @input=${(event) => this._onInput(part, index, event)}
+        @keydown=${(event) => this._onKeydown(part, index, event)}
+        @paste=${this._onPaste}
+      />`;
+      }
+      _inputs() {
+          return Array.from(this.renderRoot.querySelectorAll('input[data-part]'));
+      }
+      _onInput(part, index, event) {
+          const input = event.currentTarget;
+          const maxLength = part === 'year' ? 4 : 2;
+          const digits = input.value.replace(/\D/g, '').slice(0, maxLength);
+          input.value = digits;
+          this._setPart(part, digits);
+          this._message = '';
+          this._commit();
+          if (digits.length === maxLength && event.inputType !== 'deleteContentBackward') {
+              this._inputs()[index + 1]?.focus();
+          }
+      }
+      _onKeydown(part, index, event) {
+          const input = event.currentTarget;
+          if ((event.key === '/' || event.key === '-') && input.value) {
+              event.preventDefault();
+              if (part !== 'year')
+                  this._setPart(part, input.value.padStart(2, '0'));
+              this.requestUpdate();
+              this._commit();
+              this.updateComplete.then(() => this._inputs()[index + 1]?.focus());
+          }
+          else if (event.key === 'Backspace' && !input.value && index > 0) {
+              event.preventDefault();
+              const previous = this._inputs()[index - 1];
+              previous?.focus();
+              previous?.setSelectionRange(previous.value.length, previous.value.length);
+          }
+          else if (event.key === 'ArrowRight' && input.selectionStart === input.value.length) {
+              this._inputs()[index + 1]?.focus();
+          }
+          else if (event.key === 'ArrowLeft' && input.selectionStart === 0) {
+              this._inputs()[index - 1]?.focus();
+          }
+      }
+      _onPaste(event) {
+          const text = event.clipboardData?.getData('text').trim() || '';
+          const numbers = text.match(/\d+/g);
+          if (!numbers || numbers.length !== 3)
+              return;
+          event.preventDefault();
+          const order = this._order();
+          order.forEach((part, index) => {
+              const length = part === 'year' ? 4 : 2;
+              this._setPart(part, numbers[index].slice(0, length).padStart(length, '0'));
+          });
+          this._commit();
+          this.requestUpdate();
+      }
+      _complete() {
+          return this._month.length === 2 && this._day.length === 2 && this._year.length === 4;
+      }
+      _iso() {
+          return `${this._year}-${this._month}-${this._day}`;
+      }
+      _validDate() {
+          if (!this._complete())
+              return false;
+          const year = Number(this._year);
+          const month = Number(this._month);
+          const day = Number(this._day);
+          const date = new Date(Date.UTC(year, month - 1, day));
+          return date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+      }
+      _constraintMessage(iso) {
+          if (this.min && iso < this.min)
+              return `Enter a date on or after ${this._displayConstraint(this.min)}.`;
+          if (this.max && iso > this.max)
+              return `Enter a date on or before ${this._displayConstraint(this.max)}.`;
+          return '';
+      }
+      _displayConstraint(iso) {
+          const [year, month, day] = iso.split('-').map(Number);
+          if (!year || !month || !day)
+              return iso;
+          return new Intl.DateTimeFormat(this.locale, { dateStyle: 'medium', timeZone: 'UTC' })
+              .format(new Date(Date.UTC(year, month - 1, day)));
+      }
+      _commit() {
+          let next = '';
+          let valid = false;
+          if (this._complete() && this._validDate()) {
+              next = this._iso();
+              this._message = this._constraintMessage(next);
+              valid = !this._message;
+              if (!valid)
+                  next = '';
+          }
+          else if (this._complete()) {
+              this._message = 'Enter a valid date.';
+          }
+          this._settingValue = true;
+          this._dateValue = next;
+          this.dispatchEvent(new CustomEvent('la-change', {
+              detail: { value: next, valid, complete: this._complete() },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _onFocusOut() {
+          window.setTimeout(() => {
+              if (this.renderRoot instanceof ShadowRoot && this.renderRoot.activeElement)
+                  return;
+              const hasPartialValue = Boolean(this._month || this._day || this._year);
+              if (hasPartialValue && !this._complete()) {
+                  this._message = `Enter the full date as ${this._formatHint()}.`;
+              }
+          }, 0);
+      }
+      _invalid() {
+          return this.error || Boolean(this._message);
+      }
+      focus(options) {
+          this._inputs()[0]?.focus(options);
+      }
+      render() {
+          const order = this._order();
+          const fallbackLabel = this.ariaLabel || 'Date';
+          const format = this._formatHint();
+          const hint = this._message || this.hint || format;
+          return b `
+      <fieldset ?disabled=${this.disabled} @focusout=${this._onFocusOut}>
+        <legend class=${this.label ? '' : 'sr-only'}>
+          ${this.label || fallbackLabel}${this.required ? b `<span class="req" aria-hidden="true">*</span>` : ''}${this.optional ? b `<span class="opt">Optional</span>` : ''}
+        </legend>
+        <div class="shell ${this._invalid() ? 'is-invalid' : ''}">
+          ${order.map((part, index) => b `
+            ${index ? b `<span class="separator" aria-hidden="true">/</span>` : ''}
+            ${this._segment(part, index)}
+          `)}
+        </div>
+        <div id=${this._hintId} class="hint ${this._invalid() ? 'is-invalid' : ''}" aria-live="polite">
+          ${hint}
+        </div>
+      </fieldset>`;
+      }
+  };
+  exports.LaDateInput.styles = [
+      tokens,
+      i$5 `
+      :host { display: block; }
+      fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
+      legend {
+        display: block;
+        width: 100%;
+        padding: 0;
+        margin: 0 0 var(--la-space-2xs);
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text);
+      }
+      legend.sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      .req { color: var(--la-color-danger); margin-left: 2px; }
+      .opt {
+        color: var(--la-color-text-muted);
+        font-weight: var(--la-font-weight-normal);
+        margin-left: var(--la-space-xs);
+      }
+      .shell {
+        display: flex;
+        align-items: center;
+        width: 100%;
+        box-sizing: border-box;
+        padding: var(--la-space-sm) var(--la-space-md);
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg);
+        transition: border-color var(--dur-fast) var(--ease),
+          box-shadow var(--dur-fast) var(--ease);
+      }
+      .shell:focus-within {
+        border-color: var(--la-color-border-focus);
+        box-shadow: var(--la-input-shadow-focus);
+      }
+      .shell.is-invalid { border-color: var(--la-color-border-danger); }
+      .shell.is-invalid:focus-within { box-shadow: none; }
+      input {
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        background: transparent;
+        color: var(--la-color-text);
+        font: inherit;
+        font-size: var(--la-font-size-base);
+        line-height: var(--la-line-height);
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+      /* Sized for the widest content each segment renders — the MM/DD/YYYY
+         placeholder letters, not just digits (ch is the width of a "0", and
+         "M" is wider, so 2.4ch clips the placeholder). Entered digits stay
+         aligned via tabular-nums. */
+      input.part-2 { width: 3.2ch; }
+      input.part-4 { width: 5.6ch; }
+      input::placeholder { color: var(--la-color-text-disabled); opacity: 1; }
+      input:disabled { cursor: not-allowed; }
+      .separator {
+        flex: 0 0 auto;
+        margin: 0 var(--la-space-sm);
+        color: var(--la-color-text-faint);
+        user-select: none;
+      }
+      .hint {
+        margin-top: var(--la-space-xs);
+        color: var(--la-color-text-muted);
+        font-size: var(--la-font-size-sm);
+        line-height: 1.5;
+      }
+      .hint.is-invalid { color: var(--la-color-danger-text); }
+      :host([disabled]) { opacity: 0.4; }
+    `,
+  ];
+  __decorate$W([
+      n({ attribute: 'value' })
+  ], exports.LaDateInput.prototype, "_dateValue", void 0);
+  __decorate$W([
+      n()
+  ], exports.LaDateInput.prototype, "locale", void 0);
+  __decorate$W([
+      n()
+  ], exports.LaDateInput.prototype, "label", void 0);
+  __decorate$W([
+      n()
+  ], exports.LaDateInput.prototype, "hint", void 0);
+  __decorate$W([
+      n()
+  ], exports.LaDateInput.prototype, "min", void 0);
+  __decorate$W([
+      n()
+  ], exports.LaDateInput.prototype, "max", void 0);
+  __decorate$W([
+      n({ attribute: 'aria-label' })
+  ], exports.LaDateInput.prototype, "ariaLabel", void 0);
+  __decorate$W([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaDateInput.prototype, "required", void 0);
+  __decorate$W([
+      n({ type: Boolean })
+  ], exports.LaDateInput.prototype, "optional", void 0);
+  __decorate$W([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaDateInput.prototype, "disabled", void 0);
+  __decorate$W([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaDateInput.prototype, "error", void 0);
+  __decorate$W([
+      r()
+  ], exports.LaDateInput.prototype, "_month", void 0);
+  __decorate$W([
+      r()
+  ], exports.LaDateInput.prototype, "_day", void 0);
+  __decorate$W([
+      r()
+  ], exports.LaDateInput.prototype, "_year", void 0);
+  __decorate$W([
+      r()
+  ], exports.LaDateInput.prototype, "_message", void 0);
+  exports.LaDateInput = __decorate$W([
+      t('la-date-input')
+  ], exports.LaDateInput);
 
   var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -3306,6 +3699,7 @@
       .panel {
         position: fixed;
         z-index: 1001;
+        box-sizing: border-box;
         min-width: 100%;
         padding: var(--la-space-xs);
         background: var(--la-color-bg);
@@ -4024,7 +4418,7 @@
           this.error = '';
           this.nonInteractive = false;
           this.dismissible = false;
-          /** Show the "in default pack" toggle column */
+          /** Show the default-pack selection button */
           this.showPackToggle = false;
           /** Whether this document is currently in the default DD pack */
           this.inDefaultPack = false;
@@ -4046,12 +4440,19 @@
       }
       _onPackToggle(e) {
           e.stopPropagation();
-          this.inDefaultPack = e.detail.checked;
+          if (this.status === 'processing')
+              return;
+          this.inDefaultPack = !this.inDefaultPack;
           this.dispatchEvent(new CustomEvent('la-pack-toggle', {
               detail: { name: this.name, inDefaultPack: this.inDefaultPack },
               bubbles: true,
               composed: true,
           }));
+      }
+      _onPackRowClick(e) {
+          if (e.composedPath().some(node => node instanceof HTMLElement && node.classList.contains('pack-action'))) {
+              this._onPackToggle(e);
+          }
       }
       _renderRowContent() {
           return b `
@@ -4079,13 +4480,20 @@
             </la-icon-button>`
             : A}
         ${this.showPackToggle
-            ? b `<la-switch
-              .checked=${this.inDefaultPack}
-              label="Include in default DD pack"
+            ? b `<button
+              class="pack-action"
+              type="button"
+              aria-pressed=${String(this.inDefaultPack)}
+              aria-label=${this.inDefaultPack
+                ? `Remove ${this.name} from the default DD pack`
+                : `Add ${this.name} to the default DD pack`}
               ?disabled=${this.status === 'processing'}
-              @la-change=${this._onPackToggle}
-              @click=${(e) => e.stopPropagation()}
-            ></la-switch>`
+            >
+              <i
+                class=${this.inDefaultPack ? 'ph ph-check' : 'ph ph-plus'}
+                aria-hidden="true"
+              ></i>
+            </button>`
             : A}
       </div>
     `;
@@ -4094,8 +4502,10 @@
           const cls = `row ${this.status === 'failed' ? 'failed' : ''} ${this.nonInteractive ? 'non-interactive' : ''}`;
           return b `
       ${iconStyles}
-      ${this.nonInteractive
-            ? b `<div class=${cls}>${this._renderRowContent()}</div>`
+      ${this.nonInteractive || this.showPackToggle
+            ? b `<div class=${cls} @click=${this._onPackRowClick}>
+            ${this._renderRowContent()}
+          </div>`
             : b `<button type="button" class=${cls} @click=${this._onClick}>
             ${this._renderRowContent()}
           </button>`}
@@ -4267,6 +4677,44 @@
       }
       .actions:empty {
         display: none;
+      }
+      .pack-action {
+        box-sizing: border-box;
+        width: var(--la-button-height-default);
+        height: var(--la-button-height-default);
+        padding: 0;
+        border: 1px solid var(--la-color-secondary-border);
+        border-radius: var(--la-radius-circle);
+        background: transparent;
+        color: var(--la-color-text-secondary);
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font: inherit;
+        font-size: var(--la-font-size-2xl);
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease),
+          color var(--dur-fast) var(--ease),
+          transform var(--dur-fast) var(--ease);
+      }
+      .pack-action:hover {
+        background: var(--la-color-secondary-hover);
+        color: var(--la-color-text);
+      }
+      .pack-action[aria-pressed='true'] {
+        background: var(--la-color-bg-active);
+        color: var(--la-color-text);
+      }
+      .pack-action:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+      }
+      .pack-action:active {
+        transform: scale(var(--scale-press));
+      }
+      .pack-action:disabled {
+        cursor: not-allowed;
+        opacity: 0.4;
       }
       :host([dismissible]) .row {
         padding-right: var(--la-space-xs);
@@ -6837,6 +7285,13 @@
         overflow: visible;
         border-radius: inherit;
       }
+
+      @media (max-width: 767px) {
+        .wrap {
+          overflow-x: auto;
+          overscroll-behavior-inline: contain;
+        }
+      }
     `,
   ];
   exports.LaTable = __decorate$C([
@@ -7329,6 +7784,7 @@
         border-radius: var(--la-radius-lg);
         position: relative;
         z-index: 0;
+        container-type: inline-size;
       }
       :host:has(la-menu[open]) {
         z-index: 10;
@@ -7410,6 +7866,56 @@
         align-items: center;
         gap: var(--la-space-sm);
         flex-shrink: 0;
+      }
+
+      @container (max-width: 420px) {
+        button {
+          display: grid;
+          grid-template-columns: 32px minmax(0, 1fr);
+          align-items: start;
+          min-height: 44px;
+        }
+
+        .name,
+        .role {
+          white-space: normal;
+          overflow: visible;
+          text-overflow: clip;
+        }
+
+        .trailing {
+          grid-column: 2;
+          grid-row: 2;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          min-width: 0;
+        }
+      }
+
+      /* Viewport fallback for browsers that do not expose the host as a
+         query container inside its own shadow tree. */
+      @media (max-width: 767px) {
+        button {
+          display: grid;
+          grid-template-columns: 32px minmax(0, 1fr);
+          align-items: start;
+          min-height: 44px;
+        }
+
+        .name,
+        .role {
+          white-space: normal;
+          overflow: visible;
+          text-overflow: clip;
+        }
+
+        .trailing {
+          grid-column: 2;
+          grid-row: 2;
+          justify-content: flex-start;
+          flex-wrap: wrap;
+          min-width: 0;
+        }
       }
     `,
   ];
@@ -8785,6 +9291,8 @@
           this.unlockedAreas = ['governance'];
           /** Collapsed (icon-only) mode — persisted to localStorage */
           this.collapsed = false;
+          /** Overlay mode is controlled by la-app-shell at narrow breakpoints. */
+          this.overlay = false;
           /** Path to logo mark SVG. Falls back to text mark if not set. */
           this.logoSrc = '/assets/brand/logo-mark.svg';
           /** Path to wordmark SVG. Falls back to text if not set. */
@@ -8857,6 +9365,17 @@
               bubbles: true,
               composed: true,
           }));
+      }
+      _handleHeaderControl(e) {
+          e.stopPropagation();
+          if (this.overlay) {
+              this.dispatchEvent(new CustomEvent('la-sidebar-dismiss', {
+                  bubbles: true,
+                  composed: true,
+              }));
+              return;
+          }
+          this._toggleCollapse();
       }
       _handleAreaClick(item) {
           this.dispatchEvent(new CustomEvent('la-nav-change', {
@@ -8997,12 +9516,9 @@
         <la-icon-button
           class="collapse-btn"
           size="sm"
-          label="${this.collapsed ? 'Expand sidebar' : 'Collapse sidebar'}"
-          @click=${(e) => {
-            e.stopPropagation();
-            this._toggleCollapse();
-        }}
-        ><i class="ph ph-sidebar-simple"></i></la-icon-button>
+          label="${this.overlay ? 'Close navigation' : this.collapsed ? 'Expand sidebar' : 'Collapse sidebar'}"
+          @click=${this._handleHeaderControl}
+        ><i class="${this.overlay ? 'ph ph-x' : 'ph ph-sidebar-simple'}"></i></la-icon-button>
       </div>
 
       <nav class="nav">
@@ -9739,6 +10255,21 @@
       @media (prefers-reduced-motion: reduce) {
         * { transition-duration: 0ms !important; }
       }
+
+      @media (max-width: 1023px) {
+        .nav-item,
+        .subtab,
+        .collapsed-flyout-title,
+        .collapsed-flyout-item,
+        .user {
+          min-height: 44px;
+        }
+
+        .collapse-btn::part(button) {
+          width: 44px;
+          height: 44px;
+        }
+      }
     `,
   ];
   __decorate$t([
@@ -9753,6 +10284,9 @@
   __decorate$t([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "collapsed", void 0);
+  __decorate$t([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaSidebar.prototype, "overlay", void 0);
   __decorate$t([
       n({ attribute: 'logo-src' })
   ], exports.LaSidebar.prototype, "logoSrc", void 0);
@@ -9806,6 +10340,7 @@
           this.companies = [];
           this.active = 'home';
           this.collapsed = false;
+          this.overlay = false;
           this._snapped = false;
           this._userMenuOpen = false;
           this._userMenuClosing = false;
@@ -9845,6 +10380,17 @@
               clearTimeout(this._snapTimeout);
               this._snapped = false;
           }
+      }
+      _handleHeaderControl(e) {
+          e.stopPropagation();
+          if (this.overlay) {
+              this.dispatchEvent(new CustomEvent('la-sidebar-dismiss', {
+                  bubbles: true,
+                  composed: true,
+              }));
+              return;
+          }
+          this._toggleCollapse();
       }
       _closeUserMenu() {
           if (!this._userMenuOpen)
@@ -9897,9 +10443,9 @@
         <la-icon-button
           class="collapse-btn"
           size="sm"
-          label="${this.collapsed ? 'Expand sidebar' : 'Collapse sidebar'}"
-          @click=${(e) => { e.stopPropagation(); this._toggleCollapse(); }}
-        ><i class="ph ph-sidebar-simple"></i></la-icon-button>
+          label="${this.overlay ? 'Close navigation' : this.collapsed ? 'Expand sidebar' : 'Collapse sidebar'}"
+          @click=${this._handleHeaderControl}
+        ><i class="${this.overlay ? 'ph ph-x' : 'ph ph-sidebar-simple'}"></i></la-icon-button>
       </div>
 
       <nav class="nav">
@@ -10386,6 +10932,9 @@
       n({ type: Boolean, reflect: true })
   ], exports.LaInvestorSidebar.prototype, "collapsed", void 0);
   __decorate$s([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaInvestorSidebar.prototype, "overlay", void 0);
+  __decorate$s([
       r()
   ], exports.LaInvestorSidebar.prototype, "_snapped", void 0);
   __decorate$s([
@@ -10777,6 +11326,16 @@
                 <a href=${this.src} target="_blank" rel="noopener">open the document</a>.
               </div>`}
         </object>
+        ${this.fallbackImage
+            ? b `<img
+              class="fallback mobile-fallback"
+              src=${this.fallbackImage}
+              alt=${this.label}
+            />`
+            : b `<div class="empty mobile-fallback">
+              Preview unavailable —
+              <a href=${this.src} target="_blank" rel="noopener">open the document</a>.
+            </div>`}
       </div>
     `;
       }
@@ -10808,6 +11367,9 @@
         width: 100%;
         display: block;
       }
+      .mobile-fallback {
+        display: none;
+      }
       .empty {
         display: flex;
         align-items: center;
@@ -10821,6 +11383,20 @@
       }
       .empty a {
         color: var(--la-color-text-secondary);
+      }
+
+      @media (max-width: 767px) {
+        .object {
+          display: none;
+        }
+
+        .mobile-fallback {
+          display: block;
+        }
+
+        .empty.mobile-fallback {
+          display: flex;
+        }
       }
     `,
   ];
@@ -11129,7 +11705,7 @@
           super(...arguments);
           this.documents = [];
           this.heading = 'Documents';
-          /** Show the "Default pack" toggle column on each row */
+          /** Show the default-pack selection button on each row */
           this.showPackToggle = false;
           /** Map of category name → Phosphor icon class e.g. { 'Governance': 'ph ph-buildings' } */
           this.categoryIcons = {};
@@ -12005,7 +12581,7 @@
       .text {
         font-size: var(--la-font-size-xl);
         font-weight: var(--la-font-weight-semibold);
-        color: var(--la-color-resolved);
+        color: var(--la-color-text);
       }
       .sub {
         font-size: var(--la-font-size-md);
@@ -14936,22 +15512,86 @@
           this._asideOpen = false;
           /** Tracks whether the content area is narrow enough to use the drawer */
           this._isTablet = false;
+          /** Tracks whether navigation is presented as an overlay */
+          this._isNarrowNav = false;
+          /** Tracks whether the narrow navigation overlay is open */
+          this._navOpen = false;
           this._onToggleAside = () => this._toggleAside();
+          this._onNavChange = () => this._closeNav();
+          this._onSidebarDismiss = () => this._closeNav();
       }
       connectedCallback() {
           super.connectedCallback();
           this.addEventListener('la-toggle-aside', this._onToggleAside);
+          this.addEventListener('la-nav-change', this._onNavChange);
+          this.addEventListener('la-sidebar-dismiss', this._onSidebarDismiss);
+      }
+      _renderNavTrigger() {
+          return b `
+      <button
+        class="mobile-nav-trigger"
+        type="button"
+        aria-label="Open navigation"
+        aria-controls="app-navigation"
+        aria-expanded=${String(this._navOpen)}
+        @click=${this._toggleNav}
+      >
+        <i class="ph ph-list" aria-hidden="true"></i>
+      </button>
+    `;
+      }
+      _renderCompactBrand() {
+          return b `
+      <span class="compact-brand" role="img" aria-label="LawAdvisor">
+        <img
+          class="compact-brand-mark"
+          src="/assets/brand/logo-mark.svg"
+          alt=""
+          aria-hidden="true"
+        />
+        <img
+          class="compact-brand-wordmark"
+          src="/assets/brand/logo-wordmark.svg"
+          alt=""
+          aria-hidden="true"
+        />
+      </span>
+    `;
       }
       render() {
           return b `
       ${iconStyles}
-      <div class="sidebar-slot">
+      <div
+        id="app-navigation"
+        class="sidebar-slot ${this._navOpen ? 'open' : ''}"
+        aria-hidden=${String(this._isNarrowNav && !this._navOpen)}
+      >
         <slot name="sidebar"></slot>
       </div>
+      ${this._isNarrowNav && this._navOpen
+            ? b `
+            <button
+              class="sidebar-backdrop"
+              type="button"
+              aria-label="Close navigation"
+              @click=${this._closeNav}
+            ></button>
+          `
+            : A}
 
       <div class="content">
+        ${!this.showHeader
+            ? b `
+              <div class="mobile-nav-bar">
+                ${this._renderNavTrigger()}
+                ${this._renderCompactBrand()}
+              </div>
+            `
+            : A}
         ${this.showHeader ? b `
           <header class="page-header">
+            ${this._renderNavTrigger()}
+            ${this._renderCompactBrand()}
             ${this.showBack
             ? b `
                   <button class="back-btn" @click=${this._handleBack} title="Back">
@@ -15009,15 +15649,22 @@
           if (content) {
               this._resizeObserver = new ResizeObserver((entries) => {
                   const width = entries[0]?.contentRect.width ?? Infinity;
+                  const wasNarrowNav = this._isNarrowNav;
                   this._isTablet = width <= 1023;
+                  this._isNarrowNav = width <= 1023;
+                  if (this._isNarrowNav !== wasNarrowNav) {
+                      this._syncSidebarMode();
+                  }
                   this.style.setProperty('--la-aside-toggle-display', this._isTablet ? 'flex' : 'none');
               });
-              this._resizeObserver.observe(content);
+              this._resizeObserver.observe(this);
           }
       }
       disconnectedCallback() {
           super.disconnectedCallback();
           this.removeEventListener('la-toggle-aside', this._onToggleAside);
+          this.removeEventListener('la-nav-change', this._onNavChange);
+          this.removeEventListener('la-sidebar-dismiss', this._onSidebarDismiss);
           this._resizeObserver?.disconnect();
       }
       /** Programmatically open the aside overlay (useful for tablet preview/testing) */
@@ -15029,6 +15676,27 @@
       }
       _closeAside() {
           this._asideOpen = false;
+      }
+      _toggleNav() {
+          this._navOpen = !this._navOpen;
+      }
+      _closeNav() {
+          this._navOpen = false;
+      }
+      _syncSidebarMode() {
+          const sidebar = this.querySelector('[slot="sidebar"]');
+          if (!sidebar)
+              return;
+          sidebar.overlay = this._isNarrowNav;
+          if (this._isNarrowNav) {
+              this._sidebarWasCollapsed = sidebar.collapsed;
+              sidebar.collapsed = false;
+          }
+          else if (this._sidebarWasCollapsed !== undefined) {
+              sidebar.collapsed = this._sidebarWasCollapsed;
+              this._sidebarWasCollapsed = undefined;
+              this._navOpen = false;
+          }
       }
       updated(changed) {
           if (changed.has('showAside')) {
@@ -15065,6 +15733,13 @@
         display: flex;
         position: relative;
         z-index: auto;
+      }
+
+      .sidebar-backdrop,
+      .mobile-nav-bar,
+      .mobile-nav-trigger,
+      .compact-brand {
+        display: none;
       }
 
       /* ── Right panel slot (optional — e.g. messages aside) ── */
@@ -15205,6 +15880,133 @@
            can suppress this built-in trigger by setting the CSS var to 'none'. */
         display: var(--la-aside-open-trigger-display, inline-flex);
       }
+
+      @media (max-width: 1023px) {
+        .sidebar-slot {
+          position: fixed;
+          inset: 0 auto 0 0;
+          width: var(--la-sidebar-width);
+          height: 100%;
+          z-index: 30;
+          transform: translateX(-100%);
+          pointer-events: none;
+          transition: transform var(--dur-base) var(--ease);
+        }
+
+        .sidebar-slot.open {
+          transform: translateX(0);
+          pointer-events: auto;
+        }
+
+        .sidebar-backdrop {
+          display: block;
+          position: fixed;
+          inset: 0;
+          z-index: 29;
+          border: 0;
+          padding: 0;
+          background: var(--la-color-scrim);
+          cursor: pointer;
+        }
+
+        .mobile-nav-trigger {
+          box-sizing: border-box;
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          width: 44px;
+          height: 44px;
+          flex-shrink: 0;
+          border: 0;
+          border-radius: var(--la-radius-circle);
+          background: transparent;
+          color: var(--la-color-text);
+          font: inherit;
+          font-size: var(--la-font-size-2xl);
+          cursor: pointer;
+        }
+
+        .mobile-nav-trigger:hover {
+          background: var(--la-color-bg-muted);
+        }
+
+        .mobile-nav-trigger:focus-visible {
+          outline: 2px solid var(--la-color-border-focus);
+          outline-offset: 2px;
+        }
+
+        .mobile-nav-bar {
+          box-sizing: border-box;
+          display: flex;
+          align-items: center;
+          gap: var(--la-space-sm);
+          height: 52px;
+          padding-inline: var(--la-space-sm);
+          background: var(--la-ph-bg);
+          flex-shrink: 0;
+        }
+
+        .compact-brand {
+          display: inline-flex;
+          align-items: center;
+          gap: var(--la-space-sm);
+          min-width: 0;
+          flex-shrink: 0;
+        }
+
+        .compact-brand-mark {
+          display: block;
+          width: 20px;
+          height: 20px;
+          object-fit: contain;
+          flex-shrink: 0;
+        }
+
+        .compact-brand-wordmark {
+          display: block;
+          width: 91px;
+          height: 14px;
+          object-fit: contain;
+          flex-shrink: 0;
+        }
+
+        .page-header {
+          height: 52px;
+          padding-left: var(--la-space-sm);
+        }
+
+        .body,
+        :host(:not([show-header])) .body {
+          margin: 0 var(--la-main-margin) var(--la-main-margin);
+        }
+      }
+
+      @media (max-width: 767px) {
+        .body,
+        :host(:not([show-header])) .body {
+          margin: 0;
+          border-radius: var(--la-main-radius) var(--la-main-radius) 0 0;
+        }
+
+        .main {
+          padding-inline: var(--la-space-md);
+        }
+
+        .page-header {
+          padding-right: var(--la-space-sm);
+          gap: var(--la-space-sm);
+        }
+
+        .header-actions {
+          gap: var(--la-space-xs);
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .sidebar-slot {
+          transition: none;
+        }
+      }
     `,
   ];
   __decorate$6([
@@ -15228,6 +16030,12 @@
   __decorate$6([
       r()
   ], exports.LaAppShell.prototype, "_isTablet", void 0);
+  __decorate$6([
+      r()
+  ], exports.LaAppShell.prototype, "_isNarrowNav", void 0);
+  __decorate$6([
+      r()
+  ], exports.LaAppShell.prototype, "_navOpen", void 0);
   exports.LaAppShell = __decorate$6([
       t('la-app-shell')
   ], exports.LaAppShell);
@@ -15702,7 +16510,7 @@
         font-size: var(--la-font-size-3xl);
         font-weight: var(--la-font-weight-semibold);
         letter-spacing: -0.5px;
-        margin-top: 56px;
+        margin-top: calc(var(--la-space-2xl) + var(--la-space-xl));
         margin-bottom: var(--la-space-2xl);
         text-align: left;
       }
@@ -16985,16 +17793,6 @@
       </div>`);
       }
       _previewPane() {
-          if (this.documentStatus === 'processing') {
-              return b `
-        <div class="preview-pane">
-          <div class="processing-state">
-            <i class="preview-spinner ph ph-spinner-gap" aria-hidden="true"></i>
-            <div class="preview-label">Analysing document</div>
-            <div class="preview-sub">This usually takes under a minute.</div>
-          </div>
-        </div>`;
-          }
           if (this.previewSrc) {
               // Document rendered inline — no "View original" footer (it would just re-open
               // the same file). Saving is covered by the page's Download action.
@@ -17004,6 +17802,16 @@
             src=${this.previewSrc}
             fallback-image=${this.previewFallback}
             label=${this.documentName}></la-pdf-preview>
+        </div>`;
+          }
+          if (this.documentStatus === 'processing') {
+              return b `
+        <div class="preview-pane">
+          <div class="processing-state">
+            <i class="preview-spinner ph ph-spinner-gap" aria-hidden="true"></i>
+            <div class="preview-label">Analysing document</div>
+            <div class="preview-sub">The preview will appear when the file is ready.</div>
+          </div>
         </div>`;
           }
           return b `
