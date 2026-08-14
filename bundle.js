@@ -4460,6 +4460,7 @@
       <div class="content">
         <div class="name">
           <span class="name-text" title=${this.name}>${this.name}</span>
+          <slot name="badge"></slot>
         </div>
         ${this.association
             ? b `<div class="association">${this.association}</div>`
@@ -4646,6 +4647,11 @@
         text-overflow: ellipsis;
         white-space: nowrap;
         min-width: 0;
+      }
+      /* Inline qualifiers (Required / Optional tags) sit beside the name,
+         where they qualify it — not in the right-hand action set. */
+      slot[name='badge']::slotted(*) {
+        flex-shrink: 0;
       }
       .association {
         font-size: var(--la-font-size-sm);
