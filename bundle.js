@@ -14973,7 +14973,7 @@
   /**
    * la-investor-card — per-investor summary card for the data room investor list.
    *
-   * Shows the investor's name, firm, a three-state access pill (Not Shared /
+   * Shows the investor's name, firm, a three-state access pill (Not shared /
    * Active / Revoked), an optional last-activity line, and an unread-message
    * count. The whole card is a single click target — selecting it fires
    * `la-investor-view` so the host opens the per-investor detail. There is no
@@ -15003,7 +15003,7 @@
       _pill() {
           switch (this.status) {
               case 'invite-sent':
-                  return b `<la-badge variant="warning" size="sm" appearance="ghost"><i class="ph-fill ph-paper-plane-tilt" slot="icon"></i>Invite Sent</la-badge>`;
+                  return b `<la-badge variant="warning" size="sm" appearance="ghost"><i class="ph-fill ph-paper-plane-tilt" slot="icon"></i>Invite sent</la-badge>`;
               case 'accepted':
                   return b `<la-badge variant="success" size="sm" appearance="ghost"><i class="ph-fill ph-check-circle" slot="icon"></i>Accepted</la-badge>`;
               case 'inbound':
@@ -15013,7 +15013,7 @@
               case 'active':
                   return b `<la-badge variant="success" size="sm" appearance="ghost"><i class="ph-fill ph-check-circle" slot="icon"></i>Active</la-badge>`;
               default: // draft, invited
-                  return b `<la-badge variant="neutral" size="sm" appearance="ghost">Not Shared</la-badge>`;
+                  return b `<la-badge variant="neutral" size="sm" appearance="ghost">Not shared</la-badge>`;
           }
       }
       _view() {
