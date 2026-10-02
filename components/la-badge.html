@@ -85,6 +85,7 @@
 <div class="preview-header" id="overview">
 <h1>la-badge</h1>
 <p>A small inline label for status, category, severity, or count. Two types: <strong>badge</strong> (pill, for status labels) and <strong>counter</strong> (circle, for numerical counts). Always paired with content — never standalone.</p>
+<p>For a status column in a table, the <strong>dot</strong> appearance drops the pill: a dot in the state's colour, the word, and an optional quieter detail.</p>
 </div>
 
 <div class="preview-header" id="anatomy" style="margin-top:8px;">
@@ -96,11 +97,13 @@
 <div style="display:flex; gap:24px; align-items:center;">
 <la-badge variant="warning">Expiring soon</la-badge>
 <la-badge type="counter" variant="danger">3</la-badge>
+<la-badge appearance="dot" variant="danger" detail="Waiting on HMRC">Blocked</la-badge>
 </div>
 <ol style="list-style: decimal inside; padding:0; margin:0; font-size:13px; line-height:1.6; color:#374151; max-width:320px;">
 <li><strong>Pill container</strong> — badge type. Shared <code style="font-family:monospace;font-size:11px;">--la-color-bg-subtle</code> surface with a 1px <code style="font-family:monospace;font-size:11px;">--la-color-border-light</code> border and <code style="font-family:monospace;font-size:11px;">--la-radius-pill</code>. Variant sets the text colour; <code style="font-family:monospace;font-size:11px;">primary</code> overrides both bg and border to the solid primary colour.</li>
 <li style="margin-top:6px;"><strong>Label</strong> — default slot. A word or short phrase.</li>
 <li style="margin-top:6px;"><strong>Counter circle</strong> — counter type. Fixed 20px height, <code style="font-family:monospace;font-size:11px;">--la-radius-circle</code>, no border. Variant sets the fill; <code style="font-family:monospace;font-size:11px;">appearance</code> switches between solid (filled) and tinted-surface (ghost).</li>
+<li style="margin-top:6px;"><strong>Dot</strong>: badge type, <code style="font-family:monospace;font-size:11px;">appearance="dot"</code>. No pill. A 6px dot in the variant's state colour, the label in <code style="font-family:monospace;font-size:11px;">--la-color-text-secondary</code>, then <code style="font-family:monospace;font-size:11px;">detail</code> after a middle dot in <code style="font-family:monospace;font-size:11px;">--la-color-text-muted</code>. The detail truncates first.</li>
 </ol>
 </div>
 </div>
@@ -207,6 +210,68 @@
 </div>
 </div>
 
+<div class="preview-group" id="dot">
+<div class="preview-label">Badge, dot appearance: a status column (In progress with its step count, Blocked with its tip, Complete)</div>
+<div class="preview-frame" style="gap:32px; padding:96px 24px 40px; justify-content:center; flex-wrap:wrap; font-size:var(--la-font-size-sm); overflow:visible;">
+<la-badge appearance="dot" variant="warning" detail="2 of 10 steps">In progress</la-badge>
+<la-tooltip appearance="light" max-width="280px" tip="HMRC usually agrees a share valuation within 30 days, and you can set the scheme rules meanwhile.">
+<la-badge id="dot-blocked" appearance="dot" variant="danger" detail="Waiting on HMRC" tabindex="0">Blocked</la-badge>
+</la-tooltip>
+<la-badge appearance="dot" variant="success">Complete</la-badge>
+<la-badge appearance="dot" variant="warning">In progress</la-badge>
+</div>
+<p style="margin:0; font-size:12px; color:var(--doc-text-3);">Press Tab to reach Blocked: the focus ring shows and the tip opens, as it does on hover. The other three carry no tip, so Tab passes them by.</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Dot appearance: in a table, as Your playbooks draws it (on a phone the status sits under the name)</div>
+<style>
+  /* As 05-playbooks.html in new-design: on a phone the head goes and the status sits under the name. */
+  @media (max-width: 760px) { .dot-demo-head { display: none !important; } }
+</style>
+<div class="preview-frame" style="padding:24px; justify-content:center; overflow:visible;">
+<div style="width:100%; max-width:600px; background:var(--la-color-bg); border:1px solid var(--la-color-border-light); border-radius:var(--la-radius-lg); font-size:var(--la-font-size-sm);">
+<div class="dot-demo-head" style="display:flex; flex-wrap:wrap; gap:4px 16px; padding:16px 20px 8px; border-bottom:1px solid var(--la-color-border-light); color:var(--la-color-text-muted); font-weight:var(--la-font-weight-medium);">
+<span style="flex:1 1 240px;">Name</span><span style="flex:0 1 200px;">Status</span>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:4px 16px; padding:12px 20px; border-bottom:1px solid var(--la-color-border-light);">
+<span style="flex:1 1 240px; min-width:0; font-size:var(--la-font-size-md); font-weight:var(--la-font-weight-medium); color:var(--la-color-text);">Raise a Private Funding Round</span>
+<span style="flex:0 1 200px; min-width:0;"><la-badge appearance="dot" variant="warning" detail="2 of 10 steps">In progress</la-badge></span>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:4px 16px; padding:12px 20px; border-bottom:1px solid var(--la-color-border-light);">
+<span style="flex:1 1 240px; min-width:0; font-size:var(--la-font-size-md); font-weight:var(--la-font-weight-medium); color:var(--la-color-text);">Issue EMI Options</span>
+<span style="flex:0 1 200px; min-width:0;"><la-tooltip appearance="light" max-width="280px" style="max-width:100%;" tip="HMRC usually agrees a share valuation within 30 days, and you can set the scheme rules meanwhile."><la-badge appearance="dot" variant="danger" detail="Waiting on HMRC" tabindex="0">Blocked</la-badge></la-tooltip></span>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:4px 16px; padding:12px 20px; border-bottom:1px solid var(--la-color-border-light);">
+<span style="flex:1 1 240px; min-width:0; font-size:var(--la-font-size-md); font-weight:var(--la-font-weight-medium); color:var(--la-color-text);">Register a Trade Mark</span>
+<span style="flex:0 1 200px; min-width:0;"><la-badge appearance="dot" variant="warning">In progress</la-badge></span>
+</div>
+<div style="display:flex; flex-wrap:wrap; align-items:center; gap:4px 16px; padding:12px 20px;">
+<span style="flex:1 1 240px; min-width:0; font-size:var(--la-font-size-md); font-weight:var(--la-font-weight-medium); color:var(--la-color-text);">Appoint a Company Director</span>
+<span style="flex:0 1 200px; min-width:0;"><la-badge appearance="dot" variant="success">Complete</la-badge></span>
+</div>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Dot appearance: a long detail in a narrow cell (the detail truncates; the word never does)</div>
+<div class="preview-frame" style="gap:24px; padding:32px 24px; justify-content:center; align-items:flex-start; flex-wrap:wrap;">
+<div style="display:flex; flex-direction:column; gap:8px; width:240px;">
+<div style="padding:8px 0; border-top:1px dashed var(--la-color-border-light); border-bottom:1px dashed var(--la-color-border-light);"><la-badge appearance="dot" variant="danger" detail="Waiting on HMRC to agree the share valuation">Blocked</la-badge></div>
+<span style="font-size:11px; color:var(--doc-text-3);">240px cell</span>
+</div>
+<div style="display:flex; flex-direction:column; gap:8px; width:160px;">
+<div style="padding:8px 0; border-top:1px dashed var(--la-color-border-light); border-bottom:1px dashed var(--la-color-border-light);"><la-badge appearance="dot" variant="danger" detail="Waiting on HMRC to agree the share valuation">Blocked</la-badge></div>
+<span style="font-size:11px; color:var(--doc-text-3);">160px cell</span>
+</div>
+<div style="display:flex; flex-direction:column; gap:8px; width:130px;">
+<div style="padding:8px 0; border-top:1px dashed var(--la-color-border-light); border-bottom:1px dashed var(--la-color-border-light);"><la-badge appearance="dot" variant="warning" detail="2 of 10 steps">In progress</la-badge></div>
+<span style="font-size:11px; color:var(--doc-text-3);">130px cell</span>
+</div>
+</div>
+</div>
+
 <div class="preview-group">
 <div class="preview-label">Counter — filled (all variants)</div>
 <div class="preview-frame" style="gap:12px; padding:32px 24px; justify-content:center; align-items:center; flex-wrap:wrap;">
@@ -286,7 +351,10 @@
           <td><span class="default">appearance</span></td>
           <td><span class="type">BadgeAppearance</span></td>
           <td><span class="default">&#39;filled&#39;</span></td>
-          <td>—</td>
+          <td>How the variant is painted. `filled` (default) is the shared grey chip,
+`ghost` a tint with no border for inert status tags, `solid` a full fill.
+`dot` (badge type only) drops the pill for a status in a table cell: a
+6px dot in the variant's colour beside the word, then `detail`.</td>
         </tr>
       
         <tr>
@@ -295,6 +363,16 @@
           <td><span class="type">BadgeSize</span></td>
           <td><span class="default">&#39;default&#39;</span></td>
           <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>detail</td>
+          <td><span class="default">detail</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>A quieter second part after the word and a middle dot, such as
+"2 of 10 steps" or "Waiting on HMRC". Read by the `dot` appearance only.
+In a narrow cell it truncates with an ellipsis; the word never does.</td>
         </tr>
       
     </tbody>
@@ -371,6 +449,25 @@
 </tbody>
 </table>
 </div>
+<div>
+<p style="margin-bottom:8px;font-size:11px;color:#555;font-weight:600;">Dot appearance</p>
+<table class="docs-table">
+<thead><tr><th>Token</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-urgent</td><td>Dot for danger</td></tr>
+<tr><td>--la-color-proactive</td><td>Dot for warning</td></tr>
+<tr><td>--la-color-resolved</td><td>Dot for success</td></tr>
+<tr><td>--la-color-processing</td><td>Dot for info</td></tr>
+<tr><td>--la-color-text-faint</td><td>Dot for neutral, and for accent and primary, which are not states; the middle dot</td></tr>
+<tr><td>--la-color-text-secondary</td><td>Word</td></tr>
+<tr><td>--la-color-text-muted</td><td>Detail</td></tr>
+<tr><td>--la-space-2xs</td><td>Gap between dot, word, separator and detail</td></tr>
+<tr><td>--la-color-border-focus</td><td>Focus ring colour, on a badge with <code style="font-family:monospace;font-size:11px;">tabindex="0"</code> (any appearance)</td></tr>
+<tr><td>--la-focus-ring-width</td><td>Focus ring width</td></tr>
+<tr><td>--la-focus-ring-offset</td><td>Focus ring offset</td></tr>
+</tbody>
+</table>
+</div>
 </div>
 </div><div class="docs-divider"></div><div class="docs-section" id="usage">
 <h3>Usage examples</h3>
@@ -419,6 +516,30 @@
   5
 <span class="kw">&lt;/la-badge&gt;</span></div>
 </div>
+<div style="min-width:0;">
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Dot: a status in a table cell, with its detail</p>
+<div class="docs-code"><span class="kw">&lt;la-badge</span>
+<span class="at">appearance</span>=<span class="str">"dot"</span>
+<span class="at">variant</span>=<span class="str">"warning"</span>
+<span class="at">detail</span>=<span class="str">"2 of 10 steps"</span><span class="kw">&gt;</span>
+  In progress
+<span class="kw">&lt;/la-badge&gt;</span></div>
+</div>
+<div style="min-width:0;">
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Dot with its tip: la-tooltip opens it, tabindex lets the keyboard reach it</p>
+<div class="docs-code"><span class="kw">&lt;la-tooltip</span>
+<span class="at">appearance</span>=<span class="str">"light"</span>
+<span class="at">max-width</span>=<span class="str">"280px"</span>
+<span class="at">tip</span>=<span class="str">"HMRC usually agrees a share valuation within 30 days, and you can set the scheme rules meanwhile."</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-badge</span>
+    <span class="at">appearance</span>=<span class="str">"dot"</span>
+    <span class="at">variant</span>=<span class="str">"danger"</span>
+    <span class="at">detail</span>=<span class="str">"Waiting on HMRC"</span>
+    <span class="at">tabindex</span>=<span class="str">"0"</span><span class="kw">&gt;</span>
+    Blocked
+  <span class="kw">&lt;/la-badge&gt;</span>
+<span class="kw">&lt;/la-tooltip&gt;</span></div>
+</div>
 </div>
 </div><div class="docs-divider"></div><div class="docs-section" id="notes">
 <h3>Notes</h3>
@@ -429,6 +550,10 @@
 <div class="docs-note"><strong><code style="font-family:monospace;font-size:11px;">accent</code> is a category, not a status</strong> — use it for classification labels like "Doc Quality", "Legal Compliance". The other variants carry status or prominence meaning; accent carries domain meaning. Not applicable to counter type.</div>
 <div class="docs-note"><strong>Ghost appearance is for deemphasised counters</strong> — ghost uses the faint tinted surface for the variant colour rather than a solid fill, giving a softer presence. Use it when the count should not dominate the surrounding UI. Use filled (default) when the count is a primary signal such as an unread inbox badge.</div>
 <div class="docs-note"><strong>Icons use Phosphor fill weight</strong> — when slotting an icon on a badge, always use <code style="font-family:monospace;font-size:11px;">ph-fill</code>, never the outline <code style="font-family:monospace;font-size:11px;">ph</code> class. The filled glyph matches the badge's solid tinted surface.</div>
+<div class="docs-note"><strong>Dot is for a status column.</strong> Use <code style="font-family:monospace;font-size:11px;">appearance="dot"</code> where a table or list gives every row a status, as Your playbooks does in <code style="font-family:monospace;font-size:11px;">new-design</code>: a pill on every row is chrome. A status that stands alone, in a header or on a card, stays a ghost badge (<code style="font-family:monospace;font-size:11px;">rule/ghost-status-badges</code>). One concept takes one appearance on a surface (<code style="font-family:monospace;font-size:11px;">rule/consistent-status-treatment</code>).</div>
+<div class="docs-note"><strong>The variant follows the state.</strong> Take it from the paired-badge table in <code style="font-family:monospace;font-size:11px;">status-conventions.md</code>: Complete is <code style="font-family:monospace;font-size:11px;">success</code>, In progress <code style="font-family:monospace;font-size:11px;">warning</code>, Not started <code style="font-family:monospace;font-size:11px;">neutral</code>, Overdue <code style="font-family:monospace;font-size:11px;">danger</code>. Blocked is not in that table; it is <code style="font-family:monospace;font-size:11px;">danger</code>, like Overdue (decided 2 October 2026). The dot takes the state's colour and the word stays in ink, so the state is said once in colour and always in words. <code style="font-family:monospace;font-size:11px;">accent</code> and <code style="font-family:monospace;font-size:11px;">primary</code> are not states and draw the neutral dot.</div>
+<div class="docs-note"><strong>The detail says how far, or who it is waiting on.</strong> <code style="font-family:monospace;font-size:11px;">detail</code> is plain text after a middle dot: a count ("2 of 10 steps") or the party the run waits on ("Waiting on HMRC"). It truncates with an ellipsis in a narrow cell; the word never does. There is no icon: the dot is the glyph, so the icon slot is not drawn. <code style="font-family:monospace;font-size:11px;">detail</code> is read by the dot appearance only.</div>
+<div class="docs-note"><strong>A tip is la-tooltip's job.</strong> Wrap the badge in <code style="font-family:monospace;font-size:11px;">la-tooltip appearance="light"</code> and give the badge <code style="font-family:monospace;font-size:11px;">tabindex="0"</code>, with no wrapper element: the badge draws the focus ring, and the tooltip opens on focus as it does on hover. In a narrow cell give the <code style="font-family:monospace;font-size:11px;">la-tooltip</code> host <code style="font-family:monospace;font-size:11px;">max-width: 100%</code> so the badge inside can shrink. la-tooltip does not yet wire <code style="font-family:monospace;font-size:11px;">aria-describedby</code>, so a screen reader hears the status but not the tip: put in the tip what helps, never what is needed.</div>
 </div>
 </div>
 

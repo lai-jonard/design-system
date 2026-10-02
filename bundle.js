@@ -548,10 +548,30 @@
           super(...arguments);
           this.variant = 'neutral';
           this.type = 'badge';
+          /**
+           * How the variant is painted. `filled` (default) is the shared grey chip,
+           * `ghost` a tint with no border for inert status tags, `solid` a full fill.
+           * `dot` (badge type only) drops the pill for a status in a table cell: a
+           * 6px dot in the variant's colour beside the word, then `detail`.
+           */
           this.appearance = 'filled';
           this.size = 'default';
+          /**
+           * A quieter second part after the word and a middle dot, such as
+           * "2 of 10 steps" or "Waiting on HMRC". Read by the `dot` appearance only.
+           * In a narrow cell it truncates with an ellipsis; the word never does.
+           */
+          this.detail = '';
       }
       render() {
+          if (this.type === 'badge' && this.appearance === 'dot') {
+              return b `<span class="status"
+        ><i class="dot" aria-hidden="true"></i><slot></slot>${this.detail
+                ? b `<i class="sep" aria-hidden="true">·</i
+              ><span class="detail">${this.detail}</span>`
+                : A}</span
+      >`;
+          }
           return b `<span><slot name="icon"></slot><slot></slot></span>`;
       }
   };
@@ -736,6 +756,87 @@
         background: var(--la-color-bg-muted);
         color: var(--la-color-text);
       }
+
+      /* ── Dot: a status in a table cell (2 Oct 2026) ──
+         No pill. A 6px dot in the variant's state colour, the word in ink, and
+         an optional quieter detail after a middle dot ("Blocked · Waiting on
+         HMRC"). In a column of statuses a pill on every row is chrome, so the
+         dot says the state once (rule/state-said-once) and the word says it in
+         words, so colour is never the only signal. Badge type only. Its own
+         elements are not spans, so the pill rules above never reach them; the
+         one span inside, the detail, is reset below. */
+      :host([type='badge'][appearance='dot']) {
+        max-width: 100%;
+        min-width: 0;
+      }
+      :host([type='badge'][appearance='dot']) .status {
+        gap: var(--la-space-2xs);
+        max-width: 100%;
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: none;
+        color: var(--la-color-text-secondary);
+      }
+      .dot {
+        flex: none;
+        width: 6px; /* glyph-detail constant, as the counter's 20px */
+        height: 6px;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-text-faint);
+      }
+      /* The five status variants. accent is a category and primary is for
+         interactive elements, so neither is a state: both keep the neutral dot. */
+      :host([variant='danger']) .dot {
+        background: var(--la-color-urgent);
+      }
+      :host([variant='warning']) .dot {
+        background: var(--la-color-proactive);
+      }
+      :host([variant='success']) .dot {
+        background: var(--la-color-resolved);
+      }
+      :host([variant='info']) .dot {
+        background: var(--la-color-processing);
+      }
+      /* The separator recedes, as in every metadata run (ux-patterns 12). */
+      .sep {
+        flex: none;
+        font-style: normal;
+        color: var(--la-color-text-faint);
+        user-select: none;
+      }
+      /* The detail gives way first: it truncates, and the word never does.
+         Muted, not faint: it is read, and faint text fails AA contrast. */
+      :host([type='badge'][appearance='dot']) .detail {
+        display: block;
+        min-width: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background: none;
+        font-size: inherit;
+        color: var(--la-color-text-muted);
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      @media (forced-colors: active) {
+        .dot {
+          forced-color-adjust: none;
+          background: CanvasText;
+        }
+      }
+
+      /* ── Focus: a badge that carries a tip ──
+         A badge is not interactive, so it is only focusable when the page gives
+         it tabindex="0" inside la-tooltip, which opens on focus-within. The ring
+         is the system's; nothing changes for a badge without a tabindex. */
+      :host(:focus-visible) {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+        border-radius: var(--la-radius-sm);
+      }
     `,
   ];
   __decorate$1E([
@@ -750,6 +851,9 @@
   __decorate$1E([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
+  __decorate$1E([
+      n()
+  ], exports.LaBadge.prototype, "detail", void 0);
   exports.LaBadge = __decorate$1E([
       t$1('la-badge')
   ], exports.LaBadge);
