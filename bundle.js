@@ -537,7 +537,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */function e$2(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$3(n,s,{get(){return o(this)}})}}
 
-  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -738,19 +738,19 @@
       }
     `,
   ];
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "variant", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "type", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "appearance", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
-  exports.LaBadge = __decorate$1z([
+  exports.LaBadge = __decorate$1A([
       t$1('la-badge')
   ], exports.LaBadge);
 
@@ -760,7 +760,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const o=o=>o??A;
 
-  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -886,29 +886,29 @@
       }
     `,
   ];
-  __decorate$1y([
+  __decorate$1z([
       n()
   ], exports.LaIconButton.prototype, "label", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Boolean })
   ], exports.LaIconButton.prototype, "expanded", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "pressed", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "size", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "variant", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "disabled", void 0);
-  exports.LaIconButton = __decorate$1y([
+  exports.LaIconButton = __decorate$1z([
       t$1('la-icon-button')
   ], exports.LaIconButton);
 
-  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1043,17 +1043,17 @@
 
     `,
   ];
-  __decorate$1x([
+  __decorate$1y([
       n({ type: Array })
   ], exports.LaBreadcrumb.prototype, "items", void 0);
-  __decorate$1x([
+  __decorate$1y([
       r()
   ], exports.LaBreadcrumb.prototype, "_expanded", void 0);
-  exports.LaBreadcrumb = __decorate$1x([
+  exports.LaBreadcrumb = __decorate$1y([
       t$1('la-breadcrumb')
   ], exports.LaBreadcrumb);
 
-  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1161,20 +1161,20 @@
       }
     `,
   ];
-  __decorate$1w([
+  __decorate$1x([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "size", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "appearance", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n()
   ], exports.LaSpinner.prototype, "label", void 0);
-  exports.LaSpinner = __decorate$1w([
+  exports.LaSpinner = __decorate$1x([
       t$1('la-spinner')
   ], exports.LaSpinner);
 
-  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1517,38 +1517,38 @@
       }
     `,
   ];
-  __decorate$1v([
+  __decorate$1w([
       n({ reflect: true })
   ], exports.LaButton.prototype, "variant", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ reflect: true })
   ], exports.LaButton.prototype, "size", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "pill", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "block", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ attribute: 'loading-label' })
   ], exports.LaButton.prototype, "loadingLabel", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaButton.prototype, "hideLabel", void 0);
-  __decorate$1v([
+  __decorate$1w([
       r()
   ], exports.LaButton.prototype, "_hasIconLeft", void 0);
-  exports.LaButton = __decorate$1v([
+  exports.LaButton = __decorate$1w([
       t$1('la-button')
   ], exports.LaButton);
 
-  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1609,20 +1609,20 @@
       }
     `,
   ];
-  __decorate$1u([
+  __decorate$1v([
       n()
   ], exports.LaCard.prototype, "heading", void 0);
-  __decorate$1u([
+  __decorate$1v([
       n({ type: Boolean, reflect: true })
   ], exports.LaCard.prototype, "nopadding", void 0);
-  __decorate$1u([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaCard.prototype, "variant", void 0);
-  exports.LaCard = __decorate$1u([
+  exports.LaCard = __decorate$1v([
       t$1('la-card')
   ], exports.LaCard);
 
-  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1673,20 +1673,20 @@
       }
     `,
   ];
-  __decorate$1t([
+  __decorate$1u([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "clickable", void 0);
-  __decorate$1t([
+  __decorate$1u([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "dimmed", void 0);
-  __decorate$1t([
+  __decorate$1u([
       n()
   ], exports.LaPanel.prototype, "heading", void 0);
-  exports.LaPanel = __decorate$1t([
+  exports.LaPanel = __decorate$1u([
       t$1('la-panel')
   ], exports.LaPanel);
 
-  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1840,17 +1840,17 @@
       }
     `,
   ];
-  __decorate$1s([
+  __decorate$1t([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "error", void 0);
-  __decorate$1s([
+  __decorate$1t([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "clickable", void 0);
-  exports.LaListItem = __decorate$1s([
+  exports.LaListItem = __decorate$1t([
       t$1('la-list-item')
   ], exports.LaListItem);
 
-  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1956,26 +1956,26 @@
       }
     `,
   ];
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "checked", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "indeterminate", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "disabled", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n()
   ], exports.LaCheckbox.prototype, "label", void 0);
-  __decorate$1r([
+  __decorate$1s([
       e$2('input')
   ], exports.LaCheckbox.prototype, "input", void 0);
-  exports.LaCheckbox = __decorate$1r([
+  exports.LaCheckbox = __decorate$1s([
       t$1('la-checkbox')
   ], exports.LaCheckbox);
 
-  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2111,20 +2111,20 @@
       }
     `,
   ];
-  __decorate$1q([
+  __decorate$1r([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "checked", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "disabled", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n()
   ], exports.LaSwitch.prototype, "label", void 0);
-  exports.LaSwitch = __decorate$1q([
+  exports.LaSwitch = __decorate$1r([
       t$1('la-switch')
   ], exports.LaSwitch);
 
-  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2277,26 +2277,26 @@
       }
     `,
   ];
-  __decorate$1p([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "variant", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "checked", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "invalid", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "filled", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
-  exports.LaChoice = __decorate$1p([
+  exports.LaChoice = __decorate$1q([
       t$1('la-choice')
   ], exports.LaChoice);
 
-  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2410,14 +2410,14 @@
       }
     `,
   ];
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Array })
   ], exports.LaStepper.prototype, "steps", void 0);
-  exports.LaStepper = __decorate$1o([
+  exports.LaStepper = __decorate$1p([
       t$1('la-stepper')
   ], exports.LaStepper);
 
-  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2576,33 +2576,333 @@
       }
     `,
   ];
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "total", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "done", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean })
   ], exports.LaStepRing.prototype, "current", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "thickness", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "gap", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "corner", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaStepRing.prototype, "label", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaStepRing.prototype, "sublabel", void 0);
-  exports.LaStepRing = __decorate$1n([
+  exports.LaStepRing = __decorate$1o([
       t$1('la-step-ring')
   ], exports.LaStepRing);
+
+  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /** The paired-badge words from status-conventions.md, so a marker's
+   *  accessible name and the badge beside it never disagree. */
+  const STATUS_LABEL = {
+      complete: 'Complete',
+      active: 'In progress',
+      pending: 'Not started',
+      gated: 'Locked',
+      attention: 'Needs attention',
+      processing: 'Processing',
+  };
+  /**
+   * la-step-marker — the marker on a step, in either register of the status
+   * standard (decision 104, design-language/status-conventions.md). One place
+   * for the mapping that pages were re-declaring: the Orion playbook run, the
+   * e-sign ceremony and the wizard rail drew three different markers.
+   *
+   * Sequence register (default) — ordered steps: a 22px numbered circle,
+   * monochrome. Complete and active are both primary; the check says done,
+   * the number says where you are. Pending is muted. Colour appears only for
+   * the exceptions, attention and processing.
+   *
+   * Check register — unordered sub-tasks inside one step: a ~20px
+   * check-circle icon. Green (`--la-color-resolved`) is for complete only.
+   *
+   * Display-only by default, named for assistive tech ("Step 3: Complete").
+   * With `interactive` it is a pressable button that fires `la-step-press`;
+   * the host decides what a press does (the playbook run ticks the step), and
+   * should give it a `label` that says so. The hit area is 32px, 44px on a
+   * touch screen, while the circle stays 22px. `label=""` makes a
+   * non-interactive marker decorative, for a row whose text already says it.
+   *
+   * Usage:
+   *   <la-step-marker index="2" status="active"></la-step-marker>
+   *   <la-step-marker variant="check" status="complete"></la-step-marker>
+   *   <la-step-marker index="3" status="pending" interactive
+   *                   label="Mark step 3 done"></la-step-marker>
+   *
+   * @prop status      - pending (default) · active · complete · gated · attention · processing
+   * @prop variant     - sequence (default) · check
+   * @prop index       - the step's number, shown while pending or active (sequence only)
+   * @prop label       - accessible name; defaults to "Step N: <status>"; "" hides a display marker
+   * @prop interactive - render as a button that fires la-step-press
+   * @prop disabled    - an interactive marker that can't be pressed right now
+   * @fires la-step-press - {index, status}, bubbles and composed
+   */
+  exports.LaStepMarker = class LaStepMarker extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.status = 'pending';
+          this.variant = 'sequence';
+          this.interactive = false;
+          this.disabled = false;
+      }
+      get _name() {
+          if (this.label != null)
+              return this.label;
+          const word = STATUS_LABEL[this.status] ?? STATUS_LABEL.pending;
+          return this.variant === 'sequence' && this.index != null
+              ? `Step ${this.index}: ${word}`
+              : word;
+      }
+      _press() {
+          if (this.disabled)
+              return;
+          this.dispatchEvent(new CustomEvent('la-step-press', {
+              detail: { index: this.index, status: this.status },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _sequence() {
+          const s = this.status;
+          const showNumber = s === 'pending' || s === 'active';
+          return b `<span class="mark seq ${s}" part="mark" aria-hidden="true">
+      <span class="g ${showNumber ? 'on' : ''}">${this.index ?? ''}</span>
+      <span class="g ${s === 'complete' ? 'on' : ''}"><i class="ph-bold ph-check"></i></span>
+      ${s === 'gated'
+            ? b `<span class="g on"><i class="ph-fill ph-lock-simple"></i></span>`
+            : A}
+      ${s === 'attention'
+            ? b `<span class="g on"><i class="ph-fill ph-warning"></i></span>`
+            : A}
+      ${s === 'processing'
+            ? b `<span class="g on"><la-spinner size="sm" label=""></la-spinner></span>`
+            : A}
+    </span>`;
+      }
+      _check() {
+          const s = this.status;
+          const icon = s === 'complete'
+              ? b `<i class="ph-fill ph-check-circle"></i>`
+              : s === 'active'
+                  ? b `<i class="ph-fill ph-circle"></i>`
+                  : s === 'gated'
+                      ? b `<i class="ph ph-lock-simple"></i>`
+                      : s === 'attention'
+                          ? b `<i class="ph-fill ph-warning-circle"></i>`
+                          : s === 'processing'
+                              ? b `<la-spinner size="sm" label=""></la-spinner>`
+                              : b `<i class="ph ph-check-circle"></i>`;
+          return b `<span class="mark chk ${s}" part="mark" aria-hidden="true">${icon}</span>`;
+      }
+      render() {
+          const mark = this.variant === 'check' ? this._check() : this._sequence();
+          if (this.interactive) {
+              return b `${iconStyles}<button
+          type="button"
+          aria-label=${this._name}
+          aria-pressed=${this.status === 'complete' ? 'true' : 'false'}
+          ?disabled=${this.disabled}
+          @click=${this._press}
+        >
+          ${mark}
+        </button>`;
+          }
+          const decorative = this.label === '';
+          return b `${iconStyles}<span
+        role=${decorative ? A : 'img'}
+        aria-label=${decorative ? A : this._name}
+        aria-hidden=${decorative ? 'true' : A}
+        >${mark}</span
+      >`;
+      }
+  };
+  exports.LaStepMarker.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-flex;
+        flex: none;
+        vertical-align: middle;
+        line-height: 1;
+      }
+
+      button {
+        position: relative;
+        display: inline-grid;
+        padding: 0;
+        margin: 0;
+        border: 0;
+        background: none;
+        color: inherit;
+        font: inherit;
+        border-radius: var(--la-radius-circle);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      /* The circle stays 22px; the target is 32px, and 44px on a thumb. */
+      button::before {
+        content: '';
+        position: absolute;
+        inset: -5px;
+        border-radius: var(--la-radius-circle);
+      }
+      @media (hover: none) and (pointer: coarse) {
+        button::before {
+          inset: -11px;
+        }
+      }
+      button:focus {
+        outline: none;
+      }
+      button:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+      }
+      button:disabled {
+        cursor: default;
+      }
+
+      .mark {
+        position: relative;
+        display: inline-grid;
+        place-items: center;
+        width: 22px;
+        height: 22px;
+        border-radius: var(--la-radius-circle);
+        font-family: var(--la-font-family);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-semibold);
+        font-variant-numeric: tabular-nums;
+        transition:
+          background-color var(--dur-fast) var(--ease),
+          color var(--dur-fast) var(--ease),
+          box-shadow var(--dur-fast) var(--ease),
+          transform var(--dur-fast) var(--ease);
+      }
+      .mark i {
+        font-size: 12px;
+      }
+
+      /* Sequence register: fills from status-conventions.md. */
+      .seq.pending,
+      .seq.gated,
+      .seq.processing {
+        background-color: var(--la-color-bg-muted);
+        color: var(--la-color-text-muted);
+      }
+      .seq.gated {
+        color: var(--la-color-text-faint);
+      }
+      .seq.active,
+      .seq.complete {
+        background-color: var(--la-color-primary);
+        color: var(--la-color-primary-fg);
+      }
+      .seq.attention {
+        background-color: var(--la-color-surface-danger);
+        color: var(--la-color-danger-text);
+      }
+
+      /* Number and check share one cell and cross-fade, as motion.css's
+         t-icon-swap does on the page: fade, scale and a touch of blur. */
+      .g {
+        grid-area: 1 / 1;
+        display: grid;
+        place-items: center;
+        opacity: 0;
+        transform: scale(0.25);
+        filter: blur(2px);
+        transition:
+          opacity var(--dur-base) ease-in-out,
+          transform var(--dur-base) ease-in-out,
+          filter var(--dur-base) ease-in-out;
+      }
+      .g.on {
+        opacity: 1;
+        transform: scale(1);
+        filter: blur(0);
+      }
+
+      /* Check register: an icon, no fill. */
+      .chk {
+        width: 20px;
+        height: 20px;
+      }
+      .chk i {
+        font-size: 20px;
+      }
+      .chk.complete {
+        color: var(--la-color-resolved);
+      }
+      .chk.active {
+        color: var(--la-color-primary);
+      }
+      .chk.pending,
+      .chk.gated {
+        color: var(--la-color-text-faint);
+      }
+      .chk.attention {
+        color: var(--la-color-danger-text);
+      }
+
+      /* Pressable: the hover ring and press the playbook run used. */
+      button:not(:disabled):hover .seq {
+        box-shadow: 0 0 0 3px var(--la-color-bg-active);
+      }
+      button:not(:disabled):hover .seq.pending {
+        color: var(--la-color-text);
+      }
+      button:not(:disabled):active .mark {
+        transform: scale(var(--scale-press, 0.97));
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .mark,
+        .g {
+          transition: none;
+        }
+      }
+    `,
+  ];
+  __decorate$1n([
+      n({ reflect: true })
+  ], exports.LaStepMarker.prototype, "status", void 0);
+  __decorate$1n([
+      n({ reflect: true })
+  ], exports.LaStepMarker.prototype, "variant", void 0);
+  __decorate$1n([
+      n({ type: Number })
+  ], exports.LaStepMarker.prototype, "index", void 0);
+  __decorate$1n([
+      n()
+  ], exports.LaStepMarker.prototype, "label", void 0);
+  __decorate$1n([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaStepMarker.prototype, "interactive", void 0);
+  __decorate$1n([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaStepMarker.prototype, "disabled", void 0);
+  exports.LaStepMarker = __decorate$1n([
+      t$1('la-step-marker')
+  ], exports.LaStepMarker);
 
   var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
