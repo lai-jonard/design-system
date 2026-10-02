@@ -389,7 +389,7 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <h3 id="28-determinate-progress--la-progress">2.8 Determinate progress — <code>la-progress</code></h3>
 <p><strong>What:</strong> A horizontal bar that fills 0 → 100% as a known-quantity task progresses. File bytes uploaded, items processed in a batch, export percentage.</p>
 <p><strong>When:</strong> File upload (bytes known), bulk action (&quot;Resolving 12 of 47 insights&quot;), export (&quot;Generating PDF — 64%&quot;).</p>
-<p><strong>Component status:</strong> <strong>Locked spec — slot 4 in build queue.</strong> Build-ready; no interim solve needed. Distinct from <code>la-stepper</code> (segmented/discrete) by name and shape.</p>
+<p><strong>Component status:</strong> <strong>Built 2 October 2026</strong>, from the Phase B playbook uses: <code>la-progress</code>, in the bundle, docs draft only, 🟡 until reviewed (<a href="../../docs/components/#la-progress"><code>components.md</code></a>). The locked spec below is kept as the record; where the build departs from it is listed under it. Distinct from <code>la-stepper</code> (segmented/discrete) by name and shape.</p>
 <p><strong>Locked spec (build-ready):</strong></p>
 <ul>
 <li><strong>Tag:</strong> <code>la-progress</code></li>
@@ -401,6 +401,15 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <li><strong>Out of scope (separate decision if ever needed):</strong> striped/animated fill while running, indeterminate mode.</li>
 </ul>
 <p><strong>First consumer:</strong> <code>la-upload-box</code> — currently shows only a spinner during upload but knows bytes; can show determinate.</p>
+<p><strong>As built (2 October 2026), for review.</strong> Built from the two bars Orion's Phase B screens draw by hand in <code>new-design</code> (the playbook modal's In progress rows in <code>05-playbooks.html</code>, the plan overview in <code>16-playbook-run.html</code>), it departs from the locked spec in five places:</p>
+<ul>
+<li><strong>Fill</strong> <code>--la-color-text-secondary</code>, not <code>--la-color-primary</code>, and <strong>track</strong> <code>--la-color-bg-muted</code>, not <code>--la-color-border-light</code>: the colours the playbooks page draws, and primary is for interactive elements (<code>rule/primary-colour-interactive-only</code>). Never green, even at 100% (decision 104's sequence register).</li>
+<li><strong><code>max</code></strong> (default 100) and <strong><code>value-text</code></strong> added, so a step count is passed as it is (&quot;2 of 10 steps&quot;) rather than turned into a percentage. <code>value</code> alone is still 0 to 100.</li>
+<li><strong>No <code>label</code> or <code>description</code> slot.</strong> Neither consumer puts a caption above the bar; the page writes its own text beside it, and <code>label</code> is the accessible name. <code>label=&quot;&quot;</code> makes the bar decorative where that text already says the count.</li>
+<li><strong>Motion</strong> slides a full-width pill with <code>translateX</code> rather than <code>scaleX</code>, which keeps the pill end round; same 200ms (<code>--dur-base</code>) <code>--ease-out</code>.</li>
+<li><strong><code>size=&quot;lg&quot;</code></strong> (6px) for a bar that heads its own panel, as the plan overview does; the default stays 4px.</li>
+</ul>
+<p><code>la-upload-box</code> is still a candidate consumer.</p>
 <p><strong>Note on naming:</strong> the prior file <code>la-progress-bar.ts</code> was renamed to <code>la-stepper.ts</code> precisely because the segmented behaviour was a stepper, not a progress bar. The name <code>la-progress</code> is now used for this determinate primitive.</p>
 <hr>
 <h3 id="29-ai-thinking--streaming-state--la-thinking">2.9 AI thinking / streaming state — <code>la-thinking</code></h3>
@@ -644,7 +653,7 @@ Is this an AI generation?
 <td>4</td>
 <td>Determinate progress</td>
 <td><code>la-progress</code></td>
-<td>🟠 Locked spec — build-ready, no interim solve (§2.8)</td>
+<td>🟢 Built 2 October 2026; readiness 🟡 until reviewed, departures from the spec in §2.8</td>
 </tr>
 <tr>
 <td>—</td>
@@ -689,7 +698,7 @@ Is this an AI generation?
 <li><strong><code>skeleton-primitive</code></strong> — settles <code>la-skeleton</code> variants (text/block/circle), sizing API, multi-line text shape, shimmer-on/off rules, anti-pattern guards.</li>
 <li><strong><code>ai-thinking-state</code></strong> — settles <code>la-thinking</code> visual default (pulsing dot vs. &quot;Thinking…&quot; pill vs. shimmer vs. token stream) plus opt-out for surfaces already streaming tokens.</li>
 </ol>
-<p><code>la-progress</code> does not need a sub-solve — its spec is in §2.8 and is build-ready.</p>
+<p><code>la-progress</code> needed no sub-solve; it was built on 2 October 2026 from §2.8 and the Phase B uses.</p>
 <h3 id="advisory-opens-for-handoff-conversation-not-this-doc-to-settle">Advisory opens (for handoff conversation, not this doc to settle)</h3>
 <ol>
 <li><strong>Migration ownership.</strong> When <code>la-button</code> gains a <code>loading</code> prop, who updates the existing async-CTA call sites — designer flags, engineering executes, or pair? Process question.</li>
