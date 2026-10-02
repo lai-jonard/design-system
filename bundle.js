@@ -537,7 +537,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */function e$2(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$3(n,s,{get(){return o(this)}})}}
 
-  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -738,19 +738,19 @@
       }
     `,
   ];
-  __decorate$1D([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "variant", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "type", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "appearance", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
-  exports.LaBadge = __decorate$1D([
+  exports.LaBadge = __decorate$1E([
       t$1('la-badge')
   ], exports.LaBadge);
 
@@ -760,7 +760,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const o=o=>o??A;
 
-  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -886,29 +886,29 @@
       }
     `,
   ];
-  __decorate$1C([
+  __decorate$1D([
       n()
   ], exports.LaIconButton.prototype, "label", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ type: Boolean })
   ], exports.LaIconButton.prototype, "expanded", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "pressed", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "size", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "variant", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "disabled", void 0);
-  exports.LaIconButton = __decorate$1C([
+  exports.LaIconButton = __decorate$1D([
       t$1('la-icon-button')
   ], exports.LaIconButton);
 
-  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1043,17 +1043,17 @@
 
     `,
   ];
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Array })
   ], exports.LaBreadcrumb.prototype, "items", void 0);
-  __decorate$1B([
+  __decorate$1C([
       r()
   ], exports.LaBreadcrumb.prototype, "_expanded", void 0);
-  exports.LaBreadcrumb = __decorate$1B([
+  exports.LaBreadcrumb = __decorate$1C([
       t$1('la-breadcrumb')
   ], exports.LaBreadcrumb);
 
-  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1161,20 +1161,20 @@
       }
     `,
   ];
-  __decorate$1A([
+  __decorate$1B([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "size", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "appearance", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n()
   ], exports.LaSpinner.prototype, "label", void 0);
-  exports.LaSpinner = __decorate$1A([
+  exports.LaSpinner = __decorate$1B([
       t$1('la-spinner')
   ], exports.LaSpinner);
 
-  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1517,38 +1517,38 @@
       }
     `,
   ];
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaButton.prototype, "variant", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaButton.prototype, "size", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "pill", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "block", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ attribute: 'loading-label' })
   ], exports.LaButton.prototype, "loadingLabel", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaButton.prototype, "hideLabel", void 0);
-  __decorate$1z([
+  __decorate$1A([
       r()
   ], exports.LaButton.prototype, "_hasIconLeft", void 0);
-  exports.LaButton = __decorate$1z([
+  exports.LaButton = __decorate$1A([
       t$1('la-button')
   ], exports.LaButton);
 
-  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1609,20 +1609,20 @@
       }
     `,
   ];
-  __decorate$1y([
+  __decorate$1z([
       n()
   ], exports.LaCard.prototype, "heading", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Boolean, reflect: true })
   ], exports.LaCard.prototype, "nopadding", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaCard.prototype, "variant", void 0);
-  exports.LaCard = __decorate$1y([
+  exports.LaCard = __decorate$1z([
       t$1('la-card')
   ], exports.LaCard);
 
-  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1673,20 +1673,20 @@
       }
     `,
   ];
-  __decorate$1x([
+  __decorate$1y([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "clickable", void 0);
-  __decorate$1x([
+  __decorate$1y([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "dimmed", void 0);
-  __decorate$1x([
+  __decorate$1y([
       n()
   ], exports.LaPanel.prototype, "heading", void 0);
-  exports.LaPanel = __decorate$1x([
+  exports.LaPanel = __decorate$1y([
       t$1('la-panel')
   ], exports.LaPanel);
 
-  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1840,17 +1840,17 @@
       }
     `,
   ];
-  __decorate$1w([
+  __decorate$1x([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "error", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "clickable", void 0);
-  exports.LaListItem = __decorate$1w([
+  exports.LaListItem = __decorate$1x([
       t$1('la-list-item')
   ], exports.LaListItem);
 
-  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1956,26 +1956,26 @@
       }
     `,
   ];
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "checked", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "indeterminate", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "disabled", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n()
   ], exports.LaCheckbox.prototype, "label", void 0);
-  __decorate$1v([
+  __decorate$1w([
       e$2('input')
   ], exports.LaCheckbox.prototype, "input", void 0);
-  exports.LaCheckbox = __decorate$1v([
+  exports.LaCheckbox = __decorate$1w([
       t$1('la-checkbox')
   ], exports.LaCheckbox);
 
-  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2111,20 +2111,20 @@
       }
     `,
   ];
-  __decorate$1u([
+  __decorate$1v([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "checked", void 0);
-  __decorate$1u([
+  __decorate$1v([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "disabled", void 0);
-  __decorate$1u([
+  __decorate$1v([
       n()
   ], exports.LaSwitch.prototype, "label", void 0);
-  exports.LaSwitch = __decorate$1u([
+  exports.LaSwitch = __decorate$1v([
       t$1('la-switch')
   ], exports.LaSwitch);
 
-  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2277,26 +2277,26 @@
       }
     `,
   ];
-  __decorate$1t([
+  __decorate$1u([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "variant", void 0);
-  __decorate$1t([
+  __decorate$1u([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "checked", void 0);
-  __decorate$1t([
+  __decorate$1u([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "invalid", void 0);
-  __decorate$1t([
+  __decorate$1u([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "filled", void 0);
-  __decorate$1t([
+  __decorate$1u([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
-  exports.LaChoice = __decorate$1t([
+  exports.LaChoice = __decorate$1u([
       t$1('la-choice')
   ], exports.LaChoice);
 
-  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2410,14 +2410,14 @@
       }
     `,
   ];
-  __decorate$1s([
+  __decorate$1t([
       n({ type: Array })
   ], exports.LaStepper.prototype, "steps", void 0);
-  exports.LaStepper = __decorate$1s([
+  exports.LaStepper = __decorate$1t([
       t$1('la-stepper')
   ], exports.LaStepper);
 
-  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2576,35 +2576,35 @@
       }
     `,
   ];
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "total", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "done", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Boolean })
   ], exports.LaStepRing.prototype, "current", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "thickness", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "gap", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "corner", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n()
   ], exports.LaStepRing.prototype, "label", void 0);
-  __decorate$1r([
+  __decorate$1s([
       n()
   ], exports.LaStepRing.prototype, "sublabel", void 0);
-  exports.LaStepRing = __decorate$1r([
+  exports.LaStepRing = __decorate$1s([
       t$1('la-step-ring')
   ], exports.LaStepRing);
 
-  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2882,29 +2882,29 @@
       }
     `,
   ];
-  __decorate$1q([
+  __decorate$1r([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "status", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "variant", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ type: Number })
   ], exports.LaStepMarker.prototype, "index", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n()
   ], exports.LaStepMarker.prototype, "label", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepMarker.prototype, "interactive", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepMarker.prototype, "disabled", void 0);
-  exports.LaStepMarker = __decorate$1q([
+  exports.LaStepMarker = __decorate$1r([
       t$1('la-step-marker')
   ], exports.LaStepMarker);
 
-  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3042,17 +3042,17 @@
       }
     `,
   ];
-  __decorate$1p([
+  __decorate$1q([
       n()
   ], exports.LaActivityItem.prototype, "time", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaActivityItem.prototype, "last", void 0);
-  exports.LaActivityItem = __decorate$1p([
+  exports.LaActivityItem = __decorate$1q([
       t$1('la-activity-item')
   ], exports.LaActivityItem);
 
-  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3236,53 +3236,53 @@
       }
     `,
   ];
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaTextarea.prototype, "name", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaTextarea.prototype, "placeholder", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaTextarea.prototype, "value", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaTextarea.prototype, "label", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaTextarea.prototype, "hint", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "required", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "disabled", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "error", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "rows", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Number, attribute: 'min-rows' })
   ], exports.LaTextarea.prototype, "minRows", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Number, attribute: 'max-rows' })
   ], exports.LaTextarea.prototype, "maxRows", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "maxlength", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaTextarea.prototype, "showCount", void 0);
-  __decorate$1o([
+  __decorate$1p([
       e$2('textarea')
   ], exports.LaTextarea.prototype, "_textarea", void 0);
-  exports.LaTextarea = __decorate$1o([
+  exports.LaTextarea = __decorate$1p([
       t$1('la-textarea')
   ], exports.LaTextarea);
 
-  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3580,35 +3580,35 @@
       }
     `,
   ];
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "signed", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ attribute: false })
   ], exports.LaStepSignoff.prototype, "stamps", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean })
   ], exports.LaStepSignoff.prototype, "reopenable", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaStepSignoff.prototype, "label", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "quiet", void 0);
-  __decorate$1n([
+  __decorate$1o([
       r()
   ], exports.LaStepSignoff.prototype, "_reopening", void 0);
-  __decorate$1n([
+  __decorate$1o([
       r()
   ], exports.LaStepSignoff.prototype, "_historyOpen", void 0);
-  __decorate$1n([
+  __decorate$1o([
       r()
   ], exports.LaStepSignoff.prototype, "_reason", void 0);
-  exports.LaStepSignoff = __decorate$1n([
+  exports.LaStepSignoff = __decorate$1o([
       t$1('la-step-signoff')
   ], exports.LaStepSignoff);
 
-  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4018,38 +4018,38 @@
       }
     `,
   ];
-  __decorate$1m([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaDisclosure.prototype, "open", void 0);
-  __decorate$1m([
+  __decorate$1n([
       n()
   ], exports.LaDisclosure.prototype, "summary", void 0);
-  __decorate$1m([
+  __decorate$1n([
       n({ reflect: true })
   ], exports.LaDisclosure.prototype, "variant", void 0);
-  __decorate$1m([
+  __decorate$1n([
       r()
   ], exports.LaDisclosure.prototype, "_shown", void 0);
-  __decorate$1m([
+  __decorate$1n([
       r()
   ], exports.LaDisclosure.prototype, "_expanded", void 0);
-  __decorate$1m([
+  __decorate$1n([
       r()
   ], exports.LaDisclosure.prototype, "_settled", void 0);
-  __decorate$1m([
+  __decorate$1n([
       r()
   ], exports.LaDisclosure.prototype, "_hasTrailing", void 0);
-  __decorate$1m([
+  __decorate$1n([
       e$2('details')
   ], exports.LaDisclosure.prototype, "_details", void 0);
-  __decorate$1m([
+  __decorate$1n([
       e$2('.body')
   ], exports.LaDisclosure.prototype, "_body", void 0);
-  exports.LaDisclosure = __decorate$1m([
+  exports.LaDisclosure = __decorate$1n([
       t$1('la-disclosure')
   ], exports.LaDisclosure);
 
-  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4151,23 +4151,23 @@
       }
     `,
   ];
-  __decorate$1l([
+  __decorate$1m([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "status", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n()
   ], exports.LaSlaPill.prototype, "label", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "size", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n({ type: Boolean })
   ], exports.LaSlaPill.prototype, "clickable", void 0);
-  exports.LaSlaPill = __decorate$1l([
+  exports.LaSlaPill = __decorate$1m([
       t$1('la-sla-pill')
   ], exports.LaSlaPill);
 
-  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4266,20 +4266,20 @@
       }
     `,
   ];
-  __decorate$1k([
+  __decorate$1l([
       n({ reflect: true })
   ], exports.LaDateTile.prototype, "tone", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n()
   ], exports.LaDateTile.prototype, "day", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n()
   ], exports.LaDateTile.prototype, "month", void 0);
-  exports.LaDateTile = __decorate$1k([
+  exports.LaDateTile = __decorate$1l([
       t$1('la-date-tile')
   ], exports.LaDateTile);
 
-  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4675,41 +4675,41 @@
       }
     `,
   ];
-  __decorate$1j([
+  __decorate$1k([
       n({ type: Number, attribute: 'stage-index' })
   ], exports.LaSlaStrip.prototype, "stageIndex", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ type: Number, attribute: 'stage-total' })
   ], exports.LaSlaStrip.prototype, "stageTotal", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ attribute: 'stage-name' })
   ], exports.LaSlaStrip.prototype, "stageName", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ attribute: 'stage-status' })
   ], exports.LaSlaStrip.prototype, "stageStatus", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ attribute: 'stage-days-label' })
   ], exports.LaSlaStrip.prototype, "stageDaysLabel", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ type: Number, attribute: 'case-sla-days' })
   ], exports.LaSlaStrip.prototype, "caseSlaDays", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ attribute: 'case-status' })
   ], exports.LaSlaStrip.prototype, "caseStatus", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ attribute: false })
   ], exports.LaSlaStrip.prototype, "stages", void 0);
-  __decorate$1j([
+  __decorate$1k([
       n({ type: Boolean, reflect: true })
   ], exports.LaSlaStrip.prototype, "open", void 0);
-  __decorate$1j([
+  __decorate$1k([
       r()
   ], exports.LaSlaStrip.prototype, "_phase", void 0);
-  exports.LaSlaStrip = __decorate$1j([
+  exports.LaSlaStrip = __decorate$1k([
       t$1('la-sla-strip')
   ], exports.LaSlaStrip);
 
-  var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4812,23 +4812,23 @@
       }
     `,
   ];
-  __decorate$1i([
+  __decorate$1j([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "filled", void 0);
-  __decorate$1i([
+  __decorate$1j([
       n()
   ], exports.LaBandwidthBar.prototype, "label", void 0);
-  __decorate$1i([
+  __decorate$1j([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "count", void 0);
-  __decorate$1i([
+  __decorate$1j([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaBandwidthBar.prototype, "showCount", void 0);
-  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1i([
+  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1j([
       t$1('la-bandwidth-bar')
   ], exports.LaBandwidthBar);
 
-  var __decorate$1h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4898,17 +4898,17 @@
       :host([level='3+']) .badge { background: var(--la-color-level-3plus); }
     `,
   ];
-  __decorate$1h([
+  __decorate$1i([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "level", void 0);
-  __decorate$1h([
+  __decorate$1i([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "size", void 0);
-  exports.LaLevelIndicator = __decorate$1h([
+  exports.LaLevelIndicator = __decorate$1i([
       t$1('la-level-indicator')
   ], exports.LaLevelIndicator);
 
-  var __decorate$1g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4984,17 +4984,17 @@
       .seg.r4 { background: var(--la-color-primary); }
     `,
   ];
-  __decorate$1g([
+  __decorate$1h([
       n({ attribute: false })
   ], exports.LaDistributionBar.prototype, "segments", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ type: Number })
   ], exports.LaDistributionBar.prototype, "height", void 0);
-  exports.LaDistributionBar = __decorate$1g([
+  exports.LaDistributionBar = __decorate$1h([
       t$1('la-distribution-bar')
   ], exports.LaDistributionBar);
 
-  var __decorate$1f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5140,26 +5140,26 @@
       }
     `,
   ];
-  __decorate$1f([
+  __decorate$1g([
       n({ type: Number })
   ], exports.LaProgress.prototype, "value", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ type: Number })
   ], exports.LaProgress.prototype, "max", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n()
   ], exports.LaProgress.prototype, "label", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ attribute: 'value-text' })
   ], exports.LaProgress.prototype, "valueText", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ reflect: true })
   ], exports.LaProgress.prototype, "size", void 0);
-  exports.LaProgress = __decorate$1f([
+  exports.LaProgress = __decorate$1g([
       t$1('la-progress')
   ], exports.LaProgress);
 
-  var __decorate$1e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5373,65 +5373,65 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1e([
+  __decorate$1f([
       n({ reflect: true })
   ], exports.LaInput.prototype, "type", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n()
   ], exports.LaInput.prototype, "name", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n()
   ], exports.LaInput.prototype, "placeholder", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ reflect: true })
   ], exports.LaInput.prototype, "inputmode", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n()
   ], exports.LaInput.prototype, "autocomplete", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ attribute: 'aria-label' })
   ], exports.LaInput.prototype, "ariaLabel", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n()
   ], exports.LaInput.prototype, "value", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n()
   ], exports.LaInput.prototype, "label", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n()
   ], exports.LaInput.prototype, "hint", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "required", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ reflect: true })
   ], exports.LaInput.prototype, "size", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "optional", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "disabled", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "error", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "reveal", void 0);
-  __decorate$1e([
+  __decorate$1f([
       r()
   ], exports.LaInput.prototype, "_hasIconLeft", void 0);
-  __decorate$1e([
+  __decorate$1f([
       r()
   ], exports.LaInput.prototype, "_hasIconRight", void 0);
-  __decorate$1e([
+  __decorate$1f([
       r()
   ], exports.LaInput.prototype, "_shown", void 0);
-  exports.LaInput = __decorate$1e([
+  exports.LaInput = __decorate$1f([
       t$1('la-input')
   ], exports.LaInput);
 
-  var __decorate$1d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5760,56 +5760,56 @@
       :host([disabled]) { opacity: 0.4; }
     `,
   ];
-  __decorate$1d([
+  __decorate$1e([
       n({ attribute: 'value' })
   ], exports.LaDateInput.prototype, "_dateValue", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaDateInput.prototype, "locale", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaDateInput.prototype, "label", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaDateInput.prototype, "hint", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaDateInput.prototype, "min", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaDateInput.prototype, "max", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ attribute: 'aria-label' })
   ], exports.LaDateInput.prototype, "ariaLabel", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "required", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ type: Boolean })
   ], exports.LaDateInput.prototype, "optional", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "disabled", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "error", void 0);
-  __decorate$1d([
+  __decorate$1e([
       r()
   ], exports.LaDateInput.prototype, "_month", void 0);
-  __decorate$1d([
+  __decorate$1e([
       r()
   ], exports.LaDateInput.prototype, "_day", void 0);
-  __decorate$1d([
+  __decorate$1e([
       r()
   ], exports.LaDateInput.prototype, "_year", void 0);
-  __decorate$1d([
+  __decorate$1e([
       r()
   ], exports.LaDateInput.prototype, "_message", void 0);
-  exports.LaDateInput = __decorate$1d([
+  exports.LaDateInput = __decorate$1e([
       t$1('la-date-input')
   ], exports.LaDateInput);
 
-  var __decorate$1c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5935,23 +5935,23 @@
       }
     `,
   ];
-  __decorate$1c([
+  __decorate$1d([
       n({ reflect: true })
   ], exports.LaOption.prototype, "value", void 0);
-  __decorate$1c([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "disabled", void 0);
-  __decorate$1c([
+  __decorate$1d([
       r()
   ], exports.LaOption.prototype, "_hasCount", void 0);
-  __decorate$1c([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "selected", void 0);
-  exports.LaOption = __decorate$1c([
+  exports.LaOption = __decorate$1d([
       t$1('la-option')
   ], exports.LaOption);
 
-  var __decorate$1b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6520,47 +6520,47 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1b([
+  __decorate$1c([
       n()
   ], exports.LaSelect.prototype, "name", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n()
   ], exports.LaSelect.prototype, "value", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n()
   ], exports.LaSelect.prototype, "placeholder", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n()
   ], exports.LaSelect.prototype, "label", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n()
   ], exports.LaSelect.prototype, "hint", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "required", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n({ reflect: true })
   ], exports.LaSelect.prototype, "size", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "disabled", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "error", void 0);
-  __decorate$1b([
+  __decorate$1c([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "open", void 0);
-  __decorate$1b([
+  __decorate$1c([
       r()
   ], exports.LaSelect.prototype, "_origin", void 0);
-  __decorate$1b([
+  __decorate$1c([
       r()
   ], exports.LaSelect.prototype, "_phase", void 0);
-  exports.LaSelect = __decorate$1b([
+  exports.LaSelect = __decorate$1c([
       t$1('la-select')
   ], exports.LaSelect);
 
-  var __decorate$1a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6913,50 +6913,50 @@
       }
     `,
   ];
-  __decorate$1a([
+  __decorate$1b([
       n()
   ], exports.LaMultiSelect.prototype, "label", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n()
   ], exports.LaMultiSelect.prototype, "hint", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n()
   ], exports.LaMultiSelect.prototype, "name", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n()
   ], exports.LaMultiSelect.prototype, "placeholder", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ converter: csv })
   ], exports.LaMultiSelect.prototype, "options", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ converter: csv, reflect: true })
   ], exports.LaMultiSelect.prototype, "selected", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ type: Number, attribute: 'max-suggestions' })
   ], exports.LaMultiSelect.prototype, "maxSuggestions", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ type: Boolean, attribute: 'allow-custom' })
   ], exports.LaMultiSelect.prototype, "allowCustom", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "disabled", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "required", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "error", void 0);
-  __decorate$1a([
+  __decorate$1b([
       r()
   ], exports.LaMultiSelect.prototype, "_query", void 0);
-  __decorate$1a([
+  __decorate$1b([
       e$2('input')
   ], exports.LaMultiSelect.prototype, "_input", void 0);
-  exports.LaMultiSelect = __decorate$1a([
+  exports.LaMultiSelect = __decorate$1b([
       t$1('la-multi-select')
   ], exports.LaMultiSelect);
 
-  var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7030,14 +7030,14 @@
       }
     `,
   ];
-  __decorate$19([
+  __decorate$1a([
       n({ reflect: true })
   ], exports.LaAlert.prototype, "variant", void 0);
-  exports.LaAlert = __decorate$19([
+  exports.LaAlert = __decorate$1a([
       t$1('la-alert')
   ], exports.LaAlert);
 
-  var __decorate$18 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7197,26 +7197,26 @@
       }
     `,
   ];
-  __decorate$18([
+  __decorate$19([
       n({ reflect: true })
   ], exports.LaToast.prototype, "variant", void 0);
-  __decorate$18([
+  __decorate$19([
       n()
   ], exports.LaToast.prototype, "title", void 0);
-  __decorate$18([
+  __decorate$19([
       n()
   ], exports.LaToast.prototype, "message", void 0);
-  __decorate$18([
+  __decorate$19([
       n({ type: Boolean, reflect: true })
   ], exports.LaToast.prototype, "open", void 0);
-  __decorate$18([
+  __decorate$19([
       n({ type: Number })
   ], exports.LaToast.prototype, "duration", void 0);
-  exports.LaToast = __decorate$18([
+  exports.LaToast = __decorate$19([
       t$1('la-toast')
   ], exports.LaToast);
 
-  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$18 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7333,26 +7333,26 @@
       }
     `,
   ];
-  __decorate$17([
+  __decorate$18([
       n()
   ], exports.LaTooltip.prototype, "tip", void 0);
-  __decorate$17([
+  __decorate$18([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "position", void 0);
-  __decorate$17([
+  __decorate$18([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "appearance", void 0);
-  __decorate$17([
+  __decorate$18([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "size", void 0);
-  __decorate$17([
+  __decorate$18([
       n({ attribute: 'max-width' })
   ], exports.LaTooltip.prototype, "maxWidth", void 0);
-  exports.LaTooltip = __decorate$17([
+  exports.LaTooltip = __decorate$18([
       t$1('la-tooltip')
   ], exports.LaTooltip);
 
-  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7543,20 +7543,20 @@
       }
     `,
   ];
-  __decorate$16([
+  __decorate$17([
       n({ type: Array })
   ], exports.LaVersionPicker.prototype, "versions", void 0);
-  __decorate$16([
+  __decorate$17([
       n()
   ], exports.LaVersionPicker.prototype, "active", void 0);
-  __decorate$16([
+  __decorate$17([
       r()
   ], exports.LaVersionPicker.prototype, "_phase", void 0);
-  exports.LaVersionPicker = __decorate$16([
+  exports.LaVersionPicker = __decorate$17([
       t$1('la-version-picker')
   ], exports.LaVersionPicker);
 
-  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7979,50 +7979,50 @@
       ppt: 'ppt.png', img: 'img.png', video: 'video.png', sound: 'sound.png',
       zip: 'zip.png', folder: 'folder.png', other: 'others.png',
   };
-  __decorate$15([
+  __decorate$16([
       n()
   ], exports.LaDocumentItem.prototype, "name", void 0);
-  __decorate$15([
+  __decorate$16([
       n()
   ], exports.LaDocumentItem.prototype, "association", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaDocumentItem.prototype, "status", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaDocumentItem.prototype, "variant", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ attribute: 'file-type' })
   ], exports.LaDocumentItem.prototype, "fileType", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ attribute: 'icon-base' })
   ], exports.LaDocumentItem.prototype, "iconBase", void 0);
-  __decorate$15([
+  __decorate$16([
       n()
   ], exports.LaDocumentItem.prototype, "error", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, attribute: 'non-interactive', reflect: true })
   ], exports.LaDocumentItem.prototype, "nonInteractive", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, reflect: true })
   ], exports.LaDocumentItem.prototype, "dismissible", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, attribute: 'show-pack-toggle' })
   ], exports.LaDocumentItem.prototype, "showPackToggle", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, attribute: 'in-default-pack', reflect: true })
   ], exports.LaDocumentItem.prototype, "inDefaultPack", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, reflect: true })
   ], exports.LaDocumentItem.prototype, "locked", void 0);
-  __decorate$15([
+  __decorate$16([
       r()
   ], exports.LaDocumentItem.prototype, "_iconFailed", void 0);
-  exports.LaDocumentItem = LaDocumentItem_1 = __decorate$15([
+  exports.LaDocumentItem = LaDocumentItem_1 = __decorate$16([
       t$1('la-document-item')
   ], exports.LaDocumentItem);
 
-  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8407,47 +8407,47 @@
       }
     `,
   ];
-  __decorate$14([
+  __decorate$15([
       n()
   ], exports.LaUploadBox.prototype, "label", void 0);
-  __decorate$14([
+  __decorate$15([
       n()
   ], exports.LaUploadBox.prototype, "hint", void 0);
-  __decorate$14([
+  __decorate$15([
       n()
   ], exports.LaUploadBox.prototype, "accept", void 0);
-  __decorate$14([
+  __decorate$15([
       n({ type: Number, attribute: 'max-size' })
   ], exports.LaUploadBox.prototype, "maxSize", void 0);
-  __decorate$14([
+  __decorate$15([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "compact", void 0);
-  __decorate$14([
+  __decorate$15([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "disabled", void 0);
-  __decorate$14([
+  __decorate$15([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "error", void 0);
-  __decorate$14([
+  __decorate$15([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "processing", void 0);
-  __decorate$14([
+  __decorate$15([
       n({ attribute: 'error-message' })
   ], exports.LaUploadBox.prototype, "errorMessage", void 0);
-  __decorate$14([
+  __decorate$15([
       n()
   ], exports.LaUploadBox.prototype, "prompt", void 0);
-  __decorate$14([
+  __decorate$15([
       r()
   ], exports.LaUploadBox.prototype, "_file", void 0);
-  __decorate$14([
+  __decorate$15([
       r()
   ], exports.LaUploadBox.prototype, "_dragover", void 0);
-  exports.LaUploadBox = __decorate$14([
+  exports.LaUploadBox = __decorate$15([
       t$1('la-upload-box')
   ], exports.LaUploadBox);
 
-  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8544,17 +8544,17 @@
       }
     `,
   ];
-  __decorate$13([
+  __decorate$14([
       n({ type: Array })
   ], exports.LaFieldList.prototype, "fields", void 0);
-  __decorate$13([
+  __decorate$14([
       n({ reflect: true })
   ], exports.LaFieldList.prototype, "layout", void 0);
-  exports.LaFieldList = __decorate$13([
+  exports.LaFieldList = __decorate$14([
       t$1('la-field-list')
   ], exports.LaFieldList);
 
-  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8677,32 +8677,32 @@
       :host([checked]) .tick { display: inline-flex; }
     `,
   ];
-  __decorate$12([
+  __decorate$13([
       n()
   ], exports.LaMenuItem.prototype, "label", void 0);
-  __decorate$12([
+  __decorate$13([
       n()
   ], exports.LaMenuItem.prototype, "value", void 0);
-  __decorate$12([
+  __decorate$13([
       n()
   ], exports.LaMenuItem.prototype, "icon", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ reflect: true })
   ], exports.LaMenuItem.prototype, "variant", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "disabled", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "checked", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "radio", void 0);
-  exports.LaMenuItem = __decorate$12([
+  exports.LaMenuItem = __decorate$13([
       t$1('la-menu-item')
   ], exports.LaMenuItem);
 
-  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8803,23 +8803,23 @@
       }
     `,
   ];
-  __decorate$11([
+  __decorate$12([
       n()
   ], exports.LaMenuToggle.prototype, "label", void 0);
-  __decorate$11([
+  __decorate$12([
       n()
   ], exports.LaMenuToggle.prototype, "value", void 0);
-  __decorate$11([
+  __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "checked", void 0);
-  __decorate$11([
+  __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "disabled", void 0);
-  exports.LaMenuToggle = __decorate$11([
+  exports.LaMenuToggle = __decorate$12([
       t$1('la-menu-toggle')
   ], exports.LaMenuToggle);
 
-  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8844,11 +8844,11 @@
       }
     `,
   ];
-  exports.LaMenuDivider = __decorate$10([
+  exports.LaMenuDivider = __decorate$11([
       t$1('la-menu-divider')
   ], exports.LaMenuDivider);
 
-  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9073,29 +9073,29 @@
       }
     `,
   ];
-  __decorate$$([
+  __decorate$10([
       n()
   ], exports.LaMenu.prototype, "label", void 0);
-  __decorate$$([
+  __decorate$10([
       n({ reflect: true })
   ], exports.LaMenu.prototype, "origin", void 0);
-  __decorate$$([
+  __decorate$10([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenu.prototype, "open", void 0);
-  __decorate$$([
+  __decorate$10([
       e$2('.default-trigger')
   ], exports.LaMenu.prototype, "_defaultTrigger", void 0);
-  __decorate$$([
+  __decorate$10([
       e$2('slot[name="trigger"]')
   ], exports.LaMenu.prototype, "_triggerSlot", void 0);
-  __decorate$$([
+  __decorate$10([
       r()
   ], exports.LaMenu.prototype, "_phase", void 0);
-  exports.LaMenu = __decorate$$([
+  exports.LaMenu = __decorate$10([
       t$1('la-menu')
   ], exports.LaMenu);
 
-  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9402,29 +9402,29 @@
       }
     `,
   ];
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, reflect: true })
   ], exports.LaModal.prototype, "open", void 0);
-  __decorate$_([
+  __decorate$$([
       n()
   ], exports.LaModal.prototype, "heading", void 0);
-  __decorate$_([
+  __decorate$$([
       n()
   ], exports.LaModal.prototype, "description", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ reflect: true })
   ], exports.LaModal.prototype, "size", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ reflect: true })
   ], exports.LaModal.prototype, "variant", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, reflect: true, attribute: 'no-fade' })
   ], exports.LaModal.prototype, "noFade", void 0);
-  exports.LaModal = __decorate$_([
+  exports.LaModal = __decorate$$([
       t$1('la-modal')
   ], exports.LaModal);
 
-  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9779,35 +9779,35 @@
       }
     `,
   ];
-  __decorate$Z([
+  __decorate$_([
       n({ type: Boolean, reflect: true })
   ], exports.LaDrawer.prototype, "open", void 0);
-  __decorate$Z([
+  __decorate$_([
       n({ reflect: true })
   ], exports.LaDrawer.prototype, "edge", void 0);
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaDrawer.prototype, "size", void 0);
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaDrawer.prototype, "heading", void 0);
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaDrawer.prototype, "description", void 0);
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaDrawer.prototype, "label", void 0);
-  __decorate$Z([
+  __decorate$_([
       n({ type: Boolean, attribute: 'backdrop-dismiss' })
   ], exports.LaDrawer.prototype, "backdropDismiss", void 0);
-  __decorate$Z([
+  __decorate$_([
       n({ type: Boolean, attribute: 'no-scroll-lock' })
   ], exports.LaDrawer.prototype, "noScrollLock", void 0);
-  exports.LaDrawer = __decorate$Z([
+  exports.LaDrawer = __decorate$_([
       t$1('la-drawer')
   ], exports.LaDrawer);
 
-  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10112,17 +10112,17 @@
       }
     `,
   ];
-  __decorate$Y([
+  __decorate$Z([
       n({ reflect: true })
   ], exports.LaTab.prototype, "value", void 0);
-  __decorate$Y([
+  __decorate$Z([
       n({ type: Boolean, reflect: true })
   ], exports.LaTab.prototype, "active", void 0);
-  exports.LaTab = __decorate$Y([
+  exports.LaTab = __decorate$Z([
       t$1('la-tab')
   ], exports.LaTab);
 
-  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10164,14 +10164,14 @@
       }
     `,
   ];
-  __decorate$X([
+  __decorate$Y([
       n({ reflect: true })
   ], exports.LaTabPanel.prototype, "value", void 0);
-  exports.LaTabPanel = __decorate$X([
+  exports.LaTabPanel = __decorate$Y([
       t$1('la-tab-panel')
   ], exports.LaTabPanel);
 
-  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10534,23 +10534,23 @@
       }
     `,
   ];
-  __decorate$W([
+  __decorate$X([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "active", void 0);
-  __decorate$W([
+  __decorate$X([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "variant", void 0);
-  __decorate$W([
+  __decorate$X([
       n({ type: Boolean, reflect: true })
   ], exports.LaTabs.prototype, "block", void 0);
-  __decorate$W([
+  __decorate$X([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "size", void 0);
-  exports.LaTabs = __decorate$W([
+  exports.LaTabs = __decorate$X([
       t$1('la-tabs')
   ], exports.LaTabs);
 
-  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10679,14 +10679,14 @@
       }
     `,
   ];
-  __decorate$V([
+  __decorate$W([
       n({ type: Boolean, reflect: true })
   ], exports.LaTable.prototype, "flat", void 0);
-  exports.LaTable = __decorate$V([
+  exports.LaTable = __decorate$W([
       t$1('la-table')
   ], exports.LaTable);
 
-  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10803,26 +10803,26 @@
       }
     `,
   ];
-  __decorate$U([
+  __decorate$V([
       n()
   ], exports.LaChip.prototype, "label", void 0);
-  __decorate$U([
+  __decorate$V([
       n({ attribute: 'prefix' })
   ], exports.LaChip.prototype, "prefixText", void 0);
-  __decorate$U([
+  __decorate$V([
       n()
   ], exports.LaChip.prototype, "value", void 0);
-  __decorate$U([
+  __decorate$V([
       n({ type: Boolean, reflect: true, converter: {
               fromAttribute: (v) => v !== 'false',
               toAttribute: (v) => (v ? '' : 'false'),
           } })
   ], exports.LaChip.prototype, "removable", void 0);
-  exports.LaChip = __decorate$U([
+  exports.LaChip = __decorate$V([
       t$1('la-chip')
   ], exports.LaChip);
 
-  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10953,26 +10953,26 @@
       @media (prefers-reduced-motion: reduce) { .pg { transition: none; } }
     `,
   ];
-  __decorate$T([
+  __decorate$U([
       n({ type: Number })
   ], exports.LaPagination.prototype, "total", void 0);
-  __decorate$T([
+  __decorate$U([
       n({ type: Number, attribute: 'page-size' })
   ], exports.LaPagination.prototype, "pageSize", void 0);
-  __decorate$T([
+  __decorate$U([
       n({ type: Number })
   ], exports.LaPagination.prototype, "page", void 0);
-  __decorate$T([
+  __decorate$U([
       n()
   ], exports.LaPagination.prototype, "noun", void 0);
-  __decorate$T([
+  __decorate$U([
       n({ type: Boolean, reflect: true })
   ], exports.LaPagination.prototype, "single", void 0);
-  exports.LaPagination = __decorate$T([
+  exports.LaPagination = __decorate$U([
       t$1('la-pagination')
   ], exports.LaPagination);
 
-  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11127,32 +11127,32 @@
       @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
     `,
   ];
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaTile.prototype, "value", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaTile.prototype, "label", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaTile.prototype, "sublabel", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaTile.prototype, "icon", void 0);
-  __decorate$S([
+  __decorate$T([
       n({ reflect: true })
   ], exports.LaTile.prototype, "hue", void 0);
-  __decorate$S([
+  __decorate$T([
       n({ type: Boolean, reflect: true })
   ], exports.LaTile.prototype, "pressed", void 0);
-  __decorate$S([
+  __decorate$T([
       n({ type: Boolean, reflect: true })
   ], exports.LaTile.prototype, "quiet", void 0);
-  exports.LaTile = __decorate$S([
+  exports.LaTile = __decorate$T([
       t$1('la-tile')
   ], exports.LaTile);
 
-  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11258,23 +11258,23 @@
       @container (max-width: 440px) { .grid { grid-template-columns: minmax(0, 1fr); } }
     `,
   ];
-  __decorate$R([
+  __decorate$S([
       n()
   ], exports.LaTileStrip.prototype, "value", void 0);
-  __decorate$R([
+  __decorate$S([
       n({ type: Number })
   ], exports.LaTileStrip.prototype, "columns", void 0);
-  __decorate$R([
+  __decorate$S([
       n({ reflect: true })
   ], exports.LaTileStrip.prototype, "selection", void 0);
-  __decorate$R([
+  __decorate$S([
       e$2('.grid')
   ], exports.LaTileStrip.prototype, "_grid", void 0);
-  exports.LaTileStrip = __decorate$R([
+  exports.LaTileStrip = __decorate$S([
       t$1('la-tile-strip')
   ], exports.LaTileStrip);
 
-  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11397,23 +11397,23 @@
       :host([area='ip'])          .mark { --_fill: var(--la-area-ip-fg);          --_tint: var(--la-area-ip-bg); }
     `,
   ];
-  __decorate$Q([
+  __decorate$R([
       n({ reflect: true })
   ], exports.LaAreaIcon.prototype, "area", void 0);
-  __decorate$Q([
+  __decorate$R([
       n({ reflect: true })
   ], exports.LaAreaIcon.prototype, "size", void 0);
-  __decorate$Q([
+  __decorate$R([
       n()
   ], exports.LaAreaIcon.prototype, "icon", void 0);
-  __decorate$Q([
+  __decorate$R([
       n()
   ], exports.LaAreaIcon.prototype, "label", void 0);
-  exports.LaAreaIcon = __decorate$Q([
+  exports.LaAreaIcon = __decorate$R([
       t$1('la-area-icon')
   ], exports.LaAreaIcon);
 
-  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11795,41 +11795,41 @@
       }
     `,
   ];
-  __decorate$P([
+  __decorate$Q([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "columns", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rows", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rowKey", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "sort", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "selected", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "selectable", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "density", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, attribute: 'sticky-header', reflect: true })
   ], exports.LaDataTable.prototype, "stickyHeader", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaDataTable.prototype, "loading", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, attribute: 'row-clickable', reflect: true })
   ], exports.LaDataTable.prototype, "rowClickable", void 0);
-  exports.LaDataTable = __decorate$P([
+  exports.LaDataTable = __decorate$Q([
       t$1('la-data-table')
   ], exports.LaDataTable);
 
-  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12034,20 +12034,20 @@
       }
     `,
   ];
-  __decorate$O([
+  __decorate$P([
       n()
   ], exports.LaPersonItem.prototype, "name", void 0);
-  __decorate$O([
+  __decorate$P([
       n()
   ], exports.LaPersonItem.prototype, "subtitle", void 0);
-  __decorate$O([
+  __decorate$P([
       n()
   ], exports.LaPersonItem.prototype, "initials", void 0);
-  exports.LaPersonItem = __decorate$O([
+  exports.LaPersonItem = __decorate$P([
       t$1('la-person-item')
   ], exports.LaPersonItem);
 
-  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12113,14 +12113,14 @@
       }
     `,
   ];
-  __decorate$N([
+  __decorate$O([
       r()
   ], exports.LaPersonList.prototype, "_hasFooter", void 0);
-  exports.LaPersonList = __decorate$N([
+  exports.LaPersonList = __decorate$O([
       t$1('la-person-list')
   ], exports.LaPersonList);
 
-  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12439,35 +12439,35 @@
       }
     `,
   ];
-  __decorate$M([
+  __decorate$N([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "sender", void 0);
-  __decorate$M([
+  __decorate$N([
       n()
   ], exports.LaChatMessage.prototype, "name", void 0);
-  __decorate$M([
+  __decorate$N([
       n()
   ], exports.LaChatMessage.prototype, "timestamp", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ attribute: 'timestamp-title' })
   ], exports.LaChatMessage.prototype, "timestampTitle", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "streaming", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "typing", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "status", void 0);
-  __decorate$M([
+  __decorate$N([
       r()
   ], exports.LaChatMessage.prototype, "_hasAttachments", void 0);
-  exports.LaChatMessage = __decorate$M([
+  exports.LaChatMessage = __decorate$N([
       t$1('la-chat-message')
   ], exports.LaChatMessage);
 
-  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12586,17 +12586,17 @@
 
     `,
   ];
-  __decorate$L([
+  __decorate$M([
       n()
   ], exports.LaChatAttachmentChip.prototype, "name", void 0);
-  __decorate$L([
+  __decorate$M([
       n()
   ], exports.LaChatAttachmentChip.prototype, "category", void 0);
-  exports.LaChatAttachmentChip = __decorate$L([
+  exports.LaChatAttachmentChip = __decorate$M([
       t$1('la-chat-attachment-chip')
   ], exports.LaChatAttachmentChip);
 
-  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12844,38 +12844,38 @@
       }
     `,
   ];
-  __decorate$K([
+  __decorate$L([
       n()
   ], exports.LaChatInput.prototype, "placeholder", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "disabled", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "loading", void 0);
-  __decorate$K([
+  __decorate$L([
       n()
   ], exports.LaChatInput.prototype, "hint", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ type: Array })
   ], exports.LaChatInput.prototype, "files", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ type: Number, attribute: 'max-files' })
   ], exports.LaChatInput.prototype, "maxFiles", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ reflect: true })
   ], exports.LaChatInput.prototype, "variant", void 0);
-  __decorate$K([
+  __decorate$L([
       r()
   ], exports.LaChatInput.prototype, "_value", void 0);
-  __decorate$K([
+  __decorate$L([
       e$2('textarea')
   ], exports.LaChatInput.prototype, "_textarea", void 0);
-  exports.LaChatInput = __decorate$K([
+  exports.LaChatInput = __decorate$L([
       t$1('la-chat-input')
   ], exports.LaChatInput);
 
-  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13098,29 +13098,29 @@
       }
     `,
   ];
-  __decorate$J([
+  __decorate$K([
       n()
   ], exports.LaChatAttachment.prototype, "name", void 0);
-  __decorate$J([
+  __decorate$K([
       n()
   ], exports.LaChatAttachment.prototype, "category", void 0);
-  __decorate$J([
+  __decorate$K([
       n()
   ], exports.LaChatAttachment.prototype, "association", void 0);
-  __decorate$J([
+  __decorate$K([
       n({ reflect: true })
   ], exports.LaChatAttachment.prototype, "status", void 0);
-  __decorate$J([
+  __decorate$K([
       n()
   ], exports.LaChatAttachment.prototype, "href", void 0);
-  __decorate$J([
+  __decorate$K([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatAttachment.prototype, "removable", void 0);
-  exports.LaChatAttachment = __decorate$J([
+  exports.LaChatAttachment = __decorate$K([
       t$1('la-chat-attachment')
   ], exports.LaChatAttachment);
 
-  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13320,38 +13320,38 @@
       }
     `,
   ];
-  __decorate$I([
+  __decorate$J([
       n({ type: Array })
   ], exports.LaChat.prototype, "messages", void 0);
-  __decorate$I([
+  __decorate$J([
       n()
   ], exports.LaChat.prototype, "placeholder", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "disabled", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "readonly", void 0);
-  __decorate$I([
+  __decorate$J([
       n()
   ], exports.LaChat.prototype, "notice", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "loading", void 0);
-  __decorate$I([
+  __decorate$J([
       n()
   ], exports.LaChat.prototype, "hint", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ attribute: 'empty-message' })
   ], exports.LaChat.prototype, "emptyMessage", void 0);
-  __decorate$I([
+  __decorate$J([
       e$2('.thread')
   ], exports.LaChat.prototype, "_thread", void 0);
-  exports.LaChat = __decorate$I([
+  exports.LaChat = __decorate$J([
       t$1('la-chat')
   ], exports.LaChat);
 
-  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13475,44 +13475,44 @@
       :host([parked]) .head i, :host([parked]) .head .label { color: var(--la-color-text-faint); }
     `,
   ];
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaModuleTile.prototype, "label", void 0);
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaModuleTile.prototype, "icon", void 0);
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaModuleTile.prototype, "href", void 0);
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaModuleTile.prototype, "module", void 0);
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaModuleTile.prototype, "count", void 0);
-  __decorate$H([
+  __decorate$I([
       n({ attribute: 'count-label' })
   ], exports.LaModuleTile.prototype, "countLabel", void 0);
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaModuleTile.prototype, "sla", void 0);
-  __decorate$H([
+  __decorate$I([
       n({ reflect: true })
   ], exports.LaModuleTile.prototype, "status", void 0);
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaModuleTile.prototype, "insight", void 0);
-  __decorate$H([
+  __decorate$I([
       n({ type: Boolean, reflect: true })
   ], exports.LaModuleTile.prototype, "parked", void 0);
-  __decorate$H([
+  __decorate$I([
       n({ attribute: false })
   ], exports.LaModuleTile.prototype, "pipeline", void 0);
-  exports.LaModuleTile = __decorate$H([
+  exports.LaModuleTile = __decorate$I([
       t$1('la-module-tile')
   ], exports.LaModuleTile);
 
-  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13646,20 +13646,20 @@
       .opt i { font-size: 14px; color: var(--la-color-primary); }
     `,
   ];
-  __decorate$G([
+  __decorate$H([
       n({ attribute: 'prefix' })
   ], exports.LaScopeFilter.prototype, "prefixText", void 0);
-  __decorate$G([
+  __decorate$H([
       n()
   ], exports.LaScopeFilter.prototype, "value", void 0);
-  __decorate$G([
+  __decorate$H([
       n({ attribute: false })
   ], exports.LaScopeFilter.prototype, "options", void 0);
-  exports.LaScopeFilter = __decorate$G([
+  exports.LaScopeFilter = __decorate$H([
       t$1('la-scope-filter')
   ], exports.LaScopeFilter);
 
-  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13730,14 +13730,14 @@
       @media (max-width: 900px) { .strip { grid-template-columns: 1fr; } }
     `,
   ];
-  __decorate$F([
+  __decorate$G([
       n({ attribute: false })
   ], exports.LaWeekStrip.prototype, "days", void 0);
-  exports.LaWeekStrip = __decorate$F([
+  exports.LaWeekStrip = __decorate$G([
       t$1('la-week-strip')
   ], exports.LaWeekStrip);
 
-  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14292,62 +14292,62 @@
       }
     `,
   ];
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaAiInsight.prototype, "headline", void 0);
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaAiInsight.prototype, "attribution", void 0);
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaAiInsight.prototype, "description", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ reflect: true })
   ], exports.LaAiInsight.prototype, "size", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, reflect: true, attribute: 'no-head' })
   ], exports.LaAiInsight.prototype, "noHead", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "rateable", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Number })
   ], exports.LaAiInsight.prototype, "rating", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, reflect: true, attribute: 'rate-required' })
   ], exports.LaAiInsight.prototype, "rateRequired", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "disagreeable", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "amendable", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'edited-by' })
   ], exports.LaAiInsight.prototype, "editedBy", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'edited-at' })
   ], exports.LaAiInsight.prototype, "editedAt", void 0);
-  __decorate$E([
+  __decorate$F([
       r()
   ], exports.LaAiInsight.prototype, "_hasActions", void 0);
-  __decorate$E([
+  __decorate$F([
       r()
   ], exports.LaAiInsight.prototype, "_panel", void 0);
-  __decorate$E([
+  __decorate$F([
       r()
   ], exports.LaAiInsight.prototype, "_disagreeReason", void 0);
-  __decorate$E([
+  __decorate$F([
       r()
   ], exports.LaAiInsight.prototype, "_amendDraft", void 0);
-  __decorate$E([
+  __decorate$F([
       r()
   ], exports.LaAiInsight.prototype, "_bodyText", void 0);
-  exports.LaAiInsight = __decorate$E([
+  exports.LaAiInsight = __decorate$F([
       t$1('la-ai-insight')
   ], exports.LaAiInsight);
 
-  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14587,25 +14587,25 @@
       }
     `,
   ];
-  __decorate$D([
+  __decorate$E([
       n({ type: Array })
   ], exports.LaLevelingMatrix.prototype, "factors", void 0);
-  __decorate$D([
+  __decorate$E([
       n({ attribute: 'recommended-level' })
   ], exports.LaLevelingMatrix.prototype, "recommendedLevel", void 0);
-  __decorate$D([
+  __decorate$E([
       n()
   ], exports.LaLevelingMatrix.prototype, "summary", void 0);
-  __decorate$D([
+  __decorate$E([
       n()
   ], exports.LaLevelingMatrix.prototype, "heading", void 0);
-  __decorate$D([
+  __decorate$E([
       n({ type: Boolean })
   ], exports.LaLevelingMatrix.prototype, "rateable", void 0);
-  __decorate$D([
+  __decorate$E([
       n()
   ], exports.LaLevelingMatrix.prototype, "attribution", void 0);
-  exports.LaLevelingMatrix = __decorate$D([
+  exports.LaLevelingMatrix = __decorate$E([
       t$1('la-leveling-matrix')
   ], exports.LaLevelingMatrix);
 
@@ -14622,7 +14622,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const e=e$1(class extends i$1{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||t$1.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter(s=>t[s]).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter(t=>""!==t)));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return E}});
 
-  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14919,47 +14919,47 @@
       }
     `,
   ];
-  __decorate$C([
+  __decorate$D([
       n()
   ], LaAvatar.prototype, "name", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], LaAvatar.prototype, "initials", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ reflect: true })
   ], LaAvatar.prototype, "size", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], LaAvatar.prototype, "src", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], LaAvatar.prototype, "photo", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ type: Boolean, attribute: 'text-only' })
   ], LaAvatar.prototype, "textOnly", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ type: Boolean, reflect: true })
   ], LaAvatar.prototype, "logo", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ reflect: true })
   ], LaAvatar.prototype, "presence", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ attribute: 'asset-base' })
   ], LaAvatar.prototype, "assetBase", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], LaAvatar.prototype, "gender", void 0);
-  __decorate$C([
+  __decorate$D([
       r()
   ], LaAvatar.prototype, "_imgFailed", void 0);
-  __decorate$C([
+  __decorate$D([
       r()
   ], LaAvatar.prototype, "_imgLoaded", void 0);
-  LaAvatar = LaAvatar_1 = __decorate$C([
+  LaAvatar = LaAvatar_1 = __decorate$D([
       t$1('la-avatar')
   ], LaAvatar);
 
-  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15260,41 +15260,41 @@
       }
     `,
   ];
-  __decorate$B([
+  __decorate$C([
       n()
   ], exports.LaAssigneeCard.prototype, "name", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ attribute: 'person-role' })
   ], exports.LaAssigneeCard.prototype, "personRole", void 0);
-  __decorate$B([
+  __decorate$C([
       n()
   ], exports.LaAssigneeCard.prototype, "photo", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ type: Object })
   ], exports.LaAssigneeCard.prototype, "bandwidth", void 0);
-  __decorate$B([
+  __decorate$C([
       n()
   ], exports.LaAssigneeCard.prototype, "history", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ type: Array })
   ], exports.LaAssigneeCard.prototype, "flags", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ attribute: 'case-type' })
   ], exports.LaAssigneeCard.prototype, "caseType", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ type: Boolean, attribute: 'ai-recommendation' })
   ], exports.LaAssigneeCard.prototype, "aiRecommendation", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ attribute: 'action-label' })
   ], exports.LaAssigneeCard.prototype, "actionLabel", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ type: Boolean, attribute: 'hide-action' })
   ], exports.LaAssigneeCard.prototype, "hideAction", void 0);
-  exports.LaAssigneeCard = __decorate$B([
+  exports.LaAssigneeCard = __decorate$C([
       t$1('la-assignee-card')
   ], exports.LaAssigneeCard);
 
-  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15836,38 +15836,38 @@
       }
     `,
   ];
-  __decorate$A([
+  __decorate$B([
       n({ type: Object })
   ], exports.LaAssigneePicker.prototype, "recommended", void 0);
-  __decorate$A([
+  __decorate$B([
       n({ type: Array })
   ], exports.LaAssigneePicker.prototype, "candidates", void 0);
-  __decorate$A([
+  __decorate$B([
       n({ reflect: true })
   ], exports.LaAssigneePicker.prototype, "mode", void 0);
-  __decorate$A([
+  __decorate$B([
       n({ attribute: 'case-type' })
   ], exports.LaAssigneePicker.prototype, "caseType", void 0);
-  __decorate$A([
+  __decorate$B([
       n({ type: Object })
   ], exports.LaAssigneePicker.prototype, "current", void 0);
-  __decorate$A([
+  __decorate$B([
       n({ attribute: 'current-meta' })
   ], exports.LaAssigneePicker.prototype, "currentMeta", void 0);
-  __decorate$A([
+  __decorate$B([
       r()
   ], exports.LaAssigneePicker.prototype, "_candidatesOpen", void 0);
-  __decorate$A([
+  __decorate$B([
       r()
   ], exports.LaAssigneePicker.prototype, "_selected", void 0);
-  __decorate$A([
+  __decorate$B([
       r()
   ], exports.LaAssigneePicker.prototype, "_reason", void 0);
-  exports.LaAssigneePicker = __decorate$A([
+  exports.LaAssigneePicker = __decorate$B([
       t$1('la-assignee-picker')
   ], exports.LaAssigneePicker);
 
-  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16157,47 +16157,47 @@
       }
     `,
   ];
-  __decorate$z([
+  __decorate$A([
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookConfirmModal.prototype, "open", void 0);
-  __decorate$z([
+  __decorate$A([
       n({ attribute: 'playbook-name' })
   ], exports.LaPlaybookConfirmModal.prototype, "playbookName", void 0);
-  __decorate$z([
+  __decorate$A([
       n({ type: Array })
   ], exports.LaPlaybookConfirmModal.prototype, "facts", void 0);
-  __decorate$z([
+  __decorate$A([
       n({ attribute: 'case-type' })
   ], exports.LaPlaybookConfirmModal.prototype, "caseType", void 0);
-  __decorate$z([
+  __decorate$A([
       n({ attribute: 'accused-role' })
   ], exports.LaPlaybookConfirmModal.prototype, "accusedRole", void 0);
-  __decorate$z([
+  __decorate$A([
       n()
   ], exports.LaPlaybookConfirmModal.prototype, "jurisdiction", void 0);
-  __decorate$z([
+  __decorate$A([
       n()
   ], exports.LaPlaybookConfirmModal.prototype, "level", void 0);
-  __decorate$z([
+  __decorate$A([
       n({ type: Array })
   ], exports.LaPlaybookConfirmModal.prototype, "alternatives", void 0);
-  __decorate$z([
+  __decorate$A([
       r()
   ], exports.LaPlaybookConfirmModal.prototype, "_view", void 0);
-  __decorate$z([
+  __decorate$A([
       r()
   ], exports.LaPlaybookConfirmModal.prototype, "_picked", void 0);
-  __decorate$z([
+  __decorate$A([
       r()
   ], exports.LaPlaybookConfirmModal.prototype, "_reason", void 0);
-  __decorate$z([
+  __decorate$A([
       r()
   ], exports.LaPlaybookConfirmModal.prototype, "_reasonError", void 0);
-  exports.LaPlaybookConfirmModal = __decorate$z([
+  exports.LaPlaybookConfirmModal = __decorate$A([
       t$1('la-playbook-confirm-modal')
   ], exports.LaPlaybookConfirmModal);
 
-  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16465,26 +16465,26 @@
       }
     `,
   ];
-  __decorate$y([
+  __decorate$z([
       n({ type: Array })
   ], exports.LaSensitiveFlags.prototype, "flags", void 0);
-  __decorate$y([
+  __decorate$z([
       n()
   ], exports.LaSensitiveFlags.prototype, "heading", void 0);
-  __decorate$y([
+  __decorate$z([
       n()
   ], exports.LaSensitiveFlags.prototype, "intro", void 0);
-  __decorate$y([
+  __decorate$z([
       n({ type: Boolean, attribute: 'open-first' })
   ], exports.LaSensitiveFlags.prototype, "openFirst", void 0);
-  __decorate$y([
+  __decorate$z([
       r()
   ], exports.LaSensitiveFlags.prototype, "_open", void 0);
-  exports.LaSensitiveFlags = LaSensitiveFlags_1 = __decorate$y([
+  exports.LaSensitiveFlags = LaSensitiveFlags_1 = __decorate$z([
       t$1('la-sensitive-flags')
   ], exports.LaSensitiveFlags);
 
-  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16864,44 +16864,44 @@
       }
     `,
   ];
-  __decorate$x([
+  __decorate$y([
       n()
   ], exports.LaLevelControl.prototype, "level", void 0);
-  __decorate$x([
+  __decorate$y([
       n({ attribute: 'confirmed-by' })
   ], exports.LaLevelControl.prototype, "confirmedBy", void 0);
-  __decorate$x([
+  __decorate$y([
       n({ attribute: 'confirmed-at' })
   ], exports.LaLevelControl.prototype, "confirmedAt", void 0);
-  __decorate$x([
+  __decorate$y([
       n({ type: Array })
   ], exports.LaLevelControl.prototype, "factors", void 0);
-  __decorate$x([
+  __decorate$y([
       n({ type: Array })
   ], exports.LaLevelControl.prototype, "history", void 0);
-  __decorate$x([
+  __decorate$y([
       r()
   ], exports.LaLevelControl.prototype, "_menuOpen", void 0);
-  __decorate$x([
+  __decorate$y([
       r()
   ], exports.LaLevelControl.prototype, "_historyOpen", void 0);
-  __decorate$x([
+  __decorate$y([
       r()
   ], exports.LaLevelControl.prototype, "_modalOpen", void 0);
-  __decorate$x([
+  __decorate$y([
       r()
   ], exports.LaLevelControl.prototype, "_pendingLevel", void 0);
-  __decorate$x([
+  __decorate$y([
       r()
   ], exports.LaLevelControl.prototype, "_reason", void 0);
-  __decorate$x([
+  __decorate$y([
       r()
   ], exports.LaLevelControl.prototype, "_reasonError", void 0);
-  exports.LaLevelControl = __decorate$x([
+  exports.LaLevelControl = __decorate$y([
       t$1('la-level-control')
   ], exports.LaLevelControl);
 
-  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17090,35 +17090,35 @@
       }
     `,
   ];
-  __decorate$w([
+  __decorate$x([
       n({ attribute: 'current-handler' })
   ], exports.LaReassignControl.prototype, "currentHandler", void 0);
-  __decorate$w([
+  __decorate$x([
       n({ attribute: 'case-id' })
   ], exports.LaReassignControl.prototype, "caseId", void 0);
-  __decorate$w([
+  __decorate$x([
       n()
   ], exports.LaReassignControl.prototype, "label", void 0);
-  __decorate$w([
+  __decorate$x([
       r()
   ], exports.LaReassignControl.prototype, "_modalOpen", void 0);
-  __decorate$w([
+  __decorate$x([
       r()
   ], exports.LaReassignControl.prototype, "_selected", void 0);
-  __decorate$w([
+  __decorate$x([
       r()
   ], exports.LaReassignControl.prototype, "_reason", void 0);
-  __decorate$w([
+  __decorate$x([
       r()
   ], exports.LaReassignControl.prototype, "_reasonError", void 0);
-  __decorate$w([
+  __decorate$x([
       r()
   ], exports.LaReassignControl.prototype, "_hasSlottedPicker", void 0);
-  exports.LaReassignControl = __decorate$w([
+  exports.LaReassignControl = __decorate$x([
       t$1('la-reassign-control')
   ], exports.LaReassignControl);
 
-  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17354,38 +17354,38 @@
       }
     `,
   ];
-  __decorate$v([
+  __decorate$w([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "employeeRecord", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "caseDocuments", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "generatedArtefacts", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ attribute: 'confidential-section' })
   ], exports.LaFilesPanel.prototype, "confidentialSection", void 0);
-  __decorate$v([
+  __decorate$w([
       n()
   ], exports.LaFilesPanel.prototype, "heading", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ type: Boolean, attribute: 'hide-heading' })
   ], exports.LaFilesPanel.prototype, "hideHeading", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ attribute: 'icon-base' })
   ], exports.LaFilesPanel.prototype, "iconBase", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ attribute: 'brand-mark' })
   ], exports.LaFilesPanel.prototype, "brandMark", void 0);
-  __decorate$v([
+  __decorate$w([
       r()
   ], exports.LaFilesPanel.prototype, "_query", void 0);
-  exports.LaFilesPanel = __decorate$v([
+  exports.LaFilesPanel = __decorate$w([
       t$1('la-files-panel')
   ], exports.LaFilesPanel);
 
-  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17816,47 +17816,47 @@
       }
     `,
   ];
-  __decorate$u([
+  __decorate$v([
       n({ attribute: 'case-id' })
   ], exports.LaCaseContextPanel.prototype, "caseId", void 0);
-  __decorate$u([
+  __decorate$v([
       n()
   ], exports.LaCaseContextPanel.prototype, "level", void 0);
-  __decorate$u([
+  __decorate$v([
       n()
   ], exports.LaCaseContextPanel.prototype, "handler", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ attribute: 'open-panel', reflect: true })
   ], exports.LaCaseContextPanel.prototype, "openPanel", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ type: Number, attribute: 'file-count' })
   ], exports.LaCaseContextPanel.prototype, "fileCount", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ type: Number, attribute: 'unread-chat' })
   ], exports.LaCaseContextPanel.prototype, "unreadChat", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ attribute: 'chat-label' })
   ], exports.LaCaseContextPanel.prototype, "chatLabel", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ type: Boolean, attribute: 'expert-reply' })
   ], exports.LaCaseContextPanel.prototype, "expertReply", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ type: Boolean, attribute: 'ai-active' })
   ], exports.LaCaseContextPanel.prototype, "aiActive", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ type: Number, attribute: 'unread-flags' })
   ], exports.LaCaseContextPanel.prototype, "unreadFlags", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ type: Boolean, attribute: 'no-auto-open' })
   ], exports.LaCaseContextPanel.prototype, "noAutoOpen", void 0);
-  __decorate$u([
+  __decorate$v([
       r()
   ], exports.LaCaseContextPanel.prototype, "_autoOpened", void 0);
-  exports.LaCaseContextPanel = LaCaseContextPanel_1 = __decorate$u([
+  exports.LaCaseContextPanel = LaCaseContextPanel_1 = __decorate$v([
       t$1('la-case-context-panel')
   ], exports.LaCaseContextPanel);
 
-  var __decorate$t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -19618,77 +19618,77 @@
       }
     `,
   ];
-  __decorate$t([
+  __decorate$u([
       n()
   ], exports.LaSidebar.prototype, "activeArea", void 0);
-  __decorate$t([
+  __decorate$u([
       n()
   ], exports.LaSidebar.prototype, "activeSubtab", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Array })
   ], exports.LaSidebar.prototype, "unlockedAreas", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: false })
   ], exports.LaSidebar.prototype, "items", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Boolean, attribute: 'show-search' })
   ], exports.LaSidebar.prototype, "showSearch", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "collapsed", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "overlay", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: 'logo-src' })
   ], exports.LaSidebar.prototype, "logoSrc", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: 'wordmark-src' })
   ], exports.LaSidebar.prototype, "wordmarkSrc", void 0);
-  __decorate$t([
+  __decorate$u([
       n()
   ], exports.LaSidebar.prototype, "userInitials", void 0);
-  __decorate$t([
+  __decorate$u([
       n()
   ], exports.LaSidebar.prototype, "userName", void 0);
-  __decorate$t([
+  __decorate$u([
       n()
   ], exports.LaSidebar.prototype, "userRole", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: 'workspace-name' })
   ], exports.LaSidebar.prototype, "workspaceName", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: 'workspace-initials' })
   ], exports.LaSidebar.prototype, "workspaceInitials", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: false })
   ], exports.LaSidebar.prototype, "checklist", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: 'checklist-title' })
   ], exports.LaSidebar.prototype, "checklistTitle", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ attribute: 'checklist-sub' })
   ], exports.LaSidebar.prototype, "checklistSub", void 0);
-  __decorate$t([
+  __decorate$u([
       r()
   ], exports.LaSidebar.prototype, "_snapped", void 0);
-  __decorate$t([
+  __decorate$u([
       r()
   ], exports.LaSidebar.prototype, "_userMenuOpen", void 0);
-  __decorate$t([
+  __decorate$u([
       r()
   ], exports.LaSidebar.prototype, "_userMenuClosing", void 0);
-  __decorate$t([
+  __decorate$u([
       r()
   ], exports.LaSidebar.prototype, "_checklistOpen", void 0);
-  __decorate$t([
+  __decorate$u([
       r()
   ], exports.LaSidebar.prototype, "_toggled", void 0);
-  exports.LaSidebar = __decorate$t([
+  exports.LaSidebar = __decorate$u([
       t$1('la-sidebar')
   ], exports.LaSidebar);
 
-  var __decorate$s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20280,47 +20280,47 @@
       :host([collapsed]) .user-menu-dots { opacity: 0; max-width: 0; }
     `,
   ];
-  __decorate$s([
+  __decorate$t([
       n()
   ], exports.LaInvestorSidebar.prototype, "userName", void 0);
-  __decorate$s([
+  __decorate$t([
       n()
   ], exports.LaInvestorSidebar.prototype, "userInitials", void 0);
-  __decorate$s([
+  __decorate$t([
       n()
   ], exports.LaInvestorSidebar.prototype, "userRole", void 0);
-  __decorate$s([
+  __decorate$t([
       n({ attribute: 'logo-src' })
   ], exports.LaInvestorSidebar.prototype, "logoSrc", void 0);
-  __decorate$s([
+  __decorate$t([
       n({ attribute: 'logo-wordmark-src' })
   ], exports.LaInvestorSidebar.prototype, "logoWordmarkSrc", void 0);
-  __decorate$s([
+  __decorate$t([
       n({ type: Array })
   ], exports.LaInvestorSidebar.prototype, "companies", void 0);
-  __decorate$s([
+  __decorate$t([
       n()
   ], exports.LaInvestorSidebar.prototype, "active", void 0);
-  __decorate$s([
+  __decorate$t([
       n({ type: Boolean, reflect: true })
   ], exports.LaInvestorSidebar.prototype, "collapsed", void 0);
-  __decorate$s([
+  __decorate$t([
       n({ type: Boolean, reflect: true })
   ], exports.LaInvestorSidebar.prototype, "overlay", void 0);
-  __decorate$s([
+  __decorate$t([
       r()
   ], exports.LaInvestorSidebar.prototype, "_snapped", void 0);
-  __decorate$s([
+  __decorate$t([
       r()
   ], exports.LaInvestorSidebar.prototype, "_userMenuOpen", void 0);
-  __decorate$s([
+  __decorate$t([
       r()
   ], exports.LaInvestorSidebar.prototype, "_userMenuClosing", void 0);
-  exports.LaInvestorSidebar = __decorate$s([
+  exports.LaInvestorSidebar = __decorate$t([
       t$1('la-investor-sidebar')
   ], exports.LaInvestorSidebar);
 
-  var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20519,47 +20519,47 @@
       }
     `,
   ];
-  __decorate$r([
+  __decorate$s([
       n({ reflect: true })
   ], exports.LaInsightCard.prototype, "severity", void 0);
-  __decorate$r([
+  __decorate$s([
       n()
   ], exports.LaInsightCard.prototype, "headline", void 0);
-  __decorate$r([
+  __decorate$s([
       n()
   ], exports.LaInsightCard.prototype, "description", void 0);
-  __decorate$r([
+  __decorate$s([
       n({ attribute: 'insight-type' })
   ], exports.LaInsightCard.prototype, "insightType", void 0);
-  __decorate$r([
+  __decorate$s([
       n({ attribute: 'source-type' })
   ], exports.LaInsightCard.prototype, "sourceType", void 0);
-  __decorate$r([
+  __decorate$s([
       n({ type: Object })
   ], exports.LaInsightCard.prototype, "entity", void 0);
-  __decorate$r([
+  __decorate$s([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "dates", void 0);
-  __decorate$r([
+  __decorate$s([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "relatedInsights", void 0);
-  __decorate$r([
+  __decorate$s([
       n()
   ], exports.LaInsightCard.prototype, "explanation", void 0);
-  __decorate$r([
+  __decorate$s([
       n()
   ], exports.LaInsightCard.prototype, "reason", void 0);
-  __decorate$r([
+  __decorate$s([
       n({ type: Object })
   ], exports.LaInsightCard.prototype, "action", void 0);
-  __decorate$r([
+  __decorate$s([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "subItems", void 0);
-  exports.LaInsightCard = __decorate$r([
+  exports.LaInsightCard = __decorate$s([
       t$1('la-insight-card')
   ], exports.LaInsightCard);
 
-  var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20635,26 +20635,26 @@
       }
     `,
   ];
-  __decorate$q([
+  __decorate$r([
       n()
   ], exports.LaInfoHint.prototype, "hint", void 0);
-  __decorate$q([
+  __decorate$r([
       n({ reflect: true })
   ], exports.LaInfoHint.prototype, "position", void 0);
-  __decorate$q([
+  __decorate$r([
       n({ attribute: 'max-width' })
   ], exports.LaInfoHint.prototype, "maxWidth", void 0);
-  __decorate$q([
+  __decorate$r([
       n({ reflect: true })
   ], exports.LaInfoHint.prototype, "size", void 0);
-  __decorate$q([
+  __decorate$r([
       n()
   ], exports.LaInfoHint.prototype, "label", void 0);
-  exports.LaInfoHint = __decorate$q([
+  exports.LaInfoHint = __decorate$r([
       t$1('la-info-hint')
   ], exports.LaInfoHint);
 
-  var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20773,20 +20773,20 @@
       }
     `,
   ];
-  __decorate$p([
+  __decorate$q([
       n()
   ], exports.LaPdfPreview.prototype, "src", void 0);
-  __decorate$p([
+  __decorate$q([
       n({ attribute: 'fallback-image' })
   ], exports.LaPdfPreview.prototype, "fallbackImage", void 0);
-  __decorate$p([
+  __decorate$q([
       n()
   ], exports.LaPdfPreview.prototype, "label", void 0);
-  exports.LaPdfPreview = __decorate$p([
+  exports.LaPdfPreview = __decorate$q([
       t$1('la-pdf-preview')
   ], exports.LaPdfPreview);
 
-  var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20922,23 +20922,23 @@
       }
     `,
   ];
-  __decorate$o([
+  __decorate$p([
       n()
   ], exports.LaActionItem.prototype, "label", void 0);
-  __decorate$o([
+  __decorate$p([
       n()
   ], exports.LaActionItem.prototype, "description", void 0);
-  __decorate$o([
+  __decorate$p([
       n()
   ], exports.LaActionItem.prototype, "icon", void 0);
-  __decorate$o([
+  __decorate$p([
       n({ reflect: true })
   ], exports.LaActionItem.prototype, "status", void 0);
-  exports.LaActionItem = __decorate$o([
+  exports.LaActionItem = __decorate$p([
       t$1('la-action-item')
   ], exports.LaActionItem);
 
-  var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21054,20 +21054,20 @@
       }
     `,
   ];
-  __decorate$n([
+  __decorate$o([
       n({ type: Array })
   ], exports.LaInsightList.prototype, "insights", void 0);
-  __decorate$n([
+  __decorate$o([
       n({ type: Number })
   ], exports.LaInsightList.prototype, "defaultVisible", void 0);
-  __decorate$n([
+  __decorate$o([
       r()
   ], exports.LaInsightList.prototype, "_expanded", void 0);
-  exports.LaInsightList = __decorate$n([
+  exports.LaInsightList = __decorate$o([
       t$1('la-insight-list')
   ], exports.LaInsightList);
 
-  var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21193,23 +21193,23 @@
       }
     `,
   ];
-  __decorate$m([
+  __decorate$n([
       n({ type: Array })
   ], exports.LaDocumentList.prototype, "documents", void 0);
-  __decorate$m([
+  __decorate$n([
       n()
   ], exports.LaDocumentList.prototype, "heading", void 0);
-  __decorate$m([
+  __decorate$n([
       n({ type: Boolean, attribute: 'show-pack-toggle' })
   ], exports.LaDocumentList.prototype, "showPackToggle", void 0);
-  __decorate$m([
+  __decorate$n([
       n({ type: Object })
   ], exports.LaDocumentList.prototype, "categoryIcons", void 0);
-  exports.LaDocumentList = __decorate$m([
+  exports.LaDocumentList = __decorate$n([
       t$1('la-document-list')
   ], exports.LaDocumentList);
 
-  var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21420,20 +21420,20 @@
       }
     `,
   ];
-  __decorate$l([
+  __decorate$m([
       n({ type: Array })
   ], exports.LaProcessingWidget.prototype, "items", void 0);
-  __decorate$l([
+  __decorate$m([
       n({ type: Boolean, reflect: true })
   ], exports.LaProcessingWidget.prototype, "timeout", void 0);
-  __decorate$l([
+  __decorate$m([
       r()
   ], exports.LaProcessingWidget.prototype, "_showDetails", void 0);
-  exports.LaProcessingWidget = __decorate$l([
+  exports.LaProcessingWidget = __decorate$m([
       t$1('la-processing-widget')
   ], exports.LaProcessingWidget);
 
-  var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21538,38 +21538,38 @@
       }
     `,
   ];
-  __decorate$k([
+  __decorate$l([
       n()
   ], exports.LaUpload.prototype, "accept", void 0);
-  __decorate$k([
+  __decorate$l([
       n({ type: Number, attribute: 'max-size' })
   ], exports.LaUpload.prototype, "maxSize", void 0);
-  __decorate$k([
+  __decorate$l([
       n()
   ], exports.LaUpload.prototype, "prompt", void 0);
-  __decorate$k([
+  __decorate$l([
       n()
   ], exports.LaUpload.prototype, "hint", void 0);
-  __decorate$k([
+  __decorate$l([
       n({ type: Boolean, reflect: true })
   ], exports.LaUpload.prototype, "compact", void 0);
-  __decorate$k([
+  __decorate$l([
       n({ type: Boolean, reflect: true })
   ], exports.LaUpload.prototype, "processing", void 0);
-  __decorate$k([
+  __decorate$l([
       n({ type: Boolean, attribute: 'transfer-error', reflect: true })
   ], exports.LaUpload.prototype, "transferError", void 0);
-  __decorate$k([
+  __decorate$l([
       n({ attribute: 'transfer-error-message' })
   ], exports.LaUpload.prototype, "transferErrorMessage", void 0);
-  __decorate$k([
+  __decorate$l([
       e$2('la-upload-box')
   ], exports.LaUpload.prototype, "_box", void 0);
-  exports.LaUpload = __decorate$k([
+  exports.LaUpload = __decorate$l([
       t$1('la-upload')
   ], exports.LaUpload);
 
-  var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21974,44 +21974,44 @@
       }
     `,
   ];
-  __decorate$j([
+  __decorate$k([
       n({ reflect: true })
   ], exports.LaDocumentUpload.prototype, "reason", void 0);
-  __decorate$j([
+  __decorate$k([
       n({ attribute: 'document-id' })
   ], exports.LaDocumentUpload.prototype, "documentId", void 0);
-  __decorate$j([
+  __decorate$k([
       n({ attribute: 'document-name' })
   ], exports.LaDocumentUpload.prototype, "documentName", void 0);
-  __decorate$j([
+  __decorate$k([
       n({ attribute: 'area-label' })
   ], exports.LaDocumentUpload.prototype, "areaLabel", void 0);
-  __decorate$j([
+  __decorate$k([
       n({ attribute: false })
   ], exports.LaDocumentUpload.prototype, "areaOptions", void 0);
-  __decorate$j([
+  __decorate$k([
       n()
   ], exports.LaDocumentUpload.prototype, "label", void 0);
-  __decorate$j([
+  __decorate$k([
       n({ reflect: true })
   ], exports.LaDocumentUpload.prototype, "state", void 0);
-  __decorate$j([
+  __decorate$k([
       n({ attribute: 'error-message' })
   ], exports.LaDocumentUpload.prototype, "errorMessage", void 0);
-  __decorate$j([
+  __decorate$k([
       n()
   ], exports.LaDocumentUpload.prototype, "accept", void 0);
-  __decorate$j([
+  __decorate$k([
       r()
   ], exports.LaDocumentUpload.prototype, "_open", void 0);
-  __decorate$j([
+  __decorate$k([
       r()
   ], exports.LaDocumentUpload.prototype, "_pendingFile", void 0);
-  exports.LaDocumentUpload = __decorate$j([
+  exports.LaDocumentUpload = __decorate$k([
       t$1('la-document-upload')
   ], exports.LaDocumentUpload);
 
-  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22133,26 +22133,26 @@
       .dot--yellow { background: var(--la-color-proactive); }
     `,
   ];
-  __decorate$i([
+  __decorate$j([
       n()
   ], exports.LaSummaryLine.prototype, "area", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "urgent", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "proactive", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "documents", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Boolean, attribute: 'show-aside-toggle' })
   ], exports.LaSummaryLine.prototype, "showAsideToggle", void 0);
-  exports.LaSummaryLine = __decorate$i([
+  exports.LaSummaryLine = __decorate$j([
       t$1('la-summary-line')
   ], exports.LaSummaryLine);
 
-  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22225,20 +22225,20 @@
       }
     `,
   ];
-  __decorate$h([
+  __decorate$i([
       n({ type: Array })
   ], exports.LaActionsWidget.prototype, "actions", void 0);
-  __decorate$h([
+  __decorate$i([
       n()
   ], exports.LaActionsWidget.prototype, "heading", void 0);
-  __decorate$h([
+  __decorate$i([
       n()
   ], exports.LaActionsWidget.prototype, "subtitle", void 0);
-  exports.LaActionsWidget = __decorate$h([
+  exports.LaActionsWidget = __decorate$i([
       t$1('la-actions-widget')
   ], exports.LaActionsWidget);
 
-  var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22284,17 +22284,17 @@
       }
     `,
   ];
-  __decorate$g([
+  __decorate$h([
       n()
   ], exports.LaAnticipationTeaser.prototype, "heading", void 0);
-  __decorate$g([
+  __decorate$h([
       n()
   ], exports.LaAnticipationTeaser.prototype, "description", void 0);
-  exports.LaAnticipationTeaser = __decorate$g([
+  exports.LaAnticipationTeaser = __decorate$h([
       t$1('la-anticipation-teaser')
   ], exports.LaAnticipationTeaser);
 
-  var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22419,25 +22419,25 @@
       }
     `,
   ];
-  __decorate$f([
+  __decorate$g([
       n({ reflect: true })
   ], exports.LaEmptyState.prototype, "variant", void 0);
-  __decorate$f([
+  __decorate$g([
       n()
   ], exports.LaEmptyState.prototype, "area", void 0);
-  __decorate$f([
+  __decorate$g([
       n()
   ], exports.LaEmptyState.prototype, "message", void 0);
-  __decorate$f([
+  __decorate$g([
       n()
   ], exports.LaEmptyState.prototype, "icon", void 0);
-  __decorate$f([
+  __decorate$g([
       n()
   ], exports.LaEmptyState.prototype, "heading", void 0);
-  __decorate$f([
+  __decorate$g([
       n()
   ], exports.LaEmptyState.prototype, "illustration", void 0);
-  exports.LaEmptyState = __decorate$f([
+  exports.LaEmptyState = __decorate$g([
       t$1('la-empty-state')
   ], exports.LaEmptyState);
 
@@ -22453,7 +22453,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const i=e$1(class extends i$1{constructor(){super(...arguments),this.key=A;}render(r,t){return this.key=r,t}update(r,[t,e]){return t!==this.key&&(p(r),this.key=t),e}});
 
-  var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -23124,32 +23124,32 @@
       }
     `,
   ];
-  __decorate$e([
+  __decorate$f([
       n({ reflect: true, attribute: 'state' })
   ], exports.LaUnlockPanel.prototype, "unlockState", void 0);
-  __decorate$e([
+  __decorate$f([
       n()
   ], exports.LaUnlockPanel.prototype, "area", void 0);
-  __decorate$e([
+  __decorate$f([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "checklistItems", void 0);
-  __decorate$e([
+  __decorate$f([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "steps", void 0);
-  __decorate$e([
+  __decorate$f([
       n({ attribute: 'next-area' })
   ], exports.LaUnlockPanel.prototype, "nextArea", void 0);
-  __decorate$e([
+  __decorate$f([
       n({ attribute: 'next-description' })
   ], exports.LaUnlockPanel.prototype, "nextDescription", void 0);
-  __decorate$e([
+  __decorate$f([
       r()
   ], exports.LaUnlockPanel.prototype, "_values", void 0);
-  exports.LaUnlockPanel = __decorate$e([
+  exports.LaUnlockPanel = __decorate$f([
       t$1('la-unlock-panel')
   ], exports.LaUnlockPanel);
 
-  var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -23426,33 +23426,276 @@
       }
     `,
   ];
-  __decorate$d([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaWidget.prototype, "area", void 0);
-  __decorate$d([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaWidget.prototype, "description", void 0);
-  __decorate$d([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaWidget.prototype, "illustration", void 0);
-  __decorate$d([
+  __decorate$e([
       n({ reflect: true })
   ], exports.LaLegalAreaWidget.prototype, "status", void 0);
-  __decorate$d([
+  __decorate$e([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "urgent", void 0);
-  __decorate$d([
+  __decorate$e([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "proactive", void 0);
-  __decorate$d([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaLegalAreaWidget.prototype, "dependencies", void 0);
-  __decorate$d([
+  __decorate$e([
       n({ attribute: 'next-level-label' })
   ], exports.LaLegalAreaWidget.prototype, "nextLevelLabel", void 0);
-  exports.LaLegalAreaWidget = __decorate$d([
+  exports.LaLegalAreaWidget = __decorate$e([
       t$1('la-legal-area-widget')
   ], exports.LaLegalAreaWidget);
+
+  var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-area-card: one legal area as a card that opens it. The area's mark
+   * (la-area-icon, 40px), its name, a count line ("4 journeys · 26 documents")
+   * and a line under that (the area's sub-groups, or its description), with an
+   * arrow that slides in on hover and focus. Orion's playbook library draws six
+   * of them under All areas, and the landing draws the same six under Where to
+   * start when we have read nothing yet.
+   *
+   * A card that acts, so it is elevated (rule/one-card-surface, decision 96):
+   * no border, --la-shadow-md at rest, lifting to --la-shadow-card on hover and
+   * focus. The lift cross-fades two shadow layers' opacity rather than
+   * animating box-shadow (rule/motion-gpu-safe).
+   *
+   * Not la-tile: a tile is a toggle in a frameless strip that filters a list
+   * (aria-pressed, single selection, hairlines between); this card navigates.
+   *
+   * One link (or button), one tab stop. Its accessible name is the area's name;
+   * the count line and the line under it are its description, so a screen
+   * reader hears "Employment, link" and then the counts, and voice control
+   * finds it by the name it shows.
+   *
+   * The grid is the page's: the host is block-level and fills its grid cell, so
+   * cards in one row share a height.
+   *
+   * Usage:
+   *   <la-area-card area="employment" label="Employment"
+   *                 sublabel="9 journeys · 28 documents"
+   *                 description="Hiring Staff · Managing Staff"
+   *                 href="#/library/employment"></la-area-card>
+   *
+   * @prop area        - governance · employment · data · fundraising · commercial · ip; anything else is neutral
+   *                     (passed to la-area-icon, which owns the colour and the glyph)
+   * @prop label       - the area's name, and the card's accessible name
+   * @prop sublabel    - the count line, quiet
+   * @prop description - the line under the counts: the sub-groups, or the area's description
+   * @prop href        - where the card goes; unset, the card is a button and the host routes on la-area-click
+   * @fires la-area-click - {area, href} on activation, in both modes
+   */
+  exports.LaAreaCard = class LaAreaCard extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.area = '';
+          this.label = '';
+          this.sublabel = '';
+          this.description = '';
+          this.href = '';
+      }
+      _onClick() {
+          this.dispatchEvent(new CustomEvent('la-area-click', {
+              detail: { area: this.area, href: this.href },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _body() {
+          const described = [this.sublabel ? 'sub' : '', this.description ? 'desc' : '']
+              .filter(Boolean)
+              .join(' ');
+          return {
+              described: described || A,
+              content: b `
+        <la-area-icon area=${this.area}></la-area-icon>
+        <span class="text">
+          <span class="head">
+            <span class="label" id="label">${this.label}</span>
+            <i class="ph-bold ph-caret-right arrow" aria-hidden="true"></i>
+          </span>
+          ${this.sublabel ? b `<span class="sub" id="sub">${this.sublabel}</span>` : A}
+          ${this.description ? b `<span class="desc" id="desc">${this.description}</span>` : A}
+        </span>
+      `,
+          };
+      }
+      render() {
+          const { described, content } = this._body();
+          return b `${iconStyles}${this.href
+            ? b `<a
+          class="card"
+          href=${this.href}
+          aria-labelledby="label"
+          aria-describedby=${described}
+          @click=${this._onClick}
+          >${content}</a
+        >`
+            : b `<button
+          type="button"
+          class="card"
+          aria-labelledby="label"
+          aria-describedby=${described}
+          @click=${this._onClick}
+        >${content}</button>`}`;
+      }
+  };
+  exports.LaAreaCard.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        min-width: 0;
+      }
+
+      .card {
+        position: relative;
+        display: grid;
+        grid-template-columns: auto minmax(0, 1fr);
+        column-gap: var(--la-space-md);
+        align-items: start;
+        box-sizing: border-box;
+        width: 100%;
+        height: 100%;
+        margin: 0;
+        padding: var(--la-space-lg);
+        border: 0;
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg);
+        font: inherit;
+        color: var(--la-color-text);
+        text-align: left;
+        text-decoration: none;
+        cursor: pointer;
+        outline: none;
+      }
+
+      /* The elevation, as two layers whose opacity cross-fades: the resting
+         shadow out, the lifted one in. */
+      .card::before,
+      .card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        border-radius: inherit;
+        pointer-events: none;
+        transition: opacity var(--dur-base) var(--ease);
+      }
+      .card::before { box-shadow: var(--la-shadow-md); }
+      .card::after { box-shadow: var(--la-shadow-card); opacity: 0; }
+      .card:hover::before,
+      .card:focus-visible::before { opacity: 0; }
+      .card:hover::after,
+      .card:focus-visible::after { opacity: 1; }
+
+      .card:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+      }
+
+      .text {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+      }
+
+      /* The name and the arrow share the first line, so a long name wraps
+         before the arrow and never runs under it. */
+      .head {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+      }
+      .label {
+        flex: 1;
+        min-width: 0;
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-semibold);
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+      }
+      .arrow {
+        flex: none;
+        display: inline-flex;
+        align-items: center;
+        /* One line of the name tall, so the glyph sits on its first line. */
+        height: calc(var(--la-font-size-md) * 1.3);
+        font-size: 14px;
+        color: var(--la-color-text-faint);
+        opacity: 0;
+        transform: translateX(-4px);
+        transition:
+          opacity var(--dur-fast) var(--ease),
+          transform var(--dur-fast) var(--ease);
+      }
+      .card:hover .arrow,
+      .card:focus-visible .arrow {
+        opacity: 1;
+        transform: translateX(0);
+      }
+
+      /* The lines under the name end where the prototype's did, a little
+         short of the arrow's edge. */
+      .sub,
+      .desc {
+        padding-inline-end: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        overflow-wrap: anywhere;
+      }
+      /* The name and the counts read as one block, as the prototype set them. */
+      .sub {
+        margin-top: var(--la-space-3xs);
+        color: var(--la-color-text-muted);
+        line-height: 1.3;
+      }
+      .desc {
+        margin-top: var(--la-space-sm);
+        color: var(--la-color-text-secondary);
+        line-height: 1.45;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card::before,
+        .card::after,
+        .arrow { transition: none; }
+      }
+
+      @media (forced-colors: active) {
+        .card { border: 1px solid CanvasText; }
+      }
+    `,
+  ];
+  __decorate$d([
+      n({ reflect: true })
+  ], exports.LaAreaCard.prototype, "area", void 0);
+  __decorate$d([
+      n()
+  ], exports.LaAreaCard.prototype, "label", void 0);
+  __decorate$d([
+      n()
+  ], exports.LaAreaCard.prototype, "sublabel", void 0);
+  __decorate$d([
+      n()
+  ], exports.LaAreaCard.prototype, "description", void 0);
+  __decorate$d([
+      n()
+  ], exports.LaAreaCard.prototype, "href", void 0);
+  exports.LaAreaCard = __decorate$d([
+      t$1('la-area-card')
+  ], exports.LaAreaCard);
 
   var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

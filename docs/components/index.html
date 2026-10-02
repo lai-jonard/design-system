@@ -1084,6 +1084,7 @@ the Title Case structural register.</p>
 <h3 id="la-tile-strip--la-tile"><code>la-tile-strip</code> + <code>la-tile</code></h3>
 <p>A frameless, pressable tile group with counts. <code>la-tile</code>: 36px glyph disc (or a slotted 24px object), label, quiet sub-label, <code>pressed</code>, <code>quiet</code>, legal-area <code>hue</code>. <code>la-tile-strip</code>: grid that collapses 4 → 2 → 1 with its container (2 under 900px of strip width, 1 under 440px), re-derives which tiles end a row so the hairlines stay between and never around, and in <code>selection=&quot;single&quot;</code> (default) presses one tile and lifts the others (<code>value</code>, <code>la-tile-change</code>). <code>selection=&quot;none&quot;</code> for navigation tiles. Status: 🟡 source only (17 Sep 2026) — docs at <a href="../../components/la-tile-strip.html">docs-src/components/la-tile-strip.html</a>.</p>
 <p><strong>Problem solved:</strong> LawVault's <code>.area-strip</code> / <code>.area-tile</code> and the Dashboard's area tiles were two hand-rolled copies of the same idiom with hairline arithmetic tied to a fixed column count. <strong>Frameless by decision</strong> (Jonard, 17 Sep 2026): the strip is a filter, not a card that acts, so it takes no surface of its own (<code>rule/one-card-surface</code>). No count badges on tiles — one queue, one count, on the control that opens it.</p>
+<p><strong>Not this:</strong> an area that opens its own page, with its counts and sub-groups on an elevated card, is <a href="#la-area-card"><code>la-area-card</code></a> (2 October 2026), not a tile variant.</p>
 <hr>
 <h3 id="la-area-icon"><code>la-area-icon</code></h3>
 <p><strong>Problem:</strong> every Orion surface that names a legal area drew the area's mark by hand: four sizes on the playbooks page, two more in onboarding and add-docs, a circle on the dashboard, and two glyph sets between them. One component now holds the area's token pair and its default glyph, so an area looks the same wherever it appears.</p>
@@ -1179,7 +1180,7 @@ the Title Case structural register.</p>
 </table>
 <p><strong>Default glyphs.</strong> Orion's surfaces disagree on three areas. Governance is <code>ph-buildings</code> and Fundraising <code>ph-trend-up</code> on the dashboard, LawVault, Company Manual, onboarding, add-docs and <code>la-sidebar</code>; only the playbooks page, taken from Bobby's reference on 1 October 2026, draws <code>ph-bank</code> and <code>ph-hand-coins</code>, and <code>ph-bank</code> is already Orion's glyph for Companies House as a source. Employment is split: <code>ph-users</code> on the dashboard's area tiles, LawVault, onboarding, add-docs and <code>la-sidebar</code>, <code>ph-users-three</code> on the playbooks page and most of the dashboard's insight area chips. The defaults follow the majority, in the regular weight (<code>iconography.md</code>). Decided by Jonard on 2 October 2026: the majority glyphs are the areas' glyphs, and the playbooks page moves onto them.</p>
 <p><strong>When to use:</strong> wherever a legal area is shown with its mark: a page header, a card, a rail or list row, a section heading. <strong>Accessibility:</strong> decorative by default (<code>aria-hidden</code>), because the area's name is almost always written beside it. Where it stands alone, give it a <code>label</code> and it becomes <code>role=&quot;img&quot;</code> with that name. <strong>Unknown areas</strong> (Miscellaneous, a typo, an area not yet in <code>tokens.ts</code>) fall back to the neutral pair and a folders glyph rather than rendering nothing. <strong>Glyphs</strong> render inside the shadow root through <code>iconStyles</code>, like every other primitive, so the page must load the Phosphor stylesheets in its <code>&lt;head&gt;</code> (bold or fill too, if an <code>icon</code> asks for them).</p>
-<p><strong>Not this:</strong> a pressable tile with a label and a count is <a href="#la-tile-strip--la-tile"><code>la-tile</code></a>, whose 36px circular disc takes the same token pairs through <code>hue</code>. The dashboard's area tiles draw that circle today; moving them onto <code>la-area-icon</code> would square them, which is a review call. A state is a badge, never the icon's colour.</p>
+<p><strong>Not this:</strong> a pressable tile with a label and a count is <a href="#la-tile-strip--la-tile"><code>la-tile</code></a>, whose 36px circular disc takes the same token pairs through <code>hue</code>. A card that opens an area composes this mark: <a href="#la-area-card"><code>la-area-card</code></a>. The dashboard's area tiles draw that circle today; moving them onto <code>la-area-icon</code> would square them, which is a review call. A state is a badge, never the icon's colour.</p>
 <p><strong>Consumers:</strong> in <code>new-design</code>: Orion's playbooks page (<code>05-playbooks.html</code>: the area page header, the area rail, the area headings and area tiles in the documents catalogue, and the area cards), the dashboard's area tiles (<code>01-dashboard.html</code>), onboarding's documents step (<code>onboarding.css</code>, which draws the mark neutral today) and the add-documents modal (<code>add-docs.css</code>). None has moved onto it yet; they receive it through the sync. Built 2 October 2026. Docs draft: <code>dev/docs-drafts/la-area-icon.html</code>.</p>
 <hr>
 <h3 id="la-table-vs-la-data-table--when-to-reach-for-which"><code>la-table</code> vs <code>la-data-table</code> — when to reach for which</h3>
@@ -1406,6 +1407,11 @@ the Title Case structural register.</p>
 <td>Dashboard tile for a single legal area. Three states (<code>unlocked</code> / <code>locked-unlockable</code> / <code>locked-not-unlockable</code>) drive surface, shadow, and CTA. <strong>Surface mapping:</strong> white on unlocked + locked-unlockable so the illustration reads cleanly; subtle grey on locked-not-unlockable with the illustration desaturated and <code>mix-blend-mode: multiply</code> to dissolve into the surface. <strong>Emphasis:</strong> locked-unlockable rests with <code>--la-shadow-card</code> (next progression candidate); unlocked hovers to <code>--la-shadow-sm</code>, locked-unlockable hovers to <code>--la-shadow-md</code>. <strong>Layout:</strong> fluid 4:3 landscape, 300 px width floor; illustration takes the slack at the top via <code>flex: 1</code>, content stacks below. <strong>Keyboard:</strong> <code>tabindex=&quot;0&quot;</code> + <code>role=&quot;button&quot;</code> + <code>aria-label=&quot;Open &lt;area&gt;&quot;</code> on the la-panel; Enter/Space fires <code>la-area-click</code>. <strong>Two events:</strong> <code>la-area-click</code> (whole card) + <code>la-area-unlock</code> (CTA only, stops propagation). <strong>No &quot;Recommended&quot; badge</strong> — surface emphasis carries the meaning (decision 57). Decisions: 54 (next-level CTA), 55 (fluid widget), 58 (illustration + 4:3). Docs at <code>docs-src/components/la-legal-area-widget.html</code>.</td>
 </tr>
 <tr>
+<td>Area card</td>
+<td><code>la-area-card</code></td>
+<td>One legal area as an elevated card that opens it: <code>la-area-icon</code>, the name, a count line and the sub-groups or description, with an arrow on hover and focus. Replaces the hand-drawn <code>.area-card</code> on Orion's playbooks page (the library's All areas, the landing's Where to start). Its own component, not a <code>la-tile</code> variant: a tile is a toggle in a frameless strip, this is a link on an elevated card. Full entry: <a href="#la-area-card"><code>la-area-card</code></a>.</td>
+</tr>
+<tr>
 <td>DD readiness</td>
 <td><code>la-dd-readiness</code></td>
 <td>Show how ready the company is for due diligence as a single visual gauge</td>
@@ -1517,6 +1523,60 @@ the Title Case structural register.</p>
 </tr>
 </tbody>
 </table>
+<h3 id="la-area-card"><code>la-area-card</code></h3>
+<p><strong>Problem:</strong> Orion's playbooks page draws its area cards by hand: <code>.area-card</code> from <code>areaCard()</code> in <code>05-playbooks.html</code>, under the library's All areas, and under the landing's Where to start when we have read nothing yet (<code>?state=unread</code>). Each card is a <code>&lt;button&gt;</code> with its own copy of the area mark, its own shadow lift, and an arrow that appears on hover only; keyboard focus gets the lift and no ring. The Phase B component queue (item 21) asked for &quot;a <code>la-tile</code> / <code>la-tile-strip</code> variant&quot;. It is not one, so it is its own component, composed from <a href="#la-area-icon"><code>la-area-icon</code></a>.</p>
+<p>One legal area as a card that opens it: the area's mark (<code>la-area-icon</code>, <code>md</code>, 40px), its name, a quiet count line, a line under that (the area's sub-groups, or its description), and an arrow that slides in on hover and focus.</p>
+<p><strong>Props:</strong> <code>area</code> (governance · employment · data · fundraising · commercial · ip, reflected and passed to <code>la-area-icon</code>, which owns the colour and the glyph; anything else takes the neutral pair), <code>label</code> (the area's name, and the card's accessible name), <code>sublabel</code> (the count line, such as &quot;4 journeys · 26 documents&quot;), <code>description</code> (the sub-groups joined with &quot; · &quot; where the area has them, otherwise the area's description; the page decides which, as <code>areaCard()</code> does), <code>href</code> (set, the card is an <code>&lt;a&gt;</code>; unset, a <code>&lt;button type=&quot;button&quot;&gt;</code> and the host routes on the event). <strong>Slots:</strong> none. <strong>Event:</strong> <code>la-area-click</code> <code>{area, href}</code>, bubbling and composed, on activation in both modes; the name is <code>la-legal-area-widget</code>'s. <strong>Parts:</strong> none. <code>label</code> and <code>sublabel</code> are <code>la-tile</code>'s names for the same two lines.</p>
+<p><strong>Why not a <code>la-tile</code> variant.</strong> The content is alike (a mark, a name, a count). The contract is not:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th><code>la-tile</code> in <code>la-tile-strip</code></th>
+<th><code>la-area-card</code></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Role</td>
+<td>A toggle that filters the list under it: <code>aria-pressed</code>, single selection, <code>value</code>, <code>la-tile-change</code></td>
+<td>A link that opens the area's page</td>
+</tr>
+<tr>
+<td>Surface</td>
+<td>Frameless, hairlines between tiles, a tint when pressed (decision 99, call 2)</td>
+<td>Elevated: no border, <code>--la-shadow-md</code>, lifting to <code>--la-shadow-card</code> (<code>rule/one-card-surface</code>)</td>
+</tr>
+<tr>
+<td>Layout</td>
+<td>Strip arithmetic: 4, 2 or 1 columns on the strip's own width, and the strip works out which tiles end a row so the lines stay between</td>
+<td>A plain grid with a gap, 3, 2 or 1 columns on the window; nothing to work out</td>
+</tr>
+<tr>
+<td>Mark</td>
+<td>A 36px circular disc, tinted through <code>hue</code></td>
+<td><code>la-area-icon</code>, a 40px rounded square</td>
+</tr>
+<tr>
+<td>Text</td>
+<td>A one-line label and sub-label, cut off with an ellipsis</td>
+<td>A name, a count line and a description, all of which wrap</td>
+</tr>
+<tr>
+<td>Arrow</td>
+<td>None</td>
+<td>Slides in on hover and focus</td>
+</tr>
+</tbody>
+</table>
+<p>A variant would need a surface switch, a role switch (a pressed toggle against a link), a third line, wrapping, a second mark and a way out of the hairlines: a second component behind one tag. <code>la-tile</code> and <code>la-tile-strip</code> are unchanged, so LawVault's shelf (Orion and Pharos) and the playbooks page's documents shelf render and behave as before.</p>
+<p><strong>Surface and motion.</strong> Elevated, <code>--la-radius-lg</code>, <code>--la-space-lg</code> padding. It lifts on hover and on keyboard focus: two layers carry <code>--la-shadow-md</code> and <code>--la-shadow-card</code>, and their opacity cross-fades over <code>--dur-base</code> <code>--ease</code>, so only opacity animates (<code>rule/motion-gpu-safe</code>). <code>la-insight-card</code> and <code>la-module-tile</code> transition <code>box-shadow</code> itself, which is a review call for them. The arrow (<code>ph-bold ph-caret-right</code>, 14px, <code>--la-color-text-faint</code>) fades in and slides 4px over <code>--dur-fast</code> <code>--ease</code>. Under <code>prefers-reduced-motion</code> both change at once. In forced-colours mode the card takes a 1px <code>CanvasText</code> border, because forced colours drop shadows and the card would lose its edge.</p>
+<p><strong>Type.</strong> The name is <code>--la-font-size-md</code> semibold; the count line <code>--la-font-size-sm</code> in <code>--la-color-text-muted</code>, <code>--la-space-3xs</code> under it; the description <code>--la-font-size-sm</code> in <code>--la-color-text-secondary</code>, <code>--la-space-sm</code> under the counts. Line heights are the prototype's: 1.3 for the name and the counts, 1.45 for the description (the prototype's button drew the count line at <code>normal</code>, about 1.2; 1.3 lands within a pixel). The name and the arrow share the first line, so a long name wraps before the arrow; in the prototype the arrow was placed over the card and could sit on a long name's last few pixels. Text wraps under the tokens' <code>text-wrap: pretty</code> (decision 83), as in every component, so a description can break a word earlier than the prototype's light-DOM card did: Data Protection's last line reads &quot;a breach.&quot; rather than a lone &quot;breach.&quot;.</p>
+<p><strong>Accessibility.</strong> One link or button, one tab stop; the host takes no focus. <code>aria-labelledby</code> names it by the area's name alone, so voice control finds it by what it shows and a screen reader says &quot;Employment, link&quot; before anything else; <code>aria-describedby</code> adds the count line and the description. <code>la-area-icon</code> and the arrow are decorative. Focus shows the system ring (<code>--la-focus-ring-width</code> in <code>--la-color-border-focus</code>, offset <code>--la-focus-ring-offset</code>) as well as the lift and the arrow. Prefer <code>href</code>: a link opens in a new tab and shows its address, and a hash router picks it up without a click handler.</p>
+<p><strong>The grid is the page's.</strong> The host is block-level and fills its grid cell, so the cards in a row share a height. Orion lays them out in three columns, two under a 1000px window and one under 760px, with a <code>--la-space-md</code> gap; the docs draft gives that CSS with <code>minmax(0, 1fr)</code> columns, so a long word can't widen a column. There is no <code>la-area-card-grid</code>: a grid with a gap has no arithmetic for a component to own, unlike the strip's hairlines. Build one if a third surface lays the cards out the same way.</p>
+<p><strong>The compact row is not this component.</strong> An area page's Other areas tab (<code>.rail-cat-item</code> in <code>05-playbooks.html</code>) is a list of links: one line, no counts, no surface at rest, a hover tint, the current area bolder. It is <code>la-area-icon size=&quot;xs&quot;</code> and the name in an <code>&lt;a&gt;</code>, in a list, with the row drawn by the page, as <code>la-area-icon</code>'s docs draft already shows. Mark the current one with <code>aria-current=&quot;page&quot;</code>; the prototype uses a class only. A compact card would be a second component under the same name.</p>
+<p><strong>Not this:</strong> a tile that filters a list is <a href="#la-tile-strip--la-tile"><code>la-tile</code></a> in its strip. The dashboard's area widget, with its illustration and its states, is <code>la-legal-area-widget</code> (Tier 2, below). The area's mark on its own is <a href="#la-area-icon"><code>la-area-icon</code></a>.</p>
+<p><strong>Consumers:</strong> in <code>new-design</code>: Orion's playbooks page, <code>05-playbooks.html</code> (<code>.area-card</code> from <code>areaCard()</code>, in the library's All areas and the landing's Where to start). It has not moved onto the component yet; it receives it through the sync. Built 2 October 2026. Docs draft: <code>dev/docs-drafts/la-area-card.html</code>.</p>
 <h3 id="component-specific-notes">Component-specific notes</h3>
 <ul>
 <li><strong><code>la-processing-widget</code> status vocabulary</strong> — the widget's external API uses <code>processing | completed | failed</code> (the natural domain vocab for upload workflows, matching Sprint 1 PRD). Internally it maps <code>completed</code> → <code>ready</code> before passing to <code>la-document-item</code>, because &quot;ready&quot; is the right word once the document is viewable in the library. Don't &quot;fix&quot; the mapping — the divergence is intentional.</li>
