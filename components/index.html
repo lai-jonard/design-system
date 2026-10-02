@@ -252,6 +252,16 @@
 <p class="component-card-desc">Indeterminate loading indicator. Used inside buttons, rows, and async-operation surfaces to signal work in progress.</p>
 </div>
 </a>
+<a class="component-card" href="./la-menu.html">
+<div aria-hidden="true" class="component-card-image component-card-image--live"><la-menu label="Card options"><la-menu-item label="Edit" icon="ph ph-pencil-simple" value="edit"></la-menu-item><la-menu-item label="Delete" icon="ph ph-trash" value="delete" variant="danger"></la-menu-item></la-menu></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Menu</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">A tertiary actions menu behind a trigger: its items, toggles and dividers in one floating panel.</p>
+</div>
+</a>
 </div>
 </div>
 
@@ -328,6 +338,26 @@
 <p class="component-card-desc">Single-file drop zone with click-to-browse and drag-and-drop. Used in the unlock flow's document upload steps.</p>
 </div>
 </a>
+<a class="component-card" href="./la-chip.html">
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div style="display:flex;gap:8px;flex-wrap:wrap;justify-content:center"><la-chip prefix="Area" label="Employment" value="employment"></la-chip><la-chip prefix="Search" label="“policy”" value="q"></la-chip></div></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Chip</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">A removable token for a filter in force. The whole chip removes that filter alone.</p>
+</div>
+</a>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Scope Filter</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">A “Viewing: …” control that rescopes a whole view, not one list.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -458,6 +488,36 @@
 <span class="status-chip status-chip--v1">v1 ready</span>
 </div>
 <p class="component-card-desc">Single-selection tab list — segmented (default), underline, pill, and vertical variants. Sliding active indicator, full ARIA tablist keyboard, block + size attributes.</p>
+</div>
+</a>
+<a class="component-card" href="./la-pagination.html">
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-viewport"><div class="card-preview-scale"><la-pagination total="45" page-size="20" page="1" style="width:420px"></la-pagination></div></div></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Pagination</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">The range line and numbered pager under a list. It hides itself when everything fits on one page.</p>
+</div>
+</a>
+<a class="component-card" href="./la-tile-strip.html">
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-frame"><la-tile-strip value="" columns="2" aria-label="Filter by legal area"><la-tile value="" label="All Areas" sublabel="10 documents" icon="ph-bold ph-squares-four"></la-tile><la-tile value="employment" label="Employment" sublabel="2 documents" icon="ph-bold ph-users" hue="employment"></la-tile></la-tile-strip></div></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Tile Strip</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">A frameless group of pressable tiles with counts, such as the legal areas over the list they filter.</p>
+</div>
+</a>
+<a class="component-card" href="./la-activity-item.html">
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-frame"><la-activity-item time="1 hour ago" last><i slot="icon" class="ph-fill ph-eye"></i>Viewed the cap table</la-activity-item></div></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Activity Item</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">One event in an activity feed: its icon, what happened, and when.</p>
 </div>
 </a>
 </div>
@@ -618,6 +678,56 @@
 <p class="component-card-desc">Quiet stepped progress indicator for linear flows. A row of fixed-width pills fills with primary colour as steps complete; muted pills mark skipped steps.</p>
 </div>
 </a>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Area Icon</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">A legal area’s colour and glyph in a rounded square, at four sizes. Decorative unless it has a label.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Step Marker</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">The marker on a step, in each state a step can be in: done, current, to come, gated, needing attention or working.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Step Ring</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">A radial progress ring for a multi-step flow, one segment per step.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Date Tile</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">A compact date for a deadline: the month over the day, tinted by how soon it is due.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Distribution Bar</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">A segmented bar showing how a total splits across ordered stages, such as a pipeline.</p>
+</div>
+</div>
 </div>
 </div>
 
@@ -720,16 +830,16 @@
 <p class="component-card-desc">Dashboard tile for a single legal area — illustration on top, counts or next-level CTA below. Three states: unlocked, locked-unlockable (rests with shadow-card emphasis), locked-not-unlockable (dependency named).</p>
 </div>
 </a>
-<div class="component-card component-card--disabled">
+<a class="component-card" href="./la-investor-card.html">
 <div aria-hidden="true" class="component-card-image"></div>
 <div class="component-card-body">
 <div class="component-card-head">
 <span class="component-card-title">Investor Card</span>
-<span class="status-chip status-chip--idle">Not started</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
 </div>
 <p class="component-card-desc">Summary card for an investor — commitments, status, and entry point.</p>
 </div>
-</div>
+</a>
 <div class="component-card component-card--disabled">
 <div aria-hidden="true" class="component-card-image"></div>
 <div class="component-card-body">
@@ -738,6 +848,192 @@
 <span class="status-chip status-chip--idle">Not started</span>
 </div>
 <p class="component-card-desc">Login screen pattern. Handles email and SSO entry states.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Step Sign-off</span>
+<span class="status-chip status-chip--progress">In progress</span>
+</div>
+<p class="component-card-desc">A dated sign-off on a completed step, with its history and a reopen that logs the reason.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Document Upload</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">Asks for one file and says why. The reason sets the button, its weight and what happens next.</p>
+</div>
+</div>
+<a class="component-card" href="./la-chat.html">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Chat</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
+</div>
+<p class="component-card-desc">A conversation thread with its compose bar, auto-scroll, empty state and read-only notice.</p>
+</div>
+</a>
+</div>
+</div>
+
+<div class="component-tier" id="case-management">
+<div class="tier-label">Case management</div>
+<div class="component-grid">
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Assignee Card</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">A profile card for an investigator or case handler.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Assignee Picker</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">The recommended-assignee panel on a case overview.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Bandwidth Bar</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">An eight-segment bar showing how much capacity a handler has left.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Case Context Panel</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">The persistent four-icon panel beside a case.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Files Panel</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">A case’s files, in the case context panel.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Level Control</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">Confirms or overrides a case’s complexity level.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Level Indicator</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">A square badge showing a case’s complexity level, from L1 to L3+.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Levelling Matrix</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">The AI matrix that suggests a case’s level at triage.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Playbook Confirm Modal</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">Confirms the playbook the first time a case plan opens.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Reassign Control</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">Hands a case to another handler.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Sensitive Flags</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">The sensitive-context flags on a case.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">SLA Pill</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">The shared urgency token for a service-level deadline.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">SLA Strip</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">The persistent strip showing a case’s service-level urgency.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Module Tile</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">An overview card for one module on a leadership dashboard.</p>
+</div>
+</div>
+<div class="component-card component-card--disabled">
+<div aria-hidden="true" class="component-card-image"></div>
+<div class="component-card-body">
+<div class="component-card-head">
+<span class="component-card-title">Week Strip</span>
+<span class="status-chip status-chip--idle">No preview</span>
+</div>
+<p class="component-card-desc">A practitioner’s schedule for the week.</p>
 </div>
 </div>
 </div>
