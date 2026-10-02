@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-ai-insight — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-ai-insight</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-ai-insight</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-ai-insight</h1>
+  <p>The framed LawAdvisor AI output panel — one component for every "LawAdvisor AI recommends / has drafted / flagged…" block in the product. A header carries the brand mark and an attributed headline, the body holds the detail, and an optional footer lets the human rate the output and act on it (amend, disagree, view). It encodes the product's human-in-the-loop rule: the AI assists in the header, the human decides in the footer.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>Three regions inside a bordered, rounded panel: a tinted <strong>header</strong> with the inlined LawAdvisor mark and the attributed headline; a <strong>body</strong> (default slot, or the <code>description</code> fallback); and an optional tinted <strong>footer</strong> shown when <code>rateable</code> is set or the <code>actions</code> slot is filled.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Header + body — the default shape</div>
+  <div class="preview-frame" style="padding:28px;background:var(--la-color-bg-subtle);">
+    <la-ai-insight style="max-width:560px;width:100%;" headline="drafted 22 separation packets from the template, agreed terms and Workday profiles">Per group: business-reason document (shared). Per employee: redundancy letter + severance package (personalised, ADEA waiver for 40+). Review and approve before sending.</la-ai-insight>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Mark</td><td>Inlined LawAdvisor SVG</td><td>Self-contained — no asset dependency. Inherits colour via <code>currentColor</code>.</td></tr>
+      <tr><td>Header</td><td><code>attribution</code> + <code>headline</code> (or <code>slot="headline"</code>)</td><td>Reads "{attribution} {headline}". Attribution defaults to a semibold "LawAdvisor AI" so the branding is owned by the component, not retyped per usage.</td></tr>
+      <tr><td>Body</td><td>default slot, or <code>description</code></td><td>The detail. Slotted content overrides the <code>description</code> fallback, so rich bodies (lists, links) are possible.</td></tr>
+      <tr><td>Footer</td><td><code>rateable</code> stars + <code>slot="actions"</code></td><td>Hidden unless <code>rateable</code> is set or actions are slotted. Rating fires <code>la-rate</code>; actions are right-aligned.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-headline">headline</label>
+      <input id="ctl-headline" type="text" value="recommends California packets go out first — WARN threshold is closest there (44/50)" style="width:360px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-attribution">attribution</label>
+      <input id="ctl-attribution" type="text" value="LawAdvisor AI" style="width:140px;">
+    </div>
+  </div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label>rateable</label>
+      <div class="btn-group" data-control="rateable">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>actions slot</label>
+      <div class="btn-group" data-control="actions">
+        <button class="btn-toggle active" data-bool="false" type="button">none</button>
+        <button class="btn-toggle" data-bool="true" type="button">Amend · Dismiss</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>The event log shows <code>la-rate</code> firings.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:28px;background:var(--la-color-bg-subtle);flex-direction:column;align-items:stretch;gap:12px;">
+    <la-ai-insight id="live" style="max-width:560px;width:100%;" headline="recommends California packets go out first — WARN threshold is closest there (44/50)">Sending CA first preserves the rolling 90-day count and avoids tipping the federal 50-threshold mid-cycle.</la-ai-insight>
+    <div id="event-log" style="font-family:ui-monospace,monospace;font-size:11px;color:var(--la-color-text-faint);min-height:16px;"></div>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+  <p>Typical product usage across the playbooks.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Rateable, with amend/dismiss actions</div>
+  <div class="preview-frame" style="padding:28px;background:var(--la-color-bg-subtle);">
+    <la-ai-insight rateable style="max-width:560px;width:100%;" headline="has drafted Marcus Webb's PIP — 3 objectives mapped to the missed-deadline pattern">
+      Each objective cites the documented incident and a measurable target. Review the framing before it goes to Diana Osei.
+      <la-button slot="actions" variant="secondary" size="sm">Amend</la-button>
+      <la-button slot="actions" variant="ghost" size="sm">Dismiss</la-button>
+    </la-ai-insight>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Flag — rateable, plain body via description</div>
+  <div class="preview-frame" style="padding:28px;background:var(--la-color-bg-subtle);">
+    <la-ai-insight rateable style="max-width:560px;width:100%;"
+      headline="flagged a conflict — Karen Melo received Ana's January complaint and took no action"
+      description="Routing this investigation past Karen avoids a reviewer with prior involvement. Reassign before the interview stage."></la-ai-insight>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">No attribution — set attribution=&quot;&quot; when the surface already names the AI</div>
+  <div class="preview-frame" style="padding:28px;background:var(--la-color-bg-subtle);">
+    <la-ai-insight attribution="" style="max-width:560px;width:100%;" headline="Summary: 38 impacted, 3 states, WARN at risk in California only.">
+      Full pre-assessment attached. Re-runs automatically at execution.
+    </la-ai-insight>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-ai-insight</h2>
+    <p>The framed LawAdvisor AI output panel (the X3 pattern). A brand-marked, attributed header, a body for the detail, and an optional footer where the human rates the output and acts on it. One component for every 'LawAdvisor AI recommends / has drafted / flagged…' block.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>headline</td>
+          <td><span class="default">headline</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The action phrase, e.g. "drafted 22 separation packets…"</td>
+        </tr>
+      
+        <tr>
+          <td>attribution</td>
+          <td><span class="default">attribution</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;LawAdvisor AI&#39;</span></td>
+          <td>Brand prefix in the header. Default: "LawAdvisor AI". Set "" to omit.</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Plain-text body, used when the default slot is empty.</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">&#39;default&#39; | &#39;lg&#39;</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>Card scale. 'lg' is a roomier variant — larger radius, padding, and header.</td>
+        </tr>
+      
+        <tr>
+          <td>noHead</td>
+          <td><span class="default">no-head</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Omit the header band (brand mark + attribution + header controls). Use when
+the slotted body already carries its own title and AI attribution.</td>
+        </tr>
+      
+        <tr>
+          <td>rateable</td>
+          <td><span class="default">rateable</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Boolean; show the "Was this helpful?" thumbs up/down in the footer.</td>
+        </tr>
+      
+        <tr>
+          <td>rating</td>
+          <td><span class="default">rating</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>Current rating: 0 = unrated · 1 = thumbs up · 2 = thumbs down.</td>
+        </tr>
+      
+        <tr>
+          <td>rateRequired</td>
+          <td><span class="default">rate-required</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disagreeable</td>
+          <td><span class="default">disagreeable</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Boolean; show the "Something's wrong" Disagree control.</td>
+        </tr>
+      
+        <tr>
+          <td>amendable</td>
+          <td><span class="default">amendable</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Boolean; show the "Edit" Amend control and persist the edit stamp.</td>
+        </tr>
+      
+        <tr>
+          <td>editedBy</td>
+          <td><span class="default">edited-by</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>editedAt</td>
+          <td><span class="default">edited-at</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_hasActions</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Whether the actions slot has assigned content.</td>
+        </tr>
+      
+        <tr>
+          <td>_panel</td>
+          <td>—</td>
+          <td><span class="type">&#39;none&#39; | &#39;disagree&#39; | &#39;amend&#39;</span></td>
+          <td><span class="default">&#39;none&#39;</span></td>
+          <td>Inline panel currently open in the footer (Disagree or Amend).</td>
+        </tr>
+      
+        <tr>
+          <td>_disagreeReason</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Working copy of the disagreement reason.</td>
+        </tr>
+      
+        <tr>
+          <td>_amendDraft</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Working copy of the amended body text.</td>
+        </tr>
+      
+        <tr>
+          <td>_bodyText</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Plain-text snapshot of the slotted/described body, for seeding the amend editor.</td>
+        </tr>
+      
+        <tr>
+          <td>_bodySeed</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>rate-required</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Boolean; rating is required before the host's primary CTA — gate it with `la-rate-state`.</td>
+        </tr>
+      
+        <tr>
+          <td>edited-by</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Who last amended the output (drives the "Edited by …" stamp).</td>
+        </tr>
+      
+        <tr>
+          <td>edited-at</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>When it was last amended, e.g. "14 Apr 2026 · 09:47 AM MT".</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>(default)</td>
+          <td>Body content (overrides `description`).</td>
+        </tr>
+      
+        <tr>
+          <td>actions</td>
+          <td>Footer actions, right-aligned (e.g. a "View source" button).</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-rate-state</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{rated:boolean} whenever the rated state changes — host gates its primary CTA on this.</td>
+        </tr>
+      
+        <tr>
+          <td>la-rate</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{rating:number} when the user picks a thumbs rating (0/1/2).</td>
+        </tr>
+      
+        <tr>
+          <td>la-disagree</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{reason:string} when the user logs a disagreement.</td>
+        </tr>
+      
+        <tr>
+          <td>la-amend</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{value:string} when the user saves an amended body.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+  <h3>CSS custom properties</h3>
+  <p>No public custom properties. Surfaces, borders, and the rating colour are fixed to design tokens for consistency across every AI surface.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+
+  <h4>Drafted output (header + body)</h4>
+  <pre><code>&lt;la-ai-insight headline="drafted 22 separation packets from the template, agreed terms and Workday profiles"&gt;
+  Per group: business-reason document (shared). Per employee: redundancy letter +
+  severance package (personalised, ADEA waiver for 40+). Review and approve before sending.
+&lt;/la-ai-insight&gt;</code></pre>
+
+  <h4>Recommendation the human can rate and act on</h4>
+  <pre><code>&lt;la-ai-insight rateable headline="recommends California packets go out first…"&gt;
+  Sending CA first preserves the rolling 90-day count…
+  &lt;la-button slot="actions" variant="secondary" size="sm"&gt;Amend&lt;/la-button&gt;
+&lt;/la-ai-insight&gt;</code></pre>
+
+  <h4>Listening for a rating</h4>
+  <pre><code>el.addEventListener('la-rate', (e) =&gt; save(e.detail.rating)); // 1–5</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <ul>
+    <li><strong>Owns the branding.</strong> <code>attribution</code> defaults to "LawAdvisor AI" and is rendered semibold before the headline — set <code>headline</code> to just the action phrase ("drafted…", "recommends…", "flagged…"). Pass <code>attribution=""</code> on surfaces that already name the AI.</li>
+    <li><strong>Honest, human-in-the-loop framing.</strong> Use verbs that say the AI assisted, never decided — "recommends", "has drafted", "flagged". The footer is where the human rates, amends, or disagrees (per the X3 principle). Keep bodies to 1–2 sentences.</li>
+    <li><strong>Self-contained mark.</strong> The LawAdvisor glyph is inlined as SVG (<code>currentColor</code>), so the component has no image dependency and the mark can't 404.</li>
+    <li><strong>Footer auto-hides.</strong> It only appears when <code>rateable</code> is set or the <code>actions</code> slot has content — a plain drafted-output panel has no footer.</li>
+    <li><strong>Not the same as <a href="../components/la-insight-card.html">la-insight-card</a>.</strong> That card is the formal legal-area insight (severity icon, source tag, opens the insight modal). <code>la-ai-insight</code> is the generic AI-output framing for narrative drafts, recommendations, and flags inline in a flow.</li>
+  </ul>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const live = document.getElementById('live');
+    const log = document.getElementById('event-log');
+    if (!live) return;
+
+    document.getElementById('ctl-headline').addEventListener('input', (e) => {
+      live.setAttribute('headline', e.target.value);
+    });
+    document.getElementById('ctl-attribution').addEventListener('input', (e) => {
+      live.setAttribute('attribution', e.target.value);
+    });
+
+    document.querySelectorAll('[data-control="rateable"] [data-bool]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-control="rateable"] [data-bool]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        if (btn.dataset.bool === 'true') live.setAttribute('rateable', '');
+        else live.removeAttribute('rateable');
+      });
+    });
+
+    document.querySelectorAll('[data-control="actions"] [data-bool]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        document.querySelectorAll('[data-control="actions"] [data-bool]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        live.querySelectorAll('[slot="actions"]').forEach((n) => n.remove());
+        if (btn.dataset.bool === 'true') {
+          live.insertAdjacentHTML('beforeend',
+            '<la-button slot="actions" variant="secondary" size="sm">Amend</la-button>' +
+            '<la-button slot="actions" variant="ghost" size="sm">Dismiss</la-button>');
+        }
+      });
+    });
+
+    function flash(msg) {
+      log.textContent = msg;
+      clearTimeout(flash._t);
+      flash._t = setTimeout(() => { log.textContent = ''; }, 2000);
+    }
+    live.addEventListener('la-rate', (e) => flash('la-rate fired — rating=' + e.detail.rating));
+  })();
+</script>
+
+
+</body>
+</html>

@@ -60,6 +60,8 @@
     
       <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
     
+      <a href="#file-variant" class="docs-nav-item" data-nav-id="file-variant">File-type icons</a>
+    
       <a href="#lifecycle" class="docs-nav-item" data-nav-id="lifecycle">Status lifecycle</a>
     
   </div>
@@ -89,7 +91,7 @@
 <!-- Overview -->
 <div id="overview" class="preview-header">
   <h1>la-document-item</h1>
-  <p>Atomic document row used across every surface that lists documents — the library, processing tray, and data room. Covers four statuses (<code>none</code>, <code>ready</code>, <code>processing</code>, <code>failed</code>), accepts an <code>actions</code> slot for consumer-supplied buttons, and exposes a built-in trailing dismiss button via <code>dismissible</code>.</p>
+  <p>Atomic document row used across every surface that lists documents — the library, processing tray, and data room. Covers four statuses (<code>none</code>, <code>ready</code>, <code>processing</code>, <code>failed</code>), accepts an <code>actions</code> slot for consumer-supplied buttons, and exposes a built-in trailing dismiss button via <code>dismissible</code>. Two icon variants: the default neutral <code>glyph</code>, or <code>variant="file"</code> for coloured file-type icons (see <a href="#file-variant">File-type icons</a>).</p>
 </div>
 
 <!-- Anatomy -->
@@ -157,6 +159,13 @@
         <button class="btn-toggle" data-status="ready" type="button">ready</button>
         <button class="btn-toggle" data-status="processing" type="button">processing</button>
         <button class="btn-toggle" data-status="failed" type="button">failed</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>variant</label>
+      <div class="btn-group" data-control="variant">
+        <button class="btn-toggle active" data-variant="glyph" type="button">glyph</button>
+        <button class="btn-toggle" data-variant="file" type="button">file</button>
       </div>
     </div>
     <div class="control-group">
@@ -315,6 +324,54 @@
   </div>
 </div>
 
+<!-- File-type icon variant -->
+<div id="file-variant" class="preview-header" style="margin-top:8px;">
+  <h1>File-type icons</h1>
+  <p>Set <code>variant="file"</code> to swap the neutral glyph for the coloured app-style type icon. The type comes from <code>file-type</code> when set, otherwise it's derived from the extension in <code>name</code> — so <code>Contract.pdf</code> shows the PDF mark, <code>.docx</code> Word, <code>.txt</code> text. Status badges (ready / urgent / failed) still overlay, <code>processing</code> still shows the spinner, and an unknown or missing extension falls back to a generic document icon. Most prototype documents are PDF, Word, or text.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">variant="file" — type derived from the filename</div>
+  <div class="preview-frame" style="flex-direction:column; align-items:stretch; max-width:520px; gap:4px;">
+    <la-document-item variant="file" name="Halden Q3 Workforce Analysis.pdf" association="Uploaded 12 Aug · 2.4 MB" status="ready"></la-document-item>
+    <la-document-item variant="file" name="Separation Agreement Template.docx" association="Legal · v3"></la-document-item>
+    <la-document-item variant="file" name="WARN notice draft.txt" association="Phase 5" status="urgent"></la-document-item>
+    <la-document-item variant="file" name="Impact headcount.xlsx" association="Workday export"></la-document-item>
+    <la-document-item variant="file" name="Leadership briefing.pptx" association="Deck"></la-document-item>
+    <la-document-item variant="file" name="Evidence bundle.zip" association="Archive"></la-document-item>
+    <la-document-item variant="file" name="Reference photo.png" association="Image"></la-document-item>
+    <la-document-item variant="file" name="Untitled note" association="No extension — generic fallback"></la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Explicit file-type override · folder</div>
+  <div class="preview-frame" style="flex-direction:column; align-items:stretch; max-width:520px; gap:4px;">
+    <la-document-item variant="file" file-type="word" name="Renamed without extension" association='file-type="word"'></la-document-item>
+    <la-document-item variant="file" file-type="folder" name="Case 26-03-00487" association="12 documents" non-interactive></la-document-item>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Type → icon</div>
+  <table class="docs-table">
+    <thead><tr><th>file-type</th><th>Extensions</th><th>Icon</th></tr></thead>
+    <tbody>
+      <tr><td><code>pdf</code></td><td>pdf</td><td>PDF (red)</td></tr>
+      <tr><td><code>word</code></td><td>doc, docx</td><td>Word (blue)</td></tr>
+      <tr><td><code>text</code></td><td>txt, md, rtf</td><td>Text (lines)</td></tr>
+      <tr><td><code>xlsx</code></td><td>xls, xlsx, csv</td><td>Excel (green)</td></tr>
+      <tr><td><code>ppt</code></td><td>ppt, pptx, key</td><td>PowerPoint (orange)</td></tr>
+      <tr><td><code>img</code></td><td>png, jpg, jpeg, gif, svg, webp, heic</td><td>Image</td></tr>
+      <tr><td><code>video</code></td><td>mp4, mov, avi, webm, mkv</td><td>Video</td></tr>
+      <tr><td><code>sound</code></td><td>mp3, wav, m4a, aac</td><td>Audio</td></tr>
+      <tr><td><code>zip</code></td><td>zip, rar, 7z, gz, tar</td><td>Archive</td></tr>
+      <tr><td><code>folder</code></td><td>—</td><td>Folder</td></tr>
+      <tr><td><code>other</code></td><td>anything unmatched / no extension</td><td>Generic document</td></tr>
+    </tbody>
+  </table>
+</div>
+
 <!-- Status lifecycle -->
 <div id="lifecycle" class="preview-header" style="margin-top:8px;">
   <h1>Status lifecycle</h1>
@@ -383,6 +440,35 @@
         </tr>
       
         <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">&#39;glyph&#39; | &#39;file&#39;</span></td>
+          <td><span class="default">&#39;glyph&#39;</span></td>
+          <td>Icon style. 'glyph' (default) uses the neutral Phosphor file glyph.
+'file' uses the coloured app-style type icons from the asset set — the
+specific icon is taken from `file-type`, or derived from the extension
+in `name` (e.g. "Contract.pdf" → PDF).</td>
+        </tr>
+      
+        <tr>
+          <td>fileType</td>
+          <td><span class="default">file-type</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Explicit file type for the 'file' variant. Accepts a canonical type
+(pdf, word, text, xlsx, ppt, img, video, sound, zip, folder, other) or a
+raw extension (docx, csv, jpg…). Empty/"auto" derives it from `name`.</td>
+        </tr>
+      
+        <tr>
+          <td>iconBase</td>
+          <td><span class="default">icon-base</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;/assets/file-type&#39;</span></td>
+          <td>Base path for the file-type icon set.</td>
+        </tr>
+      
+        <tr>
           <td>error</td>
           <td><span class="default">error</span></td>
           <td><span class="type">string</span></td>
@@ -420,6 +506,78 @@
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
           <td>Whether this document is currently in the default DD pack</td>
+        </tr>
+      
+        <tr>
+          <td>locked</td>
+          <td><span class="default">locked</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Confidential presence indicator — a lock badge on the icon corner,
+mirroring the ready/urgent/failed badges. Orthogonal to `status`.</td>
+        </tr>
+      
+        <tr>
+          <td>_iconFailed</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Flips to true if the file-type icon fails to load — falls back to the glyph.</td>
+        </tr>
+      
+        <tr>
+          <td>EXT_MAP</td>
+          <td>—</td>
+          <td><span class="type">Record&lt;string, string&gt;</span></td>
+          <td><span class="default">{
+    pdf: &#39;pdf&#39;,
+    doc: &#39;word&#39;, docx: &#39;word&#39;,
+    txt: &#39;text&#39;, text: &#39;text&#39;, md: &#39;text&#39;, rtf: &#39;text&#39;,
+    xls: &#39;xlsx&#39;, xlsx: &#39;xlsx&#39;, csv: &#39;xlsx&#39;,
+    ppt: &#39;ppt&#39;, pptx: &#39;ppt&#39;, key: &#39;ppt&#39;,
+    png: &#39;img&#39;, jpg: &#39;img&#39;, jpeg: &#39;img&#39;, gif: &#39;img&#39;, svg: &#39;img&#39;, webp: &#39;img&#39;, heic: &#39;img&#39;,
+    mp4: &#39;video&#39;, mov: &#39;video&#39;, avi: &#39;video&#39;, webm: &#39;video&#39;, mkv: &#39;video&#39;,
+    mp3: &#39;sound&#39;, wav: &#39;sound&#39;, m4a: &#39;sound&#39;, aac: &#39;sound&#39;,
+    zip: &#39;zip&#39;, rar: &#39;zip&#39;, &#39;7z&#39;: &#39;zip&#39;, gz: &#39;zip&#39;, tar: &#39;zip&#39;,
+  }</span></td>
+          <td>Extension → canonical type.</td>
+        </tr>
+      
+        <tr>
+          <td>FILE_MAP</td>
+          <td>—</td>
+          <td><span class="type">Record&lt;string, string&gt;</span></td>
+          <td><span class="default">{
+    pdf: &#39;file-type.png&#39;, word: &#39;word.png&#39;, text: &#39;text.png&#39;, xlsx: &#39;xlsx.png&#39;,
+    ppt: &#39;ppt.png&#39;, img: &#39;img.png&#39;, video: &#39;video.png&#39;, sound: &#39;sound.png&#39;,
+    zip: &#39;zip.png&#39;, folder: &#39;folder.png&#39;, other: &#39;others.png&#39;,
+  }</span></td>
+          <td>Canonical type → icon filename in the asset set.</td>
+        </tr>
+      
+        <tr>
+          <td>_resolvedType</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td>—</td>
+          <td>Resolve the canonical type from `file-type` or the `name` extension.</td>
+        </tr>
+      
+        <tr>
+          <td>_fileIconSrc</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_displayName</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td>—</td>
+          <td>Display name with any trailing file extension stripped — we don't surface
+extensions in the UI (the type icon already conveys the format).</td>
         </tr>
       
     </tbody>
@@ -568,6 +726,7 @@ item.addEventListener('la-select', () =&gt; {
     <div class="docs-note"><strong>Re-upload vs Retry</strong> — use <strong>Re-upload</strong> when the failure means the user has to provide a new file (corrupted scan, wrong format, illegible). Use <strong>Retry</strong> when the existing file just needs another attempt at the same operation (transient network, parser timeout, server hiccup). The action verb should match what the user actually has to do — anything else is dishonest.</div>
     <div class="docs-note"><strong>Spinner colour is <code>--la-color-primary</code>.</strong> The processing-state spinner uses primary (near-black) for a calm monochrome reading. See decision 53 for the rationale and the soft tension with CLAUDE.md's "primary on interactive only" rule.</div>
     <div class="docs-note"><strong><code>box-sizing: border-box</code> on the row</strong> — required so <code>width: 100%</code> matches the host width exactly. Without it, the row's padding extended past the host by the padding amount; ancestors with <code>overflow: hidden</code> (la-processing-widget tray) would clip the rightmost contents (the dismiss X). The fix is in source; consumers don't need to do anything.</div>
+    <div class="docs-note"><strong>File-type icon variant</strong> — <code>variant="file"</code> opts into the coloured app-style type icons (from <code>/assets/file-type</code>; override with <code>icon-base</code>). These are intentionally vivid raster marks, a deliberate exception to the otherwise monochrome Phosphor-glyph palette — use them where a document list benefits from fast type-scanning (the library, data room), and keep the default <code>glyph</code> variant for dense or chrome-adjacent surfaces. Type is taken from <code>file-type</code> or derived from the <code>name</code> extension; a broken icon URL falls back to the glyph. See <a href="../decisions/101-document-item-file-type-icon-variant.md">decision 101</a>.</div>
     <div class="docs-note"><strong>Open gap — row icon size tokens</strong> — File glyph and status badge currently size off <code>--la-font-size-lg</code> by happenstance, and the composed <code>la-spinner</code> uses <code>md</code> (16px). An <code>--la-icon-row-*</code> token family is logged as a backlog item; sizing here will track that family if/when it lands. Not blocking v1.</div>
   </div>
 </div>
@@ -611,6 +770,14 @@ item.addEventListener('la-select', () =&gt; {
           document.querySelectorAll('[data-control="status"] [data-status]').forEach((b) => b.classList.remove('active'));
           btn.classList.add('active');
           live.setAttribute('status', btn.dataset.status);
+        });
+      });
+
+      document.querySelectorAll('[data-control="variant"] [data-variant]').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll('[data-control="variant"] [data-variant]').forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          live.setAttribute('variant', btn.dataset.variant);
         });
       });
 

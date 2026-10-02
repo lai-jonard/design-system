@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-pagination — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-pagination</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-pagination</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-pagination</h1>
+<p>"Showing 1–20 of 45", previous, first / neighbours / last with ellipses, next. The host owns the data and slices it on <code>la-page-change</code>; the component only says which page is current. When everything fits on one page it renders nothing.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Range on the left, pager on the right. The current page is the inverted pill; disabled arrows go faint rather than disappearing so the row never shifts.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-pagination total="87" page-size="20" page="3" noun="documents"></la-pagination>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">First page of five</div>
+<div class="preview-frame" style="display:block; padding:24px;"><la-pagination total="87" page-size="20" page="1"></la-pagination></div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Last page — right arrow disabled, ellipsis on the left</div>
+<div class="preview-frame" style="display:block; padding:24px;"><la-pagination total="87" page-size="20" page="5"></la-pagination></div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Two pages — no ellipsis</div>
+<div class="preview-frame" style="display:block; padding:24px;"><la-pagination total="30" page-size="20" page="1"></la-pagination></div>
+</div>
+<div class="preview-group">
+<div class="preview-label">One page — renders nothing (the frame below is empty on purpose)</div>
+<div class="preview-frame" style="display:block; padding:24px; min-height:24px;"><la-pagination total="8" page-size="20" page="1"></la-pagination></div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-pagination</h2>
+    <p>The range line and numbered pager under a list — Option 1 of the pagination study, made once. Hides itself when the list fits on one page.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>total</td>
+          <td><span class="default">total</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>items in the list after narrowing</td>
+        </tr>
+      
+        <tr>
+          <td>pageSize</td>
+          <td><span class="default">page-size</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">20</span></td>
+          <td>items per page (attribute `page-size`), default 20</td>
+        </tr>
+      
+        <tr>
+          <td>page</td>
+          <td><span class="default">page</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">1</span></td>
+          <td>current page, 1-based; the host sets it back after la-page-change</td>
+        </tr>
+      
+        <tr>
+          <td>noun</td>
+          <td><span class="default">noun</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>optional word after the range ("Showing 1–20 of 45 documents")</td>
+        </tr>
+      
+        <tr>
+          <td>single</td>
+          <td><span class="default">single</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">true</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>pages</td>
+          <td>—</td>
+          <td><span class="type">number</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-page-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{page, from, to} (from/to 0-based, half-open, for slicing)</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="usage">
+<h3>Usage</h3>
+<ul>
+<li>Set <code>total</code> to the count <em>after</em> narrowing, and reset <code>page</code> to 1 whenever the narrowing changes — page 3 only means something relative to one particular list.</li>
+<li>On <code>la-page-change</code>, slice with <code>detail.from</code> / <code>detail.to</code> (0-based, half-open) and scroll the list top into view.</li>
+<li>Default page size is 20 (LawVault). The Dashboard feed uses 8, hidden below nine items — pass <code>page-size="8"</code>; the hide rule falls out of it.</li>
+</ul>
+</div>
+<div class="docs-section" id="notes">
+<h3>Notes</h3>
+<p>Three hand-rolled copies existed on Dashboard, Company Manual and LawVault (<code>.feed-pager</code>). Study: <code>dev/prototypes/pharos/_pagination-options.html</code>, decided 1 Sep 2026. Decision 99.</p>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

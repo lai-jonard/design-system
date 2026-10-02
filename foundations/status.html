@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Status conventions — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    .page-content-inner { max-width: 880px; }
+
+    .sub-hero h1 {
+      font-size: 36px;
+      font-weight: 600;
+      color: var(--doc-text);
+      letter-spacing: -0.3px;
+      margin-bottom: 10px;
+    }
+    .sub-hero p {
+      font-size: 15px;
+      color: var(--doc-text-2);
+      max-width: 680px;
+      line-height: 1.6;
+    }
+    .sub-hero-crumb {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      margin-bottom: 12px;
+    }
+    .sub-hero-crumb a { color: var(--doc-text-3); }
+    .sub-hero-crumb a:hover { color: var(--doc-accent); }
+
+    /* ── Marker demos ─────────────────────────────────────── */
+    .demo-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 28px;
+      flex-wrap: wrap;
+      margin: 20px 0 4px;
+      padding: 24px;
+      background: var(--la-color-bg);
+      border: 1px solid var(--doc-border, #e5e5e5);
+      border-radius: 12px;
+    }
+    .demo-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      min-width: 72px;
+    }
+    .demo-item .cap {
+      font-size: 12px;
+      color: var(--doc-text-3);
+      text-align: center;
+    }
+
+    /* Sequence register — numbered circle */
+    .seq-mark {
+      width: 24px; height: 24px; border-radius: 50%;
+      display: inline-grid; place-items: center;
+      font-size: 12px; font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+    .seq-mark i { font-size: 14px; }
+    .seq-mark.s-done,
+    .seq-mark.s-active { background: var(--la-color-primary); color: var(--la-color-primary-fg); }
+    .seq-mark.s-pending { background: var(--la-color-bg-muted); color: var(--la-color-text-muted); }
+    .seq-mark.s-gated { background: var(--la-color-bg-muted); color: var(--la-color-text-faint); }
+    .seq-mark.s-attention { background: var(--la-color-surface-danger); color: var(--la-color-danger-text); }
+    .seq-mark.s-processing { background: var(--la-color-bg-muted); color: var(--la-color-text-muted); }
+
+    /* Checklist register — check-circle icon */
+    .chk-mark { font-size: 22px; line-height: 0; display: inline-grid; place-items: center; }
+    .chk-mark.c-done i { color: var(--la-color-resolved); }
+    .chk-mark.c-active i { color: var(--la-color-primary); }
+    .chk-mark.c-todo i { color: var(--la-color-text-faint); }
+    .chk-mark.c-gated i { color: var(--la-color-text-faint); }
+    .chk-mark.c-attention i { color: var(--la-color-danger-text); }
+
+    .token-cell { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
+    .reg-note { font-size: 13px; color: var(--doc-text-2); line-height: 1.6; }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/" class="active">Foundations</a>
+        <a href="../components/">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+<h3 class="docs-nav-title">On this page</h3>
+<div class="docs-nav-group">
+<a class="docs-nav-item" data-nav-id="overview" href="#overview">Two registers</a>
+<a class="docs-nav-item" data-nav-id="states" href="#states">The states</a>
+<a class="docs-nav-item" data-nav-id="sequence" href="#sequence">Sequence register</a>
+<a class="docs-nav-item" data-nav-id="checklist" href="#checklist">Checklist register</a>
+<a class="docs-nav-item" data-nav-id="radial" href="#radial">Radial (la-step-ring)</a>
+<a class="docs-nav-item" data-nav-id="badge" href="#badge">Paired badge</a>
+<a class="docs-nav-item" data-nav-id="future" href="#future">Future home</a>
+</div>
+<div class="docs-nav-group">
+<span class="docs-nav-title">Reference</span>
+<a class="docs-nav-item" href="./">← All foundations</a>
+<a class="docs-nav-item" href="../">Design system home</a>
+</div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+<section class="sub-hero">
+<div class="sub-hero-crumb">
+<a href="./">Foundations</a> · Status conventions
+          </div>
+<h1>Status conventions</h1>
+<p>
+            The single source of truth for how we mark <strong>progress state</strong> on steps and
+            tasks — the checkmarks, numbers, and markers used across every flow and subflow. Read this
+            before building any stepper, phase plan, checklist, wizard, or progress display so that
+            "done", "in progress", and "to-do" read the same everywhere. Decided in
+            <a href="https://github.com" onclick="return false;">decision&nbsp;87</a>; the living
+            reference is the RIF project overview.
+          </p>
+</section>
+<div class="docs">
+
+<!-- TWO REGISTERS ─────────────────────────────────────── -->
+<section class="docs-section" id="overview">
+<h2>Two registers</h2>
+<p>
+            Status looks different depending on whether the items are an <strong>ordered sequence</strong>
+            or an <strong>unordered checklist</strong>. Pick the register by the nature of the steps, then
+            use the exact marker below. The <em>meaning</em> of each state is identical across registers —
+            only the form differs.
+          </p>
+<table class="docs-table">
+<thead>
+<tr><th></th><th>Sequence register</th><th>Checklist register</th></tr>
+</thead>
+<tbody>
+<tr>
+<td>Use for</td>
+<td>Ordered steps you move through in turn — phase plans, wizards, <code>la-stepper</code>, <code>la-step-ring</code></td>
+<td>Unordered sub-tasks inside one step — they needn't be done in order</td>
+</tr>
+<tr>
+<td>Marker</td>
+<td>Numbered circle (22px), monochrome</td>
+<td>Check-circle icon (~20px)</td>
+</tr>
+<tr>
+<td>Hierarchy</td>
+<td>Weight + grey scale — never colour for done / active / pending</td>
+<td>Green reserved for completion; otherwise grey</td>
+</tr>
+</tbody>
+</table>
+<p class="reg-note">
+            <strong>Why hybrid:</strong> a sequence carries meaning through <em>position</em> + number, so
+            it stays calm and monochrome (matching the "hierarchy through grey, never colour" rule and
+            <code>la-stepper</code>). A checklist has no position, so a green completion check is the
+            clearest affordance — and green stays reserved for exactly that. Colour appears only for genuine
+            exceptions (attention / processing), never for ordinary progress.
+          </p>
+</section>
+
+<!-- THE STATES ────────────────────────────────────────── -->
+<section class="docs-section" id="states">
+<h2>The states</h2>
+<p>Six states are formalised. "Skipped" is deliberately excluded — bypassed steps read as <code>pending</code> or are dropped from the list.</p>
+<ul>
+<li><strong>complete / done</strong> — finished.</li>
+<li><strong>active</strong> — in progress, where you are now.</li>
+<li><strong>pending / to-do</strong> — not started, but available.</li>
+<li><strong>gated</strong> — locked until a prior gate clears.</li>
+<li><strong>attention</strong> — overdue, failed, or needs action.</li>
+<li><strong>processing</strong> — async work underway (upload, sync, AI run).</li>
+</ul>
+</section>
+
+<!-- SEQUENCE REGISTER ─────────────────────────────────── -->
+<section class="docs-section" id="sequence">
+<h2>Sequence register</h2>
+<p>Numbered circle, 22px, <code>font-size-sm</code>, weight 600. <code>complete</code> and <code>active</code> are both primary-filled (monochrome, like <code>la-stepper</code>) — the <strong>check</strong> distinguishes done from the <strong>number</strong> of where you are.</p>
+<div class="demo-row">
+<div class="demo-item"><span class="seq-mark s-done"><i class="ph-bold ph-check"></i></span><span class="cap">complete</span></div>
+<div class="demo-item"><span class="seq-mark s-active">2</span><span class="cap">active</span></div>
+<div class="demo-item"><span class="seq-mark s-pending">3</span><span class="cap">pending</span></div>
+<div class="demo-item"><span class="seq-mark s-gated"><i class="ph-fill ph-lock-simple"></i></span><span class="cap">gated</span></div>
+<div class="demo-item"><span class="seq-mark s-attention"><i class="ph-fill ph-warning"></i></span><span class="cap">attention</span></div>
+<div class="demo-item"><la-spinner size="sm"></la-spinner><span class="cap">processing</span></div>
+</div>
+<table class="docs-table">
+<thead><tr><th>State</th><th>Fill</th><th>Foreground</th><th>Glyph / content</th></tr></thead>
+<tbody>
+<tr><td>complete</td><td class="token-cell">--la-color-primary</td><td class="token-cell">--la-color-primary-fg</td><td><code>ph-bold ph-check</code></td></tr>
+<tr><td>active</td><td class="token-cell">--la-color-primary</td><td class="token-cell">--la-color-primary-fg</td><td>step number</td></tr>
+<tr><td>pending</td><td class="token-cell">--la-color-bg-muted</td><td class="token-cell">--la-color-text-muted</td><td>step number</td></tr>
+<tr><td>gated</td><td class="token-cell">--la-color-bg-muted</td><td class="token-cell">--la-color-text-faint</td><td><code>ph-fill ph-lock-simple</code></td></tr>
+<tr><td>attention</td><td class="token-cell">--la-color-surface-danger</td><td class="token-cell">--la-color-danger-text</td><td><code>ph-fill ph-warning</code></td></tr>
+<tr><td>processing</td><td class="token-cell">--la-color-bg-muted</td><td>—</td><td><code>la-spinner</code> size <code>sm</code></td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- CHECKLIST REGISTER ────────────────────────────────── -->
+<section class="docs-section" id="checklist">
+<h2>Checklist register</h2>
+<p>Check-circle icon, ~20px. <strong>Green (<code>--la-color-resolved</code>) is reserved for completion only</strong> — never for active or pending.</p>
+<div class="demo-row">
+<div class="demo-item"><span class="chk-mark c-done"><i class="ph-fill ph-check-circle"></i></span><span class="cap">done</span></div>
+<div class="demo-item"><span class="chk-mark c-active"><i class="ph-fill ph-circle"></i></span><span class="cap">active</span></div>
+<div class="demo-item"><span class="chk-mark c-todo"><i class="ph ph-check-circle"></i></span><span class="cap">todo</span></div>
+<div class="demo-item"><span class="chk-mark c-gated"><i class="ph ph-lock-simple"></i></span><span class="cap">gated</span></div>
+<div class="demo-item"><span class="chk-mark c-attention"><i class="ph-fill ph-warning-circle"></i></span><span class="cap">attention</span></div>
+<div class="demo-item"><la-spinner size="sm"></la-spinner><span class="cap">processing</span></div>
+</div>
+<table class="docs-table">
+<thead><tr><th>State</th><th>Icon</th><th>Colour</th></tr></thead>
+<tbody>
+<tr><td>done</td><td><code>ph-fill ph-check-circle</code></td><td class="token-cell">--la-color-resolved</td></tr>
+<tr><td>active</td><td><code>ph-fill ph-circle</code></td><td class="token-cell">--la-color-primary</td></tr>
+<tr><td>todo</td><td><code>ph ph-check-circle</code></td><td class="token-cell">--la-color-text-faint</td></tr>
+<tr><td>gated</td><td><code>ph ph-lock-simple</code></td><td class="token-cell">--la-color-text-faint</td></tr>
+<tr><td>attention</td><td><code>ph-fill ph-warning-circle</code></td><td class="token-cell">--la-color-danger-text</td></tr>
+<tr><td>processing</td><td><code>la-spinner</code> size <code>sm</code></td><td>—</td></tr>
+</tbody>
+</table>
+</section>
+
+<!-- RADIAL ────────────────────────────────────────────── -->
+<section class="docs-section" id="radial">
+<h2>Radial — la-step-ring</h2>
+<p>The ring is a <em>sequence</em> progress overview, so it follows the sequence semantics through segment fills: <code>complete</code> → primary, <code>active</code> → primary at 0.5 opacity, <code>pending</code> → muted. Per-segment <code>gated</code> / <code>attention</code> are <strong>not</strong> shown in the ring — it shows progress, not per-step exceptions; surface those in the accompanying list.</p>
+<div class="demo-row">
+<div class="demo-item"><la-step-ring done="3" total="6" label="3 of 6" sublabel="Done" style="--la-step-ring-size:120px"></la-step-ring><span class="cap">checklist progress</span></div>
+<div class="demo-item"><la-step-ring done="1" total="7" label="2" style="--la-step-ring-size:64px;--la-step-ring-label-size:18px"></la-step-ring><span class="cap">phase position</span></div>
+</div>
+</section>
+
+<!-- PAIRED BADGE ───────────────────────────────────────── -->
+<section class="docs-section" id="badge">
+<h2>Paired text badge</h2>
+<p>When a row also carries an <code>la-badge</code> (e.g. the phase plan), the variant matches the state so the marker and the badge never contradict.</p>
+<div class="demo-row">
+<div class="demo-item"><la-badge variant="success" appearance="ghost">Complete</la-badge><span class="cap">complete</span></div>
+<div class="demo-item"><la-badge variant="warning" appearance="ghost">In progress</la-badge><span class="cap">active</span></div>
+<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Not started</la-badge><span class="cap">pending</span></div>
+<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Gated</la-badge><span class="cap">gated</span></div>
+<div class="demo-item"><la-badge variant="danger" appearance="ghost">Overdue</la-badge><span class="cap">attention</span></div>
+</div>
+</section>
+
+<!-- FUTURE ─────────────────────────────────────────────── -->
+<section class="docs-section" id="future">
+<h2>Future home</h2>
+<p>
+            These markers currently live as page-scoped CSS (<code>.phase-row .pn</code>,
+            <code>.ov-substep</code>) plus shared classes. When a second non-RIF consumer appears, promote
+            them to a <code>la-step-marker</code> primitive (<code>variant="sequence | check"</code>,
+            <code>status</code>, <code>index</code>) so the mapping is enforced in one place rather than
+            re-declared per surface. Until then, this page is the contract — match it exactly.
+          </p>
+</section>
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+</body>
+</html>

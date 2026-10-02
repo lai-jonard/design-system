@@ -301,13 +301,35 @@
 <td><code>string</code></td>
 <td>Path or URL to the wide wordmark.</td>
 </tr>
+<tr>
+<td><code>items</code></td>
+<td>— (property only)</td>
+<td><code>NavItem[]</code></td>
+<td>Custom nav model. When set, <strong>replaces the default founder nav entirely</strong>; locking then comes from each item's <code>locked</code> flag instead of <code>unlockedAreas</code>. Each item: <code>{ id, label, icon, route, subtabs?, count?, locked? }</code>. <code>count</code> renders as a quiet muted number at the right edge (never a red badge).</td>
+</tr>
+<tr>
+<td><code>showSearch</code></td>
+<td><code>show-search</code></td>
+<td><code>boolean</code></td>
+<td>Shows the search trigger (input-styled ⌘K affordance) above the nav. Clicking it — or pressing ⌘K / Ctrl+K anywhere on the page — dispatches <code>la-search-trigger</code>.</td>
+</tr>
 </tbody>
 </table>
 <hr>
 <h2 id="events">Events</h2>
 <ul>
 <li><code>la-nav-change</code> — detail <code>{ area, subtab }</code>. Fired when a nav item or sub-tab is clicked. The event bubbles up to <code>la-app-shell</code>; listen there to update UI state.</li>
+<li><code>la-search-trigger</code> — no detail. Fired when the search trigger is clicked or ⌘K / Ctrl+K is pressed while <code>show-search</code> is on. Wire it to the Global Search surface.</li>
 </ul>
+<hr>
+<h2 id="custom-nav-platform-sweep">Custom nav (platform-sweep)</h2>
+<p>The platform-sweep prototype passes its own nav via <code>items</code> + <code>show-search</code> — see
+<code>dev/prototypes/north-star/nav.js</code> for the
+canonical structure (Search trigger · Home · Playbooks with Governance / Employment /
+Fundraising sub-tabs · LawVault · Company Manual · Upcoming Deadlines with quiet count).
+Design source: the &quot;Sidebar Nav — Final&quot; section on the Global Search page of the
+Release 7.1 Figma file. The founder prototypes keep the default nav — omitting <code>items</code>
+changes nothing.</p>
 <hr>
 <h2 id="docs">Docs</h2>
 <p><a href="../../components/la-sidebar.html"><code>docs-src/components/la-sidebar.html</code></a> — clickable reference with collapsed and expanded states.</p>

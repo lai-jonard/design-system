@@ -332,7 +332,8 @@ status surface with no border, so they do not look pressable (<code>rule/ghost-s
 <p>A depth signal rendered in the page header. Shows the user's location in the navigation hierarchy and provides a one-click path back up the tree. Used inside <code>la-app-shell</code> via the <code>breadcrumbs</code> prop — not rendered standalone.</p>
 <p><strong>Props:</strong> <code>items</code> (<code>BreadcrumbItem[]</code>) — ordered array from root to current page. Each item is <code>{ label: string; href?: string }</code>. Last item is the current page (no link).</p>
 <p><strong>Collapse behaviour:</strong> At 4 or more items, the trail collapses to <code>root / ••• / parent / current</code>. Tapping <code>•••</code> (an <code>la-icon-button</code>) expands the full trail. Collapsing resets automatically when <code>items</code> changes.</p>
-<p><strong>Colour:</strong> Ancestor links use <code>--la-color-text-faint</code>; the current page label uses <code>--la-color-text-muted</code>. Both are below WCAG AA at small text sizes — accepted divergence for navigational support copy. Hover on ancestor links resolves to <code>--la-color-text</code> (passes AA).</p>
+<p><strong>Colour:</strong> Ancestor links use <code>--la-color-text-muted</code>; the current page label uses <code>--la-color-text</code>. Both pass WCAG AA on the page header's <code>--la-color-bg-subtle</code> ground. Hover on ancestor links resolves to <code>--la-color-text</code>. The separator uses <code>--la-color-text-faint</code> and is <code>aria-hidden</code>.</p>
+<p>The earlier below-AA divergence (ancestors on <code>--la-color-text-faint</code>, current on <code>-muted</code>) was closed on 4 Sep 2026, when the trail became standard page chrome across the UK prototype — <code>prototype-standards.md</code> does not allow a published prototype to carry a divergence, so the component absorbed the fix.</p>
 <p><strong>Docs-only</strong> — see <code>docs-src/components/la-breadcrumb.html</code>.</p>
 <hr>
 <h3 id="la-button"><code>la-button</code></h3>
@@ -482,7 +483,7 @@ the Title Case structural register.</p>
 <p>Use <code>la-button</code> with its <code>icon-left</code> or <code>icon-right</code> slot when you need an icon <em>and</em> a text label. <code>la-icon-button</code> is specifically for icon-only triggers.</p>
 <hr>
 <h3 id="la-input"><code>la-input</code></h3>
-<p>A text input for forms and modal dialogs. Wraps a native <code>&lt;input&gt;</code> element with a consistent label, hint, icon slot, and state system. Single size — layout is determined by the container.</p>
+<p>A text input for forms and modal dialogs. Wraps a native <code>&lt;input&gt;</code> element with a consistent label, hint, icon slot, and state system. Width comes from the container; height has two sizes since 17 Sep 2026: default, and <code>size=&quot;sm&quot;</code> (28px, <code>--la-button-height-sm</code>) so a search box sits level with <code>la-button size=&quot;sm&quot;</code> and <code>la-select size=&quot;sm&quot;</code> in a filter bar (<code>rule/filter-bar-one-row</code>). Source only until the bundle is rebuilt.</p>
 <p><strong>Types:</strong> <code>text</code>, <code>email</code>, <code>password</code>, <code>search</code>, <code>tel</code>, <code>url</code>, <code>number</code></p>
 <table>
 <thead>
@@ -561,11 +562,12 @@ the Title Case structural register.</p>
 <h3 id="la-menu--la-menu-item--la-menu-toggle--la-menu-divider"><code>la-menu</code> + <code>la-menu-item</code> + <code>la-menu-toggle</code> + <code>la-menu-divider</code></h3>
 <p>Tertiary action surface — a 3-dot trigger button that reveals a floating list of actions. <code>la-menu</code> owns the trigger, panel, and open/close lifecycle. <code>la-menu-item</code> is the action row primitive: label, optional icon, and a <code>danger</code> variant. <code>la-menu-toggle</code> is a switch row for boolean in-menu settings (does not close the panel on change). <code>la-menu-divider</code> is a visual separator between sections. Status: 🟢 v1 ready (2026-05-07) — full reference at <a href="../../components/la-menu.html">docs-src/components/la-menu.html</a>.</p>
 <p><strong>Problem solved:</strong> Every page or card surface needs a consistent home for tertiary actions (rename, delete, export, etc.). Before this, teams were inventing ad-hoc popouts with inconsistent styling, shadow, and keyboard behaviour. <code>la-menu</code> is the one canonical answer — reach for it whenever an action doesn't warrant a visible button and isn't the primary CTA.</p>
+<p><strong><code>trigger</code> slot (17 Sep 2026):</strong> slot any button as <code>slot=&quot;trigger&quot;</code> to open the panel from a labelled <code>la-button</code>, an icon button with another glyph, or a select-like control; the menu sets <code>expanded</code> / <code>aria-expanded</code> and <code>aria-haspopup</code> on it and returns focus to it on Escape. Without the slot the 3-dot <code>la-icon-button</code> remains. <code>la-menu-item</code> gained <code>radio</code> + <code>checked</code> (role <code>menuitemradio</code>, trailing check) for one-of groups such as Sort by. Source only until the bundle is rebuilt.</p>
 <p><strong><code>origin</code> property:</strong> Controls which corner the panel scales from. Set to match the trigger's position on the page — <code>top-right</code> (default) for a 3-dot button in the top-right of a card, <code>bottom-right</code> if the trigger is near the viewport bottom.</p>
 <p><strong>Events:</strong> <code>la-menu-open</code> / <code>la-menu-close</code> (from <code>la-menu</code>), <code>la-menu-select</code> with <code>{label, value}</code> (from <code>la-menu-item</code>, bubbles), <code>la-menu-toggle-change</code> with <code>{label, value, checked}</code> (from <code>la-menu-toggle</code>, bubbles — does not trigger panel close).</p>
 <hr>
 <h3 id="la-select"><code>la-select</code></h3>
-<p>Custom single-select combobox. Trigger chrome mirrors <code>la-input</code> (height, border, focus ring, error, label, hint) so a select sits naturally in a form row alongside inputs. Slotted <code>&lt;la-option&gt;</code> children carry the values; rich content (icons, multi-line) is allowed inside each option. Status: 🟢 v1 ready (2026-05-05) — full reference at <a href="../../components/la-select.html">docs-src/components/la-select.html</a>.</p>
+<p>Custom single-select combobox. Trigger chrome mirrors <code>la-input</code> (height, border, focus ring, error, label, hint — and <code>size=&quot;sm&quot;</code> since 17 Sep 2026) so a select sits naturally in a form row alongside inputs or in a one-row filter bar. <code>la-option</code> takes a <code>count</code> slot (<code>&lt;span slot=&quot;count&quot;&gt;4&lt;/span&gt;</code>) for a quiet tabular count beside the label; the slot is not part of the label the trigger copies (<code>getLabel()</code> reads the default slot only). Source only until the bundle is rebuilt. Slotted <code>&lt;la-option&gt;</code> children carry the values; rich content (icons, multi-line) is allowed inside each option. Status: 🟢 v1 ready (2026-05-05) — full reference at <a href="../../components/la-select.html">docs-src/components/la-select.html</a>.</p>
 <p><strong>Why custom (not native <code>&lt;select&gt;</code>):</strong> native renders the open dropdown via the OS, which means we can't style options, hover, selected state, or icons inside the panel — every product surface would render differently across macOS / Windows / Linux. Custom is more code but gives us full token control and a consistent feel.</p>
 <table>
 <thead>
@@ -634,12 +636,23 @@ the Title Case structural register.</p>
 </tr>
 </tbody>
 </table>
-<p>If the answer is &quot;single + form-row,&quot; reach for <code>la-select</code>. If it's &quot;multiple + toolbar/filter,&quot; compose <code>la-checkbox</code> rows inside an overlay (no current dropdown primitive for this — pattern is documented in <code>la-data-table</code>'s filter-menu snapshot).</p>
+<p>If the answer is &quot;single + form-row,&quot; reach for <code>la-select</code>. For <strong>multiple values in a form row</strong> (capturing a set as data — jurisdictions, tags, OpCos), reach for <a href="#la-multi-select"><code>la-multi-select</code></a> (decision 103). For &quot;multiple + toolbar/filter&quot; (selections that filter other content), compose <code>la-checkbox</code> rows inside an overlay — pattern is documented in <code>la-data-table</code>'s filter-menu snapshot.</p>
+<hr>
+<h3 id="la-multi-select"><code>la-multi-select</code></h3>
+<p><strong>Problem:</strong> forms need to collect several values from a known set while showing current selections and surfacing the rest at a glance, without a heavy overlay dropdown — uncovered by <code>la-select</code> (single, overlay) or <code>la-choice</code> (one-per-group). Token field: selections are removable chips behind a search glyph; remaining options render below as one-tap &quot;+&quot; suggestion pills; typing filters them inline (no overlay). <code>options</code>/<code>selected</code> accept comma-separated strings (HTML) or arrays (JS); <code>max-suggestions</code> caps pills; <code>allow-custom</code> permits typed values; standard <code>label</code>/<code>hint</code>/<code>required</code>/<code>error</code>/<code>disabled</code> chrome matched to <code>la-input</code>. Fires <code>la-change</code> <code>{selected, action, value}</code>. Docs at <code>docs-src/components/la-multi-select.html</code>; decision 103. This is the &quot;multiple + form-row&quot; primitive the table above previously said didn't exist.</p>
 <hr>
 <h3 id="la-stepper"><code>la-stepper</code></h3>
 <p>A stepped progress indicator for multi-step flows. Shows where the user is in a sequence and what's been completed, skipped, or failed. Used in the unlock flow.</p>
 <p><strong>Step statuses:</strong> <code>pending</code>, <code>active</code>, <code>complete</code>, <code>processing</code>, <code>skipped</code>, <code>failed</code></p>
 <p>Each step is a numbered circle. Use when a process has a defined sequence with discrete steps the user must move through in order.</p>
+<p><strong>Status markers</strong> (done / in progress / to-do / gated / attention / processing) follow the cross-cutting standard in <code>status-conventions.md</code> — <code>la-stepper</code> is the linear <em>sequence register</em>. Match it for any new stepper, phase plan, or checklist.</p>
+<hr>
+<h3 id="la-step-ring"><code>la-step-ring</code></h3>
+<p><strong>Problem:</strong> secondary multi-step flows (phase plans, sub-step checklists, card-level progress) need a compact at-a-glance progress read, and the segmented donut was being hand-rolled in prototype JS in two places (the RIF overview focal ring + the project-card phase rings) — duplicated geometry, drifting styling. One component owns it.</p>
+<p>The radial cousin of <a href="#la-stepper"><code>la-stepper</code></a> (linear) and <a href="#la-spinner"><code>la-spinner</code></a> (indeterminate): a donut split into one rounded-corner segment per step — filled for completed steps, half-toned for the current step, muted for what's still ahead.</p>
+<p><strong>Props:</strong> <code>total</code> (number, default 1), <code>done</code> (number, default 0), <code>current</code> (boolean, default true — renders the step after <code>done</code> as in-progress), <code>thickness</code> (viewBox units, default 6), <code>gap</code> (degrees between segments, default 4), <code>corner</code> (corner radius in viewBox units, default 1.4 — subtle, not a full pill), <code>label</code> (centre text, e.g. &quot;3 of 6&quot; or a phase number), <code>sublabel</code> (line under the label, e.g. &quot;Done&quot;).</p>
+<p>Follows the <em>sequence register</em> of the status standard (<code>status-conventions.md</code>) via segment fills: done = primary, current = primary at 0.5, pending = muted.</p>
+<p><strong>Geometry</strong> lives in a fixed 52×52 viewBox so the shape is identical at any rendered size — size via <code>--la-step-ring-size</code> (default 120px) or the host's width/height. <strong>Centre content</strong> uses <code>label</code>/<code>sublabel</code>, or slot arbitrary markup (the default slot wins when filled). <strong>Tuning CSS vars:</strong> <code>--la-step-ring-size</code>, <code>--la-step-ring-done</code> / <code>-now</code> / <code>-future</code> (colours), <code>--la-step-ring-now-opacity</code>, <code>--la-step-ring-label-size</code>, <code>--la-step-ring-sublabel-size</code>. Display-only — no events. Crisp filled sectors (no blur filter); respects <code>prefers-reduced-motion</code> trivially as it has no motion.</p>
 <hr>
 <h3 id="la-spinner"><code>la-spinner</code></h3>
 <p>Indeterminate loading indicator — a small spinning ring used inside buttons, rows, and async-operation surfaces to communicate that work is in progress. Distinct from <code>la-stepper</code> (linear flows with discrete steps) and <code>la-progress</code> (determinate, known-quantity tasks). Slot 1 of the loading-states family — see <a href="../../docs/loading/"><code>design-language/loading.md</code></a> for the family roadmap.</p>
@@ -650,8 +663,9 @@ the Title Case structural register.</p>
 <hr>
 <h3 id="la-card"><code>la-card</code></h3>
 <p>A surface container used to group related content. Provides a visual boundary (border + background + radius) without adding layout logic. Takes an optional <code>heading</code> prop for a titled header section.</p>
-<p><strong>Props:</strong> <code>heading</code> (string), <code>nopadding</code> (boolean)</p>
+<p><strong>Props:</strong> <code>heading</code> (string), <code>nopadding</code> (boolean), <code>variant</code> (<code>elevated</code> default · <code>hairline</code>)</p>
 <p>Use <code>nopadding</code> when the content inside the card manages its own spacing (e.g. a list that needs edge-to-edge rows).</p>
+<p><strong><code>variant=&quot;hairline&quot;</code> (17 Sep 2026, decision 96):</strong> the resting card — <code>--la-color-border-light</code> hairline, no shadow, <code>--la-radius-lg</code>. The default elevated card is for cards that act (open, filter, are clicked). Source only until the bundle is rebuilt.</p>
 <hr>
 <h3 id="la-list-item"><code>la-list-item</code></h3>
 <p>A single row within a list. Handles layout for icon + content + meta pattern. Draws a bottom border between items automatically; last child has no border.</p>
@@ -965,6 +979,7 @@ the Title Case structural register.</p>
 <li><code>dev/la-table.css</code> — default chrome for <code>la-table table</code>, <code>thead th</code>, <code>tbody td</code>, <code>:hover</code>, <code>tr.success</code>, last-row border suppression. All tokenised.</li>
 </ul>
 <p><strong>Row state via class:</strong> <code>tr.success</code> adds a tinted <code>--la-color-surface-success</code> background for positive row states (e.g. a document that just finished processing). No other row classes in v1 — consumers add their own.</p>
+<p><strong><code>flat</code> (17 Sep 2026):</strong> <code>&lt;la-table flat&gt;</code> removes the border and radius for lists that rest on the page surface — the frameless direction settled on LawVault (<code>rule/one-card-surface</code>). Ask for it rather than overriding the host's border from page CSS (<code>rule/no-page-classes-on-hosts</code>). Source only until the bundle is rebuilt.</p>
 <h3 id="la-data-table"><code>la-data-table</code></h3>
 <p>A data-driven table primitive. Consumer passes <code>columns</code> and <code>rows</code> as properties; the component owns sort, selection, row-click dispatch, sticky header, density, and the empty / loading states. Everything is controlled — sort and selected arrays flow in via properties and flow out via events, so the consumer owns the state.</p>
 <p><strong>Props:</strong></p>
@@ -993,6 +1008,20 @@ the Title Case structural register.</p>
 <p><strong>Motion:</strong> row hover + sortable header colour transitions use <code>--dur-fast</code> × <code>--ease</code>. Skeleton shimmer is an opacity keyframe (GPU-safe). <code>@media (prefers-reduced-motion: reduce)</code> kills transitions and the shimmer.</p>
 <p><strong>Gate 8 noted exceptions:</strong> <code>width: 40px</code> on the checkbox cell + <code>&lt;col&gt;</code> and <code>height: 12px</code> on skeleton rows are hardcoded — no current token for checkbox-column width or skeleton-row height. Matches the <code>la-checkbox</code> / <code>la-upload-box</code> precedent for glyph-detail pixel values.</p>
 <p><strong>Known v1 limits:</strong> no virtualisation (every row renders), no column resize / reorder, no inline filter UI (sort only), no row expansion / subrows, no selection-preserving re-sort beyond what the consumer maintains via <code>selected</code> + <code>rowKey</code>. These are explicit deferrals — the primitive is for &quot;dataset rendering,&quot; not &quot;full spreadsheet.&quot;</p>
+<hr>
+<h3 id="la-chip"><code>la-chip</code></h3>
+<p>A removable token for a narrowing in force — an active filter, a scope, a picked person. The whole chip is the remove control; fires <code>la-remove</code> <code>{value, label}</code>. Status: 🟡 source only (17 Sep 2026) — docs at <a href="../../components/la-chip.html">docs-src/components/la-chip.html</a>; rebuild the bundle to see it.</p>
+<p><strong>Problem solved:</strong> the Pharos options bar hand-rolled <code>.ix-scope-chip</code> to answer &quot;why am I seeing one row?&quot; — a pressed tile above the shelf and a pressed For Review in the header composed silently. Chips make every narrowing visible and individually removable. Kept apart from <code>la-badge</code> because a badge is inert and a chip is pressable (<code>rule/ghost-status-badges</code>); apart from <code>la-chat-attachment-chip</code> because that stands for a document, not a filter.</p>
+<p><strong>Props:</strong> <code>label</code>, <code>prefix</code> (quiet lead-in, &quot;Area&quot;), <code>value</code>, <code>removable</code> (default true; <code>&quot;false&quot;</code> renders a read-only token). <strong>Events:</strong> <code>la-remove</code>.</p>
+<hr>
+<h3 id="la-pagination"><code>la-pagination</code></h3>
+<p>The range line and numbered pager under a list: &quot;Showing 1–20 of 45&quot;, previous, first / neighbours / last with ellipses, next. Hides itself at one page. Fires <code>la-page-change</code> <code>{page, from, to}</code>; the host slices. Status: 🟡 source only (17 Sep 2026) — docs at <a href="../../components/la-pagination.html">docs-src/components/la-pagination.html</a>.</p>
+<p><strong>Problem solved:</strong> three copies of <code>.feed-pager</code> on Dashboard, Company Manual and LawVault. Option 1 of the 1 Sep 2026 study (<code>_pagination-options.html</code>), made once.</p>
+<p><strong>Props:</strong> <code>total</code>, <code>page-size</code> (default 20), <code>page</code> (1-based), <code>noun</code>. <strong>Events:</strong> <code>la-page-change</code>.</p>
+<hr>
+<h3 id="la-tile-strip--la-tile"><code>la-tile-strip</code> + <code>la-tile</code></h3>
+<p>A frameless, pressable tile group with counts. <code>la-tile</code>: 36px glyph disc (or a slotted 24px object), label, quiet sub-label, <code>pressed</code>, <code>quiet</code>, legal-area <code>hue</code>. <code>la-tile-strip</code>: grid that collapses 4 → 2 → 1 with its container (2 under 900px of strip width, 1 under 440px), re-derives which tiles end a row so the hairlines stay between and never around, and in <code>selection=&quot;single&quot;</code> (default) presses one tile and lifts the others (<code>value</code>, <code>la-tile-change</code>). <code>selection=&quot;none&quot;</code> for navigation tiles. Status: 🟡 source only (17 Sep 2026) — docs at <a href="../../components/la-tile-strip.html">docs-src/components/la-tile-strip.html</a>.</p>
+<p><strong>Problem solved:</strong> LawVault's <code>.area-strip</code> / <code>.area-tile</code> and the Dashboard's area tiles were two hand-rolled copies of the same idiom with hairline arithmetic tied to a fixed column count. <strong>Frameless by decision</strong> (Jonard, 17 Sep 2026): the strip is a filter, not a card that acts, so it takes no surface of its own (<code>rule/one-card-surface</code>). No count badges on tiles — one queue, one count, on the control that opens it.</p>
 <hr>
 <h3 id="la-table-vs-la-data-table--when-to-reach-for-which"><code>la-table</code> vs <code>la-data-table</code> — when to reach for which</h3>
 <p><strong>Rule of thumb:</strong> write markup if the rows are static or under 10; pass data if the rows are a dataset.</p>
@@ -1208,6 +1237,11 @@ the Title Case structural register.</p>
 <td>Organise multiple insights into a scannable feed grouped by severity with counts</td>
 </tr>
 <tr>
+<td>AI insight</td>
+<td><code>la-ai-insight</code></td>
+<td><strong>Problem:</strong> every &quot;LawAdvisor AI recommends / has drafted / flagged…&quot; block was bespoke markup + CSS (<code>.rif-ai</code>), repeating the brand mark, attribution, and the rateable footer. One component for the X3 AI-output pattern: brand-marked attributed header (<code>attribution</code> defaults to &quot;LawAdvisor AI&quot;; <code>headline</code> = the action phrase), body (slot or <code>description</code>), optional auto-hiding footer with a star rating (<code>rateable</code> → fires <code>la-rate</code>) and an <code>actions</code> slot (amend/disagree/view). Mark is inlined SVG (no asset dependency). <strong>Distinct from <code>la-insight-card</code></strong> (formal legal-area insight → modal); this is generic narrative AI output shown inline. Docs at <code>docs-src/components/la-ai-insight.html</code>; decision 102.</td>
+</tr>
+<tr>
 <td>Legal area widget</td>
 <td><code>la-legal-area-widget</code></td>
 <td>Dashboard tile for a single legal area. Three states (<code>unlocked</code> / <code>locked-unlockable</code> / <code>locked-not-unlockable</code>) drive surface, shadow, and CTA. <strong>Surface mapping:</strong> white on unlocked + locked-unlockable so the illustration reads cleanly; subtle grey on locked-not-unlockable with the illustration desaturated and <code>mix-blend-mode: multiply</code> to dissolve into the surface. <strong>Emphasis:</strong> locked-unlockable rests with <code>--la-shadow-card</code> (next progression candidate); unlocked hovers to <code>--la-shadow-sm</code>, locked-unlockable hovers to <code>--la-shadow-md</code>. <strong>Layout:</strong> fluid 4:3 landscape, 300 px width floor; illustration takes the slack at the top via <code>flex: 1</code>, content stacks below. <strong>Keyboard:</strong> <code>tabindex=&quot;0&quot;</code> + <code>role=&quot;button&quot;</code> + <code>aria-label=&quot;Open &lt;area&gt;&quot;</code> on the la-panel; Enter/Space fires <code>la-area-click</code>. <strong>Two events:</strong> <code>la-area-click</code> (whole card) + <code>la-area-unlock</code> (CTA only, stops propagation). <strong>No &quot;Recommended&quot; badge</strong> — surface emphasis carries the meaning (decision 57). Decisions: 54 (next-level CTA), 55 (fluid widget), 58 (illustration + 4:3). Docs at <code>docs-src/components/la-legal-area-widget.html</code>.</td>
@@ -1235,7 +1269,7 @@ the Title Case structural register.</p>
 <tr>
 <td>Document item</td>
 <td><code>la-document-item</code></td>
-<td>Atomic document row — one component across every surface that lists documents (library, processing tray, data room). Covers <code>none / ready / processing / failed</code> states with an optional actions slot. <code>slot=&quot;badge&quot;</code> (added 2026-08-13) renders inline beside the name for qualifiers that describe the document itself (Required / Optional) — the actions slot stays for status and controls</td>
+<td>Atomic document row — one component across every surface that lists documents (library, processing tray, data room). Covers <code>none / ready / processing / failed</code> states with an optional actions slot. <code>slot=&quot;badge&quot;</code> (added 2026-08-13) renders inline beside the name for qualifiers that describe the document itself (Required / Optional) — the actions slot stays for status and controls. Two icon variants: default <code>glyph</code> (Phosphor) and <code>variant=&quot;file&quot;</code> for coloured file-type icons auto-derived from the filename extension (decision 101)</td>
 </tr>
 <tr>
 <td>Document list</td>
@@ -1375,6 +1409,8 @@ the Title Case structural register.</p>
 <hr>
 <h2 id="docs-pages">Docs pages</h2>
 <p>Every component has a docs draft at <code>dev/docs-drafts/la-&lt;name&gt;.html</code> that gets promoted to <code>docs-src/components/la-&lt;name&gt;.html</code> by <code>/ready</code>. Iterate the draft live via <code>npm run dev</code> at <code>http://localhost:8000/docs-drafts/la-&lt;name&gt;.html</code>.</p>
+<h2 id="membership-is-a-selection-not-a-switch-approved-17-sep-2026">Membership is a selection, not a switch (approved 17 Sep 2026)</h2>
+<p>Including an item in a set — a document in a pack, a person in a list — is an add/remove action with a count, drawn with <code>la-choice</code> or an add/remove control, never an on/off <code>la-switch</code>. A switch reads as a setting; membership is a decision the founder can see the total of. The Due Diligence Pack is out of Phase A, so this is a pattern for its return. Source: evidence <code>2026-07-29-dd-pack-membership-is-an-add-remove-selection-not-a-switch</code>, decision 97.</p>
 
 </article>
 

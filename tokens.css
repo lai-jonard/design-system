@@ -39,6 +39,15 @@
   --la-indigo-500: oklch(0.521 0.182 268.945); /* #405CD0 · brand accent blue — accent interactive elements, links, attention colour */
   --la-indigo-50:  oklch(0.962 0.018 272.314); /* #EEF2FF · tint  — accent-bg */
 
+  /* Added for the fifth and sixth Legal Areas. Both stay clear of the status
+     palette: teal is blue-leaning so it doesn't read as success green, and
+     magenta is clear of danger red. */
+  --la-teal-500:    #0E8C9B; /* base teal — Data Protection identity */
+  --la-teal-50:     #ECFAFB; /* tint  — Data Protection tile */
+
+  --la-magenta-500: #A93B8F; /* base magenta — Intellectual Property identity */
+  --la-magenta-50:  #FCEEF8; /* tint  — Intellectual Property tile */
+
   --la-white:      oklch(1 0 0); /* #FFFFFF · used as bg, all -fg foregrounds, text-invert */
 
   /* ── Semantic colours — status ────────────────────
@@ -65,6 +74,55 @@
 
   --la-color-locked-bg:       oklch(0.968 0.007 247.896); /* #F1F5F9 · soft inset background for gated content panels (la-unlock-panel) — bluish grey, no shared primitive */
   --la-color-locked-text:     var(--la-color-text-muted); /* muted label text on locked panels — soft enough to read as "not yet active" without disappearing */
+
+  /* ── Legal Area identity ──────────────────────────
+     Each Legal Area gets a stable brand pair used in three places: its tile in
+     the sidebar, its tile on the dashboard, and the gradient wash on its own
+     page. Drawn only from non-status hues — the status palette (amber / green /
+     red) means "needs attention" / "resolved" / "urgent", so an area coloured
+     from it would read as a state rather than a place. The dashboard previously
+     coloured these tiles by status, which is why an area's identity shifted
+     every time its state did; the count badge carries state now.
+     The -rgb variant is the same hue as a raw triplet, for gradient layers
+     that need
+     per-layer alpha. */
+  --la-area-governance-bg:   var(--la-indigo-50);
+  --la-area-governance-fg:   var(--la-indigo-500);
+  --la-area-governance-rgb:  64, 92, 208;
+
+  --la-area-employment-bg:   var(--la-blue-50);
+  --la-area-employment-fg:   var(--la-blue-500);
+  --la-area-employment-rgb:  4, 130, 197;
+
+  --la-area-fundraising-bg:  var(--la-purple-50);
+  --la-area-fundraising-fg:  var(--la-purple-500);
+  --la-area-fundraising-rgb: 107, 63, 160;
+
+  /* IP now has its own hue — it was neutral only while the palette was short
+     of primitives, which made the one gated area look disabled rather than
+     distinct. */
+  --la-area-ip-bg:           var(--la-magenta-50);
+  --la-area-ip-fg:           var(--la-magenta-500);
+  --la-area-ip-rgb:          169, 59, 143;
+
+  --la-area-data-bg:         var(--la-teal-50);
+  --la-area-data-fg:         var(--la-teal-500);
+  --la-area-data-rgb:        14, 140, 155;
+
+  /* Commercial takes a steel hue — a sixth decorative colour that stays clear
+     of both the status palette and the five above. */
+  --la-area-commercial-bg:   #EEF2F6;
+  --la-area-commercial-fg:   #4A6382;
+  --la-area-commercial-rgb:  74, 99, 130;
+
+  /* Case-level scale — the L1→L3+ complexity standard. A warm cream→yellow→
+     amber→pink progression, dark ink on every chip (the la-level-indicator
+     badge + leveling matrix). Distinct from status colours on purpose. */
+  --la-color-level-1:         #FEF3C7;              /* L1 routine — pale cream */
+  --la-color-level-2:         #FCD34D;              /* L2 moderate — yellow */
+  --la-color-level-3:         #F59E0B;              /* L3 complex — amber */
+  --la-color-level-3plus:     #F4729B;              /* L3+ external counsel — pink */
+  --la-color-level-text:      var(--la-color-text); /* dark ink, all levels */
 
   /* ── Action colours ───────────────────────────────
      Action colours drive interactive elements — buttons, focus
@@ -119,6 +177,18 @@
 
   /* Scrim — overlay backdrop for modals, sheets, and any UI that dims the page behind a surface */
   --la-color-scrim:             rgba(0, 0, 0, 0.2);
+
+  /* ── AI surface gradient ──────────────────────────
+     Soft sage + sky + sand wash for AI-drafted / insight surfaces. Subtle and
+     transparent — pair with background-color: var(--la-color-bg). Tune the three
+     wash hues (colour + strength) in one place below. */
+  --la-ai-wash-sage: rgba(94, 158, 110, 0.12);   /* upper-left */
+  --la-ai-wash-sky:  rgba(71, 162, 230, 0.10);   /* right */
+  --la-ai-wash-sand: rgba(222, 210, 165, 0.08);  /* top */
+  --la-gradient-ai-surface:
+    linear-gradient(118deg, var(--la-ai-wash-sage) 0%, rgba(94, 158, 110, 0) 62%),
+    linear-gradient(255deg, var(--la-ai-wash-sky) 0%, rgba(71, 162, 230, 0) 60%),
+    linear-gradient(180deg, var(--la-ai-wash-sand) 0%, rgba(255, 255, 255, 0) 70%);
 
   /* ── Text ───────────────────────────────────────── */
   --la-color-text:              oklch(0.263 0.015 235.56); /* #1E262B · primary readable text — body copy, headings, table values */
@@ -245,8 +315,8 @@
   --la-font-signature:      'Meow Script', 'Snell Roundhand', 'Brush Script MT', cursive; /* self-hosted OFL script for adopted e-signatures (.sig-mark); @font-face in la-base-root.css */
   /* Font sizes are in rem so the scale respects the user's browser font-size preference (Geist-style).
      Comments show the px equivalent at the 16px default root for Figma sync — designers continue to think in px. */
-  --la-font-size-xs:        0.625rem;   /* 10px */
-  --la-font-size-sm:        0.6875rem;  /* 11px */
+  --la-font-size-xs:        0.6875rem;  /* 11px — accessibility floor; nothing informational below this */
+  --la-font-size-sm:        0.75rem;    /* 12px */
   --la-font-size-md:        0.8125rem;  /* 13px */
   --la-font-size-base:      0.8125rem;  /* 13px */
   --la-font-size-lg:        0.875rem;   /* 14px */
@@ -295,12 +365,19 @@
   --la-nav-sub-padding-h:         12px;
 
   /* ── Page header ─────────────────────────────────── */
-  --la-ph-padding-left:   32px;
+  /* Lines the breadcrumb's first crumb up with the content beneath it: the
+     shell's main pads its content in by --la-main-padding-inline, and the trail
+     sits on that same line rather than 8px further in (nav direction B). */
+  --la-ph-padding-left:   24px;
   --la-ph-padding-right:  20px;
   --la-ph-title-size:     18px;
   --la-ph-title-weight:   600;
   --la-ph-bg:             oklch(0.985 0 0); /* #FAFAFA */
-  --la-ph-height:         40px;
+  /* One height for the page header and the sidebar's own header, so the logo
+     lockup and the breadcrumb sit on the same line. 48 rather than 40: in the
+     stacked direction the corner carries the whole navigation and needs the
+     room (nav direction B, 5 Aug 2026). */
+  --la-ph-height:         48px;
   --la-ph-padding-v:      0px;
   --la-ph-gap:            0px;
 

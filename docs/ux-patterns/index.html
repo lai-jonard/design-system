@@ -328,7 +328,7 @@ click X / backdrop → la-insight-close → close modal
 <p><strong>When:</strong> showing a document's details alongside its file preview.</p>
 <p><strong>Layout:</strong></p>
 <ul>
-<li>Left panel (1fr): detail — document header, About section, Linked insights, Actions.</li>
+<li>Left panel (600px — <code>la-document-page.ts</code> hardcodes the track; this doc said <code>1fr</code> until 22 Sep 2026): detail — document header, About section, Linked insights, Actions.</li>
 <li>Right panel (1fr): document preview — file icon placeholder (Sprint 6), PDF/DOCX viewer at integration.</li>
 <li>Left panel scrolls independently; right panel is fixed within the viewport.</li>
 <li>Both panels exist within a scrollable content column on the page.</li>
@@ -349,7 +349,7 @@ click X / backdrop → la-insight-close → close modal
 <li><code>processing</code>: spinner + &quot;Analysing document…&quot;</li>
 </ul>
 <p><strong>Component:</strong> <code>la-document-page</code></p>
-<p><strong>Prototyped in:</strong> <code>20-document-page.html</code></p>
+<p><strong>Prototyped in:</strong> <s><code>20-document-page.html</code></s> — that file does not exist in the repo (checked 22 Sep 2026), and <code>la-document-page</code> is instantiated in no prototype. The nearest live use of this pattern is the LawVault document viewer in <code>dev/prototypes/orion/02-law-vault.html</code>, which borrows the pane's section order and components inside its own full-screen shell, because the element has no slot for a document body and its preview pane is a placeholder. <code>la-pdf-preview</code>, named here as the viewer that arrives at integration, has never existed in this repo.</p>
 <hr>
 <h2 id="6-legal-area-page-layout">6. Legal area page layout</h2>
 <p><strong>When:</strong> showing a legal area's health summary, insights, and document list.</p>

@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-tile-strip + la-tile — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-tile-strip</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-tile-strip</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<div class="preview-header" id="overview">
+<h1>la-tile-strip + la-tile</h1>
+<p>A pressable tile group. <code>la-tile</code> is one tile: a 36px glyph disc, a label, a quiet count line, a pressed state. <code>la-tile-strip</code> lays tiles out in a frameless grid with hairlines between them, collapses 4 → 2 → 1 columns with its container (2 under 900px, 1 under 440px), and in single-selection mode presses one tile and lifts the others.</p>
+</div>
+
+<div class="preview-header" id="anatomy" style="margin-top:8px;">
+<h1>Anatomy</h1>
+<p>Square at rest, rounded the moment there is a surface to round (hover, pressed). The pressed tile is the darker surface and nothing louder.</p>
+</div>
+<div class="preview-group">
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-tile-strip value="employment" aria-label="Filter by legal area">
+<la-tile value="" label="All Areas" sublabel="10 documents" icon="ph-bold ph-squares-four"></la-tile>
+<la-tile value="governance" label="Corporate Governance" sublabel="3 documents" icon="ph-bold ph-buildings" hue="governance"></la-tile>
+<la-tile value="employment" label="Employment" sublabel="2 documents" icon="ph-bold ph-users" hue="employment"></la-tile>
+<la-tile value="data" label="Data Protection" sublabel="1 document" icon="ph-bold ph-shield-check" hue="data"></la-tile>
+<la-tile value="fundraising" label="Fundraising" sublabel="1 document" icon="ph-bold ph-trend-up" hue="fundraising"></la-tile>
+<la-tile value="commercial" label="Commercial" sublabel="3 documents" icon="ph-bold ph-handshake" hue="commercial"></la-tile>
+<la-tile value="ip" label="Intellectual Property" sublabel="0 documents" icon="ph-bold ph-lightbulb" hue="ip"></la-tile>
+<la-tile value="misc" label="Miscellaneous" sublabel="0 documents" icon="ph-bold ph-folders"></la-tile>
+</la-tile-strip>
+</div>
+</div>
+
+<div class="preview-header" id="snapshots" style="margin-top:8px;">
+<h1>Snapshots</h1>
+<p>Fixed states for reference</p>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Review scope — tiles with nothing for review step back (quiet), counts in "for review" terms</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-tile-strip value="" aria-label="Filter by legal area">
+<la-tile value="" label="All Areas" sublabel="4 for review" icon="ph-bold ph-squares-four"></la-tile>
+<la-tile value="governance" label="Corporate Governance" sublabel="2 for review" icon="ph-bold ph-buildings" hue="governance"></la-tile>
+<la-tile value="employment" label="Employment" sublabel="Nothing for review" icon="ph-bold ph-users" hue="employment" quiet></la-tile>
+<la-tile value="data" label="Data Protection" sublabel="1 for review" icon="ph-bold ph-shield-check" hue="data"></la-tile>
+</la-tile-strip>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Narrow container — two columns, hairlines re-derived</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<div style="max-width:560px;">
+<la-tile-strip value="governance" aria-label="Filter by legal area">
+<la-tile value="" label="All Areas" sublabel="10 documents" icon="ph-bold ph-squares-four"></la-tile>
+<la-tile value="governance" label="Corporate Governance" sublabel="3 documents" icon="ph-bold ph-buildings" hue="governance"></la-tile>
+<la-tile value="employment" label="Employment" sublabel="2 documents" icon="ph-bold ph-users" hue="employment"></la-tile>
+<la-tile value="data" label="Data Protection" sublabel="1 document" icon="ph-bold ph-shield-check" hue="data"></la-tile>
+</la-tile-strip>
+</div>
+</div>
+</div>
+
+<div class="preview-group">
+<div class="preview-label">Navigation tiles (selection="none") — the host routes on la-tile-press, nothing stays pressed</div>
+<div class="preview-frame" style="display:block; padding:24px;">
+<la-tile-strip selection="none" columns="3" aria-label="Legal areas">
+<la-tile value="governance" label="Corporate Governance" sublabel="2 insights" icon="ph-bold ph-buildings" hue="governance"></la-tile>
+<la-tile value="employment" label="Employment" sublabel="All clear" icon="ph-bold ph-users" hue="employment"></la-tile>
+<la-tile value="fundraising" label="Fundraising" sublabel="1 insight" icon="ph-bold ph-trend-up" hue="fundraising"></la-tile>
+</la-tile-strip>
+</div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-tile-strip</h2>
+    <p>A frameless, pressable tile group with counts — the legal areas as the filter over the list they narrow. Hairlines between the tiles, never a card around them.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>value</td>
+          <td><span class="default">value</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>the pressed tile's value (single selection); set it to move the press</td>
+        </tr>
+      
+        <tr>
+          <td>columns</td>
+          <td><span class="default">columns</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">4</span></td>
+          <td>columns at full width (default 4); 2 under 900px of strip width, 1 under 440px (900 is where eight two-line labels start truncating — seen at a 760px viewport, 17 Sep)</td>
+        </tr>
+      
+        <tr>
+          <td>selection</td>
+          <td><span class="default">selection</span></td>
+          <td><span class="type">&#39;single&#39; | &#39;none&#39;</span></td>
+          <td><span class="default">&#39;single&#39;</span></td>
+          <td>'single' (default): pressing a tile presses it and lifts the others; 'none': tiles fire la-tile-press and the host decides (navigation tiles)</td>
+        </tr>
+      
+        <tr>
+          <td>_grid</td>
+          <td>—</td>
+          <td><span class="type">HTMLElement</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_ro</td>
+          <td>—</td>
+          <td><span class="type">ResizeObserver | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onPress</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-tile-change</td>
+          <td>—</td>
+          <td>{value, label} after a press in single mode</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="usage">
+<h3>Usage</h3>
+<ul>
+<li>Sub-labels are counts in the words of the current scope: "3 documents", "2 to add", "1 for review". Paint them off the data; the authored text is only the first paint.</li>
+<li>Single selection (default): set <code>value</code> on the strip to move the press; listen for <code>la-tile-change</code>. The empty value is a legitimate tile ("All Areas").</li>
+<li>Slot a rendered object as <code>slot="icon"</code> (24px) when the area has one; the disc's tint comes off so the object carries its own colour.</li>
+<li>No count badges on tiles — one queue, one count, on the control that opens it (LawVault, 11 Aug 2026).</li>
+</ul>
+</div>
+<div class="docs-section" id="notes">
+<h3>Notes</h3>
+<p>Frameless by decision (Jonard, 17 Sep 2026): the strip is a filter, not a card that acts, so it takes no surface of its own (<code>rule/one-card-surface</code>). Replaces <code>.area-strip</code> / <code>.area-tile</code> on LawVault; the Dashboard's area tiles are the second consumer. Decision 99.</p>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+
+</body>
+</html>

@@ -60,6 +60,8 @@
     
       <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
     
+      <a href="#cast" class="docs-nav-item" data-nav-id="cast">Canonical cast</a>
+    
   </div>
   
 
@@ -87,18 +89,22 @@
 <!-- Overview -->
 <div id="overview" class="preview-header">
   <h1>la-avatar</h1>
-  <p>Initials avatar for people and entities. Derives two-letter initials automatically from a full name, with an optional override. Three fixed sizes — sm (32 px), md (40 px), lg (48 px) — map to specific product contexts. Purely presentational: no interactions, no events.</p>
+  <p>Photo or initials avatar for people and entities. Given a <code>name</code> it auto-picks a stable photo from the People Avatar Fill set — the same person always gets the same face — so prototype rosters fill with real faces for free. Override the choice with an explicit <code>src</code> or a <code>photo</code> index, or set <code>text-only</code> for legal entities and OpCo codes. Initials are the fallback, shown while a photo loads or if it fails. Four fixed sizes — xs (24 px), sm (32 px), md (40 px), lg (48 px) — map to specific product contexts. Purely presentational: no interactions, no events.</p>
 </div>
 
 <!-- Anatomy -->
 <div id="anatomy" class="preview-header" style="margin-top:8px;">
   <h1>Anatomy</h1>
-  <p>A single circular surface holding up to two uppercase initials. Background is <code>--la-color-bg-muted</code> with a 1 px <code>--la-color-border-light</code> border so it reads on both white and off-white surfaces.</p>
+  <p>A single circular surface. When a photo resolves it fills the circle (<code>object-fit: cover</code>) over the initials, which sit underneath as the load/failure fallback. Background is <code>--la-color-bg-muted</code> with a 1 px <code>--la-color-border-light</code> border so it reads on both white and off-white surfaces, and frames photos cleanly on white.</p>
 </div>
 
 <div class="preview-group">
-  <div class="preview-label">Three sizes — sm · md · lg</div>
+  <div class="preview-label">Four sizes — xs · sm · md · lg</div>
   <div class="preview-frame" style="padding:32px;display:flex;align-items:center;gap:24px;">
+    <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
+      <la-avatar name="James Okafor" size="xs"></la-avatar>
+      <span style="font-size:11px;color:var(--la-color-text-faint);">xs · 24 px</span>
+    </div>
     <div style="display:flex;flex-direction:column;align-items:center;gap:8px;">
       <la-avatar name="James Okafor" size="sm"></la-avatar>
       <span style="font-size:11px;color:var(--la-color-text-faint);">sm · 32 px</span>
@@ -150,8 +156,17 @@
       <input id="ctl-initials" type="text" value="" placeholder="auto" style="width:80px;">
     </div>
     <div class="control-group">
+      <label for="ctl-photo">photo <span style="font-weight:400;color:var(--la-color-text-faint);">(1–88)</span></label>
+      <input id="ctl-photo" type="number" min="1" max="88" value="" placeholder="auto" style="width:80px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-textonly">text-only</label>
+      <input id="ctl-textonly" type="checkbox">
+    </div>
+    <div class="control-group">
       <label>size</label>
       <div class="btn-group">
+        <button class="btn-toggle" data-size="xs" type="button">xs</button>
         <button class="btn-toggle" data-size="sm" type="button">sm</button>
         <button class="btn-toggle active" data-size="md" type="button">md</button>
         <button class="btn-toggle" data-size="lg" type="button">lg</button>
@@ -178,11 +193,31 @@
 </div>
 
 <div class="preview-group">
+  <div class="preview-label">Auto photo from name — stable per person, no wiring needed</div>
+  <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
+    <la-avatar name="Ana Reyes" size="md"></la-avatar>
+    <la-avatar name="Mark Hensley" size="md"></la-avatar>
+    <la-avatar name="Marcus Webb" size="md"></la-avatar>
+    <la-avatar name="Diana Osei" size="md"></la-avatar>
+    <la-avatar name="Renata Vasquez" size="md"></la-avatar>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Explicit photo index · text-only entity · initials fallback</div>
+  <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
+    <la-avatar name="Mark Hensley" photo="12" size="md"></la-avatar>
+    <la-avatar initials="HD" text-only size="md"></la-avatar>
+    <la-avatar name="No Such File" src="../assets/avatars/missing.png" size="md"></la-avatar>
+  </div>
+</div>
+
+<div class="preview-group">
   <div class="preview-label">sm (32 px) — share modal, compact lists</div>
   <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
     <la-avatar name="Sarah Kim" size="sm"></la-avatar>
     <la-avatar name="James Okafor" size="sm"></la-avatar>
-    <la-avatar name="Priya Mehta" size="sm"></la-avatar>
+    <la-avatar name="Priya Mehta" src="../assets/avatars/priya.png" size="sm"></la-avatar>
     <la-avatar name="Leo Tran" size="sm"></la-avatar>
     <la-avatar name="Chloe Park" size="sm"></la-avatar>
   </div>
@@ -193,7 +228,7 @@
   <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
     <la-avatar name="Sarah Kim" size="md"></la-avatar>
     <la-avatar name="James Okafor" size="md"></la-avatar>
-    <la-avatar name="Priya Mehta" size="md"></la-avatar>
+    <la-avatar name="Priya Mehta" src="../assets/avatars/priya.png" size="md"></la-avatar>
     <la-avatar initials="AC" size="md"></la-avatar>
   </div>
 </div>
@@ -221,12 +256,98 @@
 </div>
 
 <div class="preview-group">
-  <div class="preview-label">Initials override — entity or abbreviation</div>
+  <div class="preview-label">Initials override — entity or abbreviation (text-only)</div>
   <div class="preview-frame" style="padding:24px;display:flex;align-items:center;gap:16px;">
-    <la-avatar initials="AC" size="md"></la-avatar>
-    <la-avatar initials="LP" size="md"></la-avatar>
-    <la-avatar initials="JO" size="md"></la-avatar>
+    <la-avatar initials="AC" text-only size="md"></la-avatar>
+    <la-avatar initials="LP" text-only size="md"></la-avatar>
+    <la-avatar initials="JO" text-only size="md"></la-avatar>
   </div>
+</div>
+
+<!-- Canonical cast -->
+<div id="cast" class="preview-header" style="margin-top:8px;">
+  <h1>Canonical cast</h1>
+  <p>The fixed name → fill mapping for the case-management prototypes. One person always gets the same face, so a handler recognises Daniel Cho on the dashboard, the project header, and the tracking table as the same individual. Roles come from <a href="../../design-context/personas.md">design-context/personas.md</a> (the canonical case cast). Pin a person with <code>photo="NN"</code> so the face never depends on the hash; keep <code>name</code> set too, for the initials fallback and accessibility.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Investigations — Case 26-03-00487 · Halden Diagnostics, Indianapolis</div>
+  <div class="preview-frame" style="padding:8px;">
+    <table class="docs-table">
+      <thead><tr><th style="width:64px;">Face</th><th>Person</th><th>Role</th><th style="width:64px;">Fill</th><th>Pin with</th></tr></thead>
+      <tbody>
+        <tr><td><la-avatar name="Ana Reyes" photo="71" size="sm"></la-avatar></td><td>Ana Reyes</td><td>Reporter · Lab Technician</td><td>71</td><td><code>photo="71"</code></td></tr>
+        <tr><td><la-avatar name="Mark Hensley" photo="16" size="sm"></la-avatar></td><td>Mark Hensley</td><td>Accused · Senior Lab Supervisor</td><td>16</td><td><code>photo="16"</code></td></tr>
+        <tr><td><la-avatar name="Jordan Pratt" photo="42" size="sm"></la-avatar></td><td>Jordan Pratt</td><td>HR Investigator</td><td>42</td><td><code>photo="42"</code></td></tr>
+        <tr><td><la-avatar name="Karen Melo" photo="53" size="sm"></la-avatar></td><td>Karen Melo</td><td>HRBP (conflict flag)</td><td>53</td><td><code>photo="53"</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Performance (PIP) &amp; Individual Separations — Cases 26-04-00112 / IS-26-04-00115 · Corvane Filtration, New York</div>
+  <div class="preview-frame" style="padding:8px;">
+    <table class="docs-table">
+      <thead><tr><th style="width:64px;">Face</th><th>Person</th><th>Role</th><th style="width:64px;">Fill</th><th>Pin with</th></tr></thead>
+      <tbody>
+        <tr><td><la-avatar name="Marcus Webb" photo="41" size="sm"></la-avatar></td><td>Marcus Webb</td><td>Associate · Commercial Operations Analyst II</td><td>41</td><td><code>photo="41"</code></td></tr>
+        <tr><td><la-avatar name="Diana Osei" photo="36" size="sm"></la-avatar></td><td>Diana Osei</td><td>Supervisor · Senior Director, Sales Operations</td><td>36</td><td><code>photo="36"</code></td></tr>
+        <tr><td><la-avatar name="Priya Mehta" src="../assets/avatars/priya.png" size="sm"></la-avatar></td><td>Priya Mehta</td><td>COE Employee Relations Specialist</td><td>priya.png</td><td><code>src="../assets/avatars/priya.png"</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Accommodations — Case 26-07-00318 · Tessel Water, Loveland CO</div>
+  <div class="preview-frame" style="padding:8px;">
+    <table class="docs-table">
+      <thead><tr><th style="width:64px;">Face</th><th>Person</th><th>Role</th><th style="width:64px;">Fill</th><th>Pin with</th></tr></thead>
+      <tbody>
+        <tr><td><la-avatar name="Renata Vasquez" photo="02" size="sm"></la-avatar></td><td>Renata Vasquez</td><td>Associate · Laboratory Operations Specialist II</td><td>02</td><td><code>photo="2"</code></td></tr>
+        <tr><td><la-avatar name="Tom Breckner" photo="13" size="sm"></la-avatar></td><td>Tom Breckner</td><td>Supervisor · Senior Manager, Lab Operations</td><td>13</td><td><code>photo="13"</code></td></tr>
+        <tr><td><la-avatar name="Jordan Ellis" photo="25" size="sm"></la-avatar></td><td>Jordan Ellis</td><td>COE Support Partner</td><td>25</td><td><code>photo="25"</code></td></tr>
+        <tr><td><la-avatar name="Sandra Park" photo="26" size="sm"></la-avatar></td><td>Sandra Park</td><td>COE Ops Lead</td><td>26</td><td><code>photo="26"</code></td></tr>
+        <tr><td><la-avatar name="Lisa Kaminski" photo="18" size="sm"></la-avatar></td><td>Lisa Kaminski</td><td>HRBP</td><td>18</td><td><code>photo="18"</code></td></tr>
+        <tr><td><la-avatar name="Daniel Park" photo="61" size="sm"></la-avatar></td><td>Daniel Park</td><td>Associate — denial → IS example</td><td>61</td><td><code>photo="61"</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Projects / Workforce Reduction (RIF) — Halden Diagnostics</div>
+  <div class="preview-frame" style="padding:8px;">
+    <table class="docs-table">
+      <thead><tr><th style="width:64px;">Face</th><th>Person</th><th>Role</th><th style="width:64px;">Fill</th><th>Pin with</th></tr></thead>
+      <tbody>
+        <tr><td><la-avatar name="Daniel Cho" photo="84" size="sm"></la-avatar></td><td>Daniel Cho</td><td>RIF project lead · Regional L&amp;E Lead, Americas</td><td>84</td><td><code>photo="84"</code></td></tr>
+        <tr><td><la-avatar name="Robert Sands" photo="67" size="sm"></la-avatar></td><td>Robert Sands</td><td>Legal clearance owner</td><td>67</td><td><code>photo="67"</code></td></tr>
+        <tr><td><la-avatar name="Marcus Webb" photo="41" size="sm"></la-avatar></td><td>Marcus Webb</td><td>Affected employee <em>(shares fill 41 with Performance)</em></td><td>41</td><td><code>photo="41"</code></td></tr>
+        <tr><td><la-avatar name="Sarah Chen" photo="64" size="sm"></la-avatar></td><td>Sarah Chen</td><td>Affected employee</td><td>64</td><td><code>photo="64"</code></td></tr>
+        <tr><td><la-avatar name="James Holloway" photo="50" size="sm"></la-avatar></td><td>James Holloway</td><td>Affected employee</td><td>50</td><td><code>photo="50"</code></td></tr>
+        <tr><td><la-avatar name="Dana Whitfield" photo="68" size="sm"></la-avatar></td><td>Dana Whitfield</td><td>Affected employee</td><td>68</td><td><code>photo="68"</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Leadership &amp; system</div>
+  <div class="preview-frame" style="padding:8px;">
+    <table class="docs-table">
+      <thead><tr><th style="width:64px;">Face</th><th>Person</th><th>Role</th><th style="width:64px;">Fill</th><th>Pin with</th></tr></thead>
+      <tbody>
+        <tr><td><la-avatar name="Patricia" photo="03" size="sm"></la-avatar></td><td>Patricia</td><td>VP &amp; Chief Counsel, Global L&amp;E (dashboard leadership persona)</td><td>03</td><td><code>photo="3"</code></td></tr>
+        <tr><td><la-avatar name="LawAdvisor AI" initials="AI" src="../assets/brand/logo-mark.svg" logo size="sm"></la-avatar></td><td>LawAdvisor AI</td><td>The assistant — brand mark, never a photo</td><td>logo</td><td><code>src="../assets/brand/logo-mark.svg" logo</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<div class="preview-group">
+  <p style="font-size:var(--la-font-size-sm);color:var(--la-color-text-muted);max-width:62ch;">Adding a new person? Pick the next unused fill from the set (01–88), add a row here, and pin it in the prototype with <code>photo="NN"</code>. Faces are generic stock portraiture standing in for fictional personas — they don't depict real people. RIF cast (Daniel Cho, Sarah Chen, James Holloway, Dana Whitfield, Robert Sands) live in the prototype but aren't yet in personas.md — promote them there if they become canonical.</p>
 </div>
 
 
@@ -234,7 +355,7 @@
 
   <div id="reference" class="docs-section">
     <h2>la-avatar</h2>
-    <p>Initials avatar for people and entities. Auto-derives two-letter initials from a full name, with an override. Three fixed sizes (sm/md/lg). Purely presentational.</p>
+    <p>Photo or initials avatar for people and entities. Auto-picks a stable photo from a name (override with src or photo), falling back to auto-derived initials. Four fixed sizes (xs/sm/md/lg). Purely presentational.</p>
   </div>
 
   
@@ -258,7 +379,7 @@
           <td><span class="default">name</span></td>
           <td><span class="type">string</span></td>
           <td><span class="default">&#39;&#39;</span></td>
-          <td>Full name used to auto-derive initials (e.g. "James Okafor")</td>
+          <td>Full name; auto-derives initials and the auto photo (e.g. "Ana Reyes")</td>
         </tr>
       
         <tr>
@@ -272,9 +393,108 @@
         <tr>
           <td>size</td>
           <td><span class="default">size</span></td>
-          <td><span class="type">&#39;sm&#39; | &#39;md&#39; | &#39;lg&#39;</span></td>
+          <td><span class="type">&#39;xs&#39; | &#39;sm&#39; | &#39;md&#39; | &#39;lg&#39;</span></td>
           <td><span class="default">&#39;md&#39;</span></td>
-          <td>'sm' | 'md' | 'lg'. Default: 'md'</td>
+          <td>'xs' | 'sm' | 'md' | 'lg'. Default: 'md'</td>
+        </tr>
+      
+        <tr>
+          <td>src</td>
+          <td><span class="default">src</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Explicit image URL — wins over `photo` and the auto photo</td>
+        </tr>
+      
+        <tr>
+          <td>photo</td>
+          <td><span class="default">photo</span></td>
+          <td><span class="type">string | number</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Index 1–88 into the avatar fill set — forces a specific face</td>
+        </tr>
+      
+        <tr>
+          <td>textOnly</td>
+          <td><span class="default">text-only</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>logo</td>
+          <td><span class="default">logo</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Boolean; render `src` as a contained, inset brand mark in a rounded square (not a circle, so a square logo isn't clipped) — the AI assistant</td>
+        </tr>
+      
+        <tr>
+          <td>presence</td>
+          <td><span class="default">presence</span></td>
+          <td><span class="type">&#39;&#39; | &#39;online&#39; | &#39;away&#39; | &#39;offline&#39;</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>'' | 'online' | 'away' | 'offline'. Renders a corner presence dot (Messenger-style) with a background-coloured ring. Default: '' (none)</td>
+        </tr>
+      
+        <tr>
+          <td>assetBase</td>
+          <td><span class="default">asset-base</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;/assets/avatars&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>gender</td>
+          <td><span class="default">gender</span></td>
+          <td><span class="type">&#39;&#39; | &#39;w&#39; | &#39;m&#39; | &#39;woman&#39; | &#39;man&#39;</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>'' | 'w' | 'm' (also 'woman' / 'man'). Constrains the auto from-name photo to one presented gender. Default: '' (any)</td>
+        </tr>
+      
+        <tr>
+          <td>FILL_COUNT</td>
+          <td>—</td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">88</span></td>
+          <td>Number of numbered fills available (01–88) in the People Avatar Fill set.</td>
+        </tr>
+      
+        <tr>
+          <td>GENDERS</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;wwwmmmmmmmwmmwmmwwwmmwwmwwmwmmwwmmwwmwmmmmwwwwmmwmmmwwwmwwwmmmmwwwmwmmwmwmwmmwwmmmmmmwmm&#39;</span></td>
+          <td>Presented gender of each fill, indexed 1–88 (`GENDERS[n-1]`). The fill set
+encodes this in the filename suffix — `NNw.png` (woman) / `NNm.png` (man) —
+so a persona's avatar can match their inferred gender (e.g. "Maya
+Lindqvist" → a `w` fill). Generated from `assets/Avatar/People Avatar Fill/`.</td>
+        </tr>
+      
+        <tr>
+          <td>_genderCode</td>
+          <td>—</td>
+          <td><span class="type">&#39;w&#39; | &#39;m&#39; | &#39;&#39;</span></td>
+          <td>—</td>
+          <td>Normalise the `gender` prop to the 'w' | 'm' filename code, or '' for any.</td>
+        </tr>
+      
+        <tr>
+          <td>_imgFailed</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Flips to true if the resolved image fails to load, so we fall back to initials.</td>
+        </tr>
+      
+        <tr>
+          <td>_imgLoaded</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Flips to true once the image has loaded, to fade it in.</td>
         </tr>
       
         <tr>
@@ -283,6 +503,30 @@
           <td><span class="type">string</span></td>
           <td>—</td>
           <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_imageSrc</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td>—</td>
+          <td>The image URL to render, or '' for initials-only.</td>
+        </tr>
+      
+        <tr>
+          <td>text-only</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Boolean; never show a photo, always render initials (entities)</td>
+        </tr>
+      
+        <tr>
+          <td>asset-base</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Base path for the fill set. Default: '/assets/avatars'</td>
         </tr>
       
     </tbody>
@@ -310,8 +554,20 @@
   <pre><code>&lt;la-avatar name="James Okafor"&gt;&lt;/la-avatar&gt;
 &lt;!-- renders "JO" --&gt;</code></pre>
 
-  <h4>Initials override</h4>
-  <pre><code>&lt;la-avatar initials="AC" size="lg"&gt;&lt;/la-avatar&gt;</code></pre>
+  <h4>Auto photo from name</h4>
+  <pre><code>&lt;la-avatar name="Ana Reyes"&gt;&lt;/la-avatar&gt;
+&lt;!-- stable photo derived from the name --&gt;</code></pre>
+
+  <h4>Force a specific photo, or a custom image</h4>
+  <pre><code>&lt;la-avatar name="Mark Hensley" photo="12"&gt;&lt;/la-avatar&gt;
+&lt;la-avatar name="Jon" src="../uploads/jon.png"&gt;&lt;/la-avatar&gt;</code></pre>
+
+  <h4>Entity — initials only</h4>
+  <pre><code>&lt;la-avatar initials="HD" text-only&gt;&lt;/la-avatar&gt;</code></pre>
+
+  <h4>Brand mark — the LawAdvisor AI assistant</h4>
+  <pre><code>&lt;la-avatar name="LawAdvisor AI" initials="AI"
+           src="../assets/brand/logo-mark.svg" logo&gt;&lt;/la-avatar&gt;</code></pre>
 
   <h4>In a detail panel header</h4>
   <pre><code>&lt;div class="inv-header"&gt;
@@ -328,10 +584,14 @@
 <div id="notes" class="docs-section">
   <h3>Notes</h3>
   <ul>
+    <li><strong>Photo resolution:</strong> <code>src</code> wins, then <code>photo</code> (an index 1–88 into the People Avatar Fill set), then an auto photo hashed from <code>name</code>. Set <code>text-only</code> to skip photos entirely (legal entities, OpCo codes, teams). The auto photo is deterministic — the same name always maps to the same face.</li>
+    <li><strong>Logo mode:</strong> add <code>logo</code> alongside <code>src</code> to render a brand mark — the image is contained and inset, and the avatar switches from a circle to a rounded square so a square logo isn't clipped at the corners. Used for the LawAdvisor AI assistant (the mark, never a stock face); keep <code>initials="AI"</code> as the fallback. The square/circle split doubles as a quiet system-vs-person cue.</li>
+    <li><strong>Stock imagery, fictional people.</strong> The fill set is generic stock portraiture. Prototype people and case data remain fictional — the photos give faces to fictional personas, they don't depict real people.</li>
     <li><strong>Initials derivation:</strong> splits on spaces, takes the first character of the first two words. Single-word names produce a single-letter initial. Names with prefixes (e.g. "de la") may produce unexpected results — use the <code>initials</code> override.</li>
-    <li><strong>Accessibility:</strong> the circle is marked <code>aria-hidden="true"</code> — it's decorative alongside a visible name. If used standalone (e.g. in a list with no adjacent name text), add an <code>aria-label</code> to the wrapper element.</li>
-    <li><strong>Colour:</strong> background and border are fixed to token values. Do not override — the neutral palette ensures avatars don't compete with status colours (badges, dots). Future work: optional colour-seeded backgrounds per identity (decision pending).</li>
-    <li><strong>Do not use for company logos or uploaded photos</strong> — this component is initials-only. Photo/logo support is a separate component decision.</li>
+    <li><strong>Fallback:</strong> initials sit beneath the photo and show while it loads or if it fails to load (e.g. a broken <code>src</code>), so the avatar never renders empty.</li>
+    <li><strong>Asset path:</strong> photos resolve against <code>asset-base</code> (default <code>/assets/avatars</code>), served from the dev/prototype root. Override <code>asset-base</code> if a host serves the fills from a different path.</li>
+    <li><strong>Accessibility:</strong> the circle is marked <code>aria-hidden="true"</code> and the photo has an empty <code>alt</code> — it's decorative alongside a visible name. If used standalone (e.g. in a list with no adjacent name text), add an <code>aria-label</code> to the wrapper element.</li>
+    <li><strong>Colour:</strong> initials background and border are fixed to token values. Do not override — the neutral palette ensures avatars don't compete with status colours (badges, dots).</li>
   </ul>
 </div>
 
@@ -355,6 +615,14 @@
 
     document.getElementById('ctl-initials').addEventListener('input', function() {
       live.initials = this.value;
+    });
+
+    document.getElementById('ctl-photo').addEventListener('input', function() {
+      live.photo = this.value;
+    });
+
+    document.getElementById('ctl-textonly').addEventListener('change', function() {
+      live.textOnly = this.checked;
     });
 
     document.querySelectorAll('[data-size]').forEach(function(btn) {

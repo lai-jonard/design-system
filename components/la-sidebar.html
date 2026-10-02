@@ -256,6 +256,24 @@
         </tr>
       
         <tr>
+          <td>items</td>
+          <td>—</td>
+          <td><span class="type">NavItem[] | undefined</span></td>
+          <td>—</td>
+          <td>Custom nav model. When set, replaces the default founder nav entirely;
+locking then comes from each item's `locked` flag, not `unlockedAreas`.</td>
+        </tr>
+      
+        <tr>
+          <td>showSearch</td>
+          <td><span class="default">show-search</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Show the search trigger (input-styled ⌘K affordance) above the nav.
+Clicking it — or pressing ⌘K/Ctrl+K anywhere — dispatches `la-search-trigger`.</td>
+        </tr>
+      
+        <tr>
           <td>collapsed</td>
           <td><span class="default">collapsed</span></td>
           <td><span class="type">boolean</span></td>
@@ -312,6 +330,52 @@
         </tr>
       
         <tr>
+          <td>workspaceName</td>
+          <td><span class="default">workspace-name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Company / workspace name. When set, the footer leads with the company and
+demotes the person to the second line — every filing and contract belongs
+to one entity, so which entity you're acting on is the more load-bearing
+fact. Leave empty to keep the person-first footer, so existing consumers
+are unaffected.</td>
+        </tr>
+      
+        <tr>
+          <td>workspaceInitials</td>
+          <td><span class="default">workspace-initials</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Initials for the workspace tile. Falls back to the first two of the name.</td>
+        </tr>
+      
+        <tr>
+          <td>checklist</td>
+          <td>—</td>
+          <td><span class="type">ChecklistStep[] | undefined</span></td>
+          <td>—</td>
+          <td>Setup checklist pinned above the footer. Leave empty and nothing renders —
+the card is opt-in per screen, and it retires itself once every step is
+done rather than sitting there as a permanent trophy.</td>
+        </tr>
+      
+        <tr>
+          <td>checklistTitle</td>
+          <td><span class="default">checklist-title</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Getting Started&#39;</span></td>
+          <td>Heading on the checklist card.</td>
+        </tr>
+      
+        <tr>
+          <td>checklistSub</td>
+          <td><span class="default">checklist-sub</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>One line under the heading — what finishing the list buys them.</td>
+        </tr>
+      
+        <tr>
           <td>_snapped</td>
           <td>—</td>
           <td><span class="type">boolean</span></td>
@@ -336,6 +400,23 @@
         </tr>
       
         <tr>
+          <td>_checklistOpen</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">true</span></td>
+          <td>Open by default: a collapsed checklist on first run is a checklist nobody
+ever sees. The founder's own choice is remembered from then on.</td>
+        </tr>
+      
+        <tr>
+          <td>_toggled</td>
+          <td>—</td>
+          <td><span class="type">Record&lt;string, boolean&gt;</span></td>
+          <td><span class="default">{}</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
           <td>_closeMenuTimeout</td>
           <td>—</td>
           <td><span class="type">ReturnType&lt;typeof setTimeout&gt; | undefined</span></td>
@@ -347,6 +428,22 @@
           <td>_handleDocClick</td>
           <td>—</td>
           <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_handleGlobalKeydown</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_navItems</td>
+          <td>—</td>
+          <td><span class="type">NavItem[]</span></td>
           <td>—</td>
           <td>—</td>
         </tr>
@@ -367,6 +464,18 @@
       <tr><th>Event</th><th>Type</th><th>Description</th></tr>
     </thead>
     <tbody>
+      
+        <tr>
+          <td>la-checklist-step</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-search-trigger</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
       
         <tr>
           <td>la-sidebar-toggle</td>

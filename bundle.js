@@ -6,20 +6,20 @@
    * Copyright 2019 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$2=globalThis,e$5=t$2.ShadowRoot&&(void 0===t$2.ShadyCSS||t$2.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$2=Symbol(),o$5=new WeakMap;let n$3 = class n{constructor(t,e,o){if(this._$cssResult$=true,o!==s$2)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$5&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=o$5.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&o$5.set(s,t));}return t}toString(){return this.cssText}};const r$4=t=>new n$3("string"==typeof t?t:t+"",void 0,s$2),i$5=(t,...e)=>{const o=1===t.length?t[0]:e.reduce((e,s,o)=>e+(t=>{if(true===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[o+1],t[0]);return new n$3(o,t,s$2)},S$1=(s,o)=>{if(e$5)s.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of o){const o=document.createElement("style"),n=t$2.litNonce;void 0!==n&&o.setAttribute("nonce",n),o.textContent=e.cssText,s.appendChild(o);}},c$2=e$5?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$4(e)})(t):t;
+  const t$3=globalThis,e$6=t$3.ShadowRoot&&(void 0===t$3.ShadyCSS||t$3.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$2=Symbol(),o$5=new WeakMap;let n$3 = class n{constructor(t,e,o){if(this._$cssResult$=true,o!==s$2)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$6&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=o$5.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&o$5.set(s,t));}return t}toString(){return this.cssText}};const r$4=t=>new n$3("string"==typeof t?t:t+"",void 0,s$2),i$5=(t,...e)=>{const o=1===t.length?t[0]:e.reduce((e,s,o)=>e+(t=>{if(true===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[o+1],t[0]);return new n$3(o,t,s$2)},S$1=(s,o)=>{if(e$6)s.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of o){const o=document.createElement("style"),n=t$3.litNonce;void 0!==n&&o.setAttribute("nonce",n),o.textContent=e.cssText,s.appendChild(o);}},c$2=e$6?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$4(e)})(t):t;
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const{is:i$4,defineProperty:e$4,getOwnPropertyDescriptor:h$1,getOwnPropertyNames:r$3,getOwnPropertySymbols:o$4,getPrototypeOf:n$2}=Object,a$1=globalThis,c$1=a$1.trustedTypes,l$1=c$1?c$1.emptyScript:"",p$2=a$1.reactiveElementPolyfillSupport,d$1=(t,s)=>t,u$1={toAttribute(t,s){switch(s){case Boolean:t=t?l$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,s){let i=t;switch(s){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t);}catch(t){i=null;}}return i}},f$1=(t,s)=>!i$4(t,s),b$1={attribute:true,type:String,converter:u$1,reflect:false,useDefault:false,hasChanged:f$1};Symbol.metadata??=Symbol("metadata"),a$1.litPropertyMetadata??=new WeakMap;let y$1 = class y extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t);}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,s=b$1){if(s.state&&(s.attribute=false),this._$Ei(),this.prototype.hasOwnProperty(t)&&((s=Object.create(s)).wrapped=true),this.elementProperties.set(t,s),!s.noAccessor){const i=Symbol(),h=this.getPropertyDescriptor(t,i,s);void 0!==h&&e$4(this.prototype,t,h);}}static getPropertyDescriptor(t,s,i){const{get:e,set:r}=h$1(this.prototype,t)??{get(){return this[s]},set(t){this[s]=t;}};return {get:e,set(s){const h=e?.call(this);r?.call(this,s),this.requestUpdate(t,h,i);},configurable:true,enumerable:true}}static getPropertyOptions(t){return this.elementProperties.get(t)??b$1}static _$Ei(){if(this.hasOwnProperty(d$1("elementProperties")))return;const t=n$2(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties);}static finalize(){if(this.hasOwnProperty(d$1("finalized")))return;if(this.finalized=true,this._$Ei(),this.hasOwnProperty(d$1("properties"))){const t=this.properties,s=[...r$3(t),...o$4(t)];for(const i of s)this.createProperty(i,t[i]);}const t=this[Symbol.metadata];if(null!==t){const s=litPropertyMetadata.get(t);if(void 0!==s)for(const[t,i]of s)this.elementProperties.set(t,i);}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);void 0!==i&&this._$Eh.set(i,t);}this.elementStyles=this.finalizeStyles(this.styles);}static finalizeStyles(s){const i=[];if(Array.isArray(s)){const e=new Set(s.flat(1/0).reverse());for(const s of e)i.unshift(c$2(s));}else void 0!==s&&i.push(c$2(s));return i}static _$Eu(t,s){const i=s.attribute;return  false===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=false,this.hasUpdated=false,this._$Em=null,this._$Ev();}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this));}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.();}removeController(t){this._$EO?.delete(t);}_$E_(){const t=new Map,s=this.constructor.elementProperties;for(const i of s.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t);}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return S$1(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(true),this._$EO?.forEach(t=>t.hostConnected?.());}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.());}attributeChangedCallback(t,s,i){this._$AK(t,i);}_$ET(t,s){const i=this.constructor.elementProperties.get(t),e=this.constructor._$Eu(t,i);if(void 0!==e&&true===i.reflect){const h=(void 0!==i.converter?.toAttribute?i.converter:u$1).toAttribute(s,i.type);this._$Em=t,null==h?this.removeAttribute(e):this.setAttribute(e,h),this._$Em=null;}}_$AK(t,s){const i=this.constructor,e=i._$Eh.get(t);if(void 0!==e&&this._$Em!==e){const t=i.getPropertyOptions(e),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:u$1;this._$Em=e;const r=h.fromAttribute(s,t.type);this[e]=r??this._$Ej?.get(e)??r,this._$Em=null;}}requestUpdate(t,s,i,e=false,h){if(void 0!==t){const r=this.constructor;if(false===e&&(h=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??f$1)(h,s)||i.useDefault&&i.reflect&&h===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,s,i);} false===this.isUpdatePending&&(this._$ES=this._$EP());}C(t,s,{useDefault:i,reflect:e,wrapped:h},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??s??this[t]),true!==h||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(s=void 0),this._$AL.set(t,s)),true===e&&this._$Em!==t&&(this._$Eq??=new Set).add(t));}async _$EP(){this.isUpdatePending=true;try{await this._$ES;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,s]of this._$Ep)this[t]=s;this._$Ep=void 0;}const t=this.constructor.elementProperties;if(t.size>0)for(const[s,i]of t){const{wrapped:t}=i,e=this[s];true!==t||this._$AL.has(s)||void 0===e||this.C(s,void 0,i,e);}}let t=false;const s=this._$AL;try{t=this.shouldUpdate(s),t?(this.willUpdate(s),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(s)):this._$EM();}catch(s){throw t=false,this._$EM(),s}t&&this._$AE(s);}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=true,this.firstUpdated(t)),this.updated(t);}_$EM(){this._$AL=new Map,this.isUpdatePending=false;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return  true}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM();}updated(t){}firstUpdated(t){}};y$1.elementStyles=[],y$1.shadowRootOptions={mode:"open"},y$1[d$1("elementProperties")]=new Map,y$1[d$1("finalized")]=new Map,p$2?.({ReactiveElement:y$1}),(a$1.reactiveElementVersions??=[]).push("2.1.2");
+   */const{is:i$4,defineProperty:e$5,getOwnPropertyDescriptor:h$1,getOwnPropertyNames:r$3,getOwnPropertySymbols:o$4,getPrototypeOf:n$2}=Object,a$1=globalThis,c$1=a$1.trustedTypes,l$1=c$1?c$1.emptyScript:"",p$2=a$1.reactiveElementPolyfillSupport,d$1=(t,s)=>t,u$1={toAttribute(t,s){switch(s){case Boolean:t=t?l$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,s){let i=t;switch(s){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t);}catch(t){i=null;}}return i}},f$1=(t,s)=>!i$4(t,s),b$1={attribute:true,type:String,converter:u$1,reflect:false,useDefault:false,hasChanged:f$1};Symbol.metadata??=Symbol("metadata"),a$1.litPropertyMetadata??=new WeakMap;let y$1 = class y extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t);}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,s=b$1){if(s.state&&(s.attribute=false),this._$Ei(),this.prototype.hasOwnProperty(t)&&((s=Object.create(s)).wrapped=true),this.elementProperties.set(t,s),!s.noAccessor){const i=Symbol(),h=this.getPropertyDescriptor(t,i,s);void 0!==h&&e$5(this.prototype,t,h);}}static getPropertyDescriptor(t,s,i){const{get:e,set:r}=h$1(this.prototype,t)??{get(){return this[s]},set(t){this[s]=t;}};return {get:e,set(s){const h=e?.call(this);r?.call(this,s),this.requestUpdate(t,h,i);},configurable:true,enumerable:true}}static getPropertyOptions(t){return this.elementProperties.get(t)??b$1}static _$Ei(){if(this.hasOwnProperty(d$1("elementProperties")))return;const t=n$2(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties);}static finalize(){if(this.hasOwnProperty(d$1("finalized")))return;if(this.finalized=true,this._$Ei(),this.hasOwnProperty(d$1("properties"))){const t=this.properties,s=[...r$3(t),...o$4(t)];for(const i of s)this.createProperty(i,t[i]);}const t=this[Symbol.metadata];if(null!==t){const s=litPropertyMetadata.get(t);if(void 0!==s)for(const[t,i]of s)this.elementProperties.set(t,i);}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);void 0!==i&&this._$Eh.set(i,t);}this.elementStyles=this.finalizeStyles(this.styles);}static finalizeStyles(s){const i=[];if(Array.isArray(s)){const e=new Set(s.flat(1/0).reverse());for(const s of e)i.unshift(c$2(s));}else void 0!==s&&i.push(c$2(s));return i}static _$Eu(t,s){const i=s.attribute;return  false===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=false,this.hasUpdated=false,this._$Em=null,this._$Ev();}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this));}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.();}removeController(t){this._$EO?.delete(t);}_$E_(){const t=new Map,s=this.constructor.elementProperties;for(const i of s.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t);}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return S$1(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(true),this._$EO?.forEach(t=>t.hostConnected?.());}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.());}attributeChangedCallback(t,s,i){this._$AK(t,i);}_$ET(t,s){const i=this.constructor.elementProperties.get(t),e=this.constructor._$Eu(t,i);if(void 0!==e&&true===i.reflect){const h=(void 0!==i.converter?.toAttribute?i.converter:u$1).toAttribute(s,i.type);this._$Em=t,null==h?this.removeAttribute(e):this.setAttribute(e,h),this._$Em=null;}}_$AK(t,s){const i=this.constructor,e=i._$Eh.get(t);if(void 0!==e&&this._$Em!==e){const t=i.getPropertyOptions(e),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:u$1;this._$Em=e;const r=h.fromAttribute(s,t.type);this[e]=r??this._$Ej?.get(e)??r,this._$Em=null;}}requestUpdate(t,s,i,e=false,h){if(void 0!==t){const r=this.constructor;if(false===e&&(h=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??f$1)(h,s)||i.useDefault&&i.reflect&&h===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,s,i);} false===this.isUpdatePending&&(this._$ES=this._$EP());}C(t,s,{useDefault:i,reflect:e,wrapped:h},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??s??this[t]),true!==h||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(s=void 0),this._$AL.set(t,s)),true===e&&this._$Em!==t&&(this._$Eq??=new Set).add(t));}async _$EP(){this.isUpdatePending=true;try{await this._$ES;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,s]of this._$Ep)this[t]=s;this._$Ep=void 0;}const t=this.constructor.elementProperties;if(t.size>0)for(const[s,i]of t){const{wrapped:t}=i,e=this[s];true!==t||this._$AL.has(s)||void 0===e||this.C(s,void 0,i,e);}}let t=false;const s=this._$AL;try{t=this.shouldUpdate(s),t?(this.willUpdate(s),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(s)):this._$EM();}catch(s){throw t=false,this._$EM(),s}t&&this._$AE(s);}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=true,this.firstUpdated(t)),this.updated(t);}_$EM(){this._$AL=new Map,this.isUpdatePending=false;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return  true}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM();}updated(t){}firstUpdated(t){}};y$1.elementStyles=[],y$1.shadowRootOptions={mode:"open"},y$1[d$1("elementProperties")]=new Map,y$1[d$1("finalized")]=new Map,p$2?.({ReactiveElement:y$1}),(a$1.reactiveElementVersions??=[]).push("2.1.2");
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$1=globalThis,i$3=t=>t,s$1=t$1.trustedTypes,e$3=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$3=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$3,r$2=`<${n$1}>`,l=document,c=()=>l.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m$1=/>/g,p$1=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l.createTreeWalker(l,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e$3?e$3.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m$1:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p$1):void 0!==u[3]&&(c=p$1):c===p$1?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p$1:'"'===u[3]?$:g):c===$||c===g?c=p$1:c===_||c===m$1?c=v:(c=p$1,n=void 0);const x=c===p$1&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$2:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$3+x):s+o$3+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$3),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$3)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$3),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$3,t+1));)d.push({type:7,index:l}),t+=o$3.length-1;}l++;}}static createElement(t,i){const s=l.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$3(t).nextSibling;i$3(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$1.litHtmlPolyfillSupport;B?.(S,k),(t$1.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
+  const t$2=globalThis,i$3=t=>t,s$1=t$2.trustedTypes,e$4=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$3=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$3,r$2=`<${n$1}>`,l=document,c=()=>l.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m$1=/>/g,p$1=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),w=x(2),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l.createTreeWalker(l,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e$4?e$4.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m$1:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p$1):void 0!==u[3]&&(c=p$1):c===p$1?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p$1:'"'===u[3]?$:g):c===$||c===g?c=p$1:c===_||c===m$1?c=v:(c=p$1,n=void 0);const x=c===p$1&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$2:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$3+x):s+o$3+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$3),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$3)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$3),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$3,t+1));)d.push({type:7,index:l}),t+=o$3.length-1;}l++;}}static createElement(t,i){const s=l.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$3(t).nextSibling;i$3(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$2.litHtmlPolyfillSupport;B?.(S,k),(t$2.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
 
   /**
    * @license
@@ -71,6 +71,15 @@
     --la-indigo-500: oklch(0.521 0.182 268.945); /* #405CD0 · brand accent blue — accent interactive elements, links, attention colour */
     --la-indigo-50:  oklch(0.962 0.018 272.314); /* #EEF2FF · tint  — accent-bg */
 
+    /* Added for the fifth and sixth Legal Areas. Both stay clear of the status
+       palette: teal is blue-leaning so it doesn't read as success green, and
+       magenta is clear of danger red. */
+    --la-teal-500:    #0E8C9B; /* base teal — Data Protection identity */
+    --la-teal-50:     #ECFAFB; /* tint  — Data Protection tile */
+
+    --la-magenta-500: #A93B8F; /* base magenta — Intellectual Property identity */
+    --la-magenta-50:  #FCEEF8; /* tint  — Intellectual Property tile */
+
     --la-white:      oklch(1 0 0); /* #FFFFFF · used as bg, all -fg foregrounds, text-invert */
 
     /* ── Semantic colours — status ────────────────────
@@ -97,6 +106,55 @@
 
     --la-color-locked-bg:       oklch(0.968 0.007 247.896); /* #F1F5F9 · soft inset background for gated content panels (la-unlock-panel) — bluish grey, no shared primitive */
     --la-color-locked-text:     var(--la-color-text-muted); /* muted label text on locked panels — soft enough to read as "not yet active" without disappearing */
+
+    /* ── Legal Area identity ──────────────────────────
+       Each Legal Area gets a stable brand pair used in three places: its tile in
+       the sidebar, its tile on the dashboard, and the gradient wash on its own
+       page. Drawn only from non-status hues — the status palette (amber / green /
+       red) means "needs attention" / "resolved" / "urgent", so an area coloured
+       from it would read as a state rather than a place. The dashboard previously
+       coloured these tiles by status, which is why an area's identity shifted
+       every time its state did; the count badge carries state now.
+       The -rgb variant is the same hue as a raw triplet, for gradient layers
+       that need
+       per-layer alpha. */
+    --la-area-governance-bg:   var(--la-indigo-50);
+    --la-area-governance-fg:   var(--la-indigo-500);
+    --la-area-governance-rgb:  64, 92, 208;
+
+    --la-area-employment-bg:   var(--la-blue-50);
+    --la-area-employment-fg:   var(--la-blue-500);
+    --la-area-employment-rgb:  4, 130, 197;
+
+    --la-area-fundraising-bg:  var(--la-purple-50);
+    --la-area-fundraising-fg:  var(--la-purple-500);
+    --la-area-fundraising-rgb: 107, 63, 160;
+
+    /* IP now has its own hue — it was neutral only while the palette was short
+       of primitives, which made the one gated area look disabled rather than
+       distinct. */
+    --la-area-ip-bg:           var(--la-magenta-50);
+    --la-area-ip-fg:           var(--la-magenta-500);
+    --la-area-ip-rgb:          169, 59, 143;
+
+    --la-area-data-bg:         var(--la-teal-50);
+    --la-area-data-fg:         var(--la-teal-500);
+    --la-area-data-rgb:        14, 140, 155;
+
+    /* Commercial takes a steel hue — a sixth decorative colour that stays clear
+       of both the status palette and the five above. */
+    --la-area-commercial-bg:   #EEF2F6;
+    --la-area-commercial-fg:   #4A6382;
+    --la-area-commercial-rgb:  74, 99, 130;
+
+    /* Case-level scale — the L1→L3+ complexity standard. A warm cream→yellow→
+       amber→pink progression, dark ink on every chip (the la-level-indicator
+       badge + leveling matrix). Distinct from status colours on purpose. */
+    --la-color-level-1:         #FEF3C7;              /* L1 routine — pale cream */
+    --la-color-level-2:         #FCD34D;              /* L2 moderate — yellow */
+    --la-color-level-3:         #F59E0B;              /* L3 complex — amber */
+    --la-color-level-3plus:     #F4729B;              /* L3+ external counsel — pink */
+    --la-color-level-text:      var(--la-color-text); /* dark ink, all levels */
 
     /* ── Action colours ───────────────────────────────
        Action colours drive interactive elements — buttons, focus
@@ -151,6 +209,18 @@
 
     /* Scrim — overlay backdrop for modals, sheets, and any UI that dims the page behind a surface */
     --la-color-scrim:             rgba(0, 0, 0, 0.2);
+
+    /* ── AI surface gradient ──────────────────────────
+       Soft sage + sky + sand wash for AI-drafted / insight surfaces. Subtle and
+       transparent — pair with background-color: var(--la-color-bg). Tune the three
+       wash hues (colour + strength) in one place below. */
+    --la-ai-wash-sage: rgba(94, 158, 110, 0.12);   /* upper-left */
+    --la-ai-wash-sky:  rgba(71, 162, 230, 0.10);   /* right */
+    --la-ai-wash-sand: rgba(222, 210, 165, 0.08);  /* top */
+    --la-gradient-ai-surface:
+      linear-gradient(118deg, var(--la-ai-wash-sage) 0%, rgba(94, 158, 110, 0) 62%),
+      linear-gradient(255deg, var(--la-ai-wash-sky) 0%, rgba(71, 162, 230, 0) 60%),
+      linear-gradient(180deg, var(--la-ai-wash-sand) 0%, rgba(255, 255, 255, 0) 70%);
 
     /* ── Text ───────────────────────────────────────── */
     --la-color-text:              oklch(0.263 0.015 235.56); /* #1E262B · primary readable text — body copy, headings, table values */
@@ -277,8 +347,8 @@
     --la-font-signature:      'Meow Script', 'Snell Roundhand', 'Brush Script MT', cursive; /* self-hosted OFL script for adopted e-signatures (.sig-mark); @font-face in la-base-root.css */
     /* Font sizes are in rem so the scale respects the user's browser font-size preference (Geist-style).
        Comments show the px equivalent at the 16px default root for Figma sync — designers continue to think in px. */
-    --la-font-size-xs:        0.625rem;   /* 10px */
-    --la-font-size-sm:        0.6875rem;  /* 11px */
+    --la-font-size-xs:        0.6875rem;  /* 11px — accessibility floor; nothing informational below this */
+    --la-font-size-sm:        0.75rem;    /* 12px */
     --la-font-size-md:        0.8125rem;  /* 13px */
     --la-font-size-base:      0.8125rem;  /* 13px */
     --la-font-size-lg:        0.875rem;   /* 14px */
@@ -327,12 +397,19 @@
     --la-nav-sub-padding-h:         12px;
 
     /* ── Page header ─────────────────────────────────── */
-    --la-ph-padding-left:   32px;
+    /* Lines the breadcrumb's first crumb up with the content beneath it: the
+       shell's main pads its content in by --la-main-padding-inline, and the trail
+       sits on that same line rather than 8px further in (nav direction B). */
+    --la-ph-padding-left:   24px;
     --la-ph-padding-right:  20px;
     --la-ph-title-size:     18px;
     --la-ph-title-weight:   600;
     --la-ph-bg:             oklch(0.985 0 0); /* #FAFAFA */
-    --la-ph-height:         40px;
+    /* One height for the page header and the sidebar's own header, so the logo
+       lockup and the breadcrumb sit on the same line. 48 rather than 40: in the
+       stacked direction the corner carries the whole navigation and needs the
+       room (nav direction B, 5 Aug 2026). */
+    --la-ph-height:         48px;
     --la-ph-padding-v:      0px;
     --la-ph-gap:            0px;
 
@@ -433,7 +510,7 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);}):customElements.define(t,e);};
+  const t$1=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);}):customElements.define(t,e);};
 
   /**
    * @license
@@ -452,15 +529,15 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const e$2=(e,t,c)=>(c.configurable=true,c.enumerable=true,Reflect.decorate&&"object"!=typeof t&&Object.defineProperty(e,t,c),c);
+  const e$3=(e,t,c)=>(c.configurable=true,c.enumerable=true,Reflect.decorate&&"object"!=typeof t&&Object.defineProperty(e,t,c),c);
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */function e$1(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$2(n,s,{get(){return o(this)}})}}
+   */function e$2(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$3(n,s,{get(){return o(this)}})}}
 
-  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -504,13 +581,43 @@
         font-size: var(--la-font-size-md);
       }
 
+      /* ── Ghost badges — tinted, no border (ported from the design repo, 17 Sep 2026) ──
+         For inert status tags and quiet provenance. The shared grey+border chrome
+         reads as a pressable chip; the tint reads as state. Mirrors the counter's
+         ghost appearance. Approved by Jonard with rule/ghost-status-badges. */
+      :host([type='badge'][appearance='ghost']) span {
+        border: 0;
+        padding: 2px 8px; /* absorb the removed 1px border */
+      }
+      :host([type='badge'][appearance='ghost'][variant='success']) span {
+        background: var(--la-color-surface-success);
+      }
+      :host([type='badge'][appearance='ghost'][variant='danger']) span {
+        background: var(--la-color-surface-danger);
+      }
+      :host([type='badge'][appearance='ghost'][variant='warning']) span {
+        background: var(--la-color-surface-warning);
+      }
+      :host([type='badge'][appearance='ghost'][variant='info']) span {
+        background: var(--la-color-surface-info);
+      }
+      :host([type='badge'][appearance='ghost'][variant='neutral']) span {
+        background: var(--la-color-bg-muted);
+      }
+      :host([type='badge'][appearance='ghost'][variant='accent']) span {
+        background: var(--la-color-bg-subtle);
+      }
+
       /* ── Counter (circle) overrides ── */
+      /* A circle at one digit, a pill from two (15 Sep 2026): min-width
+         equals height, so "3" is round, and the side padding lets "10" or
+         "128" grow into a pill instead of being squeezed into the circle. */
       :host([type='counter']) span {
         height: 20px;
         min-width: 20px;
-        padding: 0;
+        padding: 0 6px;
         border: 0;
-        border-radius: var(--la-radius-circle);
+        border-radius: var(--la-radius-pill);
         justify-content: center;
         font-size: var(--la-font-size-xs);
         font-weight: var(--la-font-weight-medium);
@@ -522,6 +629,7 @@
       :host([type='counter'][size='sm']) span {
         height: 16px;
         min-width: 16px;
+        padding: 0 5px;
         font-size: var(--la-font-size-xs);
       }
 
@@ -550,28 +658,31 @@
         color: var(--la-color-primary-fg);
       }
 
-      /* ── Badge ghost — tinted status surface, no border ──
-         For inert status tags (e.g. document signature states). The shared
-         grey+border chrome reads as a pressable chip; the tint reads as
-         state. Mirrors the counter's ghost appearance. */
-      :host([type='badge'][appearance='ghost']) span {
-        border: 0;
-        padding: 2px 8px; /* absorb the removed 1px border */
+      /* ── Solid (filled) pill variants — bold status emphasis ── */
+      :host([appearance='solid'][variant='danger']) span {
+        background: var(--la-color-danger);
+        border-color: var(--la-color-danger);
+        color: var(--la-color-danger-fg);
       }
-      :host([type='badge'][appearance='ghost'][variant='success']) span {
-        background: var(--la-color-surface-success);
+      :host([appearance='solid'][variant='warning']) span {
+        background: var(--la-color-warning);
+        border-color: var(--la-color-warning);
+        color: var(--la-color-text-invert);
       }
-      :host([type='badge'][appearance='ghost'][variant='danger']) span {
-        background: var(--la-color-surface-danger);
+      :host([appearance='solid'][variant='success']) span {
+        background: var(--la-color-success);
+        border-color: var(--la-color-success);
+        color: var(--la-color-success-fg);
       }
-      :host([type='badge'][appearance='ghost'][variant='warning']) span {
-        background: var(--la-color-surface-warning);
+      :host([appearance='solid'][variant='neutral']) span {
+        background: var(--la-color-neutral);
+        border-color: var(--la-color-neutral);
+        color: var(--la-color-neutral-fg);
       }
-      :host([type='badge'][appearance='ghost'][variant='info']) span {
-        background: var(--la-color-surface-info);
-      }
-      :host([type='badge'][appearance='ghost'][variant='neutral']) span {
-        background: var(--la-color-bg-muted);
+      :host([appearance='solid'][variant='info']) span {
+        background: var(--la-color-info);
+        border-color: var(--la-color-info);
+        color: var(--la-color-text-invert);
       }
 
       /* ── Counter filled variants ── */
@@ -627,20 +738,20 @@
       }
     `,
   ];
-  __decorate$17([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "variant", void 0);
-  __decorate$17([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "type", void 0);
-  __decorate$17([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "appearance", void 0);
-  __decorate$17([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
-  exports.LaBadge = __decorate$17([
-      t('la-badge')
+  exports.LaBadge = __decorate$1z([
+      t$1('la-badge')
   ], exports.LaBadge);
 
   /**
@@ -649,7 +760,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const o=o=>o??A;
 
-  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -775,29 +886,29 @@
       }
     `,
   ];
-  __decorate$16([
+  __decorate$1y([
       n()
   ], exports.LaIconButton.prototype, "label", void 0);
-  __decorate$16([
+  __decorate$1y([
       n({ type: Boolean })
   ], exports.LaIconButton.prototype, "expanded", void 0);
-  __decorate$16([
+  __decorate$1y([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "pressed", void 0);
-  __decorate$16([
+  __decorate$1y([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "size", void 0);
-  __decorate$16([
+  __decorate$1y([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "variant", void 0);
-  __decorate$16([
+  __decorate$1y([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "disabled", void 0);
-  exports.LaIconButton = __decorate$16([
-      t('la-icon-button')
+  exports.LaIconButton = __decorate$1y([
+      t$1('la-icon-button')
   ], exports.LaIconButton);
 
-  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -888,9 +999,15 @@
         min-width: 0;
       }
 
+      /* Ancestor links were --la-color-text-faint, a logged below-AA divergence.
+         A trail that becomes standard page chrome can't carry one: prototype
+         standards forbid a divergence in a published prototype, and the fix
+         belongs in the component rather than in every page that uses it.
+         -text-muted clears AA on the header's --la-color-bg-subtle ground, and
+         the current page holds full-strength ink, so the two still read apart. */
       .crumb-link {
         font-size: var(--la-font-size-sm);
-        color: var(--la-color-text-faint);
+        color: var(--la-color-text-muted);
         text-decoration: none;
         white-space: nowrap;
         transition: color var(--dur-fast) var(--ease);
@@ -908,7 +1025,7 @@
 
       .crumb-separator {
         font-size: var(--la-font-size-sm);
-        color: var(--la-color-text-disabled);
+        color: var(--la-color-text-faint);
         margin: 0 var(--la-space-sm);
         flex-shrink: 0;
         user-select: none;
@@ -917,7 +1034,7 @@
       .crumb-current {
         font-size: var(--la-font-size-sm);
         font-weight: var(--la-font-weight-normal);
-        color: var(--la-color-text-muted);
+        color: var(--la-color-text);
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -926,17 +1043,17 @@
 
     `,
   ];
-  __decorate$15([
+  __decorate$1x([
       n({ type: Array })
   ], exports.LaBreadcrumb.prototype, "items", void 0);
-  __decorate$15([
+  __decorate$1x([
       r()
   ], exports.LaBreadcrumb.prototype, "_expanded", void 0);
-  exports.LaBreadcrumb = __decorate$15([
-      t('la-breadcrumb')
+  exports.LaBreadcrumb = __decorate$1x([
+      t$1('la-breadcrumb')
   ], exports.LaBreadcrumb);
 
-  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1044,20 +1161,20 @@
       }
     `,
   ];
-  __decorate$14([
+  __decorate$1w([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "size", void 0);
-  __decorate$14([
+  __decorate$1w([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "appearance", void 0);
-  __decorate$14([
+  __decorate$1w([
       n()
   ], exports.LaSpinner.prototype, "label", void 0);
-  exports.LaSpinner = __decorate$14([
-      t('la-spinner')
+  exports.LaSpinner = __decorate$1w([
+      t$1('la-spinner')
   ], exports.LaSpinner);
 
-  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1181,6 +1298,7 @@
         align-items: center;
         justify-content: center;
         gap: var(--la-space-2xs);
+        white-space: nowrap;
         height: var(--la-button-height-default);
         padding: 0 var(--la-space-lg);
         border-radius: var(--la-radius-md);
@@ -1399,38 +1517,38 @@
       }
     `,
   ];
-  __decorate$13([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaButton.prototype, "variant", void 0);
-  __decorate$13([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaButton.prototype, "size", void 0);
-  __decorate$13([
+  __decorate$1v([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "pill", void 0);
-  __decorate$13([
+  __decorate$1v([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "block", void 0);
-  __decorate$13([
+  __decorate$1v([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
-  __decorate$13([
+  __decorate$1v([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
-  __decorate$13([
+  __decorate$1v([
       n({ attribute: 'loading-label' })
   ], exports.LaButton.prototype, "loadingLabel", void 0);
-  __decorate$13([
+  __decorate$1v([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaButton.prototype, "hideLabel", void 0);
-  __decorate$13([
+  __decorate$1v([
       r()
   ], exports.LaButton.prototype, "_hasIconLeft", void 0);
-  exports.LaButton = __decorate$13([
-      t('la-button')
+  exports.LaButton = __decorate$1v([
+      t$1('la-button')
   ], exports.LaButton);
 
-  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1441,6 +1559,8 @@
           super(...arguments);
           this.heading = '';
           this.nopadding = false;
+          /** `elevated` (default) for a card that acts; `hairline` for a card that rests. Decision 96. */
+          this.variant = 'elevated';
       }
       render() {
           return b `
@@ -1459,14 +1579,12 @@
       :host {
         display: block;
       }
+      /* Elevation-00 — no border, hairline-ring + soft lift shadow, 24px radius. */
       .card {
-        /* Canonical resting content-card surface: white on the light
-           --la-color-border-light hairline (decision 89). Matches the
-           composed cards (investor card, legal-area widget) that already
-           use the lighter border — one card surface across the system. */
-        border: 1px solid var(--la-color-border-light);
-        border-radius: var(--la-radius-lg);
+        border: none;
+        border-radius: var(--la-radius-xl1);
         background: var(--la-color-bg);
+        box-shadow: var(--la-shadow-md);
         overflow: hidden;
       }
       .header {
@@ -1481,19 +1599,30 @@
       :host([nopadding]) .body {
         padding: 0;
       }
+      /* variant="hairline" (decision 96): the resting card. A card that holds
+         content and does nothing takes the light hairline and no shadow; the
+         default elevated card is for cards that act (open, filter, are clicked). */
+      :host([variant='hairline']) .card {
+        box-shadow: none;
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+      }
     `,
   ];
-  __decorate$12([
+  __decorate$1u([
       n()
   ], exports.LaCard.prototype, "heading", void 0);
-  __decorate$12([
+  __decorate$1u([
       n({ type: Boolean, reflect: true })
   ], exports.LaCard.prototype, "nopadding", void 0);
-  exports.LaCard = __decorate$12([
-      t('la-card')
+  __decorate$1u([
+      n({ reflect: true })
+  ], exports.LaCard.prototype, "variant", void 0);
+  exports.LaCard = __decorate$1u([
+      t$1('la-card')
   ], exports.LaCard);
 
-  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1544,20 +1673,20 @@
       }
     `,
   ];
-  __decorate$11([
+  __decorate$1t([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "clickable", void 0);
-  __decorate$11([
+  __decorate$1t([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "dimmed", void 0);
-  __decorate$11([
+  __decorate$1t([
       n()
   ], exports.LaPanel.prototype, "heading", void 0);
-  exports.LaPanel = __decorate$11([
-      t('la-panel')
+  exports.LaPanel = __decorate$1t([
+      t$1('la-panel')
   ], exports.LaPanel);
 
-  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1573,6 +1702,9 @@
    * focus-visible, and keyboard activation. Actions inside the `actions` slot
    * never bubble their click to the row — consumers can put per-row action
    * buttons (edit, remove, more) without hijacking the row click.
+   *
+   * Set `--la-list-item-inset` to pad both sides equally, for rows that bleed to
+   * the edges of their container (pull the list out by the same amount).
    */
   exports.LaListItem = class LaListItem extends i$2 {
       constructor() {
@@ -1609,8 +1741,11 @@
       .row {
         display: flex;
         align-items: center;
-        gap: var(--la-space-sm);
-        padding: var(--la-space-sm) var(--la-space-md);
+        gap: var(--la-space-lg);
+        /* --la-list-item-inset pads both sides so a row can run edge to edge
+           in its container (a modal, a panel) with the hover fill and border
+           spanning the whole width. Unset, the row keeps its flush-left layout. */
+        padding: var(--la-space-sm) var(--la-list-item-inset, var(--la-space-md)) var(--la-space-sm) var(--la-list-item-inset, 0);
         border-bottom: 1px solid var(--la-color-border-light);
         font-size: var(--la-font-size-base);
         color: var(--la-color-text);
@@ -1669,6 +1804,10 @@
         align-items: center;
         justify-content: center;
         flex-shrink: 0;
+        width: 40px;
+        height: 40px;
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg-subtle);
         font-size: var(--la-font-size-lg);
         color: var(--la-color-text-muted);
       }
@@ -1701,17 +1840,17 @@
       }
     `,
   ];
-  __decorate$10([
+  __decorate$1s([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "error", void 0);
-  __decorate$10([
+  __decorate$1s([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "clickable", void 0);
-  exports.LaListItem = __decorate$10([
-      t('la-list-item')
+  exports.LaListItem = __decorate$1s([
+      t$1('la-list-item')
   ], exports.LaListItem);
 
-  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1817,26 +1956,26 @@
       }
     `,
   ];
-  __decorate$$([
+  __decorate$1r([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "checked", void 0);
-  __decorate$$([
+  __decorate$1r([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "indeterminate", void 0);
-  __decorate$$([
+  __decorate$1r([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "disabled", void 0);
-  __decorate$$([
+  __decorate$1r([
       n()
   ], exports.LaCheckbox.prototype, "label", void 0);
-  __decorate$$([
-      e$1('input')
+  __decorate$1r([
+      e$2('input')
   ], exports.LaCheckbox.prototype, "input", void 0);
-  exports.LaCheckbox = __decorate$$([
-      t('la-checkbox')
+  exports.LaCheckbox = __decorate$1r([
+      t$1('la-checkbox')
   ], exports.LaCheckbox);
 
-  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1972,20 +2111,20 @@
       }
     `,
   ];
-  __decorate$_([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "checked", void 0);
-  __decorate$_([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "disabled", void 0);
-  __decorate$_([
+  __decorate$1q([
       n()
   ], exports.LaSwitch.prototype, "label", void 0);
-  exports.LaSwitch = __decorate$_([
-      t('la-switch')
+  exports.LaSwitch = __decorate$1q([
+      t$1('la-switch')
   ], exports.LaSwitch);
 
-  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2138,26 +2277,26 @@
       }
     `,
   ];
-  __decorate$Z([
+  __decorate$1p([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "variant", void 0);
-  __decorate$Z([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "checked", void 0);
-  __decorate$Z([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "invalid", void 0);
-  __decorate$Z([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "filled", void 0);
-  __decorate$Z([
+  __decorate$1p([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
-  exports.LaChoice = __decorate$Z([
-      t('la-choice')
+  exports.LaChoice = __decorate$1p([
+      t$1('la-choice')
   ], exports.LaChoice);
 
-  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2271,14 +2410,1850 @@
       }
     `,
   ];
-  __decorate$Y([
+  __decorate$1o([
       n({ type: Array })
   ], exports.LaStepper.prototype, "steps", void 0);
-  exports.LaStepper = __decorate$Y([
-      t('la-stepper')
+  exports.LaStepper = __decorate$1o([
+      t$1('la-stepper')
   ], exports.LaStepper);
 
-  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-step-ring — a radial discrete-step progress indicator.
+   *
+   * The circular cousin of `la-stepper` (linear) and `la-spinner` (indeterminate):
+   * a donut split into one rounded segment per step, filled for completed steps,
+   * half-toned for the current step, and muted for what's still ahead. Use for
+   * secondary multi-step flows where a compact at-a-glance progress read is wanted
+   * (phase plans, sub-step checklists, card-level progress).
+   *
+   * Geometry lives in a fixed 52×52 viewBox so the shape stays identical at any
+   * rendered size — size the host with `--la-step-ring-size` (or width/height).
+   * Colours, thickness, gap, and corner radius are all tunable via attributes /
+   * CSS custom properties.
+   *
+   * Centre content: pass `label` / `sublabel`, or slot arbitrary markup (the slot
+   * wins when filled).
+   */
+  exports.LaStepRing = class LaStepRing extends i$2 {
+      constructor() {
+          super(...arguments);
+          /** Total number of steps in the flow. */
+          this.total = 1;
+          /** Number of completed steps. */
+          this.done = 0;
+          /** Show the step after `done` as in-progress (half-toned). */
+          this.current = true;
+          /** Segment thickness, in viewBox units (outer radius is fixed at 22). */
+          this.thickness = 6;
+          /** Clear gap between segments, in degrees. */
+          this.gap = 4;
+          /** Corner radius of each segment, in viewBox units. */
+          this.corner = 1.4;
+          /** Primary centre text (e.g. "3 of 6" or a phase number). */
+          this.label = '';
+          /** Secondary centre line under the label (e.g. "Done"). */
+          this.sublabel = '';
+      }
+      /** Builds the path for one rounded-corner annular sector. */
+      sector(d0, d1, ro, ri, cr) {
+          const cx = 26;
+          const cy = 26;
+          const DEG = 180 / Math.PI;
+          const pt = (deg, rad) => {
+              const a = (deg - 90) / DEG;
+              return `${(cx + rad * Math.cos(a)).toFixed(2)} ${(cy +
+                rad * Math.sin(a)).toFixed(2)}`;
+          };
+          const ao = (cr / ro) * DEG; // angular inset so corners clear the radial edges
+          const ai = (cr / ri) * DEG;
+          const lgO = d1 - d0 - 2 * ao > 180 ? 1 : 0;
+          const lgI = d1 - d0 - 2 * ai > 180 ? 1 : 0;
+          return (`M${pt(d0 + ao, ro)}` +
+              ` A${ro} ${ro} 0 ${lgO} 1 ${pt(d1 - ao, ro)}` + // outer arc
+              ` A${cr} ${cr} 0 0 1 ${pt(d1, ro - cr)}` + // round outer-end corner
+              ` L${pt(d1, ri + cr)}` + // radial edge in
+              ` A${cr} ${cr} 0 0 1 ${pt(d1 - ai, ri)}` + // round inner-end corner
+              ` A${ri} ${ri} 0 ${lgI} 0 ${pt(d0 + ai, ri)}` + // inner arc (reverse)
+              ` A${cr} ${cr} 0 0 1 ${pt(d0, ri + cr)}` + // round inner-start corner
+              ` L${pt(d0, ro - cr)}` + // radial edge out
+              ` A${cr} ${cr} 0 0 1 ${pt(d0 + ao, ro)} Z` // round outer-start corner
+          );
+      }
+      render() {
+          const total = Math.max(1, Math.floor(this.total));
+          const done = Math.min(total, Math.max(0, Math.floor(this.done)));
+          const ro = 22;
+          const ri = Math.max(2, ro - this.thickness);
+          const cr = this.corner;
+          const seg = 360 / total;
+          const gap = this.gap;
+          const segments = [];
+          for (let i = 1; i <= total; i++) {
+              const cls = i <= done
+                  ? 'seg-done'
+                  : this.current && i === done + 1
+                      ? 'seg-now'
+                      : 'seg-future';
+              const d = this.sector((i - 1) * seg + gap / 2, i * seg - gap / 2, ro, ri, cr);
+              segments.push(w `<path class=${cls} d=${d}></path>`);
+          }
+          return b `
+      <svg
+        viewBox="0 0 52 52"
+        role="img"
+        aria-label=${`${done} of ${total} steps complete`}
+      >
+        ${segments}
+      </svg>
+      <div class="center">
+        <slot>
+          ${this.label
+            ? b `<span class="label">${this.label}</span>`
+            : ''}
+          ${this.sublabel
+            ? b `<span class="sublabel">${this.sublabel}</span>`
+            : ''}
+        </slot>
+      </div>
+    `;
+      }
+  };
+  exports.LaStepRing.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-flex;
+        position: relative;
+        width: var(--la-step-ring-size, 120px);
+        height: var(--la-step-ring-size, 120px);
+      }
+
+      svg {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      .seg-done {
+        fill: var(--la-step-ring-done, var(--la-color-primary));
+      }
+      .seg-now {
+        fill: var(--la-step-ring-now, var(--la-color-primary));
+        opacity: var(--la-step-ring-now-opacity, 0.5);
+      }
+      .seg-future {
+        fill: var(--la-step-ring-future, var(--la-color-bg-muted));
+      }
+
+      .center {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        line-height: 1.1;
+        text-align: center;
+        pointer-events: none;
+      }
+
+      .label {
+        font-size: var(--la-step-ring-label-size, var(--la-font-size-3xl));
+        font-weight: var(--la-font-weight-semibold);
+        font-variant-numeric: tabular-nums;
+        color: var(--la-color-text);
+      }
+
+      .sublabel {
+        font-size: var(--la-step-ring-sublabel-size, var(--la-font-size-sm));
+        color: var(--la-color-text-muted);
+      }
+    `,
+  ];
+  __decorate$1n([
+      n({ type: Number })
+  ], exports.LaStepRing.prototype, "total", void 0);
+  __decorate$1n([
+      n({ type: Number })
+  ], exports.LaStepRing.prototype, "done", void 0);
+  __decorate$1n([
+      n({ type: Boolean })
+  ], exports.LaStepRing.prototype, "current", void 0);
+  __decorate$1n([
+      n({ type: Number })
+  ], exports.LaStepRing.prototype, "thickness", void 0);
+  __decorate$1n([
+      n({ type: Number })
+  ], exports.LaStepRing.prototype, "gap", void 0);
+  __decorate$1n([
+      n({ type: Number })
+  ], exports.LaStepRing.prototype, "corner", void 0);
+  __decorate$1n([
+      n()
+  ], exports.LaStepRing.prototype, "label", void 0);
+  __decorate$1n([
+      n()
+  ], exports.LaStepRing.prototype, "sublabel", void 0);
+  exports.LaStepRing = __decorate$1n([
+      t$1('la-step-ring')
+  ], exports.LaStepRing);
+
+  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-activity-item — a single event row in a chronological activity feed.
+   *
+   * Renders an icon circle, a vertical connector line to the item below,
+   * a body slot for the event description, and a timestamp. Set `last` on
+   * the final item in any feed to suppress the connector line.
+   *
+   * Compose multiple items inside any container — the connector lines
+   * automatically chain them into a timeline.
+   *
+   * @slot         - Event description text. May include inline `<a>` links.
+   * @slot icon    - Icon inside the circle. Use a Phosphor `<i>` tag.
+   *
+   * @prop time    - Timestamp string shown below the body (e.g. "2 hours ago")
+   * @prop last    - Suppresses the connecting line. Set on the final item.
+   *
+   * @example
+   * <la-activity-item time="1 hour ago">
+   *   <i slot="icon" class="ph-fill ph-eye"></i>
+   *   Viewed <a href="#">Cap Table (as of Jan 2026)</a>
+   * </la-activity-item>
+   *
+   * <la-activity-item time="13 Apr 2026" last>
+   *   <i slot="icon" class="ph-fill ph-envelope-simple"></i>
+   *   Invitation accepted
+   * </la-activity-item>
+   */
+  exports.LaActivityItem = class LaActivityItem extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.time = '';
+          this.last = false;
+      }
+      render() {
+          return b `
+      <div class="icon-col">
+        <div class="icon-circle">
+          <slot name="icon"></slot>
+        </div>
+      </div>
+      <div class="body">
+        <div class="text"><slot></slot></div>
+        ${this.time ? b `<div class="time">${this.time}</div>` : A}
+      </div>
+    `;
+      }
+  };
+  exports.LaActivityItem.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-md);
+      }
+
+      /* ── Icon column ──────────────────────────────────────── */
+
+      .icon-col {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        align-self: stretch;
+        flex-shrink: 0;
+      }
+
+      /* Connector line drawn downward from the icon circle */
+      .icon-col::after {
+        content: '';
+        flex: 1;
+        width: 1.5px;
+        background: var(--la-color-border-light);
+        margin-top: 4px;
+        min-height: 12px;
+      }
+
+      :host([last]) .icon-col::after {
+        display: none;
+      }
+
+      .icon-circle {
+        width: 28px;
+        height: 28px;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-bg);
+        border: 1px solid var(--la-color-border-light);
+        color: var(--la-color-text-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        font-size: 13px;
+      }
+
+      /* ── Body ─────────────────────────────────────────────── */
+
+      .body {
+        flex: 1;
+        min-width: 0;
+        padding-bottom: var(--la-space-md);
+      }
+
+      :host([last]) .body {
+        padding-bottom: 0;
+      }
+
+      .text {
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        line-height: 1.5;
+      }
+
+      /* Inline document / entity links inside the event text */
+      .text ::slotted(a) {
+        color: var(--la-color-text);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-decoration-color: var(--la-color-border);
+        transition: text-decoration-color var(--dur-fast) var(--ease);
+      }
+
+      .text ::slotted(a:hover) {
+        text-decoration-color: var(--la-color-text);
+      }
+
+      .time {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-faint);
+        margin-top: 2px;
+      }
+    `,
+  ];
+  __decorate$1m([
+      n()
+  ], exports.LaActivityItem.prototype, "time", void 0);
+  __decorate$1m([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaActivityItem.prototype, "last", void 0);
+  exports.LaActivityItem = __decorate$1m([
+      t$1('la-activity-item')
+  ], exports.LaActivityItem);
+
+  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  exports.LaTextarea = class LaTextarea extends i$2 {
+      constructor() {
+          super(...arguments);
+          this._inputId = `la-textarea-${Math.random().toString(36).slice(2, 8)}`;
+          this.name = '';
+          this.placeholder = '';
+          this.value = '';
+          this.label = '';
+          this.hint = '';
+          this.required = false;
+          this.disabled = false;
+          this.error = false;
+          this.rows = 3;
+          this.minRows = 3;
+          this.maxRows = 8;
+          this.showCount = false;
+          this._lastInlineSize = 0;
+      }
+      firstUpdated() {
+          this._autosize();
+          this._resizeObs = new ResizeObserver((entries) => {
+              const w = entries[0]?.contentRect.width ?? 0;
+              if (w !== this._lastInlineSize) {
+                  this._lastInlineSize = w;
+                  this._autosize();
+              }
+          });
+          this._resizeObs.observe(this);
+      }
+      updated(changed) {
+          if (changed.has('value') || changed.has('minRows') || changed.has('maxRows')) {
+              this._autosize();
+          }
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          this._resizeObs?.disconnect();
+      }
+      _autosize() {
+          const ta = this._textarea;
+          if (!ta)
+              return;
+          const styles = getComputedStyle(ta);
+          const lineHeight = parseFloat(styles.lineHeight);
+          const paddingTop = parseFloat(styles.paddingTop);
+          const paddingBottom = parseFloat(styles.paddingBottom);
+          const borderTop = parseFloat(styles.borderTopWidth);
+          const borderBottom = parseFloat(styles.borderBottomWidth);
+          const verticalChrome = paddingTop + paddingBottom + borderTop + borderBottom;
+          const minHeight = lineHeight * this.minRows + verticalChrome;
+          const maxHeight = lineHeight * this.maxRows + verticalChrome;
+          ta.style.height = 'auto';
+          const contentHeight = ta.scrollHeight + borderTop + borderBottom;
+          const clamped = Math.min(Math.max(contentHeight, minHeight), maxHeight);
+          ta.style.height = `${clamped}px`;
+          ta.style.overflowY = contentHeight > maxHeight ? 'auto' : 'hidden';
+      }
+      _handleInput(e) {
+          this.value = e.target.value;
+          this._autosize();
+          this.dispatchEvent(new CustomEvent('la-change', { detail: { value: this.value }, bubbles: true, composed: true }));
+      }
+      render() {
+          const showCounter = this.showCount || typeof this.maxlength === 'number';
+          const overLimit = typeof this.maxlength === 'number' && this.value.length >= this.maxlength;
+          const counterText = typeof this.maxlength === 'number'
+              ? `${this.value.length} / ${this.maxlength}`
+              : `${this.value.length}`;
+          return b `
+      ${this.label
+            ? b `
+            <label for=${this._inputId}>
+              ${this.label}${this.required
+                ? b `<span class="req" aria-hidden="true">*</span>`
+                : ''}
+            </label>
+          `
+            : ''}
+      <textarea
+        id=${this._inputId}
+        name=${this.name}
+        placeholder=${this.placeholder}
+        rows=${this.rows}
+        .value=${this.value}
+        ?disabled=${this.disabled}
+        ?required=${this.required}
+        maxlength=${o(this.maxlength)}
+        @input=${this._handleInput}
+      ></textarea>
+      ${this.hint || showCounter
+            ? b `
+            <div class="meta">
+              ${this.hint ? b `<div class="hint">${this.hint}</div>` : ''}
+              ${showCounter
+                ? b `<div class="count ${overLimit ? 'over' : ''}">${counterText}</div>`
+                : ''}
+            </div>
+          `
+            : ''}
+    `;
+      }
+  };
+  exports.LaTextarea.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      label {
+        display: block;
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text);
+        margin-bottom: var(--la-space-2xs);
+      }
+      .req {
+        color: var(--la-color-danger);
+        margin-left: 2px;
+      }
+      textarea {
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        font-family: inherit;
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text);
+        padding: var(--la-space-sm) var(--la-space-md);
+        border-radius: var(--la-radius-md);
+        border: 1px solid var(--la-color-border);
+        background: var(--la-color-bg);
+        outline: none;
+        line-height: var(--la-line-height);
+        resize: none;
+        overflow-y: hidden;
+        transition: border-color var(--dur-fast) var(--ease),
+          box-shadow var(--dur-fast) var(--ease);
+      }
+      textarea:focus {
+        border-color: var(--la-color-border-focus);
+        box-shadow: var(--la-input-shadow-focus);
+      }
+      textarea::placeholder {
+        color: var(--la-color-text-disabled);
+      }
+      textarea:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      :host([error]) textarea {
+        border-color: var(--la-color-border-danger);
+      }
+      :host([error]) textarea:focus {
+        box-shadow: none;
+      }
+      .meta {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-md);
+        margin-top: var(--la-space-xs);
+      }
+      .hint {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .count {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-left: auto;
+        font-variant-numeric: tabular-nums;
+      }
+      :host([error]) .hint,
+      :host([error]) .count,
+      .count.over {
+        color: var(--la-color-danger-text);
+      }
+    `,
+  ];
+  __decorate$1l([
+      n()
+  ], exports.LaTextarea.prototype, "name", void 0);
+  __decorate$1l([
+      n()
+  ], exports.LaTextarea.prototype, "placeholder", void 0);
+  __decorate$1l([
+      n()
+  ], exports.LaTextarea.prototype, "value", void 0);
+  __decorate$1l([
+      n()
+  ], exports.LaTextarea.prototype, "label", void 0);
+  __decorate$1l([
+      n()
+  ], exports.LaTextarea.prototype, "hint", void 0);
+  __decorate$1l([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaTextarea.prototype, "required", void 0);
+  __decorate$1l([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaTextarea.prototype, "disabled", void 0);
+  __decorate$1l([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaTextarea.prototype, "error", void 0);
+  __decorate$1l([
+      n({ type: Number })
+  ], exports.LaTextarea.prototype, "rows", void 0);
+  __decorate$1l([
+      n({ type: Number, attribute: 'min-rows' })
+  ], exports.LaTextarea.prototype, "minRows", void 0);
+  __decorate$1l([
+      n({ type: Number, attribute: 'max-rows' })
+  ], exports.LaTextarea.prototype, "maxRows", void 0);
+  __decorate$1l([
+      n({ type: Number })
+  ], exports.LaTextarea.prototype, "maxlength", void 0);
+  __decorate$1l([
+      n({ type: Boolean, attribute: 'show-count' })
+  ], exports.LaTextarea.prototype, "showCount", void 0);
+  __decorate$1l([
+      e$2('textarea')
+  ], exports.LaTextarea.prototype, "_textarea", void 0);
+  exports.LaTextarea = __decorate$1l([
+      t$1('la-textarea')
+  ], exports.LaTextarea);
+
+  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-step-signoff — the X5 timestamped step sign-off stamp.
+   *
+   * The persistent completion stamp shown at the bottom of every completed step:
+   * `✓ Step completed 14 Apr 2026 · 09:47 AM MT · Jordan Pratt`. Sign-off fires
+   * automatically when a step's primary CTA is clicked (the act of confirming *is*
+   * the sign-off) — the host calls `signOff()` or sets `signed` + appends a stamp.
+   *
+   * A completed step cannot be undone without **Reopen**, which prompts a logged
+   * reason and fires `la-reopen`. Re-completion adds a new stamp *below* the
+   * original — history is preserved and the stamps stack. The whole record is
+   * meant for the audit export.
+   *
+   * Reuses `la-activity-item` for the stacked history rows (chronological timeline
+   * with connector lines) and `la-button` for the Reopen control.
+   *
+   * @prop signed     - Whether the step is currently signed off (shows the latest stamp).
+   * @prop stamps     - SignoffStamp[]; the latest is the live stamp, earlier ones are history.
+   * @prop reopenable - Whether to offer the Reopen control on a signed step.
+   * @prop label      - Lead text of the stamp. Default: "Step completed".
+   * @fires la-signoff - {stamp:SignoffStamp} when `signOff()` records a new stamp.
+   * @fires la-reopen  - {reason:string} when the user confirms a reopen with a logged reason.
+   *
+   * @example
+   * <la-step-signoff
+   *   signed reopenable
+   *   .stamps=${[{date:'14 Apr 2026 · 09:47 AM MT', user:'Jordan Pratt'}]}
+   * ></la-step-signoff>
+   */
+  exports.LaStepSignoff = class LaStepSignoff extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.signed = false;
+          this.stamps = [];
+          this.reopenable = false;
+          this.label = 'Step completed';
+          /**
+           * Quiet variant — drops the resolved-green pill for a plain grey, small-font
+           * line (`✓ Step completed · date · user`). The default stamp treatment on
+           * case-plan steps; the green pill is reserved for standalone sign-off moments.
+           */
+          this.quiet = false;
+          /** Whether the inline reopen-reason field is showing. */
+          this._reopening = false;
+          /** Whether the full stamp history is expanded (when >1 stamp). */
+          this._historyOpen = false;
+          this._reason = '';
+      }
+      /**
+       * Record a new sign-off. Appends `stamp` to the history, marks `signed`, and
+       * fires `la-signoff`. The host calls this from its primary-CTA handler so the
+       * confirming click *is* the sign-off.
+       */
+      signOff(stamp) {
+          this.stamps = [...this.stamps, stamp];
+          this.signed = true;
+          this._reopening = false;
+          this.dispatchEvent(new CustomEvent('la-signoff', { detail: { stamp }, bubbles: true, composed: true }));
+      }
+      get _latest() {
+          return this.stamps[this.stamps.length - 1];
+      }
+      _startReopen() {
+          this._reopening = true;
+          this._reason = '';
+      }
+      _cancelReopen() {
+          this._reopening = false;
+          this._reason = '';
+      }
+      _onReasonInput(e) {
+          this._reason = e.detail.value;
+      }
+      _confirmReopen() {
+          const reason = this._reason.trim();
+          if (!reason)
+              return;
+          this.signed = false;
+          this._reopening = false;
+          this.dispatchEvent(new CustomEvent('la-reopen', { detail: { reason }, bubbles: true, composed: true }));
+      }
+      _renderHistory() {
+          // Oldest → newest, with the connector line chaining the timeline.
+          const rows = this.stamps;
+          return b `<div class="history">
+      ${rows.map((s, i) => b `<la-activity-item
+          time=${s.date}
+          ?last=${i === rows.length - 1}
+        >
+          <i slot="icon" class="ph-fill ph-check-circle" aria-hidden="true"></i>
+          ${this.label} · ${s.user}${s.note
+            ? b ` — <span>${s.note}</span>`
+            : A}
+        </la-activity-item>`)}
+    </div>`;
+      }
+      _renderReopen() {
+          return b `<div class="reopen">
+      <div class="reopen-label">Reopen this step</div>
+      <div class="reopen-hint">
+        Tell us why you're reopening. We log the reason and keep the original
+        sign-off in the history.
+      </div>
+      <la-textarea
+        placeholder="Reason for reopening"
+        .value=${this._reason}
+        min-rows="2"
+        @la-change=${this._onReasonInput}
+      ></la-textarea>
+      <div class="reopen-actions">
+        <la-button variant="ghost" size="sm" @click=${this._cancelReopen}
+          >Cancel</la-button
+        >
+        <la-button
+          variant="secondary"
+          size="sm"
+          ?disabled=${!this._reason.trim()}
+          @click=${this._confirmReopen}
+          >Reopen Step</la-button
+        >
+      </div>
+    </div>`;
+      }
+      render() {
+          if (!this.signed) {
+              // Not signed off — nothing persistent to show. The host's primary CTA
+              // drives sign-off; this component only renders the stamp once recorded.
+              return A;
+          }
+          const latest = this._latest;
+          const hasHistory = this.stamps.length > 1;
+          return b `
+      ${iconStyles}
+      <div class="stamp-bar">
+        <span class="check"
+          ><i
+            class=${this.quiet ? 'ph-fill ph-check-circle' : 'ph-bold ph-check'}
+            aria-hidden="true"
+          ></i
+        ></span>
+        <span class="stamp-text">
+          <span class="lead">${this.label}</span>
+          ${latest
+            ? b ` <span class="meta">${latest.date} · ${latest.user}</span>`
+            : A}
+        </span>
+        <span class="stamp-actions">
+          ${hasHistory
+            ? b `<button
+                class="history-toggle"
+                type="button"
+                aria-expanded=${this._historyOpen ? 'true' : 'false'}
+                @click=${() => (this._historyOpen = !this._historyOpen)}
+              >
+                ${this._historyOpen ? 'Hide history' : 'View history'}
+              </button>`
+            : A}
+          ${this.reopenable && !this._reopening
+            ? b `<la-button variant="ghost" size="sm" @click=${this._startReopen}>
+                <i slot="icon-left" class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i>
+                Reopen
+              </la-button>`
+            : A}
+        </span>
+      </div>
+
+      ${this._historyOpen && hasHistory ? this._renderHistory() : A}
+      ${this._reopening ? this._renderReopen() : A}
+    `;
+      }
+  };
+  exports.LaStepSignoff.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+
+      .stamp-bar {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        padding: var(--la-space-sm) var(--la-space-md);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-resolved-bg);
+      }
+
+      .check {
+        display: inline-flex;
+        flex-shrink: 0;
+        color: var(--la-color-resolved);
+        font-size: 16px;
+      }
+
+      .stamp-text {
+        flex: 1;
+        min-width: 0;
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+      }
+      .stamp-text .lead {
+        font-weight: var(--la-font-weight-medium);
+      }
+      .stamp-text .meta {
+        color: var(--la-color-text-secondary);
+        font-variant-numeric: tabular-nums;
+      }
+
+      /* Quiet variant — plain grey, small-font line; no green pill. */
+      :host([quiet]) .stamp-bar {
+        padding: 0;
+        border: 0;
+        background: none;
+        gap: var(--la-space-xs);
+      }
+      :host([quiet]) .check {
+        color: var(--la-color-text-muted);
+        font-size: 14px;
+      }
+      :host([quiet]) .stamp-text {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      :host([quiet]) .stamp-text .meta {
+        color: var(--la-color-text-muted);
+      }
+
+      .stamp-actions {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        flex-shrink: 0;
+      }
+
+      /* Subdued history toggle — a quiet text affordance, never a button. */
+      .history-toggle {
+        appearance: none;
+        background: none;
+        border: 0;
+        padding: 0;
+        font-family: inherit;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+        text-decoration-color: var(--la-color-border);
+        transition: color var(--dur-fast) var(--ease);
+      }
+      .history-toggle:hover {
+        color: var(--la-color-text);
+      }
+      .history-toggle:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+        border-radius: var(--la-radius-sm);
+      }
+
+      /* ── Stacked history (la-activity-item timeline) ───────── */
+      .history {
+        margin-top: var(--la-space-md);
+        padding-left: var(--la-space-xs);
+      }
+
+      /* ── Reopen reason (inline) ────────────────────────────── */
+      .reopen {
+        margin-top: var(--la-space-md);
+        padding: var(--la-space-md);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg-subtle);
+      }
+      .reopen-label {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+        margin-bottom: var(--la-space-2xs);
+      }
+      .reopen-hint {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-bottom: var(--la-space-sm);
+      }
+      .reopen-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--la-space-sm);
+        margin-top: var(--la-space-sm);
+      }
+    `,
+  ];
+  __decorate$1k([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaStepSignoff.prototype, "signed", void 0);
+  __decorate$1k([
+      n({ attribute: false })
+  ], exports.LaStepSignoff.prototype, "stamps", void 0);
+  __decorate$1k([
+      n({ type: Boolean })
+  ], exports.LaStepSignoff.prototype, "reopenable", void 0);
+  __decorate$1k([
+      n()
+  ], exports.LaStepSignoff.prototype, "label", void 0);
+  __decorate$1k([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaStepSignoff.prototype, "quiet", void 0);
+  __decorate$1k([
+      r()
+  ], exports.LaStepSignoff.prototype, "_reopening", void 0);
+  __decorate$1k([
+      r()
+  ], exports.LaStepSignoff.prototype, "_historyOpen", void 0);
+  __decorate$1k([
+      r()
+  ], exports.LaStepSignoff.prototype, "_reason", void 0);
+  exports.LaStepSignoff = __decorate$1k([
+      t$1('la-step-signoff')
+  ], exports.LaStepSignoff);
+
+  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-sla-pill — the shared SLA urgency token.
+   *
+   * One small pill that maps an SLA state to the sanctioned green/amber/red
+   * urgency scale (the one place colour signals urgency): `on` → resolved green,
+   * `risk` → proactive amber, `late` → urgent red (with a ⚠ glyph), `none` → a
+   * muted grey "—" for cases with no confirmed level/SLA.
+   *
+   * It is deliberately presentational — the consumer decides the status and the
+   * label text (e.g. "5 days", "88%", "3 days left"). Reused by the dashboard
+   * module tiles, the X1 SLA strip, and the X2 My-Cases column.
+   *
+   * @prop status - 'on' | 'risk' | 'late' | 'none'
+   * @prop label  - text shown in the pill (falls back to "—" when status is none)
+   * @prop size   - 'sm' | 'default'
+   * @prop clickable - render as a button (fires `la-sla-click`) — used by the X2 cell
+   */
+  exports.LaSlaPill = class LaSlaPill extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.status = 'on';
+          this.label = '';
+          this.size = 'default';
+          this.clickable = false;
+      }
+      _emit() {
+          this.dispatchEvent(new CustomEvent('la-sla-click', { bubbles: true, composed: true }));
+      }
+      render() {
+          const cls = 'pill s-' + this.status;
+          const text = this.status === 'none' && !this.label ? '—' : this.label;
+          const glyph = this.status === 'late'
+              ? b `${iconStyles}<i class="ph-fill ph-warning" aria-hidden="true"></i>`
+              : '';
+          return this.clickable
+              ? b `<button
+          class=${cls}
+          @click=${this._emit}
+          type="button"
+        >${glyph}${text}</button>`
+              : b `<span class=${cls}>${glyph}${text}</span>`;
+      }
+  };
+  exports.LaSlaPill.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-flex;
+      }
+      .pill {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        padding: 2px var(--la-space-sm);
+        border-radius: var(--la-radius-pill);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+        border: 0;
+        font-family: inherit;
+        line-height: 1.4;
+      }
+      :host([size='sm']) .pill {
+        font-size: var(--la-font-size-xs);
+        padding: 1px var(--la-space-xs);
+      }
+      button.pill {
+        cursor: pointer;
+        transition: filter var(--dur-fast) var(--ease);
+      }
+      button.pill:hover {
+        filter: brightness(0.97);
+      }
+      .pill i {
+        font-size: 12px;
+      }
+      .s-on {
+        background: var(--la-color-resolved-bg);
+        color: var(--la-color-resolved-text);
+      }
+      .s-risk {
+        background: var(--la-color-proactive-bg);
+        color: var(--la-color-proactive-text);
+      }
+      .s-late {
+        background: var(--la-color-urgent-bg);
+        color: var(--la-color-urgent-text);
+        font-weight: var(--la-font-weight-semibold);
+      }
+      .s-none {
+        background: var(--la-color-bg-muted);
+        color: var(--la-color-text-faint);
+      }
+    `,
+  ];
+  __decorate$1j([
+      n({ reflect: true })
+  ], exports.LaSlaPill.prototype, "status", void 0);
+  __decorate$1j([
+      n()
+  ], exports.LaSlaPill.prototype, "label", void 0);
+  __decorate$1j([
+      n({ reflect: true })
+  ], exports.LaSlaPill.prototype, "size", void 0);
+  __decorate$1j([
+      n({ type: Boolean })
+  ], exports.LaSlaPill.prototype, "clickable", void 0);
+  exports.LaSlaPill = __decorate$1j([
+      t$1('la-sla-pill')
+  ], exports.LaSlaPill);
+
+  var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-date-tile — a compact, borderless date tile for deadlines.
+   *
+   * Day number under a 3-letter month, as given (never all caps). No border, no header — the
+   * tile is a single tinted block whose `tone` maps to the sanctioned urgency
+   * scale so an upcoming deadline reads its status at a glance:
+   *   • `default`   — soft grey block (no urgency)
+   *   • `proactive` — amber (approaching / heads-up)
+   *   • `urgent`    — red (due now / overdue)
+   *
+   * Deliberately presentational — the consumer supplies the date parts and tone.
+   * Used in the Upcoming Deadlines list and anywhere a dated obligation is shown.
+   *
+   * @prop tone  - 'default' | 'urgent' | 'proactive'
+   * @prop day   - day number, e.g. "14"
+   * @prop month - short month, e.g. "Aug"
+   */
+  exports.LaDateTile = class LaDateTile extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.tone = 'default';
+          this.day = '';
+          this.month = '';
+      }
+      render() {
+          return b `
+      <div class="tile" part="tile">
+        ${this.month ? b `<span class="month">${this.month}</span>` : ''}
+        ${this.day ? b `<span class="day">${this.day}</span>` : ''}
+      </div>
+    `;
+      }
+  };
+  exports.LaDateTile.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-flex;
+      }
+      .tile {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 1px;
+        box-sizing: border-box;
+        width: 44px;
+        height: 44px;
+        padding: 0;
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg-muted);
+        text-align: center;
+        font-variant-numeric: tabular-nums;
+      }
+      /* Month sits on top (small), day number below (large). */
+      .month {
+        /* 9px is a deliberate one-off below the type scale — approved for this
+           tiny calendar-tile month label only; do not reuse elsewhere. */
+        font-size: 9px;
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text-muted);
+        line-height: 1.2;
+      }
+      .day {
+        font-size: var(--la-font-size-lg);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+        line-height: 1.05;
+      }
+
+      /* ── Tones — tint the whole block + its text ── */
+      :host([tone='urgent']) .tile {
+        background: var(--la-color-urgent-bg);
+      }
+      :host([tone='urgent']) .day {
+        color: var(--la-color-urgent-text);
+      }
+      :host([tone='urgent']) .month {
+        color: var(--la-color-urgent-text);
+        opacity: 0.75;
+      }
+      :host([tone='proactive']) .tile {
+        background: var(--la-color-proactive-bg);
+      }
+      :host([tone='proactive']) .day {
+        color: var(--la-color-proactive-text);
+      }
+      :host([tone='proactive']) .month {
+        color: var(--la-color-proactive-text);
+        opacity: 0.75;
+      }
+    `,
+  ];
+  __decorate$1i([
+      n({ reflect: true })
+  ], exports.LaDateTile.prototype, "tone", void 0);
+  __decorate$1i([
+      n()
+  ], exports.LaDateTile.prototype, "day", void 0);
+  __decorate$1i([
+      n()
+  ], exports.LaDateTile.prototype, "month", void 0);
+  exports.LaDateTile = __decorate$1i([
+      t$1('la-date-tile')
+  ], exports.LaDateTile);
+
+  var __decorate$1h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-sla-strip — the X1 persistent SLA indicator strip.
+   *
+   * Always-visible strip across the top of the case-plan area. Three inline
+   * elements: the current stage (`Stage X of Y — Name`), an SLA pill carrying the
+   * sanctioned green/amber/red urgency for the *active stage* ("N days remaining"),
+   * and a second pill for the overall `Case SLA: N days`. The whole strip is a
+   * button — clicking opens a popover with the per-stage SLA breakdown (each stage:
+   * status · day · target · days remaining); selecting a stage row fires
+   * `la-stage-select`.
+   *
+   * Urgency colour comes from `la-sla-pill` (the one place colour signals urgency —
+   * no fourth colour). The strip is presentational: the host decides each stage's
+   * status from the configured per-level (L1/L2/L3) SLA. The breakdown popover
+   * reuses the `.t-dropdown` animation pattern (inlined — motion.css is document-
+   * scope and does not penetrate shadow DOM).
+   *
+   * @prop stageIndex   - 1-based index of the current stage.
+   * @prop stageTotal   - Total number of stages.
+   * @prop stageName    - Name of the current stage.
+   * @prop stageStatus  - SlaStatus for the active-stage pill (urgency of "N days remaining").
+   * @prop stageDaysLabel - Text inside the active-stage pill, e.g. "3 days remaining".
+   * @prop caseSlaDays  - Whole-case SLA, in days (rendered as "Case SLA: N days").
+   * @prop caseStatus   - SlaStatus for the overall case-SLA pill.
+   * @prop stages       - SlaStage[] powering the breakdown popover.
+   * @fires la-stage-select - {index:number} (1-based) when a breakdown row is chosen.
+   *
+   * @example
+   * <la-sla-strip
+   *   stage-index="2" stage-total="6" stage-name="Investigation plan"
+   *   stage-status="risk" stage-days-label="3 days remaining"
+   *   case-sla-days="30" case-status="on"
+   *   .stages=${stages}
+   * ></la-sla-strip>
+   */
+  exports.LaSlaStrip = class LaSlaStrip extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.stageIndex = 1;
+          this.stageTotal = 1;
+          this.stageName = '';
+          this.stageStatus = 'on';
+          this.stageDaysLabel = '';
+          this.caseSlaDays = 0;
+          this.caseStatus = 'on';
+          this.stages = [];
+          this.open = false;
+          this._phase = '';
+          this._closeTimer = null;
+          this._onDocumentMousedown = (e) => {
+              if (!this.open)
+                  return;
+              if (!e.composedPath().includes(this))
+                  this._close();
+          };
+          this._onKeydown = (e) => {
+              if (e.key === 'Escape' && this.open) {
+                  e.stopPropagation();
+                  this._close();
+              }
+          };
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          document.addEventListener('mousedown', this._onDocumentMousedown, true);
+          this.addEventListener('keydown', this._onKeydown);
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          document.removeEventListener('mousedown', this._onDocumentMousedown, true);
+          this.removeEventListener('keydown', this._onKeydown);
+          if (this._closeTimer != null)
+              window.clearTimeout(this._closeTimer);
+      }
+      updated(changed) {
+          if (!changed.has('open'))
+              return;
+          if (this.open) {
+              this._phase = '';
+              if (this._closeTimer != null) {
+                  window.clearTimeout(this._closeTimer);
+                  this._closeTimer = null;
+              }
+              requestAnimationFrame(() => {
+                  this._phase = 'is-open';
+              });
+          }
+          else if (this._phase === 'is-open') {
+              this._phase = 'is-closing';
+              this._closeTimer = window.setTimeout(() => {
+                  this._phase = '';
+                  this._closeTimer = null;
+              }, 150);
+          }
+      }
+      _toggle() {
+          this.open = !this.open;
+      }
+      _close() {
+          this.open = false;
+      }
+      _selectStage(index) {
+          this.dispatchEvent(new CustomEvent('la-stage-select', {
+              detail: { index },
+              bubbles: true,
+              composed: true,
+          }));
+          this._close();
+      }
+      _stateGlyph(state) {
+          if (state === 'complete') {
+              return b `<i class="ph-fill ph-check-circle state done" aria-hidden="true"></i>`;
+          }
+          if (state === 'active') {
+              return b `<i class="ph-fill ph-circle state active" aria-hidden="true"></i>`;
+          }
+          return b `<i class="ph ph-circle state pending" aria-hidden="true"></i>`;
+      }
+      _renderRows() {
+          return this.stages.map((s, i) => {
+              const idx = i + 1;
+              const isCurrent = idx === this.stageIndex;
+              const meta = [s.day, s.target].filter(Boolean).join(' · ');
+              return b `<button
+        class="row"
+        type="button"
+        role="menuitem"
+        aria-current=${isCurrent ? 'true' : 'false'}
+        @click=${() => this._selectStage(idx)}
+      >
+        <span class="row-main">
+          <span class="row-name">
+            ${this._stateGlyph(s.state)}${s.name}
+          </span>
+          ${meta ? b `<span class="row-meta">${meta}</span>` : A}
+        </span>
+        <la-sla-pill
+          size="sm"
+          status=${s.status ?? 'none'}
+          label=${s.daysLeft ?? ''}
+        ></la-sla-pill>
+      </button>`;
+          });
+      }
+      render() {
+          const hasStages = this.stages.length > 0;
+          return b `
+      ${iconStyles}
+      <button
+        class="strip"
+        part="strip"
+        type="button"
+        aria-haspopup="dialog"
+        aria-expanded=${this.open ? 'true' : 'false'}
+        @click=${this._toggle}
+      >
+        <span class="stage" part="stage">
+          <span class="stage-count"
+            >Stage ${this.stageIndex} of ${this.stageTotal}<span part="stage-sep"> —</span></span
+          >
+          <span class="stage-name" part="stage-name">${this.stageName}</span>
+        </span>
+        <span class="sep" part="sep-lead" aria-hidden="true"></span>
+        <la-sla-pill
+          status=${this.stageStatus}
+          label=${this.stageDaysLabel}
+        ></la-sla-pill>
+        <span class="sep" aria-hidden="true"></span>
+        <span class="case-sla">
+          <span class="lbl">Case SLA:</span>
+          <la-sla-pill
+            status=${this.caseStatus}
+            label=${`${this.caseSlaDays} days`}
+          ></la-sla-pill>
+        </span>
+        ${hasStages
+            ? b `<span class="caret"
+              ><i class="ph ph-caret-down" aria-hidden="true"></i
+            ></span>`
+            : A}
+      </button>
+
+      ${hasStages
+            ? b `<div
+            class="popover ${this._phase}"
+            role="dialog"
+            aria-label="SLA breakdown by stage"
+            ?inert=${this._phase === ''}
+            aria-hidden=${this._phase === '' ? 'true' : 'false'}
+          >
+            <div class="pop-title">SLA breakdown by stage</div>
+            ${this._renderRows()}
+          </div>`
+            : A}
+    `;
+      }
+  };
+  exports.LaSlaStrip.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        position: relative;
+      }
+
+      .strip {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        width: 100%;
+        box-sizing: border-box;
+        padding: var(--la-space-sm) var(--la-space-md);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg-subtle);
+        font-family: inherit;
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        text-align: left;
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease),
+          border-color var(--dur-fast) var(--ease);
+      }
+      .strip:hover {
+        background: var(--la-color-bg-muted);
+        border-color: var(--la-color-border);
+      }
+      .strip:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+      }
+
+      .stage {
+        display: inline-flex;
+        align-items: baseline;
+        gap: var(--la-space-2xs);
+        min-width: 0;
+      }
+      .stage-count {
+        color: var(--la-color-text-muted);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+      }
+      .stage-name {
+        font-weight: var(--la-font-weight-semibold);
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+
+      .sep {
+        width: 1px;
+        align-self: stretch;
+        background: var(--la-color-border-light);
+        flex-shrink: 0;
+      }
+
+      .case-sla {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        white-space: nowrap;
+        color: var(--la-color-text-secondary);
+      }
+      .case-sla .lbl {
+        font-size: var(--la-font-size-sm);
+      }
+
+      .caret {
+        margin-left: auto;
+        display: inline-flex;
+        color: var(--la-color-text-faint);
+        font-size: 14px;
+        transition: transform var(--dur-fast) var(--ease);
+      }
+      :host([open]) .caret {
+        transform: rotate(180deg);
+      }
+
+      /* ── Breakdown popover (.t-dropdown pattern, inlined) ───── */
+      .popover {
+        position: absolute;
+        z-index: 50;
+        top: calc(100% + var(--la-space-xs));
+        left: 0;
+        right: 0;
+        transform-origin: top center;
+        background: var(--la-color-bg);
+        border-radius: var(--la-radius-lg);
+        box-shadow: var(--la-shadow-popover);
+        padding: var(--la-space-sm);
+        transform: scale(0.97);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform var(--dur-modal) var(--ease-spring-sm),
+          opacity var(--dur-modal) var(--ease-spring-sm);
+        will-change: transform, opacity;
+      }
+      .popover.is-open {
+        transform: scale(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .popover.is-closing {
+        transform: scale(0.99);
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          transform var(--dur-fast) var(--ease-spring-sm),
+          opacity var(--dur-fast) var(--ease-spring-sm);
+      }
+
+      .pop-title {
+        padding: var(--la-space-xs) var(--la-space-sm) var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text-muted);
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: var(--la-space-md);
+        width: 100%;
+        box-sizing: border-box;
+        padding: var(--la-space-sm);
+        border: 0;
+        border-radius: var(--la-radius-md);
+        background: none;
+        font-family: inherit;
+        text-align: left;
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease);
+      }
+      .row:hover {
+        background: var(--la-color-bg-muted);
+      }
+      .row:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: -2px;
+      }
+      .row[aria-current='true'] {
+        background: var(--la-color-bg-active);
+      }
+
+      .row-main {
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-3xs);
+      }
+      .row-name {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+      .row-name .state {
+        font-size: 13px;
+        flex-shrink: 0;
+      }
+      .row-name .state.done {
+        color: var(--la-color-resolved);
+      }
+      .row-name .state.active {
+        color: var(--la-color-primary);
+      }
+      .row-name .state.pending {
+        color: var(--la-color-text-faint);
+      }
+      .row-meta {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .strip,
+        .caret,
+        .popover,
+        .row {
+          transition: none !important;
+        }
+      }
+    `,
+  ];
+  __decorate$1h([
+      n({ type: Number, attribute: 'stage-index' })
+  ], exports.LaSlaStrip.prototype, "stageIndex", void 0);
+  __decorate$1h([
+      n({ type: Number, attribute: 'stage-total' })
+  ], exports.LaSlaStrip.prototype, "stageTotal", void 0);
+  __decorate$1h([
+      n({ attribute: 'stage-name' })
+  ], exports.LaSlaStrip.prototype, "stageName", void 0);
+  __decorate$1h([
+      n({ attribute: 'stage-status' })
+  ], exports.LaSlaStrip.prototype, "stageStatus", void 0);
+  __decorate$1h([
+      n({ attribute: 'stage-days-label' })
+  ], exports.LaSlaStrip.prototype, "stageDaysLabel", void 0);
+  __decorate$1h([
+      n({ type: Number, attribute: 'case-sla-days' })
+  ], exports.LaSlaStrip.prototype, "caseSlaDays", void 0);
+  __decorate$1h([
+      n({ attribute: 'case-status' })
+  ], exports.LaSlaStrip.prototype, "caseStatus", void 0);
+  __decorate$1h([
+      n({ attribute: false })
+  ], exports.LaSlaStrip.prototype, "stages", void 0);
+  __decorate$1h([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaSlaStrip.prototype, "open", void 0);
+  __decorate$1h([
+      r()
+  ], exports.LaSlaStrip.prototype, "_phase", void 0);
+  exports.LaSlaStrip = __decorate$1h([
+      t$1('la-sla-strip')
+  ], exports.LaSlaStrip);
+
+  var __decorate$1g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var LaBandwidthBar_1;
+  exports.LaBandwidthBar = LaBandwidthBar_1 = class LaBandwidthBar extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.filled = 0;
+          this.label = '';
+          this.showCount = false;
+      }
+      /** Map a raw case count to the green/amber/red load band (green ≤4, amber 5–7, red 8+). */
+      get load() {
+          if (this.filled >= 8)
+              return 'red';
+          if (this.filled >= 5)
+              return 'amber';
+          return 'green';
+      }
+      render() {
+          const total = LaBandwidthBar_1.SEGMENTS;
+          const on = Math.min(total, Math.max(0, Math.round(this.filled)));
+          const load = this.load;
+          const readout = this.count ?? this.filled;
+          const cells = [];
+          for (let i = 0; i < total; i++) {
+              cells.push(b `<span class="seg ${i < on ? `on load-${load}` : ''}"></span>`);
+          }
+          return b `
+      <div class="row">
+        ${this.label ? b `<span class="label">${this.label}</span>` : ''}
+        <span
+          class="track"
+          role="img"
+          aria-label=${`${this.label ? this.label + ': ' : ''}${readout} of ${total} — ${load} load`}
+          >${cells}</span
+        >
+        ${this.showCount
+            ? b `<span class="count load-${load}">${readout}</span>`
+            : ''}
+      </div>
+    `;
+      }
+  };
+  /** Total cells in the gauge — fixed at 8 per the X13 spec. */
+  exports.LaBandwidthBar.SEGMENTS = 8;
+  exports.LaBandwidthBar.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .row {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+      }
+      .label {
+        flex: 1;
+        min-width: 0;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .track {
+        display: flex;
+        gap: 2px;
+        flex-shrink: 0;
+      }
+      .seg {
+        width: var(--la-bandwidth-seg-width, 9px);
+        height: var(--la-bandwidth-seg-height, 8px);
+        border-radius: 2px;
+        background: var(--la-color-bg-active);
+      }
+      .seg.on.load-green {
+        background: var(--la-color-resolved);
+      }
+      .seg.on.load-amber {
+        background: var(--la-color-proactive);
+      }
+      .seg.on.load-red {
+        background: var(--la-color-urgent);
+      }
+      .count {
+        flex-shrink: 0;
+        min-width: 30px;
+        text-align: right;
+        font-size: var(--la-font-size-sm);
+        font-variant-numeric: tabular-nums;
+        color: var(--la-color-text-muted);
+      }
+      .count.load-red {
+        color: var(--la-color-urgent-text);
+        font-weight: var(--la-font-weight-medium);
+      }
+    `,
+  ];
+  __decorate$1g([
+      n({ type: Number })
+  ], exports.LaBandwidthBar.prototype, "filled", void 0);
+  __decorate$1g([
+      n()
+  ], exports.LaBandwidthBar.prototype, "label", void 0);
+  __decorate$1g([
+      n({ type: Number })
+  ], exports.LaBandwidthBar.prototype, "count", void 0);
+  __decorate$1g([
+      n({ type: Boolean, attribute: 'show-count' })
+  ], exports.LaBandwidthBar.prototype, "showCount", void 0);
+  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1g([
+      t$1('la-bandwidth-bar')
+  ], exports.LaBandwidthBar);
+
+  var __decorate$1f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-level-indicator
+   *
+   * 32×32 square badge showing a case complexity level (L1–L3+).
+   * Colour progression cream → yellow → amber → pink (L1 → L3+), dark ink on
+   * every chip, from the --la-color-level-* tokens.
+   *
+   * @attr level - '1' | '2' | '3' | '3+' (default '1')
+   * @attr size  - 'sm' (24px) | 'default' (32px)
+   */
+  exports.LaLevelIndicator = class LaLevelIndicator extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.level = '1';
+          this.size = 'default';
+      }
+      render() {
+          return b `<div class="badge">L${this.level}</div>`;
+      }
+  };
+  exports.LaLevelIndicator.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-flex;
+        flex-shrink: 0;
+      }
+
+      .badge {
+        width: var(--_size, 32px);
+        height: var(--_size, 32px);
+        border-radius: var(--la-radius-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: var(--la-font-family);
+        font-size: 11px;
+        font-weight: var(--la-font-weight-semibold);
+        letter-spacing: 0.1px;
+        line-height: 1;
+        user-select: none;
+      }
+
+      :host([size='sm']) .badge {
+        --_size: 24px;
+        font-size: 10px;
+      }
+
+      /* Case-level scale — cream → yellow → amber → pink, dark ink throughout. */
+      .badge { color: var(--la-color-level-text); }
+
+      /* L1 — Routine: pale cream */
+      :host([level='1']) .badge { background: var(--la-color-level-1); }
+
+      /* L2 — Moderate: yellow */
+      :host([level='2']) .badge { background: var(--la-color-level-2); }
+
+      /* L3 — Complex: amber */
+      :host([level='3']) .badge { background: var(--la-color-level-3); }
+
+      /* L3+ — External counsel: pink */
+      :host([level='3+']) .badge { background: var(--la-color-level-3plus); }
+    `,
+  ];
+  __decorate$1f([
+      n({ reflect: true })
+  ], exports.LaLevelIndicator.prototype, "level", void 0);
+  __decorate$1f([
+      n({ reflect: true })
+  ], exports.LaLevelIndicator.prototype, "size", void 0);
+  exports.LaLevelIndicator = __decorate$1f([
+      t$1('la-level-indicator')
+  ], exports.LaLevelIndicator);
+
+  var __decorate$1e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-distribution-bar — a horizontal segmented bar showing how a total splits
+   * across ordered stages (e.g. a pipeline: New / In Progress / Review / …).
+   *
+   * Each segment's width is proportional to its value; segments ramp from muted
+   * to primary left→right so "further along" reads darker. Each segment shows its
+   * count + label on hover (native title). Reused on the dashboard module tiles
+   * and the Operations pipeline swim-lane.
+   *
+   * @prop segments - DistributionSegment[] (set as a property, not an attribute)
+   * @prop height   - bar height in px (default 8)
+   */
+  exports.LaDistributionBar = class LaDistributionBar extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.segments = [];
+          this.height = 8;
+      }
+      render() {
+          const total = this.segments.reduce((s, x) => s + (x.value || 0), 0) || 1;
+          const n = this.segments.length;
+          return b `
+      <div
+        class="bar"
+        style="height:${this.height}px"
+        role="img"
+        aria-label=${this.segments
+            .map((s) => `${s.label}: ${s.value}`)
+            .join(', ')}
+      >
+        ${this.segments.map((s, i) => {
+            // map index across the 5-step muted→primary ramp regardless of count
+            const ramp = n <= 1 ? 4 : Math.round((i / (n - 1)) * 4);
+            const pct = ((s.value || 0) / total) * 100;
+            const style = `flex:${pct} 1 0` + (s.color ? `;background:${s.color}` : '');
+            return b `<div
+            class="seg r${ramp}"
+            style=${style}
+            title="${s.label}: ${s.value}"
+          ></div>`;
+        })}
+      </div>
+    `;
+      }
+  };
+  exports.LaDistributionBar.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .bar {
+        display: flex;
+        width: 100%;
+        gap: 2px;
+        border-radius: var(--la-radius-pill);
+        overflow: hidden;
+      }
+      .seg {
+        min-width: 3px;
+        background: var(--la-color-bg-muted);
+      }
+      /* muted → primary ramp; later stages read darker */
+      .seg.r0 { background: var(--la-color-border); }
+      .seg.r1 { background: var(--la-color-text-faint); }
+      .seg.r2 { background: var(--la-color-text-muted); }
+      .seg.r3 { background: var(--la-color-text-secondary); }
+      .seg.r4 { background: var(--la-color-primary); }
+    `,
+  ];
+  __decorate$1e([
+      n({ attribute: false })
+  ], exports.LaDistributionBar.prototype, "segments", void 0);
+  __decorate$1e([
+      n({ type: Number })
+  ], exports.LaDistributionBar.prototype, "height", void 0);
+  exports.LaDistributionBar = __decorate$1e([
+      t$1('la-distribution-bar')
+  ], exports.LaDistributionBar);
+
+  var __decorate$1d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2298,11 +4273,17 @@
           this.label = '';
           this.hint = '';
           this.required = false;
+          /** `sm` = the 28px control height of `la-button size="sm"`, for filter bars. */
+          this.size = 'default';
           this.optional = false;
           this.disabled = false;
           this.error = false;
+          /* Opt-in reveal toggle for password fields. Off by default — nothing that
+             already uses la-input changes. */
+          this.reveal = false;
           this._hasIconLeft = false;
           this._hasIconRight = false;
+          this._shown = false;
       }
       _checkLeft(e) {
           this._hasIconLeft = e.target.assignedElements().length > 0;
@@ -2314,11 +4295,15 @@
           this.value = e.target.value;
           this.dispatchEvent(new CustomEvent('la-change', { detail: { value: this.value }, bubbles: true, composed: true }));
       }
+      _toggleReveal() {
+          this._shown = !this._shown;
+      }
       render() {
+          const canReveal = this.reveal && this.type === 'password';
           const shellClass = [
               'input-shell',
               this._hasIconLeft ? 'has-left' : '',
-              this._hasIconRight ? 'has-right' : '',
+              this._hasIconRight || canReveal ? 'has-right' : '',
           ].filter(Boolean).join(' ');
           return b `
       ${iconStyles}
@@ -2332,7 +4317,7 @@
         </span>
         <input
           id=${this._inputId}
-          type=${this.type}
+          type=${canReveal && this._shown ? 'text' : this.type}
           name=${this.name}
           placeholder=${this.placeholder}
           inputmode=${this.inputmode}
@@ -2346,6 +4331,13 @@
         <span class="icon icon--right" aria-hidden="true">
           <slot name="icon-right" @slotchange=${this._checkRight}></slot>
         </span>
+        ${canReveal ? b `
+          <button
+            class="reveal"
+            type="button"
+            aria-label=${this._shown ? 'Hide password' : 'Show password'}
+            @click=${this._toggleReveal}
+          ><i class=${this._shown ? 'ph ph-eye' : 'ph ph-eye-slash'}></i></button>` : ''}
       </div>
       ${this.hint ? b `<div class="hint">${this.hint}</div>` : ''}
     `;
@@ -2388,6 +4380,30 @@
       }
       .icon--left  { left:  var(--la-space-md); }
       .icon--right { right: var(--la-space-md); }
+      /* Reveal toggle — a real button, so it sits outside the .icon slots
+         (those are decorative and take no pointer events). */
+      .reveal {
+        position: absolute;
+        right: var(--la-space-sm);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 28px;
+        height: 28px;
+        padding: 0;
+        border: none;
+        border-radius: var(--la-radius-sm);
+        background: transparent;
+        color: var(--la-color-text-muted);
+        font-size: var(--la-font-size-base);
+        cursor: pointer;
+        transition: color var(--dur-fast) var(--ease);
+      }
+      .reveal:hover { color: var(--la-color-text-secondary); }
+      .reveal:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 1px;
+      }
       input {
         width: 100%;
         box-sizing: border-box;
@@ -2432,58 +4448,84 @@
       :host([error]) .hint {
         color: var(--la-color-danger-text);
       }
+      /* size="sm" (17 Sep 2026): the options-bar height. Matches --la-button-height-sm
+         so a search box, a select and a button share one row without a step. */
+      :host([size='sm']) input {
+        height: var(--la-button-height-sm);
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: var(--la-space-sm);
+        padding-right: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        border-radius: var(--la-radius-sm);
+      }
+      :host([size='sm']) .icon { font-size: var(--la-font-size-sm); }
+      :host([size='sm']) .icon--left  { left:  var(--la-space-sm); }
+      :host([size='sm']) .icon--right { right: var(--la-space-sm); }
+      :host([size='sm']) .has-left  input { padding-left:  calc(var(--la-space-sm) + var(--la-font-size-sm) + var(--la-space-xs)); }
+      :host([size='sm']) .has-right input { padding-right: calc(var(--la-space-sm) + var(--la-font-size-sm) + var(--la-space-xs)); }
+      :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$X([
+  __decorate$1d([
       n({ reflect: true })
   ], exports.LaInput.prototype, "type", void 0);
-  __decorate$X([
+  __decorate$1d([
       n()
   ], exports.LaInput.prototype, "name", void 0);
-  __decorate$X([
+  __decorate$1d([
       n()
   ], exports.LaInput.prototype, "placeholder", void 0);
-  __decorate$X([
+  __decorate$1d([
       n({ reflect: true })
   ], exports.LaInput.prototype, "inputmode", void 0);
-  __decorate$X([
+  __decorate$1d([
       n()
   ], exports.LaInput.prototype, "autocomplete", void 0);
-  __decorate$X([
+  __decorate$1d([
       n({ attribute: 'aria-label' })
   ], exports.LaInput.prototype, "ariaLabel", void 0);
-  __decorate$X([
+  __decorate$1d([
       n()
   ], exports.LaInput.prototype, "value", void 0);
-  __decorate$X([
+  __decorate$1d([
       n()
   ], exports.LaInput.prototype, "label", void 0);
-  __decorate$X([
+  __decorate$1d([
       n()
   ], exports.LaInput.prototype, "hint", void 0);
-  __decorate$X([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "required", void 0);
-  __decorate$X([
+  __decorate$1d([
+      n({ reflect: true })
+  ], exports.LaInput.prototype, "size", void 0);
+  __decorate$1d([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "optional", void 0);
-  __decorate$X([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "disabled", void 0);
-  __decorate$X([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "error", void 0);
-  __decorate$X([
+  __decorate$1d([
+      n({ type: Boolean })
+  ], exports.LaInput.prototype, "reveal", void 0);
+  __decorate$1d([
       r()
   ], exports.LaInput.prototype, "_hasIconLeft", void 0);
-  __decorate$X([
+  __decorate$1d([
       r()
   ], exports.LaInput.prototype, "_hasIconRight", void 0);
-  exports.LaInput = __decorate$X([
-      t('la-input')
+  __decorate$1d([
+      r()
+  ], exports.LaInput.prototype, "_shown", void 0);
+  exports.LaInput = __decorate$1d([
+      t$1('la-input')
   ], exports.LaInput);
 
-  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2812,286 +4854,56 @@
       :host([disabled]) { opacity: 0.4; }
     `,
   ];
-  __decorate$W([
+  __decorate$1c([
       n({ attribute: 'value' })
   ], exports.LaDateInput.prototype, "_dateValue", void 0);
-  __decorate$W([
+  __decorate$1c([
       n()
   ], exports.LaDateInput.prototype, "locale", void 0);
-  __decorate$W([
+  __decorate$1c([
       n()
   ], exports.LaDateInput.prototype, "label", void 0);
-  __decorate$W([
+  __decorate$1c([
       n()
   ], exports.LaDateInput.prototype, "hint", void 0);
-  __decorate$W([
+  __decorate$1c([
       n()
   ], exports.LaDateInput.prototype, "min", void 0);
-  __decorate$W([
+  __decorate$1c([
       n()
   ], exports.LaDateInput.prototype, "max", void 0);
-  __decorate$W([
+  __decorate$1c([
       n({ attribute: 'aria-label' })
   ], exports.LaDateInput.prototype, "ariaLabel", void 0);
-  __decorate$W([
+  __decorate$1c([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "required", void 0);
-  __decorate$W([
+  __decorate$1c([
       n({ type: Boolean })
   ], exports.LaDateInput.prototype, "optional", void 0);
-  __decorate$W([
+  __decorate$1c([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "disabled", void 0);
-  __decorate$W([
+  __decorate$1c([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "error", void 0);
-  __decorate$W([
+  __decorate$1c([
       r()
   ], exports.LaDateInput.prototype, "_month", void 0);
-  __decorate$W([
+  __decorate$1c([
       r()
   ], exports.LaDateInput.prototype, "_day", void 0);
-  __decorate$W([
+  __decorate$1c([
       r()
   ], exports.LaDateInput.prototype, "_year", void 0);
-  __decorate$W([
+  __decorate$1c([
       r()
   ], exports.LaDateInput.prototype, "_message", void 0);
-  exports.LaDateInput = __decorate$W([
-      t('la-date-input')
+  exports.LaDateInput = __decorate$1c([
+      t$1('la-date-input')
   ], exports.LaDateInput);
 
-  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-      return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  exports.LaTextarea = class LaTextarea extends i$2 {
-      constructor() {
-          super(...arguments);
-          this._inputId = `la-textarea-${Math.random().toString(36).slice(2, 8)}`;
-          this.name = '';
-          this.placeholder = '';
-          this.value = '';
-          this.label = '';
-          this.hint = '';
-          this.required = false;
-          this.disabled = false;
-          this.error = false;
-          this.rows = 3;
-          this.minRows = 3;
-          this.maxRows = 8;
-          this.showCount = false;
-          this._lastInlineSize = 0;
-      }
-      firstUpdated() {
-          this._autosize();
-          this._resizeObs = new ResizeObserver((entries) => {
-              const w = entries[0]?.contentRect.width ?? 0;
-              if (w !== this._lastInlineSize) {
-                  this._lastInlineSize = w;
-                  this._autosize();
-              }
-          });
-          this._resizeObs.observe(this);
-      }
-      updated(changed) {
-          if (changed.has('value') || changed.has('minRows') || changed.has('maxRows')) {
-              this._autosize();
-          }
-      }
-      disconnectedCallback() {
-          super.disconnectedCallback();
-          this._resizeObs?.disconnect();
-      }
-      _autosize() {
-          const ta = this._textarea;
-          if (!ta)
-              return;
-          const styles = getComputedStyle(ta);
-          const lineHeight = parseFloat(styles.lineHeight);
-          const paddingTop = parseFloat(styles.paddingTop);
-          const paddingBottom = parseFloat(styles.paddingBottom);
-          const borderTop = parseFloat(styles.borderTopWidth);
-          const borderBottom = parseFloat(styles.borderBottomWidth);
-          const verticalChrome = paddingTop + paddingBottom + borderTop + borderBottom;
-          const minHeight = lineHeight * this.minRows + verticalChrome;
-          const maxHeight = lineHeight * this.maxRows + verticalChrome;
-          ta.style.height = 'auto';
-          const contentHeight = ta.scrollHeight + borderTop + borderBottom;
-          const clamped = Math.min(Math.max(contentHeight, minHeight), maxHeight);
-          ta.style.height = `${clamped}px`;
-          ta.style.overflowY = contentHeight > maxHeight ? 'auto' : 'hidden';
-      }
-      _handleInput(e) {
-          this.value = e.target.value;
-          this._autosize();
-          this.dispatchEvent(new CustomEvent('la-change', { detail: { value: this.value }, bubbles: true, composed: true }));
-      }
-      render() {
-          const showCounter = this.showCount || typeof this.maxlength === 'number';
-          const overLimit = typeof this.maxlength === 'number' && this.value.length >= this.maxlength;
-          const counterText = typeof this.maxlength === 'number'
-              ? `${this.value.length} / ${this.maxlength}`
-              : `${this.value.length}`;
-          return b `
-      ${this.label
-            ? b `
-            <label for=${this._inputId}>
-              ${this.label}${this.required
-                ? b `<span class="req" aria-hidden="true">*</span>`
-                : ''}
-            </label>
-          `
-            : ''}
-      <textarea
-        id=${this._inputId}
-        name=${this.name}
-        placeholder=${this.placeholder}
-        rows=${this.rows}
-        .value=${this.value}
-        ?disabled=${this.disabled}
-        ?required=${this.required}
-        maxlength=${o(this.maxlength)}
-        @input=${this._handleInput}
-      ></textarea>
-      ${this.hint || showCounter
-            ? b `
-            <div class="meta">
-              ${this.hint ? b `<div class="hint">${this.hint}</div>` : ''}
-              ${showCounter
-                ? b `<div class="count ${overLimit ? 'over' : ''}">${counterText}</div>`
-                : ''}
-            </div>
-          `
-            : ''}
-    `;
-      }
-  };
-  exports.LaTextarea.styles = [
-      tokens,
-      i$5 `
-      :host {
-        display: block;
-      }
-      label {
-        display: block;
-        font-size: var(--la-font-size-base);
-        font-weight: var(--la-font-weight-normal);
-        color: var(--la-color-text);
-        margin-bottom: var(--la-space-2xs);
-      }
-      .req {
-        color: var(--la-color-danger);
-        margin-left: 2px;
-      }
-      textarea {
-        display: block;
-        width: 100%;
-        box-sizing: border-box;
-        font-family: inherit;
-        font-size: var(--la-font-size-base);
-        font-weight: var(--la-font-weight-normal);
-        color: var(--la-color-text);
-        padding: var(--la-space-sm) var(--la-space-md);
-        border-radius: var(--la-radius-md);
-        border: 1px solid var(--la-color-border);
-        background: var(--la-color-bg);
-        outline: none;
-        line-height: var(--la-line-height);
-        resize: none;
-        overflow-y: hidden;
-        transition: border-color var(--dur-fast) var(--ease),
-          box-shadow var(--dur-fast) var(--ease);
-      }
-      textarea:focus {
-        border-color: var(--la-color-border-focus);
-        box-shadow: var(--la-input-shadow-focus);
-      }
-      textarea::placeholder {
-        color: var(--la-color-text-disabled);
-      }
-      textarea:disabled {
-        opacity: 0.4;
-        cursor: not-allowed;
-      }
-      :host([error]) textarea {
-        border-color: var(--la-color-border-danger);
-      }
-      :host([error]) textarea:focus {
-        box-shadow: none;
-      }
-      .meta {
-        display: flex;
-        align-items: flex-start;
-        gap: var(--la-space-md);
-        margin-top: var(--la-space-xs);
-      }
-      .hint {
-        font-size: var(--la-font-size-sm);
-        color: var(--la-color-text-muted);
-      }
-      .count {
-        font-size: var(--la-font-size-sm);
-        color: var(--la-color-text-muted);
-        margin-left: auto;
-        font-variant-numeric: tabular-nums;
-      }
-      :host([error]) .hint,
-      :host([error]) .count,
-      .count.over {
-        color: var(--la-color-danger-text);
-      }
-    `,
-  ];
-  __decorate$V([
-      n()
-  ], exports.LaTextarea.prototype, "name", void 0);
-  __decorate$V([
-      n()
-  ], exports.LaTextarea.prototype, "placeholder", void 0);
-  __decorate$V([
-      n()
-  ], exports.LaTextarea.prototype, "value", void 0);
-  __decorate$V([
-      n()
-  ], exports.LaTextarea.prototype, "label", void 0);
-  __decorate$V([
-      n()
-  ], exports.LaTextarea.prototype, "hint", void 0);
-  __decorate$V([
-      n({ type: Boolean, reflect: true })
-  ], exports.LaTextarea.prototype, "required", void 0);
-  __decorate$V([
-      n({ type: Boolean, reflect: true })
-  ], exports.LaTextarea.prototype, "disabled", void 0);
-  __decorate$V([
-      n({ type: Boolean, reflect: true })
-  ], exports.LaTextarea.prototype, "error", void 0);
-  __decorate$V([
-      n({ type: Number })
-  ], exports.LaTextarea.prototype, "rows", void 0);
-  __decorate$V([
-      n({ type: Number, attribute: 'min-rows' })
-  ], exports.LaTextarea.prototype, "minRows", void 0);
-  __decorate$V([
-      n({ type: Number, attribute: 'max-rows' })
-  ], exports.LaTextarea.prototype, "maxRows", void 0);
-  __decorate$V([
-      n({ type: Number })
-  ], exports.LaTextarea.prototype, "maxlength", void 0);
-  __decorate$V([
-      n({ type: Boolean, attribute: 'show-count' })
-  ], exports.LaTextarea.prototype, "showCount", void 0);
-  __decorate$V([
-      e$1('textarea')
-  ], exports.LaTextarea.prototype, "_textarea", void 0);
-  exports.LaTextarea = __decorate$V([
-      t('la-textarea')
-  ], exports.LaTextarea);
-
-  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3112,12 +4924,21 @@
           this.value = '';
           /** Skipped during keyboard navigation; click is a no-op. */
           this.disabled = false;
+          this._hasCount = false;
           /** Reflected by la-select when value matches. Do not set directly. */
           this.selected = false;
       }
-      /** Plain-text label for type-ahead matching (uses textContent). */
+      _onCountSlot(e) {
+          this._hasCount = e.target.assignedNodes({ flatten: true })
+              .some((n) => n.nodeType === Node.ELEMENT_NODE || (n.textContent || '').trim() !== '');
+      }
+      /** Plain-text label for type-ahead and the la-select trigger. Reads the
+       *  default slot only — a slotted `count` is not part of the name. */
       getLabel() {
-          return (this.textContent || '').trim();
+          const slot = this.shadowRoot?.querySelector('slot:not([name])');
+          const nodes = slot ? slot.assignedNodes({ flatten: true }) : Array.from(this.childNodes);
+          const own = nodes.filter((n) => !(n instanceof Element && n.getAttribute('slot')));
+          return own.map((n) => n.textContent || '').join('').trim();
       }
       connectedCallback() {
           super.connectedCallback();
@@ -3139,6 +4960,7 @@
       ${iconStyles}
       <div class="row">
         <span class="label"><slot></slot></span>
+        <span class="count ${this._hasCount ? '' : 'empty'}"><slot name="count" @slotchange=${this._onCountSlot}></slot></span>
         <i class="check ph ph-check" aria-hidden="true"></i>
       </div>
     `;
@@ -3186,6 +5008,15 @@
         flex: 1;
         min-width: 0;
       }
+      /* A secondary slot for a count or hint ("Employment  4"). Quiet, tabular,
+         never part of the label la-select copies into its trigger. */
+      .count {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        font-variant-numeric: tabular-nums;
+        flex-shrink: 0;
+      }
+      .count.empty { display: none; }
       .check {
         font-size: var(--la-font-size-base);
         color: var(--la-color-text);
@@ -3198,20 +5029,23 @@
       }
     `,
   ];
-  __decorate$U([
+  __decorate$1b([
       n({ reflect: true })
   ], exports.LaOption.prototype, "value", void 0);
-  __decorate$U([
+  __decorate$1b([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "disabled", void 0);
-  __decorate$U([
+  __decorate$1b([
+      r()
+  ], exports.LaOption.prototype, "_hasCount", void 0);
+  __decorate$1b([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "selected", void 0);
-  exports.LaOption = __decorate$U([
-      t('la-option')
+  exports.LaOption = __decorate$1b([
+      t$1('la-option')
   ], exports.LaOption);
 
-  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3239,6 +5073,8 @@
           this.label = '';
           this.hint = '';
           this.required = false;
+          /** `sm` = the 28px control height of `la-button size="sm"`, for filter bars. */
+          this.size = 'default';
           this.disabled = false;
           this.error = false;
           this.open = false;
@@ -3764,46 +5600,457 @@
       .panel[data-scrollable] .scroll-fade {
         display: block;
       }
+      /* size="sm" (17 Sep 2026): mirrors la-input size="sm" so the two sit level in a bar. */
+      :host([size='sm']) .trigger {
+        height: var(--la-button-height-sm);
+        padding-top: 0;
+        padding-bottom: 0;
+        padding-left: var(--la-space-sm);
+        padding-right: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        border-radius: var(--la-radius-sm);
+      }
+      :host([size='sm']) .caret { font-size: var(--la-font-size-sm); }
+      :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$T([
+  __decorate$1a([
       n()
   ], exports.LaSelect.prototype, "name", void 0);
-  __decorate$T([
+  __decorate$1a([
       n()
   ], exports.LaSelect.prototype, "value", void 0);
-  __decorate$T([
+  __decorate$1a([
       n()
   ], exports.LaSelect.prototype, "placeholder", void 0);
-  __decorate$T([
+  __decorate$1a([
       n()
   ], exports.LaSelect.prototype, "label", void 0);
-  __decorate$T([
+  __decorate$1a([
       n()
   ], exports.LaSelect.prototype, "hint", void 0);
-  __decorate$T([
+  __decorate$1a([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "required", void 0);
-  __decorate$T([
+  __decorate$1a([
+      n({ reflect: true })
+  ], exports.LaSelect.prototype, "size", void 0);
+  __decorate$1a([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "disabled", void 0);
-  __decorate$T([
+  __decorate$1a([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "error", void 0);
-  __decorate$T([
+  __decorate$1a([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "open", void 0);
-  __decorate$T([
+  __decorate$1a([
       r()
   ], exports.LaSelect.prototype, "_origin", void 0);
-  __decorate$T([
+  __decorate$1a([
       r()
   ], exports.LaSelect.prototype, "_phase", void 0);
-  exports.LaSelect = __decorate$T([
-      t('la-select')
+  exports.LaSelect = __decorate$1a([
+      t$1('la-select')
   ], exports.LaSelect);
 
-  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /** Comma-separated string ⇄ string[] — lets HTML use `options="A,B,C"`. */
+  const csv = {
+      fromAttribute: (v) => v ? v.split(',').map(s => s.trim()).filter(Boolean) : [],
+      toAttribute: (v) => (Array.isArray(v) ? v.join(',') : ''),
+  };
+  /**
+   * la-multi-select — token multi-select with searchable input and suggestion pills.
+   *
+   * Pick several values from a known set: current selections sit as removable chips
+   * inside a search field, and the remaining options show below as one-tap "+"
+   * suggestion pills. Typing filters the suggestions. No overlay dropdown — the
+   * choices are always in view, which suits short, scannable option sets
+   * (jurisdictions, tags, OpCos).
+   *
+   * Options and selection accept comma-separated strings in HTML or arrays in JS.
+   * Each entry is a plain string (value = label); pass `{value,label}` objects via
+   * the JS property when they differ.
+   *
+   * @prop label           - Field label.
+   * @prop hint            - Helper text under the field.
+   * @prop placeholder     - Input placeholder (shown only when nothing is selected).
+   * @prop options         - Full set of selectable options ("A,B,C" or string[]).
+   * @prop selected        - Selected values ("A,B" or string[]). Reflects to the attribute.
+   * @prop max-suggestions - Cap the number of suggestion pills (0 = show all).
+   * @prop allow-custom    - Allow adding a typed value that isn't in `options`.
+   * @prop disabled / required / error - Standard form-control states.
+   * @fires la-change      - {selected:string[], action:'add'|'remove', value:string}
+   *
+   * @example
+   * <la-multi-select label="Jurisdiction/s"
+   *   options="California,New Jersey,Texas,New York,Florida,Illinois,Georgia"
+   *   selected="California,New Jersey,Texas"></la-multi-select>
+   */
+  exports.LaMultiSelect = class LaMultiSelect extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.label = '';
+          this.hint = '';
+          this.name = '';
+          this.placeholder = 'Search…';
+          this.options = [];
+          this.selected = [];
+          this.maxSuggestions = 0;
+          this.allowCustom = false;
+          this.disabled = false;
+          this.required = false;
+          this.error = false;
+          this._query = '';
+      }
+      _norm(o) {
+          return typeof o === 'string' ? { value: o, label: o } : o;
+      }
+      get _allOptions() {
+          return this.options.map(o => this._norm(o));
+      }
+      get _selectedItems() {
+          const byValue = new Map(this._allOptions.map(o => [o.value, o]));
+          // Preserve selection order; fall back to value=label for custom entries.
+          return this.selected.map(v => byValue.get(v) ?? { value: v, label: v });
+      }
+      get _suggestions() {
+          const q = this._query.trim().toLowerCase();
+          const sel = new Set(this.selected);
+          let list = this._allOptions.filter(o => !sel.has(o.value) && (!q || o.label.toLowerCase().includes(q)));
+          if (this.maxSuggestions > 0)
+              list = list.slice(0, this.maxSuggestions);
+          return list;
+      }
+      _emit(action, value) {
+          this.dispatchEvent(new CustomEvent('la-change', {
+              detail: { selected: [...this.selected], action, value },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _add(value) {
+          if (this.disabled || this.selected.includes(value))
+              return;
+          this.selected = [...this.selected, value];
+          this._query = '';
+          if (this._input)
+              this._input.value = '';
+          this._emit('add', value);
+          this._input?.focus();
+      }
+      _remove(value) {
+          if (this.disabled)
+              return;
+          this.selected = this.selected.filter(v => v !== value);
+          this._emit('remove', value);
+      }
+      _onInput(e) {
+          this._query = e.target.value;
+      }
+      _onKeydown(e) {
+          if (e.key === 'Enter') {
+              e.preventDefault();
+              const top = this._suggestions[0];
+              const q = this._query.trim();
+              if (top)
+                  this._add(top.value);
+              else if (this.allowCustom && q)
+                  this._add(q);
+          }
+          else if (e.key === 'Backspace' && this._query === '' && this.selected.length) {
+              this._remove(this.selected[this.selected.length - 1]);
+          }
+      }
+      _focusInput(e) {
+          // Don't steal focus when a chip's remove button was clicked.
+          if (e.target.closest('button'))
+              return;
+          this._input?.focus();
+      }
+      render() {
+          const sel = this._selectedItems;
+          const sugg = this._suggestions;
+          const q = this._query.trim();
+          const showCustom = this.allowCustom && q && !sugg.length && !this.selected.includes(q);
+          return b `
+      ${iconStyles}
+      ${this.label
+            ? b `<label class="field-label"
+            >${this.label}${this.required
+                ? b `<span class="req" aria-hidden="true">*</span>`
+                : A}</label
+          >`
+            : A}
+
+      <div class="field" @mousedown=${this._focusInput}>
+        <span class="search-icon" aria-hidden="true"><i class="ph ph-magnifying-glass"></i></span>
+        ${sel.map(item => b `<span class="chip"
+            >${item.label}<button
+              class="chip-x"
+              type="button"
+              aria-label=${`Remove ${item.label}`}
+              ?disabled=${this.disabled}
+              @click=${() => this._remove(item.value)}
+            >
+              <i class="ph ph-x" aria-hidden="true"></i></button
+          ></span>`)}
+        <input
+          type="text"
+          role="combobox"
+          aria-expanded=${sugg.length > 0}
+          aria-label=${this.label || 'Search and select'}
+          .value=${this._query}
+          placeholder=${this.selected.length ? '' : this.placeholder}
+          ?disabled=${this.disabled}
+          @input=${this._onInput}
+          @keydown=${this._onKeydown}
+        />
+      </div>
+
+      ${sugg.length || showCustom
+            ? b `<div class="suggestions">
+            ${sugg.map(item => b `<button
+                class="suggest"
+                type="button"
+                aria-label=${`Add ${item.label}`}
+                ?disabled=${this.disabled}
+                @click=${() => this._add(item.value)}
+              >
+                <i class="ph ph-plus" aria-hidden="true"></i>${item.label}
+              </button>`)}
+            ${showCustom
+                ? b `<button
+                  class="suggest"
+                  type="button"
+                  @click=${() => this._add(q)}
+                >
+                  <i class="ph ph-plus" aria-hidden="true"></i>Add “${q}”
+                </button>`
+                : A}
+          </div>`
+            : q
+                ? b `<div class="suggest-empty">No matches for “${q}”.</div>`
+                : A}
+
+      ${this.hint ? b `<div class="hint">${this.hint}</div>` : A}
+    `;
+      }
+  };
+  exports.LaMultiSelect.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      label.field-label {
+        display: block;
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text);
+        margin-bottom: var(--la-space-2xs);
+      }
+      .req {
+        color: var(--la-color-danger);
+        margin-left: 2px;
+      }
+      /* ── Field — search icon + chips + text input ── */
+      .field {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-sm);
+        /* Vertical padding matches la-input/la-select so an empty field is the
+           same height; the inner input adds no extra padding of its own. */
+        padding: var(--la-space-sm) var(--la-space-md);
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg);
+        cursor: text;
+        transition: border-color var(--dur-fast) var(--ease),
+          box-shadow var(--dur-fast) var(--ease);
+      }
+      .field:focus-within {
+        border-color: var(--la-color-border-focus);
+        box-shadow: var(--la-input-shadow-focus);
+      }
+      :host([error]) .field {
+        border-color: var(--la-color-border-danger);
+      }
+      :host([error]) .field:focus-within {
+        box-shadow: none;
+      }
+      :host([disabled]) .field {
+        opacity: 0.5;
+        cursor: not-allowed;
+        background: var(--la-color-bg-subtle);
+      }
+      .search-icon {
+        display: flex;
+        align-items: center;
+        color: var(--la-color-text-muted);
+        flex-shrink: 0;
+        font-size: var(--la-font-size-lg);
+      }
+      input {
+        flex: 1;
+        min-width: 90px;
+        border: none;
+        outline: none;
+        background: transparent;
+        font-family: inherit;
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        padding: 0;
+        line-height: var(--la-line-height);
+      }
+      input::placeholder {
+        color: var(--la-color-text-disabled);
+      }
+      input:disabled {
+        cursor: not-allowed;
+      }
+      /* ── Selected chip ── */
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-xs);
+        /* Sized so a single chip row matches the field's text line — a field
+           with one row of chips stays the same height as la-input/la-select. */
+        padding: 1px 4px 1px 10px;
+        border-radius: var(--la-radius-pill);
+        background: transparent;
+        border: 1px solid var(--la-color-border-light);
+        font-size: var(--la-font-size-sm);
+        line-height: 1.2;
+        color: var(--la-color-text);
+        white-space: nowrap;
+      }
+      .chip-x {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 16px;
+        height: 16px;
+        border: none;
+        border-radius: var(--la-radius-circle);
+        background: transparent;
+        color: var(--la-color-text-muted);
+        cursor: pointer;
+        padding: 0;
+        font-size: var(--la-font-size-sm);
+        transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+      }
+      .chip-x:hover {
+        background: var(--la-color-bg-active);
+        color: var(--la-color-text);
+      }
+      /* ── Suggestion pills ── */
+      .suggestions {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--la-space-sm);
+        margin-top: var(--la-space-md);
+      }
+      .suggest {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-xs);
+        padding: var(--la-space-xs) var(--la-space-md);
+        border-radius: var(--la-radius-pill);
+        border: 1px solid var(--la-color-border);
+        background: var(--la-color-bg);
+        color: var(--la-color-text);
+        font-family: inherit;
+        font-size: var(--la-font-size-base);
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease),
+          border-color var(--dur-fast) var(--ease),
+          transform var(--dur-fast) var(--ease);
+      }
+      .suggest:hover {
+        background: var(--la-color-bg-subtle);
+      }
+      .suggest:active {
+        transform: scale(var(--scale-press));
+      }
+      .suggest:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+      }
+      .suggest i {
+        color: var(--la-color-text-muted);
+        font-size: var(--la-font-size-base);
+      }
+      .suggest-empty {
+        margin-top: var(--la-space-md);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-faint);
+      }
+      .hint {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-top: var(--la-space-xs);
+      }
+      :host([error]) .hint {
+        color: var(--la-color-danger-text);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .field, .chip-x, .suggest { transition: none; }
+        .suggest:active { transform: none; }
+      }
+    `,
+  ];
+  __decorate$19([
+      n()
+  ], exports.LaMultiSelect.prototype, "label", void 0);
+  __decorate$19([
+      n()
+  ], exports.LaMultiSelect.prototype, "hint", void 0);
+  __decorate$19([
+      n()
+  ], exports.LaMultiSelect.prototype, "name", void 0);
+  __decorate$19([
+      n()
+  ], exports.LaMultiSelect.prototype, "placeholder", void 0);
+  __decorate$19([
+      n({ converter: csv })
+  ], exports.LaMultiSelect.prototype, "options", void 0);
+  __decorate$19([
+      n({ converter: csv, reflect: true })
+  ], exports.LaMultiSelect.prototype, "selected", void 0);
+  __decorate$19([
+      n({ type: Number, attribute: 'max-suggestions' })
+  ], exports.LaMultiSelect.prototype, "maxSuggestions", void 0);
+  __decorate$19([
+      n({ type: Boolean, attribute: 'allow-custom' })
+  ], exports.LaMultiSelect.prototype, "allowCustom", void 0);
+  __decorate$19([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaMultiSelect.prototype, "disabled", void 0);
+  __decorate$19([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaMultiSelect.prototype, "required", void 0);
+  __decorate$19([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaMultiSelect.prototype, "error", void 0);
+  __decorate$19([
+      r()
+  ], exports.LaMultiSelect.prototype, "_query", void 0);
+  __decorate$19([
+      e$2('input')
+  ], exports.LaMultiSelect.prototype, "_input", void 0);
+  exports.LaMultiSelect = __decorate$19([
+      t$1('la-multi-select')
+  ], exports.LaMultiSelect);
+
+  var __decorate$18 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3877,14 +6124,14 @@
       }
     `,
   ];
-  __decorate$S([
+  __decorate$18([
       n({ reflect: true })
   ], exports.LaAlert.prototype, "variant", void 0);
-  exports.LaAlert = __decorate$S([
-      t('la-alert')
+  exports.LaAlert = __decorate$18([
+      t$1('la-alert')
   ], exports.LaAlert);
 
-  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4044,26 +6291,26 @@
       }
     `,
   ];
-  __decorate$R([
+  __decorate$17([
       n({ reflect: true })
   ], exports.LaToast.prototype, "variant", void 0);
-  __decorate$R([
+  __decorate$17([
       n()
   ], exports.LaToast.prototype, "title", void 0);
-  __decorate$R([
+  __decorate$17([
       n()
   ], exports.LaToast.prototype, "message", void 0);
-  __decorate$R([
+  __decorate$17([
       n({ type: Boolean, reflect: true })
   ], exports.LaToast.prototype, "open", void 0);
-  __decorate$R([
+  __decorate$17([
       n({ type: Number })
   ], exports.LaToast.prototype, "duration", void 0);
-  exports.LaToast = __decorate$R([
-      t('la-toast')
+  exports.LaToast = __decorate$17([
+      t$1('la-toast')
   ], exports.LaToast);
 
-  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4136,7 +6383,7 @@
       }
       :host(:hover) .tip,
       :host(:focus-within) .tip {
-        opacity: 1;
+        opacity: var(--la-tooltip-hover-opacity, 1);
       }
       /* Top (default) */
       .tip[data-pos='top'] {
@@ -4180,26 +6427,26 @@
       }
     `,
   ];
-  __decorate$Q([
+  __decorate$16([
       n()
   ], exports.LaTooltip.prototype, "tip", void 0);
-  __decorate$Q([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "position", void 0);
-  __decorate$Q([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "appearance", void 0);
-  __decorate$Q([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "size", void 0);
-  __decorate$Q([
+  __decorate$16([
       n({ attribute: 'max-width' })
   ], exports.LaTooltip.prototype, "maxWidth", void 0);
-  exports.LaTooltip = __decorate$Q([
-      t('la-tooltip')
+  exports.LaTooltip = __decorate$16([
+      t$1('la-tooltip')
   ], exports.LaTooltip);
 
-  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4390,31 +6637,47 @@
       }
     `,
   ];
-  __decorate$P([
+  __decorate$15([
       n({ type: Array })
   ], exports.LaVersionPicker.prototype, "versions", void 0);
-  __decorate$P([
+  __decorate$15([
       n()
   ], exports.LaVersionPicker.prototype, "active", void 0);
-  __decorate$P([
+  __decorate$15([
       r()
   ], exports.LaVersionPicker.prototype, "_phase", void 0);
-  exports.LaVersionPicker = __decorate$P([
-      t('la-version-picker')
+  exports.LaVersionPicker = __decorate$15([
+      t$1('la-version-picker')
   ], exports.LaVersionPicker);
 
-  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaDocumentItem = class LaDocumentItem extends i$2 {
+  var LaDocumentItem_1;
+  exports.LaDocumentItem = LaDocumentItem_1 = class LaDocumentItem extends i$2 {
       constructor() {
           super(...arguments);
           this.name = '';
           this.association = '';
           this.status = 'none';
+          /**
+           * Icon style. 'glyph' (default) uses the neutral Phosphor file glyph.
+           * 'file' uses the coloured app-style type icons from the asset set — the
+           * specific icon is taken from `file-type`, or derived from the extension
+           * in `name` (e.g. "Contract.pdf" → PDF).
+           */
+          this.variant = 'glyph';
+          /**
+           * Explicit file type for the 'file' variant. Accepts a canonical type
+           * (pdf, word, text, xlsx, ppt, img, video, sound, zip, folder, other) or a
+           * raw extension (docx, csv, jpg…). Empty/"auto" derives it from `name`.
+           */
+          this.fileType = '';
+          /** Base path for the file-type icon set. */
+          this.iconBase = '/assets/file-type';
           this.error = '';
           this.nonInteractive = false;
           this.dismissible = false;
@@ -4422,6 +6685,39 @@
           this.showPackToggle = false;
           /** Whether this document is currently in the default DD pack */
           this.inDefaultPack = false;
+          /** Confidential presence indicator — a lock badge on the icon corner,
+           *  mirroring the ready/urgent/failed badges. Orthogonal to `status`. */
+          this.locked = false;
+          /** Flips to true if the file-type icon fails to load — falls back to the glyph. */
+          this._iconFailed = false;
+      }
+      /** Resolve the canonical type from `file-type` or the `name` extension. */
+      get _resolvedType() {
+          const t = this.fileType.trim().toLowerCase();
+          if (t && t !== 'auto') {
+              if (LaDocumentItem_1.FILE_MAP[t])
+                  return t; // already canonical
+              return LaDocumentItem_1.EXT_MAP[t] ?? 'other'; // a raw extension
+          }
+          const ext = this.name.toLowerCase().match(/\.([a-z0-9]+)\s*$/)?.[1] ?? '';
+          return LaDocumentItem_1.EXT_MAP[ext] ?? 'other';
+      }
+      get _fileIconSrc() {
+          const file = LaDocumentItem_1.FILE_MAP[this._resolvedType] ?? 'others.png';
+          return `${this.iconBase}/${file}`;
+      }
+      /** Display name with any trailing file extension stripped — we don't surface
+       *  extensions in the UI (the type icon already conveys the format). */
+      get _displayName() {
+          return this.name.replace(/\.[a-z0-9]{1,5}$/i, '');
+      }
+      willUpdate(changed) {
+          if (changed.has('variant') ||
+              changed.has('fileType') ||
+              changed.has('name') ||
+              changed.has('iconBase')) {
+              this._iconFailed = false;
+          }
       }
       _onClick(e) {
           for (const node of e.composedPath()) {
@@ -4456,10 +6752,10 @@
       }
       _renderRowContent() {
           return b `
-      <div class="icon">${this._renderIcon()}</div>
+      <div class="icon ${this.variant === 'file' && !this._iconFailed ? 'is-file' : ''}">${this._renderIcon()}</div>
       <div class="content">
         <div class="name">
-          <span class="name-text" title=${this.name}>${this.name}</span>
+          <span class="name-text" title=${this.name}>${this._displayName}</span>
           <slot name="badge"></slot>
         </div>
         ${this.association
@@ -4520,8 +6816,17 @@
         label="Processing"
       ></la-spinner>`;
           }
+          const glyph = this.variant === 'file' && !this._iconFailed
+              ? b `<img
+            class="file-icon"
+            src=${this._fileIconSrc}
+            alt=""
+            decoding="async"
+            @error=${() => (this._iconFailed = true)}
+          />`
+              : b `<i class="ph ph-file-text" aria-hidden="true"></i>`;
           return b `
-      <i class="ph ph-file-text" aria-hidden="true"></i>
+      ${glyph}
       ${this.status === 'ready'
             ? b `<span class="badge ready" role="img" aria-label="Ready">
             <i class="ph-fill ph-check-circle"></i>
@@ -4535,6 +6840,11 @@
       ${this.status === 'failed'
             ? b `<span class="badge failed" role="img" aria-label="Failed">
             <i class="ph-fill ph-x-circle"></i>
+          </span>`
+            : A}
+      ${this.locked
+            ? b `<span class="badge locked" role="img" aria-label="Confidential">
+            <i class="ph-fill ph-lock-simple"></i>
           </span>`
             : A}
     `;
@@ -4600,6 +6910,21 @@
         color: var(--la-color-text-muted);
         border-radius: var(--la-radius-md);
       }
+      /* File-type variant — a small coloured type icon centred in a subtle chip,
+         rather than a large icon filling the whole box. */
+      .icon.is-file {
+        background: var(--la-color-bg-muted);
+      }
+      .icon.is-file .file-icon {
+        width: var(--la-space-lg);
+        height: var(--la-space-lg);
+      }
+      .file-icon {
+        width: 100%;
+        height: 100%;
+        object-fit: contain;
+        display: block;
+      }
       .badge {
         position: absolute;
         bottom: -2px;
@@ -4623,6 +6948,9 @@
       }
       .badge.failed {
         color: var(--la-color-urgent);
+      }
+      .badge.locked {
+        color: var(--la-color-warning-text);
       }
       .content {
         flex: 1;
@@ -4727,35 +7055,68 @@
       }
     `,
   ];
-  __decorate$O([
+  /** Extension → canonical type. */
+  exports.LaDocumentItem.EXT_MAP = {
+      pdf: 'pdf',
+      doc: 'word', docx: 'word',
+      txt: 'text', text: 'text', md: 'text', rtf: 'text',
+      xls: 'xlsx', xlsx: 'xlsx', csv: 'xlsx',
+      ppt: 'ppt', pptx: 'ppt', key: 'ppt',
+      png: 'img', jpg: 'img', jpeg: 'img', gif: 'img', svg: 'img', webp: 'img', heic: 'img',
+      mp4: 'video', mov: 'video', avi: 'video', webm: 'video', mkv: 'video',
+      mp3: 'sound', wav: 'sound', m4a: 'sound', aac: 'sound',
+      zip: 'zip', rar: 'zip', '7z': 'zip', gz: 'zip', tar: 'zip',
+  };
+  /** Canonical type → icon filename in the asset set. */
+  exports.LaDocumentItem.FILE_MAP = {
+      pdf: 'file-type.png', word: 'word.png', text: 'text.png', xlsx: 'xlsx.png',
+      ppt: 'ppt.png', img: 'img.png', video: 'video.png', sound: 'sound.png',
+      zip: 'zip.png', folder: 'folder.png', other: 'others.png',
+  };
+  __decorate$14([
       n()
   ], exports.LaDocumentItem.prototype, "name", void 0);
-  __decorate$O([
+  __decorate$14([
       n()
   ], exports.LaDocumentItem.prototype, "association", void 0);
-  __decorate$O([
+  __decorate$14([
       n({ reflect: true })
   ], exports.LaDocumentItem.prototype, "status", void 0);
-  __decorate$O([
+  __decorate$14([
+      n({ reflect: true })
+  ], exports.LaDocumentItem.prototype, "variant", void 0);
+  __decorate$14([
+      n({ attribute: 'file-type' })
+  ], exports.LaDocumentItem.prototype, "fileType", void 0);
+  __decorate$14([
+      n({ attribute: 'icon-base' })
+  ], exports.LaDocumentItem.prototype, "iconBase", void 0);
+  __decorate$14([
       n()
   ], exports.LaDocumentItem.prototype, "error", void 0);
-  __decorate$O([
+  __decorate$14([
       n({ type: Boolean, attribute: 'non-interactive', reflect: true })
   ], exports.LaDocumentItem.prototype, "nonInteractive", void 0);
-  __decorate$O([
+  __decorate$14([
       n({ type: Boolean, reflect: true })
   ], exports.LaDocumentItem.prototype, "dismissible", void 0);
-  __decorate$O([
+  __decorate$14([
       n({ type: Boolean, attribute: 'show-pack-toggle' })
   ], exports.LaDocumentItem.prototype, "showPackToggle", void 0);
-  __decorate$O([
+  __decorate$14([
       n({ type: Boolean, attribute: 'in-default-pack', reflect: true })
   ], exports.LaDocumentItem.prototype, "inDefaultPack", void 0);
-  exports.LaDocumentItem = __decorate$O([
-      t('la-document-item')
+  __decorate$14([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaDocumentItem.prototype, "locked", void 0);
+  __decorate$14([
+      r()
+  ], exports.LaDocumentItem.prototype, "_iconFailed", void 0);
+  exports.LaDocumentItem = LaDocumentItem_1 = __decorate$14([
+      t$1('la-document-item')
   ], exports.LaDocumentItem);
 
-  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5140,47 +7501,47 @@
       }
     `,
   ];
-  __decorate$N([
+  __decorate$13([
       n()
   ], exports.LaUploadBox.prototype, "label", void 0);
-  __decorate$N([
+  __decorate$13([
       n()
   ], exports.LaUploadBox.prototype, "hint", void 0);
-  __decorate$N([
+  __decorate$13([
       n()
   ], exports.LaUploadBox.prototype, "accept", void 0);
-  __decorate$N([
+  __decorate$13([
       n({ type: Number, attribute: 'max-size' })
   ], exports.LaUploadBox.prototype, "maxSize", void 0);
-  __decorate$N([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "compact", void 0);
-  __decorate$N([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "disabled", void 0);
-  __decorate$N([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "error", void 0);
-  __decorate$N([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "processing", void 0);
-  __decorate$N([
+  __decorate$13([
       n({ attribute: 'error-message' })
   ], exports.LaUploadBox.prototype, "errorMessage", void 0);
-  __decorate$N([
+  __decorate$13([
       n()
   ], exports.LaUploadBox.prototype, "prompt", void 0);
-  __decorate$N([
+  __decorate$13([
       r()
   ], exports.LaUploadBox.prototype, "_file", void 0);
-  __decorate$N([
+  __decorate$13([
       r()
   ], exports.LaUploadBox.prototype, "_dragover", void 0);
-  exports.LaUploadBox = __decorate$N([
-      t('la-upload-box')
+  exports.LaUploadBox = __decorate$13([
+      t$1('la-upload-box')
   ], exports.LaUploadBox);
 
-  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5277,17 +7638,17 @@
       }
     `,
   ];
-  __decorate$M([
+  __decorate$12([
       n({ type: Array })
   ], exports.LaFieldList.prototype, "fields", void 0);
-  __decorate$M([
+  __decorate$12([
       n({ reflect: true })
   ], exports.LaFieldList.prototype, "layout", void 0);
-  exports.LaFieldList = __decorate$M([
-      t('la-field-list')
+  exports.LaFieldList = __decorate$12([
+      t$1('la-field-list')
   ], exports.LaFieldList);
 
-  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5301,6 +7662,10 @@
           this.icon = '';
           this.variant = 'default';
           this.disabled = false;
+          /** Marks the current pick in a one-of group; the row becomes a menuitemradio. */
+          this.checked = false;
+          /** Set on every item of a one-of group so unchecked rows also read as radios. */
+          this.radio = false;
       }
       render() {
           return b `
@@ -5308,14 +7673,17 @@
       <button
         type="button"
         class="item"
-        role="menuitem"
+        role=${this.radio || this.checked ? 'menuitemradio' : 'menuitem'}
+        aria-checked=${this.radio || this.checked ? String(this.checked) : A}
         ?disabled=${this.disabled}
         @click=${this._onClick}
       >
+        <span class="leading"><slot name="leading"></slot></span>
         ${this.icon
             ? b `<span class="icon"><i class=${this.icon} aria-hidden="true"></i></span>`
             : A}
         <span class="label">${this.label}</span>
+        <i class="tick ph-bold ph-check" aria-hidden="true"></i>
       </button>
     `;
       }
@@ -5358,7 +7726,7 @@
         white-space: nowrap;
       }
       .item:hover {
-        background: var(--la-color-bg-subtle);
+        background: var(--la-color-bg-muted);
       }
       .item:focus-visible {
         outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
@@ -5378,31 +7746,57 @@
         flex-shrink: 0;
         color: var(--la-color-text-muted);
       }
+      /* Leading slot — for an avatar or other rich marker. Collapses to
+         nothing when empty so it adds no gap. */
+      .leading {
+        display: inline-flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .leading:not(:has(*)) {
+        display: none;
+      }
       :host([variant='danger']) .icon {
         color: var(--la-color-danger-text);
       }
+      /* checked (17 Sep 2026): the current pick in a one-of menu (Sort by …).
+         A trailing check, nothing louder. */
+      .label { flex: 1; }
+      .tick {
+        display: none;
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        flex-shrink: 0;
+      }
+      :host([checked]) .tick { display: inline-flex; }
     `,
   ];
-  __decorate$L([
+  __decorate$11([
       n()
   ], exports.LaMenuItem.prototype, "label", void 0);
-  __decorate$L([
+  __decorate$11([
       n()
   ], exports.LaMenuItem.prototype, "value", void 0);
-  __decorate$L([
+  __decorate$11([
       n()
   ], exports.LaMenuItem.prototype, "icon", void 0);
-  __decorate$L([
+  __decorate$11([
       n({ reflect: true })
   ], exports.LaMenuItem.prototype, "variant", void 0);
-  __decorate$L([
+  __decorate$11([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "disabled", void 0);
-  exports.LaMenuItem = __decorate$L([
-      t('la-menu-item')
+  __decorate$11([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaMenuItem.prototype, "checked", void 0);
+  __decorate$11([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaMenuItem.prototype, "radio", void 0);
+  exports.LaMenuItem = __decorate$11([
+      t$1('la-menu-item')
   ], exports.LaMenuItem);
 
-  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5503,23 +7897,23 @@
       }
     `,
   ];
-  __decorate$K([
+  __decorate$10([
       n()
   ], exports.LaMenuToggle.prototype, "label", void 0);
-  __decorate$K([
+  __decorate$10([
       n()
   ], exports.LaMenuToggle.prototype, "value", void 0);
-  __decorate$K([
+  __decorate$10([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "checked", void 0);
-  __decorate$K([
+  __decorate$10([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "disabled", void 0);
-  exports.LaMenuToggle = __decorate$K([
-      t('la-menu-toggle')
+  exports.LaMenuToggle = __decorate$10([
+      t$1('la-menu-toggle')
   ], exports.LaMenuToggle);
 
-  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5544,18 +7938,26 @@
       }
     `,
   ];
-  exports.LaMenuDivider = __decorate$J([
-      t('la-menu-divider')
+  exports.LaMenuDivider = __decorate$$([
+      t$1('la-menu-divider')
   ], exports.LaMenuDivider);
 
-  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   /**
-   * la-menu — tertiary action menu triggered by a 3-dot button.
+   * la-menu — action menu. The trigger is a 3-dot la-icon-button by default;
+   * slot any button as `slot="trigger"` to open the same panel from a labelled
+   * button, an icon button with a different glyph, or a select-like control
+   * (17 Sep 2026 — Sort had to pair an icon button with a hand-rolled list).
+   *
+   *   <la-menu label="Sort by">
+   *     <la-icon-button slot="trigger" label="Sort by"><i class="ph ph-arrows-down-up"></i></la-icon-button>
+   *     <la-menu-item radio checked label="Next due first" value="due"></la-menu-item>
+   *   </la-menu>
    *
    * Uses the .t-dropdown animation pattern (inlined — motion.css is document-
    * scope and does not penetrate shadow DOM). Slotted la-menu-item children
@@ -5596,6 +7998,22 @@
                   this._openMenu();
           };
       }
+      /** The element that opens the menu: the slotted trigger if any, else the 3-dot button. */
+      get _triggerEl() {
+          const slotted = this._triggerSlot?.assignedElements({ flatten: true })[0];
+          return slotted ?? this._defaultTrigger;
+      }
+      _paintTrigger() {
+          const el = this._triggerEl;
+          if (!el)
+              return;
+          if ('expanded' in el)
+              el.expanded = this.open;
+          else
+              el.setAttribute('aria-expanded', String(this.open));
+          if (!el.hasAttribute('aria-haspopup'))
+              el.setAttribute('aria-haspopup', 'menu');
+      }
       connectedCallback() {
           super.connectedCallback();
           document.addEventListener('mousedown', this._onDocumentMousedown, true);
@@ -5613,6 +8031,7 @@
       updated(changed) {
           if (!changed.has('open'))
               return;
+          this._paintTrigger();
           if (this.open) {
               this._phase = '';
               if (this._closeTimer != null) {
@@ -5643,21 +8062,26 @@
           this.open = false;
           this.dispatchEvent(new CustomEvent('la-menu-close', { bubbles: true, composed: true }));
           if (restoreFocus) {
-              this._triggerEl?.shadowRoot?.querySelector('button')
-                  ?.focus({ preventScroll: true });
+              const el = this._triggerEl;
+              const inner = el?.shadowRoot?.querySelector('button');
+              (inner ?? el)?.focus({ preventScroll: true });
           }
       }
       render() {
           return b `
       ${iconStyles}
-      <la-icon-button
-        label=${this.label}
-        .expanded=${this.open}
-        aria-haspopup="menu"
-        @click=${this._onTriggerClick}
-      >
-        <i class="ph-bold ph-dots-three" aria-hidden="true"></i>
-      </la-icon-button>
+      <span class="trigger" @click=${this._onTriggerClick}>
+        <slot name="trigger" @slotchange=${this._paintTrigger}>
+          <la-icon-button
+            class="default-trigger"
+            label=${this.label}
+            .expanded=${this.open}
+            aria-haspopup="menu"
+          >
+            <i class="ph-bold ph-dots-three" aria-hidden="true"></i>
+          </la-icon-button>
+        </slot>
+      </span>
       <div
         class="panel ${this._phase}"
         role="menu"
@@ -5680,6 +8104,7 @@
       }
       /* Keep the trigger lit when the panel is open — reaches into la-icon-button's
          exposed part so the button stays highlighted while the menu is visible. */
+      .trigger { display: inline-flex; }
       :host([open]) la-icon-button::part(button) {
         background: var(--la-color-bg-muted);
         color: var(--la-color-text);
@@ -5689,6 +8114,9 @@
         z-index: 50;
         min-width: 160px;
         padding: var(--la-space-xs);
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-xs);
         background: var(--la-color-bg);
         border-radius: var(--la-radius-md);
         box-shadow: var(--la-shadow-popover);
@@ -5739,26 +8167,29 @@
       }
     `,
   ];
-  __decorate$I([
+  __decorate$_([
       n()
   ], exports.LaMenu.prototype, "label", void 0);
-  __decorate$I([
+  __decorate$_([
       n({ reflect: true })
   ], exports.LaMenu.prototype, "origin", void 0);
-  __decorate$I([
+  __decorate$_([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenu.prototype, "open", void 0);
-  __decorate$I([
-      e$1('la-icon-button')
-  ], exports.LaMenu.prototype, "_triggerEl", void 0);
-  __decorate$I([
+  __decorate$_([
+      e$2('.default-trigger')
+  ], exports.LaMenu.prototype, "_defaultTrigger", void 0);
+  __decorate$_([
+      e$2('slot[name="trigger"]')
+  ], exports.LaMenu.prototype, "_triggerSlot", void 0);
+  __decorate$_([
       r()
   ], exports.LaMenu.prototype, "_phase", void 0);
-  exports.LaMenu = __decorate$I([
-      t('la-menu')
+  exports.LaMenu = __decorate$_([
+      t$1('la-menu')
   ], exports.LaMenu);
 
-  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5775,6 +8206,11 @@
            *  (slot "icon", seal-check by default), centred heading, body, and
            *  footer. Used for the one celebratory beat a flow earns. */
           this.variant = 'default';
+          /**
+           * Suppress the scrollable-body fade. Use when the panel isn't plain white —
+           * e.g. an AI-surface modal, where the white fade gradient would clash.
+           */
+          this.noFade = false;
           this._onKeydown = (e) => {
               if (e.key === 'Escape' && this.open) {
                   e.stopPropagation();
@@ -5817,6 +8253,20 @@
           if (slot) {
               slot.addEventListener('slotchange', () => this._checkScrollable());
           }
+          // Collapse the footer when nothing is slotted into it — the `.footer:empty`
+          // rule can't catch this because the <slot> element is always a child.
+          const footerSlot = this.shadowRoot?.querySelector('slot[name="footer"]');
+          const footer = this.shadowRoot?.querySelector('.footer');
+          if (footerSlot && footer) {
+              const syncFooter = () => {
+                  const hasContent = footerSlot
+                      .assignedNodes({ flatten: true })
+                      .some((n) => n.nodeType === 1 || (n.textContent ?? '').trim() !== '');
+                  footer.style.display = hasContent ? '' : 'none';
+              };
+              footerSlot.addEventListener('slotchange', syncFooter);
+              syncFooter();
+          }
           this._checkScrollable();
       }
       updated(changed) {
@@ -5834,8 +8284,8 @@
           return b `
       ${iconStyles}
       <div class="backdrop" @click=${this._onBackdropClick}>
-        <div class="panel">
-          <div class="header">
+        <div class="panel" part="panel">
+          <div class="header" part="header">
             <div class="header-content">
               ${this.variant === 'success'
             ? A
@@ -5848,7 +8298,8 @@
                     </div>
                   </slot>`}
             </div>
-            <la-icon-button size="sm" label="Close" @click=${this._close}>
+            <slot name="header-actions"></slot>
+            <la-icon-button part="close" size="sm" label="Close" @click=${this._close}>
               <i class="ph ph-x"></i>
             </la-icon-button>
           </div>
@@ -5928,13 +8379,20 @@
       .header {
         flex-shrink: 0;
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: var(--la-space-md);
-        /* 16 top + right (tight around the close icon button) — 24 bottom + left (aligns with content padding) */
-        padding: var(--la-space-lg) var(--la-space-lg) var(--la-space-xl) var(--la-space-xl);
+        /* 24 top/bottom/left — matches body padding and sits comfortably inside the 28px panel radius.
+           Right stays at 16px so the close icon button hugs its corner. */
+        padding: var(--la-space-xl) var(--la-space-lg) var(--la-space-xl) var(--la-space-xl);
       }
       .header la-icon-button {
         flex-shrink: 0;
+        /* Pin to corner: cancel the header's top padding so the button sits
+           at --la-space-lg (16 px) from the modal top while the heading content
+           keeps its full 24 px breathing room. */
+        margin-top: calc(var(--la-space-lg) - var(--la-space-xl));
+        /* Match the right padding so the button is equidistant from both edges. */
+        margin-right: 0;
       }
       /* Wrapper gives the slot a real flex box so the close button always stays right */
       .header-content {
@@ -6023,10 +8481,10 @@
         margin: var(--la-space-lg) 0 var(--la-space-sm);
       }
       /* Fade when body is scrollable — gradient over the bottom of body content. */
-      :host([scrollable]) .footer {
+      :host([scrollable]:not([no-fade])) .footer {
         padding-top: var(--la-space-xl);
       }
-      :host([scrollable]) .footer::before {
+      :host([scrollable]:not([no-fade])) .footer::before {
         content: '';
         position: absolute;
         bottom: 100%;
@@ -6038,26 +8496,29 @@
       }
     `,
   ];
-  __decorate$H([
+  __decorate$Z([
       n({ type: Boolean, reflect: true })
   ], exports.LaModal.prototype, "open", void 0);
-  __decorate$H([
+  __decorate$Z([
       n()
   ], exports.LaModal.prototype, "heading", void 0);
-  __decorate$H([
+  __decorate$Z([
       n()
   ], exports.LaModal.prototype, "description", void 0);
-  __decorate$H([
+  __decorate$Z([
       n({ reflect: true })
   ], exports.LaModal.prototype, "size", void 0);
-  __decorate$H([
+  __decorate$Z([
       n({ reflect: true })
   ], exports.LaModal.prototype, "variant", void 0);
-  exports.LaModal = __decorate$H([
-      t('la-modal')
+  __decorate$Z([
+      n({ type: Boolean, reflect: true, attribute: 'no-fade' })
+  ], exports.LaModal.prototype, "noFade", void 0);
+  exports.LaModal = __decorate$Z([
+      t$1('la-modal')
   ], exports.LaModal);
 
-  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6412,35 +8873,35 @@
       }
     `,
   ];
-  __decorate$G([
+  __decorate$Y([
       n({ type: Boolean, reflect: true })
   ], exports.LaDrawer.prototype, "open", void 0);
-  __decorate$G([
+  __decorate$Y([
       n({ reflect: true })
   ], exports.LaDrawer.prototype, "edge", void 0);
-  __decorate$G([
+  __decorate$Y([
       n()
   ], exports.LaDrawer.prototype, "size", void 0);
-  __decorate$G([
+  __decorate$Y([
       n()
   ], exports.LaDrawer.prototype, "heading", void 0);
-  __decorate$G([
+  __decorate$Y([
       n()
   ], exports.LaDrawer.prototype, "description", void 0);
-  __decorate$G([
+  __decorate$Y([
       n()
   ], exports.LaDrawer.prototype, "label", void 0);
-  __decorate$G([
+  __decorate$Y([
       n({ type: Boolean, attribute: 'backdrop-dismiss' })
   ], exports.LaDrawer.prototype, "backdropDismiss", void 0);
-  __decorate$G([
+  __decorate$Y([
       n({ type: Boolean, attribute: 'no-scroll-lock' })
   ], exports.LaDrawer.prototype, "noScrollLock", void 0);
-  exports.LaDrawer = __decorate$G([
-      t('la-drawer')
+  exports.LaDrawer = __decorate$Y([
+      t$1('la-drawer')
   ], exports.LaDrawer);
 
-  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6745,17 +9206,17 @@
       }
     `,
   ];
-  __decorate$F([
+  __decorate$X([
       n({ reflect: true })
   ], exports.LaTab.prototype, "value", void 0);
-  __decorate$F([
+  __decorate$X([
       n({ type: Boolean, reflect: true })
   ], exports.LaTab.prototype, "active", void 0);
-  exports.LaTab = __decorate$F([
-      t('la-tab')
+  exports.LaTab = __decorate$X([
+      t$1('la-tab')
   ], exports.LaTab);
 
-  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6797,14 +9258,14 @@
       }
     `,
   ];
-  __decorate$E([
+  __decorate$W([
       n({ reflect: true })
   ], exports.LaTabPanel.prototype, "value", void 0);
-  exports.LaTabPanel = __decorate$E([
-      t('la-tab-panel')
+  exports.LaTabPanel = __decorate$W([
+      t$1('la-tab-panel')
   ], exports.LaTabPanel);
 
-  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7167,23 +9628,23 @@
       }
     `,
   ];
-  __decorate$D([
+  __decorate$V([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "active", void 0);
-  __decorate$D([
+  __decorate$V([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "variant", void 0);
-  __decorate$D([
+  __decorate$V([
       n({ type: Boolean, reflect: true })
   ], exports.LaTabs.prototype, "block", void 0);
-  __decorate$D([
+  __decorate$V([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "size", void 0);
-  exports.LaTabs = __decorate$D([
-      t('la-tabs')
+  exports.LaTabs = __decorate$V([
+      t$1('la-tabs')
   ], exports.LaTabs);
 
-  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7218,11 +9679,15 @@
    *
    *   <link rel="stylesheet" href="/dev/la-table.css">
    *
+   * `flat` removes the frame for lists that rest on the page surface.
+   *
    * @fires la-sort-change - { column: string, direction: 'asc' | 'desc' }
    */
   exports.LaTable = class LaTable extends i$2 {
       constructor() {
           super(...arguments);
+          /** Frameless: no border, no radius. Ask for it instead of overriding the host. */
+          this.flat = false;
           this._sortCol = null;
           this._sortDir = 'asc';
       }
@@ -7298,13 +9763,612 @@
           overscroll-behavior-inline: contain;
         }
       }
+
+      /* flat (17 Sep 2026): the frameless list. Hairlines between rows carry the
+         structure; the surface around them was chrome that said nothing
+         (rule/one-card-surface — a list that rests takes no frame). */
+      :host([flat]) {
+        border: 0;
+        border-radius: 0;
+      }
     `,
   ];
-  exports.LaTable = __decorate$C([
-      t('la-table')
+  __decorate$U([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaTable.prototype, "flat", void 0);
+  exports.LaTable = __decorate$U([
+      t$1('la-table')
   ], exports.LaTable);
 
-  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-chip — a removable token for a narrowing in force: an active filter, a
+   * scope, a picked person. The whole chip is the remove control; pressing it
+   * fires `la-remove` and the host drops that narrowing alone.
+   *
+   * Distinct from `la-badge` on purpose: a badge is inert status, a chip is
+   * pressable (`rule/ghost-status-badges` — anything that looks pressable must
+   * be pressable). Distinct from `la-chat-attachment-chip`, which carries a file
+   * tile and stands for a document, not a filter.
+   *
+   * Usage:
+   *   <la-chip prefix="Area" label="Employment" value="employment"></la-chip>
+   *   <la-chip label="For review" removable="false"></la-chip>   (inert, reads only)
+   *
+   * @prop label     - what the narrowing is ("Employment")
+   * @prop prefix    - optional quiet lead-in ("Area", "Status"); reads "Area: Employment" (property: prefixText)
+   * @prop value     - machine value carried in the event
+   * @prop removable - default true; false renders a read-only token with no ×
+   * @fires la-remove - {value, label}
+   */
+  exports.LaChip = class LaChip extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.label = '';
+          /** Attribute stays `prefix`; the property is `prefixText` because `Element.prefix` already exists. */
+          this.prefixText = '';
+          this.value = '';
+          this.removable = true;
+      }
+      _remove() {
+          if (!this.removable)
+              return;
+          this.dispatchEvent(new CustomEvent('la-remove', {
+              detail: { value: this.value || this.label, label: this.label },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      render() {
+          const text = this.prefixText ? `${this.prefixText}: ${this.label}` : this.label;
+          const body = b `
+      ${this.prefixText ? b `<span class="prefix">${this.prefixText}:</span>` : A}
+      <span class="label">${this.label}</span>
+      ${this.removable ? b `<i class="x ph-bold ph-x" aria-hidden="true"></i>` : A}
+    `;
+          return b `
+      ${iconStyles}
+      ${this.removable
+            ? b `<button type="button" class="chip" aria-label=${`Remove filter: ${text}`} @click=${this._remove}>${body}</button>`
+            : b `<span class="chip inert">${body}</span>`}
+    `;
+      }
+  };
+  exports.LaChip.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-flex;
+        max-width: 100%;
+        vertical-align: middle;
+      }
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        height: 22px;
+        max-width: 100%;
+        padding: 0 6px 0 var(--la-space-sm);
+        border: 0;
+        border-radius: var(--la-radius-pill);
+        background: var(--la-color-bg-muted);
+        color: var(--la-color-text-secondary);
+        font-family: inherit;
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        line-height: 1;
+        white-space: nowrap;
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+      }
+      .chip.inert {
+        cursor: default;
+        padding-right: var(--la-space-sm);
+      }
+      .chip:not(.inert):hover {
+        background: var(--la-color-bg-active);
+        color: var(--la-color-text);
+      }
+      .chip:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: 1px;
+      }
+      .prefix {
+        color: var(--la-color-text-muted);
+        font-weight: var(--la-font-weight-normal);
+      }
+      .label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .x {
+        font-size: 9px;
+        color: var(--la-color-text-muted);
+        display: inline-flex;
+      }
+      .chip:not(.inert):hover .x { color: var(--la-color-text); }
+      @media (prefers-reduced-motion: reduce) {
+        .chip { transition: none; }
+      }
+    `,
+  ];
+  __decorate$T([
+      n()
+  ], exports.LaChip.prototype, "label", void 0);
+  __decorate$T([
+      n({ attribute: 'prefix' })
+  ], exports.LaChip.prototype, "prefixText", void 0);
+  __decorate$T([
+      n()
+  ], exports.LaChip.prototype, "value", void 0);
+  __decorate$T([
+      n({ type: Boolean, reflect: true, converter: {
+              fromAttribute: (v) => v !== 'false',
+              toAttribute: (v) => (v ? '' : 'false'),
+          } })
+  ], exports.LaChip.prototype, "removable", void 0);
+  exports.LaChip = __decorate$T([
+      t$1('la-chip')
+  ], exports.LaChip);
+
+  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-pagination — the range line and numbered pager under a list.
+   *
+   * Option 1 of the 1 Sep 2026 pagination study, made once: "Showing 1–20 of 45",
+   * previous, first / neighbours / last with ellipses, next. The host owns the
+   * data; this only says which page is current and asks for another. It hides
+   * itself when everything fits on one page — a pager that reads "1" is noise.
+   *
+   * Usage:
+   *   <la-pagination total="45" page-size="20" page="1"></la-pagination>
+   *
+   * @prop total     - items in the list after narrowing
+   * @prop pageSize  - items per page (attribute `page-size`), default 20
+   * @prop page      - current page, 1-based; the host sets it back after la-page-change
+   * @prop noun      - optional word after the range ("Showing 1–20 of 45 documents")
+   * @fires la-page-change - {page, from, to} (from/to 0-based, half-open, for slicing)
+   */
+  exports.LaPagination = class LaPagination extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.total = 0;
+          this.pageSize = 20;
+          this.page = 1;
+          this.noun = '';
+          this.single = true;
+      }
+      get pages() {
+          return Math.max(1, Math.ceil(this.total / Math.max(1, this.pageSize)));
+      }
+      willUpdate() {
+          if (this.page > this.pages)
+              this.page = this.pages;
+          if (this.page < 1)
+              this.page = 1;
+          this.single = this.pages <= 1;
+      }
+      _go(p) {
+          const next = Math.min(this.pages, Math.max(1, p));
+          if (next === this.page)
+              return;
+          this.page = next;
+          const from = (next - 1) * this.pageSize;
+          this.dispatchEvent(new CustomEvent('la-page-change', {
+              detail: { page: next, from, to: Math.min(this.total, from + this.pageSize) },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _window() {
+          const list = [];
+          for (let p = 1; p <= this.pages; p++) {
+              if (p === 1 || p === this.pages || Math.abs(p - this.page) <= 1)
+                  list.push(p);
+          }
+          return list;
+      }
+      render() {
+          if (this.pages <= 1)
+              return A;
+          const from = (this.page - 1) * this.pageSize + 1;
+          const to = Math.min(this.page * this.pageSize, this.total);
+          const win = this._window();
+          return b `
+      ${iconStyles}
+      <span class="range">Showing ${from}–${to} of ${this.total}${this.noun ? ` ${this.noun}` : ''}</span>
+      <nav class="pager" aria-label="Pages">
+        <button type="button" class="pg" aria-label="Previous page" ?disabled=${this.page === 1} @click=${() => this._go(this.page - 1)}>
+          <i class="ph-bold ph-caret-left" aria-hidden="true"></i>
+        </button>
+        ${win.map((p, i) => b `
+          ${i && p - win[i - 1] > 1 ? b `<span class="ell" aria-hidden="true">…</span>` : A}
+          <button type="button" class="pg" aria-label=${`Page ${p}`}
+            aria-current=${p === this.page ? 'page' : A}
+            @click=${() => this._go(p)}>${p}</button>
+        `)}
+        <button type="button" class="pg" aria-label="Next page" ?disabled=${this.page === this.pages} @click=${() => this._go(this.page + 1)}>
+          <i class="ph-bold ph-caret-right" aria-hidden="true"></i>
+        </button>
+      </nav>
+    `;
+      }
+  };
+  exports.LaPagination.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--la-space-md);
+        padding: var(--la-space-md) 0;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      :host([single]) { display: none; }
+      .range { font-variant-numeric: tabular-nums; }
+      .pager { display: inline-flex; align-items: center; gap: 2px; }
+      .pg {
+        min-width: 28px;
+        height: 28px;
+        padding: 0 var(--la-space-xs);
+        border: 0;
+        border-radius: var(--la-radius-sm);
+        background: none;
+        font-family: inherit;
+        font-size: var(--la-font-size-sm);
+        font-variant-numeric: tabular-nums;
+        color: var(--la-color-text-secondary);
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+      }
+      .pg:hover:not(:disabled) { background: var(--la-color-bg-subtle); color: var(--la-color-text); }
+      .pg[aria-current='page'] { background: var(--la-color-bg-invert); color: var(--la-color-text-invert); }
+      .pg:disabled { color: var(--la-color-text-disabled); cursor: default; }
+      .pg:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: 1px;
+      }
+      .ell { padding: 0 var(--la-space-xs); align-self: center; }
+      @media (prefers-reduced-motion: reduce) { .pg { transition: none; } }
+    `,
+  ];
+  __decorate$S([
+      n({ type: Number })
+  ], exports.LaPagination.prototype, "total", void 0);
+  __decorate$S([
+      n({ type: Number, attribute: 'page-size' })
+  ], exports.LaPagination.prototype, "pageSize", void 0);
+  __decorate$S([
+      n({ type: Number })
+  ], exports.LaPagination.prototype, "page", void 0);
+  __decorate$S([
+      n()
+  ], exports.LaPagination.prototype, "noun", void 0);
+  __decorate$S([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPagination.prototype, "single", void 0);
+  exports.LaPagination = __decorate$S([
+      t$1('la-pagination')
+  ], exports.LaPagination);
+
+  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-tile — one pressable tile in a `la-tile-strip`: a 36px glyph disc, a
+   * label and a quiet count line. Pressed = the darker surface and nothing
+   * louder; square at rest, rounded the moment there is a surface to round.
+   *
+   * Hairlines are drawn by the tile (right edge, bottom edge) and switched off
+   * by the strip on row-ending and last-row tiles, so the strip stays
+   * frameless: lines between, never around.
+   *
+   * Usage:
+   *   <la-tile value="employment" label="Employment" sublabel="2 documents"
+   *            icon="ph-bold ph-users" hue="employment"></la-tile>
+   *   <la-tile value="ip" label="Intellectual Property" sublabel="0 to add">
+   *     <img slot="icon" src="…/area-ip.png" alt="">          (a rendered object instead of a glyph)
+   *   </la-tile>
+   *
+   * @prop value / label / sublabel
+   * @prop icon    - Phosphor classes for the glyph ("ph-bold ph-buildings")
+   * @prop hue     - legal-area hue for the disc; empty = neutral pair (All Areas, Miscellaneous)
+   * @prop pressed - reflected; set by the strip in single-selection mode
+   * @prop quiet   - steps back (nothing here for the current scope)
+   * @fires la-tile-press - {value, label}
+   */
+  exports.LaTile = class LaTile extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.value = '';
+          this.label = '';
+          this.sublabel = '';
+          this.icon = '';
+          this.hue = '';
+          this.pressed = false;
+          this.quiet = false;
+          this._hasSlot = false;
+      }
+      _onSlot(e) {
+          this._hasSlot = e.target.assignedElements().length > 0;
+          this.requestUpdate();
+      }
+      _press() {
+          this.dispatchEvent(new CustomEvent('la-tile-press', {
+              detail: { value: this.value, label: this.label },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      render() {
+          return b `
+      ${iconStyles}
+      <button type="button" class="tile" aria-pressed=${String(this.pressed)} @click=${this._press}>
+        <span class="disc ${this._hasSlot ? 'has-slot' : ''}" aria-hidden="true">
+          <slot name="icon" @slotchange=${this._onSlot}></slot>
+          ${!this._hasSlot && this.icon ? b `<i class=${this.icon}></i>` : A}
+        </span>
+        <span class="text">
+          <span class="label">${this.label}</span>
+          ${this.sublabel ? b `<span class="sub">${this.sublabel}</span>` : A}
+        </span>
+      </button>
+    `;
+      }
+  };
+  exports.LaTile.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        position: relative;
+        min-width: 0;
+      }
+      :host::after {
+        content: "";
+        position: absolute;
+        right: 0;
+        top: var(--la-space-sm);
+        bottom: var(--la-space-sm);
+        width: 1px;
+        background: var(--la-color-border-light);
+      }
+      :host([row-end])::after { content: none; }
+      :host(:not([last-row])) { border-bottom: 1px solid var(--la-color-border-light); }
+      .tile {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        width: 100%;
+        box-sizing: border-box;
+        padding: var(--la-space-md);
+        border: 0;
+        border-radius: 0;
+        background: none;
+        font-family: inherit;
+        color: inherit;
+        text-align: left;
+        cursor: pointer;
+        min-width: 0;
+        transition: background var(--dur-fast) var(--ease);
+      }
+      .tile:hover { background: var(--la-color-bg-subtle); border-radius: var(--la-radius-md); }
+      :host([pressed]) .tile { background: var(--la-color-bg-active); border-radius: var(--la-radius-md); }
+      .tile:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: -2px;
+        border-radius: var(--la-radius-md);
+      }
+      .disc {
+        position: relative;
+        width: 36px;
+        height: 36px;
+        border-radius: var(--la-radius-circle);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        flex-shrink: 0;
+        color: var(--la-tile-fill, var(--la-color-text-secondary));
+        background: var(--la-tile-tint, var(--la-color-bg-muted));
+      }
+      :host([hue='governance'])  .disc { --la-tile-fill: var(--la-area-governance-fg);  --la-tile-tint: var(--la-area-governance-bg); }
+      :host([hue='employment'])  .disc { --la-tile-fill: var(--la-area-employment-fg);  --la-tile-tint: var(--la-area-employment-bg); }
+      :host([hue='data'])        .disc { --la-tile-fill: var(--la-area-data-fg);        --la-tile-tint: var(--la-area-data-bg); }
+      :host([hue='fundraising']) .disc { --la-tile-fill: var(--la-area-fundraising-fg); --la-tile-tint: var(--la-area-fundraising-bg); }
+      :host([hue='commercial'])  .disc { --la-tile-fill: var(--la-area-commercial-fg);  --la-tile-tint: var(--la-area-commercial-bg); }
+      :host([hue='ip'])          .disc { --la-tile-fill: var(--la-area-ip-fg);          --la-tile-tint: var(--la-area-ip-bg); }
+      /* A slotted object takes the disc's footprint without its tint. */
+      .disc.has-slot { background: none; }
+      ::slotted([slot='icon']) { width: 24px; height: 24px; object-fit: contain; display: block; }
+      .text { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+      .label {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-semibold);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .sub {
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-muted);
+        font-variant-numeric: tabular-nums;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      :host([quiet]) .disc, :host([quiet]) .label { opacity: .45; }
+      :host([quiet]) .sub { color: var(--la-color-text-faint); }
+      :host([quiet]) ::slotted([slot='icon']) { filter: grayscale(1); opacity: .5; }
+      @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
+    `,
+  ];
+  __decorate$R([
+      n()
+  ], exports.LaTile.prototype, "value", void 0);
+  __decorate$R([
+      n()
+  ], exports.LaTile.prototype, "label", void 0);
+  __decorate$R([
+      n()
+  ], exports.LaTile.prototype, "sublabel", void 0);
+  __decorate$R([
+      n()
+  ], exports.LaTile.prototype, "icon", void 0);
+  __decorate$R([
+      n({ reflect: true })
+  ], exports.LaTile.prototype, "hue", void 0);
+  __decorate$R([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaTile.prototype, "pressed", void 0);
+  __decorate$R([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaTile.prototype, "quiet", void 0);
+  exports.LaTile = __decorate$R([
+      t$1('la-tile')
+  ], exports.LaTile);
+
+  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-tile-strip — a frameless, pressable tile group with counts: the legal
+   * areas as the filter over the list they narrow (LawVault shelf), or the
+   * areas on the Dashboard. Frameless with hairlines between the tiles, never a
+   * card around them (decision 99). Columns collapse 4 → 2 → 1 with the
+   * container, and the strip re-derives which tiles end a row so the hairline
+   * arithmetic never depends on a fixed count.
+   *
+   * Usage:
+   *   <la-tile-strip value="" columns="4" aria-label="Filter by legal area">
+   *     <la-tile value="" label="All Areas" sublabel="10 documents" icon="ph-bold ph-squares-four"></la-tile>
+   *     <la-tile value="governance" label="Corporate Governance" … hue="governance"></la-tile>
+   *   </la-tile-strip>
+   *
+   * @prop value     - the pressed tile's value (single selection); set it to move the press
+   * @prop columns   - columns at full width (default 4); 2 under 900px of strip width, 1 under 440px
+   *                   (900 is where eight two-line labels start truncating — seen at a 760px viewport, 17 Sep)
+   * @prop selection - 'single' (default): pressing a tile presses it and lifts the others;
+   *                   'none': tiles fire la-tile-press and the host decides (navigation tiles)
+   * @fires la-tile-change - {value, label} after a press in single mode
+   */
+  exports.LaTileStrip = class LaTileStrip extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.value = '';
+          this.columns = 4;
+          this.selection = 'single';
+          this._onPress = (e) => {
+              if (this.selection !== 'single')
+                  return;
+              this.value = e.detail.value;
+              this._paint();
+              this.dispatchEvent(new CustomEvent('la-tile-change', { detail: e.detail, bubbles: true, composed: true }));
+          };
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          if (!this.hasAttribute('role'))
+              this.setAttribute('role', 'group');
+          this.addEventListener('la-tile-press', this._onPress);
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          this.removeEventListener('la-tile-press', this._onPress);
+          this._ro?.disconnect();
+      }
+      firstUpdated() {
+          this._ro = new ResizeObserver(() => this._layout());
+          this._ro.observe(this);
+          this._layout();
+      }
+      updated(changed) {
+          if (changed.has('columns'))
+              this.style.setProperty('--la-tile-columns', String(this.columns));
+          if (changed.has('value') || changed.has('selection'))
+              this._paint();
+      }
+      _tiles() {
+          return Array.from(this.querySelectorAll(':scope > la-tile'));
+      }
+      /** Read the live column count and mark the tiles that end a row or sit on the last row. */
+      _layout() {
+          if (!this._grid)
+              return;
+          const cols = getComputedStyle(this._grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
+          const tiles = this._tiles();
+          const rows = Math.ceil(tiles.length / cols);
+          tiles.forEach((t, i) => {
+              t.toggleAttribute('row-end', (i + 1) % cols === 0 || i === tiles.length - 1);
+              t.toggleAttribute('last-row', Math.floor(i / cols) === rows - 1);
+          });
+      }
+      _paint() {
+          if (this.selection !== 'single')
+              return;
+          this._tiles().forEach((t) => { t.pressed = t.value === this.value; });
+      }
+      _onSlot() {
+          this._paint();
+          this._layout();
+      }
+      render() {
+          return b `<div class="grid"><slot @slotchange=${this._onSlot}></slot></div>`;
+      }
+  };
+  exports.LaTileStrip.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        container-type: inline-size;
+      }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(var(--la-tile-columns, 4), minmax(0, 1fr));
+      }
+      @container (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+      @container (max-width: 440px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+    `,
+  ];
+  __decorate$Q([
+      n()
+  ], exports.LaTileStrip.prototype, "value", void 0);
+  __decorate$Q([
+      n({ type: Number })
+  ], exports.LaTileStrip.prototype, "columns", void 0);
+  __decorate$Q([
+      n({ reflect: true })
+  ], exports.LaTileStrip.prototype, "selection", void 0);
+  __decorate$Q([
+      e$2('.grid')
+  ], exports.LaTileStrip.prototype, "_grid", void 0);
+  exports.LaTileStrip = __decorate$Q([
+      t$1('la-tile-strip')
+  ], exports.LaTileStrip);
+
+  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7686,41 +10750,41 @@
       }
     `,
   ];
-  __decorate$B([
+  __decorate$P([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "columns", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rows", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rowKey", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "sort", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "selected", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "selectable", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "density", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ type: Boolean, attribute: 'sticky-header', reflect: true })
   ], exports.LaDataTable.prototype, "stickyHeader", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ type: Boolean, reflect: true })
   ], exports.LaDataTable.prototype, "loading", void 0);
-  __decorate$B([
+  __decorate$P([
       n({ type: Boolean, attribute: 'row-clickable', reflect: true })
   ], exports.LaDataTable.prototype, "rowClickable", void 0);
-  exports.LaDataTable = __decorate$B([
-      t('la-data-table')
+  exports.LaDataTable = __decorate$P([
+      t$1('la-data-table')
   ], exports.LaDataTable);
 
-  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7925,20 +10989,20 @@
       }
     `,
   ];
-  __decorate$A([
+  __decorate$O([
       n()
   ], exports.LaPersonItem.prototype, "name", void 0);
-  __decorate$A([
+  __decorate$O([
       n()
   ], exports.LaPersonItem.prototype, "subtitle", void 0);
-  __decorate$A([
+  __decorate$O([
       n()
   ], exports.LaPersonItem.prototype, "initials", void 0);
-  exports.LaPersonItem = __decorate$A([
-      t('la-person-item')
+  exports.LaPersonItem = __decorate$O([
+      t$1('la-person-item')
   ], exports.LaPersonItem);
 
-  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8004,14 +11068,14 @@
       }
     `,
   ];
-  __decorate$z([
+  __decorate$N([
       r()
   ], exports.LaPersonList.prototype, "_hasFooter", void 0);
-  exports.LaPersonList = __decorate$z([
-      t('la-person-list')
+  exports.LaPersonList = __decorate$N([
+      t$1('la-person-list')
   ], exports.LaPersonList);
 
-  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8330,35 +11394,35 @@
       }
     `,
   ];
-  __decorate$y([
+  __decorate$M([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "sender", void 0);
-  __decorate$y([
+  __decorate$M([
       n()
   ], exports.LaChatMessage.prototype, "name", void 0);
-  __decorate$y([
+  __decorate$M([
       n()
   ], exports.LaChatMessage.prototype, "timestamp", void 0);
-  __decorate$y([
+  __decorate$M([
       n({ attribute: 'timestamp-title' })
   ], exports.LaChatMessage.prototype, "timestampTitle", void 0);
-  __decorate$y([
+  __decorate$M([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "streaming", void 0);
-  __decorate$y([
+  __decorate$M([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "typing", void 0);
-  __decorate$y([
+  __decorate$M([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "status", void 0);
-  __decorate$y([
+  __decorate$M([
       r()
   ], exports.LaChatMessage.prototype, "_hasAttachments", void 0);
-  exports.LaChatMessage = __decorate$y([
-      t('la-chat-message')
+  exports.LaChatMessage = __decorate$M([
+      t$1('la-chat-message')
   ], exports.LaChatMessage);
 
-  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8477,17 +11541,17 @@
 
     `,
   ];
-  __decorate$x([
+  __decorate$L([
       n()
   ], exports.LaChatAttachmentChip.prototype, "name", void 0);
-  __decorate$x([
+  __decorate$L([
       n()
   ], exports.LaChatAttachmentChip.prototype, "category", void 0);
-  exports.LaChatAttachmentChip = __decorate$x([
-      t('la-chat-attachment-chip')
+  exports.LaChatAttachmentChip = __decorate$L([
+      t$1('la-chat-attachment-chip')
   ], exports.LaChatAttachmentChip);
 
-  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8735,38 +11799,38 @@
       }
     `,
   ];
-  __decorate$w([
+  __decorate$K([
       n()
   ], exports.LaChatInput.prototype, "placeholder", void 0);
-  __decorate$w([
+  __decorate$K([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "disabled", void 0);
-  __decorate$w([
+  __decorate$K([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "loading", void 0);
-  __decorate$w([
+  __decorate$K([
       n()
   ], exports.LaChatInput.prototype, "hint", void 0);
-  __decorate$w([
+  __decorate$K([
       n({ type: Array })
   ], exports.LaChatInput.prototype, "files", void 0);
-  __decorate$w([
+  __decorate$K([
       n({ type: Number, attribute: 'max-files' })
   ], exports.LaChatInput.prototype, "maxFiles", void 0);
-  __decorate$w([
+  __decorate$K([
       n({ reflect: true })
   ], exports.LaChatInput.prototype, "variant", void 0);
-  __decorate$w([
+  __decorate$K([
       r()
   ], exports.LaChatInput.prototype, "_value", void 0);
-  __decorate$w([
-      e$1('textarea')
+  __decorate$K([
+      e$2('textarea')
   ], exports.LaChatInput.prototype, "_textarea", void 0);
-  exports.LaChatInput = __decorate$w([
-      t('la-chat-input')
+  exports.LaChatInput = __decorate$K([
+      t$1('la-chat-input')
   ], exports.LaChatInput);
 
-  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8989,29 +12053,29 @@
       }
     `,
   ];
-  __decorate$v([
+  __decorate$J([
       n()
   ], exports.LaChatAttachment.prototype, "name", void 0);
-  __decorate$v([
+  __decorate$J([
       n()
   ], exports.LaChatAttachment.prototype, "category", void 0);
-  __decorate$v([
+  __decorate$J([
       n()
   ], exports.LaChatAttachment.prototype, "association", void 0);
-  __decorate$v([
+  __decorate$J([
       n({ reflect: true })
   ], exports.LaChatAttachment.prototype, "status", void 0);
-  __decorate$v([
+  __decorate$J([
       n()
   ], exports.LaChatAttachment.prototype, "href", void 0);
-  __decorate$v([
+  __decorate$J([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatAttachment.prototype, "removable", void 0);
-  exports.LaChatAttachment = __decorate$v([
-      t('la-chat-attachment')
+  exports.LaChatAttachment = __decorate$J([
+      t$1('la-chat-attachment')
   ], exports.LaChatAttachment);
 
-  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9211,36 +12275,4541 @@
       }
     `,
   ];
-  __decorate$u([
+  __decorate$I([
       n({ type: Array })
   ], exports.LaChat.prototype, "messages", void 0);
-  __decorate$u([
+  __decorate$I([
       n()
   ], exports.LaChat.prototype, "placeholder", void 0);
-  __decorate$u([
+  __decorate$I([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "disabled", void 0);
-  __decorate$u([
+  __decorate$I([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "readonly", void 0);
-  __decorate$u([
+  __decorate$I([
       n()
   ], exports.LaChat.prototype, "notice", void 0);
-  __decorate$u([
+  __decorate$I([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "loading", void 0);
-  __decorate$u([
+  __decorate$I([
       n()
   ], exports.LaChat.prototype, "hint", void 0);
-  __decorate$u([
+  __decorate$I([
       n({ attribute: 'empty-message' })
   ], exports.LaChat.prototype, "emptyMessage", void 0);
-  __decorate$u([
-      e$1('.thread')
+  __decorate$I([
+      e$2('.thread')
   ], exports.LaChat.prototype, "_thread", void 0);
-  exports.LaChat = __decorate$u([
-      t('la-chat')
+  exports.LaChat = __decorate$I([
+      t$1('la-chat')
   ], exports.LaChat);
+
+  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-module-tile — a per-module overview card for the Leadership dashboard.
+   *
+   * Renders a whole-tile link showing: module icon + label + a green/amber/red
+   * status dot, the active count, an SLA pill, the pipeline stage distribution
+   * (la-distribution-bar), and a single headline insight line (D16). A `parked`
+   * tile is dimmed with a slotted note (e.g. Contracts).
+   *
+   * @prop label / icon (Phosphor name) / href
+   * @prop count / count-label
+   * @prop sla        - SLA text shown in the pill (e.g. "88%")
+   * @prop status     - 'on' | 'risk' | 'late' — drives the dot + SLA pill colour
+   * @prop insight    - the D16 headline insight line
+   * @prop pipeline   - DistributionSegment[] (property)
+   * @prop parked     - dim + show slotted note instead of data
+   * @fires la-tile-click - {module}
+   */
+  exports.LaModuleTile = class LaModuleTile extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.label = '';
+          this.icon = 'ph-folder';
+          this.href = '#';
+          this.module = '';
+          this.count = '';
+          this.countLabel = 'active';
+          this.sla = '';
+          this.status = 'on';
+          this.insight = '';
+          this.parked = false;
+          this.pipeline = [];
+      }
+      _emit() {
+          this.dispatchEvent(new CustomEvent('la-tile-click', {
+              detail: { module: this.module },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      render() {
+          if (this.parked) {
+              return b `${iconStyles}
+        <div class="tile">
+          <div class="head">
+            <i class="ph ${this.icon}"></i>
+            <span class="label">${this.label}</span>
+          </div>
+          <slot><span class="parked-note">Parked</span></slot>
+        </div>`;
+          }
+          return b `${iconStyles}
+      <a class="tile" href=${this.href} @click=${this._emit}>
+        <div class="head">
+          <i class="ph ${this.icon}"></i>
+          <span class="label">${this.label}</span>
+          <span class="dot ${this.status}"></span>
+        </div>
+        <div class="stats">
+          <div class="count">${this.count}<small>${this.countLabel}</small></div>
+          <la-sla-pill status=${this.status} label=${this.sla} size="sm"></la-sla-pill>
+        </div>
+        <la-distribution-bar .segments=${this.pipeline}></la-distribution-bar>
+        ${this.insight
+            ? b `<div class="insight ${this.status}">
+              <i class="ph-fill ph-circle"></i><span>${this.insight}</span>
+            </div>`
+            : ''}
+      </a>`;
+      }
+  };
+  exports.LaModuleTile.styles = [
+      tokens,
+      i$5 `
+      :host { display: block; }
+      .tile {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-md);
+        background: var(--la-color-bg);
+        border: none;
+        border-radius: var(--la-radius-xl1);
+        padding: var(--la-space-lg);
+        text-decoration: none;
+        color: inherit;
+        cursor: pointer;
+        /* A tile that acts: elevated, lifting on hover (rules.md, surface follows role). */
+        box-shadow: var(--la-shadow-md);
+        transition: box-shadow var(--dur-base) var(--ease);
+      }
+      .tile:hover {
+        box-shadow: var(--la-shadow-card);
+      }
+      .head { display: flex; align-items: center; gap: var(--la-space-sm); }
+      .head i { font-size: 20px; color: var(--la-color-text-secondary); }
+      .head .label { font-weight: var(--la-font-weight-medium); font-size: var(--la-font-size-base); letter-spacing: -0.1px; flex: 1; }
+      .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+      .dot.on { background: var(--la-color-resolved); }
+      .dot.risk { background: var(--la-color-proactive); }
+      .dot.late { background: var(--la-color-urgent); }
+      .stats { display: flex; align-items: baseline; justify-content: space-between; gap: var(--la-space-md); }
+      .count { font-size: var(--la-font-size-3xl); font-weight: var(--la-font-weight-semibold); letter-spacing: -0.3px; font-variant-numeric: tabular-nums; line-height: 1; }
+      .count small { font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); font-weight: var(--la-font-weight-normal); margin-left: var(--la-space-2xs); }
+      .insight {
+        display: flex; align-items: flex-start; gap: var(--la-space-xs);
+        font-size: var(--la-font-size-sm); color: var(--la-color-text-secondary); line-height: 1.5;
+        border-top: 1px solid color-mix(in srgb, var(--la-color-border-light), transparent 45%);
+        padding-top: var(--la-space-md);
+      }
+      .insight i { font-size: 14px; flex-shrink: 0; margin-top: 1px; }
+      .insight.on i { color: var(--la-color-resolved-text); }
+      .insight.risk i { color: var(--la-color-proactive-text); }
+      .insight.late i { color: var(--la-color-urgent-text); }
+      :host([parked]) .tile { box-shadow: 0px 0px 0px 1px var(--la-color-border-light); cursor: default; }
+      :host([parked]) .tile > *:not(.head) { display: none; }
+      .parked-note { font-size: var(--la-font-size-sm); color: var(--la-color-text-faint); }
+      :host([parked]) .head i, :host([parked]) .head .label { color: var(--la-color-text-faint); }
+    `,
+  ];
+  __decorate$H([
+      n()
+  ], exports.LaModuleTile.prototype, "label", void 0);
+  __decorate$H([
+      n()
+  ], exports.LaModuleTile.prototype, "icon", void 0);
+  __decorate$H([
+      n()
+  ], exports.LaModuleTile.prototype, "href", void 0);
+  __decorate$H([
+      n()
+  ], exports.LaModuleTile.prototype, "module", void 0);
+  __decorate$H([
+      n()
+  ], exports.LaModuleTile.prototype, "count", void 0);
+  __decorate$H([
+      n({ attribute: 'count-label' })
+  ], exports.LaModuleTile.prototype, "countLabel", void 0);
+  __decorate$H([
+      n()
+  ], exports.LaModuleTile.prototype, "sla", void 0);
+  __decorate$H([
+      n({ reflect: true })
+  ], exports.LaModuleTile.prototype, "status", void 0);
+  __decorate$H([
+      n()
+  ], exports.LaModuleTile.prototype, "insight", void 0);
+  __decorate$H([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaModuleTile.prototype, "parked", void 0);
+  __decorate$H([
+      n({ attribute: false })
+  ], exports.LaModuleTile.prototype, "pipeline", void 0);
+  exports.LaModuleTile = __decorate$H([
+      t$1('la-module-tile')
+  ], exports.LaModuleTile);
+
+  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-scope-filter — a "Viewing: X" scope control that rescopes a whole view.
+   *
+   * Used on the dashboard for the region/OpCo filter (Leadership) and the
+   * practitioner filter (Operations). Renders a pill trigger with the current
+   * selection and a grouped dropdown of options; fires `la-scope-change`
+   * `{value, label}` when a new option is chosen. The host swaps its dataset in
+   * response (this is how Leadership becomes the Regional view — same layout,
+   * filtered scope).
+   *
+   * @prop prefix  - leading label, e.g. "Viewing"
+   * @prop value   - selected option value
+   * @prop options - ScopeOption[] (property)
+   * @fires la-scope-change - {value, label}
+   */
+  exports.LaScopeFilter = class LaScopeFilter extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.prefixText = 'Viewing';
+          this.value = '';
+          this.options = [];
+      }
+      get _current() {
+          return this.options.find((o) => o.value === this.value) || this.options[0];
+      }
+      _select(opt) {
+          this.value = opt.value;
+          const details = this.renderRoot.querySelector('details');
+          if (details)
+              details.removeAttribute('open');
+          this.dispatchEvent(new CustomEvent('la-scope-change', {
+              detail: { value: opt.value, label: opt.label },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      render() {
+          // group options preserving order; ungrouped first
+          const groups = new Map();
+          for (const o of this.options) {
+              const g = o.group || '';
+              if (!groups.has(g))
+                  groups.set(g, []);
+              groups.get(g).push(o);
+          }
+          return b `${iconStyles}
+      <details>
+        <summary>
+          <span class="pfx">${this.prefixText}:</span>
+          <span>${this._current?.label ?? ''}</span>
+          <i class="ph ph-caret-down chev"></i>
+        </summary>
+        <div class="menu" role="listbox">
+          ${[...groups.entries()].map(([g, opts]) => b `
+              ${g ? b `<div class="grp-label">${g}</div>` : ''}
+              ${opts.map((o) => b `<button
+                  class="opt"
+                  role="option"
+                  aria-selected=${o.value === this.value ? 'true' : 'false'}
+                  @click=${() => this._select(o)}
+                >
+                  <span>${o.label}</span>
+                  ${o.value === this.value
+            ? b `<i class="ph ph-check"></i>`
+            : ''}
+                </button>`)}
+            `)}
+        </div>
+      </details>`;
+      }
+  };
+  exports.LaScopeFilter.styles = [
+      tokens,
+      i$5 `
+      :host { display: inline-block; position: relative; }
+      details { position: relative; }
+      summary {
+        list-style: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-xs);
+        padding: var(--la-space-xs) var(--la-space-md);
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-radius-pill);
+        background: var(--la-color-bg);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+        white-space: nowrap;
+      }
+      summary::-webkit-details-marker { display: none; }
+      summary:hover { background: var(--la-color-bg-subtle); }
+      summary .pfx { color: var(--la-color-text-muted); font-weight: var(--la-font-weight-normal); }
+      summary .chev { font-size: 12px; color: var(--la-color-text-muted); transition: transform var(--dur-fast) var(--ease); }
+      details[open] summary .chev { transform: rotate(180deg); }
+      .menu {
+        position: absolute;
+        right: 0;
+        top: calc(100% + 6px);
+        z-index: 20;
+        min-width: 220px;
+        background: var(--la-color-bg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        box-shadow: var(--la-shadow-lg);
+        padding: var(--la-space-xs);
+        max-height: 340px;
+        overflow: auto;
+      }
+      .grp-label {
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-faint);
+        letter-spacing: 0.04em;
+        padding: var(--la-space-sm) var(--la-space-sm) var(--la-space-2xs);
+      }
+      .opt {
+        display: flex; align-items: center; justify-content: space-between; gap: var(--la-space-sm);
+        width: 100%; text-align: left; border: 0; background: none; font-family: inherit; cursor: pointer;
+        padding: var(--la-space-sm) var(--la-space-sm);
+        border-radius: var(--la-radius-md);
+        font-size: var(--la-font-size-base); color: var(--la-color-text);
+      }
+      .opt:hover { background: var(--la-color-bg-subtle); }
+      .opt[aria-selected='true'] { font-weight: var(--la-font-weight-semibold); }
+      .opt i { font-size: 14px; color: var(--la-color-primary); }
+    `,
+  ];
+  __decorate$G([
+      n({ attribute: 'prefix' })
+  ], exports.LaScopeFilter.prototype, "prefixText", void 0);
+  __decorate$G([
+      n()
+  ], exports.LaScopeFilter.prototype, "value", void 0);
+  __decorate$G([
+      n({ attribute: false })
+  ], exports.LaScopeFilter.prototype, "options", void 0);
+  exports.LaScopeFilter = __decorate$G([
+      t$1('la-scope-filter')
+  ], exports.LaScopeFilter);
+
+  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-week-strip — the Practitioner "My Week" schedule strip.
+   *
+   * A day-by-day view of the current week that surfaces only action items (not a
+   * full calendar) — each day column lists its due items as small chips, colour-
+   * dotted by urgency; today's column is highlighted; empty days read "—".
+   *
+   * @prop days - WeekDay[] (property)
+   */
+  exports.LaWeekStrip = class LaWeekStrip extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.days = [];
+      }
+      render() {
+          return b `
+      <div class="strip" style="--week-cols:${this.days.length || 5}">
+        ${this.days.map((d) => b `<div class="day ${d.today ? 'today' : ''}">
+            <div class="day-head">
+              <span class="dow">${d.label}</span><span class="dom">${d.date}</span>
+            </div>
+            ${d.items.length
+            ? d.items.map((it) => b `<div class="item">
+                    <span class="d ${it.status || ''}"></span><span>${it.text}</span>
+                  </div>`)
+            : b `<span class="empty">—</span>`}
+          </div>`)}
+      </div>
+    `;
+      }
+  };
+  exports.LaWeekStrip.styles = [
+      tokens,
+      i$5 `
+      :host { display: block; }
+      .strip {
+        display: grid;
+        grid-template-columns: repeat(var(--week-cols, 5), 1fr);
+        gap: var(--la-space-sm);
+      }
+      .day {
+        display: flex; flex-direction: column; gap: var(--la-space-sm);
+        background: var(--la-color-bg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        padding: var(--la-space-md);
+        min-height: 110px;
+      }
+      .day.today { border-color: var(--la-color-border-active); background: var(--la-color-bg-subtle); }
+      .day-head { display: flex; align-items: baseline; gap: var(--la-space-xs); }
+      .day-head .dow { font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); font-weight: var(--la-font-weight-medium); }
+      .day-head .dom { font-size: var(--la-font-size-sm); color: var(--la-color-text-faint); font-variant-numeric: tabular-nums; }
+      .day.today .day-head .dow { color: var(--la-color-text); }
+      .item {
+        display: flex; align-items: flex-start; gap: var(--la-space-xs);
+        font-size: var(--la-font-size-sm); color: var(--la-color-text); line-height: 1.4;
+      }
+      .item .d { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; margin-top: 6px; background: var(--la-color-text-faint); }
+      .item .d.on { background: var(--la-color-resolved); }
+      .item .d.risk { background: var(--la-color-proactive); }
+      .item .d.late { background: var(--la-color-urgent); }
+      .empty { font-size: var(--la-font-size-sm); color: var(--la-color-text-faint); }
+      @media (max-width: 900px) { .strip { grid-template-columns: 1fr; } }
+    `,
+  ];
+  __decorate$F([
+      n({ attribute: false })
+  ], exports.LaWeekStrip.prototype, "days", void 0);
+  exports.LaWeekStrip = __decorate$F([
+      t$1('la-week-strip')
+  ], exports.LaWeekStrip);
+
+  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-ai-insight — the framed LawAdvisor AI output panel (the "X3" pattern).
+   *
+   * One component for every "LawAdvisor AI recommends / has drafted / flagged …"
+   * block in the product: a header carrying the brand mark and an attributed
+   * headline, a body for the detail, and a footer where the human can act on the
+   * output. Keeps AI framing honest and human-in-the-loop: the AI assists in the
+   * header, the human decides in the footer. Every AI output is rateable,
+   * disagreeable-with, and amendable.
+   *
+   * The footer carries the three X3 controls — **Rate** ("Was this helpful?",
+   * optionally required before the step's primary CTA fires), **Disagree**
+   * ("Something's wrong" → inline reason, logged, step can still proceed), and
+   * **Amend** ("Edit" → inline edit → "Save edits", leaving a persistent "Edited
+   * by {user} on {date}" stamp). Disagreement and amendments feed model training,
+   * not just a satisfaction score. The controls are deliberately subdued (ghost /
+   * tertiary) so they never compete with the step's primary CTA.
+   *
+   * Body content goes in the default slot; `description` is the plain-text
+   * fallback. The header reads "{attribution} {headline}" — attribution defaults
+   * to "LawAdvisor AI" so the branding is owned by the component, not retyped.
+   *
+   * @prop headline      - The action phrase, e.g. "drafted 22 separation packets…"
+   * @prop attribution   - Brand prefix in the header. Default: "LawAdvisor AI". Set "" to omit.
+   * @prop description   - Plain-text body, used when the default slot is empty.
+   * @prop rateable      - Boolean; show the "Was this helpful?" thumbs up/down in the footer.
+   * @prop rating        - Current rating: 0 = unrated · 1 = thumbs up · 2 = thumbs down.
+   * @prop rate-required - Boolean; rating is required before the host's primary CTA — gate it with `la-rate-state`.
+   * @prop disagreeable  - Boolean; show the "Something's wrong" Disagree control.
+   * @prop amendable     - Boolean; show the "Edit" Amend control and persist the edit stamp.
+   * @prop edited-by     - Who last amended the output (drives the "Edited by …" stamp).
+   * @prop edited-at     - When it was last amended, e.g. "14 Apr 2026 · 09:47 AM MT".
+   * @slot               - Body content (overrides `description`).
+   * @slot actions       - Footer actions, right-aligned (e.g. a "View source" button).
+   * @fires la-rate       - {rating:number} when the user picks a thumbs rating (0/1/2).
+   * @fires la-rate-state - {rated:boolean} whenever the rated state changes — host gates its primary CTA on this.
+   * @fires la-disagree   - {reason:string} when the user logs a disagreement.
+   * @fires la-amend      - {value:string} when the user saves an amended body.
+   *
+   * @example
+   * <la-ai-insight
+   *   rateable disagreeable amendable rate-required
+   *   headline="drafted 22 separation packets from the template, agreed terms and Workday profiles">
+   *   Per group: business-reason document (shared). Per employee: redundancy letter +
+   *   severance package (personalised, ADEA waiver for 40+). Review and approve before sending.
+   * </la-ai-insight>
+   */
+  exports.LaAiInsight = class LaAiInsight extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.headline = '';
+          this.attribution = 'LawAdvisor AI';
+          this.description = '';
+          /** Card scale. 'lg' is a roomier variant — larger radius, padding, and header. */
+          this.size = 'default';
+          /** Omit the header band (brand mark + attribution + header controls). Use when
+           *  the slotted body already carries its own title and AI attribution. */
+          this.noHead = false;
+          this.rateable = false;
+          this.rating = 0;
+          this.rateRequired = false;
+          this.disagreeable = false;
+          this.amendable = false;
+          this.editedBy = '';
+          this.editedAt = '';
+          /** Whether the actions slot has assigned content. */
+          this._hasActions = false;
+          /** Inline panel currently open in the footer (Disagree or Amend). */
+          this._panel = 'none';
+          /** Working copy of the disagreement reason. */
+          this._disagreeReason = '';
+          /** Working copy of the amended body text. */
+          this._amendDraft = '';
+          /** Plain-text snapshot of the slotted/described body, for seeding the amend editor. */
+          this._bodyText = '';
+      }
+      /** The LawAdvisor brand mark, inlined so the component carries no asset dependency. */
+      _mark() {
+          return w `<svg viewBox="0 0 80 80" fill="currentColor" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+      <path d="M0 2C0 0.895428 0.894944 0 1.99891 0H12.2156C13.3195 0 14.2145 0.895431 14.2145 2V80H1.99891C0.894942 80 0 79.1046 0 78V2Z"/>
+      <path d="M12.396 44.3996H26.7881V77.9996C26.7881 79.1042 25.8932 79.9996 24.7892 79.9996H12.396V44.3996Z"/>
+      <path d="M24.8336 2C24.8336 0.895432 25.7285 0 26.8325 0H38.826C39.9299 0 40.8249 0.895431 40.8249 2V44.4H24.8336V2Z"/>
+      <path d="M33.4274 44.3996H46.2205V77.9996C46.2205 79.1042 45.3255 79.9996 44.2215 79.9996H35.4263C34.3224 79.9996 33.4274 79.1042 33.4274 77.9996V44.3996Z"/>
+      <path d="M46.4171 2C46.4171 0.895432 47.3121 0 48.416 0H54.8126C55.9165 0 56.8115 0.895431 56.8115 2V44.4H46.4171V2Z"/>
+      <path d="M51.9797 44.3996H63.9732V77.9996C63.9732 79.1042 63.0782 79.9996 61.9742 79.9996H53.9786C52.8746 79.9996 51.9797 79.1042 51.9797 77.9996V44.3996Z"/>
+      <path d="M62.4173 2C62.4173 0.895432 63.3122 0 64.4162 0H67.2147C68.3187 0 69.2136 0.895431 69.2136 2V44.4H62.4173V2Z"/>
+      <path d="M67.5632 44.3996H76.7582V77.9996C76.7582 79.1042 75.8632 79.9996 74.7593 79.9996H69.5621C68.4581 79.9996 67.5632 79.1042 67.5632 77.9996V44.3996Z"/>
+      <path d="M74.8028 2C74.8028 0.895432 75.6978 0 76.8017 0H78.0011C79.1051 0 80 0.895431 80 2V44.4H74.8028V2Z"/>
+    </svg>`;
+      }
+      willUpdate(changed) {
+          // Keep the host's primary-CTA gate in sync whenever the rated state can
+          // change — a rating set externally, or rate-required being toggled on.
+          if (changed.has('rating') || changed.has('rateRequired')) {
+              this.dispatchEvent(new CustomEvent('la-rate-state', {
+                  detail: { rated: this.rating > 0 },
+                  bubbles: true,
+                  composed: true,
+              }));
+          }
+      }
+      _onActionsSlot(e) {
+          const slot = e.target;
+          this._hasActions = slot
+              .assignedNodes({ flatten: true })
+              .some(n => n.nodeType === Node.ELEMENT_NODE || !!n.textContent?.trim());
+      }
+      _onBodySlot(e) {
+          const slot = e.target;
+          const text = slot
+              .assignedNodes({ flatten: true })
+              .map(n => n.textContent ?? '')
+              .join('')
+              .trim();
+          if (text)
+              this._bodyText = text;
+      }
+      _rate(n) {
+          // Toggle off if the same thumb is tapped again.
+          this.rating = this.rating === n ? 0 : n;
+          this.dispatchEvent(new CustomEvent('la-rate', { detail: { rating: this.rating }, bubbles: true, composed: true }));
+      }
+      get _bodySeed() {
+          return this._bodyText || this.description;
+      }
+      _openDisagree() {
+          this._disagreeReason = '';
+          this._panel = this._panel === 'disagree' ? 'none' : 'disagree';
+      }
+      _openAmend() {
+          if (this._panel === 'amend') {
+              this._panel = 'none';
+              return;
+          }
+          this._amendDraft = this._bodySeed;
+          this._panel = 'amend';
+      }
+      _closePanel() {
+          this._panel = 'none';
+      }
+      _onDisagreeInput(e) {
+          this._disagreeReason = e.detail.value;
+      }
+      _onAmendInput(e) {
+          this._amendDraft = e.detail.value;
+      }
+      _submitDisagree() {
+          const reason = this._disagreeReason.trim();
+          if (!reason)
+              return;
+          this.dispatchEvent(new CustomEvent('la-disagree', { detail: { reason }, bubbles: true, composed: true }));
+          this._panel = 'none';
+      }
+      _saveAmend() {
+          const value = this._amendDraft.trim();
+          if (!value)
+              return;
+          this.dispatchEvent(new CustomEvent('la-amend', { detail: { value }, bubbles: true, composed: true }));
+          this._panel = 'none';
+      }
+      _renderStars() {
+          // rating: 0 = unrated, 1 = thumbs up, 2 = thumbs down
+          return b `
+      <div class="rate">
+        <span class="label">Was this helpful?</span>
+        <div class="thumbs">
+          <button
+            type="button"
+            class="thumb up ${this.rating === 1 ? 'on' : ''}"
+            aria-label="Helpful"
+            aria-pressed=${this.rating === 1}
+            @click=${() => this._rate(1)}
+          >
+            <i class="${this.rating === 1 ? 'ph-fill' : 'ph'} ph-thumbs-up" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="thumb down ${this.rating === 2 ? 'on' : ''}"
+            aria-label="Not helpful"
+            aria-pressed=${this.rating === 2}
+            @click=${() => this._rate(2)}
+          >
+            <i class="${this.rating === 2 ? 'ph-fill' : 'ph'} ph-thumbs-down" aria-hidden="true"></i>
+          </button>
+        </div>
+      </div>
+    `;
+      }
+      /** lg header controls — thumbs rating + an icon-only disagree, right-aligned. */
+      _renderHeaderControls() {
+          return b `
+      <div class="head-controls">
+        ${this.rateable ? this._renderStars() : A}
+        ${this.disagreeable
+            ? b `<button
+              type="button"
+              class="ctl-icon ${this._panel === 'disagree' ? 'on' : ''}"
+              title="Something's wrong"
+              aria-label="Something's wrong"
+              aria-pressed=${this._panel === 'disagree'}
+              @click=${this._openDisagree}
+            >
+              <i class="ph ph-warning-circle" aria-hidden="true"></i>
+            </button>`
+            : A}
+      </div>
+    `;
+      }
+      /** Subdued, tertiary X3 controls — must never compete with the primary CTA. */
+      _renderControls() {
+          return b `
+      ${this.editedBy
+            ? b `<span class="edited-stamp"
+            ><i class="ph ph-pencil-simple" aria-hidden="true"></i>Edited by
+            ${this.editedBy}${this.editedAt ? b ` on ${this.editedAt}` : A}</span
+          >`
+            : A}
+      <div class="ctl-row">
+        ${this.disagreeable
+            ? b `<la-button
+              variant="ghost"
+              size="sm"
+              aria-pressed=${this._panel === 'disagree'}
+              @click=${this._openDisagree}
+            >
+              <i slot="icon-left" class="ph ph-warning-circle" aria-hidden="true"></i>
+              Something's wrong
+            </la-button>`
+            : A}
+        ${this.amendable
+            ? b `<la-button
+              variant="ghost"
+              size="sm"
+              aria-pressed=${this._panel === 'amend'}
+              @click=${this._openAmend}
+            >
+              <i slot="icon-left" class="ph ph-pencil-simple" aria-hidden="true"></i>
+              Edit
+            </la-button>`
+            : A}
+        <slot name="actions" @slotchange=${this._onActionsSlot}></slot>
+      </div>
+    `;
+      }
+      _renderDisagreePanel() {
+          return b `<div class="panel-inline">
+      <div class="field-label">What's wrong with this output?</div>
+      <div class="field-hint">
+        We log your feedback and use it to improve future drafts. You can still
+        carry on with this step.
+      </div>
+      <la-textarea
+        placeholder="Tell us what's wrong"
+        .value=${this._disagreeReason}
+        min-rows="2"
+        @la-change=${this._onDisagreeInput}
+      ></la-textarea>
+      <div class="panel-actions">
+        <la-button variant="ghost" size="sm" @click=${this._closePanel}
+          >Cancel</la-button
+        >
+        <la-button
+          variant="secondary"
+          size="sm"
+          ?disabled=${!this._disagreeReason.trim()}
+          @click=${this._submitDisagree}
+          >Send Feedback</la-button
+        >
+      </div>
+    </div>`;
+      }
+      _renderAmendPanel() {
+          return b `<div class="panel-inline">
+      <div class="field-label">Edit this output</div>
+      <div class="field-hint">
+        Your edits replace the draft and feed model training. We record who
+        amended it and when.
+      </div>
+      <la-textarea
+        .value=${this._amendDraft}
+        min-rows="3"
+        @la-change=${this._onAmendInput}
+      ></la-textarea>
+      <div class="panel-actions">
+        <la-button variant="ghost" size="sm" @click=${this._closePanel}
+          >Cancel</la-button
+        >
+        <la-button
+          variant="secondary"
+          size="sm"
+          ?disabled=${!this._amendDraft.trim()}
+          @click=${this._saveAmend}
+          >Save Edits</la-button
+        >
+      </div>
+    </div>`;
+      }
+      render() {
+          const header = this.attribution
+              ? b `<span class="attribution">${this.attribution}</span> ${this.headline}`
+              : this.headline;
+          const hasControls = this.disagreeable || this.amendable || !!this.editedBy;
+          const footerClass = `footer ${this.rateable ? 'has-rate' : ''} ${this._hasActions || hasControls ? 'has-actions' : ''}`;
+          // lg places the rate + disagree controls on the header line (right edge);
+          // the default size keeps them in the footer. With no head, controls always
+          // fall to the footer.
+          const controlsInHeader = this.size === 'lg' && !this.noHead;
+          return b `
+      ${iconStyles}
+      <div class="panel">
+        ${this.noHead
+            ? A
+            : b `<div class="head">
+          <span class="mark">${this._mark()}</span>
+          <span class="headline"><slot name="headline">${header}</slot></span>
+          ${controlsInHeader ? this._renderHeaderControls() : A}
+        </div>`}
+        <div class="body">
+          <slot @slotchange=${this._onBodySlot}>${this.description}</slot>
+        </div>
+        ${controlsInHeader
+            ? A
+            : b `<div class=${footerClass}>
+              ${this.rateable ? this._renderStars() : A}
+              <div class="actions">${this._renderControls()}</div>
+            </div>`}
+        ${this._panel === 'disagree' ? this._renderDisagreePanel() : A}
+        ${this._panel === 'amend' ? this._renderAmendPanel() : A}
+      </div>
+    `;
+      }
+  };
+  exports.LaAiInsight.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .panel {
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        /* Soft AI wash — marks this as an AI-drafted surface. */
+        background-color: var(--la-color-bg);
+        background-image: var(--la-gradient-ai-surface);
+        overflow: hidden;
+      }
+      .head {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-sm) var(--la-space-md);
+        background: transparent;
+        border-bottom: 1px solid var(--la-color-border-light);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+      }
+      .mark {
+        flex-shrink: 0;
+        display: inline-flex;
+        width: 15px;
+        height: 15px;
+        color: var(--la-color-text);
+      }
+      .mark svg {
+        width: 100%;
+        height: 100%;
+        display: block;
+      }
+      .headline {
+        min-width: 0;
+      }
+      .attribution {
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+      }
+      .body {
+        padding: var(--la-space-md) var(--la-space-lg);
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--la-space-md);
+        padding: var(--la-space-sm) var(--la-space-md);
+        border-top: 1px solid var(--la-color-border-light);
+        background: transparent;
+      }
+      /* Hidden until there's something to show (rating or slotted actions). */
+      .footer:not(.has-rate):not(.has-actions) {
+        display: none;
+      }
+      /* ── lg — roomier card variant ────────────────────────────────────────── */
+      :host([size='lg']) .panel {
+        border-radius: var(--la-radius-xl);
+        /* Fade the AI wash to white toward the bottom — keep the tint to the
+           header + first line (top ~30%); the rest of the card reads white. */
+        background-image:
+          linear-gradient(to top, var(--la-color-bg) 0%, var(--la-color-bg) 72%, transparent 100%),
+          var(--la-gradient-ai-surface);
+      }
+      /* Borderless + one consistent 24px left edge across head, body, and footer. */
+      :host([size='lg']) .head {
+        padding: var(--la-space-xl);
+        border-bottom: none;
+        font-size: var(--la-font-size-base);
+      }
+      :host([size='lg']) .mark {
+        width: var(--la-font-size-lg);
+        height: var(--la-font-size-lg);
+      }
+      :host([size='lg']) .body {
+        padding: 0 var(--la-space-xl) var(--la-space-xl);
+      }
+      :host([size='lg']) .footer {
+        padding: 0 var(--la-space-xl) var(--la-space-xl);
+        border-top: none;
+      }
+      /* lg — rate + disagree controls live on the header line, pushed right */
+      .head-controls {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        flex-shrink: 0;
+      }
+      .ctl-icon {
+        appearance: none;
+        background: none;
+        border: none;
+        padding: 4px;
+        margin: 0;
+        cursor: pointer;
+        color: var(--la-color-text-muted);
+        font-size: var(--la-font-size-base);
+        line-height: 1;
+        display: inline-flex;
+        border-radius: var(--la-radius-sm);
+        transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+      }
+      .ctl-icon:hover,
+      .ctl-icon.on {
+        color: var(--la-color-text);
+        background: var(--la-color-bg-muted);
+      }
+      .ctl-icon:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 1px;
+      }
+      .rate {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+      }
+      .label {
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-muted);
+      }
+      .thumbs {
+        display: flex;
+        gap: var(--la-space-2xs);
+      }
+      .thumb {
+        appearance: none;
+        background: none;
+        border: none;
+        padding: 2px;
+        margin: 0;
+        cursor: pointer;
+        color: var(--la-color-text-faint);
+        font-size: var(--la-font-size-base);
+        line-height: 1;
+        display: inline-flex;
+        border-radius: var(--la-radius-sm);
+        transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+      }
+      .thumb:hover {
+        color: var(--la-color-text-secondary);
+        background: var(--la-color-bg-muted);
+      }
+      .thumb.up.on {
+        color: var(--la-color-success-text);
+      }
+      .thumb.down.on {
+        color: var(--la-color-danger-text);
+      }
+      .thumb:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 1px;
+        border-radius: var(--la-radius-sm);
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+      }
+      /* Footer-right cluster: slotted actions + the subdued X3 controls.
+         Ghost styling keeps them tertiary so they never compete with the
+         step's primary CTA. */
+      .ctl-row {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+      }
+
+      /* Persistent amendment provenance stamp. */
+      .edited-stamp {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-right: auto;
+      }
+      .edited-stamp i {
+        font-size: 12px;
+      }
+
+      /* ── Inline Disagree / Amend panels ────────────────────── */
+      .panel-inline {
+        padding: var(--la-space-md) var(--la-space-lg);
+        border-top: 1px solid var(--la-color-border-light);
+        background: var(--la-color-bg-subtle);
+      }
+      .panel-inline .field-label {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+        margin-bottom: var(--la-space-2xs);
+      }
+      .panel-inline .field-hint {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-bottom: var(--la-space-sm);
+      }
+      .panel-actions {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--la-space-sm);
+        margin-top: var(--la-space-sm);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .thumb { transition: none; }
+      }
+    `,
+  ];
+  __decorate$E([
+      n()
+  ], exports.LaAiInsight.prototype, "headline", void 0);
+  __decorate$E([
+      n()
+  ], exports.LaAiInsight.prototype, "attribution", void 0);
+  __decorate$E([
+      n()
+  ], exports.LaAiInsight.prototype, "description", void 0);
+  __decorate$E([
+      n({ reflect: true })
+  ], exports.LaAiInsight.prototype, "size", void 0);
+  __decorate$E([
+      n({ type: Boolean, reflect: true, attribute: 'no-head' })
+  ], exports.LaAiInsight.prototype, "noHead", void 0);
+  __decorate$E([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaAiInsight.prototype, "rateable", void 0);
+  __decorate$E([
+      n({ type: Number })
+  ], exports.LaAiInsight.prototype, "rating", void 0);
+  __decorate$E([
+      n({ type: Boolean, reflect: true, attribute: 'rate-required' })
+  ], exports.LaAiInsight.prototype, "rateRequired", void 0);
+  __decorate$E([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaAiInsight.prototype, "disagreeable", void 0);
+  __decorate$E([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaAiInsight.prototype, "amendable", void 0);
+  __decorate$E([
+      n({ attribute: 'edited-by' })
+  ], exports.LaAiInsight.prototype, "editedBy", void 0);
+  __decorate$E([
+      n({ attribute: 'edited-at' })
+  ], exports.LaAiInsight.prototype, "editedAt", void 0);
+  __decorate$E([
+      r()
+  ], exports.LaAiInsight.prototype, "_hasActions", void 0);
+  __decorate$E([
+      r()
+  ], exports.LaAiInsight.prototype, "_panel", void 0);
+  __decorate$E([
+      r()
+  ], exports.LaAiInsight.prototype, "_disagreeReason", void 0);
+  __decorate$E([
+      r()
+  ], exports.LaAiInsight.prototype, "_amendDraft", void 0);
+  __decorate$E([
+      r()
+  ], exports.LaAiInsight.prototype, "_bodyText", void 0);
+  exports.LaAiInsight = __decorate$E([
+      t$1('la-ai-insight')
+  ], exports.LaAiInsight);
+
+  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const LEVEL_TONE = {
+      L1: 'green',
+      L2: 'amber',
+      L3: 'red',
+  };
+  exports.LaLevelingMatrix = class LaLevelingMatrix extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.factors = [];
+          this.recommendedLevel = 'L2';
+          this.summary = '';
+          this.heading = 'Recommended level';
+          this.rateable = false;
+          this.attribution = 'LawAdvisor AI';
+          this._hasRouting = false;
+      }
+      _onRoutingSlot(e) {
+          const slot = e.target;
+          this._hasRouting = slot.assignedElements().length > 0;
+          this.requestUpdate();
+      }
+      /** Re-dispatch the AI insight's disagreement as a level-override intent. */
+      _onDisagree(e) {
+          this.dispatchEvent(new CustomEvent('la-level-override', {
+              detail: { reason: e.detail?.reason ?? '', from: this.recommendedLevel },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _renderTrigger(t) {
+          const tone = LEVEL_TONE[t.level];
+          const marker = t.level === 'L3'
+              ? b `<i
+            class="warn ph-fill ph-warning"
+            role="img"
+            aria-label="L3"
+          ></i>`
+              : b `<span
+            class="dot tone-${tone}"
+            role="img"
+            aria-label=${t.level}
+          ></span>`;
+          return b `
+      <div class="trigger">
+        ${marker}
+        <span class="trigger-text"
+          >${t.label}${t.protected
+            ? b `<span class="protected-note">
+                <i class="ph-fill ph-shield-check" aria-hidden="true"></i>
+                Protected characteristic — not escalating
+              </span>`
+            : A}</span
+        >
+      </div>
+    `;
+      }
+      render() {
+          const headline = `recommends ${this.recommendedLevel}`;
+          return b `
+      ${iconStyles}
+      ${this.factors.length
+            ? b `
+            <div class="matrix">
+              <div class="col-head">
+                <span>Factor</span>
+                <span>Triggers</span>
+              </div>
+              ${this.factors.map((f) => b `
+                  <div class="row">
+                    <div class="factor">${f.factor}</div>
+                    <div class="triggers">
+                      ${f.triggers.map((t) => this._renderTrigger(t))}
+                    </div>
+                  </div>
+                `)}
+              <div class="legend" aria-hidden="true">
+                <span class="legend-item"
+                  ><span class="dot tone-green"></span> L1 — Routine</span
+                >
+                <span class="legend-item"
+                  ><span class="dot tone-amber"></span> L2 — Moderate</span
+                >
+                <span class="legend-item"
+                  ><i class="warn ph-fill ph-warning"></i> L3 — Complex /
+                  high-risk</span
+                >
+              </div>
+            </div>
+          `
+            : A}
+
+      <la-ai-insight
+        attribution=${this.attribution}
+        headline=${headline}
+        description=${this.summary}
+        ?rateable=${this.rateable}
+        disagreeable
+        @la-disagree=${this._onDisagree}
+      >
+        <slot name="actions" slot="actions"></slot>
+      </la-ai-insight>
+
+      <div class="routing ${this._hasRouting ? 'has-routing' : ''}">
+        <slot name="routing" @slotchange=${this._onRoutingSlot}></slot>
+      </div>
+    `;
+      }
+  };
+  exports.LaLevelingMatrix.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .matrix {
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        overflow: hidden;
+        background: var(--la-color-bg);
+        margin-bottom: var(--la-space-lg);
+      }
+      .col-head {
+        display: grid;
+        grid-template-columns: var(--la-leveling-factor-col, 140px) 1fr;
+        gap: var(--la-space-md);
+        padding: var(--la-space-sm) var(--la-space-lg);
+        background: var(--la-color-bg-subtle);
+        border-bottom: 1px solid var(--la-color-border-light);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-muted);
+      }
+      .row {
+        display: grid;
+        grid-template-columns: var(--la-leveling-factor-col, 140px) 1fr;
+        gap: var(--la-space-md);
+        padding: var(--la-space-md) var(--la-space-lg);
+        border-bottom: 1px solid var(--la-color-border-light);
+      }
+      .row:last-child {
+        border-bottom: none;
+      }
+      .factor {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+        line-height: var(--la-line-height);
+      }
+      .triggers {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+        min-width: 0;
+      }
+      .trigger {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        line-height: var(--la-line-height);
+      }
+      /* Colour-only level dot. Carries no text; the ⚠ for L3 is the only
+         non-colour cue, per X15. */
+      .dot {
+        flex-shrink: 0;
+        width: 10px;
+        height: 10px;
+        margin-top: 5px;
+        border-radius: var(--la-radius-circle);
+        position: relative;
+      }
+      .dot.tone-green {
+        background: var(--la-color-resolved);
+      }
+      .dot.tone-amber {
+        background: var(--la-color-proactive);
+      }
+      .dot.tone-red {
+        background: var(--la-color-urgent);
+      }
+      /* L3 warning glyph — replaces the plain dot so the highest level is
+         legible without relying on red alone. */
+      .warn {
+        flex-shrink: 0;
+        margin-top: 2px;
+        color: var(--la-color-urgent);
+        font-size: var(--la-font-size-md);
+        line-height: 1;
+      }
+      .trigger-text {
+        min-width: 0;
+      }
+      /* Protected-characteristic note — quiet inline chip; explicitly
+         non-escalating. */
+      .protected-note {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        margin-left: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        white-space: nowrap;
+      }
+      .protected-note i {
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-faint);
+      }
+      /* Colour-key legend so the colour-only dots are decodable. */
+      .legend {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-md);
+        padding: var(--la-space-sm) var(--la-space-lg);
+        border-top: 1px solid var(--la-color-border-light);
+        background: var(--la-color-bg-subtle);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .legend-item {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+      }
+      .routing {
+        margin-top: var(--la-space-md);
+      }
+      /* Hide the routing wrapper until it has slotted content. */
+      .routing:not(.has-routing) {
+        display: none;
+      }
+    `,
+  ];
+  __decorate$D([
+      n({ type: Array })
+  ], exports.LaLevelingMatrix.prototype, "factors", void 0);
+  __decorate$D([
+      n({ attribute: 'recommended-level' })
+  ], exports.LaLevelingMatrix.prototype, "recommendedLevel", void 0);
+  __decorate$D([
+      n()
+  ], exports.LaLevelingMatrix.prototype, "summary", void 0);
+  __decorate$D([
+      n()
+  ], exports.LaLevelingMatrix.prototype, "heading", void 0);
+  __decorate$D([
+      n({ type: Boolean })
+  ], exports.LaLevelingMatrix.prototype, "rateable", void 0);
+  __decorate$D([
+      n()
+  ], exports.LaLevelingMatrix.prototype, "attribution", void 0);
+  exports.LaLevelingMatrix = __decorate$D([
+      t$1('la-leveling-matrix')
+  ], exports.LaLevelingMatrix);
+
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  const t={ATTRIBUTE:1},e$1=t=>(...e)=>({_$litDirective$:t,values:e});let i$1 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
+
+  /**
+   * @license
+   * Copyright 2018 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */const e=e$1(class extends i$1{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||t$1.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter(s=>t[s]).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter(t=>""!==t)));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return E}});
+
+  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var LaAvatar_1;
+  /**
+   * la-avatar — photo or initials avatar for people and entities.
+   *
+   * Resolution order for the surface:
+   *   1. `src`        — an explicit image URL.
+   *   2. `photo`      — an index (1–88) into the People Avatar Fill set.
+   *   3. auto         — a stable photo derived by hashing `name`, so every named
+   *                     person gets a consistent face for free. Pass `gender` to
+   *                     pick from only the women's (`w`) or men's (`m`) fills.
+   *   4. initials     — the fallback, also shown while an image loads or if it
+   *                     fails. Set `text-only` to force initials (legal entities,
+   *                     OpCo codes, teams).
+   *
+   * Gender convention: each fill encodes its presented gender in the filename
+   * suffix — `NNw.png` (woman) / `NNm.png` (man). When building a screen, match
+   * the persona: a known woman (e.g. "Maya Lindqvist") should use a `w` fill,
+   * either by setting `gender="w"` on an auto avatar, or by choosing a `photo`
+   * index whose suffix is `w`. The index→gender table lives in `GENDERS` below.
+   *
+   * Initials are derived automatically from `name` (first letter of each of the
+   * first two words). Override with `initials` when the name doesn't produce the
+   * right result.
+   *
+   * Four fixed sizes map directly to design token values:
+   * - xs (24 px) — dense list rows, inline owner chips
+   * - sm (32 px) — compact lists, inline references, share modals
+   * - md (40 px) — standard person rows, cards
+   * - lg (48 px) — detail panel headers
+   *
+   * The component is purely presentational — it fires no events.
+   *
+   * @prop name      - Full name; auto-derives initials and the auto photo (e.g. "Ana Reyes")
+   * @prop initials  - Override for auto-derived initials (e.g. "JO")
+   * @prop size      - 'xs' | 'sm' | 'md' | 'lg'. Default: 'md'
+   * @prop src       - Explicit image URL — wins over `photo` and the auto photo
+   * @prop photo     - Index 1–88 into the avatar fill set — forces a specific face
+   * @prop gender    - '' | 'w' | 'm' (also 'woman' / 'man'). Constrains the auto
+   *                    from-name photo to one presented gender. Default: '' (any)
+   * @prop text-only - Boolean; never show a photo, always render initials (entities)
+   * @prop logo      - Boolean; render `src` as a contained, inset brand mark in a rounded
+   *                    square (not a circle, so a square logo isn't clipped) — the AI assistant
+   * @prop presence  - '' | 'online' | 'away' | 'offline'. Renders a corner presence dot
+   *                    (Messenger-style) with a background-coloured ring. Default: '' (none)
+   * @prop asset-base - Base path for the fill set. Default: '/assets/avatars'
+   *
+   * @example
+   * <la-avatar name="Ana Reyes"></la-avatar>            <!-- auto photo from name -->
+   * <la-avatar name="Mark Hensley" photo="12"></la-avatar>
+   * <la-avatar name="Halden Diagnostics" initials="HD" text-only></la-avatar>
+   * <la-avatar src="/uploads/me.png" name="Jon"></la-avatar>
+   * <la-avatar name="Robert Sands" photo="67" presence="online"></la-avatar>
+   */
+  let LaAvatar = LaAvatar_1 = class LaAvatar extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.name = '';
+          this.initials = '';
+          this.size = 'md';
+          this.src = '';
+          this.photo = '';
+          this.textOnly = false;
+          this.logo = false;
+          this.presence = '';
+          this.assetBase = '/assets/avatars';
+          /** Constrain the auto (from-name) photo to one presented gender. 'w' | 'm'
+           *  (also accepts 'woman' / 'man'). Empty = pick from the whole set. */
+          this.gender = '';
+          /** Flips to true if the resolved image fails to load, so we fall back to initials. */
+          this._imgFailed = false;
+          /** Flips to true once the image has loaded, to fade it in. */
+          this._imgLoaded = false;
+      }
+      /** Fill indices for one presented gender (1-based), built once from GENDERS. */
+      static poolFor(g) {
+          const pool = [];
+          for (let i = 0; i < LaAvatar_1.GENDERS.length; i++) {
+              if (LaAvatar_1.GENDERS[i] === g)
+                  pool.push(i + 1);
+          }
+          return pool;
+      }
+      /** The filename gender suffix for a given fill index (defaults to 'm'). */
+      static suffixFor(n) {
+          return LaAvatar_1.GENDERS[n - 1] ?? 'm';
+      }
+      /** Normalise the `gender` prop to the 'w' | 'm' filename code, or '' for any. */
+      get _genderCode() {
+          const g = this.gender;
+          if (g === 'w' || g === 'woman')
+              return 'w';
+          if (g === 'm' || g === 'man')
+              return 'm';
+          return '';
+      }
+      get _displayInitials() {
+          if (this.initials)
+              return this.initials;
+          return this.name
+              .split(' ')
+              .filter(Boolean)
+              .slice(0, 2)
+              .map(w => w[0] ?? '')
+              .join('')
+              .toUpperCase();
+      }
+      /** Stable, deterministic hash of a string → small non-negative integer. */
+      _hash(value) {
+          let h = 0;
+          for (let i = 0; i < value.length; i++) {
+              h = (h << 5) - h + value.charCodeAt(i);
+              h |= 0; // force 32-bit
+          }
+          return Math.abs(h);
+      }
+      /** The image URL to render, or '' for initials-only. */
+      get _imageSrc() {
+          if (this.textOnly || this._imgFailed)
+              return '';
+          if (this.src)
+              return this.src;
+          const pad = (n) => String(n).padStart(2, '0');
+          const file = (n) => `${this.assetBase}/${pad(n)}${LaAvatar_1.suffixFor(n)}.png`;
+          // Explicit index wins next.
+          const explicit = Number(this.photo);
+          if (this.photo !== '' && Number.isFinite(explicit) && explicit >= 1) {
+              return file(explicit);
+          }
+          // Auto: stable photo derived from the name. When `gender` is set, pick from
+          // that gender's pool only so the face matches the persona.
+          if (this.name) {
+              const code = this._genderCode;
+              if (code) {
+                  const pool = LaAvatar_1.poolFor(code);
+                  return file(pool[this._hash(this.name) % pool.length]);
+              }
+              return file((this._hash(this.name) % LaAvatar_1.FILL_COUNT) + 1);
+          }
+          return '';
+      }
+      willUpdate(changed) {
+          // Reset load state when the resolved image could change.
+          if (changed.has('src') ||
+              changed.has('photo') ||
+              changed.has('name') ||
+              changed.has('gender') ||
+              changed.has('textOnly') ||
+              changed.has('assetBase')) {
+              this._imgFailed = false;
+              this._imgLoaded = false;
+          }
+      }
+      render() {
+          const imageSrc = this._imageSrc;
+          return b `
+      <div class="frame">
+        <div class="avatar" aria-hidden="true">
+          <span class="initials">${this._displayInitials}</span>
+          ${imageSrc
+            ? b `<img
+                class=${e({ photo: true, 'is-loaded': this._imgLoaded, 'is-logo': this.logo })}
+                src=${imageSrc}
+                alt=""
+                decoding="async"
+                loading="lazy"
+                @load=${() => (this._imgLoaded = true)}
+                @error=${() => (this._imgFailed = true)}
+              />`
+            : null}
+        </div>
+        ${this.presence
+            ? b `<span
+              class=${e({ presence: true, [`presence--${this.presence}`]: true })}
+              role="img"
+              aria-label=${this.presence}
+              title=${this.presence[0].toUpperCase() + this.presence.slice(1)}
+            ></span>`
+            : null}
+      </div>
+    `;
+      }
+  };
+  /** Number of numbered fills available (01–88) in the People Avatar Fill set. */
+  LaAvatar.FILL_COUNT = 88;
+  /**
+   * Presented gender of each fill, indexed 1–88 (`GENDERS[n-1]`). The fill set
+   * encodes this in the filename suffix — `NNw.png` (woman) / `NNm.png` (man) —
+   * so a persona's avatar can match their inferred gender (e.g. "Maya
+   * Lindqvist" → a `w` fill). Generated from `assets/Avatar/People Avatar Fill/`.
+   */
+  LaAvatar.GENDERS = 'wwwmmmmmmmwmmwmmwwwmmwwmwwmwmmwwmmwwmwmmmmwwwwmmwmmmwwwmwwwmmmmwwwmwmmwmwmwmmwwmmmmmmwmm';
+  LaAvatar.styles = [
+      tokens,
+      i$5 `
+      :host {
+        position: relative;
+        display: inline-flex;
+        vertical-align: middle;
+        /* Size defaults — overridden per size attribute below */
+        --_av-size: 40px;
+        --_av-font: var(--la-font-size-sm);
+        --_av-dot: 11px;
+        --_av-ring: 2px;
+      }
+
+      :host([size='xs']) { --_av-size: 24px; --_av-font: var(--la-font-size-xs); --_av-dot: 8px;  --_av-ring: 1.5px; }
+      :host([size='sm']) { --_av-size: 32px; --_av-font: var(--la-font-size-xs); --_av-dot: 9px;  --_av-ring: 2px; }
+      :host([size='md']) { --_av-size: 40px; --_av-font: var(--la-font-size-sm); --_av-dot: 11px; --_av-ring: 2px; }
+      :host([size='lg']) { --_av-size: 48px; --_av-font: var(--la-font-size-base); --_av-dot: 13px; --_av-ring: 2.5px; }
+
+      /* Fixed-size positioning context for the avatar + presence dot. Sized to
+         the avatar so the dot pins to the avatar's corner even when :host is
+         stretched by a flex/grid parent (e.g. tall comment rows). */
+      .frame {
+        position: relative;
+        width: var(--_av-size);
+        height: var(--_av-size);
+        flex-shrink: 0;
+      }
+
+      .avatar {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-bg-muted);
+        border: 1px solid var(--la-color-border-light);
+        color: var(--la-color-text-secondary);
+        font-size: var(--_av-font);
+        font-weight: var(--la-font-weight-semibold);
+        font-family: var(--la-font-family);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-shrink: 0;
+        letter-spacing: 0.3px;
+        user-select: none;
+        overflow: hidden;
+      }
+
+      /* Photo sits on top of the initials, which act as the load/failure fallback. */
+      .photo {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: inherit;
+        opacity: 0;
+        transition: opacity var(--dur-base) var(--ease-out);
+      }
+      .photo.is-loaded { opacity: 1; }
+
+      /* Logo/glyph mode — a square brand mark (e.g. the LawAdvisor AI assistant).
+         The avatar drops the circular crop for a rounded square so the mark's
+         corners aren't clipped, and the mark sits inset with breathing room. */
+      :host([logo]) .avatar {
+        border-radius: var(--la-radius-md);
+      }
+      .photo.is-logo {
+        object-fit: contain;
+        padding: 18%;
+        box-sizing: border-box;
+        background: var(--la-color-bg);
+      }
+
+      /* Presence dot — Messenger-style. Sits outside .avatar (which clips) so
+         the background-coloured ring reads as a clean cutout. right/bottom:0
+         lands it on the circle's lower-right edge (~4:30) at these dot ratios. */
+      .presence {
+        position: absolute;
+        right: 0;
+        bottom: 0;
+        width: var(--_av-dot);
+        height: var(--_av-dot);
+        border-radius: var(--la-radius-circle);
+        box-shadow: 0 0 0 var(--_av-ring) var(--la-color-bg);
+        box-sizing: border-box;
+      }
+      .presence--online  { background: var(--la-color-success); }
+      .presence--away    { background: var(--la-color-warning); }
+      .presence--offline {
+        background: var(--la-color-bg);
+        border: 1.5px solid var(--la-color-text-faint);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .photo { transition: none; }
+      }
+    `,
+  ];
+  __decorate$C([
+      n()
+  ], LaAvatar.prototype, "name", void 0);
+  __decorate$C([
+      n()
+  ], LaAvatar.prototype, "initials", void 0);
+  __decorate$C([
+      n({ reflect: true })
+  ], LaAvatar.prototype, "size", void 0);
+  __decorate$C([
+      n()
+  ], LaAvatar.prototype, "src", void 0);
+  __decorate$C([
+      n()
+  ], LaAvatar.prototype, "photo", void 0);
+  __decorate$C([
+      n({ type: Boolean, attribute: 'text-only' })
+  ], LaAvatar.prototype, "textOnly", void 0);
+  __decorate$C([
+      n({ type: Boolean, reflect: true })
+  ], LaAvatar.prototype, "logo", void 0);
+  __decorate$C([
+      n({ reflect: true })
+  ], LaAvatar.prototype, "presence", void 0);
+  __decorate$C([
+      n({ attribute: 'asset-base' })
+  ], LaAvatar.prototype, "assetBase", void 0);
+  __decorate$C([
+      n()
+  ], LaAvatar.prototype, "gender", void 0);
+  __decorate$C([
+      r()
+  ], LaAvatar.prototype, "_imgFailed", void 0);
+  __decorate$C([
+      r()
+  ], LaAvatar.prototype, "_imgLoaded", void 0);
+  LaAvatar = LaAvatar_1 = __decorate$C([
+      t$1('la-avatar')
+  ], LaAvatar);
+
+  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const PILLARS = [
+      { key: 'investigations', label: 'Investigations' },
+      { key: 'pips', label: 'PIPs' },
+      { key: 'separations', label: 'Separations' },
+      { key: 'accommodations', label: 'Accommodations' },
+  ];
+  const FLAG_META = {
+      conflict: {
+          label: 'Conflict of interest',
+          icon: 'ph-fill ph-warning-octagon',
+          caution: true,
+      },
+      'gender-concordance': {
+          label: 'Gender concordance',
+          icon: 'ph-fill ph-users-three',
+          caution: false,
+      },
+      'fresh-eyes': {
+          label: 'Fresh eyes',
+          icon: 'ph-fill ph-eye',
+          caution: false,
+      },
+  };
+  /**
+   * la-assignee-card — standalone investigator/handler profile card.
+   *
+   * Displays a handler's avatar, name, role, bandwidth per pillar, capacity
+   * summary, prior history, and sensitivity flags. Optionally shows an AI
+   * recommendation header and a footer Assign button.
+   *
+   * @prop name             - Person's name.
+   * @prop person-role      - Role/org line (attribute: person-role).
+   * @prop photo            - Avatar photo index.
+   * @prop bandwidth        - Active case counts per pillar.
+   * @prop history          - Prior history note.
+   * @prop flags            - Sensitivity checks.
+   * @prop case-type        - Pillar to highlight (PillarKey).
+   * @prop ai-recommendation - Shows AI sparkle header + gradient background.
+   * @prop action-label     - Label for the Assign button. Defaults to "Assign {firstName}".
+   * @prop hide-action      - Suppresses the footer/button entirely.
+   * @fires la-select       - {name} when the action button is clicked.
+   */
+  exports.LaAssigneeCard = class LaAssigneeCard extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.name = '';
+          this.personRole = '';
+          this.photo = '';
+          this.history = '';
+          this.flags = [];
+          this.caseType = '';
+          this.aiRecommendation = false;
+          this.actionLabel = '';
+          this.hideAction = false;
+      }
+      _total(bw) {
+          if (!bw)
+              return 0;
+          return PILLARS.reduce((sum, p) => sum + (bw[p.key] ?? 0), 0);
+      }
+      _capacity(total) {
+          if (total >= 11)
+              return 'High utilisation';
+          if (total >= 7)
+              return 'Moderate utilisation';
+          return 'Low utilisation';
+      }
+      _firstName(name) {
+          return name.split(' ')[0] || name;
+      }
+      _onAssign() {
+          this.dispatchEvent(new CustomEvent('la-select', {
+              detail: { name: this.name },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      render() {
+          const total = this._total(this.bandwidth);
+          const label = this.actionLabel || `Assign ${this._firstName(this.name)}`;
+          return b `
+      ${iconStyles}
+      <div class="rcard ${this.aiRecommendation ? 'is-reco' : ''}">
+        ${this.aiRecommendation
+            ? b `<div class="rcard-ai">
+              <i class="ph-fill ph-sparkle" aria-hidden="true"></i>
+              AI recommendation
+            </div>`
+            : A}
+        <div class="rcard-body">
+          <div class="rcard-head">
+            <la-avatar name=${this.name} photo=${this.photo} size="md"></la-avatar>
+            <div>
+              <div class="rcard-name">${this.name}</div>
+              ${this.personRole ? b `<div class="rcard-role">${this.personRole}</div>` : A}
+            </div>
+          </div>
+
+          <div class="pillars">
+            ${PILLARS.map((p) => {
+            const n = this.bandwidth?.[p.key] ?? 0;
+            const active = this.caseType === p.key;
+            return b `<div class="pstat ${active ? 'is-active' : ''}">
+                <span class="pstat-lbl">${p.label}</span>
+                <la-bandwidth-bar filled=${n}></la-bandwidth-bar>
+                <span class="pstat-count">${n} active</span>
+              </div>`;
+        })}
+          </div>
+
+          <div class="rcard-summary">
+            <span>Total <strong>${total} active ${total === 1 ? 'case' : 'cases'}</strong></span>
+            <span class="sep" aria-hidden="true">·</span>
+            <span>Estimated capacity <strong>${this._capacity(total)}</strong></span>
+          </div>
+
+          ${this.history || this.flags.length
+            ? b `<div class="factors">
+                ${this.history
+                ? b `<div class="factor">
+                      <i class="ph ph-clock-counter-clockwise" aria-hidden="true"></i>
+                      <div>
+                        <div class="factor-title">Prior history</div>
+                        <div class="factor-text">${this.history}</div>
+                      </div>
+                    </div>`
+                : A}
+                ${this.flags.map((f) => {
+                const meta = FLAG_META[f.type] ?? {
+                    label: f.type,
+                    icon: 'ph-fill ph-flag',
+                    caution: true,
+                };
+                const isOk = f.ok ?? !meta.caution;
+                const icon = meta.icon.replace('ph-fill', 'ph');
+                return b `<div class="factor ${isOk ? 'is-ok' : 'is-caution'}">
+                    <i class=${icon} aria-hidden="true"></i>
+                    <div>
+                      <div class="factor-title">${f.label ?? meta.label}</div>
+                      ${f.note ? b `<div class="factor-text">${f.note}</div>` : A}
+                    </div>
+                  </div>`;
+            })}
+              </div>`
+            : A}
+        </div>
+
+        ${!this.hideAction
+            ? b `<div class="rcard-foot">
+              <la-button variant="primary" size="sm" @click=${this._onAssign}>
+                <i slot="icon-left" class="ph ph-user-check" aria-hidden="true"></i>
+                ${label}
+              </la-button>
+            </div>`
+            : A}
+      </div>
+    `;
+      }
+  };
+  exports.LaAssigneeCard.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .rcard {
+        padding: var(--la-space-xs);
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg-subtle);
+        box-shadow: var(--la-shadow-md);
+      }
+      .rcard.is-reco {
+        background-color: var(--la-color-bg);
+        background-image: var(--la-gradient-ai-surface);
+      }
+      .rcard-ai {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        padding: var(--la-space-xs) var(--la-space-sm) var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text-secondary);
+      }
+      .rcard-ai i {
+        color: var(--la-color-primary);
+        font-size: var(--la-font-size-md);
+      }
+      .rcard-body {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-lg);
+        padding: var(--la-space-lg);
+        background: var(--la-color-bg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-md);
+      }
+      .rcard-head {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+      }
+      .rcard-name {
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+        line-height: 1.3;
+      }
+      .rcard-role {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-top: 2px;
+      }
+      .pillars {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: var(--la-space-md) var(--la-space-lg);
+      }
+      .pstat {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-2xs);
+        border-radius: var(--la-radius-sm);
+      }
+      .pstat.is-active {
+        background: var(--la-color-bg-subtle);
+        padding: var(--la-space-2xs) var(--la-space-sm);
+        margin: calc(-1 * var(--la-space-2xs)) calc(-1 * var(--la-space-sm));
+      }
+      .pstat-lbl {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+      }
+      .pstat-count {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        font-variant-numeric: tabular-nums;
+      }
+      .rcard-summary {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-2xs) var(--la-space-sm);
+        padding-top: var(--la-space-md);
+        border-top: 1px solid var(--la-color-border-light);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+      }
+      .rcard-summary strong {
+        color: var(--la-color-text);
+        font-weight: var(--la-font-weight-medium);
+      }
+      .rcard-summary .sep {
+        color: var(--la-color-text-faint);
+      }
+      .factors {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-md);
+      }
+      .factor {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+      }
+      .factor > i {
+        flex-shrink: 0;
+        margin-top: 1px;
+        font-size: var(--la-font-size-lg);
+        color: var(--la-color-text-faint);
+      }
+      .factor.is-ok > i {
+        color: var(--la-color-resolved);
+      }
+      .factor.is-caution > i {
+        color: var(--la-color-proactive);
+      }
+      .factor-title {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+      .factor-text {
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-secondary);
+        line-height: var(--la-line-height);
+        margin-top: 1px;
+      }
+      .rcard-foot {
+        display: flex;
+        justify-content: flex-end;
+        padding: var(--la-space-md) var(--la-space-sm) var(--la-space-xs);
+      }
+    `,
+  ];
+  __decorate$B([
+      n()
+  ], exports.LaAssigneeCard.prototype, "name", void 0);
+  __decorate$B([
+      n({ attribute: 'person-role' })
+  ], exports.LaAssigneeCard.prototype, "personRole", void 0);
+  __decorate$B([
+      n()
+  ], exports.LaAssigneeCard.prototype, "photo", void 0);
+  __decorate$B([
+      n({ type: Object })
+  ], exports.LaAssigneeCard.prototype, "bandwidth", void 0);
+  __decorate$B([
+      n()
+  ], exports.LaAssigneeCard.prototype, "history", void 0);
+  __decorate$B([
+      n({ type: Array })
+  ], exports.LaAssigneeCard.prototype, "flags", void 0);
+  __decorate$B([
+      n({ attribute: 'case-type' })
+  ], exports.LaAssigneeCard.prototype, "caseType", void 0);
+  __decorate$B([
+      n({ type: Boolean, attribute: 'ai-recommendation' })
+  ], exports.LaAssigneeCard.prototype, "aiRecommendation", void 0);
+  __decorate$B([
+      n({ attribute: 'action-label' })
+  ], exports.LaAssigneeCard.prototype, "actionLabel", void 0);
+  __decorate$B([
+      n({ type: Boolean, attribute: 'hide-action' })
+  ], exports.LaAssigneeCard.prototype, "hideAction", void 0);
+  exports.LaAssigneeCard = __decorate$B([
+      t$1('la-assignee-card')
+  ], exports.LaAssigneeCard);
+
+  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  exports.LaAssigneePicker = class LaAssigneePicker extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.candidates = [];
+          this.mode = 'assign';
+          /** The pillar this case belongs to — highlights that bandwidth row. */
+          this.caseType = '';
+          /** Optional "Assigned by … on …" line under the current handler. */
+          this.currentMeta = '';
+          this._candidatesOpen = false;
+          /** The currently selected handler (recommended by default in assign mode). */
+          this._selected = '';
+          this._reason = '';
+      }
+      _candidateByName(name) {
+          if (this.recommended?.name === name)
+              return this.recommended;
+          return this.candidates.find((c) => c.name === name);
+      }
+      /** Emit the selection in a shape both this picker and la-reassign-control read. */
+      _emit(name, reason) {
+          const cand = this._candidateByName(name);
+          this.dispatchEvent(new CustomEvent('la-assignee-select', {
+              detail: {
+                  handler: name,
+                  // Mirror keys so embedding controls (X16) can read whichever they expect.
+                  name,
+                  reason: reason.trim(),
+                  role: cand?.role ?? '',
+              },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      /** Assign-mode confirm of the recommended (or chosen) handler. */
+      _confirm() {
+          const name = this._selected || this.recommended?.name || '';
+          if (!name)
+              return;
+          this._emit(name, this._reason);
+      }
+      /** Pick a candidate. In reassign mode this is the selection; in assign mode
+       *  it swaps the active selection and reveals the override reason. */
+      _pickCandidate(c) {
+          this._selected = c.name;
+          if (this.mode === 'reassign') {
+              this._emit(c.name, this._reason);
+          }
+      }
+      /** Pick the recommended handler (reassign mode emits immediately). */
+      _pickRecommended() {
+          if (!this.recommended)
+              return;
+          this._selected = this.recommended.name;
+          if (this.mode === 'reassign') {
+              this._emit(this.recommended.name, this._reason);
+          }
+      }
+      _onReasonInput(e) {
+          this._reason = e.detail.value;
+      }
+      _renderBandwidth(bw) {
+          if (!bw)
+              return A;
+          return b `
+      <div class="bandwidth">
+        ${PILLARS.map((p) => {
+            const active = this.caseType === p.key;
+            return b `<div class="pillar-row" ?data-active=${active}>
+            <la-bandwidth-bar
+              label=${p.label}
+              filled=${bw[p.key] ?? 0}
+              ?data-active=${active}
+              show-count
+            ></la-bandwidth-bar>
+          </div>`;
+        })}
+      </div>
+    `;
+      }
+      _renderFlags(flags) {
+          if (!flags || !flags.length)
+              return A;
+          return b `
+      <div class="flags">
+        ${flags.map((f) => {
+            const meta = FLAG_META[f.type] ?? {
+                label: f.type,
+                icon: 'ph-fill ph-flag',
+                caution: true,
+            };
+            const isOk = f.ok ?? !meta.caution;
+            return b `<div class="flag ${isOk ? 'ok' : 'caution'}">
+            <i class=${meta.icon} aria-hidden="true"></i>
+            <span
+              ><span class="flag-title">${f.label ?? meta.label}</span>${f.note
+                ? b ` — <span class="flag-note">${f.note}</span>`
+                : A}</span
+            >
+          </div>`;
+        })}
+      </div>
+    `;
+      }
+      _renderRecommended() {
+          const r = this.recommended;
+          if (!r)
+              return A;
+          const isSelected = this.mode === 'reassign' && this._selected === r.name;
+          return b `
+      <div class="reco">
+        <div class="reco-head">
+          <la-avatar name=${r.name} photo=${r.photo ?? ''} size="md"></la-avatar>
+          <div class="reco-id">
+            <span class="reco-eyebrow">
+              <i class="ph-fill ph-sparkle" aria-hidden="true"></i>
+              ${this.mode === 'reassign'
+            ? 'Recommended handler'
+            : 'Recommended assignee'}
+            </span>
+            <div class="reco-name">${r.name}</div>
+            ${r.role ? b `<div class="reco-role">${r.role}</div>` : A}
+          </div>
+          ${this.mode === 'reassign'
+            ? b `<la-button
+                variant=${isSelected ? 'primary' : 'secondary'}
+                size="sm"
+                @click=${this._pickRecommended}
+                >${isSelected ? 'Selected' : 'Select'}</la-button
+              >`
+            : A}
+        </div>
+
+        <div class="section">
+          <div class="section-label">Current bandwidth</div>
+          ${this._renderBandwidth(r.bandwidth)}
+        </div>
+
+        ${r.history
+            ? b `<div class="section">
+              <div class="section-label">Prior history</div>
+              <div class="history">
+                <i class="ph-fill ph-clock-counter-clockwise" aria-hidden="true"></i>
+                <span>${r.history}</span>
+              </div>
+            </div>`
+            : A}
+
+        ${r.flags && r.flags.length
+            ? b `<div class="section">
+              <div class="section-label">Sensitivity checks</div>
+              ${this._renderFlags(r.flags)}
+            </div>`
+            : A}
+
+        ${this.mode === 'assign'
+            ? b `<div class="reco-foot">
+              <la-button variant="primary" size="md" @click=${this._confirm}>
+                <i slot="icon-left" class="ph ph-user-check" aria-hidden="true"></i>
+                Assign ${this._selected || r.name}
+              </la-button>
+            </div>`
+            : A}
+      </div>
+    `;
+      }
+      _candFlagSummary(c) {
+          const cautions = (c.flags ?? []).filter((f) => !(f.ok ?? !(FLAG_META[f.type]?.caution ?? true)));
+          if (!cautions.length)
+              return A;
+          const meta = FLAG_META[cautions[0].type];
+          return b `<span
+      class="cand-flag-dot"
+      title=${cautions.map((f) => f.label ?? FLAG_META[f.type]?.label ?? f.type).join(', ')}
+      ><i class=${meta?.icon ?? 'ph-fill ph-warning'} aria-hidden="true"></i
+    ></span>`;
+      }
+      _renderReassignCard(c, isReco) {
+          return b `
+      <la-assignee-card
+        name=${c.name}
+        person-role=${c.role ?? ''}
+        photo=${c.photo ?? ''}
+        .bandwidth=${c.bandwidth}
+        history=${c.history ?? ''}
+        .flags=${c.flags ?? []}
+        case-type=${this.caseType}
+        ?ai-recommendation=${isReco}
+        @la-select=${() => this._emit(c.name, '')}
+      ></la-assignee-card>
+    `;
+      }
+      _renderCurrent() {
+          const c = this.current;
+          if (!c)
+              return A;
+          return b `
+      <div class="current">
+        <div class="current-lbl">Currently assigned</div>
+        <div class="current-card">
+          <la-avatar name=${c.name} photo=${c.photo ?? ''} size="sm"></la-avatar>
+          <div>
+            <div class="rcard-name">${c.name}</div>
+            ${c.role ? b `<div class="rcard-role">${c.role}</div>` : A}
+          </div>
+        </div>
+        ${this.currentMeta
+            ? b `<div class="current-meta">${this.currentMeta}</div>`
+            : A}
+      </div>
+    `;
+      }
+      _renderReassign() {
+          const hasCards = this.recommended || this.candidates.length;
+          return b `
+      ${iconStyles}
+      ${this._renderCurrent()}
+      ${this.current && hasCards
+            ? b `<div class="suggested-lbl">Reassign to</div>`
+            : A}
+      <div class="rcards">
+        ${this.recommended
+            ? this._renderReassignCard(this.recommended, true)
+            : A}
+        ${this.candidates.map((c) => this._renderReassignCard(c, false))}
+      </div>
+    `;
+      }
+      render() {
+          if (this.mode === 'reassign')
+              return this._renderReassign();
+          const showReason = !!this._selected;
+          return b `
+      ${iconStyles}
+      ${this._renderRecommended()}
+
+      ${this.candidates.length
+            ? b `
+            <div class="candidates">
+              <button
+                type="button"
+                class="cand-toggle"
+                aria-expanded=${this._candidatesOpen ? 'true' : 'false'}
+                @click=${() => (this._candidatesOpen = !this._candidatesOpen)}
+              >
+                Choose a different assignee
+                <span>(${this.candidates.length})</span>
+                <i class="ph ph-caret-down" aria-hidden="true"></i>
+              </button>
+              ${this._candidatesOpen
+                ? b `<div class="cand-list">
+                    ${this.candidates.map((c) => b `
+                        <la-person-item
+                          name=${c.name}
+                          subtitle=${c.role ?? ''}
+                          @la-select=${() => this._pickCandidate(c)}
+                        >
+                          <div slot="trailing" class="cand-bandwidth">
+                            ${this._candFlagSummary(c)}
+                            <la-bandwidth-bar
+                              filled=${c.bandwidth?.[(this.caseType || 'investigations')] ?? 0}
+                            ></la-bandwidth-bar>
+                            ${this._selected === c.name
+                    ? b `<la-badge variant="primary"
+                                  >Selected</la-badge
+                                >`
+                    : A}
+                          </div>
+                        </la-person-item>
+                      `)}
+                  </div>`
+                : A}
+            </div>
+          `
+            : A}
+
+      ${showReason
+            ? b `<div class="reason">
+            <la-textarea
+              label="Reason for override"
+              placeholder="Optional — note why you’re not taking the recommended handler. Logged against the case."
+              hint="Optional, but logged against the case."
+              min-rows="2"
+              .value=${this._reason}
+              @la-change=${this._onReasonInput}
+            ></la-textarea>
+          </div>`
+            : A}
+    `;
+      }
+  };
+  exports.LaAssigneePicker.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      /* ── Recommended card ───────────────────────────────────── */
+      .reco {
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg);
+        overflow: hidden;
+      }
+      .reco-head {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-md);
+        padding: var(--la-space-lg);
+      }
+      .reco-id {
+        flex: 1;
+        min-width: 0;
+      }
+      .reco-eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-secondary);
+        margin-bottom: var(--la-space-2xs);
+      }
+      .reco-eyebrow i {
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-secondary);
+      }
+      .reco-name {
+        font-size: var(--la-font-size-lg);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+        line-height: 1.3;
+      }
+      .reco-role {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-top: 2px;
+        line-height: var(--la-line-height);
+      }
+      /* ── Bandwidth block ────────────────────────────────────── */
+      .section {
+        padding: 0 var(--la-space-lg) var(--la-space-lg);
+      }
+      .section-label {
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-secondary);
+        margin-bottom: var(--la-space-sm);
+      }
+      .bandwidth {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+      }
+      /* Highlight the pillar this case belongs to. */
+      la-bandwidth-bar[data-active] {
+        --la-bandwidth-seg-height: 10px;
+      }
+      .pillar-row {
+        display: block;
+        border-radius: var(--la-radius-sm);
+      }
+      .pillar-row[data-active] {
+        background: var(--la-color-bg-subtle);
+        padding: var(--la-space-2xs) var(--la-space-sm);
+        margin: 0 calc(-1 * var(--la-space-sm));
+      }
+      /* ── History ────────────────────────────────────────────── */
+      .history {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-secondary);
+        line-height: var(--la-line-height);
+      }
+      .history i {
+        flex-shrink: 0;
+        margin-top: 3px;
+        color: var(--la-color-text-faint);
+        font-size: var(--la-font-size-md);
+      }
+      /* ── Sensitivity flags ──────────────────────────────────── */
+      .flags {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+      }
+      .flag {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        font-size: var(--la-font-size-base);
+        line-height: var(--la-line-height);
+      }
+      .flag i {
+        flex-shrink: 0;
+        margin-top: 2px;
+        font-size: var(--la-font-size-lg);
+      }
+      .flag.caution {
+        color: var(--la-color-proactive-text);
+      }
+      .flag.caution i {
+        color: var(--la-color-proactive);
+      }
+      .flag.ok {
+        color: var(--la-color-resolved-text);
+      }
+      .flag.ok i {
+        color: var(--la-color-resolved);
+      }
+      .flag-title {
+        font-weight: var(--la-font-weight-medium);
+      }
+      .flag-note {
+        color: var(--la-color-text-muted);
+      }
+      /* ── Confirm footer (assign mode) ───────────────────────── */
+      .reco-foot {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-md) var(--la-space-lg);
+        border-top: 1px solid var(--la-color-border-light);
+        background: var(--la-color-bg-subtle);
+      }
+      /* ── Candidate list ─────────────────────────────────────── */
+      .candidates {
+        margin-top: var(--la-space-lg);
+      }
+      .cand-toggle {
+        appearance: none;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0 0 var(--la-space-sm);
+        cursor: pointer;
+        font-family: inherit;
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-secondary);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        transition: color var(--dur-fast) var(--ease);
+      }
+      .cand-toggle:hover {
+        color: var(--la-color-text);
+      }
+      .cand-toggle:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+        border-radius: var(--la-radius-sm);
+      }
+      .cand-toggle i {
+        font-size: var(--la-font-size-md);
+        transition: transform var(--dur-fast) var(--ease);
+      }
+      .cand-toggle[aria-expanded='true'] i {
+        transform: rotate(180deg);
+      }
+      .cand-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-2xs);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        padding: var(--la-space-xs);
+      }
+      .cand-bandwidth {
+        display: flex;
+        gap: var(--la-space-md);
+        align-items: center;
+      }
+      .cand-flag-dot {
+        display: inline-flex;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-proactive);
+      }
+      /* ── Inline override-reason panel ───────────────────────── */
+      .reason {
+        margin-top: var(--la-space-md);
+      }
+      /* ── Reassign — currently-assigned handler ──────────────── */
+      .current {
+        margin-bottom: var(--la-space-lg);
+      }
+      .current-lbl,
+      .suggested-lbl {
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-secondary);
+        margin-bottom: var(--la-space-sm);
+      }
+      .current-card {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        padding: var(--la-space-md);
+        background: var(--la-color-bg-subtle);
+        border-radius: var(--la-radius-md);
+      }
+      .current-meta {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-top: var(--la-space-sm);
+      }
+      .suggested-lbl {
+        margin: var(--la-space-lg) 0 var(--la-space-md);
+      }
+      /* ── Reassign — full candidate cards ────────────────────── */
+      .rcards {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-md);
+      }
+      /* rcard-name / rcard-role used by _renderCurrent */
+      .rcard-name {
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+        line-height: 1.3;
+      }
+      .rcard-role {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-top: 2px;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .cand-toggle i {
+          transition: none;
+        }
+      }
+    `,
+  ];
+  __decorate$A([
+      n({ type: Object })
+  ], exports.LaAssigneePicker.prototype, "recommended", void 0);
+  __decorate$A([
+      n({ type: Array })
+  ], exports.LaAssigneePicker.prototype, "candidates", void 0);
+  __decorate$A([
+      n({ reflect: true })
+  ], exports.LaAssigneePicker.prototype, "mode", void 0);
+  __decorate$A([
+      n({ attribute: 'case-type' })
+  ], exports.LaAssigneePicker.prototype, "caseType", void 0);
+  __decorate$A([
+      n({ type: Object })
+  ], exports.LaAssigneePicker.prototype, "current", void 0);
+  __decorate$A([
+      n({ attribute: 'current-meta' })
+  ], exports.LaAssigneePicker.prototype, "currentMeta", void 0);
+  __decorate$A([
+      r()
+  ], exports.LaAssigneePicker.prototype, "_candidatesOpen", void 0);
+  __decorate$A([
+      r()
+  ], exports.LaAssigneePicker.prototype, "_selected", void 0);
+  __decorate$A([
+      r()
+  ], exports.LaAssigneePicker.prototype, "_reason", void 0);
+  exports.LaAssigneePicker = __decorate$A([
+      t$1('la-assignee-picker')
+  ], exports.LaAssigneePicker);
+
+  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  exports.LaPlaybookConfirmModal = class LaPlaybookConfirmModal extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.open = false;
+          this.playbookName = '';
+          this.facts = [];
+          this.caseType = '';
+          this.accusedRole = '';
+          this.jurisdiction = '';
+          this.level = '';
+          this.alternatives = [];
+          /** Which view is showing: the confirm summary or the alternative picker. */
+          this._view = 'confirm';
+          this._picked = '';
+          this._reason = '';
+          this._reasonError = false;
+      }
+      /** Build the fact rows — explicit `facts` wins, else assemble from the convenience props. */
+      get _factRows() {
+          if (this.facts.length)
+              return this.facts;
+          const rows = [];
+          if (this.caseType)
+              rows.push({ label: 'Case type', value: this.caseType });
+          if (this.accusedRole)
+              rows.push({ label: 'Accused role', value: this.accusedRole });
+          if (this.jurisdiction)
+              rows.push({ label: 'Jurisdiction', value: this.jurisdiction });
+          if (this.level)
+              rows.push({ label: 'Level', value: this.level });
+          return rows;
+      }
+      _close() {
+          this.open = false;
+          // Reset to the confirm view for next open.
+          this._view = 'confirm';
+          this._picked = '';
+          this._reason = '';
+          this._reasonError = false;
+          this.dispatchEvent(new CustomEvent('close', { bubbles: true }));
+      }
+      _proceed() {
+          this.dispatchEvent(new CustomEvent('la-proceed', {
+              detail: { playbook: this.playbookName },
+              bubbles: true,
+              composed: true,
+          }));
+          this.open = false;
+      }
+      _openChoose() {
+          this._view = 'choose';
+          this._picked = '';
+          this._reason = '';
+          this._reasonError = false;
+      }
+      _backToConfirm() {
+          this._view = 'confirm';
+      }
+      _pick(name) {
+          this._picked = name;
+          if (this._reasonError && this._reason.trim())
+              this._reasonError = false;
+      }
+      _onReasonInput(e) {
+          this._reason = e.detail.value;
+          if (this._reasonError && this._reason.trim())
+              this._reasonError = false;
+      }
+      _confirmSwitch() {
+          if (!this._picked)
+              return;
+          if (!this._reason.trim()) {
+              this._reasonError = true;
+              return;
+          }
+          this.dispatchEvent(new CustomEvent('la-select-playbook', {
+              detail: { playbook: this._picked, reason: this._reason.trim() },
+              bubbles: true,
+              composed: true,
+          }));
+          this.open = false;
+          this._view = 'confirm';
+      }
+      _renderConfirm() {
+          const rows = this._factRows;
+          return b `
+      <p class="intro">
+        We selected the
+        <strong>${this.playbookName || 'recommended'}</strong> playbook from
+        these case facts. Review them, then proceed — or switch playbook if this
+        isn’t the right fit.
+      </p>
+      ${rows.length
+            ? b `<div class="reasoning-label">Why this playbook</div>
+            <div class="facts">
+              <la-field-list layout="spread" .fields=${rows}></la-field-list>
+            </div>`
+            : A}
+    `;
+      }
+      _renderChoose() {
+          return b `
+      <p class="alt-intro">
+        Pick the playbook that fits this case better. Switching is logged
+        against the case with your reason.
+      </p>
+      <div class="alt-list" role="radiogroup" aria-label="Alternative playbooks">
+        ${this.alternatives.map((a) => b `<button
+            type="button"
+            class="alt"
+            role="radio"
+            aria-checked=${this._picked === a.name ? 'true' : 'false'}
+            aria-pressed=${this._picked === a.name ? 'true' : 'false'}
+            @click=${() => this._pick(a.name)}
+          >
+            <i
+              class="alt-radio ${this._picked === a.name
+            ? 'ph-fill ph-radio-button'
+            : 'ph ph-circle'}"
+              aria-hidden="true"
+            ></i>
+            <span class="alt-body">
+              <span class="alt-name">${a.name}</span>
+              ${a.note ? b `<span class="alt-note">${a.note}</span>` : A}
+            </span>
+          </button>`)}
+      </div>
+      ${this._picked
+            ? b `<la-textarea
+            label="Reason for switching playbook"
+            placeholder="Explain why this playbook fits better — logged against the case."
+            required
+            ?error=${this._reasonError}
+            hint=${this._reasonError
+                ? 'A reason is required before switching playbook.'
+                : 'Logged against the case.'}
+            .value=${this._reason}
+            @la-change=${this._onReasonInput}
+          ></la-textarea>`
+            : A}
+    `;
+      }
+      render() {
+          const choosing = this._view === 'choose';
+          const heading = choosing
+              ? 'Select a different playbook'
+              : 'Confirm the playbook';
+          return b `
+      ${iconStyles}
+      <la-modal ?open=${this.open} heading=${heading} @close=${this._close}>
+        ${choosing ? this._renderChoose() : this._renderConfirm()}
+
+        <div slot="footer">
+          ${choosing
+            ? b `<div class="footer-spread">
+                <la-button variant="ghost" @click=${this._backToConfirm}>
+                  <i slot="icon-left" class="ph ph-arrow-left" aria-hidden="true"></i>
+                  Back
+                </la-button>
+                <div class="footer-right">
+                  <la-button
+                    variant="primary"
+                    ?disabled=${!this._picked}
+                    @click=${this._confirmSwitch}
+                    >Switch playbook</la-button
+                  >
+                </div>
+              </div>`
+            : b `<div class="footer-spread">
+                ${this.alternatives.length
+                ? b `<la-button variant="ghost" @click=${this._openChoose}
+                      >Select a different playbook</la-button
+                    >`
+                : b `<span></span>`}
+                <div class="footer-right">
+                  <la-button variant="primary" @click=${this._proceed}
+                    >Proceed</la-button
+                  >
+                </div>
+              </div>`}
+        </div>
+      </la-modal>
+    `;
+      }
+  };
+  exports.LaPlaybookConfirmModal.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: contents;
+      }
+      .intro {
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+        margin-bottom: var(--la-space-lg);
+      }
+      .reasoning-label {
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-secondary);
+        margin-bottom: var(--la-space-sm);
+      }
+      .facts {
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        padding: var(--la-space-md) var(--la-space-lg);
+      }
+      /* ── Alternative-picker view ────────────────────────────── */
+      .alt-intro {
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+        margin-bottom: var(--la-space-md);
+      }
+      .alt-list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+        margin-bottom: var(--la-space-lg);
+      }
+      .alt {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-md);
+        width: 100%;
+        text-align: left;
+        appearance: none;
+        font-family: inherit;
+        cursor: pointer;
+        padding: var(--la-space-md) var(--la-space-lg);
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg);
+        transition: border-color var(--dur-fast) var(--ease),
+          background var(--dur-fast) var(--ease);
+      }
+      .alt:hover {
+        background: var(--la-color-bg-muted);
+      }
+      .alt:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+      }
+      .alt[aria-pressed='true'] {
+        border-color: var(--la-color-border-active);
+        background: var(--la-color-bg-subtle);
+      }
+      .alt-radio {
+        flex-shrink: 0;
+        margin-top: 1px;
+        font-size: var(--la-font-size-lg);
+        color: var(--la-color-text-faint);
+      }
+      .alt[aria-pressed='true'] .alt-radio {
+        color: var(--la-color-primary);
+      }
+      .alt-body {
+        min-width: 0;
+      }
+      .alt-name {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+      .alt-note {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-top: 2px;
+        line-height: var(--la-line-height);
+      }
+      .footer-spread {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--la-space-md);
+        width: 100%;
+      }
+      .footer-right {
+        display: flex;
+        gap: var(--la-space-md);
+      }
+    `,
+  ];
+  __decorate$z([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookConfirmModal.prototype, "open", void 0);
+  __decorate$z([
+      n({ attribute: 'playbook-name' })
+  ], exports.LaPlaybookConfirmModal.prototype, "playbookName", void 0);
+  __decorate$z([
+      n({ type: Array })
+  ], exports.LaPlaybookConfirmModal.prototype, "facts", void 0);
+  __decorate$z([
+      n({ attribute: 'case-type' })
+  ], exports.LaPlaybookConfirmModal.prototype, "caseType", void 0);
+  __decorate$z([
+      n({ attribute: 'accused-role' })
+  ], exports.LaPlaybookConfirmModal.prototype, "accusedRole", void 0);
+  __decorate$z([
+      n()
+  ], exports.LaPlaybookConfirmModal.prototype, "jurisdiction", void 0);
+  __decorate$z([
+      n()
+  ], exports.LaPlaybookConfirmModal.prototype, "level", void 0);
+  __decorate$z([
+      n({ type: Array })
+  ], exports.LaPlaybookConfirmModal.prototype, "alternatives", void 0);
+  __decorate$z([
+      r()
+  ], exports.LaPlaybookConfirmModal.prototype, "_view", void 0);
+  __decorate$z([
+      r()
+  ], exports.LaPlaybookConfirmModal.prototype, "_picked", void 0);
+  __decorate$z([
+      r()
+  ], exports.LaPlaybookConfirmModal.prototype, "_reason", void 0);
+  __decorate$z([
+      r()
+  ], exports.LaPlaybookConfirmModal.prototype, "_reasonError", void 0);
+  exports.LaPlaybookConfirmModal = __decorate$z([
+      t$1('la-playbook-confirm-modal')
+  ], exports.LaPlaybookConfirmModal);
+
+  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var LaSensitiveFlags_1;
+  exports.LaSensitiveFlags = LaSensitiveFlags_1 = class LaSensitiveFlags extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.flags = [];
+          this.heading = 'Sensitive Context';
+          this.intro = '';
+          /** Expand the first flag by default so its detail shows without a click. */
+          this.openFirst = true;
+          /** Indices of flags currently expanded (accordion). */
+          this._open = new Set();
+          /** Whether the default-open seed has run (once, when flags first arrive). */
+          this._seeded = false;
+      }
+      willUpdate() {
+          // Seed the first flag open once — after that the user's open/close state
+          // (and any review re-renders) is left untouched.
+          if (!this._seeded && this.flags.length > 0) {
+              this._seeded = true;
+              if (this.openFirst)
+                  this._open = new Set([0]);
+          }
+      }
+      _toggle(i) {
+          const next = new Set(this._open);
+          next.has(i) ? next.delete(i) : next.add(i);
+          this._open = next;
+      }
+      /** Number of flags still unread (not yet reviewed). */
+      get unreadCount() {
+          return this.flags.filter((f) => !f.reviewed).length;
+      }
+      _meta(type) {
+          return (LaSensitiveFlags_1.FLAG_META[type] ?? {
+              severity: 'amber',
+              title: type,
+              icon: 'ph-fill ph-flag',
+          });
+      }
+      _review(flag) {
+          this.flags = this.flags.map((f) => f === flag ? { ...f, reviewed: true } : f);
+          this.dispatchEvent(new CustomEvent('la-flag-reviewed', {
+              detail: { type: flag.type },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      render() {
+          const count = this.unreadCount;
+          return b `
+      ${iconStyles}
+      <div class="head">
+        <span class="heading">${this.heading}</span>
+        ${count > 0
+            ? b `<la-badge variant="danger" appearance="filled" type="counter"
+              >${count}</la-badge
+            >`
+            : A}
+      </div>
+      ${this.intro ? b `<p class="intro">${this.intro}</p>` : A}
+      ${this.flags.length === 0
+            ? b `<p class="all-clear">No sensitive flags on this case.</p>`
+            : b `
+            <div class="list">
+              ${this.flags.map((flag, i) => {
+                const meta = this._meta(flag.type);
+                const open = this._open.has(i);
+                return b `
+                  <div class="flag ${meta.severity} ${open ? 'is-open' : ''}">
+                    <button
+                      type="button"
+                      class="flag-toggle"
+                      aria-expanded=${open ? 'true' : 'false'}
+                      @click=${() => this._toggle(i)}
+                    >
+                      <i class="flag-icon ${meta.icon}" aria-hidden="true"></i>
+                      <span class="flag-title">${flag.title ?? meta.title}</span>
+                      <i class="ph ph-caret-down flag-caret" aria-hidden="true"></i>
+                    </button>
+                    ${open
+                    ? b `<div class="flag-detail">
+                          ${flag.note
+                        ? b `<div class="flag-note">${flag.note}</div>`
+                        : A}
+                          <div class="flag-action-row">
+                            ${flag.reviewed
+                        ? b `<span class="reviewed" title=${flag.reviewedBy ?? ''}>
+                                  <i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+                                  Reviewed
+                                </span>`
+                        : b `<button
+                                  type="button"
+                                  class="flag-review"
+                                  @click=${() => this._review(flag)}
+                                >
+                                  Mark as Reviewed
+                                </button>`}
+                          </div>
+                        </div>`
+                    : A}
+                  </div>
+                `;
+            })}
+            </div>
+          `}
+    `;
+      }
+  };
+  /** Canonical type → severity + default title + icon. */
+  exports.LaSensitiveFlags.FLAG_META = {
+      'protected-characteristic': {
+          severity: 'red',
+          title: 'Protected characteristic',
+          icon: 'ph-fill ph-shield-warning',
+      },
+      'prior-complaint': {
+          severity: 'amber',
+          title: 'Prior complaint or case history',
+          icon: 'ph-fill ph-clock-counter-clockwise',
+      },
+      'high-risk': {
+          severity: 'red',
+          title: 'High-risk subject',
+          icon: 'ph-fill ph-warning-octagon',
+      },
+      'active-legal': {
+          severity: 'red',
+          title: 'Active legal proceedings',
+          icon: 'ph-fill ph-gavel',
+      },
+      'dual-track': {
+          severity: 'amber',
+          title: 'Dual-track alert',
+          icon: 'ph-fill ph-arrows-split',
+      },
+      'fresh-eyes': {
+          severity: 'amber',
+          title: 'Fresh eyes required',
+          icon: 'ph-fill ph-eye',
+      },
+  };
+  exports.LaSensitiveFlags.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .head {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        margin-bottom: var(--la-space-sm);
+      }
+      .heading {
+        font-size: var(--la-font-size-lg);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+      }
+      .intro {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+        margin-bottom: var(--la-space-md);
+      }
+      .list {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+      }
+      /* Each flag is a white card that expands to reveal its note + review
+         action — severity shows through the icon + title colour, not a tint. */
+      .flag {
+        background: var(--la-color-bg);
+        border-radius: var(--la-radius-lg);
+        box-shadow: var(--la-shadow-md);
+        overflow: hidden;
+      }
+      .flag-toggle {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-lg);
+        background: none;
+        border: none;
+        cursor: pointer;
+        font-family: var(--la-font-family);
+        text-align: left;
+      }
+      .flag-icon {
+        flex-shrink: 0;
+        font-size: 18px;
+        line-height: 1;
+      }
+      .flag-title {
+        flex: 1;
+        min-width: 0;
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        line-height: 1.4;
+      }
+      .flag-caret {
+        flex-shrink: 0;
+        font-size: 16px;
+        color: var(--la-color-text-muted);
+        transition: transform var(--dur-fast) var(--ease);
+      }
+      .flag.is-open .flag-caret {
+        transform: rotate(180deg);
+      }
+      /* Severity — red (danger) / amber (warning) on icon + title only. */
+      .flag.red .flag-icon,
+      .flag.red .flag-title {
+        color: var(--la-color-danger-text);
+      }
+      .flag.amber .flag-icon,
+      .flag.amber .flag-title {
+        color: var(--la-color-warning-text);
+      }
+      .flag-detail {
+        padding: 0 var(--la-space-lg) var(--la-space-lg);
+      }
+      .flag-note {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+        line-height: var(--la-line-height);
+      }
+      .flag-action-row {
+        display: flex;
+        justify-content: flex-end;
+        margin-top: var(--la-space-sm);
+      }
+      .flag-review {
+        background: none;
+        border: none;
+        padding: 0;
+        cursor: pointer;
+        font-family: var(--la-font-family);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text-muted);
+      }
+      .flag-review:hover {
+        color: var(--la-color-text);
+      }
+      .reviewed {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-resolved-text);
+        white-space: nowrap;
+      }
+      .reviewed i {
+        font-size: var(--la-font-size-md);
+      }
+      .all-clear {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+    `,
+  ];
+  __decorate$y([
+      n({ type: Array })
+  ], exports.LaSensitiveFlags.prototype, "flags", void 0);
+  __decorate$y([
+      n()
+  ], exports.LaSensitiveFlags.prototype, "heading", void 0);
+  __decorate$y([
+      n()
+  ], exports.LaSensitiveFlags.prototype, "intro", void 0);
+  __decorate$y([
+      n({ type: Boolean, attribute: 'open-first' })
+  ], exports.LaSensitiveFlags.prototype, "openFirst", void 0);
+  __decorate$y([
+      r()
+  ], exports.LaSensitiveFlags.prototype, "_open", void 0);
+  exports.LaSensitiveFlags = LaSensitiveFlags_1 = __decorate$y([
+      t$1('la-sensitive-flags')
+  ], exports.LaSensitiveFlags);
+
+  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const LEVEL_LABEL = {
+      L1: 'L1 — Routine',
+      L2: 'L2 — Moderate complexity',
+      L3: 'L3 — Complex / high-risk',
+  };
+  exports.LaLevelControl = class LaLevelControl extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.level = 'L2';
+          this.confirmedBy = '';
+          this.confirmedAt = '';
+          this.factors = [];
+          this.history = [];
+          this._menuOpen = false;
+          this._historyOpen = false;
+          this._modalOpen = false;
+          this._pendingLevel = null;
+          this._reason = '';
+          this._reasonError = false;
+          this._onDocMousedown = (e) => {
+              if (this._menuOpen && !e.composedPath().includes(this))
+                  this._menuOpen = false;
+          };
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          document.addEventListener('mousedown', this._onDocMousedown, true);
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          document.removeEventListener('mousedown', this._onDocMousedown, true);
+      }
+      _toggleMenu() {
+          this._menuOpen = !this._menuOpen;
+      }
+      _onMenuSelect(e) {
+          this._menuOpen = false;
+          const next = e.detail.value;
+          if (next === this.level)
+              return;
+          this._pendingLevel = next;
+          this._reason = '';
+          this._reasonError = false;
+          this._modalOpen = true;
+      }
+      _onReasonInput(e) {
+          this._reason = e.detail.value;
+          if (this._reasonError && this._reason.trim())
+              this._reasonError = false;
+      }
+      _confirmChange() {
+          if (!this._reason.trim()) {
+              this._reasonError = true;
+              return;
+          }
+          const from = this.level;
+          const to = this._pendingLevel;
+          this.dispatchEvent(new CustomEvent('la-level-change', {
+              detail: { from, to, reason: this._reason.trim() },
+              bubbles: true,
+              composed: true,
+          }));
+          this._modalOpen = false;
+          this._pendingLevel = null;
+      }
+      _closeModal() {
+          this._modalOpen = false;
+          this._pendingLevel = null;
+      }
+      _otherLevels() {
+          return ['L1', 'L2', 'L3'].filter((l) => l !== this.level);
+      }
+      render() {
+          if (this._modalOpen)
+              return this._renderChangeView();
+          return b `
+      ${iconStyles}
+      <div class="heading">Case level</div>
+
+      <div class="current">
+        <span class="level-pill">${this.level}</span>
+        <span class="level-name">${LEVEL_LABEL[this.level]}</span>
+      </div>
+
+      ${this.confirmedBy || this.confirmedAt
+            ? b `<div class="confirmed">
+            Confirmed by ${this.confirmedBy}${this.confirmedBy && this.confirmedAt
+                ? ' · '
+                : ''}${this.confirmedAt}
+          </div>`
+            : A}
+
+      ${this.factors.length
+            ? b `
+            <div class="factors-label">Triggering factors</div>
+            <ul class="factors">
+              ${this.factors.map((f) => b `<li>
+                  <i class="ph-fill ph-caret-right" aria-hidden="true"></i>
+                  <span>${f}</span>
+                </li>`)}
+            </ul>
+          `
+            : A}
+
+      <div class="actions">
+        <div class="change" @la-menu-select=${this._onMenuSelect}>
+          <la-button
+            variant="secondary"
+            size="sm"
+            aria-haspopup="menu"
+            aria-expanded=${this._menuOpen ? 'true' : 'false'}
+            @click=${this._toggleMenu}
+          >
+            Change level
+            <i slot="icon-right" class="ph ph-caret-down" aria-hidden="true"></i>
+          </la-button>
+          <div class="panel ${this._menuOpen ? 'is-open' : ''}" role="menu" aria-label="Change case level">
+            ${this._otherLevels().map((l) => b `<la-menu-item
+                label=${LEVEL_LABEL[l]}
+                value=${l}
+                icon="ph ph-arrow-bend-up-right"
+              ></la-menu-item>`)}
+          </div>
+        </div>
+
+        <button
+          type="button"
+          class="history-toggle"
+          aria-expanded=${this._historyOpen ? 'true' : 'false'}
+          @click=${() => (this._historyOpen = !this._historyOpen)}
+        >
+          View history
+          <i class="ph ph-caret-down" aria-hidden="true"></i>
+        </button>
+      </div>
+
+      ${this._historyOpen
+            ? b `
+            <div class="history">
+              ${this.history.length === 0
+                ? b `<p class="history-empty">
+                    No level changes — confirmed at ${this.level} on intake.
+                  </p>`
+                : this.history.map((h, i) => b `
+                      <la-activity-item
+                        time=${`${h.at} · ${h.by}`}
+                        ?last=${i === this.history.length - 1}
+                      >
+                        <i slot="icon" class="ph-fill ph-arrows-down-up"></i>
+                        Level changed
+                        ${h.from ? b `from <strong>${h.from}</strong> ` : A}to
+                        <strong>${h.to}</strong> — ${h.reason}
+                      </la-activity-item>
+                    `)}
+            </div>
+          `
+            : A}
+
+    `;
+      }
+      /* Inline change view — replaces the control's content (a child view, not a
+         modal): back action, from→to summary, reason, confirm. */
+      _renderChangeView() {
+          return b `
+      ${iconStyles}
+      <button type="button" class="change-back" @click=${this._closeModal}>
+        <i class="ph ph-arrow-left" aria-hidden="true"></i> Case level
+      </button>
+      <div class="heading">Change case level</div>
+      <div class="modal-summary">
+        <span class="level-pill">${this.level}</span>
+        <i class="ph-bold ph-arrow-right modal-arrow" aria-hidden="true"></i>
+        <span class="level-pill">${this._pendingLevel ?? ''}</span>
+        <span class="level-name"
+          >${this._pendingLevel ? LEVEL_LABEL[this._pendingLevel] : ''}</span
+        >
+      </div>
+      <la-textarea
+        label="Reason for change"
+        placeholder="Explain why this case is changing level — this is logged in the case history."
+        required
+        ?error=${this._reasonError}
+        hint=${this._reasonError
+            ? 'A reason is required before the level changes.'
+            : 'Logged against the case and visible in level history.'}
+        .value=${this._reason}
+        @la-change=${this._onReasonInput}
+      ></la-textarea>
+      <div class="change-actions">
+        <la-button variant="secondary" @click=${this._closeModal}>Cancel</la-button>
+        <la-button variant="primary" @click=${this._confirmChange}
+          >Change to ${this._pendingLevel ?? ''}</la-button
+        >
+      </div>
+    `;
+      }
+  };
+  exports.LaLevelControl.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .heading {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+        margin-bottom: var(--la-space-sm);
+      }
+      .current {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        margin-bottom: var(--la-space-xs);
+      }
+      .level-pill {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 34px;
+        padding: 2px var(--la-space-sm);
+        border-radius: var(--la-radius-pill);
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-semibold);
+        font-variant-numeric: tabular-nums;
+        background: var(--la-color-bg-active);
+        color: var(--la-color-text);
+      }
+      .level-name {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .confirmed {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+        margin-bottom: var(--la-space-md);
+      }
+      .factors-label {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+        margin-bottom: var(--la-space-2xs);
+      }
+      .factors {
+        margin: 0 0 var(--la-space-md);
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-2xs);
+      }
+      .factors li {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text);
+        line-height: var(--la-line-height);
+      }
+      .factors li i {
+        color: var(--la-color-text-faint);
+        font-size: var(--la-font-size-md);
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+      .actions {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        flex-wrap: wrap;
+      }
+      /* ── Change-level dropdown (self-contained, .t-dropdown pattern) ── */
+      .change {
+        position: relative;
+        display: inline-block;
+      }
+      .panel {
+        position: absolute;
+        z-index: 50;
+        top: calc(100% + var(--la-space-xs));
+        left: 0;
+        min-width: 220px;
+        padding: var(--la-space-xs);
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-xs);
+        background: var(--la-color-bg);
+        border-radius: var(--la-radius-md);
+        box-shadow: var(--la-shadow-popover);
+        transform-origin: top left;
+        transform: scale(0.97);
+        opacity: 0;
+        pointer-events: none;
+        transition: transform var(--dur-modal) var(--ease-spring-sm),
+          opacity var(--dur-modal) var(--ease-spring-sm);
+      }
+      .panel.is-open {
+        transform: scale(1);
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .history-toggle {
+        appearance: none;
+        background: none;
+        border: none;
+        padding: 0;
+        margin: 0;
+        cursor: pointer;
+        font-family: inherit;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        transition: color var(--dur-fast) var(--ease);
+      }
+      .history-toggle:hover {
+        color: var(--la-color-text);
+      }
+      .history-toggle:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+        border-radius: var(--la-radius-sm);
+      }
+      .history-toggle i {
+        font-size: var(--la-font-size-md);
+        transition: transform var(--dur-fast) var(--ease);
+      }
+      .history-toggle[aria-expanded='true'] i {
+        transform: rotate(180deg);
+      }
+      .history {
+        margin-top: var(--la-space-md);
+        padding-top: var(--la-space-md);
+        border-top: 1px solid var(--la-color-border-light);
+      }
+      .history-empty {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      /* Modal body */
+      .modal-summary {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        margin-bottom: var(--la-space-lg);
+        flex-wrap: wrap;
+      }
+      .modal-arrow {
+        color: var(--la-color-text-faint);
+      }
+      /* Inline change view (replaces the control content — no modal). */
+      .change-back {
+        appearance: none; background: none; border: none; padding: 0;
+        margin: 0 0 var(--la-space-md); cursor: pointer; font-family: inherit;
+        font-size: var(--la-font-size-sm); color: var(--la-color-text-secondary);
+        display: inline-flex; align-items: center; gap: var(--la-space-2xs);
+      }
+      .change-back:hover { color: var(--la-color-text); }
+      .change-back i { font-size: var(--la-font-size-md); }
+      .change-actions {
+        display: flex; justify-content: flex-end; gap: var(--la-space-sm);
+        margin-top: var(--la-space-md);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .history-toggle i,
+        .panel {
+          transition: none;
+        }
+      }
+    `,
+  ];
+  __decorate$x([
+      n()
+  ], exports.LaLevelControl.prototype, "level", void 0);
+  __decorate$x([
+      n({ attribute: 'confirmed-by' })
+  ], exports.LaLevelControl.prototype, "confirmedBy", void 0);
+  __decorate$x([
+      n({ attribute: 'confirmed-at' })
+  ], exports.LaLevelControl.prototype, "confirmedAt", void 0);
+  __decorate$x([
+      n({ type: Array })
+  ], exports.LaLevelControl.prototype, "factors", void 0);
+  __decorate$x([
+      n({ type: Array })
+  ], exports.LaLevelControl.prototype, "history", void 0);
+  __decorate$x([
+      r()
+  ], exports.LaLevelControl.prototype, "_menuOpen", void 0);
+  __decorate$x([
+      r()
+  ], exports.LaLevelControl.prototype, "_historyOpen", void 0);
+  __decorate$x([
+      r()
+  ], exports.LaLevelControl.prototype, "_modalOpen", void 0);
+  __decorate$x([
+      r()
+  ], exports.LaLevelControl.prototype, "_pendingLevel", void 0);
+  __decorate$x([
+      r()
+  ], exports.LaLevelControl.prototype, "_reason", void 0);
+  __decorate$x([
+      r()
+  ], exports.LaLevelControl.prototype, "_reasonError", void 0);
+  exports.LaLevelControl = __decorate$x([
+      t$1('la-level-control')
+  ], exports.LaLevelControl);
+
+  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  // la-assignee-picker is built by another agent in parallel; referenced by tag only.
+  /**
+   * la-reassign-control — the X16 reassign-case control (About panel).
+   *
+   * A "Reassign case" button opens a modal carrying the X13 assignee picker in
+   * `mode="reassign"` (pre-filtered to eligible handlers) plus a required logged
+   * reason. When the handler picks a new assignee and confirms, the control
+   * raises `la-reassign` with `{from, to, reason}`; the host emails the new
+   * handler and updates the About panel + reassignment history. The new handler
+   * inherits the full playbook — no context loss.
+   *
+   * The assignee picker is a sibling component (`<la-assignee-picker>`) built in
+   * parallel. This control embeds it in the modal and listens for its selection
+   * event (`la-assignee-select`, with the handler in `detail.name` / `detail.id`
+   * / `detail.value`). The confirm CTA stays disabled until both a handler and a
+   * reason are present. Pass the picker's data through to the slotted element, or
+   * let this control render a default `<la-assignee-picker mode="reassign">`.
+   *
+   * @prop currentHandler   - Name of the current handler, e.g. "Priya Mehta".
+   * @prop caseId           - Case reference, shown in the modal subtitle.
+   * @prop label            - Button label. Default "Reassign case".
+   * @slot picker           - The `<la-assignee-picker>` to embed. Falls back to a
+   *                          default `<la-assignee-picker mode="reassign">`.
+   * @fires la-reassign     - {from, to, reason} when the reassignment is confirmed.
+   *
+   * @example
+   * <la-reassign-control current-handler="Priya Mehta" case-id="26-04-00112">
+   *   <la-assignee-picker slot="picker" mode="reassign" .handlers=${eligible}></la-assignee-picker>
+   * </la-reassign-control>
+   */
+  exports.LaReassignControl = class LaReassignControl extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.currentHandler = '';
+          this.caseId = '';
+          this.label = 'Reassign case';
+          this._modalOpen = false;
+          this._selected = '';
+          this._reason = '';
+          this._reasonError = false;
+          this._hasSlottedPicker = false;
+      }
+      _open() {
+          this._selected = '';
+          this._reason = '';
+          this._reasonError = false;
+          this._modalOpen = true;
+      }
+      _close() {
+          this._modalOpen = false;
+      }
+      /** Read the picked handler from whatever shape the picker emits. */
+      _onPick(e) {
+          const d = (e.detail ?? {});
+          const name = (d.name ?? d.handler ?? d.label ?? d.value ?? '');
+          if (name)
+              this._selected = name;
+      }
+      _onReasonInput(e) {
+          this._reason = e.detail.value;
+          if (this._reasonError && this._reason.trim())
+              this._reasonError = false;
+      }
+      _onSlotChange(e) {
+          const slot = e.target;
+          this._hasSlottedPicker = slot.assignedElements().length > 0;
+      }
+      _confirm() {
+          if (!this._reason.trim()) {
+              this._reasonError = true;
+              return;
+          }
+          if (!this._selected)
+              return;
+          this.dispatchEvent(new CustomEvent('la-reassign', {
+              detail: {
+                  from: this.currentHandler,
+                  to: this._selected,
+                  reason: this._reason.trim(),
+              },
+              bubbles: true,
+              composed: true,
+          }));
+          this._modalOpen = false;
+      }
+      render() {
+          const canConfirm = !!this._selected && !!this._reason.trim();
+          return b `
+      ${iconStyles}
+      ${this.currentHandler
+            ? b `<div class="current">
+            Currently assigned to <strong>${this.currentHandler}</strong>.
+          </div>`
+            : A}
+
+      <la-button variant="secondary" size="sm" @click=${this._open}>
+        <i slot="icon-left" class="ph ph-user-switch" aria-hidden="true"></i>
+        ${this.label}
+      </la-button>
+
+      <la-modal
+        ?open=${this._modalOpen}
+        heading="Reassign case"
+        description=${this.caseId
+            ? `Case ${this.caseId} · the new handler inherits the full playbook — every step, AI output, decision and document stays intact.`
+            : 'The new handler inherits the full playbook — every step, AI output, decision and document stays intact.'}
+        @close=${this._close}
+        @la-assignee-select=${this._onPick}
+      >
+        <div class="picker-region">
+          <slot name="picker" @slotchange=${this._onSlotChange}>
+            ${this._hasSlottedPicker
+            ? A
+            : b `<la-assignee-picker mode="reassign"></la-assignee-picker>`}
+          </slot>
+        </div>
+
+        ${this._selected
+            ? b `<div class="selected">
+              <i class="ph-fill ph-user-check" aria-hidden="true"></i>
+              <span>Reassigning to <strong>${this._selected}</strong></span>
+            </div>`
+            : A}
+
+        <la-textarea
+          label="Reason for reassignment"
+          placeholder="Explain why this case is moving — logged against the case and shared with the new handler."
+          required
+          ?error=${this._reasonError}
+          hint=${this._reasonError
+            ? 'A reason is required before reassigning.'
+            : 'Logged in the reassignment history.'}
+          .value=${this._reason}
+          @la-change=${this._onReasonInput}
+        ></la-textarea>
+
+        <div slot="footer">
+          <la-button variant="secondary" @click=${this._close}>Cancel</la-button>
+          <la-button variant="primary" ?disabled=${!canConfirm} @click=${this._confirm}
+            >Reassign case</la-button
+          >
+        </div>
+      </la-modal>
+    `;
+      }
+  };
+  exports.LaReassignControl.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .current {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+        margin-bottom: var(--la-space-sm);
+      }
+      .current strong {
+        color: var(--la-color-text);
+        font-weight: var(--la-font-weight-semibold);
+      }
+      /* Modal body */
+      .picker-region {
+        margin-bottom: var(--la-space-lg);
+      }
+      .selected {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-sm) var(--la-space-md);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-surface-success);
+        color: var(--la-color-success-text);
+        font-size: var(--la-font-size-base);
+        margin-bottom: var(--la-space-lg);
+      }
+      .selected i {
+        font-size: var(--la-font-size-lg);
+        flex-shrink: 0;
+      }
+    `,
+  ];
+  __decorate$w([
+      n({ attribute: 'current-handler' })
+  ], exports.LaReassignControl.prototype, "currentHandler", void 0);
+  __decorate$w([
+      n({ attribute: 'case-id' })
+  ], exports.LaReassignControl.prototype, "caseId", void 0);
+  __decorate$w([
+      n()
+  ], exports.LaReassignControl.prototype, "label", void 0);
+  __decorate$w([
+      r()
+  ], exports.LaReassignControl.prototype, "_modalOpen", void 0);
+  __decorate$w([
+      r()
+  ], exports.LaReassignControl.prototype, "_selected", void 0);
+  __decorate$w([
+      r()
+  ], exports.LaReassignControl.prototype, "_reason", void 0);
+  __decorate$w([
+      r()
+  ], exports.LaReassignControl.prototype, "_reasonError", void 0);
+  __decorate$w([
+      r()
+  ], exports.LaReassignControl.prototype, "_hasSlottedPicker", void 0);
+  exports.LaReassignControl = __decorate$w([
+      t$1('la-reassign-control')
+  ], exports.LaReassignControl);
+
+  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  exports.LaFilesPanel = class LaFilesPanel extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.employeeRecord = [];
+          this.caseDocuments = [];
+          this.generatedArtefacts = [];
+          this.confidentialSection = '';
+          this.heading = 'Files';
+          /** Suppress the panel's own heading row — use when a wrapping container
+           *  (e.g. the X6 context panel) already supplies the "Files" title. */
+          this.hideHeading = false;
+          /** Base path for the coloured file-type icon set, passed to la-document-item. */
+          this.iconBase = '/assets/file-type';
+          /** LawAdvisor mark shown beside the AI-generated artefacts section. */
+          this.brandMark = '/assets/brand/logo-mark.svg';
+          this._query = '';
+      }
+      _onSearch(e) {
+          this._query = e.detail.value.trim().toLowerCase();
+      }
+      _filter(files) {
+          if (!this._query)
+              return files;
+          return files.filter((f) => f.name.toLowerCase().includes(this._query) ||
+              (f.association ?? '').toLowerCase().includes(this._query));
+      }
+      _onSelect(section, name) {
+          this.dispatchEvent(new CustomEvent('la-file-select', {
+              detail: { section, name },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _sections() {
+          return [
+              {
+                  id: 'employee-record',
+                  label: 'Employee record',
+                  icon: 'ph ph-identification-card',
+                  files: this.employeeRecord,
+              },
+              {
+                  id: 'case-documents',
+                  label: 'Case documents',
+                  icon: 'ph ph-folder',
+                  files: this.caseDocuments,
+              },
+              {
+                  id: 'generated-artefacts',
+                  label: 'Generated artefacts',
+                  icon: 'ph ph-sparkle',
+                  logo: this.brandMark,
+                  files: this.generatedArtefacts,
+              },
+          ];
+      }
+      _renderRow(section, file) {
+          // Generated artefacts carry a sage-green presence check on the icon corner
+          // (saves the horizontal space a status badge would take). The specific
+          // Draft/Approved/Sent/Signed value remains in the data for tooltips/exports.
+          const isArtefact = section === 'generated-artefacts' && !!file.artefactStatus;
+          return b `
+      <la-document-item
+        variant="file"
+        file-type=${file.fileType ?? ''}
+        icon-base=${this.iconBase}
+        name=${file.name}
+        association=${file.association ?? ''}
+        status=${isArtefact ? 'ready' : 'none'}
+        ?locked=${!!file.confidential}
+        @la-select=${() => this._onSelect(section, file.name)}
+      ></la-document-item>
+    `;
+      }
+      render() {
+          const sections = this._sections();
+          const totalFiltered = sections.reduce((n, s) => n + this._filter(s.files).length, 0);
+          const hasAnyFiles = sections.some((s) => s.files.length > 0);
+          return b `
+      ${iconStyles}
+      ${this.hideHeading
+            ? A
+            : b `<div class="head">
+            <span class="heading">${this.heading}</span>
+            <div class="head-actions"><slot name="actions"></slot></div>
+          </div>`}
+
+      <div class="search">
+        <la-input
+          type="search"
+          placeholder="Search files"
+          .value=${this._query}
+          @la-change=${this._onSearch}
+        >
+          <i slot="icon-left" class="ph ph-magnifying-glass" aria-hidden="true"></i>
+        </la-input>
+      </div>
+
+      ${!hasAnyFiles
+            ? b `<p class="empty-all">No files on this case yet.</p>`
+            : this._query && totalFiltered === 0
+                ? b `<p class="empty-all">No files match "${this._query}".</p>`
+                : sections.map((s) => {
+                    const files = this._filter(s.files);
+                    const isConfidential = this.confidentialSection === s.id;
+                    // Hide a section entirely while searching if it has no matches.
+                    if (this._query && files.length === 0)
+                        return A;
+                    return b `
+                <div class="section ${isConfidential ? 'confidential' : ''}">
+                  <div class="section-label">
+                    ${!isConfidential && s.logo
+                        ? b `<img class="section-logo" src=${s.logo} alt="" aria-hidden="true" />`
+                        : b `<i
+                          class=${isConfidential ? 'ph-fill ph-lock-simple' : s.icon}
+                          aria-hidden="true"
+                        ></i>`}
+                    ${s.label}
+                  </div>
+                  ${isConfidential
+                        ? b `<p class="confidential-note">
+                        Restricted — medical and confidential records. Access is
+                        logged.
+                      </p>`
+                        : A}
+                  ${files.length === 0
+                        ? b `<p class="section-empty">Nothing here yet.</p>`
+                        : b `<div class="items">
+                        ${files.map((f) => this._renderRow(s.id, f))}
+                      </div>`}
+                </div>
+              `;
+                })}
+    `;
+      }
+  };
+  exports.LaFilesPanel.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .head {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--la-space-md);
+        margin-bottom: var(--la-space-md);
+      }
+      .heading {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+      }
+      .head-actions {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        flex-shrink: 0;
+      }
+      .head-actions:empty {
+        display: none;
+      }
+      .search {
+        margin-bottom: var(--la-space-lg);
+      }
+      .section {
+        margin-bottom: var(--la-space-lg);
+      }
+      .section:last-of-type {
+        margin-bottom: 0;
+      }
+      .section-label {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text-secondary);
+        padding: 0 var(--la-space-md);
+        margin-bottom: var(--la-space-2xs);
+      }
+      .section-label i {
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-faint);
+      }
+      .section-label .section-logo {
+        width: var(--la-space-md);
+        height: var(--la-space-md);
+        display: block;
+        flex-shrink: 0;
+      }
+      .items {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-2xs);
+      }
+      .section-empty {
+        padding: var(--la-space-sm) var(--la-space-md);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+
+      /* ── Confidential partition — lock + amber framing ── */
+      .section.confidential {
+        background: var(--la-color-proactive-bg);
+        border-radius: var(--la-radius-lg);
+        padding: var(--la-space-sm);
+      }
+      .section.confidential .section-label {
+        color: var(--la-color-warning-text);
+        padding: var(--la-space-2xs) var(--la-space-sm);
+      }
+      .section.confidential .section-label i {
+        color: var(--la-color-warning-text);
+      }
+      .confidential-note {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-warning-text);
+        padding: 0 var(--la-space-sm) var(--la-space-sm);
+        line-height: var(--la-line-height);
+      }
+      .empty-all {
+        padding: var(--la-space-lg) var(--la-space-md);
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-muted);
+        text-align: center;
+      }
+    `,
+  ];
+  __decorate$v([
+      n({ type: Array, attribute: false })
+  ], exports.LaFilesPanel.prototype, "employeeRecord", void 0);
+  __decorate$v([
+      n({ type: Array, attribute: false })
+  ], exports.LaFilesPanel.prototype, "caseDocuments", void 0);
+  __decorate$v([
+      n({ type: Array, attribute: false })
+  ], exports.LaFilesPanel.prototype, "generatedArtefacts", void 0);
+  __decorate$v([
+      n({ attribute: 'confidential-section' })
+  ], exports.LaFilesPanel.prototype, "confidentialSection", void 0);
+  __decorate$v([
+      n()
+  ], exports.LaFilesPanel.prototype, "heading", void 0);
+  __decorate$v([
+      n({ type: Boolean, attribute: 'hide-heading' })
+  ], exports.LaFilesPanel.prototype, "hideHeading", void 0);
+  __decorate$v([
+      n({ attribute: 'icon-base' })
+  ], exports.LaFilesPanel.prototype, "iconBase", void 0);
+  __decorate$v([
+      n({ attribute: 'brand-mark' })
+  ], exports.LaFilesPanel.prototype, "brandMark", void 0);
+  __decorate$v([
+      r()
+  ], exports.LaFilesPanel.prototype, "_query", void 0);
+  exports.LaFilesPanel = __decorate$v([
+      t$1('la-files-panel')
+  ], exports.LaFilesPanel);
+
+  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  var LaCaseContextPanel_1;
+  exports.LaCaseContextPanel = LaCaseContextPanel_1 = class LaCaseContextPanel extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.caseId = '';
+          this.level = '';
+          this.handler = '';
+          this.openPanel = '';
+          this.fileCount = 0;
+          this.unreadChat = 0;
+          /** Label for the chat rail item + panel header. Override to "Ask LawAdvisor
+           *  AI" where the thread is an AI conversation rather than internal notes. */
+          this.chatLabel = 'Chat';
+          this.expertReply = false;
+          this.aiActive = false;
+          this.unreadFlags = 0;
+          /** Suppress the first-load auto-open of About. The icon rail stays collapsed
+           *  and the unread-flags badge (red dot) still shows — the host just doesn't
+           *  pop the panel open uninvited. */
+          this.noAutoOpen = false;
+          /** Guards the first-load auto-open so it only fires once. */
+          this._autoOpened = false;
+          this._onKeydown = (e) => {
+              if (e.key === 'Escape' && this.openPanel) {
+                  e.stopPropagation();
+                  this._close();
+              }
+          };
+      }
+      /** Display label for a rail item — the chat item honours `chatLabel`. */
+      _railLabel(item) {
+          if (!item)
+              return '';
+          return item.id === 'chat' ? this.chatLabel : item.label;
+      }
+      firstUpdated() {
+          // On first case load with unread flags, auto-open About (unless the host
+          // already chose a panel).
+          if (!this._autoOpened && !this.noAutoOpen && !this.openPanel && this.unreadFlags > 0) {
+              this._autoOpened = true;
+              this._setPanel('about');
+          }
+      }
+      _setPanel(panel) {
+          if (this.openPanel === panel)
+              return;
+          this.openPanel = panel;
+          this.dispatchEvent(new CustomEvent('la-panel-toggle', {
+              detail: { panel, open: panel !== '' },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _toggle(panel) {
+          this._setPanel(this.openPanel === panel ? '' : panel);
+      }
+      _close() {
+          if (this.openPanel) {
+              const closed = this.openPanel;
+              this.openPanel = '';
+              this.dispatchEvent(new CustomEvent('la-panel-toggle', {
+                  detail: { panel: closed, open: false },
+                  bubbles: true,
+                  composed: true,
+              }));
+          }
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          this.addEventListener('keydown', this._onKeydown);
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          this.removeEventListener('keydown', this._onKeydown);
+      }
+      _renderBadge(item) {
+          switch (item.id) {
+              case 'about':
+                  // Red — unread sensitive flags are a "review before proceeding" warning,
+                  // the one signal that escalates beyond the neutral count badges.
+                  return this.unreadFlags > 0
+                      ? b `<la-badge
+              class="rail-badge"
+              type="counter"
+              variant="danger"
+              appearance="filled"
+              size="sm"
+              role="img"
+              aria-label=${`${this.unreadFlags} unread sensitive flag${this.unreadFlags > 1 ? 's' : ''}`}
+              >${this.unreadFlags}</la-badge
+            >`
+                      : A;
+              case 'files':
+                  return this.fileCount > 0
+                      ? b `<la-badge
+              class="rail-badge"
+              type="counter"
+              variant="neutral"
+              appearance="ghost"
+              size="sm"
+              >${this.fileCount}</la-badge
+            >`
+                      : A;
+              case 'activity':
+                  return this.aiActive
+                      ? b `<span
+              class="dot dot-activity"
+              role="img"
+              aria-label="LawAdvisor AI is working"
+            ></span>`
+                      : A;
+              case 'chat':
+                  return this.unreadChat > 0
+                      ? b `<la-badge
+              class="rail-badge"
+              type="counter"
+              variant="neutral"
+              appearance="ghost"
+              size="sm"
+              >${this.unreadChat}</la-badge
+            >`
+                      : A;
+              case 'expert':
+                  return this.expertReply
+                      ? b `<la-badge
+              class="rail-badge"
+              type="counter"
+              variant="neutral"
+              appearance="ghost"
+              size="sm"
+              role="img"
+              aria-label="Reply from an expert"
+              >1</la-badge
+            >`
+                      : A;
+          }
+      }
+      render() {
+          const active = this.openPanel;
+          const activeItem = LaCaseContextPanel_1.RAIL.find((i) => i.id === active);
+          return b `
+      ${iconStyles}
+      <nav class="rail" aria-label="Case context">
+        ${LaCaseContextPanel_1.RAIL.map((item) => b `
+            <la-tooltip tip=${this._railLabel(item)} position="right" size="sm">
+              <span class="rail-btn">
+                <la-icon-button
+                  label=${this._railLabel(item)}
+                  ?pressed=${active === item.id}
+                  .expanded=${active === item.id}
+                  @click=${() => this._toggle(item.id)}
+                >
+                  <i
+                    class=${active === item.id ? item.iconActive : item.icon}
+                    aria-hidden="true"
+                  ></i>
+                </la-icon-button>
+                ${this._renderBadge(item)}
+              </span>
+            </la-tooltip>
+          `)}
+
+      </nav>
+
+      <aside
+        class="panel ${active ? 'is-open' : ''}"
+        aria-hidden=${active ? 'false' : 'true'}
+        ?inert=${!active}
+      >
+        <div class="panel-head">
+          <span class="panel-title">${this._railLabel(activeItem)}</span>
+          <la-icon-button size="sm" label="Close panel" @click=${this._close}>
+            <i class="ph ph-x" aria-hidden="true"></i>
+          </la-icon-button>
+        </div>
+        <div class="panel-body">
+          <div class=${active === 'about' ? 'active' : ''}>
+            <slot name="about"></slot>
+          </div>
+          <div class=${active === 'files' ? 'active' : ''}>
+            <slot name="files"></slot>
+          </div>
+          <div class=${active === 'activity' ? 'active' : ''}>
+            <slot name="activity">
+              <div class="panel-empty">
+                <i class="ph ph-pulse" aria-hidden="true"></i>
+                <p class="empty-title">No activity yet</p>
+                <p class="empty-text">
+                  Views, edits and AI updates on this playbook show up here.
+                </p>
+              </div>
+            </slot>
+          </div>
+          <div class=${active === 'chat' ? 'active' : ''}>
+            <slot name="chat"></slot>
+          </div>
+          <div class=${active === 'expert' ? 'active' : ''}>
+            <slot name="expert"></slot>
+          </div>
+        </div>
+      </aside>
+    `;
+      }
+  };
+  exports.LaCaseContextPanel.RAIL = [
+      { id: 'about', label: 'About', icon: 'ph ph-info', iconActive: 'ph-fill ph-info' },
+      { id: 'files', label: 'Files', icon: 'ph ph-folders', iconActive: 'ph-fill ph-folders' },
+      { id: 'activity', label: 'Activity', icon: 'ph ph-pulse', iconActive: 'ph-fill ph-pulse' },
+      { id: 'chat', label: 'Chat', icon: 'ph ph-chat-circle', iconActive: 'ph-fill ph-chat-circle' },
+      {
+          id: 'expert',
+          label: 'Ask an Expert',
+          icon: 'ph ph-user-square',
+          iconActive: 'ph-fill ph-user-square',
+      },
+  ];
+  exports.LaCaseContextPanel.styles = [
+      tokens,
+      i$5 `
+      :host {
+        /* The host occupies only the rail's footprint so it never displaces
+           the playbook content. The sliding panel overlays from the rail edge. */
+        display: block;
+        position: relative;
+        width: var(--la-context-rail-width, 56px);
+        flex-shrink: 0;
+        align-self: stretch;
+        z-index: 20;
+      }
+
+      /* ── Rail ── */
+      .rail {
+        position: relative;
+        z-index: 2;
+        box-sizing: border-box;
+        width: var(--la-context-rail-width, 56px);
+        /* Full height by default, so it reads as a column of the page. A host
+           can hand it the tray treatment instead — hugging its buttons on a
+           white, rounded, shadowed surface that floats over a washed page —
+           through these four properties (16 Sep 2026). */
+        height: var(--la-context-rail-height, 100%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--la-space-xs);
+        padding: var(--la-space-lg) 0;
+        /* Transparent by default — no background or border so it blends with
+           the white content panel exactly like the RIF project nav rail. */
+        background: var(--la-context-rail-bg, none);
+        border-radius: var(--la-context-rail-radius, 0);
+        box-shadow: var(--la-context-rail-shadow, none);
+        /* So a host can bring the tray in and take it away — a surface that
+           arrives with a page state rather than snapping. */
+        transition: background-color var(--dur-base) var(--ease),
+          box-shadow var(--dur-base) var(--ease);
+      }
+      .rail-btn {
+        position: relative;
+        /* inline-flex, not inline: an inline span has no box of its own for
+           the badge to anchor to, so the count sat over the icon (18 Sep 2026). */
+        display: inline-flex;
+      }
+      /* Badge overlays anchored to the icon button. */
+      .rail-badge {
+        position: absolute;
+        top: -2px;
+        right: -2px;
+        pointer-events: none;
+      }
+      .dot {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 8px;
+        height: 8px;
+        border-radius: var(--la-radius-circle);
+        /* Ring uses the white panel background (no longer the subtle grey). */
+        box-shadow: 0 0 0 2px var(--la-color-bg);
+        pointer-events: none;
+      }
+      /* Standardised rail signals:
+         • Notifications (counts of new / inside content) are BADGES — never dots —
+           neutral grey, EXCEPT About's unread sensitive flags, which are red
+           ("review before proceeding" — the one urgent escalation).
+         • A dot is used ONLY as a presence indicator: the Activity "AI is working"
+           pulse. That's the single animated signal. */
+      .dot-activity {
+        background: var(--la-color-text-muted);
+        animation: dot-pulse 1.4s var(--ease-in-out, ease-in-out) infinite;
+      }
+      @keyframes dot-pulse {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(0.7); opacity: 0.5; }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .dot-activity { animation: none; }
+      }
+
+      /* Collapsed summary — Case ID · Level · Handler — vertical under the rail. */
+      .rail-summary {
+        margin-top: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: var(--la-space-xs);
+        padding-top: var(--la-space-md);
+      }
+      .summary-level {
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text-secondary);
+        background: var(--la-color-bg-active);
+        border-radius: var(--la-radius-pill);
+        padding: 1px var(--la-space-sm);
+      }
+
+      /* ── Sliding panel — absolutely positioned from the rail's right edge ── */
+      .panel {
+        position: absolute;
+        /* 8px gap from the rail edge — matches the RIF panel popout offset. */
+        left: calc(var(--la-context-rail-width, 56px) + var(--la-space-sm));
+        /* Inset top/bottom by md so the rounded corners are visible. */
+        top: var(--la-space-md);
+        bottom: var(--la-space-md);
+        height: auto;
+        width: var(--la-context-panel-width, 420px);
+        max-width: calc(100vw - var(--la-context-rail-width, 56px));
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        background: var(--la-color-bg);
+        border-radius: var(--la-radius-xl);
+        box-shadow: var(--la-shadow-lg);
+        overflow: hidden;
+        /* .t-panel-slide pattern: slide + fade + blur from the left. */
+        transform: translateX(-8px);
+        opacity: 0;
+        filter: blur(2px);
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform var(--dur-base) var(--ease-out),
+          opacity var(--dur-base) var(--ease-out),
+          filter var(--dur-base) var(--ease-out),
+          visibility 0s linear var(--dur-base);
+      }
+      :host([open-panel]) .panel.is-open {
+        /* Settle to none (not translateX(0)/blur(0)): any transform or filter
+           value creates a containing block, which would trap fixed-position
+           modals opened from panel content (e.g. la-level-control's X12
+           change-level dialog) inside the 340px panel instead of the viewport. */
+        transform: none;
+        opacity: 1;
+        filter: none;
+        visibility: visible;
+        pointer-events: auto;
+        transition: transform var(--dur-base) var(--ease-out),
+          opacity var(--dur-base) var(--ease-out),
+          filter var(--dur-base) var(--ease-out),
+          visibility 0s linear 0s;
+      }
+      .panel-head {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-lg) var(--la-space-lg) var(--la-space-lg) var(--la-space-xl);
+        border-bottom: 1px solid var(--la-color-border-light);
+      }
+      .panel-title {
+        font-size: var(--la-font-size-lg);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+      }
+      .panel-body {
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow-y: auto;
+        padding: var(--la-space-xl);
+      }
+      /* Only the active panel's slot is shown; the rest stay in the DOM but hidden. */
+      .panel-body > div {
+        display: none;
+      }
+      .panel-body > div.active {
+        display: block;
+      }
+
+      /* Empty-state fallback — shown via native slot fallback when a panel has
+         no slotted content yet (e.g. an activity feed with nothing logged). */
+      .panel-empty {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: var(--la-space-2xs);
+        padding: var(--la-space-2xl) var(--la-space-lg);
+        color: var(--la-color-text-muted);
+      }
+      .panel-empty i {
+        font-size: var(--la-font-size-3xl);
+        color: var(--la-color-text-faint);
+        margin-bottom: var(--la-space-xs);
+      }
+      .panel-empty .empty-title {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-secondary);
+        margin: 0;
+      }
+      .panel-empty .empty-text {
+        font-size: var(--la-font-size-sm);
+        line-height: var(--la-line-height);
+        margin: 0;
+        max-width: 240px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .panel {
+          transition: visibility 0s;
+          filter: none;
+        }
+      }
+    `,
+  ];
+  __decorate$u([
+      n({ attribute: 'case-id' })
+  ], exports.LaCaseContextPanel.prototype, "caseId", void 0);
+  __decorate$u([
+      n()
+  ], exports.LaCaseContextPanel.prototype, "level", void 0);
+  __decorate$u([
+      n()
+  ], exports.LaCaseContextPanel.prototype, "handler", void 0);
+  __decorate$u([
+      n({ attribute: 'open-panel', reflect: true })
+  ], exports.LaCaseContextPanel.prototype, "openPanel", void 0);
+  __decorate$u([
+      n({ type: Number, attribute: 'file-count' })
+  ], exports.LaCaseContextPanel.prototype, "fileCount", void 0);
+  __decorate$u([
+      n({ type: Number, attribute: 'unread-chat' })
+  ], exports.LaCaseContextPanel.prototype, "unreadChat", void 0);
+  __decorate$u([
+      n({ attribute: 'chat-label' })
+  ], exports.LaCaseContextPanel.prototype, "chatLabel", void 0);
+  __decorate$u([
+      n({ type: Boolean, attribute: 'expert-reply' })
+  ], exports.LaCaseContextPanel.prototype, "expertReply", void 0);
+  __decorate$u([
+      n({ type: Boolean, attribute: 'ai-active' })
+  ], exports.LaCaseContextPanel.prototype, "aiActive", void 0);
+  __decorate$u([
+      n({ type: Number, attribute: 'unread-flags' })
+  ], exports.LaCaseContextPanel.prototype, "unreadFlags", void 0);
+  __decorate$u([
+      n({ type: Boolean, attribute: 'no-auto-open' })
+  ], exports.LaCaseContextPanel.prototype, "noAutoOpen", void 0);
+  __decorate$u([
+      r()
+  ], exports.LaCaseContextPanel.prototype, "_autoOpened", void 0);
+  exports.LaCaseContextPanel = LaCaseContextPanel_1 = __decorate$u([
+      t$1('la-case-context-panel')
+  ], exports.LaCaseContextPanel);
 
   var __decorate$t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -9248,7 +16817,7 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  const NAV_ITEMS = [
+  const DEFAULT_NAV_ITEMS = [
       {
           id: 'dashboard',
           label: 'Dashboard',
@@ -9286,6 +16855,7 @@
       },
   ];
   const STORE_KEY$1 = 'la-sidebar-collapsed';
+  const CHECKLIST_STORE_KEY = 'la-sidebar-checklist-open';
   exports.LaSidebar = class LaSidebar extends i$2 {
       constructor() {
           super(...arguments);
@@ -9295,6 +16865,9 @@
           this.activeSubtab = '';
           /** Unlocked legal area ids. Dashboard is always accessible. */
           this.unlockedAreas = ['governance'];
+          /** Show the search trigger (input-styled ⌘K affordance) above the nav.
+           *  Clicking it — or pressing ⌘K/Ctrl+K anywhere — dispatches `la-search-trigger`. */
+          this.showSearch = false;
           /** Collapsed (icon-only) mode — persisted to localStorage */
           this.collapsed = false;
           /** Overlay mode is controlled by la-app-shell at narrow breakpoints. */
@@ -9309,11 +16882,40 @@
           this.userName = 'Alex Chen';
           /** User role / company shown below name */
           this.userRole = 'Vanta Labs · Founder';
+          /**
+           * Company / workspace name. When set, the footer leads with the company and
+           * demotes the person to the second line — every filing and contract belongs
+           * to one entity, so which entity you're acting on is the more load-bearing
+           * fact. Leave empty to keep the person-first footer, so existing consumers
+           * are unaffected.
+           */
+          this.workspaceName = '';
+          /** Initials for the workspace tile. Falls back to the first two of the name. */
+          this.workspaceInitials = '';
+          /** Heading on the checklist card. */
+          this.checklistTitle = 'Getting Started';
+          /** One line under the heading — what finishing the list buys them. */
+          this.checklistSub = '';
           this._snapped = false;
           this._userMenuOpen = false;
           this._userMenuClosing = false;
+          /** Open by default: a collapsed checklist on first run is a checklist nobody
+           *  ever sees. The founder's own choice is remembered from then on. */
+          this._checklistOpen = true;
+          /* Parents opened or closed by hand. A parent with sub-items and no route of
+             its own (the UK demo's Legal Areas) has nowhere to go, so a click opens or
+             closes it instead; without an entry here it is open only while active. */
+          this._toggled = {};
           this._handleDocClick = () => {
               this._closeUserMenu();
+          };
+          this._handleGlobalKeydown = (e) => {
+              if (!this.showSearch)
+                  return;
+              if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+                  e.preventDefault();
+                  this._dispatchSearchTrigger();
+              }
           };
       }
       _closeUserMenu() {
@@ -9334,22 +16936,89 @@
               this.collapsed = true;
           if (saved === 'false')
               this.collapsed = false;
+          const savedChecklist = localStorage.getItem(CHECKLIST_STORE_KEY);
+          if (savedChecklist === 'false')
+              this._checklistOpen = false;
+          window.addEventListener('keydown', this._handleGlobalKeydown);
+      }
+      _toggleChecklist() {
+          this._checklistOpen = !this._checklistOpen;
+          try {
+              localStorage.setItem(CHECKLIST_STORE_KEY, String(this._checklistOpen));
+          }
+          catch {
+              /* private mode — the preference just doesn't outlive the session */
+          }
+      }
+      /** A pending step was picked. The host decides where that goes. */
+      _stepClicked(step) {
+          this.dispatchEvent(new CustomEvent('la-checklist-step', {
+              detail: { id: step.id },
+              bubbles: true,
+              composed: true,
+          }));
       }
       disconnectedCallback() {
           super.disconnectedCallback();
           document.removeEventListener('click', this._handleDocClick);
+          window.removeEventListener('keydown', this._handleGlobalKeydown);
           clearTimeout(this._closeMenuTimeout);
+      }
+      _dispatchSearchTrigger() {
+          this.dispatchEvent(new CustomEvent('la-search-trigger', { bubbles: true, composed: true }));
       }
       firstUpdated() {
           // Apply snap immediately on first render if starting collapsed (no animation)
           if (this.collapsed)
               this._applySnap(true);
       }
-      _isUnlocked(id) {
-          return id === 'dashboard' || this.unlockedAreas.includes(id);
+      get _navItems() {
+          const items = this.items ?? DEFAULT_NAV_ITEMS;
+          if (!this.collapsed)
+              return items;
+          // Collapsed, plain rows have nothing to draw — no glyph, and no room for a
+          // title — so they'd leave blank gaps in the rail. Drop them, and drop any
+          // section heading left introducing nothing.
+          const visible = items.filter(i => !i.plain);
+          return visible.filter((item, i) => {
+              if (!item.section)
+                  return true;
+              const next = visible[i + 1];
+              return !!next && !next.section;
+          });
+      }
+      _workspaceInitials() {
+          if (this.workspaceInitials)
+              return this.workspaceInitials;
+          // Initials of the first two words — "Brightline Analytics" → "BA".
+          return this.workspaceName
+              .split(/\s+/)
+              .filter(Boolean)
+              .slice(0, 2)
+              .map(w => w[0].toUpperCase())
+              .join('');
+      }
+      /**
+       * In workspace mode the company has moved to the primary line, so strip it
+       * out of `userRole` to avoid saying it twice — "Brightline Analytics · Founder"
+       * becomes just "Founder".
+       */
+      _personRole() {
+          if (!this.userRole)
+              return '';
+          const parts = this.userRole.split('·').map(p => p.trim());
+          const withoutCompany = parts.filter(p => p && p !== this.workspaceName);
+          return withoutCompany.join(' · ');
+      }
+      _isUnlocked(item) {
+          if (this.items)
+              return !item.locked;
+          return item.id === 'dashboard' || this.unlockedAreas.includes(item.id);
       }
       _isExpanded(item) {
-          return this.activeArea === item.id;
+          if (item.id in this._toggled)
+              return this._toggled[item.id];
+          return !!item.open || this.activeArea === item.id;
       }
       _applySnap(snapped) {
           this._snapped = snapped;
@@ -9384,6 +17053,10 @@
           this._toggleCollapse();
       }
       _handleAreaClick(item) {
+          if (item.subtabs?.length && !item.route && this._isUnlocked(item)) {
+              this._toggled = { ...this._toggled, [item.id]: !this._isExpanded(item) };
+              return;
+          }
           this.dispatchEvent(new CustomEvent('la-nav-change', {
               detail: { area: item.id, route: item.route },
               bubbles: true,
@@ -9431,29 +17104,46 @@
     `;
       }
       _renderItem(item) {
+          if (item.section) {
+              return b `
+        <div class="nav-section">
+          <span class="nav-section-label">${item.label}</span>
+          <span class="nav-section-rule" aria-hidden="true"></span>
+        </div>
+      `;
+          }
           const isActive = this.activeArea === item.id;
-          const isUnlocked = this._isUnlocked(item.id);
+          const isUnlocked = this._isUnlocked(item);
           const hasSubtabs = !!item.subtabs?.length;
           const isExpanded = this._isExpanded(item);
           const iconFill = isActive ? 'ph-fill' : 'ph';
           const hasCollapsedFlyout = this.collapsed && isUnlocked && hasSubtabs;
+          /* Inside the branch, not on the parent itself — the parent's own view is
+             marked by `active` alone, and one of its children being selected is a
+             different fact. */
+          const isBranch = isActive && hasSubtabs && !!this.activeSubtab;
           return b `
       <div class="nav-group">
         <button
           type="button"
-          class="nav-item ${isActive ? 'active' : ''} ${!isUnlocked ? 'locked' : ''} ${this._snapped ? 'snapped' : ''}"
+          class="nav-item ${isActive ? 'active' : ''} ${isBranch ? 'branch' : ''} ${!isUnlocked ? 'locked' : ''} ${item.plain ? 'plain' : ''} ${this._snapped ? 'snapped' : ''}"
           data-nav-id="${item.id}"
+          aria-expanded=${hasSubtabs && !item.route ? String(isExpanded) : A}
           @click=${() => this._handleAreaClick(item)}
         >
-          <span class="nav-icon">
-            <i class="${iconFill} ${item.icon}"></i>
-          </span>
+          ${item.plain
+            ? A
+            : b `<span class="nav-icon">
+                <i class="${iconFill} ${item.icon}"></i>
+              </span>`}
           <span class="nav-label">${item.label}</span>
           ${!isUnlocked
             ? b `<i class="ph ph-lock nav-lock"></i>`
             : hasSubtabs
                 ? b `<i class="ph ph-caret-down nav-caret ${isExpanded ? 'open' : ''}"></i>`
-                : ''}
+                : item.count != null
+                    ? b `<span class="nav-count">${item.count}</span>`
+                    : ''}
         </button>
 
         ${isUnlocked && hasSubtabs
@@ -9465,7 +17155,7 @@
                     ${item.subtabs.map((sub) => b `
                         <button
                           type="button"
-                          class="subtab ${this.activeSubtab === sub.id ? 'active' : ''}"
+                          class="subtab ${sub.depth === 2 ? 'subtab--child' : ''} ${this.activeSubtab === sub.id ? 'active' : ''}"
                           @click=${(e) => this._handleSubtabClick(e, sub)}
                         >
                           ${sub.label}
@@ -9502,6 +17192,98 @@
       </div>
     `;
       }
+      _renderChecklist() {
+          const steps = this.checklist;
+          if (!steps || !steps.length)
+              return A;
+          const done = steps.filter((s) => s.done).length;
+          // Finished is finished: the card retires rather than standing there saying
+          // so. Nothing on the list means nothing in the way.
+          if (done === steps.length)
+              return A;
+          const firstTodo = steps.find((s) => !s.done);
+          if (this.collapsed) {
+              return b `
+        <div class="checklist">
+          <button
+            type="button"
+            class="checklist-mini"
+            title="${this.checklistTitle} — ${done} of ${steps.length} done"
+            aria-label="${this.checklistTitle}, ${done} of ${steps.length} done. Open the sidebar to see the list."
+            @click=${() => this._toggleCollapse()}
+          >
+            <i class="ph ph-list-checks" aria-hidden="true"></i>
+            <span>${done}/${steps.length}</span>
+          </button>
+        </div>
+      `;
+          }
+          return b `
+      <div class="checklist ${this._checklistOpen ? 'is-open' : ''}">
+        <button
+          type="button"
+          class="checklist-head"
+          aria-expanded=${String(this._checklistOpen)}
+          @click=${() => this._toggleChecklist()}
+        >
+          <span class="checklist-head-text">
+            <span class="checklist-title">${this.checklistTitle}</span>
+            ${this.checklistSub
+            ? b `<span class="checklist-sub">${this.checklistSub}</span>`
+            : ''}
+          </span>
+          ${this._checklistOpen
+            ? ''
+            : b `<span class="checklist-head-count">${done}/${steps.length}</span>`}
+          <i class="ph-bold ph-caret-down checklist-caret" aria-hidden="true"></i>
+        </button>
+
+        <div class="checklist-body">
+          <div>
+            <div class="checklist-steps">
+              ${steps.map((step) => {
+            // A done step is a record, not a control, so it isn't a button.
+            if (step.done) {
+                return b `
+                    <div class="checklist-step is-done">
+                      <i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+                      <span class="checklist-step-text">
+                        <span class="checklist-step-label">${step.label}</span>
+                      </span>
+                    </div>
+                  `;
+            }
+            return b `
+                  <button
+                    type="button"
+                    class="checklist-step ${step === firstTodo ? 'is-next' : ''}"
+                    @click=${() => this._stepClicked(step)}
+                  >
+                    <i class="ph ph-circle-dashed" aria-hidden="true"></i>
+                    <span class="checklist-step-text">
+                      <span class="checklist-step-label">${step.label}</span>
+                      ${step.sub
+                ? b `<span class="checklist-step-sub">${step.sub}</span>`
+                : ''}
+                    </span>
+                  </button>
+                `;
+        })}
+            </div>
+
+            <div class="checklist-foot">
+              <div class="checklist-bar" role="progressbar"
+                   aria-valuenow=${done} aria-valuemin="0" aria-valuemax=${steps.length}
+                   aria-label="${done} of ${steps.length} steps done">
+                <span style="transform: scaleX(${done / steps.length})"></span>
+              </div>
+              <span class="checklist-count">${done} of ${steps.length} done</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+      }
       render() {
           return b `
       ${iconStyles}
@@ -9527,9 +17309,42 @@
         ><i class="${this.overlay ? 'ph ph-x' : 'ph ph-sidebar-simple'}"></i></la-icon-button>
       </div>
 
+      ${this.showSearch
+            ? b `
+            <div class="search-wrap">
+              <button
+                type="button"
+                class="search-trigger ${this._snapped ? 'snapped' : ''}"
+                aria-label="Search"
+                @click=${() => this._dispatchSearchTrigger()}
+              >
+                <span class="nav-icon"><i class="ph ph-magnifying-glass"></i></span>
+                <span class="nav-label">Search</span>
+                <span class="search-kbd">⌘K</span>
+              </button>
+            </div>
+          `
+            : ''}
+
+      <!-- Anything a host needs to pin above the nav — currently the Legal
+           Health widget, which is scaffolding rather than a place and so does
+           not belong among the nav items. Hidden when collapsed: at 56px there
+           is no room for a widget, and the host has no way to know. -->
+      <div class="rail-top"><slot name="rail-top"></slot></div>
+
       <nav class="nav">
-        ${NAV_ITEMS.map((item) => this._renderItem(item))}
+        ${this._navItems.filter((item) => item.pin !== 'bottom').map((item) => this._renderItem(item))}
+        ${this._navItems.some((item) => item.pin === 'bottom')
+            ? b `
+              <div class="nav-spacer" aria-hidden="true"></div>
+              ${this._navItems
+                .filter((item) => item.pin === 'bottom')
+                .map((item) => this._renderItem(item))}
+            `
+            : ''}
       </nav>
+
+      ${this._renderChecklist()}
 
       <div class="footer">
         <div
@@ -9557,12 +17372,23 @@
           @keydown=${(e) => { if (e.key === 'Enter' || e.key === ' ')
             this._toggleUserMenu(e); }}
         >
-          <div class="user-avatar">${this.userInitials}</div>
-          <div class="user-info">
-            <div class="user-name">${this.userName}</div>
-            ${this.userRole ? b `<div class="user-role">${this.userRole}</div>` : ''}
-          </div>
-          <i class="ph-fill ph-dots-three-outline-vertical user-menu-dots"></i>
+          ${this.workspaceName
+            ? b `
+              <div class="user-avatar workspace">${this._workspaceInitials()}</div>
+              <div class="user-info">
+                <div class="user-name">${this.workspaceName}</div>
+                <div class="user-role">${this.userName}${this._personRole() ? ` · ${this._personRole()}` : ''}</div>
+              </div>
+              <i class="ph-bold ph-caret-up-down user-menu-dots"></i>
+            `
+            : b `
+              <div class="user-avatar">${this.userInitials}</div>
+              <div class="user-info">
+                <div class="user-name">${this.userName}</div>
+                ${this.userRole ? b `<div class="user-role">${this.userRole}</div>` : ''}
+              </div>
+              <i class="ph-fill ph-dots-three-outline-vertical user-menu-dots"></i>
+            `}
         </div>
       </div>
     `;
@@ -9636,6 +17462,20 @@
         flex-shrink: 0;
       }
 
+      /* Both halves of the lockup are centred in the header row, which is
+         geometrically right and optically wrong: the wordmark's ink runs
+         ascender-top to baseline-bottom, so centring its box drops its baseline
+         ~2px below the breadcrumb's beside it. The trail cannot move — it answers
+         to the search field and the avatar — so the lockup does, mark and
+         wordmark together so their own relationship survives. Whole pixels: the
+         residual fraction is invisible and 2px keeps the mark's edges crisp. */
+      .logo-mark-wrap,
+      .logo-text {
+        transform: translateY(calc(-1 * var(--la-nav-lockup-lift, 2px)));
+      }
+
+      /* Collapsed there is no trail to answer to — the mark is alone in the rail
+         and centring is the whole job, so the lift comes off. */
       :host([collapsed]) .logo-mark-wrap {
         transform: translate(
           var(--la-nav-logo-collapsed-offset-x, 6px),
@@ -9740,6 +17580,87 @@
         transform: translate(-50%, -50%) scale(1);
       }
 
+      /* ── Search trigger ───────────────────────────────────── */
+
+      .rail-top {
+        padding: 0 var(--la-nav-padding-h, 12px);
+      }
+      /* An empty slot must take no space — every screen without the widget
+         would otherwise gain 12px of padding above its first nav row. */
+      .rail-top:not(:has(*)) {
+        display: none;
+      }
+      :host([collapsed]) .rail-top {
+        display: none;
+      }
+
+      .search-wrap {
+        padding: var(--la-space-xs) var(--la-nav-padding-h, 12px) 0;
+        flex-shrink: 0;
+      }
+
+      .search-trigger {
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        width: 100%;
+        padding: var(--la-nav-item-padding-v, 6px) var(--la-nav-item-padding-h, 8px);
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-nav-item-radius, var(--la-radius-md));
+        background: var(--la-color-bg);
+        box-shadow: var(--la-shadow-xs);
+        color: var(--la-color-text-muted);
+        font-size: var(--la-font-size-base);
+        font-family: var(--la-font-family);
+        font-weight: 400;
+        text-align: left;
+        cursor: pointer;
+        white-space: nowrap;
+        user-select: none;
+        transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+      }
+
+      .search-trigger:hover {
+        background: var(--la-color-bg-subtle);
+        color: var(--la-color-text-secondary);
+      }
+
+      .search-trigger:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: -2px;
+      }
+
+      :host([collapsed]) .search-trigger.snapped {
+        justify-content: center;
+        padding: 7px;
+        gap: 0;
+      }
+
+      .search-kbd {
+        flex-shrink: 0;
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-faint);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: 6px;
+        padding: 1px 5px;
+        background: var(--la-color-bg-subtle);
+        line-height: 1.4;
+        opacity: 1;
+        max-width: 40px;
+        overflow: hidden;
+        /* max-width is not GPU-composited but required for layout collapse — no pure transform alternative */
+        transition: opacity var(--dur-fast) var(--ease),
+                    max-width var(--dur-fast) var(--ease);
+      }
+
+      :host([collapsed]) .search-kbd {
+        opacity: 0;
+        max-width: 0;
+        padding-left: 0;
+        padding-right: 0;
+        border-width: 0;
+      }
+
       /* ── Nav ──────────────────────────────────────────────── */
 
       .nav {
@@ -9747,13 +17668,20 @@
         padding: var(--la-nav-padding-v, 8px) var(--la-nav-padding-h, 12px);
         display: flex;
         flex-direction: column;
-        gap: var(--la-nav-item-gap, 3px);
+        gap: var(--la-nav-item-gap, 1px);
         overflow-y: auto;
         overflow-x: hidden;
       }
 
       :host([collapsed]) .nav {
         overflow: visible;
+      }
+
+      /* Settings and Help are pushed to the foot by whitespace, not by a rule —
+         they are still one list, just not in the way of the work (direction B). */
+      .nav-spacer {
+        flex: 1;
+        min-height: var(--la-space-lg);
       }
 
       :host([collapsed]) .header {
@@ -9765,11 +17693,12 @@
       }
 
       .nav-item {
+        position: relative;
         display: flex;
         align-items: center;
         gap: 9px;
         width: 100%;
-        padding: var(--la-nav-item-padding-v, 6px) var(--la-nav-item-padding-h, 8px);
+        padding: var(--la-nav-item-padding-v, 5px) var(--la-nav-item-padding-h, 8px);
         border-radius: var(--la-nav-item-radius, var(--la-radius-md));
         cursor: pointer;
         color: var(--la-color-text-secondary);
@@ -9788,6 +17717,26 @@
       .nav-item:focus-visible {
         outline: 2px solid var(--la-color-border-focus);
         outline-offset: -2px;
+      }
+
+      /* The branch you are inside stays marked while you move between its
+         children — the one thing a folded second level can say that a flat list
+         cannot. A bar rather than a second tint: the child carries the selection,
+         and two tinted rows touching read as two selections (direction B). */
+      .nav-item.branch::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 6px;
+        bottom: 6px;
+        width: 2px;
+        border-radius: 0 2px 2px 0;
+        background: var(--la-color-text);
+      }
+
+      /* Collapsed there is no second level on show, so nothing to mark. */
+      :host([collapsed]) .nav-item.branch::before {
+        display: none;
       }
 
       /* Layout snap — applied with a delay on collapse (after labels fade),
@@ -9827,6 +17776,16 @@
         color: var(--la-color-text-secondary);
       }
 
+      /* ── Plain rows — recents ──────────────────────────────
+         No glyph and no gutter, so titles align to the section label above. */
+      .nav-item.plain {
+        color: var(--la-color-text-secondary);
+      }
+      .nav-item.plain .nav-label {
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
       .nav-icon {
         font-size: var(--la-nav-item-icon-size);
         flex-shrink: 0;
@@ -9841,6 +17800,9 @@
       /* Label fade — same opacity+max-width pattern as logo text */
       .nav-label {
         overflow: hidden;
+        /* The longest Legal Area names run past the rail's width; ellipsis makes
+           that legible instead of shearing a word mid-letter. */
+        text-overflow: ellipsis;
         white-space: nowrap;
         flex: 1;
         max-width: 200px;
@@ -9872,6 +17834,24 @@
         max-width: 0;
       }
 
+      /* Quiet count at the item's right edge — muted number, never a red badge */
+      .nav-count {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-faint);
+        flex-shrink: 0;
+        opacity: 1;
+        max-width: 28px;
+        overflow: hidden;
+        /* max-width is not GPU-composited but required for layout collapse — no pure transform alternative */
+        transition: opacity var(--dur-fast) var(--ease),
+                    max-width var(--dur-fast) var(--ease);
+      }
+
+      :host([collapsed]) .nav-count {
+        opacity: 0;
+        max-width: 0;
+      }
+
       .nav-caret {
         font-size: var(--la-font-size-sm);
         color: var(--la-color-text-faint);
@@ -9894,6 +17874,56 @@
         max-width: 0;
       }
 
+      /* ── Section headers — nav zone labels ────────────────── */
+
+      .nav-section {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 0 var(--la-nav-item-padding-h, 8px);
+        margin-top: var(--la-space-sm);
+        margin-bottom: 1px;
+        min-height: 20px;
+      }
+
+      .nav-section:first-child {
+        margin-top: 0;
+      }
+
+      /* Title Case at xs and faint, not the all-caps exception this used to
+         carry: the reference sets zone labels in caps, and Title Case separates
+         the zones just as well while leaving the house rule with one fewer
+         exception to defend (nav direction B, 5 Aug 2026). */
+      .nav-section-label {
+        font-size: var(--la-font-size-xs);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-faint);
+        white-space: nowrap;
+        overflow: hidden;
+        max-width: 200px;
+        opacity: 1;
+        /* max-width is not GPU-composited but required for layout collapse — no pure transform alternative */
+        transition: opacity var(--dur-fast) var(--ease),
+                    max-width var(--dur-fast) var(--ease);
+      }
+
+      /* When collapsed the label folds away and a divider rule takes its place */
+      .nav-section-rule {
+        display: none;
+        height: 1px;
+        flex: 1;
+        background: var(--la-color-border-light);
+      }
+
+      :host([collapsed]) .nav-section-label {
+        opacity: 0;
+        max-width: 0;
+      }
+
+      :host([collapsed]) .nav-section-rule {
+        display: block;
+      }
+
       /* ── Sub-tabs — rail line pattern ─────────────────────── */
 
       .subtabs-wrap {
@@ -9904,7 +17934,10 @@
       }
 
       .subtabs-wrap.open {
-        max-height: 200px;
+        /* Headroom for a nested set — LawVault now runs Files, Review, Ask AI,
+           Due Diligence Packs and one row per pack, which overran 200px. It is
+           a clamp for the transition, not a layout, so the slack costs nothing. */
+        max-height: 420px;
       }
 
       :host([collapsed]) .subtabs-wrap {
@@ -10029,6 +18062,7 @@
       }
 
       .subtab {
+        position: relative;
         display: flex;
         align-items: center;
         width: 100%;
@@ -10049,6 +18083,14 @@
         user-select: none;
       }
 
+      /* A sub-item that holds a set, not a screen: its children step in from
+         the rail and read one size down, so the parent still looks like the
+         heading of the group rather than a peer of its own contents. */
+      .subtab--child {
+        padding-left: calc(var(--la-nav-sub-padding-h, 12px) + var(--la-space-md));
+        font-size: 11.5px;
+      }
+
       .subtab:focus-visible {
         outline: 2px solid var(--la-color-border-focus);
         outline-offset: -2px;
@@ -10059,15 +18101,259 @@
         color: var(--la-color-text);
       }
 
+      /* The selected child is marked on the guide rather than filled: its parent
+         already carries a block of tint while you are inside the branch, and two
+         tinted rows touching read as two selections (direction B). */
       .subtab.active {
-        background: var(--la-color-bg-active);
+        background: none;
         color: var(--la-nav-active-text, var(--la-color-text));
         font-weight: 500;
       }
 
+      .subtab.active::before {
+        content: '';
+        position: absolute;
+        left: -10px;
+        top: 5px;
+        bottom: 5px;
+        width: 2px;
+        background: var(--la-color-text);
+      }
+
       .subtab.active:hover {
-        background: var(--la-color-bg-active);
+        background: var(--la-color-bg-muted);
         color: var(--la-nav-active-text, var(--la-color-text));
+      }
+
+      /* ── Setup checklist ──────────────────────────────────────
+         A card at the foot of the rail, above the workspace row. It sits with
+         the nav rather than in it: these are things to do, not places to go,
+         so it takes a surface of its own instead of pretending to be a fifth
+         nav item.
+
+         Collapsing is the whole point of the card. A founder mid-week does not
+         want five setup steps in their peripheral vision on every screen, and
+         a checklist that can only be finished or endured is one they come to
+         resent. Collapsed it keeps the count, which is the one thing worth
+         carrying. */
+      .checklist {
+        margin: 0 var(--la-nav-padding-h, 12px) var(--la-space-sm);
+        background: var(--la-color-bg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+
+      /* Collapsed rail: the card would be wider than the rail, so it becomes
+         the glyph and the count. Clicking it opens the rail rather than the
+         card — there is nowhere to put the card until the rail is open. */
+      :host([collapsed]) .checklist {
+        margin: 0 auto var(--la-space-sm);
+        width: 32px;
+        border-radius: var(--la-radius-md);
+      }
+
+      .checklist-head {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        width: 100%;
+        padding: 9px 10px;
+        border: 0;
+        background: transparent;
+        font-family: inherit;
+        text-align: left;
+        cursor: pointer;
+        color: var(--la-color-text);
+        transition: background var(--dur-fast) var(--ease);
+      }
+
+      .checklist-head:hover { background: var(--la-color-bg-subtle); }
+      .checklist-head:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: -2px;
+      }
+
+      .checklist-head-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
+      }
+
+      .checklist-title {
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-semibold);
+        line-height: 1.3;
+      }
+
+      /* Wraps rather than truncating — the line is one short sentence saying
+         what finishing the list buys them, and an ellipsis halfway through it
+         says nothing at all. */
+      .checklist-sub {
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-muted);
+        line-height: 1.35;
+      }
+
+      /* Collapsed, the head is the whole card, so it takes over the count the
+         foot was carrying. Open, the count is in the foot beside the bar and
+         saying it twice would be noise. */
+      .checklist-head-count {
+        margin-left: auto;
+        margin-top: 1px;
+        align-self: flex-start;
+        font-size: var(--la-font-size-xs);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-muted);
+        flex-shrink: 0;
+      }
+
+      .checklist-head-count + .checklist-caret { margin-left: 0; }
+
+      /* Aligned to the title's line rather than the block's centre — the sub
+         can run to two lines and the caret must not drift down with it. */
+      .checklist-caret {
+        margin-left: auto;
+        margin-top: 2px;
+        align-self: flex-start;
+        font-size: 11px;
+        color: var(--la-color-text-muted);
+        flex-shrink: 0;
+        transition: transform var(--dur-fast) var(--ease);
+      }
+
+      .checklist.is-open .checklist-caret { transform: rotate(180deg); }
+
+      /* Height is the one property that cannot be animated on the GPU, so the
+         reveal is done with a grid track collapsing to 0fr — the browser
+         interpolates the track, the child never reflows, and the motion stays
+         on the compositor. */
+      .checklist-body {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows var(--dur-base) var(--ease-out);
+      }
+
+      .checklist.is-open .checklist-body { grid-template-rows: 1fr; }
+
+      .checklist-body > div { overflow: hidden; min-height: 0; }
+
+      .checklist-steps {
+        display: flex;
+        flex-direction: column;
+        padding: 0 6px 2px;
+      }
+
+      .checklist-step {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        width: 100%;
+        padding: 6px 4px;
+        border: 0;
+        background: transparent;
+        border-radius: var(--la-radius-sm);
+        font-family: inherit;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text);
+        text-align: left;
+        line-height: 1.35;
+      }
+
+      button.checklist-step { cursor: pointer; }
+      button.checklist-step:hover { background: var(--la-color-bg-subtle); }
+      button.checklist-step:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: -2px;
+      }
+
+      .checklist-step > i {
+        font-size: 15px;
+        flex-shrink: 0;
+        margin-top: 1px;
+        color: var(--la-color-text-faint);
+      }
+
+      .checklist-step-text {
+        display: flex;
+        flex-direction: column;
+        gap: 1px;
+        min-width: 0;
+      }
+
+      .checklist-step-sub {
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-muted);
+      }
+
+      /* Done — struck through and gone quiet. It stays on the list because a
+         list that only shows what is left never shows progress. */
+      .checklist-step.is-done { color: var(--la-color-text-muted); }
+      .checklist-step.is-done > i { color: var(--la-color-resolved); }
+      .checklist-step.is-done .checklist-step-label { text-decoration: line-through; }
+
+      /* The next move. One step is drawn heavier than the rest so the card
+         answers "what now" without the founder reading all five. */
+      .checklist-step.is-next .checklist-step-label {
+        font-weight: var(--la-font-weight-medium);
+      }
+      .checklist-step.is-next > i { color: var(--la-color-text-secondary); }
+
+      .checklist-foot {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        padding: 8px 10px 10px;
+      }
+
+      .checklist-count {
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-muted);
+        flex-shrink: 0;
+      }
+
+      .checklist-bar {
+        flex: 1;
+        height: 4px;
+        border-radius: var(--la-radius-pill);
+        background: var(--la-color-bg-active);
+        overflow: hidden;
+      }
+
+      .checklist-bar span {
+        display: block;
+        height: 100%;
+        border-radius: var(--la-radius-pill);
+        background: var(--la-color-resolved);
+        transform-origin: left center;
+        transition: transform var(--dur-base) var(--ease-out);
+      }
+
+      /* Collapsed rail — glyph and count, nothing else. */
+      .checklist-mini {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+        width: 100%;
+        padding: 6px 0;
+        border: 0;
+        background: transparent;
+        font-family: inherit;
+        cursor: pointer;
+        color: var(--la-color-text-secondary);
+        transition: background var(--dur-fast) var(--ease);
+      }
+
+      .checklist-mini:hover { background: var(--la-color-bg-subtle); }
+      .checklist-mini i { font-size: 15px; }
+      .checklist-mini span {
+        font-size: 10px;
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text-muted);
+        line-height: 1;
       }
 
       /* ── Footer / User ────────────────────────────────────── */
@@ -10207,6 +18493,15 @@
         background: var(--la-color-bg-muted);
       }
 
+      /* Workspace avatar — squared and inverted, so the company reads as an
+         entity rather than as another person. */
+      .user-avatar.workspace {
+        border-radius: var(--la-radius-sm);
+        background: var(--la-color-bg-invert);
+        border-color: var(--la-color-bg-invert);
+        color: var(--la-color-text-invert);
+      }
+
       .user-avatar {
         width: 26px;
         height: 26px;
@@ -10288,6 +18583,12 @@
       n({ type: Array })
   ], exports.LaSidebar.prototype, "unlockedAreas", void 0);
   __decorate$t([
+      n({ attribute: false })
+  ], exports.LaSidebar.prototype, "items", void 0);
+  __decorate$t([
+      n({ type: Boolean, attribute: 'show-search' })
+  ], exports.LaSidebar.prototype, "showSearch", void 0);
+  __decorate$t([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "collapsed", void 0);
   __decorate$t([
@@ -10309,6 +18610,21 @@
       n()
   ], exports.LaSidebar.prototype, "userRole", void 0);
   __decorate$t([
+      n({ attribute: 'workspace-name' })
+  ], exports.LaSidebar.prototype, "workspaceName", void 0);
+  __decorate$t([
+      n({ attribute: 'workspace-initials' })
+  ], exports.LaSidebar.prototype, "workspaceInitials", void 0);
+  __decorate$t([
+      n({ attribute: false })
+  ], exports.LaSidebar.prototype, "checklist", void 0);
+  __decorate$t([
+      n({ attribute: 'checklist-title' })
+  ], exports.LaSidebar.prototype, "checklistTitle", void 0);
+  __decorate$t([
+      n({ attribute: 'checklist-sub' })
+  ], exports.LaSidebar.prototype, "checklistSub", void 0);
+  __decorate$t([
       r()
   ], exports.LaSidebar.prototype, "_snapped", void 0);
   __decorate$t([
@@ -10317,8 +18633,14 @@
   __decorate$t([
       r()
   ], exports.LaSidebar.prototype, "_userMenuClosing", void 0);
+  __decorate$t([
+      r()
+  ], exports.LaSidebar.prototype, "_checklistOpen", void 0);
+  __decorate$t([
+      r()
+  ], exports.LaSidebar.prototype, "_toggled", void 0);
   exports.LaSidebar = __decorate$t([
-      t('la-sidebar')
+      t$1('la-sidebar')
   ], exports.LaSidebar);
 
   var __decorate$s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -10950,7 +19272,7 @@
       r()
   ], exports.LaInvestorSidebar.prototype, "_userMenuClosing", void 0);
   exports.LaInvestorSidebar = __decorate$s([
-      t('la-investor-sidebar')
+      t$1('la-investor-sidebar')
   ], exports.LaInvestorSidebar);
 
   var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -11189,7 +19511,7 @@
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "subItems", void 0);
   exports.LaInsightCard = __decorate$r([
-      t('la-insight-card')
+      t$1('la-insight-card')
   ], exports.LaInsightCard);
 
   var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -11284,7 +19606,7 @@
       n()
   ], exports.LaInfoHint.prototype, "label", void 0);
   exports.LaInfoHint = __decorate$q([
-      t('la-info-hint')
+      t$1('la-info-hint')
   ], exports.LaInfoHint);
 
   var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -11416,7 +19738,7 @@
       n()
   ], exports.LaPdfPreview.prototype, "label", void 0);
   exports.LaPdfPreview = __decorate$p([
-      t('la-pdf-preview')
+      t$1('la-pdf-preview')
   ], exports.LaPdfPreview);
 
   var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -11568,7 +19890,7 @@
       n({ reflect: true })
   ], exports.LaActionItem.prototype, "status", void 0);
   exports.LaActionItem = __decorate$o([
-      t('la-action-item')
+      t$1('la-action-item')
   ], exports.LaActionItem);
 
   var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -11697,7 +20019,7 @@
       r()
   ], exports.LaInsightList.prototype, "_expanded", void 0);
   exports.LaInsightList = __decorate$n([
-      t('la-insight-list')
+      t$1('la-insight-list')
   ], exports.LaInsightList);
 
   var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -11839,7 +20161,7 @@
       n({ type: Object })
   ], exports.LaDocumentList.prototype, "categoryIcons", void 0);
   exports.LaDocumentList = __decorate$m([
-      t('la-document-list')
+      t$1('la-document-list')
   ], exports.LaDocumentList);
 
   var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -11940,7 +20262,7 @@
           <div class="items">
             ${this.timeout
             ? b `<la-alert variant="info" class="timeout-alert">
-                  This is taking a little longer than usual. We'll keep going — you can come back to check.
+                  This is taking a little longer than usual. We’ll keep going, and you can come back to check.
                 </la-alert>`
             : A}
             ${this.items.map((item) => b `
@@ -12063,7 +20385,7 @@
       r()
   ], exports.LaProcessingWidget.prototype, "_showDetails", void 0);
   exports.LaProcessingWidget = __decorate$l([
-      t('la-processing-widget')
+      t$1('la-processing-widget')
   ], exports.LaProcessingWidget);
 
   var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -12196,13 +20518,455 @@
       n({ attribute: 'transfer-error-message' })
   ], exports.LaUpload.prototype, "transferErrorMessage", void 0);
   __decorate$k([
-      e$1('la-upload-box')
+      e$2('la-upload-box')
   ], exports.LaUpload.prototype, "_box", void 0);
   exports.LaUpload = __decorate$k([
-      t('la-upload')
+      t$1('la-upload')
   ], exports.LaUpload);
 
   var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const REASONS = {
+      signature: {
+          label: 'Upload Signed Copy',
+          ask: 'Once you have the signed copy, add it here and the flag clears.',
+          claim: 'this is the signed copy of',
+      },
+      stale: {
+          label: 'Upload Current Version',
+          ask: 'Add the version you operate under now.',
+          claim: 'this is the current version of',
+      },
+      missing: {
+          label: 'Upload This Document',
+          ask: "Upload one you already have and we'll read it against the list.",
+          claim: 'this is your',
+      },
+      /* A copy we couldn't read (cycle 5, PRO-133 item 17): the one status where
+         a better copy is the entire fix, so it asks for one plainly. */
+      unreadable: {
+          label: 'Upload a Copy We Can Read',
+          ask: "The copy we hold can't be read — scanned, password-protected or damaged. Add a PDF or Word copy and it replaces it.",
+          claim: 'this is a readable copy of',
+      },
+      /* A healthy document is not urged to be replaced — but a founder holding a
+         newer one still needs somewhere to put it without breaking the flag first.
+         No prose: the control is available, not asked for. */
+      newer: {
+          label: 'Upload Newer Version',
+          ask: '',
+          claim: 'this replaces the version we hold of',
+          ghost: true,
+      },
+  };
+  /**
+   * `la-document-upload` — the document contract around an upload.
+   *
+   * `la-upload` already handles the transfer (browse, drag, Drive, retry). What
+   * this adds is the part three tickets were missing: which document is being
+   * replaced, why we are asking, and what becomes of the file it supersedes.
+   *
+   * Hosted by the LawVault viewer panel, the policy detail page and
+   * `la-insight-modal` — one component, not three upload paths.
+   *
+   * @fires la-document-upload - `{reason, documentId, documentName, file}` when a
+   *   file lands. The host performs the supersede and drives `state` from there.
+   * @fires la-document-area-change - `{documentName, area}` when the founder
+   *   corrects the area we filed it under.
+   */
+  exports.LaDocumentUpload = class LaDocumentUpload extends i$2 {
+      constructor() {
+          super(...arguments);
+          /** Why we are asking. Drives every word and the control's weight. */
+          this.reason = 'missing';
+          /**
+           * The record being superseded. Absent means nothing is held yet, which makes
+           * this a supply rather than a replace — the one behavioural fork, derived
+           * rather than passed so the two can never disagree.
+           */
+          this.documentId = '';
+          /** What we are asking for, named. */
+          this.documentName = '';
+          /** Where a supplied document is filed, as a label — 'Employment'. */
+          this.areaLabel = '';
+          /** Area options offered if the founder disagrees with where we filed it. */
+          this.areaOptions = [];
+          /**
+           * Overrides the derived CTA. Exists for one caller: the policy detail page
+           * says "Upload This Policy", which is the precedent the tickets name.
+           */
+          this.label = '';
+          /** Ask → reading → filed. The host drives this; the component never self-advances. */
+          this.state = 'ask';
+          /** What went wrong, in the error state. Empty falls back to the honest default. */
+          this.errorMessage = '';
+          /** Accepted file types, passed through to `la-upload`. */
+          this.accept = '.pdf,.doc,.docx';
+          /** True once the CTA has been pressed and the drop zone is showing. */
+          this._open = false;
+          /** The chosen file, held while it waits on the founder's word. The status
+           *  change is founder-confirmed, never inferred (PRO-133) — so the file does
+           *  not fire the event; Confirm does. */
+          this._pendingFile = null;
+      }
+      /** `documentId` is the whole test: something to replace, or nothing yet. */
+      get _isReplace() {
+          return !!this.documentId;
+      }
+      get _copy() {
+          return REASONS[this.reason] || REASONS.missing;
+      }
+      /** Called by the host when it wants the control back in its resting state. */
+      reset() {
+          this._open = false;
+          this._pendingFile = null;
+          this.state = 'ask';
+      }
+      _onCta() {
+          // "Try Another Copy" is the same gesture as "Upload", so it has to land in
+          // the same place. render() branches on `error` before it reaches the ask,
+          // so opening the drop zone is not enough on its own — the error has to
+          // clear with it, or the button changes nothing the founder can see. Hosts
+          // used to nudge `state` back themselves; that belongs here.
+          if (this.state === 'error')
+              this.state = 'ask';
+          this._open = true;
+      }
+      _onChange(e) {
+          const file = e.detail?.file;
+          if (!file)
+              return;
+          /* Held, not fired. The transfer is not the confirmation — the founder's
+             word is, and it hasn't been given yet. */
+          this._pendingFile = file;
+      }
+      _onConfirm() {
+          if (!this._pendingFile)
+              return;
+          /* The component reports; the host supersedes and moves the state on. It
+             must not mark itself filed — only the host knows whether the write
+             succeeded. */
+          this.dispatchEvent(new CustomEvent('la-document-upload', {
+              detail: {
+                  reason: this.reason,
+                  documentId: this.documentId,
+                  documentName: this.documentName,
+                  file: this._pendingFile,
+              },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _onRechoose() {
+          this._pendingFile = null;
+      }
+      _onAreaChange(e) {
+          this.dispatchEvent(new CustomEvent('la-document-area-change', {
+              detail: {
+                  documentName: this.documentName,
+                  area: e.target.value,
+              },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      /* The confirmation step (PRO-133). What flips a status is never the file
+         landing — it is the founder saying the file is what we asked for. The
+         sentence states the claim in full, with the document named, so Confirm
+         records something specific rather than assent to a transfer. */
+      _renderConfirm() {
+          const copy = this._copy;
+          const file = this._pendingFile;
+          return b `
+      <div class="confirm-file">
+        <i class="ph ph-file-text" aria-hidden="true"></i>
+        <span>${file.name}</span>
+      </div>
+      <p class="ask">
+        You're telling us ${copy.claim}
+        ${this.documentName ? b `<strong>${this.documentName}</strong>` : 'this document'}.
+        Your word is what moves the status — we record it; we don't verify
+        signatures or read version numbers.
+      </p>
+      <div class="confirm-actions">
+        <la-button variant="primary" size="sm" @click=${this._onConfirm}>
+          Confirm &amp; File
+        </la-button>
+        <la-button variant="ghost" size="sm" @click=${this._onRechoose}>
+          Choose a Different File
+        </la-button>
+      </div>
+    `;
+      }
+      _renderAsk() {
+          const copy = this._copy;
+          if (this._pendingFile)
+              return this._renderConfirm();
+          if (this._open) {
+              return b `
+        ${copy.ask ? b `<p class="ask">${copy.ask}</p>` : A}
+        <la-upload
+          compact
+          accept=${this.accept}
+          prompt="Click to browse or drag the file here"
+          hint="PDF or Word."
+          @la-change=${this._onChange}
+        ></la-upload>
+      `;
+          }
+          return b `
+      ${copy.ask ? b `<p class="ask">${copy.ask}</p>` : A}
+      <la-button
+        variant=${copy.ghost ? 'ghost' : 'primary'}
+        size="sm"
+        @click=${this._onCta}
+      >
+        <i slot="icon-left" class="ph-bold ph-upload-simple"></i>
+        ${this.label || copy.label}
+      </la-button>
+    `;
+      }
+      /**
+       * The failure, said honestly and without drama: what happened, the likely
+       * reason, and the one way forward — another copy. The retry reuses the ask
+       * CTA's own path, so recovering is the same gesture as starting.
+       */
+      _renderError() {
+          return b `
+      <div class="error-wrap">
+        <div class="note is-error" role="alert">
+          <i class="ph-fill ph-warning-circle" aria-hidden="true"></i>
+          <span
+            >${this.errorMessage ||
+            "We couldn't read that file — it may be scanned, password-protected or damaged. Try a PDF or Word copy."}</span
+          >
+        </div>
+        <la-button variant="secondary" size="sm" @click=${this._onCta}>
+          <i slot="icon-left" class="ph-bold ph-upload-simple"></i>
+          Try Another Copy
+        </la-button>
+      </div>
+    `;
+      }
+      _renderReading() {
+          return b `
+      <div class="note is-reading" role="status">
+        <i class="ph ph-circle-notch" aria-hidden="true"></i>
+        <span
+          >Reading it — we'll update the status when we've finished.</span
+        >
+      </div>
+    `;
+      }
+      /**
+       * The outcome, and the half a founder will not assume. A replace has to say
+       * that the version it supersedes is kept: "stays on the record" promises
+       * retention without promising access, because whether the older file is
+       * reachable in Phase A is still open (decision 107).
+       *
+       * Nothing here claims we verified anything. The status is a record of what
+       * the founder supplied, not a check we performed.
+       */
+      _renderFiled() {
+          const area = this.areaLabel;
+          return b `
+      <div class="note is-filed" role="status">
+        <i class="ph-fill ph-check-circle" aria-hidden="true"></i>
+        ${this._isReplace
+            ? b `<span
+              ><strong>Filed, on your confirmation</strong> — we'll work from
+              this version now. The one it replaces stays on the record.</span
+            >`
+            : b `<span
+              ><strong>Filed.</strong> We're reading it now${area
+                ? b `, and it'll sit under ${area}`
+                : A}.</span
+            >`}
+      </div>
+      ${!this._isReplace && area && this.areaOptions.length
+            ? b `
+            <div class="filed-area">
+              <span>Filed under</span>
+              <select
+                aria-label="Change the legal area we filed this under"
+                .value=${area}
+                @change=${this._onAreaChange}
+              >
+                ${this.areaOptions.map((opt) => b `<option value=${opt} ?selected=${opt === area}>
+                      ${opt}
+                    </option>`)}
+              </select>
+            </div>
+          `
+            : A}
+    `;
+      }
+      render() {
+          return b `
+      ${iconStyles}
+      ${this.state === 'reading'
+            ? this._renderReading()
+            : this.state === 'filed'
+                ? this._renderFiled()
+                : this.state === 'error'
+                    ? this._renderError()
+                    : this._renderAsk()}
+    `;
+      }
+  };
+  exports.LaDocumentUpload.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+      }
+      .ask {
+        font-size: var(--la-font-size-sm);
+        line-height: 1.6;
+        color: var(--la-color-text-secondary);
+        margin-bottom: var(--la-space-md);
+      }
+      /* Reading and filed are statements, not controls — same noted-block
+         treatment the platform uses wherever it tells someone what it has just
+         done with their document. */
+      .note {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-md);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg-subtle);
+        font-size: var(--la-font-size-sm);
+        line-height: 1.6;
+        color: var(--la-color-text-secondary);
+      }
+      .note > i {
+        font-size: 15px;
+        flex-shrink: 0;
+        margin-top: 2px;
+        color: var(--la-color-text-muted);
+      }
+      .note.is-filed > i {
+        color: var(--la-color-success);
+      }
+      .note.is-error > i {
+        color: var(--la-color-danger);
+      }
+      .error-wrap {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+        align-items: flex-start;
+      }
+      .note strong {
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+      /* The spinner is the only motion here, and it is the one case the motion
+         system allows a continuous animation: an indeterminate wait. */
+      .note.is-reading > i {
+        animation: spin 1.2s linear infinite;
+      }
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .note.is-reading > i {
+          animation: none;
+        }
+      }
+      /* Where we filed it, and the way to disagree — supply only. A replace
+         inherits the area of the document it supersedes, so there is nothing to
+         decide and a picker would be asking a question with one answer. The
+         founder still gets the final say when we are filing something fresh,
+         the same as on the Add Documents modal's filed rows. */
+      .confirm-file {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-sm) var(--la-space-md);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-md);
+        margin-bottom: var(--la-space-md);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+      }
+      .confirm-file i {
+        font-size: 15px;
+        color: var(--la-color-text-muted);
+        flex-shrink: 0;
+      }
+      .ask strong {
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+      .confirm-actions {
+        display: flex;
+        gap: var(--la-space-sm);
+      }
+      .filed-area {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        margin-top: var(--la-space-md);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .filed-area select {
+        font: inherit;
+        font-size: var(--la-font-size-sm);
+        padding: 4px 8px;
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-radius-sm);
+        background: var(--la-color-bg);
+        color: var(--la-color-text);
+      }
+    `,
+  ];
+  __decorate$j([
+      n({ reflect: true })
+  ], exports.LaDocumentUpload.prototype, "reason", void 0);
+  __decorate$j([
+      n({ attribute: 'document-id' })
+  ], exports.LaDocumentUpload.prototype, "documentId", void 0);
+  __decorate$j([
+      n({ attribute: 'document-name' })
+  ], exports.LaDocumentUpload.prototype, "documentName", void 0);
+  __decorate$j([
+      n({ attribute: 'area-label' })
+  ], exports.LaDocumentUpload.prototype, "areaLabel", void 0);
+  __decorate$j([
+      n({ attribute: false })
+  ], exports.LaDocumentUpload.prototype, "areaOptions", void 0);
+  __decorate$j([
+      n()
+  ], exports.LaDocumentUpload.prototype, "label", void 0);
+  __decorate$j([
+      n({ reflect: true })
+  ], exports.LaDocumentUpload.prototype, "state", void 0);
+  __decorate$j([
+      n({ attribute: 'error-message' })
+  ], exports.LaDocumentUpload.prototype, "errorMessage", void 0);
+  __decorate$j([
+      n()
+  ], exports.LaDocumentUpload.prototype, "accept", void 0);
+  __decorate$j([
+      r()
+  ], exports.LaDocumentUpload.prototype, "_open", void 0);
+  __decorate$j([
+      r()
+  ], exports.LaDocumentUpload.prototype, "_pendingFile", void 0);
+  exports.LaDocumentUpload = __decorate$j([
+      t$1('la-document-upload')
+  ], exports.LaDocumentUpload);
+
+  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12324,26 +21088,26 @@
       .dot--yellow { background: var(--la-color-proactive); }
     `,
   ];
-  __decorate$j([
+  __decorate$i([
       n()
   ], exports.LaSummaryLine.prototype, "area", void 0);
-  __decorate$j([
+  __decorate$i([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "urgent", void 0);
-  __decorate$j([
+  __decorate$i([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "proactive", void 0);
-  __decorate$j([
+  __decorate$i([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "documents", void 0);
-  __decorate$j([
+  __decorate$i([
       n({ type: Boolean, attribute: 'show-aside-toggle' })
   ], exports.LaSummaryLine.prototype, "showAsideToggle", void 0);
-  exports.LaSummaryLine = __decorate$j([
-      t('la-summary-line')
+  exports.LaSummaryLine = __decorate$i([
+      t$1('la-summary-line')
   ], exports.LaSummaryLine);
 
-  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12416,20 +21180,20 @@
       }
     `,
   ];
-  __decorate$i([
+  __decorate$h([
       n({ type: Array })
   ], exports.LaActionsWidget.prototype, "actions", void 0);
-  __decorate$i([
+  __decorate$h([
       n()
   ], exports.LaActionsWidget.prototype, "heading", void 0);
-  __decorate$i([
+  __decorate$h([
       n()
   ], exports.LaActionsWidget.prototype, "subtitle", void 0);
-  exports.LaActionsWidget = __decorate$i([
-      t('la-actions-widget')
+  exports.LaActionsWidget = __decorate$h([
+      t$1('la-actions-widget')
   ], exports.LaActionsWidget);
 
-  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12475,17 +21239,17 @@
       }
     `,
   ];
-  __decorate$h([
+  __decorate$g([
       n()
   ], exports.LaAnticipationTeaser.prototype, "heading", void 0);
-  __decorate$h([
+  __decorate$g([
       n()
   ], exports.LaAnticipationTeaser.prototype, "description", void 0);
-  exports.LaAnticipationTeaser = __decorate$h([
-      t('la-anticipation-teaser')
+  exports.LaAnticipationTeaser = __decorate$g([
+      t$1('la-anticipation-teaser')
   ], exports.LaAnticipationTeaser);
 
-  var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12610,34 +21374,27 @@
       }
     `,
   ];
-  __decorate$g([
+  __decorate$f([
       n({ reflect: true })
   ], exports.LaEmptyState.prototype, "variant", void 0);
-  __decorate$g([
+  __decorate$f([
       n()
   ], exports.LaEmptyState.prototype, "area", void 0);
-  __decorate$g([
+  __decorate$f([
       n()
   ], exports.LaEmptyState.prototype, "message", void 0);
-  __decorate$g([
+  __decorate$f([
       n()
   ], exports.LaEmptyState.prototype, "icon", void 0);
-  __decorate$g([
+  __decorate$f([
       n()
   ], exports.LaEmptyState.prototype, "heading", void 0);
-  __decorate$g([
+  __decorate$f([
       n()
   ], exports.LaEmptyState.prototype, "illustration", void 0);
-  exports.LaEmptyState = __decorate$g([
-      t('la-empty-state')
+  exports.LaEmptyState = __decorate$f([
+      t$1('la-empty-state')
   ], exports.LaEmptyState);
-
-  /**
-   * @license
-   * Copyright 2017 Google LLC
-   * SPDX-License-Identifier: BSD-3-Clause
-   */
-  const e=t=>(...e)=>({_$litDirective$:t,values:e});let i$1 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
 
   /**
    * @license
@@ -12649,9 +21406,9 @@
    * @license
    * Copyright 2021 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const i=e(class extends i$1{constructor(){super(...arguments),this.key=A;}render(r,t){return this.key=r,t}update(r,[t,e]){return t!==this.key&&(p(r),this.key=t),e}});
+   */const i=e$1(class extends i$1{constructor(){super(...arguments),this.key=A;}render(r,t){return this.key=r,t}update(r,[t,e]){return t!==this.key&&(p(r),this.key=t),e}});
 
-  var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13322,32 +22079,32 @@
       }
     `,
   ];
-  __decorate$f([
+  __decorate$e([
       n({ reflect: true, attribute: 'state' })
   ], exports.LaUnlockPanel.prototype, "unlockState", void 0);
-  __decorate$f([
+  __decorate$e([
       n()
   ], exports.LaUnlockPanel.prototype, "area", void 0);
-  __decorate$f([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "checklistItems", void 0);
-  __decorate$f([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "steps", void 0);
-  __decorate$f([
+  __decorate$e([
       n({ attribute: 'next-area' })
   ], exports.LaUnlockPanel.prototype, "nextArea", void 0);
-  __decorate$f([
+  __decorate$e([
       n({ attribute: 'next-description' })
   ], exports.LaUnlockPanel.prototype, "nextDescription", void 0);
-  __decorate$f([
+  __decorate$e([
       r()
   ], exports.LaUnlockPanel.prototype, "_values", void 0);
-  exports.LaUnlockPanel = __decorate$f([
-      t('la-unlock-panel')
+  exports.LaUnlockPanel = __decorate$e([
+      t$1('la-unlock-panel')
   ], exports.LaUnlockPanel);
 
-  var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13624,35 +22381,35 @@
       }
     `,
   ];
-  __decorate$e([
+  __decorate$d([
       n()
   ], exports.LaLegalAreaWidget.prototype, "area", void 0);
-  __decorate$e([
+  __decorate$d([
       n()
   ], exports.LaLegalAreaWidget.prototype, "description", void 0);
-  __decorate$e([
+  __decorate$d([
       n()
   ], exports.LaLegalAreaWidget.prototype, "illustration", void 0);
-  __decorate$e([
+  __decorate$d([
       n({ reflect: true })
   ], exports.LaLegalAreaWidget.prototype, "status", void 0);
-  __decorate$e([
+  __decorate$d([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "urgent", void 0);
-  __decorate$e([
+  __decorate$d([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "proactive", void 0);
-  __decorate$e([
+  __decorate$d([
       n({ type: Array })
   ], exports.LaLegalAreaWidget.prototype, "dependencies", void 0);
-  __decorate$e([
+  __decorate$d([
       n({ attribute: 'next-level-label' })
   ], exports.LaLegalAreaWidget.prototype, "nextLevelLabel", void 0);
-  exports.LaLegalAreaWidget = __decorate$e([
-      t('la-legal-area-widget')
+  exports.LaLegalAreaWidget = __decorate$d([
+      t$1('la-legal-area-widget')
   ], exports.LaLegalAreaWidget);
 
-  var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13756,17 +22513,17 @@
       }
     `,
   ];
-  __decorate$d([
+  __decorate$c([
       n()
   ], exports.LaDdReadiness.prototype, "level", void 0);
-  __decorate$d([
+  __decorate$c([
       n({ type: Number })
   ], exports.LaDdReadiness.prototype, "remaining", void 0);
-  exports.LaDdReadiness = __decorate$d([
-      t('la-dd-readiness')
+  exports.LaDdReadiness = __decorate$c([
+      t$1('la-dd-readiness')
   ], exports.LaDdReadiness);
 
-  var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13846,14 +22603,14 @@
       }
     `,
   ];
-  __decorate$c([
+  __decorate$b([
       n({ type: Array })
   ], exports.LaUpcomingDeadlines.prototype, "deadlines", void 0);
-  exports.LaUpcomingDeadlines = __decorate$c([
-      t('la-upcoming-deadlines')
+  exports.LaUpcomingDeadlines = __decorate$b([
+      t$1('la-upcoming-deadlines')
   ], exports.LaUpcomingDeadlines);
 
-  var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14108,20 +22865,20 @@
       }
     `,
   ];
-  __decorate$b([
+  __decorate$a([
       n()
   ], exports.LaJourneySteps.prototype, "heading", void 0);
-  __decorate$b([
+  __decorate$a([
       n()
   ], exports.LaJourneySteps.prototype, "subtitle", void 0);
-  __decorate$b([
+  __decorate$a([
       n({ type: Array })
   ], exports.LaJourneySteps.prototype, "steps", void 0);
-  exports.LaJourneySteps = __decorate$b([
-      t('la-journey-steps')
+  exports.LaJourneySteps = __decorate$a([
+      t$1('la-journey-steps')
   ], exports.LaJourneySteps);
 
-  var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$9 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14191,28 +22948,43 @@
       }
     `,
   ];
-  __decorate$a([
+  __decorate$9([
       n({ type: Boolean })
   ], exports.LaWelcomeBanner.prototype, "dismissed", void 0);
-  __decorate$a([
+  __decorate$9([
       n()
   ], exports.LaWelcomeBanner.prototype, "heading", void 0);
-  __decorate$a([
+  __decorate$9([
       n()
   ], exports.LaWelcomeBanner.prototype, "description", void 0);
-  __decorate$a([
+  __decorate$9([
       n()
   ], exports.LaWelcomeBanner.prototype, "ctaLabel", void 0);
-  exports.LaWelcomeBanner = __decorate$a([
-      t('la-welcome-banner')
+  exports.LaWelcomeBanner = __decorate$9([
+      t$1('la-welcome-banner')
   ], exports.LaWelcomeBanner);
 
-  var __decorate$9 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$8 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  /**
+   * One Act, named once. The rail lists instruments, not provisions, so an
+   * insight resting on two sections of the same statute would otherwise print
+   * that statute's name twice with nothing to tell the rows apart. `section` is
+   * still carried on the data — it is the authored record of which provision the
+   * insight rests on, and the rail simply does not show it.
+   */
+  function groupLaws(laws) {
+      const rows = [];
+      for (const law of laws) {
+          if (!rows.some(r => r.name === law.name))
+              rows.push({ name: law.name });
+      }
+      return rows;
+  }
   exports.LaInsightModal = class LaInsightModal extends i$2 {
       constructor() {
           super(...arguments);
@@ -14220,6 +22992,18 @@
           this.open = false;
           /** Severity of the insight */
           this.severity = 'urgent';
+          /**
+           * Overrides the eyebrow wording where a surface has its own state vocabulary —
+           * Deadlines says "Overdue" / "Due soon" / "On track". Colour still follows
+           * `severity`, so keep the two in step.
+           */
+          this.statusLabel = '';
+          /**
+           * A Phosphor glyph beside the eyebrow (`ph-scales`). Left empty, the three
+           * asks an insight card carries get the card's own icon, so the opened card
+           * and the tag behind it match (28 Sep 2026, DA-2).
+           */
+          this.statusIcon = '';
           /** Source type — determines type tag label */
           this.sourceType = '';
           /** Main headline */
@@ -14228,6 +23012,34 @@
           this.reason = '';
           /** What to do about it */
           this.guidance = '';
+          /** Documents and registers this insight was built from. */
+          this.sources = [];
+          /**
+           * `stacked` (default) — one column, sections in sequence.
+           * `rail` — narrative left, a quieter rail on the right holding the facts:
+           * hero date, meta rows, sources. Use for insights whose point is a date, so
+           * the date reads first and the prose isn't competing with it. Ignored in
+           * grouped mode (`subItems`), which has its own tab structure.
+           */
+          this.layout = 'stacked';
+          /** Scannable facts listed under the date in the rail. Rail layout only. */
+          this.meta = [];
+          /** The legal area, named at the top of the rail, with its Phosphor glyph. */
+          this.area = '';
+          this.areaIcon = '';
+          /**
+           * The issues found on the document (9 Sep 2026). One document carrying
+           * several problems is one insight with the issues listed inside it; a
+           * single-issue insight lists one. Rendered folded to the headline.
+           */
+          this.issues = [];
+          /**
+           * The law behind the insight, listed in the rail under Sources. Empty by
+           * default — plenty of insights rest on a contract term or good practice
+           * rather than a statute, and inventing a provision would be worse than
+           * showing none.
+           */
+          this.laws = [];
           /** Whether the insight has been resolved */
           this.resolved = false;
           /** Documents linked to this insight */
@@ -14238,13 +23050,54 @@
           this.uploadState = 'idle';
           /** Specific verification error shown when `uploadState` is `error` */
           this.verificationError = '';
+          /** Label on the resolve button. Defaults to "Mark Resolved". */
+          this.resolveLabel = '';
+          /**
+           * A closed insight, opened to be read (PRO-128, 2 Sep 2026): the same detail
+           * view minus the actions — no upload zone, no Mark as Done, a Close button in
+           * the footer. The item is closed, so there is nothing to do to it.
+           */
+          this.readOnly = false;
           this._resolving = false;
           this._activeTab = 0;
           this._resolvedTabs = new Set();
           this._resolvingSubItemId = null;
+          /**
+           * Which page of the modal is showing. The reason flow is a page of its own
+           * rather than a footer that grows (13 Aug 2026): asking "how did you deal with
+           * this?" underneath the thing being closed left both competing for the same
+           * screen, and on a tall insight the question opened below the fold.
+           *
+           *   insight → reason → done
+           */
+          this._page = 'insight';
+          this._pageBack = false;
+          this._reasonId = '';
+          this._reasonNote = '';
+          this._doneNote = '';
+          /** The everything-open list: five rows by default, the rest on demand (PRO-115). */
+          this._relatedExpanded = false;
+          /** Which issues are open, by index. */
+          this._openIssues = {};
+      }
+      willUpdate(changed) {
+          // A fresh insight starts folded, whatever the last one was left at.
+          if (changed.has('relatedInsights') || changed.has('issues')) {
+              this._relatedExpanded = false;
+              this._openIssues = {};
+          }
       }
       _close() {
           this.open = false;
+          // A half-answered reason page shouldn't be waiting on the next insight.
+          this._page = 'insight';
+          this._pageBack = false;
+          this._reasonId = '';
+          this._reasonNote = '';
+          this._doneReason = undefined;
+          this._doneNote = '';
+          this._relatedExpanded = false;
+          this._openIssues = {};
           // Delay until the close animation finishes so consumers resetting
           // resolved/state don't flip content while the modal is still visible.
           setTimeout(() => {
@@ -14255,17 +23108,51 @@
           if (e.target === e.currentTarget)
               this._close();
       }
+      /**
+       * The resolve button. With reasons configured it turns the page rather than
+       * resolving on the click — see `resolveReasons`.
+       */
       _handleResolve() {
+          if (this.resolveReasons && this.resolveReasons.length) {
+              this._pageBack = false;
+              this._page = 'reason';
+              return;
+          }
+          this._resolve();
+      }
+      _resolve() {
           this._resolving = true;
+          const reason = this.resolveReasons?.find(r => r.id === this._reasonId);
+          const note = this._reasonNote.trim();
           setTimeout(() => {
               this.resolved = true;
               this._resolving = false;
+              /* The reason flow ends on a page of its own; the plain one-click resolve
+                 keeps the footer alert it always had. */
+              if (reason) {
+                  this._doneReason = { id: reason.id, label: reason.label };
+                  this._doneNote = note;
+                  this._pageBack = false;
+                  this._page = 'done';
+              }
               this.dispatchEvent(new CustomEvent('la-insight-resolved', {
-                  detail: { headline: this.headline },
+                  detail: {
+                      headline: this.headline,
+                      reason: reason ? { id: reason.id, label: reason.label } : undefined,
+                      note: note || undefined,
+                  },
                   bubbles: true,
                   composed: true,
               }));
+              this._reasonId = '';
+              this._reasonNote = '';
           }, 600);
+      }
+      _cancelReason() {
+          this._pageBack = true;
+          this._page = 'insight';
+          this._reasonId = '';
+          this._reasonNote = '';
       }
       _handleUploadRequest(source) {
           const activeSubItem = this._isGrouped && this.subItems ? this.subItems[this._activeTab] : undefined;
@@ -14290,6 +23177,42 @@
               bubbles: true,
               composed: true,
           }));
+      }
+      /**
+       * Sources, with the one carrying the date first. Sorted for display only —
+       * the caller's array is left untouched.
+       */
+      _renderSources() {
+          const ordered = [
+              ...this.sources.filter(s => s.holdsDeadline),
+              ...this.sources.filter(s => !s.holdsDeadline),
+          ];
+          return b `
+      <div>
+        <div class="section-label">Sources</div>
+        <div class="source-list">
+          ${ordered.map(src => {
+            const body = b `
+              <i class="ph ${src.icon || 'ph-file-text'} source-row-icon" aria-hidden="true"></i>
+              <span class="source-row-body">
+                <span class="source-row-head">
+                  <span class="source-row-doc">${src.doc}</span>
+                </span>
+              </span>
+              ${src.id ? b `<i class="ph ph-arrow-square-out source-row-go" aria-hidden="true"></i>` : A}
+            `;
+            // Only sources we can open become buttons.
+            return src.id
+                ? b `<button
+                  type="button"
+                  class="source-row ${src.holdsDeadline ? 'holds-deadline' : ''}"
+                  @click=${() => this._handleRelatedNavigate(src.id)}
+                >${body}</button>`
+                : b `<div class="source-row ${src.holdsDeadline ? 'holds-deadline' : ''}">${body}</div>`;
+        })}
+        </div>
+      </div>
+    `;
       }
       get _isGrouped() {
           return !!(this.subItems && this.subItems.length > 0);
@@ -14369,36 +23292,357 @@
       </div>
     `;
       }
+      /**
+       * The eyebrow above the headline. It should tell the person the state of the
+       * thing — never name the design-system status token, which is vocabulary for
+       * us, not for them. ("Proactive" describes how we found the insight, which is
+       * a different axis from how pressing it is, and says nothing useful here.)
+       * Callers with their own state vocabulary set `statusLabel`.
+       */
       _severityLabel() {
           if (this.resolved)
               return 'Resolved';
-          return this.severity === 'urgent' ? 'Urgent' : 'Proactive';
+          if (this.statusLabel)
+              return this.statusLabel;
+          if (this.severity === 'urgent')
+              return 'Urgent';
+          if (this.severity === 'high')
+              return 'High priority';
+          if (this.severity === 'neutral')
+              return 'For information';
+          return 'Needs attention';
+      }
+      _statusIcon() {
+          if (this.resolved)
+              return '';
+          if (this.statusIcon)
+              return this.statusIcon;
+          const ASK = {
+              'Legal Requirement': 'ph-scales',
+              'Recommended': 'ph-lightbulb',
+              'Upcoming': 'ph-clock',
+          };
+          return ASK[this.statusLabel] || '';
       }
       _entityIcon() {
           return this.entity?.type === 'person' ? 'ph-user' : 'ph-building';
       }
+      /**
+       * Rail layout applies only when asked for, not grouped, and there is
+       * something to put in the rail — otherwise it would render an empty column.
+       */
+      get _useRail() {
+          return (this.layout === 'rail' &&
+              !this._isGrouped &&
+              !!(this.deadline || this.meta.length > 0 || this.sources.length > 0 || this.area || this.issues.length > 0));
+      }
+      /** The rail (9 Sep 2026, from the register-of-members design): legal
+       *  area → Sources → Applicable Law → Deadline. Values only —
+       *  the prose column explains. An insight with no date says so. */
+      _renderRail() {
+          const d = this.deadline;
+          const ordered = [
+              ...this.sources.filter(s => s.holdsDeadline),
+              ...this.sources.filter(s => !s.holdsDeadline),
+          ];
+          const srcRow = (src) => {
+              const body = b `
+        <i class="ph ${src.icon || 'ph-file-text'}" aria-hidden="true"></i>
+        <span class="rail-src-body">
+          <span class="rail-src-doc">${src.doc}</span>
+        </span>`;
+              return src.id
+                  ? b `<button type="button" class="rail-src ${src.holdsDeadline ? 'holds-deadline' : ''}" @click=${() => this._handleRelatedNavigate(src.id)}>${body}</button>`
+                  : b `<div class="rail-src ${src.holdsDeadline ? 'holds-deadline' : ''}">${body}</div>`;
+          };
+          const hasHead = !!this.area || this.meta.length > 0;
+          return b `
+      <aside class="rail-aside">
+        <div class="rail-close">
+          <la-icon-button label="Close" @click=${this._close}><i class="ph ph-x"></i></la-icon-button>
+        </div>
+        ${this.area ? b `<div class="rail-area"><i class="ph ${this.areaIcon || 'ph-tag'}" aria-hidden="true"></i>${this.area}</div>` : A}
+        ${this.meta.length > 0 ? b `
+          <div class="rail-meta">
+            ${this.meta.map(m => b `<div class="rail-meta-row"><i class="ph ${m.icon}" aria-hidden="true"></i>${m.label}</div>`)}
+          </div>` : A}
+        ${ordered.length > 0 ? b `
+          ${hasHead ? b `<div class="rail-divider"></div>` : A}
+          <div>
+            <div class="rail-label">Sources</div>
+            ${ordered.map(srcRow)}
+          </div>` : A}
+        ${this.laws.length > 0 ? b `
+          <div class="rail-divider"></div>
+          <div>
+            <div class="rail-label">Applicable Law</div>
+            ${groupLaws(this.laws).map(law => b `
+              <div class="rail-src">
+                <i class="ph ph-scales" aria-hidden="true"></i>
+                <span class="rail-src-body">
+                  <span class="rail-src-doc">${law.name}</span>
+                </span>
+              </div>`)}
+          </div>` : A}
+        ${d ? b `
+        <div class="rail-divider"></div>
+        <div>
+          <div class="rail-label">Deadline</div>
+          <div class="rail-src">
+            <i class="ph ph-calendar-blank" aria-hidden="true"></i>
+            <span class="rail-src-body">
+              <span class="rail-src-doc">${d.label}</span>
+              ${d.sub ? b `<span class="rail-src-section">${d.sub}</span>` : A}
+            </span>
+          </div>
+        </div>` : A}
+      </aside>
+    `;
+      }
+      /** One issue on the document: number, headline, and — open — the body and the law behind it. */
+      _renderIssue(it, i) {
+          const open = !!this._openIssues[i];
+          return b `
+      <div class="issue" ?data-open=${open}>
+        <button type="button" class="issue-head" aria-expanded=${open} @click=${() => { this._openIssues = { ...this._openIssues, [i]: !open }; }}>
+          <span class="issue-num" aria-hidden="true">${i + 1}</span>
+          <span class="issue-title">${it.headline}</span>
+          <i class="ph-bold ph-caret-down" aria-hidden="true"></i>
+        </button>
+        ${open ? b `
+          <div class="issue-body">
+            ${it.body ? b `<p>${it.body}</p>` : A}
+            ${it.law ? b `<div class="issue-law"><i class="ph ph-scales" aria-hidden="true"></i><span>${it.law}</span></div>` : A}
+          </div>` : A}
+      </div>`;
+      }
+      /** The issues, five at a time (PRO-115 §4 still holds), folded to their headlines. */
+      _renderIssues() {
+          const all = this.issues || [];
+          const shown = this._relatedExpanded ? all : all.slice(0, 5);
+          const hidden = all.length - shown.length;
+          return b `
+      <div class="issues">
+        ${shown.map((it, i) => this._renderIssue(it, i))}
+        ${hidden > 0 ? b `<la-button variant="ghost" size="sm" class="related-more" @click=${() => { this._relatedExpanded = true; }}>See ${hidden} more</la-button>`
+            : all.length > 5 ? b `<la-button variant="ghost" size="sm" class="related-more" @click=${() => { this._relatedExpanded = false; }}>Show fewer</la-button>`
+                : A}
+      </div>`;
+      }
+      /** The pinned action block under the reading: what to do, then the upload. */
+      _renderCtaBlock() {
+          const upload = !this._isGrouped && this.actionType === 'upload' && !this.resolved && !this.readOnly;
+          /* Where the insight offers resolutions, they are the call to action, and
+             the guidance prose restates them — on the anti-harassment insight it
+             said "upload a policy you already have below" directly beneath a button
+             reading "I already have one". Choose, then do: the prose comes off, and
+             the upload zone appears only once upload is the chosen route. */
+          const guidance = this.resolutions && this.resolutions.length ? undefined : this.guidance;
+          if (!guidance && !upload)
+              return A;
+          return b `
+      <div class="cta-block">
+        ${guidance ? b `<div class="cta-text">${this.prose(guidance)}</div>` : A}
+        ${upload ? this._renderUploadSection(true) : A}
+      </div>`;
+      }
+      /**
+       * A prose field, as paragraphs. Authors break a long explanation with a
+       * blank line and it renders as separate paragraphs instead of one block —
+       * which is the difference between a reading and a wall. A field with no
+       * blank line is returned as-is, so existing copy is untouched.
+       */
+      prose(text) {
+          const paras = text.split(/\n\s*\n/).map((p) => p.trim()).filter(Boolean);
+          return paras.length > 1 ? paras.map((p) => b `<p>${p}</p>`) : text;
+      }
       render() {
+          const useRail = this._useRail;
+          // The wash follows the date's own tone, so the surface says the same thing
+          // the date tile does. Only where there is a date to key off.
+          const wash = useRail && this.deadline ? this.deadline.tone || 'default' : undefined;
+          /* Three pages, one panel. The reason and done pages take the whole surface
+             so the question being asked is the only thing on screen. */
+          const page = this._page === 'reason'
+              ? this._renderReasonPage()
+              : this._page === 'done'
+                  ? this._renderDonePage()
+                  : useRail
+                      ? b `
+            <div class="rail-grid">
+              <div class="rail-main">
+                ${this._renderHeader()}
+                <div class="rail-scroll">${this._renderBody(true)}</div>
+                ${this._renderCtaBlock()}
+              </div>
+              ${this._renderRail()}
+            </div>
+            ${this._renderFooter()}
+          `
+                      : b `
+            ${this._renderHeader()}
+            ${this._isGrouped ? this._renderEntityTabs() : A}
+            ${this._renderBody(false)}
+            ${this._renderFooter()}
+          `;
+          return b `
+      ${iconStyles}
+      <div class="backdrop" @click=${this._onBackdropClick}>
+        <div class="panel" data-wash=${this._page === 'insight' ? (wash ?? A) : A}>
+          <!-- Keyed on the page so each turn re-runs its enter animation. -->
+          <div class="modal-page" data-page=${this._page} data-dir=${this._pageBack ? 'back' : 'forward'}>
+            ${page}
+          </div>
+        </div>
+      </div>
+    `;
+      }
+      /**
+       * Page two: how did you deal with this? The picked reason and the written
+       * line are both required (PRO-127, 2 Sep 2026) — the option says what kind
+       * of claim this is, the line says what actually happened, and both go on the
+       * record. The confirm button waits for both. The way back is a control, not
+       * a guess.
+       */
+      _renderReasonPage() {
+          const reasons = this.resolveReasons || [];
+          return b `
+      <div class="rp">
+        <div class="rp-head">
+          <button
+            type="button"
+            class="rp-back"
+            @click=${this._cancelReason}
+            aria-label="Back to the insight"
+          ><i class="ph-bold ph-arrow-left" aria-hidden="true"></i>Back</button>
+          <la-icon-button label="Close" @click=${this._close}><i class="ph ph-x"></i></la-icon-button>
+        </div>
+
+        <div class="rp-body">
+          <p class="rp-eyebrow">${this.headline}</p>
+          <h2 class="rp-title" id="reasonLabel">How did you deal with this?</h2>
+          <p class="rp-lede">
+            We'll close it with your reason on the record, and stop raising it.
+          </p>
+
+          <div class="reason-options" role="group" aria-labelledby="reasonLabel">
+            ${reasons.map(r => b `
+              <button
+                type="button"
+                class="reason-option"
+                aria-pressed=${this._reasonId === r.id}
+                @click=${() => { this._reasonId = r.id; }}
+              >
+                <i class="ph ${this._reasonId === r.id ? 'ph-fill ph-check-circle' : (r.icon || 'ph-circle')}" aria-hidden="true"></i>
+                <span>${r.label}</span>
+              </button>
+            `)}
+          </div>
+
+          <!-- Optional since 28 Sep 2026 (DA-14, Somya: "I dont wanna be
+               blocked by text entry to dismiss the insight"). The reason is
+               the record; a line on top of it is welcome, not a gate. -->
+          <la-textarea
+            class="reason-note"
+            label="Anything to add? (optional)"
+            rows="3"
+            placeholder="A line on what happened — it goes on the record with your reason."
+            .value=${this._reasonNote}
+            @la-change=${(e) => { this._reasonNote = e.detail.value; }}
+          ></la-textarea>
+        </div>
+
+        <div class="footer">
+          <div class="footer-left">
+            <la-button variant="ghost" @click=${this._cancelReason}>Back</la-button>
+          </div>
+          <div class="footer-right">
+            <la-button
+              variant="primary"
+              ?disabled=${!this._reasonId}
+              ?loading=${this._resolving}
+              loading-label="Closing…"
+              @click=${this._resolve}
+            >Mark as Done</la-button>
+          </div>
+        </div>
+      </div>
+    `;
+      }
+      /**
+       * Page three: it's done, and here is what we wrote down. A success state that
+       * only says "done" leaves the founder wondering what we recorded and whether
+       * the thing will be back next week, so this page answers both.
+       */
+      _renderDonePage() {
+          return b `
+      <div class="dp">
+        <div class="dp-head">
+          <la-icon-button label="Close" @click=${this._close}><i class="ph ph-x"></i></la-icon-button>
+        </div>
+
+        <div class="dp-body">
+          <span class="dp-mark"><i class="ph-fill ph-check-circle" aria-hidden="true"></i></span>
+          <h2 class="dp-title">Done.</h2>
+          <p class="dp-headline">${this.headline}</p>
+
+          ${this._doneReason ? b `
+            <div class="dp-record">
+              <div class="dp-record-label">What we've put on the record</div>
+              <div class="dp-record-reason">
+                <i class="ph ph-quotes" aria-hidden="true"></i>
+                <span>${this._doneReason.label}</span>
+              </div>
+              ${this._doneNote ? b `<p class="dp-record-note">${this._doneNote}</p>` : A}
+            </div>
+          ` : A}
+
+          <p class="dp-next">
+            We'll stop raising this one. If something changes — a new document, a date
+            passing — we'll bring it back and say why.
+          </p>
+        </div>
+
+        <div class="footer">
+          <div class="footer-right">
+            <la-button variant="primary" @click=${this._close}>Back to Dashboard</la-button>
+          </div>
+        </div>
+      </div>
+    `;
+      }
+      _renderHeader() {
+          return b `
+      <div class="header">
+        <div class="header-main">
+          <div class="severity-label">${this._statusIcon()
+            ? b `<i class="ph ${this._statusIcon()}" aria-hidden="true"></i>` : ''}${this._severityLabel()}</div>
+          <div class="headline">${this.headline}</div>
+        </div>
+        <span class="header-close">
+          <la-icon-button label="Close" @click=${this._close}><i class="ph ph-x"></i></la-icon-button>
+        </span>
+      </div>
+    `;
+      }
+      /**
+       * @param inRail true when the rail is carrying the facts — the meta badge row
+       * and the sources section move there, so they're suppressed here.
+       */
+      _renderBody(inRail) {
           const typeLabel = this.sourceType === 'best_practice' ? 'Best practice' : this.sourceType === 'legal' ? 'Legal' : '';
           // In grouped mode, entity and dates live in the tab panel, not the meta row
           const showEntityInMeta = !this._isGrouped && !!this.entity;
           const showDatesInMeta = !this._isGrouped && !!(this.dates && this.dates.length > 0);
-          const hasMeta = !!(typeLabel || showEntityInMeta || showDatesInMeta);
+          const hasMeta = !inRail && !!(typeLabel || showEntityInMeta || showDatesInMeta);
           const hasRelated = !!(this.relatedInsights && this.relatedInsights.length > 0);
+          /* Five, then "See N more" (PRO-115, 2 Sep 2026). */
+          const RELATED_SHOWN = 5;
+          const relatedAll = this.relatedInsights || [];
+          const relatedShown = this._relatedExpanded ? relatedAll : relatedAll.slice(0, RELATED_SHOWN);
+          const relatedHidden = relatedAll.length - relatedShown.length;
           const activeSubItem = this._isGrouped && this.subItems ? this.subItems[this._activeTab] : undefined;
           return b `
-      ${iconStyles}
-      <div class="backdrop" @click=${this._onBackdropClick}>
-        <div class="panel">
-          <div class="header">
-            <div class="header-main">
-              <div class="severity-label">${this._severityLabel()}</div>
-              <div class="headline">${this.headline}</div>
-            </div>
-            <la-icon-button label="Close" @click=${this._close}><i class="ph ph-x"></i></la-icon-button>
-          </div>
-
-          ${this._isGrouped ? this._renderEntityTabs() : A}
-
           <div class="body">
             ${hasMeta ? b `
               <div class="meta">
@@ -14416,19 +23660,154 @@
               </div>
             ` : A}
 
-            ${this.reason ? b `
-              <div>
-                <div class="section-label">Why this matters</div>
-                <div class="reason-text">${this.reason}</div>
+            ${this.consequence ? b `
+              <div class="consequence" data-level=${this.consequence.level}>
+                <i class="ph-fill ${this.consequence.level === 'offence'
+            ? 'ph-warning-octagon' : 'ph-warning'}" aria-hidden="true"></i>
+                <span>${this.consequence.text}</span>
               </div>
             ` : A}
 
-            ${this.guidance ? b `
+            ${this.reason ? b `
               <div>
-                <div class="section-label">What to do</div>
-                <div class="guidance-text">${this.guidance}</div>
+                <div class="section-label">Why this matters</div>
+                <div class="reason-text">${this.prose(this.reason)}</div>
               </div>
             ` : A}
+
+            <!-- "What to do" was removed on review (7 Sep 2026) — the prose
+                 restated the button beneath it. What replaced it says the same
+                 thing as a thing rather than a description: the playbook we
+                 would run, by name, with its length. The guidance property is
+                 kept so no caller breaks; it is deliberately not rendered. -->
+            <!-- ── How this gets resolved (22 Sep 2026) ───────────────────
+                 An insight used to have one door: the CTA. That is right when
+                 there is genuinely one answer, and wrong the rest of the time
+                 — most of what the engine raises can be closed by producing
+                 the thing, by handing us the thing you already hold, or by
+                 telling us it is covered. Making one of those the button and
+                 the others a footer link reads as a preference we do not have.
+
+                 So they are peers, in the order a founder should meet them.
+                 Upload leads wherever it might be true, because we cannot see
+                 what the founder holds — only what we have not seen — and
+                 the cheapest honest answer should not be the hardest to find.
+                 Opt-in: an insight with no resolutions renders no section. -->
+            ${this.resolutions && this.resolutions.length ? b `
+              <div>
+                <div class="section-label">How would you like to resolve this?</div>
+                <div class="resolutions">
+                  ${this.resolutions
+            .filter((r) => !this.chosenResolution || r.id === this.chosenResolution)
+            .map((r) => b `
+                    <button
+                      type="button"
+                      class="resolution${r.suggested ? ' is-suggested' : ''}${this.chosenResolution === r.id ? ' is-chosen' : ''}"
+                      ?disabled=${this.chosenResolution === r.id}
+                      @click=${() => this._handleResolution(r)}
+                    >
+                      <span class="resolution-icon">
+                        <i class="${r.icon || 'ph ph-arrow-right'}"></i>
+                      </span>
+                      <span class="resolution-body">
+                        <span class="resolution-label">${r.label}</span>
+                        ${r.note ? b `<span class="resolution-note">${r.note}</span>` : A}
+                      </span>
+                      <i class="ph-bold ${this.chosenResolution === r.id ? 'ph-check resolution-chosen' : 'ph-arrow-right resolution-go'}" aria-hidden="true"></i>
+                    </button>
+                  `)}
+                </div>
+                ${this.chosenResolution ? b `
+                  <button type="button" class="resolution-back" @click=${this._clearResolution}>
+                    Choose something else
+                  </button>
+                ` : A}
+              </div>
+            ` : A}
+
+            ${this.playbook ? b `
+              <div>
+                <div class="section-label">Recommended playbook</div>
+                <button type="button" class="playbook-card" @click=${this._handlePlaybook}>
+                  <span class="playbook-icon"><i class="ph-fill ph-shapes"></i></span>
+                  <span class="playbook-body">
+                    <span class="playbook-name">${this.playbook.name}</span>
+                    ${this.playbook.note
+            ? b `<span class="playbook-note">${this.playbook.note}</span>`
+            : A}
+                    ${this.playbook.steps || this.playbook.time ? b `
+                      <span class="playbook-meta">
+                        ${this.playbook.steps
+            ? b `<span><i class="ph ph-list-checks"></i>${this.playbook.steps}</span>`
+            : A}
+                        ${this.playbook.time
+            ? b `<span><i class="ph ph-clock"></i>${this.playbook.time}</span>`
+            : A}
+                      </span>
+                    ` : A}
+                  </span>
+                  <i class="ph-bold ph-arrow-right playbook-go" aria-hidden="true"></i>
+                </button>
+              </div>
+            ` : A}
+
+            <!-- The date, said once. In the rail layout the aside's date tile
+                 is suppressed when this renders, so the modal never carries
+                 two drawings of the same deadline. -->
+            ${this.deadline && !inRail ? b `
+              <div>
+                <div class="section-label">Deadline</div>
+                <div class="deadline-row ${this.deadline.tone === 'urgent' ? 'is-urgent' : ''}">
+                  <i class="ph-fill ph-calendar-blank" aria-hidden="true"></i>
+                  <span class="deadline-row-b">
+                    <span class="deadline-row-when">${this.deadline.label}</span>
+                    ${this.deadline.sub
+            ? b `<span class="deadline-row-sub">${this.deadline.sub}</span>`
+            : A}
+                  </span>
+                </div>
+              </div>
+            ` : A}
+
+            ${inRail && this.issues.length > 0 ? this._renderIssues() : A}
+
+            ${hasRelated && !(inRail && this.issues.length > 0) ? b `
+              <div>
+                <div class="section-label">Everything open on this document</div>
+                <ul class="related-section">
+                  ${relatedShown.map(r => b `
+                    <li>
+                      <span
+                        class="related-link"
+                        role="button"
+                        tabindex="0"
+                        @click=${() => this._handleRelatedNavigate(r.id)}
+                        @keydown=${(e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                this._handleRelatedNavigate(r.id);
+            }
+        }}
+                      >${r.headline}</span>${r.legalArea ? b `<span class="related-area">${r.legalArea}</span>` : A}
+                    </li>
+                  `)}
+                </ul>
+                ${relatedHidden > 0 ? b `
+                  <la-button variant="ghost" size="sm" class="related-more" @click=${() => { this._relatedExpanded = true; }}>
+                    See ${relatedHidden} more
+                  </la-button>
+                ` : relatedAll.length > RELATED_SHOWN ? b `
+                  <la-button variant="ghost" size="sm" class="related-more" @click=${() => { this._relatedExpanded = false; }}>
+                    Show fewer
+                  </la-button>
+                ` : A}
+                ${this.actionType === 'upload' ? b `
+                  <p class="cascade-note">Uploading a corrected document re-checks every issue above.</p>
+                ` : A}
+              </div>
+            ` : A}
+
+            ${!inRail && this.sources.length > 0 ? this._renderSources() : A}
 
             ${this.sourceDocument ? b `
               <div>
@@ -14476,46 +23855,27 @@
               </div>
             ` : A}
 
-            ${hasRelated ? b `
-              <div>
-                <div class="section-label">This document also has</div>
-                <div class="related-section">
-                  ${this.relatedInsights.map(r => b `
-                    <span
-                      class="related-link"
-                      role="button"
-                      tabindex="0"
-                      @click=${() => this._handleRelatedNavigate(r.id)}
-                      @keydown=${(e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                this._handleRelatedNavigate(r.id);
-            }
-        }}
-                    >${r.headline}${r.legalArea ? b `<span class="related-area">${r.legalArea}</span>` : A}</span>
-                  `)}
-                  ${this.actionType === 'upload' ? b `
-                    <p class="cascade-note">Uploading a corrected document will re-evaluate all issues above.</p>
-                  ` : A}
-                </div>
-              </div>
-            ` : A}
-
             ${this._isGrouped && activeSubItem && !this.resolved
             ? this._renderTabPanel(activeSubItem)
             : A}
 
-            ${!this._isGrouped && this.actionType === 'upload' && !this.resolved
+            ${!this._isGrouped && this.actionType === 'upload' && !this.resolved && !this.readOnly && !inRail
             ? this._renderUploadSection()
             : A}
           </div>
-
-          ${this._renderFooter()}
-        </div>
-      </div>
     `;
       }
       _renderFooter() {
+          if (this.readOnly) {
+              return b `
+        <div class="footer">
+          <div class="footer-left"></div>
+          <div class="footer-right">
+            <la-button variant="secondary" @click=${this._close}>Close</la-button>
+          </div>
+        </div>
+      `;
+          }
           if (this.resolved) {
               return b `
         <div class="resolved-footer">
@@ -14554,18 +23914,66 @@
       </div>
     `;
       }
+      /**
+       * Three tiers when a contextual CTA is present: doing the work is primary,
+       * recording it done is secondary, walking away is the ghost on the left.
+       * Without a CTA, the resolve button keeps its secondary weight — an insight
+       * with no next step here has no primary action to offer.
+       */
       _renderFooterPrimary() {
+          // The upload flow's action lives in the body; a second primary would compete.
+          const showCta = !!this.cta && this.actionType !== 'upload';
+          const resolve = b `
+      <la-button variant=${showCta ? 'secondary' : 'primary'} @click=${this._handleResolve} ?loading=${this._resolving} loading-label="Resolving…">
+        ${this.resolveLabel || 'Mark Resolved'}
+      </la-button>
+    `;
+          if (!showCta)
+              return resolve;
           return b `
-      <la-button variant="secondary" @click=${this._handleResolve} ?loading=${this._resolving} loading-label="Resolving…">
-        Mark Resolved
+      ${resolve}
+      <la-button variant="primary" @click=${this._handleCta}>
+        ${this.cta.icon ? b `<i slot="icon-left" class="ph ${this.cta.icon}"></i>` : A}
+        ${this.cta.label}
+        <i slot="icon-right" class="ph-bold ph-arrow-right"></i>
       </la-button>
     `;
       }
-      _renderUploadSection() {
+      _handlePlaybook() {
+          if (!this.playbook)
+              return;
+          this.dispatchEvent(new CustomEvent('la-insight-playbook', {
+              detail: { id: this.playbook.id, name: this.playbook.name, headline: this.headline },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _clearResolution() {
+          this.chosenResolution = undefined;
+          this.dispatchEvent(new CustomEvent('la-insight-resolution-cleared', { bubbles: true, composed: true }));
+      }
+      _handleResolution(r) {
+          this.dispatchEvent(new CustomEvent('la-insight-resolution', {
+              detail: { id: r.id, label: r.label, headline: this.headline },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _handleCta() {
+          if (!this.cta)
+              return;
+          this.dispatchEvent(new CustomEvent('la-insight-cta', {
+              detail: { id: this.cta.id, label: this.cta.label, headline: this.headline },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      _renderUploadSection(bare = false) {
           const upload = b `<la-upload
       prompt="Or drag a file here"
       hint="PDF, DOCX up to 50 MB"
       accept=".pdf,.doc,.docx,application/pdf,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      ?compact=${bare}
       ?processing=${this.uploadState === 'processing'}
       @la-upload-drive=${() => this._handleUploadRequest('drive')}
       @la-change=${() => this._handleUploadRequest('local')}
@@ -14581,7 +23989,7 @@
       `;
           }
           return b `
-      <p class="upload-hint">Upload the latest version of this document to resolve this insight.</p>
+      ${bare ? A : b `<p class="upload-hint">Upload the latest version of this document to resolve this insight.</p>`}
       ${upload}
     `;
       }
@@ -14625,9 +24033,16 @@
         background: var(--la-color-bg);
         border-radius: var(--la-radius-xl);
         width: 100%;
-        max-width: 600px;
+        /* One width for every insight modal, prose or rail. The prose layout
+           sat at 600 and the rail at 700, so the same insight opened at two
+           sizes depending on which screen the founder was on. */
+        max-width: 700px;
         max-height: 88vh;
-        overflow-y: auto;
+        /* The body scrolls, not the panel. When the panel was the scroller the
+           footer scrolled away with the prose, so on a long insight the one
+           thing the founder came to press was below the fold. Header and footer
+           are now fixed and the reading scrolls between them. */
+        overflow: hidden;
         box-shadow: var(--la-shadow-lg);
         display: flex;
         flex-direction: column;
@@ -14652,6 +24067,7 @@
         align-items: flex-start;
         gap: var(--la-space-md);
         padding: var(--la-space-xl) var(--la-space-xl) 0;
+        flex-shrink: 0;
       }
 
       .header-main {
@@ -14660,16 +24076,35 @@
       }
 
       .severity-label {
+        display: flex;
+        align-items: center;
+        gap: 6px;
         font-size: var(--la-font-size-base);
         font-weight: var(--la-font-weight-normal);
         margin-bottom: var(--la-space-2xs);
       }
+      .severity-label i { font-size: 1.1em; flex: none; }
 
       :host([severity='urgent']) .severity-label {
         color: var(--la-color-urgent-text);
       }
       :host([severity='proactive']) .severity-label {
         color: var(--la-color-proactive-text);
+      }
+      /* High (9 Sep 2026): the fourth tier reads between Urgent and Medium —
+         the eyebrow in the amber-700 the register-of-members design uses, and
+         the wash in the urgent red family at three-quarter strength, so a High
+         insight is unmistakably not a Medium one. */
+      :host([severity='high']) .severity-label {
+        color: var(--la-color-proactive-text);
+      }
+      :host([severity='neutral']) .severity-label {
+        color: var(--la-color-text-muted);
+      }
+      /* Info (24 Sep 2026): the eyebrow for a Recommended insight, in the blue
+         its tag carries on the card. */
+      :host([severity='info']) .severity-label {
+        color: var(--la-color-processing-text);
       }
 
       .headline {
@@ -14688,6 +24123,11 @@
         display: flex;
         flex-direction: column;
         gap: 20px; /* Gate 8: 20px between --la-space-lg (16) and --la-space-xl (24) — visual tuning constant */
+        /* The scroller. min-height:0 is load-bearing — a flex child won't
+           shrink below its content without it, and the panel would grow past
+           its max-height instead of the body scrolling. */
+        overflow-y: auto;
+        min-height: 0;
       }
 
       /* Meta row */
@@ -14718,6 +24158,48 @@
         line-height: 1.6;
       }
 
+      /* The consequence, above the reason it used to be buried in. Inline-flex
+         so it hugs its own sentence — a filled band across the panel would be
+         a coloured section background, which the house rules don't allow. */
+      .consequence {
+        display: inline-flex;
+        align-items: flex-start;
+        /* The body is a flex column, which stretches an inline-flex child to
+           its full width — the strip has to hug its own sentence. */
+        align-self: flex-start;
+        max-width: 100%;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-2xs) var(--la-space-md);
+        border-radius: var(--la-radius-md);
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        line-height: 1.45;
+      }
+      .consequence i {
+        font-size: 16px;
+        flex: none;
+        margin-top: 1px;
+      }
+      .consequence[data-level='offence'] {
+        background: var(--la-color-surface-danger);
+        color: var(--la-color-danger-text);
+      }
+      .consequence[data-level='penalty'] {
+        background: var(--la-color-surface-warning);
+        color: var(--la-color-warning-text);
+      }
+
+      /* Long prose reads as a wall when it is one block. Copy that carries a
+         blank line renders as paragraphs; copy that doesn't is unchanged. */
+      .reason-text p,
+      .guidance-text p {
+        margin: 0 0 var(--la-space-md);
+      }
+      .reason-text p:last-child,
+      .guidance-text p:last-child {
+        margin-bottom: 0;
+      }
+
       /* Documents */
       .doc-list {
         display: flex;
@@ -14744,19 +24226,114 @@
         gap: var(--la-space-xs);
       }
 
-      /* Related insights */
-      .related-section {
+      /* ── Sources ────────────────────────────────────── */
+      /* Mirrors the sources dropdown used on case plan steps, insight cards
+         and deadline rows, so provenance reads the same everywhere. The
+         source carrying the date is distinguished by weight and a label —
+         never by colour. */
+      .source-list {
         display: flex;
         flex-direction: column;
         gap: var(--la-space-xs);
+      }
+
+      .source-row {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-md);
+        padding: var(--la-space-sm) var(--la-space-md);
+        background: var(--la-color-bg-muted);
+        border-radius: var(--la-radius-md);
+        /* Reset for the button variant */
+        width: 100%;
+        border: 0;
+        margin: 0;
+        font: inherit;
+        color: inherit;
+        text-align: left;
+      }
+
+      button.source-row {
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease);
+      }
+      button.source-row:hover {
+        background: var(--la-color-bg-active);
+      }
+
+      .source-row-icon {
+        font-size: 16px;
+        color: var(--la-color-text-muted);
+        flex-shrink: 0;
+        margin-top: 2px;
+      }
+
+      .source-row-body {
+        min-width: 0;
+        flex: 1;
+      }
+
+      .source-row-head {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        flex-wrap: wrap;
+      }
+
+      .source-row-doc {
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+        line-height: 1.3;
+      }
+      .source-row.holds-deadline .source-row-doc {
+        font-weight: var(--la-font-weight-semibold);
+      }
+
+
+      .source-row-go {
+        font-size: 14px;
+        color: var(--la-color-text-faint);
+        flex-shrink: 0;
+        margin-top: 3px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        button.source-row {
+          transition: none;
+        }
+      }
+
+      /* Related insights */
+      /* Every open issue on the document, as bullets. Insights bundle per
+         document, so this list can hold nineteen: it shows five, says how many
+         more there are, and reveals the rest on demand (PRO-115, 2 Sep 2026).
+         The panel scrolls; the list never scrolls inside itself — a scroll box
+         inside a scrolling modal hides content with no sign there is more, and
+         listing everything pushes the resolve action off the bottom. */
+      .related-section {
+        list-style: disc;
+        margin: 0;
+        padding-left: var(--la-space-lg);
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-xs);
+      }
+
+      .related-more {
+        display: block;
+        width: max-content;
+        margin-top: var(--la-space-xs);
+      }
+
+      .related-section li {
+        color: var(--la-color-text-muted);
       }
 
       .related-link {
         font-size: var(--la-font-size-base);
         color: var(--la-color-primary);
         cursor: pointer;
-        padding: var(--la-space-3xs) 0;
-        display: block;
       }
 
       .related-link:hover {
@@ -14833,6 +24410,490 @@
         color: var(--la-color-resolved-text);
       }
 
+      /* ── Rail layout ────────────────────────────────── */
+      /* Narrative left, facts right. The rail is the scannable half — hero
+         date, meta, sources — so the prose column carries only reading. The
+         panel runs taller than it is wide-per-column on purpose: both halves
+         need vertical room to breathe. */
+
+      /* ── Due-date wash ──────────────────────────────── */
+      /* Same construction as the Home page wash — layered radials from the top,
+         fading out downward — but single-hue and keyed to how urgent the date
+         is, so the modal's whole surface carries the status the date tile shows.
+         Hues mirror the status tokens; kept as rgb triplets because the layers
+         need per-layer alpha. Tune strength via --la-wash-strength. */
+      .panel[data-wash] {
+        --la-wash-strength: 1;
+        background-color: var(--la-color-bg);
+        background-image:
+          radial-gradient(ellipse 120% 70% at 0% 0%,
+            rgba(var(--la-wash-rgb), calc(0.20 * var(--la-wash-strength))) 0%, transparent 70%), /* design-token-ok: built from --la-wash-rgb */
+          radial-gradient(ellipse 110% 60% at 100% 2%,
+            rgba(var(--la-wash-rgb), calc(0.13 * var(--la-wash-strength))) 0%, transparent 65%), /* design-token-ok: built from --la-wash-rgb */
+          radial-gradient(ellipse 140% 50% at 50% -10%,
+            rgba(var(--la-wash-rgb), calc(0.09 * var(--la-wash-strength))) 0%, transparent 60%); /* design-token-ok: built from --la-wash-rgb */
+        background-repeat: no-repeat;
+        background-size: 100% 360px;
+      }
+      /* red-500 — overdue */
+      .panel[data-wash='urgent'] {
+        --la-wash-rgb: 204, 70, 67;
+      }
+      /* red-500 at three-quarter strength — high */
+      .panel[data-wash='high'] {
+        --la-wash-rgb: 204, 70, 67;
+        --la-wash-strength: 0.75;
+      }
+      /* amber-500 — due soon */
+      .panel[data-wash='proactive'] {
+        --la-wash-rgb: 245, 158, 11;
+      }
+      /* the cool grey of --la-color-text-muted — on track, nothing pressing */
+      .panel[data-wash='default'] {
+        --la-wash-rgb: 107, 114, 128;
+      }
+
+      /* The rail's grey fill would cut the wash off at the divider, leaving a
+         hard vertical seam. With a wash present the fill goes entirely and the
+         1px border does the dividing on its own — the gradient then reads as
+         one surface, and the rail still recedes on type size and weight. */
+      .panel[data-wash] .rail-aside {
+        background: none;
+      }
+
+      .rail-grid {
+        display: grid;
+        grid-template-columns: 1fr 244px;
+        min-height: 420px;
+        /* Each column scrolls its own content now that the panel doesn't, so
+           the footer below the grid stays on screen. min-height:0 lets the grid
+           shrink to the space left over rather than pushing the footer out. */
+        flex: 1 1 auto;
+        min-height: 0;
+        overflow: hidden;
+      }
+
+      .rail-main {
+        display: flex;
+        flex-direction: column;
+        min-width: 0;
+        min-height: 0;
+      }
+      .rail-main .body {
+        gap: var(--la-space-xl);
+        padding-top: var(--la-space-xl);
+      }
+
+      /* The footer sits below the grid and spans the full panel — the actions
+         belong to the whole modal, not just the prose column, and three of them
+         won't fit in the 456px column without wrapping. */
+      :host([layout='rail']) .footer,
+      :host([layout='rail']) .resolved-footer {
+        border-top: 1px solid var(--la-color-border-light);
+      }
+      /* The fade-out above the footer is for scrolling content; with a divider
+         and a full-width footer it just reads as a smudge. */
+      :host([layout='rail']) .footer::before {
+        content: none;
+      }
+
+      .rail-aside {
+        border-left: 1px solid var(--la-color-border-light);
+        background: var(--la-color-bg-subtle);
+        padding: var(--la-space-lg) var(--la-space-lg) var(--la-space-xl);
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-lg);
+      }
+
+      /* Close lives at the panel's top-right, which in rail layout is the top of
+         the rail. When the rail stacks under the prose it would land mid-panel,
+         so a second copy in the main header takes over — only ever one visible. */
+      .rail-close {
+        display: flex;
+        justify-content: flex-end;
+        margin: -4px -4px 0 0;
+      }
+      .rail-main .header-close {
+        display: none;
+      }
+
+      .rail-date {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+      }
+      .rail-date-label {
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+        line-height: 1.3;
+      }
+      .rail-date-sub {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+        margin-top: 1px;
+      }
+
+      .rail-meta {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-xs);
+      }
+      .rail-meta-row {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+      }
+      .rail-meta-row i {
+        font-size: 14px;
+        color: var(--la-color-text-muted);
+        flex-shrink: 0;
+      }
+
+      .rail-divider {
+        border-top: 1px solid var(--la-color-border-light);
+      }
+
+      /* ── The rail layout is a fixed-height surface (9 Sep 2026, from the
+         register-of-members design). The header and the action block stay
+         put; only the reading scrolls, so a long issue list can never push
+         the upload off the bottom. ── */
+      :host([layout='rail']) .panel { overflow: hidden; }
+      :host([layout='rail']) .modal-page { flex: 1; min-height: 0; }
+      :host([layout='rail']) .rail-grid { flex: 1 1 auto; min-height: 0; }
+      .rail-main { min-height: 0; }
+      .rail-scroll { flex: 1; min-height: 0; overflow-y: auto; }
+      .rail-aside { overflow-y: auto; min-height: 0; }
+      .cta-block {
+        flex-shrink: 0;
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-md);
+        padding: var(--la-space-md) var(--la-space-xl) var(--la-space-lg);
+        border-top: 1px solid var(--la-color-border-light);
+      }
+      .cta-text { font-size: var(--la-font-size-base); color: var(--la-color-text); line-height: 1.6; }
+      .cta-text p { margin: 0 0 var(--la-space-sm); }
+      .cta-text p:last-child { margin-bottom: 0; }
+      .rail-area {
+        display: flex; align-items: center; gap: var(--la-space-sm);
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-semibold);
+        color: var(--la-color-text);
+      }
+      .rail-area i { font-size: 16px; color: var(--la-color-text-muted); }
+
+      /* The issues — numbered, folded to the headline; the body and the law
+         behind it open on demand. One document, N issues, one action. */
+      .issues { display: flex; flex-direction: column; gap: var(--la-space-sm); }
+      .issue { border: 1px solid var(--la-color-border-light); border-radius: var(--la-radius-lg); overflow: hidden; }
+      .issue-head {
+        display: flex; align-items: center; gap: var(--la-space-md);
+        width: 100%; padding: var(--la-space-md);
+        border: 0; background: none; font: inherit; color: inherit; text-align: left; cursor: pointer;
+      }
+      .issue-head:hover { background: var(--la-color-bg-subtle); }
+      .issue-head:focus-visible { outline: 2px solid var(--la-color-border-focus); outline-offset: -2px; }
+      .issue-num {
+        flex-shrink: 0; width: 22px; height: 22px;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-urgent-bg); color: var(--la-color-urgent-text);
+        font-size: var(--la-font-size-xs); font-weight: var(--la-font-weight-semibold);
+        display: flex; align-items: center; justify-content: center;
+      }
+      .issue-title { flex: 1; min-width: 0; font-size: var(--la-font-size-md); font-weight: var(--la-font-weight-semibold); line-height: 1.35; }
+      .issue-head > i { flex-shrink: 0; font-size: 14px; color: var(--la-color-text-muted); transition: transform var(--dur-fast) var(--ease); }
+      .issue[data-open] .issue-head > i { transform: rotate(180deg); }
+      .issue-body {
+        display: flex; flex-direction: column; gap: var(--la-space-sm);
+        padding: 0 var(--la-space-md) var(--la-space-md) calc(var(--la-space-md) * 2 + 22px);
+      }
+      .issue-body p { margin: 0; font-size: var(--la-font-size-base); color: var(--la-color-text-secondary); line-height: 1.55; }
+      .issue-law { display: flex; align-items: center; gap: var(--la-space-xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+      .issue-law i { font-size: 13px; }
+
+      .rail-label {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        margin-bottom: var(--la-space-xs);
+      }
+
+      /* Rail sources — same information design as the stacked rows, stripped of
+         the filled surface so the rail stays quiet. */
+      .rail-src {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        width: 100%;
+        padding: 0;
+        border: 0;
+        margin: 0;
+        background: none;
+        font: inherit;
+        color: inherit;
+        text-align: left;
+      }
+      .rail-src + .rail-src {
+        margin-top: var(--la-space-sm);
+      }
+      button.rail-src {
+        cursor: pointer;
+      }
+      button.rail-src:hover .rail-src-doc {
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .rail-src > i {
+        font-size: 14px;
+        color: var(--la-color-text-muted);
+        margin-top: 2px;
+        flex-shrink: 0;
+      }
+      /* The doc name, its location and the deadline note each need their own
+         line — as inline spans they run together when the name is long. */
+      .rail-src-body {
+        display: block;
+        min-width: 0;
+      }
+      .rail-src-doc {
+        display: block;
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+        line-height: 1.3;
+      }
+      .rail-src.holds-deadline .rail-src-doc {
+        font-weight: var(--la-font-weight-semibold);
+      }
+      .rail-src-section {
+        display: block;
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-faint);
+        line-height: 1.35;
+        margin-top: 1px;
+      }
+
+      /* Narrow viewports — the rail can't hold its width, so stack it under
+         the prose and drop the tint. */
+      @media (max-width: 620px) {
+        .rail-grid {
+          grid-template-columns: 1fr;
+          min-height: 0;
+          overflow-y: auto;
+        }
+        .rail-main {
+          overflow: visible;
+        }
+        .rail-main .body {
+          overflow: visible;
+        }
+        .rail-aside {
+          border-left: 0;
+          border-top: 1px solid var(--la-color-border-light);
+          background: none;
+        }
+        .rail-close {
+          display: none;
+        }
+        .rail-main .header-close {
+          display: block;
+        }
+      }
+
+      /* ── Recommended playbook ─────────────────────────
+         The work, named. A card rather than a paragraph: a founder deciding
+         whether to start something wants its length before its description,
+         and a paragraph can't carry that. It is a control, because the only
+         useful thing to do with it is run it. */
+      /* ── How this gets resolved ──────────────────────────────────────
+         Peers, stacked, in the order they should be met. They share the
+         playbook card's chrome deliberately: a founder reading down the modal
+         meets the same kind of object twice, and the only difference is that
+         one of these is a choice and the other is a recommendation.
+
+         is-suggested gives the one we would pick a tinted glyph and nothing
+         else. It is a lead, not a gate — the whole argument for this section
+         is that the other answers are equally honest. */
+      .resolutions {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+      }
+      .resolution {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        width: 100%;
+        padding: var(--la-space-md) var(--la-space-lg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg);
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease),
+                    border-color var(--dur-fast) var(--ease);
+      }
+      .resolution:hover {
+        background: var(--la-color-bg-subtle);
+        border-color: var(--la-color-border-active);
+      }
+      .resolution:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 1px;
+      }
+      .resolution-icon {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        flex-shrink: 0;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-bg-muted);
+        color: var(--la-color-text-secondary);
+        font-size: 15px;
+      }
+      .resolution.is-suggested .resolution-icon {
+        background: var(--la-color-surface-info);
+        color: var(--la-color-processing-text);
+      }
+      .resolution-body {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        min-width: 0;
+        flex: 1;
+      }
+      .resolution-label {
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+      .resolution-note {
+        font-size: var(--la-font-size-sm);
+        line-height: var(--la-line-height);
+        color: var(--la-color-text-muted);
+      }
+      .resolution.is-chosen {
+        border-color: var(--la-color-border-active);
+        background: var(--la-color-bg-subtle);
+        cursor: default;
+      }
+      .resolution-chosen {
+        flex-shrink: 0;
+        font-size: 13px;
+        color: var(--la-color-resolved);
+      }
+      /* The way back. Quiet, because choosing again is a correction rather
+         than a step — but present, because a choice with no exit is a trap. */
+      .resolution-back {
+        margin-top: var(--la-space-sm);
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+      .resolution-back:hover { color: var(--la-color-text); }
+      .resolution-go {
+        flex-shrink: 0;
+        font-size: 13px;
+        color: var(--la-color-text-faint);
+      }
+      .resolution:hover .resolution-go { color: var(--la-color-text-secondary); }
+
+      .playbook-card {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        width: 100%;
+        padding: var(--la-space-md) var(--la-space-lg);
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg);
+        box-shadow: var(--la-shadow-xs);
+        text-align: left;
+        font: inherit;
+        color: inherit;
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease),
+                    border-color var(--dur-fast) var(--ease);
+      }
+      .playbook-card:hover {
+        background: var(--la-color-bg-subtle);
+        border-color: var(--la-color-border-active);
+      }
+      .playbook-card:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+      }
+      .playbook-icon {
+        width: 34px;
+        height: 34px;
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-accent-bg);
+        color: var(--la-color-accent);
+        font-size: 16px;
+      }
+      .playbook-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+      .playbook-name {
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-medium);
+      }
+      .playbook-note {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+        line-height: 1.5;
+      }
+      .playbook-meta {
+        display: flex;
+        gap: var(--la-space-md);
+        flex-wrap: wrap;
+        margin-top: var(--la-space-3xs);
+        font-size: var(--la-font-size-xs);
+        color: var(--la-color-text-muted);
+      }
+      .playbook-meta span { display: inline-flex; align-items: center; gap: 4px; }
+      .playbook-meta i { font-size: 12px; }
+      .playbook-go { font-size: 14px; color: var(--la-color-text-faint); flex-shrink: 0; }
+      .playbook-card:hover .playbook-go { color: var(--la-color-text); }
+
+      /* ── Deadline ─────────────────────────────────────
+         One row, one date. The rail's date tile is off while this renders, so
+         the modal never draws the same deadline twice. */
+      .deadline-row {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        padding: var(--la-space-md) var(--la-space-lg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg-subtle);
+      }
+      .deadline-row > i { font-size: 17px; color: var(--la-color-text-muted); flex-shrink: 0; }
+      .deadline-row.is-urgent { background: var(--la-color-surface-danger); border-color: var(--la-color-urgent-bg); }
+      .deadline-row.is-urgent > i { color: var(--la-color-urgent); }
+      .deadline-row-b { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+      .deadline-row-when {
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-medium);
+      }
+      .deadline-row-sub { font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+      .deadline-row.is-urgent .deadline-row-sub { color: var(--la-color-urgent-text); }
+
       /* ── Footer ─────────────────────────────────────── */
 
       .footer {
@@ -14843,6 +24904,9 @@
         padding: var(--la-space-lg) var(--la-space-xl);
         gap: var(--la-space-md);
         flex-shrink: 0;
+        /* Three actions in the rail layout's 456px column can outgrow one line
+           with a long CTA label — let the row wrap rather than overflow. */
+        flex-wrap: wrap;
       }
       .footer::before {
         content: '';
@@ -14857,12 +24921,243 @@
 
       .footer-left {
         display: flex;
-        gap: var(--la-space-sm);
+        gap: var(--la-space-2xs);
+        flex-wrap: wrap;
+        align-items: center;
       }
 
       .footer-right {
         display: flex;
         gap: var(--la-space-sm);
+        /* Resolve and the CTA stay shoulder to shoulder — a long CTA label makes
+           the whole pair drop to a second row under Dismiss, right-aligned,
+           rather than the two splitting across separate lines. */
+        flex-wrap: nowrap;
+        margin-left: auto;
+      }
+
+      /* ══ The reason and done pages ══════════════════════
+         Marking something done without saying how it was done teaches us
+         nothing and leaves the founder's record with a gap in it. When
+         resolveReasons is set, resolving turns the page instead: the reason
+         page asks how, and the done page says what we wrote down.
+
+         Each is a page of the same panel, not a second modal — the founder is
+         still closing the same insight, so the surface shouldn't stack. */
+
+      .modal-page {
+        display: flex;
+        flex-direction: column;
+        min-height: 0;
+      }
+      /* The panel is a fixed surface; only the pages inside it move. Transform
+         and opacity only, one beat, out-easing. */
+      .modal-page[data-page='reason'],
+      .modal-page[data-page='done'] {
+        animation: page-in var(--dur-base) var(--ease-out) both;
+      }
+      .modal-page[data-page='insight'][data-dir='back'] {
+        animation: page-in-back var(--dur-base) var(--ease-out) both;
+      }
+      @keyframes page-in {
+        from { opacity: 0; transform: translateX(16px); }
+        to { opacity: 1; transform: none; }
+      }
+      @keyframes page-in-back {
+        from { opacity: 0; transform: translateX(-16px); }
+        to { opacity: 1; transform: none; }
+      }
+
+      /* ── Reason page ──────────────────────────────────── */
+
+      .rp, .dp { display: flex; flex-direction: column; min-height: 0; }
+      .rp-head, .dp-head {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-md) var(--la-space-lg) 0;
+        flex-shrink: 0;
+      }
+      .dp-head { justify-content: flex-end; }
+      .rp-head la-icon-button, .dp-head la-icon-button { margin-left: auto; }
+      .rp-back {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-xs);
+        padding: 6px 10px;
+        margin-left: -4px;
+        border: 0;
+        background: none;
+        border-radius: var(--la-radius-md);
+        font-family: inherit;
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text-secondary);
+        cursor: pointer;
+        transition: background var(--dur-fast) var(--ease),
+                    color var(--dur-fast) var(--ease);
+      }
+      .rp-back:hover { background: var(--la-color-bg-subtle); color: var(--la-color-text); }
+      .rp-back:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 1px;
+      }
+      .rp-back i { font-size: 13px; }
+
+      .rp-body {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-md);
+        padding: var(--la-space-md) var(--la-space-xl) var(--la-space-xl);
+      }
+      /* The insight being closed, named once and quietly — the founder needs to
+         know which one they are answering for, not to read it again. */
+      .rp-eyebrow {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+      }
+      .rp-title {
+        font-size: var(--la-font-size-xl);
+        font-weight: var(--la-font-weight-semibold);
+        line-height: 1.3;
+        margin-top: calc(-1 * var(--la-space-xs));
+      }
+      .rp-lede {
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-secondary);
+        line-height: var(--la-line-height);
+        margin-top: calc(-1 * var(--la-space-xs));
+        margin-bottom: var(--la-space-xs);
+      }
+      .reason-options {
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-xs);
+      }
+      .reason-option {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-sm) var(--la-space-md);
+        border: 1px solid var(--la-color-border);
+        border-radius: var(--la-radius-md);
+        background: var(--la-color-bg);
+        font-family: inherit;
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        text-align: left;
+        cursor: pointer;
+        transition: border-color var(--dur-fast) var(--ease),
+                    background var(--dur-fast) var(--ease);
+      }
+      .reason-option:hover { background: var(--la-color-bg-subtle); }
+      .reason-option[aria-pressed='true'] {
+        border-color: var(--la-color-border-active);
+        background: var(--la-color-bg-subtle);
+      }
+      .reason-option:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 1px;
+      }
+      .reason-option i {
+        font-size: 16px;
+        color: var(--la-color-text-faint);
+        margin-top: 1px;
+        flex-shrink: 0;
+      }
+      .reason-option[aria-pressed='true'] i { color: var(--la-color-resolved); }
+      .reason-note { display: block; }
+
+      /* ── Done page ────────────────────────────────────── */
+
+      .dp-body {
+        flex: 1;
+        min-height: 0;
+        overflow-y: auto;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        padding: var(--la-space-md) var(--la-space-xl) var(--la-space-2xl);
+      }
+      .dp-mark {
+        display: grid;
+        place-items: center;
+        width: 44px;
+        height: 44px;
+        border-radius: var(--la-radius-circle);
+        background: var(--la-color-resolved-bg);
+        color: var(--la-color-resolved);
+        font-size: 26px;
+        margin-bottom: var(--la-space-lg);
+        /* One-off, so it may run to 400ms. Never from zero. */
+        animation: mark-in 400ms var(--ease-spring) both;
+      }
+      @keyframes mark-in {
+        from { opacity: 0; transform: scale(0.96); }
+        to { opacity: 1; transform: none; }
+      }
+      .dp-title {
+        font-size: var(--la-font-size-2xl);
+        font-weight: var(--la-font-weight-semibold);
+        line-height: 1.25;
+      }
+      .dp-headline {
+        margin-top: var(--la-space-xs);
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text-secondary);
+        line-height: var(--la-line-height);
+      }
+      /* What we wrote down. A success state that only says "done" leaves the
+         founder guessing what went on the record. */
+      .dp-record {
+        align-self: stretch;
+        margin-top: var(--la-space-xl);
+        padding: var(--la-space-md) var(--la-space-lg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg-subtle);
+      }
+      .dp-record-label {
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .dp-record-reason {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-sm);
+        margin-top: var(--la-space-xs);
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+        line-height: var(--la-line-height);
+      }
+      .dp-record-reason i {
+        font-size: 15px;
+        color: var(--la-color-text-faint);
+        margin-top: 3px;
+        flex-shrink: 0;
+      }
+      .dp-record-note {
+        margin-top: var(--la-space-sm);
+        padding-left: calc(15px + var(--la-space-sm));
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+        line-height: var(--la-line-height);
+      }
+      .dp-next {
+        margin-top: var(--la-space-lg);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        line-height: var(--la-line-height);
+        max-width: 52ch;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .reason-option, .rp-back { transition: none; }
       }
 
       /* ── Upload section ─────────────────────────────────── */
@@ -14906,71 +25201,149 @@
 
     `,
   ];
-  __decorate$9([
+  __decorate$8([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "open", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ reflect: true })
   ], exports.LaInsightModal.prototype, "severity", void 0);
-  __decorate$9([
+  __decorate$8([
+      n({ attribute: 'status-label' })
+  ], exports.LaInsightModal.prototype, "statusLabel", void 0);
+  __decorate$8([
+      n({ attribute: 'status-icon' })
+  ], exports.LaInsightModal.prototype, "statusIcon", void 0);
+  __decorate$8([
       n({ attribute: 'source-type' })
   ], exports.LaInsightModal.prototype, "sourceType", void 0);
-  __decorate$9([
+  __decorate$8([
       n()
   ], exports.LaInsightModal.prototype, "headline", void 0);
-  __decorate$9([
+  __decorate$8([
       n()
   ], exports.LaInsightModal.prototype, "reason", void 0);
-  __decorate$9([
+  __decorate$8([
+      n({ type: Object })
+  ], exports.LaInsightModal.prototype, "consequence", void 0);
+  __decorate$8([
       n()
   ], exports.LaInsightModal.prototype, "guidance", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "entity", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "dates", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "sourceDocument", void 0);
-  __decorate$9([
+  __decorate$8([
+      n({ type: Array })
+  ], exports.LaInsightModal.prototype, "sources", void 0);
+  __decorate$8([
+      n({ reflect: true })
+  ], exports.LaInsightModal.prototype, "layout", void 0);
+  __decorate$8([
+      n({ type: Object })
+  ], exports.LaInsightModal.prototype, "deadline", void 0);
+  __decorate$8([
+      n({ type: Array })
+  ], exports.LaInsightModal.prototype, "meta", void 0);
+  __decorate$8([
+      n()
+  ], exports.LaInsightModal.prototype, "area", void 0);
+  __decorate$8([
+      n({ attribute: 'area-icon' })
+  ], exports.LaInsightModal.prototype, "areaIcon", void 0);
+  __decorate$8([
+      n({ type: Array })
+  ], exports.LaInsightModal.prototype, "issues", void 0);
+  __decorate$8([
+      n({ type: Object })
+  ], exports.LaInsightModal.prototype, "cta", void 0);
+  __decorate$8([
+      n({ type: Object })
+  ], exports.LaInsightModal.prototype, "playbook", void 0);
+  __decorate$8([
+      n({ type: Array })
+  ], exports.LaInsightModal.prototype, "resolutions", void 0);
+  __decorate$8([
+      n({ type: String, attribute: 'chosen-resolution' })
+  ], exports.LaInsightModal.prototype, "chosenResolution", void 0);
+  __decorate$8([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "relatedInsights", void 0);
-  __decorate$9([
+  __decorate$8([
+      n({ type: Array })
+  ], exports.LaInsightModal.prototype, "laws", void 0);
+  __decorate$8([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "resolved", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "documents", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ reflect: true, attribute: 'action-type' })
   ], exports.LaInsightModal.prototype, "actionType", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ reflect: true, attribute: 'upload-state' })
   ], exports.LaInsightModal.prototype, "uploadState", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ attribute: 'verification-error' })
   ], exports.LaInsightModal.prototype, "verificationError", void 0);
-  __decorate$9([
+  __decorate$8([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "subItems", void 0);
-  __decorate$9([
+  __decorate$8([
+      n({ type: Array })
+  ], exports.LaInsightModal.prototype, "resolveReasons", void 0);
+  __decorate$8([
+      n({ attribute: 'resolve-label' })
+  ], exports.LaInsightModal.prototype, "resolveLabel", void 0);
+  __decorate$8([
+      n({ type: Boolean, reflect: true, attribute: 'read-only' })
+  ], exports.LaInsightModal.prototype, "readOnly", void 0);
+  __decorate$8([
       r()
   ], exports.LaInsightModal.prototype, "_resolving", void 0);
-  __decorate$9([
+  __decorate$8([
       r()
   ], exports.LaInsightModal.prototype, "_activeTab", void 0);
-  __decorate$9([
+  __decorate$8([
       r()
   ], exports.LaInsightModal.prototype, "_resolvedTabs", void 0);
-  __decorate$9([
+  __decorate$8([
       r()
   ], exports.LaInsightModal.prototype, "_resolvingSubItemId", void 0);
-  exports.LaInsightModal = __decorate$9([
-      t('la-insight-modal')
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_page", void 0);
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_pageBack", void 0);
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_reasonId", void 0);
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_reasonNote", void 0);
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_doneReason", void 0);
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_doneNote", void 0);
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_relatedExpanded", void 0);
+  __decorate$8([
+      r()
+  ], exports.LaInsightModal.prototype, "_openIssues", void 0);
+  exports.LaInsightModal = __decorate$8([
+      t$1('la-insight-modal')
   ], exports.LaInsightModal);
 
-  var __decorate$8 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15158,26 +25531,26 @@
       }
     `,
   ];
-  __decorate$8([
+  __decorate$7([
       n({ attribute: 'investor-name' })
   ], exports.LaInvestorCard.prototype, "investorName", void 0);
-  __decorate$8([
+  __decorate$7([
       n()
   ], exports.LaInvestorCard.prototype, "firm", void 0);
-  __decorate$8([
+  __decorate$7([
       n({ reflect: true })
   ], exports.LaInvestorCard.prototype, "status", void 0);
-  __decorate$8([
+  __decorate$7([
       n({ attribute: 'last-activity' })
   ], exports.LaInvestorCard.prototype, "lastActivity", void 0);
-  __decorate$8([
+  __decorate$7([
       n({ type: Number, attribute: 'unread-count' })
   ], exports.LaInvestorCard.prototype, "unreadCount", void 0);
-  exports.LaInvestorCard = __decorate$8([
-      t('la-investor-card')
+  exports.LaInvestorCard = __decorate$7([
+      t$1('la-investor-card')
   ], exports.LaInvestorCard);
 
-  var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15445,26 +25818,26 @@
       }
     `,
   ];
-  __decorate$7([
+  __decorate$6([
       n({ reflect: true })
   ], exports.LaToastStack.prototype, "position", void 0);
-  __decorate$7([
+  __decorate$6([
       n({ type: Number, attribute: 'max-visible' })
   ], exports.LaToastStack.prototype, "maxVisible", void 0);
-  __decorate$7([
+  __decorate$6([
       r()
   ], exports.LaToastStack.prototype, "_items", void 0);
-  __decorate$7([
+  __decorate$6([
       r()
   ], exports.LaToastStack.prototype, "_exitingItems", void 0);
-  __decorate$7([
+  __decorate$6([
       r()
   ], exports.LaToastStack.prototype, "_hovered", void 0);
-  __decorate$7([
+  __decorate$6([
       r()
   ], exports.LaToastStack.prototype, "_topItemHeight", void 0);
-  exports.LaToastStack = __decorate$7([
-      t('la-toast-stack')
+  exports.LaToastStack = __decorate$6([
+      t$1('la-toast-stack')
   ], exports.LaToastStack);
   // ── Programmatic API ─────────────────────────────────────────
   function _getStack() {
@@ -15482,7 +25855,7 @@
       dismiss: (id) => _getStack().dismiss(id),
   });
 
-  var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15598,6 +25971,7 @@
           <header class="page-header">
             ${this._renderNavTrigger()}
             ${this._renderCompactBrand()}
+            <slot name="header-leading"></slot>
             ${this.showBack
             ? b `
                   <button class="back-btn" @click=${this._handleBack} title="Back">
@@ -15780,6 +26154,12 @@
 
       /* ── Page header ──────────────────────────────────────── */
 
+      /* Leading slot (e.g. a logo for sidebar-less shells). display:contents so
+         an empty slot adds no flex item / gap — only the slotted content counts. */
+      slot[name='header-leading'] {
+        display: contents;
+      }
+
       .page-header {
         display: flex;
         align-items: center;
@@ -15824,11 +26204,14 @@
         text-overflow: ellipsis;
       }
 
+      /* Pushed to the right edge — the trail sizes to its own content, so without
+         this the actions would trail behind it rather than holding the corner. */
       .header-actions {
         display: flex;
         align-items: center;
         gap: var(--la-space-sm);
         flex-shrink: 0;
+        margin-left: auto;
       }
 
       /* ── Main + aside row ────────────────────────────────── */
@@ -16015,38 +26398,38 @@
       }
     `,
   ];
-  __decorate$6([
+  __decorate$5([
       n()
   ], exports.LaAppShell.prototype, "pageTitle", void 0);
-  __decorate$6([
+  __decorate$5([
       n({ type: Array })
   ], exports.LaAppShell.prototype, "breadcrumbs", void 0);
-  __decorate$6([
+  __decorate$5([
       n({ type: Boolean })
   ], exports.LaAppShell.prototype, "showBack", void 0);
-  __decorate$6([
+  __decorate$5([
       n({ type: Boolean, attribute: 'show-header', reflect: true })
   ], exports.LaAppShell.prototype, "showHeader", void 0);
-  __decorate$6([
+  __decorate$5([
       n({ type: Boolean, attribute: 'show-aside' })
   ], exports.LaAppShell.prototype, "showAside", void 0);
-  __decorate$6([
+  __decorate$5([
       r()
   ], exports.LaAppShell.prototype, "_asideOpen", void 0);
-  __decorate$6([
+  __decorate$5([
       r()
   ], exports.LaAppShell.prototype, "_isTablet", void 0);
-  __decorate$6([
+  __decorate$5([
       r()
   ], exports.LaAppShell.prototype, "_isNarrowNav", void 0);
-  __decorate$6([
+  __decorate$5([
       r()
   ], exports.LaAppShell.prototype, "_navOpen", void 0);
-  exports.LaAppShell = __decorate$6([
-      t('la-app-shell')
+  exports.LaAppShell = __decorate$5([
+      t$1('la-app-shell')
   ], exports.LaAppShell);
 
-  var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16132,29 +26515,29 @@
       }
     `,
   ];
-  __decorate$5([
+  __decorate$4([
       n({ type: Boolean })
   ], exports.LaDashboard.prototype, "showWelcome", void 0);
-  __decorate$5([
+  __decorate$4([
       n({ type: Array })
   ], exports.LaDashboard.prototype, "areas", void 0);
-  __decorate$5([
+  __decorate$4([
       n()
   ], exports.LaDashboard.prototype, "readinessLevel", void 0);
-  __decorate$5([
+  __decorate$4([
       n({ type: Number })
   ], exports.LaDashboard.prototype, "readinessRemaining", void 0);
-  __decorate$5([
+  __decorate$4([
       n({ type: Boolean })
   ], exports.LaDashboard.prototype, "showReadiness", void 0);
-  __decorate$5([
+  __decorate$4([
       n({ type: Array })
   ], exports.LaDashboard.prototype, "deadlines", void 0);
-  exports.LaDashboard = __decorate$5([
-      t('la-dashboard')
+  exports.LaDashboard = __decorate$4([
+      t$1('la-dashboard')
   ], exports.LaDashboard);
 
-  var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16784,74 +27167,74 @@
       }
     `,
   ];
-  __decorate$4([
+  __decorate$3([
       n({ type: Boolean, attribute: 'show-aside-toggle' })
   ], exports.LaLegalAreaPage.prototype, "showAsideToggle", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "area", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "subtitle", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ attribute: 'last-updated' })
   ], exports.LaLegalAreaPage.prototype, "lastUpdated", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "pageState", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "unlockState", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "unlockSteps", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "unlockChecklist", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "nextArea", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "nextDescription", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "insights", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "actions", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ type: Number })
   ], exports.LaLegalAreaPage.prototype, "resolvedCount", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "areaDescription", void 0);
-  __decorate$4([
+  __decorate$3([
       n()
   ], exports.LaLegalAreaPage.prototype, "illustration", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ attribute: 'clear-illustration' })
   ], exports.LaLegalAreaPage.prototype, "clearIllustration", void 0);
-  __decorate$4([
+  __decorate$3([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "prerequisites", void 0);
-  __decorate$4([
+  __decorate$3([
       r()
   ], exports.LaLegalAreaPage.prototype, "_showResolved", void 0);
-  __decorate$4([
+  __decorate$3([
       r()
   ], exports.LaLegalAreaPage.prototype, "_urgentExpanded", void 0);
-  __decorate$4([
+  __decorate$3([
       r()
   ], exports.LaLegalAreaPage.prototype, "_proactiveExpanded", void 0);
-  __decorate$4([
+  __decorate$3([
       r()
   ], exports.LaLegalAreaPage.prototype, "_hadBoth", void 0);
-  exports.LaLegalAreaPage = __decorate$4([
-      t('la-legal-area-page')
+  exports.LaLegalAreaPage = __decorate$3([
+      t$1('la-legal-area-page')
   ], exports.LaLegalAreaPage);
 
-  var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16979,110 +27362,12 @@
       }
     `,
   ];
-  __decorate$3([
+  __decorate$2([
       n({ type: Array })
   ], exports.LaDataRoomPage.prototype, "documents", void 0);
-  exports.LaDataRoomPage = LaDataRoomPage_1 = __decorate$3([
-      t('la-data-room-page')
+  exports.LaDataRoomPage = LaDataRoomPage_1 = __decorate$2([
+      t$1('la-data-room-page')
   ], exports.LaDataRoomPage);
-
-  var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-      return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  /**
-   * la-avatar — initials avatar for people and entities.
-   *
-   * Derives initials automatically from `name` (first letter of each of the
-   * first two words). Override with `initials` when the name doesn't produce
-   * the right result (e.g. legal entities, abbreviations).
-   *
-   * Three fixed sizes map directly to design token values:
-   * - sm (32 px) — compact lists, inline references, share modals
-   * - md (40 px) — standard person rows, cards
-   * - lg (48 px) — detail panel headers
-   *
-   * The component is purely presentational — it fires no events.
-   *
-   * @prop name     - Full name used to auto-derive initials (e.g. "James Okafor")
-   * @prop initials - Override for auto-derived initials (e.g. "JO")
-   * @prop size     - 'sm' | 'md' | 'lg'. Default: 'md'
-   *
-   * @example
-   * <la-avatar name="James Okafor"></la-avatar>
-   * <la-avatar initials="JO" size="lg"></la-avatar>
-   */
-  let LaAvatar = class LaAvatar extends i$2 {
-      constructor() {
-          super(...arguments);
-          this.name = '';
-          this.initials = '';
-          this.size = 'md';
-      }
-      get _displayInitials() {
-          if (this.initials)
-              return this.initials;
-          return this.name
-              .split(' ')
-              .slice(0, 2)
-              .map(w => w[0] ?? '')
-              .join('')
-              .toUpperCase();
-      }
-      render() {
-          return b `
-      <div class="avatar" aria-hidden="true">${this._displayInitials}</div>
-    `;
-      }
-  };
-  LaAvatar.styles = [
-      tokens,
-      i$5 `
-      :host {
-        display: inline-flex;
-        vertical-align: middle;
-        /* Size defaults — overridden per size attribute below */
-        --_av-size: 40px;
-        --_av-font: var(--la-font-size-sm);
-      }
-
-      :host([size='sm']) { --_av-size: 32px; --_av-font: var(--la-font-size-xs); }
-      :host([size='md']) { --_av-size: 40px; --_av-font: var(--la-font-size-sm); }
-      :host([size='lg']) { --_av-size: 48px; --_av-font: var(--la-font-size-base); }
-
-      .avatar {
-        width: var(--_av-size);
-        height: var(--_av-size);
-        border-radius: var(--la-radius-circle);
-        background: var(--la-color-bg-muted);
-        border: 1px solid var(--la-color-border-light);
-        color: var(--la-color-text-secondary);
-        font-size: var(--_av-font);
-        font-weight: var(--la-font-weight-semibold);
-        font-family: var(--la-font-family);
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        flex-shrink: 0;
-        letter-spacing: 0.3px;
-        user-select: none;
-      }
-    `,
-  ];
-  __decorate$2([
-      n()
-  ], LaAvatar.prototype, "name", void 0);
-  __decorate$2([
-      n()
-  ], LaAvatar.prototype, "initials", void 0);
-  __decorate$2([
-      n({ reflect: true })
-  ], LaAvatar.prototype, "size", void 0);
-  LaAvatar = __decorate$2([
-      t('la-avatar')
-  ], LaAvatar);
 
   var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -17260,7 +27545,7 @@
       _renderDetailHeader(inv) {
           return b `
       <div class="inv-header">
-        <la-avatar .name=${inv.name} .initials=${inv.initials ?? ''} size="lg"></la-avatar>
+        <la-avatar .name=${inv.name} .initials=${inv.initials ?? ''} ?text-only=${!!inv.initials} size="lg"></la-avatar>
         <div class="inv-identity">
           <div class="inv-name-lg">${inv.name}</div>
           <div class="inv-firm-lg">
@@ -17651,7 +27936,7 @@
       r()
   ], exports.LaInvestorsPage.prototype, "_activeIndex", void 0);
   exports.LaInvestorsPage = __decorate$1([
-      t('la-investors-page')
+      t$1('la-investors-page')
   ], exports.LaInvestorsPage);
 
   var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -18357,7 +28642,7 @@
       r()
   ], exports.LaDocumentPage.prototype, "_view", void 0);
   exports.LaDocumentPage = __decorate([
-      t('la-document-page')
+      t$1('la-document-page')
   ], exports.LaDocumentPage);
 
   exports.iconStyles = iconStyles;

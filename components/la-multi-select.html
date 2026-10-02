@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-multi-select — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-multi-select</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Controls</a>
+    
+      <a href="#preview" class="docs-nav-item" data-nav-id="preview">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-multi-select</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+<!-- Overview -->
+<div id="overview" class="preview-header">
+  <h1>la-multi-select</h1>
+  <p>Pick several values from a known set. Current selections sit as removable chips inside a search field; the remaining options show below as one-tap "+" suggestion pills. Typing filters the suggestions. There is no overlay dropdown — the choices stay in view, which suits short, scannable option sets (jurisdictions, tags, OpCos). Options and selection accept comma-separated strings in HTML or arrays in JS.</p>
+</div>
+
+<!-- Anatomy -->
+<div id="anatomy" class="preview-header" style="margin-top:8px;">
+  <h1>Anatomy</h1>
+  <p>A bordered field with a leading search glyph, the selected values as chips, and a flex-grow text input. Below the field, the unselected options render as outlined "+" pills. The field shows the standard focus ring; chips carry a remove button; pills add on click.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px;display:block;max-width:620px;">
+    <la-multi-select
+      label="Jurisdiction/s"
+      options="California,New Jersey,Texas,New York,Florida,Illinois,Georgia,Washington,Massachusetts,Colorado,Arizona,North Carolina,Ohio,Pennsylvania,Michigan"
+      selected="California,New Jersey,Texas"></la-multi-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Regions</div>
+  <table class="docs-table">
+    <thead><tr><th>Region</th><th>Source</th><th>Role</th></tr></thead>
+    <tbody>
+      <tr><td>Field</td><td><code>.field</code></td><td>Bordered container with the search glyph, chips, and input. Focus-within shows the standard <code>--la-color-border-focus</code> ring.</td></tr>
+      <tr><td>Chip</td><td><code>.chip</code> per selected value</td><td>Pill on <code>--la-color-bg-subtle</code> with a remove button (<code>ph-x</code>). Removing returns the option to the suggestions.</td></tr>
+      <tr><td>Input</td><td><code>&lt;input role="combobox"&gt;</code></td><td>Filters the suggestions as you type. Enter adds the top match; Backspace on an empty input removes the last chip.</td></tr>
+      <tr><td>Suggestions</td><td><code>.suggestions</code> → <code>.suggest</code> pills</td><td>Outlined "+" pills for every unselected (and matching) option. Click to add. Capped by <code>max-suggestions</code>.</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- Controls -->
+<div id="controls" class="preview-header" style="margin-top:8px;">
+  <h1>Controls</h1>
+  <p>Drive the live preview below.</p>
+</div>
+
+<div class="controls">
+  <div class="controls-row">
+    <div class="control-group">
+      <label for="ctl-label">label</label>
+      <input id="ctl-label" type="text" value="Jurisdiction/s" style="width:200px;">
+    </div>
+    <div class="control-group">
+      <label for="ctl-ph">placeholder</label>
+      <input id="ctl-ph" type="text" value="Search…" style="width:160px;">
+    </div>
+  </div>
+  <div class="controls-row">
+    <div class="control-group">
+      <label>allow-custom</label>
+      <div class="btn-group" data-control="allow-custom">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>error</label>
+      <div class="btn-group" data-control="error">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+    <div class="control-group">
+      <label>disabled</label>
+      <div class="btn-group" data-control="disabled">
+        <button class="btn-toggle active" data-bool="false" type="button">false</button>
+        <button class="btn-toggle" data-bool="true" type="button">true</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Live preview -->
+<div id="preview" class="preview-header" style="margin-top:8px;">
+  <h1>Live preview</h1>
+  <p>The event log shows <code>la-change</code> firings.</p>
+</div>
+
+<div class="preview-group">
+  <div class="preview-frame" style="padding:32px;display:block;max-width:620px;">
+    <la-multi-select id="live"
+      label="Jurisdiction/s"
+      hint="Add every state the action touches."
+      options="California,New Jersey,Texas,New York,Florida,Illinois,Georgia,Washington,Massachusetts,Colorado,Arizona,North Carolina,Ohio,Pennsylvania,Michigan"
+      selected="California,New Jersey,Texas"></la-multi-select>
+    <div id="event-log" style="font-family:ui-monospace,monospace;font-size:11px;color:var(--la-color-text-faint);min-height:16px;margin-top:16px;"></div>
+  </div>
+</div>
+
+<!-- Snapshots -->
+<div id="snapshots" class="preview-header" style="margin-top:8px;">
+  <h1>Snapshots</h1>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Empty — placeholder shown, all options suggested</div>
+  <div class="preview-frame" style="padding:32px;display:block;max-width:620px;">
+    <la-multi-select label="OpCos" placeholder="Search operating companies…"
+      options="Halden Diagnostics,Corvane Filtration,Tessel Water,Ardent Bio,Lumen Optics,Calder Instruments,Vireo Analytics"></la-multi-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Capped suggestions + free entry (max-suggestions, allow-custom)</div>
+  <div class="preview-frame" style="padding:32px;display:block;max-width:620px;">
+    <la-multi-select label="Tags" allow-custom max-suggestions="6"
+      hint="Type to add a tag that isn't listed."
+      options="Urgent,Legal review,OWBPA,WARN,Severance,Demographic,Retention,Confidential"
+      selected="WARN"></la-multi-select>
+  </div>
+</div>
+
+<div class="preview-group">
+  <div class="preview-label">Error · disabled</div>
+  <div class="preview-frame" style="padding:32px;display:flex;flex-direction:column;gap:24px;max-width:620px;">
+    <la-multi-select label="Jurisdiction/s" required error hint="Select at least one jurisdiction."
+      options="California,New Jersey,Texas,New York,Florida"></la-multi-select>
+    <la-multi-select label="Jurisdiction/s" disabled
+      options="California,New Jersey,Texas,New York,Florida" selected="California,Texas"></la-multi-select>
+  </div>
+</div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-multi-select</h2>
+    <p>Token multi-select with a searchable field and add-on suggestion pills. Selections sit as removable chips inside the field; the remaining options show below as one-tap '+' pills. Typing filters them. No overlay dropdown.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Field label.</td>
+        </tr>
+      
+        <tr>
+          <td>hint</td>
+          <td><span class="default">hint</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Helper text under the field.</td>
+        </tr>
+      
+        <tr>
+          <td>name</td>
+          <td><span class="default">name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>placeholder</td>
+          <td><span class="default">placeholder</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Search…&#39;</span></td>
+          <td>Input placeholder (shown only when nothing is selected).</td>
+        </tr>
+      
+        <tr>
+          <td>options</td>
+          <td><span class="default">options</span></td>
+          <td><span class="type">Array&lt;string | Option&gt;</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Full set of selectable options ("A,B,C" or string[]).</td>
+        </tr>
+      
+        <tr>
+          <td>selected</td>
+          <td><span class="default">selected</span></td>
+          <td><span class="type">string[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Selected values ("A,B" or string[]). Reflects to the attribute.</td>
+        </tr>
+      
+        <tr>
+          <td>maxSuggestions</td>
+          <td><span class="default">max-suggestions</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>allowCustom</td>
+          <td><span class="default">allow-custom</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>/ required / error - Standard form-control states.</td>
+        </tr>
+      
+        <tr>
+          <td>required</td>
+          <td><span class="default">required</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_query</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_input</td>
+          <td>—</td>
+          <td><span class="type">HTMLInputElement</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_allOptions</td>
+          <td>—</td>
+          <td><span class="type">Option[]</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_selectedItems</td>
+          <td>—</td>
+          <td><span class="type">Option[]</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_suggestions</td>
+          <td>—</td>
+          <td><span class="type">Option[]</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>max-suggestions</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Cap the number of suggestion pills (0 = show all).</td>
+        </tr>
+      
+        <tr>
+          <td>allow-custom</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Allow adding a typed value that isn't in `options`.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{selected:string[], action:'add'|'remove', value:string}</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+<div class="docs-section" id="css-tokens">
+  <h3>CSS custom properties</h3>
+  <p>No public custom properties. Field chrome (border, focus ring, radii) and the chip/pill surfaces are fixed to design tokens to match <code>la-input</code> and <code>la-select</code>.</p>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="usage" class="docs-section">
+  <h3>Usage examples</h3>
+
+  <h4>Comma-separated in HTML</h4>
+  <pre><code>&lt;la-multi-select label="Jurisdiction/s"
+  options="California,New Jersey,Texas,New York,Florida"
+  selected="California,New Jersey,Texas"&gt;&lt;/la-multi-select&gt;</code></pre>
+
+  <h4>Arrays + reacting to change</h4>
+  <pre><code>el.options = ['California', 'New Jersey', 'Texas'];
+el.addEventListener('la-change', (e) =&gt; {
+  // e.detail: { selected: string[], action: 'add' | 'remove', value: string }
+  save(e.detail.selected);
+});</code></pre>
+
+  <h4>Allow values that aren't in the list</h4>
+  <pre><code>&lt;la-multi-select label="Tags" allow-custom max-suggestions="6"&gt;&lt;/la-multi-select&gt;</code></pre>
+</div>
+
+<div class="docs-divider"></div>
+
+<div id="notes" class="docs-section">
+  <h3>Notes</h3>
+  <ul>
+    <li><strong>No overlay dropdown.</strong> Suggestions render inline below the field, so they never clip and there's no open/close state to manage. Best for short-to-medium option sets; for very long lists, cap with <code>max-suggestions</code> or pair with search.</li>
+    <li><strong>Keyboard.</strong> Type to filter; <kbd>Enter</kbd> adds the top match (or the typed value when <code>allow-custom</code>); <kbd>Backspace</kbd> on an empty input removes the last chip. Each chip's remove button and each suggestion is independently focusable.</li>
+    <li><strong>Data shape.</strong> Entries are plain strings (value = label). Pass <code>{value, label}</code> objects via the JS <code>options</code>/selection when they differ; comma-separated attributes are string-only.</li>
+    <li><strong>State, not store.</strong> The component owns <code>selected</code> and reflects it to the attribute, firing <code>la-change</code> on every add/remove — the consumer persists.</li>
+    <li><strong>Not <a href="../components/la-select.html">la-select</a>.</strong> Use <code>la-select</code> for a single value from a dropdown; <code>la-multi-select</code> for several values shown as chips with always-visible suggestions.</li>
+  </ul>
+</div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    const live = document.getElementById('live');
+    const log = document.getElementById('event-log');
+    if (!live) return;
+
+    document.getElementById('ctl-label').addEventListener('input', (e) => {
+      live.setAttribute('label', e.target.value);
+    });
+    document.getElementById('ctl-ph').addEventListener('input', (e) => {
+      live.setAttribute('placeholder', e.target.value);
+    });
+
+    ['allow-custom', 'error', 'disabled'].forEach((attr) => {
+      document.querySelectorAll(`[data-control="${attr}"] [data-bool]`).forEach((btn) => {
+        btn.addEventListener('click', () => {
+          document.querySelectorAll(`[data-control="${attr}"] [data-bool]`).forEach((b) => b.classList.remove('active'));
+          btn.classList.add('active');
+          if (btn.dataset.bool === 'true') live.setAttribute(attr, '');
+          else live.removeAttribute(attr);
+        });
+      });
+    });
+
+    function flash(msg) {
+      log.textContent = msg;
+      clearTimeout(flash._t);
+      flash._t = setTimeout(() => { log.textContent = ''; }, 2200);
+    }
+    live.addEventListener('la-change', (e) => {
+      flash('la-change · ' + e.detail.action + ' "' + e.detail.value + '" → [' + e.detail.selected.join(', ') + ']');
+    });
+  })();
+</script>
+
+
+</body>
+</html>

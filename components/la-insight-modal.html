@@ -760,6 +760,26 @@ interface GroupSubItem {
         </tr>
       
         <tr>
+          <td>statusLabel</td>
+          <td><span class="default">status-label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Overrides the eyebrow wording where a surface has its own state vocabulary —
+Deadlines says "Overdue" / "Due soon" / "On track". Colour still follows
+`severity`, so keep the two in step.</td>
+        </tr>
+      
+        <tr>
+          <td>statusIcon</td>
+          <td><span class="default">status-icon</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>A Phosphor glyph beside the eyebrow (`ph-scales`). Left empty, the three
+asks an insight card carries get the card's own icon, so the opened card
+and the tag behind it match (28 Sep 2026, DA-2).</td>
+        </tr>
+      
+        <tr>
           <td>sourceType</td>
           <td><span class="default">source-type</span></td>
           <td><span class="type">&#39;legal&#39; | &#39;best_practice&#39; | &#39;&#39;</span></td>
@@ -781,6 +801,16 @@ interface GroupSubItem {
           <td><span class="type">string</span></td>
           <td><span class="default">&#39;&#39;</span></td>
           <td>Why this is an issue (explanation / reason)</td>
+        </tr>
+      
+        <tr>
+          <td>consequence</td>
+          <td><span class="default">consequence</span></td>
+          <td><span class="type">InsightConsequence | undefined</span></td>
+          <td>—</td>
+          <td>What it costs to leave this alone — see `InsightConsequence`. Rendered
+above `Why this matters`, and mirrored by the strip on the card that
+opened the modal, so the two surfaces make the same claim.</td>
         </tr>
       
         <tr>
@@ -816,11 +846,125 @@ interface GroupSubItem {
         </tr>
       
         <tr>
+          <td>sources</td>
+          <td><span class="default">sources</span></td>
+          <td><span class="type">InsightSource[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Documents and registers this insight was built from.</td>
+        </tr>
+      
+        <tr>
+          <td>layout</td>
+          <td><span class="default">layout</span></td>
+          <td><span class="type">&#39;stacked&#39; | &#39;rail&#39;</span></td>
+          <td><span class="default">&#39;stacked&#39;</span></td>
+          <td>`stacked` (default) — one column, sections in sequence.
+`rail` — narrative left, a quieter rail on the right holding the facts:
+hero date, meta rows, sources. Use for insights whose point is a date, so
+the date reads first and the prose isn't competing with it. Ignored in
+grouped mode (`subItems`), which has its own tab structure.</td>
+        </tr>
+      
+        <tr>
+          <td>deadline</td>
+          <td><span class="default">deadline</span></td>
+          <td><span class="type">InsightDeadline | undefined</span></td>
+          <td>—</td>
+          <td>Hero date shown in the rail. Rail layout only.</td>
+        </tr>
+      
+        <tr>
+          <td>meta</td>
+          <td><span class="default">meta</span></td>
+          <td><span class="type">InsightMeta[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>Scannable facts listed under the date in the rail. Rail layout only.</td>
+        </tr>
+      
+        <tr>
+          <td>area</td>
+          <td><span class="default">area</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The legal area, named at the top of the rail, with its Phosphor glyph.</td>
+        </tr>
+      
+        <tr>
+          <td>areaIcon</td>
+          <td><span class="default">area-icon</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>issues</td>
+          <td><span class="default">issues</span></td>
+          <td><span class="type">InsightIssue[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>The issues found on the document (9 Sep 2026). One document carrying
+several problems is one insight with the issues listed inside it; a
+single-issue insight lists one. Rendered folded to the headline.</td>
+        </tr>
+      
+        <tr>
+          <td>cta</td>
+          <td><span class="default">cta</span></td>
+          <td><span class="type">InsightCta | undefined</span></td>
+          <td>—</td>
+          <td>Contextual next step, mirroring the CTA on the card that opened this modal.
+When set it takes the primary slot in the footer and pushes Mark Resolved to
+secondary. Suppressed in the upload flow, which owns its own actions.</td>
+        </tr>
+      
+        <tr>
+          <td>playbook</td>
+          <td><span class="default">playbook</span></td>
+          <td><span class="type">InsightPlaybook | undefined</span></td>
+          <td>—</td>
+          <td>The playbook we would run for this. Rendered where "What to do" used to
+be: the work has a name, a length and a shape, and naming it is more use
+than describing it.</td>
+        </tr>
+      
+        <tr>
+          <td>resolutions</td>
+          <td><span class="default">resolutions</span></td>
+          <td><span class="type">InsightResolution[] | undefined</span></td>
+          <td>—</td>
+          <td>The honest ways this insight can be resolved, shown as peers. Order is the
+order they are offered, so where uploading a document the founder already
+holds is plausible, it leads.</td>
+        </tr>
+      
+        <tr>
+          <td>chosenResolution</td>
+          <td><span class="default">chosen-resolution</span></td>
+          <td><span class="type">string | undefined</span></td>
+          <td>—</td>
+          <td>The resolution the founder has chosen, by id. Set by the host when it acts
+on `la-insight-resolution`. The section then shows that one with a way
+back rather than all of them, so the modal says what is happening once
+instead of offering a choice it has already acted on.</td>
+        </tr>
+      
+        <tr>
           <td>relatedInsights</td>
           <td><span class="default">relatedInsights</span></td>
           <td><span class="type">{id: string; headline: string; legalArea: string}[] | undefined</span></td>
           <td>—</td>
           <td>Related insights on the same document</td>
+        </tr>
+      
+        <tr>
+          <td>laws</td>
+          <td><span class="default">laws</span></td>
+          <td><span class="type">InsightLaw[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>The law behind the insight, listed in the rail under Sources. Empty by
+default — plenty of insights rest on a contract term or good practice
+rather than a statute, and inventing a provision would be worse than
+showing none.</td>
         </tr>
       
         <tr>
@@ -872,6 +1016,36 @@ interface GroupSubItem {
         </tr>
       
         <tr>
+          <td>resolveReasons</td>
+          <td><span class="default">resolveReasons</span></td>
+          <td><span class="type">{id: string; label: string; icon?: string}[] | undefined</span></td>
+          <td>—</td>
+          <td>Reasons a person can give for marking this done. When set, the resolve
+action asks for one before it completes, and the chosen reason rides out on
+`la-insight-resolved`. Marking something done is a claim about the record —
+we ask what the claim rests on rather than taking the click as the answer.
+Leave unset for the plain one-click "Mark Resolved".</td>
+        </tr>
+      
+        <tr>
+          <td>resolveLabel</td>
+          <td><span class="default">resolve-label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Label on the resolve button. Defaults to "Mark Resolved".</td>
+        </tr>
+      
+        <tr>
+          <td>readOnly</td>
+          <td><span class="default">read-only</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>A closed insight, opened to be read (PRO-128, 2 Sep 2026): the same detail
+view minus the actions — no upload zone, no Mark as Done, a Close button in
+the footer. The item is closed, so there is nothing to do to it.</td>
+        </tr>
+      
+        <tr>
           <td>_resolving</td>
           <td>—</td>
           <td><span class="type">boolean</span></td>
@@ -904,11 +1078,89 @@ interface GroupSubItem {
         </tr>
       
         <tr>
+          <td>_page</td>
+          <td>—</td>
+          <td><span class="type">&#39;insight&#39; | &#39;reason&#39; | &#39;done&#39;</span></td>
+          <td><span class="default">&#39;insight&#39;</span></td>
+          <td>Which page of the modal is showing. The reason flow is a page of its own
+rather than a footer that grows (13 Aug 2026): asking "how did you deal with
+this?" underneath the thing being closed left both competing for the same
+screen, and on a tall insight the question opened below the fold.
+
+  insight → reason → done</td>
+        </tr>
+      
+        <tr>
+          <td>_pageBack</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_reasonId</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_reasonNote</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_doneReason</td>
+          <td>—</td>
+          <td><span class="type">{id: string; label: string} | undefined</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_doneNote</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_relatedExpanded</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>The everything-open list: five rows by default, the rest on demand (PRO-115).</td>
+        </tr>
+      
+        <tr>
+          <td>_openIssues</td>
+          <td>—</td>
+          <td><span class="type">Record&lt;number, boolean&gt;</span></td>
+          <td><span class="default">{}</span></td>
+          <td>Which issues are open, by index.</td>
+        </tr>
+      
+        <tr>
           <td>_isGrouped</td>
           <td>—</td>
           <td>—</td>
           <td>—</td>
           <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_useRail</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>Rail layout applies only when asked for, not grouped, and there is
+something to put in the rail — otherwise it would render an empty column.</td>
         </tr>
       
     </tbody>
@@ -954,6 +1206,30 @@ interface GroupSubItem {
       
         <tr>
           <td>la-subitem-resolved</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-insight-playbook</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-insight-resolution-cleared</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-insight-resolution</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>la-insight-cta</td>
           <td><span class="type">CustomEvent</span></td>
           <td>—</td>
         </tr>
