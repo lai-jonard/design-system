@@ -6,20 +6,20 @@
    * Copyright 2019 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$3=globalThis,e$6=t$3.ShadowRoot&&(void 0===t$3.ShadyCSS||t$3.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$2=Symbol(),o$5=new WeakMap;let n$3 = class n{constructor(t,e,o){if(this._$cssResult$=true,o!==s$2)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$6&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=o$5.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&o$5.set(s,t));}return t}toString(){return this.cssText}};const r$4=t=>new n$3("string"==typeof t?t:t+"",void 0,s$2),i$5=(t,...e)=>{const o=1===t.length?t[0]:e.reduce((e,s,o)=>e+(t=>{if(true===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[o+1],t[0]);return new n$3(o,t,s$2)},S$1=(s,o)=>{if(e$6)s.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of o){const o=document.createElement("style"),n=t$3.litNonce;void 0!==n&&o.setAttribute("nonce",n),o.textContent=e.cssText,s.appendChild(o);}},c$2=e$6?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$4(e)})(t):t;
+  const t$3=globalThis,e$6=t$3.ShadowRoot&&(void 0===t$3.ShadyCSS||t$3.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$2=Symbol(),o$5=new WeakMap;let n$3 = class n{constructor(t,e,o){if(this._$cssResult$=true,o!==s$2)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$6&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=o$5.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&o$5.set(s,t));}return t}toString(){return this.cssText}};const r$5=t=>new n$3("string"==typeof t?t:t+"",void 0,s$2),i$5=(t,...e)=>{const o=1===t.length?t[0]:e.reduce((e,s,o)=>e+(t=>{if(true===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[o+1],t[0]);return new n$3(o,t,s$2)},S$1=(s,o)=>{if(e$6)s.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of o){const o=document.createElement("style"),n=t$3.litNonce;void 0!==n&&o.setAttribute("nonce",n),o.textContent=e.cssText,s.appendChild(o);}},c$2=e$6?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$5(e)})(t):t;
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const{is:i$4,defineProperty:e$5,getOwnPropertyDescriptor:h$1,getOwnPropertyNames:r$3,getOwnPropertySymbols:o$4,getPrototypeOf:n$2}=Object,a$1=globalThis,c$1=a$1.trustedTypes,l$1=c$1?c$1.emptyScript:"",p$2=a$1.reactiveElementPolyfillSupport,d$1=(t,s)=>t,u$1={toAttribute(t,s){switch(s){case Boolean:t=t?l$1:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,s){let i=t;switch(s){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t);}catch(t){i=null;}}return i}},f$1=(t,s)=>!i$4(t,s),b$1={attribute:true,type:String,converter:u$1,reflect:false,useDefault:false,hasChanged:f$1};Symbol.metadata??=Symbol("metadata"),a$1.litPropertyMetadata??=new WeakMap;let y$1 = class y extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t);}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,s=b$1){if(s.state&&(s.attribute=false),this._$Ei(),this.prototype.hasOwnProperty(t)&&((s=Object.create(s)).wrapped=true),this.elementProperties.set(t,s),!s.noAccessor){const i=Symbol(),h=this.getPropertyDescriptor(t,i,s);void 0!==h&&e$5(this.prototype,t,h);}}static getPropertyDescriptor(t,s,i){const{get:e,set:r}=h$1(this.prototype,t)??{get(){return this[s]},set(t){this[s]=t;}};return {get:e,set(s){const h=e?.call(this);r?.call(this,s),this.requestUpdate(t,h,i);},configurable:true,enumerable:true}}static getPropertyOptions(t){return this.elementProperties.get(t)??b$1}static _$Ei(){if(this.hasOwnProperty(d$1("elementProperties")))return;const t=n$2(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties);}static finalize(){if(this.hasOwnProperty(d$1("finalized")))return;if(this.finalized=true,this._$Ei(),this.hasOwnProperty(d$1("properties"))){const t=this.properties,s=[...r$3(t),...o$4(t)];for(const i of s)this.createProperty(i,t[i]);}const t=this[Symbol.metadata];if(null!==t){const s=litPropertyMetadata.get(t);if(void 0!==s)for(const[t,i]of s)this.elementProperties.set(t,i);}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);void 0!==i&&this._$Eh.set(i,t);}this.elementStyles=this.finalizeStyles(this.styles);}static finalizeStyles(s){const i=[];if(Array.isArray(s)){const e=new Set(s.flat(1/0).reverse());for(const s of e)i.unshift(c$2(s));}else void 0!==s&&i.push(c$2(s));return i}static _$Eu(t,s){const i=s.attribute;return  false===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=false,this.hasUpdated=false,this._$Em=null,this._$Ev();}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this));}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.();}removeController(t){this._$EO?.delete(t);}_$E_(){const t=new Map,s=this.constructor.elementProperties;for(const i of s.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t);}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return S$1(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(true),this._$EO?.forEach(t=>t.hostConnected?.());}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.());}attributeChangedCallback(t,s,i){this._$AK(t,i);}_$ET(t,s){const i=this.constructor.elementProperties.get(t),e=this.constructor._$Eu(t,i);if(void 0!==e&&true===i.reflect){const h=(void 0!==i.converter?.toAttribute?i.converter:u$1).toAttribute(s,i.type);this._$Em=t,null==h?this.removeAttribute(e):this.setAttribute(e,h),this._$Em=null;}}_$AK(t,s){const i=this.constructor,e=i._$Eh.get(t);if(void 0!==e&&this._$Em!==e){const t=i.getPropertyOptions(e),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:u$1;this._$Em=e;const r=h.fromAttribute(s,t.type);this[e]=r??this._$Ej?.get(e)??r,this._$Em=null;}}requestUpdate(t,s,i,e=false,h){if(void 0!==t){const r=this.constructor;if(false===e&&(h=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??f$1)(h,s)||i.useDefault&&i.reflect&&h===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,s,i);} false===this.isUpdatePending&&(this._$ES=this._$EP());}C(t,s,{useDefault:i,reflect:e,wrapped:h},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??s??this[t]),true!==h||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(s=void 0),this._$AL.set(t,s)),true===e&&this._$Em!==t&&(this._$Eq??=new Set).add(t));}async _$EP(){this.isUpdatePending=true;try{await this._$ES;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,s]of this._$Ep)this[t]=s;this._$Ep=void 0;}const t=this.constructor.elementProperties;if(t.size>0)for(const[s,i]of t){const{wrapped:t}=i,e=this[s];true!==t||this._$AL.has(s)||void 0===e||this.C(s,void 0,i,e);}}let t=false;const s=this._$AL;try{t=this.shouldUpdate(s),t?(this.willUpdate(s),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(s)):this._$EM();}catch(s){throw t=false,this._$EM(),s}t&&this._$AE(s);}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=true,this.firstUpdated(t)),this.updated(t);}_$EM(){this._$AL=new Map,this.isUpdatePending=false;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return  true}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM();}updated(t){}firstUpdated(t){}};y$1.elementStyles=[],y$1.shadowRootOptions={mode:"open"},y$1[d$1("elementProperties")]=new Map,y$1[d$1("finalized")]=new Map,p$2?.({ReactiveElement:y$1}),(a$1.reactiveElementVersions??=[]).push("2.1.2");
+   */const{is:i$4,defineProperty:e$5,getOwnPropertyDescriptor:h$1,getOwnPropertyNames:r$4,getOwnPropertySymbols:o$4,getPrototypeOf:n$2}=Object,a$1=globalThis,c$1=a$1.trustedTypes,l$2=c$1?c$1.emptyScript:"",p$2=a$1.reactiveElementPolyfillSupport,d$1=(t,s)=>t,u$1={toAttribute(t,s){switch(s){case Boolean:t=t?l$2:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,s){let i=t;switch(s){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t);}catch(t){i=null;}}return i}},f$1=(t,s)=>!i$4(t,s),b$1={attribute:true,type:String,converter:u$1,reflect:false,useDefault:false,hasChanged:f$1};Symbol.metadata??=Symbol("metadata"),a$1.litPropertyMetadata??=new WeakMap;let y$1 = class y extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t);}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,s=b$1){if(s.state&&(s.attribute=false),this._$Ei(),this.prototype.hasOwnProperty(t)&&((s=Object.create(s)).wrapped=true),this.elementProperties.set(t,s),!s.noAccessor){const i=Symbol(),h=this.getPropertyDescriptor(t,i,s);void 0!==h&&e$5(this.prototype,t,h);}}static getPropertyDescriptor(t,s,i){const{get:e,set:r}=h$1(this.prototype,t)??{get(){return this[s]},set(t){this[s]=t;}};return {get:e,set(s){const h=e?.call(this);r?.call(this,s),this.requestUpdate(t,h,i);},configurable:true,enumerable:true}}static getPropertyOptions(t){return this.elementProperties.get(t)??b$1}static _$Ei(){if(this.hasOwnProperty(d$1("elementProperties")))return;const t=n$2(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties);}static finalize(){if(this.hasOwnProperty(d$1("finalized")))return;if(this.finalized=true,this._$Ei(),this.hasOwnProperty(d$1("properties"))){const t=this.properties,s=[...r$4(t),...o$4(t)];for(const i of s)this.createProperty(i,t[i]);}const t=this[Symbol.metadata];if(null!==t){const s=litPropertyMetadata.get(t);if(void 0!==s)for(const[t,i]of s)this.elementProperties.set(t,i);}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);void 0!==i&&this._$Eh.set(i,t);}this.elementStyles=this.finalizeStyles(this.styles);}static finalizeStyles(s){const i=[];if(Array.isArray(s)){const e=new Set(s.flat(1/0).reverse());for(const s of e)i.unshift(c$2(s));}else void 0!==s&&i.push(c$2(s));return i}static _$Eu(t,s){const i=s.attribute;return  false===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=false,this.hasUpdated=false,this._$Em=null,this._$Ev();}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this));}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.();}removeController(t){this._$EO?.delete(t);}_$E_(){const t=new Map,s=this.constructor.elementProperties;for(const i of s.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t);}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return S$1(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(true),this._$EO?.forEach(t=>t.hostConnected?.());}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.());}attributeChangedCallback(t,s,i){this._$AK(t,i);}_$ET(t,s){const i=this.constructor.elementProperties.get(t),e=this.constructor._$Eu(t,i);if(void 0!==e&&true===i.reflect){const h=(void 0!==i.converter?.toAttribute?i.converter:u$1).toAttribute(s,i.type);this._$Em=t,null==h?this.removeAttribute(e):this.setAttribute(e,h),this._$Em=null;}}_$AK(t,s){const i=this.constructor,e=i._$Eh.get(t);if(void 0!==e&&this._$Em!==e){const t=i.getPropertyOptions(e),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:u$1;this._$Em=e;const r=h.fromAttribute(s,t.type);this[e]=r??this._$Ej?.get(e)??r,this._$Em=null;}}requestUpdate(t,s,i,e=false,h){if(void 0!==t){const r=this.constructor;if(false===e&&(h=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??f$1)(h,s)||i.useDefault&&i.reflect&&h===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,s,i);} false===this.isUpdatePending&&(this._$ES=this._$EP());}C(t,s,{useDefault:i,reflect:e,wrapped:h},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??s??this[t]),true!==h||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(s=void 0),this._$AL.set(t,s)),true===e&&this._$Em!==t&&(this._$Eq??=new Set).add(t));}async _$EP(){this.isUpdatePending=true;try{await this._$ES;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,s]of this._$Ep)this[t]=s;this._$Ep=void 0;}const t=this.constructor.elementProperties;if(t.size>0)for(const[s,i]of t){const{wrapped:t}=i,e=this[s];true!==t||this._$AL.has(s)||void 0===e||this.C(s,void 0,i,e);}}let t=false;const s=this._$AL;try{t=this.shouldUpdate(s),t?(this.willUpdate(s),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(s)):this._$EM();}catch(s){throw t=false,this._$EM(),s}t&&this._$AE(s);}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=true,this.firstUpdated(t)),this.updated(t);}_$EM(){this._$AL=new Map,this.isUpdatePending=false;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return  true}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM();}updated(t){}firstUpdated(t){}};y$1.elementStyles=[],y$1.shadowRootOptions={mode:"open"},y$1[d$1("elementProperties")]=new Map,y$1[d$1("finalized")]=new Map,p$2?.({ReactiveElement:y$1}),(a$1.reactiveElementVersions??=[]).push("2.1.2");
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$2=globalThis,i$3=t=>t,s$1=t$2.trustedTypes,e$4=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$3=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$3,r$2=`<${n$1}>`,l=document,c=()=>l.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m$1=/>/g,p$1=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),w=x(2),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l.createTreeWalker(l,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e$4?e$4.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m$1:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p$1):void 0!==u[3]&&(c=p$1):c===p$1?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p$1:'"'===u[3]?$:g):c===$||c===g?c=p$1:c===_||c===m$1?c=v:(c=p$1,n=void 0);const x=c===p$1&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$2:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$3+x):s+o$3+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$3),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$3)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$3),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$3,t+1));)d.push({type:7,index:l}),t+=o$3.length-1;}l++;}}static createElement(t,i){const s=l.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$3(t).nextSibling;i$3(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$2.litHtmlPolyfillSupport;B?.(S,k),(t$2.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
+  const t$2=globalThis,i$3=t=>t,s$1=t$2.trustedTypes,e$4=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$3=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$3,r$3=`<${n$1}>`,l$1=document,c=()=>l$1.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m$1=/>/g,p$1=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),w=x(2),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l$1.createTreeWalker(l$1,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e$4?e$4.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m$1:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p$1):void 0!==u[3]&&(c=p$1):c===p$1?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p$1:'"'===u[3]?$:g):c===$||c===g?c=p$1:c===_||c===m$1?c=v:(c=p$1,n=void 0);const x=c===p$1&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$3:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$3+x):s+o$3+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$3),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$3)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$3),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$3,t+1));)d.push({type:7,index:l}),t+=o$3.length-1;}l++;}}static createElement(t,i){const s=l$1.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l$1).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l$1,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l$1.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$3(t).nextSibling;i$3(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$2.litHtmlPolyfillSupport;B?.(S,k),(t$2.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
 
   /**
    * @license
@@ -516,13 +516,13 @@
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const o$1={attribute:true,type:String,converter:u$1,reflect:false,hasChanged:f$1},r$1=(t=o$1,e,r)=>{const{kind:n,metadata:i}=r;let s=globalThis.litPropertyMetadata.get(i);if(void 0===s&&globalThis.litPropertyMetadata.set(i,s=new Map),"setter"===n&&((t=Object.create(t)).wrapped=true),s.set(r.name,t),"accessor"===n){const{name:o}=r;return {set(r){const n=e.get.call(this);e.set.call(this,r),this.requestUpdate(o,n,t,true,r);},init(e){return void 0!==e&&this.C(o,void 0,t,e),e}}}if("setter"===n){const{name:o}=r;return function(r){const n=this[o];e.call(this,r),this.requestUpdate(o,n,t,true,r);}}throw Error("Unsupported decorator location: "+n)};function n(t){return (e,o)=>"object"==typeof o?r$1(t,e,o):((t,e,o)=>{const r=e.hasOwnProperty(o);return e.constructor.createProperty(o,t),r?Object.getOwnPropertyDescriptor(e,o):void 0})(t,e,o)}
+   */const o$1={attribute:true,type:String,converter:u$1,reflect:false,hasChanged:f$1},r$2=(t=o$1,e,r)=>{const{kind:n,metadata:i}=r;let s=globalThis.litPropertyMetadata.get(i);if(void 0===s&&globalThis.litPropertyMetadata.set(i,s=new Map),"setter"===n&&((t=Object.create(t)).wrapped=true),s.set(r.name,t),"accessor"===n){const{name:o}=r;return {set(r){const n=e.get.call(this);e.set.call(this,r),this.requestUpdate(o,n,t,true,r);},init(e){return void 0!==e&&this.C(o,void 0,t,e),e}}}if("setter"===n){const{name:o}=r;return function(r){const n=this[o];e.call(this,r),this.requestUpdate(o,n,t,true,r);}}throw Error("Unsupported decorator location: "+n)};function n(t){return (e,o)=>"object"==typeof o?r$2(t,e,o):((t,e,o)=>{const r=e.hasOwnProperty(o);return e.constructor.createProperty(o,t),r?Object.getOwnPropertyDescriptor(e,o):void 0})(t,e,o)}
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */function r(r){return n({...r,state:true,attribute:false})}
+   */function r$1(r){return n({...r,state:true,attribute:false})}
 
   /**
    * @license
@@ -537,7 +537,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */function e$2(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$3(n,s,{get(){return o(this)}})}}
 
-  var __decorate$1E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -839,22 +839,22 @@
       }
     `,
   ];
-  __decorate$1E([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "variant", void 0);
-  __decorate$1E([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "type", void 0);
-  __decorate$1E([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "appearance", void 0);
-  __decorate$1E([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
-  __decorate$1E([
+  __decorate$1R([
       n()
   ], exports.LaBadge.prototype, "detail", void 0);
-  exports.LaBadge = __decorate$1E([
+  exports.LaBadge = __decorate$1R([
       t$1('la-badge')
   ], exports.LaBadge);
 
@@ -864,7 +864,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const o=o=>o??A;
 
-  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -990,29 +990,29 @@
       }
     `,
   ];
-  __decorate$1D([
+  __decorate$1Q([
       n()
   ], exports.LaIconButton.prototype, "label", void 0);
-  __decorate$1D([
+  __decorate$1Q([
       n({ type: Boolean })
   ], exports.LaIconButton.prototype, "expanded", void 0);
-  __decorate$1D([
+  __decorate$1Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "pressed", void 0);
-  __decorate$1D([
+  __decorate$1Q([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "size", void 0);
-  __decorate$1D([
+  __decorate$1Q([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "variant", void 0);
-  __decorate$1D([
+  __decorate$1Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "disabled", void 0);
-  exports.LaIconButton = __decorate$1D([
+  exports.LaIconButton = __decorate$1Q([
       t$1('la-icon-button')
   ], exports.LaIconButton);
 
-  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1147,17 +1147,17 @@
 
     `,
   ];
-  __decorate$1C([
+  __decorate$1P([
       n({ type: Array })
   ], exports.LaBreadcrumb.prototype, "items", void 0);
-  __decorate$1C([
-      r()
+  __decorate$1P([
+      r$1()
   ], exports.LaBreadcrumb.prototype, "_expanded", void 0);
-  exports.LaBreadcrumb = __decorate$1C([
+  exports.LaBreadcrumb = __decorate$1P([
       t$1('la-breadcrumb')
   ], exports.LaBreadcrumb);
 
-  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1265,20 +1265,20 @@
       }
     `,
   ];
-  __decorate$1B([
+  __decorate$1O([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "size", void 0);
-  __decorate$1B([
+  __decorate$1O([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "appearance", void 0);
-  __decorate$1B([
+  __decorate$1O([
       n()
   ], exports.LaSpinner.prototype, "label", void 0);
-  exports.LaSpinner = __decorate$1B([
+  exports.LaSpinner = __decorate$1O([
       t$1('la-spinner')
   ], exports.LaSpinner);
 
-  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1621,38 +1621,38 @@
       }
     `,
   ];
-  __decorate$1A([
+  __decorate$1N([
       n({ reflect: true })
   ], exports.LaButton.prototype, "variant", void 0);
-  __decorate$1A([
+  __decorate$1N([
       n({ reflect: true })
   ], exports.LaButton.prototype, "size", void 0);
-  __decorate$1A([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "pill", void 0);
-  __decorate$1A([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "block", void 0);
-  __decorate$1A([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
-  __decorate$1A([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
-  __decorate$1A([
+  __decorate$1N([
       n({ attribute: 'loading-label' })
   ], exports.LaButton.prototype, "loadingLabel", void 0);
-  __decorate$1A([
+  __decorate$1N([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaButton.prototype, "hideLabel", void 0);
-  __decorate$1A([
-      r()
+  __decorate$1N([
+      r$1()
   ], exports.LaButton.prototype, "_hasIconLeft", void 0);
-  exports.LaButton = __decorate$1A([
+  exports.LaButton = __decorate$1N([
       t$1('la-button')
   ], exports.LaButton);
 
-  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1713,20 +1713,20 @@
       }
     `,
   ];
-  __decorate$1z([
+  __decorate$1M([
       n()
   ], exports.LaCard.prototype, "heading", void 0);
-  __decorate$1z([
+  __decorate$1M([
       n({ type: Boolean, reflect: true })
   ], exports.LaCard.prototype, "nopadding", void 0);
-  __decorate$1z([
+  __decorate$1M([
       n({ reflect: true })
   ], exports.LaCard.prototype, "variant", void 0);
-  exports.LaCard = __decorate$1z([
+  exports.LaCard = __decorate$1M([
       t$1('la-card')
   ], exports.LaCard);
 
-  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1777,20 +1777,20 @@
       }
     `,
   ];
-  __decorate$1y([
+  __decorate$1L([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "clickable", void 0);
-  __decorate$1y([
+  __decorate$1L([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "dimmed", void 0);
-  __decorate$1y([
+  __decorate$1L([
       n()
   ], exports.LaPanel.prototype, "heading", void 0);
-  exports.LaPanel = __decorate$1y([
+  exports.LaPanel = __decorate$1L([
       t$1('la-panel')
   ], exports.LaPanel);
 
-  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1944,17 +1944,17 @@
       }
     `,
   ];
-  __decorate$1x([
+  __decorate$1K([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "error", void 0);
-  __decorate$1x([
+  __decorate$1K([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "clickable", void 0);
-  exports.LaListItem = __decorate$1x([
+  exports.LaListItem = __decorate$1K([
       t$1('la-list-item')
   ], exports.LaListItem);
 
-  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2060,26 +2060,26 @@
       }
     `,
   ];
-  __decorate$1w([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "checked", void 0);
-  __decorate$1w([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "indeterminate", void 0);
-  __decorate$1w([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "disabled", void 0);
-  __decorate$1w([
+  __decorate$1J([
       n()
   ], exports.LaCheckbox.prototype, "label", void 0);
-  __decorate$1w([
+  __decorate$1J([
       e$2('input')
   ], exports.LaCheckbox.prototype, "input", void 0);
-  exports.LaCheckbox = __decorate$1w([
+  exports.LaCheckbox = __decorate$1J([
       t$1('la-checkbox')
   ], exports.LaCheckbox);
 
-  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2215,20 +2215,20 @@
       }
     `,
   ];
-  __decorate$1v([
+  __decorate$1I([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "checked", void 0);
-  __decorate$1v([
+  __decorate$1I([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "disabled", void 0);
-  __decorate$1v([
+  __decorate$1I([
       n()
   ], exports.LaSwitch.prototype, "label", void 0);
-  exports.LaSwitch = __decorate$1v([
+  exports.LaSwitch = __decorate$1I([
       t$1('la-switch')
   ], exports.LaSwitch);
 
-  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2340,7 +2340,7 @@
         border: 1px solid var(--la-color-primary);
       }
       :host([filled][checked]) .row--contained {
-        background: var(--la-color-surface-success);
+        background: var(--la-color-surface-success); /* verdict-ok: onboarding's filled variant, never on a step (decision 117) */
         border-color: transparent;
       }
 
@@ -2354,11 +2354,11 @@
       }
       /* Invalid ring around the checkbox */
       :host([invalid]) .checkbox-wrap {
-        outline: 1.5px solid var(--la-color-border-danger);
+        outline: 1.5px solid var(--la-color-border-danger); /* verdict-ok: validation, not a verdict (decision 117) */
         outline-offset: 1px;
       }
       :host([invalid]) .content .label {
-        color: var(--la-color-danger-text);
+        color: var(--la-color-danger-text); /* verdict-ok: validation, not a verdict (decision 117) */
       }
 
       .content {
@@ -2381,26 +2381,26 @@
       }
     `,
   ];
-  __decorate$1u([
+  __decorate$1H([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "variant", void 0);
-  __decorate$1u([
+  __decorate$1H([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "checked", void 0);
-  __decorate$1u([
+  __decorate$1H([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "invalid", void 0);
-  __decorate$1u([
+  __decorate$1H([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "filled", void 0);
-  __decorate$1u([
+  __decorate$1H([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
-  exports.LaChoice = __decorate$1u([
+  exports.LaChoice = __decorate$1H([
       t$1('la-choice')
   ], exports.LaChoice);
 
-  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2514,14 +2514,14 @@
       }
     `,
   ];
-  __decorate$1t([
+  __decorate$1G([
       n({ type: Array })
   ], exports.LaStepper.prototype, "steps", void 0);
-  exports.LaStepper = __decorate$1t([
+  exports.LaStepper = __decorate$1G([
       t$1('la-stepper')
   ], exports.LaStepper);
 
-  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2680,35 +2680,35 @@
       }
     `,
   ];
-  __decorate$1s([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "total", void 0);
-  __decorate$1s([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "done", void 0);
-  __decorate$1s([
+  __decorate$1F([
       n({ type: Boolean })
   ], exports.LaStepRing.prototype, "current", void 0);
-  __decorate$1s([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "thickness", void 0);
-  __decorate$1s([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "gap", void 0);
-  __decorate$1s([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "corner", void 0);
-  __decorate$1s([
+  __decorate$1F([
       n()
   ], exports.LaStepRing.prototype, "label", void 0);
-  __decorate$1s([
+  __decorate$1F([
       n()
   ], exports.LaStepRing.prototype, "sublabel", void 0);
-  exports.LaStepRing = __decorate$1s([
+  exports.LaStepRing = __decorate$1F([
       t$1('la-step-ring')
   ], exports.LaStepRing);
 
-  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2723,6 +2723,7 @@
       gated: 'Locked',
       attention: 'Needs attention',
       processing: 'Processing',
+      passed: 'Moved past',
   };
   /**
    * la-step-marker — the marker on a step, in either register of the status
@@ -2738,6 +2739,12 @@
    * Check register — unordered sub-tasks inside one step: a ~20px
    * check-circle icon. Green (`--la-color-resolved`) is for complete only.
    *
+   * Passed (decision 115): a step the person moved past with a reason, so
+   * they're never blocked. Visibly not done: no fill, a dashed ring in
+   * --la-color-text-faint and a bent arrow in --la-color-text-muted, in both
+   * registers. It isn't "not applicable": a step that doesn't apply leaves
+   * the list, as the standard says.
+   *
    * Display-only by default, named for assistive tech ("Step 3: Complete").
    * With `interactive` it is a pressable button that fires `la-step-press`;
    * the host decides what a press does (the playbook run ticks the step), and
@@ -2751,7 +2758,7 @@
    *   <la-step-marker index="3" status="pending" interactive
    *                   label="Mark step 3 done"></la-step-marker>
    *
-   * @prop status      - pending (default) · active · complete · gated · attention · processing
+   * @prop status      - pending (default) · active · complete · gated · attention · processing · passed
    * @prop variant     - sequence (default) · check
    * @prop index       - the step's number, shown while pending or active (sequence only)
    * @prop label       - accessible name; defaults to "Step N: <status>"; "" hides a display marker
@@ -2799,6 +2806,9 @@
       ${s === 'processing'
             ? b `<span class="g on"><la-spinner size="sm" label=""></la-spinner></span>`
             : A}
+      ${s === 'passed'
+            ? b `<span class="g on"><i class="ph-bold ph-arrow-bend-down-right"></i></span>`
+            : A}
     </span>`;
       }
       _check() {
@@ -2813,7 +2823,9 @@
                           ? b `<i class="ph-fill ph-warning-circle"></i>`
                           : s === 'processing'
                               ? b `<la-spinner size="sm" label=""></la-spinner>`
-                              : b `<i class="ph ph-check-circle"></i>`;
+                              : s === 'passed'
+                                  ? b `<i class="ph-bold ph-arrow-bend-down-right"></i>`
+                                  : b `<i class="ph ph-check-circle"></i>`;
           return b `<span class="mark chk ${s}" part="mark" aria-hidden="true">${icon}</span>`;
       }
       render() {
@@ -2924,6 +2936,19 @@
         background-color: var(--la-color-surface-danger);
         color: var(--la-color-danger-text);
       }
+      /* Passed, in both registers: no fill, a dashed ring, a bent arrow.
+         Monochrome and quieter than pending's fill, so it can't be read as
+         done or as a step still to do. */
+      .seq.passed,
+      .chk.passed {
+        box-sizing: border-box;
+        background-color: transparent;
+        border: 1.5px dashed var(--la-color-text-faint);
+        color: var(--la-color-text-muted);
+      }
+      .mark.passed i {
+        font-size: 11px;
+      }
 
       /* Number and check share one cell and cross-fade, as motion.css's
          t-icon-swap does on the page: fade, scale and a touch of blur. */
@@ -2986,29 +3011,29 @@
       }
     `,
   ];
-  __decorate$1r([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "status", void 0);
-  __decorate$1r([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "variant", void 0);
-  __decorate$1r([
+  __decorate$1E([
       n({ type: Number })
   ], exports.LaStepMarker.prototype, "index", void 0);
-  __decorate$1r([
+  __decorate$1E([
       n()
   ], exports.LaStepMarker.prototype, "label", void 0);
-  __decorate$1r([
+  __decorate$1E([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepMarker.prototype, "interactive", void 0);
-  __decorate$1r([
+  __decorate$1E([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepMarker.prototype, "disabled", void 0);
-  exports.LaStepMarker = __decorate$1r([
+  exports.LaStepMarker = __decorate$1E([
       t$1('la-step-marker')
   ], exports.LaStepMarker);
 
-  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3146,17 +3171,17 @@
       }
     `,
   ];
-  __decorate$1q([
+  __decorate$1D([
       n()
   ], exports.LaActivityItem.prototype, "time", void 0);
-  __decorate$1q([
+  __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaActivityItem.prototype, "last", void 0);
-  exports.LaActivityItem = __decorate$1q([
+  exports.LaActivityItem = __decorate$1D([
       t$1('la-activity-item')
   ], exports.LaActivityItem);
 
-  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3340,53 +3365,53 @@
       }
     `,
   ];
-  __decorate$1p([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "name", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "placeholder", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "value", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "label", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "hint", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "required", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "disabled", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "error", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "rows", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Number, attribute: 'min-rows' })
   ], exports.LaTextarea.prototype, "minRows", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Number, attribute: 'max-rows' })
   ], exports.LaTextarea.prototype, "maxRows", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "maxlength", void 0);
-  __decorate$1p([
+  __decorate$1C([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaTextarea.prototype, "showCount", void 0);
-  __decorate$1p([
+  __decorate$1C([
       e$2('textarea')
   ], exports.LaTextarea.prototype, "_textarea", void 0);
-  exports.LaTextarea = __decorate$1p([
+  exports.LaTextarea = __decorate$1C([
       t$1('la-textarea')
   ], exports.LaTextarea);
 
-  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3684,35 +3709,35 @@
       }
     `,
   ];
-  __decorate$1o([
+  __decorate$1B([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "signed", void 0);
-  __decorate$1o([
+  __decorate$1B([
       n({ attribute: false })
   ], exports.LaStepSignoff.prototype, "stamps", void 0);
-  __decorate$1o([
+  __decorate$1B([
       n({ type: Boolean })
   ], exports.LaStepSignoff.prototype, "reopenable", void 0);
-  __decorate$1o([
+  __decorate$1B([
       n()
   ], exports.LaStepSignoff.prototype, "label", void 0);
-  __decorate$1o([
+  __decorate$1B([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "quiet", void 0);
-  __decorate$1o([
-      r()
+  __decorate$1B([
+      r$1()
   ], exports.LaStepSignoff.prototype, "_reopening", void 0);
-  __decorate$1o([
-      r()
+  __decorate$1B([
+      r$1()
   ], exports.LaStepSignoff.prototype, "_historyOpen", void 0);
-  __decorate$1o([
-      r()
+  __decorate$1B([
+      r$1()
   ], exports.LaStepSignoff.prototype, "_reason", void 0);
-  exports.LaStepSignoff = __decorate$1o([
+  exports.LaStepSignoff = __decorate$1B([
       t$1('la-step-signoff')
   ], exports.LaStepSignoff);
 
-  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4122,38 +4147,38 @@
       }
     `,
   ];
-  __decorate$1n([
+  __decorate$1A([
       n({ type: Boolean, reflect: true })
   ], exports.LaDisclosure.prototype, "open", void 0);
-  __decorate$1n([
+  __decorate$1A([
       n()
   ], exports.LaDisclosure.prototype, "summary", void 0);
-  __decorate$1n([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaDisclosure.prototype, "variant", void 0);
-  __decorate$1n([
-      r()
+  __decorate$1A([
+      r$1()
   ], exports.LaDisclosure.prototype, "_shown", void 0);
-  __decorate$1n([
-      r()
+  __decorate$1A([
+      r$1()
   ], exports.LaDisclosure.prototype, "_expanded", void 0);
-  __decorate$1n([
-      r()
+  __decorate$1A([
+      r$1()
   ], exports.LaDisclosure.prototype, "_settled", void 0);
-  __decorate$1n([
-      r()
+  __decorate$1A([
+      r$1()
   ], exports.LaDisclosure.prototype, "_hasTrailing", void 0);
-  __decorate$1n([
+  __decorate$1A([
       e$2('details')
   ], exports.LaDisclosure.prototype, "_details", void 0);
-  __decorate$1n([
+  __decorate$1A([
       e$2('.body')
   ], exports.LaDisclosure.prototype, "_body", void 0);
-  exports.LaDisclosure = __decorate$1n([
+  exports.LaDisclosure = __decorate$1A([
       t$1('la-disclosure')
   ], exports.LaDisclosure);
 
-  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4255,23 +4280,23 @@
       }
     `,
   ];
-  __decorate$1m([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "status", void 0);
-  __decorate$1m([
+  __decorate$1z([
       n()
   ], exports.LaSlaPill.prototype, "label", void 0);
-  __decorate$1m([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "size", void 0);
-  __decorate$1m([
+  __decorate$1z([
       n({ type: Boolean })
   ], exports.LaSlaPill.prototype, "clickable", void 0);
-  exports.LaSlaPill = __decorate$1m([
+  exports.LaSlaPill = __decorate$1z([
       t$1('la-sla-pill')
   ], exports.LaSlaPill);
 
-  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4370,20 +4395,20 @@
       }
     `,
   ];
-  __decorate$1l([
+  __decorate$1y([
       n({ reflect: true })
   ], exports.LaDateTile.prototype, "tone", void 0);
-  __decorate$1l([
+  __decorate$1y([
       n()
   ], exports.LaDateTile.prototype, "day", void 0);
-  __decorate$1l([
+  __decorate$1y([
       n()
   ], exports.LaDateTile.prototype, "month", void 0);
-  exports.LaDateTile = __decorate$1l([
+  exports.LaDateTile = __decorate$1y([
       t$1('la-date-tile')
   ], exports.LaDateTile);
 
-  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4779,41 +4804,41 @@
       }
     `,
   ];
-  __decorate$1k([
+  __decorate$1x([
       n({ type: Number, attribute: 'stage-index' })
   ], exports.LaSlaStrip.prototype, "stageIndex", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ type: Number, attribute: 'stage-total' })
   ], exports.LaSlaStrip.prototype, "stageTotal", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ attribute: 'stage-name' })
   ], exports.LaSlaStrip.prototype, "stageName", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ attribute: 'stage-status' })
   ], exports.LaSlaStrip.prototype, "stageStatus", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ attribute: 'stage-days-label' })
   ], exports.LaSlaStrip.prototype, "stageDaysLabel", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ type: Number, attribute: 'case-sla-days' })
   ], exports.LaSlaStrip.prototype, "caseSlaDays", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ attribute: 'case-status' })
   ], exports.LaSlaStrip.prototype, "caseStatus", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ attribute: false })
   ], exports.LaSlaStrip.prototype, "stages", void 0);
-  __decorate$1k([
+  __decorate$1x([
       n({ type: Boolean, reflect: true })
   ], exports.LaSlaStrip.prototype, "open", void 0);
-  __decorate$1k([
-      r()
+  __decorate$1x([
+      r$1()
   ], exports.LaSlaStrip.prototype, "_phase", void 0);
-  exports.LaSlaStrip = __decorate$1k([
+  exports.LaSlaStrip = __decorate$1x([
       t$1('la-sla-strip')
   ], exports.LaSlaStrip);
 
-  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4916,23 +4941,23 @@
       }
     `,
   ];
-  __decorate$1j([
+  __decorate$1w([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "filled", void 0);
-  __decorate$1j([
+  __decorate$1w([
       n()
   ], exports.LaBandwidthBar.prototype, "label", void 0);
-  __decorate$1j([
+  __decorate$1w([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "count", void 0);
-  __decorate$1j([
+  __decorate$1w([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaBandwidthBar.prototype, "showCount", void 0);
-  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1j([
+  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1w([
       t$1('la-bandwidth-bar')
   ], exports.LaBandwidthBar);
 
-  var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5002,17 +5027,17 @@
       :host([level='3+']) .badge { background: var(--la-color-level-3plus); }
     `,
   ];
-  __decorate$1i([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "level", void 0);
-  __decorate$1i([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "size", void 0);
-  exports.LaLevelIndicator = __decorate$1i([
+  exports.LaLevelIndicator = __decorate$1v([
       t$1('la-level-indicator')
   ], exports.LaLevelIndicator);
 
-  var __decorate$1h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5088,17 +5113,17 @@
       .seg.r4 { background: var(--la-color-primary); }
     `,
   ];
-  __decorate$1h([
+  __decorate$1u([
       n({ attribute: false })
   ], exports.LaDistributionBar.prototype, "segments", void 0);
-  __decorate$1h([
+  __decorate$1u([
       n({ type: Number })
   ], exports.LaDistributionBar.prototype, "height", void 0);
-  exports.LaDistributionBar = __decorate$1h([
+  exports.LaDistributionBar = __decorate$1u([
       t$1('la-distribution-bar')
   ], exports.LaDistributionBar);
 
-  var __decorate$1g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5244,26 +5269,461 @@
       }
     `,
   ];
-  __decorate$1g([
+  __decorate$1t([
       n({ type: Number })
   ], exports.LaProgress.prototype, "value", void 0);
-  __decorate$1g([
+  __decorate$1t([
       n({ type: Number })
   ], exports.LaProgress.prototype, "max", void 0);
-  __decorate$1g([
+  __decorate$1t([
       n()
   ], exports.LaProgress.prototype, "label", void 0);
-  __decorate$1g([
+  __decorate$1t([
       n({ attribute: 'value-text' })
   ], exports.LaProgress.prototype, "valueText", void 0);
-  __decorate$1g([
+  __decorate$1t([
       n({ reflect: true })
   ], exports.LaProgress.prototype, "size", void 0);
-  exports.LaProgress = __decorate$1g([
+  exports.LaProgress = __decorate$1t([
       t$1('la-progress')
   ], exports.LaProgress);
 
-  var __decorate$1f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-guidance — the note under an answer someone has picked: what their
+   * answer means and what to do next. Authored by legal for each option of a
+   * Review, Decide & Confirm question (Phase B brief, Screen 1, "What a picked
+   * option does"), and shown only once the option is picked.
+   *
+   * Neutral by design. A --la-color-bg-subtle box with no status colour, no
+   * icon of judgement and no side stripe (decision 93): the guidance follows
+   * the founder's own answer, it isn't our verdict on it. An answer that ends
+   * the playbook says so in its own box on the step, not here.
+   *
+   * The body is the default slot: one or two short paragraphs (the guidance,
+   * and an option's skip reason where it has one). Where the option turns on
+   * later steps, put each step's title in the `adds` slot. The note then reads
+   * "This adds: <titles>" and says when they join the plan: `adds="pending"`
+   * (default) before the founder confirms, `adds="added"` once they have.
+   *
+   * Usage:
+   *   <la-guidance>
+   *     <p>We draft board minutes or a directors’ written resolution at step 4.</p>
+   *     <span slot="adds">Create the board minutes or written resolution.</span>
+   *   </la-guidance>
+   *
+   * @prop label - the small heading (default "Guidance"); "" hides it
+   * @prop adds  - pending (default: "It joins your plan when you confirm.") · added ("It’s on your plan.")
+   * @slot       - the guidance: short paragraphs
+   * @slot adds  - the titles of the steps this answer turns on, one element each
+   */
+  exports.LaGuidance = class LaGuidance extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.label = 'Guidance';
+          this.adds = 'pending';
+          this._hasAdds = false;
+      }
+      _onAdds(e) {
+          this._hasAdds = e.target.assignedElements().length > 0;
+      }
+      render() {
+          return b `${iconStyles}
+      ${this.label ? b `<span class="label" part="label">${this.label}</span>` : A}
+      <slot></slot>
+      <div class="adds" part="adds" ?hidden=${!this._hasAdds}>
+        <i class="ph ph-plus-circle" aria-hidden="true"></i>
+        <span><span class="adds-lead">This adds:</span><slot name="adds" @slotchange=${this._onAdds}></slot></span>
+        <span class="note">${this.adds === 'added' ? 'It’s on your plan.' : 'It joins your plan when you confirm.'}</span>
+      </div>`;
+      }
+  };
+  exports.LaGuidance.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        box-sizing: border-box;
+        padding: var(--la-space-md) var(--la-space-lg);
+        border-radius: var(--la-radius-md);
+        background-color: var(--la-color-bg-subtle);
+        color: var(--la-color-text);
+        font-size: var(--la-font-size-md);
+        line-height: var(--la-line-height);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      .label {
+        display: block;
+        margin-bottom: var(--la-space-3xs);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      /* The body is the page's paragraphs: no browser margins, a small gap
+         between two, and a reading measure. */
+      ::slotted(*) {
+        margin: 0;
+        max-width: 64ch;
+      }
+      ::slotted(:not([slot]):not(:first-child)) {
+        margin-top: var(--la-space-xs);
+      }
+      .adds {
+        display: grid;
+        grid-template-columns: 14px minmax(0, 1fr);
+        column-gap: 6px;
+        margin-top: var(--la-space-sm);
+      }
+      .adds[hidden] {
+        display: none;
+      }
+      .adds i {
+        margin-top: 3px;
+        font-size: 14px;
+        color: var(--la-color-text-secondary);
+      }
+      .adds-lead {
+        margin-right: 4px;
+      }
+      /* Each title is its own sentence, so a space is all that joins two. */
+      /* The lead is secondary, the titles it adds are in the text colour. */
+      .adds > span {
+        color: var(--la-color-text-secondary);
+      }
+      .adds ::slotted([slot='adds']) {
+        margin-right: 4px;
+        color: var(--la-color-text);
+      }
+      .note {
+        grid-column: 2;
+        margin-top: var(--la-space-3xs);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+    `,
+  ];
+  __decorate$1s([
+      n()
+  ], exports.LaGuidance.prototype, "label", void 0);
+  __decorate$1s([
+      n({ reflect: true })
+  ], exports.LaGuidance.prototype, "adds", void 0);
+  __decorate$1s([
+      r$1()
+  ], exports.LaGuidance.prototype, "_hasAdds", void 0);
+  exports.LaGuidance = __decorate$1s([
+      t$1('la-guidance')
+  ], exports.LaGuidance);
+
+  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-segment: one option inside la-segmented. Its text is the label. The
+   * parent owns the state: it sets `checked`, the role and the tab stop, and
+   * hears the press. A segment on its own does nothing.
+   *
+   * @prop value    - what la-segmented's `value` becomes when this is picked
+   * @prop checked  - set by the parent; reflected for styling
+   * @prop disabled - can't be picked; skipped by the arrow keys
+   */
+  exports.LaSegment = class LaSegment extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.value = '';
+          this.checked = false;
+          this.disabled = false;
+      }
+      render() {
+          return b `<span class="seg" part="segment"><slot></slot></span>`;
+      }
+  };
+  exports.LaSegment.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-flex;
+        flex: none;
+        min-width: 0;
+        border-radius: var(--la-radius-sm);
+        outline: none;
+        cursor: pointer;
+        user-select: none;
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      .seg {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        min-height: var(--_seg-height, 30px);
+        padding: 0 var(--la-space-md);
+        border-radius: inherit;
+        font-size: var(--_seg-font, var(--la-font-size-md));
+        line-height: 1.3;
+        text-align: center;
+        color: var(--la-color-text-secondary);
+        transition:
+          background-color var(--dur-fast) var(--ease),
+          color var(--dur-fast) var(--ease),
+          box-shadow var(--dur-fast) var(--ease);
+      }
+      :host(:hover) .seg {
+        color: var(--la-color-text);
+      }
+      /* Picked: raised on the track, in the text colour. Never a status
+         colour: what was picked is the person's answer, not a result. */
+      :host([checked]) .seg {
+        background-color: var(--la-color-bg);
+        color: var(--la-color-text);
+        box-shadow: var(--la-shadow-xs);
+      }
+      :host(:focus-visible) {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+      }
+      :host([disabled]) {
+        cursor: not-allowed;
+      }
+      :host([disabled]) .seg {
+        color: var(--la-color-text-disabled);
+      }
+      /* Touch: the target grows to 44px; the track keeps its look. */
+      @media (pointer: coarse) {
+        .seg {
+          min-height: 44px;
+        }
+      }
+      @media (forced-colors: active) {
+        :host([checked]) .seg {
+          outline: 2px solid CanvasText;
+          outline-offset: -2px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .seg {
+          transition: none;
+        }
+      }
+    `,
+  ];
+  __decorate$1r([
+      n({ reflect: true })
+  ], exports.LaSegment.prototype, "value", void 0);
+  __decorate$1r([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaSegment.prototype, "checked", void 0);
+  __decorate$1r([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaSegment.prototype, "disabled", void 0);
+  exports.LaSegment = __decorate$1r([
+      t$1('la-segment')
+  ], exports.LaSegment);
+  /**
+   * la-segmented: pick one of a few short options, in a row. A radio group
+   * drawn as a single track, for answers that sit inline: the answer per
+   * person on a Review, Decide & Confirm step ("High-net-worth · Self-certified
+   * sophisticated · Not sure"), or a view switch with two to four options.
+   *
+   * Not this: options that need a description or a recommendation are
+   * la-choice in a radiogroup. More than four, or long labels, are la-select.
+   * A switch that applies at once is la-switch. Tabs that swap a panel are
+   * la-tabs.
+   *
+   * Neutral by design. The track is --la-color-bg-muted; the picked segment is
+   * raised in --la-color-bg with --la-shadow-xs, never primary or a status
+   * colour, so a founder's answer never reads as our verdict (Phase B brief,
+   * Screen 1). Nothing is picked until someone picks.
+   *
+   * Accessible as role="radiogroup" named by `label`; each segment is
+   * role="radio" with aria-checked. One tab stop: the picked segment, or the
+   * first enabled one. Arrow keys move and pick (Left/Up back, Right/Down on,
+   * wrapping), Home and End go to the ends, Space and Enter pick the focused
+   * segment. Disabled segments are skipped.
+   *
+   * The track wraps when its container is narrow, so long labels go onto a
+   * second row rather than overflow.
+   *
+   * Usage:
+   *   <la-segmented label="Priya Shah" value="unsure">
+   *     <la-segment value="hnw">High-net-worth</la-segment>
+   *     <la-segment value="ssi">Self-certified sophisticated</la-segment>
+   *     <la-segment value="unsure">Not sure</la-segment>
+   *   </la-segmented>
+   *
+   * @prop value    - the picked segment's value; "" when none is picked
+   * @prop label    - accessible name of the group (required: say what's being answered)
+   * @prop size     - default (30px) · sm (26px, in a dense row)
+   * @prop disabled - nothing can be picked
+   * @fires la-change - {value} when someone picks a different segment; not when `value` is set from script
+   */
+  exports.LaSegmented = class LaSegmented extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.value = '';
+          this.label = '';
+          this.size = 'default';
+          this.disabled = false;
+          this._onClick = (e) => {
+              const s = e.target.closest('la-segment');
+              if (s && s.parentElement === this)
+                  this._pick(s, true);
+          };
+          this._onKey = (e) => {
+              const list = this._enabled();
+              if (!list.length)
+                  return;
+              const current = e.target.closest('la-segment');
+              const i = current ? list.indexOf(current) : -1;
+              let next;
+              switch (e.key) {
+                  case 'ArrowRight':
+                  case 'ArrowDown':
+                      next = list[(i + 1) % list.length];
+                      break;
+                  case 'ArrowLeft':
+                  case 'ArrowUp':
+                      next = list[(i - 1 + list.length) % list.length];
+                      break;
+                  case 'Home':
+                      next = list[0];
+                      break;
+                  case 'End':
+                      next = list[list.length - 1];
+                      break;
+                  case ' ':
+                  case 'Enter':
+                      next = current ?? undefined;
+                      break;
+                  default:
+                      return;
+              }
+              e.preventDefault();
+              this._pick(next, true);
+          };
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          this.setAttribute('role', 'radiogroup');
+          this.addEventListener('click', this._onClick);
+          this.addEventListener('keydown', this._onKey);
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          this.removeEventListener('click', this._onClick);
+          this.removeEventListener('keydown', this._onKey);
+      }
+      get _segments() {
+          return Array.from(this.querySelectorAll(':scope > la-segment'));
+      }
+      _enabled() {
+          return this._segments.filter((s) => !s.disabled && !s.hidden);
+      }
+      /* State flows one way: `value` sets every segment's checked, role and
+         tab stop. Runs after each update and whenever the slot changes. */
+      _sync() {
+          const segs = this._segments;
+          const picked = segs.find((s) => s.value === this.value && !s.disabled);
+          const stop = picked ?? this._enabled()[0];
+          for (const s of segs) {
+              s.checked = s === picked;
+              s.setAttribute('role', 'radio');
+              s.setAttribute('aria-checked', String(s === picked));
+              if (s.disabled)
+                  s.setAttribute('aria-disabled', 'true');
+              else
+                  s.removeAttribute('aria-disabled');
+              s.tabIndex = this.disabled ? -1 : s === stop ? 0 : -1;
+          }
+          if (this.label)
+              this.setAttribute('aria-label', this.label);
+          else
+              this.removeAttribute('aria-label');
+          if (this.disabled)
+              this.setAttribute('aria-disabled', 'true');
+          else
+              this.removeAttribute('aria-disabled');
+      }
+      updated() {
+          this._sync();
+      }
+      _pick(s, focus = false) {
+          if (!s || s.disabled || this.disabled)
+              return;
+          if (focus)
+              s.focus();
+          if (s.value === this.value)
+              return;
+          this.value = s.value;
+          this._sync();
+          this.dispatchEvent(new CustomEvent('la-change', { detail: { value: this.value }, bubbles: true, composed: true }));
+      }
+      render() {
+          return b `<div class="track" part="track"><slot @slotchange=${this._sync}></slot></div>`;
+      }
+  };
+  exports.LaSegmented.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-block;
+        max-width: 100%;
+        vertical-align: middle;
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      /* The track hugs its segments, even where a grid or flex parent
+         stretches the host, and wraps only when it runs out of room. */
+      .track {
+        display: flex;
+        flex-wrap: wrap;
+        width: fit-content;
+        max-width: 100%;
+        box-sizing: border-box;
+        gap: 2px;
+        padding: 3px;
+        border-radius: var(--la-radius-md);
+        background-color: var(--la-color-bg-muted);
+      }
+      :host([size='sm']) {
+        --_seg-height: 26px;
+        --_seg-font: var(--la-font-size-sm);
+      }
+      :host([disabled]) {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+    `,
+  ];
+  __decorate$1r([
+      n({ reflect: true })
+  ], exports.LaSegmented.prototype, "value", void 0);
+  __decorate$1r([
+      n()
+  ], exports.LaSegmented.prototype, "label", void 0);
+  __decorate$1r([
+      n({ reflect: true })
+  ], exports.LaSegmented.prototype, "size", void 0);
+  __decorate$1r([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaSegmented.prototype, "disabled", void 0);
+  exports.LaSegmented = __decorate$1r([
+      t$1('la-segmented')
+  ], exports.LaSegmented);
+
+  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5421,7 +5881,10 @@
         font-size: var(--la-font-size-base);
         font-weight: var(--la-font-weight-normal);
         color: var(--la-color-text);
-        padding: var(--la-space-sm) var(--la-space-md);
+        /* On the button scale (6 Oct 2026): 36px, la-button's md, so a
+           button beside a field matches it. Was padding-driven at 38px. */
+        height: var(--la-button-height-md);
+        padding: 0 var(--la-space-md);
         border-radius: var(--la-radius-md);
         border: 1px solid var(--la-color-border);
         background: var(--la-color-bg);
@@ -5477,65 +5940,65 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1f([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaInput.prototype, "type", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n()
   ], exports.LaInput.prototype, "name", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n()
   ], exports.LaInput.prototype, "placeholder", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaInput.prototype, "inputmode", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n()
   ], exports.LaInput.prototype, "autocomplete", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ attribute: 'aria-label' })
   ], exports.LaInput.prototype, "ariaLabel", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n()
   ], exports.LaInput.prototype, "value", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n()
   ], exports.LaInput.prototype, "label", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n()
   ], exports.LaInput.prototype, "hint", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "required", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaInput.prototype, "size", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "optional", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "disabled", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "error", void 0);
-  __decorate$1f([
+  __decorate$1q([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "reveal", void 0);
-  __decorate$1f([
-      r()
+  __decorate$1q([
+      r$1()
   ], exports.LaInput.prototype, "_hasIconLeft", void 0);
-  __decorate$1f([
-      r()
+  __decorate$1q([
+      r$1()
   ], exports.LaInput.prototype, "_hasIconRight", void 0);
-  __decorate$1f([
-      r()
+  __decorate$1q([
+      r$1()
   ], exports.LaInput.prototype, "_shown", void 0);
-  exports.LaInput = __decorate$1f([
+  exports.LaInput = __decorate$1q([
       t$1('la-input')
   ], exports.LaInput);
 
-  var __decorate$1e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5814,7 +6277,8 @@
         align-items: center;
         width: 100%;
         box-sizing: border-box;
-        padding: var(--la-space-sm) var(--la-space-md);
+        height: var(--la-button-height-md); /* on the button scale, 6 Oct 2026 */
+        padding: 0 var(--la-space-md);
         border: 1px solid var(--la-color-border);
         border-radius: var(--la-radius-md);
         background: var(--la-color-bg);
@@ -5864,56 +6328,56 @@
       :host([disabled]) { opacity: 0.4; }
     `,
   ];
-  __decorate$1e([
+  __decorate$1p([
       n({ attribute: 'value' })
   ], exports.LaDateInput.prototype, "_dateValue", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n()
   ], exports.LaDateInput.prototype, "locale", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n()
   ], exports.LaDateInput.prototype, "label", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n()
   ], exports.LaDateInput.prototype, "hint", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n()
   ], exports.LaDateInput.prototype, "min", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n()
   ], exports.LaDateInput.prototype, "max", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n({ attribute: 'aria-label' })
   ], exports.LaDateInput.prototype, "ariaLabel", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "required", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n({ type: Boolean })
   ], exports.LaDateInput.prototype, "optional", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "disabled", void 0);
-  __decorate$1e([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "error", void 0);
-  __decorate$1e([
-      r()
+  __decorate$1p([
+      r$1()
   ], exports.LaDateInput.prototype, "_month", void 0);
-  __decorate$1e([
-      r()
+  __decorate$1p([
+      r$1()
   ], exports.LaDateInput.prototype, "_day", void 0);
-  __decorate$1e([
-      r()
+  __decorate$1p([
+      r$1()
   ], exports.LaDateInput.prototype, "_year", void 0);
-  __decorate$1e([
-      r()
+  __decorate$1p([
+      r$1()
   ], exports.LaDateInput.prototype, "_message", void 0);
-  exports.LaDateInput = __decorate$1e([
+  exports.LaDateInput = __decorate$1p([
       t$1('la-date-input')
   ], exports.LaDateInput);
 
-  var __decorate$1d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6039,23 +6503,23 @@
       }
     `,
   ];
-  __decorate$1d([
+  __decorate$1o([
       n({ reflect: true })
   ], exports.LaOption.prototype, "value", void 0);
-  __decorate$1d([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "disabled", void 0);
-  __decorate$1d([
-      r()
+  __decorate$1o([
+      r$1()
   ], exports.LaOption.prototype, "_hasCount", void 0);
-  __decorate$1d([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "selected", void 0);
-  exports.LaOption = __decorate$1d([
+  exports.LaOption = __decorate$1o([
       t$1('la-option')
   ], exports.LaOption);
 
-  var __decorate$1c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6486,7 +6950,8 @@
         font-size: var(--la-font-size-base);
         font-weight: var(--la-font-weight-normal);
         color: var(--la-color-text);
-        padding: var(--la-space-sm) var(--la-space-md);
+        height: var(--la-button-height-md); /* on the button scale, 6 Oct 2026 */
+        padding: 0 var(--la-space-md);
         border-radius: var(--la-radius-md);
         border: 1px solid var(--la-color-border);
         background: var(--la-color-bg);
@@ -6624,47 +7089,47 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1c([
+  __decorate$1n([
       n()
   ], exports.LaSelect.prototype, "name", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n()
   ], exports.LaSelect.prototype, "value", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n()
   ], exports.LaSelect.prototype, "placeholder", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n()
   ], exports.LaSelect.prototype, "label", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n()
   ], exports.LaSelect.prototype, "hint", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "required", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n({ reflect: true })
   ], exports.LaSelect.prototype, "size", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "disabled", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "error", void 0);
-  __decorate$1c([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "open", void 0);
-  __decorate$1c([
-      r()
+  __decorate$1n([
+      r$1()
   ], exports.LaSelect.prototype, "_origin", void 0);
-  __decorate$1c([
-      r()
+  __decorate$1n([
+      r$1()
   ], exports.LaSelect.prototype, "_phase", void 0);
-  exports.LaSelect = __decorate$1c([
+  exports.LaSelect = __decorate$1n([
       t$1('la-select')
   ], exports.LaSelect);
 
-  var __decorate$1b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7017,50 +7482,50 @@
       }
     `,
   ];
-  __decorate$1b([
+  __decorate$1m([
       n()
   ], exports.LaMultiSelect.prototype, "label", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n()
   ], exports.LaMultiSelect.prototype, "hint", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n()
   ], exports.LaMultiSelect.prototype, "name", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n()
   ], exports.LaMultiSelect.prototype, "placeholder", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n({ converter: csv })
   ], exports.LaMultiSelect.prototype, "options", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n({ converter: csv, reflect: true })
   ], exports.LaMultiSelect.prototype, "selected", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n({ type: Number, attribute: 'max-suggestions' })
   ], exports.LaMultiSelect.prototype, "maxSuggestions", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n({ type: Boolean, attribute: 'allow-custom' })
   ], exports.LaMultiSelect.prototype, "allowCustom", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "disabled", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "required", void 0);
-  __decorate$1b([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "error", void 0);
-  __decorate$1b([
-      r()
+  __decorate$1m([
+      r$1()
   ], exports.LaMultiSelect.prototype, "_query", void 0);
-  __decorate$1b([
+  __decorate$1m([
       e$2('input')
   ], exports.LaMultiSelect.prototype, "_input", void 0);
-  exports.LaMultiSelect = __decorate$1b([
+  exports.LaMultiSelect = __decorate$1m([
       t$1('la-multi-select')
   ], exports.LaMultiSelect);
 
-  var __decorate$1a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7134,14 +7599,14 @@
       }
     `,
   ];
-  __decorate$1a([
+  __decorate$1l([
       n({ reflect: true })
   ], exports.LaAlert.prototype, "variant", void 0);
-  exports.LaAlert = __decorate$1a([
+  exports.LaAlert = __decorate$1l([
       t$1('la-alert')
   ], exports.LaAlert);
 
-  var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7301,26 +7766,26 @@
       }
     `,
   ];
-  __decorate$19([
+  __decorate$1k([
       n({ reflect: true })
   ], exports.LaToast.prototype, "variant", void 0);
-  __decorate$19([
+  __decorate$1k([
       n()
   ], exports.LaToast.prototype, "title", void 0);
-  __decorate$19([
+  __decorate$1k([
       n()
   ], exports.LaToast.prototype, "message", void 0);
-  __decorate$19([
+  __decorate$1k([
       n({ type: Boolean, reflect: true })
   ], exports.LaToast.prototype, "open", void 0);
-  __decorate$19([
+  __decorate$1k([
       n({ type: Number })
   ], exports.LaToast.prototype, "duration", void 0);
-  exports.LaToast = __decorate$19([
+  exports.LaToast = __decorate$1k([
       t$1('la-toast')
   ], exports.LaToast);
 
-  var __decorate$18 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7437,26 +7902,26 @@
       }
     `,
   ];
-  __decorate$18([
+  __decorate$1j([
       n()
   ], exports.LaTooltip.prototype, "tip", void 0);
-  __decorate$18([
+  __decorate$1j([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "position", void 0);
-  __decorate$18([
+  __decorate$1j([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "appearance", void 0);
-  __decorate$18([
+  __decorate$1j([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "size", void 0);
-  __decorate$18([
+  __decorate$1j([
       n({ attribute: 'max-width' })
   ], exports.LaTooltip.prototype, "maxWidth", void 0);
-  exports.LaTooltip = __decorate$18([
+  exports.LaTooltip = __decorate$1j([
       t$1('la-tooltip')
   ], exports.LaTooltip);
 
-  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7647,20 +8112,20 @@
       }
     `,
   ];
-  __decorate$17([
+  __decorate$1i([
       n({ type: Array })
   ], exports.LaVersionPicker.prototype, "versions", void 0);
-  __decorate$17([
+  __decorate$1i([
       n()
   ], exports.LaVersionPicker.prototype, "active", void 0);
-  __decorate$17([
-      r()
+  __decorate$1i([
+      r$1()
   ], exports.LaVersionPicker.prototype, "_phase", void 0);
-  exports.LaVersionPicker = __decorate$17([
+  exports.LaVersionPicker = __decorate$1i([
       t$1('la-version-picker')
   ], exports.LaVersionPicker);
 
-  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8083,50 +8548,50 @@
       ppt: 'ppt.png', img: 'img.png', video: 'video.png', sound: 'sound.png',
       zip: 'zip.png', folder: 'folder.png', other: 'others.png',
   };
-  __decorate$16([
+  __decorate$1h([
       n()
   ], exports.LaDocumentItem.prototype, "name", void 0);
-  __decorate$16([
+  __decorate$1h([
       n()
   ], exports.LaDocumentItem.prototype, "association", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ reflect: true })
   ], exports.LaDocumentItem.prototype, "status", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ reflect: true })
   ], exports.LaDocumentItem.prototype, "variant", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ attribute: 'file-type' })
   ], exports.LaDocumentItem.prototype, "fileType", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ attribute: 'icon-base' })
   ], exports.LaDocumentItem.prototype, "iconBase", void 0);
-  __decorate$16([
+  __decorate$1h([
       n()
   ], exports.LaDocumentItem.prototype, "error", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ type: Boolean, attribute: 'non-interactive', reflect: true })
   ], exports.LaDocumentItem.prototype, "nonInteractive", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ type: Boolean, reflect: true })
   ], exports.LaDocumentItem.prototype, "dismissible", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ type: Boolean, attribute: 'show-pack-toggle' })
   ], exports.LaDocumentItem.prototype, "showPackToggle", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ type: Boolean, attribute: 'in-default-pack', reflect: true })
   ], exports.LaDocumentItem.prototype, "inDefaultPack", void 0);
-  __decorate$16([
+  __decorate$1h([
       n({ type: Boolean, reflect: true })
   ], exports.LaDocumentItem.prototype, "locked", void 0);
-  __decorate$16([
-      r()
+  __decorate$1h([
+      r$1()
   ], exports.LaDocumentItem.prototype, "_iconFailed", void 0);
-  exports.LaDocumentItem = LaDocumentItem_1 = __decorate$16([
+  exports.LaDocumentItem = LaDocumentItem_1 = __decorate$1h([
       t$1('la-document-item')
   ], exports.LaDocumentItem);
 
-  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8146,10 +8611,15 @@
           this.processing = false;
           this.errorMessage = '';
           this.prompt = 'Click to browse or drag a file here';
+          /** A file already on the record, by name: a resumed run shows what was
+           *  uploaded before without holding the File. Remove fires la-remove with
+           *  no file, and clears it. */
+          this.fileName = '';
           this._dragover = false;
       }
       reset() {
           this._file = undefined;
+          this.fileName = '';
           this.error = false;
           this.errorMessage = '';
           const input = this.shadowRoot?.querySelector('input[type="file"]');
@@ -8157,7 +8627,7 @@
               input.value = '';
       }
       openPicker() {
-          if (this.disabled || this.processing || this._file)
+          if (this.disabled || this.processing || this._file || this.fileName)
               return;
           const input = this.shadowRoot?.querySelector('input[type="file"]');
           input?.click();
@@ -8219,7 +8689,7 @@
               this._handleFile(file);
       }
       _onDragOver(e) {
-          if (this.disabled || this.processing || this._file)
+          if (this.disabled || this.processing || this._file || this.fileName)
               return;
           e.preventDefault();
           this._dragover = true;
@@ -8229,7 +8699,7 @@
           this._dragover = false;
       }
       _onDrop(e) {
-          if (this.disabled || this.processing || this._file)
+          if (this.disabled || this.processing || this._file || this.fileName)
               return;
           e.preventDefault();
           this._dragover = false;
@@ -8253,8 +8723,9 @@
           if (this.disabled || this.processing)
               return;
           const file = this._file;
+          const had = Boolean(file || this.fileName);
           this.reset();
-          if (file) {
+          if (had) {
               this.dispatchEvent(new CustomEvent('la-remove', {
                   detail: { file },
                   bubbles: true,
@@ -8263,7 +8734,7 @@
           }
       }
       render() {
-          const hasFile = Boolean(this._file);
+          const hasFile = Boolean(this._file || this.fileName);
           const zoneClass = [
               'zone',
               this._dragover ? 'is-dragover' : '',
@@ -8300,8 +8771,8 @@
         ${hasFile
             ? b `
               <la-document-item
-                name=${this._file?.name ?? ''}
-                association=${this.processing ? 'Uploading…' : 'File selected'}
+                name=${this._file?.name ?? this.fileName}
+                association=${this.processing ? 'Uploading…' : this._file ? 'File selected' : 'Uploaded'}
                 status=${this.processing ? 'processing' : 'none'}
                 non-interactive
                 ?dismissible=${!this.processing && !this.disabled}
@@ -8511,47 +8982,50 @@
       }
     `,
   ];
-  __decorate$15([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "label", void 0);
-  __decorate$15([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "hint", void 0);
-  __decorate$15([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "accept", void 0);
-  __decorate$15([
+  __decorate$1g([
       n({ type: Number, attribute: 'max-size' })
   ], exports.LaUploadBox.prototype, "maxSize", void 0);
-  __decorate$15([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "compact", void 0);
-  __decorate$15([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "disabled", void 0);
-  __decorate$15([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "error", void 0);
-  __decorate$15([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "processing", void 0);
-  __decorate$15([
+  __decorate$1g([
       n({ attribute: 'error-message' })
   ], exports.LaUploadBox.prototype, "errorMessage", void 0);
-  __decorate$15([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "prompt", void 0);
-  __decorate$15([
-      r()
+  __decorate$1g([
+      n({ attribute: 'file-name' })
+  ], exports.LaUploadBox.prototype, "fileName", void 0);
+  __decorate$1g([
+      r$1()
   ], exports.LaUploadBox.prototype, "_file", void 0);
-  __decorate$15([
-      r()
+  __decorate$1g([
+      r$1()
   ], exports.LaUploadBox.prototype, "_dragover", void 0);
-  exports.LaUploadBox = __decorate$15([
+  exports.LaUploadBox = __decorate$1g([
       t$1('la-upload-box')
   ], exports.LaUploadBox);
 
-  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8623,6 +9097,8 @@
 
       dd {
         margin: 0;
+        min-width: 0;
+        overflow-wrap: anywhere;
         font-size: var(--la-font-size-base);
         color: var(--la-color-text);
         font-weight: var(--la-font-weight-normal);
@@ -8642,23 +9118,26 @@
         justify-content: flex-start;
       }
 
+      /* A fixed label column, as documented: a long label wraps inside it
+         rather than widening the row (6 Oct 2026; it was min-width with an
+         auto basis, so a full sentence took its max-content width). */
       :host([layout='stack']) dt {
-        min-width: 160px;
-        flex-shrink: 0;
+        flex: 0 0 160px;
+        overflow-wrap: anywhere;
       }
     `,
   ];
-  __decorate$14([
+  __decorate$1f([
       n({ type: Array })
   ], exports.LaFieldList.prototype, "fields", void 0);
-  __decorate$14([
+  __decorate$1f([
       n({ reflect: true })
   ], exports.LaFieldList.prototype, "layout", void 0);
-  exports.LaFieldList = __decorate$14([
+  exports.LaFieldList = __decorate$1f([
       t$1('la-field-list')
   ], exports.LaFieldList);
 
-  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8781,32 +9260,32 @@
       :host([checked]) .tick { display: inline-flex; }
     `,
   ];
-  __decorate$13([
+  __decorate$1e([
       n()
   ], exports.LaMenuItem.prototype, "label", void 0);
-  __decorate$13([
+  __decorate$1e([
       n()
   ], exports.LaMenuItem.prototype, "value", void 0);
-  __decorate$13([
+  __decorate$1e([
       n()
   ], exports.LaMenuItem.prototype, "icon", void 0);
-  __decorate$13([
+  __decorate$1e([
       n({ reflect: true })
   ], exports.LaMenuItem.prototype, "variant", void 0);
-  __decorate$13([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "disabled", void 0);
-  __decorate$13([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "checked", void 0);
-  __decorate$13([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "radio", void 0);
-  exports.LaMenuItem = __decorate$13([
+  exports.LaMenuItem = __decorate$1e([
       t$1('la-menu-item')
   ], exports.LaMenuItem);
 
-  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8907,23 +9386,23 @@
       }
     `,
   ];
-  __decorate$12([
+  __decorate$1d([
       n()
   ], exports.LaMenuToggle.prototype, "label", void 0);
-  __decorate$12([
+  __decorate$1d([
       n()
   ], exports.LaMenuToggle.prototype, "value", void 0);
-  __decorate$12([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "checked", void 0);
-  __decorate$12([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "disabled", void 0);
-  exports.LaMenuToggle = __decorate$12([
+  exports.LaMenuToggle = __decorate$1d([
       t$1('la-menu-toggle')
   ], exports.LaMenuToggle);
 
-  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -8948,11 +9427,11 @@
       }
     `,
   ];
-  exports.LaMenuDivider = __decorate$11([
+  exports.LaMenuDivider = __decorate$1c([
       t$1('la-menu-divider')
   ], exports.LaMenuDivider);
 
-  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9177,29 +9656,29 @@
       }
     `,
   ];
-  __decorate$10([
+  __decorate$1b([
       n()
   ], exports.LaMenu.prototype, "label", void 0);
-  __decorate$10([
+  __decorate$1b([
       n({ reflect: true })
   ], exports.LaMenu.prototype, "origin", void 0);
-  __decorate$10([
+  __decorate$1b([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenu.prototype, "open", void 0);
-  __decorate$10([
+  __decorate$1b([
       e$2('.default-trigger')
   ], exports.LaMenu.prototype, "_defaultTrigger", void 0);
-  __decorate$10([
+  __decorate$1b([
       e$2('slot[name="trigger"]')
   ], exports.LaMenu.prototype, "_triggerSlot", void 0);
-  __decorate$10([
-      r()
+  __decorate$1b([
+      r$1()
   ], exports.LaMenu.prototype, "_phase", void 0);
-  exports.LaMenu = __decorate$10([
+  exports.LaMenu = __decorate$1b([
       t$1('la-menu')
   ], exports.LaMenu);
 
-  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9506,29 +9985,29 @@
       }
     `,
   ];
-  __decorate$$([
+  __decorate$1a([
       n({ type: Boolean, reflect: true })
   ], exports.LaModal.prototype, "open", void 0);
-  __decorate$$([
+  __decorate$1a([
       n()
   ], exports.LaModal.prototype, "heading", void 0);
-  __decorate$$([
+  __decorate$1a([
       n()
   ], exports.LaModal.prototype, "description", void 0);
-  __decorate$$([
+  __decorate$1a([
       n({ reflect: true })
   ], exports.LaModal.prototype, "size", void 0);
-  __decorate$$([
+  __decorate$1a([
       n({ reflect: true })
   ], exports.LaModal.prototype, "variant", void 0);
-  __decorate$$([
+  __decorate$1a([
       n({ type: Boolean, reflect: true, attribute: 'no-fade' })
   ], exports.LaModal.prototype, "noFade", void 0);
-  exports.LaModal = __decorate$$([
+  exports.LaModal = __decorate$1a([
       t$1('la-modal')
   ], exports.LaModal);
 
-  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9883,35 +10362,35 @@
       }
     `,
   ];
-  __decorate$_([
+  __decorate$19([
       n({ type: Boolean, reflect: true })
   ], exports.LaDrawer.prototype, "open", void 0);
-  __decorate$_([
+  __decorate$19([
       n({ reflect: true })
   ], exports.LaDrawer.prototype, "edge", void 0);
-  __decorate$_([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "size", void 0);
-  __decorate$_([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "heading", void 0);
-  __decorate$_([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "description", void 0);
-  __decorate$_([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "label", void 0);
-  __decorate$_([
+  __decorate$19([
       n({ type: Boolean, attribute: 'backdrop-dismiss' })
   ], exports.LaDrawer.prototype, "backdropDismiss", void 0);
-  __decorate$_([
+  __decorate$19([
       n({ type: Boolean, attribute: 'no-scroll-lock' })
   ], exports.LaDrawer.prototype, "noScrollLock", void 0);
-  exports.LaDrawer = __decorate$_([
+  exports.LaDrawer = __decorate$19([
       t$1('la-drawer')
   ], exports.LaDrawer);
 
-  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$18 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10216,17 +10695,17 @@
       }
     `,
   ];
-  __decorate$Z([
+  __decorate$18([
       n({ reflect: true })
   ], exports.LaTab.prototype, "value", void 0);
-  __decorate$Z([
+  __decorate$18([
       n({ type: Boolean, reflect: true })
   ], exports.LaTab.prototype, "active", void 0);
-  exports.LaTab = __decorate$Z([
+  exports.LaTab = __decorate$18([
       t$1('la-tab')
   ], exports.LaTab);
 
-  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10268,14 +10747,14 @@
       }
     `,
   ];
-  __decorate$Y([
+  __decorate$17([
       n({ reflect: true })
   ], exports.LaTabPanel.prototype, "value", void 0);
-  exports.LaTabPanel = __decorate$Y([
+  exports.LaTabPanel = __decorate$17([
       t$1('la-tab-panel')
   ], exports.LaTabPanel);
 
-  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10638,23 +11117,23 @@
       }
     `,
   ];
-  __decorate$X([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "active", void 0);
-  __decorate$X([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "variant", void 0);
-  __decorate$X([
+  __decorate$16([
       n({ type: Boolean, reflect: true })
   ], exports.LaTabs.prototype, "block", void 0);
-  __decorate$X([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "size", void 0);
-  exports.LaTabs = __decorate$X([
+  exports.LaTabs = __decorate$16([
       t$1('la-tabs')
   ], exports.LaTabs);
 
-  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10783,14 +11262,14 @@
       }
     `,
   ];
-  __decorate$W([
+  __decorate$15([
       n({ type: Boolean, reflect: true })
   ], exports.LaTable.prototype, "flat", void 0);
-  exports.LaTable = __decorate$W([
+  exports.LaTable = __decorate$15([
       t$1('la-table')
   ], exports.LaTable);
 
-  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10907,26 +11386,26 @@
       }
     `,
   ];
-  __decorate$V([
+  __decorate$14([
       n()
   ], exports.LaChip.prototype, "label", void 0);
-  __decorate$V([
+  __decorate$14([
       n({ attribute: 'prefix' })
   ], exports.LaChip.prototype, "prefixText", void 0);
-  __decorate$V([
+  __decorate$14([
       n()
   ], exports.LaChip.prototype, "value", void 0);
-  __decorate$V([
+  __decorate$14([
       n({ type: Boolean, reflect: true, converter: {
               fromAttribute: (v) => v !== 'false',
               toAttribute: (v) => (v ? '' : 'false'),
           } })
   ], exports.LaChip.prototype, "removable", void 0);
-  exports.LaChip = __decorate$V([
+  exports.LaChip = __decorate$14([
       t$1('la-chip')
   ], exports.LaChip);
 
-  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11057,26 +11536,26 @@
       @media (prefers-reduced-motion: reduce) { .pg { transition: none; } }
     `,
   ];
-  __decorate$U([
+  __decorate$13([
       n({ type: Number })
   ], exports.LaPagination.prototype, "total", void 0);
-  __decorate$U([
+  __decorate$13([
       n({ type: Number, attribute: 'page-size' })
   ], exports.LaPagination.prototype, "pageSize", void 0);
-  __decorate$U([
+  __decorate$13([
       n({ type: Number })
   ], exports.LaPagination.prototype, "page", void 0);
-  __decorate$U([
+  __decorate$13([
       n()
   ], exports.LaPagination.prototype, "noun", void 0);
-  __decorate$U([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaPagination.prototype, "single", void 0);
-  exports.LaPagination = __decorate$U([
+  exports.LaPagination = __decorate$13([
       t$1('la-pagination')
   ], exports.LaPagination);
 
-  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11231,32 +11710,32 @@
       @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
     `,
   ];
-  __decorate$T([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "value", void 0);
-  __decorate$T([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "label", void 0);
-  __decorate$T([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "sublabel", void 0);
-  __decorate$T([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "icon", void 0);
-  __decorate$T([
+  __decorate$12([
       n({ reflect: true })
   ], exports.LaTile.prototype, "hue", void 0);
-  __decorate$T([
+  __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaTile.prototype, "pressed", void 0);
-  __decorate$T([
+  __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaTile.prototype, "quiet", void 0);
-  exports.LaTile = __decorate$T([
+  exports.LaTile = __decorate$12([
       t$1('la-tile')
   ], exports.LaTile);
 
-  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11362,23 +11841,23 @@
       @container (max-width: 440px) { .grid { grid-template-columns: minmax(0, 1fr); } }
     `,
   ];
-  __decorate$S([
+  __decorate$11([
       n()
   ], exports.LaTileStrip.prototype, "value", void 0);
-  __decorate$S([
+  __decorate$11([
       n({ type: Number })
   ], exports.LaTileStrip.prototype, "columns", void 0);
-  __decorate$S([
+  __decorate$11([
       n({ reflect: true })
   ], exports.LaTileStrip.prototype, "selection", void 0);
-  __decorate$S([
+  __decorate$11([
       e$2('.grid')
   ], exports.LaTileStrip.prototype, "_grid", void 0);
-  exports.LaTileStrip = __decorate$S([
+  exports.LaTileStrip = __decorate$11([
       t$1('la-tile-strip')
   ], exports.LaTileStrip);
 
-  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11501,23 +11980,23 @@
       :host([area='ip'])          .mark { --_fill: var(--la-area-ip-fg);          --_tint: var(--la-area-ip-bg); }
     `,
   ];
-  __decorate$R([
+  __decorate$10([
       n({ reflect: true })
   ], exports.LaAreaIcon.prototype, "area", void 0);
-  __decorate$R([
+  __decorate$10([
       n({ reflect: true })
   ], exports.LaAreaIcon.prototype, "size", void 0);
-  __decorate$R([
+  __decorate$10([
       n()
   ], exports.LaAreaIcon.prototype, "icon", void 0);
-  __decorate$R([
+  __decorate$10([
       n()
   ], exports.LaAreaIcon.prototype, "label", void 0);
-  exports.LaAreaIcon = __decorate$R([
+  exports.LaAreaIcon = __decorate$10([
       t$1('la-area-icon')
   ], exports.LaAreaIcon);
 
-  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11899,41 +12378,41 @@
       }
     `,
   ];
-  __decorate$Q([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "columns", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rows", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rowKey", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "sort", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "selected", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "selectable", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "density", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ type: Boolean, attribute: 'sticky-header', reflect: true })
   ], exports.LaDataTable.prototype, "stickyHeader", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ type: Boolean, reflect: true })
   ], exports.LaDataTable.prototype, "loading", void 0);
-  __decorate$Q([
+  __decorate$$([
       n({ type: Boolean, attribute: 'row-clickable', reflect: true })
   ], exports.LaDataTable.prototype, "rowClickable", void 0);
-  exports.LaDataTable = __decorate$Q([
+  exports.LaDataTable = __decorate$$([
       t$1('la-data-table')
   ], exports.LaDataTable);
 
-  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12138,20 +12617,20 @@
       }
     `,
   ];
-  __decorate$P([
+  __decorate$_([
       n()
   ], exports.LaPersonItem.prototype, "name", void 0);
-  __decorate$P([
+  __decorate$_([
       n()
   ], exports.LaPersonItem.prototype, "subtitle", void 0);
-  __decorate$P([
+  __decorate$_([
       n()
   ], exports.LaPersonItem.prototype, "initials", void 0);
-  exports.LaPersonItem = __decorate$P([
+  exports.LaPersonItem = __decorate$_([
       t$1('la-person-item')
   ], exports.LaPersonItem);
 
-  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12217,14 +12696,14 @@
       }
     `,
   ];
-  __decorate$O([
-      r()
+  __decorate$Z([
+      r$1()
   ], exports.LaPersonList.prototype, "_hasFooter", void 0);
-  exports.LaPersonList = __decorate$O([
+  exports.LaPersonList = __decorate$Z([
       t$1('la-person-list')
   ], exports.LaPersonList);
 
-  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12543,35 +13022,35 @@
       }
     `,
   ];
-  __decorate$N([
+  __decorate$Y([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "sender", void 0);
-  __decorate$N([
+  __decorate$Y([
       n()
   ], exports.LaChatMessage.prototype, "name", void 0);
-  __decorate$N([
+  __decorate$Y([
       n()
   ], exports.LaChatMessage.prototype, "timestamp", void 0);
-  __decorate$N([
+  __decorate$Y([
       n({ attribute: 'timestamp-title' })
   ], exports.LaChatMessage.prototype, "timestampTitle", void 0);
-  __decorate$N([
+  __decorate$Y([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "streaming", void 0);
-  __decorate$N([
+  __decorate$Y([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "typing", void 0);
-  __decorate$N([
+  __decorate$Y([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "status", void 0);
-  __decorate$N([
-      r()
+  __decorate$Y([
+      r$1()
   ], exports.LaChatMessage.prototype, "_hasAttachments", void 0);
-  exports.LaChatMessage = __decorate$N([
+  exports.LaChatMessage = __decorate$Y([
       t$1('la-chat-message')
   ], exports.LaChatMessage);
 
-  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12690,17 +13169,17 @@
 
     `,
   ];
-  __decorate$M([
+  __decorate$X([
       n()
   ], exports.LaChatAttachmentChip.prototype, "name", void 0);
-  __decorate$M([
+  __decorate$X([
       n()
   ], exports.LaChatAttachmentChip.prototype, "category", void 0);
-  exports.LaChatAttachmentChip = __decorate$M([
+  exports.LaChatAttachmentChip = __decorate$X([
       t$1('la-chat-attachment-chip')
   ], exports.LaChatAttachmentChip);
 
-  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12948,38 +13427,38 @@
       }
     `,
   ];
-  __decorate$L([
+  __decorate$W([
       n()
   ], exports.LaChatInput.prototype, "placeholder", void 0);
-  __decorate$L([
+  __decorate$W([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "disabled", void 0);
-  __decorate$L([
+  __decorate$W([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "loading", void 0);
-  __decorate$L([
+  __decorate$W([
       n()
   ], exports.LaChatInput.prototype, "hint", void 0);
-  __decorate$L([
+  __decorate$W([
       n({ type: Array })
   ], exports.LaChatInput.prototype, "files", void 0);
-  __decorate$L([
+  __decorate$W([
       n({ type: Number, attribute: 'max-files' })
   ], exports.LaChatInput.prototype, "maxFiles", void 0);
-  __decorate$L([
+  __decorate$W([
       n({ reflect: true })
   ], exports.LaChatInput.prototype, "variant", void 0);
-  __decorate$L([
-      r()
+  __decorate$W([
+      r$1()
   ], exports.LaChatInput.prototype, "_value", void 0);
-  __decorate$L([
+  __decorate$W([
       e$2('textarea')
   ], exports.LaChatInput.prototype, "_textarea", void 0);
-  exports.LaChatInput = __decorate$L([
+  exports.LaChatInput = __decorate$W([
       t$1('la-chat-input')
   ], exports.LaChatInput);
 
-  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13202,29 +13681,29 @@
       }
     `,
   ];
-  __decorate$K([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "name", void 0);
-  __decorate$K([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "category", void 0);
-  __decorate$K([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "association", void 0);
-  __decorate$K([
+  __decorate$V([
       n({ reflect: true })
   ], exports.LaChatAttachment.prototype, "status", void 0);
-  __decorate$K([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "href", void 0);
-  __decorate$K([
+  __decorate$V([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatAttachment.prototype, "removable", void 0);
-  exports.LaChatAttachment = __decorate$K([
+  exports.LaChatAttachment = __decorate$V([
       t$1('la-chat-attachment')
   ], exports.LaChatAttachment);
 
-  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13424,38 +13903,38 @@
       }
     `,
   ];
-  __decorate$J([
+  __decorate$U([
       n({ type: Array })
   ], exports.LaChat.prototype, "messages", void 0);
-  __decorate$J([
+  __decorate$U([
       n()
   ], exports.LaChat.prototype, "placeholder", void 0);
-  __decorate$J([
+  __decorate$U([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "disabled", void 0);
-  __decorate$J([
+  __decorate$U([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "readonly", void 0);
-  __decorate$J([
+  __decorate$U([
       n()
   ], exports.LaChat.prototype, "notice", void 0);
-  __decorate$J([
+  __decorate$U([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "loading", void 0);
-  __decorate$J([
+  __decorate$U([
       n()
   ], exports.LaChat.prototype, "hint", void 0);
-  __decorate$J([
+  __decorate$U([
       n({ attribute: 'empty-message' })
   ], exports.LaChat.prototype, "emptyMessage", void 0);
-  __decorate$J([
+  __decorate$U([
       e$2('.thread')
   ], exports.LaChat.prototype, "_thread", void 0);
-  exports.LaChat = __decorate$J([
+  exports.LaChat = __decorate$U([
       t$1('la-chat')
   ], exports.LaChat);
 
-  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13579,44 +14058,44 @@
       :host([parked]) .head i, :host([parked]) .head .label { color: var(--la-color-text-faint); }
     `,
   ];
-  __decorate$I([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "label", void 0);
-  __decorate$I([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "icon", void 0);
-  __decorate$I([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "href", void 0);
-  __decorate$I([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "module", void 0);
-  __decorate$I([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "count", void 0);
-  __decorate$I([
+  __decorate$T([
       n({ attribute: 'count-label' })
   ], exports.LaModuleTile.prototype, "countLabel", void 0);
-  __decorate$I([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "sla", void 0);
-  __decorate$I([
+  __decorate$T([
       n({ reflect: true })
   ], exports.LaModuleTile.prototype, "status", void 0);
-  __decorate$I([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "insight", void 0);
-  __decorate$I([
+  __decorate$T([
       n({ type: Boolean, reflect: true })
   ], exports.LaModuleTile.prototype, "parked", void 0);
-  __decorate$I([
+  __decorate$T([
       n({ attribute: false })
   ], exports.LaModuleTile.prototype, "pipeline", void 0);
-  exports.LaModuleTile = __decorate$I([
+  exports.LaModuleTile = __decorate$T([
       t$1('la-module-tile')
   ], exports.LaModuleTile);
 
-  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13750,20 +14229,20 @@
       .opt i { font-size: 14px; color: var(--la-color-primary); }
     `,
   ];
-  __decorate$H([
+  __decorate$S([
       n({ attribute: 'prefix' })
   ], exports.LaScopeFilter.prototype, "prefixText", void 0);
-  __decorate$H([
+  __decorate$S([
       n()
   ], exports.LaScopeFilter.prototype, "value", void 0);
-  __decorate$H([
+  __decorate$S([
       n({ attribute: false })
   ], exports.LaScopeFilter.prototype, "options", void 0);
-  exports.LaScopeFilter = __decorate$H([
+  exports.LaScopeFilter = __decorate$S([
       t$1('la-scope-filter')
   ], exports.LaScopeFilter);
 
-  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13834,14 +14313,14 @@
       @media (max-width: 900px) { .strip { grid-template-columns: 1fr; } }
     `,
   ];
-  __decorate$G([
+  __decorate$R([
       n({ attribute: false })
   ], exports.LaWeekStrip.prototype, "days", void 0);
-  exports.LaWeekStrip = __decorate$G([
+  exports.LaWeekStrip = __decorate$R([
       t$1('la-week-strip')
   ], exports.LaWeekStrip);
 
-  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14396,62 +14875,62 @@
       }
     `,
   ];
-  __decorate$F([
+  __decorate$Q([
       n()
   ], exports.LaAiInsight.prototype, "headline", void 0);
-  __decorate$F([
+  __decorate$Q([
       n()
   ], exports.LaAiInsight.prototype, "attribution", void 0);
-  __decorate$F([
+  __decorate$Q([
       n()
   ], exports.LaAiInsight.prototype, "description", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ reflect: true })
   ], exports.LaAiInsight.prototype, "size", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ type: Boolean, reflect: true, attribute: 'no-head' })
   ], exports.LaAiInsight.prototype, "noHead", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "rateable", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ type: Number })
   ], exports.LaAiInsight.prototype, "rating", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ type: Boolean, reflect: true, attribute: 'rate-required' })
   ], exports.LaAiInsight.prototype, "rateRequired", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "disagreeable", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "amendable", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ attribute: 'edited-by' })
   ], exports.LaAiInsight.prototype, "editedBy", void 0);
-  __decorate$F([
+  __decorate$Q([
       n({ attribute: 'edited-at' })
   ], exports.LaAiInsight.prototype, "editedAt", void 0);
-  __decorate$F([
-      r()
+  __decorate$Q([
+      r$1()
   ], exports.LaAiInsight.prototype, "_hasActions", void 0);
-  __decorate$F([
-      r()
+  __decorate$Q([
+      r$1()
   ], exports.LaAiInsight.prototype, "_panel", void 0);
-  __decorate$F([
-      r()
+  __decorate$Q([
+      r$1()
   ], exports.LaAiInsight.prototype, "_disagreeReason", void 0);
-  __decorate$F([
-      r()
+  __decorate$Q([
+      r$1()
   ], exports.LaAiInsight.prototype, "_amendDraft", void 0);
-  __decorate$F([
-      r()
+  __decorate$Q([
+      r$1()
   ], exports.LaAiInsight.prototype, "_bodyText", void 0);
-  exports.LaAiInsight = __decorate$F([
+  exports.LaAiInsight = __decorate$Q([
       t$1('la-ai-insight')
   ], exports.LaAiInsight);
 
-  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14691,25 +15170,25 @@
       }
     `,
   ];
-  __decorate$E([
+  __decorate$P([
       n({ type: Array })
   ], exports.LaLevelingMatrix.prototype, "factors", void 0);
-  __decorate$E([
+  __decorate$P([
       n({ attribute: 'recommended-level' })
   ], exports.LaLevelingMatrix.prototype, "recommendedLevel", void 0);
-  __decorate$E([
+  __decorate$P([
       n()
   ], exports.LaLevelingMatrix.prototype, "summary", void 0);
-  __decorate$E([
+  __decorate$P([
       n()
   ], exports.LaLevelingMatrix.prototype, "heading", void 0);
-  __decorate$E([
+  __decorate$P([
       n({ type: Boolean })
   ], exports.LaLevelingMatrix.prototype, "rateable", void 0);
-  __decorate$E([
+  __decorate$P([
       n()
   ], exports.LaLevelingMatrix.prototype, "attribution", void 0);
-  exports.LaLevelingMatrix = __decorate$E([
+  exports.LaLevelingMatrix = __decorate$P([
       t$1('la-leveling-matrix')
   ], exports.LaLevelingMatrix);
 
@@ -14718,7 +15197,7 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t={ATTRIBUTE:1},e$1=t=>(...e)=>({_$litDirective$:t,values:e});let i$1 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
+  const t={ATTRIBUTE:1,PROPERTY:3,BOOLEAN_ATTRIBUTE:4},e$1=t=>(...e)=>({_$litDirective$:t,values:e});let i$1 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
 
   /**
    * @license
@@ -14726,7 +15205,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const e=e$1(class extends i$1{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||t$1.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter(s=>t[s]).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter(t=>""!==t)));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return E}});
 
-  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15023,47 +15502,47 @@
       }
     `,
   ];
-  __decorate$D([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "name", void 0);
-  __decorate$D([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "initials", void 0);
-  __decorate$D([
+  __decorate$O([
       n({ reflect: true })
   ], LaAvatar.prototype, "size", void 0);
-  __decorate$D([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "src", void 0);
-  __decorate$D([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "photo", void 0);
-  __decorate$D([
+  __decorate$O([
       n({ type: Boolean, attribute: 'text-only' })
   ], LaAvatar.prototype, "textOnly", void 0);
-  __decorate$D([
+  __decorate$O([
       n({ type: Boolean, reflect: true })
   ], LaAvatar.prototype, "logo", void 0);
-  __decorate$D([
+  __decorate$O([
       n({ reflect: true })
   ], LaAvatar.prototype, "presence", void 0);
-  __decorate$D([
+  __decorate$O([
       n({ attribute: 'asset-base' })
   ], LaAvatar.prototype, "assetBase", void 0);
-  __decorate$D([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "gender", void 0);
-  __decorate$D([
-      r()
+  __decorate$O([
+      r$1()
   ], LaAvatar.prototype, "_imgFailed", void 0);
-  __decorate$D([
-      r()
+  __decorate$O([
+      r$1()
   ], LaAvatar.prototype, "_imgLoaded", void 0);
-  LaAvatar = LaAvatar_1 = __decorate$D([
+  LaAvatar = LaAvatar_1 = __decorate$O([
       t$1('la-avatar')
   ], LaAvatar);
 
-  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15364,41 +15843,41 @@
       }
     `,
   ];
-  __decorate$C([
+  __decorate$N([
       n()
   ], exports.LaAssigneeCard.prototype, "name", void 0);
-  __decorate$C([
+  __decorate$N([
       n({ attribute: 'person-role' })
   ], exports.LaAssigneeCard.prototype, "personRole", void 0);
-  __decorate$C([
+  __decorate$N([
       n()
   ], exports.LaAssigneeCard.prototype, "photo", void 0);
-  __decorate$C([
+  __decorate$N([
       n({ type: Object })
   ], exports.LaAssigneeCard.prototype, "bandwidth", void 0);
-  __decorate$C([
+  __decorate$N([
       n()
   ], exports.LaAssigneeCard.prototype, "history", void 0);
-  __decorate$C([
+  __decorate$N([
       n({ type: Array })
   ], exports.LaAssigneeCard.prototype, "flags", void 0);
-  __decorate$C([
+  __decorate$N([
       n({ attribute: 'case-type' })
   ], exports.LaAssigneeCard.prototype, "caseType", void 0);
-  __decorate$C([
+  __decorate$N([
       n({ type: Boolean, attribute: 'ai-recommendation' })
   ], exports.LaAssigneeCard.prototype, "aiRecommendation", void 0);
-  __decorate$C([
+  __decorate$N([
       n({ attribute: 'action-label' })
   ], exports.LaAssigneeCard.prototype, "actionLabel", void 0);
-  __decorate$C([
+  __decorate$N([
       n({ type: Boolean, attribute: 'hide-action' })
   ], exports.LaAssigneeCard.prototype, "hideAction", void 0);
-  exports.LaAssigneeCard = __decorate$C([
+  exports.LaAssigneeCard = __decorate$N([
       t$1('la-assignee-card')
   ], exports.LaAssigneeCard);
 
-  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15940,38 +16419,38 @@
       }
     `,
   ];
-  __decorate$B([
+  __decorate$M([
       n({ type: Object })
   ], exports.LaAssigneePicker.prototype, "recommended", void 0);
-  __decorate$B([
+  __decorate$M([
       n({ type: Array })
   ], exports.LaAssigneePicker.prototype, "candidates", void 0);
-  __decorate$B([
+  __decorate$M([
       n({ reflect: true })
   ], exports.LaAssigneePicker.prototype, "mode", void 0);
-  __decorate$B([
+  __decorate$M([
       n({ attribute: 'case-type' })
   ], exports.LaAssigneePicker.prototype, "caseType", void 0);
-  __decorate$B([
+  __decorate$M([
       n({ type: Object })
   ], exports.LaAssigneePicker.prototype, "current", void 0);
-  __decorate$B([
+  __decorate$M([
       n({ attribute: 'current-meta' })
   ], exports.LaAssigneePicker.prototype, "currentMeta", void 0);
-  __decorate$B([
-      r()
+  __decorate$M([
+      r$1()
   ], exports.LaAssigneePicker.prototype, "_candidatesOpen", void 0);
-  __decorate$B([
-      r()
+  __decorate$M([
+      r$1()
   ], exports.LaAssigneePicker.prototype, "_selected", void 0);
-  __decorate$B([
-      r()
+  __decorate$M([
+      r$1()
   ], exports.LaAssigneePicker.prototype, "_reason", void 0);
-  exports.LaAssigneePicker = __decorate$B([
+  exports.LaAssigneePicker = __decorate$M([
       t$1('la-assignee-picker')
   ], exports.LaAssigneePicker);
 
-  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16261,47 +16740,47 @@
       }
     `,
   ];
-  __decorate$A([
+  __decorate$L([
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookConfirmModal.prototype, "open", void 0);
-  __decorate$A([
+  __decorate$L([
       n({ attribute: 'playbook-name' })
   ], exports.LaPlaybookConfirmModal.prototype, "playbookName", void 0);
-  __decorate$A([
+  __decorate$L([
       n({ type: Array })
   ], exports.LaPlaybookConfirmModal.prototype, "facts", void 0);
-  __decorate$A([
+  __decorate$L([
       n({ attribute: 'case-type' })
   ], exports.LaPlaybookConfirmModal.prototype, "caseType", void 0);
-  __decorate$A([
+  __decorate$L([
       n({ attribute: 'accused-role' })
   ], exports.LaPlaybookConfirmModal.prototype, "accusedRole", void 0);
-  __decorate$A([
+  __decorate$L([
       n()
   ], exports.LaPlaybookConfirmModal.prototype, "jurisdiction", void 0);
-  __decorate$A([
+  __decorate$L([
       n()
   ], exports.LaPlaybookConfirmModal.prototype, "level", void 0);
-  __decorate$A([
+  __decorate$L([
       n({ type: Array })
   ], exports.LaPlaybookConfirmModal.prototype, "alternatives", void 0);
-  __decorate$A([
-      r()
+  __decorate$L([
+      r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_view", void 0);
-  __decorate$A([
-      r()
+  __decorate$L([
+      r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_picked", void 0);
-  __decorate$A([
-      r()
+  __decorate$L([
+      r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_reason", void 0);
-  __decorate$A([
-      r()
+  __decorate$L([
+      r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_reasonError", void 0);
-  exports.LaPlaybookConfirmModal = __decorate$A([
+  exports.LaPlaybookConfirmModal = __decorate$L([
       t$1('la-playbook-confirm-modal')
   ], exports.LaPlaybookConfirmModal);
 
-  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16569,26 +17048,26 @@
       }
     `,
   ];
-  __decorate$z([
+  __decorate$K([
       n({ type: Array })
   ], exports.LaSensitiveFlags.prototype, "flags", void 0);
-  __decorate$z([
+  __decorate$K([
       n()
   ], exports.LaSensitiveFlags.prototype, "heading", void 0);
-  __decorate$z([
+  __decorate$K([
       n()
   ], exports.LaSensitiveFlags.prototype, "intro", void 0);
-  __decorate$z([
+  __decorate$K([
       n({ type: Boolean, attribute: 'open-first' })
   ], exports.LaSensitiveFlags.prototype, "openFirst", void 0);
-  __decorate$z([
-      r()
+  __decorate$K([
+      r$1()
   ], exports.LaSensitiveFlags.prototype, "_open", void 0);
-  exports.LaSensitiveFlags = LaSensitiveFlags_1 = __decorate$z([
+  exports.LaSensitiveFlags = LaSensitiveFlags_1 = __decorate$K([
       t$1('la-sensitive-flags')
   ], exports.LaSensitiveFlags);
 
-  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -16968,44 +17447,44 @@
       }
     `,
   ];
-  __decorate$y([
+  __decorate$J([
       n()
   ], exports.LaLevelControl.prototype, "level", void 0);
-  __decorate$y([
+  __decorate$J([
       n({ attribute: 'confirmed-by' })
   ], exports.LaLevelControl.prototype, "confirmedBy", void 0);
-  __decorate$y([
+  __decorate$J([
       n({ attribute: 'confirmed-at' })
   ], exports.LaLevelControl.prototype, "confirmedAt", void 0);
-  __decorate$y([
+  __decorate$J([
       n({ type: Array })
   ], exports.LaLevelControl.prototype, "factors", void 0);
-  __decorate$y([
+  __decorate$J([
       n({ type: Array })
   ], exports.LaLevelControl.prototype, "history", void 0);
-  __decorate$y([
-      r()
+  __decorate$J([
+      r$1()
   ], exports.LaLevelControl.prototype, "_menuOpen", void 0);
-  __decorate$y([
-      r()
+  __decorate$J([
+      r$1()
   ], exports.LaLevelControl.prototype, "_historyOpen", void 0);
-  __decorate$y([
-      r()
+  __decorate$J([
+      r$1()
   ], exports.LaLevelControl.prototype, "_modalOpen", void 0);
-  __decorate$y([
-      r()
+  __decorate$J([
+      r$1()
   ], exports.LaLevelControl.prototype, "_pendingLevel", void 0);
-  __decorate$y([
-      r()
+  __decorate$J([
+      r$1()
   ], exports.LaLevelControl.prototype, "_reason", void 0);
-  __decorate$y([
-      r()
+  __decorate$J([
+      r$1()
   ], exports.LaLevelControl.prototype, "_reasonError", void 0);
-  exports.LaLevelControl = __decorate$y([
+  exports.LaLevelControl = __decorate$J([
       t$1('la-level-control')
   ], exports.LaLevelControl);
 
-  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17194,35 +17673,35 @@
       }
     `,
   ];
-  __decorate$x([
+  __decorate$I([
       n({ attribute: 'current-handler' })
   ], exports.LaReassignControl.prototype, "currentHandler", void 0);
-  __decorate$x([
+  __decorate$I([
       n({ attribute: 'case-id' })
   ], exports.LaReassignControl.prototype, "caseId", void 0);
-  __decorate$x([
+  __decorate$I([
       n()
   ], exports.LaReassignControl.prototype, "label", void 0);
-  __decorate$x([
-      r()
+  __decorate$I([
+      r$1()
   ], exports.LaReassignControl.prototype, "_modalOpen", void 0);
-  __decorate$x([
-      r()
+  __decorate$I([
+      r$1()
   ], exports.LaReassignControl.prototype, "_selected", void 0);
-  __decorate$x([
-      r()
+  __decorate$I([
+      r$1()
   ], exports.LaReassignControl.prototype, "_reason", void 0);
-  __decorate$x([
-      r()
+  __decorate$I([
+      r$1()
   ], exports.LaReassignControl.prototype, "_reasonError", void 0);
-  __decorate$x([
-      r()
+  __decorate$I([
+      r$1()
   ], exports.LaReassignControl.prototype, "_hasSlottedPicker", void 0);
-  exports.LaReassignControl = __decorate$x([
+  exports.LaReassignControl = __decorate$I([
       t$1('la-reassign-control')
   ], exports.LaReassignControl);
 
-  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17458,38 +17937,38 @@
       }
     `,
   ];
-  __decorate$w([
+  __decorate$H([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "employeeRecord", void 0);
-  __decorate$w([
+  __decorate$H([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "caseDocuments", void 0);
-  __decorate$w([
+  __decorate$H([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "generatedArtefacts", void 0);
-  __decorate$w([
+  __decorate$H([
       n({ attribute: 'confidential-section' })
   ], exports.LaFilesPanel.prototype, "confidentialSection", void 0);
-  __decorate$w([
+  __decorate$H([
       n()
   ], exports.LaFilesPanel.prototype, "heading", void 0);
-  __decorate$w([
+  __decorate$H([
       n({ type: Boolean, attribute: 'hide-heading' })
   ], exports.LaFilesPanel.prototype, "hideHeading", void 0);
-  __decorate$w([
+  __decorate$H([
       n({ attribute: 'icon-base' })
   ], exports.LaFilesPanel.prototype, "iconBase", void 0);
-  __decorate$w([
+  __decorate$H([
       n({ attribute: 'brand-mark' })
   ], exports.LaFilesPanel.prototype, "brandMark", void 0);
-  __decorate$w([
-      r()
+  __decorate$H([
+      r$1()
   ], exports.LaFilesPanel.prototype, "_query", void 0);
-  exports.LaFilesPanel = __decorate$w([
+  exports.LaFilesPanel = __decorate$H([
       t$1('la-files-panel')
   ], exports.LaFilesPanel);
 
-  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17920,47 +18399,47 @@
       }
     `,
   ];
-  __decorate$v([
+  __decorate$G([
       n({ attribute: 'case-id' })
   ], exports.LaCaseContextPanel.prototype, "caseId", void 0);
-  __decorate$v([
+  __decorate$G([
       n()
   ], exports.LaCaseContextPanel.prototype, "level", void 0);
-  __decorate$v([
+  __decorate$G([
       n()
   ], exports.LaCaseContextPanel.prototype, "handler", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ attribute: 'open-panel', reflect: true })
   ], exports.LaCaseContextPanel.prototype, "openPanel", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ type: Number, attribute: 'file-count' })
   ], exports.LaCaseContextPanel.prototype, "fileCount", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ type: Number, attribute: 'unread-chat' })
   ], exports.LaCaseContextPanel.prototype, "unreadChat", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ attribute: 'chat-label' })
   ], exports.LaCaseContextPanel.prototype, "chatLabel", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ type: Boolean, attribute: 'expert-reply' })
   ], exports.LaCaseContextPanel.prototype, "expertReply", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ type: Boolean, attribute: 'ai-active' })
   ], exports.LaCaseContextPanel.prototype, "aiActive", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ type: Number, attribute: 'unread-flags' })
   ], exports.LaCaseContextPanel.prototype, "unreadFlags", void 0);
-  __decorate$v([
+  __decorate$G([
       n({ type: Boolean, attribute: 'no-auto-open' })
   ], exports.LaCaseContextPanel.prototype, "noAutoOpen", void 0);
-  __decorate$v([
-      r()
+  __decorate$G([
+      r$1()
   ], exports.LaCaseContextPanel.prototype, "_autoOpened", void 0);
-  exports.LaCaseContextPanel = LaCaseContextPanel_1 = __decorate$v([
+  exports.LaCaseContextPanel = LaCaseContextPanel_1 = __decorate$G([
       t$1('la-case-context-panel')
   ], exports.LaCaseContextPanel);
 
-  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -19722,77 +20201,77 @@
       }
     `,
   ];
-  __decorate$u([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "activeArea", void 0);
-  __decorate$u([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "activeSubtab", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ type: Array })
   ], exports.LaSidebar.prototype, "unlockedAreas", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: false })
   ], exports.LaSidebar.prototype, "items", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ type: Boolean, attribute: 'show-search' })
   ], exports.LaSidebar.prototype, "showSearch", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "collapsed", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "overlay", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: 'logo-src' })
   ], exports.LaSidebar.prototype, "logoSrc", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: 'wordmark-src' })
   ], exports.LaSidebar.prototype, "wordmarkSrc", void 0);
-  __decorate$u([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "userInitials", void 0);
-  __decorate$u([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "userName", void 0);
-  __decorate$u([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "userRole", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: 'workspace-name' })
   ], exports.LaSidebar.prototype, "workspaceName", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: 'workspace-initials' })
   ], exports.LaSidebar.prototype, "workspaceInitials", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: false })
   ], exports.LaSidebar.prototype, "checklist", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: 'checklist-title' })
   ], exports.LaSidebar.prototype, "checklistTitle", void 0);
-  __decorate$u([
+  __decorate$F([
       n({ attribute: 'checklist-sub' })
   ], exports.LaSidebar.prototype, "checklistSub", void 0);
-  __decorate$u([
-      r()
+  __decorate$F([
+      r$1()
   ], exports.LaSidebar.prototype, "_snapped", void 0);
-  __decorate$u([
-      r()
+  __decorate$F([
+      r$1()
   ], exports.LaSidebar.prototype, "_userMenuOpen", void 0);
-  __decorate$u([
-      r()
+  __decorate$F([
+      r$1()
   ], exports.LaSidebar.prototype, "_userMenuClosing", void 0);
-  __decorate$u([
-      r()
+  __decorate$F([
+      r$1()
   ], exports.LaSidebar.prototype, "_checklistOpen", void 0);
-  __decorate$u([
-      r()
+  __decorate$F([
+      r$1()
   ], exports.LaSidebar.prototype, "_toggled", void 0);
-  exports.LaSidebar = __decorate$u([
+  exports.LaSidebar = __decorate$F([
       t$1('la-sidebar')
   ], exports.LaSidebar);
 
-  var __decorate$t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20384,47 +20863,47 @@
       :host([collapsed]) .user-menu-dots { opacity: 0; max-width: 0; }
     `,
   ];
-  __decorate$t([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "userName", void 0);
-  __decorate$t([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "userInitials", void 0);
-  __decorate$t([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "userRole", void 0);
-  __decorate$t([
+  __decorate$E([
       n({ attribute: 'logo-src' })
   ], exports.LaInvestorSidebar.prototype, "logoSrc", void 0);
-  __decorate$t([
+  __decorate$E([
       n({ attribute: 'logo-wordmark-src' })
   ], exports.LaInvestorSidebar.prototype, "logoWordmarkSrc", void 0);
-  __decorate$t([
+  __decorate$E([
       n({ type: Array })
   ], exports.LaInvestorSidebar.prototype, "companies", void 0);
-  __decorate$t([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "active", void 0);
-  __decorate$t([
+  __decorate$E([
       n({ type: Boolean, reflect: true })
   ], exports.LaInvestorSidebar.prototype, "collapsed", void 0);
-  __decorate$t([
+  __decorate$E([
       n({ type: Boolean, reflect: true })
   ], exports.LaInvestorSidebar.prototype, "overlay", void 0);
-  __decorate$t([
-      r()
+  __decorate$E([
+      r$1()
   ], exports.LaInvestorSidebar.prototype, "_snapped", void 0);
-  __decorate$t([
-      r()
+  __decorate$E([
+      r$1()
   ], exports.LaInvestorSidebar.prototype, "_userMenuOpen", void 0);
-  __decorate$t([
-      r()
+  __decorate$E([
+      r$1()
   ], exports.LaInvestorSidebar.prototype, "_userMenuClosing", void 0);
-  exports.LaInvestorSidebar = __decorate$t([
+  exports.LaInvestorSidebar = __decorate$E([
       t$1('la-investor-sidebar')
   ], exports.LaInvestorSidebar);
 
-  var __decorate$s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20623,47 +21102,47 @@
       }
     `,
   ];
-  __decorate$s([
+  __decorate$D([
       n({ reflect: true })
   ], exports.LaInsightCard.prototype, "severity", void 0);
-  __decorate$s([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "headline", void 0);
-  __decorate$s([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "description", void 0);
-  __decorate$s([
+  __decorate$D([
       n({ attribute: 'insight-type' })
   ], exports.LaInsightCard.prototype, "insightType", void 0);
-  __decorate$s([
+  __decorate$D([
       n({ attribute: 'source-type' })
   ], exports.LaInsightCard.prototype, "sourceType", void 0);
-  __decorate$s([
+  __decorate$D([
       n({ type: Object })
   ], exports.LaInsightCard.prototype, "entity", void 0);
-  __decorate$s([
+  __decorate$D([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "dates", void 0);
-  __decorate$s([
+  __decorate$D([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "relatedInsights", void 0);
-  __decorate$s([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "explanation", void 0);
-  __decorate$s([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "reason", void 0);
-  __decorate$s([
+  __decorate$D([
       n({ type: Object })
   ], exports.LaInsightCard.prototype, "action", void 0);
-  __decorate$s([
+  __decorate$D([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "subItems", void 0);
-  exports.LaInsightCard = __decorate$s([
+  exports.LaInsightCard = __decorate$D([
       t$1('la-insight-card')
   ], exports.LaInsightCard);
 
-  var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20739,26 +21218,26 @@
       }
     `,
   ];
-  __decorate$r([
+  __decorate$C([
       n()
   ], exports.LaInfoHint.prototype, "hint", void 0);
-  __decorate$r([
+  __decorate$C([
       n({ reflect: true })
   ], exports.LaInfoHint.prototype, "position", void 0);
-  __decorate$r([
+  __decorate$C([
       n({ attribute: 'max-width' })
   ], exports.LaInfoHint.prototype, "maxWidth", void 0);
-  __decorate$r([
+  __decorate$C([
       n({ reflect: true })
   ], exports.LaInfoHint.prototype, "size", void 0);
-  __decorate$r([
+  __decorate$C([
       n()
   ], exports.LaInfoHint.prototype, "label", void 0);
-  exports.LaInfoHint = __decorate$r([
+  exports.LaInfoHint = __decorate$C([
       t$1('la-info-hint')
   ], exports.LaInfoHint);
 
-  var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20877,20 +21356,20 @@
       }
     `,
   ];
-  __decorate$q([
+  __decorate$B([
       n()
   ], exports.LaPdfPreview.prototype, "src", void 0);
-  __decorate$q([
+  __decorate$B([
       n({ attribute: 'fallback-image' })
   ], exports.LaPdfPreview.prototype, "fallbackImage", void 0);
-  __decorate$q([
+  __decorate$B([
       n()
   ], exports.LaPdfPreview.prototype, "label", void 0);
-  exports.LaPdfPreview = __decorate$q([
+  exports.LaPdfPreview = __decorate$B([
       t$1('la-pdf-preview')
   ], exports.LaPdfPreview);
 
-  var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21026,23 +21505,23 @@
       }
     `,
   ];
-  __decorate$p([
+  __decorate$A([
       n()
   ], exports.LaActionItem.prototype, "label", void 0);
-  __decorate$p([
+  __decorate$A([
       n()
   ], exports.LaActionItem.prototype, "description", void 0);
-  __decorate$p([
+  __decorate$A([
       n()
   ], exports.LaActionItem.prototype, "icon", void 0);
-  __decorate$p([
+  __decorate$A([
       n({ reflect: true })
   ], exports.LaActionItem.prototype, "status", void 0);
-  exports.LaActionItem = __decorate$p([
+  exports.LaActionItem = __decorate$A([
       t$1('la-action-item')
   ], exports.LaActionItem);
 
-  var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21158,20 +21637,20 @@
       }
     `,
   ];
-  __decorate$o([
+  __decorate$z([
       n({ type: Array })
   ], exports.LaInsightList.prototype, "insights", void 0);
-  __decorate$o([
+  __decorate$z([
       n({ type: Number })
   ], exports.LaInsightList.prototype, "defaultVisible", void 0);
-  __decorate$o([
-      r()
+  __decorate$z([
+      r$1()
   ], exports.LaInsightList.prototype, "_expanded", void 0);
-  exports.LaInsightList = __decorate$o([
+  exports.LaInsightList = __decorate$z([
       t$1('la-insight-list')
   ], exports.LaInsightList);
 
-  var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21297,23 +21776,23 @@
       }
     `,
   ];
-  __decorate$n([
+  __decorate$y([
       n({ type: Array })
   ], exports.LaDocumentList.prototype, "documents", void 0);
-  __decorate$n([
+  __decorate$y([
       n()
   ], exports.LaDocumentList.prototype, "heading", void 0);
-  __decorate$n([
+  __decorate$y([
       n({ type: Boolean, attribute: 'show-pack-toggle' })
   ], exports.LaDocumentList.prototype, "showPackToggle", void 0);
-  __decorate$n([
+  __decorate$y([
       n({ type: Object })
   ], exports.LaDocumentList.prototype, "categoryIcons", void 0);
-  exports.LaDocumentList = __decorate$n([
+  exports.LaDocumentList = __decorate$y([
       t$1('la-document-list')
   ], exports.LaDocumentList);
 
-  var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21524,20 +22003,20 @@
       }
     `,
   ];
-  __decorate$m([
+  __decorate$x([
       n({ type: Array })
   ], exports.LaProcessingWidget.prototype, "items", void 0);
-  __decorate$m([
+  __decorate$x([
       n({ type: Boolean, reflect: true })
   ], exports.LaProcessingWidget.prototype, "timeout", void 0);
-  __decorate$m([
-      r()
+  __decorate$x([
+      r$1()
   ], exports.LaProcessingWidget.prototype, "_showDetails", void 0);
-  exports.LaProcessingWidget = __decorate$m([
+  exports.LaProcessingWidget = __decorate$x([
       t$1('la-processing-widget')
   ], exports.LaProcessingWidget);
 
-  var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21642,38 +22121,38 @@
       }
     `,
   ];
-  __decorate$l([
+  __decorate$w([
       n()
   ], exports.LaUpload.prototype, "accept", void 0);
-  __decorate$l([
+  __decorate$w([
       n({ type: Number, attribute: 'max-size' })
   ], exports.LaUpload.prototype, "maxSize", void 0);
-  __decorate$l([
+  __decorate$w([
       n()
   ], exports.LaUpload.prototype, "prompt", void 0);
-  __decorate$l([
+  __decorate$w([
       n()
   ], exports.LaUpload.prototype, "hint", void 0);
-  __decorate$l([
+  __decorate$w([
       n({ type: Boolean, reflect: true })
   ], exports.LaUpload.prototype, "compact", void 0);
-  __decorate$l([
+  __decorate$w([
       n({ type: Boolean, reflect: true })
   ], exports.LaUpload.prototype, "processing", void 0);
-  __decorate$l([
+  __decorate$w([
       n({ type: Boolean, attribute: 'transfer-error', reflect: true })
   ], exports.LaUpload.prototype, "transferError", void 0);
-  __decorate$l([
+  __decorate$w([
       n({ attribute: 'transfer-error-message' })
   ], exports.LaUpload.prototype, "transferErrorMessage", void 0);
-  __decorate$l([
+  __decorate$w([
       e$2('la-upload-box')
   ], exports.LaUpload.prototype, "_box", void 0);
-  exports.LaUpload = __decorate$l([
+  exports.LaUpload = __decorate$w([
       t$1('la-upload')
   ], exports.LaUpload);
 
-  var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22078,44 +22557,44 @@
       }
     `,
   ];
-  __decorate$k([
+  __decorate$v([
       n({ reflect: true })
   ], exports.LaDocumentUpload.prototype, "reason", void 0);
-  __decorate$k([
+  __decorate$v([
       n({ attribute: 'document-id' })
   ], exports.LaDocumentUpload.prototype, "documentId", void 0);
-  __decorate$k([
+  __decorate$v([
       n({ attribute: 'document-name' })
   ], exports.LaDocumentUpload.prototype, "documentName", void 0);
-  __decorate$k([
+  __decorate$v([
       n({ attribute: 'area-label' })
   ], exports.LaDocumentUpload.prototype, "areaLabel", void 0);
-  __decorate$k([
+  __decorate$v([
       n({ attribute: false })
   ], exports.LaDocumentUpload.prototype, "areaOptions", void 0);
-  __decorate$k([
+  __decorate$v([
       n()
   ], exports.LaDocumentUpload.prototype, "label", void 0);
-  __decorate$k([
+  __decorate$v([
       n({ reflect: true })
   ], exports.LaDocumentUpload.prototype, "state", void 0);
-  __decorate$k([
+  __decorate$v([
       n({ attribute: 'error-message' })
   ], exports.LaDocumentUpload.prototype, "errorMessage", void 0);
-  __decorate$k([
+  __decorate$v([
       n()
   ], exports.LaDocumentUpload.prototype, "accept", void 0);
-  __decorate$k([
-      r()
+  __decorate$v([
+      r$1()
   ], exports.LaDocumentUpload.prototype, "_open", void 0);
-  __decorate$k([
-      r()
+  __decorate$v([
+      r$1()
   ], exports.LaDocumentUpload.prototype, "_pendingFile", void 0);
-  exports.LaDocumentUpload = __decorate$k([
+  exports.LaDocumentUpload = __decorate$v([
       t$1('la-document-upload')
   ], exports.LaDocumentUpload);
 
-  var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22237,26 +22716,26 @@
       .dot--yellow { background: var(--la-color-proactive); }
     `,
   ];
-  __decorate$j([
+  __decorate$u([
       n()
   ], exports.LaSummaryLine.prototype, "area", void 0);
-  __decorate$j([
+  __decorate$u([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "urgent", void 0);
-  __decorate$j([
+  __decorate$u([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "proactive", void 0);
-  __decorate$j([
+  __decorate$u([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "documents", void 0);
-  __decorate$j([
+  __decorate$u([
       n({ type: Boolean, attribute: 'show-aside-toggle' })
   ], exports.LaSummaryLine.prototype, "showAsideToggle", void 0);
-  exports.LaSummaryLine = __decorate$j([
+  exports.LaSummaryLine = __decorate$u([
       t$1('la-summary-line')
   ], exports.LaSummaryLine);
 
-  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22329,20 +22808,20 @@
       }
     `,
   ];
-  __decorate$i([
+  __decorate$t([
       n({ type: Array })
   ], exports.LaActionsWidget.prototype, "actions", void 0);
-  __decorate$i([
+  __decorate$t([
       n()
   ], exports.LaActionsWidget.prototype, "heading", void 0);
-  __decorate$i([
+  __decorate$t([
       n()
   ], exports.LaActionsWidget.prototype, "subtitle", void 0);
-  exports.LaActionsWidget = __decorate$i([
+  exports.LaActionsWidget = __decorate$t([
       t$1('la-actions-widget')
   ], exports.LaActionsWidget);
 
-  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22388,17 +22867,17 @@
       }
     `,
   ];
-  __decorate$h([
+  __decorate$s([
       n()
   ], exports.LaAnticipationTeaser.prototype, "heading", void 0);
-  __decorate$h([
+  __decorate$s([
       n()
   ], exports.LaAnticipationTeaser.prototype, "description", void 0);
-  exports.LaAnticipationTeaser = __decorate$h([
+  exports.LaAnticipationTeaser = __decorate$s([
       t$1('la-anticipation-teaser')
   ], exports.LaAnticipationTeaser);
 
-  var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22523,25 +23002,25 @@
       }
     `,
   ];
-  __decorate$g([
+  __decorate$r([
       n({ reflect: true })
   ], exports.LaEmptyState.prototype, "variant", void 0);
-  __decorate$g([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "area", void 0);
-  __decorate$g([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "message", void 0);
-  __decorate$g([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "icon", void 0);
-  __decorate$g([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "heading", void 0);
-  __decorate$g([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "illustration", void 0);
-  exports.LaEmptyState = __decorate$g([
+  exports.LaEmptyState = __decorate$r([
       t$1('la-empty-state')
   ], exports.LaEmptyState);
 
@@ -22549,7 +23028,7 @@
    * @license
    * Copyright 2020 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const m={},p=(o,t=m)=>o._$AH=t;
+   */const r=o=>void 0===o.strings,m={},p=(o,t=m)=>o._$AH=t;
 
   /**
    * @license
@@ -22557,7 +23036,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const i=e$1(class extends i$1{constructor(){super(...arguments),this.key=A;}render(r,t){return this.key=r,t}update(r,[t,e]){return t!==this.key&&(p(r),this.key=t),e}});
 
-  var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -23228,32 +23707,32 @@
       }
     `,
   ];
-  __decorate$f([
+  __decorate$q([
       n({ reflect: true, attribute: 'state' })
   ], exports.LaUnlockPanel.prototype, "unlockState", void 0);
-  __decorate$f([
+  __decorate$q([
       n()
   ], exports.LaUnlockPanel.prototype, "area", void 0);
-  __decorate$f([
+  __decorate$q([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "checklistItems", void 0);
-  __decorate$f([
+  __decorate$q([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "steps", void 0);
-  __decorate$f([
+  __decorate$q([
       n({ attribute: 'next-area' })
   ], exports.LaUnlockPanel.prototype, "nextArea", void 0);
-  __decorate$f([
+  __decorate$q([
       n({ attribute: 'next-description' })
   ], exports.LaUnlockPanel.prototype, "nextDescription", void 0);
-  __decorate$f([
-      r()
+  __decorate$q([
+      r$1()
   ], exports.LaUnlockPanel.prototype, "_values", void 0);
-  exports.LaUnlockPanel = __decorate$f([
+  exports.LaUnlockPanel = __decorate$q([
       t$1('la-unlock-panel')
   ], exports.LaUnlockPanel);
 
-  var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -23530,35 +24009,35 @@
       }
     `,
   ];
-  __decorate$e([
+  __decorate$p([
       n()
   ], exports.LaLegalAreaWidget.prototype, "area", void 0);
-  __decorate$e([
+  __decorate$p([
       n()
   ], exports.LaLegalAreaWidget.prototype, "description", void 0);
-  __decorate$e([
+  __decorate$p([
       n()
   ], exports.LaLegalAreaWidget.prototype, "illustration", void 0);
-  __decorate$e([
+  __decorate$p([
       n({ reflect: true })
   ], exports.LaLegalAreaWidget.prototype, "status", void 0);
-  __decorate$e([
+  __decorate$p([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "urgent", void 0);
-  __decorate$e([
+  __decorate$p([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "proactive", void 0);
-  __decorate$e([
+  __decorate$p([
       n({ type: Array })
   ], exports.LaLegalAreaWidget.prototype, "dependencies", void 0);
-  __decorate$e([
+  __decorate$p([
       n({ attribute: 'next-level-label' })
   ], exports.LaLegalAreaWidget.prototype, "nextLevelLabel", void 0);
-  exports.LaLegalAreaWidget = __decorate$e([
+  exports.LaLegalAreaWidget = __decorate$p([
       t$1('la-legal-area-widget')
   ], exports.LaLegalAreaWidget);
 
-  var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -23782,26 +24261,26 @@
       }
     `,
   ];
-  __decorate$d([
+  __decorate$o([
       n({ reflect: true })
   ], exports.LaAreaCard.prototype, "area", void 0);
-  __decorate$d([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "label", void 0);
-  __decorate$d([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "sublabel", void 0);
-  __decorate$d([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "description", void 0);
-  __decorate$d([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "href", void 0);
-  exports.LaAreaCard = __decorate$d([
+  exports.LaAreaCard = __decorate$o([
       t$1('la-area-card')
   ], exports.LaAreaCard);
 
-  var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -23905,17 +24384,17 @@
       }
     `,
   ];
-  __decorate$c([
+  __decorate$n([
       n()
   ], exports.LaDdReadiness.prototype, "level", void 0);
-  __decorate$c([
+  __decorate$n([
       n({ type: Number })
   ], exports.LaDdReadiness.prototype, "remaining", void 0);
-  exports.LaDdReadiness = __decorate$c([
+  exports.LaDdReadiness = __decorate$n([
       t$1('la-dd-readiness')
   ], exports.LaDdReadiness);
 
-  var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -23995,14 +24474,14 @@
       }
     `,
   ];
-  __decorate$b([
+  __decorate$m([
       n({ type: Array })
   ], exports.LaUpcomingDeadlines.prototype, "deadlines", void 0);
-  exports.LaUpcomingDeadlines = __decorate$b([
+  exports.LaUpcomingDeadlines = __decorate$m([
       t$1('la-upcoming-deadlines')
   ], exports.LaUpcomingDeadlines);
 
-  var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -24257,20 +24736,20 @@
       }
     `,
   ];
-  __decorate$a([
+  __decorate$l([
       n()
   ], exports.LaJourneySteps.prototype, "heading", void 0);
-  __decorate$a([
+  __decorate$l([
       n()
   ], exports.LaJourneySteps.prototype, "subtitle", void 0);
-  __decorate$a([
+  __decorate$l([
       n({ type: Array })
   ], exports.LaJourneySteps.prototype, "steps", void 0);
-  exports.LaJourneySteps = __decorate$a([
+  exports.LaJourneySteps = __decorate$l([
       t$1('la-journey-steps')
   ], exports.LaJourneySteps);
 
-  var __decorate$9 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -24340,23 +24819,23 @@
       }
     `,
   ];
-  __decorate$9([
+  __decorate$k([
       n({ type: Boolean })
   ], exports.LaWelcomeBanner.prototype, "dismissed", void 0);
-  __decorate$9([
+  __decorate$k([
       n()
   ], exports.LaWelcomeBanner.prototype, "heading", void 0);
-  __decorate$9([
+  __decorate$k([
       n()
   ], exports.LaWelcomeBanner.prototype, "description", void 0);
-  __decorate$9([
+  __decorate$k([
       n()
   ], exports.LaWelcomeBanner.prototype, "ctaLabel", void 0);
-  exports.LaWelcomeBanner = __decorate$9([
+  exports.LaWelcomeBanner = __decorate$k([
       t$1('la-welcome-banner')
   ], exports.LaWelcomeBanner);
 
-  var __decorate$8 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -26593,149 +27072,149 @@
 
     `,
   ];
-  __decorate$8([
+  __decorate$j([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "open", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ reflect: true })
   ], exports.LaInsightModal.prototype, "severity", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ attribute: 'status-label' })
   ], exports.LaInsightModal.prototype, "statusLabel", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ attribute: 'status-icon' })
   ], exports.LaInsightModal.prototype, "statusIcon", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ attribute: 'source-type' })
   ], exports.LaInsightModal.prototype, "sourceType", void 0);
-  __decorate$8([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "headline", void 0);
-  __decorate$8([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "reason", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "consequence", void 0);
-  __decorate$8([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "guidance", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "entity", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "dates", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "sourceDocument", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "sources", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ reflect: true })
   ], exports.LaInsightModal.prototype, "layout", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "deadline", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "meta", void 0);
-  __decorate$8([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "area", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ attribute: 'area-icon' })
   ], exports.LaInsightModal.prototype, "areaIcon", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "issues", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "cta", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "playbook", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "resolutions", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: String, attribute: 'chosen-resolution' })
   ], exports.LaInsightModal.prototype, "chosenResolution", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "relatedInsights", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "laws", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "resolved", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "documents", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ reflect: true, attribute: 'action-type' })
   ], exports.LaInsightModal.prototype, "actionType", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ reflect: true, attribute: 'upload-state' })
   ], exports.LaInsightModal.prototype, "uploadState", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ attribute: 'verification-error' })
   ], exports.LaInsightModal.prototype, "verificationError", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "subItems", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "resolveReasons", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ attribute: 'resolve-label' })
   ], exports.LaInsightModal.prototype, "resolveLabel", void 0);
-  __decorate$8([
+  __decorate$j([
       n({ type: Boolean, reflect: true, attribute: 'read-only' })
   ], exports.LaInsightModal.prototype, "readOnly", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_resolving", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_activeTab", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_resolvedTabs", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_resolvingSubItemId", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_page", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_pageBack", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_reasonId", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_reasonNote", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_doneReason", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_doneNote", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_relatedExpanded", void 0);
-  __decorate$8([
-      r()
+  __decorate$j([
+      r$1()
   ], exports.LaInsightModal.prototype, "_openIssues", void 0);
-  exports.LaInsightModal = __decorate$8([
+  exports.LaInsightModal = __decorate$j([
       t$1('la-insight-modal')
   ], exports.LaInsightModal);
 
-  var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -26923,26 +27402,26 @@
       }
     `,
   ];
-  __decorate$7([
+  __decorate$i([
       n({ attribute: 'investor-name' })
   ], exports.LaInvestorCard.prototype, "investorName", void 0);
-  __decorate$7([
+  __decorate$i([
       n()
   ], exports.LaInvestorCard.prototype, "firm", void 0);
-  __decorate$7([
+  __decorate$i([
       n({ reflect: true })
   ], exports.LaInvestorCard.prototype, "status", void 0);
-  __decorate$7([
+  __decorate$i([
       n({ attribute: 'last-activity' })
   ], exports.LaInvestorCard.prototype, "lastActivity", void 0);
-  __decorate$7([
+  __decorate$i([
       n({ type: Number, attribute: 'unread-count' })
   ], exports.LaInvestorCard.prototype, "unreadCount", void 0);
-  exports.LaInvestorCard = __decorate$7([
+  exports.LaInvestorCard = __decorate$i([
       t$1('la-investor-card')
   ], exports.LaInvestorCard);
 
-  var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -27210,25 +27689,25 @@
       }
     `,
   ];
-  __decorate$6([
+  __decorate$h([
       n({ reflect: true })
   ], exports.LaToastStack.prototype, "position", void 0);
-  __decorate$6([
+  __decorate$h([
       n({ type: Number, attribute: 'max-visible' })
   ], exports.LaToastStack.prototype, "maxVisible", void 0);
-  __decorate$6([
-      r()
+  __decorate$h([
+      r$1()
   ], exports.LaToastStack.prototype, "_items", void 0);
-  __decorate$6([
-      r()
+  __decorate$h([
+      r$1()
   ], exports.LaToastStack.prototype, "_exitingItems", void 0);
-  __decorate$6([
-      r()
+  __decorate$h([
+      r$1()
   ], exports.LaToastStack.prototype, "_hovered", void 0);
-  __decorate$6([
-      r()
+  __decorate$h([
+      r$1()
   ], exports.LaToastStack.prototype, "_topItemHeight", void 0);
-  exports.LaToastStack = __decorate$6([
+  exports.LaToastStack = __decorate$h([
       t$1('la-toast-stack')
   ], exports.LaToastStack);
   // ── Programmatic API ─────────────────────────────────────────
@@ -27247,7 +27726,7 @@
       dismiss: (id) => _getStack().dismiss(id),
   });
 
-  var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -27790,38 +28269,38 @@
       }
     `,
   ];
-  __decorate$5([
+  __decorate$g([
       n()
   ], exports.LaAppShell.prototype, "pageTitle", void 0);
-  __decorate$5([
+  __decorate$g([
       n({ type: Array })
   ], exports.LaAppShell.prototype, "breadcrumbs", void 0);
-  __decorate$5([
+  __decorate$g([
       n({ type: Boolean })
   ], exports.LaAppShell.prototype, "showBack", void 0);
-  __decorate$5([
+  __decorate$g([
       n({ type: Boolean, attribute: 'show-header', reflect: true })
   ], exports.LaAppShell.prototype, "showHeader", void 0);
-  __decorate$5([
+  __decorate$g([
       n({ type: Boolean, attribute: 'show-aside' })
   ], exports.LaAppShell.prototype, "showAside", void 0);
-  __decorate$5([
-      r()
+  __decorate$g([
+      r$1()
   ], exports.LaAppShell.prototype, "_asideOpen", void 0);
-  __decorate$5([
-      r()
+  __decorate$g([
+      r$1()
   ], exports.LaAppShell.prototype, "_isTablet", void 0);
-  __decorate$5([
-      r()
+  __decorate$g([
+      r$1()
   ], exports.LaAppShell.prototype, "_isNarrowNav", void 0);
-  __decorate$5([
-      r()
+  __decorate$g([
+      r$1()
   ], exports.LaAppShell.prototype, "_navOpen", void 0);
-  exports.LaAppShell = __decorate$5([
+  exports.LaAppShell = __decorate$g([
       t$1('la-app-shell')
   ], exports.LaAppShell);
 
-  var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -27907,29 +28386,29 @@
       }
     `,
   ];
-  __decorate$4([
+  __decorate$f([
       n({ type: Boolean })
   ], exports.LaDashboard.prototype, "showWelcome", void 0);
-  __decorate$4([
+  __decorate$f([
       n({ type: Array })
   ], exports.LaDashboard.prototype, "areas", void 0);
-  __decorate$4([
+  __decorate$f([
       n()
   ], exports.LaDashboard.prototype, "readinessLevel", void 0);
-  __decorate$4([
+  __decorate$f([
       n({ type: Number })
   ], exports.LaDashboard.prototype, "readinessRemaining", void 0);
-  __decorate$4([
+  __decorate$f([
       n({ type: Boolean })
   ], exports.LaDashboard.prototype, "showReadiness", void 0);
-  __decorate$4([
+  __decorate$f([
       n({ type: Array })
   ], exports.LaDashboard.prototype, "deadlines", void 0);
-  exports.LaDashboard = __decorate$4([
+  exports.LaDashboard = __decorate$f([
       t$1('la-dashboard')
   ], exports.LaDashboard);
 
-  var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -28559,74 +29038,74 @@
       }
     `,
   ];
-  __decorate$3([
+  __decorate$e([
       n({ type: Boolean, attribute: 'show-aside-toggle' })
   ], exports.LaLegalAreaPage.prototype, "showAsideToggle", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "area", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "subtitle", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ attribute: 'last-updated' })
   ], exports.LaLegalAreaPage.prototype, "lastUpdated", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "pageState", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "unlockState", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "unlockSteps", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "unlockChecklist", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "nextArea", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "nextDescription", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "insights", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "actions", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ type: Number })
   ], exports.LaLegalAreaPage.prototype, "resolvedCount", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "areaDescription", void 0);
-  __decorate$3([
+  __decorate$e([
       n()
   ], exports.LaLegalAreaPage.prototype, "illustration", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ attribute: 'clear-illustration' })
   ], exports.LaLegalAreaPage.prototype, "clearIllustration", void 0);
-  __decorate$3([
+  __decorate$e([
       n({ type: Array })
   ], exports.LaLegalAreaPage.prototype, "prerequisites", void 0);
-  __decorate$3([
-      r()
+  __decorate$e([
+      r$1()
   ], exports.LaLegalAreaPage.prototype, "_showResolved", void 0);
-  __decorate$3([
-      r()
+  __decorate$e([
+      r$1()
   ], exports.LaLegalAreaPage.prototype, "_urgentExpanded", void 0);
-  __decorate$3([
-      r()
+  __decorate$e([
+      r$1()
   ], exports.LaLegalAreaPage.prototype, "_proactiveExpanded", void 0);
-  __decorate$3([
-      r()
+  __decorate$e([
+      r$1()
   ], exports.LaLegalAreaPage.prototype, "_hadBoth", void 0);
-  exports.LaLegalAreaPage = __decorate$3([
+  exports.LaLegalAreaPage = __decorate$e([
       t$1('la-legal-area-page')
   ], exports.LaLegalAreaPage);
 
-  var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -28754,14 +29233,14 @@
       }
     `,
   ];
-  __decorate$2([
+  __decorate$d([
       n({ type: Array })
   ], exports.LaDataRoomPage.prototype, "documents", void 0);
-  exports.LaDataRoomPage = LaDataRoomPage_1 = __decorate$2([
+  exports.LaDataRoomPage = LaDataRoomPage_1 = __decorate$d([
       t$1('la-data-room-page')
   ], exports.LaDataRoomPage);
 
-  var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -29318,20 +29797,20 @@
       }
     `,
   ];
-  __decorate$1([
+  __decorate$c([
       n({ type: Array })
   ], exports.LaInvestorsPage.prototype, "investors", void 0);
-  __decorate$1([
+  __decorate$c([
       n({ type: Number })
   ], exports.LaInvestorsPage.prototype, "selectedIndex", void 0);
-  __decorate$1([
-      r()
+  __decorate$c([
+      r$1()
   ], exports.LaInvestorsPage.prototype, "_activeIndex", void 0);
-  exports.LaInvestorsPage = __decorate$1([
+  exports.LaInvestorsPage = __decorate$c([
       t$1('la-investors-page')
   ], exports.LaInvestorsPage);
 
-  var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -29973,70 +30452,2717 @@
       }
     `,
   ];
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "documentName", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "documentStatus", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "entity", void 0);
-  __decorate([
+  __decorate$b([
       n({ type: Boolean })
   ], exports.LaDocumentPage.prototype, "entityClickable", void 0);
-  __decorate([
+  __decorate$b([
       n({ type: Boolean })
   ], exports.LaDocumentPage.prototype, "deletable", void 0);
-  __decorate([
+  __decorate$b([
       n({ type: Boolean })
   ], exports.LaDocumentPage.prototype, "readonly", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "flagReason", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "category", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "legalArea", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "uploadedDate", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "fileSize", void 0);
-  __decorate([
+  __decorate$b([
       n({ type: Array })
   ], exports.LaDocumentPage.prototype, "insights", void 0);
-  __decorate([
+  __decorate$b([
       n({ type: Boolean })
   ], exports.LaDocumentPage.prototype, "replacing", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "aboutType", void 0);
-  __decorate([
+  __decorate$b([
       n()
   ], exports.LaDocumentPage.prototype, "aboutSummary", void 0);
-  __decorate([
+  __decorate$b([
       n({ type: Array })
   ], exports.LaDocumentPage.prototype, "aboutItems", void 0);
-  __decorate([
+  __decorate$b([
       n({ attribute: 'preview-src' })
   ], exports.LaDocumentPage.prototype, "previewSrc", void 0);
-  __decorate([
+  __decorate$b([
       n({ attribute: 'preview-fallback' })
   ], exports.LaDocumentPage.prototype, "previewFallback", void 0);
-  __decorate([
+  __decorate$b([
       n({ type: Boolean, attribute: 'hide-details' })
   ], exports.LaDocumentPage.prototype, "hideDetails", void 0);
-  __decorate([
-      r()
+  __decorate$b([
+      r$1()
   ], exports.LaDocumentPage.prototype, "_view", void 0);
-  exports.LaDocumentPage = __decorate([
+  exports.LaDocumentPage = __decorate$b([
       t$1('la-document-page')
   ], exports.LaDocumentPage);
 
+  var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-record-row — a value from the founder's record, to confirm or correct
+   * (Phase B brief, Screen 1, question type *Confirm what we hold*). What's on
+   * the record must look different from what we ask, so this is a row, not a
+   * field: an icon, the value, and where it came from on a line of its own
+   * ("From LawVault"), then *That’s right* or *Change it*.
+   *
+   * Copy follows "your record, never what we hold" (Jonard, 28 Sep 2026).
+   *
+   * A document is confirmed from its preview, not from the row (Jonard, 6 Oct
+   * 2026): a file name alone isn't enough to be sure it's the right file. On a
+   * `doc` row the only act is *Open* (the name is a link too); both fire
+   * `la-record-preview`, and the page opens la-document-preview, which carries
+   * *That's right* and *Upload a different one*. Confirmed, the row says *You
+   * confirmed this*, with Undo and Open. A fact with no document keeps its
+   * acts on the row, since there's nothing to open.
+   *
+   * States, set by the page:
+   *   held      - the value and its source, with That’s right · Change it;
+   *               for a document, Open alone (its acts are in the preview)
+   *   confirmed - a small "You confirmed this", with Undo as an icon button.
+   *               The check is the founder's own act, never a result
+   *   changed   - the founder's new value, "You changed this", with Undo
+   *   empty     - "Your record has no <label> yet.", with Add it (Upload it)
+   *   editing   - the `editor` slot (an la-input and a Save, or an
+   *               la-upload-box), with Cancel
+   *
+   * Usage:
+   *   <la-record-row label="Shareholders’ agreement" value="signed 2 June 2024"
+   *                  source="LawVault" doc></la-record-row>
+   *
+   * @prop label  - what the value is ("Shareholders’ agreement")
+   * @prop value  - the value on the record, or the founder's change
+   * @prop source - where it came from ("LawVault", "Companies House")
+   * @prop doc    - it's a document: a file icon, and Upload rather than Change
+   * @prop state  - held (default) · confirmed · changed · empty · editing
+   * @slot editor - the field or upload shown while editing
+   * @fires la-record-confirm - That’s right
+   * @fires la-record-change  - Change it, Upload a different one, Add it or Upload it
+   * @fires la-record-undo    - Undo, after confirming or changing
+   * @fires la-record-cancel  - Cancel, while editing
+   * @fires la-record-preview - the document's name, on a `doc` row: open it to read before confirming
+   */
+  exports.LaRecordRow = class LaRecordRow extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.label = '';
+          this.value = '';
+          this.source = '';
+          this.doc = false;
+          this.state = 'held';
+      }
+      _fire(name) {
+          this.dispatchEvent(new CustomEvent(name, { bubbles: true, composed: true }));
+      }
+      /* Open, on a document row: read it, and confirm it there. */
+      _openBtn(variant) {
+          return b `<la-button size="sm" variant=${variant} @click=${() => this._fire('la-record-preview')}
+      ><i slot="icon-left" class="ph ph-arrow-square-out" aria-hidden="true"></i>Open</la-button
+    >`;
+      }
+      _acts() {
+          const s = this.state;
+          if (s === 'confirmed' || s === 'changed') {
+              return b `${this.doc ? this._openBtn('ghost') : A}
+        <span class="mine"><i class="ph-bold ph-check" aria-hidden="true"></i>You confirmed this</span>
+        <la-icon-button size="sm" label="Undo" @click=${() => this._fire('la-record-undo')}
+          ><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i
+        ></la-icon-button>`;
+          }
+          if (s === 'empty') {
+              return b `<la-button size="sm" variant="secondary" @click=${() => this._fire('la-record-change')}
+        >${this.doc ? 'Upload it' : 'Add it'}</la-button
+      >`;
+          }
+          if (this.doc)
+              return this._openBtn('secondary');
+          return b `<la-button size="sm" variant="secondary" @click=${() => this._fire('la-record-confirm')}>That’s right</la-button>
+      <la-button size="sm" variant="ghost" @click=${() => this._fire('la-record-change')}>Change it</la-button>`;
+      }
+      render() {
+          if (this.state === 'editing') {
+              return b `<div class="editing" part="row">
+        <slot name="editor"></slot>
+        <la-button size="md" variant="ghost" @click=${() => this._fire('la-record-cancel')}>Cancel</la-button>
+      </div>`;
+          }
+          const empty = this.state === 'empty';
+          const source = this.state === 'changed' ? 'You changed this' : this.source ? `From ${this.source}` : '';
+          return b `${iconStyles}<div class="row" part="row">
+      <i class="ph ${this.doc ? 'ph-file-text' : 'ph-identification-card'} icon" aria-hidden="true"></i>
+      <div>
+        <p class="value">
+          ${empty
+            ? b `Your record has no ${this.label.toLowerCase()} yet.`
+            : this.doc
+                ? b `<button class="name" type="button" @click=${() => this._fire('la-record-preview')} aria-label=${`Open ${this.label}`}
+                    >${this.label}<i class="ph ph-arrow-square-out" aria-hidden="true"></i></button
+                  >, ${this.value}`
+                : b `<b>${this.label}</b>, ${this.value}`}
+        </p>
+        ${!empty && source
+            ? b `<p class="source"><i class="ph ph-database" aria-hidden="true"></i>${source}</p>`
+            : A}
+      </div>
+      <div class="acts">${this._acts()}</div>
+    </div>`;
+      }
+  };
+  exports.LaRecordRow.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        container-type: inline-size;
+        color: var(--la-color-text);
+        font-size: var(--la-font-size-base);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 20px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: var(--la-space-md);
+        box-sizing: border-box;
+        padding: var(--la-space-md) var(--la-space-lg);
+        border-radius: var(--la-radius-md);
+        border: 1px solid var(--la-color-border-light);
+        background-color: var(--la-color-bg-subtle);
+      }
+      :host([state='empty']) .row {
+        background-color: transparent;
+        border-style: dashed;
+      }
+      .icon {
+        font-size: 18px;
+        color: var(--la-color-text-secondary);
+      }
+      .value {
+        margin: 0;
+        line-height: var(--la-line-height);
+        overflow-wrap: anywhere;
+      }
+      /* The label in the text colour, the value after it in the secondary:
+         colour tells them apart, not weight. */
+      .value {
+        color: var(--la-color-text-secondary);
+      }
+      .value b {
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text);
+      }
+      /* A document's name opens its preview: the name itself is the link,
+         underlined on hover, with the open-out arrow after it. */
+      .name {
+        display: inline;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        color: var(--la-color-text);
+        cursor: pointer;
+        text-decoration: underline;
+        text-decoration-color: var(--la-color-border);
+        text-underline-offset: 3px;
+        border-radius: var(--la-radius-sm);
+      }
+      .name:hover {
+        text-decoration-color: currentColor;
+      }
+      .name:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+      }
+      .name i {
+        margin-left: 3px;
+        font-size: 12px;
+        color: var(--la-color-text-muted);
+        vertical-align: -1px;
+      }
+      .source {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 2px 0 0;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .acts {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        flex-wrap: wrap;
+        justify-content: flex-end;
+      }
+      /* The founder's own mark, small and quiet (Jonard, 6 Oct 2026): it
+         isn't a result, so it doesn't need weight. */
+      .mine {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+      }
+      .mine i {
+        font-size: 12px;
+      }
+      .editing {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-sm);
+      }
+      .editing ::slotted(*) {
+        flex: 1 1 240px;
+      }
+      @container (max-width: 440px) {
+        .row {
+          grid-template-columns: 20px minmax(0, 1fr);
+        }
+        .acts {
+          grid-column: 1 / -1;
+          justify-content: flex-start;
+        }
+      }
+    `,
+  ];
+  __decorate$a([
+      n()
+  ], exports.LaRecordRow.prototype, "label", void 0);
+  __decorate$a([
+      n()
+  ], exports.LaRecordRow.prototype, "value", void 0);
+  __decorate$a([
+      n()
+  ], exports.LaRecordRow.prototype, "source", void 0);
+  __decorate$a([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaRecordRow.prototype, "doc", void 0);
+  __decorate$a([
+      n({ reflect: true })
+  ], exports.LaRecordRow.prototype, "state", void 0);
+  exports.LaRecordRow = __decorate$a([
+      t$1('la-record-row')
+  ], exports.LaRecordRow);
+
+  var __decorate$9 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /** Small counts in words, not machine counters. */
+  const WORDS$4 = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  /**
+   * la-question — one question on a Review, Decide & Confirm step (Phase B
+   * brief, Screen 1, "The questions"). The question's text with, on the same
+   * line to the right, *Optional* where it isn't required and one *What this
+   * means*; then the answer, the guidance on a picked option, and any
+   * follow-ups.
+   *
+   * *What this means* is drawn here rather than with la-disclosure, because
+   * its toggle sits on the head row and its gloss opens full width under the
+   * question text: a native <details> can't put its summary apart from its
+   * body. It borrows la-disclosure's quiet look and motion (the caret on
+   * --dur-fast, the gloss on a 0fr to 1fr track on --dur-base), and is a
+   * button with aria-expanded and aria-controls. Jonard, 6 Oct 2026: one
+   * line shorter per question, and the links stop repeating down the card.
+   *
+   * The answer is the page's: put any input in the default slot (la-choice in
+   * a radiogroup, la-input, la-date-input, la-upload-box, la-record-row, or
+   * la-segmented rows for one answer per person). The question doesn't know
+   * the answer; the page decides what's picked, what guidance shows and which
+   * follow-ups appear. That keeps a check reading as the founder's answer,
+   * never as something we worked out.
+   *
+   * Questions stack as siblings and rule themselves: each draws a hairline
+   * above, except the first la-question among its siblings. A follow-up is a
+   * la-question in the `follow` slot: one level down, indented under a hairline,
+   * with no hairline of its own.
+   *
+   * Where a picked option skips the rest of the step, set `dropped` to how
+   * many questions after this one go, and a line says so ("The last two
+   * questions on this step aren't needed.").
+   *
+   * Usage:
+   *   <la-question text="Does an investor have a right to approve or appoint directors?"
+   *                means="Usually set in a shareholders’ agreement after a funding round.">
+   *     <div role="radiogroup" aria-label="…">…la-choice…</div>
+   *     <la-guidance slot="guidance"><p>Get their consent in writing…</p></la-guidance>
+   *   </la-question>
+   *
+   * @prop text     - the question, with any name already filled in by the page
+   * @prop optional - shows *Optional*; required is the default
+   * @prop means    - the plain-English gloss behind *What this means*; none hides it
+   * @prop dropped  - how many questions after this one a skip removed (0: no line)
+   * @slot          - the answer: inputs, choices, a record row
+   * @slot guidance - la-guidance for the picked option
+   * @slot follow   - follow-up la-question elements, one level down
+   */
+  exports.LaQuestion = class LaQuestion extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.text = '';
+          this.optional = false;
+          this.means = '';
+          this.dropped = 0;
+          this._hasGuidance = false;
+          this._hasFollow = false;
+          this._meansOpen = false;
+          this._meansId = `la-q-means-${Math.random().toString(36).slice(2, 8)}`;
+      }
+      _droppedText() {
+          const n = this.dropped;
+          if (n === 1)
+              return 'The last question on this step isn’t needed.';
+          return `The last ${WORDS$4[n] ?? n} questions on this step aren’t needed.`;
+      }
+      render() {
+          return b `${iconStyles}
+      <div class="head">
+        <p class="text" part="text">${this.text}</p>
+        ${this.optional || this.means
+            ? b `<span class="aside">
+              ${this.optional ? b `<span>Optional</span>` : A}
+              ${this.means
+                ? b `<button
+                    class="means-toggle"
+                    type="button"
+                    aria-expanded=${this._meansOpen ? 'true' : 'false'}
+                    aria-controls=${this._meansId}
+                    @click=${() => (this._meansOpen = !this._meansOpen)}
+                  >
+                    What this means<i class="ph ph-caret-down" aria-hidden="true"></i>
+                  </button>`
+                : A}
+            </span>`
+            : A}
+      </div>
+      ${this.means
+            ? b `<div class="means-wrap ${this._meansOpen ? 'open' : ''}">
+            <div class="means-in" id=${this._meansId} role="region" aria-label="What this means" ?hidden=${false}>
+              <p class="means">${this.means}</p>
+            </div>
+          </div>`
+            : A}
+      <div class="answer" part="answer"><slot></slot></div>
+      <div class="guidance" ?hidden=${!this._hasGuidance}>
+        <slot name="guidance" @slotchange=${(e) => (this._hasGuidance = this._assigned(e))}></slot>
+      </div>
+      <div class="follow" part="follow" ?hidden=${!this._hasFollow}>
+        <slot name="follow" @slotchange=${(e) => (this._hasFollow = this._assigned(e))}></slot>
+      </div>
+      ${this.dropped > 0
+            ? b `<p class="dropped"><i class="ph ph-minus-circle" aria-hidden="true"></i>${this._droppedText()}</p>`
+            : A}`;
+      }
+      _assigned(e) {
+          return e.target.assignedElements().length > 0;
+      }
+  };
+  exports.LaQuestion.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        padding: var(--la-space-lg) 0;
+        border-top: 1px solid var(--la-color-border-light);
+        color: var(--la-color-text);
+      }
+      :host(:first-of-type) {
+        border-top: 0;
+      }
+      :host([slot='follow']) {
+        padding: var(--la-space-sm) 0 var(--la-space-xs);
+        border-top: 0;
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      .head {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: baseline;
+        justify-content: space-between;
+        gap: var(--la-space-3xs) var(--la-space-md);
+      }
+      .text {
+        flex: 1 1 24ch;
+        margin: 0;
+        font-size: var(--la-font-size-lg);
+        line-height: 1.45;
+        color: var(--la-color-text);
+      }
+      .aside {
+        display: flex;
+        flex: none;
+        align-items: baseline;
+        gap: var(--la-space-md);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      /* The quiet toggle, as la-disclosure draws it: link-sized, muted,
+         the caret beside the label turning on --dur-fast. */
+      .means-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        min-height: 32px;
+        margin: -8px 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        cursor: pointer;
+        border-radius: var(--la-radius-sm);
+        transition: color var(--dur-fast) var(--ease);
+      }
+      .means-toggle:hover,
+      .means-toggle[aria-expanded='true'] {
+        color: var(--la-color-text);
+      }
+      .means-toggle:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+      }
+      .means-toggle i {
+        font-size: 12px;
+        transition: transform var(--dur-fast) var(--ease);
+      }
+      .means-toggle[aria-expanded='true'] i {
+        transform: rotate(180deg);
+      }
+      @media (hover: none) and (pointer: coarse) {
+        .means-toggle {
+          min-height: 44px;
+          margin: -14px 0;
+        }
+      }
+      /* The gloss grows on a grid track, full width under the text. */
+      .means-wrap {
+        display: grid;
+        grid-template-rows: 0fr;
+        transition: grid-template-rows var(--dur-base) var(--ease-out);
+      }
+      .means-wrap.open {
+        grid-template-rows: 1fr;
+      }
+      .means-in {
+        min-height: 0;
+        overflow: hidden;
+      }
+      .means {
+        margin: var(--la-space-xs) 0 0;
+        max-width: 64ch;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+      }
+      .answer {
+        margin-top: var(--la-space-md);
+      }
+      .guidance[hidden],
+      .follow[hidden] {
+        display: none;
+      }
+      .guidance {
+        margin-top: var(--la-space-md);
+      }
+      .follow {
+        margin-top: var(--la-space-md);
+        padding-left: var(--la-space-lg);
+        /* A 1px hairline, structural like the rules between questions: it
+           shows which answer asked, and isn't an accent (decision 93). */
+        border-left: 1px solid var(--la-color-border);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .means-toggle,
+        .means-toggle i,
+        .means-wrap {
+          transition: none;
+        }
+      }
+      .dropped {
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        margin: var(--la-space-md) 0 0;
+        padding-top: var(--la-space-md);
+        border-top: 1px dashed var(--la-color-border-light);
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-muted);
+      }
+    `,
+  ];
+  __decorate$9([
+      n()
+  ], exports.LaQuestion.prototype, "text", void 0);
+  __decorate$9([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaQuestion.prototype, "optional", void 0);
+  __decorate$9([
+      n()
+  ], exports.LaQuestion.prototype, "means", void 0);
+  __decorate$9([
+      n({ type: Number })
+  ], exports.LaQuestion.prototype, "dropped", void 0);
+  __decorate$9([
+      r$1()
+  ], exports.LaQuestion.prototype, "_hasGuidance", void 0);
+  __decorate$9([
+      r$1()
+  ], exports.LaQuestion.prototype, "_hasFollow", void 0);
+  __decorate$9([
+      r$1()
+  ], exports.LaQuestion.prototype, "_meansOpen", void 0);
+  exports.LaQuestion = __decorate$9([
+      t$1('la-question')
+  ], exports.LaQuestion);
+
+  /**
+   * @license
+   * Copyright 2020 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */const l=e$1(class extends i$1{constructor(r$1){if(super(r$1),r$1.type!==t.PROPERTY&&r$1.type!==t.ATTRIBUTE&&r$1.type!==t.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!r(r$1))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t$1]){if(t$1===E||t$1===A)return t$1;const o=i.element,l=i.name;if(i.type===t.PROPERTY){if(t$1===o[l])return E}else if(i.type===t.BOOLEAN_ATTRIBUTE){if(!!t$1===o.hasAttribute(l))return E}else if(i.type===t.ATTRIBUTE&&o.getAttribute(l)===t$1+"")return E;return p(i),t$1}});
+
+  var __decorate$8 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /** Proposed by design on 6 Oct 2026 (PRO-230). The brief gives one example,
+   *  "done outside LawAdvisor"; the wording waits on Bobby. */
+  const MOVE_PAST_REASONS = [
+      { id: 'elsewhere', label: 'We did it outside LawAdvisor', short: 'Done outside LawAdvisor' },
+      { id: 'notours', label: 'It doesn’t apply to us', short: 'Doesn’t apply to us' },
+      { id: 'other', label: 'Another reason', short: '' },
+  ];
+  /**
+   * la-move-past — the way past any step, with a reason, so the founder is
+   * never blocked (Phase B brief, Screen 1, *The acts*). A modal, like the
+   * step's questions (Jonard, 6 Oct 2026): *Move past this step* as the title,
+   * what moving past means as the line under it, then why, the reasons as a
+   * radio group, a field when it's another reason, and the act in the footer
+   * beside Cancel. Opened from the ⋯ menu in the step's acts.
+   *
+   * Moving past isn't done. The step settles with la-step-marker's `passed`
+   * status (decision 115) and the reason, nothing is asked again, and Change
+   * reopens it.
+   *
+   * Usage:
+   *   <la-move-past open></la-move-past>
+   *
+   * @prop open    - the modal is shown; it resets its pick each time it opens
+   * @prop reasons - the choices (default MOVE_PAST_REASONS); one with an empty `short` asks for the founder's own words
+   * @fires la-move-past        - {reason, text}: the reason's id, and the words the step should show
+   * @fires la-move-past-cancel - Cancel, or the modal closed
+   */
+  exports.LaMovePast = class LaMovePast extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.open = false;
+          this.reasons = MOVE_PAST_REASONS;
+          this._picked = '';
+          this._text = '';
+      }
+      willUpdate(changed) {
+          if (changed.has('open') && this.open) {
+              this._picked = '';
+              this._text = '';
+          }
+      }
+      get _reason() {
+          return this.reasons.find((r) => r.id === this._picked);
+      }
+      get _ready() {
+          const r = this._reason;
+          return !!r && (r.short !== '' || this._text.trim() !== '');
+      }
+      /* One reason at a time. la-choice toggles itself on a press, so a second
+         press on the picked one would clear it; `live` puts it back. */
+      _pick(id) {
+          this._picked = id;
+          this.requestUpdate();
+      }
+      _cancel() {
+          this.open = false;
+          this.dispatchEvent(new CustomEvent('la-move-past-cancel', { bubbles: true, composed: true }));
+      }
+      _go() {
+          const r = this._reason;
+          if (!r || !this._ready)
+              return;
+          this.open = false;
+          this.dispatchEvent(new CustomEvent('la-move-past', {
+              detail: { reason: r.id, text: r.short || this._text.trim() },
+              bubbles: true,
+              composed: true,
+          }));
+      }
+      render() {
+          const own = this._reason && this._reason.short === '';
+          /* The reasons' and the field's la-change stay inside; the page hears
+             la-move-past or la-move-past-cancel. */
+          return b `<la-modal
+      ?open=${this.open}
+      size="sm"
+      heading="Move past this step"
+      description="It won’t count as done, and we won’t ask about it again. You can reopen it any time."
+      @close=${this._cancel}
+    >
+      <div @la-change=${(e) => e.stopPropagation()}>
+      <p class="q" id="q">Why are you moving past this step?</p>
+      <div class="opts" role="radiogroup" aria-labelledby="q">
+        ${this.reasons.map((r) => b `<la-choice .checked=${l(this._picked === r.id)} @la-change=${() => this._pick(r.id)}
+            >${r.label}</la-choice
+          >`)}
+      </div>
+      ${own
+            ? b `<la-input
+            placeholder="Say why"
+            aria-label="Why are you moving past this step?"
+            .value=${this._text}
+            @la-change=${(e) => (this._text = e.detail.value)}
+          ></la-input>`
+            : A}
+      </div>
+      <div slot="footer" class="footer">
+        <la-button variant="ghost" @click=${this._cancel}>Cancel</la-button>
+        <la-button variant="primary" ?disabled=${!this._ready} @click=${this._go}>Move past this step</la-button>
+      </div>
+    </la-modal>`;
+      }
+  };
+  exports.LaMovePast.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        color: var(--la-color-text);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      .q {
+        margin: 0 0 var(--la-space-sm);
+        font-size: var(--la-font-size-lg);
+      }
+      .opts {
+        display: grid;
+        gap: 2px;
+      }
+      la-input {
+        display: block;
+        margin-top: var(--la-space-sm);
+        max-width: 420px;
+      }
+      .footer {
+        display: flex;
+        justify-content: flex-end;
+        gap: var(--la-space-sm);
+        width: 100%;
+      }
+    `,
+  ];
+  __decorate$8([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaMovePast.prototype, "open", void 0);
+  __decorate$8([
+      n({ type: Array })
+  ], exports.LaMovePast.prototype, "reasons", void 0);
+  __decorate$8([
+      r$1()
+  ], exports.LaMovePast.prototype, "_picked", void 0);
+  __decorate$8([
+      r$1()
+  ], exports.LaMovePast.prototype, "_text", void 0);
+  exports.LaMovePast = __decorate$8([
+      t$1('la-move-past')
+  ], exports.LaMovePast);
+
+  var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const WORDS$3 = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+  /**
+   * la-playbook-step — a step of a playbook run, the Review, Decide & Confirm
+   * card (Phase B brief, Screen 1; PRO-230). The founder is shown something
+   * they need to know, answers what we ask, and makes it theirs. Nothing
+   * counts until they confirm.
+   *
+   * Three states, plus kinds of settled:
+   *   idle    - not reached: the title, its one line, *Why it matters*, *More*,
+   *             and the authored button, whose label is the action. A caret in
+   *             the corner expands the card alone (la-step-expand), the mirror
+   *             of the open card's collapse (Jonard, 6 Oct 2026). `next` makes
+   *             it the run's one primary button and fills the marker. It is the
+   *             same size as Confirm and carries no caret (Jonard, 6 Oct 2026:
+   *             a small button with a caret read as a dropdown, and the step's
+   *             two acts should look like two acts)
+   *   open    - the card lifts into the brief's three verbs, as bands with a
+   *             hairline between them and no label (the words were for the
+   *             review's grouping, not the founder; Jonard, 6 Oct 2026).
+   *             Review: the line, Why it matters, More, and the facts on the
+   *             record (default slot: la-question + la-record-row).
+   *             Decide and Confirm happen in the modal (la-step-questions),
+   *             which the authored button opens together with the step: the
+   *             questions, then the summary of the answers with what they do
+   *             to the plan, confirmed there (decision 120). The card carries
+   *             none of the answers (Jonard, 6 Oct 2026). Its one act:
+   *             "Finish answering" while questions remain (reopens the modal
+   *             at the next question), then Confirm or Finish, which opens the
+   *             summary to confirm from; a step with no questions confirms on
+   *             the card. What's left in words; the sources pill; and a ⋯ menu
+   *             holding "Move past this step" (decision 119,
+   *             amended 6 Oct: the sentence "Stuck? Move past this step" was
+   *             long and competed with the acts; la-menu is the system's home
+   *             for an action that doesn't warrant a visible button).
+   *   done    - one line: Done · the answer that matters · the date, and Change
+   *   passed  - moved past with a reason (la-step-marker `passed`, decision 115),
+   *             a dashed card, and Change
+   *   before  - done before the founder started this run: nothing to change
+   * A step that doesn't apply isn't a state of the card: it leaves the run.
+   *
+   * The card holds no answers and runs no rule (no AI in Phase B). The page
+   * owns the state, the answers and the plan; the card draws them and says
+   * what the founder did. An answer that ends the playbook is shown with the
+   * founder's own answer beside it ("Because you answered …"), so the stop
+   * reads as theirs, never as our verdict.
+   *
+   * Width: the card is its own container. Below 480px it tightens its padding
+   * and stacks its acts, so a run in a narrow column needs nothing else.
+   *
+   * Usage:
+   *   <la-playbook-step index="1" state="open" heading="Check your articles give the power, and pick the route."
+   *       line="Your articles decide…" matters="An appointment is only valid if…"
+   *       button="Which appointment route applies to me?" remaining="1">
+   *     <div slot="more"><p><b>What it is.</b> …</p></div>
+   *     <la-question text="Which route will you use?">…</la-question>
+   *   </la-playbook-step>
+   *
+   * @prop index       - the step's number in the run
+   * @prop state       - idle (default) · open · done · passed · before
+   * @prop next        - the run's next step: primary button, filled marker
+   * @prop heading     - the step's title, legal's words
+   * @prop line        - its one action-first sentence
+   * @prop matters     - why it matters, one line
+   * @prop button      - the authored button label: the action that opens it
+   * @prop info        - an information step, no questions: the button settles it ("Got it")
+   * @prop remaining   - required questions still unanswered, on the card and in the modal; gates Confirm
+   * @prop questionCount - attribute question-count: how many questions the modal asks; 0 hides the Decide band
+   * @prop answered    - every asked question has an answer: show the `answers` summary, not the button
+   * @prop summary     - what a settled step says after its state word
+   * @prop endReason   - attribute end-reason: set when a picked answer ends the playbook; Confirm becomes Finish
+   * @prop endBecause  - attribute end-because: the founder's answer that ended it, as "Because you answered …"
+   * @prop notice      - a line above the questions, such as what changing a confirmed answer can undo
+   * @prop passing     - the way past is open: la-move-past, a modal, from the acts' ⋯ menu
+   * @slot             - Review: the facts on the record, la-question elements holding la-record-row
+   * @slot more        - *More*: what it is, when it bites, the law and the procedure. Empty hides it
+   * @slot sources     - la-sources: the documents and registers the step reads from. It keeps the
+   *                     far right, opposite the act (Jonard, 28 Sep and 6 Oct 2026): provenance,
+   *                     not the law, which stays behind More
+   * @fires la-step-open    - the authored button, on a step that isn't an information step
+   * @fires la-step-expand  - the caret on a not-reached card: open the card alone, without its questions
+   * @fires la-step-answer  - {at: 'next' | 'summary'}: open la-step-questions at the next unanswered question
+   *                          (Finish answering) or at the summary (Confirm or Finish on a step with
+   *                          questions). On la-step-open the page opens the step and, when it asks
+   *                          questions not yet answered, the modal at once (decision 120)
+   * @fires la-step-close   - collapse an open step
+   * @fires la-step-confirm - Confirm on a step with no questions (record facts only), or an information step's button
+   * @fires la-step-change  - Change on a done or passed step
+   * @fires la-step-moved   - {reason, text} from la-move-past: the page settles the step as passed
+   */
+  exports.LaPlaybookStep = class LaPlaybookStep extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.index = 1;
+          this.state = 'idle';
+          this.next = false;
+          this.heading = '';
+          this.line = '';
+          this.matters = '';
+          this.button = '';
+          this.info = false;
+          this.remaining = 0;
+          this.questionCount = 0;
+          this.answered = false;
+          this.summary = '';
+          this.endReason = '';
+          this.notice = '';
+          this.passing = false;
+          this._hasMore = false;
+          this._hasReview = false;
+      }
+      _fire(name, detail) {
+          this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }));
+      }
+      get _settled() {
+          return this.state === 'done' || this.state === 'passed' || this.state === 'before';
+      }
+      _marker() {
+          const s = this.state;
+          const status = s === 'done' || s === 'before'
+              ? 'complete'
+              : s === 'passed'
+                  ? 'passed'
+                  : s === 'open' || this.next
+                      ? 'active'
+                      : 'pending';
+          return b `<la-step-marker index=${this.index} status=${status}></la-step-marker>`;
+      }
+      _word() {
+          if (this.state === 'passed')
+              return 'Moved past';
+          if (this.state === 'before')
+              return 'Done before you started';
+          if (this.endReason)
+              return 'Finished';
+          return this.info ? 'Read' : 'Done';
+      }
+      _settledView() {
+          return b `<div class="settled">
+      <div>
+        <h3>${this.heading}</h3>
+        <p class="summary">
+          <span class="word">${this._word()}</span>${this.summary ? b ` · ${this.summary}` : A}
+        </p>
+      </div>
+      ${this.state === 'before'
+            ? A
+            : b `<la-button variant="ghost" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
+    </div>`;
+      }
+      _frame() {
+          const open = this.state === 'open';
+          return b `<div class="head">
+        <h3>${this.heading}</h3>
+        ${open
+            ? b `<button class="collapse" type="button" aria-label="Close this step" @click=${() => this._fire('la-step-close')}>
+              <i class="ph ph-caret-up" aria-hidden="true"></i>
+            </button>`
+            : b `<button class="collapse" type="button" aria-label="Open this step" @click=${() => this._fire('la-step-expand')}>
+              <i class="ph ph-caret-down" aria-hidden="true"></i>
+            </button>`}
+      </div>
+      ${this.line ? b `<p class="line">${this.line}</p>` : A}
+      ${this.matters ? b `<p class="matters"><b>Why it matters</b>${this.matters}</p>` : A}
+      <la-disclosure class="more" variant="quiet" summary="More" ?hidden=${!this._hasMore}>
+        <slot name="more" @slotchange=${(e) => (this._hasMore = e.target.assignedElements().length > 0)}></slot>
+      </la-disclosure>`;
+      }
+      _leftText(ends) {
+          const n = this.remaining;
+          if (n > 0)
+              return `${WORDS$3[n] ?? n} ${n === 1 ? 'question' : 'questions'} left.`;
+          if (ends)
+              return 'Your answers end the playbook here. Nothing counts until you finish.';
+          return 'Nothing counts until you confirm.';
+      }
+      _openView() {
+          const ends = !!this.endReason;
+          const toAnswer = this.questionCount > 0 && !this.answered;
+          const act = toAnswer ? 'Finish answering' : ends ? 'Finish' : 'Confirm';
+          const onAct = () => {
+              if (toAnswer)
+                  return this._fire('la-step-answer', { at: 'next' });
+              if (this.questionCount > 0)
+                  return this._fire('la-step-answer', { at: 'summary' });
+              this._fire('la-step-confirm');
+          };
+          return b `<div class="review-slot" ?hidden=${!this._hasReview}>
+        <slot @slotchange=${(e) => (this._hasReview = this._assigned(e))}></slot>
+      </div>
+      ${this.notice
+            ? b `<p class="notice"><i class="ph ph-info" aria-hidden="true"></i><span>${this.notice}</span></p>`
+            : A}
+      <div class="band confirm">
+      <la-move-past
+        ?open=${this.passing}
+        @la-move-past=${(e) => {
+            e.stopPropagation();
+            this.passing = false;
+            this._fire('la-step-moved', e.detail);
+        }}
+        @la-move-past-cancel=${(e) => {
+            e.stopPropagation();
+            this.passing = false;
+        }}
+      ></la-move-past>
+      <div class="acts">
+        <div class="acts-main">
+          <la-button variant="primary" ?disabled=${!toAnswer && this.remaining > 0} @click=${onAct}>${act}</la-button>
+          <span class="left ${this.remaining ? '' : 'ready'}" aria-live="polite">${this._leftText(ends)}</span>
+        </div>
+        <div class="acts-side">
+          <slot name="sources"></slot>
+          <la-menu label="More for this step" origin="bottom-right">
+            <la-menu-item label="Move past this step" value="pass" @la-menu-select=${() => (this.passing = true)}></la-menu-item>
+          </la-menu>
+        </div>
+      </div>
+      </div>`;
+      }
+      _assigned(e) {
+          return e.target.assignedElements().length > 0;
+      }
+      render() {
+          const open = this.state === 'open';
+          return b `${iconStyles}<article class="card" part="card" aria-label=${`Step ${this.index}: ${this.heading}`}>
+      <div class="gut">${this._marker()}</div>
+      <div class="body">
+        ${this._settled
+            ? this._settledView()
+            : b `${this._frame()}
+            ${open
+                ? this._openView()
+                : b `<div class="foot">
+                  <la-button
+                    variant=${this.next ? 'primary' : 'secondary'}
+                    @click=${() => this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
+                    >${this.button}</la-button
+                  >
+                  <slot name="sources"></slot>
+                </div>`}`}
+      </div>
+    </article>`;
+      }
+  };
+  exports.LaPlaybookStep.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        container-type: inline-size;
+        color: var(--la-color-text);
+        font-size: var(--la-font-size-base);
+        line-height: var(--la-line-height);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+
+      .card {
+        display: grid;
+        grid-template-columns: 28px minmax(0, 1fr);
+        gap: var(--la-space-md);
+        box-sizing: border-box;
+        padding: var(--la-space-lg) var(--la-space-xl);
+        border-radius: var(--la-radius-xl);
+        border: 1px solid var(--la-color-border-light);
+        background-color: var(--la-color-bg);
+        transition:
+          box-shadow var(--dur-base) var(--ease-out),
+          border-color var(--dur-base) var(--ease-out);
+      }
+      :host([next]:not([state='open'])) .card {
+        border-color: var(--la-color-border);
+        box-shadow: var(--la-shadow-xs);
+      }
+      :host([state='open']) .card {
+        padding: var(--la-space-xl);
+        border-color: var(--la-color-border);
+        box-shadow: var(--la-shadow-card);
+      }
+      /* Settled: one line. The right padding matches the top and bottom, so
+         the ghost Change sits at the edge and its label lines up with the
+         content column (Jonard, 6 Oct 2026). */
+      :host([state='done']) .card,
+      :host([state='passed']) .card,
+      :host([state='before']) .card {
+        padding-top: var(--la-space-md);
+        padding-right: var(--la-space-md);
+        padding-bottom: var(--la-space-md);
+        background-color: transparent;
+      }
+      :host([state='passed']) .card {
+        border-style: dashed;
+      }
+      .gut {
+        padding-top: 1px;
+      }
+      .body {
+        min-width: 0;
+      }
+
+      .head {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--la-space-md);
+      }
+      /* Hierarchy by colour, not weight (Jonard, 6 Oct 2026): the title is
+         the one weighted line; everything else is told apart by size and
+         by the text, secondary and muted colours. */
+      h3 {
+        margin: 0;
+        font-size: var(--la-font-size-xl);
+        line-height: 1.4;
+        font-weight: var(--la-font-weight-medium);
+        overflow-wrap: anywhere;
+      }
+      .line {
+        margin: var(--la-space-xs) 0 0;
+        font-size: var(--la-font-size-lg);
+        color: var(--la-color-text-secondary);
+      }
+      .matters {
+        margin: var(--la-space-sm) 0 0;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-secondary);
+      }
+      .matters b {
+        margin-right: 6px;
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text);
+      }
+      .more {
+        display: block;
+        margin-top: 2px;
+      }
+      .more[hidden] {
+        display: none;
+      }
+      .more ::slotted(*) {
+        max-width: 64ch;
+      }
+      /* The act on the left, where the eye lands; the sources pill keeps
+         the right. */
+      .foot {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--la-space-md);
+        margin-top: var(--la-space-md);
+      }
+      .acts-side {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--la-space-sm);
+      }
+      .collapse {
+        flex: none;
+        width: 32px;
+        height: 32px;
+        margin: -4px -6px 0 0;
+        border: 0;
+        border-radius: var(--la-radius-sm);
+        background: transparent;
+        color: var(--la-color-text-muted);
+        font-size: 16px;
+        cursor: pointer;
+      }
+      .collapse:hover {
+        background-color: var(--la-color-bg-subtle);
+        color: var(--la-color-text);
+      }
+      .collapse:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+      }
+
+      /* Settled: one line. */
+      .settled {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: var(--la-space-lg);
+      }
+      .settled h3 {
+        font-size: var(--la-font-size-lg);
+        font-weight: var(--la-font-weight-normal);
+      }
+      :host([state='passed']) .settled h3 {
+        color: var(--la-color-text-secondary);
+      }
+      .summary {
+        margin: 2px 0 0;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-muted);
+      }
+      .word {
+        color: var(--la-color-text-secondary);
+      }
+
+      /* The three verbs, each a band with its word. */
+      .band {
+        margin-top: var(--la-space-lg);
+        padding-top: var(--la-space-lg);
+        border-top: 1px solid var(--la-color-border-light);
+      }
+      .band.review {
+        margin-top: var(--la-space-md);
+        padding-top: 0;
+        border-top: 0;
+      }
+      .review-slot[hidden],
+      .review-slot {
+        margin-top: var(--la-space-xs);
+      }
+      .notice {
+        display: flex;
+        gap: var(--la-space-sm);
+        margin: var(--la-space-lg) 0 0;
+        padding: var(--la-space-md) var(--la-space-lg);
+        border-radius: var(--la-radius-md);
+        background-color: var(--la-color-surface-info);
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-info-text);
+      }
+      .notice i {
+        margin-top: 2px;
+      }
+      .qs {
+        margin-top: var(--la-space-lg);
+      }
+
+
+      .acts {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--la-space-md);
+      }
+      .acts-main {
+        display: flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--la-space-md);
+      }
+      .left {
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-secondary);
+      }
+      .left.ready {
+        color: var(--la-color-text-muted);
+      }
+
+
+      @container (max-width: 480px) {
+        .card,
+        :host([state='open']) .card {
+          gap: var(--la-space-sm);
+          padding: var(--la-space-lg);
+        }
+        :host([state='done']) .card,
+        :host([state='passed']) .card,
+        :host([state='before']) .card {
+          padding: var(--la-space-md) var(--la-space-lg);
+        }
+        .settled {
+          flex-direction: column;
+          gap: var(--la-space-xs);
+        }
+        .acts {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .card {
+          transition: none;
+        }
+      }
+    `,
+  ];
+  __decorate$7([
+      n({ type: Number })
+  ], exports.LaPlaybookStep.prototype, "index", void 0);
+  __decorate$7([
+      n({ reflect: true })
+  ], exports.LaPlaybookStep.prototype, "state", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "next", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "heading", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "line", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "matters", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "button", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "info", void 0);
+  __decorate$7([
+      n({ type: Number })
+  ], exports.LaPlaybookStep.prototype, "remaining", void 0);
+  __decorate$7([
+      n({ type: Number, attribute: 'question-count' })
+  ], exports.LaPlaybookStep.prototype, "questionCount", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "answered", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "summary", void 0);
+  __decorate$7([
+      n({ attribute: 'end-reason' })
+  ], exports.LaPlaybookStep.prototype, "endReason", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "notice", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "passing", void 0);
+  __decorate$7([
+      r$1()
+  ], exports.LaPlaybookStep.prototype, "_hasMore", void 0);
+  __decorate$7([
+      r$1()
+  ], exports.LaPlaybookStep.prototype, "_hasReview", void 0);
+  exports.LaPlaybookStep = __decorate$7([
+      t$1('la-playbook-step')
+  ], exports.LaPlaybookStep);
+
+  var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-people-answer — a question answered about people on the founder's
+   * record (Phase B brief, Screen 1, question types *Pick people* and *One
+   * answer per person*). The group and where it came from on a line of its
+   * own ("Your investors, from Cap table"), then one row per person, and
+   * *Add someone not listed* where the content allows it.
+   *
+   *   mode="pick"  tick people from the group: an la-choice per person, in a
+   *                `role="group"`. `value` is the names ticked
+   *   mode="each"  one answer per person: the name and an la-segmented of the
+   *                `options`, with the picked option's guidance under the row.
+   *                `value` maps each name to an option id
+   *
+   * The page owns the answer: set `value`, hear `la-change`. Someone added is
+   * reported with `la-add`; the page adds them to `people` (and, for pick,
+   * ticks them). Nothing is picked until the founder picks.
+   *
+   * Usage:
+   *   <la-people-answer mode="each" group="investors" source="Cap table"
+   *       .people=${['Example Ventures LP', 'Priya Shah']}
+   *       .options=${[{id: 'hnw', label: 'High-net-worth'}, …]}
+   *       .value=${{'Priya Shah': 'unsure'}}></la-people-answer>
+   *
+   * @prop mode    - pick (default) · each
+   * @prop group   - the group's name, lower case ("investors", "directors")
+   * @prop source  - where the group came from ("Cap table", "Companies House")
+   * @prop people  - the names in the group, in order
+   * @prop options - each mode: the answers offered per person
+   * @prop value   - pick: string[] of names ticked · each: Record<name, option id>
+   * @prop label   - accessible name of the group of rows (the question's text)
+   * @prop add     - offer Add someone not listed (default true)
+   * @fires la-change - {value} when the founder ticks or answers
+   * @fires la-add    - {name} when they add someone not listed
+   */
+  exports.LaPeopleAnswer = class LaPeopleAnswer extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.mode = 'pick';
+          this.group = '';
+          this.source = '';
+          this.people = [];
+          this.options = [];
+          this.value = [];
+          this.label = '';
+          this.add = true;
+          this._draft = '';
+      }
+      _emit(value) {
+          this.value = value;
+          this.dispatchEvent(new CustomEvent('la-change', { detail: { value }, bubbles: true, composed: true }));
+      }
+      _tick(name, checked) {
+          const cur = (Array.isArray(this.value) ? this.value : []).filter((n) => n !== name);
+          if (checked)
+              cur.push(name);
+          this._emit(cur);
+      }
+      _answer(name, id) {
+          const cur = Array.isArray(this.value) ? {} : { ...this.value };
+          cur[name] = id;
+          this._emit(cur);
+      }
+      _addOther() {
+          const name = this._draft.trim();
+          if (!name)
+              return;
+          this._draft = '';
+          this.dispatchEvent(new CustomEvent('la-add', { detail: { name }, bubbles: true, composed: true }));
+      }
+      _source() {
+          if (!this.group)
+              return A;
+          return b `<p class="src">
+      <i class="ph ph-database" aria-hidden="true"></i>Your ${this.group}${this.source ? `, from ${this.source}` : ''}
+    </p>`;
+      }
+      _pick() {
+          const ticked = Array.isArray(this.value) ? this.value : [];
+          return b `<div class="pick" role="group" aria-label=${this.label || A}>
+      ${this.people.map((p) => b `<la-choice
+          ?checked=${ticked.includes(p)}
+          @la-change=${(e) => this._tick(p, e.detail.checked)}
+          >${p}</la-choice
+        >`)}
+    </div>`;
+      }
+      _each() {
+          const answers = Array.isArray(this.value) ? {} : this.value;
+          return b `<div class="each" role="group" aria-label=${this.label || A}>
+      ${this.people.map((p) => {
+            const picked = this.options.find((o) => o.id === answers[p]);
+            return b `<div class="row">
+          <span class="name">${p}</span>
+          <la-segmented size="sm" label=${p} value=${answers[p] ?? ''} @la-change=${(e) => this._answer(p, e.detail.value)}>
+            ${this.options.map((o) => b `<la-segment value=${o.id}>${o.label}</la-segment>`)}
+          </la-segmented>
+          ${picked?.guidance ? b `<p class="guide">${picked.guidance}</p>` : A}
+        </div>`;
+        })}
+    </div>`;
+      }
+      /* Inner controls' la-change stays inside: the page hears one la-change,
+         this component's own, with the whole answer. */
+      _swallow(e) {
+          e.stopPropagation();
+      }
+      render() {
+          const none = this.people.length === 0;
+          return b `${iconStyles}<div @la-change=${this._swallow}>${this._source()}
+      ${none
+            ? b `<p class="empty">Your record has no ${this.group || 'one in this group'} yet.</p>`
+            : this.mode === 'each'
+                ? this._each()
+                : this._pick()}
+      ${this.add
+            ? b `<div class="add">
+            <la-input
+              placeholder="Add someone not listed"
+              aria-label="Add someone not listed"
+              .value=${this._draft}
+              @la-change=${(e) => (this._draft = e.detail.value)}
+              @keydown=${(e) => e.key === 'Enter' && this._addOther()}
+            ></la-input>
+            <la-button size="md" variant="ghost" @click=${this._addOther}>Add</la-button>
+          </div>`
+            : A}</div>`;
+      }
+  };
+  exports.LaPeopleAnswer.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        container-type: inline-size;
+        color: var(--la-color-text);
+        font-size: var(--la-font-size-base);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      .src {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+        margin: 0 0 var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .empty {
+        margin: 0;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-secondary);
+      }
+      .pick {
+        display: grid;
+        gap: 2px;
+      }
+      .each {
+        border-top: 1px solid var(--la-color-border-light);
+      }
+      .row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        align-items: center;
+        gap: var(--la-space-xs) var(--la-space-md);
+        padding: var(--la-space-sm) 0;
+        border-bottom: 1px solid var(--la-color-border-light);
+      }
+      .name {
+        overflow-wrap: anywhere;
+      }
+      .guide {
+        grid-column: 1 / -1;
+        margin: 0;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-secondary);
+      }
+      .add {
+        display: flex;
+        gap: var(--la-space-sm);
+        margin-top: var(--la-space-md);
+        max-width: 420px;
+      }
+      .add la-input {
+        flex: 1;
+      }
+      @container (max-width: 480px) {
+        .row {
+          grid-template-columns: minmax(0, 1fr);
+        }
+      }
+    `,
+  ];
+  __decorate$6([
+      n({ reflect: true })
+  ], exports.LaPeopleAnswer.prototype, "mode", void 0);
+  __decorate$6([
+      n()
+  ], exports.LaPeopleAnswer.prototype, "group", void 0);
+  __decorate$6([
+      n()
+  ], exports.LaPeopleAnswer.prototype, "source", void 0);
+  __decorate$6([
+      n({ attribute: false })
+  ], exports.LaPeopleAnswer.prototype, "people", void 0);
+  __decorate$6([
+      n({ attribute: false })
+  ], exports.LaPeopleAnswer.prototype, "options", void 0);
+  __decorate$6([
+      n({ attribute: false })
+  ], exports.LaPeopleAnswer.prototype, "value", void 0);
+  __decorate$6([
+      n()
+  ], exports.LaPeopleAnswer.prototype, "label", void 0);
+  __decorate$6([
+      n({ type: Boolean })
+  ], exports.LaPeopleAnswer.prototype, "add", void 0);
+  __decorate$6([
+      r$1()
+  ], exports.LaPeopleAnswer.prototype, "_draft", void 0);
+  exports.LaPeopleAnswer = __decorate$6([
+      t$1('la-people-answer')
+  ], exports.LaPeopleAnswer);
+
+  var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const WORDS$2 = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten'];
+  /**
+   * la-steps-not-applying — the foot of a playbook run: the steps that don't
+   * apply to this company, each with its reason. A step that doesn't apply
+   * isn't a status on the step (status-conventions.md, decision 115): it
+   * leaves the list, and this row gathers them so the founder can still see
+   * what was left out and why. Kept honest in words: "Two steps don't apply
+   * to you".
+   *
+   * An la-disclosure row, closed by default. Each item is the step's title
+   * and its reason: the authored one ("No investor has a right to appoint, so
+   * there is no nominee to think about."), or the founder's own answer ("You
+   * chose “The board appoints”.").
+   *
+   * Usage:
+   *   <la-steps-not-applying .items=${[{title: '…', why: '…'}]}></la-steps-not-applying>
+   *
+   * @prop items - the steps, in run order
+   * @prop open  - start open
+   * @fires la-disclosure-toggle - {open}, from the row
+   */
+  exports.LaStepsNotApplying = class LaStepsNotApplying extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.items = [];
+          this.open = false;
+      }
+      _summary() {
+          const n = this.items.length;
+          const word = WORDS$2[n] ?? String(n);
+          return n === 1 ? `${word} step doesn’t apply to you` : `${word} steps don’t apply to you`;
+      }
+      render() {
+          if (!this.items.length)
+              return b ``;
+          return b `<la-disclosure variant="row" summary=${this._summary()} ?open=${this.open}>
+      <ul>
+        ${this.items.map((s) => b `<li><p class="t">${s.title}</p><p class="w">${s.why}</p></li>`)}
+      </ul>
+    </la-disclosure>`;
+      }
+  };
+  exports.LaStepsNotApplying.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        color: var(--la-color-text);
+        font-size: var(--la-font-size-base);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      la-disclosure {
+        display: block;
+      }
+      ul {
+        list-style: none;
+        margin: 0;
+        padding: 0 0 var(--la-space-sm);
+      }
+      li {
+        padding: var(--la-space-sm) 0;
+      }
+      li + li {
+        border-top: 1px dashed var(--la-color-border-light);
+      }
+      .t {
+        margin: 0;
+        color: var(--la-color-text-secondary);
+      }
+      .w {
+        margin: 2px 0 0;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-muted);
+      }
+    `,
+  ];
+  __decorate$5([
+      n({ attribute: false })
+  ], exports.LaStepsNotApplying.prototype, "items", void 0);
+  __decorate$5([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaStepsNotApplying.prototype, "open", void 0);
+  exports.LaStepsNotApplying = __decorate$5([
+      t$1('la-steps-not-applying')
+  ], exports.LaStepsNotApplying);
+
+  var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const WORDS$1 = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  /**
+   * la-run-ended — a playbook run that an answer ended (Phase B brief, Screen
+   * 1, *End the playbook*). Said once, in place of the steps it ends, rather
+   * than repeating the reason under each of them: which step ended it, legal's
+   * reason, how many steps after it aren't needed, and how to pick the run up
+   * again (change the answer on that step).
+   *
+   * Quiet, not alarming: a dashed border and no colour. The founder's answer
+   * ended the run, and it was theirs to give; the step's own end box already
+   * said so before they pressed Finish.
+   *
+   * Usage:
+   *   <la-run-ended step="2" dropped="7"
+   *       reason="Kate Adeyemi can’t lawfully act as a director without a court’s permission."></la-run-ended>
+   *
+   * @prop step    - the number of the step whose answer ended the run
+   * @prop reason  - legal's authored reason, with any name filled in
+   * @prop dropped - how many steps after it aren't needed
+   */
+  exports.LaRunEnded = class LaRunEnded extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.step = 0;
+          this.reason = '';
+          this.dropped = 0;
+      }
+      _more() {
+          const n = this.dropped;
+          const left = n <= 0 ? '' : n === 1 ? 'The step after it isn’t needed.' : `The ${WORDS$1[n] ?? n} steps after it aren’t needed.`;
+          const again = this.step ? ` To pick the playbook up again, change your answer on step ${this.step}.` : '';
+          return (left + again).trim();
+      }
+      render() {
+          const more = this._more();
+          return b `${iconStyles}<i class="ph ph-flag-banner" aria-hidden="true"></i>
+      <div>
+        <p class="title">The playbook ended${this.step ? ` at step ${this.step}` : ''}</p>
+        ${this.reason ? b `<p>${this.reason}</p>` : A}
+        ${more ? b `<p class="more">${more}</p>` : A}
+      </div>`;
+      }
+  };
+  exports.LaRunEnded.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: grid;
+        grid-template-columns: 20px minmax(0, 1fr);
+        gap: var(--la-space-md);
+        box-sizing: border-box;
+        padding: var(--la-space-lg) var(--la-space-xl);
+        border-radius: var(--la-radius-xl);
+        border: 1px dashed var(--la-color-border);
+        color: var(--la-color-text);
+        font-size: var(--la-font-size-base);
+        line-height: var(--la-line-height);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      i {
+        margin-top: 1px;
+        font-size: 18px;
+        color: var(--la-color-text-secondary);
+      }
+      p {
+        margin: 0;
+        color: var(--la-color-text-secondary);
+      }
+      .title {
+        margin-bottom: 2px;
+        font-size: var(--la-font-size-lg);
+        color: var(--la-color-text);
+      }
+      .more {
+        margin-top: var(--la-space-sm);
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-muted);
+      }
+    `,
+  ];
+  __decorate$4([
+      n({ type: Number })
+  ], exports.LaRunEnded.prototype, "step", void 0);
+  __decorate$4([
+      n()
+  ], exports.LaRunEnded.prototype, "reason", void 0);
+  __decorate$4([
+      n({ type: Number })
+  ], exports.LaRunEnded.prototype, "dropped", void 0);
+  exports.LaRunEnded = __decorate$4([
+      t$1('la-run-ended')
+  ], exports.LaRunEnded);
+
+  var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-run-progress — how far a playbook run has got: la-progress at its `lg`
+   * size with "2 of 9 done" beside it. One line at the head of a run, under
+   * the title and intro, and the one place the count is drawn (the Orion run
+   * and the UK case plan each drew their own).
+   *
+   * `done` counts settled steps: done, moved past, and done before you
+   * started. `total` counts the steps that apply, so a step that doesn't
+   * apply is in neither, and the run's progress stays honest (RDC-16).
+   *
+   * Usage:
+   *   <la-run-progress done="2" total="9"></la-run-progress>
+   *
+   * @prop done  - settled steps
+   * @prop total - steps that apply
+   * @prop label - accessible name of the bar (default "Playbook progress")
+   */
+  exports.LaRunProgress = class LaRunProgress extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.done = 0;
+          this.total = 0;
+          this.label = 'Playbook progress';
+      }
+      render() {
+          const text = `${this.done} of ${this.total} done`;
+          return b `<la-progress
+        size="lg"
+        value=${this.done}
+        max=${this.total || 1}
+        label=${this.label}
+        value-text=${`${this.done} of ${this.total} steps`}
+      ></la-progress>
+      <span aria-hidden="true">${text}</span>`;
+      }
+  };
+  exports.LaRunProgress.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+        color: var(--la-color-text-secondary);
+        font-size: var(--la-font-size-md);
+        font-variant-numeric: tabular-nums;
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      la-progress {
+        flex: 1;
+      }
+      span {
+        flex: none;
+      }
+    `,
+  ];
+  __decorate$3([
+      n({ type: Number })
+  ], exports.LaRunProgress.prototype, "done", void 0);
+  __decorate$3([
+      n({ type: Number })
+  ], exports.LaRunProgress.prototype, "total", void 0);
+  __decorate$3([
+      n()
+  ], exports.LaRunProgress.prototype, "label", void 0);
+  exports.LaRunProgress = __decorate$3([
+      t$1('la-run-progress')
+  ], exports.LaRunProgress);
+
+  var __decorate$2 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /** One open panel at a time, anywhere on the page. */
+  const OPEN = new Set();
+  /**
+   * la-sources — where something came from. A ghost "Sources · 2" pill that
+   * opens a panel naming the documents and registers a step, an insight or a
+   * deadline read from: the Orion run drew it as page JS (`sources.js`,
+   * `sources.css`) since the North Star case plan, and every page that showed
+   * provenance copied the pattern. One component now holds it.
+   *
+   * The promise is the same wherever it appears: whenever we assert something,
+   * the person can see which document or register it came from, in one click.
+   * On a playbook step it keeps the far right of the foot, opposite the act
+   * (Jonard, 28 Sep 2026 and 6 Oct 2026). It is provenance, not the law: the
+   * step's legal grounding stays behind *More*.
+   *
+   * A row with `nav` is a button and fires `la-source-open` {nav, doc}; the
+   * page routes it (a document to its LawVault page, a register row). A row
+   * without one is plain. The panel opens upward by default, so a pill at the
+   * foot of a card doesn't push the page; `drop="down"` for one near the top.
+   * One panel is open at a time; a click outside or Escape closes it, and
+   * Escape returns focus to the pill.
+   *
+   * Usage:
+   *   <la-sources .sources=${[{icon: 'ph-file-text', doc: 'Articles of association',
+   *       section: 'adopted 2 June 2024 · LawVault', nav: 'lawvault-articles'}]}></la-sources>
+   *
+   * @prop sources - the documents and registers, in the order read
+   * @prop label   - the pill's word (default "Sources"); the count follows it
+   * @prop drop    - up (default) · down
+   * @slot note    - closes the panel: how we read it, and how sure we are
+   * @fires la-source-open - {nav, doc} when a row with `nav` is pressed
+   */
+  exports.LaSources = class LaSources extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.sources = [];
+          this.label = 'Sources';
+          this.drop = 'up';
+          this._open = false;
+          this._hasNote = false;
+          this._panelId = `la-sources-${Math.random().toString(36).slice(2, 8)}`;
+          this._onDocClick = (e) => {
+              if (!this._open)
+                  return;
+              if (e.composedPath().includes(this))
+                  return;
+              this.close();
+          };
+          this._onKey = (e) => {
+              if (e.key !== 'Escape' || !this._open)
+                  return;
+              this.close();
+              this.renderRoot.querySelector('la-button')?.focus();
+          };
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          document.addEventListener('click', this._onDocClick);
+          document.addEventListener('keydown', this._onKey);
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          document.removeEventListener('click', this._onDocClick);
+          document.removeEventListener('keydown', this._onKey);
+          OPEN.delete(this);
+      }
+      /** Close the panel, from the page. */
+      close() {
+          if (!this._open)
+              return;
+          this._open = false;
+          OPEN.delete(this);
+      }
+      _toggle(e) {
+          e.stopPropagation();
+          if (this._open)
+              return this.close();
+          OPEN.forEach((o) => o.close());
+          this._open = true;
+          OPEN.add(this);
+      }
+      _go(s) {
+          this.dispatchEvent(new CustomEvent('la-source-open', { detail: { nav: s.nav, doc: s.doc }, bubbles: true, composed: true }));
+          this.close();
+      }
+      _row(s) {
+          const body = b `<i class="ph ${s.icon} icon" aria-hidden="true"></i>
+      <div>
+        <div class="doc">${s.doc}</div>
+        ${s.section ? b `<div class="section">${s.section}</div>` : A}
+      </div>`;
+          return s.nav
+              ? b `<button class="item" type="button" @click=${() => this._go(s)}>
+          ${body}<i class="ph ph-arrow-square-out go" aria-hidden="true"></i>
+        </button>`
+              : b `<div class="item">${body}</div>`;
+      }
+      render() {
+          const n = this.sources.length;
+          return b `${iconStyles}
+      <la-button
+        variant="ghost"
+        size="sm"
+        aria-haspopup="true"
+        aria-expanded=${this._open ? 'true' : 'false'}
+        aria-controls=${this._panelId}
+        @click=${this._toggle}
+      >
+        <i slot="icon-left" class="ph ph-link-simple"></i>${this.label} · ${n}
+      </la-button>
+      <div
+        class="panel ${this._open ? 'open' : ''}"
+        id=${this._panelId}
+        role="group"
+        aria-label=${this.label}
+        @click=${(e) => e.stopPropagation()}
+      >
+        <div class="title">${this.label}</div>
+        ${this.sources.map((s) => this._row(s))}
+        <div class="note" ?hidden=${!this._hasNote}>
+          <slot name="note" @slotchange=${(e) => (this._hasNote = e.target.assignedElements().length > 0)}></slot>
+        </div>
+      </div>`;
+      }
+  };
+  exports.LaSources.styles = [
+      tokens,
+      i$5 `
+      :host {
+        position: relative;
+        display: inline-flex;
+        flex: none;
+        font-family: var(--la-font-family);
+        font-size: var(--la-font-size-base);
+        line-height: var(--la-line-height);
+        color: var(--la-color-text);
+      }
+      :host([hidden]) {
+        display: none;
+      }
+      .panel {
+        position: absolute;
+        right: 0;
+        bottom: calc(100% + 8px);
+        z-index: 30;
+        box-sizing: border-box;
+        min-width: 280px;
+        max-width: min(360px, 90vw);
+        padding: var(--la-space-xs);
+        border-radius: var(--la-radius-lg);
+        background-color: var(--la-color-bg);
+        box-shadow: var(--la-shadow-popover, var(--la-shadow-lg));
+        text-align: left;
+        white-space: normal;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transform: translateY(4px);
+        transition:
+          opacity var(--dur-fast) var(--ease),
+          transform var(--dur-fast) var(--ease),
+          visibility 0s var(--dur-fast);
+      }
+      :host([drop='down']) .panel {
+        bottom: auto;
+        top: calc(100% + 8px);
+        transform: translateY(-4px);
+      }
+      .panel.open {
+        visibility: visible;
+        opacity: 1;
+        pointer-events: auto;
+        transform: translateY(0);
+        transition:
+          opacity var(--dur-fast) var(--ease),
+          transform var(--dur-fast) var(--ease);
+      }
+      .title {
+        padding: var(--la-space-sm) var(--la-space-md) var(--la-space-xs);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .item {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-md);
+        width: 100%;
+        box-sizing: border-box;
+        margin: 0;
+        padding: var(--la-space-sm) var(--la-space-md);
+        border: 0;
+        border-radius: var(--la-radius-md);
+        background: none;
+        font: inherit;
+        color: inherit;
+        text-align: left;
+      }
+      .item + .item {
+        margin-top: 1px;
+      }
+      button.item {
+        cursor: pointer;
+      }
+      button.item:hover {
+        background-color: var(--la-color-bg-subtle);
+      }
+      button.item:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: -2px;
+      }
+      .item > div {
+        min-width: 0;
+        flex: 1;
+      }
+      .item .icon {
+        flex: none;
+        margin-top: 2px;
+        font-size: 15px;
+        color: var(--la-color-text-muted);
+      }
+      .doc {
+        font-size: var(--la-font-size-sm);
+        line-height: 1.25;
+      }
+      .section {
+        margin-top: 1px;
+        font-size: var(--la-font-size-sm);
+        line-height: 1.25;
+        color: var(--la-color-text-faint);
+      }
+      .go {
+        flex: none;
+        margin-top: 2px;
+        font-size: 14px;
+        color: var(--la-color-text-faint);
+      }
+      .note {
+        margin-top: var(--la-space-xs);
+        padding: var(--la-space-sm) var(--la-space-md);
+        border-top: 1px solid var(--la-color-border-light);
+        font-size: var(--la-font-size-sm);
+        line-height: 1.4;
+        color: var(--la-color-text-secondary);
+      }
+      .note[hidden] {
+        display: none;
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .panel {
+          transition: none;
+        }
+      }
+    `,
+  ];
+  __decorate$2([
+      n({ attribute: false })
+  ], exports.LaSources.prototype, "sources", void 0);
+  __decorate$2([
+      n()
+  ], exports.LaSources.prototype, "label", void 0);
+  __decorate$2([
+      n({ reflect: true })
+  ], exports.LaSources.prototype, "drop", void 0);
+  __decorate$2([
+      r$1()
+  ], exports.LaSources.prototype, "_open", void 0);
+  __decorate$2([
+      r$1()
+  ], exports.LaSources.prototype, "_hasNote", void 0);
+  exports.LaSources = __decorate$2([
+      t$1('la-sources')
+  ], exports.LaSources);
+
+  var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  const WORDS = ['no', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten'];
+  /**
+   * la-step-questions — the Decide step of a playbook step, in a modal: the
+   * questions one at a time, with Back and Next, the picked option's guidance
+   * under it, follow-ups as the next screens, an answer that ends the playbook
+   * shown before the last Next, and a summary screen the founder finishes from.
+   * Opened together with the step by its authored button (decision 120), so
+   * the open card has one act; the card then shows the answers and Confirm,
+   * and nothing counts until they confirm on the step (Jonard, 6 Oct 2026).
+   *
+   * It follows the authored content and nothing else: an option's `then` says
+   * whether a follow-up comes next, the rest of the step is skipped, later
+   * steps turn on, or the playbook ends. No answer is worked out for the
+   * founder, nothing is pre-selected, and no control carries a result colour
+   * (decision 117). The record's facts aren't asked here: they stay on the
+   * card's Review band as la-record-row.
+   *
+   * The page owns the answers. Set `answers` before opening; the modal keeps
+   * its own copy while open, fires `la-step-questions-change` {answers} on
+   * every Next (so closing early loses nothing), and from the summary either
+   * `la-step-questions-done` {answers} (Done: back to the step, which still
+   * has facts to settle) or, with `confirms`, `la-step-questions-confirm`
+   * {answers} (Confirm, or Finish when an answer ends the playbook: the step
+   * settles as the modal closes). The page sets `confirms` when nothing else
+   * on the card is pending (decision 120, amended: the hybrid).
+   *
+   * The lead line of each screen is the modal's description, under the title
+   * and above the stepper (Jonard, 6 Oct 2026).
+   *
+   * Usage:
+   *   <la-step-questions heading="Check your articles give the power, and pick the route."
+   *       .questions=${step.questions} .answers=${answers} .titles=${titles}
+   *       name-key="ad_name" open></la-step-questions>
+   *
+   * @prop open      - the modal is shown
+   * @prop heading   - the step's title
+   * @prop questions - the step's questions, with their options, thens and follow-ups
+   * @prop answers   - the answers so far, by question id
+   * @prop titles    - step id to title, for "This adds:"
+   * @prop nameKey   - attribute name-key: the question whose answer fills `{name}` ("this person" until answered)
+   * @prop confirms  - the summary's act is Confirm (or Finish) and settles the step; otherwise Done hands back to the card
+   * @prop start     - where it opens: 'next' (default), the first unanswered question, or 'summary'
+   * @fires la-step-questions-change - {answers} on each Next and on the summary
+   * @fires la-step-questions-done   - {answers} from Done on the summary
+   * @fires la-step-questions-confirm - {answers} from Confirm or Finish on the summary, with `confirms`
+   * @fires la-step-questions-close  - the founder closed it without finishing
+   */
+  exports.LaStepQuestions = class LaStepQuestions extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.open = false;
+          this.heading = '';
+          this.questions = [];
+          this.answers = {};
+          this.titles = {};
+          this.nameKey = '';
+          this.confirms = false;
+          this.start = 'next';
+          this._ans = {};
+          this._i = 0;
+      }
+      willUpdate(changed) {
+          if (changed.has('open') && this.open) {
+              this._ans = { ...this.answers };
+              const { items } = this._flow();
+              const first = items.findIndex((q) => q.required !== false && !this._answered(q));
+              this._i = this.start === 'summary' || first < 0 ? items.length : first;
+          }
+      }
+      /* ── The flow: follow-ups slot in under their option; skip and end cut it. */
+      _opt(q, a) {
+          if (q.type !== 'yesno' && q.type !== 'choice')
+              return undefined;
+          return (q.options ?? []).find((o) => o.id === a);
+      }
+      _flow() {
+          const items = [];
+          let cut;
+          const walk = (qs) => {
+              for (const q of qs) {
+                  if (cut)
+                      return;
+                  items.push(q);
+                  const o = this._opt(q, this._ans[q.id]);
+                  if (!o)
+                      continue;
+                  if (o.then === 'follow' && o.follow)
+                      walk(o.follow);
+                  if (o.then === 'skip' || o.then === 'end')
+                      cut = { kind: o.then, q, o };
+              }
+          };
+          walk(this.questions);
+          return { items, cut };
+      }
+      _answered(q) {
+          const a = this._ans[q.id];
+          switch (q.type) {
+              case 'text':
+              case 'number':
+              case 'date':
+                  return a != null && String(a).trim() !== '';
+              case 'pick':
+                  return Array.isArray(a) && a.length > 0;
+              case 'each':
+                  return (q.people ?? []).every((p) => !!a?.[p]);
+              default:
+                  return a != null && a !== '';
+          }
+      }
+      _name() {
+          const n = this.nameKey ? this._ans[this.nameKey] : '';
+          return n && String(n).trim() ? String(n).trim() : 'this person';
+      }
+      _fill(s) {
+          return (s ?? '').replace(/\{name\}/g, this._name());
+      }
+      _answerText(q) {
+          const a = this._ans[q.id];
+          const o = this._opt(q, a);
+          if (o)
+              return o.label;
+          if (q.type === 'pick')
+              return (a ?? []).join(', ') || 'No one';
+          if (q.type === 'each') {
+              const m = a ?? {};
+              return (q.people ?? [])
+                  .map((p) => `${p}: ${(q.options ?? []).find((x) => x.id === m[p])?.label ?? 'not answered'}`)
+                  .join(' · ');
+          }
+          return a == null || a === '' ? 'Not answered' : String(a);
+      }
+      /* ── Acts ──────────────────────────────────────────────────────────── */
+      _set(id, value) {
+          this._ans = { ...this._ans, [id]: value };
+      }
+      _emit(name) {
+          this.dispatchEvent(new CustomEvent(name, { detail: { answers: { ...this._ans } }, bubbles: true, composed: true }));
+      }
+      _next(total) {
+          this._emit('la-step-questions-change');
+          this._i = Math.min(this._i + 1, total);
+      }
+      _back() {
+          this._i = Math.max(this._i - 1, 0);
+      }
+      _done() {
+          this._emit('la-step-questions-change');
+          this._emit(this.confirms ? 'la-step-questions-confirm' : 'la-step-questions-done');
+          this.open = false;
+      }
+      _close() {
+          this._emit('la-step-questions-change');
+          this.open = false;
+          this.dispatchEvent(new CustomEvent('la-step-questions-close', { bubbles: true, composed: true }));
+      }
+      /* ── Screens ───────────────────────────────────────────────────────── */
+      _input(q) {
+          const a = this._ans[q.id];
+          const label = this._fill(q.text);
+          switch (q.type) {
+              case 'yesno':
+              case 'choice':
+                  return b `<div class="opts ${q.type === 'yesno' ? 'yn' : ''}" role="radiogroup" aria-label=${label}>
+          ${(q.options ?? []).map((o) => b `<la-choice variant="contained" .checked=${l(a === o.id)} @la-change=${() => this._set(q.id, o.id)}
+              >${o.label}${o.rec
+                    ? b ` <la-badge class="rec" variant="neutral" appearance="ghost" size="sm">Recommended</la-badge>`
+                    : A}</la-choice
+            >`)}
+        </div>`;
+              case 'text':
+              case 'number':
+                  return b `<la-input
+          class=${q.type === 'number' ? 'num' : 'text'}
+          type=${q.type === 'number' ? 'number' : 'text'}
+          .value=${a ?? ''}
+          aria-label=${label}
+          @la-change=${(e) => this._set(q.id, e.detail.value)}
+        ></la-input>`;
+              case 'date':
+                  return b `<la-date-input
+          .value=${a ?? ''}
+          aria-label=${label}
+          @la-change=${(e) => this._set(q.id, e.detail.complete ? e.detail.value : '')}
+        ></la-date-input>`;
+              case 'file':
+                  return b `<la-upload-box
+          file-name=${a ?? ''}
+          @la-change=${(e) => e.detail.file && this._set(q.id, e.detail.file.name)}
+          @la-remove=${() => this._set(q.id, '')}
+        ></la-upload-box>`;
+              case 'pick':
+              case 'each':
+                  return b `<la-people-answer
+          mode=${q.type}
+          group=${q.group ?? ''}
+          source=${q.source ?? ''}
+          label=${label}
+          .people=${q.people ?? []}
+          .options=${(q.options ?? [])}
+          .value=${a ?? (q.type === 'pick' ? [] : {})}
+          @la-change=${(e) => this._set(q.id, e.detail.value)}
+        ></la-people-answer>`;
+          }
+          return A;
+      }
+      _guidance(q) {
+          const o = this._opt(q, this._ans[q.id]);
+          if (!o)
+              return A;
+          const adds = o.then === 'on' ? (o.adds ?? []) : [];
+          const skip = o.then === 'skip' ? o.reason : '';
+          if (!o.guidance && !skip && !adds.length)
+              return A;
+          return b `<la-guidance slot="guidance">
+      ${o.guidance ? b `<p>${this._fill(o.guidance)}</p>` : A}
+      ${skip ? b `<p>${this._fill(skip)}</p>` : A}
+      ${adds.map((id) => b `<span slot="adds">${this.titles[id] ?? id}</span>`)}
+    </la-guidance>`;
+      }
+      _end(cut, q) {
+          if (!cut || cut.kind !== 'end' || cut.q !== q)
+              return A;
+          return b `<div class="end" role="status">
+      <i class="ph ph-flag-banner" aria-hidden="true"></i>
+      <div>
+        <p class="end-title">The playbook ends here</p>
+        <p>${this._fill(cut.o.reason)}</p>
+        <p class="end-why">Because you answered “${cut.o.label}” to “${this._fill(q.text)}”</p>
+      </div>
+    </div>`;
+      }
+      _question(q, cut) {
+          return b `<la-question text=${this._fill(q.text)} ?optional=${q.required === false} means=${q.means ?? ''}>
+        ${this._input(q)} ${this._guidance(q)}
+      </la-question>
+      ${this._end(cut, q)}`;
+      }
+      /* The lead line, under the modal's title: what this screen is and what the
+         act at the foot does. */
+      _lead(items, cut, onSummary) {
+          if (!onSummary)
+              return 'One question at a time. Nothing counts until you confirm.';
+          const n = items.length;
+          const yours = `Your ${n === 1 ? 'answer' : `${WORDS[n] ?? n} answers`}.`;
+          if (cut?.kind === 'end') {
+              return this.confirms
+                  ? 'Your answers end the playbook here. Finish puts them on the record.'
+                  : 'Your answers end the playbook here. Done takes them back to the step, where Finish puts them on the record.';
+          }
+          return this.confirms
+              ? `${yours} Confirm puts them on the record and completes the step.`
+              : `${yours} Done takes them back to the step; confirm there once its facts are settled.`;
+      }
+      _summary(items) {
+          return b `<dl class="sum">
+        ${items.map((q) => {
+            const text = this._answerText(q);
+            const none = text === 'Not answered' || text === 'No one';
+            return b `<div class="sum-row">
+            <dt>${this._fill(q.text)}</dt>
+            <dd class=${none ? 'none' : ''}>${text}</dd>
+          </div>`;
+        })}
+      </dl>`;
+      }
+      render() {
+          const { items, cut } = this._flow();
+          const total = items.length;
+          const onSummary = this._i >= total;
+          const q = onSummary ? undefined : items[this._i];
+          const canNext = q ? q.required === false || this._answered(q) : true;
+          const steps = [
+              ...items.map((it, k) => ({
+                  label: this._fill(it.text),
+                  status: k < this._i ? 'complete' : k === this._i ? 'active' : 'pending',
+              })),
+              { label: 'Your answers', status: onSummary ? 'active' : 'pending' },
+          ];
+          const ends = cut?.kind === 'end';
+          const act = !this.confirms ? 'Done' : ends ? 'Finish' : 'Confirm';
+          return b `${iconStyles}<la-modal
+      ?open=${this.open}
+      heading=${this.heading}
+      description=${this._lead(items, cut, onSummary)}
+      @close=${this._close}
+    >
+      <div class="wrap" @la-change=${(e) => e.stopPropagation()}>
+        <la-stepper .steps=${steps}></la-stepper>
+        ${q ? this._question(q, cut) : this._summary(items)}
+      </div>
+      <div slot="footer" class="footer">
+        <div>
+          ${this._i > 0
+            ? b `<la-button variant="ghost" @click=${this._back}
+                ><i slot="icon-left" class="ph ph-arrow-left" aria-hidden="true"></i>Back</la-button
+              >`
+            : A}
+        </div>
+        <div class="right">
+          ${q && q.required === false && !this._answered(q) ? b `<span class="left-note">Optional</span>` : A}
+          ${onSummary
+            ? b `<la-button variant="primary" @click=${this._done}>${act}</la-button>`
+            : b `<la-button variant="primary" ?disabled=${!canNext} @click=${() => this._next(total)}
+                >${this._i === total - 1 ? 'See your answers' : 'Next'}<i slot="icon-right" class="ph ph-arrow-right" aria-hidden="true"></i
+              ></la-button>`}
+        </div>
+      </div>
+    </la-modal>`;
+      }
+  };
+  exports.LaStepQuestions.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        font-family: var(--la-font-family);
+        color: var(--la-color-text);
+      }
+      la-stepper {
+        display: block;
+        margin-bottom: var(--la-space-lg);
+      }
+      la-question {
+        padding-top: 0;
+        border-top: 0;
+      }
+      .opts {
+        display: grid;
+        gap: var(--la-space-sm);
+      }
+      .opts.yn {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        max-width: 360px;
+      }
+      .rec {
+        margin-left: 6px;
+        vertical-align: 1px;
+      }
+      la-input.text {
+        display: block;
+        max-width: 420px;
+      }
+      la-input.num {
+        display: block;
+        max-width: 160px;
+      }
+      la-date-input {
+        display: block;
+        max-width: 220px;
+      }
+      .end {
+        display: grid;
+        grid-template-columns: 20px minmax(0, 1fr);
+        gap: var(--la-space-md);
+        margin-top: var(--la-space-md);
+        padding: var(--la-space-lg);
+        border-radius: var(--la-radius-md);
+        background-color: var(--la-color-surface-warning); /* verdict-ok: the consequence, not the answer (decision 117) */
+      }
+      .end i {
+        margin-top: 1px;
+        font-size: 18px;
+        color: var(--la-color-warning-text); /* verdict-ok */
+      }
+      .end p {
+        margin: 0;
+        font-size: var(--la-font-size-md);
+      }
+      .end .end-title {
+        margin-bottom: 2px;
+        font-size: var(--la-font-size-lg);
+        color: var(--la-color-text);
+      }
+      .end p {
+        color: var(--la-color-text-secondary);
+      }
+      .end .end-why {
+        margin-top: var(--la-space-sm);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-secondary);
+      }
+      /* The summary: each question above its answer, both wrapping, so a
+         long question or a per-person answer never widens the modal (a
+         fixed label column, as la-field-list's stack draws, overflows on a
+         full sentence). */
+      .sum {
+        margin: 0;
+        min-width: 0;
+      }
+      .sum-row {
+        padding: var(--la-space-sm) 0;
+        border-top: 1px solid var(--la-color-border-light);
+        min-width: 0;
+      }
+      .sum-row:first-child {
+        padding-top: 0;
+        border-top: 0;
+      }
+      .sum dt {
+        margin: 0;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+        overflow-wrap: anywhere;
+      }
+      .sum dd {
+        margin: 2px 0 0;
+        font-size: var(--la-font-size-base);
+        color: var(--la-color-text);
+        overflow-wrap: anywhere;
+      }
+      .sum dd.none {
+        color: var(--la-color-text-muted);
+      }
+      .wrap {
+        min-width: 0;
+        overflow-wrap: anywhere;
+      }
+      la-stepper {
+        max-width: 100%;
+        overflow: hidden;
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--la-space-md);
+        width: 100%;
+      }
+      .footer .right {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+      }
+      .left-note {
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-muted);
+      }
+    `,
+  ];
+  __decorate$1([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaStepQuestions.prototype, "open", void 0);
+  __decorate$1([
+      n()
+  ], exports.LaStepQuestions.prototype, "heading", void 0);
+  __decorate$1([
+      n({ attribute: false })
+  ], exports.LaStepQuestions.prototype, "questions", void 0);
+  __decorate$1([
+      n({ attribute: false })
+  ], exports.LaStepQuestions.prototype, "answers", void 0);
+  __decorate$1([
+      n({ attribute: false })
+  ], exports.LaStepQuestions.prototype, "titles", void 0);
+  __decorate$1([
+      n({ attribute: 'name-key' })
+  ], exports.LaStepQuestions.prototype, "nameKey", void 0);
+  __decorate$1([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaStepQuestions.prototype, "confirms", void 0);
+  __decorate$1([
+      n()
+  ], exports.LaStepQuestions.prototype, "start", void 0);
+  __decorate$1([
+      r$1()
+  ], exports.LaStepQuestions.prototype, "_ans", void 0);
+  __decorate$1([
+      r$1()
+  ], exports.LaStepQuestions.prototype, "_i", void 0);
+  exports.LaStepQuestions = __decorate$1([
+      t$1('la-step-questions')
+  ], exports.LaStepQuestions);
+
+  var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-document-preview — read a document on the record before confirming it
+   * is the right one. A file name alone isn't enough to be sure (Jonard, 6 Oct
+   * 2026): a record row's document name opens this, the founder reads the
+   * pages, and confirms from here.
+   *
+   * An la-modal at its large size: the document's name as the heading, its
+   * meta as the description ("signed 2 June 2024 · From LawVault"), the pages
+   * in la-pdf-preview, and a footer with the record row's own acts: *That's
+   * right* (primary) and *Upload a different one* (ghost), plus *Open in
+   * LawVault* on the left for the document's own page when `nav` is set.
+   * Confirming here is the same act as on the row, so the page settles the
+   * row the same way.
+   *
+   * Usage:
+   *   <la-document-preview name="Shareholders’ agreement" meta="signed 2 June 2024 · From LawVault"
+   *       src="/assets/sample-docs/shareholders-agreement-acme-preview.pdf" nav="lawvault-sha" open>
+   *   </la-document-preview>
+   *
+   * @prop open           - the modal is shown
+   * @prop name           - the document's name, the heading
+   * @prop meta           - its date and source, the description
+   * @prop src            - the PDF (la-pdf-preview)
+   * @prop fallbackImage  - attribute fallback-image: a page image where no PDF viewer is available
+   * @prop nav            - where "Open in LawVault" goes; empty hides it
+   * @prop confirmLabel   - attribute confirm-label (default "That’s right")
+   * @prop changeLabel    - attribute change-label (default "Upload a different one")
+   * @fires la-document-confirm - That’s right
+   * @fires la-document-change  - Upload a different one
+   * @fires la-document-open    - {nav}: Open in LawVault
+   * @fires la-document-close   - closed without an act
+   */
+  exports.LaDocumentPreview = class LaDocumentPreview extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.open = false;
+          this.name = '';
+          this.meta = '';
+          this.src = '';
+          this.fallbackImage = '';
+          this.nav = '';
+          this.confirmLabel = 'That’s right';
+          this.changeLabel = 'Upload a different one';
+      }
+      _fire(name, detail) {
+          this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }));
+      }
+      _act(name, detail) {
+          this.open = false;
+          this._fire(name, detail);
+      }
+      render() {
+          return b `${iconStyles}<la-modal
+      ?open=${this.open}
+      size="lg"
+      heading=${this.name}
+      description=${this.meta}
+      @close=${() => {
+            this.open = false;
+            this._fire('la-document-close');
+        }}
+    >
+      <div class="pane">
+        <la-pdf-preview src=${this.src} fallback-image=${this.fallbackImage} label=${`${this.name}, preview`}></la-pdf-preview>
+      </div>
+      <div slot="footer" class="footer">
+        ${this.nav
+            ? b `<la-button variant="ghost" @click=${() => this._act('la-document-open', { nav: this.nav })}
+              ><i slot="icon-left" class="ph ph-arrow-square-out" aria-hidden="true"></i>Open in LawVault</la-button
+            >`
+            : A}
+        <div class="right">
+          <la-button variant="ghost" @click=${() => this._act('la-document-change')}>${this.changeLabel}</la-button>
+          <la-button variant="primary" @click=${() => this._act('la-document-confirm')}>${this.confirmLabel}</la-button>
+        </div>
+      </div>
+    </la-modal>`;
+      }
+  };
+  exports.LaDocumentPreview.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: block;
+        font-family: var(--la-font-family);
+        color: var(--la-color-text);
+      }
+      /* The pages take the modal's height; the modal caps itself at 90vh. */
+      .pane {
+        height: min(68vh, 760px);
+        min-height: 320px;
+        border-radius: var(--la-radius-md);
+        border: 1px solid var(--la-color-border-light);
+        overflow: hidden;
+        background: var(--la-color-bg-subtle);
+      }
+      la-pdf-preview {
+        height: 100%;
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--la-space-md);
+        width: 100%;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        margin-left: auto;
+      }
+    `,
+  ];
+  __decorate([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaDocumentPreview.prototype, "open", void 0);
+  __decorate([
+      n()
+  ], exports.LaDocumentPreview.prototype, "name", void 0);
+  __decorate([
+      n()
+  ], exports.LaDocumentPreview.prototype, "meta", void 0);
+  __decorate([
+      n()
+  ], exports.LaDocumentPreview.prototype, "src", void 0);
+  __decorate([
+      n({ attribute: 'fallback-image' })
+  ], exports.LaDocumentPreview.prototype, "fallbackImage", void 0);
+  __decorate([
+      n()
+  ], exports.LaDocumentPreview.prototype, "nav", void 0);
+  __decorate([
+      n({ attribute: 'confirm-label' })
+  ], exports.LaDocumentPreview.prototype, "confirmLabel", void 0);
+  __decorate([
+      n({ attribute: 'change-label' })
+  ], exports.LaDocumentPreview.prototype, "changeLabel", void 0);
+  exports.LaDocumentPreview = __decorate([
+      t$1('la-document-preview')
+  ], exports.LaDocumentPreview);
+
+  exports.MOVE_PAST_REASONS = MOVE_PAST_REASONS;
   exports.iconStyles = iconStyles;
   exports.toast = toast;
   exports.tokens = tokens;
