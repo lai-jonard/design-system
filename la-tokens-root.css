@@ -177,6 +177,9 @@
 
   /* Scrim — overlay backdrop for modals, sheets, and any UI that dims the page behind a surface */
   --la-color-scrim:             rgba(0, 0, 0, 0.2);
+  /* A deliberate variant (decision 27): the insight modal's scrim, ink at 32%, so
+     a white panel reads as a layer over a near-white page (DA-63, 2 Oct 2026). */
+  --la-color-scrim-strong:      rgba(3, 7, 18, 0.32);
 
   /* ── AI surface gradient ──────────────────────────
      Soft sage + sky + sand wash for AI-drafted / insight surfaces. Subtle and
@@ -223,6 +226,9 @@
     0 8px 16px -4px rgba(3, 7, 18, 0.04);
   --la-shadow-float: 0 2px 8px rgba(3, 7, 18, 0.08), 0 8px 24px rgba(3, 7, 18, 0.08);
   --la-shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.12);
+  /* dialog — a large panel over a scrim: a 1px ring for an edge, then contact,
+     lift and falloff. The insight modal (DA-63, 2 Oct 2026). */
+  --la-shadow-dialog: 0 0 0 1px rgba(3, 7, 18, 0.08), 0 1px 2px rgba(3, 7, 18, 0.06), 0 8px 16px -4px rgba(3, 7, 18, 0.10), 0 24px 48px -12px rgba(3, 7, 18, 0.22);
   /* popover — for floating menus / select panels / dropdowns. Four-layer
      stack: hairline outline replaces the border, then contact, mid lift,
      and ambient falloff. Apply with no border. */

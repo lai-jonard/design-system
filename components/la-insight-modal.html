@@ -938,6 +938,37 @@ holds is plausible, it leads.</td>
         </tr>
       
         <tr>
+          <td>resolutionsPlacement</td>
+          <td><span class="default">resolutions-placement</span></td>
+          <td><span class="type">&#39;body&#39; | &#39;footer&#39;</span></td>
+          <td><span class="default">&#39;body&#39;</span></td>
+          <td>Where the resolutions sit. 'body' (the default) lists them as cards under
+"How would you like to resolve this?". 'footer' makes them buttons beside
+Mark as Done, so every way to close the insight sits in one row (Riel,
+6 Oct 2026, UK DD pack). The suggested one takes the primary slot; notes
+are not shown there. Once one is chosen, the body shows it with its way
+back, as before.</td>
+        </tr>
+      
+        <tr>
+          <td>noResolve</td>
+          <td><span class="default">no-resolve</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Leaves the resolve button out of the footer, so the resolutions are the
+only way on (Riel, 6 Oct 2026, UK DD pack: "Remove mark as done CTA").
+An insight with nothing else to offer keeps it; the host decides.</td>
+        </tr>
+      
+        <tr>
+          <td>_resolutionsInFooter</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
           <td>chosenResolution</td>
           <td><span class="default">chosen-resolution</span></td>
           <td><span class="type">string | undefined</span></td>

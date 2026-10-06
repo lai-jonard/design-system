@@ -209,6 +209,9 @@
 
     /* Scrim — overlay backdrop for modals, sheets, and any UI that dims the page behind a surface */
     --la-color-scrim:             rgba(0, 0, 0, 0.2);
+    /* A deliberate variant (decision 27): the insight modal's scrim, ink at 32%, so
+       a white panel reads as a layer over a near-white page (DA-63, 2 Oct 2026). */
+    --la-color-scrim-strong:      rgba(3, 7, 18, 0.32);
 
     /* ── AI surface gradient ──────────────────────────
        Soft sage + sky + sand wash for AI-drafted / insight surfaces. Subtle and
@@ -255,6 +258,9 @@
       0 8px 16px -4px rgba(3, 7, 18, 0.04);
     --la-shadow-float: 0 2px 8px rgba(3, 7, 18, 0.08), 0 8px 24px rgba(3, 7, 18, 0.08);
     --la-shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.12);
+    /* dialog — a large panel over a scrim: a 1px ring for an edge, then contact,
+       lift and falloff. The insight modal (DA-63, 2 Oct 2026). */
+    --la-shadow-dialog: 0 0 0 1px rgba(3, 7, 18, 0.08), 0 1px 2px rgba(3, 7, 18, 0.06), 0 8px 16px -4px rgba(3, 7, 18, 0.10), 0 24px 48px -12px rgba(3, 7, 18, 0.22);
     /* popover — for floating menus / select panels / dropdowns. Four-layer
        stack: hairline outline replaces the border, then contact, mid lift,
        and ambient falloff. Apply with no border. */
@@ -24842,6 +24848,35 @@
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   /**
+   * Where a founder can read each law for themselves (DA-54, Somya, 1 Oct 2026:
+   * "each law should link to its page on GOV.UK"). The Acts and regulations
+   * live on legislation.gov.uk, the government's official copy; each address
+   * was checked against its page title on 2 Oct 2026. Keyed by the name the
+   * insight data uses, so no page has to carry a URL of its own.
+   */
+  const LEG = 'https://www.legislation.gov.uk/';
+  const LAW_LINKS = {
+      'Companies Act 2006': LEG + 'ukpga/2006/46/contents',
+      'Economic Crime and Corporate Transparency Act 2023': LEG + 'ukpga/2023/56/contents',
+      'Trading Disclosures Regulations 2015': LEG + 'uksi/2015/17/contents',
+      'Income Tax (Earnings and Pensions) Act 2003': LEG + 'ukpga/2003/1/contents',
+      'Income Tax Act 2007': LEG + 'ukpga/2007/3/contents',
+      'Income Tax (PAYE) Regulations 2003': LEG + 'uksi/2003/2682/contents',
+      'UK GDPR': LEG + 'eur/2016/679/contents',
+      'Trade Marks Act 1994': LEG + 'ukpga/1994/26/contents',
+      'Copyright, Designs and Patents Act 1988': LEG + 'ukpga/1988/48/contents',
+      'Employment Rights Act 1996': LEG + 'ukpga/1996/18/contents',
+      'Employment Rights Act 2025': LEG + 'ukpga/2025/36/contents',
+      'Employment Act 2002': LEG + 'ukpga/2002/22/contents',
+      'Equality Act 2010': LEG + 'ukpga/2010/15/contents',
+      'Working Time Regulations 1998': LEG + 'uksi/1998/1833/contents',
+      'Health and Safety at Work Act 1974': LEG + 'ukpga/1974/37/contents',
+      'Health and Safety at Work etc. Act 1974': LEG + 'ukpga/1974/37/contents',
+      'Employers’ Liability (Compulsory Insurance) Act 1969': LEG + 'ukpga/1969/57/contents',
+      'Unfair Contract Terms Act 1977': LEG + 'ukpga/1977/50/contents',
+      'Payment Services Regulations 2017': LEG + 'uksi/2017/752/contents',
+  };
+  /**
    * One Act, named once. The rail lists instruments, not provisions, so an
    * insight resting on two sections of the same statute would otherwise print
    * that statute's name twice with nothing to tell the rows apart. `section` is
@@ -24852,10 +24887,19 @@
       const rows = [];
       for (const law of laws) {
           if (!rows.some(r => r.name === law.name))
-              rows.push({ name: law.name });
+              rows.push({ name: law.name, url: law.url || LAW_LINKS[law.name] });
       }
       return rows;
   }
+  /** Legal Area names, as the rail's area row prints them, to their token key. */
+  const AREA_KEYS = {
+      'Corporate Governance': 'governance',
+      'Employment': 'employment',
+      'Fundraising': 'fundraising',
+      'Intellectual Property': 'ip',
+      'Data Protection': 'data',
+      'Commercial Agreements': 'commercial',
+  };
   exports.LaInsightModal = class LaInsightModal extends i$2 {
       constructor() {
           super(...arguments);
@@ -24905,6 +24949,21 @@
            */
           this.issues = [];
           /**
+           * Where the resolutions sit. 'body' (the default) lists them as cards under
+           * "How would you like to resolve this?". 'footer' makes them buttons beside
+           * Mark as Done, so every way to close the insight sits in one row (Riel,
+           * 6 Oct 2026, UK DD pack). The suggested one takes the primary slot; notes
+           * are not shown there. Once one is chosen, the body shows it with its way
+           * back, as before.
+           */
+          this.resolutionsPlacement = 'body';
+          /**
+           * Leaves the resolve button out of the footer, so the resolutions are the
+           * only way on (Riel, 6 Oct 2026, UK DD pack: "Remove mark as done CTA").
+           * An insight with nothing else to offer keeps it; the host decides.
+           */
+          this.noResolve = false;
+          /**
            * The law behind the insight, listed in the rail under Sources. Empty by
            * default — plenty of insights rest on a contract term or good practice
            * rather than a statute, and inventing a provision would be worse than
@@ -24950,6 +25009,9 @@
           this._relatedExpanded = false;
           /** Which issues are open, by index. */
           this._openIssues = {};
+      }
+      get _resolutionsInFooter() {
+          return this.resolutionsPlacement === 'footer' && !!this.resolutions?.length && !this.chosenResolution;
       }
       willUpdate(changed) {
           // A fresh insight starts folded, whatever the last one was left at.
@@ -25060,7 +25122,7 @@
           ];
           return b `
       <div>
-        <div class="section-label">Sources</div>
+        <div class="section-label">Where we looked</div>
         <div class="source-list">
           ${ordered.map(src => {
             const body = b `
@@ -25226,7 +25288,6 @@
                   ? b `<button type="button" class="rail-src ${src.holdsDeadline ? 'holds-deadline' : ''}" @click=${() => this._handleRelatedNavigate(src.id)}>${body}</button>`
                   : b `<div class="rail-src ${src.holdsDeadline ? 'holds-deadline' : ''}">${body}</div>`;
           };
-          const hasHead = !!this.area || this.meta.length > 0;
           return b `
       <aside class="rail-aside">
         <div class="rail-close">
@@ -25235,35 +25296,41 @@
         ${this.area ? b `<div class="rail-area"><i class="ph ${this.areaIcon || 'ph-tag'}" aria-hidden="true"></i>${this.area}</div>` : A}
         ${this.meta.length > 0 ? b `
           <div class="rail-meta">
-            ${this.meta.map(m => b `<div class="rail-meta-row"><i class="ph ${m.icon}" aria-hidden="true"></i>${m.label}</div>`)}
+            ${this.meta.map(m => {
+            const area = m.icon === 'ph-tag' ? AREA_KEYS[m.label] : undefined;
+            return area
+                ? b `<div class="rail-meta-row is-area"><span class="area-tile" style=${`--area-bg: var(--la-area-${area}-bg); --area-fg: var(--la-area-${area}-fg)`}><i class="ph ph-tag" aria-hidden="true"></i></span>${m.label}</div>`
+                : b `<div class="rail-meta-row"><i class="ph ${m.icon}" aria-hidden="true"></i>${m.label}</div>`;
+        })}
           </div>` : A}
         ${ordered.length > 0 ? b `
-          ${hasHead ? b `<div class="rail-divider"></div>` : A}
           <div>
-            <div class="rail-label">Sources</div>
+            <div class="rail-label">Where we looked</div>
             ${ordered.map(srcRow)}
           </div>` : A}
         ${this.laws.length > 0 ? b `
-          <div class="rail-divider"></div>
           <div>
             <div class="rail-label">Applicable Law</div>
-            ${groupLaws(this.laws).map(law => b `
-              <div class="rail-src">
+            ${groupLaws(this.laws).map(law => {
+            const body = b `
                 <i class="ph ph-scales" aria-hidden="true"></i>
                 <span class="rail-src-body">
-                  <span class="rail-src-doc">${law.name}</span>
-                </span>
-              </div>`)}
+                  <span class="rail-src-doc">${law.name}${law.url ? b `<i class="ph ph-arrow-up-right rail-src-out" aria-hidden="true"></i>` : A}</span>
+                </span>`;
+            /* Read the law itself, in a new tab so the insight stays open. */
+            return law.url
+                ? b `<a class="rail-src" href=${law.url} target="_blank" rel="noopener noreferrer" aria-label="${law.name}, on legislation.gov.uk (opens in a new tab)">${body}</a>`
+                : b `<div class="rail-src">${body}</div>`;
+        })}
           </div>` : A}
         ${d ? b `
-        <div class="rail-divider"></div>
         <div>
           <div class="rail-label">Deadline</div>
           <div class="rail-src">
             <i class="ph ph-calendar-blank" aria-hidden="true"></i>
             <span class="rail-src-body">
+              <!-- The date only: how far away it is lives in the header's status pill (DA-63). -->
               <span class="rail-src-doc">${d.label}</span>
-              ${d.sub ? b `<span class="rail-src-section">${d.sub}</span>` : A}
             </span>
           </div>
         </div>` : A}
@@ -25331,7 +25398,8 @@
           const useRail = this._useRail;
           // The wash follows the date's own tone, so the surface says the same thing
           // the date tile does. Only where there is a date to key off.
-          const wash = useRail && this.deadline ? this.deadline.tone || 'default' : undefined;
+          // No date reads as calm too (DA-63): the default wash, never plain white.
+          const wash = useRail ? (this.deadline ? this.deadline.tone || 'default' : 'default') : undefined;
           /* Three pages, one panel. The reason and done pages take the whole surface
              so the question being asked is the only thing on screen. */
           const page = this._page === 'reason'
@@ -25482,12 +25550,43 @@
       </div>
     `;
       }
+      /** The date status that sets the header's tint, with its count — in the rail
+       *  layout, where the tint lives. The rail's deadline then keeps the date only. */
+      _renderStatusPill() {
+          if (!this._useRail)
+              return A;
+          const d = this.deadline;
+          const n = d && /(\d+)\s+day/.exec(d.sub || '');
+          const days = n ? `${n[1]} ${n[1] === '1' ? 'day' : 'days'}` : '';
+          let status;
+          let text;
+          if (!d) {
+              status = 'none';
+              text = 'No deadline';
+          }
+          else if (d.tone === 'urgent' || d.tone === 'high') {
+              status = 'late';
+              text = days ? `Overdue · ${days}` : 'Overdue';
+          }
+          else if (d.tone === 'proactive') {
+              status = 'soon';
+              text = days ? `Due in ${days}` : 'Due soon';
+          }
+          else {
+              status = 'track';
+              text = days ? `On track · ${days}` : 'On track';
+          }
+          return b `<span class="status-pill" data-status=${status}>${text}</span>`;
+      }
       _renderHeader() {
           return b `
       <div class="header">
         <div class="header-main">
-          <div class="severity-label">${this._statusIcon()
+          <div class="header-pills">
+            <div class="severity-label">${this._statusIcon()
             ? b `<i class="ph ${this._statusIcon()}" aria-hidden="true"></i>` : ''}${this._severityLabel()}</div>
+            ${this._renderStatusPill()}
+          </div>
           <div class="headline">${this.headline}</div>
         </div>
         <span class="header-close">
@@ -25546,6 +25645,39 @@
               </div>
             ` : A}
 
+            <!-- The recommended playbook follows the first section (Riel, 2 Oct
+                 2026: "put the playbook back to after the first section instead
+                 of it being at the bottom"), so the way to fix it comes straight
+                 after the reason; spare height falls at the foot. -->
+            ${this.playbook ? b `
+              <div class="playbook-block">
+                <div class="section-label">Recommended playbook</div>
+                <button type="button" class="playbook-card" @click=${this._handlePlaybook}>
+                  ${this.playbook.image
+            ? b `<span class="playbook-icon has-image" style=${'background-image: url("' + encodeURI(this.playbook.image) + '")'} aria-hidden="true"></span>`
+            : b `<span class="playbook-icon"><i class="ph-fill ph-shapes"></i></span>`}
+                  <span class="playbook-body">
+                    <span class="playbook-name">${this.playbook.name}</span>
+                    ${this.playbook.note
+            ? b `<span class="playbook-note">${this.playbook.note}</span>`
+            : A}
+                    ${this.playbook.steps || this.playbook.time ? b `
+                      <span class="playbook-meta">
+                        ${this.playbook.steps
+            ? b `<span><i class="ph ph-list-checks"></i>${this.playbook.steps}</span>`
+            : A}
+                        ${this.playbook.time
+            ? b `<span><i class="ph ph-clock"></i>${this.playbook.time}</span>`
+            : A}
+                      </span>
+                    ` : A}
+
+                  </span>
+                  <i class="ph-bold ph-arrow-right playbook-go" aria-hidden="true"></i>
+                </button>
+              </div>
+            ` : A}
+
             <!-- "What to do" was removed on review (7 Sep 2026) — the prose
                  restated the button beneath it. What replaced it says the same
                  thing as a thing rather than a description: the playbook we
@@ -25564,7 +25696,7 @@
                  what the founder holds — only what we have not seen — and
                  the cheapest honest answer should not be the hardest to find.
                  Opt-in: an insight with no resolutions renders no section. -->
-            ${this.resolutions && this.resolutions.length ? b `
+            ${this.resolutions && this.resolutions.length && !this._resolutionsInFooter ? b `
               <div>
                 <div class="section-label">How would you like to resolve this?</div>
                 <div class="resolutions">
@@ -25593,32 +25725,6 @@
                     Choose something else
                   </button>
                 ` : A}
-              </div>
-            ` : A}
-
-            ${this.playbook ? b `
-              <div>
-                <div class="section-label">Recommended playbook</div>
-                <button type="button" class="playbook-card" @click=${this._handlePlaybook}>
-                  <span class="playbook-icon"><i class="ph-fill ph-shapes"></i></span>
-                  <span class="playbook-body">
-                    <span class="playbook-name">${this.playbook.name}</span>
-                    ${this.playbook.note
-            ? b `<span class="playbook-note">${this.playbook.note}</span>`
-            : A}
-                    ${this.playbook.steps || this.playbook.time ? b `
-                      <span class="playbook-meta">
-                        ${this.playbook.steps
-            ? b `<span><i class="ph ph-list-checks"></i>${this.playbook.steps}</span>`
-            : A}
-                        ${this.playbook.time
-            ? b `<span><i class="ph ph-clock"></i>${this.playbook.time}</span>`
-            : A}
-                      </span>
-                    ` : A}
-                  </span>
-                  <i class="ph-bold ph-arrow-right playbook-go" aria-hidden="true"></i>
-                </button>
               </div>
             ` : A}
 
@@ -25794,11 +25900,27 @@
       _renderFooterPrimary() {
           // The upload flow's action lives in the body; a second primary would compete.
           const showCta = !!this.cta && this.actionType !== 'upload';
-          const resolve = b `
-      <la-button variant=${showCta ? 'secondary' : 'primary'} @click=${this._handleResolve} ?loading=${this._resolving} loading-label="Resolving…">
+          const inFooter = this._resolutionsInFooter;
+          const resolve = this.noResolve ? A : b `
+      <la-button variant=${showCta || inFooter ? 'secondary' : 'primary'} @click=${this._handleResolve} ?loading=${this._resolving} loading-label="Resolving…">
         ${this.resolveLabel || 'Mark Resolved'}
       </la-button>
     `;
+          /* Resolutions in the footer: recording it done stays secondary, the
+             others follow it, and the suggested one ends the row as the primary. */
+          if (inFooter) {
+              const rs = this.resolutions;
+              const ordered = [...rs.filter((r) => !r.suggested), ...rs.filter((r) => r.suggested)];
+              return b `
+        ${resolve}
+        ${ordered.map((r) => b `
+          <la-button variant=${r.suggested ? 'primary' : 'secondary'} @click=${() => this._handleResolution(r)}>
+            ${r.icon ? b `<i slot="icon-left" class="${r.icon}"></i>` : A}
+            ${r.label}
+          </la-button>
+        `)}
+      `;
+          }
           if (!showCta)
               return resolve;
           return b `
@@ -25877,7 +25999,10 @@
       .backdrop {
         position: fixed;
         inset: 0;
-        background: var(--la-color-scrim);
+        /* A stronger scrim than the shared one (decision 27 allows a deliberate
+           variant): at 20% black a white panel sat on a light grey page and
+           read as faint (DA-63, 2 Oct 2026). */
+        background: var(--la-color-scrim-strong);
         display: flex;
         align-items: center;
         justify-content: center;
@@ -25914,7 +26039,9 @@
            thing the founder came to press was below the fold. Header and footer
            are now fixed and the reading scrolls between them. */
         overflow: hidden;
-        box-shadow: var(--la-shadow-lg);
+        /* A 1px ring plus layered shadow: an edge that holds against the white
+           card behind it, where one soft shadow blended in (DA-63). */
+        box-shadow: var(--la-shadow-dialog);
         display: flex;
         flex-direction: column;
         transform: scale(var(--scale-enter));
@@ -25922,6 +26049,13 @@
       }
       :host([open]) .panel {
         transform: scale(1);
+      }
+      /* One size for every insight (DA-63, 2 Oct 2026, Riel: "constant and
+         cohesive sizing"): a short insight no longer opens a smaller modal.
+         The reading scrolls inside; header and footer stay put. */
+      :host([layout='rail']) .panel {
+        height: min(600px, calc(100vh - 48px));
+        max-height: none;
       }
       @media (prefers-reduced-motion: reduce) {
         .backdrop,
@@ -25978,8 +26112,57 @@
         color: var(--la-color-processing-text);
       }
 
+      /* The label on a pill, the card's tag pattern in the label's colour, and
+         beside it the date status that sets the header's tint, so the colour
+         explains itself (DA-63, 2 Oct 2026, Riel). */
+      .header-pills {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-sm);
+        margin-bottom: var(--la-space-md);
+      }
+      .header-pills .severity-label,
+      .status-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+        margin: 0;
+        padding: 3px 9px;
+        border-radius: var(--la-radius-pill);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        white-space: nowrap;
+      }
+      :host([severity='urgent']) .header-pills .severity-label { background: var(--la-color-urgent-bg); }
+      :host([severity='proactive']) .header-pills .severity-label,
+      :host([severity='high']) .header-pills .severity-label { background: var(--la-color-proactive-bg); }
+      :host([severity='info']) .header-pills .severity-label { background: var(--la-color-processing-bg); }
+      :host([severity='neutral']) .header-pills .severity-label {
+        background: var(--la-color-bg);
+        color: var(--la-color-text-secondary);
+        box-shadow: inset 0 0 0 1px var(--la-color-border);
+      }
+      .status-pill::before {
+        content: '';
+        width: 6px;
+        height: 6px;
+        border-radius: var(--la-radius-circle);
+        background: currentColor;
+      }
+      .status-pill[data-status='late'] { background: var(--la-color-urgent-bg); color: var(--la-color-urgent-text); }
+      .status-pill[data-status='soon'] { background: var(--la-color-proactive-bg); color: var(--la-color-proactive-text); }
+      .status-pill[data-status='track'] { background: var(--la-color-surface-success); color: var(--la-color-success-text); }
+      .status-pill[data-status='none'] {
+        background: var(--la-color-bg);
+        color: var(--la-color-text-secondary);
+        box-shadow: inset 0 0 0 1px var(--la-color-border);
+      }
+      .status-pill[data-status='none']::before { background: var(--la-color-text-faint); }
+
       .headline {
-        font-size: var(--la-font-size-xl);
+        /* 18px since the panel grew (DA-63): it anchors the header over the pills. */
+        font-size: var(--la-font-size-2xl);
         font-weight: var(--la-font-weight-semibold);
         color: var(--la-color-text);
         line-height: 1.3;
@@ -26013,7 +26196,10 @@
       .section-label {
         font-size: var(--la-font-size-base);
         font-weight: var(--la-font-weight-normal);
-        color: var(--la-color-text-muted);
+        /* Secondary, not muted: on the tinted header muted grey measured 3.2 to
+           3.9:1, under the 4.5:1 small text needs; secondary is 5.0:1 or more
+           (DA-63). */
+        color: var(--la-color-text-secondary);
         margin-bottom: var(--la-space-2xs);
       }
 
@@ -26319,9 +26505,12 @@
       .panel[data-wash='proactive'] {
         --la-wash-rgb: 245, 158, 11;
       }
-      /* the cool grey of --la-color-text-muted — on track, nothing pressing */
+      /* indigo-500, the brand accent — on track or no date, nothing pressing.
+         It was the cool grey of the muted text, which at this strength read as
+         white; never the AI palette, which means "AI did this" (DA-63, 2 Oct
+         2026, Riel: "Brand Indigo"). */
       .panel[data-wash='default'] {
-        --la-wash-rgb: 107, 114, 128;
+        --la-wash-rgb: 64, 92, 208;
       }
 
       /* The rail's grey fill would cut the wash off at the divider, leaving a
@@ -26371,10 +26560,11 @@
       .rail-aside {
         border-left: 1px solid var(--la-color-border-light);
         background: var(--la-color-bg-subtle);
-        padding: var(--la-space-lg) var(--la-space-lg) var(--la-space-xl);
+        padding: var(--la-space-xl) var(--la-space-xl) var(--la-space-2xl);
         display: flex;
         flex-direction: column;
-        gap: var(--la-space-lg);
+        /* No hairlines between sections since DA-63: this spacing separates them. */
+        gap: var(--la-space-xl);
       }
 
       /* Close lives at the panel's top-right, which in rail layout is the top of
@@ -26426,6 +26616,53 @@
 
       .rail-divider {
         border-top: 1px solid var(--la-color-border-light);
+      }
+
+      /* The area as a tile in its identity colour (DA-63). */
+      .area-tile {
+        width: 24px;
+        height: 24px;
+        flex-shrink: 0;
+        display: inline-grid;
+        place-items: center;
+        border-radius: var(--la-radius-sm);
+        background: var(--area-bg, var(--la-color-bg-muted));
+        color: var(--area-fg, var(--la-color-text-muted));
+        font-size: 13px;
+      }
+      .rail-meta-row.is-area {
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+
+      /* DA-63, 2 Oct 2026: a step more room — 32px sides, 24px in the rail.
+         The playbook was pinned to the foot here; on review it follows the
+         first section instead, so the spare height sits at the foot. */
+      :host([layout='rail']) .header { padding: var(--la-space-2xl) var(--la-space-2xl) 0; }
+      :host([layout='rail']) .footer { padding: var(--la-space-lg) var(--la-space-2xl); }
+      :host([layout='rail']) .rail-scroll { display: flex; flex-direction: column; }
+      :host([layout='rail']) .rail-main .body {
+        flex: 1 0 auto;
+        padding: var(--la-space-lg) var(--la-space-2xl) var(--la-space-2xl);
+      }
+
+      /* A quiet entrance: the pills, then the rail's sections, 40ms apart. */
+      @keyframes la-im-up {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: none; }
+      }
+      :host([open]) .header-pills > *,
+      :host([open][layout='rail']) .rail-aside > * {
+        animation: la-im-up var(--dur-base) var(--ease-out) both;
+      }
+      :host([open]) .header-pills > :nth-child(2),
+      :host([open][layout='rail']) .rail-aside > :nth-child(2) { animation-delay: 40ms; }
+      :host([open][layout='rail']) .rail-aside > :nth-child(3) { animation-delay: 80ms; }
+      :host([open][layout='rail']) .rail-aside > :nth-child(4) { animation-delay: 120ms; }
+      :host([open][layout='rail']) .rail-aside > :nth-child(n+5) { animation-delay: 160ms; }
+      @media (prefers-reduced-motion: reduce) {
+        :host([open]) .header-pills > *,
+        :host([open][layout='rail']) .rail-aside > * { animation: none; }
       }
 
       /* ── The rail layout is a fixed-height surface (9 Sep 2026, from the
@@ -26488,7 +26725,7 @@
 
       .rail-label {
         font-size: var(--la-font-size-sm);
-        color: var(--la-color-text-muted);
+        color: var(--la-color-text-secondary);
         margin-bottom: var(--la-space-xs);
       }
 
@@ -26510,12 +26747,26 @@
       .rail-src + .rail-src {
         margin-top: var(--la-space-sm);
       }
-      button.rail-src {
+      button.rail-src,
+      a.rail-src {
         cursor: pointer;
+        text-decoration: none;
       }
-      button.rail-src:hover .rail-src-doc {
+      button.rail-src:hover .rail-src-doc,
+      a.rail-src:hover .rail-src-doc {
         text-decoration: underline;
         text-underline-offset: 2px;
+      }
+      a.rail-src:focus-visible {
+        outline: 2px solid var(--la-color-border-focus);
+        outline-offset: 2px;
+        border-radius: var(--la-radius-sm);
+      }
+      .rail-src-out {
+        font-size: 11px;
+        margin-left: 3px;
+        color: var(--la-color-text-muted);
+        vertical-align: 0;
       }
       .rail-src > i {
         font-size: 14px;
@@ -26708,8 +26959,8 @@
         outline-offset: 2px;
       }
       .playbook-icon {
-        width: 34px;
-        height: 34px;
+        width: 40px;
+        height: 40px;
         flex-shrink: 0;
         display: flex;
         align-items: center;
@@ -26718,6 +26969,11 @@
         background: var(--la-color-accent-bg);
         color: var(--la-color-accent);
         font-size: 16px;
+      }
+      /* The playbook's own image, in a circle (DA-63, 2 Oct 2026, Riel). */
+      .playbook-icon.has-image {
+        background: var(--la-color-bg-muted) center / cover no-repeat;
+        box-shadow: inset 0 0 0 1px var(--la-color-border-light);
       }
       .playbook-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
       .playbook-name {
@@ -27138,6 +27394,12 @@
   __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "resolutions", void 0);
+  __decorate$j([
+      n({ attribute: 'resolutions-placement' })
+  ], exports.LaInsightModal.prototype, "resolutionsPlacement", void 0);
+  __decorate$j([
+      n({ type: Boolean, attribute: 'no-resolve' })
+  ], exports.LaInsightModal.prototype, "noResolve", void 0);
   __decorate$j([
       n({ type: String, attribute: 'chosen-resolution' })
   ], exports.LaInsightModal.prototype, "chosenResolution", void 0);
