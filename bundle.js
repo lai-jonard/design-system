@@ -31715,18 +31715,6 @@
         <slot @slotchange=${(e) => (this._hasReview = this._assigned(e))}></slot>
       </div>
       <div class="band confirm">
-      <la-move-past
-        ?open=${this.passing}
-        @la-move-past=${(e) => {
-            e.stopPropagation();
-            this.passing = false;
-            this._fire('la-step-moved', e.detail);
-        }}
-        @la-move-past-cancel=${(e) => {
-            e.stopPropagation();
-            this.passing = false;
-        }}
-      ></la-move-past>
       <div class="acts">
         <div class="acts-main">
           <la-button variant="primary" ?disabled=${!toAnswer && this.remaining > 0} @click=${onAct}>${act}</la-button>
@@ -31744,23 +31732,32 @@
       _assigned(e) {
           return e.target.assignedElements().length > 0;
       }
+      /**
+       * The way past, once, for the open and the not-reached card. It lives
+       * beside the article, not in it: the card is a grid, and a modal placed
+       * among its children takes the marker's cell and squeezes the title (seen
+       * on Orion's run, 7 Oct 2026). Its backdrop is fixed, so it adds nothing
+       * to the flow.
+       */
+      _wayPast() {
+          if (this._settled)
+              return A;
+          return b `<la-move-past
+      ?open=${this.passing}
+      @la-move-past=${(e) => {
+            e.stopPropagation();
+            this.passing = false;
+            this._fire('la-step-moved', e.detail);
+        }}
+      @la-move-past-cancel=${(e) => {
+            e.stopPropagation();
+            this.passing = false;
+        }}
+    ></la-move-past>`;
+      }
       render() {
           const open = this.state === 'open';
           return b `${iconStyles}<article class="card" part="card" aria-label=${`Step ${this.index}: ${this.heading}`}>
-      ${!open && !this._settled
-            ? b `<la-move-past
-            ?open=${this.passing}
-            @la-move-past=${(e) => {
-                e.stopPropagation();
-                this.passing = false;
-                this._fire('la-step-moved', e.detail);
-            }}
-            @la-move-past-cancel=${(e) => {
-                e.stopPropagation();
-                this.passing = false;
-            }}
-          ></la-move-past>`
-            : A}
       <div class="gut">${this._marker()}</div>
       <div class="body">
         ${this._settled
@@ -31791,7 +31788,7 @@
                   </span>
                 </div>`}`}
       </div>
-    </article>`;
+    </article>${this._wayPast()}`;
       }
   };
   exports.LaPlaybookStep.styles = [
