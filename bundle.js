@@ -31486,7 +31486,8 @@
    *   idle    - not reached: the title, its one line, *Why it matters*, *More*,
    *             and the authored button, whose label is the action. A caret in
    *             the corner expands the card alone (la-step-expand), the mirror
-   *             of the open card's collapse (Jonard, 6 Oct 2026). `next` makes
+   *             of the open card's collapse (Jonard, 6 Oct 2026) — only when
+   *             opening shows more: record facts or questions (7 Oct 2026). `next` makes
    *             it the run's one primary button and fills the marker. It is the
    *             same size as Confirm and carries no caret (Jonard, 6 Oct 2026:
    *             a small button with a caret read as a dropdown, and the step's
@@ -31576,7 +31577,7 @@
    *                     far right, opposite the act (Jonard, 28 Sep and 6 Oct 2026): provenance,
    *                     not the law, which stays behind More
    * @fires la-step-open    - the authored button, on a step that isn't an information step
-   * @fires la-step-expand  - the caret on a not-reached card: open the card alone, without its questions
+   * @fires la-step-expand  - the caret on a not-reached card that has record facts or questions: open the card alone, without its questions
    * @fires la-step-answer  - {at: 'next' | 'summary'}: open la-step-questions at the next unanswered question
    *                          (Finish answering) or at the summary (Confirm or Finish on a step with
    *                          questions). On la-step-open the page opens the step and, when it asks
@@ -31623,6 +31624,17 @@
       }
       get _settled() {
           return this.state === 'done' || this.state === 'passed' || this.state === 'before';
+      }
+      /**
+       * Whether opening the card shows more than the closed card does: facts on
+       * the record (the default slot) or questions. A step whose button opens
+       * its own surface — document creation, a check record, e-sign — has
+       * nothing to open as a card, so it draws no caret: one that opened a
+       * modal, or nothing new, read as a false promise (Jonard, 7 Oct 2026, on
+       * Orion's run).
+       */
+      get _opensMore() {
+          return this._hasReview || this.questionCount > 0;
       }
       _marker() {
           const s = this.state;
@@ -31673,9 +31685,11 @@
             ? b `<button class="collapse" type="button" aria-label="Close this step" @click=${() => this._fire('la-step-close')}>
               <i class="ph ph-caret-up" aria-hidden="true"></i>
             </button>`
-            : b `<button class="collapse" type="button" aria-label="Open this step" @click=${() => this._fire('la-step-expand')}>
-              <i class="ph ph-caret-down" aria-hidden="true"></i>
-            </button>`}
+            : this._opensMore
+                ? b `<button class="collapse" type="button" aria-label="Open this step" @click=${() => this._fire('la-step-expand')}>
+                <i class="ph ph-caret-down" aria-hidden="true"></i>
+              </button>`
+                : A}
       </div>
       ${this.line ? b `<p class="line">${this.line}</p>` : A}
       <div class="body-slot" ?hidden=${!this._hasBody}>
