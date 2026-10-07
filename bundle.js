@@ -31553,7 +31553,8 @@
    * authored button opens the type's own surface (document creation, the check
    * record, e-sign), and the card carries that step's states:
    * @prop locked      - a settled step the founder can't reopen: one the record holds, or one that is its
-   *                     own playbook. No Change; `word` says which
+   *                     own playbook. No Change; `word` says which, and the authored button stays, as a
+   *                     ghost, to open the thing (View Policy, View Playbook): it fires la-step-open
    * @prop word        - the settled state's word, in place of Done / Finished / Read ("On your record",
    *                     "Done in its own playbook")
    * @prop icon        - a Phosphor class for the authored button's leading icon ("ph-file-plus")
@@ -31653,9 +31654,13 @@
           <span class="word">${this._word()}</span>${this.summary ? b ` · ${this.summary}` : A}
         </p>
       </div>
-      ${this.state === 'before' || this.locked
-            ? A
-            : b `<la-button variant="ghost" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
+      ${this.locked && this.button
+            ? b `<la-button variant="ghost" @click=${() => this._fire('la-step-open')}
+            >${this.icon ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this.button}</la-button
+          >`
+            : this.state === 'before' || this.locked
+                ? A
+                : b `<la-button variant="ghost" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
     </div>`;
       }
       _frame() {
