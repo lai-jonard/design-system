@@ -32548,9 +32548,16 @@
    *   <la-sources .sources=${[{icon: 'ph-file-text', doc: 'Articles of association',
    *       section: 'adopted 2 June 2024 · LawVault', nav: 'lawvault-articles'}]}></la-sources>
    *
+   * A page can bring its own trigger in the `trigger` slot, as la-menu
+   * allows: Deadlines already says where each row came from, so that label
+   * opens the panel rather than sitting beside a second control. The slotted
+   * element is wired as the button (aria-haspopup, aria-expanded, click),
+   * and the default pill isn't drawn.
+   *
    * @prop sources - the documents and registers, in the order read
    * @prop label   - the pill's word (default "Sources"); the count follows it
    * @prop drop    - up (default) · down
+   * @slot trigger - a page's own trigger in place of the pill
    * @slot note    - closes the panel: how we read it, and how sure we are
    * @fires la-source-open - {nav, doc} when a row with `nav` is pressed
    */
@@ -32562,6 +32569,7 @@
           this.drop = 'up';
           this._open = false;
           this._hasNote = false;
+          this._hasTrigger = false;
           this._panelId = `la-sources-${Math.random().toString(36).slice(2, 8)}`;
           this._onDocClick = (e) => {
               if (!this._open)
@@ -32574,7 +32582,8 @@
               if (e.key !== 'Escape' || !this._open)
                   return;
               this.close();
-              this.renderRoot.querySelector('la-button')?.focus();
+              const own = this.querySelector('[slot="trigger"]');
+              (own ?? this.renderRoot.querySelector('la-button'))?.focus();
           };
       }
       connectedCallback() {
@@ -32603,6 +32612,23 @@
           this._open = true;
           OPEN.add(this);
       }
+      /* A slotted trigger is wired as the button: the page's own label, or an
+         icon button, opens the panel. */
+      _onTriggerSlot(e) {
+          const els = e.target.assignedElements();
+          this._hasTrigger = els.length > 0;
+          els.forEach((el) => {
+              el.setAttribute('aria-haspopup', 'true');
+              el.setAttribute('aria-controls', this._panelId);
+              if (!el.dataset.laSourcesWired) {
+                  el.dataset.laSourcesWired = '1';
+                  el.addEventListener('click', this._toggle.bind(this));
+              }
+          });
+      }
+      updated() {
+          this.querySelectorAll('[slot="trigger"]').forEach((el) => el.setAttribute('aria-expanded', this._open ? 'true' : 'false'));
+      }
       _go(s) {
           this.dispatchEvent(new CustomEvent('la-source-open', { detail: { nav: s.nav, doc: s.doc }, bubbles: true, composed: true }));
           this.close();
@@ -32622,16 +32648,19 @@
       render() {
           const n = this.sources.length;
           return b `${iconStyles}
-      <la-button
-        variant="ghost"
-        size="sm"
-        aria-haspopup="true"
-        aria-expanded=${this._open ? 'true' : 'false'}
-        aria-controls=${this._panelId}
-        @click=${this._toggle}
-      >
-        <i slot="icon-left" class="ph ph-link-simple"></i>${this.label} · ${n}
-      </la-button>
+      <slot name="trigger" @slotchange=${this._onTriggerSlot}></slot>
+      ${this._hasTrigger
+            ? A
+            : b `<la-button
+            variant="ghost"
+            size="sm"
+            aria-haspopup="true"
+            aria-expanded=${this._open ? 'true' : 'false'}
+            aria-controls=${this._panelId}
+            @click=${this._toggle}
+          >
+            <i slot="icon-left" class="ph ph-link-simple"></i>${this.label} · ${n}
+          </la-button>`}
       <div
         class="panel ${this._open ? 'open' : ''}"
         id=${this._panelId}
@@ -32791,6 +32820,9 @@
   __decorate$2([
       r$1()
   ], exports.LaSources.prototype, "_hasNote", void 0);
+  __decorate$2([
+      r$1()
+  ], exports.LaSources.prototype, "_hasTrigger", void 0);
   exports.LaSources = __decorate$2([
       t$1('la-sources')
   ], exports.LaSources);
