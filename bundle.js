@@ -31548,6 +31548,25 @@
    * @prop endBecause  - attribute end-because: the founder's answer that ended it, as "Because you answered …"
    * @prop notice      - a line above the questions, such as what changing a confirmed answer can undo
    * @prop passing     - the way past is open: la-move-past, a modal, from the acts' ⋯ menu
+   *
+   * For the other step types (7 Oct 2026, moving Orion's run onto the card): the
+   * authored button opens the type's own surface (document creation, the check
+   * record, e-sign), and the card carries that step's states:
+   * @prop locked      - a settled step the founder can't reopen: one the record holds, or one that is its
+   *                     own playbook. No Change; `word` says which
+   * @prop word        - the settled state's word, in place of Done / Finished / Read ("On your record",
+   *                     "Done in its own playbook")
+   * @prop icon        - a Phosphor class for the authored button's leading icon ("ph-file-plus")
+   * @prop disabled    - the authored button can't be pressed yet (a plan that confirms step by step);
+   *                     `disabled-reason` is its title
+   * @prop loading     - the authored button shows la-button's spinner, with `loading-label`, while a
+   *                     document renders
+   * @prop processing  - the step is being prepared (Auto mode): the marker spins, the body dims, the
+   *                     button waits. The page attaches its beam to the host
+   * @slot body        - prose under the one-liner, in both not-reached and open: the step's framing once
+   *                     Auto mode has prepared it
+   * @slot insight     - an la-ai-insight under the body
+   * @slot actions     - beside the authored button: the sign step's "Signed outside LawAdvisor?" fallback
    * @slot             - Review: the facts on the record, la-question elements holding la-record-row
    * @slot more        - *More*: what it is, when it bites, the law and the procedure. Empty hides it
    * @slot sources     - la-sources: the documents and registers the step reads from. It keeps the
@@ -31582,8 +31601,19 @@
           this.endReason = '';
           this.notice = '';
           this.passing = false;
+          this.locked = false;
+          this.word = '';
+          this.icon = '';
+          this.disabled = false;
+          this.disabledReason = '';
+          this.loading = false;
+          this.loadingLabel = 'Rendering…';
+          this.processing = false;
           this._hasMore = false;
           this._hasReview = false;
+          this._hasBody = false;
+          this._hasInsight = false;
+          this._hasActions = false;
       }
       _fire(name, detail) {
           this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }));
@@ -31593,16 +31623,20 @@
       }
       _marker() {
           const s = this.state;
-          const status = s === 'done' || s === 'before'
-              ? 'complete'
-              : s === 'passed'
-                  ? 'passed'
-                  : s === 'open' || this.next
-                      ? 'active'
-                      : 'pending';
+          const status = this.processing
+              ? 'processing'
+              : s === 'done' || s === 'before'
+                  ? 'complete'
+                  : s === 'passed'
+                      ? 'passed'
+                      : s === 'open' || this.next
+                          ? 'active'
+                          : 'pending';
           return b `<la-step-marker index=${this.index} status=${status}></la-step-marker>`;
       }
       _word() {
+          if (this.word)
+              return this.word;
           if (this.state === 'passed')
               return 'Moved past';
           if (this.state === 'before')
@@ -31619,7 +31653,7 @@
           <span class="word">${this._word()}</span>${this.summary ? b ` · ${this.summary}` : A}
         </p>
       </div>
-      ${this.state === 'before'
+      ${this.state === 'before' || this.locked
             ? A
             : b `<la-button variant="ghost" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
     </div>`;
@@ -31637,10 +31671,19 @@
             </button>`}
       </div>
       ${this.line ? b `<p class="line">${this.line}</p>` : A}
+      <div class="body-slot" ?hidden=${!this._hasBody}>
+        <slot name="body" @slotchange=${(e) => (this._hasBody = this._assigned(e))}></slot>
+      </div>
       ${this.matters ? b `<p class="matters"><b>Why it matters</b>${this.matters}</p>` : A}
       <la-disclosure class="more" variant="quiet" summary="More" ?hidden=${!this._hasMore}>
         <slot name="more" @slotchange=${(e) => (this._hasMore = e.target.assignedElements().length > 0)}></slot>
-      </la-disclosure>`;
+      </la-disclosure>
+      <div class="insight-slot" ?hidden=${!this._hasInsight}>
+        <slot name="insight" @slotchange=${(e) => (this._hasInsight = this._assigned(e))}></slot>
+      </div>
+      ${this.notice
+            ? b `<p class="notice"><i class="ph ph-info" aria-hidden="true"></i><span>${this.notice}</span></p>`
+            : A}`;
       }
       _leftText(ends) {
           const n = this.remaining;
@@ -31664,9 +31707,6 @@
           return b `<div class="review-slot" ?hidden=${!this._hasReview}>
         <slot @slotchange=${(e) => (this._hasReview = this._assigned(e))}></slot>
       </div>
-      ${this.notice
-            ? b `<p class="notice"><i class="ph ph-info" aria-hidden="true"></i><span>${this.notice}</span></p>`
-            : A}
       <div class="band confirm">
       <la-move-past
         ?open=${this.passing}
@@ -31708,11 +31748,20 @@
             ${open
                 ? this._openView()
                 : b `<div class="foot">
-                  <la-button
-                    variant=${this.next ? 'primary' : 'secondary'}
-                    @click=${() => this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
-                    >${this.button}</la-button
-                  >
+                  <span class="foot-acts">
+                    <la-button
+                      variant=${this.next ? 'primary' : 'secondary'}
+                      ?disabled=${this.disabled || this.processing}
+                      title=${this.disabled && this.disabledReason ? this.disabledReason : A}
+                      ?loading=${this.loading}
+                      loading-label=${this.loadingLabel}
+                      @click=${() => this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
+                      >${this.icon ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this.button}</la-button
+                    >
+                    <span class="actions-slot" ?hidden=${!this._hasActions}>
+                      <slot name="actions" @slotchange=${(e) => (this._hasActions = this._assigned(e))}></slot>
+                    </span>
+                  </span>
                   <slot name="sources"></slot>
                 </div>`}`}
       </div>
@@ -31932,6 +31981,36 @@
       }
 
 
+      .body-slot[hidden],
+      .insight-slot[hidden],
+      .actions-slot[hidden] {
+        display: none;
+      }
+      .body-slot {
+        margin-top: var(--la-space-sm);
+        color: var(--la-color-text-secondary);
+      }
+      .body-slot ::slotted(*) {
+        margin: 0;
+        max-width: 64ch;
+      }
+      .body-slot ::slotted(* + *) {
+        margin-top: var(--la-space-sm);
+      }
+      .insight-slot {
+        margin-top: var(--la-space-md);
+      }
+      .foot-acts {
+        display: inline-flex;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: var(--la-space-md);
+      }
+      /* Being prepared (Auto mode): the body dims while the page's beam runs. */
+      :host([processing]) .body {
+        opacity: 0.55;
+        transition: opacity var(--dur-base) var(--ease-out);
+      }
       @container (max-width: 480px) {
         .card,
         :host([state='open']) .card {
@@ -32005,11 +32084,44 @@
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookStep.prototype, "passing", void 0);
   __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "locked", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "word", void 0);
+  __decorate$7([
+      n()
+  ], exports.LaPlaybookStep.prototype, "icon", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "disabled", void 0);
+  __decorate$7([
+      n({ attribute: 'disabled-reason' })
+  ], exports.LaPlaybookStep.prototype, "disabledReason", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "loading", void 0);
+  __decorate$7([
+      n({ attribute: 'loading-label' })
+  ], exports.LaPlaybookStep.prototype, "loadingLabel", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "processing", void 0);
+  __decorate$7([
       r$1()
   ], exports.LaPlaybookStep.prototype, "_hasMore", void 0);
   __decorate$7([
       r$1()
   ], exports.LaPlaybookStep.prototype, "_hasReview", void 0);
+  __decorate$7([
+      r$1()
+  ], exports.LaPlaybookStep.prototype, "_hasBody", void 0);
+  __decorate$7([
+      r$1()
+  ], exports.LaPlaybookStep.prototype, "_hasInsight", void 0);
+  __decorate$7([
+      r$1()
+  ], exports.LaPlaybookStep.prototype, "_hasActions", void 0);
   exports.LaPlaybookStep = __decorate$7([
       t$1('la-playbook-step')
   ], exports.LaPlaybookStep);
