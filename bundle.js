@@ -31505,7 +31505,9 @@
    *             at the next question), then Confirm or Finish, which opens the
    *             summary to confirm from; a step with no questions confirms on
    *             the card. What's left in words; the sources pill; and a ⋯ menu
-   *             holding "Move past this step" (decision 119,
+   *             holding "Move past this step" (decision 119; the menu is on the
+   *             not-reached foot too, since a step whose button opens another
+   *             surface never opens as a card, 7 Oct 2026),
    *             amended 6 Oct: the sentence "Stuck? Move past this step" was
    *             long and competed with the acts; la-menu is the system's home
    *             for an action that doesn't warrant a visible button).
@@ -31745,6 +31747,20 @@
       render() {
           const open = this.state === 'open';
           return b `${iconStyles}<article class="card" part="card" aria-label=${`Step ${this.index}: ${this.heading}`}>
+      ${!open && !this._settled
+            ? b `<la-move-past
+            ?open=${this.passing}
+            @la-move-past=${(e) => {
+                e.stopPropagation();
+                this.passing = false;
+                this._fire('la-step-moved', e.detail);
+            }}
+            @la-move-past-cancel=${(e) => {
+                e.stopPropagation();
+                this.passing = false;
+            }}
+          ></la-move-past>`
+            : A}
       <div class="gut">${this._marker()}</div>
       <div class="body">
         ${this._settled
@@ -31767,7 +31783,12 @@
                       <slot name="actions" @slotchange=${(e) => (this._hasActions = this._assigned(e))}></slot>
                     </span>
                   </span>
-                  <slot name="sources"></slot>
+                  <span class="acts-side">
+                    <slot name="sources"></slot>
+                    <la-menu label="More for this step" origin="bottom-right">
+                      <la-menu-item label="Move past this step" value="pass" @la-menu-select=${() => (this.passing = true)}></la-menu-item>
+                    </la-menu>
+                  </span>
                 </div>`}`}
       </div>
     </article>`;
