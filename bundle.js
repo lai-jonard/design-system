@@ -5433,14 +5433,159 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  exports.LaTooltip = class LaTooltip extends i$2 {
+      constructor() {
+          super(...arguments);
+          this.tip = '';
+          this.position = 'top';
+          this.appearance = 'dark';
+          this.size = 'default';
+          /**
+           * Maximum width of the tooltip bubble. Defaults to `240px` so longer tips
+           * wrap onto multiple lines instead of stretching across the viewport.
+           * Set to an empty string (`max-width=""`) to opt out and let the tooltip
+           * size to its content on a single line.
+           */
+          this.maxWidth = '240px';
+      }
+      render() {
+          const wrap = this.maxWidth !== '';
+          const tipStyle = wrap ? `max-width: ${this.maxWidth};` : '';
+          return b `
+      <slot></slot>
+      <div
+        class="tip ${wrap ? 'wrap' : ''}"
+        data-pos=${this.position}
+        style=${tipStyle}
+      >${this.tip}</div>
+    `;
+      }
+  };
+  exports.LaTooltip.styles = [
+      tokens,
+      i$5 `
+      :host {
+        display: inline-block;
+        position: relative;
+      }
+      .tip {
+        position: absolute;
+        z-index: 200;
+        background: var(--la-color-bg-invert);
+        color: var(--la-color-text-invert);
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-normal);
+        white-space: nowrap;
+        padding: var(--la-space-sm) var(--la-space-md);
+        border-radius: var(--la-radius-md);
+        pointer-events: none;
+        opacity: 0;
+        transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
+        box-shadow: var(--la-shadow-sm);
+      }
+      :host([appearance='light']) .tip {
+        background: var(--la-color-bg);
+        color: var(--la-color-text);
+        border: 1px solid var(--la-color-border-light);
+        box-shadow: var(--la-shadow-sm);
+      }
+      :host([size='sm']) .tip {
+        font-size: var(--la-font-size-sm);
+        padding: var(--la-space-xs) var(--la-space-sm);
+      }
+      .tip.wrap {
+        white-space: normal;
+        line-height: 1.4;
+        width: max-content;
+      }
+      :host(:hover) .tip,
+      :host(:focus-within) .tip {
+        opacity: var(--la-tooltip-hover-opacity, 1);
+      }
+      /* Top (default) */
+      .tip[data-pos='top'] {
+        bottom: calc(100% + var(--la-space-2xs));
+        left: 50%;
+        transform: translateX(-50%) translateY(var(--la-space-xs));
+      }
+      :host(:hover) .tip[data-pos='top'],
+      :host(:focus-within) .tip[data-pos='top'] {
+        transform: translateX(-50%) translateY(0);
+      }
+      /* Bottom */
+      .tip[data-pos='bottom'] {
+        top: calc(100% + var(--la-space-2xs));
+        left: 50%;
+        transform: translateX(-50%) translateY(calc(var(--la-space-xs) * -1));
+      }
+      :host(:hover) .tip[data-pos='bottom'],
+      :host(:focus-within) .tip[data-pos='bottom'] {
+        transform: translateX(-50%) translateY(0);
+      }
+      /* Left */
+      .tip[data-pos='left'] {
+        right: calc(100% + var(--la-space-2xs));
+        top: 50%;
+        transform: translateY(-50%) translateX(var(--la-space-xs));
+      }
+      :host(:hover) .tip[data-pos='left'],
+      :host(:focus-within) .tip[data-pos='left'] {
+        transform: translateY(-50%) translateX(0);
+      }
+      /* Right */
+      .tip[data-pos='right'] {
+        left: calc(100% + var(--la-space-2xs));
+        top: 50%;
+        transform: translateY(-50%) translateX(calc(var(--la-space-xs) * -1));
+      }
+      :host(:hover) .tip[data-pos='right'],
+      :host(:focus-within) .tip[data-pos='right'] {
+        transform: translateY(-50%) translateX(0);
+      }
+    `,
+  ];
+  __decorate$1r([
+      n()
+  ], exports.LaTooltip.prototype, "tip", void 0);
+  __decorate$1r([
+      n({ reflect: true })
+  ], exports.LaTooltip.prototype, "position", void 0);
+  __decorate$1r([
+      n({ reflect: true })
+  ], exports.LaTooltip.prototype, "appearance", void 0);
+  __decorate$1r([
+      n({ reflect: true })
+  ], exports.LaTooltip.prototype, "size", void 0);
+  __decorate$1r([
+      n({ attribute: 'max-width' })
+  ], exports.LaTooltip.prototype, "maxWidth", void 0);
+  exports.LaTooltip = __decorate$1r([
+      t$1('la-tooltip')
+  ], exports.LaTooltip);
+
+  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
   /**
    * la-segment: one option inside la-segmented. Its text is the label. The
    * parent owns the state: it sets `checked`, the role and the tab stop, and
    * hears the press. A segment on its own does nothing.
    *
-   * @prop value    - what la-segmented's `value` becomes when this is picked
-   * @prop checked  - set by the parent; reflected for styling
-   * @prop disabled - can't be picked; skipped by the arrow keys
+   * An icon goes in the `icon` slot, before the label. With `hide-label` the
+   * label is read but not shown, and the segment is square: only for icons
+   * that say what they are on their own (a grid, a list).
+   *
+   * @prop value     - what la-segmented's `value` becomes when this is picked
+   * @prop checked   - set by the parent; reflected for styling. Don't set it yourself
+   * @prop disabled  - can't be picked; skipped by the arrow keys
+   * @prop hideLabel - attribute `hide-label`: the label is the accessible name only; the icon shows
+   * @slot           - the label
+   * @slot icon      - an icon before the label
+   * @csspart segment - the segment's surface
+   * @csspart label   - the label's wrapper
    */
   exports.LaSegment = class LaSegment extends i$2 {
       constructor() {
@@ -5448,9 +5593,12 @@
           this.value = '';
           this.checked = false;
           this.disabled = false;
+          this.hideLabel = false;
       }
       render() {
-          return b `<span class="seg" part="segment"><slot></slot></span>`;
+          return b `<span class="seg" part="segment"
+      ><slot name="icon"></slot><span class="label" part="label"><slot></slot></span
+    ></span>`;
       }
   };
   exports.LaSegment.styles = [
@@ -5470,10 +5618,13 @@
       }
       .seg {
         display: inline-flex;
+        flex: 1 1 auto;
         align-items: center;
         justify-content: center;
+        gap: var(--la-space-2xs);
         box-sizing: border-box;
-        min-height: var(--_seg-height, 30px);
+        min-width: 0;
+        min-height: var(--_seg-height, calc(var(--la-button-height-md) - 2 * var(--la-space-3xs)));
         padding: 0 var(--la-space-md);
         border-radius: inherit;
         font-size: var(--_seg-font, var(--la-font-size-md));
@@ -5484,6 +5635,26 @@
           background-color var(--dur-fast) var(--ease),
           color var(--dur-fast) var(--ease),
           box-shadow var(--dur-fast) var(--ease);
+      }
+      ::slotted([slot='icon']) {
+        flex: none;
+        font-size: var(--_seg-icon, var(--la-font-size-xl));
+        line-height: 1;
+      }
+      /* Icon only: the label stays as the accessible name, the segment is
+         square at the track's height. */
+      :host([hide-label]) .seg {
+        width: var(--_seg-height, calc(var(--la-button-height-md) - 2 * var(--la-space-3xs)));
+        padding: 0;
+      }
+      /* Visually hidden, still read: the standard 1px clip. */
+      :host([hide-label]) .label {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
       }
       :host(:hover) .seg {
         color: var(--la-color-text);
@@ -5505,16 +5676,20 @@
       :host([disabled]) .seg {
         color: var(--la-color-text-disabled);
       }
-      /* Touch: the target grows to 44px; the track keeps its look. */
+      /* Touch: the target grows to 44px (the large button's height); the
+         track keeps its look. */
       @media (pointer: coarse) {
         .seg {
-          min-height: 44px;
+          min-height: var(--la-button-height-lg);
+        }
+        :host([hide-label]) .seg {
+          width: var(--la-button-height-lg);
         }
       }
       @media (forced-colors: active) {
         :host([checked]) .seg {
-          outline: 2px solid CanvasText;
-          outline-offset: -2px;
+          outline: var(--la-focus-ring-width) solid CanvasText;
+          outline-offset: calc(-1 * var(--la-focus-ring-width));
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -5524,33 +5699,47 @@
       }
     `,
   ];
-  __decorate$1r([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaSegment.prototype, "value", void 0);
-  __decorate$1r([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSegment.prototype, "checked", void 0);
-  __decorate$1r([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSegment.prototype, "disabled", void 0);
-  exports.LaSegment = __decorate$1r([
+  __decorate$1q([
+      n({ type: Boolean, reflect: true, attribute: 'hide-label' })
+  ], exports.LaSegment.prototype, "hideLabel", void 0);
+  exports.LaSegment = __decorate$1q([
       t$1('la-segment')
   ], exports.LaSegment);
   /**
-   * la-segmented: pick one of a few short options, in a row. A radio group
-   * drawn as a single track, for answers that sit inline: the answer per
+   * la-segmented: pick one of two to five short options, in a row. An input,
+   * not navigation: it sits in a form beside la-input and la-select, at their
+   * heights, and gives the page a `value`, as they do. Moving between panels or
+   * pages is la-tabs, even in its segmented look. A radio group drawn as a
+   * single track, for answers that sit inline: the answer per
    * person on a Review, Decide & Confirm step ("High-net-worth · Self-certified
-   * sophisticated · Not sure"), or a view switch with two to four options.
+   * sophisticated · Not sure"), or a switch between views or modes where every
+   * option should stay in sight.
+   *
+   * The limits follow Astryx's SegmentedControl (Meta, v0.6.6), which this
+   * control is modelled on: two to five options, three sizes, a layout that
+   * hugs or fills, icons beside the label or alone, a disabled option, and a
+   * message that says why the whole control is disabled.
    *
    * Not this: options that need a description or a recommendation are
-   * la-choice in a radiogroup. More than four, or long labels, are la-select.
-   * A switch that applies at once is la-switch. Tabs that swap a panel are
-   * la-tabs.
+   * la-choice in a radiogroup. Six or more options, or long labels, are
+   * la-select. Moving between pages or panels is la-tabs, and a single on or
+   * off is la-switch.
    *
    * Neutral by design. The track is --la-color-bg-muted; the picked segment is
    * raised in --la-color-bg with --la-shadow-xs, never primary or a status
    * colour, so a founder's answer never reads as our verdict (Phase B brief,
-   * Screen 1). Nothing is picked until someone picks.
+   * Screen 1). Nothing is picked until someone picks: unlike Astryx, which
+   * always has one option picked, an answer is never chosen for the founder
+   * (decision 117). A view switch sets `value`.
    *
    * Accessible as role="radiogroup" named by `label`; each segment is
    * role="radio" with aria-checked. One tab stop: the picked segment, or the
@@ -5558,8 +5747,11 @@
    * wrapping), Home and End go to the ends, Space and Enter pick the focused
    * segment. Disabled segments are skipped.
    *
-   * The track wraps when its container is narrow, so long labels go onto a
-   * second row rather than overflow.
+   * `layout="hug"` sizes segments to their labels and wraps the track onto a
+   * second row when its container is narrow; `fill` shares the width equally,
+   * and moves a segment to a second row rather than squeeze it below its
+   * longest word. A label is never cut short: here it's an answer the founder
+   * has to read (Astryx truncates instead).
    *
    * Usage:
    *   <la-segmented label="Priya Shah" value="unsure">
@@ -5568,10 +5760,14 @@
    *     <la-segment value="unsure">Not sure</la-segment>
    *   </la-segmented>
    *
-   * @prop value    - the picked segment's value; "" when none is picked
-   * @prop label    - accessible name of the group (required: say what's being answered)
-   * @prop size     - default (30px) · sm (26px, in a dense row)
-   * @prop disabled - nothing can be picked
+   * @prop value           - the picked segment's value; "" when none is picked
+   * @prop label           - accessible name of the group (required: say what's being answered)
+   * @prop size            - sm (28px) · default (36px) · lg (44px, beside a large button): la-input's and la-select's heights
+   * @prop layout          - hug (default: segments fit their labels) · fill (equal shares of the width)
+   * @prop disabled        - nothing can be picked
+   * @prop disabledMessage - attribute `disabled-message`: why it's disabled, shown on hover and focus; the control stays focusable
+   * @slot - the la-segment children, two to five of them
+   * @csspart track - the muted rail that holds the segments
    * @fires la-change - {value} when someone picks a different segment; not when `value` is set from script
    */
   exports.LaSegmented = class LaSegmented extends i$2 {
@@ -5580,7 +5776,9 @@
           this.value = '';
           this.label = '';
           this.size = 'default';
+          this.layout = 'hug';
           this.disabled = false;
+          this.disabledMessage = '';
           this._onClick = (e) => {
               const s = e.target.closest('la-segment');
               if (s && s.parentElement === this)
@@ -5636,12 +5834,18 @@
       _enabled() {
           return this._segments.filter((s) => !s.disabled && !s.hidden);
       }
+      /* With a message, a disabled control can still be reached, so the reason
+         can be read; nothing can be picked. */
+      get _explained() {
+          return this.disabled && !!this.disabledMessage;
+      }
       /* State flows one way: `value` sets every segment's checked, role and
          tab stop. Runs after each update and whenever the slot changes. */
       _sync() {
           const segs = this._segments;
           const picked = segs.find((s) => s.value === this.value && !s.disabled);
           const stop = picked ?? this._enabled()[0];
+          const reachable = !this.disabled || this._explained;
           for (const s of segs) {
               s.checked = s === picked;
               s.setAttribute('role', 'radio');
@@ -5650,7 +5854,7 @@
                   s.setAttribute('aria-disabled', 'true');
               else
                   s.removeAttribute('aria-disabled');
-              s.tabIndex = this.disabled ? -1 : s === stop ? 0 : -1;
+              s.tabIndex = reachable && s === stop ? 0 : -1;
           }
           if (this.label)
               this.setAttribute('aria-label', this.label);
@@ -5660,6 +5864,10 @@
               this.setAttribute('aria-disabled', 'true');
           else
               this.removeAttribute('aria-disabled');
+          if (this._explained)
+              this.setAttribute('aria-description', this.disabledMessage);
+          else
+              this.removeAttribute('aria-description');
       }
       updated() {
           this._sync();
@@ -5676,7 +5884,13 @@
           this.dispatchEvent(new CustomEvent('la-change', { detail: { value: this.value }, bubbles: true, composed: true }));
       }
       render() {
-          return b `<div class="track" part="track"><slot @slotchange=${this._sync}></slot></div>`;
+          const blocked = this.disabled && !this._explained;
+          const track = b `<div class="track ${blocked ? 'blocked' : ''}" part="track">
+      <slot @slotchange=${this._sync}></slot>
+    </div>`;
+          return this._explained
+              ? b `<la-tooltip tip=${this.disabledMessage}>${track}</la-tooltip>`
+              : track;
       }
   };
   exports.LaSegmented.styles = [
@@ -5698,38 +5912,80 @@
         width: fit-content;
         max-width: 100%;
         box-sizing: border-box;
-        gap: 2px;
-        padding: 3px;
+        gap: var(--la-space-3xs);
+        padding: var(--la-space-3xs);
         border-radius: var(--la-radius-md);
         background-color: var(--la-color-bg-muted);
       }
-      :host([size='sm']) {
-        --_seg-height: 26px;
-        --_seg-font: var(--la-font-size-sm);
+      la-tooltip {
+        max-width: 100%;
       }
-      :host([disabled]) {
+      /* The whole control sits on the button scale, at la-input's and
+         la-select's heights so it lines up in a form row: 28px (sm), 36px
+         (default), and 44px (lg, beside a large button). Each segment is the
+         height less the track's padding top and bottom. */
+      :host([size='sm']) {
+        --_seg-height: calc(var(--la-button-height-sm) - 2 * var(--la-space-3xs));
+        --_seg-font: var(--la-font-size-sm);
+        --_seg-icon: var(--la-font-size-lg);
+      }
+      :host([size='lg']) {
+        --_seg-height: calc(var(--la-button-height-lg) - 2 * var(--la-space-3xs));
+        --_seg-font: var(--la-font-size-lg);
+        --_seg-icon: var(--la-font-size-2xl);
+      }
+      :host([layout='fill']) {
+        display: block;
+      }
+      :host([layout='fill']) la-tooltip {
+        display: block;
+      }
+      /* Equal shares of the width. A segment never gets narrower than its
+         longest word: when the shares can't hold them, a segment moves to a
+         second row and the row's segments share that one. */
+      :host([layout='fill']) .track {
+        width: 100%;
+      }
+      :host([layout='fill']) ::slotted(la-segment) {
+        flex: 1 1 0;
+        min-width: min-content;
+      }
+      :host([disabled]) .track {
         opacity: 0.6;
+      }
+      /* Disabled with no message: nothing to hover or reach. With one, the
+         tooltip needs the hover, so only picking is blocked (in _pick). */
+      .track.blocked {
         pointer-events: none;
+      }
+      :host([disabled]) ::slotted(la-segment) {
+        cursor: not-allowed;
       }
     `,
   ];
-  __decorate$1r([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaSegmented.prototype, "value", void 0);
-  __decorate$1r([
+  __decorate$1q([
       n()
   ], exports.LaSegmented.prototype, "label", void 0);
-  __decorate$1r([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaSegmented.prototype, "size", void 0);
-  __decorate$1r([
+  __decorate$1q([
+      n({ reflect: true })
+  ], exports.LaSegmented.prototype, "layout", void 0);
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSegmented.prototype, "disabled", void 0);
-  exports.LaSegmented = __decorate$1r([
+  __decorate$1q([
+      n({ attribute: 'disabled-message' })
+  ], exports.LaSegmented.prototype, "disabledMessage", void 0);
+  exports.LaSegmented = __decorate$1q([
       t$1('la-segmented')
   ], exports.LaSegmented);
 
-  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5946,65 +6202,65 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1q([
+  __decorate$1p([
       n({ reflect: true })
   ], exports.LaInput.prototype, "type", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "name", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "placeholder", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ reflect: true })
   ], exports.LaInput.prototype, "inputmode", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "autocomplete", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ attribute: 'aria-label' })
   ], exports.LaInput.prototype, "ariaLabel", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "value", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "label", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "hint", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "required", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ reflect: true })
   ], exports.LaInput.prototype, "size", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "optional", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "disabled", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "error", void 0);
-  __decorate$1q([
+  __decorate$1p([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "reveal", void 0);
-  __decorate$1q([
+  __decorate$1p([
       r$1()
   ], exports.LaInput.prototype, "_hasIconLeft", void 0);
-  __decorate$1q([
+  __decorate$1p([
       r$1()
   ], exports.LaInput.prototype, "_hasIconRight", void 0);
-  __decorate$1q([
+  __decorate$1p([
       r$1()
   ], exports.LaInput.prototype, "_shown", void 0);
-  exports.LaInput = __decorate$1q([
+  exports.LaInput = __decorate$1p([
       t$1('la-input')
   ], exports.LaInput);
 
-  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6334,56 +6590,56 @@
       :host([disabled]) { opacity: 0.4; }
     `,
   ];
-  __decorate$1p([
+  __decorate$1o([
       n({ attribute: 'value' })
   ], exports.LaDateInput.prototype, "_dateValue", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "locale", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "label", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "hint", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "min", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "max", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n({ attribute: 'aria-label' })
   ], exports.LaDateInput.prototype, "ariaLabel", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "required", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n({ type: Boolean })
   ], exports.LaDateInput.prototype, "optional", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "disabled", void 0);
-  __decorate$1p([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "error", void 0);
-  __decorate$1p([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_month", void 0);
-  __decorate$1p([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_day", void 0);
-  __decorate$1p([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_year", void 0);
-  __decorate$1p([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_message", void 0);
-  exports.LaDateInput = __decorate$1p([
+  exports.LaDateInput = __decorate$1o([
       t$1('la-date-input')
   ], exports.LaDateInput);
 
-  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6509,23 +6765,23 @@
       }
     `,
   ];
-  __decorate$1o([
+  __decorate$1n([
       n({ reflect: true })
   ], exports.LaOption.prototype, "value", void 0);
-  __decorate$1o([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "disabled", void 0);
-  __decorate$1o([
+  __decorate$1n([
       r$1()
   ], exports.LaOption.prototype, "_hasCount", void 0);
-  __decorate$1o([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "selected", void 0);
-  exports.LaOption = __decorate$1o([
+  exports.LaOption = __decorate$1n([
       t$1('la-option')
   ], exports.LaOption);
 
-  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7095,47 +7351,47 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1n([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "name", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "value", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "placeholder", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "label", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "hint", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "required", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n({ reflect: true })
   ], exports.LaSelect.prototype, "size", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "disabled", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "error", void 0);
-  __decorate$1n([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "open", void 0);
-  __decorate$1n([
+  __decorate$1m([
       r$1()
   ], exports.LaSelect.prototype, "_origin", void 0);
-  __decorate$1n([
+  __decorate$1m([
       r$1()
   ], exports.LaSelect.prototype, "_phase", void 0);
-  exports.LaSelect = __decorate$1n([
+  exports.LaSelect = __decorate$1m([
       t$1('la-select')
   ], exports.LaSelect);
 
-  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7488,50 +7744,50 @@
       }
     `,
   ];
-  __decorate$1m([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "label", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "hint", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "name", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "placeholder", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n({ converter: csv })
   ], exports.LaMultiSelect.prototype, "options", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n({ converter: csv, reflect: true })
   ], exports.LaMultiSelect.prototype, "selected", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n({ type: Number, attribute: 'max-suggestions' })
   ], exports.LaMultiSelect.prototype, "maxSuggestions", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n({ type: Boolean, attribute: 'allow-custom' })
   ], exports.LaMultiSelect.prototype, "allowCustom", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "disabled", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "required", void 0);
-  __decorate$1m([
+  __decorate$1l([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "error", void 0);
-  __decorate$1m([
+  __decorate$1l([
       r$1()
   ], exports.LaMultiSelect.prototype, "_query", void 0);
-  __decorate$1m([
+  __decorate$1l([
       e$2('input')
   ], exports.LaMultiSelect.prototype, "_input", void 0);
-  exports.LaMultiSelect = __decorate$1m([
+  exports.LaMultiSelect = __decorate$1l([
       t$1('la-multi-select')
   ], exports.LaMultiSelect);
 
-  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7605,14 +7861,14 @@
       }
     `,
   ];
-  __decorate$1l([
+  __decorate$1k([
       n({ reflect: true })
   ], exports.LaAlert.prototype, "variant", void 0);
-  exports.LaAlert = __decorate$1l([
+  exports.LaAlert = __decorate$1k([
       t$1('la-alert')
   ], exports.LaAlert);
 
-  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7772,160 +8028,24 @@
       }
     `,
   ];
-  __decorate$1k([
+  __decorate$1j([
       n({ reflect: true })
   ], exports.LaToast.prototype, "variant", void 0);
-  __decorate$1k([
+  __decorate$1j([
       n()
   ], exports.LaToast.prototype, "title", void 0);
-  __decorate$1k([
+  __decorate$1j([
       n()
   ], exports.LaToast.prototype, "message", void 0);
-  __decorate$1k([
+  __decorate$1j([
       n({ type: Boolean, reflect: true })
   ], exports.LaToast.prototype, "open", void 0);
-  __decorate$1k([
+  __decorate$1j([
       n({ type: Number })
   ], exports.LaToast.prototype, "duration", void 0);
-  exports.LaToast = __decorate$1k([
+  exports.LaToast = __decorate$1j([
       t$1('la-toast')
   ], exports.LaToast);
-
-  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-      return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  exports.LaTooltip = class LaTooltip extends i$2 {
-      constructor() {
-          super(...arguments);
-          this.tip = '';
-          this.position = 'top';
-          this.appearance = 'dark';
-          this.size = 'default';
-          /**
-           * Maximum width of the tooltip bubble. Defaults to `240px` so longer tips
-           * wrap onto multiple lines instead of stretching across the viewport.
-           * Set to an empty string (`max-width=""`) to opt out and let the tooltip
-           * size to its content on a single line.
-           */
-          this.maxWidth = '240px';
-      }
-      render() {
-          const wrap = this.maxWidth !== '';
-          const tipStyle = wrap ? `max-width: ${this.maxWidth};` : '';
-          return b `
-      <slot></slot>
-      <div
-        class="tip ${wrap ? 'wrap' : ''}"
-        data-pos=${this.position}
-        style=${tipStyle}
-      >${this.tip}</div>
-    `;
-      }
-  };
-  exports.LaTooltip.styles = [
-      tokens,
-      i$5 `
-      :host {
-        display: inline-block;
-        position: relative;
-      }
-      .tip {
-        position: absolute;
-        z-index: 200;
-        background: var(--la-color-bg-invert);
-        color: var(--la-color-text-invert);
-        font-size: var(--la-font-size-base);
-        font-weight: var(--la-font-weight-normal);
-        white-space: nowrap;
-        padding: var(--la-space-sm) var(--la-space-md);
-        border-radius: var(--la-radius-md);
-        pointer-events: none;
-        opacity: 0;
-        transition: opacity var(--dur-base) var(--ease-out), transform var(--dur-base) var(--ease-out);
-        box-shadow: var(--la-shadow-sm);
-      }
-      :host([appearance='light']) .tip {
-        background: var(--la-color-bg);
-        color: var(--la-color-text);
-        border: 1px solid var(--la-color-border-light);
-        box-shadow: var(--la-shadow-sm);
-      }
-      :host([size='sm']) .tip {
-        font-size: var(--la-font-size-sm);
-        padding: var(--la-space-xs) var(--la-space-sm);
-      }
-      .tip.wrap {
-        white-space: normal;
-        line-height: 1.4;
-        width: max-content;
-      }
-      :host(:hover) .tip,
-      :host(:focus-within) .tip {
-        opacity: var(--la-tooltip-hover-opacity, 1);
-      }
-      /* Top (default) */
-      .tip[data-pos='top'] {
-        bottom: calc(100% + var(--la-space-2xs));
-        left: 50%;
-        transform: translateX(-50%) translateY(var(--la-space-xs));
-      }
-      :host(:hover) .tip[data-pos='top'],
-      :host(:focus-within) .tip[data-pos='top'] {
-        transform: translateX(-50%) translateY(0);
-      }
-      /* Bottom */
-      .tip[data-pos='bottom'] {
-        top: calc(100% + var(--la-space-2xs));
-        left: 50%;
-        transform: translateX(-50%) translateY(calc(var(--la-space-xs) * -1));
-      }
-      :host(:hover) .tip[data-pos='bottom'],
-      :host(:focus-within) .tip[data-pos='bottom'] {
-        transform: translateX(-50%) translateY(0);
-      }
-      /* Left */
-      .tip[data-pos='left'] {
-        right: calc(100% + var(--la-space-2xs));
-        top: 50%;
-        transform: translateY(-50%) translateX(var(--la-space-xs));
-      }
-      :host(:hover) .tip[data-pos='left'],
-      :host(:focus-within) .tip[data-pos='left'] {
-        transform: translateY(-50%) translateX(0);
-      }
-      /* Right */
-      .tip[data-pos='right'] {
-        left: calc(100% + var(--la-space-2xs));
-        top: 50%;
-        transform: translateY(-50%) translateX(calc(var(--la-space-xs) * -1));
-      }
-      :host(:hover) .tip[data-pos='right'],
-      :host(:focus-within) .tip[data-pos='right'] {
-        transform: translateY(-50%) translateX(0);
-      }
-    `,
-  ];
-  __decorate$1j([
-      n()
-  ], exports.LaTooltip.prototype, "tip", void 0);
-  __decorate$1j([
-      n({ reflect: true })
-  ], exports.LaTooltip.prototype, "position", void 0);
-  __decorate$1j([
-      n({ reflect: true })
-  ], exports.LaTooltip.prototype, "appearance", void 0);
-  __decorate$1j([
-      n({ reflect: true })
-  ], exports.LaTooltip.prototype, "size", void 0);
-  __decorate$1j([
-      n({ attribute: 'max-width' })
-  ], exports.LaTooltip.prototype, "maxWidth", void 0);
-  exports.LaTooltip = __decorate$1j([
-      t$1('la-tooltip')
-  ], exports.LaTooltip);
 
   var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;

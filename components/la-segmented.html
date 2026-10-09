@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-segmented — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimen rows ────────────────────────────────── */
+    .seg-stack { display: flex; flex-direction: column; align-items: flex-start; gap: var(--la-space-lg); }
+    .seg-cap { display: block; margin-bottom: var(--la-space-xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .seg-cap code { font-size: var(--la-font-size-sm); }
+    .seg-fill { width: 320px; max-width: 100%; }
+    .seg-narrow { width: 220px; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    /* ── In context ───────────────────────────────────── */
+    .ctx { width: 100%; max-width: 560px; }
+    .ctx-q { margin: 0; font-size: var(--la-font-size-lg); font-weight: var(--la-font-weight-medium); color: var(--la-color-text); }
+    .ctx-src { display: flex; align-items: center; gap: var(--la-space-xs); margin: var(--la-space-xs) 0 var(--la-space-sm); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .each-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--la-space-xs) var(--la-space-md); padding: var(--la-space-sm) 0; border-top: 1px solid var(--la-color-border-light); }
+    .each-row:last-child { border-bottom: 1px solid var(--la-color-border-light); }
+    .each-name { font-size: var(--la-font-size-md); font-weight: var(--la-font-weight-medium); color: var(--la-color-text); }
+    .form-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--la-space-md); }
+    .form-field { display: flex; flex-direction: column; gap: var(--la-space-2xs); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .view-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--la-space-md); width: 100%; max-width: 560px; }
+    .view-bar b { font-size: var(--la-font-size-lg); color: var(--la-color-text); }
+
+    /* ── Live preview ─────────────────────────────────── */
+    .live-box { width: 360px; max-width: 100%; }
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-segmented</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-segmented</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    <a href="#css-parts" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-parts">CSS parts</a>
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-segmented</h1>
+          <p>Pick one of two to five short options, in a row: a radio group drawn as one track. <code>la-segmented</code> holds <code>la-segment</code> children, in the same way <code>la-select</code> holds <code>la-option</code>; each segment’s text is its label. An input, not navigation: it can sit in a form beside <code>la-input</code> and <code>la-select</code>, at their heights, and the page reads its <code>value</code> as it reads theirs. <code>la-tabs</code>, even <code>variant="segmented"</code>, is navigation: each tab shows a different panel or view. Modelled on <a href="https://astryx.atmeta.com/components/SegmentedControl">Astryx’s SegmentedControl</a>, whose limits and variations it takes.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack" style="padding:24px;">
+            <la-segmented label="View" value="list">
+              <la-segment value="grid"><i slot="icon" class="ph ph-squares-four" aria-hidden="true"></i>Grid</la-segment>
+              <la-segment value="list"><i slot="icon" class="ph ph-list" aria-hidden="true"></i>List</la-segment>
+              <la-segment value="table"><i slot="icon" class="ph ph-table" aria-hidden="true"></i>Table</la-segment>
+            </la-segmented>
+            <ol class="anatomy-list">
+              <li><strong>Track.</strong> The muted rail that holds the segments: <code>--la-color-bg-muted</code>, <code>--la-radius-md</code>. <code>part="track"</code> on <code>la-segmented</code>.</li>
+              <li><strong>Segment.</strong> One option, an <code>la-segment</code>. <code>part="segment"</code>.</li>
+              <li><strong>Icon.</strong> Optional, before the label. The <code>icon</code> slot on <code>la-segment</code>.</li>
+              <li><strong>Label.</strong> The segment’s text, its default slot. <code>part="label"</code>. With <code>hide-label</code> it is read but not shown.</li>
+              <li><strong>Picked segment.</strong> Raised in <code>--la-color-bg</code> with <code>--la-shadow-xs</code>, in the text colour. Never a status colour.</li>
+              <li><strong>Tooltip.</strong> Only when the control is <code>disabled</code> with a <code>disabled-message</code>: an <code>la-tooltip</code> around the track that says why.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header" style="margin-top:8px;">
+          <h1>Live preview</h1>
+          <p>Each control sets a property on the preview.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>size</label>
+              <div class="btn-group" data-control="size">
+                <button class="btn-toggle" data-value="sm" type="button">sm</button>
+                <button class="btn-toggle active" data-value="default" type="button">default</button>
+                <button class="btn-toggle" data-value="lg" type="button">lg</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>layout</label>
+              <div class="btn-group" data-control="layout">
+                <button class="btn-toggle active" data-value="hug" type="button">hug</button>
+                <button class="btn-toggle" data-value="fill" type="button">fill</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>value</label>
+              <div class="btn-group" data-control="value">
+                <button class="btn-toggle" data-value="" type="button">none</button>
+                <button class="btn-toggle" data-value="grid" type="button">grid</button>
+                <button class="btn-toggle active" data-value="list" type="button">list</button>
+                <button class="btn-toggle" data-value="table" type="button">table</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label>disabled</label>
+              <div class="btn-group" data-control="disabled">
+                <button class="btn-toggle active" data-value="false" type="button">false</button>
+                <button class="btn-toggle" data-value="true" type="button">true</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>hide-label <span style="font-weight:400;">(each la-segment)</span></label>
+              <div class="btn-group" data-control="hide-label">
+                <button class="btn-toggle active" data-value="false" type="button">false</button>
+                <button class="btn-toggle" data-value="true" type="button">true</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>disabled <span style="font-weight:400;">(the Table la-segment)</span></label>
+              <div class="btn-group" data-control="segment-disabled">
+                <button class="btn-toggle active" data-value="false" type="button">false</button>
+                <button class="btn-toggle" data-value="true" type="button">true</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-label">label</label>
+              <input id="ctl-label" type="text" value="View" style="width:220px;">
+            </div>
+            <div class="control-group">
+              <label for="ctl-message">disabled-message</label>
+              <input id="ctl-message" type="text" value="" placeholder="(empty)" style="width:300px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:24px;">
+            <div class="live-box">
+              <la-segmented id="live" label="View" value="list">
+                <la-segment value="grid"><i slot="icon" class="ph ph-squares-four" aria-hidden="true"></i>Grid</la-segment>
+                <la-segment value="list"><i slot="icon" class="ph ph-list" aria-hidden="true"></i>List</la-segment>
+                <la-segment value="table"><i slot="icon" class="ph ph-table" aria-hidden="true"></i>Table</la-segment>
+              </la-segmented>
+            </div>
+          </div>
+          <div class="preview-label event-log" id="event-log">la-change: —</div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-sizes" class="preview-group">
+          <div class="preview-label">Sizes: 28px <code>sm</code>, 36px <code>default</code>, 44px <code>lg</code>, the heights of <code>la-input</code> and <code>la-select</code></div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="seg-stack">
+              <div><span class="seg-cap"><code>size="sm"</code></span><la-segmented label="Answer" size="sm" value="y"><la-segment value="y">Yes</la-segment><la-segment value="n">No</la-segment></la-segmented></div>
+              <div><span class="seg-cap"><code>size="default"</code></span><la-segmented label="Answer" value="y"><la-segment value="y">Yes</la-segment><la-segment value="n">No</la-segment></la-segmented></div>
+              <div><span class="seg-cap"><code>size="lg"</code></span><la-segmented label="Answer" size="lg" value="y"><la-segment value="y">Yes</la-segment><la-segment value="n">No</la-segment></la-segmented></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-layout" class="preview-group">
+          <div class="preview-label">Layout: <code>hug</code> fits the labels; <code>fill</code> shares the width equally. In a narrow column the track wraps, and a filled segment that can’t hold its longest word moves to a second row. A label is never cut short.</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="seg-stack">
+              <div><span class="seg-cap"><code>layout="hug"</code></span><la-segmented label="Period" value="weekly"><la-segment value="daily">Daily</la-segment><la-segment value="weekly">Weekly</la-segment><la-segment value="monthly">Monthly</la-segment></la-segmented></div>
+              <div class="seg-fill"><span class="seg-cap"><code>layout="fill"</code> in 320px</span><la-segmented label="Period" layout="fill" value="weekly"><la-segment value="daily">Daily</la-segment><la-segment value="weekly">Weekly</la-segment><la-segment value="monthly">Monthly</la-segment></la-segmented></div>
+              <div class="seg-narrow"><span class="seg-cap"><code>layout="hug"</code> in 220px</span><la-segmented label="Exemption" value="ssi"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
+              <div class="seg-narrow"><span class="seg-cap"><code>layout="fill"</code> in 220px</span><la-segmented label="Exemption" layout="fill" value="ssi"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-states" class="preview-group">
+          <div class="preview-label">States</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="seg-stack">
+              <div><span class="seg-cap">Nothing picked: <code>value=""</code></span><la-segmented label="Exemption"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
+              <div><span class="seg-cap">Picked: <code>value="unsure"</code></span><la-segmented label="Exemption" value="unsure"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
+              <div><span class="seg-cap">A disabled segment: <code>la-segment disabled</code></span><la-segmented label="View" value="run"><la-segment value="run">The run</la-segment><la-segment value="states">Every state</la-segment><la-segment value="calls" disabled>Design calls</la-segment></la-segmented></div>
+              <div><span class="seg-cap">Disabled: <code>disabled</code></span><la-segmented label="Answer" value="n" disabled><la-segment value="y">Yes</la-segment><la-segment value="n">No</la-segment></la-segmented></div>
+              <div><span class="seg-cap">Disabled, saying why: <code>disabled-message</code> (hover or focus it)</span><la-segmented label="Answer" value="n" disabled disabled-message="Confirmed on 3 October. Change it from the step."><la-segment value="y">Yes</la-segment><la-segment value="n">No</la-segment></la-segmented></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-icons" class="preview-group">
+          <div class="preview-label">Icons: in the <code>icon</code> slot, before the label; with <code>hide-label</code> the label is read, not shown, and the segment is square</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="seg-stack">
+              <div><span class="seg-cap">With icons</span><la-segmented label="View" value="list"><la-segment value="grid"><i slot="icon" class="ph ph-squares-four" aria-hidden="true"></i>Grid</la-segment><la-segment value="list"><i slot="icon" class="ph ph-list" aria-hidden="true"></i>List</la-segment><la-segment value="table"><i slot="icon" class="ph ph-table" aria-hidden="true"></i>Table</la-segment></la-segmented></div>
+              <div><span class="seg-cap">Icon only: <code>hide-label</code></span><la-segmented label="View" value="grid"><la-segment value="grid" hide-label><i slot="icon" class="ph ph-squares-four" aria-hidden="true"></i>Grid</la-segment><la-segment value="list" hide-label><i slot="icon" class="ph ph-list" aria-hidden="true"></i>List</la-segment><la-segment value="table" hide-label><i slot="icon" class="ph ph-table" aria-hidden="true"></i>Table</la-segment></la-segmented></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-five" class="preview-group">
+          <div class="preview-label">Five options, the most. Six or more are <code>la-select</code>.</div>
+          <div class="preview-frame" style="padding:24px;">
+            <la-segmented label="Frequency" value="weekly"><la-segment value="hourly">Hourly</la-segment><la-segment value="daily">Daily</la-segment><la-segment value="weekly">Weekly</la-segment><la-segment value="monthly">Monthly</la-segment><la-segment value="yearly">Yearly</la-segment></la-segmented>
+          </div>
+        </div>
+
+        <div id="snap-context" class="preview-group">
+          <div class="preview-label">In context: one answer per person on a Review, Decide &amp; Confirm step (as <code>la-people-answer</code> draws it), in a form, and a view switch</div>
+          <div class="preview-frame preview-frame--stack" style="padding:24px;gap:32px;">
+            <div class="ctx">
+              <p class="ctx-q">Which exemption does each angel fit?</p>
+              <p class="ctx-src"><i class="ph ph-database" aria-hidden="true"></i>Your investors, from Cap table</p>
+              <div class="each-row"><span class="each-name">Example Ventures LP</span><la-segmented size="sm" label="Example Ventures LP"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
+              <div class="each-row"><span class="each-name">Priya Shah</span><la-segmented size="sm" label="Priya Shah" value="unsure"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
+              <div class="each-row"><span class="each-name">Owen Hart</span><la-segmented size="sm" label="Owen Hart"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
+            </div>
+            <div class="form-row">
+              <la-input label="Employee name" placeholder="Priya Shah"></la-input>
+              <la-select label="Contract" placeholder="Choose"><la-option value="perm">Permanent</la-option><la-option value="fixed">Fixed term</la-option></la-select>
+              <div class="form-field"><span>Hours</span><la-segmented label="Hours" value="full"><la-segment value="full">Full time</la-segment><la-segment value="part">Part time</la-segment></la-segmented></div>
+            </div>
+            <div class="view-bar">
+              <b>Review, Decide &amp; Confirm</b>
+              <la-segmented label="Views" value="run"><la-segment value="run">The run</la-segment><la-segment value="states">Every state</la-segment><la-segment value="calls">Design calls</la-segment></la-segmented>
+            </div>
+          </div>
+        </div>
+
+        
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-segmented</h2>
+    <p>Pick one of two to five short options, in a row: a radio group drawn as one track. la-segmented holds la-segment children, in the same way la-select holds la-option; each segment’s text is its label. An input, not navigation: it can sit in a form beside la-input and la-select, at their heights, and the page reads its value as it reads theirs. la-tabs, even variant="segmented", is navigation: each tab shows a different panel or view. Modelled on Astryx’s SegmentedControl, whose limits and variations it takes.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>value</td>
+          <td><span class="default">value</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>the picked segment's value; "" when none is picked</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>accessible name of the group (required: say what's being answered)</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">SegmentedSize</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>sm (28px) · default (36px) · lg (44px, beside a large button): la-input's and la-select's heights</td>
+        </tr>
+      
+        <tr>
+          <td>layout</td>
+          <td><span class="default">layout</span></td>
+          <td><span class="type">SegmentedLayout</span></td>
+          <td><span class="default">&#39;hug&#39;</span></td>
+          <td>hug (default: segments fit their labels) · fill (equal shares of the width)</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>nothing can be picked</td>
+        </tr>
+      
+        <tr>
+          <td>disabledMessage</td>
+          <td><span class="default">disabled-message</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>attribute `disabled-message`: why it's disabled, shown on hover and focus; the control stays focusable</td>
+        </tr>
+      
+        <tr>
+          <td>_segments</td>
+          <td>—</td>
+          <td><span class="type">LaSegment[]</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_explained</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onClick</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_onKey</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>(default)</td>
+          <td>the la-segment children, two to five of them</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{value} when someone picks a different segment; not when `value` is set from script</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+
+
+
+
+<div id="css-parts" class="docs-section">
+  <h3>CSS parts</h3>
+  <table class="docs-table">
+    <thead><tr><th>Part</th><th>Description</th></tr></thead>
+    <tbody>
+      
+        <tr>
+          <td>track</td>
+          <td>the muted rail that holds the segments</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+  
+
+  
+          <div class="docs-divider"></div>
+
+<div id="segment" class="docs-section">
+            <h3>la-segment</h3>
+            <p>One option inside <code>la-segmented</code>. Its text is the label. The parent owns the state: it sets <code>checked</code>, the role and the tab stop, and hears the press. A segment on its own does nothing.</p>
+            <table class="docs-table">
+              <thead>
+                <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>value</td><td><span class="default">value</span></td><td><span class="type">string</span></td><td><code>''</code></td><td>What <code>la-segmented</code>’s <code>value</code> becomes when this is picked.</td></tr>
+                <tr><td>checked</td><td><span class="default">checked</span></td><td><span class="type">boolean</span></td><td><code>false</code></td><td>Set by the parent; reflected for styling. Don’t set it yourself.</td></tr>
+                <tr><td>disabled</td><td><span class="default">disabled</span></td><td><span class="type">boolean</span></td><td><code>false</code></td><td>Can’t be picked; skipped by the arrow keys.</td></tr>
+                <tr><td>hideLabel</td><td><span class="default">hide-label</span></td><td><span class="type">boolean</span></td><td><code>false</code></td><td>The label is the accessible name only; the icon shows.</td></tr>
+              </tbody>
+            </table>
+            <table class="docs-table" style="margin-top:16px;">
+              <thead><tr><th>Slot</th><th>Content</th></tr></thead>
+              <tbody>
+                <tr><td><em>default</em></td><td>The label.</td></tr>
+                <tr><td><code>icon</code></td><td>An icon before the label: <code>--la-font-size-lg</code> at <code>sm</code>, <code>-xl</code> at default, <code>-2xl</code> at <code>lg</code>.</td></tr>
+              </tbody>
+            </table>
+            <table class="docs-table" style="margin-top:16px;">
+              <thead><tr><th>Part</th><th>Element</th></tr></thead>
+              <tbody>
+                <tr><td>segment</td><td>The segment’s surface.</td></tr>
+                <tr><td>label</td><td>The label’s wrapper.</td></tr>
+              </tbody>
+            </table>
+            <p style="margin-top:8px;">No events: the parent fires <code>la-change</code>.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-color-bg-muted</code></td><td>The track.</td></tr>
+                <tr><td><code>--la-color-bg</code></td><td>The picked segment.</td></tr>
+                <tr><td><code>--la-shadow-xs</code></td><td>The picked segment’s lift.</td></tr>
+                <tr><td><code>--la-color-text-secondary</code></td><td>An unpicked label.</td></tr>
+                <tr><td><code>--la-color-text</code></td><td>A hovered or picked label.</td></tr>
+                <tr><td><code>--la-color-text-disabled</code></td><td>A disabled segment’s label.</td></tr>
+                <tr><td><code>--la-radius-md</code></td><td>The track’s corners.</td></tr>
+                <tr><td><code>--la-radius-sm</code></td><td>A segment’s corners.</td></tr>
+                <tr><td><code>--la-space-3xs</code></td><td>The track’s padding and the gap between segments.</td></tr>
+                <tr><td><code>--la-space-md</code></td><td>A segment’s side padding.</td></tr>
+                <tr><td><code>--la-space-2xs</code></td><td>The gap between an icon and its label.</td></tr>
+                <tr><td><code>--la-button-height-sm</code> · <code>-md</code> · <code>-lg</code></td><td>The control’s height at <code>sm</code>, default and <code>lg</code>; <code>-lg</code> is also the touch target.</td></tr>
+                <tr><td><code>--la-font-size-sm</code> · <code>-md</code> · <code>-lg</code></td><td>The label at <code>sm</code>, default and <code>lg</code>.</td></tr>
+                <tr><td><code>--la-font-size-lg</code> · <code>-xl</code> · <code>-2xl</code></td><td>The icon at <code>sm</code>, default and <code>lg</code>.</td></tr>
+                <tr><td><code>--la-focus-ring-width</code> · <code>--la-focus-ring-offset</code> · <code>--la-color-border-focus</code></td><td>The focus ring; the width also draws the picked outline under forced colours.</td></tr>
+                <tr><td><code>--dur-fast</code> · <code>--ease</code></td><td>The colour and shadow change when a segment is hovered or picked.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>One answer per person on a playbook step, as <code>la-people-answer</code> draws it. Nothing is picked until the founder picks.</p>
+            <div class="docs-code"><span class="kw">&lt;la-segmented</span> <span class="at">size</span>=<span class="str">"sm"</span> <span class="at">label</span>=<span class="str">"Priya Shah"</span> <span class="at">value</span>=<span class="str">""</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"hnw"</span><span class="kw">&gt;</span>High-net-worth<span class="kw">&lt;/la-segment&gt;</span>
+  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"ssi"</span><span class="kw">&gt;</span>Self-certified sophisticated<span class="kw">&lt;/la-segment&gt;</span>
+  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"unsure"</span><span class="kw">&gt;</span>Not sure<span class="kw">&lt;/la-segment&gt;</span>
+<span class="kw">&lt;/la-segmented&gt;</span></div>
+            <p style="margin-top:16px;">In a form, beside <code>la-input</code> and <code>la-select</code> at the same height. The page reads <code>value</code>, or listens for <code>la-change</code>.</p>
+            <div class="docs-code"><span class="kw">&lt;la-input</span> <span class="at">label</span>=<span class="str">"Employee name"</span><span class="kw">&gt;&lt;/la-input&gt;</span>
+<span class="kw">&lt;la-select</span> <span class="at">label</span>=<span class="str">"Contract"</span><span class="kw">&gt;</span>…<span class="kw">&lt;/la-select&gt;</span>
+<span class="kw">&lt;la-segmented</span> <span class="at">label</span>=<span class="str">"Hours"</span> <span class="at">value</span>=<span class="str">"full"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"full"</span><span class="kw">&gt;</span>Full time<span class="kw">&lt;/la-segment&gt;</span>
+  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"part"</span><span class="kw">&gt;</span>Part time<span class="kw">&lt;/la-segment&gt;</span>
+<span class="kw">&lt;/la-segmented&gt;</span></div>
+            <p style="margin-top:16px;">A view switch with icons. A view switch sets <code>value</code>; an answer never does.</p>
+            <div class="docs-code"><span class="kw">&lt;la-segmented</span> <span class="at">label</span>=<span class="str">"View"</span> <span class="at">value</span>=<span class="str">"list"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"grid"</span> <span class="at">hide-label</span><span class="kw">&gt;</span><span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-squares-four"</span><span class="kw">&gt;&lt;/i&gt;</span>Grid<span class="kw">&lt;/la-segment&gt;</span>
+  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"list"</span> <span class="at">hide-label</span><span class="kw">&gt;</span><span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-list"</span><span class="kw">&gt;&lt;/i&gt;</span>List<span class="kw">&lt;/la-segment&gt;</span>
+<span class="kw">&lt;/la-segmented&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>When to use.</strong> Two to five short options, picked inline, where every option should stay in sight: the answer per person on a step, or a switch between views or modes on a workbench or toolbar.</li>
+              <li><strong>Not this.</strong> Options that need a description or a <em>Recommended</em> mark are <code>la-choice</code> in a radiogroup. Six or more options, or long labels, are <code>la-select</code>. Moving between pages or panels is <code>la-tabs</code>, and a single on or off is <code>la-switch</code>. Don’t wrap a disabled control in <code>la-tooltip</code> to say why: it swallows the hover, so use <code>disabled-message</code>.</li>
+              <li><strong>Neutral.</strong> The picked segment is raised, never primary or a status colour, because on a playbook step the pick is the founder’s answer, not our verdict (decision 117). Nothing is picked until someone picks.</li>
+              <li><strong>Where it differs from Astryx, on purpose.</strong> Astryx always has one option picked; here nothing is picked until someone picks, and a view switch sets <code>value</code>. Astryx truncates a long label; here it wraps, because the founder has to read the whole answer.</li>
+              <li><strong>Contrast, deferred (Jonard, 8 October 2026).</strong> Labels meet 4.5:1 in every state, an icon with no label 3:1, and the focus ring 3:1. The picked segment is told apart by its raised white (1.09:1 on the track) and a darker label (2.03:1 against the unpicked one), below the 3:1 Astryx asks for where people rely on the selected look. A 3:1 edge on the picked segment is the likely fix; it isn’t added for now.</li>
+              <li><strong>Keyboard and ARIA.</strong> The host is <code>role="radiogroup"</code> named by <code>label</code>, and each segment is <code>role="radio"</code> with <code>aria-checked</code>. One tab stop: the picked segment, or the first enabled one. Arrow keys move and pick (Left and Up go back, Right and Down go on, wrapping round), Home and End go to the ends, and Space or Enter picks the focused segment. Disabled segments are skipped and carry <code>aria-disabled</code>. With <code>disabled-message</code> the control keeps a tab stop and is described by the message. Under forced colours the picked segment gets an outline.</li>
+              <li><strong>Targets and motion.</strong> Each segment pads to 44px on a touch screen. Background, colour and shadow change on <code>--dur-fast</code> <code>--ease</code>, and are instant under <code>prefers-reduced-motion</code>.</li>
+              <li><strong>Consumers.</strong> <code>la-people-answer</code> (one answer per person, <code>sm</code>).</li>
+            </ul>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+      customElements.whenDefined('la-segmented').then(function () {
+        var live = document.getElementById('live');
+        function segs() { return live.querySelectorAll('la-segment'); }
+
+        document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-toggle');
+            if (!btn) return;
+            group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+            var v = btn.getAttribute('data-value'), on = v === 'true';
+            switch (group.getAttribute('data-control')) {
+              case 'size': live.size = v; break;
+              case 'layout': live.layout = v; break;
+              case 'value': live.value = v; break;
+              case 'disabled': live.disabled = on; break;
+              case 'hide-label': segs().forEach(function (s) { s.hideLabel = on; }); break;
+              case 'segment-disabled': live.querySelector('la-segment[value="table"]').disabled = on; live.requestUpdate(); break;
+            }
+          });
+        });
+        document.getElementById('ctl-label').addEventListener('input', function (e) { live.label = e.target.value; });
+        document.getElementById('ctl-message').addEventListener('input', function (e) { live.disabledMessage = e.target.value; });
+
+        /* The log, and the value chips following a pick. */
+        live.addEventListener('la-change', function (e) {
+          document.getElementById('event-log').textContent = 'la-change: {value: "' + e.detail.value + '"}';
+          document.querySelectorAll('[data-control="value"] .btn-toggle').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-value') === e.detail.value); });
+        });
+      });
+  })();
+</script>
+
+
+</body>
+</html>
