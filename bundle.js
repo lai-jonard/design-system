@@ -31631,18 +31631,32 @@
    *             surface never opens as a card, 7 Oct 2026),
    *             amended 6 Oct: the sentence "Stuck? Move past this step" was
    *             long and competed with the acts; la-menu is the system's home
-   *             for an action that doesn't warrant a visible button).
+   *             for an action that doesn't warrant a visible button). Since
+   *             8 Oct the menu is "Other options": Ask a lawyer, then Move past
+   *             this step (PRO-210, notes, 7 Oct 2026).
    *   done    - one line: Done · the answer that matters · the date, and Change
    *   passed  - moved past with a reason (la-step-marker `passed`, decision 115),
    *             a dashed card, and Change
    *   before  - done before the founder started this run: nothing to change
-   * A step that doesn't apply isn't a state of the card: it leaves the run.
+   * Steps run in order (PRO-210, notes, 7 Oct 2026): only the next step opens.
+   * A later step's button waits, `disabled`, with `disabled-reason` as its
+   * title. Every founder sees every step; one that doesn't apply to them is
+   * moved past, with a reason.
    *
-   * The card holds no answers and runs no rule (no AI in Phase B). The page
-   * owns the state, the answers and the plan; the card draws them and says
-   * what the founder did. An answer that ends the playbook is shown with the
-   * founder's own answer beside it ("Because you answered …"), so the stop
-   * reads as theirs, never as our verdict.
+   * Sub-steps (PRO-210 S): what happens straight after a step, such as signing
+   * or sending, runs inside the same card, in order, each with its own button.
+   * `parts` lists them after the step's own part (`part-own`, "Answer and
+   * confirm"); once the page sets `confirmed`, the card's one act is the
+   * current part's button (la-step-part), and the step is done when the last
+   * part is.
+   *
+   * The card holds no answers and runs no rule. The page owns the state, the
+   * answers and the plan; the card draws them and says what the founder did.
+   * Answers that arrive filled in, from the record or by AI, are shown in the
+   * questions modal with their source (la-step-questions `filled`). After
+   * launch, an answer that ends the playbook is shown with the founder's own
+   * answer beside it ("Because you answered …"), so the stop reads as theirs,
+   * never as our verdict; in Phase B, "Stop here" lives in legal's guidance.
    *
    * Width: the card is its own container. Below 480px it tightens its padding
    * and stacks its acts, so a run in a narrow column needs nothing else.
@@ -31681,8 +31695,13 @@
    * @prop word        - the settled state's word, in place of Done / Finished / Read ("On your record",
    *                     "Done in its own playbook")
    * @prop icon        - a Phosphor class for the authored button's leading icon ("ph-file-plus")
-   * @prop disabled    - the authored button can't be pressed yet (a plan that confirms step by step);
-   *                     `disabled-reason` is its title
+   * @prop disabled    - the authored button can't be pressed yet: steps run in order, so every step but
+   *                     the next one waits. `disabled-reason` is its title
+   * @prop parts       - sub-steps, run inside the card after the step's own part, in order:
+   *                     {label, button, done?}[] (a property)
+   * @prop partOwn     - attribute part-own: the step's own part, first in the sequence (default
+   *                     "Answer and confirm"; "Draft" for a document, as the CMS names them)
+   * @prop confirmed   - the step's own part is done; its sub-steps run now
    * @prop loading     - the authored button shows la-button's spinner, with `loading-label`, while a
    *                     document renders
    * @prop processing  - the step is being prepared (Auto mode): the marker spins, the body dims, the
@@ -31706,6 +31725,9 @@
    * @fires la-step-confirm - Confirm on a step with no questions (record facts only), or an information step's button
    * @fires la-step-change  - Change on a done or passed step
    * @fires la-step-moved   - {reason, text} from la-move-past: the page settles the step as passed
+   * @fires la-step-lawyer  - Ask a lawyer, from Other options: the page opens Ask a lawyer with this step's context
+   * @fires la-step-part    - {index}: the current sub-step's button. The page does it, marks the part done,
+   *                          and settles the step when the last part is done
    */
   exports.LaPlaybookStep = class LaPlaybookStep extends i$2 {
       constructor() {
@@ -31733,6 +31755,9 @@
           this.loading = false;
           this.loadingLabel = 'Rendering…';
           this.processing = false;
+          this.parts = [];
+          this.partOwn = 'Answer and confirm';
+          this.confirmed = false;
           this._hasMore = false;
           this._hasReview = false;
           this._hasBody = false;
@@ -31834,11 +31859,19 @@
               return 'Your answers end the playbook here. Nothing counts until you finish.';
           return 'Nothing counts until you confirm.';
       }
+      _partsLeft() {
+          const n = this.parts.filter((p) => !p.done).length;
+          return `${WORDS$3[n] ?? n} ${n === 1 ? 'part' : 'parts'} left.`;
+      }
       _openView() {
           const ends = !!this.endReason;
-          const toAnswer = this.questionCount > 0 && !this.answered;
-          const act = toAnswer ? 'Finish answering' : ends ? 'Finish' : 'Confirm';
+          const at = this._partAt;
+          const part = at >= 0 ? this.parts[at] : undefined;
+          const toAnswer = !part && this.questionCount > 0 && !this.answered;
+          const act = part ? part.button : toAnswer ? 'Finish answering' : ends ? 'Finish' : 'Confirm';
           const onAct = () => {
+              if (part)
+                  return this._fire('la-step-part', { index: at });
               if (toAnswer)
                   return this._fire('la-step-answer', { at: 'next' });
               if (this.questionCount > 0)
@@ -31848,20 +31881,46 @@
           return b `<div class="review-slot" ?hidden=${!this._hasReview}>
         <slot @slotchange=${(e) => (this._hasReview = this._assigned(e))}></slot>
       </div>
+      ${this._parts()}
       <div class="band confirm">
       <div class="acts">
         <div class="acts-main">
-          <la-button variant="primary" ?disabled=${!toAnswer && this.remaining > 0} @click=${onAct}>${act}</la-button>
-          <span class="left ${this.remaining ? '' : 'ready'}" aria-live="polite">${this._leftText(ends)}</span>
+          <la-button variant="primary" ?disabled=${!part && !toAnswer && this.remaining > 0} @click=${onAct}>${act}</la-button>
+          <span class="left ${part || !this.remaining ? 'ready' : ''}" aria-live="polite">${part ? this._partsLeft() : this._leftText(ends)}</span>
         </div>
         <div class="acts-side">
           <slot name="sources"></slot>
-          <la-menu label="More for this step" origin="bottom-right">
-            <la-menu-item label="Move past this step" value="pass" @la-menu-select=${() => (this.passing = true)}></la-menu-item>
-          </la-menu>
+          ${this._otherOptions()}
         </div>
       </div>
       </div>`;
+      }
+      /** Other options: Ask a lawyer and the way past (PRO-210, notes, 7 Oct 2026). */
+      _otherOptions() {
+          return b `<la-menu label="Other options" origin="bottom-right">
+      <la-menu-item label="Ask a lawyer" value="lawyer" @la-menu-select=${() => this._fire('la-step-lawyer')}></la-menu-item>
+      <la-menu-item label="Move past this step" value="pass" @la-menu-select=${() => (this.passing = true)}></la-menu-item>
+    </la-menu>`;
+      }
+      /** The sub-step running now, once the step's own part is done; -1 when none. */
+      get _partAt() {
+          return this.confirmed ? this.parts.findIndex((p) => !p.done) : -1;
+      }
+      _parts() {
+          if (!this.parts.length)
+              return A;
+          const at = this._partAt;
+          const seq = [
+              { label: this.partOwn, status: this.confirmed ? 'complete' : 'active' },
+              ...this.parts.map((p, i) => ({ label: p.label, status: p.done ? 'complete' : i === at ? 'active' : 'pending' })),
+          ];
+          return b `<ol class="parts" aria-label="Parts of this step">
+      ${seq.map((s, i) => b `<li class="part ${s.status}" aria-current=${s.status === 'active' ? 'step' : A}>
+          ${i ? b `<i class="ph ph-caret-right sep" aria-hidden="true"></i>` : A}
+          <la-step-marker variant="check" status=${s.status} label=""></la-step-marker>
+          <span>${s.label}${s.status === 'complete' ? b `<span class="sr">, done</span>` : A}</span>
+        </li>`)}
+    </ol>`;
       }
       _assigned(e) {
           return e.target.assignedElements().length > 0;
@@ -31899,7 +31958,7 @@
             : b `${this._frame()}
             ${open
                 ? this._openView()
-                : b `<div class="foot">
+                : b `${this._parts()}<div class="foot">
                   <span class="foot-acts">
                     <la-button
                       variant=${this.next ? 'primary' : 'secondary'}
@@ -31907,8 +31966,12 @@
                       title=${this.disabled && this.disabledReason ? this.disabledReason : A}
                       ?loading=${this.loading}
                       loading-label=${this.loadingLabel}
-                      @click=${() => this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
-                      >${this.icon ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this.button}</la-button
+                      @click=${() => this._partAt >= 0
+                    ? this._fire('la-step-part', { index: this._partAt })
+                    : this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
+                      >${this.icon && this._partAt < 0 ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this._partAt >= 0
+                    ? this.parts[this._partAt].button
+                    : this.button}</la-button
                     >
                     <span class="actions-slot" ?hidden=${!this._hasActions}>
                       <slot name="actions" @slotchange=${(e) => (this._hasActions = this._assigned(e))}></slot>
@@ -31916,9 +31979,7 @@
                   </span>
                   <span class="acts-side">
                     <slot name="sources"></slot>
-                    <la-menu label="More for this step" origin="bottom-right">
-                      <la-menu-item label="Move past this step" value="pass" @la-menu-select=${() => (this.passing = true)}></la-menu-item>
-                    </la-menu>
+                    ${this._otherOptions()}
                   </span>
                 </div>`}`}
       </div>
@@ -32054,6 +32115,40 @@
       .collapse:hover {
         background-color: var(--la-color-bg-subtle);
         color: var(--la-color-text);
+      }
+      /* Sub-steps: the step's own part, then each sub-step, in order. */
+      .parts {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-xs) var(--la-space-sm);
+        margin: var(--la-space-md) 0 0;
+        padding: 0;
+        list-style: none;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-muted);
+      }
+      .part {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-xs);
+      }
+      .part.complete {
+        color: var(--la-color-text-secondary);
+      }
+      .part.active {
+        color: var(--la-color-text);
+      }
+      .part .sep {
+        color: var(--la-color-text-faint);
+      }
+      .sr {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
       }
       .collapse:focus-visible {
         outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
@@ -32264,6 +32359,15 @@
   __decorate$7([
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookStep.prototype, "processing", void 0);
+  __decorate$7([
+      n({ attribute: false })
+  ], exports.LaPlaybookStep.prototype, "parts", void 0);
+  __decorate$7([
+      n({ attribute: 'part-own' })
+  ], exports.LaPlaybookStep.prototype, "partOwn", void 0);
+  __decorate$7([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "confirmed", void 0);
   __decorate$7([
       r$1()
   ], exports.LaPlaybookStep.prototype, "_hasMore", void 0);
@@ -33113,11 +33217,20 @@
    * and nothing counts until they confirm on the step (Jonard, 6 Oct 2026).
    *
    * It follows the authored content and nothing else: an option's `then` says
-   * whether a follow-up comes next, the rest of the step is skipped, later
-   * steps turn on, or the playbook ends. No answer is worked out for the
-   * founder, nothing is pre-selected, and no control carries a result colour
+   * whether a follow-up comes next (and, after launch, whether the rest of the
+   * step is skipped, later steps turn on, or the playbook ends: PRO-210 keeps
+   * Phase B to carrying on or a follow-up). No control carries a result colour
    * (decision 117). The record's facts aren't asked here: they stay on the
    * card's Review band as la-record-row.
+   *
+   * An answer can arrive filled in (PRO-210 E; decision 117, amended 8 Oct
+   * 2026): from the founder's record, or read by AI from what the step reads.
+   * The page puts the value in `answers` and says where it came from in
+   * `filled`. The question then shows it picked, a "Filled in" or "Filled in by
+   * AI" badge, and the source under the answer: "Read by AI from your articles
+   * of association. Check it’s right." Once the founder changes it, the line
+   * reads "You changed this." It is a suggestion to check, never our verdict,
+   * and nothing counts until the step is confirmed.
    *
    * The page owns the answers. Set `answers` before opening; the modal keeps
    * its own copy while open, fires `la-step-questions-change` {answers} on
@@ -33142,8 +33255,10 @@
    * @prop answers   - the answers so far, by question id
    * @prop titles    - step id to title, for "This adds:"
    * @prop nameKey   - attribute name-key: the question whose answer fills `{name}` ("this person" until answered)
+   * @prop filled    - answers that arrived filled in, by question id: {value, source, ai?}
    * @prop confirms  - the summary's act is Confirm (or Finish) and settles the step; otherwise Done hands back to the card
-   * @prop start     - where it opens: 'next' (default), the first unanswered question, or 'summary'
+   * @prop start     - where it opens: 'next' (default), the first unanswered question; 'first', the first question,
+   *                   so the founder checks what arrived filled in; or 'summary'
    * @fires la-step-questions-change - {answers} on each Next and on the summary
    * @fires la-step-questions-done   - {answers} from Done on the summary
    * @fires la-step-questions-confirm - {answers} from Confirm or Finish on the summary, with `confirms`
@@ -33157,6 +33272,7 @@
           this.questions = [];
           this.answers = {};
           this.titles = {};
+          this.filled = {};
           this.nameKey = '';
           this.confirms = false;
           this.start = 'next';
@@ -33168,7 +33284,7 @@
               this._ans = { ...this.answers };
               const { items } = this._flow();
               const first = items.findIndex((q) => q.required !== false && !this._answered(q));
-              this._i = this.start === 'summary' || first < 0 ? items.length : first;
+              this._i = this.start === 'first' ? 0 : this.start === 'summary' || first < 0 ? items.length : first;
           }
       }
       /* ── The flow: follow-ups slot in under their option; skip and end cut it. */
@@ -33211,6 +33327,24 @@
               default:
                   return a != null && a !== '';
           }
+      }
+      /** 'kept' while a filled-in answer is as it arrived, 'changed' once the founder changes it. */
+      _filledState(q) {
+          const f = this.filled[q.id];
+          if (!f)
+              return '';
+          return JSON.stringify(this._ans[q.id] ?? null) === JSON.stringify(f.value ?? null) ? 'kept' : 'changed';
+      }
+      _filledLine(q) {
+          const f = this.filled[q.id];
+          if (!f)
+              return A;
+          const kept = this._filledState(q) === 'kept';
+          return b `<p class="filled">
+      ${kept
+            ? b `<la-badge variant="neutral" appearance="ghost" size="sm">${f.ai ? 'Filled in by AI' : 'Filled in'}</la-badge>`
+            : A}<span>${kept ? `${f.source}. Check it’s right.` : 'You changed this.'}</span>
+    </p>`;
       }
       _name() {
           const n = this.nameKey ? this._ans[this.nameKey] : '';
@@ -33336,7 +33470,7 @@
       }
       _question(q, cut) {
           return b `<la-question text=${this._fill(q.text)} ?optional=${q.required === false} means=${q.means ?? ''}>
-        ${this._input(q)} ${this._guidance(q)}
+        ${this._input(q)} ${this._filledLine(q)} ${this._guidance(q)}
       </la-question>
       ${this._end(cut, q)}`;
       }
@@ -33361,9 +33495,12 @@
         ${items.map((q) => {
             const text = this._answerText(q);
             const none = text === 'Not answered' || text === 'No one';
+            const f = this.filled[q.id], fs = this._filledState(q);
             return b `<div class="sum-row">
             <dt>${this._fill(q.text)}</dt>
-            <dd class=${none ? 'none' : ''}>${text}</dd>
+            <dd class=${none ? 'none' : ''}>${text}${f
+                ? b `<span class="src">${fs === 'kept' ? `${f.ai ? 'Filled in by AI' : 'Filled in'} · ${f.source}` : 'You changed this.'}</span>`
+                : A}</dd>
           </div>`;
         })}
       </dl>`;
@@ -33540,6 +33677,23 @@
         font-size: var(--la-font-size-md);
         color: var(--la-color-text-muted);
       }
+      /* Where a filled-in answer came from: a suggestion to check, in the
+         muted colour, never a status (decision 117). */
+      .filled {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-xs) var(--la-space-sm);
+        margin: var(--la-space-sm) 0 0;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-muted);
+      }
+      .sum dd .src {
+        display: block;
+        margin-top: 2px;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
     `,
   ];
   __decorate$1([
@@ -33557,6 +33711,9 @@
   __decorate$1([
       n({ attribute: false })
   ], exports.LaStepQuestions.prototype, "titles", void 0);
+  __decorate$1([
+      n({ attribute: false })
+  ], exports.LaStepQuestions.prototype, "filled", void 0);
   __decorate$1([
       n({ attribute: 'name-key' })
   ], exports.LaStepQuestions.prototype, "nameKey", void 0);
