@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-disclosure — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .d-box { width: 100%; max-width: 560px; }
+    .d-narrow { width: 100%; max-width: 320px; }
+    .d-cap { display: block; margin-bottom: var(--la-space-xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .d-cap code { font-size: var(--la-font-size-sm); }
+    .d-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: var(--la-space-xl); width: 100%; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    /* ── In context: the FAQ, a check, a question ─────── */
+    .faq-head { font-size: var(--la-font-size-xl); font-weight: var(--la-font-weight-semibold); margin: 0 0 var(--la-space-sm); }
+    .faq-desc { font-size: var(--la-font-size-sm); color: var(--la-color-text-secondary); margin: 0 0 var(--la-space-lg); }
+    .faq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0 var(--la-space-2xl); width: 100%; }
+    .check-title { font-size: var(--la-font-size-xl); font-weight: var(--la-font-weight-semibold); margin: 0 0 var(--la-space-xs); }
+    .check-lead { font-size: var(--la-font-size-base); color: var(--la-color-text-secondary); margin: 0 0 var(--la-space-lg); max-width: 64ch; }
+    .law-list { margin: 0; padding-left: var(--la-space-lg); display: flex; flex-direction: column; gap: var(--la-space-2xs); }
+    .law-list .law { color: var(--la-color-text); font-weight: var(--la-font-weight-medium); }
+    .q + .q { margin-top: var(--la-space-xl); padding-top: var(--la-space-xl); border-top: 1px solid var(--la-color-border-light); }
+    .q-title { font-size: var(--la-font-size-lg); font-weight: var(--la-font-weight-semibold); margin: 0 0 var(--la-space-xs); }
+    .q-help { font-size: var(--la-font-size-base); color: var(--la-color-text-secondary); margin: 0; max-width: 64ch; }
+
+    /* ── In context: the run's phase cards ────────────── */
+    .phases { display: flex; flex-direction: column; gap: var(--la-space-lg); width: 100%; max-width: 560px; }
+    .phase-card { background: var(--la-color-bg); border-radius: var(--la-radius-xl); box-shadow: var(--la-shadow-md); padding: var(--la-space-md) var(--la-space-lg); }
+    .phase-icon { width: calc(var(--la-space-xl) + var(--la-space-xs)); height: calc(var(--la-space-xl) + var(--la-space-xs)); border-radius: var(--la-radius-sm); display: inline-flex; align-items: center; justify-content: center; flex: none; font-size: var(--la-font-size-lg); background: var(--la-color-bg-muted); color: var(--la-color-text); }
+    .phase-icon.is-on { background: var(--la-color-primary); color: var(--la-color-primary-fg); }
+    .phase-name { margin: 0; font-size: var(--la-font-size-xl); font-weight: var(--la-font-weight-semibold); line-height: var(--la-line-height); }
+    .steps { display: flex; flex-direction: column; }
+    .line { display: flex; align-items: center; gap: var(--la-space-md); padding: var(--la-space-md) 0; border-top: 1px solid var(--la-color-border-light); font-size: var(--la-font-size-lg); }
+    .line .grow { flex: 1; min-width: 0; }
+
+    /* ── Keyboard ─────────────────────────────────────── */
+    kbd { font-family: inherit; font-size: var(--la-font-size-sm); padding: 0 var(--la-space-2xs); border-radius: var(--la-radius-sm); background: var(--la-color-bg-muted); border: 1px solid var(--la-color-border-light); }
+
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+    /* ── Research sections ────────────────────────────── */
+    .pattern-copy { font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .pattern-copy a { color: var(--la-color-text); }
+    .pattern-h { margin: var(--la-space-xl) 0 var(--la-space-sm); font-size: var(--la-font-size-lg); font-weight: var(--la-font-weight-semibold); color: var(--la-color-text); }
+    .pattern-list { margin: 0; padding-left: var(--la-space-lg); }
+    .pattern-list li { margin: var(--la-space-xs) 0; max-width: 80ch; }
+    .opts-yn { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--la-space-sm); max-width: 360px; }
+    .pattern-copy .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; }
+
+    @media (max-width: 560px) {
+      .faq-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-disclosure</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#pattern" class="docs-nav-item" data-nav-id="pattern">Disclosure or accordion</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#content" class="docs-nav-item" data-nav-id="content">Content guidance</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-disclosure</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-disclosure</h1>
+          <p>One expandable row: a question or heading that opens to its answer. A native <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code> underneath, so Tab reaches it, Enter and Space toggle it, a screen reader hears whether it is open, and find in page opens a closed one. Three variants: <code>row</code> for a list such as the FAQ, <code>section</code> for a heading inside a card, and <code>quiet</code> for a link-sized “More about this choice”. For depth one press away under content that stands on its own; never for what someone needs in order to act.</p>
+        </div>
+
+        <!-- Disclosure or accordion -->
+        <div id="pattern" class="preview-header" style="margin-top:8px;">
+          <h1>Disclosure or accordion</h1>
+          <p>One row that opens is a <strong>disclosure</strong>. A set of rows stacked one under another is an <strong>accordion</strong>. <code>la-disclosure</code> is the one row; stack rows as siblings and they make an accordion, with no group behaviour of its own. That’s why a stack of rows looks like an accordion: it is one. Researched 9 October 2026; every source below opens.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="pattern-copy">
+            <table class="docs-table">
+              <thead><tr><th></th><th>Disclosure</th><th>Accordion</th></tr></thead>
+              <tbody>
+                <tr><td>Unit</td><td>One control and what it reveals (<a href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/">W3C APG</a>, <a href="https://www.radix-ui.com/primitives/docs/components/collapsible">Radix Collapsible</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details">MDN</a>)</td><td>A set of them (<a href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/">W3C APG</a>, <a href="https://react-aria.adobe.com/DisclosureGroup">React Aria DisclosureGroup</a>, <a href="https://react-spectrum.adobe.com/v3/Accordion.html">Spectrum Accordion</a>: “a group of disclosures”)</td></tr>
+                <tr><td>Heading</td><td>Not required (<a href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/examples/disclosure-faq/">APG’s FAQ example</a>, <a href="https://design-system.service.gov.uk/components/details/">GOV.UK Details</a>); Adobe adds one</td><td>Required: each header is a heading holding a button (APG, <a href="https://design-system.service.gov.uk/components/accordion/">GOV.UK Accordion</a>, <a href="https://base-ui.com/react/components/accordion">Base UI</a>)</td></tr>
+                <tr><td>Look</td><td>Link-sized, the marker before the label (GOV.UK, APG, <a href="https://developer.apple.com/design/human-interface-guidelines/disclosure-controls">Apple</a>)</td><td>Full-width rows with lines between, the chevron at the end (<a href="https://carbondesignsystem.com/components/accordion/usage/">Carbon</a>, <a href="https://ui.shadcn.com/docs/components/accordion">shadcn</a>, <a href="https://astryx.atmeta.com/components/CollapsibleGroup">Astryx CollapsibleGroup</a>)</td></tr>
+                <tr><td>One open at a time</td><td>Doesn’t apply</td><td>Optional; the default in React Aria, Base UI, <a href="https://fluent2.microsoft.design/components/web/react/core/accordion/usage">Fluent 2</a> and Astryx</td></tr>
+                <tr><td>“Show all sections”</td><td>No</td><td>GOV.UK</td></tr>
+                <tr><td>Use for</td><td>“one or two pieces of short, less important content” (GOV.UK); lower-priority content (<a href="https://github.com/Shopify/polaris/blob/main/polaris.shopify.com/content/components/utilities/collapsible.mdx">Polaris Collapsible</a>)</td><td>Several related sections a person needs only some of (GOV.UK, Carbon); FAQs (Fluent 2, Astryx)</td></tr>
+              </tbody>
+            </table>
+
+            <h3 class="pattern-h">Our uses, by those definitions</h3>
+            <table class="docs-table">
+              <thead><tr><th>Use</th><th>Pattern</th><th>Why</th></tr></thead>
+              <tbody>
+                <tr><td><code>quiet</code>, “More about this choice”</td><td>Disclosure</td><td>One short, secondary piece under a question: GOV.UK Details.</td></tr>
+                <tr><td>One <code>row</code></td><td>A disclosure, drawn like an accordion row</td><td>Full width, lines, chevron at the end: Carbon’s and Astryx’s row styling. This is why it reads as an accordion.</td></tr>
+                <tr><td>The FAQ, rows stacked</td><td>An accordion (GOV.UK, Fluent 2, shadcn, Astryx); a list of disclosures by APG</td><td>APG files its FAQ under Disclosure, as answers shown or hidden one by one, in a list (<code>ul</code>/<code>li</code>), with no headings.</td></tr>
+                <tr><td>The three rows under a check</td><td>An accordion (GOV.UK, React Aria)</td><td>Optional depth under content that stands on its own: GOV.UK’s Details guidance.</td></tr>
+                <tr><td><code>section</code>, a phase in a card</td><td>A disclosure with a heading (Adobe’s Disclosure)</td><td>A heading, its trigger and a status, opening the phase’s steps.</td></tr>
+              </tbody>
+            </table>
+
+            <h3 class="pattern-h">Where we differ, and what it costs</h3>
+            <ul class="pattern-list">
+              <li><strong>No headings in a stack.</strong> APG and GOV.UK make each accordion header a heading, so people who move by headings can jump between them. Our FAQ rows aren’t headings and aren’t in a list, which APG’s FAQ uses instead. Decide this when the FAQ moves onto the system: a list round the rows, or heading semantics.</li>
+              <li><strong>The chevron at the end.</strong> Carbon, Astryx and Fluent allow it; APG, GOV.UK and Apple put the marker first, and Carbon’s <a href="https://carbondesignsystem.com/components/accordion/accessibility/">accessibility guidance</a> says a chevron on the left helps people using magnification.</li>
+              <li><strong>A heading inside the row: solved for <code>section</code></strong> (9 Oct 2026). A heading inside <code>&lt;summary&gt;</code> isn’t reliably announced as a heading (<a href="https://www.scottohara.me/blog/2022/09/12/details-summary.html">Scott O’Hara</a>; <a href="https://adrianroselli.com/2019/04/details-summary-are-not-insert-control-here.html">Adrian Roselli</a>: JAWS doesn’t support it). Once the run’s sections became collapsible, <code>section</code> moved to W3C’s accordion structure: a real heading (<code>heading-level</code>) holding a button with <code>aria-expanded</code>, its body <code>hidden="until-found"</code> so find in page still opens it. <code>row</code> and <code>quiet</code> keep <code>&lt;details&gt;</code>.</li>
+              <li><strong>A name clash.</strong> Shape of AI’s <a href="https://shapeof.ai/patterns/disclosure">Disclosure</a> pattern means labelling content made by AI. It has nothing to do with this component.</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack" style="padding:24px;">
+            <div class="d-box">
+              <la-disclosure summary="Put it in force" open>
+                <span slot="trailing">1 of 2 done</span>
+                <p>Get your senior responsible person to sign the statement and adopt the policy, then bring it to everyone’s notice.</p>
+              </la-disclosure>
+            </div>
+            <ol class="anatomy-list">
+              <li><strong>Summary.</strong> The whole row is the control: a native <code>&lt;summary&gt;</code>, so the label, the trailing slot and the caret are pressed together and read together.</li>
+              <li><strong>Label.</strong> The <code>summary</code> slot, or the <code>summary</code> text when the slot is empty. Text, or an icon and a heading side by side; no interactive content.</li>
+              <li><strong>Trailing.</strong> The <code>trailing</code> slot, beside the caret: a status badge or a count. Row and section only.</li>
+              <li><strong>Caret.</strong> <code>ph-caret-down</code> in the muted colour; it turns over when the row opens. On a label that wraps it sits on the first line.</li>
+              <li><strong>Body.</strong> The default slot: what it reveals. It grows open, and once settled it stops clipping, so a menu inside can spill out.</li>
+              <li><strong>Hairline</strong> (row only). A line above each row, and below the last of its siblings.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header" style="margin-top:8px;">
+          <h1>Live preview</h1>
+          <p>Each control sets a property on the preview. Press the row itself to see the event fire; setting <code>open</code> from a control doesn’t fire it.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>variant</label>
+              <div class="btn-group" data-control="variant">
+                <button class="btn-toggle active" data-value="row" type="button">row</button>
+                <button class="btn-toggle" data-value="section" type="button">section</button>
+                <button class="btn-toggle" data-value="quiet" type="button">quiet</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>open</label>
+              <div class="btn-group" data-control="open" id="ctl-open">
+                <button class="btn-toggle active" data-value="false" type="button">false</button>
+                <button class="btn-toggle" data-value="true" type="button">true</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="ctl-summary">summary</label>
+              <input id="ctl-summary" type="text" value="What is a playbook?" style="width:280px;">
+            </div>
+            <div class="control-group">
+              <label for="ctl-level">heading-level (section)</label>
+              <input id="ctl-level" type="number" value="3" min="2" max="6" style="width:80px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:32px;">
+            <div class="d-box">
+              <la-disclosure id="live" summary="What is a playbook?">A legal job broken into steps, in the order they have to happen. Each step says what to do and why, drafts any document you need, and files it when you approve it.</la-disclosure>
+            </div>
+          </div>
+          <div class="preview-label event-log" id="event-log">open: false · la-disclosure-toggle: —</div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-variants" class="preview-group">
+          <div class="preview-label">Variants, closed and open. The label sits in the secondary colour at rest and takes the text colour when open or under the pointer</div>
+          <div class="preview-frame preview-frame--stack" style="padding:24px;gap:32px;">
+            <div class="d-pair">
+              <div><span class="d-cap"><code>row</code> (default)</span><la-disclosure summary="Who is this for?">Founders and operators who have to get legal work done without a lawyer on the team. You do not need to know the law to run one.</la-disclosure></div>
+              <div><span class="d-cap"><code>row</code>, open</span><la-disclosure summary="Who is this for?" open>Founders and operators who have to get legal work done without a lawyer on the team. You do not need to know the law to run one.</la-disclosure></div>
+            </div>
+            <div class="d-pair">
+              <div><span class="d-cap"><code>section</code></span><la-disclosure variant="section" heading-level="3"><span slot="summary" class="phase-icon is-on"><i class="ph-bold ph-check" aria-hidden="true"></i></span><span slot="summary" class="phase-name">Prepare</span><la-badge slot="trailing" variant="success" appearance="ghost" size="sm">Completed</la-badge><p>Two steps.</p></la-disclosure></div>
+              <div><span class="d-cap"><code>section</code>, open</span><la-disclosure variant="section" heading-level="3" open><span slot="summary" class="phase-icon is-on"><i class="ph ph-seal-check" aria-hidden="true"></i></span><span slot="summary" class="phase-name">Put it in force</span><span slot="trailing">1 of 2 done</span><div class="steps"><div class="line"><la-step-marker index="3" status="complete" label=""></la-step-marker><span class="grow">Get your senior responsible person to sign the statement and adopt the policy</span></div><div class="line"><la-step-marker index="4" status="active" label=""></la-step-marker><span class="grow">Bring it to everyone’s notice and add it to the staff handbook</span></div></div></la-disclosure></div>
+            </div>
+            <div class="d-pair">
+              <div><span class="d-cap"><code>quiet</code></span><la-disclosure variant="quiet" summary="More about this choice"><p>A person is competent if they have enough training, experience or knowledge to give you sound help.</p></la-disclosure></div>
+              <div><span class="d-cap"><code>quiet</code>, open</span><la-disclosure variant="quiet" summary="More about this choice" open><p>A person is competent if they have enough training, experience or knowledge to give you sound help.</p></la-disclosure></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-list" class="preview-group">
+          <div class="preview-label">A list: rows stacked as siblings. Each draws the hairline above itself and the last also draws the one below, so the list is ruled once between items and never twice</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="d-box" id="faq-list"></div>
+          </div>
+        </div>
+
+        <div id="snap-grid" class="preview-group">
+          <div class="preview-label">Two columns, as the area page’s FAQs tab: every row keeps its top line, and the closing line follows the last row in source order. One column below 560px</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="faq-grid" id="faq-grid"></div>
+          </div>
+        </div>
+
+        <div id="snap-wrap" class="preview-group">
+          <div class="preview-label">A long label in a narrow column: it wraps, and the trailing slot and the caret stay on its first line</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="d-narrow">
+              <la-disclosure summary="Name your competent person, and decide whether they sit inside or outside the company">
+                <span slot="trailing">2</span>
+                <p>Every employer, whatever its size, must appoint one or more competent people to help it meet its health and safety duties.</p>
+              </la-disclosure>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-context" class="preview-group">
+          <div class="preview-label">In context: the library FAQ, in the FAQ modal</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="d-box">
+              <p class="faq-head">About Playbook Library</p>
+              <p class="faq-desc">The library holds every playbook we have.</p>
+              <div id="faq-modal"></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context: why it matters, under a check. Three rows, each a section of legal’s explainer; a page’s own list styles still apply inside the body</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="d-box">
+              <p class="check-title">Confirm you are adopting the written policy, and check your headcount</p>
+              <p class="check-lead">Once you employ five or more people, having a written health and safety policy is a legal must, and you have to bring it to everyone’s attention.</p>
+              <la-disclosure summary="Why it matters">This is the headline decision: are you putting a written health and safety policy in place, and does the law require you to. The written-policy duty is staged by headcount. At five or more employees you must have a written statement of your general policy plus the organisation and arrangements for carrying it out, and you must bring it to everyone’s attention. Below five, the writing requirement is switched off, but nothing else is.</la-disclosure>
+              <la-disclosure summary="The duties that do not wait for five employees">A cluster of health and safety duties that bind from your very first hire, with no headcount threshold at all: the general duty to keep people safe so far as is reasonably practicable, the duty to make a suitable and sufficient risk assessment, the duty to appoint a competent person, and compulsory employers’ liability insurance.</la-disclosure>
+              <la-disclosure summary="The law, and the procedure">
+                <ul class="law-list">
+                  <li><span class="law">Health and Safety at Work etc. Act 1974 s.2(3)</span></li>
+                  <li><span class="law">Employers’ Health and Safety Policy Statements (Exception) Regulations 1975 (SI 1975/1584) reg 2</span> the exemption from the written-policy duty below five employees; the general duty and the duty to assess risk still apply below five</li>
+                </ul>
+              </la-disclosure>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context: a question’s <em>What this means</em> in the step card. <code>la-question</code> puts a <code>quiet</code> row directly under the question, above the answer, so the explanation opens where it’s read, before the founder answers (decision 118, amended 9 Oct 2026; until then it was a toggle on the question’s row, to the right)</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="d-box">
+              <la-question text="Does an investor have a right to approve or appoint directors?" means="Usually set in a shareholders’ agreement after a funding round.">
+                <div class="opts-yn" role="radiogroup" aria-label="Does an investor have a right to approve or appoint directors?">
+                  <la-choice variant="contained">Yes</la-choice>
+                  <la-choice variant="contained">No</la-choice>
+                </div>
+              </la-question>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context, Orion’s run today (<code>gen-runner.js</code> in <code>new-design</code>): <code>quiet</code> under a question’s framing paragraph, “More about this choice”. The step card’s questions carry <em>What this means</em> instead (above), and the run moves onto the step card</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="d-box">
+              <div class="q">
+                <p class="q-title">Set the risk profile the whole policy is written to</p>
+                <p class="q-help">This policy is written for a low-risk, largely desk-based office or hybrid workplace, which is the typical startup.</p>
+                <la-disclosure variant="quiet" summary="More about this choice"><p>The standard the law sets, so far as is reasonably practicable, scales the effort expected of you to the size of your risks, so a normal office is not held to a factory’s standard. If your business carries heavier risks, a workshop, a lab, a warehouse, field or site work, driving for work, lone working, hazardous substances, manual handling or machinery, the practical arrangements need materially more before you adopt it.</p></la-disclosure>
+              </div>
+              <div class="q">
+                <p class="q-title">Name your competent person, and decide whether they sit inside or outside the company</p>
+                <p class="q-help">Every employer, whatever its size, must appoint one or more competent people to help it meet its health and safety duties.</p>
+                <la-disclosure variant="quiet" summary="More about this choice" open><p>A person is competent if they have enough training, experience or knowledge to give you sound help. For a small, low-risk office this can be a founder or a manager who genuinely knows the ground, or an inexpensive external health and safety consultant. If you already have a genuinely competent person on the team, the law says appoint them ahead of an outsider.</p></la-disclosure>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context: the run’s phase head, <code>section</code> inside the page’s card. The icon and a real heading go in the <code>summary</code> slot; the <code>trailing</code> slot holds the paired badge or a count. Every Phase B playbook is one list today, so no run draws a phase head yet</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="phases">
+              <div class="phase-card">
+                <la-disclosure variant="section" heading-level="3">
+                  <span slot="summary" class="phase-icon is-on"><i class="ph-bold ph-check" aria-hidden="true"></i></span>
+                  <span slot="summary" class="phase-name">Prepare</span>
+                  <la-badge slot="trailing" variant="success" appearance="ghost" size="sm">Completed</la-badge>
+                  <div class="steps">
+                    <div class="line"><la-step-marker index="1" status="complete" label=""></la-step-marker><span class="grow">Confirm you are adopting the written policy, and check your headcount</span></div>
+                    <div class="line"><la-step-marker index="2" status="complete" label=""></la-step-marker><span class="grow">Create your health and safety policy</span></div>
+                  </div>
+                </la-disclosure>
+              </div>
+              <div class="phase-card">
+                <la-disclosure variant="section" heading-level="3" open>
+                  <span slot="summary" class="phase-icon is-on"><i class="ph ph-seal-check" aria-hidden="true"></i></span>
+                  <span slot="summary" class="phase-name">Put it in force</span>
+                  <span slot="trailing">1 of 2 done</span>
+                  <div class="steps">
+                    <div class="line"><la-step-marker index="3" status="complete" label=""></la-step-marker><span class="grow">Get your senior responsible person to sign the statement and adopt the policy</span></div>
+                    <div class="line"><la-step-marker index="4" status="active" label=""></la-step-marker><span class="grow">Bring it to everyone’s notice and add it to the staff handbook</span></div>
+                  </div>
+                </la-disclosure>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context: <code>la-playbook-step</code>’s “More”, a <code>quiet</code> row holding legal’s what it is, when it bites, and the law and the procedure</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="d-box">
+              <la-playbook-step index="1" state="open" next heading="Check your articles give the power, and pick the route." line="Your articles decide whether the board or the shareholders appoint a new director." matters="An appointment is only valid if it is made by whoever your articles give the power to." button="Which appointment route applies to me?">
+                <div slot="more"><p><b>What it is.</b> Under the model articles either the board or the shareholders can appoint. Bespoke articles or a shareholders’ agreement can change that.</p><p><b>When it bites.</b> When the board appoints someone and the articles had reserved the decision to the shareholders.</p><p><b>The law and the procedure.</b> Model Articles (SI 2008/3229) art. 17(1); Companies Act 2006 s.20. No filing at this step. The route decides the document at step 4.</p></div>
+              </la-playbook-step>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-keys" class="preview-group">
+          <div class="preview-label">Keyboard and find in page. Press the row, or Tab to it and press Enter or Space</div>
+          <div class="preview-frame preview-frame--stack" style="padding:24px;gap:16px;">
+            <table class="docs-table">
+              <thead><tr><th>Key</th><th>What happens</th></tr></thead>
+              <tbody>
+                <tr><td><kbd>Tab</kbd> · <kbd>Shift</kbd> <kbd>Tab</kbd></td><td>Moves to the row and away from it. The focus ring goes round the whole summary.</td></tr>
+                <tr><td><kbd>Enter</kbd> · <kbd>Space</kbd></td><td>Opens or closes it. Focus stays on the row.</td></tr>
+                <tr><td>Closed</td><td>What it holds is out of the tab order and hidden from screen readers until it opens.</td></tr>
+                <tr><td>Find in page</td><td>A match inside a closed row opens it, and it fires <code>la-disclosure-toggle</code> as a press would.</td></tr>
+              </tbody>
+            </table>
+            <div class="d-box">
+              <la-disclosure id="try" summary="What if I can’t find what I need?">Ask an expert. One of our lawyers will point you to the right playbook, or tell you plainly if it is something we do not cover yet.</la-disclosure>
+            </div>
+          </div>
+          <div class="preview-label event-log" id="try-log" aria-live="polite">No la-disclosure-toggle yet.</div>
+        </div>
+
+        <!-- Content guidance -->
+        <div id="content" class="preview-header" style="margin-top:8px;">
+          <h1>Content guidance</h1>
+          <p>What goes inside, how to write the label, and what can go wrong. Researched 9 October 2026.</p>
+        </div>
+
+        <div class="preview-group">
+          <div class="pattern-copy">
+            <h3 class="pattern-h">What goes inside</h3>
+            <ul class="pattern-list">
+              <li><strong>Optional depth only.</strong> Never hide what most people need: GOV.UK says not to use Details to hide “information that the majority of your users will need”, and its <a href="https://design-system.service.gov.uk/components/accordion/">accordion</a> says the same. Nielsen’s rule for <a href="https://www.nngroup.com/articles/progressive-disclosure/">progressive disclosure</a>: show the secondary only when asked; if people open it most of the time, the split is wrong.</li>
+              <li><strong>One level.</strong> Never a disclosure inside a disclosure: more than two levels usually works badly (Nielsen), and GOV.UK says not to nest them.</li>
+              <li><strong>Not something to read straight through.</strong> Content meant to be read in order shouldn’t be cut into panels (<a href="https://www.nngroup.com/videos/avoid-accordions/">NN/g</a>). A long FAQ answer belongs on its own page (<a href="https://www.nngroup.com/articles/faqs-deliver-value/">Farrell, NN/g</a>). No source gives a word limit; long panels on a phone mean a lot of scrolling and losing your place (<a href="https://www.nngroup.com/articles/mobile-accordions/">NN/g</a>).</li>
+            </ul>
+
+            <h3 class="pattern-h">The label</h3>
+            <ul class="pattern-list">
+              <li><strong>Say what’s inside,</strong> so people can tell whether they need to open it (GOV.UK Details; <a href="https://www.nngroup.com/articles/accordions-on-desktop/">NN/g, accordions on desktop</a>). Short, in sentence case, written like button text (GOV.UK accordion). WCAG <a href="https://www.w3.org/WAI/WCAG22/Understanding/headings-and-labels.html">2.4.6</a> asks only that it be descriptive.</li>
+              <li><strong>An FAQ asks the founder’s own question,</strong> the concern people actually contact you about (Farrell, NN/g).</li>
+              <li><strong>“More about this choice” is generic.</strong> Naming the topic sets the expectation better (our reading of Nielsen; no source tests it). Worth raising with legal for the run’s questions.</li>
+              <li><strong>A badge in the row is part of its name.</strong> Keep it to a word or two: GOV.UK notes extra summary text makes the button’s name longer for screen reader users.</li>
+            </ul>
+
+            <h3 class="pattern-h">What can go wrong</h3>
+            <table class="docs-table">
+              <thead><tr><th>Risk</th><th>Evidence</th><th>What we do</th></tr></thead>
+              <tbody>
+                <tr><td>What’s inside is missed</td><td>Hidden content may be missed altogether (NN/g); people overlooked core content in tabs (<a href="https://baymard.com/blog/avoid-horizontal-tabs">Baymard</a>); teams saw users “scan straight past” Details (<a href="https://github.com/alphagov/govuk-design-system-backlog/issues/44#issuecomment-629122091">GOV.UK backlog</a>)</td><td>Only optional depth inside; a label that says what’s there</td></tr>
+                <tr><td>More work when most people need it</td><td>Scrolling one page is easier than choosing headings to open (<a href="https://www.nngroup.com/articles/accordions-complex-content/">Loranger, NN/g</a>)</td><td>Show that content openly</td></tr>
+                <tr><td>Mistaken for a link</td><td>Some users won’t press Details, expecting to leave the page; some voice control needs it called a button. GOV.UK dropped link styling from its accordion for this (<a href="https://insidegovuk.blog.gov.uk/2021/10/29/how-we-made-the-gov-uk-accordion-component-more-accessible/">2021</a>)</td><td><code>quiet</code> keeps its caret, which says “opens here”, and isn’t underlined</td></tr>
+                <tr><td>A heading lost in the row</td><td>O’Hara, Roselli (above)</td><td>Kept for <code>section</code> while unused; revisit with phases</td></tr>
+                <tr><td>Doesn’t print</td><td>A closed row doesn’t print; NN/g suggests an “expand all” or opening everything to print</td><td>Matters for legal’s explainers: open for print when a page offers printing</td></tr>
+                <tr><td>Losing your place on a phone</td><td>Don’t scroll an opened panel to the top (NN/g mobile; <a href="https://www.smashingmagazine.com/2017/06/designing-perfect-accordion-checklist/">Friedman</a>)</td><td>The row stays where it is; the body grows under it</td></tr>
+              </tbody>
+            </table>
+
+            <h3 class="pattern-h">The caret</h3>
+            <ul class="pattern-list">
+              <li>In NN/g’s <a href="https://www.nngroup.com/articles/accordion-icons/">2020 study</a>, a caret was the only icon that did better than no icon at telling people the content opens in place; a plus or an arrow did no better than nothing. Icons were tested on the right only.</li>
+              <li>Friedman: people notice an icon on the right more than one on the left; use a down chevron or a plus, never an arrow pointing right. The icon and the label must do the same thing (NN/g).</li>
+              <li>Against: Carbon finds a left chevron helps people using magnification (above).</li>
+            </ul>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-disclosure</h2>
+    <p>One expandable row: a question or heading that opens to its answer. Three variants: row for a list such as the FAQ, section for a run’s section or a phase (a heading holding a button), and quiet for a link-sized toggle such as What this means. For depth one press away under content that stands on its own; never for what someone needs in order to act.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>whether it is open; reflected</td>
+        </tr>
+      
+        <tr>
+          <td>summary</td>
+          <td><span class="default">summary</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>the summary's text, when the summary slot is empty</td>
+        </tr>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">DisclosureVariant</span></td>
+          <td><span class="default">&#39;row&#39;</span></td>
+          <td>row (default) · section · quiet</td>
+        </tr>
+      
+        <tr>
+          <td>headingLevel</td>
+          <td><span class="default">heading-level</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">3</span></td>
+          <td>attribute heading-level: the section's heading level (2–6, default 3); section only</td>
+        </tr>
+      
+        <tr>
+          <td>_shown</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>The native details is open: true while the body is open or closing.</td>
+        </tr>
+      
+        <tr>
+          <td>_expanded</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>The body's track is at 1fr.</td>
+        </tr>
+      
+        <tr>
+          <td>_settled</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Open and finished growing, so the body no longer clips.</td>
+        </tr>
+      
+        <tr>
+          <td>_hasTrailing</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_details</td>
+          <td>—</td>
+          <td><span class="type">HTMLDetailsElement</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_body</td>
+          <td>—</td>
+          <td><span class="type">HTMLElement</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_seq</td>
+          <td>—</td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>Bumped on every open or close, so a finished motion that belongs to an
+earlier toggle does nothing.</td>
+        </tr>
+      
+        <tr>
+          <td>_expandAfterRender</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>_instantOnce</td>
+          <td>—</td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>A find-in-page match opened it: show the match at once, no motion.</td>
+        </tr>
+      
+        <tr>
+          <td>_bodyId</td>
+          <td>—</td>
+          <td>—</td>
+          <td><span class="default">`la-disclosure-${Math.random().toString(36).slice(2, 8)}`</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>summary</td>
+          <td>the summary: text, or an icon and text side by side; no interactive content and, for a section, no heading (the component draws the heading)</td>
+        </tr>
+      
+        <tr>
+          <td>trailing</td>
+          <td>beside the caret: a status badge or a count (row and section only)</td>
+        </tr>
+      
+        <tr>
+          <td>(default)</td>
+          <td>the content it reveals</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-disclosure-toggle</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{open}, bubbles and composed, when the founder opens or closes it (summary press, keyboard or find in page); setting `open` does not fire it</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-font-size-base</code> · <code>--la-font-size-xl</code> · <code>--la-font-size-sm</code></td><td>The label: row, section and quiet. The body’s reading text and the trailing slot are <code>--la-font-size-sm</code>.</td></tr>
+                <tr><td><code>--la-font-weight-medium</code> · <code>--la-font-weight-semibold</code> · <code>--la-font-weight-normal</code></td><td>The label’s weight: row, section and quiet; the trailing slot.</td></tr>
+                <tr><td><code>--la-color-text-secondary</code> · <code>--la-color-text</code></td><td>The row’s label at rest, and once open or under the pointer. The body’s reading text.</td></tr>
+                <tr><td><code>--la-color-text-muted</code></td><td>The quiet label, the caret and the trailing slot.</td></tr>
+                <tr><td><code>--la-color-border-light</code></td><td>The row’s hairlines.</td></tr>
+                <tr><td><code>--la-color-border-focus</code> · <code>--la-focus-ring-width</code> · <code>--la-focus-ring-offset</code></td><td>The focus ring round the summary.</td></tr>
+                <tr><td><code>--la-space-2xs</code> · <code>--la-space-xs</code> · <code>--la-space-sm</code> · <code>--la-space-md</code></td><td>The summary’s padding (larger on a touch screen), the gaps in the label, and the body’s spacing.</td></tr>
+                <tr><td><code>--la-disclosure-quiet-target</code> · <code>--la-disclosure-quiet-target-touch</code></td><td>The quiet toggle’s target: 32px, and 44px on a touch screen, round its 30px row.</td></tr>
+                <tr><td><code>--la-font-size-lg</code></td><td>The caret (<code>--la-font-size-sm</code> in quiet).</td></tr>
+                <tr><td><code>--la-line-height</code> · <code>--la-radius-sm</code></td><td>The label’s line, which keeps the caret on the first line of a wrap; the focus ring’s corners.</td></tr>
+                <tr><td><code>--dur-fast</code> · <code>--ease</code></td><td>The caret’s turn and the label’s colour.</td></tr>
+                <tr><td><code>--dur-base</code> · <code>--ease-out</code></td><td>The body growing open from a <code>0fr</code> grid track.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>A row in the FAQ. Stack rows as siblings; each draws its own lines.</p>
+            <div class="docs-code"><span class="kw">&lt;la-disclosure</span> <span class="at">summary</span>=<span class="str">"What is a playbook?"</span><span class="kw">&gt;</span>A legal job broken into steps…<span class="kw">&lt;/la-disclosure&gt;</span></div>
+            <p style="margin-top:16px;">The rest of legal’s framing, under a question.</p>
+            <div class="docs-code"><span class="kw">&lt;la-disclosure</span> <span class="at">variant</span>=<span class="str">"quiet"</span> <span class="at">summary</span>=<span class="str">"More about this choice"</span><span class="kw">&gt;&lt;p&gt;</span>…<span class="kw">&lt;/p&gt;&lt;/la-disclosure&gt;</span></div>
+            <p style="margin-top:16px;">A phase head inside a card, open on the phase the founder is in.</p>
+            <div class="docs-code"><span class="kw">&lt;la-disclosure</span> <span class="at">variant</span>=<span class="str">"section"</span> <span class="at">open</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"summary"</span> <span class="at">class</span>=<span class="str">"phase-icon"</span><span class="kw">&gt;&lt;i</span> <span class="at">class</span>=<span class="str">"ph ph-clipboard-text"</span><span class="kw">&gt;&lt;/i&gt;&lt;/span&gt;</span>
+  <span class="kw">&lt;h2</span> <span class="at">slot</span>=<span class="str">"summary"</span><span class="kw">&gt;</span>Prepare<span class="kw">&lt;/h2&gt;</span>
+  <span class="kw">&lt;la-badge</span> <span class="at">slot</span>=<span class="str">"trailing"</span> <span class="at">variant</span>=<span class="str">"warning"</span> <span class="at">appearance</span>=<span class="str">"ghost"</span> <span class="at">size</span>=<span class="str">"sm"</span><span class="kw">&gt;</span>In progress<span class="kw">&lt;/la-badge&gt;</span>
+  <span class="kw">&lt;div</span> <span class="at">class</span>=<span class="str">"steps"</span><span class="kw">&gt;</span>…<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/la-disclosure&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>When to use.</strong> To keep depth one press away under content that stands on its own: an FAQ, legal’s explainer under a check, the rest of a framing paragraph, a long phase a founder may fold. Not for anything the founder must read to act (put it on the page), not to switch views (<code>la-tabs</code>), not for actions (<code>la-menu</code>).</li>
+              <li><strong>Hairlines.</strong> The component draws them, because a page may place a host but not paint it. Don’t wrap each row in its own element: each would be the last of its type and draw both lines, doubling them. Don’t stack a row straight under something with a bottom border of its own. <code>section</code> and <code>quiet</code> draw no lines.</li>
+              <li><strong>No group, and no “Show all”.</strong> None of the uses closes one row when another opens, so there is no <code>la-disclosure-group</code>; several can be open at once. The lists are short, so there is no “Show all sections” either.</li>
+              <li><strong>A section is a heading holding a button</strong> (<code>section</code>, 9 Oct 2026). The component draws the heading at <code>heading-level</code> (default 3) round a button with <code>aria-expanded</code> and <code>aria-controls</code>, as W3C’s accordion pattern does, so people who move by headings can jump between a run’s sections. Put text (and an icon) in the <code>summary</code> slot, never a heading. Closed, the body is <code>hidden="until-found"</code> where the browser supports it, so find in page opens it; elsewhere it’s plainly hidden.</li>
+              <li><strong>The label’s colour.</strong> A row’s label is in the secondary colour at rest and takes the text colour when open or under the pointer, so an open row reads as the one in hand. Our own; see Basis.</li>
+              <li><strong>Motion.</strong> The caret turns on <code>--dur-fast</code>; the body grows from a <code>0fr</code> grid track on <code>--dur-base</code> <code>--ease-out</code>, so nothing animates height. On close the track collapses first and the details shuts when it has. Under <code>prefers-reduced-motion</code> both change at once.</li>
+              <li><strong>Targets.</strong> The row is 36px, the section 36px round a 28px icon, the quiet toggle 30px with its target stretched to 32px. On a touch screen the row and the section pad to 44px and the quiet target stretches to 44px.</li>
+              <li><strong>Consumers.</strong> In this repo, all <code>quiet</code>: <code>la-question</code>’s <em>What this means</em> (decision 118, amended), <code>la-step-questions</code>’ <em>What we read</em> after a founder answers differently from what we filled in (decision 129), and <code>la-playbook-step</code>’s <em>More</em>. In <code>new-design</code>, the library FAQ in <code>05-playbooks.html</code>, and the depth door and “More about this choice” that <code>gen-runner.js</code> and <code>create-doc.js</code> draw in the playbook run. The run’s phase head hasn’t moved onto it.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and what was decided where we differ from them (9 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>The native <code>&lt;details&gt;</code> and <code>&lt;summary&gt;</code></td><td>The <a href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/">WAI-ARIA disclosure pattern</a>; <a href="https://design-system.service.gov.uk/components/details/">GOV.UK Details</a> is built on it.</td><td>Backed</td></tr>
+                <tr><td>Caret at the end of a full-width row, turning when it opens</td><td><a href="https://carbondesignsystem.com/components/accordion/usage/">Carbon’s accordion</a> puts the chevron at the end; <a href="https://developer.apple.com/design/human-interface-guidelines/disclosure-controls">Apple’s disclosure controls</a> turn it to show the state. <a href="https://www.nngroup.com/articles/accordion-icons/">NN/g (2020)</a>: a caret is the icon that best says “opens here”. Against: APG, GOV.UK and Apple put the marker first, and Carbon finds a left chevron helps people using magnification.</td><td>Backed; see Disclosure or accordion</td></tr>
+                <tr><td>A line above each row and below the last</td><td>Carbon’s accordion rules its items the same way.</td><td>Backed</td></tr>
+                <tr><td>Several open at once; no group</td><td>Carbon’s and GOV.UK’s accordions both let several sections stay open.</td><td>Backed</td></tr>
+                <tr><td>Never hide what people need in order to act</td><td>GOV.UK Details: don’t use it to hide information most users will need.</td><td>Backed</td></tr>
+                <tr><td>Quiet: link-sized, the caret after the label</td><td><a href="https://polaris-react.shopify.com/components/actions/button">Polaris’s button</a> with its disclosure chevron after the label. GOV.UK Details and Apple’s triangle put the marker before the text.</td><td>Backed (Polaris)</td></tr>
+                <tr><td>A status or count at the end of the row</td><td><a href="https://design-system.service.gov.uk/components/task-list/">GOV.UK’s task list</a> puts each task’s status at the end of its row.</td><td>Backed</td></tr>
+                <tr><td>The body animates open</td><td>Carbon’s accordion and Polaris’s Collapsible animate it; GOV.UK doesn’t. Off under reduced motion (WCAG 2.3.3).</td><td>Backed</td></tr>
+                <tr><td>Reading text no wider than 76 characters</td><td>WCAG 1.4.8: no more than 80 characters a line.</td><td>Backed</td></tr>
+                <tr><td>44px on a touch screen</td><td>WCAG 2.5.5 and Apple’s HIG: 44px. Carbon’s accordion comes in 32, 40 and 48px rows.</td><td>Backed</td></tr>
+                <tr><td>Find in page opens a closed row</td><td>The HTML standard’s behaviour for <code>&lt;details&gt;</code>.</td><td>Backed</td></tr>
+                <tr><td>A section: a heading holding a button</td><td>The <a href="https://www.w3.org/WAI/ARIA/apg/patterns/accordion/">WAI-ARIA accordion pattern</a> and <a href="https://design-system.service.gov.uk/components/accordion/">GOV.UK’s accordion</a> put the button inside the heading; <a href="https://developer.chrome.com/docs/css-ui/hidden-until-found"><code>hidden="until-found"</code></a> keeps the closed body findable.</td><td>Backed (9 Oct 2026; until then a heading in <code>&lt;summary&gt;</code>, with its cost noted)</td></tr>
+                <tr><td>The label grey at rest, darker when open or hovered</td><td>Carbon keeps an accordion’s title in the text colour.</td><td>Decided: our own</td></tr>
+                <tr><td>No “Show all sections”</td><td>GOV.UK’s accordion has one.</td><td>Decided: left out; the lists are short</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    (function () {
+          var FAQS = [
+            ['What is a playbook?', 'A legal job broken into steps, in the order they have to happen. Each step says what to do and why, drafts any document you need, and files it when you approve it.'],
+            ['What’s the difference between a journey and a document?', 'A journey is the whole job: the decisions, the documents, the filings and the deadlines that follow. A document is one contract, policy or letter, drafted from what we already know about you.'],
+            ['Who is this for?', 'Founders and operators who have to get legal work done without a lawyer on the team. You do not need to know the law to run one.'],
+            ['Which playbooks apply to me?', 'All of them are written for UK companies. We only show you playbooks that fit your company. You will not see one for a country you do not trade in.'],
+            ['What if I can’t find what I need?', 'Ask an expert. One of our lawyers will point you to the right playbook, or tell you plainly if it is something we do not cover yet.']
+          ];
+          function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+          var rows = FAQS.map(function (f) {
+            return '<la-disclosure summary="' + esc(f[0]) + '"><p>' + esc(f[1]) + '</p></la-disclosure>';
+          }).join('');
+          ['faq-list', 'faq-grid', 'faq-modal'].forEach(function (id) { document.getElementById(id).innerHTML = rows; });
+        })();
+
+        customElements.whenDefined('la-disclosure').then(function () {
+          var live = document.getElementById('live'), log = document.getElementById('event-log'), last = '—';
+          var openGroup = document.getElementById('ctl-open');
+          function sync() {
+            live.updateComplete.then(function () {
+              log.textContent = 'open: ' + live.open + ' · la-disclosure-toggle: ' + last;
+              openGroup.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-value') === String(live.open)); });
+            });
+          }
+          document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+            group.addEventListener('click', function (e) {
+              var btn = e.target.closest('.btn-toggle');
+              if (!btn) return;
+              group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+              var v = btn.getAttribute('data-value');
+              switch (group.getAttribute('data-control')) {
+                case 'variant': live.variant = v; break;
+                case 'open': live.open = v === 'true'; break;
+              }
+              sync();
+            });
+          });
+          document.getElementById('ctl-summary').addEventListener('input', function (e) { live.summary = e.target.value; sync(); });
+          document.getElementById('ctl-level').addEventListener('input', function (e) { live.headingLevel = Number(e.target.value) || 3; sync(); });
+          live.addEventListener('la-disclosure-toggle', function (e) { last = JSON.stringify(e.detail); sync(); });
+          sync();
+
+          var tryEl = document.getElementById('try'), tryLog = document.getElementById('try-log');
+          tryEl.addEventListener('la-disclosure-toggle', function (e) {
+            tryEl.updateComplete.then(function () {
+              tryLog.textContent = 'Last la-disclosure-toggle: ' + JSON.stringify(e.detail) + '. open is ' + tryEl.open + (tryEl.hasAttribute('open') ? ', and the attribute is set.' : ', and there is no attribute.');
+            });
+          });
+        });
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-guidance — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .g-stack { display: flex; flex-direction: column; gap: var(--la-space-xl); width: 100%; max-width: 560px; }
+    .g-cap { display: block; margin-bottom: var(--la-space-xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .g-cap code { font-size: var(--la-font-size-sm); }
+    .g-narrow { width: 280px; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    /* ── In context: the question inside the step's questions modal ── */
+    .q-frame { width: 100%; max-width: 560px; padding: var(--la-space-xl); border-radius: var(--la-radius-xl); background: var(--la-color-bg); box-shadow: var(--la-shadow-dialog); }
+    .opts { display: grid; gap: var(--la-space-sm); }
+    .opts.yn { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 360px; }
+
+    /* ── Live preview ─────────────────────────────────── */
+    .live-box { width: 100%; max-width: 560px; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-guidance</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-guidance</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    
+    
+    <a href="#css-parts" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-parts">CSS parts</a>
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-guidance</h1>
+          <p>The note under an answer someone has picked: what their answer means and what to do next. Legal writes it for each option of a Review, Decide &amp; Confirm question, and it shows only once that option is picked. Neutral by design: the guidance follows the founder’s own answer, so it must never read as our verdict on it.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack" style="padding:24px;">
+            <div class="live-box">
+              <la-guidance><p>We draft board minutes or a directors’ written resolution. Mark the shareholders’ resolution step as done elsewhere: it’s for the other route.</p></la-guidance>
+            </div>
+            <ol class="anatomy-list">
+              <li><strong>Label.</strong> The small heading, “Guidance” by default, in <code>--la-color-text-muted</code>. <code>label=""</code> hides it. <code>part="label"</code>.</li>
+              <li><strong>Body.</strong> The default slot: one or two short paragraphs, in <code>--la-color-text</code> on <code>--la-color-bg-subtle</code>, at a 64ch measure.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header" style="margin-top:8px;">
+          <h1>Live preview</h1>
+          <p>Guidance on a picked answer.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-label">label</label>
+              <input id="ctl-label" type="text" value="Guidance" style="width:220px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:24px;">
+            <div class="live-box">
+              <la-guidance id="live"><p>Get their consent in writing before you appoint anyone.</p></la-guidance>
+            </div>
+          </div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+          <p>The copy is legal’s, from Bobby’s CMS prototype 07 at v0.4 (8 October 2026).</p>
+        </div>
+
+        <div id="snap-phase-b" class="preview-group">
+          <div class="preview-label">Phase B: an answer carries on or asks a follow-up, and a stop, or the step that’s for the other route, is said here</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="g-stack">
+              <div><span class="g-cap">One paragraph</span><la-guidance><p>Get their consent in writing before you appoint anyone.</p></la-guidance></div>
+              <div><span class="g-cap">Stop here</span><la-guidance><p>Stop here. They can’t act as a director without a court’s permission. Talk to a lawyer before you go further.</p></la-guidance></div>
+              <div><span class="g-cap">The other route</span><la-guidance><p>We draft board minutes or a directors’ written resolution. Mark the shareholders’ resolution step as done elsewhere: it’s for the other route.</p></la-guidance></div>
+              <div><span class="g-cap">No label: <code>label=""</code></span><la-guidance label=""><p>Each angel must fit an exemption before you send them anything. We check each one next.</p></la-guidance></div>
+              <div class="g-narrow"><span class="g-cap">Narrow: in 280px</span><la-guidance><p>Stop here. A private company must never offer its shares to the public. Talk to a lawyer about another way to raise.</p></la-guidance></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-context" class="preview-group">
+          <div class="preview-label">In context: under the picked option, inside the step’s questions modal (<code>la-step-questions</code> puts it in <code>la-question</code>’s <code>guidance</code> slot)</div>
+          <div class="preview-frame" style="padding:24px;background:var(--la-color-bg-subtle);">
+            <div class="q-frame">
+              <la-question text="Does an investor have a right to approve or appoint directors?" means="Usually set in a shareholders’ agreement after a funding round.">
+                <div class="opts yn" role="radiogroup" aria-label="Does an investor have a right to approve or appoint directors?">
+                  <la-choice variant="contained" checked>Yes</la-choice>
+                  <la-choice variant="contained">No</la-choice>
+                </div>
+                <la-guidance slot="guidance"><p>Get their consent in writing before you appoint anyone.</p></la-guidance>
+              </la-question>
+            </div>
+          </div>
+        </div>
+
+
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-guidance</h2>
+    <p>The note under an answer someone has picked: what their answer means and what to do next. Legal writes it for each option of a Review, Decide & Confirm question, and it shows only once that option is picked. Neutral by design: the guidance follows the founder’s own answer, so it must never read as our verdict on it.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Guidance&#39;</span></td>
+          <td>the small heading (default "Guidance"); "" hides it</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>(default)</td>
+          <td>the guidance: short paragraphs</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+
+
+
+
+<div id="css-parts" class="docs-section">
+  <h3>CSS parts</h3>
+  <table class="docs-table">
+    <thead><tr><th>Part</th><th>Description</th></tr></thead>
+    <tbody>
+      
+        <tr>
+          <td>label</td>
+          <td>the small heading Shown under the picked option (Polaris ChoiceList renders content under a choice only once it's selected). la-question's guidance slot is a polite live region, so a screen reader hears it appear.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+  
+
+  
+          <div class="docs-divider"></div>
+
+<div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-color-bg-subtle</code></td><td>The note’s background.</td></tr>
+                <tr><td><code>--la-radius-md</code></td><td>Its corners.</td></tr>
+                <tr><td><code>--la-space-md</code> · <code>--la-space-lg</code></td><td>Its padding, top and bottom, then the sides.</td></tr>
+                <tr><td><code>--la-color-text</code></td><td>The body.</td></tr>
+                <tr><td><code>--la-color-text-muted</code></td><td>The label.</td></tr>
+                <tr><td><code>--la-font-size-md</code> · <code>--la-font-size-sm</code></td><td>The body; the label.</td></tr>
+                <tr><td><code>--la-line-height</code></td><td>The body’s leading.</td></tr>
+                <tr><td><code>--la-space-3xs</code> · <code>--la-space-xs</code></td><td>Under the label; between paragraphs.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>Under the picked option, in <code>la-question</code>’s <code>guidance</code> slot. Show it only once the option is picked.</p>
+            <div class="docs-code"><span class="kw">&lt;la-question</span> <span class="at">text</span>=<span class="str">"Does an investor have a right to approve or appoint directors?"</span><span class="kw">&gt;</span>
+  …the answer…
+  <span class="kw">&lt;la-guidance</span> <span class="at">slot</span>=<span class="str">"guidance"</span><span class="kw">&gt;</span>
+    <span class="kw">&lt;p&gt;</span>Get their consent in writing before you appoint anyone.<span class="kw">&lt;/p&gt;</span>
+  <span class="kw">&lt;/la-guidance&gt;</span>
+<span class="kw">&lt;/la-question&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>When to use.</strong> Under a picked option on a playbook step, for legal’s guidance on that option. Show it only once the option is picked, as Polaris’s ChoiceList renders content under a choice only once it’s selected.</li>
+              <li><strong>Announced.</strong> <code>la-question</code>’s <code>guidance</code> slot is a polite live region that stays in place, so a screen reader hears the guidance when an option is picked (WCAG 4.1.3 Status Messages). GOV.UK notes that users of assistive technology may not be told when revealed content appears; this closes that gap.</li>
+              <li><strong>Not this.</strong> A message about the page or the system is <code>la-alert</code>, and how to fill a field in is the field’s <code>hint</code>.</li>
+              <li><strong>Neutral.</strong> A <code>--la-color-bg-subtle</code> box at <code>--la-radius-md</code>, with no status colour, no icon of judgement and no side stripe (decision 93). The guidance follows the founder’s own answer, so it never reads as our verdict on it (decision 117, <code>rule/answers-never-verdicts</code>).</li>
+              <li><strong>Phase B.</strong> An answer carries on or asks a follow-up. A stop, or the step that’s for the other route, is said in the guidance itself.</li>
+              <li><strong>Removed 9 Oct 2026.</strong> The <code>adds</code> slot and property, which named the steps an answer turns on (“This adds: … It joins your plan when you confirm.”), were cut from Phase B with the other after-launch paths (decision 124; Bobby’s 8 Oct brief, B8). They’re in the north star, and intact at <code>dc95fe47</code>.</li>
+              <li><strong>Consumers.</strong> <code>la-step-questions</code>, under the picked option.</li>
+            </ul>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+      customElements.whenDefined('la-guidance').then(function () {
+        var live = document.getElementById('live');
+        document.getElementById('ctl-label').addEventListener('input', function (e) { live.label = e.target.value; });
+      });
+  })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-step-marker — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Status grids: one marker per status, its words under it ── */
+    .m-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(112px, 1fr)); gap: var(--la-space-lg); width: 100%; }
+    .m-cell { display: flex; flex-direction: column; align-items: flex-start; gap: var(--la-space-xs); }
+    .m-cell code { font-size: var(--la-font-size-sm); }
+    .m-cell span { font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+    .row { display: flex; align-items: center; gap: var(--la-space-xl); }
+
+    /* ── In context ───────────────────────────────────── */
+    .ctx { width: 100%; max-width: 560px; }
+    .step-row { display: grid; grid-template-columns: 28px minmax(0, 1fr); gap: var(--la-space-md); align-items: start; padding: var(--la-space-sm) 0; border-top: 1px solid var(--la-color-border-light); font-size: var(--la-font-size-md); }
+    .step-row:first-child { border-top: 0; }
+    .step-row .sub { display: block; font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .parts { display: flex; flex-wrap: wrap; align-items: center; gap: var(--la-space-xs) var(--la-space-sm); margin: 0; padding: 0; list-style: none; font-size: var(--la-font-size-md); }
+    .parts li { display: inline-flex; align-items: center; gap: var(--la-space-xs); }
+    .parts .sep { color: var(--la-color-text-faint); }
+
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-step-marker</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-step-marker</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    <a href="#css-parts" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-parts">CSS parts</a>
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-step-marker</h1>
+          <p>The marker on a step, in either register of the status standard (decision 104). <code>variant="sequence"</code> is a numbered circle for ordered steps: primary while it’s the step in hand, green once it’s done. <code>variant="check"</code> is a check-circle for unordered sub-tasks inside one step. One place for the mapping, so a page can’t drift from the standard. It shows a status; it isn’t pressed.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header" style="margin-top:8px;">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack" style="padding:24px;">
+            <div class="row">
+              <la-step-marker index="2" status="active"></la-step-marker>
+              <la-step-marker index="1" status="complete"></la-step-marker>
+              <la-step-marker variant="check" status="complete"></la-step-marker>
+            </div>
+            <ol class="anatomy-list">
+              <li><strong>Mark.</strong> The 22px circle (sequence, <code>--la-step-marker-size</code>) or the 20px icon (check, <code>--la-step-marker-check-size</code>). <code>part="mark"</code>.</li>
+              <li><strong>Glyph.</strong> The step’s number while it’s pending or active; a check once complete; a lock, a warning, a spinner or a bent arrow for the other statuses.</li>
+              <li><strong>Name.</strong> Not drawn: the marker is named for assistive tech, “Step 2: In progress”, in the paired badge’s words. <code>label=""</code> makes it decorative, for a row that says the state in text.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header" style="margin-top:8px;">
+          <h1>Live preview</h1>
+          <p>Each control sets a property on the preview.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>variant</label>
+              <div class="btn-group" data-control="variant">
+                <button class="btn-toggle active" data-value="sequence" type="button">sequence</button>
+                <button class="btn-toggle" data-value="check" type="button">check</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>status</label>
+              <div class="btn-group" data-control="status">
+                <button class="btn-toggle" data-value="pending" type="button">pending</button>
+                <button class="btn-toggle active" data-value="active" type="button">active</button>
+                <button class="btn-toggle" data-value="complete" type="button">complete</button>
+                <button class="btn-toggle" data-value="gated" type="button">gated</button>
+                <button class="btn-toggle" data-value="attention" type="button">attention</button>
+                <button class="btn-toggle" data-value="processing" type="button">processing</button>
+                <button class="btn-toggle" data-value="passed" type="button">passed</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-index">index</label>
+              <input id="ctl-index" type="number" value="2" min="1" style="width:80px;">
+            </div>
+            <div class="control-group">
+              <label for="ctl-label">label</label>
+              <input id="ctl-label" type="text" value="" placeholder="(default: Step N: status)" style="width:240px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame" style="padding:32px;">
+            <la-step-marker id="live" index="2" status="active"></la-step-marker>
+          </div>
+          <div class="preview-label event-log" id="event-log">Accessible name: Step 2: In progress</div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header" style="margin-top:8px;">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-sequence" class="preview-group">
+          <div class="preview-label">Sequence register: ordered steps. Active is primary with its number; complete is green with a check; pending and gated are muted; attention is danger. Processing is after launch</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="m-grid">
+              <div class="m-cell"><la-step-marker index="3" status="pending"></la-step-marker><code>pending</code><span>Not yet started</span></div>
+              <div class="m-cell"><la-step-marker index="3" status="active"></la-step-marker><code>active</code><span>In progress</span></div>
+              <div class="m-cell"><la-step-marker index="3" status="complete"></la-step-marker><code>complete</code><span>Completed</span></div>
+              <div class="m-cell"><la-step-marker index="3" status="gated"></la-step-marker><code>gated</code><span>Cannot start yet</span></div>
+              <div class="m-cell"><la-step-marker index="3" status="attention"></la-step-marker><code>attention</code><span>There is a problem</span></div>
+              <div class="m-cell"><la-step-marker index="3" status="processing"></la-step-marker><code>processing</code><span>Processing · after launch</span></div>
+              <div class="m-cell"><la-step-marker index="3" status="passed"></la-step-marker><code>passed</code><span>Moved past</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-check" class="preview-group">
+          <div class="preview-label">Check register: unordered sub-tasks inside one step. Green for complete, a primary dot for active</div>
+          <div class="preview-frame" style="padding:24px;">
+            <div class="m-grid">
+              <div class="m-cell"><la-step-marker variant="check" status="pending"></la-step-marker><code>pending</code><span>Not yet started</span></div>
+              <div class="m-cell"><la-step-marker variant="check" status="active"></la-step-marker><code>active</code><span>In progress</span></div>
+              <div class="m-cell"><la-step-marker variant="check" status="complete"></la-step-marker><code>complete</code><span>Completed</span></div>
+              <div class="m-cell"><la-step-marker variant="check" status="gated"></la-step-marker><code>gated</code><span>Cannot start yet</span></div>
+              <div class="m-cell"><la-step-marker variant="check" status="attention"></la-step-marker><code>attention</code><span>There is a problem</span></div>
+              <div class="m-cell"><la-step-marker variant="check" status="processing"></la-step-marker><code>processing</code><span>Processing · after launch</span></div>
+              <div class="m-cell"><la-step-marker variant="check" status="passed"></la-step-marker><code>passed</code><span>Moved past</span></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-context" class="preview-group">
+          <div class="preview-label">In context: a run’s steps (sequence, as <code>la-playbook-step</code> draws its marker), then one step’s parts (check, as its <code>parts</code> row draws them: PRO-210’s sub-steps, Bobby’s CMS step 3)</div>
+          <div class="preview-frame preview-frame--stack" style="padding:24px;gap:24px;">
+            <div class="ctx">
+              <div class="step-row"><la-step-marker index="1" status="complete" label=""></la-step-marker><span>Check your articles give the power, and pick the route.<span class="sub">Completed · The board appoints · 6 Oct</span></span></div>
+              <div class="step-row"><la-step-marker index="2" status="passed" label=""></la-step-marker><span>Confirm the person is eligible and not barred.<span class="sub">Moved past · Done outside LawAdvisor</span></span></div>
+              <div class="step-row"><la-step-marker index="3" status="active" label=""></la-step-marker><span>Create the letter of appointment or service agreement.<span class="sub">In progress</span></span></div>
+              <div class="step-row"><la-step-marker index="4" status="pending" label=""></la-step-marker><span>Create the board minutes or written resolution.<span class="sub">Not yet started</span></span></div>
+            </div>
+            <ol class="parts ctx" aria-label="Parts of this step">
+              <li><la-step-marker variant="check" status="complete" label=""></la-step-marker><span>Draft</span></li>
+              <li><i class="ph ph-caret-right sep" aria-hidden="true"></i><la-step-marker variant="check" status="active" label=""></la-step-marker><span>Get the agreement signed</span></li>
+            </ol>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-step-marker</h2>
+    <p>The marker on a step, in either register of the status standard (decision 104). The sequence variant is a numbered circle for ordered steps: primary while it’s the step in hand, green once it’s done. The check variant is a check-circle for unordered sub-tasks inside one step. One place for the mapping, so a page can’t drift from the standard. It shows a status; it isn’t pressed.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>status</td>
+          <td><span class="default">status</span></td>
+          <td><span class="type">StepMarkerStatus</span></td>
+          <td><span class="default">&#39;pending&#39;</span></td>
+          <td>pending (default) · active · complete · gated · attention · processing (after launch) · passed</td>
+        </tr>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">StepMarkerVariant</span></td>
+          <td><span class="default">&#39;sequence&#39;</span></td>
+          <td>sequence (default) · check</td>
+        </tr>
+      
+        <tr>
+          <td>index</td>
+          <td><span class="default">index</span></td>
+          <td><span class="type">number | undefined</span></td>
+          <td>—</td>
+          <td>the step's number, shown while pending or active (sequence only)</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string | undefined</span></td>
+          <td>—</td>
+          <td>accessible name; defaults to "Step N: <status>"; "" hides it, for a row that says the state</td>
+        </tr>
+      
+        <tr>
+          <td>_name</td>
+          <td>—</td>
+          <td><span class="type">string</span></td>
+          <td>—</td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    <div class="docs-divider"></div>
+
+
+
+
+
+
+<div id="css-parts" class="docs-section">
+  <h3>CSS parts</h3>
+  <table class="docs-table">
+    <thead><tr><th>Part</th><th>Description</th></tr></thead>
+    <tbody>
+      
+        <tr>
+          <td>mark</td>
+          <td>the circle, or the icon</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-step-marker-size</code> · <code>--la-step-marker-check-size</code></td><td>The circle (22px) and the check-register icon (20px).</td></tr>
+                <tr><td><code>--la-step-marker-glyph-size</code> · <code>--la-step-marker-passed-glyph-size</code></td><td>The glyph in the circle (12px), and the smaller arrow inside passed’s ring (11px).</td></tr>
+                <tr><td><code>--la-step-marker-ring</code></td><td>Passed’s dashed ring (1.5px).</td></tr>
+                <tr><td><code>--la-color-primary</code> · <code>--la-color-primary-fg</code></td><td>Sequence active: the fill and the number. Check active: the dot.</td></tr>
+                <tr><td><code>--la-color-resolved</code> · <code>--la-color-text-invert</code></td><td>Complete: the sequence circle and its check, and the check-register icon.</td></tr>
+                <tr><td><code>--la-color-bg-muted</code> · <code>--la-color-text-muted</code></td><td>Sequence pending, gated and processing: the fill and the number. Passed: the arrow.</td></tr>
+                <tr><td><code>--la-color-text-faint</code></td><td>Gated’s lock; check pending and gated; passed’s dashed ring.</td></tr>
+                <tr><td><code>--la-color-surface-danger</code> · <code>--la-color-danger-text</code></td><td>Attention, in both registers.</td></tr>
+                <tr><td><code>--la-radius-circle</code></td><td>The circle.</td></tr>
+                <tr><td><code>--la-font-family</code> · <code>--la-font-size-sm</code> · <code>--la-font-weight-semibold</code></td><td>The number.</td></tr>
+                <tr><td><code>--dur-fast</code> · <code>--dur-base</code> · <code>--ease</code> · <code>--la-space-3xs</code></td><td>Colour changes, and the number-to-check cross-fade (its blur).</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>A step in a run. The row says the state in words, so the marker is decorative.</p>
+            <div class="docs-code"><span class="kw">&lt;la-step-marker</span> <span class="at">index</span>=<span class="str">"3"</span> <span class="at">status</span>=<span class="str">"active"</span> <span class="at">label</span>=<span class="str">""</span><span class="kw">&gt;&lt;/la-step-marker&gt;</span></div>
+            <p style="margin-top:16px;">A sub-task inside one step.</p>
+            <div class="docs-code"><span class="kw">&lt;la-step-marker</span> <span class="at">variant</span>=<span class="str">"check"</span> <span class="at">status</span>=<span class="str">"complete"</span><span class="kw">&gt;&lt;/la-step-marker&gt;</span></div>
+            <p style="margin-top:16px;">A step moved past with a reason (decision 115).</p>
+            <div class="docs-code"><span class="kw">&lt;la-step-marker</span> <span class="at">index</span>=<span class="str">"2"</span> <span class="at">status</span>=<span class="str">"passed"</span><span class="kw">&gt;&lt;/la-step-marker&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>Two registers</strong> (decision 104, <code>status-conventions.md</code>). Sequence for ordered steps: the number says where you are, a check says done. Check for unordered sub-tasks inside one step.</li>
+              <li><strong>Green means done</strong>, in both registers (decision 104, amended 9 Oct 2026). Active keeps the primary colour, so the step in hand and a finished one differ in colour and in glyph. Beyond that, colour is for the exceptions: attention takes the danger surface and a warning.</li>
+              <li><strong>Processing waits for after launch.</strong> It was Auto mode’s, which isn’t in Phase B.</li>
+              <li><strong>Passed</strong> (decision 115). A step moved past with a reason: no fill, a 1.5px dashed ring in <code>--la-color-text-faint</code> and a bent arrow in <code>--la-color-text-muted</code>, so it reads neither as done nor as still to do. A step that doesn’t apply isn’t a status.</li>
+              <li><strong>Words.</strong> The accessible name uses the paired badge’s words, which are GOV.UK’s task statuses: Completed, In progress, Not yet started, Cannot start yet, There is a problem. Processing and Moved past are ours; GOV.UK has neither.</li>
+              <li><strong>Not pressable.</strong> A step is finished from its own button, not by ticking the marker. The marker had a pressable mode until 9 Oct 2026; nothing used it.</li>
+              <li><strong>Numbers.</strong> Two digits fit the circle; 100 and above overflow it. A playbook run has far fewer steps.</li>
+              <li><strong>Motion.</strong> The number and the check cross-fade (fade, scale, a touch of blur); instant under <code>prefers-reduced-motion</code>.</li>
+              <li><strong>Consumers.</strong> <code>la-playbook-step</code>: its step’s marker (sequence) and its parts row (check). In <code>new-design</code>, the Orion playbook run and the e-sign ceremony.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and what was decided where we differ from them (9 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>A numbered circle; a check once done</td><td><a href="https://m1.material.io/components/steppers.html">Material steppers</a>: numbered circle, a check on completed steps. <a href="https://carbondesignsystem.com/components/progress-indicator/usage/">Carbon progress indicator</a>: a circle with a checkmark for completed.</td><td>Backed</td></tr>
+                <tr><td>Active in the primary colour</td><td>Material: the active circle takes the primary colour. Carbon: the current step is blue.</td><td>Backed</td></tr>
+                <tr><td>Complete in green, both registers</td><td>For: success is green in <a href="https://atlassian.design/components/lozenge/">Atlassian’s lozenge</a>, <a href="https://polaris-react.shopify.com/components/feedback-indicators/badge">Polaris’s badge</a> and <a href="https://carbondesignsystem.com/patterns/status-indicator-pattern/">Carbon’s status indicators</a>. Against: <a href="https://design-system.service.gov.uk/components/task-list/">GOV.UK’s task list</a> leaves “Completed” uncoloured; Material’s and Carbon’s steppers fill done with the primary colour.</td><td>Decided: green, to set done apart from the step in hand (decision 104 amended)</td></tr>
+                <tr><td>Pending muted</td><td>Material: inactive circle in 38% black. Carbon: not started is an outlined grey circle (ours is a muted fill).</td><td>Backed</td></tr>
+                <tr><td>Attention: a warning, in danger colours</td><td>Material and Carbon both have an error state. GOV.UK task list: “There is a problem” is the only status in red.</td><td>Backed</td></tr>
+                <tr><td>Gated: a lock, faint</td><td>GOV.UK: “Cannot start yet” in grey text, the row not linked. <a href="https://atlassian.design/components/progress-tracker/">Atlassian progress tracker</a>: a disabled step, greyed. None of them use a lock.</td><td>Backed; the lock is ours</td></tr>
+                <tr><td>Processing: a spinner</td><td>None of Carbon, Material, GOV.UK or Atlassian has a processing step state.</td><td>Decided: after launch, with Auto mode</td></tr>
+                <tr><td>Passed: a dashed ring and a bent arrow</td><td>Carbon has no skipped state. Material marks optional steps “Optional” but has no skipped look. Product requires the state (PRO-210 O, P).</td><td>Decided: our own look (decision 115)</td></tr>
+                <tr><td>Not pressable</td><td>Carbon’s interactive indicator and Material’s non-linear stepper navigate to a step; GOV.UK’s task rows link to the task. None ticks a step from its marker.</td><td>Decided: pressable mode removed</td></tr>
+                <tr><td>The words</td><td><a href="https://design-system.service.gov.uk/patterns/complete-multiple-tasks/">GOV.UK’s task statuses</a>: Completed, In progress, Not yet started, Cannot start yet, There is a problem.</td><td>Decided: GOV.UK’s; Processing and Moved past are ours</td></tr>
+                <tr><td>Number-to-check cross-fade</td><td>Our <code>motion.css</code> icon swap; no outside basis. Reduced motion respected.</td><td>Decided: kept, ours</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+  (function () {
+    customElements.whenDefined('la-step-marker').then(function () {
+      var live = document.getElementById('live'), log = document.getElementById('event-log');
+      function sync() {
+        live.updateComplete.then(function () {
+          var host = live.shadowRoot && (live.shadowRoot.querySelector('[aria-label]'));
+          log.textContent = 'Accessible name: ' + (host ? host.getAttribute('aria-label') : '(decorative)');
+        });
+      }
+      document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+        group.addEventListener('click', function (e) {
+          var btn = e.target.closest('.btn-toggle');
+          if (!btn) return;
+          group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+          var v = btn.getAttribute('data-value');
+          switch (group.getAttribute('data-control')) {
+            case 'variant': live.variant = v; break;
+            case 'status': live.status = v; break;
+          }
+          sync();
+        });
+      });
+      document.getElementById('ctl-index').addEventListener('input', function (e) { live.index = e.target.value === '' ? undefined : Number(e.target.value); sync(); });
+      document.getElementById('ctl-label').addEventListener('input', function (e) { live.label = e.target.value === '' ? undefined : e.target.value; sync(); });
+      sync();
+    });
+  })();
+</script>
+
+
+</body>
+</html>

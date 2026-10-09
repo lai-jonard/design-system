@@ -285,6 +285,17 @@
   --la-checkbox-icon-size:  11px;
   --la-checkbox-offset:     1px;
 
+  /* ── Step marker ────────────────────────────────── */
+  --la-step-marker-size:              22px;
+  --la-step-marker-check-size:        20px;
+  --la-step-marker-glyph-size:        12px;
+  --la-step-marker-passed-glyph-size: 11px;
+  --la-step-marker-ring:              1.5px;
+
+  /* ── Disclosure ───────────────────────────────────── */
+  --la-disclosure-quiet-target:       32px;
+  --la-disclosure-quiet-target-touch: 44px;
+
   /* ── Switch ─────────────────────────────────────── */
   /* Off-state bg uses its own token — the shared --la-color-bg-* scale
      tops out at a warm light grey; the switch track needs more visible

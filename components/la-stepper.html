@@ -69,6 +69,7 @@
     <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
     <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
     <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    
   </div>
 </nav>
 
@@ -83,7 +84,7 @@
 <!-- Overview -->
 <div id="overview" class="preview-header">
   <h1>la-stepper</h1>
-  <p>Quiet stepped progress indicator for linear flows. A horizontal bar segmented by step that fills with primary colour left-to-right as steps are completed; skipped steps appear as visible grey gaps in the primary fill. The finished bar — every segment primary — is the completion signal. No per-step animation, no labels — the surrounding flow names each step in its own copy.</p>
+  <p>Quiet stepped progress indicator for linear flows. A horizontal bar segmented by step that fills with primary colour left-to-right as steps are completed; skipped steps appear as visible grey gaps in the primary fill. The finished bar, every segment primary, is the completion signal. No per-step animation, no labels — the surrounding flow names each step in its own copy.</p>
 </div>
 
 <!-- Anatomy -->
@@ -105,8 +106,8 @@
     <thead><tr><th>Status</th><th>Background</th><th>Reads as</th></tr></thead>
     <tbody>
       <tr><td><code>pending</code></td><td><code>--la-color-border-light</code></td><td>Light rail — the empty track ahead.</td></tr>
-      <tr><td><code>active</code></td><td><code>--la-color-primary</code></td><td>Solid primary. Indistinguishable from <code>complete</code> by design — the transition point shows the user's place.</td></tr>
-      <tr><td><code>complete</code></td><td><code>--la-color-primary</code></td><td>Solid primary. Step done.</td></tr>
+      <tr><td><code>active</code></td><td><code>--la-color-primary</code></td><td>Solid primary. The transition point shows the user’s place.</td></tr>
+      <tr><td><code>complete</code></td><td><code>--la-color-primary</code></td><td>Solid primary. Step done. Green is only for a circular marker with a check (<code>la-step-marker</code>), never these pills (Jonard, 9 Oct 2026).</td></tr>
       <tr><td><code>skipped</code></td><td><code>--la-color-border</code></td><td>Solid muted — visible grey gap in the primary fill.</td></tr>
       <tr><td><code>processing</code> (deferred)</td><td><code>--la-color-bg-muted</code></td><td>Muted-primary tint to read as "in progress but unresolved." Wired when the document-upload path lands.</td></tr>
     </tbody>
@@ -187,8 +188,8 @@ bar; the bar fills left-to-right as steps are completed.
 
 - `pending` — light rail. The empty track ahead.
 - `active` — solid primary. Position is the last primary segment.
-- `complete` — solid primary. Indistinguishable from `active` by
-  design — the transition point shows the user's place.
+- `complete` — solid primary. Green is only for a circular marker with
+  a check (Jonard, 9 Oct 2026), so the bar stays primary.
 - `skipped` — solid muted. Visible grey gap in the primary fill.
 - `processing` — deferred; muted-primary tint until consumers wire
   the document-upload path.

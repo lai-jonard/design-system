@@ -60,29 +60,6 @@
       text-align: center;
     }
 
-    /* Sequence register — numbered circle */
-    .seq-mark {
-      width: 24px; height: 24px; border-radius: 50%;
-      display: inline-grid; place-items: center;
-      font-size: 12px; font-weight: 600;
-      font-variant-numeric: tabular-nums;
-    }
-    .seq-mark i { font-size: 14px; }
-    .seq-mark.s-done,
-    .seq-mark.s-active { background: var(--la-color-primary); color: var(--la-color-primary-fg); }
-    .seq-mark.s-pending { background: var(--la-color-bg-muted); color: var(--la-color-text-muted); }
-    .seq-mark.s-gated { background: var(--la-color-bg-muted); color: var(--la-color-text-faint); }
-    .seq-mark.s-attention { background: var(--la-color-surface-danger); color: var(--la-color-danger-text); }
-    .seq-mark.s-processing { background: var(--la-color-bg-muted); color: var(--la-color-text-muted); }
-
-    /* Checklist register — check-circle icon */
-    .chk-mark { font-size: 22px; line-height: 0; display: inline-grid; place-items: center; }
-    .chk-mark.c-done i { color: var(--la-color-resolved); }
-    .chk-mark.c-active i { color: var(--la-color-primary); }
-    .chk-mark.c-todo i { color: var(--la-color-text-faint); }
-    .chk-mark.c-gated i { color: var(--la-color-text-faint); }
-    .chk-mark.c-attention i { color: var(--la-color-danger-text); }
-
     .token-cell { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: 12px; }
     .reg-note { font-size: 13px; color: var(--doc-text-2); line-height: 1.6; }
 </style>
@@ -129,7 +106,7 @@
 <a class="docs-nav-item" data-nav-id="checklist" href="#checklist">Checklist register</a>
 <a class="docs-nav-item" data-nav-id="radial" href="#radial">Radial (la-step-ring)</a>
 <a class="docs-nav-item" data-nav-id="badge" href="#badge">Paired badge</a>
-<a class="docs-nav-item" data-nav-id="future" href="#future">Future home</a>
+<a class="docs-nav-item" data-nav-id="future" href="#future">The component</a>
 </div>
 <div class="docs-nav-group">
 <span class="docs-nav-title">Reference</span>
@@ -152,11 +129,12 @@
 <h1>Status conventions</h1>
 <p>
             The single source of truth for how we mark <strong>progress state</strong> on steps and
-            tasks — the checkmarks, numbers, and markers used across every flow and subflow. Read this
-            before building any stepper, phase plan, checklist, wizard, or progress display so that
-            "done", "in progress", and "to-do" read the same everywhere. Decided in
-            <a href="https://github.com" onclick="return false;">decision&nbsp;87</a>; the living
-            reference is the RIF project overview.
+            tasks: the checks, numbers and markers used across every flow and subflow. Read this
+            before building any stepper, phase plan, checklist, wizard or progress display, so that
+            “done”, “in progress” and “to do” read the same everywhere. Decided in
+            <a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/104-step-status-conventions.md">decision&nbsp;104</a> (amended 9 Oct 2026) and
+            <a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/115-passed-step-status.md">decision&nbsp;115</a>. Every marker on this page is
+            <a href="../components/la-step-marker.html"><code>la-step-marker</code></a>.
           </p>
 </section>
 <div class="docs">
@@ -167,7 +145,7 @@
 <p>
             Status looks different depending on whether the items are an <strong>ordered sequence</strong>
             or an <strong>unordered checklist</strong>. Pick the register by the nature of the steps, then
-            use the exact marker below. The <em>meaning</em> of each state is identical across registers —
+            use the marker below. The <em>meaning</em> of each state is the same in both registers;
             only the form differs.
           </p>
 <table class="docs-table">
@@ -177,65 +155,76 @@
 <tbody>
 <tr>
 <td>Use for</td>
-<td>Ordered steps you move through in turn — phase plans, wizards, <code>la-stepper</code>, <code>la-step-ring</code></td>
-<td>Unordered sub-tasks inside one step — they needn't be done in order</td>
+<td>Ordered steps you move through in turn: phase plans, wizards, <code>la-stepper</code>, <code>la-step-ring</code></td>
+<td>Unordered sub-tasks inside one step: they needn’t be done in order</td>
 </tr>
 <tr>
 <td>Marker</td>
-<td>Numbered circle (22px), monochrome</td>
-<td>Check-circle icon (~20px)</td>
+<td>Numbered circle (22px)</td>
+<td>Check-circle icon (20px)</td>
 </tr>
 <tr>
-<td>Hierarchy</td>
-<td>Weight + grey scale — never colour for done / active / pending</td>
-<td>Green reserved for completion; otherwise grey</td>
+<td>Colour</td>
+<td>Active is primary, complete is green, pending is grey</td>
+<td>Green for complete, a primary dot for active, otherwise grey</td>
 </tr>
 </tbody>
 </table>
 <p class="reg-note">
-            <strong>Why hybrid:</strong> a sequence carries meaning through <em>position</em> + number, so
-            it stays calm and monochrome (matching the "hierarchy through grey, never colour" rule and
-            <code>la-stepper</code>). A checklist has no position, so a green completion check is the
-            clearest affordance — and green stays reserved for exactly that. Colour appears only for genuine
-            exceptions (attention / processing), never for ordinary progress.
+            <strong>Why hybrid:</strong> a sequence carries its meaning through <em>position</em> and number;
+            a checklist has no position, so a green check is the clearest sign of done. In both registers
+            green means done and nothing else. Beyond done, colour appears only for the exceptions
+            (attention, processing).
+          </p>
+<p class="reg-note">
+            <strong>Amended 9 Oct 2026.</strong> The sequence register was monochrome: done and active were
+            both primary, told apart only by check and number. Done is now green, so it can’t be read as the
+            step in hand. Success is green in <a href="https://atlassian.design/components/lozenge/">Atlassian’s lozenge</a>,
+            <a href="https://polaris-react.shopify.com/components/feedback-indicators/badge">Polaris’s badge</a> and
+            <a href="https://carbondesignsystem.com/patterns/status-indicator-pattern/">Carbon’s status indicators</a>;
+            <a href="https://design-system.service.gov.uk/components/task-list/">GOV.UK’s task list</a> leaves
+            “Completed” uncoloured, and Material’s and Carbon’s steppers use the primary colour.
           </p>
 </section>
 
 <!-- THE STATES ────────────────────────────────────────── -->
 <section class="docs-section" id="states">
 <h2>The states</h2>
-<p>Six states are formalised. "Skipped" is deliberately excluded — bypassed steps read as <code>pending</code> or are dropped from the list.</p>
+<p>Seven states. A step that doesn’t apply isn’t one of them: it leaves the list, and its reason goes at the foot.</p>
 <ul>
-<li><strong>complete / done</strong> — finished.</li>
-<li><strong>active</strong> — in progress, where you are now.</li>
-<li><strong>pending / to-do</strong> — not started, but available.</li>
-<li><strong>gated</strong> — locked until a prior gate clears.</li>
-<li><strong>attention</strong> — overdue, failed, or needs action.</li>
-<li><strong>processing</strong> — async work underway (upload, sync, AI run).</li>
+<li><strong>complete</strong>: finished.</li>
+<li><strong>active</strong>: in progress, where you are now.</li>
+<li><strong>pending</strong>: not yet started, but available.</li>
+<li><strong>gated</strong>: can’t start until an earlier step is done.</li>
+<li><strong>attention</strong>: overdue, failed, or needs action.</li>
+<li><strong>processing</strong>: work underway in the background. After launch: it was Auto mode’s, which isn’t in Phase B.</li>
+<li><strong>passed</strong>: moved past with a reason, so the person is never blocked (<a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/115-passed-step-status.md">decision 115</a>, 6 Oct 2026).</li>
 </ul>
 </section>
 
 <!-- SEQUENCE REGISTER ─────────────────────────────────── -->
 <section class="docs-section" id="sequence">
 <h2>Sequence register</h2>
-<p>Numbered circle, 22px, <code>font-size-sm</code>, weight 600. <code>complete</code> and <code>active</code> are both primary-filled (monochrome, like <code>la-stepper</code>) — the <strong>check</strong> distinguishes done from the <strong>number</strong> of where you are.</p>
+<p>Numbered circle, 22px, <code>font-size-sm</code>, weight 600. <code>active</code> is primary with the <strong>number</strong> of where you are; <code>complete</code> is green with a <strong>check</strong>. Two cues, colour and glyph, so neither carries it alone.</p>
 <div class="demo-row">
-<div class="demo-item"><span class="seq-mark s-done"><i class="ph-bold ph-check"></i></span><span class="cap">complete</span></div>
-<div class="demo-item"><span class="seq-mark s-active">2</span><span class="cap">active</span></div>
-<div class="demo-item"><span class="seq-mark s-pending">3</span><span class="cap">pending</span></div>
-<div class="demo-item"><span class="seq-mark s-gated"><i class="ph-fill ph-lock-simple"></i></span><span class="cap">gated</span></div>
-<div class="demo-item"><span class="seq-mark s-attention"><i class="ph-fill ph-warning"></i></span><span class="cap">attention</span></div>
-<div class="demo-item"><la-spinner size="sm"></la-spinner><span class="cap">processing</span></div>
+<div class="demo-item"><la-step-marker index="1" status="complete"></la-step-marker><span class="cap">complete</span></div>
+<div class="demo-item"><la-step-marker index="2" status="active"></la-step-marker><span class="cap">active</span></div>
+<div class="demo-item"><la-step-marker index="3" status="pending"></la-step-marker><span class="cap">pending</span></div>
+<div class="demo-item"><la-step-marker index="4" status="gated"></la-step-marker><span class="cap">gated</span></div>
+<div class="demo-item"><la-step-marker index="5" status="attention"></la-step-marker><span class="cap">attention</span></div>
+<div class="demo-item"><la-step-marker index="6" status="processing"></la-step-marker><span class="cap">processing</span></div>
+<div class="demo-item"><la-step-marker index="7" status="passed"></la-step-marker><span class="cap">passed</span></div>
 </div>
 <table class="docs-table">
 <thead><tr><th>State</th><th>Fill</th><th>Foreground</th><th>Glyph / content</th></tr></thead>
 <tbody>
-<tr><td>complete</td><td class="token-cell">--la-color-primary</td><td class="token-cell">--la-color-primary-fg</td><td><code>ph-bold ph-check</code></td></tr>
+<tr><td>complete</td><td class="token-cell">--la-color-resolved</td><td class="token-cell">--la-color-text-invert</td><td><code>ph-bold ph-check</code></td></tr>
 <tr><td>active</td><td class="token-cell">--la-color-primary</td><td class="token-cell">--la-color-primary-fg</td><td>step number</td></tr>
 <tr><td>pending</td><td class="token-cell">--la-color-bg-muted</td><td class="token-cell">--la-color-text-muted</td><td>step number</td></tr>
 <tr><td>gated</td><td class="token-cell">--la-color-bg-muted</td><td class="token-cell">--la-color-text-faint</td><td><code>ph-fill ph-lock-simple</code></td></tr>
 <tr><td>attention</td><td class="token-cell">--la-color-surface-danger</td><td class="token-cell">--la-color-danger-text</td><td><code>ph-fill ph-warning</code></td></tr>
-<tr><td>processing</td><td class="token-cell">--la-color-bg-muted</td><td>—</td><td><code>la-spinner</code> size <code>sm</code></td></tr>
+<tr><td>processing (after launch)</td><td class="token-cell">--la-color-bg-muted</td><td>—</td><td><code>la-spinner</code> size <code>sm</code></td></tr>
+<tr><td>passed</td><td>none; a 1.5px dashed <span class="token-cell">--la-color-text-faint</span> ring</td><td class="token-cell">--la-color-text-muted</td><td><code>ph-bold ph-arrow-bend-down-right</code></td></tr>
 </tbody>
 </table>
 </section>
@@ -243,24 +232,26 @@
 <!-- CHECKLIST REGISTER ────────────────────────────────── -->
 <section class="docs-section" id="checklist">
 <h2>Checklist register</h2>
-<p>Check-circle icon, ~20px. <strong>Green (<code>--la-color-resolved</code>) is reserved for completion only</strong> — never for active or pending.</p>
+<p>Check-circle icon, 20px. <strong>Green (<code>--la-color-resolved</code>) for complete only</strong>, never for active or pending.</p>
 <div class="demo-row">
-<div class="demo-item"><span class="chk-mark c-done"><i class="ph-fill ph-check-circle"></i></span><span class="cap">done</span></div>
-<div class="demo-item"><span class="chk-mark c-active"><i class="ph-fill ph-circle"></i></span><span class="cap">active</span></div>
-<div class="demo-item"><span class="chk-mark c-todo"><i class="ph ph-check-circle"></i></span><span class="cap">todo</span></div>
-<div class="demo-item"><span class="chk-mark c-gated"><i class="ph ph-lock-simple"></i></span><span class="cap">gated</span></div>
-<div class="demo-item"><span class="chk-mark c-attention"><i class="ph-fill ph-warning-circle"></i></span><span class="cap">attention</span></div>
-<div class="demo-item"><la-spinner size="sm"></la-spinner><span class="cap">processing</span></div>
+<div class="demo-item"><la-step-marker variant="check" status="complete"></la-step-marker><span class="cap">complete</span></div>
+<div class="demo-item"><la-step-marker variant="check" status="active"></la-step-marker><span class="cap">active</span></div>
+<div class="demo-item"><la-step-marker variant="check" status="pending"></la-step-marker><span class="cap">pending</span></div>
+<div class="demo-item"><la-step-marker variant="check" status="gated"></la-step-marker><span class="cap">gated</span></div>
+<div class="demo-item"><la-step-marker variant="check" status="attention"></la-step-marker><span class="cap">attention</span></div>
+<div class="demo-item"><la-step-marker variant="check" status="processing"></la-step-marker><span class="cap">processing</span></div>
+<div class="demo-item"><la-step-marker variant="check" status="passed"></la-step-marker><span class="cap">passed</span></div>
 </div>
 <table class="docs-table">
 <thead><tr><th>State</th><th>Icon</th><th>Colour</th></tr></thead>
 <tbody>
-<tr><td>done</td><td><code>ph-fill ph-check-circle</code></td><td class="token-cell">--la-color-resolved</td></tr>
+<tr><td>complete</td><td><code>ph-fill ph-check-circle</code></td><td class="token-cell">--la-color-resolved</td></tr>
 <tr><td>active</td><td><code>ph-fill ph-circle</code></td><td class="token-cell">--la-color-primary</td></tr>
-<tr><td>todo</td><td><code>ph ph-check-circle</code></td><td class="token-cell">--la-color-text-faint</td></tr>
+<tr><td>pending</td><td><code>ph ph-check-circle</code></td><td class="token-cell">--la-color-text-faint</td></tr>
 <tr><td>gated</td><td><code>ph ph-lock-simple</code></td><td class="token-cell">--la-color-text-faint</td></tr>
 <tr><td>attention</td><td><code>ph-fill ph-warning-circle</code></td><td class="token-cell">--la-color-danger-text</td></tr>
-<tr><td>processing</td><td><code>la-spinner</code> size <code>sm</code></td><td>—</td></tr>
+<tr><td>processing (after launch)</td><td><code>la-spinner</code> size <code>sm</code></td><td>—</td></tr>
+<tr><td>passed</td><td><code>ph-bold ph-arrow-bend-down-right</code> in a dashed ring</td><td class="token-cell">--la-color-text-muted</td></tr>
 </tbody>
 </table>
 </section>
@@ -268,7 +259,7 @@
 <!-- RADIAL ────────────────────────────────────────────── -->
 <section class="docs-section" id="radial">
 <h2>Radial — la-step-ring</h2>
-<p>The ring is a <em>sequence</em> progress overview, so it follows the sequence semantics through segment fills: <code>complete</code> → primary, <code>active</code> → primary at 0.5 opacity, <code>pending</code> → muted. Per-segment <code>gated</code> / <code>attention</code> are <strong>not</strong> shown in the ring — it shows progress, not per-step exceptions; surface those in the accompanying list.</p>
+<p>The ring is a <em>sequence</em> progress overview, so it follows the sequence register through its segment fills: <code>complete</code> → green (<code>--la-color-resolved</code>, since 9 Oct 2026), <code>active</code> → primary at 0.5 opacity, <code>pending</code> → muted. Per-segment <code>gated</code> / <code>attention</code> are <strong>not</strong> shown in the ring: it shows progress, not per-step exceptions, so surface those in the list beside it. <code>la-stepper</code>, the linear bar, stays primary: green is only for a circular marker with a check.</p>
 <div class="demo-row">
 <div class="demo-item"><la-step-ring done="3" total="6" label="3 of 6" sublabel="Done" style="--la-step-ring-size:120px"></la-step-ring><span class="cap">checklist progress</span></div>
 <div class="demo-item"><la-step-ring done="1" total="7" label="2" style="--la-step-ring-size:64px;--la-step-ring-label-size:18px"></la-step-ring><span class="cap">phase position</span></div>
@@ -278,25 +269,26 @@
 <!-- PAIRED BADGE ───────────────────────────────────────── -->
 <section class="docs-section" id="badge">
 <h2>Paired text badge</h2>
-<p>When a row also carries an <code>la-badge</code> (e.g. the phase plan), the variant matches the state so the marker and the badge never contradict.</p>
+<p>When a row also carries an <code>la-badge</code> (e.g. the phase plan), the variant matches the state so the marker and the badge never contradict. The words are GOV.UK’s <a href="https://design-system.service.gov.uk/patterns/complete-multiple-tasks/">task statuses</a> where it has one; <code>la-step-marker</code> names itself with the same words (“Step 3: Completed”). Processing and Moved past are ours.</p>
 <div class="demo-row">
-<div class="demo-item"><la-badge variant="success" appearance="ghost">Complete</la-badge><span class="cap">complete</span></div>
+<div class="demo-item"><la-badge variant="success" appearance="ghost">Completed</la-badge><span class="cap">complete</span></div>
 <div class="demo-item"><la-badge variant="warning" appearance="ghost">In progress</la-badge><span class="cap">active</span></div>
-<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Not started</la-badge><span class="cap">pending</span></div>
-<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Gated</la-badge><span class="cap">gated</span></div>
-<div class="demo-item"><la-badge variant="danger" appearance="ghost">Overdue</la-badge><span class="cap">attention</span></div>
+<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Not yet started</la-badge><span class="cap">pending</span></div>
+<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Cannot start yet</la-badge><span class="cap">gated</span></div>
+<div class="demo-item"><la-badge variant="danger" appearance="ghost">There is a problem</la-badge><span class="cap">attention</span></div>
+<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Processing</la-badge><span class="cap">processing</span></div>
+<div class="demo-item"><la-badge variant="neutral" appearance="ghost">Moved past</la-badge><span class="cap">passed</span></div>
 </div>
 </section>
 
-<!-- FUTURE ─────────────────────────────────────────────── -->
+<!-- THE COMPONENT ──────────────────────────────────────── -->
 <section class="docs-section" id="future">
-<h2>Future home</h2>
+<h2>The component</h2>
 <p>
-            These markers currently live as page-scoped CSS (<code>.phase-row .pn</code>,
-            <code>.ov-substep</code>) plus shared classes. When a second non-RIF consumer appears, promote
-            them to a <code>la-step-marker</code> primitive (<code>variant="sequence | check"</code>,
-            <code>status</code>, <code>index</code>) so the mapping is enforced in one place rather than
-            re-declared per surface. Until then, this page is the contract — match it exactly.
+            The markers were page-scoped CSS until a second consumer appeared outside the RIF overview. Since
+            2 Oct 2026 they are one component, <a href="../components/la-step-marker.html"><code>la-step-marker</code></a>
+            (<code>variant="sequence | check"</code>, <code>status</code>, <code>index</code>), so the mapping is held
+            in one place. New surfaces use it rather than re-declaring the tables above.
           </p>
 </section>
 
