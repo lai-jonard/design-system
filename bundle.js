@@ -324,6 +324,10 @@
     --la-step-marker-passed-glyph-size: 11px;
     --la-step-marker-ring:              1.5px;
 
+    /* ── Progress bar ───────────────────────────────── */
+    --la-progress-height:    4px; /* la-progress default: beside a label in a row */
+    --la-progress-height-lg: 6px; /* la-progress lg: heading its own panel */
+
     /* ── Disclosure ───────────────────────────────────── */
     --la-disclosure-quiet-target:       32px;
     --la-disclosure-quiet-target-touch: 44px;
@@ -2566,7 +2570,7 @@
    * la-step-ring — a radial discrete-step progress indicator.
    *
    * The circular cousin of `la-stepper` (linear) and `la-spinner` (indeterminate):
-   * a donut split into one rounded segment per step, green for completed steps,
+   * a donut split into one rounded segment per step, ink for completed steps,
    * half-toned for the current step, and muted for what's still ahead. Use for
    * secondary multi-step flows where a compact at-a-glance progress read is wanted
    * (phase plans, sub-step checklists, card-level progress).
@@ -2680,9 +2684,10 @@
       }
 
       .seg-done {
-        /* Done is green, as la-step-marker's complete is (decision 104,
-           amended 9 Oct 2026); the current step stays primary. */
-        fill: var(--la-step-ring-done, var(--la-color-resolved));
+        /* Done is ink, as la-progress's fill is: green marks done only on a
+           circular marker with a check (Jonard, 12 Oct 2026). The current
+           step stays primary. */
+        fill: var(--la-step-ring-done, var(--la-color-text-secondary));
       }
       .seg-now {
         fill: var(--la-step-ring-now, var(--la-color-primary));
@@ -5176,10 +5181,15 @@
    * §2.8). Continuous, not segmented: a sequence of named steps is la-stepper,
    * a radial overview is la-step-ring, and an unknown wait is la-spinner.
    *
-   * Monochrome, like the sequence register of the status standard (decision
-   * 104): an ink fill on a muted track, never green and never primary. The fill
-   * is the same at 100% as at 40%; a run that is complete, blocked or overdue
-   * says so in the text or badge beside the bar (rule/state-said-once).
+   * Neutral by default: an ink fill on a muted track, the same at 100% as at
+   * 40%, never primary. `variant` colours the fill for how an operation ended or
+   * stands, as Astryx's ProgressBar does: success when it finished, warning when
+   * it needs a look, danger when it failed. The page sets it, always with words
+   * beside the bar that say the same; the value never sets it, so a bar doesn't
+   * turn green at 100% on its own. A bar that sums up steps shown on the same
+   * screen stays neutral: green marks done on their check markers (Jonard,
+   * 12 Oct 2026). Warning fills with the dark amber, as the base amber is under
+   * 3:1 against the track.
    *
    * The bar is sized by its container: block-level and full width. In a row
    * beside a label, give the host a width (`width: 96px; flex: none`).
@@ -5200,12 +5210,14 @@
    *   <la-progress value="2" max="10" label="Plan progress"
    *                value-text="2 of 10 steps" size="lg"></la-progress>
    *   <la-progress value="2" max="10" label="" style="width: 96px"></la-progress>
+   *   <la-progress value="100" variant="success" label="Uploading your articles"></la-progress>
    *
    * @prop value      - how far it has got, from 0 to max; clamped, and 0 when not a number
    * @prop max        - the whole (default 100); a step count when the value is steps; 100 when not above 0
    * @prop label      - accessible name (default "Progress"); "" makes the bar decorative
-   * @prop value-text - the value in words for assistive tech, such as "2 of 10 steps"
-   * @prop size       - default (4px, beside a label in a row) · lg (6px, heading its own panel)
+   * @prop valueText  - the value in words for assistive tech, such as "2 of 10 steps" (attribute value-text)
+   * @prop size       - default (4px, beside a label in a row) · lg (6px, heading its own panel); --la-progress-height(-lg)
+   * @prop variant    - neutral (default) · success · warning · danger; set by the page, never by the value
    */
   exports.LaProgress = class LaProgress extends i$2 {
       constructor() {
@@ -5217,6 +5229,8 @@
           /** Accessible name. "" makes the bar decorative. */
           this.label = 'Progress';
           this.size = 'default';
+          /** How an operation ended or stands. Set by the page with words beside the bar, never by the value. */
+          this.variant = 'neutral';
       }
       get _max() {
           return this.max > 0 ? this.max : 100;
@@ -5264,7 +5278,7 @@
 
       .track {
         position: relative;
-        height: var(--_height, 4px);
+        height: var(--_height, var(--la-progress-height));
         border-radius: var(--la-radius-pill);
         background-color: var(--la-color-bg-muted);
         overflow: hidden;
@@ -5272,7 +5286,7 @@
         transform: translateZ(0);
       }
       :host([size='lg']) .track {
-        --_height: 6px;
+        --_height: var(--la-progress-height-lg);
       }
 
       /* A full-width pill slid in from the left, so its leading edge stays
@@ -5284,6 +5298,16 @@
         border-radius: inherit;
         background-color: var(--la-color-text-secondary);
         transition: transform var(--dur-base) var(--ease-out);
+      }
+      :host([variant='success']) .fill {
+        background-color: var(--la-color-success);
+      }
+      /* The base amber is 1.97:1 against the track; the dark one is 4.6:1. */
+      :host([variant='warning']) .fill {
+        background-color: var(--la-color-warning-text);
+      }
+      :host([variant='danger']) .fill {
+        background-color: var(--la-color-danger);
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -5321,6 +5345,9 @@
   __decorate$1r([
       n({ reflect: true })
   ], exports.LaProgress.prototype, "size", void 0);
+  __decorate$1r([
+      n({ reflect: true })
+  ], exports.LaProgress.prototype, "variant", void 0);
   exports.LaProgress = __decorate$1r([
       t$1('la-progress')
   ], exports.LaProgress);

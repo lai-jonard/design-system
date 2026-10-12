@@ -661,9 +661,9 @@ the Title Case structural register.</p>
 <hr>
 <h3 id="la-step-ring"><code>la-step-ring</code></h3>
 <p><strong>Problem:</strong> secondary multi-step flows (phase plans, sub-step checklists, card-level progress) need a compact at-a-glance progress read, and the segmented donut was being hand-rolled in prototype JS in two places (the RIF overview focal ring + the project-card phase rings) — duplicated geometry, drifting styling. One component owns it.</p>
-<p>The radial cousin of <a href="#la-stepper"><code>la-stepper</code></a> (linear) and <a href="#la-spinner"><code>la-spinner</code></a> (indeterminate): a donut split into one rounded-corner segment per step — green for completed steps, half-toned primary for the current step, muted for what's still ahead.</p>
+<p>The radial cousin of <a href="#la-stepper"><code>la-stepper</code></a> (linear) and <a href="#la-spinner"><code>la-spinner</code></a> (indeterminate): a donut split into one rounded-corner segment per step — ink for completed steps, half-toned primary for the current step, muted for what's still ahead.</p>
 <p><strong>Props:</strong> <code>total</code> (number, default 1), <code>done</code> (number, default 0), <code>current</code> (boolean, default true — renders the step after <code>done</code> as in-progress), <code>thickness</code> (viewBox units, default 6), <code>gap</code> (degrees between segments, default 4), <code>corner</code> (corner radius in viewBox units, default 1.4 — subtle, not a full pill), <code>label</code> (centre text, e.g. &quot;3 of 6&quot; or a phase number), <code>sublabel</code> (line under the label, e.g. &quot;Done&quot;).</p>
-<p>Follows the <em>sequence register</em> of the status standard (<code>status-conventions.md</code>) via segment fills: done = green (<code>--la-color-resolved</code>, since 9 Oct 2026, decision 104 amended), current = primary at 0.5, pending = muted.</p>
+<p>Follows the <em>sequence register</em> of the status standard (<code>status-conventions.md</code>) via segment fills: done = ink (<code>--la-color-text-secondary</code>, as <code>la-progress</code>'s fill; green from 9 to 12 Oct 2026, when decision 104 was amended to keep green to a circular marker with a check), current = primary at 0.5, pending = muted. No outside system documents a segmented ring (12 Oct 2026 research), so show its count beside or inside it.</p>
 <p><strong>Geometry</strong> lives in a fixed 52×52 viewBox so the shape is identical at any rendered size — size via <code>--la-step-ring-size</code> (default 120px) or the host's width/height. <strong>Centre content</strong> uses <code>label</code>/<code>sublabel</code>, or slot arbitrary markup (the default slot wins when filled). <strong>Tuning CSS vars:</strong> <code>--la-step-ring-size</code>, <code>--la-step-ring-done</code> / <code>-now</code> / <code>-future</code> (colours), <code>--la-step-ring-now-opacity</code>, <code>--la-step-ring-label-size</code>, <code>--la-step-ring-sublabel-size</code>. Display-only — no events. Crisp filled sectors (no blur filter); respects <code>prefers-reduced-motion</code> trivially as it has no motion.</p>
 <hr>
 <h3 id="la-step-marker"><code>la-step-marker</code></h3>
@@ -684,36 +684,67 @@ the Title Case structural register.</p>
 <hr>
 <h3 id="la-progress"><code>la-progress</code></h3>
 <p><strong>Problem:</strong> Orion's Phase B screens draw a determinate bar by hand in two places, at two heights, in two colours and with two motions, for one idea: how far a playbook run has got. The playbook modal's In progress rows draw a 96 by 4px ink bar that scales; the run's plan overview draws a 6px green bar that animates its width. <code>la-sidebar</code>'s setup checklist draws a third, green again. The loading family named this primitive in April (decision 45, <a href="../../docs/loading/"><code>loading.md</code></a> §2.8) and it was never built. One component now holds it.</p>
-<p>A determinate progress bar: one continuous fill for how far a known quantity has got, such as the steps of a run, the items of a batch or the bytes of an upload. Monochrome: a <code>--la-color-text-secondary</code> fill on a <code>--la-color-bg-muted</code> track, both with pill ends.</p>
-<p><strong>Props:</strong> <code>value</code> (number, default 0; clamped to 0 to <code>max</code>, and 0 when not a number), <code>max</code> (number, default 100, so <code>value</code> alone is a percentage; pass the step count when the value is steps; anything not above 0 falls back to 100), <code>label</code> (accessible name, default &quot;Progress&quot;; <code>label=&quot;&quot;</code> makes the bar decorative), <code>value-text</code> (the value in words for assistive tech, such as &quot;2 of 10 steps&quot;; unset, it reads &quot;40%&quot; on the default scale, or &quot;2 of 10&quot; once <code>max</code> is set), <code>size</code> (<code>default</code> · <code>lg</code>). <strong>Slots:</strong> none · <strong>Events:</strong> none · <strong>Parts:</strong> none.</p>
+<p>A determinate progress bar: one continuous fill for how far a known quantity has got, such as the steps of a run, the items of a batch or the bytes of an upload. Neutral by default: a <code>--la-color-text-secondary</code> fill on a <code>--la-color-bg-muted</code> track, both with pill ends. <code>variant</code> colours it for how an operation ended or stands (decision 132).</p>
+<p><strong>Props:</strong> <code>value</code> (number, default 0; clamped to 0 to <code>max</code>, and 0 when not a number), <code>max</code> (number, default 100, so <code>value</code> alone is a percentage; pass the step count when the value is steps; anything not above 0 falls back to 100), <code>label</code> (accessible name, default &quot;Progress&quot;; <code>label=&quot;&quot;</code> makes the bar decorative), <code>value-text</code> (the value in words for assistive tech, such as &quot;2 of 10 steps&quot;; unset, it reads &quot;40%&quot; on the default scale, or &quot;2 of 10&quot; once <code>max</code> is set), <code>size</code> (<code>default</code> · <code>lg</code>), <code>variant</code> (<code>neutral</code> default · <code>success</code> · <code>warning</code> · <code>danger</code>). <strong>Slots:</strong> none · <strong>Events:</strong> none · <strong>Parts:</strong> none.</p>
 <table>
 <thead>
 <tr>
 <th>Size</th>
 <th>Height</th>
-<th>Where Orion draws it today</th>
+<th>Where Orion uses it</th>
 </tr>
 </thead>
 <tbody>
 <tr>
 <td><code>default</code></td>
-<td>4px</td>
+<td><code>--la-progress-height</code>, 4px</td>
 <td>Beside a label in a row: the playbook modal's In progress rows (and <code>la-sidebar</code>'s checklist)</td>
 </tr>
 <tr>
 <td><code>lg</code></td>
-<td>6px</td>
+<td><code>--la-progress-height-lg</code>, 6px</td>
 <td>Heading its own panel: the playbook run's plan overview</td>
 </tr>
 </tbody>
 </table>
+<table>
+<thead>
+<tr>
+<th>Variant</th>
+<th>Fill</th>
+<th>When</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>neutral</code> (default)</td>
+<td><code>--la-color-text-secondary</code></td>
+<td>Progress, and every bar that sums up steps shown on the same screen, at every value</td>
+</tr>
+<tr>
+<td><code>success</code></td>
+<td><code>--la-color-success</code></td>
+<td>An operation with no steps on the screen finished, such as an upload</td>
+</tr>
+<tr>
+<td><code>warning</code></td>
+<td><code>--la-color-warning-text</code></td>
+<td>It needs a look. The dark amber: the base amber is 1.97:1 against the track</td>
+</tr>
+<tr>
+<td><code>danger</code></td>
+<td><code>--la-color-danger</code></td>
+<td>It failed</td>
+</tr>
+</tbody>
+</table>
 <p><strong>Width</strong> is the container's: the host is block-level and full width. In a flex row, give the host a width, as the modal row does (<code>width: 96px; flex: none</code>). A page may size and place the host, never paint it (<code>rule/no-page-classes-on-hosts</code>).</p>
-<p><strong>Colour.</strong> Never green, never primary, and no tone. The fill is the same ink at 100% as at 40%: progress through a sequence is monochrome (<code>status-conventions.md</code>, decision 104), green is kept for a checklist's completion check, and <code>--la-color-primary</code> is for interactive elements (<code>rule/primary-colour-interactive-only</code>). A run that is complete, blocked or overdue says so in the badge or text beside the bar, once (<code>rule/state-said-once</code>): the modal's blocked run keeps its bar, and its meta reads &quot;Blocked · Awaiting HMRC&quot;. A tone prop waits for a use that needs one.</p>
+<p><strong>Colour.</strong> Neutral by default, never primary (<code>rule/primary-colour-interactive-only</code>): the fill is the same ink at 100% as at 40%. <code>variant</code> says how an operation ended or stands, as <a href="https://astryx.atmeta.com/components/ProgressBar">Astryx's ProgressBar</a> does. The page sets it, with words beside the bar that say the same (&quot;Uploaded&quot;, &quot;Upload failed at 40%&quot;); the value never sets it, so a bar doesn't turn green on its own at 100%. A bar that sums up steps shown on the same screen stays neutral at every value: green marks done on their check markers (<code>rule/green-on-a-check</code>; decision 104 amended 12 Oct 2026). A blocked or overdue run says so once, in the badge or text beside the bar (<code>rule/state-said-once</code>): the modal's blocked run keeps its bar, and its meta reads &quot;Blocked · Awaiting HMRC&quot;.</p>
 <p><strong>Accessibility:</strong> <code>role=&quot;progressbar&quot;</code> with <code>aria-valuenow</code>, <code>aria-valuemin</code> (0), <code>aria-valuemax</code> and <code>aria-valuetext</code>, named by <code>label</code>. Pass <code>value-text</code> in the words the page shows (&quot;2 of 10 steps&quot;; <code>loading.md</code> prefers a count to a percentage where the count means something). Where the text beside the bar already says the count, and inside a clickable row (a button flattens what it holds), set <code>label=&quot;&quot;</code>: the bar is then <code>aria-hidden</code>, with no role. In forced-colours mode the track takes an outline and the fill <code>CanvasText</code>, because forced colours drop background colours and would empty the bar.</p>
 <p><strong>Motion:</strong> the fill is a full-width pill slid in with <code>transform: translateX</code> over <code>--dur-base</code> with <code>--ease-out</code>, so its leading end stays round at any value (<code>scaleX</code> would squash it). The first paint draws the value without animating. Under <code>prefers-reduced-motion</code> it jumps.</p>
 <p><strong>Not this:</strong> a sequence of named steps the founder moves through is <a href="#la-stepper"><code>la-stepper</code></a>: segmented, one pill per step, with skipped and processing steps. A compact radial overview of steps is <a href="#la-step-ring"><code>la-step-ring</code></a>: a donut, one segment per step, the current one half-toned. The marker on one step is <a href="#la-step-marker"><code>la-step-marker</code></a>, and a wait of unknown length is <a href="#la-spinner"><code>la-spinner</code></a>. <code>la-bandwidth-bar</code> is a capacity gauge in load colours and <code>la-distribution-bar</code> splits a total across stages; neither says how far something has got. <code>la-progress</code> says how much, not which step.</p>
-<p><strong>Against the April spec</strong> (<code>loading.md</code> §2.8), for review: the fill is <code>--la-color-text-secondary</code> rather than <code>--la-color-primary</code> and the track <code>--la-color-bg-muted</code> rather than <code>--la-color-border-light</code>, as both consumers draw it; <code>max</code> and <code>value-text</code> are added (<code>value</code> alone is still a 0 to 100 percentage); there are no <code>label</code> or <code>description</code> slots, because neither consumer puts a caption above the bar, and <code>label</code> is the accessible name; the fill slides with <code>translateX</code> rather than scaling; and <code>size=&quot;lg&quot;</code> covers the overview's 6px. <code>la-step-ring</code> fills its done segments with primary, so a ring and a bar side by side would not quite agree.</p>
-<p><strong>Consumers:</strong> in <code>new-design</code>: the playbook modal's In progress rows in Orion's <code>05-playbooks.html</code> (<code>.run-progress .progress</code>, built by <code>runRow()</code>), and the plan overview in <code>16-playbook-run.html</code> (<code>.sla-progress</code>), whose fill turns from green to ink when it moves over. Neither has moved onto it yet; they receive it through the sync. Candidates in this repo: <code>la-sidebar</code>'s setup checklist bar (4px, green, <code>scaleX</code>) and <code>la-upload-box</code>, the first consumer the April spec named. Built 2 October 2026. Docs draft: <code>dev/docs-drafts/la-progress.html</code>.</p>
+<p><strong>Against the April spec</strong> (<code>loading.md</code> §2.8): the fill is <code>--la-color-text-secondary</code> rather than <code>--la-color-primary</code> and the track <code>--la-color-bg-muted</code> rather than <code>--la-color-border-light</code>; <code>max</code>, <code>value-text</code> and <code>variant</code> are added (<code>value</code> alone is still a 0 to 100 percentage); there are no <code>label</code> or <code>description</code> slots, because the page writes its own text beside the bar and <code>label</code> is the accessible name; the fill slides with <code>translateX</code> rather than scaling; and <code>size=&quot;lg&quot;</code> covers the overview's 6px.</p>
+<p><strong>Consumers:</strong> <code>la-run-progress</code>, the head of a playbook run. In <code>new-design</code>: the playbook modal's In progress rows in Orion's <code>05-playbooks.html</code> and the plan overview in <code>16-playbook-run.html</code>, both on <code>la-progress</code> since the sync. Still drawn by hand: the UK case plan's 6px green bar and its copies, onboarding's Company DNA bar, and <code>la-sidebar</code>'s setup checklist bar (4px, green, <code>scaleX</code>). <code>la-upload-box</code>, the first consumer the April spec named, would be the first to use a variant. Built 2 October 2026; v1 ready 12 October 2026. Docs: <a href="../../components/la-progress.html"><code>docs-src/components/la-progress.html</code></a>.</p>
 <hr>
 <h3 id="la-spinner"><code>la-spinner</code></h3>
 <p>Indeterminate loading indicator — a small spinning ring used inside buttons, rows, and async-operation surfaces to communicate that work is in progress. Distinct from <code>la-stepper</code> (linear flows with discrete steps) and <a href="#la-progress"><code>la-progress</code></a> (determinate, known-quantity tasks). Slot 1 of the loading-states family — see <a href="../../docs/loading/"><code>design-language/loading.md</code></a> for the family roadmap.</p>

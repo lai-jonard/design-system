@@ -389,7 +389,7 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <h3 id="28-determinate-progress--la-progress">2.8 Determinate progress — <code>la-progress</code></h3>
 <p><strong>What:</strong> A horizontal bar that fills 0 → 100% as a known-quantity task progresses. File bytes uploaded, items processed in a batch, export percentage.</p>
 <p><strong>When:</strong> File upload (bytes known), bulk action (&quot;Resolving 12 of 47 insights&quot;), export (&quot;Generating PDF — 64%&quot;).</p>
-<p><strong>Component status:</strong> <strong>Built 2 October 2026</strong>, from the Phase B playbook uses: <code>la-progress</code>, in the bundle, docs draft only, 🟡 until reviewed (<a href="../../docs/components/#la-progress"><code>components.md</code></a>). The locked spec below is kept as the record; where the build departs from it is listed under it. Distinct from <code>la-stepper</code> (segmented/discrete) by name and shape.</p>
+<p><strong>Component status:</strong> <strong>Built 2 October 2026</strong>, from the Phase B playbook uses; <strong>v1 ready 12 October 2026</strong>: <code>la-progress</code>, docs at <a href="../../components/la-progress.html"><code>docs-src/components/la-progress.html</code></a> (<a href="../../docs/components/#la-progress"><code>components.md</code></a>). The locked spec below is kept as the record; where the build departs from it is listed under it. Distinct from <code>la-stepper</code> (segmented/discrete) by name and shape.</p>
 <p><strong>Locked spec (build-ready):</strong></p>
 <ul>
 <li><strong>Tag:</strong> <code>la-progress</code></li>
@@ -401,13 +401,14 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <li><strong>Out of scope (separate decision if ever needed):</strong> striped/animated fill while running, indeterminate mode.</li>
 </ul>
 <p><strong>First consumer:</strong> <code>la-upload-box</code> — currently shows only a spinner during upload but knows bytes; can show determinate.</p>
-<p><strong>As built (2 October 2026), for review.</strong> Built from the two bars Orion's Phase B screens draw by hand in <code>new-design</code> (the playbook modal's In progress rows in <code>05-playbooks.html</code>, the plan overview in <code>16-playbook-run.html</code>), it departs from the locked spec in five places:</p>
+<p><strong>As built (2 October 2026; v1 ready 12 October 2026).</strong> Built from the two bars Orion's Phase B screens drew by hand in <code>new-design</code> (the playbook modal's In progress rows in <code>05-playbooks.html</code>, the plan overview in <code>16-playbook-run.html</code>), it departs from the locked spec in six places:</p>
 <ul>
-<li><strong>Fill</strong> <code>--la-color-text-secondary</code>, not <code>--la-color-primary</code>, and <strong>track</strong> <code>--la-color-bg-muted</code>, not <code>--la-color-border-light</code>: the colours the playbooks page draws, and primary is for interactive elements (<code>rule/primary-colour-interactive-only</code>). Never green, even at 100% (decision 104's sequence register).</li>
+<li><strong>Fill</strong> <code>--la-color-text-secondary</code>, not <code>--la-color-primary</code>, and <strong>track</strong> <code>--la-color-bg-muted</code>, not <code>--la-color-border-light</code>: the colours the playbooks page draws, and primary is for interactive elements (<code>rule/primary-colour-interactive-only</code>). The same at every value; never green on its own at 100%.</li>
 <li><strong><code>max</code></strong> (default 100) and <strong><code>value-text</code></strong> added, so a step count is passed as it is (&quot;2 of 10 steps&quot;) rather than turned into a percentage. <code>value</code> alone is still 0 to 100.</li>
 <li><strong>No <code>label</code> or <code>description</code> slot.</strong> Neither consumer puts a caption above the bar; the page writes its own text beside it, and <code>label</code> is the accessible name. <code>label=&quot;&quot;</code> makes the bar decorative where that text already says the count.</li>
 <li><strong>Motion</strong> slides a full-width pill with <code>translateX</code> rather than <code>scaleX</code>, which keeps the pill end round; same 200ms (<code>--dur-base</code>) <code>--ease-out</code>.</li>
-<li><strong><code>size=&quot;lg&quot;</code></strong> (6px) for a bar that heads its own panel, as the plan overview does; the default stays 4px.</li>
+<li><strong><code>size=&quot;lg&quot;</code></strong> (6px) for a bar that heads its own panel, as the plan overview does; the default stays 4px. Both on <code>--la-progress-height</code> tokens.</li>
+<li><strong><code>variant</code></strong> (12 October 2026, decision 132): <code>neutral</code> (default) · <code>success</code> · <code>warning</code> · <code>danger</code>, set by the page with words beside the bar for how an operation ended or stands. A bar summing up steps shown on the same screen stays neutral.</li>
 </ul>
 <p><code>la-upload-box</code> is still a candidate consumer.</p>
 <p><strong>Note on naming:</strong> the prior file <code>la-progress-bar.ts</code> was renamed to <code>la-stepper.ts</code> precisely because the segmented behaviour was a stepper, not a progress bar. The name <code>la-progress</code> is now used for this determinate primitive.</p>
@@ -595,7 +596,7 @@ Is this an AI generation?
 </ul>
 <p><strong>Motion (motion.css rules apply):</strong></p>
 <ul>
-<li>GPU-safe only — <code>transform</code> and <code>opacity</code>. Never <code>width</code> for skeleton fill or progress fill (use <code>transform: scaleX(…)</code>).</li>
+<li>GPU-safe only — <code>transform</code> and <code>opacity</code>. Never <code>width</code> for skeleton fill or progress fill (use <code>transform</code>: <code>scaleX(…)</code> for a skeleton, <code>translateX(…)</code> for <code>la-progress</code>, which keeps its pill end round).</li>
 <li><strong>Shared utilities live in <code>motion.css</code>:</strong>
 <ul>
 <li><code>.t-shimmer</code> — skeleton shimmer (also reusable by <code>la-thinking</code> if shimmer-on-response-area is the chosen pattern)</li>
@@ -653,7 +654,7 @@ Is this an AI generation?
 <td>4</td>
 <td>Determinate progress</td>
 <td><code>la-progress</code></td>
-<td>🟢 Built 2 October 2026; readiness 🟡 until reviewed, departures from the spec in §2.8</td>
+<td>🟢 Built 2 October 2026; v1 ready 12 October 2026, departures from the spec in §2.8</td>
 </tr>
 <tr>
 <td>—</td>

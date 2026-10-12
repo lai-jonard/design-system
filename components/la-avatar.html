@@ -456,65 +456,6 @@
         </tr>
       
         <tr>
-          <td>FILL_COUNT</td>
-          <td>—</td>
-          <td><span class="type">number</span></td>
-          <td><span class="default">88</span></td>
-          <td>Number of numbered fills available (01–88) in the People Avatar Fill set.</td>
-        </tr>
-      
-        <tr>
-          <td>GENDERS</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td><span class="default">&#39;wwwmmmmmmmwmmwmmwwwmmwwmwwmwmmwwmmwwmwmmmmwwwwmmwmmmwwwmwwwmmmmwwwmwmmwmwmwmmwwmmmmmmwmm&#39;</span></td>
-          <td>Presented gender of each fill, indexed 1–88 (`GENDERS[n-1]`). The fill set
-encodes this in the filename suffix — `NNw.png` (woman) / `NNm.png` (man) —
-so a persona's avatar can match their inferred gender (e.g. "Maya
-Lindqvist" → a `w` fill). Generated from `assets/Avatar/People Avatar Fill/`.</td>
-        </tr>
-      
-        <tr>
-          <td>_genderCode</td>
-          <td>—</td>
-          <td><span class="type">&#39;w&#39; | &#39;m&#39; | &#39;&#39;</span></td>
-          <td>—</td>
-          <td>Normalise the `gender` prop to the 'w' | 'm' filename code, or '' for any.</td>
-        </tr>
-      
-        <tr>
-          <td>_imgFailed</td>
-          <td>—</td>
-          <td><span class="type">boolean</span></td>
-          <td><span class="default">false</span></td>
-          <td>Flips to true if the resolved image fails to load, so we fall back to initials.</td>
-        </tr>
-      
-        <tr>
-          <td>_imgLoaded</td>
-          <td>—</td>
-          <td><span class="type">boolean</span></td>
-          <td><span class="default">false</span></td>
-          <td>Flips to true once the image has loaded, to fade it in.</td>
-        </tr>
-      
-        <tr>
-          <td>_displayInitials</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_imageSrc</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td>—</td>
-          <td>The image URL to render, or '' for initials-only.</td>
-        </tr>
-      
-        <tr>
           <td>text-only</td>
           <td>—</td>
           <td>—</td>

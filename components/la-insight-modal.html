@@ -962,14 +962,6 @@ An insight with nothing else to offer keeps it; the host decides.</td>
         </tr>
       
         <tr>
-          <td>_resolutionsInFooter</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
           <td>chosenResolution</td>
           <td><span class="default">chosen-resolution</span></td>
           <td><span class="type">string | undefined</span></td>
@@ -1075,124 +1067,6 @@ Leave unset for the plain one-click "Mark Resolved".</td>
           <td>A closed insight, opened to be read (PRO-128, 2 Sep 2026): the same detail
 view minus the actions — no upload zone, no Mark as Done, a Close button in
 the footer. The item is closed, so there is nothing to do to it.</td>
-        </tr>
-      
-        <tr>
-          <td>_resolving</td>
-          <td>—</td>
-          <td><span class="type">boolean</span></td>
-          <td><span class="default">false</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_activeTab</td>
-          <td>—</td>
-          <td><span class="type">number</span></td>
-          <td><span class="default">0</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_resolvedTabs</td>
-          <td>—</td>
-          <td><span class="type">Set&lt;string&gt;</span></td>
-          <td><span class="default">new Set()</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_resolvingSubItemId</td>
-          <td>—</td>
-          <td><span class="type">string | null</span></td>
-          <td><span class="default">null</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_page</td>
-          <td>—</td>
-          <td><span class="type">&#39;insight&#39; | &#39;reason&#39; | &#39;done&#39;</span></td>
-          <td><span class="default">&#39;insight&#39;</span></td>
-          <td>Which page of the modal is showing. The reason flow is a page of its own
-rather than a footer that grows (13 Aug 2026): asking "how did you deal with
-this?" underneath the thing being closed left both competing for the same
-screen, and on a tall insight the question opened below the fold.
-
-  insight → reason → done</td>
-        </tr>
-      
-        <tr>
-          <td>_pageBack</td>
-          <td>—</td>
-          <td><span class="type">boolean</span></td>
-          <td><span class="default">false</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_reasonId</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td><span class="default">&#39;&#39;</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_reasonNote</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td><span class="default">&#39;&#39;</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_doneReason</td>
-          <td>—</td>
-          <td><span class="type">{id: string; label: string} | undefined</span></td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_doneNote</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td><span class="default">&#39;&#39;</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_relatedExpanded</td>
-          <td>—</td>
-          <td><span class="type">boolean</span></td>
-          <td><span class="default">false</span></td>
-          <td>The everything-open list: five rows by default, the rest on demand (PRO-115).</td>
-        </tr>
-      
-        <tr>
-          <td>_openIssues</td>
-          <td>—</td>
-          <td><span class="type">Record&lt;number, boolean&gt;</span></td>
-          <td><span class="default">{}</span></td>
-          <td>Which issues are open, by index.</td>
-        </tr>
-      
-        <tr>
-          <td>_isGrouped</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_useRail</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td>Rail layout applies only when asked for, not grouped, and there is
-something to put in the rail — otherwise it would render an empty column.</td>
         </tr>
       
     </tbody>

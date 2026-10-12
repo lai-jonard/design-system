@@ -132,7 +132,7 @@
             tasks: the checks, numbers and markers used across every flow and subflow. Read this
             before building any stepper, phase plan, checklist, wizard or progress display, so that
             “done”, “in progress” and “to do” read the same everywhere. Decided in
-            <a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/104-step-status-conventions.md">decision&nbsp;104</a> (amended 9 Oct 2026) and
+            <a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/104-step-status-conventions.md">decision&nbsp;104</a> (amended 9 and 12 Oct 2026) and
             <a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/115-passed-step-status.md">decision&nbsp;115</a>. Every marker on this page is
             <a href="../components/la-step-marker.html"><code>la-step-marker</code></a>.
           </p>
@@ -184,6 +184,12 @@
             <a href="https://carbondesignsystem.com/patterns/status-indicator-pattern/">Carbon’s status indicators</a>;
             <a href="https://design-system.service.gov.uk/components/task-list/">GOV.UK’s task list</a> leaves
             “Completed” uncoloured, and Material’s and Carbon’s steppers use the primary colour.
+          </p>
+<p class="reg-note">
+            <strong>Amended 12 Oct 2026.</strong> Green marks done only on a circular marker with a check,
+            where the steps are shown. A shape without a check doesn’t take green for done, so
+            <code>la-step-ring</code>’s segments are ink, and a bar summing up steps shown on the same screen stays
+            neutral at every value (<a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/132-a-progress-bar-variant.md">decision&nbsp;132</a>).
           </p>
 </section>
 
@@ -259,7 +265,7 @@
 <!-- RADIAL ────────────────────────────────────────────── -->
 <section class="docs-section" id="radial">
 <h2>Radial — la-step-ring</h2>
-<p>The ring is a <em>sequence</em> progress overview, so it follows the sequence register through its segment fills: <code>complete</code> → green (<code>--la-color-resolved</code>, since 9 Oct 2026), <code>active</code> → primary at 0.5 opacity, <code>pending</code> → muted. Per-segment <code>gated</code> / <code>attention</code> are <strong>not</strong> shown in the ring: it shows progress, not per-step exceptions, so surface those in the list beside it. <code>la-stepper</code>, the linear bar, stays primary: green is only for a circular marker with a check.</p>
+<p>The ring is a <em>sequence</em> progress overview, so it follows the sequence register through its segment fills: <code>complete</code> → ink (<code>--la-color-text-secondary</code>; green from 9 to 12 Oct 2026, when green was kept to markers with a check), <code>active</code> → primary at 0.5 opacity, <code>pending</code> → muted. Per-segment <code>gated</code> / <code>attention</code> are <strong>not</strong> shown in the ring: it shows progress, not per-step exceptions, so surface those in the list beside it. <code>la-stepper</code>, the linear bar, stays primary: green is only for a circular marker with a check.</p>
 <div class="demo-row">
 <div class="demo-item"><la-step-ring done="3" total="6" label="3 of 6" sublabel="Done" style="--la-step-ring-size:120px"></la-step-ring><span class="cap">checklist progress</span></div>
 <div class="demo-item"><la-step-ring done="1" total="7" label="2" style="--la-step-ring-size:64px;--la-step-ring-label-size:18px"></la-step-ring><span class="cap">phase position</span></div>

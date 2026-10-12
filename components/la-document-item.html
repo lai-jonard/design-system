@@ -518,69 +518,6 @@ raw extension (docx, csv, jpg…). Empty/"auto" derives it from `name`.</td>
 mirroring the ready/urgent/failed badges. Orthogonal to `status`.</td>
         </tr>
       
-        <tr>
-          <td>_iconFailed</td>
-          <td>—</td>
-          <td><span class="type">boolean</span></td>
-          <td><span class="default">false</span></td>
-          <td>Flips to true if the file-type icon fails to load — falls back to the glyph.</td>
-        </tr>
-      
-        <tr>
-          <td>EXT_MAP</td>
-          <td>—</td>
-          <td><span class="type">Record&lt;string, string&gt;</span></td>
-          <td><span class="default">{
-    pdf: &#39;pdf&#39;,
-    doc: &#39;word&#39;, docx: &#39;word&#39;,
-    txt: &#39;text&#39;, text: &#39;text&#39;, md: &#39;text&#39;, rtf: &#39;text&#39;,
-    xls: &#39;xlsx&#39;, xlsx: &#39;xlsx&#39;, csv: &#39;xlsx&#39;,
-    ppt: &#39;ppt&#39;, pptx: &#39;ppt&#39;, key: &#39;ppt&#39;,
-    png: &#39;img&#39;, jpg: &#39;img&#39;, jpeg: &#39;img&#39;, gif: &#39;img&#39;, svg: &#39;img&#39;, webp: &#39;img&#39;, heic: &#39;img&#39;,
-    mp4: &#39;video&#39;, mov: &#39;video&#39;, avi: &#39;video&#39;, webm: &#39;video&#39;, mkv: &#39;video&#39;,
-    mp3: &#39;sound&#39;, wav: &#39;sound&#39;, m4a: &#39;sound&#39;, aac: &#39;sound&#39;,
-    zip: &#39;zip&#39;, rar: &#39;zip&#39;, &#39;7z&#39;: &#39;zip&#39;, gz: &#39;zip&#39;, tar: &#39;zip&#39;,
-  }</span></td>
-          <td>Extension → canonical type.</td>
-        </tr>
-      
-        <tr>
-          <td>FILE_MAP</td>
-          <td>—</td>
-          <td><span class="type">Record&lt;string, string&gt;</span></td>
-          <td><span class="default">{
-    pdf: &#39;file-type.png&#39;, word: &#39;word.png&#39;, text: &#39;text.png&#39;, xlsx: &#39;xlsx.png&#39;,
-    ppt: &#39;ppt.png&#39;, img: &#39;img.png&#39;, video: &#39;video.png&#39;, sound: &#39;sound.png&#39;,
-    zip: &#39;zip.png&#39;, folder: &#39;folder.png&#39;, other: &#39;others.png&#39;,
-  }</span></td>
-          <td>Canonical type → icon filename in the asset set.</td>
-        </tr>
-      
-        <tr>
-          <td>_resolvedType</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td>—</td>
-          <td>Resolve the canonical type from `file-type` or the `name` extension.</td>
-        </tr>
-      
-        <tr>
-          <td>_fileIconSrc</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td>—</td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>_displayName</td>
-          <td>—</td>
-          <td><span class="type">string</span></td>
-          <td>—</td>
-          <td>Display name with any trailing file extension stripped — we don't surface
-extensions in the UI (the type icon already conveys the format).</td>
-        </tr>
-      
     </tbody>
   </table>
 </div>

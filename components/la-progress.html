@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-progress — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .p-pad { padding: var(--la-space-lg); }
+    .p-box { width: 100%; max-width: 560px; }
+    .p-rows { display: flex; flex-direction: column; width: 100%; max-width: 560px; }
+    .p-row { display: grid; grid-template-columns: minmax(0, 160px) minmax(0, 1fr); align-items: center; gap: var(--la-space-lg); padding: var(--la-space-md) 0; border-top: 1px solid var(--la-color-border-light); }
+    .p-row:first-child { border-top: 0; }
+    .p-cap { font-size: var(--la-font-size-md); color: var(--la-color-text); }
+    .p-cap code { display: block; margin-top: var(--la-space-3xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .p-words { display: block; margin-top: var(--la-space-xs); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .p-read { display: block; margin-top: var(--la-space-xs); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); overflow-wrap: anywhere; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    /* ── Controls ─────────────────────────────────────── */
+    .ctl-num { width: calc(var(--la-space-xl) * 3); }
+    .ctl-text { width: calc(var(--la-space-xl) * 9); max-width: 100%; }
+
+    /* ── In context: the playbook modal's In progress rows (Orion 05-playbooks.html) ── */
+    .pbx-label { font-size: var(--la-font-size-md); font-weight: var(--la-font-weight-medium); color: var(--la-color-text-muted); margin: 0 0 var(--la-space-xs); }
+    .pic { width: calc(var(--la-space-xl) + var(--la-space-lg)); height: calc(var(--la-space-xl) + var(--la-space-lg)); border-radius: var(--la-radius-md); background: var(--la-color-bg-muted); color: var(--la-color-text-muted); display: grid; place-items: center; font-size: var(--la-font-size-xl); }
+    .run-progress { display: flex; align-items: center; gap: var(--la-space-md); font-size: var(--la-font-size-md); font-weight: var(--la-font-weight-medium); color: var(--la-color-text); }
+    /* The page sizes the host, never paints it. */
+    .run-progress la-progress { width: calc(var(--la-space-xl) * 4); flex: none; }
+    .run-meta { display: inline-flex; align-items: center; gap: var(--la-space-sm); }
+    .run-meta i { color: var(--la-color-text-faint); font-size: var(--la-font-size-md); }
+
+    /* ── In context: the run's plan overview (Orion 16-playbook-run.html) ── */
+    .sla-panel { width: 100%; max-width: 360px; box-sizing: border-box; padding: var(--la-space-md); border-radius: var(--la-radius-lg); background: var(--la-color-bg); box-shadow: var(--la-shadow-lg); }
+    .sla-head { display: flex; align-items: center; justify-content: space-between; gap: var(--la-space-sm); margin-bottom: var(--la-space-md); }
+    .sla-title { font-size: var(--la-font-size-base); font-weight: var(--la-font-weight-semibold); }
+    .sla-panel la-progress { margin-bottom: var(--la-space-sm); }
+    .sla-meta { display: flex; justify-content: space-between; font-size: var(--la-font-size-sm); color: var(--la-color-text-secondary); font-variant-numeric: tabular-nums; margin-bottom: var(--la-space-md); }
+    .sla-meta b { color: var(--la-color-text); font-weight: var(--la-font-weight-medium); }
+    .sla-dates { display: flex; flex-wrap: wrap; gap: var(--la-space-md) var(--la-space-xl); }
+    .sla-date { display: flex; flex-direction: column; font-size: var(--la-font-size-sm); }
+    .sla-date span { color: var(--la-color-text-muted); }
+    .sla-date b { font-weight: var(--la-font-weight-medium); }
+
+    /* ── Value changes ────────────────────────────────── */
+    .demo { width: 100%; max-width: 560px; border-radius: var(--la-radius-lg); background: var(--la-color-bg); box-shadow: var(--la-shadow-md); overflow: hidden; }
+    .demo-head { display: flex; flex-direction: column; gap: var(--la-space-sm); padding: var(--la-space-md); border-bottom: 1px solid var(--la-color-border-light); }
+    .demo-head .t { font-size: var(--la-font-size-lg); font-weight: var(--la-font-weight-semibold); }
+    .demo-head .count { font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); font-variant-numeric: tabular-nums; }
+    .line { display: flex; align-items: center; gap: var(--la-space-md); padding: var(--la-space-md); border-bottom: 1px solid var(--la-color-border-light); font-size: var(--la-font-size-lg); }
+    .line:last-child { border-bottom: 0; }
+    .demo-acts { display: flex; gap: var(--la-space-sm); margin-top: var(--la-space-md); }
+
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .usage-gap { margin-top: var(--la-space-lg); }
+    /* The Basis table's first column is prose, not a property name. */
+    #basis .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; width: 28%; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-progress</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-progress</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-progress</h1>
+          <p>A determinate progress bar: one continuous fill for how far a known quantity has got, such as the steps of a run, the items of a batch or the bytes of an upload. Neutral by default: an ink fill on a muted track, both with pill ends. <code>variant</code> colours it for how an operation ended or stands, always with words beside it that say the same; the value never changes the colour. A sequence of named steps is <code>la-stepper</code>, a radial overview is <code>la-step-ring</code>, and a wait of unknown length is <code>la-spinner</code>. <code>la-progress</code> says how much, not which step.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="p-box">
+              <la-progress value="4" max="10" size="lg" label="Plan progress" value-text="4 of 10 steps"></la-progress>
+            </div>
+            <ol class="anatomy-list">
+              <li><strong>Track.</strong> The whole bar: full width of its container, pill ends, the muted colour. It carries the bar’s role, name and value for screen readers.</li>
+              <li><strong>Fill.</strong> How far it has got, from the left: ink, or the colour of its <code>variant</code>. A full-width pill slid in from the left, so its leading end stays round at any value.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header">
+          <h1>Live preview</h1>
+          <p>Each control sets a property on the preview. The line under it is what a screen reader gets, read off the rendered bar.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-value">value</label>
+              <input id="ctl-value" class="ctl-num" type="text" inputmode="numeric" value="4">
+            </div>
+            <div class="control-group">
+              <label for="ctl-max">max</label>
+              <input id="ctl-max" class="ctl-num" type="text" inputmode="numeric" value="10">
+            </div>
+            <div class="control-group">
+              <label>size</label>
+              <div class="btn-group" data-control="size">
+                <button class="btn-toggle active" data-value="default" type="button">default</button>
+                <button class="btn-toggle" data-value="lg" type="button">lg</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>variant</label>
+              <div class="btn-group" data-control="variant">
+                <button class="btn-toggle active" data-value="neutral" type="button">neutral</button>
+                <button class="btn-toggle" data-value="success" type="button">success</button>
+                <button class="btn-toggle" data-value="warning" type="button">warning</button>
+                <button class="btn-toggle" data-value="danger" type="button">danger</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-label">label</label>
+              <input id="ctl-label" class="ctl-text" type="text" value="Plan progress">
+            </div>
+            <div class="control-group">
+              <label for="ctl-text">value-text</label>
+              <input id="ctl-text" class="ctl-text" type="text" value="4 of 10 steps">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame p-pad">
+            <div class="p-box">
+              <la-progress id="live" value="4" max="10" label="Plan progress" value-text="4 of 10 steps"></la-progress>
+            </div>
+          </div>
+          <div class="preview-label event-log" id="live-read" aria-live="polite"></div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-states" class="preview-group">
+          <div class="preview-label">Not started, part way and complete. Complete is the same ink as part way: the value never changes the colour, and a run’s steps say done on their own check markers. Values outside 0 to <code>max</code> are clamped</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Not started<code>value="0" max="10"</code></span><la-progress value="0" max="10" value-text="0 of 10 steps"></la-progress></div>
+              <div class="p-row"><span class="p-cap">Part way<code>value="4" max="10"</code></span><la-progress value="4" max="10" value-text="4 of 10 steps"></la-progress></div>
+              <div class="p-row"><span class="p-cap">Complete<code>value="10" max="10"</code></span><la-progress value="10" max="10" value-text="10 of 10 steps"></la-progress></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-sizes" class="preview-group">
+          <div class="preview-label">Sizes: the default 4px beside a label in a row; <code>lg</code>, 6px, where the bar heads its own panel. The width is the container’s</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Default, 4px<code>size="default"</code></span><la-progress value="40"></la-progress></div>
+              <div class="p-row"><span class="p-cap">Large, 6px<code>size="lg"</code></span><la-progress value="40" size="lg"></la-progress></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-variants" class="preview-group">
+          <div class="preview-label">Variants: how an operation ended or stands, set by the page with words beside the bar that say the same. For an operation whose steps aren’t on the screen, such as an upload. A bar that sums up steps shown with it stays neutral</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Neutral, the default<code>variant="neutral"</code></span><div><la-progress value="64" label="Uploading your articles of association"></la-progress><span class="p-words">Uploading · 64%</span></div></div>
+              <div class="p-row"><span class="p-cap">Finished<code>variant="success"</code></span><div><la-progress value="100" variant="success" label="Uploading your articles of association"></la-progress><span class="p-words">Uploaded</span></div></div>
+              <div class="p-row"><span class="p-cap">Needs a look<code>variant="warning"</code></span><div><la-progress value="7" max="10" variant="warning" label="Reading your documents" value-text="7 of 10 documents read"></la-progress><span class="p-words">7 of 10 read · 2 need a clearer scan</span></div></div>
+              <div class="p-row"><span class="p-cap">Failed<code>variant="danger"</code></span><div><la-progress value="40" variant="danger" label="Uploading your articles of association"></la-progress><span class="p-words">Upload failed at 40%</span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-read" class="preview-group">
+          <div class="preview-label">What a screen reader hears. <code>value-text</code> says the value in the words the page shows; unset, it reads a percentage on the default 0 to 100 scale, or “N of M” once <code>max</code> is set. <code>label=""</code> makes the bar decorative where the text beside it already says the count. Each line is read off the rendered bar</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows" id="aria-rows">
+              <div class="p-row"><span class="p-cap">Steps, in words<code>value-text="2 of 10 steps"</code></span><div><la-progress value="2" max="10" label="Plan progress" value-text="2 of 10 steps" size="lg"></la-progress><span class="p-read"></span></div></div>
+              <div class="p-row"><span class="p-cap">A percentage<code>value="64"</code></span><div><la-progress value="64" label="Uploading your articles of association"></la-progress><span class="p-read"></span></div></div>
+              <div class="p-row"><span class="p-cap">A count, no words<code>value="3" max="7"</code></span><div><la-progress value="3" max="7"></la-progress><span class="p-read"></span></div></div>
+              <div class="p-row"><span class="p-cap">Decorative<code>label=""</code></span><div><la-progress value="5" max="7" label=""></la-progress><span class="p-read"></span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-context" class="preview-group">
+          <div class="preview-label">In context: the playbook modal’s In progress list (Orion’s <code>05-playbooks.html</code> in <code>new-design</code>). The bar is decorative: the row’s own text says the count. A blocked run keeps the same bar; its meta says it’s blocked, and on whom, so the state is said once</div>
+          <div class="preview-frame p-pad">
+            <div class="p-box">
+              <p class="pbx-label">In progress</p>
+              <la-list-item clickable>
+                <span slot="icon" class="pic"><i class="ph ph-list-checks" aria-hidden="true"></i></span>
+                <div class="run-progress"><la-progress value="2" max="10" label=""></la-progress>2 of 10 steps</div>
+                <span slot="meta" class="run-meta">Updated 4 minutes ago<i class="ph-bold ph-caret-right" aria-hidden="true"></i></span>
+              </la-list-item>
+              <la-list-item clickable>
+                <span slot="icon" class="pic"><i class="ph ph-list-checks" aria-hidden="true"></i></span>
+                <div class="run-progress"><la-progress value="3" max="7" label=""></la-progress>3 of 7 steps</div>
+                <span slot="meta" class="run-meta">Blocked · Awaiting HMRC<i class="ph-bold ph-caret-right" aria-hidden="true"></i></span>
+              </la-list-item>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context: the run’s plan overview, <code>size="lg"</code> (Orion’s <code>16-playbook-run.html</code>). Neutral at every value: the run’s steps are on the same page, and their check markers say done</div>
+          <div class="preview-frame p-pad">
+            <div class="sla-panel">
+              <div class="sla-head">
+                <div class="sla-title">Plan overview</div>
+                <la-badge variant="neutral" appearance="ghost" size="sm">Fundraising</la-badge>
+              </div>
+              <la-progress value="2" max="10" label="Plan progress" value-text="2 of 10 steps" size="lg"></la-progress>
+              <div class="sla-meta"><span><b>2</b> of 10 steps</span><span>8 remaining</span></div>
+              <div class="sla-dates">
+                <div class="sla-date"><span>Started</span><b>28 September 2026</b></div>
+                <div class="sla-date"><span>Entity</span><b>Ardelow Analytics</b></div>
+                <div class="sla-date"><span>Owner</span><b>Maya Okafor</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-label">In context: the head of a playbook run, through <code>la-run-progress</code>, which is <code>la-progress</code> at <code>lg</code> with “2 of 9 done” beside it. It counts settled steps over the steps that apply</div>
+          <div class="preview-frame p-pad">
+            <div class="p-box">
+              <la-run-progress done="2" total="9"></la-run-progress>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-motion" class="preview-group">
+          <div class="preview-label">Value changes. Finish a step and the bar slides to its new value over <code>--dur-base</code> with <code>--ease-out</code>; under reduced motion it jumps. The first paint draws the value without animating</div>
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="demo" id="demo">
+              <div class="demo-head">
+                <span class="t">Create a Health and Safety Policy</span>
+                <la-progress id="demo-bar" max="4" label="Playbook progress"></la-progress>
+                <span class="count" id="demo-count"></span>
+              </div>
+              <div class="line"><la-step-marker index="1" status="complete" label=""></la-step-marker><span>Confirm the headcount</span></div>
+              <div class="line"><la-step-marker index="2" status="active" label=""></la-step-marker><span>Create your health and safety policy</span></div>
+              <div class="line"><la-step-marker index="3" status="pending" label=""></la-step-marker><span>Sign and adopt the statement</span></div>
+              <div class="line"><la-step-marker index="4" status="pending" label=""></la-step-marker><span>Bring it to everyone’s notice</span></div>
+            </div>
+            <div class="demo-acts">
+              <la-button size="sm" variant="secondary" id="demo-next">Finish the next step</la-button>
+              <la-button size="sm" variant="ghost" id="demo-back">Undo</la-button>
+            </div>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-progress</h2>
+    <p>A determinate progress bar: one continuous fill for how far a known quantity has got, such as the steps of a run, the items of a batch or the bytes of an upload. Neutral by default: an ink fill on a muted track, both with pill ends. variant colours it for how an operation ended or stands, always with words beside it that say the same; the value never changes the colour. A sequence of named steps is la-stepper, a radial overview is la-step-ring, and a wait of unknown length is la-spinner. la-progress says how much, not which step.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>value</td>
+          <td><span class="default">value</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>how far it has got, from 0 to max; clamped, and 0 when not a number</td>
+        </tr>
+      
+        <tr>
+          <td>max</td>
+          <td><span class="default">max</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">100</span></td>
+          <td>the whole (default 100); a step count when the value is steps; 100 when not above 0</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Progress&#39;</span></td>
+          <td>accessible name (default "Progress"); "" makes the bar decorative</td>
+        </tr>
+      
+        <tr>
+          <td>valueText</td>
+          <td><span class="default">value-text</span></td>
+          <td><span class="type">string | undefined</span></td>
+          <td>—</td>
+          <td>the value in words for assistive tech, such as "2 of 10 steps" (attribute value-text)</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">ProgressSize</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>default (4px, beside a label in a row) · lg (6px, heading its own panel); --la-progress-height(-lg)</td>
+        </tr>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">ProgressVariant</span></td>
+          <td><span class="default">&#39;neutral&#39;</span></td>
+          <td>neutral (default) · success · warning · danger; set by the page, never by the value</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-progress-height</code> · <code>--la-progress-height-lg</code></td><td>The track’s height: 4px by default, 6px at <code>lg</code>.</td></tr>
+                <tr><td><code>--la-color-bg-muted</code></td><td>The track.</td></tr>
+                <tr><td><code>--la-color-text-secondary</code></td><td>The neutral fill, the same at every value.</td></tr>
+                <tr><td><code>--la-color-success</code></td><td>The success fill.</td></tr>
+                <tr><td><code>--la-color-warning-text</code></td><td>The warning fill: the dark amber, as the base amber is 1.97:1 against the track.</td></tr>
+                <tr><td><code>--la-color-danger</code></td><td>The danger fill.</td></tr>
+                <tr><td><code>--la-radius-pill</code></td><td>The pill ends of the track; the fill inherits them.</td></tr>
+                <tr><td><code>--dur-base</code> · <code>--ease-out</code></td><td>The fill sliding to a new value.</td></tr>
+              </tbody>
+            </table>
+            <p>In forced-colours mode the track takes an outline in <code>CanvasText</code> and the fill <code>CanvasText</code>.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>A percentage, on the default 0 to 100 scale.</p>
+            <div class="docs-code"><span class="kw">&lt;la-progress</span> <span class="at">value</span>=<span class="str">"40"</span><span class="kw">&gt;&lt;/la-progress&gt;</span></div>
+            <p class="usage-gap">Steps heading a panel, with the value in the words the page shows.</p>
+            <div class="docs-code"><span class="kw">&lt;la-progress</span> <span class="at">value</span>=<span class="str">"2"</span> <span class="at">max</span>=<span class="str">"10"</span> <span class="at">label</span>=<span class="str">"Plan progress"</span>
+             <span class="at">value-text</span>=<span class="str">"2 of 10 steps"</span> <span class="at">size</span>=<span class="str">"lg"</span><span class="kw">&gt;&lt;/la-progress&gt;</span></div>
+            <p class="usage-gap">Beside a row’s own count: decorative, sized by the page.</p>
+            <div class="docs-code"><span class="kw">&lt;la-progress</span> <span class="at">value</span>=<span class="str">"2"</span> <span class="at">max</span>=<span class="str">"10"</span> <span class="at">label</span>=<span class="str">""</span> <span class="at">style</span>=<span class="str">"width: 96px; flex: none"</span><span class="kw">&gt;&lt;/la-progress&gt;</span> 2 of 10 steps</div>
+            <p class="usage-gap">An upload that finished, with the words that say so.</p>
+            <div class="docs-code"><span class="kw">&lt;la-progress</span> <span class="at">value</span>=<span class="str">"100"</span> <span class="at">variant</span>=<span class="str">"success"</span> <span class="at">label</span>=<span class="str">"Uploading your articles of association"</span><span class="kw">&gt;&lt;/la-progress&gt;</span> Uploaded</div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>When to use.</strong> How far a known quantity has got: the steps of a run, the items of a batch, the bytes of an upload. Not for named steps the founder moves through (<code>la-stepper</code>), not for a radial overview (<code>la-step-ring</code>), not for a wait of unknown length (<code>la-spinner</code>). <code>la-bandwidth-bar</code> is a capacity gauge and <code>la-distribution-bar</code> splits a total; neither says how far something has got.</li>
+              <li><strong>Colour.</strong> Neutral by default, never primary: the fill is the same ink at 100% as at 40%, and <code>--la-color-primary</code> is for interactive elements. <code>variant</code> says how an operation ended or stands, set by the page with words that say the same; the value never sets it. A bar that sums up steps shown on the same screen stays neutral at every value: green marks done on their check markers, as on a playbook run (<code>rule/green-on-a-check</code>; decision 132, and decision 104 as amended 12 Oct 2026). A blocked or overdue run says so once, in the badge or text beside the bar.</li>
+              <li><strong>The words beside it.</strong> Prefer a count to a percentage where the count means something (“2 of 10 steps”, <code>loading.md</code>), and pass the same words as <code>value-text</code>. Where the text beside the bar already says the count, and inside a clickable row (a button flattens what it holds), set <code>label=""</code>.</li>
+              <li><strong>Width.</strong> The bar is block-level and full width. In a flex row, give the host a width, as the modal row does. A page may size and place the host, never paint it.</li>
+              <li><strong>Motion.</strong> The fill is a full-width pill slid in with <code>translateX</code>, so its leading end stays round at any value (<code>scaleX</code> would squash it). The first paint draws the value without animating; under <code>prefers-reduced-motion</code> it jumps.</li>
+              <li><strong>Consumers.</strong> In this repo, <code>la-run-progress</code>, the head of a playbook run. In <code>new-design</code>, Orion’s playbook modal (<code>05-playbooks.html</code>) and the run’s plan overview (<code>16-playbook-run.html</code>). Still drawn by hand: the UK case plan’s green bar and its copies, onboarding’s Company DNA bar, and <code>la-sidebar</code>’s setup checklist bar. <code>la-upload-box</code>, the first consumer the April spec named, would be the first to use a variant.</li>
+              <li><strong>Against the April spec</strong> (<code>loading.md</code> §2.8): an ink fill and a muted track, not primary on a light border, with a <code>variant</code>; <code>max</code> and <code>value-text</code> added; no <code>label</code> or <code>description</code> slots; <code>translateX</code>, not <code>scaleX</code>; and <code>size="lg"</code> for the overview’s 6px.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and what was decided where we differ from them (researched 12 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>A continuous fill, for a quantity we can measure</td><td><a href="https://atlassian.design/components/progress-bar/usage">Atlassian</a> uses a progress bar when “you can determine the percentage”, and a spinner otherwise; <a href="https://carbondesignsystem.com/components/progress-bar/usage/">Carbon</a> and <a href="https://m3.material.io/components/progress-indicators/guidelines">Material 3</a> draw one continuous fill. <a href="https://primer.style/product/components/progress-bar/">Primer</a> splits the bar only for parts of a whole, with a legend.</td><td>Backed</td></tr>
+                <tr><td>A neutral ink fill by default, never primary</td><td>Atlassian’s default is a neutral dark grey on a neutral track. Polaris fills with its info colour, Carbon with blue, Primer with green, Material 3 with its primary colour and Astryx with its accent.</td><td>Backed (Atlassian)</td></tr>
+                <tr><td>A variant for how it ended or stands: success, warning, danger</td><td><a href="https://astryx.atmeta.com/components/ProgressBar">Astryx</a>: “accent for general progress, success for completion, warning or error for alerts”. <a href="https://fluent2.microsoft.design/components/web/react/core/progressbar/usage">Fluent 2</a> has success, warning and error; <a href="https://polaris.shopify.com/components/feedback-indicators/progress-bar">Polaris</a> success and critical tones; Atlassian a success appearance; Carbon a finished and an error status. Our names are <code>la-badge</code>’s and <code>la-alert</code>’s.</td><td>Backed (Astryx, Fluent 2); decision 132</td></tr>
+                <tr><td>Set by the page, never by the value</td><td>Atlassian, Fluent 2, Polaris and Astryx make the colour a choice. Against: <a href="https://ant.design/components/progress">Ant Design</a> turns a bar green on its own at 100%.</td><td>Backed</td></tr>
+                <tr><td>A bar summing up steps on the same screen stays neutral; green is on their check markers</td><td><a href="https://www.lightningdesignsystem.com/components/setup-assistant/">Salesforce’s Setup Assistant</a> marks each step with its own progress marker under an overall bar. <a href="https://design-system.service.gov.uk/patterns/complete-multiple-tasks/">GOV.UK</a> shows a completed task as “black text with no background colour”, so the tasks left stand out.</td><td>Decided: our own (decision 132); GOV.UK in support</td></tr>
+                <tr><td>Warning in the dark amber</td><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/non-text-contrast.html">WCAG 1.4.11</a> asks for 3:1 against adjacent colours for graphics needed to understand them. The base amber is 1.97:1 against the track; the dark amber is 4.6:1.</td><td>Backed (WCAG)</td></tr>
+                <tr><td>4px beside a label, 6px heading a panel</td><td>Carbon’s small bar is 4px, for “cards, data tables, or side panels”; Material 3’s track is 4dp; Atlassian’s bar is 6px. No system ties a height to where the bar sits.</td><td>Backed</td></tr>
+                <tr><td>Pill ends</td><td>Atlassian rounds the bar fully; Carbon does behind its v12 flag. Primer and Polaris use small radii.</td><td>Backed (Atlassian)</td></tr>
+                <tr><td><code>max</code> as the real count</td><td>Shopify’s <a href="https://shopify.dev/docs/apps/build/app-home/migrate-from-polaris-react/progress-bar">progress element</a>: “For counts or amounts, preserve their natural scale with a matching max”.</td><td>Backed</td></tr>
+                <tr><td>The value in words (<code>value-text</code>, “2 of 10 steps”)</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-valuetext">MDN</a>: assistive tech will “often present the value of aria-valuenow as a percentage. If this would not be accurate use this property”. Against, in part: <a href="https://www.w3.org/TR/wai-aria-1.2/#progressbar">WAI-ARIA 1.2</a> says to set it only when the value “cannot be meaningfully represented as a number”; Atlassian and Primer put the count in the name instead.</td><td>Backed (MDN); a step count read as a percentage is the case MDN names</td></tr>
+                <tr><td>A name always; <code>label=""</code> when the text beside it says the count</td><td>WAI-ARIA 1.2: a progress bar’s accessible name is required. Primer: “If the ProgressBar value is already shown as text adjacent… don’t use a redundant label”. Against: Carbon says a label is “still required”.</td><td>Backed (Primer); Carbon differs</td></tr>
+                <tr><td>The page writes a count beside the bar, not a percentage</td><td>Atlassian: write “5 of 10 files uploaded” and “also include this text as visual helper text”; Primer: “Default to pairing the ProgressBar with text”; <a href="https://www.nngroup.com/articles/progress-indicators/">NN/g</a>: “Instead of showing a percentage number, consider showing the number of steps”; <a href="https://design-system.service.gov.uk/patterns/question-pages/">GOV.UK</a> shows “Question 3 of 9”, as text.</td><td>Backed</td></tr>
+                <tr><td>Summing up steps the founder completes</td><td>A bar over a list of steps is a set pattern: <a href="https://shopify.dev/docs/api/app-home/patterns/compositions/setup-guide">Shopify’s setup guide</a> pairs a checklist with “0 out of 3 steps completed” and a progress indicator; Salesforce’s Setup Assistant heads its steps with an overall bar; Primer counts “4 of 12 tasks completed”. Against: Carbon doesn’t use a progress bar “when the progress is determined by user actions”, and points to its step indicator. On a playbook run, the step cards and their markers are that indicator, and the bar sums them up.</td><td>Backed (Shopify, Salesforce, Primer); Carbon differs</td></tr>
+                <tr><td>The fill slides over 200ms</td><td>Atlassian animates its fill over .2s; Carbon over 110ms; Polaris slides it with a transform over 500ms.</td><td>Backed</td></tr>
+                <tr><td>It jumps under reduced motion</td><td>No system found says this for the fill; Primer runs its shimmer only when motion isn’t reduced. WCAG 2.3.3 asks that motion from interactions can be turned off.</td><td>Decided: our own, as every animated component here does</td></tr>
+                <tr><td>A forced-colours fallback</td><td>Primer’s bar “should remain visible and usable in… Forced colors mode”; Polaris and Carbon both draw one.</td><td>Backed</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+    (function () {
+      /* What a screen reader gets from a bar, read off its shadow root rather than restated by hand. */
+      function read(el) {
+        var t = el.shadowRoot.querySelector('.track');
+        if (t.getAttribute('aria-hidden') === 'true') return 'aria-hidden="true": decorative, no role or value';
+        return 'role="' + t.getAttribute('role') + '" · name "' + t.getAttribute('aria-label') + '" · valuenow ' + t.getAttribute('aria-valuenow') +
+          ', min ' + t.getAttribute('aria-valuemin') + ', max ' + t.getAttribute('aria-valuemax') + ' · valuetext "' + t.getAttribute('aria-valuetext') + '"';
+      }
+
+      Promise.all(['la-progress', 'la-step-marker', 'la-run-progress'].map(function (n) { return customElements.whenDefined(n); })).then(function () {
+        /* Live preview. */
+        var live = document.getElementById('live'), out = document.getElementById('live-read');
+        function sync() { live.updateComplete.then(function () { out.textContent = read(live); }); }
+        document.getElementById('ctl-value').addEventListener('input', function (e) { live.value = Number(e.target.value); sync(); });
+        document.getElementById('ctl-max').addEventListener('input', function (e) { live.max = Number(e.target.value); sync(); });
+        document.getElementById('ctl-label').addEventListener('input', function (e) { live.label = e.target.value; sync(); });
+        document.getElementById('ctl-text').addEventListener('input', function (e) { live.valueText = e.target.value || undefined; sync(); });
+        document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-toggle');
+            if (!btn) return;
+            group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+            if (group.getAttribute('data-control') === 'size') live.size = btn.getAttribute('data-value');
+            if (group.getAttribute('data-control') === 'variant') live.variant = btn.getAttribute('data-value');
+            sync();
+          });
+        });
+        sync();
+
+        /* What a screen reader hears. */
+        var bars = [].slice.call(document.querySelectorAll('#aria-rows la-progress'));
+        Promise.all(bars.map(function (el) { return el.updateComplete; })).then(function () {
+          bars.forEach(function (el) { el.nextElementSibling.textContent = read(el); });
+        });
+
+        /* Value changes: steps run in order, so the demo finishes the next one or undoes the last. */
+        var bar = document.getElementById('demo-bar'), count = document.getElementById('demo-count');
+        var marks = [].slice.call(document.querySelectorAll('#demo la-step-marker'));
+        marks.forEach(function (m) { if (m.getAttribute('status') === 'complete') m.dataset.done = '1'; });
+        function paint() {
+          var done = marks.filter(function (m) { return m.dataset.done === '1'; }).length;
+          var now = marks.findIndex(function (m) { return m.dataset.done !== '1'; });
+          marks.forEach(function (m, i) { m.status = m.dataset.done === '1' ? 'complete' : i === now ? 'active' : 'pending'; });
+          var words = done + ' of ' + marks.length + ' steps';
+          bar.value = done; bar.valueText = words; count.textContent = words;
+        }
+        document.getElementById('demo-next').addEventListener('click', function () {
+          var m = marks.find(function (x) { return x.dataset.done !== '1'; });
+          if (m) { m.dataset.done = '1'; paint(); }
+        });
+        document.getElementById('demo-back').addEventListener('click', function () {
+          var done = marks.filter(function (x) { return x.dataset.done === '1'; });
+          if (done.length) { done[done.length - 1].dataset.done = ''; paint(); }
+        });
+        paint();
+      });
+    })();
+</script>
+
+
+</body>
+</html>

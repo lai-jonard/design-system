@@ -292,6 +292,10 @@
   --la-step-marker-passed-glyph-size: 11px;
   --la-step-marker-ring:              1.5px;
 
+  /* ── Progress bar ───────────────────────────────── */
+  --la-progress-height:    4px; /* la-progress default: beside a label in a row */
+  --la-progress-height-lg: 6px; /* la-progress lg: heading its own panel */
+
   /* ── Disclosure ───────────────────────────────────── */
   --la-disclosure-quiet-target:       32px;
   --la-disclosure-quiet-target-touch: 44px;
