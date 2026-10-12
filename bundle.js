@@ -31505,7 +31505,7 @@
    * title. Every founder sees every step; one that doesn't apply to them is
    * moved past, with a reason.
    *
-   * Sub-steps (PRO-210 S): what happens straight after a step, such as signing
+   * Sub-steps (PRO-210 Q, 11 Oct): what happens straight after a step, such as signing
    * or sending, runs inside the same card, in order, each with its own button.
    * `parts` lists them after the step's own part (`part-own`, "Answer and
    * confirm"); once the page sets `confirmed`, the card's one act is the
@@ -31552,7 +31552,7 @@
    * record, e-sign), and the card carries that step's states:
    * @prop locked      - a settled step the founder can't reopen: one the record holds, or one that is its
    *                     own playbook. No Change; `word` says which, and the authored button stays, as a
-   *                     ghost, to open the thing (View Policy, View Playbook): it fires la-step-open
+   *                     secondary button, to open the thing (View Policy, View Playbook): it fires la-step-open
    * @prop word        - the settled state's word, in place of Done / Read ("On your record",
    *                     "Done in its own playbook")
    * @prop icon        - a Phosphor class for the authored button's leading icon ("ph-file-plus")
@@ -31573,7 +31573,8 @@
    * @slot actions     - beside the authored button: the sign step's "Signed outside LawAdvisor?" fallback
    * @slot             - the step's la-step-questions, and anything the page places with the card. A value on
    *                     the record is asked in the modal, not here (decision 125)
-   * @slot more        - *More*: what it is, when it bites, the law and the procedure. Empty hides it
+   * @slot more        - *More*: what it is, when it bites, and the source (07's *Source*). Empty hides it. The
+   *                     source line links out where legal gives the step a source link (PRO-210 B, 11 Oct)
    * @slot sources     - la-sources: the documents and registers the step reads from. It keeps the
    *                     far right, opposite the act (Jonard, 28 Sep and 6 Oct 2026): provenance,
    *                     not the law, which stays behind More
@@ -31659,12 +31660,12 @@
         </p>
       </div>
       ${this.locked && this.button
-            ? b `<la-button variant="ghost" @click=${() => this._fire('la-step-open')}
+            ? b `<la-button variant="secondary" @click=${() => this._fire('la-step-open')}
             >${this.icon ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this.button}</la-button
           >`
             : this.state === 'before' || this.locked
                 ? A
-                : b `<la-button variant="ghost" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
+                : b `<la-button variant="secondary" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
     </div>`;
       }
       _frame() {
@@ -31687,7 +31688,7 @@
             : A}`;
       }
       /** What counts so far, as a pill in the act while some questions don't
-       *  (PRO-210 M; Jonard, 9 Oct 2026). The pill is hidden from screen readers;
+       *  (PRO-210 K, 11 Oct; Jonard, 9 Oct 2026). The pill is hidden from screen readers;
        *  the button's name says it in words. Ready to confirm, there's no pill:
        *  the modal already says nothing counts until Confirm. */
       _count() {
@@ -31698,7 +31699,7 @@
           return b `<span slot="icon-right" class="count" aria-hidden="true">${done} of ${total}</span>
       <span class="vh">, ${done} of ${total} answered</span>`;
       }
-      /** What's left, in words, for the live region (PRO-210 M). Ready to
+      /** What's left, in words, for the live region (PRO-210 K, 11 Oct). Ready to
        *  confirm, it says nothing. */
       _leftText() {
           const n = this.remaining;
@@ -32051,7 +32052,7 @@
       .acts .acts-side {
         min-height: var(--la-button-height-default);
       }
-      /* The act on its own, what's counted in it (PRO-210 M); the quiet
+      /* The act on its own, what's counted in it (PRO-210 K, 11 Oct); the quiet
          acts, the way past and Sources, grouped on the right (Jonard,
          9 Oct 2026). */
       .acts-main {
