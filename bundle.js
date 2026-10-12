@@ -31887,14 +31887,11 @@
         border-color: var(--la-color-border);
         box-shadow: var(--la-shadow-card);
       }
-      /* Settled: one line. The right padding matches the top and bottom, so
-         the ghost Change sits at the edge and its label lines up with the
-         content column (Jonard, 6 Oct 2026). */
+      /* Settled: tighter top and bottom. */
       :host([state='done']) .card,
       :host([state='passed']) .card,
       :host([state='before']) .card {
         padding-top: var(--la-space-md);
-        padding-right: var(--la-space-md);
         padding-bottom: var(--la-space-md);
         background-color: transparent;
       }
@@ -32000,12 +31997,14 @@
         white-space: nowrap;
       }
 
-      /* Settled: one line. */
+      /* Settled: the title and its state word, then Change under them on
+         the text's left edge, where every other state puts its act
+         (Jonard, 12 Oct 2026). */
       .settled {
         display: flex;
+        flex-direction: column;
         align-items: flex-start;
-        justify-content: space-between;
-        gap: var(--la-space-lg);
+        gap: var(--la-space-sm);
       }
       .settled h3 {
         font-size: var(--la-font-size-lg);
@@ -32161,10 +32160,6 @@
         :host([state='passed']) .card,
         :host([state='before']) .card {
           padding: var(--la-space-md) var(--la-space-lg);
-        }
-        .settled {
-          flex-direction: column;
-          gap: var(--la-space-xs);
         }
         .acts {
           flex-direction: column;
