@@ -475,18 +475,19 @@ the spinner placement (leading-area vs middle-area).</td>
         <thead><tr><th>Token used</th><th>Role</th></tr></thead>
         <tbody>
           <tr><td>--la-radius-md</td><td>Border radius</td></tr>
-          <tr><td>--la-button-height-sm</td><td>Small height (28px)</td></tr>
-          <tr><td>--la-button-height-default</td><td>Default height (36px)</td></tr>
-          <tr><td>--la-button-height-lg</td><td>Large height (44px)</td></tr>
-          <tr><td>--la-space-sm</td><td>Horizontal padding (sm) + icon gap</td></tr>
-          <tr><td>--la-space-lg</td><td>Horizontal padding (default)</td></tr>
-          <tr><td>--la-space-xl</td><td>Horizontal padding (lg)</td></tr>
+          <tr><td>--la-button-height-sm</td><td>Small: minimum height (28px)</td></tr>
+          <tr><td>--la-button-height-default</td><td>Default: minimum height (32px)</td></tr>
+          <tr><td>--la-button-height-md</td><td>Medium: minimum height (36px)</td></tr>
+          <tr><td>--la-button-height-lg</td><td>Large: minimum height (44px)</td></tr>
+          <tr><td>--la-space-md</td><td>Horizontal padding (sm)</td></tr>
+          <tr><td>--la-space-lg</td><td>Horizontal padding (default, md, lg)</td></tr>
+          <tr><td>--la-space-2xs</td><td>Gap between the icon and the label</td></tr>
           <tr><td>--la-font-size-sm</td><td>Label size (sm)</td></tr>
-          <tr><td>--la-font-size-md</td><td>Label size (default)</td></tr>
-          <tr><td>--la-font-size-lg</td><td>Label size (lg)</td></tr>
+          <tr><td>--la-font-size-base</td><td>Label size (md)</td></tr>
+          <tr><td>--la-font-size-lg</td><td>Label size (default, lg)</td></tr>
           <tr><td>--la-font-weight-medium</td><td>Label weight (default)</td></tr>
           <tr><td>--la-font-weight-normal</td><td>Label weight (ghost variant)</td></tr>
-          <tr><td>--la-line-height</td><td>Inner line height</td></tr>
+          <tr><td>--la-line-height</td><td>Inner line height; the top and bottom padding are what one line leaves of the height</td></tr>
         </tbody>
       </table>
     </div>
@@ -593,6 +594,7 @@ la-button::part(button) {
     <div class="docs-note"><strong>Primary = action</strong> — Per the design language, <code style="font-family:monospace;font-size:11px;">variant="primary"</code> uses <code style="font-family:monospace;font-size:11px;">--la-color-primary</code> (#18181B). Use it only on the single next actionable step. Never use it decoratively.</div>
     <div class="docs-note"><strong>Ghost for low-prominence actions</strong> — Use <code style="font-family:monospace;font-size:11px;">variant="ghost"</code> for tertiary actions: "View details", "Back", "Learn more". Resting state is subtle secondary-coloured text with transparent background; on hover it gains a pale-grey fill and darker text. Padding matches the default button so there's no layout shift on hover.</div>
     <div class="docs-note"><strong>danger vs destructive</strong> — <code style="font-family:monospace;font-size:11px;">variant="danger"</code> is a solid red-filled button for high-visibility system alerts or irreversible one-shot actions. <code style="font-family:monospace;font-size:11px;">variant="destructive"</code> uses the secondary surface (same background, border, and shadow) but with <code style="font-family:monospace;font-size:11px;">--la-color-danger-text</code> for label and icon — quieter at rest, red tint on hover. Use <code style="font-family:monospace;font-size:11px;">destructive</code> as the final commit button in confirmation modals (Delete, Remove) to keep the modal feeling calm without losing the destructive signal.</div>
+    <div class="docs-note"><strong>A long label wraps</strong> — A button is never wider than its container. A label too long for the space wraps to a second line, aligned to the start, and the button grows taller: never truncated, never spilling out of its card (Carbon: “We do not recommend truncating a button label”). The top and bottom padding are what a one-line label leaves of the button’s height, so a wrapped label keeps the same space above and below it, and a one-line button stays exactly its size’s height. Keep labels short all the same: wrapping is for narrow screens, not for long copy (12 Oct 2026, decision 131).</div>
     <div class="docs-note"><strong>Font inheritance</strong> — <code style="font-family:monospace;font-size:11px;">la-button</code> uses <code style="font-family:monospace;font-size:11px;">font-family: inherit</code> on the inner button, so it picks up the host document's typeface. No extra font setup needed.</div>
   </div>
 </div>

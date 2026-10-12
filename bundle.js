@@ -1403,8 +1403,13 @@
   exports.LaButton.styles = [
       tokens,
       i$5 `
+      /* Never wider than its container: a label too long for the space
+         wraps to a second line rather than running out of the card. Carbon:
+         "We do not recommend truncating a button label"; it wraps instead
+         (Jonard, 12 Oct 2026). */
       :host {
         display: inline-block;
+        max-width: 100%;
       }
       :host([block]) {
         display: block;
@@ -1419,9 +1424,16 @@
         align-items: center;
         justify-content: center;
         gap: var(--la-space-2xs);
-        white-space: nowrap;
-        height: var(--la-button-height-default);
-        padding: 0 var(--la-space-lg);
+        max-width: 100%;
+        min-height: var(--la-button-height-default);
+        /* Top and bottom padding are what a one-line label leaves of the
+           height, so a wrapped label keeps the same space above and below
+           it (Jonard, 12 Oct 2026). 1lh is one line of the label; a
+           bordered variant takes its border off, as the fixed height did. */
+        padding: calc((var(--la-button-height-default) - 1lh) / 2 - var(--_border, 0px)) var(--la-space-lg);
+        /* A wrapped label's lines align to the start (Jonard, 12 Oct
+           2026); a one-line label is still centred by the flex row. */
+        text-align: start;
         border-radius: var(--la-radius-md);
         font-size: var(--la-font-size-lg);
         font-weight: var(--la-font-weight-normal);
@@ -1453,7 +1465,8 @@
       :host([variant='secondary']) button {
         background: var(--la-color-secondary-bg);
         color: var(--la-color-secondary-text);
-        border: 1px solid var(--la-color-secondary-border);
+        --_border: 1px;
+        border: var(--_border) solid var(--la-color-secondary-border);
         box-shadow: var(--la-shadow-xs);
       }
       :host([variant='secondary']) button:hover {
@@ -1476,7 +1489,8 @@
       :host([variant='destructive']) button {
         background: var(--la-color-secondary-bg);
         color: var(--la-color-danger-text);
-        border: 1px solid var(--la-color-secondary-border);
+        --_border: 1px;
+        border: var(--_border) solid var(--la-color-secondary-border);
         box-shadow: var(--la-shadow-xs);
       }
       :host([variant='destructive']) button:hover {
@@ -1493,23 +1507,23 @@
         color: var(--la-color-text);
       }
       :host([size='sm']) button {
-        height: var(--la-button-height-sm);
+        min-height: var(--la-button-height-sm);
         font-size: var(--la-font-size-sm);
-        padding: 0 var(--la-space-md);
+        padding: calc((var(--la-button-height-sm) - 1lh) / 2 - var(--_border, 0px)) var(--la-space-md);
       }
       :host([size='sm'][variant='secondary']) button {
         box-shadow: var(--la-shadow-xs);
       }
 
       :host([size='md']) button {
-        height: var(--la-button-height-md);
+        min-height: var(--la-button-height-md);
         font-size: var(--la-font-size-base);
-        padding: 0 var(--la-space-lg);
+        padding: calc((var(--la-button-height-md) - 1lh) / 2 - var(--_border, 0px)) var(--la-space-lg);
       }
       :host([size='lg']) button {
-        height: var(--la-button-height-lg);
+        min-height: var(--la-button-height-lg);
         font-size: var(--la-font-size-lg);
-        padding: 0 var(--la-space-lg);
+        padding: calc((var(--la-button-height-lg) - 1lh) / 2 - var(--_border, 0px)) var(--la-space-lg);
         border-radius: var(--la-radius-lg);
       }
       :host([pill]) button {
@@ -1576,6 +1590,7 @@
          icon, no loading-label) never changes width. */
       .middle-area {
         display: grid;
+        min-width: 0;
         grid-template-areas: 'stack';
         align-items: center;
         justify-items: center;
