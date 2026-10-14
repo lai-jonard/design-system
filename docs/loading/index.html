@@ -401,7 +401,7 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <li><strong>Out of scope (separate decision if ever needed):</strong> striped/animated fill while running, indeterminate mode.</li>
 </ul>
 <p><strong>First consumer:</strong> <code>la-upload-box</code> — currently shows only a spinner during upload but knows bytes; can show determinate.</p>
-<p><strong>As built (2 October 2026; v1 ready 12 October 2026).</strong> Built from the two bars Orion's Phase B screens drew by hand in <code>new-design</code> (the playbook modal's In progress rows in <code>05-playbooks.html</code>, the plan overview in <code>16-playbook-run.html</code>), it departs from the locked spec in six places:</p>
+<p><strong>As built (2 October 2026, decided by Jonard the same day; v1 ready 12 October 2026).</strong> Built from the two bars Orion's Phase B screens drew by hand in <code>new-design</code> (the playbook modal's In progress rows in <code>05-playbooks.html</code>, the plan overview in <code>16-playbook-run.html</code>), it departs from the locked spec in six places:</p>
 <ul>
 <li><strong>Fill</strong> <code>--la-color-text-secondary</code>, not <code>--la-color-primary</code>, and <strong>track</strong> <code>--la-color-bg-muted</code>, not <code>--la-color-border-light</code>: the colours the playbooks page draws, and primary is for interactive elements (<code>rule/primary-colour-interactive-only</code>). The same at every value; never green on its own at 100%.</li>
 <li><strong><code>max</code></strong> (default 100) and <strong><code>value-text</code></strong> added, so a step count is passed as it is (&quot;2 of 10 steps&quot;) rather than turned into a percentage. <code>value</code> alone is still 0 to 100.</li>
