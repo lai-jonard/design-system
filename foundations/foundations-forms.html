@@ -174,7 +174,7 @@
 
   <section class="docs-section" id="validation">
     <h2>Validation states</h2>
-    <p>Validate on blur for individual fields. Validate on submit for the whole form. Do not validate on every keystroke — it punishes the user mid-type. Errors live with the field they describe, not as a banner on top.</p>
+    <p>Check a form when its button is pressed, not as each field is left, and never on every keystroke: pressed too soon, each field that needs something shows its message at the field, and focus moves to the first. Once a message shows, it clears as soon as the field is put right. Errors live with the field they describe, not as a banner on top. (Decision 156, as the step’s questions do: decisions 140 and 149.)</p>
     <div class="form-demo" style="max-width:480px;">
       <div class="form-row">
         <label for="fv-email" class="form-label">Email<span class="form-required" aria-hidden="true">*</span></label>
@@ -195,7 +195,7 @@
       </tbody>
     </table>
     <div class="docs-note" style="margin-top:16px;">
-      <strong>Submit disabled until valid.</strong> The submit button stays disabled until every required field passes its validator. Don't let users click submit only to be told their form is incomplete — disable it and let the absence speak.
+      <strong>Submit is never disabled for a missing or wrong answer.</strong> A disabled button can’t be focused and says nothing about what’s missing; pressed too soon, the form says what it needs at each field and moves focus there (decision 156; decision 140).
     </div>
   </section>
 

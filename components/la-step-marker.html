@@ -201,7 +201,7 @@
         </div>
 
         <div id="snap-check" class="preview-group">
-          <div class="preview-label">Check register: unordered sub-tasks inside one step. Green for complete, a primary dot for active</div>
+          <div class="preview-label">Check register: unordered sub-tasks inside one step. Green for complete; for active, the same check outline in primary ink</div>
           <div class="preview-frame" style="padding:24px;">
             <div class="m-grid">
               <div class="m-cell"><la-step-marker variant="check" status="pending"></la-step-marker><code>pending</code><span>Not yet started</span></div>
@@ -330,7 +330,7 @@
                 <tr><td><code>--la-step-marker-size</code> · <code>--la-step-marker-check-size</code></td><td>The circle (22px) and the check-register icon (20px).</td></tr>
                 <tr><td><code>--la-step-marker-glyph-size</code> · <code>--la-step-marker-passed-glyph-size</code></td><td>The glyph in the circle (12px), and the smaller arrow inside passed’s ring (11px).</td></tr>
                 <tr><td><code>--la-step-marker-ring</code></td><td>Passed’s dashed ring (1.5px).</td></tr>
-                <tr><td><code>--la-color-primary</code> · <code>--la-color-primary-fg</code></td><td>Sequence active: the fill and the number. Check active: the dot.</td></tr>
+                <tr><td><code>--la-color-primary</code> · <code>--la-color-primary-fg</code></td><td>Sequence active: the fill and the number. Check active: the check outline.</td></tr>
                 <tr><td><code>--la-color-resolved</code> · <code>--la-color-text-invert</code></td><td>Complete: the sequence circle and its check, and the check-register icon.</td></tr>
                 <tr><td><code>--la-color-bg-muted</code> · <code>--la-color-text-muted</code></td><td>Sequence pending, gated and processing: the fill and the number. Passed: the arrow.</td></tr>
                 <tr><td><code>--la-color-text-faint</code></td><td>Gated’s lock; check pending and gated; passed’s dashed ring.</td></tr>
@@ -381,6 +381,7 @@
               <tbody>
                 <tr><td>A numbered circle; a check once done</td><td><a href="https://m1.material.io/components/steppers.html">Material steppers</a>: numbered circle, a check on completed steps. <a href="https://carbondesignsystem.com/components/progress-indicator/usage/">Carbon progress indicator</a>: a circle with a checkmark for completed.</td><td>Backed</td></tr>
                 <tr><td>Active in the primary colour</td><td>Material: the active circle takes the primary colour. Carbon: the current step is blue.</td><td>Backed</td></tr>
+                <tr><td>Check active: the pending outline, in primary ink</td><td>Material’s stepper draws active and inactive steps as the same circle and tells them apart by colour. Against: Carbon’s current step is a half-filled circle, a shape cue as well as colour (WCAG 1.4.1). Here the marker’s name says “In progress”, and the run overview sets the current row’s name in a heavier weight.</td><td>Decided (Jonard, 12 Oct 2026; a solid dot before)</td></tr>
                 <tr><td>Complete in green, both registers</td><td>For: success is green in <a href="https://atlassian.design/components/lozenge/">Atlassian’s lozenge</a>, <a href="https://polaris-react.shopify.com/components/feedback-indicators/badge">Polaris’s badge</a> and <a href="https://carbondesignsystem.com/patterns/status-indicator-pattern/">Carbon’s status indicators</a>. Against: <a href="https://design-system.service.gov.uk/components/task-list/">GOV.UK’s task list</a> leaves “Completed” uncoloured; Material’s and Carbon’s steppers fill done with the primary colour.</td><td>Decided: green, to set done apart from the step in hand (decision 104 amended)</td></tr>
                 <tr><td>Pending muted</td><td>Material: inactive circle in 38% black. Carbon: not started is an outlined grey circle (ours is a muted fill).</td><td>Backed</td></tr>
                 <tr><td>Attention: a warning, in danger colours</td><td>Material and Carbon both have an error state. GOV.UK task list: “There is a problem” is the only status in red.</td><td>Backed</td></tr>
