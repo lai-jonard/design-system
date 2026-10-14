@@ -24,12 +24,6 @@
     .anatomy-list li { margin: var(--la-space-xs) 0; }
 
     /* ── In context ───────────────────────────────────── */
-    .ctx { width: 100%; max-width: 560px; }
-    .ctx-q { margin: 0; font-size: var(--la-font-size-lg); font-weight: var(--la-font-weight-medium); color: var(--la-color-text); }
-    .ctx-src { display: flex; align-items: center; gap: var(--la-space-xs); margin: var(--la-space-xs) 0 var(--la-space-sm); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
-    .each-row { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--la-space-xs) var(--la-space-md); padding: var(--la-space-sm) 0; border-top: 1px solid var(--la-color-border-light); }
-    .each-row:last-child { border-bottom: 1px solid var(--la-color-border-light); }
-    .each-name { font-size: var(--la-font-size-md); font-weight: var(--la-font-weight-medium); color: var(--la-color-text); }
     .form-row { display: flex; flex-wrap: wrap; align-items: flex-end; gap: var(--la-space-md); }
     .form-field { display: flex; flex-direction: column; gap: var(--la-space-2xs); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
     .view-bar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--la-space-md); width: 100%; max-width: 560px; }
@@ -281,15 +275,8 @@
         </div>
 
         <div id="snap-context" class="preview-group">
-          <div class="preview-label">In context: one answer per person on a Review, Decide &amp; Confirm step (as <code>la-people-answer</code> draws it), in a form, and a view switch</div>
+          <div class="preview-label">In context: in a form, and a view switch</div>
           <div class="preview-frame preview-frame--stack" style="padding:24px;gap:32px;">
-            <div class="ctx">
-              <p class="ctx-q">Which exemption does each angel fit?</p>
-              <p class="ctx-src"><i class="ph ph-database" aria-hidden="true"></i>Your investors, from Cap table</p>
-              <div class="each-row"><span class="each-name">Example Ventures LP</span><la-segmented size="sm" label="Example Ventures LP"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
-              <div class="each-row"><span class="each-name">Priya Shah</span><la-segmented size="sm" label="Priya Shah" value="unsure"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
-              <div class="each-row"><span class="each-name">Owen Hart</span><la-segmented size="sm" label="Owen Hart"><la-segment value="hnw">High-net-worth</la-segment><la-segment value="ssi">Self-certified sophisticated</la-segment><la-segment value="unsure">Not sure</la-segment></la-segmented></div>
-            </div>
             <div class="form-row">
               <la-input label="Employee name" placeholder="Priya Shah"></la-input>
               <la-select label="Contract" placeholder="Choose"><la-option value="perm">Permanent</la-option><la-option value="fixed">Fixed term</la-option></la-select>
@@ -495,6 +482,7 @@
                 <tr><td><code>--la-shadow-xs</code></td><td>The picked segment’s lift.</td></tr>
                 <tr><td><code>--la-color-text-secondary</code></td><td>An unpicked label.</td></tr>
                 <tr><td><code>--la-color-text</code></td><td>A hovered or picked label.</td></tr>
+                <tr><td><code>--la-font-weight-semibold</code></td><td>The picked label (decision 150).</td></tr>
                 <tr><td><code>--la-color-text-disabled</code></td><td>A disabled segment’s label.</td></tr>
                 <tr><td><code>--la-radius-md</code></td><td>The track’s corners.</td></tr>
                 <tr><td><code>--la-radius-sm</code></td><td>A segment’s corners.</td></tr>
@@ -514,39 +502,21 @@
 
           <div id="usage" class="docs-section">
             <h3>Usage examples</h3>
-            <p>One answer per person on a playbook step, as <code>la-people-answer</code> draws it. Nothing is picked until the founder picks.</p>
-            <div class="docs-code"><span class="kw">&lt;la-segmented</span> <span class="at">size</span>=<span class="str">"sm"</span> <span class="at">label</span>=<span class="str">"Priya Shah"</span> <span class="at">value</span>=<span class="str">""</span><span class="kw">&gt;</span>
-  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"hnw"</span><span class="kw">&gt;</span>High-net-worth<span class="kw">&lt;/la-segment&gt;</span>
-  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"ssi"</span><span class="kw">&gt;</span>Self-certified sophisticated<span class="kw">&lt;/la-segment&gt;</span>
-  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"unsure"</span><span class="kw">&gt;</span>Not sure<span class="kw">&lt;/la-segment&gt;</span>
-<span class="kw">&lt;/la-segmented&gt;</span></div>
-            <p style="margin-top:16px;">In a form, beside <code>la-input</code> and <code>la-select</code> at the same height. The page reads <code>value</code>, or listens for <code>la-change</code>.</p>
-            <div class="docs-code"><span class="kw">&lt;la-input</span> <span class="at">label</span>=<span class="str">"Employee name"</span><span class="kw">&gt;&lt;/la-input&gt;</span>
-<span class="kw">&lt;la-select</span> <span class="at">label</span>=<span class="str">"Contract"</span><span class="kw">&gt;</span>…<span class="kw">&lt;/la-select&gt;</span>
-<span class="kw">&lt;la-segmented</span> <span class="at">label</span>=<span class="str">"Hours"</span> <span class="at">value</span>=<span class="str">"full"</span><span class="kw">&gt;</span>
+            <p>A short choice in a form. Nothing is picked until someone picks.</p>
+            <div class="docs-code"><span class="kw">&lt;la-segmented</span> <span class="at">label</span>=<span class="str">"Hours"</span> <span class="at">value</span>=<span class="str">""</span><span class="kw">&gt;</span>
   <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"full"</span><span class="kw">&gt;</span>Full time<span class="kw">&lt;/la-segment&gt;</span>
   <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"part"</span><span class="kw">&gt;</span>Part time<span class="kw">&lt;/la-segment&gt;</span>
 <span class="kw">&lt;/la-segmented&gt;</span></div>
-            <p style="margin-top:16px;">A view switch with icons. A view switch sets <code>value</code>; an answer never does.</p>
-            <div class="docs-code"><span class="kw">&lt;la-segmented</span> <span class="at">label</span>=<span class="str">"View"</span> <span class="at">value</span>=<span class="str">"list"</span><span class="kw">&gt;</span>
-  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"grid"</span> <span class="at">hide-label</span><span class="kw">&gt;</span><span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-squares-four"</span><span class="kw">&gt;&lt;/i&gt;</span>Grid<span class="kw">&lt;/la-segment&gt;</span>
-  <span class="kw">&lt;la-segment</span> <span class="at">value</span>=<span class="str">"list"</span> <span class="at">hide-label</span><span class="kw">&gt;</span><span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-list"</span><span class="kw">&gt;&lt;/i&gt;</span>List<span class="kw">&lt;/la-segment&gt;</span>
-<span class="kw">&lt;/la-segmented&gt;</span></div>
-          </div>
-
-          <div class="docs-divider"></div>
-
-          <div id="notes" class="docs-section">
             <h3>Notes</h3>
             <ul>
-              <li><strong>When to use.</strong> Two to five short options, picked inline, where every option should stay in sight: the answer per person on a step, or a switch between views or modes on a workbench or toolbar.</li>
+              <li><strong>When to use.</strong> Two to five short options, picked inline, where every option should stay in sight: a short choice in a form, or a switch between views or modes on a workbench or toolbar. One answer per person on a playbook step is <code>la-choice</code> radios, not this (decision 150).</li>
               <li><strong>Not this.</strong> Options that need a description or a <em>Recommended</em> mark are <code>la-choice</code> in a radiogroup. Six or more options, or long labels, are <code>la-select</code>. Moving between pages or panels is <code>la-tabs</code>, and a single on or off is <code>la-switch</code>. Don’t wrap a disabled control in <code>la-tooltip</code> to say why: it swallows the hover, so use <code>disabled-message</code>.</li>
               <li><strong>Neutral.</strong> The picked segment is raised, never primary or a status colour, because on a playbook step the pick is the founder’s answer, not our verdict (decision 117). Nothing is picked until someone picks.</li>
               <li><strong>Where it differs from Astryx, on purpose.</strong> Astryx always has one option picked; here nothing is picked until someone picks, and a view switch sets <code>value</code>. Astryx truncates a long label; here it wraps, because the founder has to read the whole answer.</li>
-              <li><strong>Contrast, deferred (Jonard, 8 October 2026).</strong> Labels meet 4.5:1 in every state, an icon with no label 3:1, and the focus ring 3:1. The picked segment is told apart by its raised white (1.09:1 on the track) and a darker label (2.03:1 against the unpicked one), below the 3:1 Astryx asks for where people rely on the selected look. A 3:1 edge on the picked segment is the likely fix; it isn’t added for now.</li>
+              <li><strong>Contrast, deferred (Jonard, 8 October 2026).</strong> Labels meet 4.5:1 in every state, an icon with no label 3:1, and the focus ring 3:1. The picked segment is told apart by its raised white (1.09:1 on the track) and a darker label (2.03:1 against the unpicked one), below the 3:1 Astryx asks for where people rely on the selected look. Since 14 October 2026 the picked label is also semibold, so the pick doesn’t rest on colour alone (decision 150). A 3:1 edge on the picked segment is still the likely fix; it isn’t added for now.</li>
               <li><strong>Keyboard and ARIA.</strong> The host is <code>role="radiogroup"</code> named by <code>label</code>, and each segment is <code>role="radio"</code> with <code>aria-checked</code>. One tab stop: the picked segment, or the first enabled one. Arrow keys move and pick (Left and Up go back, Right and Down go on, wrapping round), Home and End go to the ends, and Space or Enter picks the focused segment. Disabled segments are skipped and carry <code>aria-disabled</code>. With <code>disabled-message</code> the control keeps a tab stop and is described by the message. Under forced colours the picked segment gets an outline.</li>
               <li><strong>Targets and motion.</strong> Each segment pads to 44px on a touch screen. Background, colour and shadow change on <code>--dur-fast</code> <code>--ease</code>, and are instant under <code>prefers-reduced-motion</code>.</li>
-              <li><strong>Consumers.</strong> <code>la-people-answer</code> (one answer per person, <code>sm</code>).</li>
+              <li><strong>Consumers.</strong> None in the system since 14 October 2026: <code>la-people-answer</code> answers per person with <code>la-choice</code> radios (decision 150).</li>
             </ul>
           </div>
 

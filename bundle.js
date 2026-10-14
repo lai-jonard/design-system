@@ -2482,8 +2482,24 @@
           this.invalid = false;
           this.filled = false;
           this.description = '';
+          /** `radio` for one answer (decision 141): role radio, a pick that a second
+           *  press keeps, one tab stop for the group, and the arrow keys. Left empty,
+           *  a choice inside a `role="radiogroup"` is a radio and any other is a
+           *  checkbox. The look is the same either way: the round mark and its tick. */
+          this.type = '';
           this._handleClick = () => {
-              this.checked = !this.checked;
+              if (this._radio) {
+                  /* A second press keeps the pick; another answer replaces it. */
+                  if (this.checked)
+                      return;
+                  for (const c of this._peers())
+                      if (c !== this)
+                          c.checked = false;
+                  this.checked = true;
+              }
+              else {
+                  this.checked = !this.checked;
+              }
               this.dispatchEvent(new CustomEvent('la-change', {
                   detail: { checked: this.checked },
                   bubbles: true,
@@ -2491,20 +2507,62 @@
               }));
           };
           this._handleKeydown = (e) => {
+              if (this._radio) {
+                  const step = { ArrowDown: 1, ArrowRight: 1, ArrowUp: -1, ArrowLeft: -1 }[e.key];
+                  if (step) {
+                      /* The arrows move and pick, wrapping at the ends (APG radio group). */
+                      e.preventDefault();
+                      const peers = this._peers();
+                      const next = peers[(peers.indexOf(this) + step + peers.length) % peers.length];
+                      next.focus();
+                      next._handleClick();
+                      return;
+                  }
+                  if (e.key === ' ') {
+                      e.preventDefault();
+                      this._handleClick();
+                  }
+                  return;
+              }
               if (e.key === ' ' || e.key === 'Enter') {
                   e.preventDefault();
                   this._handleClick();
               }
           };
       }
+      get _radio() {
+          return this.type ? this.type === 'radio' : !!this._group;
+      }
+      get _group() {
+          return this.closest('[role="radiogroup"]');
+      }
+      /** The radios that share this one's group, in order. */
+      _peers() {
+          const group = this._group;
+          if (!group)
+              return [this];
+          return Array.from(group.querySelectorAll('la-choice')).filter((c) => c.closest('[role="radiogroup"]') === group && c._radio);
+      }
+      /** One tab stop: the picked radio, or the first when none is picked. */
+      _syncGroup() {
+          if (!this._radio)
+              return;
+          const peers = this._peers();
+          const stop = peers.find((c) => c.checked) ?? peers[0];
+          for (const c of peers)
+              c.setAttribute('tabindex', c === stop ? '0' : '-1');
+      }
       connectedCallback() {
           super.connectedCallback();
-          if (!this.hasAttribute('role'))
-              this.setAttribute('role', 'checkbox');
           if (!this.hasAttribute('tabindex'))
               this.setAttribute('tabindex', '0');
           this.addEventListener('click', this._handleClick);
           this.addEventListener('keydown', this._handleKeydown);
+          /* The group's other choices may not be connected yet. */
+          queueMicrotask(() => {
+              this.setAttribute('role', this._radio ? 'radio' : 'checkbox');
+              this._syncGroup();
+          });
       }
       disconnectedCallback() {
           super.disconnectedCallback();
@@ -2512,9 +2570,14 @@
           this.removeEventListener('keydown', this._handleKeydown);
       }
       updated(changed) {
+          if (changed.has('type')) {
+              this.setAttribute('role', this._radio ? 'radio' : 'checkbox');
+          }
           if (changed.has('checked')) {
               this.setAttribute('aria-checked', String(this.checked));
           }
+          if (changed.has('checked') || changed.has('type'))
+              this._syncGroup();
       }
       render() {
           const rowClass = `row${this.variant === 'contained' ? ' row--contained' : ''}`;
@@ -2635,6 +2698,9 @@
   __decorate$1I([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
+  __decorate$1I([
+      n({ reflect: true })
+  ], exports.LaChoice.prototype, "type", void 0);
   exports.LaChoice = __decorate$1I([
       t$2('la-choice')
   ], exports.LaChoice);
@@ -2992,8 +3058,13 @@
    * --la-color-text-faint and a bent arrow in --la-color-text-muted, in both
    * registers. Our own design: no other system has a skipped look.
    *
+   * Gated: a step that can't start yet, its lock in --la-color-text-faint and
+   * "Cannot start yet" for its name. A playbook run's later steps, which wait
+   * their turn, show it, with the reason in words beside them (decision 152,
+   * PS2).
+   *
    * Processing waits for after launch: it was Auto mode's, which isn't in
-   * Phase B.
+   * Phase B. la-playbook-step no longer uses it (decision 152, PS5).
    *
    * A display marker, named for assistive tech ("Step 3: Completed", in
    * GOV.UK's task status words). `label=""` makes it decorative, for a row
@@ -3360,6 +3431,15 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  /**
+   * la-textarea — a multi-line answer that grows with its text, between
+   * `min-rows` and `max-rows`.
+   *
+   * Typing stops at `maxlength`, and the count turns red there (decision 149,
+   * TA1, as built). An optional field takes `optional` and draws la-input's
+   * *Optional* tag (decision 149, TA2). It's never checked as it's left: a form
+   * checks when its button is pressed and sets `error` (decision 156).
+   */
   exports.LaTextarea = class LaTextarea extends i$3 {
       constructor() {
           super(...arguments);
@@ -3370,6 +3450,7 @@
           this.label = '';
           this.hint = '';
           this.required = false;
+          this.optional = false;
           this.disabled = false;
           this.error = false;
           this.rows = 3;
@@ -3434,7 +3515,7 @@
             <label for=${this._inputId}>
               ${this.label}${this.required
                 ? b `<span class="req" aria-hidden="true">*</span>`
-                : ''}
+                : ''}${this.optional ? b `<span class="opt">Optional</span>` : ''}
             </label>
           `
             : ''}
@@ -3478,6 +3559,12 @@
       .req {
         color: var(--la-color-danger);
         margin-left: 2px;
+      }
+      /* la-input's Optional tag, the same markup and style (decision 149, TA2). */
+      .opt {
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text-muted);
+        margin-left: var(--la-space-xs);
       }
       textarea {
         display: block;
@@ -3556,6 +3643,9 @@
   __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "required", void 0);
+  __decorate$1D([
+      n({ type: Boolean })
+  ], exports.LaTextarea.prototype, "optional", void 0);
   __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "disabled", void 0);
@@ -6008,11 +6098,14 @@
       :host(:hover) .seg {
         color: var(--la-color-text);
       }
-      /* Picked: raised on the track, in the text colour. Never a status
-         colour: what was picked is the person's answer, not a result. */
+      /* Picked: raised on the track, in the text colour, the label semibold
+         (decision 150, PA3, as Primer and Astryx). Never a status colour:
+         what was picked is the person's answer, not a result. The label
+         widens a little as it's picked; that was accepted. */
       :host([checked]) .seg {
         background-color: var(--la-color-bg);
         color: var(--la-color-text);
+        font-weight: var(--la-font-weight-semibold);
         box-shadow: var(--la-shadow-xs);
       }
       :host(:focus-visible) {
@@ -6068,10 +6161,9 @@
    * not navigation: it sits in a form beside la-input and la-select, at their
    * heights, and gives the page a `value`, as they do. Moving between panels or
    * pages is la-tabs, even in its segmented look. A radio group drawn as a
-   * single track, for answers that sit inline: the answer per
-   * person on a Review, Decide & Confirm step ("High-net-worth · Self-certified
-   * sophisticated · Not sure"), or a switch between views or modes where every
-   * option should stay in sight.
+   * single track, for short answers that sit inline, or a switch between views
+   * or modes where every option should stay in sight. One answer per person on
+   * a step is la-choice radios, not this (decision 150, PA4).
    *
    * The limits follow Astryx's SegmentedControl (Meta, v0.6.6), which this
    * control is modelled on: two to five options, three sizes, a layout that
@@ -6084,11 +6176,11 @@
    * off is la-switch.
    *
    * Neutral by design. The track is --la-color-bg-muted; the picked segment is
-   * raised in --la-color-bg with --la-shadow-xs, never primary or a status
-   * colour, so a founder's answer never reads as our verdict (Phase B brief,
-   * Screen 1). Nothing is picked until someone picks: unlike Astryx, which
-   * always has one option picked, an answer is never chosen for the founder
-   * (decision 117). A view switch sets `value`.
+   * raised in --la-color-bg with --la-shadow-xs and a semibold label (decision
+   * 150), never primary or a status colour, so a founder's answer never reads
+   * as our verdict (Phase B brief, Screen 1). Nothing is picked until someone
+   * picks: unlike Astryx, which always has one option picked, an answer is
+   * never chosen for the founder (decision 117). A view switch sets `value`.
    *
    * Accessible as role="radiogroup" named by `label`; each segment is
    * role="radio" with aria-checked. One tab stop: the picked segment, or the
@@ -6103,10 +6195,9 @@
    * has to read (Astryx truncates instead).
    *
    * Usage:
-   *   <la-segmented label="Priya Shah" value="unsure">
-   *     <la-segment value="hnw">High-net-worth</la-segment>
-   *     <la-segment value="ssi">Self-certified sophisticated</la-segment>
-   *     <la-segment value="unsure">Not sure</la-segment>
+   *   <la-segmented label="View" value="grid">
+   *     <la-segment value="grid">Grid</la-segment>
+   *     <la-segment value="list">List</la-segment>
    *   </la-segmented>
    *
    * @prop value           - the picked segment's value; "" when none is picked
@@ -6609,6 +6700,38 @@
       t$2('la-input')
   ], exports.LaInput);
 
+  /**
+   * One formatter for every date the system prints (decision 145).
+   *
+   * The reader's locale, the month as a word, at the medium length:
+   * *15 Apr 2026* in en-GB, *Apr 15, 2026* in en-US. The year is shown only
+   * when it isn't this year: *6 Oct*. ISO stays in the data and is never shown.
+   */
+  /** The reader's locale: the browser's, whoever the company is (decision 145, 4). */
+  function readerLocale() {
+      return (typeof navigator !== 'undefined' && navigator.language) || 'en-GB';
+  }
+  /** Parse an ISO date (`2026-10-06`) as a local calendar day, not UTC midnight. */
+  function toDate(value) {
+      if (value instanceof Date)
+          return isNaN(value.getTime()) ? null : value;
+      const m = /^(\d{4})-(\d{2})-(\d{2})$/.exec(value);
+      const d = m ? new Date(+m[1], +m[2] - 1, +m[3]) : new Date(value);
+      return isNaN(d.getTime()) ? null : d;
+  }
+  /** A date as the reader writes it; what can't be read as a date is returned as given. */
+  function formatDate(value, locale = readerLocale(), today = new Date()) {
+      const d = toDate(value);
+      if (!d)
+          return String(value);
+      const sameYear = d.getFullYear() === today.getFullYear();
+      return new Intl.DateTimeFormat(locale, {
+          day: 'numeric',
+          month: 'short',
+          ...(sameYear ? {} : { year: 'numeric' }),
+      }).format(d);
+  }
+
   var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -6621,12 +6744,23 @@
    * This component deliberately does not open a calendar. A future date picker
    * can compose it as its text-entry surface, while a date range can compose two
    * instances and own start/end validation.
+   *
+   * The parts follow the reader's locale, from the browser (decisions 145 and
+   * 149): day first in en-GB, month first in en-US. Each part is labelled, and
+   * the format is always in the hint, never only the placeholder.
+   *
+   * It checks only when the page asks (decisions 149 and 156): `check()`, on
+   * Next or submit, shows what's wrong and returns false. Not as the date is
+   * typed or left, and typing never moves on by itself. A message, once shown,
+   * clears as soon as the date is put right. `check()` returns true when the
+   * date is whole, real and inside `min`/`max`, or empty and not `required`.
    */
   exports.LaDateInput = class LaDateInput extends i$3 {
       constructor() {
           super(...arguments);
           this._dateValue = '';
-          this.locale = 'en-US';
+          /** The reader's browser locale by default, not en-US (decision 145). */
+          this.locale = readerLocale();
           this.label = '';
           this.hint = '';
           this.min = '';
@@ -6641,6 +6775,8 @@
           this._year = '';
           this._message = '';
           this._settingValue = false;
+          /* `error` set by check(), which a fix clears; an error the page sets stays. */
+          this._ownError = false;
           this._hintId = `la-date-hint-${Math.random().toString(36).slice(2, 8)}`;
       }
       get value() { return this._dateValue; }
@@ -6659,9 +6795,18 @@
               this._syncFromValue();
           this._settingValue = false;
       }
+      /* A locale the browser can't read falls back to the reader's own. */
+      _locale() {
+          try {
+              return Intl.DateTimeFormat.supportedLocalesOf(this.locale).length ? this.locale : readerLocale();
+          }
+          catch (_) {
+              return readerLocale();
+          }
+      }
       _order() {
           try {
-              const parts = new Intl.DateTimeFormat(this.locale, {
+              const parts = new Intl.DateTimeFormat(this._locale(), {
                   year: 'numeric', month: '2-digit', day: '2-digit', timeZone: 'UTC',
               }).formatToParts(new Date(Date.UTC(2006, 10, 22)));
               const order = parts
@@ -6671,9 +6816,9 @@
                   return order;
           }
           catch (_) {
-              // Fall through to the documented component default.
+              // Fall through to day, month, year.
           }
-          return ['month', 'day', 'year'];
+          return ['day', 'month', 'year'];
       }
       _formatHint() {
           return this._order().map(part => part === 'year' ? 'YYYY' : part === 'month' ? 'MM' : 'DD').join('/');
@@ -6683,7 +6828,7 @@
           this._year = match ? match[1] : '';
           this._month = match ? match[2] : '';
           this._day = match ? match[3] : '';
-          this._message = '';
+          this._clearMessage();
       }
       _partValue(part) {
           return part === 'month' ? this._month : part === 'day' ? this._day : this._year;
@@ -6713,7 +6858,7 @@
         aria-invalid=${this._invalid() ? 'true' : 'false'}
         .value=${this._partValue(part)}
         ?disabled=${this.disabled}
-        @input=${(event) => this._onInput(part, index, event)}
+        @input=${(event) => this._onInput(part, event)}
         @keydown=${(event) => this._onKeydown(part, index, event)}
         @paste=${this._onPaste}
       />`;
@@ -6721,17 +6866,15 @@
       _inputs() {
           return Array.from(this.renderRoot.querySelectorAll('input[data-part]'));
       }
-      _onInput(part, index, event) {
+      _onInput(part, event) {
           const input = event.currentTarget;
           const maxLength = part === 'year' ? 4 : 2;
           const digits = input.value.replace(/\D/g, '').slice(0, maxLength);
           input.value = digits;
           this._setPart(part, digits);
-          this._message = '';
           this._commit();
-          if (digits.length === maxLength && event.inputType !== 'deleteContentBackward') {
-              this._inputs()[index + 1]?.focus();
-          }
+          /* No moving on as a part fills (decision 149, DI4): `/`, `-`, Tab and
+             the arrow keys move between the parts. */
       }
       _onKeydown(part, index, event) {
           const input = event.currentTarget;
@@ -6770,14 +6913,16 @@
           this._commit();
           this.requestUpdate();
       }
+      /* Every part typed. A one-digit day or month counts: without moving on by
+         itself, "1" then Tab is how January is typed. */
       _complete() {
-          return this._month.length === 2 && this._day.length === 2 && this._year.length === 4;
+          return Boolean(this._month && this._day && this._year);
       }
       _iso() {
-          return `${this._year}-${this._month}-${this._day}`;
+          return `${this._year}-${this._month.padStart(2, '0')}-${this._day.padStart(2, '0')}`;
       }
       _validDate() {
-          if (!this._complete())
+          if (!this._complete() || this._year.length !== 4)
               return false;
           const year = Number(this._year);
           const month = Number(this._month);
@@ -6792,26 +6937,57 @@
               return `Enter a date on or before ${this._displayConstraint(this.max)}.`;
           return '';
       }
+      /* Dates in messages follow decision 145: the reader's locale, the month a
+         word, the year only when it isn't this year. */
       _displayConstraint(iso) {
-          const [year, month, day] = iso.split('-').map(Number);
-          if (!year || !month || !day)
-              return iso;
-          return new Intl.DateTimeFormat(this.locale, { dateStyle: 'medium', timeZone: 'UTC' })
-              .format(new Date(Date.UTC(year, month - 1, day)));
+          return formatDate(iso, this._locale());
       }
+      /** What's wrong, verb first and never *valid* (decision 149, DI5); '' when
+       *  nothing is. */
+      _problem() {
+          const missing = this._order().filter(part => !this._partValue(part));
+          if (missing.length === 3) {
+              /* Placeholder, on DI5's pattern, for Jonard: the decision gives no words
+                 for a required date left empty. */
+              return this.required ? 'Enter the date.' : '';
+          }
+          /* Two parts missing is named as one message, in the locale's order;
+             placeholder on DI5's pattern ("Enter the month."), for Jonard. */
+          if (missing.length)
+              return `Enter the ${missing.join(' and ')}.`;
+          if (!this._validDate())
+              return 'Enter a real date.';
+          return this._constraintMessage(this._iso());
+      }
+      /** Check the date now, as the page asks on Next or submit (decisions 149
+       *  and 156): show the message, set `error`, and say whether it passes. */
+      check() {
+          this._message = this._problem();
+          this._ownError = Boolean(this._message);
+          this.error = this._ownError;
+          return !this._message;
+      }
+      _clearMessage() {
+          this._message = '';
+          if (this._ownError)
+              this.error = false;
+          this._ownError = false;
+      }
+      /* Never checked as it's typed: the value is ISO only when the date is
+         whole, real and inside its bounds, but no message shows until check().
+         A message already shown clears as soon as the date is put right
+         (decision 156, point 4). */
       _commit() {
           let next = '';
           let valid = false;
-          if (this._complete() && this._validDate()) {
+          if (this._validDate()) {
               next = this._iso();
-              this._message = this._constraintMessage(next);
-              valid = !this._message;
+              valid = !this._constraintMessage(next);
               if (!valid)
                   next = '';
           }
-          else if (this._complete()) {
-              this._message = 'Enter a valid date.';
-          }
+          if (this._message && !this._problem())
+              this._clearMessage();
           this._settingValue = true;
           this._dateValue = next;
           this.dispatchEvent(new CustomEvent('la-change', {
@@ -6819,16 +6995,6 @@
               bubbles: true,
               composed: true,
           }));
-      }
-      _onFocusOut() {
-          window.setTimeout(() => {
-              if (this.renderRoot instanceof ShadowRoot && this.renderRoot.activeElement)
-                  return;
-              const hasPartialValue = Boolean(this._month || this._day || this._year);
-              if (hasPartialValue && !this._complete()) {
-                  this._message = `Enter the full date as ${this._formatHint()}.`;
-              }
-          }, 0);
       }
       _invalid() {
           return this.error || Boolean(this._message);
@@ -6840,9 +7006,11 @@
           const order = this._order();
           const fallbackLabel = this.ariaLabel || 'Date';
           const format = this._formatHint();
-          const hint = this._message || this.hint || format;
+          /* The format is always in the hint (decision 145, 3); the page's own hint
+             comes first. A message takes the hint's place in the same live region. */
+          const hint = this._message || (this.hint ? `${this.hint} · ${format}` : format);
           return b `
-      <fieldset ?disabled=${this.disabled} @focusout=${this._onFocusOut}>
+      <fieldset ?disabled=${this.disabled}>
         <legend class=${this.label ? '' : 'sr-only'}>
           ${this.label || fallbackLabel}${this.required ? b `<span class="req" aria-hidden="true">*</span>` : ''}${this.optional ? b `<span class="opt">Optional</span>` : ''}
         </legend>
@@ -14901,44 +15069,50 @@
    * la-ai-insight — the framed LawAdvisor AI output panel (the "X3" pattern).
    *
    * One component for every "LawAdvisor AI recommends / has drafted / flagged …"
-   * block in the product: a header carrying the brand mark and an attributed
-   * headline, a body for the detail, and a footer where the human can act on the
+   * block in the product: a head carrying the LawAdvisor mark and an attributed
+   * headline, a body for the detail, and a foot where the human can act on the
    * output. Keeps AI framing honest and human-in-the-loop: the AI assists in the
-   * header, the human decides in the footer. Every AI output is rateable,
-   * disagreeable-with, and amendable.
+   * head, the human decides in the foot. The mark always comes with the name
+   * (decision 144): `attribution` is *LawAdvisor AI* by default, and a page
+   * that clears it names LawAdvisor AI in its `headline`.
    *
-   * The footer carries the three X3 controls — **Rate** ("Was this helpful?",
-   * optionally required before the step's primary CTA fires), **Disagree**
-   * ("Something's wrong" → inline reason, logged, step can still proceed), and
-   * **Amend** ("Edit" → inline edit → "Save edits", leaving a persistent "Edited
-   * by {user} on {date}" stamp). Disagreement and amendments feed model training,
-   * not just a satisfaction score. The controls are deliberately subdued (ghost /
-   * tertiary) so they never compete with the step's primary CTA.
+   * The foot is the same at every size (decision 151, AI2) and carries:
+   * - **Thumbs** ("Was this helpful?", `rateable`). Thumbs-down opens an
+   *   optional *What was wrong?* (AI1, decision 102's stars amended); that is
+   *   also how the founder says something's wrong, with no separate control
+   *   (AI3). The picked thumb stays filled, and screen readers hear
+   *   *Feedback sent* (AI4). Rating is always optional (AI5).
+   * - **Edit** (`amendable`): the output opens as a field. Once saved it's the
+   *   founder's: the AI frame drops (no mark, name or wash), and the foot says
+   *   *Your version* with Undo, which brings the suggestion back (AI6, as
+   *   decision 129).
+   * The controls are deliberately subdued (ghost / tertiary) so they never
+   * compete with the step's primary CTA.
    *
    * Body content goes in the default slot; `description` is the plain-text
    * fallback. The header reads "{attribution} {headline}" — attribution defaults
    * to "LawAdvisor AI" so the branding is owned by the component, not retyped.
    *
    * @prop headline      - The action phrase, e.g. "drafted 22 separation packets…"
-   * @prop attribution   - Brand prefix in the header. Default: "LawAdvisor AI". Set "" to omit.
+   * @prop attribution   - Brand prefix in the header. Default: "LawAdvisor AI". Set "" only when the headline names LawAdvisor AI.
    * @prop description   - Plain-text body, used when the default slot is empty.
-   * @prop rateable      - Boolean; show the "Was this helpful?" thumbs up/down in the footer.
+   * @prop rateable      - Boolean; show "Was this helpful?" and the thumbs in the foot.
    * @prop rating        - Current rating: 0 = unrated · 1 = thumbs up · 2 = thumbs down.
-   * @prop rate-required - Boolean; rating is required before the host's primary CTA — gate it with `la-rate-state`.
-   * @prop disagreeable  - Boolean; show the "Something's wrong" Disagree control.
-   * @prop amendable     - Boolean; show the "Edit" Amend control and persist the edit stamp.
-   * @prop edited-by     - Who last amended the output (drives the "Edited by …" stamp).
-   * @prop edited-at     - When it was last amended, e.g. "14 Apr 2026 · 09:47 AM MT".
+   * @prop disagreeable  - Boolean; the founder can say it's wrong. Since decision 151 (AI3) that is
+   *                       thumbs-down and its reason, so it shows the thumbs as `rateable` does.
+   * @prop amendable     - Boolean; show "Edit".
+   * @prop amended       - The founder's version of the output. Set, the AI frame drops and Undo shows;
+   *                       the component sets it on "Save edits", a page sets it to restore a saved edit.
    * @slot               - Body content (overrides `description`).
-   * @slot actions       - Footer actions, right-aligned (e.g. a "View source" button).
-   * @fires la-rate       - {rating:number} when the user picks a thumbs rating (0/1/2).
-   * @fires la-rate-state - {rated:boolean} whenever the rated state changes — host gates its primary CTA on this.
-   * @fires la-disagree   - {reason:string} when the user logs a disagreement.
-   * @fires la-amend      - {value:string} when the user saves an amended body.
+   * @slot actions       - The page's own actions in the foot (e.g. a "View source" button).
+   * @fires la-rate        - {rating:number} when the user picks a thumb (0 = cleared, 1, 2).
+   * @fires la-disagree    - {reason:string} when the user sends a reason after thumbs-down.
+   * @fires la-amend       - {value:string} when the user saves an edit.
+   * @fires la-amend-undo  - Undo on the founder's version: the suggestion is back.
    *
    * @example
    * <la-ai-insight
-   *   rateable disagreeable amendable rate-required
+   *   rateable amendable
    *   headline="drafted 22 separation packets from the template, agreed terms and Workday profiles">
    *   Per group: business-reason document (shared). Per employee: redundancy letter +
    *   severance package (personalised, ADEA waiver for 40+). Review and approve before sending.
@@ -14952,26 +15126,28 @@
           this.description = '';
           /** Card scale. 'lg' is a roomier variant — larger radius, padding, and header. */
           this.size = 'default';
-          /** Omit the header band (brand mark + attribution + header controls). Use when
-           *  the slotted body already carries its own title and AI attribution. */
+          /** Omit the header band (brand mark + attribution). Use when the slotted
+           *  body already carries its own title and AI attribution. */
           this.noHead = false;
           this.rateable = false;
           this.rating = 0;
-          this.rateRequired = false;
           this.disagreeable = false;
           this.amendable = false;
-          this.editedBy = '';
-          this.editedAt = '';
+          this.amended = '';
           /** Whether the actions slot has assigned content. */
           this._hasActions = false;
-          /** Inline panel currently open in the footer (Disagree or Amend). */
+          /** Inline panel currently open under the foot: the reason, or the edit. */
           this._panel = 'none';
-          /** Working copy of the disagreement reason. */
-          this._disagreeReason = '';
-          /** Working copy of the amended body text. */
+          /** Working copy of the reason after thumbs-down. */
+          this._reason = '';
+          /** Working copy of the edited body text. */
           this._amendDraft = '';
-          /** Plain-text snapshot of the slotted/described body, for seeding the amend editor. */
+          /** Save edits was pressed with nothing written (decisions 140 and 156). */
+          this._amendEmpty = false;
+          /** Plain-text snapshot of the slotted/described body, for seeding the edit field. */
           this._bodyText = '';
+          /** What the polite live region says. */
+          this._said = '';
       }
       /** The LawAdvisor brand mark, inlined so the component carries no asset dependency. */
       _mark() {
@@ -14986,17 +15162,6 @@
       <path d="M67.5632 44.3996H76.7582V77.9996C76.7582 79.1042 75.8632 79.9996 74.7593 79.9996H69.5621C68.4581 79.9996 67.5632 79.1042 67.5632 77.9996V44.3996Z"/>
       <path d="M74.8028 2C74.8028 0.895432 75.6978 0 76.8017 0H78.0011C79.1051 0 80 0.895431 80 2V44.4H74.8028V2Z"/>
     </svg>`;
-      }
-      willUpdate(changed) {
-          // Keep the host's primary-CTA gate in sync whenever the rated state can
-          // change — a rating set externally, or rate-required being toggled on.
-          if (changed.has('rating') || changed.has('rateRequired')) {
-              this.dispatchEvent(new CustomEvent('la-rate-state', {
-                  detail: { rated: this.rating > 0 },
-                  bubbles: true,
-                  composed: true,
-              }));
-          }
       }
       _onActionsSlot(e) {
           const slot = e.target;
@@ -15014,50 +15179,92 @@
           if (text)
               this._bodyText = text;
       }
+      /** Focus a control in the shadow root once it's drawn; la-button and
+       *  la-icon-button don't delegate focus, so focus the button inside. */
+      async _focus(selector) {
+          await this.updateComplete;
+          const el = this.renderRoot.querySelector(selector);
+          if (!el)
+              return;
+          await el.updateComplete;
+          (el.shadowRoot?.querySelector('button, textarea') ?? el).focus();
+      }
+      /** The polite "Feedback sent" (decision 151, AI4): cleared first, so a
+       *  second piece of feedback is heard too. */
+      async _announce() {
+          this._said = '';
+          await this.updateComplete;
+          this._said = 'Feedback sent';
+      }
       _rate(n) {
           // Toggle off if the same thumb is tapped again.
           this.rating = this.rating === n ? 0 : n;
           this.dispatchEvent(new CustomEvent('la-rate', { detail: { rating: this.rating }, bubbles: true, composed: true }));
+          if (this.rating)
+              void this._announce();
+          // Thumbs-down asks what was wrong, optionally (decision 151, AI1).
+          this._reason = '';
+          if (this.rating === 2)
+              this._panel = 'reason';
+          else if (this._panel === 'reason')
+              this._panel = 'none';
       }
       get _bodySeed() {
           return this._bodyText || this.description;
-      }
-      _openDisagree() {
-          this._disagreeReason = '';
-          this._panel = this._panel === 'disagree' ? 'none' : 'disagree';
       }
       _openAmend() {
           if (this._panel === 'amend') {
               this._panel = 'none';
               return;
           }
-          this._amendDraft = this._bodySeed;
+          this._amendDraft = this.amended || this._bodySeed;
+          this._amendEmpty = false;
           this._panel = 'amend';
       }
-      _closePanel() {
-          this._panel = 'none';
-      }
-      _onDisagreeInput(e) {
-          this._disagreeReason = e.detail.value;
+      _onReasonInput(e) {
+          this._reason = e.detail.value;
       }
       _onAmendInput(e) {
           this._amendDraft = e.detail.value;
+          if (this._amendDraft.trim())
+              this._amendEmpty = false;
       }
-      _submitDisagree() {
-          const reason = this._disagreeReason.trim();
-          if (!reason)
-              return;
-          this.dispatchEvent(new CustomEvent('la-disagree', { detail: { reason }, bubbles: true, composed: true }));
+      /** The reason is optional: Send with nothing written closes, as Skip. */
+      _sendReason() {
+          const reason = this._reason.trim();
+          if (reason) {
+              this.dispatchEvent(new CustomEvent('la-disagree', { detail: { reason }, bubbles: true, composed: true }));
+              void this._announce();
+          }
+          this._skipReason();
+      }
+      _skipReason() {
           this._panel = 'none';
+          void this._focus('.thumb.down');
       }
+      _cancelAmend() {
+          this._panel = 'none';
+          void this._focus('.edit');
+      }
+      /** Checked on press, never disabled (decisions 140 and 156). */
       _saveAmend() {
           const value = this._amendDraft.trim();
-          if (!value)
+          if (!value) {
+              this._amendEmpty = true;
+              void this._focus('.panel-inline la-textarea');
               return;
+          }
           this.dispatchEvent(new CustomEvent('la-amend', { detail: { value }, bubbles: true, composed: true }));
+          this.amended = value;
           this._panel = 'none';
+          void this._focus('.undo');
       }
-      _renderStars() {
+      _undo() {
+          this.amended = '';
+          this.dispatchEvent(new CustomEvent('la-amend-undo', { bubbles: true, composed: true }));
+          void this._focus(this.amendable ? '.edit' : '.thumb');
+      }
+      _renderThumbs() {
           // rating: 0 = unrated, 1 = thumbs up, 2 = thumbs down
           return b `
       <div class="rate">
@@ -15085,49 +15292,21 @@
       </div>
     `;
       }
-      /** lg header controls — thumbs rating + an icon-only disagree, right-aligned. */
-      _renderHeaderControls() {
-          return b `
-      <div class="head-controls">
-        ${this.rateable ? this._renderStars() : A}
-        ${this.disagreeable
-            ? b `<button
-              type="button"
-              class="ctl-icon ${this._panel === 'disagree' ? 'on' : ''}"
-              title="Something's wrong"
-              aria-label="Something's wrong"
-              aria-pressed=${this._panel === 'disagree'}
-              @click=${this._openDisagree}
-            >
-              <i class="ph ph-warning-circle" aria-hidden="true"></i>
-            </button>`
-            : A}
-      </div>
-    `;
+      /** The founder's version: in place of the lasting "Edited by" stamp
+       *  (decision 151, AI6). "Your version" is the AI6 B option's line. */
+      _renderMine() {
+          return b `<span class="mine"
+      >Your version<la-icon-button class="undo" size="sm" label="Undo" @click=${this._undo}
+        ><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i></la-icon-button
+    ></span>`;
       }
-      /** Subdued, tertiary X3 controls — must never compete with the primary CTA. */
+      /** Subdued, tertiary controls — must never compete with the primary CTA. */
       _renderControls() {
           return b `
-      ${this.editedBy
-            ? b `<span class="edited-stamp"
-            ><i class="ph ph-pencil-simple" aria-hidden="true"></i>Edited by
-            ${this.editedBy}${this.editedAt ? b ` on ${this.editedAt}` : A}</span
-          >`
-            : A}
       <div class="ctl-row">
-        ${this.disagreeable
-            ? b `<la-button
-              variant="ghost"
-              size="sm"
-              aria-pressed=${this._panel === 'disagree'}
-              @click=${this._openDisagree}
-            >
-              <i slot="icon-left" class="ph ph-warning-circle" aria-hidden="true"></i>
-              Something's wrong
-            </la-button>`
-            : A}
         ${this.amendable
             ? b `<la-button
+              class="edit"
               variant="ghost"
               size="sm"
               aria-pressed=${this._panel === 'amend'}
@@ -15141,50 +15320,36 @@
       </div>
     `;
       }
-      _renderDisagreePanel() {
+      /* "Optional" and "Skip" are the AI1 B option's words (14 Oct 2026). */
+      _renderReasonPanel() {
           return b `<div class="panel-inline">
       <la-textarea
-        label="What's wrong with this output?"
-        hint="We log your feedback and use it to improve future drafts. You can still carry on with this step."
-        placeholder="Tell us what's wrong"
-        .value=${this._disagreeReason}
+        label="What was wrong?"
+        hint="Optional"
+        .value=${this._reason}
         min-rows="2"
-        @la-change=${this._onDisagreeInput}
+        @la-change=${this._onReasonInput}
       ></la-textarea>
       <div class="panel-actions">
-        <la-button variant="ghost" size="sm" @click=${this._closePanel}
-          >Cancel</la-button
-        >
-        <la-button
-          variant="secondary"
-          size="sm"
-          ?disabled=${!this._disagreeReason.trim()}
-          @click=${this._submitDisagree}
-          >Send Feedback</la-button
-        >
+        <la-button variant="ghost" size="sm" @click=${this._skipReason}>Skip</la-button>
+        <la-button variant="secondary" size="sm" @click=${this._sendReason}>Send feedback</la-button>
       </div>
     </div>`;
       }
       _renderAmendPanel() {
+          // The message is placeholder copy, for Bobby.
           return b `<div class="panel-inline">
       <la-textarea
         label="Edit this output"
-        hint="Your edits replace the draft and feed model training. We record who amended it and when."
+        hint=${this._amendEmpty ? 'Write your version, or cancel.' : ''}
+        ?error=${this._amendEmpty}
         .value=${this._amendDraft}
         min-rows="3"
         @la-change=${this._onAmendInput}
       ></la-textarea>
       <div class="panel-actions">
-        <la-button variant="ghost" size="sm" @click=${this._closePanel}
-          >Cancel</la-button
-        >
-        <la-button
-          variant="secondary"
-          size="sm"
-          ?disabled=${!this._amendDraft.trim()}
-          @click=${this._saveAmend}
-          >Save Edits</la-button
-        >
+        <la-button variant="ghost" size="sm" @click=${this._cancelAmend}>Cancel</la-button>
+        <la-button variant="secondary" size="sm" @click=${this._saveAmend}>Save edits</la-button>
       </div>
     </div>`;
       }
@@ -15192,33 +15357,31 @@
           const header = this.attribution
               ? b `<span class="attribution">${this.attribution}</span> ${this.headline}`
               : this.headline;
-          const hasControls = this.disagreeable || this.amendable || !!this.editedBy;
-          const footerClass = `footer ${this.rateable ? 'has-rate' : ''} ${this._hasActions || hasControls ? 'has-actions' : ''}`;
-          // lg places the rate + disagree controls on the header line (right edge);
-          // the default size keeps them in the footer. With no head, controls always
-          // fall to the footer.
-          const controlsInHeader = this.size === 'lg' && !this.noHead;
+          const edited = !!this.amended;
+          // Saying it's wrong is thumbs-down now (AI3), so disagreeable shows the thumbs.
+          const thumbs = (this.rateable || this.disagreeable) && !edited;
+          const hasFoot = edited || thumbs || this.amendable || this._hasActions;
           return b `
       ${iconStyles}
-      <div class="panel">
-        ${this.noHead
+      <div class="panel ${edited ? 'edited' : ''}">
+        ${this.noHead || edited
             ? A
             : b `<div class="head">
-          <span class="mark">${this._mark()}</span>
-          <span class="headline"><slot name="headline">${header}</slot></span>
-          ${controlsInHeader ? this._renderHeaderControls() : A}
-        </div>`}
-        <div class="body">
-          <slot @slotchange=${this._onBodySlot}>${this.description}</slot>
-        </div>
-        ${controlsInHeader
-            ? A
-            : b `<div class=${footerClass}>
-              ${this.rateable ? this._renderStars() : A}
-              <div class="actions">${this._renderControls()}</div>
+              <span class="mark">${this._mark()}</span>
+              <span class="headline"><slot name="headline">${header}</slot></span>
             </div>`}
-        ${this._panel === 'disagree' ? this._renderDisagreePanel() : A}
+        <div class="body">
+          ${edited
+            ? b `<p class="mine-text">${this.amended}</p>`
+            : b `<slot @slotchange=${this._onBodySlot}>${this.description}</slot>`}
+        </div>
+        <div class="footer ${hasFoot ? '' : 'empty'}">
+          ${edited ? this._renderMine() : thumbs ? this._renderThumbs() : A}
+          <div class="actions">${this._renderControls()}</div>
+        </div>
+        ${this._panel === 'reason' ? this._renderReasonPanel() : A}
         ${this._panel === 'amend' ? this._renderAmendPanel() : A}
+        <span class="sr-only" role="status">${this._said}</span>
       </div>
     `;
       }
@@ -15272,6 +15435,11 @@
         color: var(--la-color-text-muted);
         line-height: var(--la-line-height);
       }
+      /* The founder's version, as typed in the edit field. */
+      .mine-text {
+        margin: 0;
+        white-space: pre-line;
+      }
       .footer {
         display: flex;
         align-items: center;
@@ -15281,8 +15449,8 @@
         border-top: 1px solid var(--la-color-border-light);
         background: transparent;
       }
-      /* Hidden until there's something to show (rating or slotted actions). */
-      .footer:not(.has-rate):not(.has-actions) {
+      /* Hidden until there's something to show. */
+      .footer.empty {
         display: none;
       }
       /* ── lg — roomier card variant ────────────────────────────────────────── */
@@ -15294,7 +15462,7 @@
           linear-gradient(to top, var(--la-color-bg) 0%, var(--la-color-bg) 72%, transparent 100%),
           var(--la-gradient-ai-surface);
       }
-      /* Borderless + one consistent 24px left edge across head, body, and footer. */
+      /* Borderless + one consistent 24px left edge across head, body, and foot. */
       :host([size='lg']) .head {
         padding: var(--la-space-xl);
         border-bottom: none;
@@ -15311,36 +15479,17 @@
         padding: 0 var(--la-space-xl) var(--la-space-xl);
         border-top: none;
       }
-      /* lg — rate + disagree controls live on the header line, pushed right */
-      .head-controls {
-        margin-left: auto;
-        display: flex;
-        align-items: center;
-        gap: var(--la-space-md);
-        flex-shrink: 0;
+      :host([size='lg']) .panel-inline {
+        padding: var(--la-space-lg) var(--la-space-xl);
       }
-      .ctl-icon {
-        appearance: none;
-        background: none;
-        border: none;
-        padding: 4px;
-        margin: 0;
-        cursor: pointer;
-        color: var(--la-color-text-muted);
-        font-size: var(--la-font-size-base);
-        line-height: 1;
-        display: inline-flex;
-        border-radius: var(--la-radius-sm);
-        transition: color var(--dur-fast) var(--ease), background var(--dur-fast) var(--ease);
+      /* Edited, it's the founder's: the AI wash goes with the head
+         (decision 151, AI6). */
+      .panel.edited,
+      :host([size='lg']) .panel.edited {
+        background-image: none;
       }
-      .ctl-icon:hover,
-      .ctl-icon.on {
-        color: var(--la-color-text);
-        background: var(--la-color-bg-muted);
-      }
-      .ctl-icon:focus-visible {
-        outline: 2px solid var(--la-color-border-focus);
-        outline-offset: 1px;
+      :host([size='lg']) .panel.edited .body {
+        padding-top: var(--la-space-xl);
       }
       .rate {
         display: flex;
@@ -15389,29 +15538,23 @@
         align-items: center;
         gap: var(--la-space-sm);
       }
-      /* Footer-right cluster: slotted actions + the subdued X3 controls.
-         Ghost styling keeps them tertiary so they never compete with the
-         step's primary CTA. */
+      /* Footer-right cluster: Edit and the page's actions. Ghost styling
+         keeps them tertiary so they never compete with the step's primary CTA. */
       .ctl-row {
         display: flex;
         align-items: center;
         gap: var(--la-space-2xs);
       }
-
-      /* Persistent amendment provenance stamp. */
-      .edited-stamp {
+      /* "Your version" and Undo, as la-record-row's confirmed line. */
+      .mine {
         display: inline-flex;
         align-items: center;
-        gap: var(--la-space-2xs);
+        gap: var(--la-space-xs);
         font-size: var(--la-font-size-sm);
-        color: var(--la-color-text-muted);
-        margin-right: auto;
-      }
-      .edited-stamp i {
-        font-size: 12px;
+        color: var(--la-color-text-secondary);
       }
 
-      /* ── Inline Disagree / Amend panels ────────────────────── */
+      /* ── Inline reason / edit panels ───────────────────────── */
       .panel-inline {
         padding: var(--la-space-md) var(--la-space-lg);
         border-top: 1px solid var(--la-color-border-light);
@@ -15423,10 +15566,20 @@
         gap: var(--la-space-sm);
         margin-top: var(--la-space-sm);
       }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+      }
 
       @media (prefers-reduced-motion: reduce) {
-        .thumb,
-        .ctl-icon {
+        .thumb {
           transition: none;
         }
       }
@@ -15454,20 +15607,14 @@
       n({ type: Number })
   ], exports.LaAiInsight.prototype, "rating", void 0);
   __decorate$Q([
-      n({ type: Boolean, reflect: true, attribute: 'rate-required' })
-  ], exports.LaAiInsight.prototype, "rateRequired", void 0);
-  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "disagreeable", void 0);
   __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "amendable", void 0);
   __decorate$Q([
-      n({ attribute: 'edited-by' })
-  ], exports.LaAiInsight.prototype, "editedBy", void 0);
-  __decorate$Q([
-      n({ attribute: 'edited-at' })
-  ], exports.LaAiInsight.prototype, "editedAt", void 0);
+      n()
+  ], exports.LaAiInsight.prototype, "amended", void 0);
   __decorate$Q([
       r$1()
   ], exports.LaAiInsight.prototype, "_hasActions", void 0);
@@ -15476,13 +15623,19 @@
   ], exports.LaAiInsight.prototype, "_panel", void 0);
   __decorate$Q([
       r$1()
-  ], exports.LaAiInsight.prototype, "_disagreeReason", void 0);
+  ], exports.LaAiInsight.prototype, "_reason", void 0);
   __decorate$Q([
       r$1()
   ], exports.LaAiInsight.prototype, "_amendDraft", void 0);
   __decorate$Q([
       r$1()
+  ], exports.LaAiInsight.prototype, "_amendEmpty", void 0);
+  __decorate$Q([
+      r$1()
   ], exports.LaAiInsight.prototype, "_bodyText", void 0);
+  __decorate$Q([
+      r$1()
+  ], exports.LaAiInsight.prototype, "_said", void 0);
   exports.LaAiInsight = __decorate$Q([
       t$2('la-ai-insight')
   ], exports.LaAiInsight);
@@ -31817,7 +31970,8 @@
    * name opens it (`la-record-preview`), to read it first. (Until 9 Oct a
    * document was confirmed only from its preview, which in the modal would
    * stack a modal on a modal.) Confirmed, the row says *You confirmed this*,
-   * with Undo, and Open for a document.
+   * with Undo, and Open for a document. Changed, it doesn't: the founder's
+   * value stands, with what the record has and Undo (decision 150, RR1).
    *
    * States, set by the page:
    *   held      - the value and its source, with That’s right · Change it;
@@ -31825,16 +31979,21 @@
    *   confirmed - a small "You confirmed this", with Undo as an icon button.
    *               The check is the founder's own act, never a result
    *   changed   - the founder's new value, and what the record has
-   *               (`changed-note`, default "Your answer"), with Undo
-   *   empty     - "Your record has no <label> yet.", with Add it (Upload it)
+   *               (`changed-note`, default "Your answer"), with Undo; never
+   *               "You confirmed this" (decision 150, RR1)
+   *   empty     - "Your record has no <label> yet.", with Add it (Upload it),
+   *               on the same solid hairline as every row (decision 150, RR2)
    *   editing   - the `editor` slot (an la-input and a Save, or an
    *               la-upload-box), with Cancel
    *
+   * A document's label names it, so it's Title Case; in the empty row's
+   * sentence it's lower case (decision 139).
+   *
    * Usage:
-   *   <la-record-row label="Shareholders’ agreement" value="signed 2 June 2024"
+   *   <la-record-row label="Shareholders’ Agreement" value="signed 2 Jun 2024"
    *                  source="LawVault" doc></la-record-row>
    *
-   * @prop label  - what the value is ("Shareholders’ agreement")
+   * @prop label  - what the value is ("Registered office", "Shareholders’ Agreement")
    * @prop value  - the value on the record, or the founder's change
    * @prop source - where it came from ("LawVault", "Companies House")
    * @prop register - the source is an official register: its line takes ph-buildings,
@@ -31875,8 +32034,12 @@
       _acts() {
           const s = this.state;
           if (s === 'confirmed' || s === 'changed') {
+              /* A changed row doesn't say *You confirmed this*: those are the
+                 confirmed state's words (decision 150, RR1). */
               return b `${this.doc ? this._openBtn('ghost') : A}
-        <span class="mine"><i class="ph-bold ph-check" aria-hidden="true"></i>You confirmed this</span>
+        ${s === 'confirmed'
+                ? b `<span class="mine"><i class="ph-bold ph-check" aria-hidden="true"></i>You confirmed this</span>`
+                : A}
         <la-icon-button size="sm" label="Undo" @click=${() => this._fire('la-record-undo')}
           ><i class="ph ph-arrow-counter-clockwise" aria-hidden="true"></i
         ></la-icon-button>`;
@@ -31898,6 +32061,8 @@
         <la-button size="md" variant="ghost" @click=${() => this._fire('la-record-cancel')}>Cancel</la-button>
       </div>`;
           }
+          /* Empty, the label sits in a sentence, where a document is a common
+             noun in lower case (decision 139). */
           const empty = this.state === 'empty';
           const source = this.state === 'changed' ? this.changedNote || 'Your answer' : this.source ? `From ${this.source}` : '';
           return b `${iconStyles}<div class="row" part="row">
@@ -31945,9 +32110,11 @@
         border: 1px solid var(--la-color-border-light);
         background-color: var(--la-color-bg-subtle);
       }
+      /* Empty: the same solid hairline, without the fill. Not dashed: dashed
+         means moved past (decision 115) and splits a run's steps (decision
+         147), so it's declined here (decision 150, RR2). */
       :host([state='empty']) .row {
         background-color: transparent;
-        border-style: dashed;
       }
       .icon {
         font-size: 18px;
@@ -32073,6 +32240,34 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  /** Answers that take the question's words as their name: a group, or a
+   *  field that hands its `aria-label` to its own control. */
+  const NAMED = '[role="radiogroup"], [role="group"], la-input, la-date-input, la-textarea, la-select, la-segmented';
+  /** What can take focus, for moving into an answer's own control. */
+  const FOCUSABLE = 'input:not([disabled]), textarea:not([disabled]), select:not([disabled]), button:not([disabled]), a[href], [tabindex="0"]';
+  /** The first control inside an element, looking through shadow roots and
+   *  slots in order: la-input's input, la-record-row's first button. */
+  function firstFocusable(root) {
+      const kids = root.shadowRoot ? Array.from(root.shadowRoot.children) : Array.from(root.children);
+      for (const el of kids) {
+          if (el.closest('[hidden], [inert]'))
+              continue;
+          if (el instanceof HTMLSlotElement) {
+              for (const a of el.assignedElements({ flatten: true })) {
+                  const hit = a.matches(FOCUSABLE) ? a : firstFocusable(a);
+                  if (hit)
+                      return hit;
+              }
+              continue;
+          }
+          if (el.matches(FOCUSABLE))
+              return el;
+          const hit = firstFocusable(el);
+          if (hit)
+              return hit;
+      }
+      return null;
+  }
   /**
    * la-question — one question on a Review, Decide & Confirm step (Phase B
    * brief, Screen 1, "The questions"). The question's text; under it, one
@@ -32089,26 +32284,43 @@
    *
    * The answer is the page's: put any input in the default slot (la-choice in
    * a radiogroup, la-input, la-date-input, la-upload-box, la-record-row, or
-   * la-segmented rows for one answer per person). The question doesn't know
+   * la-people-answer, whose one answer per person is la-choice radios in a
+   * radiogroup named by the person, decision 150 PA4). The question doesn't know
    * the answer; the page decides what's picked, what guidance shows and which
    * follow-ups appear. That keeps a check reading as the founder's answer,
    * never as something we worked out.
    *
-   * Questions stack as siblings and rule themselves: each draws a hairline
-   * above, except the first la-question among its siblings. A follow-up is a
-   * la-question in the `follow` slot: one level down, indented under a hairline,
-   * with no hairline of its own.
+   * The question is its answer's label, or its group's legend, and the
+   * screen's heading when it's alone on the screen (decision 149, Q1). Its
+   * words are set as the slotted answer's own name: a group's `aria-label`, a
+   * field's `aria-label` (which la-input, la-date-input and la-textarea hand to
+   * their own control), or la-people-answer's `label`. A screen reader hears
+   * the heading, then the same words on the field. (aria-labelledby can't
+   * reach from the field's shadow root to this one's, and a legend in the
+   * page's DOM wouldn't reach la-input's input either.)
+   *
+   * Questions stack as siblings, separated by space, with no rule between
+   * them (decision 149, Q3). A follow-up is a la-question in the `follow`
+   * slot: one level down, indented under a 1px hairline (Q2).
+   *
+   * Pressed too soon, the page's button sets `error`: the message shows above
+   * the answer, the choices are marked `invalid` (a field takes `error`), and
+   * the page calls focusAnswer() (decision 140). The page clears it as soon as
+   * the answer is given.
    *
    * Usage:
    *   <la-question text="Does an investor have a right to approve or appoint directors?"
-   *                means="Usually set in a shareholders’ agreement after a funding round.">
-   *     <div role="radiogroup" aria-label="…">…la-choice…</div>
+   *                means="Usually set in a shareholders’ agreement after a funding round." heading-level="3">
+   *     <div role="radiogroup">…la-choice…</div>
    *     <la-guidance slot="guidance"><p>Get their consent in writing…</p></la-guidance>
    *   </la-question>
    *
-   * @prop text     - the question, legal's words
+   * @prop text     - the question, legal's words; also its answer's name
    * @prop means    - the plain-English gloss behind *What this means* (a quiet la-disclosure); none hides it
-   * @slot          - the answer: inputs, choices, a record row
+   * @prop headingLevel - attribute heading-level: the question is the screen's heading at this level (2–6),
+   *                  for a screen that asks one question; 0 (default), it isn't a heading
+   * @prop error    - what's missing, above the answer, when the page's button was pressed too soon (decision 140)
+   * @slot          - the answer: inputs, choices, a record row. The first element is the one the question names
    * @slot guidance - la-guidance for the picked option. Its wrapper is a polite live region that
    *                  stays in place, so a screen reader hears the guidance when an option is
    *                  picked (WCAG 4.1.3; the gap GOV.UK notes for revealed content)
@@ -32119,8 +32331,12 @@
           super(...arguments);
           this.text = '';
           this.means = '';
+          this.headingLevel = 0;
+          this.error = '';
           this._hasGuidance = false;
           this._hasFollow = false;
+          /** The controls this question marked invalid, so it clears only its own. */
+          this._marked = new Set();
       }
       /** Move focus to the question's words, for a page that has just shown a
        *  new question in place of the last: the APG dialog pattern focuses a
@@ -32132,12 +32348,90 @@
           p.tabIndex = -1;
           p.focus();
       }
+      /** Move focus to the answer (decision 140): the group's tab stop, the
+       *  picked choice or the first, or into the field's own control. */
+      focusAnswer() {
+          const el = this._answer();
+          if (!el)
+              return;
+          const choice = el.localName === 'la-choice'
+              ? el
+              : (el.querySelector('la-choice[tabindex="0"]') ?? el.querySelector('la-choice'));
+          const target = (choice ?? el);
+          target.focus();
+          if (!target.matches(':focus-within'))
+              firstFocusable(target)?.focus();
+      }
+      /** The answer the question names: the first element in the default slot. */
+      _answer() {
+          const slot = this.renderRoot.querySelector('slot:not([name])');
+          return slot?.assignedElements()[0];
+      }
+      /** The question's words as its answer's own name (decision 149, Q1). A
+       *  record row isn't a field (its label is the record's), so it keeps its own. */
+      _name() {
+          const el = this._answer();
+          if (!el || !this.text)
+              return;
+          if (el.localName === 'la-people-answer')
+              el.label = this.text;
+          else if (el.matches(NAMED))
+              el.setAttribute('aria-label', this.text);
+      }
+      /** Marks the answer invalid while there's an error (decision 140): its
+       *  choices take `invalid`, a group `aria-invalid`, a field `error`.
+       *  la-date-input's error is its own check()'s, so it's left alone. */
+      _mark() {
+          const el = this._answer();
+          const on = !!this.error;
+          const now = new Set();
+          if (on && el) {
+              if (el.matches('[role="radiogroup"], [role="group"]'))
+                  el.setAttribute('aria-invalid', 'true');
+              const controls = el.matches('la-choice, la-input, la-textarea, la-upload-box')
+                  ? [el]
+                  : Array.from(el.querySelectorAll('la-choice'));
+              for (const c of controls) {
+                  if (c.localName === 'la-choice')
+                      c.invalid = true;
+                  else
+                      c.error = true;
+                  now.add(c);
+              }
+          }
+          if (!on && el?.getAttribute('aria-invalid') === 'true')
+              el.removeAttribute('aria-invalid');
+          for (const c of this._marked) {
+              if (now.has(c))
+                  continue;
+              if (c.localName === 'la-choice')
+                  c.invalid = false;
+              else
+                  c.error = false;
+          }
+          this._marked = now;
+      }
+      updated(changed) {
+          if (changed.has('text'))
+              this._name();
+          if (changed.has('error'))
+              this._mark();
+      }
+      _onAnswer() {
+          this._name();
+          this._mark();
+      }
       render() {
-          return b `<p class="text" part="text">${this.text}</p>
+          const level = this.headingLevel ? Math.min(6, Math.max(2, Math.round(this.headingLevel))) : 0;
+          const text = level
+              ? b `<p class="text" part="text" role="heading" aria-level=${level}>${this.text}</p>`
+              : b `<p class="text" part="text">${this.text}</p>`;
+          return b `${text}
       ${this.means
             ? b `<la-disclosure class="means" variant="quiet" summary="What this means"><p>${this.means}</p></la-disclosure>`
             : A}
-      <div class="answer" part="answer"><slot></slot></div>
+      <div class="error" part="error" aria-live="polite">${this.error ? b `<p>${this.error}</p>` : A}</div>
+      <div class="answer" part="answer"><slot @slotchange=${this._onAnswer}></slot></div>
       <div class="guidance ${this._hasGuidance ? '' : 'empty'}" aria-live="polite">
         <div class="guidance-in">
           <slot name="guidance" @slotchange=${(e) => (this._hasGuidance = this._assigned(e))}></slot>
@@ -32155,18 +32449,15 @@
   exports.LaQuestion.styles = [
       tokens,
       i$6 `
+      /* Stacked questions are separated by space, with no rule between them
+         (decision 149, Q3). */
       :host {
         display: block;
         padding: var(--la-space-lg) 0;
-        border-top: 1px solid var(--la-color-border-light);
         color: var(--la-color-text);
-      }
-      :host(:first-of-type) {
-        border-top: 0;
       }
       :host([slot='follow']) {
         padding: var(--la-space-sm) 0 var(--la-space-xs);
-        border-top: 0;
       }
       :host([hidden]) {
         display: none;
@@ -32187,6 +32478,15 @@
       }
       .answer {
         margin-top: var(--la-space-md);
+      }
+      /* What's missing, above the answer (decision 140). A polite live region
+         that stays in the tree, so the message is heard as it appears; empty,
+         it takes no space. */
+      .error p {
+        margin: var(--la-space-md) 0 0;
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-danger-text); /* verdict-ok: validation, not a verdict (decision 117) */
       }
       .follow[hidden] {
         display: none;
@@ -32220,8 +32520,8 @@
       .follow {
         margin-top: var(--la-space-md);
         padding-left: var(--la-space-lg);
-        /* A 1px hairline, structural like the rules between questions: it
-           shows which answer asked, and isn't an accent (decision 93). */
+        /* A 1px hairline, structural: it shows which answer asked, and isn't
+           an accent (decision 93; decision 149, Q2). */
         border-left: 1px solid var(--la-color-border);
       }
     `,
@@ -32232,6 +32532,12 @@
   __decorate$8([
       n()
   ], exports.LaQuestion.prototype, "means", void 0);
+  __decorate$8([
+      n({ type: Number, attribute: 'heading-level' })
+  ], exports.LaQuestion.prototype, "headingLevel", void 0);
+  __decorate$8([
+      n()
+  ], exports.LaQuestion.prototype, "error", void 0);
   __decorate$8([
       r$1()
   ], exports.LaQuestion.prototype, "_hasGuidance", void 0);
@@ -32266,9 +32572,17 @@
    * never blocked (Phase B brief, Screen 1, *The acts*). A modal, like the
    * step's questions (Jonard, 6 Oct 2026): *Move past this step* as the title,
    * what moving past means as the line under it, then why, the reasons as a
-   * radio group, a field when it's another reason, and the act in the footer
-   * beside Cancel. Opened from *Mark as done elsewhere*, beside the step's act
-   * (decision 128). Its own wording waits on Bobby.
+   * radio group of contained choices at the questions modal's spacing, so a
+   * reason is asked the way a question is (decisions 119, 141, 152 MP2), a
+   * field when it's another reason, and the act in the footer beside Cancel.
+   * Opened from *Mark as done elsewhere*, beside the step's act (decision
+   * 128). Its own wording waits on Bobby.
+   *
+   * The act is never disabled (decisions 140, 156). Pressed with no reason,
+   * the message shows above the reasons, they're marked invalid and focus
+   * moves to the first; with *Another reason* and no words, the message is at
+   * the field and focus moves into it. A message goes as soon as it's put
+   * right.
    *
    * Moving past isn't done. The step settles with la-step-marker's `passed`
    * status (decision 115) and the reason, nothing is asked again, and Change
@@ -32289,12 +32603,19 @@
           this.reasons = MOVE_PAST_REASONS;
           this._picked = '';
           this._text = '';
+          /** What was missing when the act was pressed: its message shows until
+           *  that's put right (decision 140). */
+          this._error = '';
       }
       willUpdate(changed) {
           if (changed.has('open') && this.open) {
               this._picked = '';
               this._text = '';
+              this._error = '';
           }
+          // A message goes as soon as what it asked for is there (decision 140).
+          if (this._error && this._missing !== this._error)
+              this._error = '';
       }
       get _reason() {
           return this.reasons.find((r) => r.id === this._picked);
@@ -32303,20 +32624,31 @@
           const r = this._reason;
           return !!r && (r.short !== '' || this._text.trim() !== '');
       }
-      /* One reason at a time. la-choice toggles itself on a press, so a second
-         press on the picked one would clear it; `live` puts it back. */
-      _pick(id) {
-          this._picked = id;
-          this.requestUpdate();
+      /** What's missing, said where it goes: 'reason' (above the reasons) or
+       *  'text' (at the field), or '' once it's ready. */
+      get _missing() {
+          if (!this._reason)
+              return 'reason';
+          return this._ready ? '' : 'text';
       }
       _cancel() {
           this.open = false;
           this.dispatchEvent(new CustomEvent('la-move-past-cancel', { bubbles: true, composed: true }));
       }
-      _go() {
+      async _go() {
           const r = this._reason;
-          if (!r || !this._ready)
+          if (!r || !this._ready) {
+              // Never disabled (decisions 140, 156): say what's missing, and move
+              // focus to it.
+              this._error = this._missing;
+              await this.updateComplete;
+              const root = this.renderRoot;
+              if (this._error === 'reason')
+                  root.querySelector('la-choice')?.focus();
+              else
+                  root.querySelector('la-input')?.renderRoot.querySelector('input')?.focus();
               return;
+          }
           this.open = false;
           this.dispatchEvent(new CustomEvent('la-move-past', {
               detail: { reason: r.id, text: r.short || this._text.trim() },
@@ -32326,8 +32658,14 @@
       }
       render() {
           const own = this._reason && this._reason.short === '';
+          const missing = this._error;
+          // Placeholder words, until Bobby writes them (decision 140).
+          const REASON_MSG = 'Select why you’re moving past this step.';
+          const TEXT_MSG = 'Say why you’re moving past this step.';
           /* The reasons' and the field's la-change stay inside; the page hears
-             la-move-past or la-move-past-cancel. */
+             la-move-past or la-move-past-cancel. The reasons are la-choice's radio
+             mode (decision 141): a second press keeps the pick, and picking
+             unpicks the others. */
           return b `<la-modal
       ?open=${this.open}
       size="sm"
@@ -32337,23 +32675,36 @@
     >
       <div @la-change=${(e) => e.stopPropagation()}>
       <p class="q" id="q">Why are you moving past this step?</p>
-      <div class="opts" role="radiogroup" aria-labelledby="q">
-        ${this.reasons.map((r) => b `<la-choice .checked=${l(this._picked === r.id)} @la-change=${() => this._pick(r.id)}
+      <div aria-live="polite">${missing === 'reason' ? b `<p class="error" id="q-error">${REASON_MSG}</p>` : A}</div>
+      <div
+        class="opts"
+        role="radiogroup"
+        aria-labelledby="q"
+        aria-describedby=${missing === 'reason' ? 'q-error' : A}
+        aria-invalid=${missing === 'reason' ? 'true' : 'false'}
+      >
+        ${this.reasons.map((r) => b `<la-choice
+            variant="contained"
+            .checked=${l(this._picked === r.id)}
+            ?invalid=${missing === 'reason'}
+            @la-change=${() => (this._picked = r.id)}
             >${r.label}</la-choice
           >`)}
       </div>
+      <div aria-live="polite">${missing === 'text' ? b `<p class="error at-field">${TEXT_MSG}</p>` : A}</div>
       ${own
             ? b `<la-input
             placeholder="Say why"
             aria-label="Why are you moving past this step?"
             .value=${this._text}
+            ?error=${missing === 'text'}
             @la-change=${(e) => (this._text = e.detail.value)}
           ></la-input>`
             : A}
       </div>
       <div slot="footer" class="footer">
         <la-button variant="ghost" @click=${this._cancel}>Cancel</la-button>
-        <la-button variant="primary" ?disabled=${!this._ready} @click=${this._go}>Move past this step</la-button>
+        <la-button variant="primary" @click=${this._go}>Move past this step</la-button>
       </div>
     </la-modal>`;
       }
@@ -32372,9 +32723,22 @@
         margin: 0 0 var(--la-space-sm);
         font-size: var(--la-font-size-lg);
       }
+      /* Contained choices, --la-space-sm apart, as the questions modal draws
+         them (decision 152, MP2). */
       .opts {
         display: grid;
-        gap: 2px;
+        gap: var(--la-space-sm);
+      }
+      /* What's missing, at the reasons or at the field (decision 140), as
+         la-question draws its error. */
+      .error {
+        margin: 0 0 var(--la-space-sm);
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-danger-text); /* verdict-ok: validation, not a verdict (decision 117) */
+      }
+      .error.at-field {
+        margin: var(--la-space-sm) 0 0;
       }
       la-input {
         display: block;
@@ -32401,6 +32765,9 @@
   __decorate$7([
       r$1()
   ], exports.LaMovePast.prototype, "_text", void 0);
+  __decorate$7([
+      r$1()
+  ], exports.LaMovePast.prototype, "_error", void 0);
   exports.LaMovePast = __decorate$7([
       t$2('la-move-past')
   ], exports.LaMovePast);
@@ -32419,7 +32786,7 @@
    * counts until they confirm.
    *
    * Three states, plus kinds of settled:
-   *   idle    - not reached: the title, its one line, *Why it matters*, *More*,
+   *   idle    - not reached: the title, its one line, *Why this matters*, *More*,
    *             and the authored button, whose label is the action. No caret:
    *             with the answers and the record's facts in the modal, opening
    *             the card alone showed nothing new, and More holds the depth;
@@ -32431,7 +32798,7 @@
    *   open    - the card lifts into the brief's three verbs, as bands with a
    *             hairline between them and no label (the words were for the
    *             review's grouping, not the founder; Jonard, 6 Oct 2026).
-   *             Review is the step's frame: the line, Why it matters and More.
+   *             Review is the step's frame: the line, Why this matters and More.
    *             Decide and Confirm happen in the modal (la-step-questions),
    *             which the authored button opens together with the step: every
    *             question in legal's order, a value on the founder's record
@@ -32451,12 +32818,27 @@
    *             Ask a lawyer is in the run's sidebar, not on the step.
    *   done    - one line: Done · the answer that matters · the date, and Change
    *   passed  - moved past with a reason (la-step-marker `passed`, decision 115),
-   *             a dashed card, and Change
+   *             a dashed card, and Change; on a run's rows, a row like the others
+   *             (decision 147, amended)
    *   before  - done before the founder started this run: nothing to change
    * Steps run in order (PRO-210, notes, 7 Oct 2026): only the next step opens.
-   * A later step's button waits, `disabled`, with `disabled-reason` as its
-   * title. Every founder sees every step; one that doesn't apply to them is
-   * moved past, with a reason.
+   * A later step's button waits, `disabled`, and says why in a line under it,
+   * `disabled-reason`; its marker reads *Cannot start yet* (la-step-marker
+   * `gated`). No tooltip on the disabled button (decision 152, PS2). Every
+   * founder sees every step; one that doesn't apply to them is moved past,
+   * with a reason.
+   *
+   * On a run (decision 147, `surface="row"`): each section is a hairline card
+   * the page draws round its la-disclosure `section`, and its steps are rows
+   * with no frame of their own, split by a dashed --la-color-border-light
+   * line. The step you're on, the next or the one open, lifts out as a card:
+   * its hairline for the edge and --la-shadow-card for the lift, at
+   * --la-radius-xl, with no dashed line either side. On its own (`card`, the
+   * default) a step keeps its hairline card, and the step you're on lifts the
+   * same way.
+   *
+   * No `processing`: Auto mode isn't designed, and a cut path is removed, not
+   * hidden (decision 152, PS5; decision 124).
    *
    * Sub-steps are not used by Review, Decide & Confirm (PRO-210 Q struck, 13 Oct
    * 2026); `parts` stays for a document-creation or e-sign step that asks for it.
@@ -32477,7 +32859,8 @@
    * 124).
    *
    * Width: the card is its own container. Below 480px it tightens its padding
-   * and stacks its acts, so a run in a narrow column needs nothing else.
+   * and stacks its acts, the primary full width and the quiet acts at their
+   * own (decision 152, PS8), so a run in a narrow column needs nothing else.
    *
    * Usage:
    *   <la-playbook-step index="1" state="open" heading="Check your articles give the power, and pick the route."
@@ -32490,6 +32873,8 @@
    * @prop index       - the step's number in the run
    * @prop state       - idle (default) · open · done · passed · before
    * @prop next        - the run's next step: primary button, filled marker
+   * @prop surface     - card (default): framed on its own · row: a step in a run's section card, which
+   *                     lifts as a card while it's the step you're on (decision 147)
    * @prop heading     - the step's title, legal's words
    * @prop line        - its one action-first sentence
    * @prop matters     - why it matters, one line
@@ -32499,6 +32884,8 @@
    * @prop questionCount - attribute question-count: how many questions the modal asks; 0 hides the Decide band
    * @prop answered    - every asked question has an answer: show the `answers` summary, not the button
    * @prop summary     - what a settled step says after its state word
+   * @prop date        - the day it settled, ISO (`2026-10-06`), printed after the summary in the reader's
+   *                     locale (formatDate, decision 145); empty prints none
    * @prop notice      - a line above the questions, such as what changing a confirmed answer can undo
    * @prop passing     - the way past is open: la-move-past, a modal, from Mark as done elsewhere
    *
@@ -32512,7 +32899,8 @@
    *                     "Done in its own playbook")
    * @prop icon        - a Phosphor class for the authored button's leading icon ("ph-file-plus")
    * @prop disabled    - the authored button can't be pressed yet: steps run in order, so every step but
-   *                     the next one waits. `disabled-reason` is its title
+   *                     the next one waits. Its marker reads Cannot start yet
+   * @prop disabledReason - attribute disabled-reason: why it waits, in a line under its button (decision 152)
    * @prop parts       - sub-steps, run inside the card after the step's own part, in order:
    *                     {label, button, done?}[] (a property)
    * @prop partOwn     - attribute part-own: the step's own part, first in the sequence (default
@@ -32520,10 +32908,7 @@
    * @prop confirmed   - the step's own part is done; its sub-steps run now
    * @prop loading     - the authored button shows la-button's spinner, with `loading-label`, while a
    *                     document renders
-   * @prop processing  - the step is being prepared (Auto mode): the marker spins, the body dims, the
-   *                     button waits. The page attaches its beam to the host
-   * @slot body        - prose under the one-liner, in both not-reached and open: the step's framing once
-   *                     Auto mode has prepared it
+   * @slot body        - prose under the one-liner, in both not-reached and open
    * @slot insight     - an la-ai-insight under the body
    * @slot actions     - beside the authored button: the sign step's "Signed outside LawAdvisor?" fallback
    * @slot             - the step's la-step-questions, and anything the page places with the card. A value on
@@ -32550,6 +32935,7 @@
           this.index = 1;
           this.state = 'idle';
           this.next = false;
+          this.surface = 'card';
           this.heading = '';
           this.line = '';
           this.matters = '';
@@ -32559,6 +32945,7 @@
           this.questionCount = 0;
           this.answered = false;
           this.summary = '';
+          this.date = '';
           this.notice = '';
           this.passing = false;
           this.locked = false;
@@ -32568,7 +32955,6 @@
           this.disabledReason = '';
           this.loading = false;
           this.loadingLabel = 'Rendering…';
-          this.processing = false;
           this.parts = [];
           this.partOwn = 'Answer and confirm';
           this.confirmed = false;
@@ -32577,6 +32963,7 @@
           this._hasBody = false;
           this._hasInsight = false;
           this._hasActions = false;
+          this._hasSources = false;
       }
       _fire(name, detail) {
           this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }));
@@ -32584,16 +32971,24 @@
       get _settled() {
           return this.state === 'done' || this.state === 'passed' || this.state === 'before';
       }
+      /** The step you're on: the next one, or the one open (decision 147). */
+      get _current() {
+          return !this._settled && (this.state === 'open' || this.next);
+      }
+      /** Waiting its turn: a later step, its button disabled (decision 152, PS2). */
+      get _waiting() {
+          return this.disabled && !this._settled && !this._current;
+      }
       _marker() {
           const s = this.state;
-          const status = this.processing
-              ? 'processing'
-              : s === 'done' || s === 'before'
-                  ? 'complete'
-                  : s === 'passed'
-                      ? 'passed'
-                      : s === 'open' || this.next
-                          ? 'active'
+          const status = s === 'done' || s === 'before'
+              ? 'complete'
+              : s === 'passed'
+                  ? 'passed'
+                  : this._current
+                      ? 'active'
+                      : this._waiting
+                          ? 'gated'
                           : 'pending';
           return b `<la-step-marker index=${this.index} status=${status}></la-step-marker>`;
       }
@@ -32611,7 +33006,9 @@
       <div>
         <h3>${this.heading}</h3>
         <p class="summary">
-          <span class="word">${this._word()}</span>${this.summary ? b ` · ${this.summary}` : A}
+          <span class="word">${this._word()}</span>${this.summary ? b ` · ${this.summary}` : A}${this.date
+            ? b ` · ${formatDate(this.date)}`
+            : A}
         </p>
       </div>
       ${this.locked && this.button
@@ -32631,7 +33028,7 @@
       <div class="body-slot" ?hidden=${!this._hasBody}>
         <slot name="body" @slotchange=${(e) => (this._hasBody = this._assigned(e))}></slot>
       </div>
-      ${this.matters ? b `<p class="matters"><b>Why it matters</b>${this.matters}</p>` : A}
+      ${this.matters ? b `<p class="matters"><b>Why this matters</b>${this.matters}</p>` : A}
       <la-disclosure class="more" variant="quiet" summary="More" ?hidden=${!this._hasMore}>
         <slot name="more" @slotchange=${(e) => (this._hasMore = e.target.assignedElements().length > 0)}></slot>
       </la-disclosure>
@@ -32667,7 +33064,9 @@
       _openView() {
           const at = this._partAt;
           const part = at >= 0 ? this.parts[at] : undefined;
-          const toAnswer = !part && this.questionCount > 0 && !this.answered;
+          /* Questions left always open the modal at the next one: the act is never
+             disabled for a missing answer (decisions 140 and 156). */
+          const toAnswer = !part && this.questionCount > 0 && (!this.answered || this.remaining > 0);
           const act = part ? part.button : toAnswer ? 'Finish answering' : 'Confirm';
           const onAct = () => {
               if (part)
@@ -32684,11 +33083,10 @@
       ${this._parts()}
       <div class="band confirm">
       <div class="acts">
-        <div class="acts-main">
+        <div class="acts-main has-primary">
           <la-button
-            class="act ${!part && this.questionCount > 0 && this.remaining > 0 ? 'counted' : ''}"
+            class="act primary-act ${!part && this.questionCount > 0 && this.remaining > 0 ? 'counted' : ''}"
             variant="primary"
-            ?disabled=${!part && !toAnswer && this.remaining > 0}
             @click=${onAct}
             >${act}${part ? A : this._count()}</la-button
           >
@@ -32755,7 +33153,12 @@
       }
       render() {
           const open = this.state === 'open';
-          return b `${iconStyles}<article class="card" part="card" aria-label=${`Step ${this.index}: ${this.heading}`}>
+          const wait = this._waiting && this.disabledReason;
+          return b `${iconStyles}<article
+        class="card ${this._current ? 'current' : ''}"
+        part="card"
+        aria-label=${`Step ${this.index}: ${this.heading}`}
+      >
       <div class="gut">${this._marker()}</div>
       <div class="body">
         ${this._settled
@@ -32764,27 +33167,30 @@
             ${open
                 ? this._openView()
                 : b `${this._parts()}<div class="foot">
-                  <span class="foot-acts">
-                    <la-button
-                      variant=${this.next ? 'primary' : 'secondary'}
-                      ?disabled=${this.disabled || this.processing}
-                      title=${this.disabled && this.disabledReason ? this.disabledReason : A}
-                      ?loading=${this.loading}
-                      loading-label=${this.loadingLabel}
-                      @click=${() => this._partAt >= 0
+                  <div class="foot-main ${this.next ? 'has-primary' : ''}">
+                    <span class="foot-acts">
+                      <la-button
+                        class=${this.next ? 'primary-act' : ''}
+                        variant=${this.next ? 'primary' : 'secondary'}
+                        ?disabled=${this.disabled}
+                        ?loading=${this.loading}
+                        loading-label=${this.loadingLabel}
+                        @click=${() => this._partAt >= 0
                     ? this._fire('la-step-part', { index: this._partAt })
                     : this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
-                      >${this.icon && this._partAt < 0 ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this._partAt >= 0
+                        >${this.icon && this._partAt < 0 ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this._partAt >= 0
                     ? this.parts[this._partAt].button
                     : this.button}</la-button
-                    >
-                    <span class="actions-slot" ?hidden=${!this._hasActions}>
-                      <slot name="actions" @slotchange=${(e) => (this._hasActions = this._assigned(e))}></slot>
+                      >
+                      <span class="actions-slot" ?hidden=${!this._hasActions}>
+                        <slot name="actions" @slotchange=${(e) => (this._hasActions = this._assigned(e))}></slot>
+                      </span>
                     </span>
-                  </span>
-                  <span class="acts-side">
-                    ${this.disabled || this.processing ? A : this._doneElsewhere()}
-                    <slot name="sources"></slot>
+                    ${wait ? b `<p class="wait">${this.disabledReason}</p>` : A}
+                  </div>
+                  <span class="acts-side" ?hidden=${this.disabled && !this._hasSources}>
+                    ${this.disabled ? A : this._doneElsewhere()}
+                    <slot name="sources" @slotchange=${(e) => (this._hasSources = this._assigned(e))}></slot>
                   </span>
                 </div>`}`}
       </div>
@@ -32818,14 +33224,8 @@
           box-shadow var(--dur-base) var(--ease-out),
           border-color var(--dur-base) var(--ease-out);
       }
-      :host([next]:not([state='open'])) .card {
-        border-color: var(--la-color-border);
-        box-shadow: var(--la-shadow-xs);
-      }
       :host([state='open']) .card {
         padding: var(--la-space-xl);
-        border-color: var(--la-color-border);
-        box-shadow: var(--la-shadow-card);
       }
       /* Settled: tighter top and bottom. */
       :host([state='done']) .card,
@@ -32835,8 +33235,40 @@
         padding-bottom: var(--la-space-md);
         background-color: transparent;
       }
-      :host([state='passed']) .card {
+      :host([state='passed']:not([surface='row'])) .card {
         border-style: dashed;
+      }
+
+      /* On a run, a row (decision 147): no frame of its own, and a dashed
+         hairline between it and the row above. Its border stays, clear, so
+         its content sits where the lifted card's does. A moved-past step is
+         a row too: its marker and words say it (decision 147, amended). */
+      :host([surface='row']) .card:not(.current) {
+        border-color: transparent;
+        border-radius: 0;
+        background-color: transparent;
+      }
+      :host([surface='row']:not(:first-of-type)) .card:not(.current) {
+        border-top: 1px dashed var(--la-color-border-light);
+      }
+      /* The step you're on, the next or the one open, lifts out as a card:
+         the hairline carries the edge, --la-shadow-card the lift (decision
+         147; tokens.ts pairs the two). */
+      .card.current {
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-xl);
+        background-color: var(--la-color-bg);
+        box-shadow: var(--la-shadow-card);
+      }
+      /* No dashed line either side of it: on a row, it sits over the line
+         the row below draws, its bottom hairline on that line and the
+         section's white behind its corners over the line's ends. */
+      :host([surface='row'][state='open']),
+      :host([surface='row'][next]:not([state='done']):not([state='passed']):not([state='before'])) {
+        position: relative;
+        z-index: 1;
+        margin-bottom: -1px;
+        background-color: var(--la-color-bg);
       }
       .gut {
         padding-top: 1px;
@@ -32890,17 +33322,38 @@
          the right. */
       .foot {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         justify-content: space-between;
         flex-wrap: wrap;
         gap: var(--la-space-md);
         margin-top: var(--la-space-md);
+      }
+      .foot-main {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      /* Why a step waits, in words under its button (decision 152, PS2;
+         GOV.UK's task list shows the reason as text, never a tooltip on a
+         disabled button). */
+      .wait {
+        margin: var(--la-space-xs) 0 0;
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
       }
       .acts-side {
         display: flex;
         align-items: center;
         flex-wrap: wrap;
         gap: var(--la-space-sm);
+      }
+      /* The quiet acts line up with the act, not with what's under it. */
+      .foot .acts-side {
+        min-height: var(--la-button-height-default);
+      }
+      /* A waiting step with no Sources has nothing on the right. */
+      .acts-side[hidden] {
+        display: none;
       }
       /* Sub-steps: the step's own part, then each sub-step, in order. */
       .parts {
@@ -33085,11 +33538,6 @@
         flex-wrap: wrap;
         gap: var(--la-space-md);
       }
-      /* Being prepared (Auto mode): the body dims while the page's beam runs. */
-      :host([processing]) .body {
-        opacity: 0.55;
-        transition: opacity var(--dur-base) var(--ease-out);
-      }
       @container (max-width: 480px) {
         .card,
         :host([state='open']) .card {
@@ -33101,9 +33549,27 @@
         :host([state='before']) .card {
           padding: var(--la-space-md) var(--la-space-lg);
         }
-        .acts {
+        .acts,
+        .foot {
           flex-direction: column;
           align-items: flex-start;
+        }
+        /* Stacked, the primary act is full width and the quiet acts keep
+           their own (decision 152, PS8; Carbon's and GOV.UK's stacked
+           buttons). */
+        .has-primary {
+          align-self: stretch;
+          align-items: stretch;
+        }
+        .has-primary .foot-acts {
+          display: flex;
+        }
+        .primary-act {
+          display: block;
+          width: 100%;
+        }
+        .primary-act::part(button) {
+          width: 100%;
         }
       }
       @media (prefers-reduced-motion: reduce) {
@@ -33122,6 +33588,9 @@
   __decorate$6([
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookStep.prototype, "next", void 0);
+  __decorate$6([
+      n({ reflect: true })
+  ], exports.LaPlaybookStep.prototype, "surface", void 0);
   __decorate$6([
       n()
   ], exports.LaPlaybookStep.prototype, "heading", void 0);
@@ -33151,6 +33620,9 @@
   ], exports.LaPlaybookStep.prototype, "summary", void 0);
   __decorate$6([
       n()
+  ], exports.LaPlaybookStep.prototype, "date", void 0);
+  __decorate$6([
+      n()
   ], exports.LaPlaybookStep.prototype, "notice", void 0);
   __decorate$6([
       n({ type: Boolean, reflect: true })
@@ -33177,9 +33649,6 @@
       n({ attribute: 'loading-label' })
   ], exports.LaPlaybookStep.prototype, "loadingLabel", void 0);
   __decorate$6([
-      n({ type: Boolean, reflect: true })
-  ], exports.LaPlaybookStep.prototype, "processing", void 0);
-  __decorate$6([
       n({ attribute: false })
   ], exports.LaPlaybookStep.prototype, "parts", void 0);
   __decorate$6([
@@ -33203,6 +33672,9 @@
   __decorate$6([
       r$1()
   ], exports.LaPlaybookStep.prototype, "_hasActions", void 0);
+  __decorate$6([
+      r$1()
+  ], exports.LaPlaybookStep.prototype, "_hasSources", void 0);
   exports.LaPlaybookStep = __decorate$6([
       t$2('la-playbook-step')
   ], exports.LaPlaybookStep);
@@ -33213,37 +33685,49 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  /** A pick answered *None of them* (decision 150, PA1): `[PEOPLE_NONE]`, the
+   *  value's only entry. `''` can't be a person's name, so it never meets one;
+   *  `[]` is still unanswered. */
+  const PEOPLE_NONE = '';
   /**
    * la-people-answer — a question answered about people on the founder's
    * record (Phase B brief, Screen 1, question types *Pick people* and *One
    * answer per person*). The group and where it came from on a line of its
-   * own ("Your investors, from Cap table"), then one row per person, and
+   * own ("Your investors, from Cap Table"), then one row per person, and
    * *Add someone not listed* where the content allows it.
    *
    *   mode="pick"  tick people from the group: an la-choice per person, in a
-   *                `role="group"`. `value` is the names ticked
-   *   mode="each"  one answer per person: the name and an la-segmented of the
-   *                `options`, with the picked option's guidance under the row.
-   *                `value` maps each name to an option id
+   *                `role="group"`, then *or* and an exclusive *None of them*
+   *                (decision 150, PA1, as GOV.UK's checkboxes): ticking it
+   *                clears the people, and ticking a person clears it. `value`
+   *                is the names ticked, or `[PEOPLE_NONE]`
+   *   mode="each"  one answer per person: the name and la-choice radios of the
+   *                `options`, in a `role="radiogroup"` named by the person
+   *                (decisions 141 and 150, PA4), at la-choice's default size
+   *                (PA2). They sit beside the name, and wrap under it when they
+   *                don't fit. The picked option's guidance shows under the row,
+   *                in a polite live region, as la-question's (PA5). `value`
+   *                maps each name to an option id
    *
    * The page owns the answer: set `value`, hear `la-change`. Someone added is
    * reported with `la-add`; the page adds them to `people` (and, for pick,
    * ticks them). Nothing is picked until the founder picks.
    *
    * Usage:
-   *   <la-people-answer mode="each" group="investors" source="Cap table"
+   *   <la-people-answer mode="each" group="investors" source="Cap Table"
    *       .people=${['Example Ventures LP', 'Priya Shah']}
    *       .options=${[{id: 'hnw', label: 'High-net-worth'}, …]}
    *       .value=${{'Priya Shah': 'unsure'}}></la-people-answer>
    *
    * @prop mode    - pick (default) · each
    * @prop group   - the group's name, lower case ("investors", "directors")
-   * @prop source  - where the group came from ("Cap table", "Companies House")
+   * @prop source  - where the group came from ("Cap Table", "Companies House")
    * @prop register - the source is an official register: its line takes
    *                 ph-buildings, as la-sources does (decision 129); the record's is ph-database
    * @prop people  - the names in the group, in order
    * @prop options - each mode: the answers offered per person
-   * @prop value   - pick: string[] of names ticked · each: Record<name, option id>
+   * @prop value   - pick: string[] of names ticked, `[PEOPLE_NONE]` for None of them, `[]` unanswered ·
+   *                 each: Record<name, option id>
    * @prop label   - accessible name of the group of rows (the question's text)
    * @prop add     - offer Add someone not listed (default true). Always offered when the group is
    *                 empty, so the question can always be answered (PRO-210; L-2795 §4).
@@ -33268,11 +33752,16 @@
           this.value = value;
           this.dispatchEvent(new CustomEvent('la-change', { detail: { value }, bubbles: true, composed: true }));
       }
+      /* Ticking a person clears None of them (decision 150, PA1). */
       _tick(name, checked) {
-          const cur = (Array.isArray(this.value) ? this.value : []).filter((n) => n !== name);
+          const cur = (Array.isArray(this.value) ? this.value : []).filter((n) => n !== name && n !== PEOPLE_NONE);
           if (checked)
               cur.push(name);
           this._emit(cur);
+      }
+      /* Ticking None of them clears the people. */
+      _none(checked) {
+          this._emit(checked ? [PEOPLE_NONE] : []);
       }
       _answer(name, id) {
           const cur = Array.isArray(this.value) ? {} : { ...this.value };
@@ -33293,27 +33782,43 @@
       <i class="ph ${this.register ? 'ph-buildings' : 'ph-database'}" aria-hidden="true"></i>Your ${this.group}${this.source ? `, from ${this.source}` : ''}
     </p>`;
       }
+      /* `live`: a choice ticks itself before the page answers, so each binding
+         checks the element, not the last value written. */
       _pick() {
           const ticked = Array.isArray(this.value) ? this.value : [];
+          const none = ticked.includes(PEOPLE_NONE);
           return b `<div class="pick" role="group" aria-label=${this.label || A}>
       ${this.people.map((p) => b `<la-choice
-          ?checked=${ticked.includes(p)}
+          .checked=${l(!none && ticked.includes(p))}
           @la-change=${(e) => this._tick(p, e.detail.checked)}
           >${p}</la-choice
         >`)}
+      <p class="or">or</p>
+      <la-choice .checked=${l(none)} @la-change=${(e) => this._none(e.detail.checked)}
+        >None of them</la-choice
+      >
     </div>`;
       }
+      /* One radio group per person (decision 141): la-choice keeps the pick to
+         one, holds it on a second press, and owns the arrow keys and the single
+         tab stop. A radio fires la-change only as it's picked. */
       _each() {
           const answers = Array.isArray(this.value) ? {} : this.value;
           return b `<div class="each" role="group" aria-label=${this.label || A}>
       ${this.people.map((p) => {
             const picked = this.options.find((o) => o.id === answers[p]);
-            return b `<div class="row">
-          <span class="name">${p}</span>
-          <la-segmented size="sm" label=${p} value=${answers[p] ?? ''} @la-change=${(e) => this._answer(p, e.detail.value)}>
-            ${this.options.map((o) => b `<la-segment value=${o.id}>${o.label}</la-segment>`)}
-          </la-segmented>
-          ${picked?.guidance ? b `<p class="guide">${picked.guidance}</p>` : A}
+            return b `<div class="person">
+          <div class="line">
+            <span class="name">${p}</span>
+            <div class="radios" role="radiogroup" aria-label=${p}>
+              ${this.options.map((o) => b `<la-choice
+                  .checked=${l(answers[p] === o.id)}
+                  @la-change=${(e) => e.detail.checked && this._answer(p, o.id)}
+                  >${o.label}</la-choice
+                >`)}
+            </div>
+          </div>
+          <div class="guide" aria-live="polite">${picked?.guidance ? b `<p>${picked.guidance}</p>` : A}</div>
         </div>`;
         })}
     </div>`;
@@ -33374,23 +33879,44 @@
         display: grid;
         gap: 2px;
       }
+      /* GOV.UK's divider: *or*, centred under the choices' marks. */
+      .or {
+        width: var(--la-checkbox-size);
+        margin: var(--la-space-2xs) 0;
+        text-align: center;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-text-secondary);
+      }
       .each {
         border-top: 1px solid var(--la-color-border-light);
       }
-      .row {
-        display: grid;
-        grid-template-columns: minmax(0, 1fr) auto;
-        align-items: center;
-        gap: var(--la-space-xs) var(--la-space-md);
+      .person {
         padding: var(--la-space-sm) 0;
         border-bottom: 1px solid var(--la-color-border-light);
       }
+      /* The name, then its answers at the end of the line; when they don't
+         fit beside it, they wrap under it (decision 150, PA4). */
+      .line {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap: var(--la-space-sm) var(--la-space-lg);
+      }
       .name {
+        flex: 1 1 auto;
         overflow-wrap: anywhere;
       }
-      .guide {
-        grid-column: 1 / -1;
-        margin: 0;
+      /* Wider apart than a choice's mark is from its label, so each answer
+         reads as one. */
+      .radios {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--la-space-sm) var(--la-space-lg);
+      }
+      /* The live region stays in the tree and, empty, takes no space: a
+         region that appears with its content often isn't announced. */
+      .guide p {
+        margin: var(--la-space-xs) 0 0;
         font-size: var(--la-font-size-md);
         color: var(--la-color-text-secondary);
       }
@@ -33402,11 +33928,6 @@
       }
       .add la-input {
         flex: 1;
-      }
-      @container (max-width: 480px) {
-        .row {
-          grid-template-columns: minmax(0, 1fr);
-        }
       }
     `,
   ];
@@ -33451,25 +33972,29 @@
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   /**
-   * la-run-progress — how far a playbook run has got: "2 of 9 done", then
-   * la-progress at its `lg` size. One line at the head of a run, under
-   * the title and intro, and the one place the count is drawn (the Orion run
-   * and the UK case plan each drew their own).
+   * la-run-progress — how far a playbook run has got: "2 of 9 steps done", then
+   * la-progress at its `lg` size. The one place the bar is drawn (the Orion
+   * run and the UK case plan each drew their own).
    *
    * `done` counts settled steps: done, moved past, and done before you
    * started (decision 133). `total` counts every step in the run: in Phase B no step leaves
-   * the run (decision 124). `done` is kept between 0 and `total`. A screen
-   * reader hears the bar as "2 of 9 steps done", the words beside it.
+   * the run (decision 124). `done` is kept between 0 and `total`.
    *
-   * It heads la-run-overview's popover; on its own it's the one line Bobby's
-   * CMS (07) draws under a run's intro.
+   * The count names what it counts, on screen as for screen readers (decision
+   * 148, RP3). The bar is named for the run, its title, so its name never
+   * changes as the run moves; the count is its value text, "2 of 9 steps
+   * done", and the visible count is hidden from screen readers. "Playbook
+   * progress" names it only where a page gives no title.
+   *
+   * It heads la-run-overview's popover; the run page draws no second count
+   * and bar under its intro (decision 148, RP2).
    *
    * Usage:
-   *   <la-run-progress done="2" total="9"></la-run-progress>
+   *   <la-run-progress done="2" total="9" label="Appoint a director"></la-run-progress>
    *
    * @prop done  - settled steps
    * @prop total - every step in the run
-   * @prop label - accessible name of the bar (default "Playbook progress")
+   * @prop label - the bar's accessible name: the run's title (default "Playbook progress", where there's none)
    */
   exports.LaRunProgress = class LaRunProgress extends i$3 {
       constructor() {
@@ -33482,12 +34007,12 @@
           const total = Math.max(0, Number(this.total) || 0);
           const done = Math.min(total, Math.max(0, Number(this.done) || 0));
           // The count reads first, then the bar (Jonard, 12 Oct 2026; Bobby's CMS 07 too).
-          return b `<span aria-hidden="true">${done} of ${total} done</span>
+          return b `<span aria-hidden="true">${done} of ${total} steps done</span>
       <la-progress
         size="lg"
         value=${done}
         max=${total || 1}
-        label=${this.label}
+        label=${this.label || 'Playbook progress'}
         value-text=${`${done} of ${total} steps done`}
       ></la-progress>`;
       }
@@ -33534,9 +34059,16 @@
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   const OPEN$1 = new Set();
+  /** The browser places the panel itself: anchor positioning, with its flips
+   *  (decision 143). Without it, the panel is placed from the pill's position,
+   *  as la-sources does. */
+  const ANCHORS = typeof CSS !== 'undefined' &&
+      typeof CSS.supports === 'function' &&
+      CSS.supports('anchor-name: --a') &&
+      CSS.supports('position-try-fallbacks: flip-block');
   /**
    * la-run-overview — where a playbook run has got, in its header: a pill with
-   * the section you're in and the count ("01 Check | 3 of 9 done"), which opens
+   * the section you're in and the count ("01 Check | 3 of 9 steps done"), which opens
    * the playbook overview: la-run-progress, then each section with its marker
    * and its own count ("2 of 2"), and under it every step with the card's
    * numbered marker and its title, wrapped (Jonard, 12 Oct 2026). Picking a
@@ -33546,21 +34078,35 @@
    * dates (Jonard, 12 Oct 2026).
    *
    * The count stays on the pill, so the popover is never the only place the
-   * run's progress is shown. The pill's accessible name is its own text (WCAG
-   * 2.5.3), and the popover is a non-modal dialog named by its heading. The
+   * run's progress is shown. It names what it counts, as the bar it opens
+   * does, "3 of 9 steps done"; the overview's rows keep a bare "2 of 2" under
+   * the bar (decision 148, amended). The bar is named for the run, from
+   * `run-title`. The pill's accessible name is its own text (WCAG 2.5.3), the
+   * whole section name included: a long one is cut on the pill, and only
+   * then shown whole in an la-tooltip on hover and focus (decision 148, RO3;
+   * the pill keeps one line, the stated exception to decision 131). The
    * section you're in is the first one not finished: steps run in order. A
    * run with one unnamed section shows only the count, and the popover only
-   * the bar; a run with no steps isn't drawn.
+   * the bar; a run with no steps isn't drawn. A long list scrolls past
+   * min(70vh, 560px), and only the list moves (RO4).
    *
-   * Mechanics follow la-sources: one open at a time, a click outside or Escape
-   * closes it, and Escape returns focus to the pill. Focus isn't trapped: Tab
-   * moves into the popover, as in the ARIA disclosure pattern.
+   * A panel you work in, so a non-modal dialog (decision 143,
+   * rule/popover-by-content): `aria-haspopup="dialog"` on the pill, the panel
+   * named by its heading, and focus moves into it, to its first section, when
+   * the founder opens it. Focus isn't trapped. It opens in the top layer (the
+   * `popover` attribute), so no container clips it, and stays right after the
+   * pill in the page, so reading order holds. It's placed below the pill with
+   * CSS anchor positioning, flipping to fit; where the browser has none, it's
+   * placed from the pill's position, moved as the page scrolls or resizes, and
+   * kept inside the window (rule/pop-outs-never-clip). One is open at a time,
+   * a click outside or Escape closes it, and Escape returns focus to the pill.
    * `open` is a reflected property, as Astryx's Popover (isOpen), Material Web's
    * menu and Atlassian's, Primer's and Carbon's popovers let a page control it;
-   * the founder's clicks set it and fire `la-run-overview-toggle`.
+   * the founder's clicks set it and fire `la-run-overview-toggle`. Set by the
+   * page, it opens without moving focus.
    *
    * Usage:
-   *   <la-run-overview .sections=${[
+   *   <la-run-overview run-title="Appoint a director" .sections=${[
    *     {name: 'Check', steps: [{title: 'Check your articles…', status: 'complete'},
    *       {title: 'Confirm the person is eligible…', status: 'active'}]},
    *     {name: 'File', done: 0, total: 4}]}>
@@ -33568,6 +34114,8 @@
    *
    * @prop sections - one {name, steps?} or {name, done, total} per section, in run order (attribute: JSON)
    * @prop heading  - the popover's heading and accessible name (default "Playbook overview")
+   * @prop runTitle - attribute run-title: the run's title, the name of the bar it draws (decision 148);
+   *                  without one the bar is "Playbook progress"
    * @prop open     - whether the overview is open; the founder's clicks set it, and a page may set it (reflected)
    * @fires la-section-select - {index}: the section picked, for the page to open and scroll to
    * @fires la-step-select - {section, step, number}: the step picked (indexes, and its number in the run)
@@ -33580,9 +34128,40 @@
           this.sections = [];
           /** The popover's heading, and its accessible name. */
           this.heading = 'Playbook overview';
+          /** The run's title: the name of the bar in the popover (decision 148). */
+          this.runTitle = '';
           /** Whether the playbook overview is open. The founder's clicks set it; a page may set it too. */
           this.open = false;
+          /** The section's name is cut on the pill, so the tooltip shows it whole. */
+          this._cut = false;
           this._id = `la-run-overview-${Math.random().toString(36).slice(2, 8)}`;
+          this._measured = null;
+          /* Without anchor positioning, the panel follows the pill as the page
+             scrolls or resizes. */
+          this._following = false;
+          /* Below the pill, above it when there's no room below, and always inside
+             the window: --la-space-sm from the pill, --la-space-lg from the edges. */
+          this._place = () => {
+              const pill = this.renderRoot.querySelector('.pill');
+              const panel = this._panel;
+              if (!pill || !panel)
+                  return;
+              const css = getComputedStyle(this);
+              const gap = parseFloat(css.getPropertyValue('--la-space-sm')) || 0;
+              const edge = parseFloat(css.getPropertyValue('--la-space-lg')) || 0;
+              const r = pill.getBoundingClientRect();
+              const w = panel.offsetWidth;
+              const h = panel.offsetHeight;
+              const vw = document.documentElement.clientWidth;
+              const vh = window.innerHeight;
+              let top = r.bottom + gap;
+              if (top + h > vh - edge && r.top - gap - h >= edge)
+                  top = r.top - gap - h;
+              top = Math.max(edge, Math.min(top, vh - edge - h));
+              const left = Math.max(edge, Math.min(r.left, vw - edge - w));
+              panel.style.top = `${Math.round(top)}px`;
+              panel.style.left = `${Math.round(left)}px`;
+          };
           this._onDocClick = (e) => {
               if (!this.open || e.composedPath().includes(this))
                   return;
@@ -33599,11 +34178,17 @@
           super.connectedCallback();
           document.addEventListener('click', this._onDocClick);
           document.addEventListener('keydown', this._onKey);
+          if (typeof ResizeObserver === 'function')
+              this._sized = new ResizeObserver(() => this._measure());
       }
       disconnectedCallback() {
           super.disconnectedCallback();
           document.removeEventListener('click', this._onDocClick);
           document.removeEventListener('keydown', this._onKey);
+          this._sized?.disconnect();
+          this._sized = undefined;
+          this._measured = null;
+          this._follow(false);
           OPEN$1.delete(this);
       }
       /** Close the popover, from the page. */
@@ -33615,12 +34200,60 @@
       _toggle() {
           this._set(!this.open);
       }
-      /* A change the founder made: set it and say so. */
+      /* A change the founder made: set it and say so. Opened by the founder,
+         focus moves into the dialog, to its first section (decision 143). */
       _set(open) {
           if (open === this.open)
               return;
           this.open = open;
           this.dispatchEvent(new CustomEvent('la-run-overview-toggle', { detail: { open }, bubbles: true, composed: true }));
+          if (open)
+              this.updateComplete.then(() => this._focusIn());
+      }
+      _focusIn() {
+          if (!this.open)
+              return;
+          const first = this.renderRoot.querySelector('nav .row');
+          (first ?? this._panel)?.focus();
+      }
+      get _panel() {
+          return this.renderRoot.querySelector('.panel');
+      }
+      /* Into the top layer and out of it (decision 143). */
+      _layer(open) {
+          const panel = this._panel;
+          if (!panel)
+              return;
+          if (typeof panel.showPopover === 'function') {
+              const shown = panel.matches(':popover-open');
+              if (open && !shown)
+                  panel.showPopover();
+              if (!open && shown)
+                  panel.hidePopover();
+          }
+          this._follow(open && !ANCHORS);
+      }
+      _follow(on) {
+          if (on === this._following)
+              return;
+          this._following = on;
+          if (on) {
+              document.addEventListener('scroll', this._place, { capture: true, passive: true });
+              window.addEventListener('resize', this._place, { passive: true });
+              this._place();
+          }
+          else {
+              document.removeEventListener('scroll', this._place, { capture: true });
+              window.removeEventListener('resize', this._place);
+          }
+      }
+      /* Is the section's name cut on the pill? Watched as the pill's room
+         changes, and checked again when the sections do. */
+      _measure() {
+          const name = this.renderRoot.querySelector('.pill .name');
+          const cut = !!name && name.scrollWidth > name.clientWidth;
+          if (cut !== this._cut)
+              this._cut = cut;
       }
       _select(index) {
           this._set(false);
@@ -33645,6 +34278,16 @@
       }
       /* One open at a time, however it was opened. */
       updated(changed) {
+          const name = this.renderRoot.querySelector('.pill .name');
+          if (name !== this._measured) {
+              if (this._measured)
+                  this._sized?.unobserve(this._measured);
+              if (name)
+                  this._sized?.observe(name);
+              this._measured = name;
+          }
+          if (changed.has('sections'))
+              requestAnimationFrame(() => this._measure());
           if (!changed.has('open'))
               return;
           if (this.open) {
@@ -33653,6 +34296,7 @@
           }
           else
               OPEN$1.delete(this);
+          this._layer(this.open);
       }
       /* Sections, and under each its steps numbered through the run. With steps,
          the step you're on is the current one; without, the section is. */
@@ -33709,27 +34353,40 @@
           const current = first < 0 ? -1 : first;
           const shown = first < 0 ? rows.length - 1 : first;
           const titleId = `${this._id}-title`;
+          const anchor = `--${this._id}`;
+          const cut = named && this._cut;
           return b `${iconStyles}
-      <button
-        class="pill"
-        type="button"
-        aria-expanded=${this.open ? 'true' : 'false'}
-        aria-controls=${this._id}
-        aria-haspopup="dialog"
-        @click=${this._toggle}
-      >
-        ${named
+      <la-tooltip class="pill-tip ${cut ? '' : 'fits'}" size="sm" tip=${cut ? rows[shown].name : ''}>
+        <button
+          class="pill"
+          type="button"
+          style=${`anchor-name: ${anchor}`}
+          aria-expanded=${this.open ? 'true' : 'false'}
+          aria-controls=${this._id}
+          aria-haspopup="dialog"
+          @click=${this._toggle}
+        >
+          ${named
             ? b `<span class="sect"
-                ><span class="num">${String(shown + 1).padStart(2, '0')}</span>
-                <span class="name">${rows[shown].name}</span></span
-              ><span class="sep" aria-hidden="true"></span>`
+                  ><span class="num">${String(shown + 1).padStart(2, '0')}</span>
+                  <span class="name">${rows[shown].name}</span></span
+                ><span class="sep" aria-hidden="true"></span>`
             : A}
-        <span class="sect count">${done} of ${total} done</span>
-        <span class="caret" aria-hidden="true"><i class="ph ph-caret-down"></i></span>
-      </button>
-      <div class="panel ${this.open ? 'open' : ''}" id=${this._id} role="dialog" aria-labelledby=${titleId}>
+          <span class="sect count">${done} of ${total} steps done</span>
+          <span class="caret" aria-hidden="true"><i class="ph ph-caret-down"></i></span>
+        </button>
+      </la-tooltip>
+      <div
+        class="panel ${this.open ? 'open' : ''}"
+        id=${this._id}
+        popover="manual"
+        role="dialog"
+        aria-labelledby=${titleId}
+        tabindex="-1"
+        style=${`position-anchor: ${anchor}`}
+      >
         <h2 class="title" id=${titleId}>${this.heading}</h2>
-        <la-run-progress done=${done} total=${total}></la-run-progress>
+        <la-run-progress done=${done} total=${total} label=${this.runTitle}></la-run-progress>
         ${named ? this._list(rows, current) : A}
       </div>`;
       }
@@ -33748,6 +34405,19 @@
       }
       :host([hidden]) {
         display: none;
+      }
+
+      /* The pill keeps one line: a long section name is cut, and the tooltip
+         shows it whole (decision 148, RO3). The tooltip draws nothing while
+         the name fits. */
+      .pill-tip {
+        display: inline-flex;
+        min-width: 0;
+        max-width: 100%;
+        vertical-align: top;
+      }
+      .pill-tip.fits {
+        --la-tooltip-hover-opacity: 0;
       }
 
       /* The pill: Orion's plan pill, without its status and calendar. */
@@ -33786,6 +34456,10 @@
       .sect:first-child {
         padding-left: var(--la-space-md);
       }
+      /* Only the section's name gives way; the count keeps its words. */
+      .sect.count {
+        flex: none;
+      }
       .num {
         color: var(--la-color-text-muted);
         font-variant-numeric: tabular-nums;
@@ -33815,39 +34489,66 @@
         transform: rotate(180deg);
       }
 
-      /* The popover: la-sources' panel, dropping down from the pill. */
+      /* The popover: la-sources' panel, dropping down from the pill. A manual
+         popover, in the top layer, so no container clips it (decision 143).
+         The open class, not :popover-open, shows it, so a browser without
+         popover still opens it, placed by _place(). */
       .panel {
-        position: absolute;
-        top: calc(100% + var(--la-space-sm));
-        left: 0;
+        position: fixed;
+        inset: auto;
         z-index: 30;
+        display: none;
+        flex-direction: column;
         box-sizing: border-box;
         width: 320px;
         max-width: calc(100vw - 2 * var(--la-space-lg));
+        max-height: calc(100vh - 2 * var(--la-space-lg));
+        margin: 0;
         padding: var(--la-space-md);
+        border: 0;
         border-radius: var(--la-radius-lg);
         background-color: var(--la-color-bg);
+        color: var(--la-color-text);
         box-shadow: var(--la-shadow-popover, var(--la-shadow-lg));
         font-size: var(--la-font-size-sm);
         white-space: normal;
         text-align: left;
-        visibility: hidden;
+        overflow: visible;
+        /* It fades rather than slides, as la-sources' panel: which side it
+           lands on is known only once it's placed. It fades out before it
+           leaves the top layer, where the browser can hold display and
+           overlay; elsewhere it simply goes. */
         opacity: 0;
-        pointer-events: none;
-        transform: translateY(-4px);
-        transition:
-          opacity var(--dur-fast) var(--ease),
-          transform var(--dur-fast) var(--ease),
-          visibility 0s var(--dur-fast);
+        transition-property: opacity, display, overlay;
+        transition-duration: var(--dur-fast);
+        transition-timing-function: var(--ease);
+        transition-behavior: allow-discrete;
       }
       .panel.open {
-        visibility: visible;
+        display: flex;
         opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-        transition:
-          opacity var(--dur-fast) var(--ease),
-          transform var(--dur-fast) var(--ease);
+      }
+      @starting-style {
+        .panel.open {
+          opacity: 0;
+        }
+      }
+      .panel:focus {
+        outline: none;
+      }
+      /* Below the pill, left edges aligned; up when there's no room below,
+         to the right edge when there's none to the right. Without anchor
+         positioning the component places it. */
+      @supports (anchor-name: --a) and (position-try-fallbacks: flip-block) {
+        .panel {
+          top: anchor(bottom);
+          left: anchor(left);
+          margin-top: var(--la-space-sm);
+          position-try-fallbacks:
+            flip-block,
+            flip-inline,
+            flip-block flip-inline;
+        }
       }
       .title {
         margin: 0 0 var(--la-space-md);
@@ -33856,7 +34557,11 @@
         font-weight: var(--la-font-weight-semibold);
         color: var(--la-color-text);
       }
+      /* Only the list moves: the heading and the bar stay put (decision
+         148, RO4). */
       nav {
+        min-height: 0;
+        overflow-y: auto;
         margin-top: var(--la-space-md);
         padding-top: var(--la-space-xs);
         border-top: 1px solid var(--la-color-border-light);
@@ -33904,7 +34609,6 @@
       /* With steps, a section is a heading over its steps: base size, medium. */
       nav.with-steps {
         max-height: min(70vh, 560px);
-        overflow-y: auto;
       }
       nav.with-steps .sec {
         font-size: var(--la-font-size-base);
@@ -33949,8 +34653,14 @@
       n()
   ], exports.LaRunOverview.prototype, "heading", void 0);
   __decorate$3([
+      n({ attribute: 'run-title' })
+  ], exports.LaRunOverview.prototype, "runTitle", void 0);
+  __decorate$3([
       n({ type: Boolean, reflect: true })
   ], exports.LaRunOverview.prototype, "open", void 0);
+  __decorate$3([
+      r$1()
+  ], exports.LaRunOverview.prototype, "_cut", void 0);
   exports.LaRunOverview = __decorate$3([
       t$2('la-run-overview')
   ], exports.LaRunOverview);
@@ -33969,6 +34679,10 @@
   };
   /** One open panel at a time, anywhere on the page. */
   const OPEN = new Set();
+  /** The browser places the panel itself: anchor positioning, with its flips (decision 143). */
+  const ANCHORED = typeof CSS !== 'undefined' &&
+      CSS.supports('anchor-name: --a') &&
+      CSS.supports('position-try-fallbacks: flip-block');
   /**
    * la-sources — where something came from. A ghost "Sources · 2" pill that
    * opens a panel naming the documents and registers a step, an insight or a
@@ -33979,19 +34693,31 @@
    * The promise is the same wherever it appears: whenever we assert something,
    * the person can see which document or register it came from, in one click.
    * On a playbook step it keeps the far right of the foot, opposite the act
-   * (Jonard, 28 Sep 2026 and 6 Oct 2026). It is provenance, not the law: the
-   * step's legal grounding stays behind *More*.
+   * (Jonard, 28 Sep 2026 and 6 Oct 2026; decision 151, SR2). It is provenance,
+   * not the law: the step's legal grounding stays behind *More*.
    *
-   * A row with `nav` is a button and fires `la-source-open` {nav, doc}; the
-   * page routes it (a document to its LawVault page, a register row). A row
-   * without one is plain. The panel opens upward by default, so a pill at the
-   * foot of a card doesn't push the page; `drop="down"` for one near the top.
+   * A row with `href` is a link, with the open-out arrow (decision 151, SR3, as
+   * decision 142): the browser follows it. A page that opens the source itself
+   * listens for `click` and calls preventDefault(); the link is in
+   * e.composedPath(). A row without one is plain. Pressing a link closes the
+   * panel.
+   *
+   * The panel opens in the top layer (`popover="manual"`, so the disclosure
+   * keeps its own rules below), right after its trigger in the page, so a
+   * container that scrolls can't clip it (decision 143; rule/pop-outs-never-clip).
+   * It opens below the pill, right edges aligned, and flips up when there's no
+   * room below, or to the pill's left edge when there's none to the left
+   * (decision 151, SR4). CSS anchor positioning places it; where the browser
+   * lacks it, it's placed from the pill's position, moved on scroll and
+   * resize, and kept inside the window.
+   *
    * One panel is open at a time; a click outside or Escape closes it, and
-   * Escape returns focus to the pill.
+   * Escape returns focus to the pill. The panel takes Escape before a modal
+   * does, so it closes the panel and leaves the modal round it open.
    *
    * Usage:
-   *   <la-sources .sources=${[{icon: 'ph-file-text', doc: 'Articles of association',
-   *       section: 'adopted 2 June 2024 · LawVault', nav: 'lawvault-articles'}]}></la-sources>
+   *   <la-sources .sources=${[{icon: 'ph-file-text', doc: 'Articles of Association',
+   *       section: `adopted ${formatDate('2024-06-02')} · LawVault`, href: '/lawvault/articles'}]}></la-sources>
    *
    * A page can bring its own trigger in the `trigger` slot, as la-menu
    * allows: Deadlines already says where each row came from, so that label
@@ -33999,27 +34725,25 @@
    * element is wired as the button (aria-expanded, aria-controls, click),
    * and the default pill isn't drawn.
    *
-   * A disclosure, as Carbon's toggletip and the APG's disclosure pattern:
-   * the trigger has aria-expanded and aria-controls and no aria-haspopup
-   * (whose `true` means a menu), and focus stays on it as the panel opens.
+   * A disclosure, as Carbon's toggletip and the APG's disclosure pattern
+   * (decision 143; rule/popover-by-content): the trigger has aria-expanded and
+   * aria-controls and no aria-haspopup (whose `true` means a menu), focus stays
+   * on it as the panel opens, and Tab moves on into the rows.
    *
    * @prop sources - the documents and registers, in the order read
    * @prop label   - the pill's word (default "Sources"); the count follows it
-   * @prop drop    - up (default) · down
    * @slot trigger - a page's own trigger in place of the pill
-   * @slot note    - closes the panel: how we read it, and how sure we are
-   * @fires la-source-open - {nav, doc} when a row with `nav` is pressed
    */
   exports.LaSources = class LaSources extends i$3 {
       constructor() {
           super(...arguments);
           this.sources = [];
           this.label = 'Sources';
-          this.drop = 'up';
           this._open = false;
-          this._hasNote = false;
           this._hasTrigger = false;
           this._panelId = `la-sources-${Math.random().toString(36).slice(2, 8)}`;
+          /** Whether the panel is moved with the page (no anchor positioning). */
+          this._following = false;
           this._onDocClick = (e) => {
               if (!this._open)
                   return;
@@ -34030,22 +34754,57 @@
           this._onKey = (e) => {
               if (e.key !== 'Escape' || !this._open)
                   return;
+              e.preventDefault();
+              e.stopPropagation();
               this.close();
               const own = this.querySelector('[slot="trigger"]');
               const trigger = own ?? this.renderRoot.querySelector('la-button');
               /* la-button doesn't delegate focus, so focus the button inside it. */
               (trigger?.shadowRoot?.querySelector('button, a') ?? trigger)?.focus();
           };
+          /* Where the browser lacks anchor positioning (decision 143): below the
+             pill, right edges aligned; up when there's no room below, to the pill's
+             left edge when there's none to the left; always inside the window. */
+          this._place = () => {
+              if (ANCHORED || !this._open)
+                  return;
+              const panel = this._panel;
+              const anchor = this._anchor;
+              if (!panel || !anchor)
+                  return;
+              const gap = parseFloat(getComputedStyle(this).getPropertyValue('--la-space-sm')) || 8;
+              const a = anchor.getBoundingClientRect();
+              const { width, height } = panel.getBoundingClientRect();
+              const vw = document.documentElement.clientWidth;
+              const vh = window.innerHeight;
+              let top = a.bottom + gap;
+              if (top + height > vh - gap && a.top - gap - height >= gap)
+                  top = a.top - gap - height;
+              let left = a.right - width;
+              if (left < gap)
+                  left = a.left;
+              panel.style.left = `${Math.max(gap, Math.min(left, vw - width - gap))}px`;
+              panel.style.top = `${Math.max(gap, Math.min(top, vh - height - gap))}px`;
+          };
+      }
+      get _panel() {
+          return this.renderRoot.querySelector('.panel');
+      }
+      get _anchor() {
+          return this.renderRoot.querySelector('.anchor');
       }
       connectedCallback() {
           super.connectedCallback();
           document.addEventListener('click', this._onDocClick);
-          document.addEventListener('keydown', this._onKey);
+          /* Capture: the panel takes Escape before a modal round it does. */
+          document.addEventListener('keydown', this._onKey, true);
       }
       disconnectedCallback() {
           super.disconnectedCallback();
           document.removeEventListener('click', this._onDocClick);
-          document.removeEventListener('keydown', this._onKey);
+          document.removeEventListener('keydown', this._onKey, true);
+          this._follow(false);
+          this._open = false;
           OPEN.delete(this);
       }
       /** Close the panel, from the page. */
@@ -34076,12 +34835,63 @@
               }
           });
       }
-      updated() {
-          this.querySelectorAll('[slot="trigger"]').forEach((el) => el.setAttribute('aria-expanded', this._open ? 'true' : 'false'));
+      firstUpdated() {
+          /* One anchor name per pill, so each panel finds its own. */
+          const name = `--${this._panelId}`;
+          this._anchor?.style.setProperty('anchor-name', name);
+          this._panel?.style.setProperty('position-anchor', name);
       }
-      _go(s) {
-          this.dispatchEvent(new CustomEvent('la-source-open', { detail: { nav: s.nav, doc: s.doc }, bubbles: true, composed: true }));
-          this.close();
+      updated(changed) {
+          this.querySelectorAll('[slot="trigger"]').forEach((el) => el.setAttribute('aria-expanded', this._open ? 'true' : 'false'));
+          void this._syncPill();
+          if (changed.has('_open'))
+              this._show(this._open);
+      }
+      /* la-button draws its own <button> and passes no ARIA on, so the
+         disclosure's state goes on that button: a screen reader hears the pill
+         as a button, expanded or collapsed (decision 143). aria-controls reaches
+         the panel by element reference, where the browser has it. */
+      async _syncPill() {
+          const pill = this.renderRoot.querySelector('la-button');
+          if (!pill)
+              return;
+          await pill.updateComplete;
+          const b = pill.shadowRoot?.querySelector('button');
+          if (!b)
+              return;
+          b.setAttribute('aria-expanded', this._open ? 'true' : 'false');
+          const panel = this._panel;
+          if (panel && 'ariaControlsElements' in b)
+              b.ariaControlsElements = [panel];
+      }
+      _show(open) {
+          const p = this._panel;
+          if (!p)
+              return;
+          if (typeof p.showPopover === 'function') {
+              const shown = p.matches(':popover-open');
+              if (open && !shown)
+                  p.showPopover();
+              if (!open && shown)
+                  p.hidePopover();
+          }
+          this._follow(open);
+          if (open)
+              this._place();
+      }
+      /* Without anchor positioning, the panel moves with the page. */
+      _follow(on) {
+          if (ANCHORED || on === this._following)
+              return;
+          this._following = on;
+          if (on) {
+              document.addEventListener('scroll', this._place, { capture: true, passive: true });
+              window.addEventListener('resize', this._place, { passive: true });
+          }
+          else {
+              document.removeEventListener('scroll', this._place, { capture: true });
+              window.removeEventListener('resize', this._place);
+          }
       }
       _row(s) {
           const body = b `<i class="ph ${s.icon} icon" aria-hidden="true"></i>
@@ -34089,39 +34899,32 @@
         <div class="doc">${s.doc}</div>
         ${s.section ? b `<div class="section">${s.section}</div>` : A}
       </div>`;
-          return s.nav
-              ? b `<button class="item" type="button" @click=${() => this._go(s)}>
+          return s.href
+              ? b `<a class="item" href=${s.href} @click=${() => this.close()}>
           ${body}<i class="ph ph-arrow-square-out go" aria-hidden="true"></i>
-        </button>`
+        </a>`
               : b `<div class="item">${body}</div>`;
       }
       render() {
           const n = this.sources.length;
           return b `${iconStyles}
-      <slot name="trigger" @slotchange=${this._onTriggerSlot}></slot>
-      ${this._hasTrigger
+      <span class="anchor">
+        <slot name="trigger" @slotchange=${this._onTriggerSlot}></slot>
+        ${this._hasTrigger
             ? A
-            : b `<la-button
-            variant="ghost"
-            size="sm"
-            aria-expanded=${this._open ? 'true' : 'false'}
-            aria-controls=${this._panelId}
-            @click=${this._toggle}
-          >
-            <i slot="icon-left" class="ph ph-link-simple" aria-hidden="true"></i>${this.label} · ${n}
-          </la-button>`}
+            : b `<la-button variant="ghost" size="sm" @click=${this._toggle}>
+              <i slot="icon-left" class="ph ph-link-simple" aria-hidden="true"></i>${this.label} · ${n}
+            </la-button>`}
+      </span>
       <div
         class="panel ${this._open ? 'open' : ''}"
         id=${this._panelId}
+        popover="manual"
         role="group"
         aria-label=${this.label}
-        @click=${(e) => e.stopPropagation()}
       >
         <div class="title">${this.label}</div>
         ${this.sources.map((s) => this._row(s))}
-        <div class="note" ?hidden=${!this._hasNote}>
-          <slot name="note" @slotchange=${(e) => (this._hasNote = e.target.assignedElements().length > 0)}></slot>
-        </div>
       </div>`;
       }
   };
@@ -34140,11 +34943,18 @@
       :host([hidden]) {
         display: none;
       }
+      /* What the panel is placed against: the pill, or the page's trigger. */
+      .anchor {
+        display: inline-flex;
+      }
+      /* A manual popover, in the top layer (decision 143). The open class,
+         not :popover-open, shows it, so a browser without popover still
+         opens it, placed by _place(). */
       .panel {
-        position: absolute;
-        right: 0;
-        bottom: calc(100% + 8px);
-        z-index: 30;
+        position: fixed;
+        inset: auto;
+        margin: 0;
+        border: 0;
         box-sizing: border-box;
         min-width: 280px;
         max-width: min(360px, 90vw);
@@ -34155,30 +34965,40 @@
         border-radius: var(--la-radius-lg);
         background-color: var(--la-color-bg);
         box-shadow: var(--la-shadow-popover, var(--la-shadow-lg));
+        color: var(--la-color-text);
         text-align: left;
         white-space: normal;
-        visibility: hidden;
+        /* It fades rather than slides: which side it lands on is known
+           only once it's placed. */
         opacity: 0;
-        pointer-events: none;
-        transform: translateY(4px);
         transition:
           opacity var(--dur-fast) var(--ease),
-          transform var(--dur-fast) var(--ease),
-          visibility 0s var(--dur-fast);
+          display var(--dur-fast) allow-discrete,
+          overlay var(--dur-fast) allow-discrete;
       }
-      :host([drop='down']) .panel {
-        bottom: auto;
-        top: calc(100% + 8px);
-        transform: translateY(-4px);
+      .panel:not(.open) {
+        display: none;
       }
       .panel.open {
-        visibility: visible;
         opacity: 1;
-        pointer-events: auto;
-        transform: translateY(0);
-        transition:
-          opacity var(--dur-fast) var(--ease),
-          transform var(--dur-fast) var(--ease);
+      }
+      @starting-style {
+        .panel.open {
+          opacity: 0;
+        }
+      }
+      /* Below the pill, right edges aligned; up when there's no room below,
+         to the left edge when there's none to the left (decision 151, SR4). */
+      @supports (anchor-name: --a) and (position-try-fallbacks: flip-block) {
+        .panel {
+          top: anchor(bottom);
+          right: anchor(right);
+          margin-top: var(--la-space-sm);
+          position-try-fallbacks:
+            flip-block,
+            flip-inline,
+            flip-block flip-inline;
+        }
       }
       .title {
         padding: var(--la-space-sm) var(--la-space-md) var(--la-space-xs);
@@ -34193,23 +35013,19 @@
         box-sizing: border-box;
         margin: 0;
         padding: var(--la-space-sm) var(--la-space-md);
-        border: 0;
         border-radius: var(--la-radius-md);
-        background: none;
         font: inherit;
         color: inherit;
         text-align: left;
+        text-decoration: none;
       }
       .item + .item {
         margin-top: 1px;
       }
-      button.item {
-        cursor: pointer;
-      }
-      button.item:hover {
+      a.item:hover {
         background-color: var(--la-color-bg-subtle);
       }
-      button.item:focus-visible {
+      a.item:focus-visible {
         outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
         outline-offset: -2px;
       }
@@ -34239,17 +35055,6 @@
         font-size: 14px;
         color: var(--la-color-text-faint);
       }
-      .note {
-        margin-top: var(--la-space-xs);
-        padding: var(--la-space-sm) var(--la-space-md);
-        border-top: 1px solid var(--la-color-border-light);
-        font-size: var(--la-font-size-sm);
-        line-height: 1.4;
-        color: var(--la-color-text-secondary);
-      }
-      .note[hidden] {
-        display: none;
-      }
       @media (prefers-reduced-motion: reduce) {
         .panel {
           transition: none;
@@ -34264,14 +35069,8 @@
       n()
   ], exports.LaSources.prototype, "label", void 0);
   __decorate$2([
-      n({ reflect: true })
-  ], exports.LaSources.prototype, "drop", void 0);
-  __decorate$2([
       r$1()
   ], exports.LaSources.prototype, "_open", void 0);
-  __decorate$2([
-      r$1()
-  ], exports.LaSources.prototype, "_hasNote", void 0);
   __decorate$2([
       r$1()
   ], exports.LaSources.prototype, "_hasTrigger", void 0);
@@ -34280,6 +35079,173 @@
   ], exports.LaSources);
 
   var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /**
+   * la-document-preview — read a document on the record before confirming it
+   * is the right one. A file name alone isn't enough to be sure (Jonard, 6 Oct
+   * 2026): a record row's document name opens this, the founder reads the
+   * pages, and confirms from here.
+   *
+   * An la-modal at its large size: the document's name as the heading, its
+   * meta as the description ("signed 2 June 2024 · From LawVault"), the pages
+   * in la-pdf-preview, and a footer with the record row's own acts: *That's
+   * right* (primary) and *Upload a different one* (ghost), plus *Open in
+   * LawVault* on the left for the document's own page when `nav` is set.
+   * Confirming here is the same act as on the row, so the page settles the
+   * row the same way.
+   *
+   * From the questions modal a document opens inside it (decision 150, DP-D):
+   * la-step-questions turns its own page to the document, with *Back to the
+   * question*, and shows this with `inline`: the pages only, with no modal of
+   * its own and no acts, since the acts stay on the row (decision 125). The
+   * host shows the name and the meta. No modal opens over another.
+   *
+   * The name is the document's, in Title Case (decision 139).
+   *
+   * Usage:
+   *   <la-document-preview name="Shareholders’ Agreement" meta="signed 2 June 2024 · From LawVault"
+   *       src="/assets/sample-docs/shareholders-agreement-acme-preview.pdf" nav="lawvault-sha" open>
+   *   </la-document-preview>
+   *   <la-document-preview inline name="Shareholders’ Agreement" src="…"></la-document-preview>
+   *
+   * @prop inline         - the pages only, for a host that turns its own page to the document: no modal, no acts
+   * @prop open           - the modal is shown
+   * @prop name           - the document's name, the heading
+   * @prop meta           - its date and source, the description
+   * @prop src            - the PDF (la-pdf-preview)
+   * @prop fallbackImage  - attribute fallback-image: a page image where no PDF viewer is available
+   * @prop nav            - where "Open in LawVault" goes; empty hides it
+   * @prop confirmLabel   - attribute confirm-label (default "That’s right")
+   * @prop changeLabel    - attribute change-label (default "Upload a different one")
+   * @fires la-document-confirm - That’s right
+   * @fires la-document-change  - Upload a different one
+   * @fires la-document-open    - {nav}: Open in LawVault
+   * @fires la-document-close   - closed without an act
+   */
+  exports.LaDocumentPreview = class LaDocumentPreview extends i$3 {
+      constructor() {
+          super(...arguments);
+          this.open = false;
+          this.inline = false;
+          this.name = '';
+          this.meta = '';
+          this.src = '';
+          this.fallbackImage = '';
+          this.nav = '';
+          this.confirmLabel = 'That’s right';
+          this.changeLabel = 'Upload a different one';
+      }
+      _fire(name, detail) {
+          this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }));
+      }
+      _act(name, detail) {
+          this.open = false;
+          this._fire(name, detail);
+      }
+      render() {
+          const pages = b `<div class="pane">
+      <la-pdf-preview src=${this.src} fallback-image=${this.fallbackImage} label=${`${this.name}, preview`}></la-pdf-preview>
+    </div>`;
+          // Inside the questions modal: the pages, and nothing to act on (decision 150).
+          if (this.inline)
+              return pages;
+          return b `${iconStyles}<la-modal
+      ?open=${this.open}
+      size="lg"
+      heading=${this.name}
+      description=${this.meta}
+      @close=${() => {
+            this.open = false;
+            this._fire('la-document-close');
+        }}
+    >
+      ${pages}
+      <div slot="footer" class="footer">
+        ${this.nav
+            ? b `<la-button variant="ghost" @click=${() => this._act('la-document-open', { nav: this.nav })}
+              ><i slot="icon-left" class="ph ph-arrow-square-out" aria-hidden="true"></i>Open in LawVault</la-button
+            >`
+            : A}
+        <div class="right">
+          <la-button variant="ghost" @click=${() => this._act('la-document-change')}>${this.changeLabel}</la-button>
+          <la-button variant="primary" @click=${() => this._act('la-document-confirm')}>${this.confirmLabel}</la-button>
+        </div>
+      </div>
+    </la-modal>`;
+      }
+  };
+  exports.LaDocumentPreview.styles = [
+      tokens,
+      i$6 `
+      :host {
+        display: block;
+        font-family: var(--la-font-family);
+        color: var(--la-color-text);
+      }
+      /* The pages take the modal's height; the modal caps itself at 90vh. */
+      .pane {
+        height: min(68vh, 760px);
+        min-height: 320px;
+        border-radius: var(--la-radius-md);
+        border: 1px solid var(--la-color-border-light);
+        overflow: hidden;
+        background: var(--la-color-bg-subtle);
+      }
+      la-pdf-preview {
+        height: 100%;
+      }
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: var(--la-space-md);
+        width: 100%;
+      }
+      .right {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+        margin-left: auto;
+      }
+    `,
+  ];
+  __decorate$1([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaDocumentPreview.prototype, "open", void 0);
+  __decorate$1([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaDocumentPreview.prototype, "inline", void 0);
+  __decorate$1([
+      n()
+  ], exports.LaDocumentPreview.prototype, "name", void 0);
+  __decorate$1([
+      n()
+  ], exports.LaDocumentPreview.prototype, "meta", void 0);
+  __decorate$1([
+      n()
+  ], exports.LaDocumentPreview.prototype, "src", void 0);
+  __decorate$1([
+      n({ attribute: 'fallback-image' })
+  ], exports.LaDocumentPreview.prototype, "fallbackImage", void 0);
+  __decorate$1([
+      n()
+  ], exports.LaDocumentPreview.prototype, "nav", void 0);
+  __decorate$1([
+      n({ attribute: 'confirm-label' })
+  ], exports.LaDocumentPreview.prototype, "confirmLabel", void 0);
+  __decorate$1([
+      n({ attribute: 'change-label' })
+  ], exports.LaDocumentPreview.prototype, "changeLabel", void 0);
+  exports.LaDocumentPreview = __decorate$1([
+      t$2('la-document-preview')
+  ], exports.LaDocumentPreview);
+
+  var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -34304,26 +35270,47 @@
    *   Company DNA - picked, with "From Companies House. Check it’s right."; a
    *               record question shows as a record row
    *   AI        - suggested, never picked (decision 130): AI's option carries
-   *               a "Suggested" tag, and la-ai-insight ("Suggested by AI") says
-   *               "We suggest Yes. Check it’s right. From your Articles of
-   *               Association, Article 17.2:" (the document's own title and
-   *               numbering, in its own case); the founder's press is the
-   *               answer; a typed answer has "Use …". Then
-   *               the quote in its own box with a link to the document
-   *               (decision 126, amended 9 Oct: Shape of AI's Citations)
+   *               a "Suggested" tag, and la-ai-insight, headed "Suggested by
+   *               LawAdvisor AI" with the LawAdvisor mark (decision 144), says
+   *               "We suggest Yes. Check it’s right. From your articles of
+   *               association, article 17.2:" (in a sentence, a document and
+   *               its clause are lower case: decision 139); the founder's press
+   *               is the answer; a typed answer has "Use …". Then the quote in
+   *               its own box with a link naming the file in Title Case,
+   *               "Articles of Association" (decision 126, amended 9 Oct:
+   *               Shape of AI's Citations)
    *   A question whose document isn't in LawVault is simply asked: no
    *   suggestion and no upload prompt (decision 126, amended 13 Oct 2026).
    * Answered differently, the founder's answer stands on its own, no badge; a
    * neutral card under it says what we filled in and where from, with Undo,
-   * and for AI "What we read" (decision 129): "We suggested Yes, from your Articles of
-   * Association, Article 17.2.", "Your record says …", or for a protected
+   * and for AI "What we read" (decision 129): "We suggested Yes, from your articles of
+   * association, article 17.2.", "Your record says …", or for a protected
    * register value "Companies House has … We’ll keep their record and flag
    * the difference."
    *
    * Every question is required. A value from the record or a register counts
    * once it's kept or changed (decision 127): kept is Next past it, or That’s
-   * right on a record row. AI's suggestion counts once the founder picks. The modal opens on the first question that doesn't count yet, so the
-   * founder steps through every one; the summary comes only when all count.
+   * right on a record row. AI's suggestion counts once the founder picks. The
+   * modal opens on the first question that doesn't count yet, so the founder
+   * steps through every one; the summary comes only when all count. The
+   * stepper marks a question done once it counts, wherever the founder is
+   * (decision 152, SQ1).
+   *
+   * Each question is the screen's heading and its answer's name (la-question;
+   * decision 149). The footer says Next on every question, the last included,
+   * and Confirm on the summary (SQ5). Next is never disabled (decisions 140,
+   * 156): pressed with the answer missing, the question shows what's missing
+   * above its answer, its choices are marked invalid and focus moves to the
+   * first; the message goes as soon as the answer is given. A date is checked
+   * then too, by la-date-input's check(), with its own message. The summary
+   * has Change on each row: it opens that question, and Next comes back to
+   * the summary (SQ2).
+   *
+   * A held document is read inside the modal (decision 150, DP-D): its name
+   * on the record row turns the modal's page to it, with the document's name
+   * and meta in the title and line, its pages (la-document-preview `inline`),
+   * and *Back to the question*. It reads only: the acts stay on the row
+   * (decision 125), and no modal opens over another.
    *
    * The page owns the answers. Set `answers`, `filled` and `checked`
    * before opening; the modal keeps its own copy while open and fires
@@ -34348,15 +35335,16 @@
    * @prop checked   - question ids whose filled-in answer the founder has kept
    * @prop start     - where it opens: 'next' (default), the first question that doesn't count yet; 'first',
    *                   the first question; 'summary', the summary, once every question counts
-   * @prop reading   - questions AI is still reading a document for: id to the document's own title.
-   *                   AI's panel shows with la-thinking ("Reading your Articles of Association…")
-   *                   until the page sets `filled` (ready) or drops the id (failed: simply asked).
+   * @prop reading   - questions AI is still reading a document for: id to the document as a sentence
+   *                   names it, in lower case (decision 139). AI's panel shows with la-thinking
+   *                   ("Reading your articles of association…") until the page sets `filled` (ready)
+   *                   or drops the id (failed: simply asked).
    * @slot warning - on the summary, above the answers: what confirming a change does to documents
    *                 made from the old answers (PRO-210 N, decision 136). The page fills it, with
    *                 la-alert variant="warning", only when a changed answer was used by a document.
    * @fires la-step-questions-change  - {answers, checked} on each Next and on the summary
    * @fires la-step-questions-confirm - {answers, checked} from Confirm on the summary
-   * @fires la-source-open            - {nav, doc}: the document under AI's quote, for the page to open (as la-sources does)
+   * @fires la-source-open            - {nav, doc}: the document under AI's quote, for the page to open
    * @fires la-step-questions-close   - the founder closed it without finishing
    */
   exports.LaStepQuestions = class LaStepQuestions extends i$3 {
@@ -34368,8 +35356,9 @@
           this.answers = {};
           this.filled = {};
           this.checked = [];
-          /** Questions AI is still reading a document for, by id: the document's
-           *  own title ("Articles of Association"). */
+          /** Questions AI is still reading a document for, by id: the document as
+           *  a sentence names it, in lower case ("articles of association";
+           *  decision 139). */
           this.reading = {};
           this.start = 'next';
           this._ans = {};
@@ -34378,10 +35367,21 @@
           /** The record question being changed, and the value being typed. */
           this._editing = '';
           this._draft = '';
+          /** Save was pressed on the record's editor with nothing typed. */
+          this._draftError = false;
+          /** The record question whose held document the modal's page is turned
+           *  to (decision 150), and what had focus when it turned. */
+          this._doc = '';
+          /** Change on a summary row opened this question: Next comes back to the
+           *  summary (decision 152, SQ2). */
+          this._fromSummary = false;
+          /** The question whose Next was pressed with its answer missing: its message
+           *  shows above the answer until the answer is given (decisions 140, 156). */
+          this._invalid = '';
           /* Next and Back swap the screen under the pressed button, which may then
-             be disabled (the next question isn't answered), relabelled as Confirm,
-             or gone (Back on the first question): focus would fall to the page. It
-             moves to the new screen's top instead, the question or the summary. */
+             be relabelled as Confirm, or gone (Back on the first question): focus
+             would fall to the page. It moves to the new screen's top instead, the
+             question or the summary. */
           this._moved = false;
           /** Questions AI has read for while the modal was open, with the document's
            *  title, so the reading line keeps its words while it fades out. */
@@ -34392,6 +35392,9 @@
               this._ans = { ...this.answers };
               this._checked = new Set(this.checked);
               this._editing = '';
+              this._invalid = '';
+              this._fromSummary = false;
+              this._doc = '';
               const items = this._flow();
               const first = items.findIndex((q) => !this._counts(q));
               this._i = this.start === 'first' ? 0 : first < 0 ? items.length : first;
@@ -34410,6 +35413,13 @@
               }
               if (next)
                   this._ans = next;
+          }
+          // A message goes as soon as its answer is given (decision 140), or once
+          // the founder is on another screen.
+          if (this._invalid) {
+              const q = this._flow()[this._i];
+              if (!q || q.id !== this._invalid || this._ok(q))
+                  this._invalid = '';
           }
       }
       /* ── The flow: follow-ups slot in under their option. */
@@ -34469,14 +35479,18 @@
       _suggests(f) {
           return !!f?.ai;
       }
-      /** Where a filled-in answer came from, in words. An AI read names the
-       *  document by its own title and numbering, in the document's case
-       *  (decision 126, amended): "From your Articles of Association, Article 17.2". */
+      /** Where a filled-in answer came from, in words, for a sentence (decision
+       *  139): a document is a common noun, in lower case, and so is its clause's
+       *  numbering, "From your articles of association, article 17.2". The words
+       *  are the page's `source`, so nothing in a title is lower-cased here; the
+       *  link under the quote keeps the file's own title. */
       _from(f) {
-          // A register is named as itself ("From Companies House"); a document is
-          // the founder's own ("From your Articles of Association").
-          const where = f.register ? `From ${f.register}` : f.doc ? `From your ${f.doc}` : f.source;
-          return f.clause ? `${where}, ${f.clause}` : where;
+          // A register is named as itself ("From Companies House"), and its entry
+          // keeps its own case ("Harbour Analytics Ltd, 12650338").
+          if (f.register)
+              return f.clause ? `From ${f.register}, ${f.clause}` : `From ${f.register}`;
+          const clause = f.clause?.replace(/^(Article|Clause|Section|Schedule|Paragraph|Part|Regulation|Rule)\b/, (w) => w.toLowerCase());
+          return clause ? `${f.source}, ${clause}` : f.source;
       }
       /** Whether a question counts towards Confirm (decision 127): answered, and
        *  for a filled-in one, kept or changed. */
@@ -34496,15 +35510,54 @@
           const o = this._opt(q, a);
           if (o)
               return o.label;
+          // A pick answered "no one" is [''], la-people-answer's None of them
+          // (decision 150, PA1); [] is not answered.
           if (q.type === 'pick')
-              return (a ?? []).join(', ') || 'No one';
+              return this._valueText(q, a ?? []) || 'Not answered';
           if (q.type === 'each') {
               const m = a ?? {};
               return (q.people ?? [])
                   .map((p) => `${p}: ${(q.options ?? []).find((x) => x.id === m[p])?.label ?? 'not answered'}`)
                   .join(' · ');
           }
-          return a == null || a === '' ? 'Not answered' : String(a);
+          return a == null || a === '' ? 'Not answered' : this._valueText(q, a);
+      }
+      /** Whether Next can move on from a question: a record row once it's kept
+       *  or changed, and not mid-edit; any other question once it's answered. */
+      _ok(q) {
+          if (this._editing === q.id)
+              return false;
+          return q.record ? this._counts(q) : this._answered(q);
+      }
+      /** What's missing, said above the answer when Next is pressed too soon
+       *  (decision 140). Legal's `error` where it's written; otherwise these
+       *  words, which are placeholders until legal and Bobby write them. */
+      _missing(q) {
+          if (this._editing === q.id)
+              return 'Save your answer, or cancel.';
+          if (q.error)
+              return q.error;
+          if (q.record) {
+              if (this._recordState(q) !== 'empty')
+                  return 'Say if this is right, or change it.';
+              return q.type === 'file' ? 'Upload it to answer.' : 'Add it to answer.';
+          }
+          switch (q.type) {
+              case 'yesno':
+              case 'choice':
+              case 'pick':
+                  return 'Select an answer.';
+              case 'each':
+                  return 'Select an answer for each person.';
+              case 'number':
+                  return 'Enter a number.';
+              case 'date':
+                  return 'Enter the date.';
+              case 'file':
+                  return 'Upload a file.';
+              default:
+                  return 'Enter an answer.';
+          }
       }
       /* ── Acts ──────────────────────────────────────────────────────────── */
       _set(id, value) {
@@ -34525,13 +35578,53 @@
               composed: true,
           }));
       }
-      _next(q, total) {
+      /** la-date-input's check() (decision 149, DI3): validates now and shows
+       *  its own message. Guarded, for a la-date-input without it. */
+      _checkDate(el) {
+          const date = el;
+          if (!date?.check || date.check())
+              return true;
+          date.focus();
+          return false;
+      }
+      async _next(q, total) {
+          // Never disabled (decisions 140, 156). A date is checked here, with its
+          // own message at the date (decision 149); anything else missing shows
+          // its message above the answer, and focus moves to the answer.
+          if (q.type === 'date' && !q.record && !this._checkDate(this.renderRoot.querySelector('la-question la-date-input')))
+              return;
+          if (!this._ok(q)) {
+              this._invalid = q.id;
+              await this.updateComplete;
+              const el = this.renderRoot.querySelector('la-question');
+              await el?.updateComplete;
+              el?.focusAnswer();
+              return;
+          }
           // Next past a filled-in answer keeps it: that's the founder's check.
           if (this._filledFor(q) && this._filledState(q) === 'kept')
               this._check(q.id, true);
           this._emit('la-step-questions-change');
           this._moved = true;
+          if (this._fromSummary) {
+              // Opened by Change on the summary: back to the summary, by way of any
+              // question the change has left to answer (a new follow-up), since the
+              // summary comes only once every question counts.
+              const items = this._flow();
+              const open = items.findIndex((x) => !this._counts(x));
+              this._i = open < 0 ? items.length : open;
+              if (open < 0)
+                  this._fromSummary = false;
+              return;
+          }
           this._i = Math.min(this._i + 1, total);
+      }
+      /** Change on a summary row: that question, then Next back to the summary
+       *  (decision 152, SQ2; GOV.UK's and ONS's check answers). */
+      _change(k) {
+          this._fromSummary = true;
+          this._moved = true;
+          this._i = k;
       }
       _back() {
           this._moved = true;
@@ -34541,6 +35634,16 @@
           if (this._moved && changed.has('_i')) {
               this._moved = false;
               this._focusScreen();
+          }
+          // The page turned to a document: focus its top; turned back: focus the
+          // document's name on the row, which opened it (the APG dialog pattern).
+          if (changed.has('_doc') && changed.get('_doc') !== undefined && !changed.has('open')) {
+              if (this._doc)
+                  this.renderRoot.querySelector('.doc-page')?.focus();
+              else if (this._docOpener?.isConnected)
+                  this._docOpener.focus();
+              else
+                  this._focusScreen();
           }
       }
       async _focusScreen() {
@@ -34562,7 +35665,25 @@
           this.open = false;
           this.dispatchEvent(new CustomEvent('la-step-questions-close', { bubbles: true, composed: true }));
       }
+      /** The width class of a typed answer's field (decision 146). */
+      _width(q) {
+          return `w-${q.expects ?? (q.type === 'number' ? 'number' : 'long')}`;
+      }
       /* ── A value on the record (decision 125) ──────────────────────────── */
+      /** A held document the modal can turn its page to: one with its pages,
+       *  still the one on the record (a changed one is the founder's upload). */
+      _readable(q) {
+          const f = this._filledFor(q);
+          return q.type === 'file' && f?.src && this._filledState(q) !== 'changed' ? f : undefined;
+      }
+      /** The row's document name, pressed: the page turns to the document. */
+      _read(q) {
+          let el = document.activeElement;
+          while (el?.shadowRoot?.activeElement)
+              el = el.shadowRoot.activeElement;
+          this._docOpener = el instanceof HTMLElement ? el : undefined;
+          this._doc = q.id;
+      }
       _recordState(q) {
           if (this._editing === q.id)
               return 'editing';
@@ -34573,10 +35694,24 @@
               return 'changed';
           return this._checked.has(q.id) ? 'confirmed' : 'held';
       }
-      _saveDraft(q) {
-          const v = this._draft.trim();
-          if (!v)
+      /** Save on the record's editor checks what's typed (decision 156): a date
+       *  by its own check(), with its own message, anything else at the field;
+       *  it stays in the editor until it's put right. */
+      async _saveDraft(q) {
+          if (q.type === 'date' && !this._checkDate(this.renderRoot.querySelector('.editor la-date-input')))
               return;
+          const v = this._draft.trim();
+          if (!v) {
+              this._draftError = true;
+              await this.updateComplete;
+              const field = this.renderRoot.querySelector('.editor la-input, .editor la-date-input');
+              if (field?.localName === 'la-input')
+                  field.renderRoot.querySelector('input')?.focus();
+              else
+                  field?.focus();
+              return;
+          }
+          this._draftError = false;
           this._set(q.id, v);
           this._editing = '';
       }
@@ -34593,17 +35728,28 @@
             }}
       ></la-upload-box>`;
           }
+          // Saved empty, the field says so (placeholder words); it goes as the
+          // founder types (decision 156).
+          const draft = (v) => {
+              this._draft = v;
+              if (v.trim())
+                  this._draftError = false;
+          };
           const field = q.type === 'date'
               ? b `<la-date-input
             .value=${this._draft}
             aria-label=${label}
-            @la-change=${(e) => (this._draft = e.detail.complete ? e.detail.value : '')}
+            required
+            @la-change=${(e) => draft(e.detail.complete ? e.detail.value : '')}
           ></la-date-input>`
               : b `<la-input
+            class=${this._width(q)}
             type=${q.type === 'number' ? 'number' : 'text'}
             .value=${this._draft}
             aria-label=${label}
-            @la-change=${(e) => (this._draft = e.detail.value)}
+            ?error=${this._draftError}
+            hint=${this._draftError ? (q.type === 'number' ? 'Enter a number.' : 'Enter an answer.') : ''}
+            @la-change=${(e) => draft(e.detail.value)}
           ></la-input>`;
           return b `<span slot="editor" class="editor"
       >${field}<la-button size="md" variant="secondary" @click=${() => this._saveDraft(q)}>Save</la-button></span
@@ -34613,9 +35759,10 @@
           const f = this._filledFor(q);
           const s = this._recordState(q);
           const a = this._ans[q.id];
-          const value = s === 'empty' ? '' : String(a ?? f?.value ?? '');
-          /* The row's events are the modal's to handle; only the preview, which
-             the page opens, goes on out. */
+          const value = s === 'empty' ? '' : this._valueText(q, a ?? f?.value ?? '');
+          /* The row's events are the modal's to handle. The preview turns the
+             modal's page to the document when it has its pages (decision 150);
+             otherwise it goes on out, for the page to open. */
           const own = (e) => e.stopPropagation();
           return b `<la-record-row
       label=${q.record ?? ''}
@@ -34624,11 +35771,16 @@
       ?doc=${q.type === 'file'}
       ?register=${!!f?.register}
       state=${s}
-      changed-note=${f ? (f.register ? `${f.register} has ${String(f.value)}.` : `Your record says ${String(f.value)}.`) : ''}
+      changed-note=${f
+            ? f.register
+                ? `${f.register} has ${this._valueText(q, f.value)}.`
+                : `Your record says ${this._valueText(q, f.value)}.`
+            : ''}
       @la-record-confirm=${(e) => (own(e), this._check(q.id, true))}
       @la-record-change=${(e) => {
             own(e);
             this._draft = String(a ?? f?.value ?? '');
+            this._draftError = false;
             this._editing = q.id;
         }}
       @la-record-undo=${(e) => {
@@ -34637,18 +35789,28 @@
             this._set(q.id, f ? f.value : '');
         }}
       @la-record-cancel=${(e) => (own(e), (this._editing = ''))}
+      @la-record-preview=${(e) => {
+            if (!this._readable(q))
+                return;
+            own(e);
+            this._read(q);
+        }}
       >${s === 'editing' ? this._editor(q) : A}</la-record-row
     >`;
       }
       /* ── Where an answer came from ─────────────────────────────────────── */
-      /** An answer's value in words: the option's label, or the value itself. */
+      /** An answer's value in words: the option's label, or the value itself.
+       *  A date is printed by formatDate(), in the reader's locale with the
+       *  month as a word, never as ISO (decision 145). */
       _valueText(q, v) {
           const o = this._opt(q, v);
           if (o)
               return o.label;
           if (Array.isArray(v))
-              return v.join(', ');
-          return v == null ? '' : String(v);
+              return v.length === 1 && v[0] === '' ? 'None of them' : v.join(', ');
+          if (v == null)
+              return '';
+          return q.type === 'date' && v !== '' ? formatDate(String(v)) : String(v);
       }
       /** AI's quote in its own box, with the document it came from (decision 126). */
       _quoteBox(f) {
@@ -34734,7 +35896,9 @@
       <div class="swap-in">${content}</div>
     </div>`;
       }
-      /** AI's panel, from reading to ready, as one template (decision 137).
+      /** AI's panel, from reading to ready, as one template (decision 137),
+       *  headed *Suggested by LawAdvisor AI* under la-ai-insight's LawAdvisor
+       *  mark: one mark, at the panel, with the name (decision 144).
        *  Lit keeps the same elements across the change, so each part swaps in
        *  place: the reading line collapses and fades as the evidence grows and
        *  fades in, and the panel's height follows (Jonard, 13 Oct 2026: a smooth
@@ -34755,7 +35919,7 @@
               ? b `<p class="ev-lead">We suggest ${v}. Check it’s right. ${this._from(f)}:</p>
           ${this._quoteBox(f)} ${use}`
               : A;
-          return b `${this._swap(reading || (!!f && !changed), b `<la-ai-insight class="evidence" attribution="" headline="Suggested by AI">
+          return b `${this._swap(reading || (!!f && !changed), b `<la-ai-insight class="evidence" attribution="" headline="Suggested by LawAdvisor AI">
         ${this._swap(reading, b `<p class="reading">
             <i class="ph ph-file-text" aria-hidden="true"></i
             ><la-thinking size="sm">Reading your ${this._readDoc.get(q.id) ?? ''}…</la-thinking>
@@ -34787,10 +35951,11 @@
               const use = typed && this._filledState(q) === 'open'
                   ? b `<la-button class="use" size="sm" variant="secondary" @click=${() => this._set(q.id, f.value)}>Use ${v}</la-button>`
                   : A;
-              // With a quote, the suggestion is AI's panel (_aiPanel); without one,
-              // a line.
+              // With a quote, the suggestion is AI's panel (_aiPanel), with the
+              // LawAdvisor mark; without one, a line. Either way AI is named
+              // LawAdvisor AI (decision 144).
               const panel = b `<p class="filled">
-        <la-badge variant="neutral" appearance="ghost" size="sm">Suggested by AI</la-badge
+        <la-badge variant="neutral" appearance="ghost" size="sm">Suggested by LawAdvisor AI</la-badge
         ><span>We suggest ${v}. ${this._from(f)}. Check it’s right.</span>${use}
       </p>`;
               return b `${this._swap(!changed, panel)}${this._swap(changed, this._wasLine(q, f))}`;
@@ -34811,15 +35976,19 @@
           return b `${this._swap(!changed, kept)}${this._swap(changed, this._wasLine(q, f))}`;
       }
       /* ── Screens ───────────────────────────────────────────────────────── */
+      /** The answer, by type. Its name is the question's: la-question sets it
+       *  (decision 149, Q1). One answer is a radio group, in la-choice's radio
+       *  mode (decision 141): a second press keeps the pick, picking unpicks the
+       *  others, one tab stop and the arrow keys. `live` keeps each choice to the
+       *  page's answer, as Undo and Use put an answer back. */
       _input(q) {
           if (q.record)
               return this._recordRow(q);
           const a = this._ans[q.id];
-          const label = q.text;
           switch (q.type) {
               case 'yesno':
               case 'choice':
-                  return b `<div class="opts ${q.type === 'yesno' ? 'yn' : ''}" role="radiogroup" aria-label=${label}>
+                  return b `<div class="opts ${q.type === 'yesno' ? 'yn' : ''}" role="radiogroup">
           ${(q.options ?? []).map((o) => b `<la-choice variant="contained" .checked=${l(a === o.id)} @la-change=${() => this._set(q.id, o.id)}
               >${o.label}${o.rec
                     ? b ` <la-badge class="rec" variant="neutral" appearance="ghost" size="sm">Recommended</la-badge>`
@@ -34831,16 +36000,15 @@
               case 'text':
               case 'number':
                   return b `<la-input
-          class=${q.type === 'number' ? 'num' : 'text'}
+          class=${this._width(q)}
           type=${q.type === 'number' ? 'number' : 'text'}
           .value=${a ?? ''}
-          aria-label=${label}
           @la-change=${(e) => this._set(q.id, e.detail.value)}
         ></la-input>`;
               case 'date':
                   return b `<la-date-input
           .value=${a ?? ''}
-          aria-label=${label}
+          required
           @la-change=${(e) => this._set(q.id, e.detail.complete ? e.detail.value : '')}
         ></la-date-input>`;
               case 'file':
@@ -34856,7 +36024,6 @@
           group=${q.group ?? ''}
           source=${q.source ?? ''}
           ?register=${!!q.register}
-          label=${label}
           .people=${q.people ?? []}
           .options=${(q.options ?? [])}
           .value=${a ?? (q.type === 'pick' ? [] : {})}
@@ -34871,8 +36038,16 @@
               return A;
           return b `<la-guidance slot="guidance"><p>${o.guidance}</p></la-guidance>`;
       }
+      /** One question to a screen: the question is the screen's heading, a
+       *  level under the modal's title (decision 149, Q1), and the message when
+       *  Next was pressed too soon (decision 140). */
       _question(q) {
-          return b `<la-question text=${q.text} means=${q.means ?? ''}>
+          return b `<la-question
+      text=${q.text}
+      means=${q.means ?? ''}
+      heading-level="3"
+      error=${this._invalid === q.id ? this._missing(q) : ''}
+    >
       ${this._input(q)} ${this._filledLine(q)} ${this._guidance(q)}
     </la-question>`;
       }
@@ -34888,15 +36063,23 @@
       }
       /** The summary is the questions and the founder's answers, nothing else
        *  (Jonard, 9 Oct 2026): where an answer came from was checked on its own
-       *  screen, and repeating it here read as a second claim on the answer. */
+       *  screen, and repeating it here read as a second claim on the answer.
+       *  Each row has Change, which opens that question (decision 152, SQ2); its
+       *  name carries the question, as GOV.UK's hidden text does. Secondary, as
+       *  the step's own Change is (Jonard, 12 Oct 2026). */
       _summary(items) {
           return b `<dl class="sum" tabindex="-1">
-        ${items.map((q) => {
+        ${items.map((q, k) => {
             const text = this._answerText(q);
-            const none = text === 'Not answered' || text === 'No one';
+            const none = text === 'Not answered';
             return b `<div class="sum-row">
             <dt>${q.text}</dt>
             <dd class=${none ? 'none' : ''}>${text}</dd>
+            <dd class="sum-act">
+              <la-button size="sm" variant="secondary" @click=${() => this._change(k)}
+                >Change<span class="sr-only"> ${q.text}</span></la-button
+              >
+            </dd>
           </div>`;
         })}
       </dl>`;
@@ -34906,28 +36089,57 @@
           const total = items.length;
           const onSummary = this._i >= total;
           const q = onSummary ? undefined : items[this._i];
-          // A record row moves on once it's kept or changed; any other question
-          // once it's answered, and Next keeps a filled-in pick.
-          const canNext = q ? (q.record ? this._counts(q) : this._answered(q)) && this._editing !== q.id : true;
+          // A question is done once it counts (answered, or a filled-in answer
+          // kept), not by its position: one scale with the card's count (decision
+          // 152, SQ1; decision 128).
           const steps = [
               ...items.map((it, k) => ({
                   label: it.text,
-                  status: k < this._i ? 'complete' : k === this._i ? 'active' : 'pending',
+                  status: k === this._i ? 'active' : this._counts(it) ? 'complete' : 'pending',
               })),
               { label: 'Your answers', status: onSummary ? 'active' : 'pending' },
           ];
+          // The page turned to a held document (decision 150): its name and meta
+          // as the title and line, its pages, and Back to the question. The
+          // question stays in place, hidden, so the row that opened it keeps focus.
+          const dq = this._doc && q?.id === this._doc ? q : undefined;
+          const df = dq ? this._readable(dq) : undefined;
+          const name = dq && df ? (df.doc ?? dq.record ?? '') : '';
+          const meta = dq && df ? [this._valueText(dq, df.value), df.source].filter(Boolean).join(' · ') : '';
           return b `${iconStyles}<la-modal
       ?open=${this.open}
-      heading=${this.heading}
-      description=${this._lead(items, onSummary)}
+      heading=${df ? name : this.heading}
+      description=${df ? meta : this._lead(items, onSummary)}
       @close=${this._close}
     >
       <div class="wrap" @la-change=${(e) => e.stopPropagation()}>
-        <la-stepper .steps=${steps}></la-stepper>
-        ${q ? this._question(q) : b `<slot name="warning"></slot>${this._summary(items)}`}
+        <div ?hidden=${!!df}>
+          <la-stepper .steps=${steps}></la-stepper>
+          ${q ? this._question(q) : b `<slot name="warning"></slot>${this._summary(items)}`}
+        </div>
+        ${df
+            ? b `<div class="doc-page" tabindex="-1">
+              <la-document-preview
+                inline
+                name=${name}
+                src=${df.src ?? ''}
+                fallback-image=${df.fallbackImage ?? ''}
+              ></la-document-preview>
+            </div>`
+            : A}
       </div>
       <div slot="footer" class="footer">
-        <div>
+        ${df
+            ? b `<la-button variant="ghost" @click=${() => (this._doc = '')}
+              ><i slot="icon-left" class="ph ph-arrow-left" aria-hidden="true"></i>Back to the question</la-button
+            >`
+            : this._acts(q, onSummary, total)}
+      </div>
+    </la-modal>`;
+      }
+      /** The footer: Back on the left; Next, or Confirm on the summary. */
+      _acts(q, onSummary, total) {
+          return b `<div>
           ${this._i > 0
             ? b `<la-button variant="ghost" @click=${this._back}
                 ><i slot="icon-left" class="ph ph-arrow-left" aria-hidden="true"></i>Back</la-button
@@ -34937,12 +36149,10 @@
         <div class="right">
           ${onSummary
             ? b `<la-button variant="primary" @click=${this._confirm}>Confirm</la-button>`
-            : b `<la-button variant="primary" ?disabled=${!canNext} @click=${() => this._next(q, total)}
-                >${this._i === total - 1 ? 'See your answers' : 'Next'}<i slot="icon-right" class="ph ph-arrow-right" aria-hidden="true"></i
+            : b `<la-button variant="primary" @click=${() => this._next(q, total)}
+                >Next<i slot="icon-right" class="ph ph-arrow-right" aria-hidden="true"></i
               ></la-button>`}
-        </div>
-      </div>
-    </la-modal>`;
+        </div>`;
       }
   };
   exports.LaStepQuestions.styles = [
@@ -34973,17 +36183,35 @@
         margin-left: 6px;
         vertical-align: 1px;
       }
-      la-input.text {
-        display: block;
-        max-width: 420px;
-      }
-      la-input.num {
-        display: block;
-        max-width: 160px;
-      }
+      /* A field is as wide as the answer it expects (decision 146), always a
+         max-width, so it shrinks in a narrow column and nothing scrolls
+         sideways at 320px. In characters for a name, a number or a reference,
+         plus the field's own padding and border; fluid and capped for an
+         address or long text, at the forms foundation's caps. The font is the
+         field's, so a ch here is a ch there. */
+      la-input,
       la-date-input {
         display: block;
-        max-width: 220px;
+        font-size: var(--la-font-size-base);
+      }
+      .w-name {
+        max-width: calc(20ch + 2 * var(--la-space-md) + 2px);
+      }
+      .w-number,
+      .w-reference {
+        max-width: calc(10ch + 2 * var(--la-space-md) + 2px);
+      }
+      .w-address {
+        max-width: 480px;
+      }
+      .w-long {
+        max-width: 560px;
+      }
+      /* The date at its own width: la-date-input's segments (3.2ch, 3.2ch and
+         5.6ch), its two separators with their margins, and the box's padding
+         and border. */
+      la-date-input {
+        max-width: calc(14ch + 4 * var(--la-space-sm) + 2 * var(--la-space-md) + 2px);
       }
       /* The summary: each question above its answer, both wrapping, so a
          long question or a per-person answer never widens the modal (a
@@ -35001,17 +36229,45 @@
         display: block;
         margin-bottom: var(--la-space-md);
       }
-      .sum:focus {
+      .sum:focus,
+      .doc-page:focus {
         outline: none;
       }
+      /* Each row: the question above the answer, and Change beside both
+         (decision 152, SQ2), as GOV.UK's check answers puts Change on every
+         row. */
       .sum-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        column-gap: var(--la-space-md);
         padding: var(--la-space-sm) 0;
         border-top: 1px solid var(--la-color-border-light);
         min-width: 0;
       }
+      .sum .sum-act {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: center;
+        margin: 0;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
       .sum-row:first-child {
         padding-top: 0;
         border-top: 0;
+      }
+      .sum dt,
+      .sum dd {
+        grid-column: 1;
       }
       .sum dt {
         margin: 0;
@@ -35252,204 +36508,69 @@
       .editor la-date-input {
         flex: 1;
         min-width: 0;
-        max-width: none;
       }
     `,
   ];
-  __decorate$1([
+  __decorate([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepQuestions.prototype, "open", void 0);
-  __decorate$1([
+  __decorate([
       n()
   ], exports.LaStepQuestions.prototype, "heading", void 0);
-  __decorate$1([
+  __decorate([
       n({ attribute: false })
   ], exports.LaStepQuestions.prototype, "questions", void 0);
-  __decorate$1([
+  __decorate([
       n({ attribute: false })
   ], exports.LaStepQuestions.prototype, "answers", void 0);
-  __decorate$1([
+  __decorate([
       n({ attribute: false })
   ], exports.LaStepQuestions.prototype, "filled", void 0);
-  __decorate$1([
+  __decorate([
       n({ attribute: false })
   ], exports.LaStepQuestions.prototype, "checked", void 0);
-  __decorate$1([
+  __decorate([
       n({ attribute: false })
   ], exports.LaStepQuestions.prototype, "reading", void 0);
-  __decorate$1([
+  __decorate([
       n()
   ], exports.LaStepQuestions.prototype, "start", void 0);
-  __decorate$1([
+  __decorate([
       r$1()
   ], exports.LaStepQuestions.prototype, "_ans", void 0);
-  __decorate$1([
+  __decorate([
       r$1()
   ], exports.LaStepQuestions.prototype, "_checked", void 0);
-  __decorate$1([
+  __decorate([
       r$1()
   ], exports.LaStepQuestions.prototype, "_i", void 0);
-  __decorate$1([
+  __decorate([
       r$1()
   ], exports.LaStepQuestions.prototype, "_editing", void 0);
-  __decorate$1([
+  __decorate([
       r$1()
   ], exports.LaStepQuestions.prototype, "_draft", void 0);
-  exports.LaStepQuestions = __decorate$1([
+  __decorate([
+      r$1()
+  ], exports.LaStepQuestions.prototype, "_draftError", void 0);
+  __decorate([
+      r$1()
+  ], exports.LaStepQuestions.prototype, "_doc", void 0);
+  __decorate([
+      r$1()
+  ], exports.LaStepQuestions.prototype, "_fromSummary", void 0);
+  __decorate([
+      r$1()
+  ], exports.LaStepQuestions.prototype, "_invalid", void 0);
+  exports.LaStepQuestions = __decorate([
       t$2('la-step-questions')
   ], exports.LaStepQuestions);
 
-  var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-      return c > 3 && r && Object.defineProperty(target, key, r), r;
-  };
-  /**
-   * la-document-preview — read a document on the record before confirming it
-   * is the right one. A file name alone isn't enough to be sure (Jonard, 6 Oct
-   * 2026): a record row's document name opens this, the founder reads the
-   * pages, and confirms from here.
-   *
-   * An la-modal at its large size: the document's name as the heading, its
-   * meta as the description ("signed 2 June 2024 · From LawVault"), the pages
-   * in la-pdf-preview, and a footer with the record row's own acts: *That's
-   * right* (primary) and *Upload a different one* (ghost), plus *Open in
-   * LawVault* on the left for the document's own page when `nav` is set.
-   * Confirming here is the same act as on the row, so the page settles the
-   * row the same way.
-   *
-   * Usage:
-   *   <la-document-preview name="Shareholders’ agreement" meta="signed 2 June 2024 · From LawVault"
-   *       src="/assets/sample-docs/shareholders-agreement-acme-preview.pdf" nav="lawvault-sha" open>
-   *   </la-document-preview>
-   *
-   * @prop open           - the modal is shown
-   * @prop name           - the document's name, the heading
-   * @prop meta           - its date and source, the description
-   * @prop src            - the PDF (la-pdf-preview)
-   * @prop fallbackImage  - attribute fallback-image: a page image where no PDF viewer is available
-   * @prop nav            - where "Open in LawVault" goes; empty hides it
-   * @prop confirmLabel   - attribute confirm-label (default "That’s right")
-   * @prop changeLabel    - attribute change-label (default "Upload a different one")
-   * @fires la-document-confirm - That’s right
-   * @fires la-document-change  - Upload a different one
-   * @fires la-document-open    - {nav}: Open in LawVault
-   * @fires la-document-close   - closed without an act
-   */
-  exports.LaDocumentPreview = class LaDocumentPreview extends i$3 {
-      constructor() {
-          super(...arguments);
-          this.open = false;
-          this.name = '';
-          this.meta = '';
-          this.src = '';
-          this.fallbackImage = '';
-          this.nav = '';
-          this.confirmLabel = 'That’s right';
-          this.changeLabel = 'Upload a different one';
-      }
-      _fire(name, detail) {
-          this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }));
-      }
-      _act(name, detail) {
-          this.open = false;
-          this._fire(name, detail);
-      }
-      render() {
-          return b `${iconStyles}<la-modal
-      ?open=${this.open}
-      size="lg"
-      heading=${this.name}
-      description=${this.meta}
-      @close=${() => {
-            this.open = false;
-            this._fire('la-document-close');
-        }}
-    >
-      <div class="pane">
-        <la-pdf-preview src=${this.src} fallback-image=${this.fallbackImage} label=${`${this.name}, preview`}></la-pdf-preview>
-      </div>
-      <div slot="footer" class="footer">
-        ${this.nav
-            ? b `<la-button variant="ghost" @click=${() => this._act('la-document-open', { nav: this.nav })}
-              ><i slot="icon-left" class="ph ph-arrow-square-out" aria-hidden="true"></i>Open in LawVault</la-button
-            >`
-            : A}
-        <div class="right">
-          <la-button variant="ghost" @click=${() => this._act('la-document-change')}>${this.changeLabel}</la-button>
-          <la-button variant="primary" @click=${() => this._act('la-document-confirm')}>${this.confirmLabel}</la-button>
-        </div>
-      </div>
-    </la-modal>`;
-      }
-  };
-  exports.LaDocumentPreview.styles = [
-      tokens,
-      i$6 `
-      :host {
-        display: block;
-        font-family: var(--la-font-family);
-        color: var(--la-color-text);
-      }
-      /* The pages take the modal's height; the modal caps itself at 90vh. */
-      .pane {
-        height: min(68vh, 760px);
-        min-height: 320px;
-        border-radius: var(--la-radius-md);
-        border: 1px solid var(--la-color-border-light);
-        overflow: hidden;
-        background: var(--la-color-bg-subtle);
-      }
-      la-pdf-preview {
-        height: 100%;
-      }
-      .footer {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        gap: var(--la-space-md);
-        width: 100%;
-      }
-      .right {
-        display: flex;
-        align-items: center;
-        gap: var(--la-space-sm);
-        margin-left: auto;
-      }
-    `,
-  ];
-  __decorate([
-      n({ type: Boolean, reflect: true })
-  ], exports.LaDocumentPreview.prototype, "open", void 0);
-  __decorate([
-      n()
-  ], exports.LaDocumentPreview.prototype, "name", void 0);
-  __decorate([
-      n()
-  ], exports.LaDocumentPreview.prototype, "meta", void 0);
-  __decorate([
-      n()
-  ], exports.LaDocumentPreview.prototype, "src", void 0);
-  __decorate([
-      n({ attribute: 'fallback-image' })
-  ], exports.LaDocumentPreview.prototype, "fallbackImage", void 0);
-  __decorate([
-      n()
-  ], exports.LaDocumentPreview.prototype, "nav", void 0);
-  __decorate([
-      n({ attribute: 'confirm-label' })
-  ], exports.LaDocumentPreview.prototype, "confirmLabel", void 0);
-  __decorate([
-      n({ attribute: 'change-label' })
-  ], exports.LaDocumentPreview.prototype, "changeLabel", void 0);
-  exports.LaDocumentPreview = __decorate([
-      t$2('la-document-preview')
-  ], exports.LaDocumentPreview);
-
   exports.MOVE_PAST_REASONS = MOVE_PAST_REASONS;
+  exports.PEOPLE_NONE = PEOPLE_NONE;
+  exports.formatDate = formatDate;
   exports.iconStyles = iconStyles;
+  exports.readerLocale = readerLocale;
   exports.toast = toast;
   exports.tokens = tokens;
 

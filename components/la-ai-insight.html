@@ -237,7 +237,7 @@
           <td><span class="default">attribution</span></td>
           <td><span class="type">string</span></td>
           <td><span class="default">&#39;LawAdvisor AI&#39;</span></td>
-          <td>Brand prefix in the header. Default: "LawAdvisor AI". Set "" to omit.</td>
+          <td>Brand prefix in the header. Default: "LawAdvisor AI". Set "" only when the headline names LawAdvisor AI.</td>
         </tr>
       
         <tr>
@@ -261,8 +261,8 @@
           <td><span class="default">no-head</span></td>
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
-          <td>Omit the header band (brand mark + attribution + header controls). Use when
-the slotted body already carries its own title and AI attribution.</td>
+          <td>Omit the header band (brand mark + attribution). Use when the slotted
+body already carries its own title and AI attribution.</td>
         </tr>
       
         <tr>
@@ -270,7 +270,7 @@ the slotted body already carries its own title and AI attribution.</td>
           <td><span class="default">rateable</span></td>
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
-          <td>Boolean; show the "Was this helpful?" thumbs up/down in the footer.</td>
+          <td>Boolean; show "Was this helpful?" and the thumbs in the foot.</td>
         </tr>
       
         <tr>
@@ -282,19 +282,11 @@ the slotted body already carries its own title and AI attribution.</td>
         </tr>
       
         <tr>
-          <td>rateRequired</td>
-          <td><span class="default">rate-required</span></td>
-          <td><span class="type">boolean</span></td>
-          <td><span class="default">false</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
           <td>disagreeable</td>
           <td><span class="default">disagreeable</span></td>
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
-          <td>Boolean; show the "Something's wrong" Disagree control.</td>
+          <td>Boolean; the founder can say it's wrong. Since decision 151 (AI3) that is thumbs-down and its reason, so it shows the thumbs as `rateable` does.</td>
         </tr>
       
         <tr>
@@ -302,47 +294,15 @@ the slotted body already carries its own title and AI attribution.</td>
           <td><span class="default">amendable</span></td>
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
-          <td>Boolean; show the "Edit" Amend control and persist the edit stamp.</td>
+          <td>Boolean; show "Edit".</td>
         </tr>
       
         <tr>
-          <td>editedBy</td>
-          <td><span class="default">edited-by</span></td>
+          <td>amended</td>
+          <td><span class="default">amended</span></td>
           <td><span class="type">string</span></td>
           <td><span class="default">&#39;&#39;</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>editedAt</td>
-          <td><span class="default">edited-at</span></td>
-          <td><span class="type">string</span></td>
-          <td><span class="default">&#39;&#39;</span></td>
-          <td>—</td>
-        </tr>
-      
-        <tr>
-          <td>rate-required</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td>Boolean; rating is required before the host's primary CTA — gate it with `la-rate-state`.</td>
-        </tr>
-      
-        <tr>
-          <td>edited-by</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td>Who last amended the output (drives the "Edited by …" stamp).</td>
-        </tr>
-      
-        <tr>
-          <td>edited-at</td>
-          <td>—</td>
-          <td>—</td>
-          <td>—</td>
-          <td>When it was last amended, e.g. "14 Apr 2026 · 09:47 AM MT".</td>
+          <td>The founder's version of the output. Set, the AI frame drops and Undo shows; the component sets it on "Save edits", a page sets it to restore a saved edit.</td>
         </tr>
       
     </tbody>
@@ -368,7 +328,7 @@ the slotted body already carries its own title and AI attribution.</td>
       
         <tr>
           <td>actions</td>
-          <td>Footer actions, right-aligned (e.g. a "View source" button).</td>
+          <td>The page's own actions in the foot (e.g. a "View source" button).</td>
         </tr>
       
     </tbody>
@@ -388,27 +348,27 @@ the slotted body already carries its own title and AI attribution.</td>
     <tbody>
       
         <tr>
-          <td>la-rate-state</td>
-          <td><span class="type">CustomEvent</span></td>
-          <td>{rated:boolean} whenever the rated state changes — host gates its primary CTA on this.</td>
-        </tr>
-      
-        <tr>
           <td>la-rate</td>
           <td><span class="type">CustomEvent</span></td>
-          <td>{rating:number} when the user picks a thumbs rating (0/1/2).</td>
+          <td>{rating:number} when the user picks a thumb (0 = cleared, 1, 2).</td>
         </tr>
       
         <tr>
           <td>la-disagree</td>
           <td><span class="type">CustomEvent</span></td>
-          <td>{reason:string} when the user logs a disagreement.</td>
+          <td>{reason:string} when the user sends a reason after thumbs-down.</td>
         </tr>
       
         <tr>
           <td>la-amend</td>
           <td><span class="type">CustomEvent</span></td>
-          <td>{value:string} when the user saves an amended body.</td>
+          <td>{value:string} when the user saves an edit.</td>
+        </tr>
+      
+        <tr>
+          <td>la-amend-undo</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>Undo on the founder's version: the suggestion is back.</td>
         </tr>
       
     </tbody>
