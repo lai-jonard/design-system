@@ -257,6 +257,7 @@
 <p>Initials avatar for people and entities. Derives two-letter initials automatically from <code>name</code> (first letter of the first two words), with an <code>initials</code> override for entities or edge cases. Three fixed sizes — sm (32px), md (40px), lg (48px) — map to product contexts (compact lists / person rows / detail headers). Purely presentational and decorative (<code>aria-hidden</code>); the adjacent visible name carries the accessible identity. Used across investor surfaces (Sprint 12) and the share modal.</p>
 <p><strong>Props:</strong> <code>name</code> (auto-derives initials), <code>initials</code> (override), <code>size</code> (<code>'sm' | 'md' | 'lg'</code>, default <code>md</code>)
 <strong>Slots:</strong> none · <strong>Events:</strong> none</p>
+<p><strong>On the company record</strong> (directors, secretaries, PSCs): <code>text-only</code>, so a person shows the initials of their first and last name and never a photo; a company shows the building symbol instead of an avatar (decision 112, <code>rule/record-people-initials</code>).</p>
 <hr>
 <h3 id="la-badge"><code>la-badge</code></h3>
 <p>A small inline primitive with two types. <strong>Badge</strong> (pill) communicates status, category, or severity at a glance; always paired with content, never standalone. <strong>Counter</strong> (circle) communicates a numerical count — unread items, queue depth, notification totals.</p>
