@@ -9819,6 +9819,14 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  /** The focused element, looking through shadow roots — so the button inside an
+   *  la-icon-button is found, not just its host. Body counts as nothing focused. */
+  function deepActiveElement() {
+      let el = document.activeElement;
+      while (el?.shadowRoot?.activeElement)
+          el = el.shadowRoot.activeElement;
+      return el instanceof HTMLElement && el !== document.body ? el : undefined;
+  }
   exports.LaModal = class LaModal extends i$2 {
       constructor() {
           super(...arguments);
@@ -9835,6 +9843,11 @@
            * e.g. an AI-surface modal, where the white fade gradient would clash.
            */
           this.noFade = false;
+          /**
+           * Don't hand focus back to the opener on close. Use when the consumer
+           * moves focus itself — e.g. to a row the modal just created.
+           */
+          this.noReturnFocus = false;
           this._onKeydown = (e) => {
               if (e.key === 'Escape' && this.open) {
                   e.stopPropagation();
@@ -9897,7 +9910,37 @@
           if (changed.has('open')) {
               // Body dimensions aren't known until after the modal renders open — recheck after layout
               requestAnimationFrame(() => this._checkScrollable());
+              // WAI-ARIA dialog pattern: remember the opener, hand focus back on close.
+              // Runs on every close path — Escape, X, backdrop, or a consumer setting open = false.
+              if (this.open)
+                  this._opener = deepActiveElement();
+              else if (changed.get('open'))
+                  this._returnFocus();
           }
+      }
+      _returnFocus() {
+          const opener = this._opener;
+          this._opener = undefined;
+          if (!opener || this.noReturnFocus)
+              return;
+          // Next frame, so a consumer that re-renders on close has settled first.
+          requestAnimationFrame(() => {
+              if (this.open || !opener.isConnected)
+                  return;
+              // Don't steal focus the consumer has already moved somewhere deliberate.
+              const active = deepActiveElement();
+              if (active && !this._holds(active))
+                  return;
+              // A no-op if the opener can no longer take focus (disabled, hidden).
+              opener.focus({ preventScroll: true });
+          });
+      }
+      /** True when `el` is inside this modal — slotted content or its own shadow tree. */
+      _holds(el) {
+          let node = el;
+          while (node && !this.contains(node))
+              node = node.getRootNode().host;
+          return !!node;
       }
       disconnectedCallback() {
           super.disconnectedCallback();
@@ -10138,6 +10181,9 @@
   __decorate$18([
       n({ type: Boolean, reflect: true, attribute: 'no-fade' })
   ], exports.LaModal.prototype, "noFade", void 0);
+  __decorate$18([
+      n({ type: Boolean, attribute: 'no-return-focus' })
+  ], exports.LaModal.prototype, "noReturnFocus", void 0);
   exports.LaModal = __decorate$18([
       t$1('la-modal')
   ], exports.LaModal);
