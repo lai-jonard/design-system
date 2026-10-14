@@ -33262,11 +33262,12 @@
       }
       /* No dashed line either side of it: on a row, it sits over the line
          the row below draws, its bottom hairline on that line and the
-         section's white behind its corners over the line's ends. */
+         section's white behind its corners over the line's ends. Positioned
+         with no z-index, it paints after the rows around it without making a
+         stacking context, so the modals it opens stay above the page. */
       :host([surface='row'][state='open']),
       :host([surface='row'][next]:not([state='done']):not([state='passed']):not([state='before'])) {
         position: relative;
-        z-index: 1;
         margin-bottom: -1px;
         background-color: var(--la-color-bg);
       }
