@@ -409,6 +409,15 @@
         </tr>
       
         <tr>
+          <td>wrap</td>
+          <td><span class="default">wrap</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Lets a neighbour squeeze the button so its label wraps. Off by
+default: a label wraps only when the container is too narrow.</td>
+        </tr>
+      
+        <tr>
           <td>disabled</td>
           <td><span class="default">disabled</span></td>
           <td><span class="type">boolean</span></td>
@@ -585,6 +594,7 @@ la-button::part(button) {
     <div class="docs-note"><strong>Ghost for low-prominence actions</strong> — Use <code style="font-family:monospace;font-size:11px;">variant="ghost"</code> for tertiary actions: "View details", "Back", "Learn more". Resting state is subtle secondary-coloured text with transparent background; on hover it gains a pale-grey fill and darker text. Padding matches the default button so there's no layout shift on hover.</div>
     <div class="docs-note"><strong>danger vs destructive</strong> — <code style="font-family:monospace;font-size:11px;">variant="danger"</code> is a solid red-filled button for high-visibility system alerts or irreversible one-shot actions. <code style="font-family:monospace;font-size:11px;">variant="destructive"</code> uses the secondary surface (same background, border, and shadow) but with <code style="font-family:monospace;font-size:11px;">--la-color-danger-text</code> for label and icon — quieter at rest, red tint on hover. Use <code style="font-family:monospace;font-size:11px;">destructive</code> as the final commit button in confirmation modals (Delete, Remove) to keep the modal feeling calm without losing the destructive signal.</div>
     <div class="docs-note"><strong>A long label wraps</strong> — A button is never wider than its container. A label too long for the space wraps to a second line, aligned to the start, and the button grows taller: never truncated, never spilling out of its card (Carbon: “We do not recommend truncating a button label”). The top and bottom padding are what a one-line label leaves of the button’s height, so a wrapped label keeps the same space above and below it, and a one-line button stays exactly its size’s height. Keep labels short all the same: wrapping is for narrow screens, not for long copy (12 Oct 2026, decision 131).</div>
+    <div class="docs-note"><strong>Only when the container is too narrow</strong> — A neighbour never squeezes a button: in a row it keeps its one-line width and the text beside it wraps first. Add <code style="font-family:monospace;color:#c3e88d;font-size:11px;">wrap</code> where a page wants the button to shrink and wrap with its neighbours (Primer’s <em>labelWrap</em>). To tuck a button into a corner, offset it rather than using a negative margin, which narrows its column and wraps it (13 Oct 2026, decision 131 amended).</div>
     <div class="docs-note"><strong>Font inheritance</strong> — <code style="font-family:monospace;font-size:11px;">la-button</code> uses <code style="font-family:monospace;font-size:11px;">font-family: inherit</code> on the inner button, so it picks up the host document's typeface. No extra font setup needed.</div>
   </div>
 </div>

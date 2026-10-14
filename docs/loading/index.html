@@ -422,6 +422,7 @@ Every loading state must have a designed timeout/failure variant. A spinner with
 <li>Pulse motion uses the shared <strong><code>.t-pulse</code></strong> utility class in <code>motion.css</code>; shimmer (when used) reuses <strong><code>.t-shimmer</code></strong></li>
 <li>Cross-cuts every AI surface (chat, insights, document Q&amp;A, suggested actions) — primitive must support a clear opt-out for surfaces that already stream tokens</li>
 </ul>
+<p><strong>As built (13 October 2026, decision 137).</strong> A text shimmer, as Vercel AI Elements' Shimmer: the page's words in the muted colour with a soft band of the background sweeping across them (<code>duration</code> 2s, <code>spread</code> 2px per character), plain muted text under reduced motion, a polite <code>role=&quot;status&quot;</code>. It carries its own keyframes in its shadow root, as <code>la-spinner</code> does; the <code>.t-shimmer</code> utility named above was never built. First consumer: <code>la-step-questions</code>' <code>reading</code>, inside AI's panel while AI reads a document.</p>
 <p><strong>Why this matters for a legal-AI product:</strong> AI latency is a structural property of every page that uses an LLM. A consistent, non-anxious thinking-state pattern is more important here than in a non-AI product. See <a href="../../docs/ai-ux-guidelines/"><code>design-language/ai-ux-guidelines.md</code></a> for adjacent rules.</p>
 <hr>
 <h2 id="3-decision-tree">3. Decision tree</h2>
