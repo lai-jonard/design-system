@@ -298,7 +298,7 @@
 <h3 id="gate-8--standards-compliance">Gate 8 — Standards compliance</h3>
 <p><strong>Tokens.</strong> No hex values in the prototype's own <code>&lt;style&gt;</code> block. All colour comes from <code>--la-color-*</code>. Padding, gap, margin use <code>--la-space-*</code>. Radius uses <code>--la-radius-*</code>. Font size uses <code>--la-font-size-*</code>; weight uses <code>--la-font-weight-*</code> per decision 39 (400 default, 500 only when weight change is the state signal, 600 for headings, never 700).</p>
 <p><strong>Raw <code>px</code> values.</strong> Permitted only on layout-position properties (<code>width</code>, <code>min-width</code>, <code>max-width</code>, <code>height</code> where the dimension doesn't map to a token — e.g. a <code>--signin-panel-width: 711px</code> layout constant). Not permitted for padding, gap, margin, font-size, border-radius.</p>
-<p><strong>Copy.</strong> Every visible string respects <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> — British English, two-register capitalisation (Title Case for structural labels and CTAs, sentence case for explanatory copy), verb-first CTAs, 1–2 sentences max in body copy.</p>
+<p><strong>Copy.</strong> Every visible string respects <a href="../../docs/copy-guidelines/"><code>copy-guidelines.md</code></a> — British English, two-register capitalisation (Title Case for structural labels, sentence case for buttons and explanatory copy; decision 138), verb-first CTAs, 1–2 sentences max in body copy.</p>
 <p><strong>Assets.</strong> Paths are absolute so the Eleventy passthrough works without rewrites:</p>
 <ul>
 <li><code>/bundle.js</code></li>

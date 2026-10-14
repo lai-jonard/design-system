@@ -281,10 +281,6 @@ the operational layer on top of it; the personal <code>lawadvisor-ux-writing</co
 <td>Tab labels</td>
 <td>Urgent, Proactive, Resolved</td>
 </tr>
-<tr>
-<td>Short action CTAs (buttons)</td>
-<td>Send Invite, Mark Resolved, Review Unconfirmed Entries</td>
-</tr>
 </tbody>
 </table>
 <h3 id="sentence-case--guidance-and-explanatory-copy">Sentence case — guidance and explanatory copy</h3>
@@ -297,6 +293,10 @@ the operational layer on top of it; the personal <code>lawadvisor-ux-writing</co
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Buttons and acts, whatever their weight (decision 138)</td>
+<td>Send invite, Mark resolved, Review unconfirmed entries</td>
+</tr>
 <tr>
 <td>Insight headlines</td>
 <td>Cap table has unconfirmed entries</td>
@@ -330,12 +330,13 @@ the operational layer on top of it; the personal <code>lawadvisor-ux-writing</co
 <h3 id="edge-cases">Edge cases</h3>
 <ul>
 <li><strong>Legal proper nouns</strong> are always Title Case regardless of context — &quot;Cap Table&quot;, &quot;Shareholders' Agreement&quot;, &quot;Articles of Incorporation&quot; are named documents, not style choices.</li>
+<li><strong>A proper noun or acronym inside a button</strong> keeps its capitals: &quot;Send to Companies House&quot;, &quot;Create SAFE&quot;.</li>
 <li><strong>Modal titles that describe content</strong> (not a feature name) stay sentence case — insight titles fall here.</li>
 <li><strong>Badge labels</strong> are one word — case is moot. Treat as Title Case for consistency.</li>
 <li><strong>Loading / progress labels</strong> (&quot;Resolving…&quot;, &quot;Uploading…&quot;) are one word — no case decision needed.</li>
 </ul>
 <h3 id="why-this-pattern--research-context">Why this pattern — research context</h3>
-<p>Major design systems (Material Design, Microsoft Fluent, PatternFly) recommend sentence case everywhere for simplicity and localisation. LawAdvisor diverges intentionally: the product vocabulary includes genuine proper nouns (legal documents, commercial terms) where Title Case is standard professional practice. The split-register rule formalises this rather than leaving it implicit.</p>
+<p>Major design systems (Material Design, Microsoft Fluent, PatternFly) recommend sentence case everywhere for simplicity and localisation. LawAdvisor diverges intentionally: the product vocabulary includes genuine proper nouns (legal documents, commercial terms) where Title Case is standard professional practice. The split-register rule formalises this rather than leaving it implicit. <strong>Buttons left the split on 13 October 2026</strong> (decision 138): every button and act is sentence case, as the systems above do; the Title Case register keeps navigation, tabs, column headers and the names of surfaces.</p>
 <p><strong>Sources:</strong></p>
 <ul>
 <li><a href="https://learn.microsoft.com/en-us/style-guide/capitalization">Microsoft Style Guide — Capitalisation</a></li>
@@ -347,7 +348,7 @@ the operational layer on top of it; the personal <code>lawadvisor-ux-writing</co
 <hr>
 <h2 id="calls-to-action">Calls to action</h2>
 <ul>
-<li><strong>Verb-first, Title Case:</strong> &quot;Send for Signature&quot;, &quot;Add Employee&quot;, &quot;View Details&quot;</li>
+<li><strong>Verb first, sentence case:</strong> &quot;Send for signature&quot;, &quot;Add employee&quot;, &quot;View details&quot; (decision 138)</li>
 <li><strong>No jargon</strong> — use plain language the user already knows:</li>
 </ul>
 <table>
