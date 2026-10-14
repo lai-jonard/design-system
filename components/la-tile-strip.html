@@ -69,7 +69,7 @@
     
     <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
     <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
-    
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
   </div>
 </nav>
 
@@ -239,6 +239,23 @@
 <div class="docs-section" id="notes">
 <h3>Notes</h3>
 <p>Frameless by decision (Jonard, 17 Sep 2026): the strip is a filter, not a card that acts, so it takes no surface of its own (<code>rule/one-card-surface</code>). Replaces <code>.area-strip</code> / <code>.area-tile</code> on LawVault; the Dashboard's area tiles are the second consumer. Decision 99.</p>
+</div>
+<div class="docs-divider"></div>
+
+<div id="basis" class="docs-section">
+<h3>Basis</h3>
+<p>What other systems do for each choice, and where we differ (researched 13 Oct 2026).</p>
+<table class="docs-table">
+<thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>A strip of tiles that filters the list, one at a time</td><td><a href="https://carbondesignsystem.com/components/tile/usage/">Carbon’s selectable tiles</a> pick one from a group; Polaris uses tabs for filtered views of one list, which Atlassian advises against.</td><td>Backed (Carbon)</td></tr>
+<tr><td>Each tile a toggle with <code>aria-pressed</code>, its own tab stop</td><td>Carbon (native radios in a fieldset), the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/radio/">APG radio group</a> and Polaris’s ChoiceList treat one-of-many as radios: one tab stop, arrow keys. Material uses <code>aria-pressed</code> only for chips that can be picked together.</td><td>Closed: TL2, B: a radio group, one tab stop and arrow keys, as decision 141 (Jonard, 14 Oct; decision 153). Code owed</td></tr>
+<tr><td>An “All Areas” tile as the way back</td><td>A radio filter needs a way back to none: DWP adds “Any”, Polaris an “All” tab.</td><td>Backed</td></tr>
+<tr><td>A strip that doesn’t select has no pressed state</td><td>Carbon’s clickable tile is a link with no state. Fixed 13 Oct: its tiles no longer read as unpressed toggles.</td><td>Backed</td></tr>
+<tr><td>Frameless: lines between, never around</td><td>Jonard, 17 Sep 2026 (<code>rule/one-card-surface</code>). No outside system checked for it.</td><td>Decided: ours. Superseded 14 Oct: no lines between the tiles either (Jonard, 14 Oct; decision 153, AR1). Code owed</td></tr>
+<tr><td>The Dashboard adopts it now or later</td><td>A scope call (decision 99).</td><td>Closed: TL1, B: the Dashboard waits for its own pass (Jonard, 14 Oct; decision 153)</td></tr>
+</tbody>
+</table>
 </div>
 
 

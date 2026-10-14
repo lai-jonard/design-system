@@ -6,26 +6,26 @@
    * Copyright 2019 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$3=globalThis,e$6=t$3.ShadowRoot&&(void 0===t$3.ShadyCSS||t$3.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$2=Symbol(),o$5=new WeakMap;let n$3 = class n{constructor(t,e,o){if(this._$cssResult$=true,o!==s$2)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$6&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=o$5.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&o$5.set(s,t));}return t}toString(){return this.cssText}};const r$5=t=>new n$3("string"==typeof t?t:t+"",void 0,s$2),i$5=(t,...e)=>{const o=1===t.length?t[0]:e.reduce((e,s,o)=>e+(t=>{if(true===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[o+1],t[0]);return new n$3(o,t,s$2)},S$1=(s,o)=>{if(e$6)s.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of o){const o=document.createElement("style"),n=t$3.litNonce;void 0!==n&&o.setAttribute("nonce",n),o.textContent=e.cssText,s.appendChild(o);}},c$2=e$6?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$5(e)})(t):t;
+  const t$4=globalThis,e$6=t$4.ShadowRoot&&(void 0===t$4.ShadyCSS||t$4.ShadyCSS.nativeShadow)&&"adoptedStyleSheets"in Document.prototype&&"replace"in CSSStyleSheet.prototype,s$3=Symbol(),o$5=new WeakMap;let n$3 = class n{constructor(t,e,o){if(this._$cssResult$=true,o!==s$3)throw Error("CSSResult is not constructable. Use `unsafeCSS` or `css` instead.");this.cssText=t,this.t=e;}get styleSheet(){let t=this.o;const s=this.t;if(e$6&&void 0===t){const e=void 0!==s&&1===s.length;e&&(t=o$5.get(s)),void 0===t&&((this.o=t=new CSSStyleSheet).replaceSync(this.cssText),e&&o$5.set(s,t));}return t}toString(){return this.cssText}};const r$5=t=>new n$3("string"==typeof t?t:t+"",void 0,s$3),i$6=(t,...e)=>{const o=1===t.length?t[0]:e.reduce((e,s,o)=>e+(t=>{if(true===t._$cssResult$)return t.cssText;if("number"==typeof t)return t;throw Error("Value passed to 'css' function must be a 'css' function result: "+t+". Use 'unsafeCSS' to pass non-literal values, but take care to ensure page security.")})(s)+t[o+1],t[0]);return new n$3(o,t,s$3)},S$1=(s,o)=>{if(e$6)s.adoptedStyleSheets=o.map(t=>t instanceof CSSStyleSheet?t:t.styleSheet);else for(const e of o){const o=document.createElement("style"),n=t$4.litNonce;void 0!==n&&o.setAttribute("nonce",n),o.textContent=e.cssText,s.appendChild(o);}},c$3=e$6?t=>t:t=>t instanceof CSSStyleSheet?(t=>{let e="";for(const s of t.cssRules)e+=s.cssText;return r$5(e)})(t):t;
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const{is:i$4,defineProperty:e$5,getOwnPropertyDescriptor:h$1,getOwnPropertyNames:r$4,getOwnPropertySymbols:o$4,getPrototypeOf:n$2}=Object,a$1=globalThis,c$1=a$1.trustedTypes,l$2=c$1?c$1.emptyScript:"",p$2=a$1.reactiveElementPolyfillSupport,d$1=(t,s)=>t,u$1={toAttribute(t,s){switch(s){case Boolean:t=t?l$2:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,s){let i=t;switch(s){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t);}catch(t){i=null;}}return i}},f$1=(t,s)=>!i$4(t,s),b$1={attribute:true,type:String,converter:u$1,reflect:false,useDefault:false,hasChanged:f$1};Symbol.metadata??=Symbol("metadata"),a$1.litPropertyMetadata??=new WeakMap;let y$1 = class y extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t);}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,s=b$1){if(s.state&&(s.attribute=false),this._$Ei(),this.prototype.hasOwnProperty(t)&&((s=Object.create(s)).wrapped=true),this.elementProperties.set(t,s),!s.noAccessor){const i=Symbol(),h=this.getPropertyDescriptor(t,i,s);void 0!==h&&e$5(this.prototype,t,h);}}static getPropertyDescriptor(t,s,i){const{get:e,set:r}=h$1(this.prototype,t)??{get(){return this[s]},set(t){this[s]=t;}};return {get:e,set(s){const h=e?.call(this);r?.call(this,s),this.requestUpdate(t,h,i);},configurable:true,enumerable:true}}static getPropertyOptions(t){return this.elementProperties.get(t)??b$1}static _$Ei(){if(this.hasOwnProperty(d$1("elementProperties")))return;const t=n$2(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties);}static finalize(){if(this.hasOwnProperty(d$1("finalized")))return;if(this.finalized=true,this._$Ei(),this.hasOwnProperty(d$1("properties"))){const t=this.properties,s=[...r$4(t),...o$4(t)];for(const i of s)this.createProperty(i,t[i]);}const t=this[Symbol.metadata];if(null!==t){const s=litPropertyMetadata.get(t);if(void 0!==s)for(const[t,i]of s)this.elementProperties.set(t,i);}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);void 0!==i&&this._$Eh.set(i,t);}this.elementStyles=this.finalizeStyles(this.styles);}static finalizeStyles(s){const i=[];if(Array.isArray(s)){const e=new Set(s.flat(1/0).reverse());for(const s of e)i.unshift(c$2(s));}else void 0!==s&&i.push(c$2(s));return i}static _$Eu(t,s){const i=s.attribute;return  false===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=false,this.hasUpdated=false,this._$Em=null,this._$Ev();}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this));}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.();}removeController(t){this._$EO?.delete(t);}_$E_(){const t=new Map,s=this.constructor.elementProperties;for(const i of s.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t);}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return S$1(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(true),this._$EO?.forEach(t=>t.hostConnected?.());}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.());}attributeChangedCallback(t,s,i){this._$AK(t,i);}_$ET(t,s){const i=this.constructor.elementProperties.get(t),e=this.constructor._$Eu(t,i);if(void 0!==e&&true===i.reflect){const h=(void 0!==i.converter?.toAttribute?i.converter:u$1).toAttribute(s,i.type);this._$Em=t,null==h?this.removeAttribute(e):this.setAttribute(e,h),this._$Em=null;}}_$AK(t,s){const i=this.constructor,e=i._$Eh.get(t);if(void 0!==e&&this._$Em!==e){const t=i.getPropertyOptions(e),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:u$1;this._$Em=e;const r=h.fromAttribute(s,t.type);this[e]=r??this._$Ej?.get(e)??r,this._$Em=null;}}requestUpdate(t,s,i,e=false,h){if(void 0!==t){const r=this.constructor;if(false===e&&(h=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??f$1)(h,s)||i.useDefault&&i.reflect&&h===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,s,i);} false===this.isUpdatePending&&(this._$ES=this._$EP());}C(t,s,{useDefault:i,reflect:e,wrapped:h},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??s??this[t]),true!==h||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(s=void 0),this._$AL.set(t,s)),true===e&&this._$Em!==t&&(this._$Eq??=new Set).add(t));}async _$EP(){this.isUpdatePending=true;try{await this._$ES;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,s]of this._$Ep)this[t]=s;this._$Ep=void 0;}const t=this.constructor.elementProperties;if(t.size>0)for(const[s,i]of t){const{wrapped:t}=i,e=this[s];true!==t||this._$AL.has(s)||void 0===e||this.C(s,void 0,i,e);}}let t=false;const s=this._$AL;try{t=this.shouldUpdate(s),t?(this.willUpdate(s),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(s)):this._$EM();}catch(s){throw t=false,this._$EM(),s}t&&this._$AE(s);}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=true,this.firstUpdated(t)),this.updated(t);}_$EM(){this._$AL=new Map,this.isUpdatePending=false;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return  true}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM();}updated(t){}firstUpdated(t){}};y$1.elementStyles=[],y$1.shadowRootOptions={mode:"open"},y$1[d$1("elementProperties")]=new Map,y$1[d$1("finalized")]=new Map,p$2?.({ReactiveElement:y$1}),(a$1.reactiveElementVersions??=[]).push("2.1.2");
+   */const{is:i$5,defineProperty:e$5,getOwnPropertyDescriptor:h$2,getOwnPropertyNames:r$4,getOwnPropertySymbols:o$4,getPrototypeOf:n$2}=Object,a$1=globalThis,c$2=a$1.trustedTypes,l$2=c$2?c$2.emptyScript:"",p$2=a$1.reactiveElementPolyfillSupport,d$1=(t,s)=>t,u$3={toAttribute(t,s){switch(s){case Boolean:t=t?l$2:null;break;case Object:case Array:t=null==t?t:JSON.stringify(t);}return t},fromAttribute(t,s){let i=t;switch(s){case Boolean:i=null!==t;break;case Number:i=null===t?null:Number(t);break;case Object:case Array:try{i=JSON.parse(t);}catch(t){i=null;}}return i}},f$1=(t,s)=>!i$5(t,s),b$1={attribute:true,type:String,converter:u$3,reflect:false,useDefault:false,hasChanged:f$1};Symbol.metadata??=Symbol("metadata"),a$1.litPropertyMetadata??=new WeakMap;let y$1 = class y extends HTMLElement{static addInitializer(t){this._$Ei(),(this.l??=[]).push(t);}static get observedAttributes(){return this.finalize(),this._$Eh&&[...this._$Eh.keys()]}static createProperty(t,s=b$1){if(s.state&&(s.attribute=false),this._$Ei(),this.prototype.hasOwnProperty(t)&&((s=Object.create(s)).wrapped=true),this.elementProperties.set(t,s),!s.noAccessor){const i=Symbol(),h=this.getPropertyDescriptor(t,i,s);void 0!==h&&e$5(this.prototype,t,h);}}static getPropertyDescriptor(t,s,i){const{get:e,set:r}=h$2(this.prototype,t)??{get(){return this[s]},set(t){this[s]=t;}};return {get:e,set(s){const h=e?.call(this);r?.call(this,s),this.requestUpdate(t,h,i);},configurable:true,enumerable:true}}static getPropertyOptions(t){return this.elementProperties.get(t)??b$1}static _$Ei(){if(this.hasOwnProperty(d$1("elementProperties")))return;const t=n$2(this);t.finalize(),void 0!==t.l&&(this.l=[...t.l]),this.elementProperties=new Map(t.elementProperties);}static finalize(){if(this.hasOwnProperty(d$1("finalized")))return;if(this.finalized=true,this._$Ei(),this.hasOwnProperty(d$1("properties"))){const t=this.properties,s=[...r$4(t),...o$4(t)];for(const i of s)this.createProperty(i,t[i]);}const t=this[Symbol.metadata];if(null!==t){const s=litPropertyMetadata.get(t);if(void 0!==s)for(const[t,i]of s)this.elementProperties.set(t,i);}this._$Eh=new Map;for(const[t,s]of this.elementProperties){const i=this._$Eu(t,s);void 0!==i&&this._$Eh.set(i,t);}this.elementStyles=this.finalizeStyles(this.styles);}static finalizeStyles(s){const i=[];if(Array.isArray(s)){const e=new Set(s.flat(1/0).reverse());for(const s of e)i.unshift(c$3(s));}else void 0!==s&&i.push(c$3(s));return i}static _$Eu(t,s){const i=s.attribute;return  false===i?void 0:"string"==typeof i?i:"string"==typeof t?t.toLowerCase():void 0}constructor(){super(),this._$Ep=void 0,this.isUpdatePending=false,this.hasUpdated=false,this._$Em=null,this._$Ev();}_$Ev(){this._$ES=new Promise(t=>this.enableUpdating=t),this._$AL=new Map,this._$E_(),this.requestUpdate(),this.constructor.l?.forEach(t=>t(this));}addController(t){(this._$EO??=new Set).add(t),void 0!==this.renderRoot&&this.isConnected&&t.hostConnected?.();}removeController(t){this._$EO?.delete(t);}_$E_(){const t=new Map,s=this.constructor.elementProperties;for(const i of s.keys())this.hasOwnProperty(i)&&(t.set(i,this[i]),delete this[i]);t.size>0&&(this._$Ep=t);}createRenderRoot(){const t=this.shadowRoot??this.attachShadow(this.constructor.shadowRootOptions);return S$1(t,this.constructor.elementStyles),t}connectedCallback(){this.renderRoot??=this.createRenderRoot(),this.enableUpdating(true),this._$EO?.forEach(t=>t.hostConnected?.());}enableUpdating(t){}disconnectedCallback(){this._$EO?.forEach(t=>t.hostDisconnected?.());}attributeChangedCallback(t,s,i){this._$AK(t,i);}_$ET(t,s){const i=this.constructor.elementProperties.get(t),e=this.constructor._$Eu(t,i);if(void 0!==e&&true===i.reflect){const h=(void 0!==i.converter?.toAttribute?i.converter:u$3).toAttribute(s,i.type);this._$Em=t,null==h?this.removeAttribute(e):this.setAttribute(e,h),this._$Em=null;}}_$AK(t,s){const i=this.constructor,e=i._$Eh.get(t);if(void 0!==e&&this._$Em!==e){const t=i.getPropertyOptions(e),h="function"==typeof t.converter?{fromAttribute:t.converter}:void 0!==t.converter?.fromAttribute?t.converter:u$3;this._$Em=e;const r=h.fromAttribute(s,t.type);this[e]=r??this._$Ej?.get(e)??r,this._$Em=null;}}requestUpdate(t,s,i,e=false,h){if(void 0!==t){const r=this.constructor;if(false===e&&(h=this[t]),i??=r.getPropertyOptions(t),!((i.hasChanged??f$1)(h,s)||i.useDefault&&i.reflect&&h===this._$Ej?.get(t)&&!this.hasAttribute(r._$Eu(t,i))))return;this.C(t,s,i);} false===this.isUpdatePending&&(this._$ES=this._$EP());}C(t,s,{useDefault:i,reflect:e,wrapped:h},r){i&&!(this._$Ej??=new Map).has(t)&&(this._$Ej.set(t,r??s??this[t]),true!==h||void 0!==r)||(this._$AL.has(t)||(this.hasUpdated||i||(s=void 0),this._$AL.set(t,s)),true===e&&this._$Em!==t&&(this._$Eq??=new Set).add(t));}async _$EP(){this.isUpdatePending=true;try{await this._$ES;}catch(t){Promise.reject(t);}const t=this.scheduleUpdate();return null!=t&&await t,!this.isUpdatePending}scheduleUpdate(){return this.performUpdate()}performUpdate(){if(!this.isUpdatePending)return;if(!this.hasUpdated){if(this.renderRoot??=this.createRenderRoot(),this._$Ep){for(const[t,s]of this._$Ep)this[t]=s;this._$Ep=void 0;}const t=this.constructor.elementProperties;if(t.size>0)for(const[s,i]of t){const{wrapped:t}=i,e=this[s];true!==t||this._$AL.has(s)||void 0===e||this.C(s,void 0,i,e);}}let t=false;const s=this._$AL;try{t=this.shouldUpdate(s),t?(this.willUpdate(s),this._$EO?.forEach(t=>t.hostUpdate?.()),this.update(s)):this._$EM();}catch(s){throw t=false,this._$EM(),s}t&&this._$AE(s);}willUpdate(t){}_$AE(t){this._$EO?.forEach(t=>t.hostUpdated?.()),this.hasUpdated||(this.hasUpdated=true,this.firstUpdated(t)),this.updated(t);}_$EM(){this._$AL=new Map,this.isUpdatePending=false;}get updateComplete(){return this.getUpdateComplete()}getUpdateComplete(){return this._$ES}shouldUpdate(t){return  true}update(t){this._$Eq&&=this._$Eq.forEach(t=>this._$ET(t,this[t])),this._$EM();}updated(t){}firstUpdated(t){}};y$1.elementStyles=[],y$1.shadowRootOptions={mode:"open"},y$1[d$1("elementProperties")]=new Map,y$1[d$1("finalized")]=new Map,p$2?.({ReactiveElement:y$1}),(a$1.reactiveElementVersions??=[]).push("2.1.2");
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$2=globalThis,i$3=t=>t,s$1=t$2.trustedTypes,e$4=s$1?s$1.createPolicy("lit-html",{createHTML:t=>t}):void 0,h="$lit$",o$3=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$3,r$3=`<${n$1}>`,l$1=document,c=()=>l$1.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u=Array.isArray,d=t=>u(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m$1=/>/g,p$1=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),w=x(2),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l$1.createTreeWalker(l$1,129);function V(t,i){if(!u(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e$4?e$4.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v?"!--"===u[1]?c=_:void 0!==u[1]?c=m$1:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p$1):void 0!==u[3]&&(c=p$1):c===p$1?">"===u[0]?(c=n??v,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p$1:'"'===u[3]?$:g):c===$||c===g?c=p$1:c===_||c===m$1?c=v:(c=p$1,n=void 0);const x=c===p$1&&t[i+1].startsWith("/>")?" ":"";l+=c===v?s+r$3:d>=0?(e.push(a),s.slice(0,d)+h+s.slice(d)+o$3+x):s+o$3+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h)){const i=v[a++],s=r.getAttribute(t).split(o$3),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$3)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$3),i=t.length-1;if(i>0){r.textContent=s$1?s$1.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$3,t+1));)d.push({type:7,index:l}),t+=o$3.length-1;}l++;}}static createElement(t,i){const s=l$1.createElement("template");return s.innerHTML=t,s}}function M(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l$1).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l$1,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l$1.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c()),this.O(c()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$3(t).nextSibling;i$3(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M(this,t);}}const B=t$2.litHtmlPolyfillSupport;B?.(S,k),(t$2.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c(),t),t,void 0,s??{});}return h._$AI(t),h};
+  const t$3=globalThis,i$4=t=>t,s$2=t$3.trustedTypes,e$4=s$2?s$2.createPolicy("lit-html",{createHTML:t=>t}):void 0,h$1="$lit$",o$3=`lit$${Math.random().toFixed(9).slice(2)}$`,n$1="?"+o$3,r$3=`<${n$1}>`,l$1=document,c$1=()=>l$1.createComment(""),a=t=>null===t||"object"!=typeof t&&"function"!=typeof t,u$2=Array.isArray,d=t=>u$2(t)||"function"==typeof t?.[Symbol.iterator],f="[ \t\n\f\r]",v$1=/<(?:(!--|\/[^a-zA-Z])|(\/?[a-zA-Z][^>\s]*)|(\/?$))/g,_=/-->/g,m$1=/>/g,p$1=RegExp(`>|${f}(?:([^\\s"'>=/]+)(${f}*=${f}*(?:[^ \t\n\f\r"'\`<>=]|("|')|))|$)`,"g"),g=/'/g,$=/"/g,y=/^(?:script|style|textarea|title)$/i,x=t=>(i,...s)=>({_$litType$:t,strings:i,values:s}),b=x(1),w=x(2),E=Symbol.for("lit-noChange"),A=Symbol.for("lit-nothing"),C=new WeakMap,P=l$1.createTreeWalker(l$1,129);function V(t,i){if(!u$2(t)||!t.hasOwnProperty("raw"))throw Error("invalid template strings array");return void 0!==e$4?e$4.createHTML(i):i}const N=(t,i)=>{const s=t.length-1,e=[];let n,l=2===i?"<svg>":3===i?"<math>":"",c=v$1;for(let i=0;i<s;i++){const s=t[i];let a,u,d=-1,f=0;for(;f<s.length&&(c.lastIndex=f,u=c.exec(s),null!==u);)f=c.lastIndex,c===v$1?"!--"===u[1]?c=_:void 0!==u[1]?c=m$1:void 0!==u[2]?(y.test(u[2])&&(n=RegExp("</"+u[2],"g")),c=p$1):void 0!==u[3]&&(c=p$1):c===p$1?">"===u[0]?(c=n??v$1,d=-1):void 0===u[1]?d=-2:(d=c.lastIndex-u[2].length,a=u[1],c=void 0===u[3]?p$1:'"'===u[3]?$:g):c===$||c===g?c=p$1:c===_||c===m$1?c=v$1:(c=p$1,n=void 0);const x=c===p$1&&t[i+1].startsWith("/>")?" ":"";l+=c===v$1?s+r$3:d>=0?(e.push(a),s.slice(0,d)+h$1+s.slice(d)+o$3+x):s+o$3+(-2===d?i:x);}return [V(t,l+(t[s]||"<?>")+(2===i?"</svg>":3===i?"</math>":"")),e]};class S{constructor({strings:t,_$litType$:i},e){let r;this.parts=[];let l=0,a=0;const u=t.length-1,d=this.parts,[f,v]=N(t,i);if(this.el=S.createElement(f,e),P.currentNode=this.el.content,2===i||3===i){const t=this.el.content.firstChild;t.replaceWith(...t.childNodes);}for(;null!==(r=P.nextNode())&&d.length<u;){if(1===r.nodeType){if(r.hasAttributes())for(const t of r.getAttributeNames())if(t.endsWith(h$1)){const i=v[a++],s=r.getAttribute(t).split(o$3),e=/([.?@])?(.*)/.exec(i);d.push({type:1,index:l,name:e[2],strings:s,ctor:"."===e[1]?I:"?"===e[1]?L:"@"===e[1]?z:H}),r.removeAttribute(t);}else t.startsWith(o$3)&&(d.push({type:6,index:l}),r.removeAttribute(t));if(y.test(r.tagName)){const t=r.textContent.split(o$3),i=t.length-1;if(i>0){r.textContent=s$2?s$2.emptyScript:"";for(let s=0;s<i;s++)r.append(t[s],c$1()),P.nextNode(),d.push({type:2,index:++l});r.append(t[i],c$1());}}}else if(8===r.nodeType)if(r.data===n$1)d.push({type:2,index:l});else {let t=-1;for(;-1!==(t=r.data.indexOf(o$3,t+1));)d.push({type:7,index:l}),t+=o$3.length-1;}l++;}}static createElement(t,i){const s=l$1.createElement("template");return s.innerHTML=t,s}}function M$1(t,i,s=t,e){if(i===E)return i;let h=void 0!==e?s._$Co?.[e]:s._$Cl;const o=a(i)?void 0:i._$litDirective$;return h?.constructor!==o&&(h?._$AO?.(false),void 0===o?h=void 0:(h=new o(t),h._$AT(t,s,e)),void 0!==e?(s._$Co??=[])[e]=h:s._$Cl=h),void 0!==h&&(i=M$1(t,h._$AS(t,i.values),h,e)),i}class R{constructor(t,i){this._$AV=[],this._$AN=void 0,this._$AD=t,this._$AM=i;}get parentNode(){return this._$AM.parentNode}get _$AU(){return this._$AM._$AU}u(t){const{el:{content:i},parts:s}=this._$AD,e=(t?.creationScope??l$1).importNode(i,true);P.currentNode=e;let h=P.nextNode(),o=0,n=0,r=s[0];for(;void 0!==r;){if(o===r.index){let i;2===r.type?i=new k(h,h.nextSibling,this,t):1===r.type?i=new r.ctor(h,r.name,r.strings,this,t):6===r.type&&(i=new Z(h,this,t)),this._$AV.push(i),r=s[++n];}o!==r?.index&&(h=P.nextNode(),o++);}return P.currentNode=l$1,e}p(t){let i=0;for(const s of this._$AV) void 0!==s&&(void 0!==s.strings?(s._$AI(t,s,i),i+=s.strings.length-2):s._$AI(t[i])),i++;}}class k{get _$AU(){return this._$AM?._$AU??this._$Cv}constructor(t,i,s,e){this.type=2,this._$AH=A,this._$AN=void 0,this._$AA=t,this._$AB=i,this._$AM=s,this.options=e,this._$Cv=e?.isConnected??true;}get parentNode(){let t=this._$AA.parentNode;const i=this._$AM;return void 0!==i&&11===t?.nodeType&&(t=i.parentNode),t}get startNode(){return this._$AA}get endNode(){return this._$AB}_$AI(t,i=this){t=M$1(this,t,i),a(t)?t===A||null==t||""===t?(this._$AH!==A&&this._$AR(),this._$AH=A):t!==this._$AH&&t!==E&&this._(t):void 0!==t._$litType$?this.$(t):void 0!==t.nodeType?this.T(t):d(t)?this.k(t):this._(t);}O(t){return this._$AA.parentNode.insertBefore(t,this._$AB)}T(t){this._$AH!==t&&(this._$AR(),this._$AH=this.O(t));}_(t){this._$AH!==A&&a(this._$AH)?this._$AA.nextSibling.data=t:this.T(l$1.createTextNode(t)),this._$AH=t;}$(t){const{values:i,_$litType$:s}=t,e="number"==typeof s?this._$AC(t):(void 0===s.el&&(s.el=S.createElement(V(s.h,s.h[0]),this.options)),s);if(this._$AH?._$AD===e)this._$AH.p(i);else {const t=new R(e,this),s=t.u(this.options);t.p(i),this.T(s),this._$AH=t;}}_$AC(t){let i=C.get(t.strings);return void 0===i&&C.set(t.strings,i=new S(t)),i}k(t){u$2(this._$AH)||(this._$AH=[],this._$AR());const i=this._$AH;let s,e=0;for(const h of t)e===i.length?i.push(s=new k(this.O(c$1()),this.O(c$1()),this,this.options)):s=i[e],s._$AI(h),e++;e<i.length&&(this._$AR(s&&s._$AB.nextSibling,e),i.length=e);}_$AR(t=this._$AA.nextSibling,s){for(this._$AP?.(false,true,s);t!==this._$AB;){const s=i$4(t).nextSibling;i$4(t).remove(),t=s;}}setConnected(t){ void 0===this._$AM&&(this._$Cv=t,this._$AP?.(t));}}class H{get tagName(){return this.element.tagName}get _$AU(){return this._$AM._$AU}constructor(t,i,s,e,h){this.type=1,this._$AH=A,this._$AN=void 0,this.element=t,this.name=i,this._$AM=e,this.options=h,s.length>2||""!==s[0]||""!==s[1]?(this._$AH=Array(s.length-1).fill(new String),this.strings=s):this._$AH=A;}_$AI(t,i=this,s,e){const h=this.strings;let o=false;if(void 0===h)t=M$1(this,t,i,0),o=!a(t)||t!==this._$AH&&t!==E,o&&(this._$AH=t);else {const e=t;let n,r;for(t=h[0],n=0;n<h.length-1;n++)r=M$1(this,e[s+n],i,n),r===E&&(r=this._$AH[n]),o||=!a(r)||r!==this._$AH[n],r===A?t=A:t!==A&&(t+=(r??"")+h[n+1]),this._$AH[n]=r;}o&&!e&&this.j(t);}j(t){t===A?this.element.removeAttribute(this.name):this.element.setAttribute(this.name,t??"");}}class I extends H{constructor(){super(...arguments),this.type=3;}j(t){this.element[this.name]=t===A?void 0:t;}}class L extends H{constructor(){super(...arguments),this.type=4;}j(t){this.element.toggleAttribute(this.name,!!t&&t!==A);}}class z extends H{constructor(t,i,s,e,h){super(t,i,s,e,h),this.type=5;}_$AI(t,i=this){if((t=M$1(this,t,i,0)??A)===E)return;const s=this._$AH,e=t===A&&s!==A||t.capture!==s.capture||t.once!==s.once||t.passive!==s.passive,h=t!==A&&(s===A||e);e&&this.element.removeEventListener(this.name,this,s),h&&this.element.addEventListener(this.name,this,t),this._$AH=t;}handleEvent(t){"function"==typeof this._$AH?this._$AH.call(this.options?.host??this.element,t):this._$AH.handleEvent(t);}}class Z{constructor(t,i,s){this.element=t,this.type=6,this._$AN=void 0,this._$AM=i,this.options=s;}get _$AU(){return this._$AM._$AU}_$AI(t){M$1(this,t);}}const j={I:k},B=t$3.litHtmlPolyfillSupport;B?.(S,k),(t$3.litHtmlVersions??=[]).push("3.3.2");const D=(t,i,s)=>{const e=s?.renderBefore??i;let h=e._$litPart$;if(void 0===h){const t=s?.renderBefore??null;e._$litPart$=h=new k(i.insertBefore(c$1(),t),t,void 0,s??{});}return h._$AI(t),h};
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const s=globalThis;let i$2 = class i extends y$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0;}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const r=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=D(r,this.renderRoot,this.renderOptions);}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(true);}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(false);}render(){return E}};i$2._$litElement$=true,i$2["finalized"]=true,s.litElementHydrateSupport?.({LitElement:i$2});const o$2=s.litElementPolyfillSupport;o$2?.({LitElement:i$2});(s.litElementVersions??=[]).push("4.2.2");
+   */const s$1=globalThis;let i$3 = class i extends y$1{constructor(){super(...arguments),this.renderOptions={host:this},this._$Do=void 0;}createRenderRoot(){const t=super.createRenderRoot();return this.renderOptions.renderBefore??=t.firstChild,t}update(t){const r=this.render();this.hasUpdated||(this.renderOptions.isConnected=this.isConnected),super.update(t),this._$Do=D(r,this.renderRoot,this.renderOptions);}connectedCallback(){super.connectedCallback(),this._$Do?.setConnected(true);}disconnectedCallback(){super.disconnectedCallback(),this._$Do?.setConnected(false);}render(){return E}};i$3._$litElement$=true,i$3["finalized"]=true,s$1.litElementHydrateSupport?.({LitElement:i$3});const o$2=s$1.litElementPolyfillSupport;o$2?.({LitElement:i$3});(s$1.litElementVersions??=[]).push("4.2.2");
 
   /*
     SOURCE OF TRUTH for every la-* token.
@@ -37,7 +37,7 @@
     scripts/generate-token-css.cjs on every npm build (`prebuild` hook).
     Never edit the mirrors by hand; edit here and run `npm run build`.
   */
-  const tokens = i$5 `
+  const tokens = i$6 `
   :host {
     /* ── Core palette — primitives ────────────────────
        Hue scales. The ONLY place a colour hex appears.
@@ -531,13 +531,13 @@
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
    */
-  const t$1=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);}):customElements.define(t,e);};
+  const t$2=t=>(e,o)=>{ void 0!==o?o.addInitializer(()=>{customElements.define(t,e);}):customElements.define(t,e);};
 
   /**
    * @license
    * Copyright 2017 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const o$1={attribute:true,type:String,converter:u$1,reflect:false,hasChanged:f$1},r$2=(t=o$1,e,r)=>{const{kind:n,metadata:i}=r;let s=globalThis.litPropertyMetadata.get(i);if(void 0===s&&globalThis.litPropertyMetadata.set(i,s=new Map),"setter"===n&&((t=Object.create(t)).wrapped=true),s.set(r.name,t),"accessor"===n){const{name:o}=r;return {set(r){const n=e.get.call(this);e.set.call(this,r),this.requestUpdate(o,n,t,true,r);},init(e){return void 0!==e&&this.C(o,void 0,t,e),e}}}if("setter"===n){const{name:o}=r;return function(r){const n=this[o];e.call(this,r),this.requestUpdate(o,n,t,true,r);}}throw Error("Unsupported decorator location: "+n)};function n(t){return (e,o)=>"object"==typeof o?r$2(t,e,o):((t,e,o)=>{const r=e.hasOwnProperty(o);return e.constructor.createProperty(o,t),r?Object.getOwnPropertyDescriptor(e,o):void 0})(t,e,o)}
+   */const o$1={attribute:true,type:String,converter:u$3,reflect:false,hasChanged:f$1},r$2=(t=o$1,e,r)=>{const{kind:n,metadata:i}=r;let s=globalThis.litPropertyMetadata.get(i);if(void 0===s&&globalThis.litPropertyMetadata.set(i,s=new Map),"setter"===n&&((t=Object.create(t)).wrapped=true),s.set(r.name,t),"accessor"===n){const{name:o}=r;return {set(r){const n=e.get.call(this);e.set.call(this,r),this.requestUpdate(o,n,t,true,r);},init(e){return void 0!==e&&this.C(o,void 0,t,e),e}}}if("setter"===n){const{name:o}=r;return function(r){const n=this[o];e.call(this,r),this.requestUpdate(o,n,t,true,r);}}throw Error("Unsupported decorator location: "+n)};function n(t){return (e,o)=>"object"==typeof o?r$2(t,e,o):((t,e,o)=>{const r=e.hasOwnProperty(o);return e.constructor.createProperty(o,t),r?Object.getOwnPropertyDescriptor(e,o):void 0})(t,e,o)}
 
   /**
    * @license
@@ -558,13 +558,13 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */function e$2(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$3(n,s,{get(){return o(this)}})}}
 
-  var __decorate$1Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaBadge = class LaBadge extends i$2 {
+  exports.LaBadge = class LaBadge extends i$3 {
       constructor() {
           super(...arguments);
           this.variant = 'neutral';
@@ -598,7 +598,7 @@
   };
   exports.LaBadge.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         vertical-align: middle;
@@ -860,23 +860,23 @@
       }
     `,
   ];
-  __decorate$1Q([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "variant", void 0);
-  __decorate$1Q([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "type", void 0);
-  __decorate$1Q([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "appearance", void 0);
-  __decorate$1Q([
+  __decorate$1R([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
-  __decorate$1Q([
+  __decorate$1R([
       n()
   ], exports.LaBadge.prototype, "detail", void 0);
-  exports.LaBadge = __decorate$1Q([
-      t$1('la-badge')
+  exports.LaBadge = __decorate$1R([
+      t$2('la-badge')
   ], exports.LaBadge);
 
   /**
@@ -885,13 +885,13 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const o=o=>o??A;
 
-  var __decorate$1P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaIconButton = class LaIconButton extends i$2 {
+  exports.LaIconButton = class LaIconButton extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -923,7 +923,7 @@
   };
   exports.LaIconButton.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
       }
@@ -1011,36 +1011,36 @@
       }
     `,
   ];
-  __decorate$1P([
+  __decorate$1Q([
       n()
   ], exports.LaIconButton.prototype, "label", void 0);
-  __decorate$1P([
+  __decorate$1Q([
       n({ type: Boolean })
   ], exports.LaIconButton.prototype, "expanded", void 0);
-  __decorate$1P([
+  __decorate$1Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "pressed", void 0);
-  __decorate$1P([
+  __decorate$1Q([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "size", void 0);
-  __decorate$1P([
+  __decorate$1Q([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "variant", void 0);
-  __decorate$1P([
+  __decorate$1Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "disabled", void 0);
-  exports.LaIconButton = __decorate$1P([
-      t$1('la-icon-button')
+  exports.LaIconButton = __decorate$1Q([
+      t$2('la-icon-button')
   ], exports.LaIconButton);
 
-  var __decorate$1O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   const COLLAPSE_AT = 4;
-  exports.LaBreadcrumb = class LaBreadcrumb extends i$2 {
+  exports.LaBreadcrumb = class LaBreadcrumb extends i$3 {
       constructor() {
           super(...arguments);
           this.items = [];
@@ -1109,7 +1109,7 @@
   };
   exports.LaBreadcrumb.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         align-items: center;
@@ -1168,23 +1168,23 @@
 
     `,
   ];
-  __decorate$1O([
+  __decorate$1P([
       n({ type: Array })
   ], exports.LaBreadcrumb.prototype, "items", void 0);
-  __decorate$1O([
+  __decorate$1P([
       r$1()
   ], exports.LaBreadcrumb.prototype, "_expanded", void 0);
-  exports.LaBreadcrumb = __decorate$1O([
-      t$1('la-breadcrumb')
+  exports.LaBreadcrumb = __decorate$1P([
+      t$2('la-breadcrumb')
   ], exports.LaBreadcrumb);
 
-  var __decorate$1N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaSpinner = class LaSpinner extends i$2 {
+  exports.LaSpinner = class LaSpinner extends i$3 {
       constructor() {
           super(...arguments);
           this.size = 'sm';
@@ -1211,7 +1211,7 @@
   };
   exports.LaSpinner.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         vertical-align: middle;
@@ -1286,26 +1286,26 @@
       }
     `,
   ];
-  __decorate$1N([
+  __decorate$1O([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "size", void 0);
-  __decorate$1N([
+  __decorate$1O([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "appearance", void 0);
-  __decorate$1N([
+  __decorate$1O([
       n()
   ], exports.LaSpinner.prototype, "label", void 0);
-  exports.LaSpinner = __decorate$1N([
-      t$1('la-spinner')
+  exports.LaSpinner = __decorate$1O([
+      t$2('la-spinner')
   ], exports.LaSpinner);
 
-  var __decorate$1M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaButton = class LaButton extends i$2 {
+  exports.LaButton = class LaButton extends i$3 {
       constructor() {
           super(...arguments);
           this.variant = 'primary';
@@ -1406,7 +1406,7 @@
   };
   exports.LaButton.styles = [
       tokens,
-      i$5 `
+      i$6 `
       /* Never wider than its container: a label too long for the space
          wraps to a second line rather than running out of the card. Carbon:
          "We do not recommend truncating a button label"; it wraps instead
@@ -1657,44 +1657,44 @@
       }
     `,
   ];
-  __decorate$1M([
+  __decorate$1N([
       n({ reflect: true })
   ], exports.LaButton.prototype, "variant", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ reflect: true })
   ], exports.LaButton.prototype, "size", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "pill", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "block", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ attribute: 'loading-label' })
   ], exports.LaButton.prototype, "loadingLabel", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaButton.prototype, "hideLabel", void 0);
-  __decorate$1M([
+  __decorate$1N([
       r$1()
   ], exports.LaButton.prototype, "_hasIconLeft", void 0);
-  exports.LaButton = __decorate$1M([
-      t$1('la-button')
+  exports.LaButton = __decorate$1N([
+      t$2('la-button')
   ], exports.LaButton);
 
-  var __decorate$1L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaCard = class LaCard extends i$2 {
+  exports.LaCard = class LaCard extends i$3 {
       constructor() {
           super(...arguments);
           this.heading = '';
@@ -1715,7 +1715,7 @@
   };
   exports.LaCard.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -1749,26 +1749,26 @@
       }
     `,
   ];
-  __decorate$1L([
+  __decorate$1M([
       n()
   ], exports.LaCard.prototype, "heading", void 0);
-  __decorate$1L([
+  __decorate$1M([
       n({ type: Boolean, reflect: true })
   ], exports.LaCard.prototype, "nopadding", void 0);
-  __decorate$1L([
+  __decorate$1M([
       n({ reflect: true })
   ], exports.LaCard.prototype, "variant", void 0);
-  exports.LaCard = __decorate$1L([
-      t$1('la-card')
+  exports.LaCard = __decorate$1M([
+      t$2('la-card')
   ], exports.LaCard);
 
-  var __decorate$1K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaPanel = class LaPanel extends i$2 {
+  exports.LaPanel = class LaPanel extends i$3 {
       constructor() {
           super(...arguments);
           this.clickable = false;
@@ -1786,7 +1786,7 @@
   };
   exports.LaPanel.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         font-size: var(--la-font-size-base);
@@ -1813,20 +1813,20 @@
       }
     `,
   ];
-  __decorate$1K([
+  __decorate$1L([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "clickable", void 0);
-  __decorate$1K([
+  __decorate$1L([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "dimmed", void 0);
-  __decorate$1K([
+  __decorate$1L([
       n()
   ], exports.LaPanel.prototype, "heading", void 0);
-  exports.LaPanel = __decorate$1K([
-      t$1('la-panel')
+  exports.LaPanel = __decorate$1L([
+      t$2('la-panel')
   ], exports.LaPanel);
 
-  var __decorate$1J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1845,20 +1845,88 @@
    *
    * Set `--la-list-item-inset` to pad both sides equally, for rows that bleed to
    * the edges of their container (pull the list out by the same amount).
+   *
+   * Two variants:
+   *   row (default) - a row in a ruled list, as above. Nothing about it changes
+   *     with the card variant.
+   *   card - a row that stands on its own: an elevated card in a grid of its
+   *     siblings, for a catalogue the founder looks something up in (Orion's
+   *     documents and single steps). The surface follows rule/one-card-surface:
+   *     something that acts is elevated, no border, --la-shadow-md, lifting to
+   *     --la-shadow-card on hover and focus. A card always acts, so it is always
+   *     a native button (`clickable` is implied). It is one press with one name:
+   *     no actions slot. The leading slot takes a glyph (drawn on a 32px muted
+   *     tile) or an <img> (filling the tile); the default slot is the title and
+   *     the description slot its one line, both cut short with an ellipsis; the
+   *     meta slot holds a badge in place of the caret the card draws when meta is
+   *     empty. `quiet` steps the card back for a thing that is not ready yet: the
+   *     picture greys, the glyph's tile turns dashed, the title goes secondary.
+   *     It still opens, so a quiet card can say why (it is not `disabled`).
+   *
+   * Usage:
+   *   <la-list-item variant="card">
+   *     <i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+   *     Director’s Consent to Act
+   *     <span slot="description">The signed consent you need before you file the appointment</span>
+   *   </la-list-item>
+   *   <la-list-item variant="card" quiet>
+   *     <img slot="icon" src="documents.jpg" alt="">
+   *     Employee IP Assignment
+   *     <span slot="description">Make sure the company owns what your team creates</span>
+   *     <la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+   *   </la-list-item>
+   *
+   * @slot icon - leading column: a glyph or an avatar; in a card, a glyph on a 32px tile or an image (an img element) that fills it
+   * @slot - the row's content; in a card, its title (text), one line, cut short with an ellipsis
+   * @slot description - a card's one line under the title, cut short with an ellipsis (card only)
+   * @slot meta - trailing text; in a card, a badge in place of the caret it draws when this is empty
+   * @slot actions - trailing buttons whose clicks never reach the row (row only: a card is one press)
+   * @cssprop --la-list-item-inset - pads a row's both sides equally, for a row that runs edge to edge (row only)
    */
-  exports.LaListItem = class LaListItem extends i$2 {
+  exports.LaListItem = class LaListItem extends i$3 {
       constructor() {
           super(...arguments);
           /** Tints the row background with `--la-color-surface-danger`. */
           this.error = false;
-          /** When true, the row renders as a native button — tab-focusable, keyboard-activated, hover + focus styles. */
+          /** When true, the row renders as a native button — tab-focusable, keyboard-activated, hover + focus styles. Implied by the card variant. */
           this.clickable = false;
+          /** `row` (default): a row in a ruled list. `card`: a row that stands on its own as an elevated card, always a button, for a grid of siblings such as a catalogue. */
+          this.variant = 'row';
+          /** Card only. Steps the card back for something not ready yet (the picture greys, the glyph's tile turns dashed, the title goes secondary); it still opens. Put the badge that says why in the meta slot. */
+          this.quiet = false;
       }
       /** Stop clicks inside the actions slot from bubbling to the row click. */
       _onActionsClick(e) {
           e.stopPropagation();
       }
+      /** Marks a slot's wrapper empty, and the icon's as a picture when it holds
+       *  an <img>, so a card can hide an empty tile or line and quiet a picture
+       *  and a glyph differently. Classes, not reactive fields, keep the API
+       *  table to the public props. */
+      _onCardSlotChange(e) {
+          const slot = e.target;
+          const wrap = slot.parentElement;
+          if (!wrap)
+              return;
+          const assigned = slot.assignedElements({ flatten: true });
+          wrap.classList.toggle('is-empty', assigned.length === 0);
+          if (slot.name === 'icon') {
+              wrap.classList.toggle('is-picture', assigned[0]?.tagName === 'IMG');
+          }
+      }
+      _renderCard() {
+          return b `${iconStyles}<button class="row card" type="button">
+      <span class="icon is-empty"><slot name="icon" @slotchange=${this._onCardSlotChange}></slot></span>
+      <span class="content">
+        <span class="title"><slot></slot></span>
+        <span class="description is-empty"><slot name="description" @slotchange=${this._onCardSlotChange}></slot></span>
+      </span>
+      <span class="meta"><slot name="meta"><span class="caret" aria-hidden="true"><i class="ph-bold ph-caret-right"></i></span></slot></span>
+    </button>`;
+      }
       render() {
+          if (this.variant === 'card')
+              return this._renderCard();
           const inner = b `
       <span class="icon"><slot name="icon"></slot></span>
       <span class="content"><slot></slot></span>
@@ -1872,9 +1940,14 @@
   };
   exports.LaListItem.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
+      }
+      /* :host's display would otherwise beat the hidden attribute, so a page
+         that filters its rows (the Documents catalogue's search) can hide one. */
+      :host([hidden]) {
+        display: none;
       }
 
       /* ── Row shell ─────────────────────────────── */
@@ -1978,25 +2051,139 @@
       .actions:empty {
         display: none;
       }
+
+      /* ── Card variant ──────────────────────────────
+         A row that stands on its own, in a grid of its siblings. Everything
+         below is scoped to .card, so a row (the default) draws exactly as it
+         did before the variant existed. */
+      :host([variant='card']) {
+        /* As a grid or flex item, let the card shrink below its title's
+           width, so the title truncates instead of widening the column. */
+        min-width: 0;
+      }
+      button.row.card {
+        gap: var(--la-space-md);
+        height: 100%;
+        padding: var(--la-space-md) var(--la-space-lg);
+        border: none;
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg);
+        box-shadow: var(--la-shadow-md);
+        transition: box-shadow var(--dur-base) var(--ease);
+      }
+      /* The lift is a card's hover; the row's fill would fight it. */
+      button.row.card::before {
+        display: none;
+      }
+      button.row.card:hover,
+      button.row.card:focus-visible {
+        box-shadow: var(--la-shadow-card);
+      }
+      /* Cards sit apart, so the ring goes outside, as la-document-item's
+         does; a row's sits inside because rows touch. */
+      button.row.card:focus-visible {
+        outline-offset: var(--la-focus-ring-offset);
+      }
+
+      /* Leading tile: a glyph on a muted square, or a picture filling it. */
+      .card .icon {
+        width: 32px;
+        height: 32px;
+        box-sizing: border-box;
+        overflow: hidden;
+        background: var(--la-color-bg-muted);
+        color: var(--la-color-text-secondary);
+        font-size: var(--la-font-size-xl);
+      }
+      .card .icon.is-empty {
+        display: none;
+      }
+      .card .icon ::slotted(img) {
+        display: block;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+
+      /* Title and one line, each cut short rather than wrapping, so cards
+         side by side keep one height. */
+      .card .title,
+      .card .description {
+        display: block;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      .card .title {
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-medium);
+        color: var(--la-color-text);
+      }
+      .card .description {
+        margin-top: var(--la-space-3xs);
+        font-size: var(--la-font-size-sm);
+        color: var(--la-color-text-muted);
+      }
+      .card .description.is-empty {
+        display: none;
+      }
+
+      /* Trailing: the caret, or what the meta slot holds in its place. */
+      .card .meta {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-sm);
+      }
+      .card .caret {
+        display: inline-flex;
+        font-size: var(--la-font-size-lg);
+        color: var(--la-color-text-faint);
+      }
+
+      /* Quiet: not ready yet, so it steps back, and still opens. */
+      :host([quiet]) .card .title {
+        color: var(--la-color-text-secondary);
+      }
+      :host([quiet]) .card .icon:not(.is-picture) {
+        background: transparent;
+        border: 1px dashed var(--la-color-border);
+        color: var(--la-color-text-faint);
+      }
+      :host([quiet]) .card .icon.is-picture ::slotted(img) {
+        opacity: 0.45;
+        filter: grayscale(1);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        button.row.card {
+          transition: none;
+        }
+      }
     `,
   ];
-  __decorate$1J([
+  __decorate$1K([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "error", void 0);
-  __decorate$1J([
+  __decorate$1K([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "clickable", void 0);
-  exports.LaListItem = __decorate$1J([
-      t$1('la-list-item')
+  __decorate$1K([
+      n({ reflect: true })
+  ], exports.LaListItem.prototype, "variant", void 0);
+  __decorate$1K([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaListItem.prototype, "quiet", void 0);
+  exports.LaListItem = __decorate$1K([
+      t$2('la-list-item')
   ], exports.LaListItem);
 
-  var __decorate$1I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaCheckbox = class LaCheckbox extends i$2 {
+  exports.LaCheckbox = class LaCheckbox extends i$3 {
       constructor() {
           super(...arguments);
           this.checked = false;
@@ -2034,7 +2221,7 @@
   };
   exports.LaCheckbox.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         vertical-align: middle;
@@ -2096,26 +2283,26 @@
       }
     `,
   ];
-  __decorate$1I([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "checked", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "indeterminate", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "disabled", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n()
   ], exports.LaCheckbox.prototype, "label", void 0);
-  __decorate$1I([
+  __decorate$1J([
       e$2('input')
   ], exports.LaCheckbox.prototype, "input", void 0);
-  exports.LaCheckbox = __decorate$1I([
-      t$1('la-checkbox')
+  exports.LaCheckbox = __decorate$1J([
+      t$2('la-checkbox')
   ], exports.LaCheckbox);
 
-  var __decorate$1H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2137,7 +2324,7 @@
    * Sizing (32/18/14 px) is hardcoded for v1 since there's only one size.
    * If a sm / lg variant lands, graduate to a --la-switch-* token family.
    */
-  exports.LaSwitch = class LaSwitch extends i$2 {
+  exports.LaSwitch = class LaSwitch extends i$3 {
       constructor() {
           super(...arguments);
           this.checked = false;
@@ -2173,7 +2360,7 @@
   };
   exports.LaSwitch.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         vertical-align: middle;
@@ -2251,27 +2438,27 @@
       }
     `,
   ];
-  __decorate$1H([
+  __decorate$1I([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "checked", void 0);
-  __decorate$1H([
+  __decorate$1I([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "disabled", void 0);
-  __decorate$1H([
+  __decorate$1I([
       n()
   ], exports.LaSwitch.prototype, "label", void 0);
-  exports.LaSwitch = __decorate$1H([
-      t$1('la-switch')
+  exports.LaSwitch = __decorate$1I([
+      t$2('la-switch')
   ], exports.LaSwitch);
 
-  var __decorate$1G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   // filled=true: checked state uses success-surface fill instead of primary border
-  exports.LaChoice = class LaChoice extends i$2 {
+  exports.LaChoice = class LaChoice extends i$3 {
       constructor() {
           super(...arguments);
           this.variant = 'default';
@@ -2330,7 +2517,7 @@
   };
   exports.LaChoice.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         font-size: var(--la-font-size-base);
@@ -2417,26 +2604,26 @@
       }
     `,
   ];
-  __decorate$1G([
+  __decorate$1H([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "variant", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "checked", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "invalid", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "filled", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
-  exports.LaChoice = __decorate$1G([
-      t$1('la-choice')
+  exports.LaChoice = __decorate$1H([
+      t$2('la-choice')
   ], exports.LaChoice);
 
-  var __decorate$1F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2453,7 +2640,7 @@
    * component emits no events. Used by the unlock flow; reusable for any
    * linear multi-step flow (onboarding, KYC, sign-up).
    */
-  exports.LaStepper = class LaStepper extends i$2 {
+  exports.LaStepper = class LaStepper extends i$3 {
       constructor() {
           super(...arguments);
           /**
@@ -2492,7 +2679,7 @@
   };
   exports.LaStepper.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -2553,14 +2740,14 @@
       }
     `,
   ];
-  __decorate$1F([
+  __decorate$1G([
       n({ type: Array })
   ], exports.LaStepper.prototype, "steps", void 0);
-  exports.LaStepper = __decorate$1F([
-      t$1('la-stepper')
+  exports.LaStepper = __decorate$1G([
+      t$2('la-stepper')
   ], exports.LaStepper);
 
-  var __decorate$1E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2583,7 +2770,7 @@
    * Centre content: pass `label` / `sublabel`, or slot arbitrary markup (the slot
    * wins when filled).
    */
-  exports.LaStepRing = class LaStepRing extends i$2 {
+  exports.LaStepRing = class LaStepRing extends i$3 {
       constructor() {
           super(...arguments);
           /** Total number of steps in the flow. */
@@ -2669,7 +2856,7 @@
   };
   exports.LaStepRing.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         position: relative;
@@ -2722,35 +2909,35 @@
       }
     `,
   ];
-  __decorate$1E([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "total", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "done", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n({ type: Boolean })
   ], exports.LaStepRing.prototype, "current", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "thickness", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "gap", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "corner", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n()
   ], exports.LaStepRing.prototype, "label", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n()
   ], exports.LaStepRing.prototype, "sublabel", void 0);
-  exports.LaStepRing = __decorate$1E([
-      t$1('la-step-ring')
+  exports.LaStepRing = __decorate$1F([
+      t$2('la-step-ring')
   ], exports.LaStepRing);
 
-  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2808,7 +2995,7 @@
    * @prop label   - accessible name; defaults to "Step N: <status>"; "" hides it, for a row that says the state
    * @csspart mark - the circle, or the icon
    */
-  exports.LaStepMarker = class LaStepMarker extends i$2 {
+  exports.LaStepMarker = class LaStepMarker extends i$3 {
       constructor() {
           super(...arguments);
           this.status = 'pending';
@@ -2872,7 +3059,7 @@
   };
   exports.LaStepMarker.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         flex: none;
@@ -2987,23 +3174,23 @@
       }
     `,
   ];
-  __decorate$1D([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "status", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "variant", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Number })
   ], exports.LaStepMarker.prototype, "index", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n()
   ], exports.LaStepMarker.prototype, "label", void 0);
-  exports.LaStepMarker = __decorate$1D([
-      t$1('la-step-marker')
+  exports.LaStepMarker = __decorate$1E([
+      t$2('la-step-marker')
   ], exports.LaStepMarker);
 
-  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3036,7 +3223,7 @@
    *   Invitation accepted
    * </la-activity-item>
    */
-  exports.LaActivityItem = class LaActivityItem extends i$2 {
+  exports.LaActivityItem = class LaActivityItem extends i$3 {
       constructor() {
           super(...arguments);
           this.time = '';
@@ -3058,7 +3245,7 @@
   };
   exports.LaActivityItem.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         align-items: flex-start;
@@ -3141,23 +3328,23 @@
       }
     `,
   ];
-  __decorate$1C([
+  __decorate$1D([
       n()
   ], exports.LaActivityItem.prototype, "time", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaActivityItem.prototype, "last", void 0);
-  exports.LaActivityItem = __decorate$1C([
-      t$1('la-activity-item')
+  exports.LaActivityItem = __decorate$1D([
+      t$2('la-activity-item')
   ], exports.LaActivityItem);
 
-  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaTextarea = class LaTextarea extends i$2 {
+  exports.LaTextarea = class LaTextarea extends i$3 {
       constructor() {
           super(...arguments);
           this._inputId = `la-textarea-${Math.random().toString(36).slice(2, 8)}`;
@@ -3261,7 +3448,7 @@
   };
   exports.LaTextarea.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -3335,53 +3522,53 @@
       }
     `,
   ];
-  __decorate$1B([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "name", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "placeholder", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "value", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "label", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n()
   ], exports.LaTextarea.prototype, "hint", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "required", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "disabled", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "error", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "rows", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Number, attribute: 'min-rows' })
   ], exports.LaTextarea.prototype, "minRows", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Number, attribute: 'max-rows' })
   ], exports.LaTextarea.prototype, "maxRows", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "maxlength", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaTextarea.prototype, "showCount", void 0);
-  __decorate$1B([
+  __decorate$1C([
       e$2('textarea')
   ], exports.LaTextarea.prototype, "_textarea", void 0);
-  exports.LaTextarea = __decorate$1B([
-      t$1('la-textarea')
+  exports.LaTextarea = __decorate$1C([
+      t$2('la-textarea')
   ], exports.LaTextarea);
 
-  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3416,7 +3603,7 @@
    *   .stamps=${[{date:'14 Apr 2026 · 09:47 AM MT', user:'Jordan Pratt'}]}
    * ></la-step-signoff>
    */
-  exports.LaStepSignoff = class LaStepSignoff extends i$2 {
+  exports.LaStepSignoff = class LaStepSignoff extends i$3 {
       constructor() {
           super(...arguments);
           this.signed = false;
@@ -3560,7 +3747,7 @@
   };
   exports.LaStepSignoff.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -3679,35 +3866,35 @@
       }
     `,
   ];
-  __decorate$1A([
+  __decorate$1B([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "signed", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n({ attribute: false })
   ], exports.LaStepSignoff.prototype, "stamps", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n({ type: Boolean })
   ], exports.LaStepSignoff.prototype, "reopenable", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n()
   ], exports.LaStepSignoff.prototype, "label", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "quiet", void 0);
-  __decorate$1A([
+  __decorate$1B([
       r$1()
   ], exports.LaStepSignoff.prototype, "_reopening", void 0);
-  __decorate$1A([
+  __decorate$1B([
       r$1()
   ], exports.LaStepSignoff.prototype, "_historyOpen", void 0);
-  __decorate$1A([
+  __decorate$1B([
       r$1()
   ], exports.LaStepSignoff.prototype, "_reason", void 0);
-  exports.LaStepSignoff = __decorate$1A([
-      t$1('la-step-signoff')
+  exports.LaStepSignoff = __decorate$1B([
+      t$2('la-step-signoff')
   ], exports.LaStepSignoff);
 
-  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3768,7 +3955,7 @@
    * @fires la-disclosure-toggle - {open}, bubbles and composed, when the founder opens or closes it
    *                               (summary press, keyboard or find in page); setting `open` does not fire it
    */
-  exports.LaDisclosure = class LaDisclosure extends i$2 {
+  exports.LaDisclosure = class LaDisclosure extends i$3 {
       constructor() {
           super(...arguments);
           /** Whether it is open. Reflected, so a page can style or query by it. */
@@ -3941,7 +4128,7 @@
   };
   exports.LaDisclosure.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -4187,41 +4374,41 @@
       }
     `,
   ];
-  __decorate$1z([
+  __decorate$1A([
       n({ type: Boolean, reflect: true })
   ], exports.LaDisclosure.prototype, "open", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n()
   ], exports.LaDisclosure.prototype, "summary", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaDisclosure.prototype, "variant", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n({ type: Number, attribute: 'heading-level' })
   ], exports.LaDisclosure.prototype, "headingLevel", void 0);
-  __decorate$1z([
+  __decorate$1A([
       r$1()
   ], exports.LaDisclosure.prototype, "_shown", void 0);
-  __decorate$1z([
+  __decorate$1A([
       r$1()
   ], exports.LaDisclosure.prototype, "_expanded", void 0);
-  __decorate$1z([
+  __decorate$1A([
       r$1()
   ], exports.LaDisclosure.prototype, "_settled", void 0);
-  __decorate$1z([
+  __decorate$1A([
       r$1()
   ], exports.LaDisclosure.prototype, "_hasTrailing", void 0);
-  __decorate$1z([
+  __decorate$1A([
       e$2('details')
   ], exports.LaDisclosure.prototype, "_details", void 0);
-  __decorate$1z([
+  __decorate$1A([
       e$2('.body')
   ], exports.LaDisclosure.prototype, "_body", void 0);
-  exports.LaDisclosure = __decorate$1z([
-      t$1('la-disclosure')
+  exports.LaDisclosure = __decorate$1A([
+      t$2('la-disclosure')
   ], exports.LaDisclosure);
 
-  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4244,7 +4431,7 @@
    * @prop size   - 'sm' | 'default'
    * @prop clickable - render as a button (fires `la-sla-click`) — used by the X2 cell
    */
-  exports.LaSlaPill = class LaSlaPill extends i$2 {
+  exports.LaSlaPill = class LaSlaPill extends i$3 {
       constructor() {
           super(...arguments);
           this.status = 'on';
@@ -4272,7 +4459,7 @@
   };
   exports.LaSlaPill.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
       }
@@ -4323,23 +4510,23 @@
       }
     `,
   ];
-  __decorate$1y([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "status", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n()
   ], exports.LaSlaPill.prototype, "label", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "size", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Boolean })
   ], exports.LaSlaPill.prototype, "clickable", void 0);
-  exports.LaSlaPill = __decorate$1y([
-      t$1('la-sla-pill')
+  exports.LaSlaPill = __decorate$1z([
+      t$2('la-sla-pill')
   ], exports.LaSlaPill);
 
-  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4362,7 +4549,7 @@
    * @prop day   - day number, e.g. "14"
    * @prop month - short month, e.g. "Aug"
    */
-  exports.LaDateTile = class LaDateTile extends i$2 {
+  exports.LaDateTile = class LaDateTile extends i$3 {
       constructor() {
           super(...arguments);
           this.tone = 'default';
@@ -4380,7 +4567,7 @@
   };
   exports.LaDateTile.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
       }
@@ -4438,20 +4625,20 @@
       }
     `,
   ];
-  __decorate$1x([
+  __decorate$1y([
       n({ reflect: true })
   ], exports.LaDateTile.prototype, "tone", void 0);
-  __decorate$1x([
+  __decorate$1y([
       n()
   ], exports.LaDateTile.prototype, "day", void 0);
-  __decorate$1x([
+  __decorate$1y([
       n()
   ], exports.LaDateTile.prototype, "month", void 0);
-  exports.LaDateTile = __decorate$1x([
-      t$1('la-date-tile')
+  exports.LaDateTile = __decorate$1y([
+      t$2('la-date-tile')
   ], exports.LaDateTile);
 
-  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4492,7 +4679,7 @@
    *   .stages=${stages}
    * ></la-sla-strip>
    */
-  exports.LaSlaStrip = class LaSlaStrip extends i$2 {
+  exports.LaSlaStrip = class LaSlaStrip extends i$3 {
       constructor() {
           super(...arguments);
           this.stageIndex = 1;
@@ -4656,7 +4843,7 @@
   };
   exports.LaSlaStrip.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         position: relative;
@@ -4847,48 +5034,48 @@
       }
     `,
   ];
-  __decorate$1w([
+  __decorate$1x([
       n({ type: Number, attribute: 'stage-index' })
   ], exports.LaSlaStrip.prototype, "stageIndex", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ type: Number, attribute: 'stage-total' })
   ], exports.LaSlaStrip.prototype, "stageTotal", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ attribute: 'stage-name' })
   ], exports.LaSlaStrip.prototype, "stageName", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ attribute: 'stage-status' })
   ], exports.LaSlaStrip.prototype, "stageStatus", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ attribute: 'stage-days-label' })
   ], exports.LaSlaStrip.prototype, "stageDaysLabel", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ type: Number, attribute: 'case-sla-days' })
   ], exports.LaSlaStrip.prototype, "caseSlaDays", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ attribute: 'case-status' })
   ], exports.LaSlaStrip.prototype, "caseStatus", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ attribute: false })
   ], exports.LaSlaStrip.prototype, "stages", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ type: Boolean, reflect: true })
   ], exports.LaSlaStrip.prototype, "open", void 0);
-  __decorate$1w([
+  __decorate$1x([
       r$1()
   ], exports.LaSlaStrip.prototype, "_phase", void 0);
-  exports.LaSlaStrip = __decorate$1w([
-      t$1('la-sla-strip')
+  exports.LaSlaStrip = __decorate$1x([
+      t$2('la-sla-strip')
   ], exports.LaSlaStrip);
 
-  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var LaBandwidthBar_1;
-  exports.LaBandwidthBar = LaBandwidthBar_1 = class LaBandwidthBar extends i$2 {
+  exports.LaBandwidthBar = LaBandwidthBar_1 = class LaBandwidthBar extends i$3 {
       constructor() {
           super(...arguments);
           this.filled = 0;
@@ -4932,7 +5119,7 @@
   exports.LaBandwidthBar.SEGMENTS = 8;
   exports.LaBandwidthBar.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -4984,23 +5171,23 @@
       }
     `,
   ];
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "filled", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n()
   ], exports.LaBandwidthBar.prototype, "label", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "count", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaBandwidthBar.prototype, "showCount", void 0);
-  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1v([
-      t$1('la-bandwidth-bar')
+  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1w([
+      t$2('la-bandwidth-bar')
   ], exports.LaBandwidthBar);
 
-  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5016,7 +5203,7 @@
    * @attr level - '1' | '2' | '3' | '3+' (default '1')
    * @attr size  - 'sm' (24px) | 'default' (32px)
    */
-  exports.LaLevelIndicator = class LaLevelIndicator extends i$2 {
+  exports.LaLevelIndicator = class LaLevelIndicator extends i$3 {
       constructor() {
           super(...arguments);
           this.level = '1';
@@ -5028,7 +5215,7 @@
   };
   exports.LaLevelIndicator.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         flex-shrink: 0;
@@ -5070,17 +5257,17 @@
       :host([level='3+']) .badge { background: var(--la-color-level-3plus); }
     `,
   ];
-  __decorate$1u([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "level", void 0);
-  __decorate$1u([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "size", void 0);
-  exports.LaLevelIndicator = __decorate$1u([
-      t$1('la-level-indicator')
+  exports.LaLevelIndicator = __decorate$1v([
+      t$2('la-level-indicator')
   ], exports.LaLevelIndicator);
 
-  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5098,7 +5285,7 @@
    * @prop segments - DistributionSegment[] (set as a property, not an attribute)
    * @prop height   - bar height in px (default 8)
    */
-  exports.LaDistributionBar = class LaDistributionBar extends i$2 {
+  exports.LaDistributionBar = class LaDistributionBar extends i$3 {
       constructor() {
           super(...arguments);
           this.segments = [];
@@ -5133,7 +5320,7 @@
   };
   exports.LaDistributionBar.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -5156,17 +5343,17 @@
       .seg.r4 { background: var(--la-color-primary); }
     `,
   ];
-  __decorate$1t([
+  __decorate$1u([
       n({ attribute: false })
   ], exports.LaDistributionBar.prototype, "segments", void 0);
-  __decorate$1t([
+  __decorate$1u([
       n({ type: Number })
   ], exports.LaDistributionBar.prototype, "height", void 0);
-  exports.LaDistributionBar = __decorate$1t([
-      t$1('la-distribution-bar')
+  exports.LaDistributionBar = __decorate$1u([
+      t$2('la-distribution-bar')
   ], exports.LaDistributionBar);
 
-  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5220,7 +5407,7 @@
    * @prop size       - default (4px, beside a label in a row) · lg (6px, heading its own panel); --la-progress-height(-lg)
    * @prop variant    - neutral (default) · success · warning · danger; set by the page, never by the value
    */
-  exports.LaProgress = class LaProgress extends i$2 {
+  exports.LaProgress = class LaProgress extends i$3 {
       constructor() {
           super(...arguments);
           /** How far it has got, from 0 to `max`. */
@@ -5269,7 +5456,7 @@
   };
   exports.LaProgress.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -5331,29 +5518,29 @@
       }
     `,
   ];
-  __decorate$1s([
+  __decorate$1t([
       n({ type: Number })
   ], exports.LaProgress.prototype, "value", void 0);
-  __decorate$1s([
+  __decorate$1t([
       n({ type: Number })
   ], exports.LaProgress.prototype, "max", void 0);
-  __decorate$1s([
+  __decorate$1t([
       n()
   ], exports.LaProgress.prototype, "label", void 0);
-  __decorate$1s([
+  __decorate$1t([
       n({ attribute: 'value-text' })
   ], exports.LaProgress.prototype, "valueText", void 0);
-  __decorate$1s([
+  __decorate$1t([
       n({ reflect: true })
   ], exports.LaProgress.prototype, "size", void 0);
-  __decorate$1s([
+  __decorate$1t([
       n({ reflect: true })
   ], exports.LaProgress.prototype, "variant", void 0);
-  exports.LaProgress = __decorate$1s([
-      t$1('la-progress')
+  exports.LaProgress = __decorate$1t([
+      t$2('la-progress')
   ], exports.LaProgress);
 
-  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5387,7 +5574,7 @@
    * choice only once it's selected). la-question's guidance slot is a polite
    * live region, so a screen reader hears it appear.
    */
-  exports.LaGuidance = class LaGuidance extends i$2 {
+  exports.LaGuidance = class LaGuidance extends i$3 {
       constructor() {
           super(...arguments);
           this.label = 'Guidance';
@@ -5399,7 +5586,7 @@
   };
   exports.LaGuidance.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         box-sizing: border-box;
@@ -5430,20 +5617,20 @@
       }
     `,
   ];
-  __decorate$1r([
+  __decorate$1s([
       n()
   ], exports.LaGuidance.prototype, "label", void 0);
-  exports.LaGuidance = __decorate$1r([
-      t$1('la-guidance')
+  exports.LaGuidance = __decorate$1s([
+      t$2('la-guidance')
   ], exports.LaGuidance);
 
-  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaTooltip = class LaTooltip extends i$2 {
+  exports.LaTooltip = class LaTooltip extends i$3 {
       constructor() {
           super(...arguments);
           this.tip = '';
@@ -5473,7 +5660,7 @@
   };
   exports.LaTooltip.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-block;
         position: relative;
@@ -5554,26 +5741,26 @@
       }
     `,
   ];
-  __decorate$1q([
+  __decorate$1r([
       n()
   ], exports.LaTooltip.prototype, "tip", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "position", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "appearance", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ reflect: true })
   ], exports.LaTooltip.prototype, "size", void 0);
-  __decorate$1q([
+  __decorate$1r([
       n({ attribute: 'max-width' })
   ], exports.LaTooltip.prototype, "maxWidth", void 0);
-  exports.LaTooltip = __decorate$1q([
-      t$1('la-tooltip')
+  exports.LaTooltip = __decorate$1r([
+      t$2('la-tooltip')
   ], exports.LaTooltip);
 
-  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5597,7 +5784,7 @@
    * @csspart segment - the segment's surface
    * @csspart label   - the label's wrapper
    */
-  exports.LaSegment = class LaSegment extends i$2 {
+  exports.LaSegment = class LaSegment extends i$3 {
       constructor() {
           super(...arguments);
           this.value = '';
@@ -5613,7 +5800,7 @@
   };
   exports.LaSegment.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         flex: none;
@@ -5709,20 +5896,20 @@
       }
     `,
   ];
-  __decorate$1p([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaSegment.prototype, "value", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSegment.prototype, "checked", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSegment.prototype, "disabled", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaSegment.prototype, "hideLabel", void 0);
-  exports.LaSegment = __decorate$1p([
-      t$1('la-segment')
+  exports.LaSegment = __decorate$1q([
+      t$2('la-segment')
   ], exports.LaSegment);
   /**
    * la-segmented: pick one of two to five short options, in a row. An input,
@@ -5780,7 +5967,7 @@
    * @csspart track - the muted rail that holds the segments
    * @fires la-change - {value} when someone picks a different segment; not when `value` is set from script
    */
-  exports.LaSegmented = class LaSegmented extends i$2 {
+  exports.LaSegmented = class LaSegmented extends i$3 {
       constructor() {
           super(...arguments);
           this.value = '';
@@ -5905,7 +6092,7 @@
   };
   exports.LaSegmented.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-block;
         max-width: 100%;
@@ -5973,35 +6160,35 @@
       }
     `,
   ];
-  __decorate$1p([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaSegmented.prototype, "value", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n()
   ], exports.LaSegmented.prototype, "label", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaSegmented.prototype, "size", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ reflect: true })
   ], exports.LaSegmented.prototype, "layout", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ type: Boolean, reflect: true })
   ], exports.LaSegmented.prototype, "disabled", void 0);
-  __decorate$1p([
+  __decorate$1q([
       n({ attribute: 'disabled-message' })
   ], exports.LaSegmented.prototype, "disabledMessage", void 0);
-  exports.LaSegmented = __decorate$1p([
-      t$1('la-segmented')
+  exports.LaSegmented = __decorate$1q([
+      t$2('la-segmented')
   ], exports.LaSegmented);
 
-  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaInput = class LaInput extends i$2 {
+  exports.LaInput = class LaInput extends i$3 {
       constructor() {
           super(...arguments);
           this._inputId = `la-input-${Math.random().toString(36).slice(2, 8)}`;
@@ -6087,7 +6274,7 @@
   };
   exports.LaInput.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -6212,65 +6399,65 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1o([
+  __decorate$1p([
       n({ reflect: true })
   ], exports.LaInput.prototype, "type", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "name", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "placeholder", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ reflect: true })
   ], exports.LaInput.prototype, "inputmode", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "autocomplete", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ attribute: 'aria-label' })
   ], exports.LaInput.prototype, "ariaLabel", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "value", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "label", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n()
   ], exports.LaInput.prototype, "hint", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "required", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ reflect: true })
   ], exports.LaInput.prototype, "size", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "optional", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "disabled", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean, reflect: true })
   ], exports.LaInput.prototype, "error", void 0);
-  __decorate$1o([
+  __decorate$1p([
       n({ type: Boolean })
   ], exports.LaInput.prototype, "reveal", void 0);
-  __decorate$1o([
+  __decorate$1p([
       r$1()
   ], exports.LaInput.prototype, "_hasIconLeft", void 0);
-  __decorate$1o([
+  __decorate$1p([
       r$1()
   ], exports.LaInput.prototype, "_hasIconRight", void 0);
-  __decorate$1o([
+  __decorate$1p([
       r$1()
   ], exports.LaInput.prototype, "_shown", void 0);
-  exports.LaInput = __decorate$1o([
-      t$1('la-input')
+  exports.LaInput = __decorate$1p([
+      t$2('la-input')
   ], exports.LaInput);
 
-  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6283,7 +6470,7 @@
    * can compose it as its text-entry surface, while a date range can compose two
    * instances and own start/end validation.
    */
-  exports.LaDateInput = class LaDateInput extends i$2 {
+  exports.LaDateInput = class LaDateInput extends i$3 {
       constructor() {
           super(...arguments);
           this._dateValue = '';
@@ -6521,7 +6708,7 @@
   };
   exports.LaDateInput.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host { display: block; }
       fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
       legend {
@@ -6606,56 +6793,56 @@
       :host([disabled]) { opacity: 0.4; }
     `,
   ];
-  __decorate$1n([
+  __decorate$1o([
       n({ attribute: 'value' })
   ], exports.LaDateInput.prototype, "_dateValue", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "locale", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "label", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "hint", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "min", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n()
   ], exports.LaDateInput.prototype, "max", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ attribute: 'aria-label' })
   ], exports.LaDateInput.prototype, "ariaLabel", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "required", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean })
   ], exports.LaDateInput.prototype, "optional", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "disabled", void 0);
-  __decorate$1n([
+  __decorate$1o([
       n({ type: Boolean, reflect: true })
   ], exports.LaDateInput.prototype, "error", void 0);
-  __decorate$1n([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_month", void 0);
-  __decorate$1n([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_day", void 0);
-  __decorate$1n([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_year", void 0);
-  __decorate$1n([
+  __decorate$1o([
       r$1()
   ], exports.LaDateInput.prototype, "_message", void 0);
-  exports.LaDateInput = __decorate$1n([
-      t$1('la-date-input')
+  exports.LaDateInput = __decorate$1o([
+      t$2('la-date-input')
   ], exports.LaDateInput);
 
-  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6669,7 +6856,7 @@
    * DOM-focused element. tabindex=-1 keeps options out of the document tab
    * order; la-select calls .focus() programmatically as the user navigates.
    */
-  exports.LaOption = class LaOption extends i$2 {
+  exports.LaOption = class LaOption extends i$3 {
       constructor() {
           super(...arguments);
           /** Required — written into la-select.value when this option is chosen. */
@@ -6720,7 +6907,7 @@
   };
   exports.LaOption.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         border-radius: var(--la-radius-sm);
@@ -6781,23 +6968,23 @@
       }
     `,
   ];
-  __decorate$1m([
+  __decorate$1n([
       n({ reflect: true })
   ], exports.LaOption.prototype, "value", void 0);
-  __decorate$1m([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "disabled", void 0);
-  __decorate$1m([
+  __decorate$1n([
       r$1()
   ], exports.LaOption.prototype, "_hasCount", void 0);
-  __decorate$1m([
+  __decorate$1n([
       n({ type: Boolean, reflect: true })
   ], exports.LaOption.prototype, "selected", void 0);
-  exports.LaOption = __decorate$1m([
-      t$1('la-option')
+  exports.LaOption = __decorate$1n([
+      t$2('la-option')
   ], exports.LaOption);
 
-  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -6815,7 +7002,7 @@
    * option. Escape returns focus to the trigger; Tab closes and lets focus
    * proceed naturally.
    */
-  exports.LaSelect = class LaSelect extends i$2 {
+  exports.LaSelect = class LaSelect extends i$3 {
       constructor() {
           super(...arguments);
           this._id = `la-select-${Math.random().toString(36).slice(2, 8)}`;
@@ -7204,7 +7391,7 @@
   };
   exports.LaSelect.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         position: relative;
@@ -7367,47 +7554,47 @@
       :host([size='sm']) label, :host([size='sm']) .hint { font-size: var(--la-font-size-sm); }
     `,
   ];
-  __decorate$1l([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "name", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "value", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "placeholder", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "label", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n()
   ], exports.LaSelect.prototype, "hint", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "required", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n({ reflect: true })
   ], exports.LaSelect.prototype, "size", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "disabled", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "error", void 0);
-  __decorate$1l([
+  __decorate$1m([
       n({ type: Boolean, reflect: true })
   ], exports.LaSelect.prototype, "open", void 0);
-  __decorate$1l([
+  __decorate$1m([
       r$1()
   ], exports.LaSelect.prototype, "_origin", void 0);
-  __decorate$1l([
+  __decorate$1m([
       r$1()
   ], exports.LaSelect.prototype, "_phase", void 0);
-  exports.LaSelect = __decorate$1l([
-      t$1('la-select')
+  exports.LaSelect = __decorate$1m([
+      t$2('la-select')
   ], exports.LaSelect);
 
-  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -7446,7 +7633,7 @@
    *   options="California,New Jersey,Texas,New York,Florida,Illinois,Georgia"
    *   selected="California,New Jersey,Texas"></la-multi-select>
    */
-  exports.LaMultiSelect = class LaMultiSelect extends i$2 {
+  exports.LaMultiSelect = class LaMultiSelect extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -7598,7 +7785,7 @@
   };
   exports.LaMultiSelect.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -7760,56 +7947,56 @@
       }
     `,
   ];
-  __decorate$1k([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "label", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "hint", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "name", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n()
   ], exports.LaMultiSelect.prototype, "placeholder", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n({ converter: csv })
   ], exports.LaMultiSelect.prototype, "options", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n({ converter: csv, reflect: true })
   ], exports.LaMultiSelect.prototype, "selected", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n({ type: Number, attribute: 'max-suggestions' })
   ], exports.LaMultiSelect.prototype, "maxSuggestions", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n({ type: Boolean, attribute: 'allow-custom' })
   ], exports.LaMultiSelect.prototype, "allowCustom", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "disabled", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "required", void 0);
-  __decorate$1k([
+  __decorate$1l([
       n({ type: Boolean, reflect: true })
   ], exports.LaMultiSelect.prototype, "error", void 0);
-  __decorate$1k([
+  __decorate$1l([
       r$1()
   ], exports.LaMultiSelect.prototype, "_query", void 0);
-  __decorate$1k([
+  __decorate$1l([
       e$2('input')
   ], exports.LaMultiSelect.prototype, "_input", void 0);
-  exports.LaMultiSelect = __decorate$1k([
-      t$1('la-multi-select')
+  exports.LaMultiSelect = __decorate$1l([
+      t$2('la-multi-select')
   ], exports.LaMultiSelect);
 
-  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaAlert = class LaAlert extends i$2 {
+  exports.LaAlert = class LaAlert extends i$3 {
       constructor() {
           super(...arguments);
           this.variant = 'info';
@@ -7825,7 +8012,7 @@
   };
   exports.LaAlert.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         container-type: inline-size;
@@ -7877,20 +8064,20 @@
       }
     `,
   ];
-  __decorate$1j([
+  __decorate$1k([
       n({ reflect: true })
   ], exports.LaAlert.prototype, "variant", void 0);
-  exports.LaAlert = __decorate$1j([
-      t$1('la-alert')
+  exports.LaAlert = __decorate$1k([
+      t$2('la-alert')
   ], exports.LaAlert);
 
-  var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaToast = class LaToast extends i$2 {
+  exports.LaToast = class LaToast extends i$3 {
       constructor() {
           super(...arguments);
           this.variant = 'default';
@@ -7958,7 +8145,7 @@
   };
   exports.LaToast.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -8044,32 +8231,32 @@
       }
     `,
   ];
-  __decorate$1i([
+  __decorate$1j([
       n({ reflect: true })
   ], exports.LaToast.prototype, "variant", void 0);
-  __decorate$1i([
+  __decorate$1j([
       n()
   ], exports.LaToast.prototype, "title", void 0);
-  __decorate$1i([
+  __decorate$1j([
       n()
   ], exports.LaToast.prototype, "message", void 0);
-  __decorate$1i([
+  __decorate$1j([
       n({ type: Boolean, reflect: true })
   ], exports.LaToast.prototype, "open", void 0);
-  __decorate$1i([
+  __decorate$1j([
       n({ type: Number })
   ], exports.LaToast.prototype, "duration", void 0);
-  exports.LaToast = __decorate$1i([
-      t$1('la-toast')
+  exports.LaToast = __decorate$1j([
+      t$2('la-toast')
   ], exports.LaToast);
 
-  var __decorate$1h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaVersionPicker = class LaVersionPicker extends i$2 {
+  exports.LaVersionPicker = class LaVersionPicker extends i$3 {
       constructor() {
           super(...arguments);
           this.versions = [];
@@ -8141,7 +8328,7 @@
   };
   exports.LaVersionPicker.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host { display: inline-block; position: relative; }
 
       .pill {
@@ -8254,27 +8441,27 @@
       }
     `,
   ];
-  __decorate$1h([
+  __decorate$1i([
       n({ type: Array })
   ], exports.LaVersionPicker.prototype, "versions", void 0);
-  __decorate$1h([
+  __decorate$1i([
       n()
   ], exports.LaVersionPicker.prototype, "active", void 0);
-  __decorate$1h([
+  __decorate$1i([
       r$1()
   ], exports.LaVersionPicker.prototype, "_phase", void 0);
-  exports.LaVersionPicker = __decorate$1h([
-      t$1('la-version-picker')
+  exports.LaVersionPicker = __decorate$1i([
+      t$2('la-version-picker')
   ], exports.LaVersionPicker);
 
-  var __decorate$1g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var LaDocumentItem_1;
-  exports.LaDocumentItem = LaDocumentItem_1 = class LaDocumentItem extends i$2 {
+  exports.LaDocumentItem = LaDocumentItem_1 = class LaDocumentItem extends i$3 {
       constructor() {
           super(...arguments);
           this.name = '';
@@ -8469,7 +8656,7 @@
   };
   exports.LaDocumentItem.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -8690,56 +8877,56 @@
       ppt: 'ppt.png', img: 'img.png', video: 'video.png', sound: 'sound.png',
       zip: 'zip.png', folder: 'folder.png', other: 'others.png',
   };
-  __decorate$1g([
+  __decorate$1h([
       n()
   ], exports.LaDocumentItem.prototype, "name", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n()
   ], exports.LaDocumentItem.prototype, "association", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ reflect: true })
   ], exports.LaDocumentItem.prototype, "status", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ reflect: true })
   ], exports.LaDocumentItem.prototype, "variant", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ attribute: 'file-type' })
   ], exports.LaDocumentItem.prototype, "fileType", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ attribute: 'icon-base' })
   ], exports.LaDocumentItem.prototype, "iconBase", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n()
   ], exports.LaDocumentItem.prototype, "error", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ type: Boolean, attribute: 'non-interactive', reflect: true })
   ], exports.LaDocumentItem.prototype, "nonInteractive", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ type: Boolean, reflect: true })
   ], exports.LaDocumentItem.prototype, "dismissible", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ type: Boolean, attribute: 'show-pack-toggle' })
   ], exports.LaDocumentItem.prototype, "showPackToggle", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ type: Boolean, attribute: 'in-default-pack', reflect: true })
   ], exports.LaDocumentItem.prototype, "inDefaultPack", void 0);
-  __decorate$1g([
+  __decorate$1h([
       n({ type: Boolean, reflect: true })
   ], exports.LaDocumentItem.prototype, "locked", void 0);
-  __decorate$1g([
+  __decorate$1h([
       r$1()
   ], exports.LaDocumentItem.prototype, "_iconFailed", void 0);
-  exports.LaDocumentItem = LaDocumentItem_1 = __decorate$1g([
-      t$1('la-document-item')
+  exports.LaDocumentItem = LaDocumentItem_1 = __decorate$1h([
+      t$2('la-document-item')
   ], exports.LaDocumentItem);
 
-  var __decorate$1f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaUploadBox = class LaUploadBox extends i$2 {
+  exports.LaUploadBox = class LaUploadBox extends i$3 {
       constructor() {
           super(...arguments);
           this._inputId = `la-upload-${Math.random().toString(36).slice(2, 8)}`;
@@ -8947,7 +9134,7 @@
   };
   exports.LaUploadBox.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -9124,50 +9311,50 @@
       }
     `,
   ];
-  __decorate$1f([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "label", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "hint", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "accept", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ type: Number, attribute: 'max-size' })
   ], exports.LaUploadBox.prototype, "maxSize", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "compact", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "disabled", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "error", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ type: Boolean, reflect: true })
   ], exports.LaUploadBox.prototype, "processing", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ attribute: 'error-message' })
   ], exports.LaUploadBox.prototype, "errorMessage", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n()
   ], exports.LaUploadBox.prototype, "prompt", void 0);
-  __decorate$1f([
+  __decorate$1g([
       n({ attribute: 'file-name' })
   ], exports.LaUploadBox.prototype, "fileName", void 0);
-  __decorate$1f([
+  __decorate$1g([
       r$1()
   ], exports.LaUploadBox.prototype, "_file", void 0);
-  __decorate$1f([
+  __decorate$1g([
       r$1()
   ], exports.LaUploadBox.prototype, "_dragover", void 0);
-  exports.LaUploadBox = __decorate$1f([
-      t$1('la-upload-box')
+  exports.LaUploadBox = __decorate$1g([
+      t$2('la-upload-box')
   ], exports.LaUploadBox);
 
-  var __decorate$1e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1f = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9185,7 +9372,7 @@
    * layout="stack"             — label fixed-width left column, value flows right.
    *                              Suited for wider surfaces (company manual).
    */
-  exports.LaFieldList = class LaFieldList extends i$2 {
+  exports.LaFieldList = class LaFieldList extends i$3 {
       constructor() {
           super(...arguments);
           /** Rows to render. Each item has a `label` and a `value`. */
@@ -9210,7 +9397,7 @@
   };
   exports.LaFieldList.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -9269,23 +9456,23 @@
       }
     `,
   ];
-  __decorate$1e([
+  __decorate$1f([
       n({ type: Array })
   ], exports.LaFieldList.prototype, "fields", void 0);
-  __decorate$1e([
+  __decorate$1f([
       n({ reflect: true })
   ], exports.LaFieldList.prototype, "layout", void 0);
-  exports.LaFieldList = __decorate$1e([
-      t$1('la-field-list')
+  exports.LaFieldList = __decorate$1f([
+      t$2('la-field-list')
   ], exports.LaFieldList);
 
-  var __decorate$1d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaMenuItem = class LaMenuItem extends i$2 {
+  exports.LaMenuItem = class LaMenuItem extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -9328,7 +9515,7 @@
   };
   exports.LaMenuItem.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -9402,38 +9589,38 @@
       :host([checked]) .tick { display: inline-flex; }
     `,
   ];
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaMenuItem.prototype, "label", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaMenuItem.prototype, "value", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n()
   ], exports.LaMenuItem.prototype, "icon", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ reflect: true })
   ], exports.LaMenuItem.prototype, "variant", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "disabled", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "checked", void 0);
-  __decorate$1d([
+  __decorate$1e([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuItem.prototype, "radio", void 0);
-  exports.LaMenuItem = __decorate$1d([
-      t$1('la-menu-item')
+  exports.LaMenuItem = __decorate$1e([
+      t$2('la-menu-item')
   ], exports.LaMenuItem);
 
-  var __decorate$1c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaMenuToggle = class LaMenuToggle extends i$2 {
+  exports.LaMenuToggle = class LaMenuToggle extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -9494,7 +9681,7 @@
   };
   exports.LaMenuToggle.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -9528,36 +9715,36 @@
       }
     `,
   ];
-  __decorate$1c([
+  __decorate$1d([
       n()
   ], exports.LaMenuToggle.prototype, "label", void 0);
-  __decorate$1c([
+  __decorate$1d([
       n()
   ], exports.LaMenuToggle.prototype, "value", void 0);
-  __decorate$1c([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "checked", void 0);
-  __decorate$1c([
+  __decorate$1d([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenuToggle.prototype, "disabled", void 0);
-  exports.LaMenuToggle = __decorate$1c([
-      t$1('la-menu-toggle')
+  exports.LaMenuToggle = __decorate$1d([
+      t$2('la-menu-toggle')
   ], exports.LaMenuToggle);
 
-  var __decorate$1b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaMenuDivider = class LaMenuDivider extends i$2 {
+  exports.LaMenuDivider = class LaMenuDivider extends i$3 {
       render() {
           return b `<hr role="separator" aria-orientation="horizontal">`;
       }
   };
   exports.LaMenuDivider.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         padding: var(--la-space-xs) 0;
@@ -9569,11 +9756,11 @@
       }
     `,
   ];
-  exports.LaMenuDivider = __decorate$1b([
-      t$1('la-menu-divider')
+  exports.LaMenuDivider = __decorate$1c([
+      t$2('la-menu-divider')
   ], exports.LaMenuDivider);
 
-  var __decorate$1a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9597,7 +9784,7 @@
    * Focus model: Escape closes and returns focus to the trigger. Click-outside
    * closes without restoring focus. Items handle their own focus on Tab.
    */
-  exports.LaMenu = class LaMenu extends i$2 {
+  exports.LaMenu = class LaMenu extends i$3 {
       constructor() {
           super(...arguments);
           /** Accessible label for the trigger button. */
@@ -9728,7 +9915,7 @@
   };
   exports.LaMenu.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-block;
         position: relative;
@@ -9798,29 +9985,29 @@
       }
     `,
   ];
-  __decorate$1a([
+  __decorate$1b([
       n()
   ], exports.LaMenu.prototype, "label", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ reflect: true })
   ], exports.LaMenu.prototype, "origin", void 0);
-  __decorate$1a([
+  __decorate$1b([
       n({ type: Boolean, reflect: true })
   ], exports.LaMenu.prototype, "open", void 0);
-  __decorate$1a([
+  __decorate$1b([
       e$2('.default-trigger')
   ], exports.LaMenu.prototype, "_defaultTrigger", void 0);
-  __decorate$1a([
+  __decorate$1b([
       e$2('slot[name="trigger"]')
   ], exports.LaMenu.prototype, "_triggerSlot", void 0);
-  __decorate$1a([
+  __decorate$1b([
       r$1()
   ], exports.LaMenu.prototype, "_phase", void 0);
-  exports.LaMenu = __decorate$1a([
-      t$1('la-menu')
+  exports.LaMenu = __decorate$1b([
+      t$2('la-menu')
   ], exports.LaMenu);
 
-  var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -9834,7 +10021,7 @@
           el = el.shadowRoot.activeElement;
       return el instanceof HTMLElement && el !== document.body ? el : undefined;
   }
-  exports.LaModal = class LaModal extends i$2 {
+  exports.LaModal = class LaModal extends i$3 {
       constructor() {
           super(...arguments);
           this.open = false;
@@ -9992,7 +10179,7 @@
   };
   exports.LaModal.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -10170,32 +10357,32 @@
       }
     `,
   ];
-  __decorate$19([
+  __decorate$1a([
       n({ type: Boolean, reflect: true })
   ], exports.LaModal.prototype, "open", void 0);
-  __decorate$19([
+  __decorate$1a([
       n()
   ], exports.LaModal.prototype, "heading", void 0);
-  __decorate$19([
+  __decorate$1a([
       n()
   ], exports.LaModal.prototype, "description", void 0);
-  __decorate$19([
+  __decorate$1a([
       n({ reflect: true })
   ], exports.LaModal.prototype, "size", void 0);
-  __decorate$19([
+  __decorate$1a([
       n({ reflect: true })
   ], exports.LaModal.prototype, "variant", void 0);
-  __decorate$19([
+  __decorate$1a([
       n({ type: Boolean, reflect: true, attribute: 'no-fade' })
   ], exports.LaModal.prototype, "noFade", void 0);
-  __decorate$19([
+  __decorate$1a([
       n({ type: Boolean, attribute: 'no-return-focus' })
   ], exports.LaModal.prototype, "noReturnFocus", void 0);
-  exports.LaModal = __decorate$19([
-      t$1('la-modal')
+  exports.LaModal = __decorate$1a([
+      t$2('la-modal')
   ], exports.LaModal);
 
-  var __decorate$18 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$19 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10216,7 +10403,7 @@
    *   header  — replaces heading-block but the close button always stays
    *   footer  — action row (auto-hidden via :empty)
    */
-  exports.LaDrawer = class LaDrawer extends i$2 {
+  exports.LaDrawer = class LaDrawer extends i$3 {
       constructor() {
           super(...arguments);
           this.open = false;
@@ -10374,7 +10561,7 @@
   };
   exports.LaDrawer.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -10550,35 +10737,35 @@
       }
     `,
   ];
-  __decorate$18([
+  __decorate$19([
       n({ type: Boolean, reflect: true })
   ], exports.LaDrawer.prototype, "open", void 0);
-  __decorate$18([
+  __decorate$19([
       n({ reflect: true })
   ], exports.LaDrawer.prototype, "edge", void 0);
-  __decorate$18([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "size", void 0);
-  __decorate$18([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "heading", void 0);
-  __decorate$18([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "description", void 0);
-  __decorate$18([
+  __decorate$19([
       n()
   ], exports.LaDrawer.prototype, "label", void 0);
-  __decorate$18([
+  __decorate$19([
       n({ type: Boolean, attribute: 'backdrop-dismiss' })
   ], exports.LaDrawer.prototype, "backdropDismiss", void 0);
-  __decorate$18([
+  __decorate$19([
       n({ type: Boolean, attribute: 'no-scroll-lock' })
   ], exports.LaDrawer.prototype, "noScrollLock", void 0);
-  exports.LaDrawer = __decorate$18([
-      t$1('la-drawer')
+  exports.LaDrawer = __decorate$19([
+      t$2('la-drawer')
   ], exports.LaDrawer);
 
-  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$18 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10595,7 +10782,7 @@
    * roving-tabindex pattern (active tab = 0, others = -1) and arrow-key
    * navigation.
    */
-  exports.LaTab = class LaTab extends i$2 {
+  exports.LaTab = class LaTab extends i$3 {
       constructor() {
           super(...arguments);
           /** Identifier matched against la-tabs' `active` and la-tab-panel's `value`. */
@@ -10681,7 +10868,7 @@
   };
   exports.LaTab.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         align-items: center;
@@ -10883,17 +11070,17 @@
       }
     `,
   ];
-  __decorate$17([
+  __decorate$18([
       n({ reflect: true })
   ], exports.LaTab.prototype, "value", void 0);
-  __decorate$17([
+  __decorate$18([
       n({ type: Boolean, reflect: true })
   ], exports.LaTab.prototype, "active", void 0);
-  exports.LaTab = __decorate$17([
-      t$1('la-tab')
+  exports.LaTab = __decorate$18([
+      t$2('la-tab')
   ], exports.LaTab);
 
-  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$17 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10907,7 +11094,7 @@
    * and tabindex="0" so keyboard users can Tab into the panel region itself
    * if it contains no focusable content.
    */
-  exports.LaTabPanel = class LaTabPanel extends i$2 {
+  exports.LaTabPanel = class LaTabPanel extends i$3 {
       constructor() {
           super(...arguments);
           /** Identifier matched against la-tabs' `active` and la-tab's `value`. */
@@ -10926,7 +11113,7 @@
   };
   exports.LaTabPanel.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -10935,14 +11122,14 @@
       }
     `,
   ];
-  __decorate$16([
+  __decorate$17([
       n({ reflect: true })
   ], exports.LaTabPanel.prototype, "value", void 0);
-  exports.LaTabPanel = __decorate$16([
-      t$1('la-tab-panel')
+  exports.LaTabPanel = __decorate$17([
+      t$2('la-tab-panel')
   ], exports.LaTabPanel);
 
-  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$16 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -10964,7 +11151,7 @@
    *   - Listens for `la-tab-activate` bubbles from children; updates `active` and
    *     dispatches `la-change` once per real change.
    */
-  exports.LaTabs = class LaTabs extends i$2 {
+  exports.LaTabs = class LaTabs extends i$3 {
       constructor() {
           super(...arguments);
           /** Currently active tab value — matches a `la-tab[value]` child. Reflected. */
@@ -11177,7 +11364,7 @@
   };
   exports.LaTabs.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -11305,23 +11492,23 @@
       }
     `,
   ];
-  __decorate$15([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "active", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "variant", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ type: Boolean, reflect: true })
   ], exports.LaTabs.prototype, "block", void 0);
-  __decorate$15([
+  __decorate$16([
       n({ reflect: true })
   ], exports.LaTabs.prototype, "size", void 0);
-  exports.LaTabs = __decorate$15([
-      t$1('la-tabs')
+  exports.LaTabs = __decorate$16([
+      t$2('la-tabs')
   ], exports.LaTabs);
 
-  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$15 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11360,7 +11547,7 @@
    *
    * @fires la-sort-change - { column: string, direction: 'asc' | 'desc' }
    */
-  exports.LaTable = class LaTable extends i$2 {
+  exports.LaTable = class LaTable extends i$3 {
       constructor() {
           super(...arguments);
           /** Frameless: no border, no radius. Ask for it instead of overriding the host. */
@@ -11421,7 +11608,7 @@
   };
   exports.LaTable.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         border: 1px solid var(--la-color-border-light);
@@ -11450,14 +11637,14 @@
       }
     `,
   ];
-  __decorate$14([
+  __decorate$15([
       n({ type: Boolean, reflect: true })
   ], exports.LaTable.prototype, "flat", void 0);
-  exports.LaTable = __decorate$14([
-      t$1('la-table')
+  exports.LaTable = __decorate$15([
+      t$2('la-table')
   ], exports.LaTable);
 
-  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$14 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11483,7 +11670,7 @@
    * @prop removable - default true; false renders a read-only token with no ×
    * @fires la-remove - {value, label}
    */
-  exports.LaChip = class LaChip extends i$2 {
+  exports.LaChip = class LaChip extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -11518,7 +11705,7 @@
   };
   exports.LaChip.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         max-width: 100%;
@@ -11574,26 +11761,46 @@
       }
     `,
   ];
-  __decorate$13([
+  __decorate$14([
       n()
   ], exports.LaChip.prototype, "label", void 0);
-  __decorate$13([
+  __decorate$14([
       n({ attribute: 'prefix' })
   ], exports.LaChip.prototype, "prefixText", void 0);
-  __decorate$13([
+  __decorate$14([
       n()
   ], exports.LaChip.prototype, "value", void 0);
-  __decorate$13([
+  __decorate$14([
       n({ type: Boolean, reflect: true, converter: {
               fromAttribute: (v) => v !== 'false',
               toAttribute: (v) => (v ? '' : 'false'),
           } })
   ], exports.LaChip.prototype, "removable", void 0);
-  exports.LaChip = __decorate$13([
-      t$1('la-chip')
+  exports.LaChip = __decorate$14([
+      t$2('la-chip')
   ], exports.LaChip);
 
-  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  const t$1={ATTRIBUTE:1,CHILD:2,PROPERTY:3,BOOLEAN_ATTRIBUTE:4},e$1=t=>(...e)=>({_$litDirective$:t,values:e});let i$2 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
+
+  /**
+   * @license
+   * Copyright 2020 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */const {I:t}=j,i$1=o=>o,r=o=>void 0===o.strings,s=()=>document.createComment(""),v=(o,n,e)=>{const l=o._$AA.parentNode,d=void 0===n?o._$AB:n._$AA;if(void 0===e){const i=l.insertBefore(s(),d),n=l.insertBefore(s(),d);e=new t(i,n,o,o.options);}else {const t=e._$AB.nextSibling,n=e._$AM,c=n!==o;if(c){let t;e._$AQ?.(o),e._$AM=o,void 0!==e._$AP&&(t=o._$AU)!==n._$AU&&e._$AP(t);}if(t!==d||c){let o=e._$AA;for(;o!==t;){const t=i$1(o).nextSibling;i$1(l).insertBefore(o,d),o=t;}}}return e},u$1=(o,t,i=o)=>(o._$AI(t,i),o),m={},p=(o,t=m)=>o._$AH=t,M=o=>o._$AH,h=o=>{o._$AR(),o._$AA.remove();};
+
+  /**
+   * @license
+   * Copyright 2017 Google LLC
+   * SPDX-License-Identifier: BSD-3-Clause
+   */
+  const u=(e,s,t)=>{const r=new Map;for(let l=s;l<=t;l++)r.set(e[l],l);return r},c=e$1(class extends i$2{constructor(e){if(super(e),e.type!==t$1.CHILD)throw Error("repeat() can only be used in text expressions")}dt(e,s,t){let r;void 0===t?t=s:void 0!==s&&(r=s);const l=[],o=[];let i=0;for(const s of e)l[i]=r?r(s,i):i,o[i]=t(s,i),i++;return {values:o,keys:l}}render(e,s,t){return this.dt(e,s,t).values}update(s,[t,r,c]){const d=M(s),{values:p$1,keys:a}=this.dt(t,r,c);if(!Array.isArray(d))return this.ut=a,p$1;const h$1=this.ut??=[],v$1=[];let m,y,x=0,j=d.length-1,k=0,w=p$1.length-1;for(;x<=j&&k<=w;)if(null===d[x])x++;else if(null===d[j])j--;else if(h$1[x]===a[k])v$1[k]=u$1(d[x],p$1[k]),x++,k++;else if(h$1[j]===a[w])v$1[w]=u$1(d[j],p$1[w]),j--,w--;else if(h$1[x]===a[w])v$1[w]=u$1(d[x],p$1[w]),v(s,v$1[w+1],d[x]),x++,w--;else if(h$1[j]===a[k])v$1[k]=u$1(d[j],p$1[k]),v(s,d[x],d[j]),j--,k++;else if(void 0===m&&(m=u(a,k,w),y=u(h$1,x,j)),m.has(h$1[x]))if(m.has(h$1[j])){const e=y.get(a[k]),t=void 0!==e?d[e]:null;if(null===t){const e=v(s,d[x]);u$1(e,p$1[k]),v$1[k]=e;}else v$1[k]=u$1(t,p$1[k]),v(s,d[x],t),d[e]=null;k++;}else h(d[j]),j--;else h(d[x]),x++;for(;k<=w;){const e=v(s,v$1[w+1]);u$1(e,p$1[k]),v$1[k++]=e;}for(;x<=j;){const e=d[x++];null!==e&&h(e);}return this.ut=a,p(s,v$1),E}});
+
+  var __decorate$13 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11616,7 +11823,7 @@
    * @prop noun      - optional word after the range ("Showing 1–20 of 45 documents")
    * @fires la-page-change - {page, from, to} (from/to 0-based, half-open, for slicing)
    */
-  exports.LaPagination = class LaPagination extends i$2 {
+  exports.LaPagination = class LaPagination extends i$3 {
       constructor() {
           super(...arguments);
           this.total = 0;
@@ -11624,6 +11831,11 @@
           this.page = 1;
           this.noun = '';
           this.single = true;
+          /* Focus stays with the control the person pressed. Page buttons are keyed
+             by page, so a pressed number keeps focus as the window shifts round it;
+             an arrow that ends up disabled hands focus to the other arrow, as
+             Carbon's pagination does, rather than dropping it to the page. */
+          this._arrow = null;
       }
       get pages() {
           return Math.max(1, Math.ceil(this.total / Math.max(1, this.pageSize)));
@@ -11635,10 +11847,20 @@
               this.page = 1;
           this.single = this.pages <= 1;
       }
-      _go(p) {
+      updated() {
+          const a = this._arrow;
+          this._arrow = null;
+          if (!a)
+              return;
+          const atEnd = a === 'prev' ? this.page === 1 : this.page === this.pages;
+          if (atEnd)
+              this.renderRoot.querySelector(a === 'prev' ? '.pg.next' : '.pg.prev')?.focus();
+      }
+      _go(p, arrow = null) {
           const next = Math.min(this.pages, Math.max(1, p));
           if (next === this.page)
               return;
+          this._arrow = arrow;
           this.page = next;
           const from = (next - 1) * this.pageSize;
           this.dispatchEvent(new CustomEvent('la-page-change', {
@@ -11665,16 +11887,16 @@
       ${iconStyles}
       <span class="range">Showing ${from}–${to} of ${this.total}${this.noun ? ` ${this.noun}` : ''}</span>
       <nav class="pager" aria-label="Pages">
-        <button type="button" class="pg" aria-label="Previous page" ?disabled=${this.page === 1} @click=${() => this._go(this.page - 1)}>
+        <button type="button" class="pg prev" aria-label="Previous page" ?disabled=${this.page === 1} @click=${() => this._go(this.page - 1, 'prev')}>
           <i class="ph-bold ph-caret-left" aria-hidden="true"></i>
         </button>
-        ${win.map((p, i) => b `
+        ${c(win, (p) => p, (p, i) => b `
           ${i && p - win[i - 1] > 1 ? b `<span class="ell" aria-hidden="true">…</span>` : A}
           <button type="button" class="pg" aria-label=${`Page ${p}`}
             aria-current=${p === this.page ? 'page' : A}
             @click=${() => this._go(p)}>${p}</button>
         `)}
-        <button type="button" class="pg" aria-label="Next page" ?disabled=${this.page === this.pages} @click=${() => this._go(this.page + 1)}>
+        <button type="button" class="pg next" aria-label="Next page" ?disabled=${this.page === this.pages} @click=${() => this._go(this.page + 1, 'next')}>
           <i class="ph-bold ph-caret-right" aria-hidden="true"></i>
         </button>
       </nav>
@@ -11683,7 +11905,7 @@
   };
   exports.LaPagination.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         align-items: center;
@@ -11724,26 +11946,26 @@
       @media (prefers-reduced-motion: reduce) { .pg { transition: none; } }
     `,
   ];
-  __decorate$12([
+  __decorate$13([
       n({ type: Number })
   ], exports.LaPagination.prototype, "total", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Number, attribute: 'page-size' })
   ], exports.LaPagination.prototype, "pageSize", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Number })
   ], exports.LaPagination.prototype, "page", void 0);
-  __decorate$12([
+  __decorate$13([
       n()
   ], exports.LaPagination.prototype, "noun", void 0);
-  __decorate$12([
+  __decorate$13([
       n({ type: Boolean, reflect: true })
   ], exports.LaPagination.prototype, "single", void 0);
-  exports.LaPagination = __decorate$12([
-      t$1('la-pagination')
+  exports.LaPagination = __decorate$13([
+      t$2('la-pagination')
   ], exports.LaPagination);
 
-  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$12 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11769,10 +11991,13 @@
    * @prop icon    - Phosphor classes for the glyph ("ph-bold ph-buildings")
    * @prop hue     - legal-area hue for the disc; empty = neutral pair (All Areas, Miscellaneous)
    * @prop pressed - reflected; set by the strip in single-selection mode
+   * @prop selectable - whether the tile has a pressed state at all; the strip
+   *                   clears it when it doesn't select, so a tile that only
+   *                   acts isn't announced as an unpressed toggle
    * @prop quiet   - steps back (nothing here for the current scope)
    * @fires la-tile-press - {value, label}
    */
-  exports.LaTile = class LaTile extends i$2 {
+  exports.LaTile = class LaTile extends i$3 {
       constructor() {
           super(...arguments);
           this.value = '';
@@ -11781,6 +12006,7 @@
           this.icon = '';
           this.hue = '';
           this.pressed = false;
+          this.selectable = true;
           this.quiet = false;
           this._hasSlot = false;
       }
@@ -11798,7 +12024,7 @@
       render() {
           return b `
       ${iconStyles}
-      <button type="button" class="tile" aria-pressed=${String(this.pressed)} @click=${this._press}>
+      <button type="button" class="tile" aria-pressed=${this.selectable ? String(this.pressed) : A} @click=${this._press}>
         <span class="disc ${this._hasSlot ? 'has-slot' : ''}" aria-hidden="true">
           <slot name="icon" @slotchange=${this._onSlot}></slot>
           ${!this._hasSlot && this.icon ? b `<i class=${this.icon}></i>` : A}
@@ -11813,7 +12039,7 @@
   };
   exports.LaTile.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         position: relative;
@@ -11898,32 +12124,35 @@
       @media (prefers-reduced-motion: reduce) { .tile { transition: none; } }
     `,
   ];
-  __decorate$11([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "value", void 0);
-  __decorate$11([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "label", void 0);
-  __decorate$11([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "sublabel", void 0);
-  __decorate$11([
+  __decorate$12([
       n()
   ], exports.LaTile.prototype, "icon", void 0);
-  __decorate$11([
+  __decorate$12([
       n({ reflect: true })
   ], exports.LaTile.prototype, "hue", void 0);
-  __decorate$11([
+  __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaTile.prototype, "pressed", void 0);
-  __decorate$11([
+  __decorate$12([
+      n({ type: Boolean })
+  ], exports.LaTile.prototype, "selectable", void 0);
+  __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaTile.prototype, "quiet", void 0);
-  exports.LaTile = __decorate$11([
-      t$1('la-tile')
+  exports.LaTile = __decorate$12([
+      t$2('la-tile')
   ], exports.LaTile);
 
-  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$11 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -11950,7 +12179,7 @@
    *                   'none': tiles fire la-tile-press and the host decides (navigation tiles)
    * @fires la-tile-change - {value, label} after a press in single mode
    */
-  exports.LaTileStrip = class LaTileStrip extends i$2 {
+  exports.LaTileStrip = class LaTileStrip extends i$3 {
       constructor() {
           super(...arguments);
           this.value = '';
@@ -12002,9 +12231,11 @@
           });
       }
       _paint() {
-          if (this.selection !== 'single')
-              return;
-          this._tiles().forEach((t) => { t.pressed = t.value === this.value; });
+          const single = this.selection === 'single';
+          this._tiles().forEach((t) => {
+              t.selectable = single;
+              t.pressed = single && t.value === this.value;
+          });
       }
       _onSlot() {
           this._paint();
@@ -12016,7 +12247,7 @@
   };
   exports.LaTileStrip.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         container-type: inline-size;
@@ -12029,23 +12260,23 @@
       @container (max-width: 440px) { .grid { grid-template-columns: minmax(0, 1fr); } }
     `,
   ];
-  __decorate$10([
+  __decorate$11([
       n()
   ], exports.LaTileStrip.prototype, "value", void 0);
-  __decorate$10([
+  __decorate$11([
       n({ type: Number })
   ], exports.LaTileStrip.prototype, "columns", void 0);
-  __decorate$10([
+  __decorate$11([
       n({ reflect: true })
   ], exports.LaTileStrip.prototype, "selection", void 0);
-  __decorate$10([
+  __decorate$11([
       e$2('.grid')
   ], exports.LaTileStrip.prototype, "_grid", void 0);
-  exports.LaTileStrip = __decorate$10([
-      t$1('la-tile-strip')
+  exports.LaTileStrip = __decorate$11([
+      t$2('la-tile-strip')
   ], exports.LaTileStrip);
 
-  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$10 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12065,7 +12296,7 @@
   /** The glyph for an area with no identity pair, as LawVault's Miscellaneous. */
   const NEUTRAL_GLYPH = 'ph ph-folders';
   /** A Phosphor weight class: `ph`, `ph-bold`, `ph-fill` and the rest. */
-  const WEIGHT = /(^|\s)ph(-thin|-light|-bold|-fill|-duotone)?(\s|$)/;
+  const WEIGHT$1 = /(^|\s)ph(-thin|-light|-bold|-fill|-duotone)?(\s|$)/;
   /**
    * la-area-icon: a legal area's colour and glyph in a rounded square, the
    * area's 50-weight tint behind its 500-weight glyph. One place for the mark
@@ -12101,7 +12332,7 @@
    *               a bare glyph ("ph-bank") takes the regular weight
    * @prop label - accessible name; unset or "" leaves the icon decorative
    */
-  exports.LaAreaIcon = class LaAreaIcon extends i$2 {
+  exports.LaAreaIcon = class LaAreaIcon extends i$3 {
       constructor() {
           super(...arguments);
           this.area = '';
@@ -12114,7 +12345,7 @@
       get _glyph() {
           const own = this.icon.trim();
           if (own)
-              return WEIGHT.test(own) ? own : `ph ${own}`;
+              return WEIGHT$1.test(own) ? own : `ph ${own}`;
           return Object.prototype.hasOwnProperty.call(AREA_GLYPH, this.area)
               ? AREA_GLYPH[this.area]
               : NEUTRAL_GLYPH;
@@ -12132,7 +12363,7 @@
   };
   exports.LaAreaIcon.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         flex: none;
@@ -12168,29 +12399,29 @@
       :host([area='ip'])          .mark { --_fill: var(--la-area-ip-fg);          --_tint: var(--la-area-ip-bg); }
     `,
   ];
-  __decorate$$([
+  __decorate$10([
       n({ reflect: true })
   ], exports.LaAreaIcon.prototype, "area", void 0);
-  __decorate$$([
+  __decorate$10([
       n({ reflect: true })
   ], exports.LaAreaIcon.prototype, "size", void 0);
-  __decorate$$([
+  __decorate$10([
       n()
   ], exports.LaAreaIcon.prototype, "icon", void 0);
-  __decorate$$([
+  __decorate$10([
       n()
   ], exports.LaAreaIcon.prototype, "label", void 0);
-  exports.LaAreaIcon = __decorate$$([
-      t$1('la-area-icon')
+  exports.LaAreaIcon = __decorate$10([
+      t$2('la-area-icon')
   ], exports.LaAreaIcon);
 
-  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$$ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaDataTable = class LaDataTable extends i$2 {
+  exports.LaDataTable = class LaDataTable extends i$3 {
       constructor() {
           super(...arguments);
           this.columns = [];
@@ -12412,7 +12643,7 @@
   };
   exports.LaDataTable.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         font-family: var(--la-font-family);
@@ -12566,41 +12797,41 @@
       }
     `,
   ];
-  __decorate$_([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "columns", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rows", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "rowKey", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "sort", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ attribute: false })
   ], exports.LaDataTable.prototype, "selected", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "selectable", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ reflect: true })
   ], exports.LaDataTable.prototype, "density", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, attribute: 'sticky-header', reflect: true })
   ], exports.LaDataTable.prototype, "stickyHeader", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, reflect: true })
   ], exports.LaDataTable.prototype, "loading", void 0);
-  __decorate$_([
+  __decorate$$([
       n({ type: Boolean, attribute: 'row-clickable', reflect: true })
   ], exports.LaDataTable.prototype, "rowClickable", void 0);
-  exports.LaDataTable = __decorate$_([
-      t$1('la-data-table')
+  exports.LaDataTable = __decorate$$([
+      t$2('la-data-table')
   ], exports.LaDataTable);
 
-  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$_ = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12616,7 +12847,7 @@
    * @fires la-select - Dispatched on click; detail: { name: string, subtitle: string }
    * @slot trailing - Right-side content (status dots, badges, menus). Empty by default.
    */
-  exports.LaPersonItem = class LaPersonItem extends i$2 {
+  exports.LaPersonItem = class LaPersonItem extends i$3 {
       constructor() {
           super(...arguments);
           this.name = '';
@@ -12664,7 +12895,7 @@
   };
   exports.LaPersonItem.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         border-radius: var(--la-radius-lg);
@@ -12805,20 +13036,20 @@
       }
     `,
   ];
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaPersonItem.prototype, "name", void 0);
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaPersonItem.prototype, "subtitle", void 0);
-  __decorate$Z([
+  __decorate$_([
       n()
   ], exports.LaPersonItem.prototype, "initials", void 0);
-  exports.LaPersonItem = __decorate$Z([
-      t$1('la-person-item')
+  exports.LaPersonItem = __decorate$_([
+      t$2('la-person-item')
   ], exports.LaPersonItem);
 
-  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -12843,7 +13074,7 @@
    *   <la-button slot="footer" variant="ghost" size="sm">Add director</la-button>
    * </la-person-list>
    */
-  exports.LaPersonList = class LaPersonList extends i$2 {
+  exports.LaPersonList = class LaPersonList extends i$3 {
       constructor() {
           super(...arguments);
           this._hasFooter = false;
@@ -12871,7 +13102,7 @@
   };
   exports.LaPersonList.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         flex-direction: column;
@@ -12884,20 +13115,20 @@
       }
     `,
   ];
-  __decorate$Y([
+  __decorate$Z([
       r$1()
   ], exports.LaPersonList.prototype, "_hasFooter", void 0);
-  exports.LaPersonList = __decorate$Y([
-      t$1('la-person-list')
+  exports.LaPersonList = __decorate$Z([
+      t$2('la-person-list')
   ], exports.LaPersonList);
 
-  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaChatMessage = class LaChatMessage extends i$2 {
+  exports.LaChatMessage = class LaChatMessage extends i$3 {
       constructor() {
           super(...arguments);
           /** Sender — determines layout and visual style. */
@@ -13010,7 +13241,7 @@
   };
   exports.LaChatMessage.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -13210,35 +13441,35 @@
       }
     `,
   ];
-  __decorate$X([
+  __decorate$Y([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "sender", void 0);
-  __decorate$X([
+  __decorate$Y([
       n()
   ], exports.LaChatMessage.prototype, "name", void 0);
-  __decorate$X([
+  __decorate$Y([
       n()
   ], exports.LaChatMessage.prototype, "timestamp", void 0);
-  __decorate$X([
+  __decorate$Y([
       n({ attribute: 'timestamp-title' })
   ], exports.LaChatMessage.prototype, "timestampTitle", void 0);
-  __decorate$X([
+  __decorate$Y([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "streaming", void 0);
-  __decorate$X([
+  __decorate$Y([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatMessage.prototype, "typing", void 0);
-  __decorate$X([
+  __decorate$Y([
       n({ reflect: true })
   ], exports.LaChatMessage.prototype, "status", void 0);
-  __decorate$X([
+  __decorate$Y([
       r$1()
   ], exports.LaChatMessage.prototype, "_hasAttachments", void 0);
-  exports.LaChatMessage = __decorate$X([
-      t$1('la-chat-message')
+  exports.LaChatMessage = __decorate$Y([
+      t$2('la-chat-message')
   ], exports.LaChatMessage);
 
-  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$X = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -13255,7 +13486,7 @@
    *   <la-chat-attachment-chip name="Cap Table (as of Jan 2026)" category="Fundraising">
    *   </la-chat-attachment-chip>
    */
-  exports.LaChatAttachmentChip = class LaChatAttachmentChip extends i$2 {
+  exports.LaChatAttachmentChip = class LaChatAttachmentChip extends i$3 {
       constructor() {
           super(...arguments);
           /** Document name displayed in the chip. Truncated with ellipsis if it overflows. */
@@ -13296,7 +13527,7 @@
   };
   exports.LaChatAttachmentChip.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-block;
         max-width: 260px;
@@ -13357,23 +13588,23 @@
 
     `,
   ];
-  __decorate$W([
+  __decorate$X([
       n()
   ], exports.LaChatAttachmentChip.prototype, "name", void 0);
-  __decorate$W([
+  __decorate$X([
       n()
   ], exports.LaChatAttachmentChip.prototype, "category", void 0);
-  exports.LaChatAttachmentChip = __decorate$W([
-      t$1('la-chat-attachment-chip')
+  exports.LaChatAttachmentChip = __decorate$X([
+      t$2('la-chat-attachment-chip')
   ], exports.LaChatAttachmentChip);
 
-  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$W = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaChatInput = class LaChatInput extends i$2 {
+  exports.LaChatInput = class LaChatInput extends i$3 {
       constructor() {
           super(...arguments);
           /** Placeholder text for the textarea. */
@@ -13515,7 +13746,7 @@
   };
   exports.LaChatInput.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -13615,44 +13846,44 @@
       }
     `,
   ];
-  __decorate$V([
+  __decorate$W([
       n()
   ], exports.LaChatInput.prototype, "placeholder", void 0);
-  __decorate$V([
+  __decorate$W([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "disabled", void 0);
-  __decorate$V([
+  __decorate$W([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatInput.prototype, "loading", void 0);
-  __decorate$V([
+  __decorate$W([
       n()
   ], exports.LaChatInput.prototype, "hint", void 0);
-  __decorate$V([
+  __decorate$W([
       n({ type: Array })
   ], exports.LaChatInput.prototype, "files", void 0);
-  __decorate$V([
+  __decorate$W([
       n({ type: Number, attribute: 'max-files' })
   ], exports.LaChatInput.prototype, "maxFiles", void 0);
-  __decorate$V([
+  __decorate$W([
       n({ reflect: true })
   ], exports.LaChatInput.prototype, "variant", void 0);
-  __decorate$V([
+  __decorate$W([
       r$1()
   ], exports.LaChatInput.prototype, "_value", void 0);
-  __decorate$V([
+  __decorate$W([
       e$2('textarea')
   ], exports.LaChatInput.prototype, "_textarea", void 0);
-  exports.LaChatInput = __decorate$V([
-      t$1('la-chat-input')
+  exports.LaChatInput = __decorate$W([
+      t$2('la-chat-input')
   ], exports.LaChatInput);
 
-  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$V = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaChatAttachment = class LaChatAttachment extends i$2 {
+  exports.LaChatAttachment = class LaChatAttachment extends i$3 {
       constructor() {
           super(...arguments);
           /** Document title. */
@@ -13745,7 +13976,7 @@
   };
   exports.LaChatAttachment.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -13869,35 +14100,35 @@
       }
     `,
   ];
-  __decorate$U([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "name", void 0);
-  __decorate$U([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "category", void 0);
-  __decorate$U([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "association", void 0);
-  __decorate$U([
+  __decorate$V([
       n({ reflect: true })
   ], exports.LaChatAttachment.prototype, "status", void 0);
-  __decorate$U([
+  __decorate$V([
       n()
   ], exports.LaChatAttachment.prototype, "href", void 0);
-  __decorate$U([
+  __decorate$V([
       n({ type: Boolean, reflect: true })
   ], exports.LaChatAttachment.prototype, "removable", void 0);
-  exports.LaChatAttachment = __decorate$U([
-      t$1('la-chat-attachment')
+  exports.LaChatAttachment = __decorate$V([
+      t$2('la-chat-attachment')
   ], exports.LaChatAttachment);
 
-  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$U = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaChat = class LaChat extends i$2 {
+  exports.LaChat = class LaChat extends i$3 {
       constructor() {
           super(...arguments);
           /** Message thread. Each object maps to one `la-chat-message`. */
@@ -14021,7 +14252,7 @@
   };
   exports.LaChat.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         flex-direction: column;
@@ -14091,38 +14322,38 @@
       }
     `,
   ];
-  __decorate$T([
+  __decorate$U([
       n({ type: Array })
   ], exports.LaChat.prototype, "messages", void 0);
-  __decorate$T([
+  __decorate$U([
       n()
   ], exports.LaChat.prototype, "placeholder", void 0);
-  __decorate$T([
+  __decorate$U([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "disabled", void 0);
-  __decorate$T([
+  __decorate$U([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "readonly", void 0);
-  __decorate$T([
+  __decorate$U([
       n()
   ], exports.LaChat.prototype, "notice", void 0);
-  __decorate$T([
+  __decorate$U([
       n({ type: Boolean, reflect: true })
   ], exports.LaChat.prototype, "loading", void 0);
-  __decorate$T([
+  __decorate$U([
       n()
   ], exports.LaChat.prototype, "hint", void 0);
-  __decorate$T([
+  __decorate$U([
       n({ attribute: 'empty-message' })
   ], exports.LaChat.prototype, "emptyMessage", void 0);
-  __decorate$T([
+  __decorate$U([
       e$2('.thread')
   ], exports.LaChat.prototype, "_thread", void 0);
-  exports.LaChat = __decorate$T([
-      t$1('la-chat')
+  exports.LaChat = __decorate$U([
+      t$2('la-chat')
   ], exports.LaChat);
 
-  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14145,7 +14376,7 @@
    * @prop parked     - dim + show slotted note instead of data
    * @fires la-tile-click - {module}
    */
-  exports.LaModuleTile = class LaModuleTile extends i$2 {
+  exports.LaModuleTile = class LaModuleTile extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -14200,7 +14431,7 @@
   };
   exports.LaModuleTile.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host { display: block; }
       .tile {
         display: flex;
@@ -14246,44 +14477,44 @@
       :host([parked]) .head i, :host([parked]) .head .label { color: var(--la-color-text-faint); }
     `,
   ];
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "label", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "icon", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "href", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "module", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "count", void 0);
-  __decorate$S([
+  __decorate$T([
       n({ attribute: 'count-label' })
   ], exports.LaModuleTile.prototype, "countLabel", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "sla", void 0);
-  __decorate$S([
+  __decorate$T([
       n({ reflect: true })
   ], exports.LaModuleTile.prototype, "status", void 0);
-  __decorate$S([
+  __decorate$T([
       n()
   ], exports.LaModuleTile.prototype, "insight", void 0);
-  __decorate$S([
+  __decorate$T([
       n({ type: Boolean, reflect: true })
   ], exports.LaModuleTile.prototype, "parked", void 0);
-  __decorate$S([
+  __decorate$T([
       n({ attribute: false })
   ], exports.LaModuleTile.prototype, "pipeline", void 0);
-  exports.LaModuleTile = __decorate$S([
-      t$1('la-module-tile')
+  exports.LaModuleTile = __decorate$T([
+      t$2('la-module-tile')
   ], exports.LaModuleTile);
 
-  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14304,7 +14535,7 @@
    * @prop options - ScopeOption[] (property)
    * @fires la-scope-change - {value, label}
    */
-  exports.LaScopeFilter = class LaScopeFilter extends i$2 {
+  exports.LaScopeFilter = class LaScopeFilter extends i$3 {
       constructor() {
           super(...arguments);
           this.prefixText = 'Viewing';
@@ -14362,7 +14593,7 @@
   };
   exports.LaScopeFilter.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host { display: inline-block; position: relative; }
       details { position: relative; }
       summary {
@@ -14417,20 +14648,20 @@
       .opt i { font-size: 14px; color: var(--la-color-primary); }
     `,
   ];
-  __decorate$R([
+  __decorate$S([
       n({ attribute: 'prefix' })
   ], exports.LaScopeFilter.prototype, "prefixText", void 0);
-  __decorate$R([
+  __decorate$S([
       n()
   ], exports.LaScopeFilter.prototype, "value", void 0);
-  __decorate$R([
+  __decorate$S([
       n({ attribute: false })
   ], exports.LaScopeFilter.prototype, "options", void 0);
-  exports.LaScopeFilter = __decorate$R([
-      t$1('la-scope-filter')
+  exports.LaScopeFilter = __decorate$S([
+      t$2('la-scope-filter')
   ], exports.LaScopeFilter);
 
-  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14445,7 +14676,7 @@
    *
    * @prop days - WeekDay[] (property)
    */
-  exports.LaWeekStrip = class LaWeekStrip extends i$2 {
+  exports.LaWeekStrip = class LaWeekStrip extends i$3 {
       constructor() {
           super(...arguments);
           this.days = [];
@@ -14469,7 +14700,7 @@
   };
   exports.LaWeekStrip.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host { display: block; }
       .strip {
         display: grid;
@@ -14501,14 +14732,14 @@
       @media (max-width: 900px) { .strip { grid-template-columns: 1fr; } }
     `,
   ];
-  __decorate$Q([
+  __decorate$R([
       n({ attribute: false })
   ], exports.LaWeekStrip.prototype, "days", void 0);
-  exports.LaWeekStrip = __decorate$Q([
-      t$1('la-week-strip')
+  exports.LaWeekStrip = __decorate$R([
+      t$2('la-week-strip')
   ], exports.LaWeekStrip);
 
-  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -14561,7 +14792,7 @@
    *   severance package (personalised, ADEA waiver for 40+). Review and approve before sending.
    * </la-ai-insight>
    */
-  exports.LaAiInsight = class LaAiInsight extends i$2 {
+  exports.LaAiInsight = class LaAiInsight extends i$3 {
       constructor() {
           super(...arguments);
           this.headline = '';
@@ -14842,7 +15073,7 @@
   };
   exports.LaAiInsight.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -15049,62 +15280,62 @@
       }
     `,
   ];
-  __decorate$P([
+  __decorate$Q([
       n()
   ], exports.LaAiInsight.prototype, "headline", void 0);
-  __decorate$P([
+  __decorate$Q([
       n()
   ], exports.LaAiInsight.prototype, "attribution", void 0);
-  __decorate$P([
+  __decorate$Q([
       n()
   ], exports.LaAiInsight.prototype, "description", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ reflect: true })
   ], exports.LaAiInsight.prototype, "size", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, reflect: true, attribute: 'no-head' })
   ], exports.LaAiInsight.prototype, "noHead", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "rateable", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Number })
   ], exports.LaAiInsight.prototype, "rating", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, reflect: true, attribute: 'rate-required' })
   ], exports.LaAiInsight.prototype, "rateRequired", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "disagreeable", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ type: Boolean, reflect: true })
   ], exports.LaAiInsight.prototype, "amendable", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ attribute: 'edited-by' })
   ], exports.LaAiInsight.prototype, "editedBy", void 0);
-  __decorate$P([
+  __decorate$Q([
       n({ attribute: 'edited-at' })
   ], exports.LaAiInsight.prototype, "editedAt", void 0);
-  __decorate$P([
+  __decorate$Q([
       r$1()
   ], exports.LaAiInsight.prototype, "_hasActions", void 0);
-  __decorate$P([
+  __decorate$Q([
       r$1()
   ], exports.LaAiInsight.prototype, "_panel", void 0);
-  __decorate$P([
+  __decorate$Q([
       r$1()
   ], exports.LaAiInsight.prototype, "_disagreeReason", void 0);
-  __decorate$P([
+  __decorate$Q([
       r$1()
   ], exports.LaAiInsight.prototype, "_amendDraft", void 0);
-  __decorate$P([
+  __decorate$Q([
       r$1()
   ], exports.LaAiInsight.prototype, "_bodyText", void 0);
-  exports.LaAiInsight = __decorate$P([
-      t$1('la-ai-insight')
+  exports.LaAiInsight = __decorate$Q([
+      t$2('la-ai-insight')
   ], exports.LaAiInsight);
 
-  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15115,7 +15346,7 @@
       L2: 'amber',
       L3: 'red',
   };
-  exports.LaLevelingMatrix = class LaLevelingMatrix extends i$2 {
+  exports.LaLevelingMatrix = class LaLevelingMatrix extends i$3 {
       constructor() {
           super(...arguments);
           this.factors = [];
@@ -15220,7 +15451,7 @@
   };
   exports.LaLevelingMatrix.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -15344,42 +15575,35 @@
       }
     `,
   ];
-  __decorate$O([
+  __decorate$P([
       n({ type: Array })
   ], exports.LaLevelingMatrix.prototype, "factors", void 0);
-  __decorate$O([
+  __decorate$P([
       n({ attribute: 'recommended-level' })
   ], exports.LaLevelingMatrix.prototype, "recommendedLevel", void 0);
-  __decorate$O([
+  __decorate$P([
       n()
   ], exports.LaLevelingMatrix.prototype, "summary", void 0);
-  __decorate$O([
+  __decorate$P([
       n()
   ], exports.LaLevelingMatrix.prototype, "heading", void 0);
-  __decorate$O([
+  __decorate$P([
       n({ type: Boolean })
   ], exports.LaLevelingMatrix.prototype, "rateable", void 0);
-  __decorate$O([
+  __decorate$P([
       n()
   ], exports.LaLevelingMatrix.prototype, "attribution", void 0);
-  exports.LaLevelingMatrix = __decorate$O([
-      t$1('la-leveling-matrix')
+  exports.LaLevelingMatrix = __decorate$P([
+      t$2('la-leveling-matrix')
   ], exports.LaLevelingMatrix);
-
-  /**
-   * @license
-   * Copyright 2017 Google LLC
-   * SPDX-License-Identifier: BSD-3-Clause
-   */
-  const t={ATTRIBUTE:1,PROPERTY:3,BOOLEAN_ATTRIBUTE:4},e$1=t=>(...e)=>({_$litDirective$:t,values:e});let i$1 = class i{constructor(t){}get _$AU(){return this._$AM._$AU}_$AT(t,e,i){this._$Ct=t,this._$AM=e,this._$Ci=i;}_$AS(t,e){return this.update(t,e)}update(t,e){return this.render(...e)}};
 
   /**
    * @license
    * Copyright 2018 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const e=e$1(class extends i$1{constructor(t$1){if(super(t$1),t$1.type!==t.ATTRIBUTE||"class"!==t$1.name||t$1.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter(s=>t[s]).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter(t=>""!==t)));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return E}});
+   */const e=e$1(class extends i$2{constructor(t){if(super(t),t.type!==t$1.ATTRIBUTE||"class"!==t.name||t.strings?.length>2)throw Error("`classMap()` can only be used in the `class` attribute and must be the only part in the attribute.")}render(t){return " "+Object.keys(t).filter(s=>t[s]).join(" ")+" "}update(s,[i]){if(void 0===this.st){this.st=new Set,void 0!==s.strings&&(this.nt=new Set(s.strings.join(" ").split(/\s/).filter(t=>""!==t)));for(const t in i)i[t]&&!this.nt?.has(t)&&this.st.add(t);return this.render(i)}const r=s.element.classList;for(const t of this.st)t in i||(r.remove(t),this.st.delete(t));for(const t in i){const s=!!i[t];s===this.st.has(t)||this.nt?.has(t)||(s?(r.add(t),this.st.add(t)):(r.remove(t),this.st.delete(t)));}return E}});
 
-  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15438,7 +15662,7 @@
    * <la-avatar src="/uploads/me.png" name="Jon"></la-avatar>
    * <la-avatar name="Robert Sands" photo="67" presence="online"></la-avatar>
    */
-  let LaAvatar = LaAvatar_1 = class LaAvatar extends i$2 {
+  let LaAvatar = LaAvatar_1 = class LaAvatar extends i$3 {
       constructor() {
           super(...arguments);
           this.name = '';
@@ -15578,7 +15802,7 @@
   LaAvatar.GENDERS = 'wwwmmmmmmmwmmwmmwwwmmwwmwwmwmmwwmmwwmwmmmmwwwwmmwmmmwwwmwwwmmmmwwwmwmmwmwmwmmwwmmmmmmwmm';
   LaAvatar.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         position: relative;
         display: inline-flex;
@@ -15676,47 +15900,47 @@
       }
     `,
   ];
-  __decorate$N([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "name", void 0);
-  __decorate$N([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "initials", void 0);
-  __decorate$N([
+  __decorate$O([
       n({ reflect: true })
   ], LaAvatar.prototype, "size", void 0);
-  __decorate$N([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "src", void 0);
-  __decorate$N([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "photo", void 0);
-  __decorate$N([
+  __decorate$O([
       n({ type: Boolean, attribute: 'text-only' })
   ], LaAvatar.prototype, "textOnly", void 0);
-  __decorate$N([
+  __decorate$O([
       n({ type: Boolean, reflect: true })
   ], LaAvatar.prototype, "logo", void 0);
-  __decorate$N([
+  __decorate$O([
       n({ reflect: true })
   ], LaAvatar.prototype, "presence", void 0);
-  __decorate$N([
+  __decorate$O([
       n({ attribute: 'asset-base' })
   ], LaAvatar.prototype, "assetBase", void 0);
-  __decorate$N([
+  __decorate$O([
       n()
   ], LaAvatar.prototype, "gender", void 0);
-  __decorate$N([
+  __decorate$O([
       r$1()
   ], LaAvatar.prototype, "_imgFailed", void 0);
-  __decorate$N([
+  __decorate$O([
       r$1()
   ], LaAvatar.prototype, "_imgLoaded", void 0);
-  LaAvatar = LaAvatar_1 = __decorate$N([
-      t$1('la-avatar')
+  LaAvatar = LaAvatar_1 = __decorate$O([
+      t$2('la-avatar')
   ], LaAvatar);
 
-  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -15764,7 +15988,7 @@
    * @prop hide-action      - Suppresses the footer/button entirely.
    * @fires la-select       - {name} when the action button is clicked.
    */
-  exports.LaAssigneeCard = class LaAssigneeCard extends i$2 {
+  exports.LaAssigneeCard = class LaAssigneeCard extends i$3 {
       constructor() {
           super(...arguments);
           this.name = '';
@@ -15883,7 +16107,7 @@
   };
   exports.LaAssigneeCard.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -16017,47 +16241,47 @@
       }
     `,
   ];
-  __decorate$M([
+  __decorate$N([
       n()
   ], exports.LaAssigneeCard.prototype, "name", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ attribute: 'person-role' })
   ], exports.LaAssigneeCard.prototype, "personRole", void 0);
-  __decorate$M([
+  __decorate$N([
       n()
   ], exports.LaAssigneeCard.prototype, "photo", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ type: Object })
   ], exports.LaAssigneeCard.prototype, "bandwidth", void 0);
-  __decorate$M([
+  __decorate$N([
       n()
   ], exports.LaAssigneeCard.prototype, "history", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ type: Array })
   ], exports.LaAssigneeCard.prototype, "flags", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ attribute: 'case-type' })
   ], exports.LaAssigneeCard.prototype, "caseType", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ type: Boolean, attribute: 'ai-recommendation' })
   ], exports.LaAssigneeCard.prototype, "aiRecommendation", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ attribute: 'action-label' })
   ], exports.LaAssigneeCard.prototype, "actionLabel", void 0);
-  __decorate$M([
+  __decorate$N([
       n({ type: Boolean, attribute: 'hide-action' })
   ], exports.LaAssigneeCard.prototype, "hideAction", void 0);
-  exports.LaAssigneeCard = __decorate$M([
-      t$1('la-assignee-card')
+  exports.LaAssigneeCard = __decorate$N([
+      t$2('la-assignee-card')
   ], exports.LaAssigneeCard);
 
-  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaAssigneePicker = class LaAssigneePicker extends i$2 {
+  exports.LaAssigneePicker = class LaAssigneePicker extends i$3 {
       constructor() {
           super(...arguments);
           this.candidates = [];
@@ -16350,7 +16574,7 @@
   };
   exports.LaAssigneePicker.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -16593,44 +16817,44 @@
       }
     `,
   ];
-  __decorate$L([
+  __decorate$M([
       n({ type: Object })
   ], exports.LaAssigneePicker.prototype, "recommended", void 0);
-  __decorate$L([
+  __decorate$M([
       n({ type: Array })
   ], exports.LaAssigneePicker.prototype, "candidates", void 0);
-  __decorate$L([
+  __decorate$M([
       n({ reflect: true })
   ], exports.LaAssigneePicker.prototype, "mode", void 0);
-  __decorate$L([
+  __decorate$M([
       n({ attribute: 'case-type' })
   ], exports.LaAssigneePicker.prototype, "caseType", void 0);
-  __decorate$L([
+  __decorate$M([
       n({ type: Object })
   ], exports.LaAssigneePicker.prototype, "current", void 0);
-  __decorate$L([
+  __decorate$M([
       n({ attribute: 'current-meta' })
   ], exports.LaAssigneePicker.prototype, "currentMeta", void 0);
-  __decorate$L([
+  __decorate$M([
       r$1()
   ], exports.LaAssigneePicker.prototype, "_candidatesOpen", void 0);
-  __decorate$L([
+  __decorate$M([
       r$1()
   ], exports.LaAssigneePicker.prototype, "_selected", void 0);
-  __decorate$L([
+  __decorate$M([
       r$1()
   ], exports.LaAssigneePicker.prototype, "_reason", void 0);
-  exports.LaAssigneePicker = __decorate$L([
-      t$1('la-assignee-picker')
+  exports.LaAssigneePicker = __decorate$M([
+      t$2('la-assignee-picker')
   ], exports.LaAssigneePicker);
 
-  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaPlaybookConfirmModal = class LaPlaybookConfirmModal extends i$2 {
+  exports.LaPlaybookConfirmModal = class LaPlaybookConfirmModal extends i$3 {
       constructor() {
           super(...arguments);
           this.open = false;
@@ -16817,7 +17041,7 @@
   };
   exports.LaPlaybookConfirmModal.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: contents;
       }
@@ -16914,54 +17138,54 @@
       }
     `,
   ];
-  __decorate$K([
+  __decorate$L([
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookConfirmModal.prototype, "open", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ attribute: 'playbook-name' })
   ], exports.LaPlaybookConfirmModal.prototype, "playbookName", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ type: Array })
   ], exports.LaPlaybookConfirmModal.prototype, "facts", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ attribute: 'case-type' })
   ], exports.LaPlaybookConfirmModal.prototype, "caseType", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ attribute: 'accused-role' })
   ], exports.LaPlaybookConfirmModal.prototype, "accusedRole", void 0);
-  __decorate$K([
+  __decorate$L([
       n()
   ], exports.LaPlaybookConfirmModal.prototype, "jurisdiction", void 0);
-  __decorate$K([
+  __decorate$L([
       n()
   ], exports.LaPlaybookConfirmModal.prototype, "level", void 0);
-  __decorate$K([
+  __decorate$L([
       n({ type: Array })
   ], exports.LaPlaybookConfirmModal.prototype, "alternatives", void 0);
-  __decorate$K([
+  __decorate$L([
       r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_view", void 0);
-  __decorate$K([
+  __decorate$L([
       r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_picked", void 0);
-  __decorate$K([
+  __decorate$L([
       r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_reason", void 0);
-  __decorate$K([
+  __decorate$L([
       r$1()
   ], exports.LaPlaybookConfirmModal.prototype, "_reasonError", void 0);
-  exports.LaPlaybookConfirmModal = __decorate$K([
-      t$1('la-playbook-confirm-modal')
+  exports.LaPlaybookConfirmModal = __decorate$L([
+      t$2('la-playbook-confirm-modal')
   ], exports.LaPlaybookConfirmModal);
 
-  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var LaSensitiveFlags_1;
-  exports.LaSensitiveFlags = LaSensitiveFlags_1 = class LaSensitiveFlags extends i$2 {
+  exports.LaSensitiveFlags = LaSensitiveFlags_1 = class LaSensitiveFlags extends i$3 {
       constructor() {
           super(...arguments);
           this.flags = [];
@@ -17103,7 +17327,7 @@
   };
   exports.LaSensitiveFlags.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -17222,26 +17446,26 @@
       }
     `,
   ];
-  __decorate$J([
+  __decorate$K([
       n({ type: Array })
   ], exports.LaSensitiveFlags.prototype, "flags", void 0);
-  __decorate$J([
+  __decorate$K([
       n()
   ], exports.LaSensitiveFlags.prototype, "heading", void 0);
-  __decorate$J([
+  __decorate$K([
       n()
   ], exports.LaSensitiveFlags.prototype, "intro", void 0);
-  __decorate$J([
+  __decorate$K([
       n({ type: Boolean, attribute: 'open-first' })
   ], exports.LaSensitiveFlags.prototype, "openFirst", void 0);
-  __decorate$J([
+  __decorate$K([
       r$1()
   ], exports.LaSensitiveFlags.prototype, "_open", void 0);
-  exports.LaSensitiveFlags = LaSensitiveFlags_1 = __decorate$J([
-      t$1('la-sensitive-flags')
+  exports.LaSensitiveFlags = LaSensitiveFlags_1 = __decorate$K([
+      t$2('la-sensitive-flags')
   ], exports.LaSensitiveFlags);
 
-  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17252,7 +17476,7 @@
       L2: 'L2 — Moderate complexity',
       L3: 'L3 — Complex / high-risk',
   };
-  exports.LaLevelControl = class LaLevelControl extends i$2 {
+  exports.LaLevelControl = class LaLevelControl extends i$3 {
       constructor() {
           super(...arguments);
           this.level = 'L2';
@@ -17446,7 +17670,7 @@
   };
   exports.LaLevelControl.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -17621,44 +17845,44 @@
       }
     `,
   ];
-  __decorate$I([
+  __decorate$J([
       n()
   ], exports.LaLevelControl.prototype, "level", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ attribute: 'confirmed-by' })
   ], exports.LaLevelControl.prototype, "confirmedBy", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ attribute: 'confirmed-at' })
   ], exports.LaLevelControl.prototype, "confirmedAt", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ type: Array })
   ], exports.LaLevelControl.prototype, "factors", void 0);
-  __decorate$I([
+  __decorate$J([
       n({ type: Array })
   ], exports.LaLevelControl.prototype, "history", void 0);
-  __decorate$I([
+  __decorate$J([
       r$1()
   ], exports.LaLevelControl.prototype, "_menuOpen", void 0);
-  __decorate$I([
+  __decorate$J([
       r$1()
   ], exports.LaLevelControl.prototype, "_historyOpen", void 0);
-  __decorate$I([
+  __decorate$J([
       r$1()
   ], exports.LaLevelControl.prototype, "_modalOpen", void 0);
-  __decorate$I([
+  __decorate$J([
       r$1()
   ], exports.LaLevelControl.prototype, "_pendingLevel", void 0);
-  __decorate$I([
+  __decorate$J([
       r$1()
   ], exports.LaLevelControl.prototype, "_reason", void 0);
-  __decorate$I([
+  __decorate$J([
       r$1()
   ], exports.LaLevelControl.prototype, "_reasonError", void 0);
-  exports.LaLevelControl = __decorate$I([
-      t$1('la-level-control')
+  exports.LaLevelControl = __decorate$J([
+      t$2('la-level-control')
   ], exports.LaLevelControl);
 
-  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -17694,7 +17918,7 @@
    *   <la-assignee-picker slot="picker" mode="reassign" .handlers=${eligible}></la-assignee-picker>
    * </la-reassign-control>
    */
-  exports.LaReassignControl = class LaReassignControl extends i$2 {
+  exports.LaReassignControl = class LaReassignControl extends i$3 {
       constructor() {
           super(...arguments);
           this.currentHandler = '';
@@ -17812,7 +18036,7 @@
   };
   exports.LaReassignControl.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -17847,41 +18071,41 @@
       }
     `,
   ];
-  __decorate$H([
+  __decorate$I([
       n({ attribute: 'current-handler' })
   ], exports.LaReassignControl.prototype, "currentHandler", void 0);
-  __decorate$H([
+  __decorate$I([
       n({ attribute: 'case-id' })
   ], exports.LaReassignControl.prototype, "caseId", void 0);
-  __decorate$H([
+  __decorate$I([
       n()
   ], exports.LaReassignControl.prototype, "label", void 0);
-  __decorate$H([
+  __decorate$I([
       r$1()
   ], exports.LaReassignControl.prototype, "_modalOpen", void 0);
-  __decorate$H([
+  __decorate$I([
       r$1()
   ], exports.LaReassignControl.prototype, "_selected", void 0);
-  __decorate$H([
+  __decorate$I([
       r$1()
   ], exports.LaReassignControl.prototype, "_reason", void 0);
-  __decorate$H([
+  __decorate$I([
       r$1()
   ], exports.LaReassignControl.prototype, "_reasonError", void 0);
-  __decorate$H([
+  __decorate$I([
       r$1()
   ], exports.LaReassignControl.prototype, "_hasSlottedPicker", void 0);
-  exports.LaReassignControl = __decorate$H([
-      t$1('la-reassign-control')
+  exports.LaReassignControl = __decorate$I([
+      t$2('la-reassign-control')
   ], exports.LaReassignControl);
 
-  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaFilesPanel = class LaFilesPanel extends i$2 {
+  exports.LaFilesPanel = class LaFilesPanel extends i$3 {
       constructor() {
           super(...arguments);
           this.employeeRecord = [];
@@ -18019,7 +18243,7 @@
   };
   exports.LaFilesPanel.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -18111,45 +18335,45 @@
       }
     `,
   ];
-  __decorate$G([
+  __decorate$H([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "employeeRecord", void 0);
-  __decorate$G([
+  __decorate$H([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "caseDocuments", void 0);
-  __decorate$G([
+  __decorate$H([
       n({ type: Array, attribute: false })
   ], exports.LaFilesPanel.prototype, "generatedArtefacts", void 0);
-  __decorate$G([
+  __decorate$H([
       n({ attribute: 'confidential-section' })
   ], exports.LaFilesPanel.prototype, "confidentialSection", void 0);
-  __decorate$G([
+  __decorate$H([
       n()
   ], exports.LaFilesPanel.prototype, "heading", void 0);
-  __decorate$G([
+  __decorate$H([
       n({ type: Boolean, attribute: 'hide-heading' })
   ], exports.LaFilesPanel.prototype, "hideHeading", void 0);
-  __decorate$G([
+  __decorate$H([
       n({ attribute: 'icon-base' })
   ], exports.LaFilesPanel.prototype, "iconBase", void 0);
-  __decorate$G([
+  __decorate$H([
       n({ attribute: 'brand-mark' })
   ], exports.LaFilesPanel.prototype, "brandMark", void 0);
-  __decorate$G([
+  __decorate$H([
       r$1()
   ], exports.LaFilesPanel.prototype, "_query", void 0);
-  exports.LaFilesPanel = __decorate$G([
-      t$1('la-files-panel')
+  exports.LaFilesPanel = __decorate$H([
+      t$2('la-files-panel')
   ], exports.LaFilesPanel);
 
-  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   var LaCaseContextPanel_1;
-  exports.LaCaseContextPanel = LaCaseContextPanel_1 = class LaCaseContextPanel extends i$2 {
+  exports.LaCaseContextPanel = LaCaseContextPanel_1 = class LaCaseContextPanel extends i$3 {
       constructor() {
           super(...arguments);
           this.caseId = '';
@@ -18366,7 +18590,7 @@
   ];
   exports.LaCaseContextPanel.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         /* The host occupies only the rail's footprint so it never displaces
            the playbook content. The sliding panel overlays from the rail edge. */
@@ -18573,47 +18797,47 @@
       }
     `,
   ];
-  __decorate$F([
+  __decorate$G([
       n({ attribute: 'case-id' })
   ], exports.LaCaseContextPanel.prototype, "caseId", void 0);
-  __decorate$F([
+  __decorate$G([
       n()
   ], exports.LaCaseContextPanel.prototype, "level", void 0);
-  __decorate$F([
+  __decorate$G([
       n()
   ], exports.LaCaseContextPanel.prototype, "handler", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ attribute: 'open-panel', reflect: true })
   ], exports.LaCaseContextPanel.prototype, "openPanel", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ type: Number, attribute: 'file-count' })
   ], exports.LaCaseContextPanel.prototype, "fileCount", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ type: Number, attribute: 'unread-chat' })
   ], exports.LaCaseContextPanel.prototype, "unreadChat", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ attribute: 'chat-label' })
   ], exports.LaCaseContextPanel.prototype, "chatLabel", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ type: Boolean, attribute: 'expert-reply' })
   ], exports.LaCaseContextPanel.prototype, "expertReply", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ type: Boolean, attribute: 'ai-active' })
   ], exports.LaCaseContextPanel.prototype, "aiActive", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ type: Number, attribute: 'unread-flags' })
   ], exports.LaCaseContextPanel.prototype, "unreadFlags", void 0);
-  __decorate$F([
+  __decorate$G([
       n({ type: Boolean, attribute: 'no-auto-open' })
   ], exports.LaCaseContextPanel.prototype, "noAutoOpen", void 0);
-  __decorate$F([
+  __decorate$G([
       r$1()
   ], exports.LaCaseContextPanel.prototype, "_autoOpened", void 0);
-  exports.LaCaseContextPanel = LaCaseContextPanel_1 = __decorate$F([
-      t$1('la-case-context-panel')
+  exports.LaCaseContextPanel = LaCaseContextPanel_1 = __decorate$G([
+      t$2('la-case-context-panel')
   ], exports.LaCaseContextPanel);
 
-  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -18658,7 +18882,7 @@
   ];
   const STORE_KEY$1 = 'la-sidebar-collapsed';
   const CHECKLIST_STORE_KEY = 'la-sidebar-checklist-open';
-  exports.LaSidebar = class LaSidebar extends i$2 {
+  exports.LaSidebar = class LaSidebar extends i$3 {
       constructor() {
           super(...arguments);
           /** Currently active legal area id */
@@ -19198,7 +19422,7 @@
   };
   exports.LaSidebar.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         flex-direction: column;
@@ -20375,77 +20599,77 @@
       }
     `,
   ];
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "activeArea", void 0);
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "activeSubtab", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Array })
   ], exports.LaSidebar.prototype, "unlockedAreas", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: false })
   ], exports.LaSidebar.prototype, "items", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, attribute: 'show-search' })
   ], exports.LaSidebar.prototype, "showSearch", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "collapsed", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ type: Boolean, reflect: true })
   ], exports.LaSidebar.prototype, "overlay", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'logo-src' })
   ], exports.LaSidebar.prototype, "logoSrc", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'wordmark-src' })
   ], exports.LaSidebar.prototype, "wordmarkSrc", void 0);
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "userInitials", void 0);
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "userName", void 0);
-  __decorate$E([
+  __decorate$F([
       n()
   ], exports.LaSidebar.prototype, "userRole", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'workspace-name' })
   ], exports.LaSidebar.prototype, "workspaceName", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'workspace-initials' })
   ], exports.LaSidebar.prototype, "workspaceInitials", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: false })
   ], exports.LaSidebar.prototype, "checklist", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'checklist-title' })
   ], exports.LaSidebar.prototype, "checklistTitle", void 0);
-  __decorate$E([
+  __decorate$F([
       n({ attribute: 'checklist-sub' })
   ], exports.LaSidebar.prototype, "checklistSub", void 0);
-  __decorate$E([
+  __decorate$F([
       r$1()
   ], exports.LaSidebar.prototype, "_snapped", void 0);
-  __decorate$E([
+  __decorate$F([
       r$1()
   ], exports.LaSidebar.prototype, "_userMenuOpen", void 0);
-  __decorate$E([
+  __decorate$F([
       r$1()
   ], exports.LaSidebar.prototype, "_userMenuClosing", void 0);
-  __decorate$E([
+  __decorate$F([
       r$1()
   ], exports.LaSidebar.prototype, "_checklistOpen", void 0);
-  __decorate$E([
+  __decorate$F([
       r$1()
   ], exports.LaSidebar.prototype, "_toggled", void 0);
-  exports.LaSidebar = __decorate$E([
-      t$1('la-sidebar')
+  exports.LaSidebar = __decorate$F([
+      t$2('la-sidebar')
   ], exports.LaSidebar);
 
-  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -20459,7 +20683,7 @@
    * `la-sidebar` (spacing, collapse animation, label fade) but with investor-
    * specific nav: Home + per-company pack items + sign-out.
    */
-  exports.LaInvestorSidebar = class LaInvestorSidebar extends i$2 {
+  exports.LaInvestorSidebar = class LaInvestorSidebar extends i$3 {
       constructor() {
           super(...arguments);
           this.userName = '';
@@ -20663,7 +20887,7 @@
   };
   exports.LaInvestorSidebar.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         flex-direction: column;
@@ -21037,53 +21261,53 @@
       :host([collapsed]) .user-menu-dots { opacity: 0; max-width: 0; }
     `,
   ];
-  __decorate$D([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "userName", void 0);
-  __decorate$D([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "userInitials", void 0);
-  __decorate$D([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "userRole", void 0);
-  __decorate$D([
+  __decorate$E([
       n({ attribute: 'logo-src' })
   ], exports.LaInvestorSidebar.prototype, "logoSrc", void 0);
-  __decorate$D([
+  __decorate$E([
       n({ attribute: 'logo-wordmark-src' })
   ], exports.LaInvestorSidebar.prototype, "logoWordmarkSrc", void 0);
-  __decorate$D([
+  __decorate$E([
       n({ type: Array })
   ], exports.LaInvestorSidebar.prototype, "companies", void 0);
-  __decorate$D([
+  __decorate$E([
       n()
   ], exports.LaInvestorSidebar.prototype, "active", void 0);
-  __decorate$D([
+  __decorate$E([
       n({ type: Boolean, reflect: true })
   ], exports.LaInvestorSidebar.prototype, "collapsed", void 0);
-  __decorate$D([
+  __decorate$E([
       n({ type: Boolean, reflect: true })
   ], exports.LaInvestorSidebar.prototype, "overlay", void 0);
-  __decorate$D([
+  __decorate$E([
       r$1()
   ], exports.LaInvestorSidebar.prototype, "_snapped", void 0);
-  __decorate$D([
+  __decorate$E([
       r$1()
   ], exports.LaInvestorSidebar.prototype, "_userMenuOpen", void 0);
-  __decorate$D([
+  __decorate$E([
       r$1()
   ], exports.LaInvestorSidebar.prototype, "_userMenuClosing", void 0);
-  exports.LaInvestorSidebar = __decorate$D([
-      t$1('la-investor-sidebar')
+  exports.LaInvestorSidebar = __decorate$E([
+      t$2('la-investor-sidebar')
   ], exports.LaInvestorSidebar);
 
-  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaInsightCard = class LaInsightCard extends i$2 {
+  exports.LaInsightCard = class LaInsightCard extends i$3 {
       constructor() {
           super(...arguments);
           /** Severity level — always backend-assigned. `'urgent'` or `'proactive'` for active insights; `'resolved'` for the resolved list. */
@@ -21168,7 +21392,7 @@
   };
   exports.LaInsightCard.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         cursor: pointer;
@@ -21276,53 +21500,53 @@
       }
     `,
   ];
-  __decorate$C([
+  __decorate$D([
       n({ reflect: true })
   ], exports.LaInsightCard.prototype, "severity", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "headline", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "description", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ attribute: 'insight-type' })
   ], exports.LaInsightCard.prototype, "insightType", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ attribute: 'source-type' })
   ], exports.LaInsightCard.prototype, "sourceType", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ type: Object })
   ], exports.LaInsightCard.prototype, "entity", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "dates", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "relatedInsights", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "explanation", void 0);
-  __decorate$C([
+  __decorate$D([
       n()
   ], exports.LaInsightCard.prototype, "reason", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ type: Object })
   ], exports.LaInsightCard.prototype, "action", void 0);
-  __decorate$C([
+  __decorate$D([
       n({ type: Array })
   ], exports.LaInsightCard.prototype, "subItems", void 0);
-  exports.LaInsightCard = __decorate$C([
-      t$1('la-insight-card')
+  exports.LaInsightCard = __decorate$D([
+      t$2('la-insight-card')
   ], exports.LaInsightCard);
 
-  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaInfoHint = class LaInfoHint extends i$2 {
+  exports.LaInfoHint = class LaInfoHint extends i$3 {
       constructor() {
           super(...arguments);
           this.hint = '';
@@ -21349,7 +21573,7 @@
   };
   exports.LaInfoHint.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: inline-flex;
         vertical-align: middle;
@@ -21392,26 +21616,26 @@
       }
     `,
   ];
-  __decorate$B([
+  __decorate$C([
       n()
   ], exports.LaInfoHint.prototype, "hint", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ reflect: true })
   ], exports.LaInfoHint.prototype, "position", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ attribute: 'max-width' })
   ], exports.LaInfoHint.prototype, "maxWidth", void 0);
-  __decorate$B([
+  __decorate$C([
       n({ reflect: true })
   ], exports.LaInfoHint.prototype, "size", void 0);
-  __decorate$B([
+  __decorate$C([
       n()
   ], exports.LaInfoHint.prototype, "label", void 0);
-  exports.LaInfoHint = __decorate$B([
-      t$1('la-info-hint')
+  exports.LaInfoHint = __decorate$C([
+      t$2('la-info-hint')
   ], exports.LaInfoHint);
 
-  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -21431,7 +21655,7 @@
    * and fit pages to width; Safari's PDFKit ignores it but is already chromeless — so both
    * converge on a clean, pages-only view.
    */
-  exports.LaPdfPreview = class LaPdfPreview extends i$2 {
+  exports.LaPdfPreview = class LaPdfPreview extends i$3 {
       constructor() {
           super(...arguments);
           /** URL of the PDF to display. */
@@ -21472,7 +21696,7 @@
   };
   exports.LaPdfPreview.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         flex-direction: column;
@@ -21530,26 +21754,26 @@
       }
     `,
   ];
-  __decorate$A([
+  __decorate$B([
       n()
   ], exports.LaPdfPreview.prototype, "src", void 0);
-  __decorate$A([
+  __decorate$B([
       n({ attribute: 'fallback-image' })
   ], exports.LaPdfPreview.prototype, "fallbackImage", void 0);
-  __decorate$A([
+  __decorate$B([
       n()
   ], exports.LaPdfPreview.prototype, "label", void 0);
-  exports.LaPdfPreview = __decorate$A([
-      t$1('la-pdf-preview')
+  exports.LaPdfPreview = __decorate$B([
+      t$2('la-pdf-preview')
   ], exports.LaPdfPreview);
 
-  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaActionItem = class LaActionItem extends i$2 {
+  exports.LaActionItem = class LaActionItem extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -21593,7 +21817,7 @@
   };
   exports.LaActionItem.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -21679,29 +21903,29 @@
       }
     `,
   ];
-  __decorate$z([
+  __decorate$A([
       n()
   ], exports.LaActionItem.prototype, "label", void 0);
-  __decorate$z([
+  __decorate$A([
       n()
   ], exports.LaActionItem.prototype, "description", void 0);
-  __decorate$z([
+  __decorate$A([
       n()
   ], exports.LaActionItem.prototype, "icon", void 0);
-  __decorate$z([
+  __decorate$A([
       n({ reflect: true })
   ], exports.LaActionItem.prototype, "status", void 0);
-  exports.LaActionItem = __decorate$z([
-      t$1('la-action-item')
+  exports.LaActionItem = __decorate$A([
+      t$2('la-action-item')
   ], exports.LaActionItem);
 
-  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaInsightList = class LaInsightList extends i$2 {
+  exports.LaInsightList = class LaInsightList extends i$3 {
       constructor() {
           super(...arguments);
           this.insights = [];
@@ -21782,7 +22006,7 @@
   };
   exports.LaInsightList.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -21811,26 +22035,26 @@
       }
     `,
   ];
-  __decorate$y([
+  __decorate$z([
       n({ type: Array })
   ], exports.LaInsightList.prototype, "insights", void 0);
-  __decorate$y([
+  __decorate$z([
       n({ type: Number })
   ], exports.LaInsightList.prototype, "defaultVisible", void 0);
-  __decorate$y([
+  __decorate$z([
       r$1()
   ], exports.LaInsightList.prototype, "_expanded", void 0);
-  exports.LaInsightList = __decorate$y([
-      t$1('la-insight-list')
+  exports.LaInsightList = __decorate$z([
+      t$2('la-insight-list')
   ], exports.LaInsightList);
 
-  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaDocumentList = class LaDocumentList extends i$2 {
+  exports.LaDocumentList = class LaDocumentList extends i$3 {
       constructor() {
           super(...arguments);
           this.documents = [];
@@ -21894,7 +22118,7 @@
   };
   exports.LaDocumentList.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -21950,29 +22174,29 @@
       }
     `,
   ];
-  __decorate$x([
+  __decorate$y([
       n({ type: Array })
   ], exports.LaDocumentList.prototype, "documents", void 0);
-  __decorate$x([
+  __decorate$y([
       n()
   ], exports.LaDocumentList.prototype, "heading", void 0);
-  __decorate$x([
+  __decorate$y([
       n({ type: Boolean, attribute: 'show-pack-toggle' })
   ], exports.LaDocumentList.prototype, "showPackToggle", void 0);
-  __decorate$x([
+  __decorate$y([
       n({ type: Object })
   ], exports.LaDocumentList.prototype, "categoryIcons", void 0);
-  exports.LaDocumentList = __decorate$x([
-      t$1('la-document-list')
+  exports.LaDocumentList = __decorate$y([
+      t$2('la-document-list')
   ], exports.LaDocumentList);
 
-  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaProcessingWidget = class LaProcessingWidget extends i$2 {
+  exports.LaProcessingWidget = class LaProcessingWidget extends i$3 {
       constructor() {
           super(...arguments);
           this.items = [];
@@ -22096,7 +22320,7 @@
   };
   exports.LaProcessingWidget.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -22177,26 +22401,26 @@
       }
     `,
   ];
-  __decorate$w([
+  __decorate$x([
       n({ type: Array })
   ], exports.LaProcessingWidget.prototype, "items", void 0);
-  __decorate$w([
+  __decorate$x([
       n({ type: Boolean, reflect: true })
   ], exports.LaProcessingWidget.prototype, "timeout", void 0);
-  __decorate$w([
+  __decorate$x([
       r$1()
   ], exports.LaProcessingWidget.prototype, "_showDetails", void 0);
-  exports.LaProcessingWidget = __decorate$w([
-      t$1('la-processing-widget')
+  exports.LaProcessingWidget = __decorate$x([
+      t$2('la-processing-widget')
   ], exports.LaProcessingWidget);
 
-  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaUpload = class LaUpload extends i$2 {
+  exports.LaUpload = class LaUpload extends i$3 {
       constructor() {
           super(...arguments);
           this.accept = '';
@@ -22268,7 +22492,7 @@
   };
   exports.LaUpload.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -22295,38 +22519,38 @@
       }
     `,
   ];
-  __decorate$v([
+  __decorate$w([
       n()
   ], exports.LaUpload.prototype, "accept", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ type: Number, attribute: 'max-size' })
   ], exports.LaUpload.prototype, "maxSize", void 0);
-  __decorate$v([
+  __decorate$w([
       n()
   ], exports.LaUpload.prototype, "prompt", void 0);
-  __decorate$v([
+  __decorate$w([
       n()
   ], exports.LaUpload.prototype, "hint", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ type: Boolean, reflect: true })
   ], exports.LaUpload.prototype, "compact", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ type: Boolean, reflect: true })
   ], exports.LaUpload.prototype, "processing", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ type: Boolean, attribute: 'transfer-error', reflect: true })
   ], exports.LaUpload.prototype, "transferError", void 0);
-  __decorate$v([
+  __decorate$w([
       n({ attribute: 'transfer-error-message' })
   ], exports.LaUpload.prototype, "transferErrorMessage", void 0);
-  __decorate$v([
+  __decorate$w([
       e$2('la-upload-box')
   ], exports.LaUpload.prototype, "_box", void 0);
-  exports.LaUpload = __decorate$v([
-      t$1('la-upload')
+  exports.LaUpload = __decorate$w([
+      t$2('la-upload')
   ], exports.LaUpload);
 
-  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -22380,7 +22604,7 @@
    * @fires la-document-area-change - `{documentName, area}` when the founder
    *   corrects the area we filed it under.
    */
-  exports.LaDocumentUpload = class LaDocumentUpload extends i$2 {
+  exports.LaDocumentUpload = class LaDocumentUpload extends i$3 {
       constructor() {
           super(...arguments);
           /** Why we are asking. Drives every word and the control's weight. */
@@ -22622,7 +22846,7 @@
   };
   exports.LaDocumentUpload.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -22731,50 +22955,50 @@
       }
     `,
   ];
-  __decorate$u([
+  __decorate$v([
       n({ reflect: true })
   ], exports.LaDocumentUpload.prototype, "reason", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ attribute: 'document-id' })
   ], exports.LaDocumentUpload.prototype, "documentId", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ attribute: 'document-name' })
   ], exports.LaDocumentUpload.prototype, "documentName", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ attribute: 'area-label' })
   ], exports.LaDocumentUpload.prototype, "areaLabel", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ attribute: false })
   ], exports.LaDocumentUpload.prototype, "areaOptions", void 0);
-  __decorate$u([
+  __decorate$v([
       n()
   ], exports.LaDocumentUpload.prototype, "label", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ reflect: true })
   ], exports.LaDocumentUpload.prototype, "state", void 0);
-  __decorate$u([
+  __decorate$v([
       n({ attribute: 'error-message' })
   ], exports.LaDocumentUpload.prototype, "errorMessage", void 0);
-  __decorate$u([
+  __decorate$v([
       n()
   ], exports.LaDocumentUpload.prototype, "accept", void 0);
-  __decorate$u([
+  __decorate$v([
       r$1()
   ], exports.LaDocumentUpload.prototype, "_open", void 0);
-  __decorate$u([
+  __decorate$v([
       r$1()
   ], exports.LaDocumentUpload.prototype, "_pendingFile", void 0);
-  exports.LaDocumentUpload = __decorate$u([
-      t$1('la-document-upload')
+  exports.LaDocumentUpload = __decorate$v([
+      t$2('la-document-upload')
   ], exports.LaDocumentUpload);
 
-  var __decorate$t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaSummaryLine = class LaSummaryLine extends i$2 {
+  exports.LaSummaryLine = class LaSummaryLine extends i$3 {
       constructor() {
           super(...arguments);
           this.area = '';
@@ -22818,7 +23042,7 @@
   };
   exports.LaSummaryLine.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -22890,32 +23114,32 @@
       .dot--yellow { background: var(--la-color-proactive); }
     `,
   ];
-  __decorate$t([
+  __decorate$u([
       n()
   ], exports.LaSummaryLine.prototype, "area", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "urgent", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "proactive", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Number })
   ], exports.LaSummaryLine.prototype, "documents", void 0);
-  __decorate$t([
+  __decorate$u([
       n({ type: Boolean, attribute: 'show-aside-toggle' })
   ], exports.LaSummaryLine.prototype, "showAsideToggle", void 0);
-  exports.LaSummaryLine = __decorate$t([
-      t$1('la-summary-line')
+  exports.LaSummaryLine = __decorate$u([
+      t$2('la-summary-line')
   ], exports.LaSummaryLine);
 
-  var __decorate$s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaActionsWidget = class LaActionsWidget extends i$2 {
+  exports.LaActionsWidget = class LaActionsWidget extends i$3 {
       constructor() {
           super(...arguments);
           this.actions = [];
@@ -22947,7 +23171,7 @@
   };
   exports.LaActionsWidget.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -22982,26 +23206,26 @@
       }
     `,
   ];
-  __decorate$s([
+  __decorate$t([
       n({ type: Array })
   ], exports.LaActionsWidget.prototype, "actions", void 0);
-  __decorate$s([
+  __decorate$t([
       n()
   ], exports.LaActionsWidget.prototype, "heading", void 0);
-  __decorate$s([
+  __decorate$t([
       n()
   ], exports.LaActionsWidget.prototype, "subtitle", void 0);
-  exports.LaActionsWidget = __decorate$s([
-      t$1('la-actions-widget')
+  exports.LaActionsWidget = __decorate$t([
+      t$2('la-actions-widget')
   ], exports.LaActionsWidget);
 
-  var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$s = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaAnticipationTeaser = class LaAnticipationTeaser extends i$2 {
+  exports.LaAnticipationTeaser = class LaAnticipationTeaser extends i$3 {
       constructor() {
           super(...arguments);
           this.heading = 'More insights coming soon';
@@ -23018,7 +23242,7 @@
   };
   exports.LaAnticipationTeaser.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -23041,23 +23265,23 @@
       }
     `,
   ];
-  __decorate$r([
+  __decorate$s([
       n()
   ], exports.LaAnticipationTeaser.prototype, "heading", void 0);
-  __decorate$r([
+  __decorate$s([
       n()
   ], exports.LaAnticipationTeaser.prototype, "description", void 0);
-  exports.LaAnticipationTeaser = __decorate$r([
-      t$1('la-anticipation-teaser')
+  exports.LaAnticipationTeaser = __decorate$s([
+      t$2('la-anticipation-teaser')
   ], exports.LaAnticipationTeaser);
 
-  var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$r = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaEmptyState = class LaEmptyState extends i$2 {
+  exports.LaEmptyState = class LaEmptyState extends i$3 {
       constructor() {
           super(...arguments);
           this.variant = 'clean';
@@ -23118,7 +23342,7 @@
   };
   exports.LaEmptyState.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         text-align: center;
@@ -23176,47 +23400,41 @@
       }
     `,
   ];
-  __decorate$q([
+  __decorate$r([
       n({ reflect: true })
   ], exports.LaEmptyState.prototype, "variant", void 0);
-  __decorate$q([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "area", void 0);
-  __decorate$q([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "message", void 0);
-  __decorate$q([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "icon", void 0);
-  __decorate$q([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "heading", void 0);
-  __decorate$q([
+  __decorate$r([
       n()
   ], exports.LaEmptyState.prototype, "illustration", void 0);
-  exports.LaEmptyState = __decorate$q([
-      t$1('la-empty-state')
+  exports.LaEmptyState = __decorate$r([
+      t$2('la-empty-state')
   ], exports.LaEmptyState);
-
-  /**
-   * @license
-   * Copyright 2020 Google LLC
-   * SPDX-License-Identifier: BSD-3-Clause
-   */const r=o=>void 0===o.strings,m={},p=(o,t=m)=>o._$AH=t;
 
   /**
    * @license
    * Copyright 2021 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const i=e$1(class extends i$1{constructor(){super(...arguments),this.key=A;}render(r,t){return this.key=r,t}update(r,[t,e]){return t!==this.key&&(p(r),this.key=t),e}});
+   */const i=e$1(class extends i$2{constructor(){super(...arguments),this.key=A;}render(r,t){return this.key=r,t}update(r,[t,e]){return t!==this.key&&(p(r),this.key=t),e}});
 
-  var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaUnlockPanel = class LaUnlockPanel extends i$2 {
+  exports.LaUnlockPanel = class LaUnlockPanel extends i$3 {
       constructor() {
           super(...arguments);
           /* ── Public API ────────────────────────────────────────── */
@@ -23619,7 +23837,7 @@
   };
   exports.LaUnlockPanel.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         --la-unlock-min-h: 420px;
         display: block;
@@ -23881,38 +24099,38 @@
       }
     `,
   ];
-  __decorate$p([
+  __decorate$q([
       n({ reflect: true, attribute: 'state' })
   ], exports.LaUnlockPanel.prototype, "unlockState", void 0);
-  __decorate$p([
+  __decorate$q([
       n()
   ], exports.LaUnlockPanel.prototype, "area", void 0);
-  __decorate$p([
+  __decorate$q([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "checklistItems", void 0);
-  __decorate$p([
+  __decorate$q([
       n({ type: Array })
   ], exports.LaUnlockPanel.prototype, "steps", void 0);
-  __decorate$p([
+  __decorate$q([
       n({ attribute: 'next-area' })
   ], exports.LaUnlockPanel.prototype, "nextArea", void 0);
-  __decorate$p([
+  __decorate$q([
       n({ attribute: 'next-description' })
   ], exports.LaUnlockPanel.prototype, "nextDescription", void 0);
-  __decorate$p([
+  __decorate$q([
       r$1()
   ], exports.LaUnlockPanel.prototype, "_values", void 0);
-  exports.LaUnlockPanel = __decorate$p([
-      t$1('la-unlock-panel')
+  exports.LaUnlockPanel = __decorate$q([
+      t$2('la-unlock-panel')
   ], exports.LaUnlockPanel);
 
-  var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$p = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaLegalAreaWidget = class LaLegalAreaWidget extends i$2 {
+  exports.LaLegalAreaWidget = class LaLegalAreaWidget extends i$3 {
       constructor() {
           super(...arguments);
           this.area = '';
@@ -24027,7 +24245,7 @@
   };
   exports.LaLegalAreaWidget.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         cursor: pointer;
@@ -24183,35 +24401,35 @@
       }
     `,
   ];
-  __decorate$o([
+  __decorate$p([
       n()
   ], exports.LaLegalAreaWidget.prototype, "area", void 0);
-  __decorate$o([
+  __decorate$p([
       n()
   ], exports.LaLegalAreaWidget.prototype, "description", void 0);
-  __decorate$o([
+  __decorate$p([
       n()
   ], exports.LaLegalAreaWidget.prototype, "illustration", void 0);
-  __decorate$o([
+  __decorate$p([
       n({ reflect: true })
   ], exports.LaLegalAreaWidget.prototype, "status", void 0);
-  __decorate$o([
+  __decorate$p([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "urgent", void 0);
-  __decorate$o([
+  __decorate$p([
       n({ type: Number })
   ], exports.LaLegalAreaWidget.prototype, "proactive", void 0);
-  __decorate$o([
+  __decorate$p([
       n({ type: Array })
   ], exports.LaLegalAreaWidget.prototype, "dependencies", void 0);
-  __decorate$o([
+  __decorate$p([
       n({ attribute: 'next-level-label' })
   ], exports.LaLegalAreaWidget.prototype, "nextLevelLabel", void 0);
-  exports.LaLegalAreaWidget = __decorate$o([
-      t$1('la-legal-area-widget')
+  exports.LaLegalAreaWidget = __decorate$p([
+      t$2('la-legal-area-widget')
   ], exports.LaLegalAreaWidget);
 
-  var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$o = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -24255,7 +24473,7 @@
    * @prop href        - where the card goes; unset, the card is a button and the host routes on la-area-click
    * @fires la-area-click - {area, href} on activation, in both modes
    */
-  exports.LaAreaCard = class LaAreaCard extends i$2 {
+  exports.LaAreaCard = class LaAreaCard extends i$3 {
       constructor() {
           super(...arguments);
           this.area = '';
@@ -24312,7 +24530,7 @@
   };
   exports.LaAreaCard.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         min-width: 0;
@@ -24435,32 +24653,32 @@
       }
     `,
   ];
-  __decorate$n([
+  __decorate$o([
       n({ reflect: true })
   ], exports.LaAreaCard.prototype, "area", void 0);
-  __decorate$n([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "label", void 0);
-  __decorate$n([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "sublabel", void 0);
-  __decorate$n([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "description", void 0);
-  __decorate$n([
+  __decorate$o([
       n()
   ], exports.LaAreaCard.prototype, "href", void 0);
-  exports.LaAreaCard = __decorate$n([
-      t$1('la-area-card')
+  exports.LaAreaCard = __decorate$o([
+      t$2('la-area-card')
   ], exports.LaAreaCard);
 
-  var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$n = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaDdReadiness = class LaDdReadiness extends i$2 {
+  exports.LaDdReadiness = class LaDdReadiness extends i$3 {
       constructor() {
           super(...arguments);
           this.level = 'ready';
@@ -24511,7 +24729,7 @@
   };
   exports.LaDdReadiness.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -24558,23 +24776,23 @@
       }
     `,
   ];
-  __decorate$m([
+  __decorate$n([
       n()
   ], exports.LaDdReadiness.prototype, "level", void 0);
-  __decorate$m([
+  __decorate$n([
       n({ type: Number })
   ], exports.LaDdReadiness.prototype, "remaining", void 0);
-  exports.LaDdReadiness = __decorate$m([
-      t$1('la-dd-readiness')
+  exports.LaDdReadiness = __decorate$n([
+      t$2('la-dd-readiness')
   ], exports.LaDdReadiness);
 
-  var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$m = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaUpcomingDeadlines = class LaUpcomingDeadlines extends i$2 {
+  exports.LaUpcomingDeadlines = class LaUpcomingDeadlines extends i$3 {
       constructor() {
           super(...arguments);
           this.deadlines = [];
@@ -24602,7 +24820,7 @@
   };
   exports.LaUpcomingDeadlines.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -24648,14 +24866,14 @@
       }
     `,
   ];
-  __decorate$l([
+  __decorate$m([
       n({ type: Array })
   ], exports.LaUpcomingDeadlines.prototype, "deadlines", void 0);
-  exports.LaUpcomingDeadlines = __decorate$l([
-      t$1('la-upcoming-deadlines')
+  exports.LaUpcomingDeadlines = __decorate$m([
+      t$2('la-upcoming-deadlines')
   ], exports.LaUpcomingDeadlines);
 
-  var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$l = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -24679,7 +24897,7 @@
    * Clicking an active or done step dispatches `la-step-click` (bubbles, composed)
    * with `{ index: number, step: StepItem }`.
    */
-  exports.LaJourneySteps = class LaJourneySteps extends i$2 {
+  exports.LaJourneySteps = class LaJourneySteps extends i$3 {
       constructor() {
           super(...arguments);
           this.heading = '';
@@ -24746,7 +24964,7 @@
   };
   exports.LaJourneySteps.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -24910,26 +25128,26 @@
       }
     `,
   ];
-  __decorate$k([
+  __decorate$l([
       n()
   ], exports.LaJourneySteps.prototype, "heading", void 0);
-  __decorate$k([
+  __decorate$l([
       n()
   ], exports.LaJourneySteps.prototype, "subtitle", void 0);
-  __decorate$k([
+  __decorate$l([
       n({ type: Array })
   ], exports.LaJourneySteps.prototype, "steps", void 0);
-  exports.LaJourneySteps = __decorate$k([
-      t$1('la-journey-steps')
+  exports.LaJourneySteps = __decorate$l([
+      t$2('la-journey-steps')
   ], exports.LaJourneySteps);
 
-  var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$k = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaWelcomeBanner = class LaWelcomeBanner extends i$2 {
+  exports.LaWelcomeBanner = class LaWelcomeBanner extends i$3 {
       constructor() {
           super(...arguments);
           this.dismissed = false;
@@ -24957,7 +25175,7 @@
   };
   exports.LaWelcomeBanner.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -24993,23 +25211,23 @@
       }
     `,
   ];
-  __decorate$j([
+  __decorate$k([
       n({ type: Boolean })
   ], exports.LaWelcomeBanner.prototype, "dismissed", void 0);
-  __decorate$j([
+  __decorate$k([
       n()
   ], exports.LaWelcomeBanner.prototype, "heading", void 0);
-  __decorate$j([
+  __decorate$k([
       n()
   ], exports.LaWelcomeBanner.prototype, "description", void 0);
-  __decorate$j([
+  __decorate$k([
       n()
   ], exports.LaWelcomeBanner.prototype, "ctaLabel", void 0);
-  exports.LaWelcomeBanner = __decorate$j([
-      t$1('la-welcome-banner')
+  exports.LaWelcomeBanner = __decorate$k([
+      t$2('la-welcome-banner')
   ], exports.LaWelcomeBanner);
 
-  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$j = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -25068,7 +25286,7 @@
       'Data Protection': 'data',
       'Commercial Agreements': 'commercial',
   };
-  exports.LaInsightModal = class LaInsightModal extends i$2 {
+  exports.LaInsightModal = class LaInsightModal extends i$3 {
       constructor() {
           super(...arguments);
           /** Whether the modal is visible */
@@ -26157,7 +26375,7 @@
   };
   exports.LaInsightModal.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -27496,155 +27714,155 @@
 
     `,
   ];
-  __decorate$i([
+  __decorate$j([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "open", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ reflect: true })
   ], exports.LaInsightModal.prototype, "severity", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ attribute: 'status-label' })
   ], exports.LaInsightModal.prototype, "statusLabel", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ attribute: 'status-icon' })
   ], exports.LaInsightModal.prototype, "statusIcon", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ attribute: 'source-type' })
   ], exports.LaInsightModal.prototype, "sourceType", void 0);
-  __decorate$i([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "headline", void 0);
-  __decorate$i([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "reason", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "consequence", void 0);
-  __decorate$i([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "guidance", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "entity", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "dates", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "sourceDocument", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "sources", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ reflect: true })
   ], exports.LaInsightModal.prototype, "layout", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "deadline", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "meta", void 0);
-  __decorate$i([
+  __decorate$j([
       n()
   ], exports.LaInsightModal.prototype, "area", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ attribute: 'area-icon' })
   ], exports.LaInsightModal.prototype, "areaIcon", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "issues", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "cta", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Object })
   ], exports.LaInsightModal.prototype, "playbook", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "resolutions", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ attribute: 'resolutions-placement' })
   ], exports.LaInsightModal.prototype, "resolutionsPlacement", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Boolean, attribute: 'no-resolve' })
   ], exports.LaInsightModal.prototype, "noResolve", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: String, attribute: 'chosen-resolution' })
   ], exports.LaInsightModal.prototype, "chosenResolution", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "relatedInsights", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "laws", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "resolved", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "documents", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ reflect: true, attribute: 'action-type' })
   ], exports.LaInsightModal.prototype, "actionType", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ reflect: true, attribute: 'upload-state' })
   ], exports.LaInsightModal.prototype, "uploadState", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ attribute: 'verification-error' })
   ], exports.LaInsightModal.prototype, "verificationError", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "subItems", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "resolveReasons", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ attribute: 'resolve-label' })
   ], exports.LaInsightModal.prototype, "resolveLabel", void 0);
-  __decorate$i([
+  __decorate$j([
       n({ type: Boolean, reflect: true, attribute: 'read-only' })
   ], exports.LaInsightModal.prototype, "readOnly", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_resolving", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_activeTab", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_resolvedTabs", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_resolvingSubItemId", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_page", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_pageBack", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_reasonId", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_reasonNote", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_doneReason", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_doneNote", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_relatedExpanded", void 0);
-  __decorate$i([
+  __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_openIssues", void 0);
-  exports.LaInsightModal = __decorate$i([
-      t$1('la-insight-modal')
+  exports.LaInsightModal = __decorate$j([
+      t$2('la-insight-modal')
   ], exports.LaInsightModal);
 
-  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$i = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -27668,7 +27886,7 @@
    *
    * @fires la-investor-view - Card clicked / activated; detail: { name }
    */
-  exports.LaInvestorCard = class LaInvestorCard extends i$2 {
+  exports.LaInvestorCard = class LaInvestorCard extends i$3 {
       constructor() {
           super(...arguments);
           this.investorName = '';
@@ -27737,7 +27955,7 @@
   };
   exports.LaInvestorCard.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
       }
@@ -27832,24 +28050,504 @@
       }
     `,
   ];
-  __decorate$h([
+  __decorate$i([
       n({ attribute: 'investor-name' })
   ], exports.LaInvestorCard.prototype, "investorName", void 0);
-  __decorate$h([
+  __decorate$i([
       n()
   ], exports.LaInvestorCard.prototype, "firm", void 0);
-  __decorate$h([
+  __decorate$i([
       n({ reflect: true })
   ], exports.LaInvestorCard.prototype, "status", void 0);
-  __decorate$h([
+  __decorate$i([
       n({ attribute: 'last-activity' })
   ], exports.LaInvestorCard.prototype, "lastActivity", void 0);
-  __decorate$h([
+  __decorate$i([
       n({ type: Number, attribute: 'unread-count' })
   ], exports.LaInvestorCard.prototype, "unreadCount", void 0);
-  exports.LaInvestorCard = __decorate$h([
-      t$1('la-investor-card')
+  exports.LaInvestorCard = __decorate$i([
+      t$2('la-investor-card')
   ], exports.LaInvestorCard);
+
+  var __decorate$h = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /** Each kind's line: its glyph and its label. A journey adds its step count. */
+  const KIND = {
+      journey: { icon: 'ph ph-list-checks', label: 'Journey' },
+      document: { icon: 'ph ph-file-text', label: 'Document' },
+      step: { icon: 'ph ph-check-square-offset', label: 'Single step' },
+  };
+  /** The prompt's glyph when the page names none: the raise chooser's. */
+  const PROMPT_GLYPH = 'ph ph-signpost';
+  /** A Phosphor weight class: `ph`, `ph-bold`, `ph-fill` and the rest. */
+  const WEIGHT = /(^|\s)ph(-thin|-light|-bold|-fill|-duotone)?(\s|$)/;
+  const glyph = (classes) => (WEIGHT.test(classes) ? classes : `ph ${classes}`);
+  /**
+   * la-playbook-card: the picture card for a playbook or a document. One place
+   * for the card Orion's playbooks page (05-playbooks.html in new-design) drew
+   * three ways: the shelf and grid card (.fp-card), the raise chooser
+   * (.chooser-card) and the Recently viewed card (.rv-card).
+   *
+   * One card, one action. The title is the card's only control, a link when
+   * `href` is set and a button when it is not, and its hit area is stretched
+   * over the whole card, so a press anywhere opens it and Tab stops once. The
+   * action drawn at the foot ("View Playbook") is the cue for that press, not
+   * a second control: it is an inert la-button, out of the tab order and the
+   * accessibility tree. The control is named by the title; the kind line, the
+   * description and the reason describe it.
+   *
+   * Elevated, as every card that acts (rule/one-card-surface): no border,
+   * --la-shadow-md at rest, --la-shadow-card under the pointer or on focus. The
+   * two shadows sit on layers that cross-fade on opacity (rule/motion-gpu-safe).
+   * The prompt is dashed and flat at rest, because it is not a playbook, and
+   * lifts the same way.
+   *
+   * No text sits on the picture (decision 134): how well text
+   * over a picture reads depends on the art, and a legal app puts legibility
+   * first. A recommendation's reason is a row of its own under the picture,
+   * always shown, as Polaris's MediaCard keeps text off its media; the compact
+   * card's kind and title sit under its picture too. Under
+   * prefers-reduced-motion the lift changes at once.
+   *
+   * Usage:
+   *   <la-playbook-card heading="Hire an Employee" kind="journey" steps="7"
+   *     description="Hire someone with the right contract, checks and payroll from day one"
+   *     src="/assets/…/hire-employee.jpg"
+   *     reason="Your careers page is advertising a Product Designer role."
+   *     href="#/library?open=j:hire-an-employee"></la-playbook-card>
+   *   <la-playbook-card variant="prompt" kind-label="Not sure yet?" kind-icon="ph-question"
+   *     heading="Help Me Choose How to Raise" description="…" action="Start Questions"></la-playbook-card>
+   *   <la-playbook-card variant="compact" heading="Non-Disclosure Agreement" kind="document"
+   *     src="/assets/…/nda.jpg"></la-playbook-card>
+   *
+   * @prop variant       - default · prompt · compact
+   * @prop heading       - the title, and the control's accessible name (not `title`, which would
+   *                       put a native tooltip on the whole card)
+   * @prop description   - the line under the title (default and prompt)
+   * @prop kind          - journey · document · step; draws the kind line with its glyph
+   * @prop steps         - a journey's step count: "Journey · 7 steps"
+   * @prop kind-label    - a kind line of the page's own, as the prompt's "Not sure yet?"; wins over `kind`
+   * @prop kind-icon     - its glyph, Phosphor classes ("ph-question", "ph ph-question")
+   * @prop src           - the picture; decorative, so it has no alt (default and compact)
+   * @prop icon          - the prompt's glyph in place of a picture; default ph-signpost
+   * @prop reason        - why we recommend it, a row under the picture (default only)
+   * @prop action        - the cue at the foot; default "View Document" for a document, otherwise
+   *                       "View Playbook"; a prompt draws one only when this is set; compact never
+   * @prop href          - set, the card is a link; unset, a button
+   * @prop heading-level - the title's heading level, 2 to 6; default 3
+   * @fires la-playbook-card-open - {heading, kind, href}, bubbles, composed and cancelable, when the
+   *                       founder opens the card (a press, Enter, or Space on a button). Cancelling it
+   *                       stops a link navigating. A modified click on a link (a new tab) does not fire it.
+   */
+  exports.LaPlaybookCard = class LaPlaybookCard extends i$3 {
+      constructor() {
+          super(...arguments);
+          this.variant = 'default';
+          this.heading = '';
+          this.description = '';
+          this.kind = '';
+          this.steps = 0;
+          this.kindLabel = '';
+          this.kindIcon = '';
+          this.src = '';
+          this.icon = '';
+          this.reason = '';
+          this.action = '';
+          this.href = '';
+          this.headingLevel = 3;
+      }
+      get _variant() {
+          return this.variant === 'prompt' || this.variant === 'compact' ? this.variant : 'default';
+      }
+      get _kind() {
+          return Object.prototype.hasOwnProperty.call(KIND, this.kind)
+              ? this.kind
+              : null;
+      }
+      _onActivate(e) {
+          // A modified click on a link opens a tab: the browser's, not the card's.
+          if (this.href && (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) {
+              return;
+          }
+          const open = this.dispatchEvent(new CustomEvent('la-playbook-card-open', {
+              detail: { heading: this.heading, kind: this._kind ?? '', href: this.href },
+              bubbles: true,
+              composed: true,
+              cancelable: true,
+          }));
+          if (!open && this.href)
+              e.preventDefault();
+      }
+      /** The kind line: a glyph and one run of text, so the flex gap falls only
+       *  between the two. The middle dot is for the eye; a screen reader hears
+       *  "Journey, 7 steps" from a hidden copy, since the line is part of the
+       *  control's description. */
+      _kindLine() {
+          const own = this.kindLabel.trim();
+          if (own) {
+              const icon = this.kindIcon.trim();
+              return b `<span class="kind" id="kind"
+        >${icon ? b `<i class=${glyph(icon)} aria-hidden="true"></i>` : A}<span
+          >${own}</span
+        ></span
+      >`;
+          }
+          const kind = this._kind;
+          if (!kind)
+              return A;
+          const { icon, label } = KIND[kind];
+          const n = kind === 'journey' && this.steps > 0 ? Math.round(this.steps) : 0;
+          const count = `${n} ${n === 1 ? 'step' : 'steps'}`;
+          const text = n
+              ? b `<span aria-hidden="true">${`${label} · ${count}`}</span
+          ><span class="sr-only">${`${label}, ${count}`}</span>`
+              : b `<span>${label}</span>`;
+          return b `<span class="kind" id="kind"
+      ><i class=${icon} aria-hidden="true"></i>${text}</span
+    >`;
+      }
+      _target(describedBy) {
+          const by = describedBy || A;
+          return this.href
+              ? b `<a class="target" href=${this.href} aria-describedby=${by} @click=${this._onActivate}
+          >${this.heading}</a
+        >`
+              : b `<button
+          type="button"
+          class="target"
+          aria-describedby=${by}
+          @click=${this._onActivate}
+        >${this.heading}</button>`;
+      }
+      render() {
+          const variant = this._variant;
+          const level = Math.min(6, Math.max(2, Math.round(this.headingLevel) || 3));
+          const kindLine = this._kindLine();
+          const hasKind = kindLine !== A;
+          const showDesc = variant !== 'compact' && this.description.trim() !== '';
+          const showWhy = variant === 'default' && this.reason.trim() !== '';
+          const actionLabel = variant === 'default'
+              ? this.action.trim() || (this._kind === 'document' ? 'View Document' : 'View Playbook')
+              : variant === 'prompt'
+                  ? this.action.trim()
+                  : '';
+          const describedBy = [hasKind && 'kind', showDesc && 'desc', showWhy && 'why']
+              .filter(Boolean)
+              .join(' ');
+          const picture = variant === 'prompt'
+              ? b `<div class="picture" aria-hidden="true">
+            <i class=${glyph(this.icon.trim() || PROMPT_GLYPH)}></i>
+          </div>`
+              : b `<div class="picture">
+            ${this.src
+                ? b `<img src=${this.src} alt="" loading="lazy" decoding="async" />`
+                : A}
+          </div>`;
+          return b `${iconStyles}<div class="card ${variant}">
+        ${picture}
+        ${showWhy
+            ? b `<div class="why" id="why">
+              <i class="ph ph-lightbulb" aria-hidden="true"></i>
+              <span><span class="sr-only">Why we recommend it. </span>${this.reason}</span>
+            </div>`
+            : A}
+        <div class="body">
+          ${kindLine}
+          <div class="heading" role="heading" aria-level=${level}>${this._target(describedBy)}</div>
+          ${showDesc ? b `<p class="desc" id="desc">${this.description}</p>` : A}
+          ${actionLabel
+            ? b `<div class="action">
+                <la-button variant="secondary" size="sm" .inert=${true}>${actionLabel}</la-button>
+              </div>`
+            : A}
+        </div>
+      </div>`;
+      }
+  };
+  exports.LaPlaybookCard.styles = [
+      tokens,
+      i$6 `
+      :host {
+        display: flex;
+        min-width: 0;
+      }
+      :host([hidden]) {
+        display: none;
+      }
+
+      /* ── The surface ───────────────────────────────────
+         Never overflow: hidden here: it would clip the shadow layers and the
+         focus ring. The picture clips itself. */
+      .card {
+        position: relative;
+        isolation: isolate;
+        flex: 1 1 auto;
+        min-width: 0;
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+        border-radius: var(--la-radius-lg);
+        background: var(--la-color-bg);
+        color: var(--la-color-text);
+      }
+      /* Two shadow layers that cross-fade, so the lift animates opacity, not
+         box-shadow. Behind the content (the card is its own stacking
+         context); an outer shadow paints only outside the box. */
+      .card::before,
+      .card::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        border-radius: inherit;
+        pointer-events: none;
+        transition: opacity var(--dur-base) var(--ease);
+      }
+      .card::before {
+        box-shadow: var(--la-shadow-md);
+      }
+      .card::after {
+        box-shadow: var(--la-shadow-card);
+        opacity: 0;
+      }
+      .card:focus-within::before {
+        opacity: 0;
+      }
+      .card:focus-within::after {
+        opacity: 1;
+      }
+      @media (hover: hover) {
+        .card:hover::before {
+          opacity: 0;
+        }
+        .card:hover::after {
+          opacity: 1;
+        }
+      }
+
+      /* The prompt: dashed and flat at rest, because it is a questionnaire
+         and not a playbook. It lifts like every card that acts, and keeps its
+         dashes while it does. The dashes are an outline drawn inside the
+         edge, not a border, so the prompt's box is its neighbours' and its
+         action sits on their line. */
+      .prompt {
+        background: transparent;
+        outline: 1px dashed var(--la-color-border);
+        outline-offset: -1px;
+      }
+      .prompt::before {
+        box-shadow: none;
+      }
+      .prompt::after {
+        background: var(--la-color-bg);
+      }
+
+      /* ── The one control ───────────────────────────────
+         The title's link or button; its ::after stretches over the whole
+         card, so the card is one target and one tab stop. */
+      .heading {
+        margin: 0;
+        font-size: var(--la-font-size-md);
+        font-weight: var(--la-font-weight-semibold);
+        line-height: 1.3;
+        color: var(--la-color-text);
+      }
+      .target {
+        display: inline;
+        margin: 0;
+        padding: 0;
+        border: 0;
+        background: none;
+        font: inherit;
+        color: inherit;
+        text-align: inherit;
+        text-decoration: none;
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .target::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        border-radius: var(--la-radius-lg);
+      }
+      .target:focus {
+        outline: none;
+      }
+      .target:focus-visible::after {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+      }
+
+      /* ── The picture ───────────────────────────────────── */
+      .picture {
+        position: relative;
+        flex: none;
+        aspect-ratio: 4 / 3;
+        overflow: hidden;
+        border-radius: var(--la-radius-lg) var(--la-radius-lg) 0 0;
+        background: var(--la-color-bg-muted);
+      }
+      .picture img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      /* The prompt's glyph stands in for a picture, so it is sized as one,
+         not as a glyph beside text (rule/glyph-optical-size). */
+      .prompt .picture {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: transparent;
+        font-size: 40px;
+        color: var(--la-color-text-faint);
+      }
+
+      /* ── The reason, a row under the picture ──────────
+         Off the picture, always shown (PC2, PC3): nothing to reveal, so
+         nothing differs between a pointer, a keyboard and a touch screen. */
+      .why {
+        flex: none;
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-2xs);
+        padding: var(--la-space-md) var(--la-space-xl);
+        border-bottom: 1px solid var(--la-color-border-light);
+        font-size: var(--la-font-size-sm);
+        line-height: var(--la-line-height);
+        color: var(--la-color-text-secondary);
+      }
+      .why i {
+        flex: none;
+        margin-top: var(--la-space-3xs);
+        font-size: var(--la-font-size-lg);
+        color: var(--la-color-text-muted);
+      }
+
+      /* ── The body ──────────────────────────────────────── */
+      .body {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-lg) var(--la-space-xl);
+      }
+      .kind {
+        display: inline-flex;
+        align-items: center;
+        gap: var(--la-space-2xs);
+        font-size: var(--la-font-size-sm);
+        font-weight: var(--la-font-weight-medium);
+        line-height: var(--la-line-height);
+        color: var(--la-color-text-muted);
+      }
+      .kind i {
+        font-size: var(--la-font-size-lg);
+      }
+      .desc {
+        margin: 0;
+        font-size: var(--la-font-size-sm);
+        line-height: var(--la-line-height);
+        color: var(--la-color-text-secondary);
+      }
+      .action {
+        align-self: flex-start;
+        margin-top: auto;
+        padding-top: var(--la-space-xs);
+      }
+
+      /* ── Compact: the picture, then the kind and the title under it ── */
+      .compact {
+        align-self: flex-start;
+      }
+      .compact .body {
+        flex: none;
+        gap: var(--la-space-3xs);
+        padding: var(--la-space-md) var(--la-space-lg);
+      }
+
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        margin: -1px;
+        padding: 0;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+        border: 0;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .card::before,
+        .card::after {
+          transition: none;
+        }
+      }
+
+      /* Forced colours drop shadows, which are the card's only edge. */
+      @media (forced-colors: active) {
+        .card {
+          outline: 1px solid CanvasText;
+          outline-offset: -1px;
+        }
+        .prompt {
+          outline-style: dashed;
+        }
+      }
+    `,
+  ];
+  __decorate$h([
+      n({ reflect: true })
+  ], exports.LaPlaybookCard.prototype, "variant", void 0);
+  __decorate$h([
+      n()
+  ], exports.LaPlaybookCard.prototype, "heading", void 0);
+  __decorate$h([
+      n()
+  ], exports.LaPlaybookCard.prototype, "description", void 0);
+  __decorate$h([
+      n({ reflect: true })
+  ], exports.LaPlaybookCard.prototype, "kind", void 0);
+  __decorate$h([
+      n({ type: Number })
+  ], exports.LaPlaybookCard.prototype, "steps", void 0);
+  __decorate$h([
+      n({ attribute: 'kind-label' })
+  ], exports.LaPlaybookCard.prototype, "kindLabel", void 0);
+  __decorate$h([
+      n({ attribute: 'kind-icon' })
+  ], exports.LaPlaybookCard.prototype, "kindIcon", void 0);
+  __decorate$h([
+      n()
+  ], exports.LaPlaybookCard.prototype, "src", void 0);
+  __decorate$h([
+      n()
+  ], exports.LaPlaybookCard.prototype, "icon", void 0);
+  __decorate$h([
+      n()
+  ], exports.LaPlaybookCard.prototype, "reason", void 0);
+  __decorate$h([
+      n()
+  ], exports.LaPlaybookCard.prototype, "action", void 0);
+  __decorate$h([
+      n()
+  ], exports.LaPlaybookCard.prototype, "href", void 0);
+  __decorate$h([
+      n({ type: Number, attribute: 'heading-level' })
+  ], exports.LaPlaybookCard.prototype, "headingLevel", void 0);
+  exports.LaPlaybookCard = __decorate$h([
+      t$2('la-playbook-card')
+  ], exports.LaPlaybookCard);
 
   var __decorate$g = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -27867,7 +28565,7 @@
    *
    * @fires la-toast-dismiss — when any toast closes; detail: { id: string }
    */
-  exports.LaToastStack = class LaToastStack extends i$2 {
+  exports.LaToastStack = class LaToastStack extends i$3 {
       constructor() {
           super(...arguments);
           /** Corner to anchor the stack */
@@ -28039,7 +28737,7 @@
   };
   exports.LaToastStack.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         position: fixed;
         z-index: 9999;
@@ -28138,7 +28836,7 @@
       r$1()
   ], exports.LaToastStack.prototype, "_topItemHeight", void 0);
   exports.LaToastStack = __decorate$g([
-      t$1('la-toast-stack')
+      t$2('la-toast-stack')
   ], exports.LaToastStack);
   // ── Programmatic API ─────────────────────────────────────────
   function _getStack() {
@@ -28175,7 +28873,7 @@
    *   main           — the page content
    *   aside          — optional right panel (widgets, tools); only rendered when show-aside is set
    */
-  exports.LaAppShell = class LaAppShell extends i$2 {
+  exports.LaAppShell = class LaAppShell extends i$3 {
       constructor() {
           super(...arguments);
           /** Page title shown in the header (fallback when no breadcrumbs) */
@@ -28395,7 +29093,7 @@
   };
   exports.LaAppShell.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         width: 100%;
@@ -28727,7 +29425,7 @@
       r$1()
   ], exports.LaAppShell.prototype, "_navOpen", void 0);
   exports.LaAppShell = __decorate$f([
-      t$1('la-app-shell')
+      t$2('la-app-shell')
   ], exports.LaAppShell);
 
   var __decorate$e = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -28736,7 +29434,7 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaDashboard = class LaDashboard extends i$2 {
+  exports.LaDashboard = class LaDashboard extends i$3 {
       constructor() {
           super(...arguments);
           this.showWelcome = false;
@@ -28780,7 +29478,7 @@
   };
   exports.LaDashboard.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         width: 100%;
@@ -28835,7 +29533,7 @@
       n({ type: Array })
   ], exports.LaDashboard.prototype, "deadlines", void 0);
   exports.LaDashboard = __decorate$e([
-      t$1('la-dashboard')
+      t$2('la-dashboard')
   ], exports.LaDashboard);
 
   var __decorate$d = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -28844,7 +29542,7 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaLegalAreaPage = class LaLegalAreaPage extends i$2 {
+  exports.LaLegalAreaPage = class LaLegalAreaPage extends i$3 {
       constructor() {
           super(...arguments);
           this.showAsideToggle = false;
@@ -29182,7 +29880,7 @@
   };
   exports.LaLegalAreaPage.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         width: 100%;
@@ -29532,7 +30230,7 @@
       r$1()
   ], exports.LaLegalAreaPage.prototype, "_hadBoth", void 0);
   exports.LaLegalAreaPage = __decorate$d([
-      t$1('la-legal-area-page')
+      t$2('la-legal-area-page')
   ], exports.LaLegalAreaPage);
 
   var __decorate$c = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -29556,7 +30254,7 @@
    * @prop documents - All vault documents. Each is grouped by its `category`
    *                   ('Governance' | 'Employment'); other categories are ignored.
    */
-  exports.LaDataRoomPage = LaDataRoomPage_1 = class LaDataRoomPage extends i$2 {
+  exports.LaDataRoomPage = LaDataRoomPage_1 = class LaDataRoomPage extends i$3 {
       constructor() {
           super(...arguments);
           this.documents = [];
@@ -29606,7 +30304,7 @@
   ];
   exports.LaDataRoomPage.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         height: 100%;
@@ -29667,7 +30365,7 @@
       n({ type: Array })
   ], exports.LaDataRoomPage.prototype, "documents", void 0);
   exports.LaDataRoomPage = LaDataRoomPage_1 = __decorate$c([
-      t$1('la-data-room-page')
+      t$2('la-data-room-page')
   ], exports.LaDataRoomPage);
 
   var __decorate$b = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -29707,7 +30405,7 @@
    *   @la-add-doc=${e => openDocPicker(e.detail.name)}
    * ></la-investors-page>
    */
-  exports.LaInvestorsPage = class LaInvestorsPage extends i$2 {
+  exports.LaInvestorsPage = class LaInvestorsPage extends i$3 {
       constructor() {
           /* ── Public properties ──────────────────────────────────────── */
           super(...arguments);
@@ -29950,7 +30648,7 @@
   /* ── Styles ─────────────────────────────────────────────────── */
   exports.LaInvestorsPage.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         flex-direction: column;
@@ -30237,7 +30935,7 @@
       r$1()
   ], exports.LaInvestorsPage.prototype, "_activeIndex", void 0);
   exports.LaInvestorsPage = __decorate$b([
-      t$1('la-investors-page')
+      t$2('la-investors-page')
   ], exports.LaInvestorsPage);
 
   var __decorate$a = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -30246,7 +30944,7 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  exports.LaDocumentPage = class LaDocumentPage extends i$2 {
+  exports.LaDocumentPage = class LaDocumentPage extends i$3 {
       constructor() {
           super(...arguments);
           this.documentName = 'Untitled document';
@@ -30516,7 +31214,7 @@
   };
   exports.LaDocumentPage.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         flex-direction: column;
@@ -30943,7 +31641,7 @@
       r$1()
   ], exports.LaDocumentPage.prototype, "_view", void 0);
   exports.LaDocumentPage = __decorate$a([
-      t$1('la-document-page')
+      t$2('la-document-page')
   ], exports.LaDocumentPage);
 
   var __decorate$9 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -30999,7 +31697,7 @@
    * @fires la-record-cancel  - Cancel, while editing
    * @fires la-record-preview - the document's name or Open, on a `doc` row: open it to read it
    */
-  exports.LaRecordRow = class LaRecordRow extends i$2 {
+  exports.LaRecordRow = class LaRecordRow extends i$3 {
       constructor() {
           super(...arguments);
           this.label = '';
@@ -31074,7 +31772,7 @@
   };
   exports.LaRecordRow.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         container-type: inline-size;
@@ -31214,7 +31912,7 @@
       n({ attribute: 'changed-note' })
   ], exports.LaRecordRow.prototype, "changedNote", void 0);
   exports.LaRecordRow = __decorate$9([
-      t$1('la-record-row')
+      t$2('la-record-row')
   ], exports.LaRecordRow);
 
   var __decorate$8 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -31264,7 +31962,7 @@
    *                  picked (WCAG 4.1.3; the gap GOV.UK notes for revealed content)
    * @slot follow   - follow-up la-question elements, one level down
    */
-  exports.LaQuestion = class LaQuestion extends i$2 {
+  exports.LaQuestion = class LaQuestion extends i$3 {
       constructor() {
           super(...arguments);
           this.text = '';
@@ -31304,7 +32002,7 @@
   };
   exports.LaQuestion.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         padding: var(--la-space-lg) 0;
@@ -31389,14 +32087,14 @@
       r$1()
   ], exports.LaQuestion.prototype, "_hasFollow", void 0);
   exports.LaQuestion = __decorate$8([
-      t$1('la-question')
+      t$2('la-question')
   ], exports.LaQuestion);
 
   /**
    * @license
    * Copyright 2020 Google LLC
    * SPDX-License-Identifier: BSD-3-Clause
-   */const l=e$1(class extends i$1{constructor(r$1){if(super(r$1),r$1.type!==t.PROPERTY&&r$1.type!==t.ATTRIBUTE&&r$1.type!==t.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!r(r$1))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t$1]){if(t$1===E||t$1===A)return t$1;const o=i.element,l=i.name;if(i.type===t.PROPERTY){if(t$1===o[l])return E}else if(i.type===t.BOOLEAN_ATTRIBUTE){if(!!t$1===o.hasAttribute(l))return E}else if(i.type===t.ATTRIBUTE&&o.getAttribute(l)===t$1+"")return E;return p(i),t$1}});
+   */const l=e$1(class extends i$2{constructor(r$1){if(super(r$1),r$1.type!==t$1.PROPERTY&&r$1.type!==t$1.ATTRIBUTE&&r$1.type!==t$1.BOOLEAN_ATTRIBUTE)throw Error("The `live` directive is not allowed on child or event bindings");if(!r(r$1))throw Error("`live` bindings can only contain a single expression")}render(r){return r}update(i,[t]){if(t===E||t===A)return t;const o=i.element,l=i.name;if(i.type===t$1.PROPERTY){if(t===o[l])return E}else if(i.type===t$1.BOOLEAN_ATTRIBUTE){if(!!t===o.hasAttribute(l))return E}else if(i.type===t$1.ATTRIBUTE&&o.getAttribute(l)===t+"")return E;return p(i),t}});
 
   var __decorate$7 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -31432,7 +32130,7 @@
    * @fires la-move-past        - {reason, text}: the reason's id, and the words the step should show
    * @fires la-move-past-cancel - Cancel, or the modal closed
    */
-  exports.LaMovePast = class LaMovePast extends i$2 {
+  exports.LaMovePast = class LaMovePast extends i$3 {
       constructor() {
           super(...arguments);
           this.open = false;
@@ -31510,7 +32208,7 @@
   };
   exports.LaMovePast.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         color: var(--la-color-text);
@@ -31552,7 +32250,7 @@
       r$1()
   ], exports.LaMovePast.prototype, "_text", void 0);
   exports.LaMovePast = __decorate$7([
-      t$1('la-move-past')
+      t$2('la-move-past')
   ], exports.LaMovePast);
 
   var __decorate$6 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -31692,7 +32390,7 @@
    * @fires la-step-part    - {index}: the current sub-step's button. The page does it, marks the part done,
    *                          and settles the step when the last part is done
    */
-  exports.LaPlaybookStep = class LaPlaybookStep extends i$2 {
+  exports.LaPlaybookStep = class LaPlaybookStep extends i$3 {
       constructor() {
           super(...arguments);
           this.index = 1;
@@ -31941,7 +32639,7 @@
   };
   exports.LaPlaybookStep.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         container-type: inline-size;
@@ -32352,7 +33050,7 @@
       r$1()
   ], exports.LaPlaybookStep.prototype, "_hasActions", void 0);
   exports.LaPlaybookStep = __decorate$6([
-      t$1('la-playbook-step')
+      t$2('la-playbook-step')
   ], exports.LaPlaybookStep);
 
   var __decorate$5 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -32397,7 +33095,7 @@
    * @fires la-change - {value} when the founder ticks or answers
    * @fires la-add    - {name} when they add someone not listed
    */
-  exports.LaPeopleAnswer = class LaPeopleAnswer extends i$2 {
+  exports.LaPeopleAnswer = class LaPeopleAnswer extends i$3 {
       constructor() {
           super(...arguments);
           this.mode = 'pick';
@@ -32494,7 +33192,7 @@
   };
   exports.LaPeopleAnswer.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         container-type: inline-size;
@@ -32588,7 +33286,7 @@
       r$1()
   ], exports.LaPeopleAnswer.prototype, "_draft", void 0);
   exports.LaPeopleAnswer = __decorate$5([
-      t$1('la-people-answer')
+      t$2('la-people-answer')
   ], exports.LaPeopleAnswer);
 
   var __decorate$4 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -32618,7 +33316,7 @@
    * @prop total - every step in the run
    * @prop label - accessible name of the bar (default "Playbook progress")
    */
-  exports.LaRunProgress = class LaRunProgress extends i$2 {
+  exports.LaRunProgress = class LaRunProgress extends i$3 {
       constructor() {
           super(...arguments);
           this.done = 0;
@@ -32641,7 +33339,7 @@
   };
   exports.LaRunProgress.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: flex;
         align-items: center;
@@ -32671,7 +33369,7 @@
       n()
   ], exports.LaRunProgress.prototype, "label", void 0);
   exports.LaRunProgress = __decorate$4([
-      t$1('la-run-progress')
+      t$2('la-run-progress')
   ], exports.LaRunProgress);
 
   var __decorate$3 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -32720,7 +33418,7 @@
    * @fires la-step-select - {section, step, number}: the step picked (indexes, and its number in the run)
    * @fires la-run-overview-toggle - {open}: when the founder opens or closes it (not when the page sets `open`)
    */
-  exports.LaRunOverview = class LaRunOverview extends i$2 {
+  exports.LaRunOverview = class LaRunOverview extends i$3 {
       constructor() {
           super(...arguments);
           /** One {name, done, total} per section, in run order. */
@@ -32883,7 +33581,7 @@
   };
   exports.LaRunOverview.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         position: relative;
         display: inline-flex;
@@ -33099,7 +33797,7 @@
       n({ type: Boolean, reflect: true })
   ], exports.LaRunOverview.prototype, "open", void 0);
   exports.LaRunOverview = __decorate$3([
-      t$1('la-run-overview')
+      t$2('la-run-overview')
   ], exports.LaRunOverview);
   /* GOV.UK's task status words, as la-step-marker names itself. */
   const MARKER_WORD = {
@@ -33157,7 +33855,7 @@
    * @slot note    - closes the panel: how we read it, and how sure we are
    * @fires la-source-open - {nav, doc} when a row with `nav` is pressed
    */
-  exports.LaSources = class LaSources extends i$2 {
+  exports.LaSources = class LaSources extends i$3 {
       constructor() {
           super(...arguments);
           this.sources = [];
@@ -33274,7 +33972,7 @@
   };
   exports.LaSources.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         position: relative;
         display: inline-flex;
@@ -33423,7 +34121,7 @@
       r$1()
   ], exports.LaSources.prototype, "_hasTrigger", void 0);
   exports.LaSources = __decorate$2([
-      t$1('la-sources')
+      t$2('la-sources')
   ], exports.LaSources);
 
   var __decorate$1 = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -33503,7 +34201,7 @@
    * @fires la-source-open            - {nav, doc}: the document under AI's quote, for the page to open (as la-sources does)
    * @fires la-step-questions-close   - the founder closed it without finishing
    */
-  exports.LaStepQuestions = class LaStepQuestions extends i$2 {
+  exports.LaStepQuestions = class LaStepQuestions extends i$3 {
       constructor() {
           super(...arguments);
           this.open = false;
@@ -34072,7 +34770,7 @@
   };
   exports.LaStepQuestions.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         font-family: var(--la-font-family);
@@ -34401,7 +35099,7 @@
       r$1()
   ], exports.LaStepQuestions.prototype, "_draft", void 0);
   exports.LaStepQuestions = __decorate$1([
-      t$1('la-step-questions')
+      t$2('la-step-questions')
   ], exports.LaStepQuestions);
 
   var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
@@ -34442,7 +35140,7 @@
    * @fires la-document-open    - {nav}: Open in LawVault
    * @fires la-document-close   - closed without an act
    */
-  exports.LaDocumentPreview = class LaDocumentPreview extends i$2 {
+  exports.LaDocumentPreview = class LaDocumentPreview extends i$3 {
       constructor() {
           super(...arguments);
           this.open = false;
@@ -34491,7 +35189,7 @@
   };
   exports.LaDocumentPreview.styles = [
       tokens,
-      i$5 `
+      i$6 `
       :host {
         display: block;
         font-family: var(--la-font-family);
@@ -34550,7 +35248,7 @@
       n({ attribute: 'change-label' })
   ], exports.LaDocumentPreview.prototype, "changeLabel", void 0);
   exports.LaDocumentPreview = __decorate([
-      t$1('la-document-preview')
+      t$2('la-document-preview')
   ], exports.LaDocumentPreview);
 
   exports.MOVE_PAST_REASONS = MOVE_PAST_REASONS;

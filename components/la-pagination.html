@@ -69,7 +69,7 @@
     
     <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
     <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
-    
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
   </div>
 </nav>
 
@@ -233,6 +233,26 @@
 <div class="docs-section" id="notes">
 <h3>Notes</h3>
 <p>Three hand-rolled copies existed on Dashboard, Company Manual and LawVault (<code>.feed-pager</code>). Study: <code>dev/prototypes/pharos/_pagination-options.html</code>, decided 1 Sep 2026. Decision 99.</p>
+</div>
+<div class="docs-divider"></div>
+
+<div id="basis" class="docs-section">
+<h3>Basis</h3>
+<p>What other systems do for each choice, and where we differ (researched 13 Oct 2026).</p>
+<table class="docs-table">
+<thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>A range line, “Showing 1–20 of 45”</td><td>Carbon’s pagination reads “{min}–{max} of {total} items”.</td><td>Backed (Carbon)</td></tr>
+<tr><td>First, the neighbours, last, with ellipses</td><td><a href="https://design-system.service.gov.uk/components/pagination/">GOV.UK</a> always shows the first, last and current pages, with one either side; Atlassian keeps to seven slots.</td><td>Backed (GOV.UK)</td></tr>
+<tr><td>Hidden when everything fits on one page</td><td>GOV.UK hides pagination when there’s only one page.</td><td>Backed</td></tr>
+<tr><td>Previous and Next disabled at the ends</td><td>Carbon, Polaris and Atlassian disable them; GOV.UK leaves the link out; USWDS hides it.</td><td>Backed (Carbon, Polaris, Atlassian)</td></tr>
+<tr><td>“Page 3” names, and <code>aria-current="page"</code></td><td>GOV.UK, Atlassian, USWDS and Primer.</td><td>Backed</td></tr>
+<tr><td>The pager named “Pages”</td><td>GOV.UK, Polaris and Primer name the landmark “Pagination”.</td><td>Closed: PG2, B: the landmark is named Pagination, as GOV.UK, Polaris and Primer (Jonard, 14 Oct; decision 153). Code owed</td></tr>
+<tr><td>Focus stays with what was pressed</td><td>Carbon moves focus to the other arrow when the pressed one is disabled; <a href="https://primer.style/product/components/pagination/accessibility">Primer</a> asks the page to move focus to the new content when it changes in place. Fixed 13 Oct: a pressed number keeps focus, and an arrow at the end hands it to the other.</td><td>Backed</td></tr>
+<tr><td>Back to page 1 when the narrowing changes</td><td>GOV.UK and Polaris both reset to the first page after a filter or sort.</td><td>Backed</td></tr>
+<tr><td>20 a page by default; 8 on the Dashboard, hidden below nine</td><td>No system gives a page size for a card grid. Polaris paginates only above 25 items; USWDS shows a short collection whole.</td><td>Closed: PG1, A: 20 a page, as Orion’s landing (DL-210), with no pager when everything fits (Jonard, 14 Oct; decision 153)</td></tr>
+</tbody>
+</table>
 </div>
 
 

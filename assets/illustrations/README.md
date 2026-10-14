@@ -9,5 +9,6 @@ Reusable UI illustrations referenced by components. These appear in more than on
 | Empty state — documents | `empty-documents.svg` | Document list |
 | Empty state — data room | `empty-data-room.svg` | Data room |
 | Onboarding welcome | `welcome.svg` | Dashboard FTUE |
+| Documents picture, 96px square | `documents-thumb.jpg` | `la-list-item` docs, the card variant's picture. A centre crop of the Documents picture in `new-design` (`dev/assets/illustrations/playbooks/handbook.jpg`), which Orion's Documents catalogue shows on every row |
 
 Drop SVGs here as they're created. Components reference them by path property.

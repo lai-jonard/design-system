@@ -71,7 +71,7 @@
     <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
     <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
     <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
-    
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
   </div>
 </nav>
 
@@ -556,6 +556,21 @@ In a narrow cell it truncates with an ellipsis; the word never does.</td>
 <div class="docs-note"><strong>The detail says how far, or who it is waiting on.</strong> <code style="font-family:monospace;font-size:11px;">detail</code> is plain text after a middle dot: a count ("2 of 10 steps") or the party the run waits on ("Waiting on HMRC"). It truncates with an ellipsis in a narrow cell; the word never does. There is no icon: the dot is the glyph, so the icon slot is not drawn. <code style="font-family:monospace;font-size:11px;">detail</code> is read by the dot appearance only.</div>
 <div class="docs-note"><strong>A tip is la-tooltip's job.</strong> Wrap the badge in <code style="font-family:monospace;font-size:11px;">la-tooltip appearance="light"</code> and give the badge <code style="font-family:monospace;font-size:11px;">tabindex="0"</code>, with no wrapper element: the badge draws the focus ring, and the tooltip opens on focus as it does on hover. In a narrow cell give the <code style="font-family:monospace;font-size:11px;">la-tooltip</code> host <code style="font-family:monospace;font-size:11px;">max-width: 100%</code> so the badge inside can shrink. la-tooltip does not yet wire <code style="font-family:monospace;font-size:11px;">aria-describedby</code>, so a screen reader hears the status but not the tip: put in the tip what helps, never what is needed.</div>
 </div>
+</div>
+<div class="docs-divider"></div>
+
+<div id="basis" class="docs-section">
+<h3>Basis</h3>
+<p>The dot appearance, against other systems (researched 13 Oct 2026). The pill and the counter predate this research.</p>
+<table class="docs-table">
+<thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>A dot in the state’s colour, then the word</td><td><a href="https://www.carbondesignsystem.com/building-blocks/core/patterns/status-indicators">Carbon’s status indicators</a> pair a shape, a colour and a label, shape first. Carbon also advises against one shape in different colours; Polaris changes its pip’s shape (empty, half, full) so colour isn’t the only cue.</td><td>Partly (Carbon); BD1</td></tr>
+<tr><td>A detail after a middle dot, “Blocked · Waiting on HMRC”</td><td>No system puts a detail inside a status label. Polaris keeps labels to a word or two; Atlassian’s lozenge truncates at 200px.</td><td>Closed: BD1, A, kept: the detail after a middle dot carries who a run waits on (Jonard, 14 Oct; decision 153)</td></tr>
+<tr><td>The detail in the muted text colour</td><td>Atlassian’s <code>color.text.subtlest</code> and Carbon’s <code>$text-helper</code> are the tier for metadata, both above 4.5:1 on white.</td><td>Backed (Atlassian, Carbon)</td></tr>
+<tr><td>A two-sentence tip on a badge that takes no focus</td><td>Atlassian and Primer say never put a tooltip on something that isn’t interactive; Polaris keeps tooltips to a short phrase. Carbon’s definition tooltip takes full sentences, on a focusable button.</td><td>Closed: BD1, A, kept: Orion’s tip (Jonard, 1 Oct, DL-202), on a cell the page makes focusable (decision 153)</td></tr>
+</tbody>
+</table>
 </div>
 
 

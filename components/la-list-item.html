@@ -58,6 +58,8 @@
     
       <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
     
+      <a href="#card" class="docs-nav-item" data-nav-id="card">Card</a>
+    
       <a href="#events-demo" class="docs-nav-item" data-nav-id="events-demo">Events</a>
     
   </div>
@@ -66,14 +68,14 @@
   <div class="docs-nav-group">
     <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-list-item</a>
     <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
     
-    
-    
+    <a href="#css-custom-properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-custom-properties">CSS custom properties</a>
     
     <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
     <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
     <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
-    
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
   </div>
 </nav>
 
@@ -85,9 +87,43 @@
       <div class="page-content-inner">
         
 
+<style>
+  /* Card variant demos. The stage is the product's page colour, so the cards
+     read as they do in Orion; the grid is the page's, not the component's. */
+  .page-content-inner .preview-frame.card-stage { display: block; background: var(--la-color-bg-subtle); container-type: inline-size; }
+  .card-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--la-space-sm); }
+  .card-grid--narrow { max-width: 560px; }
+  @container (max-width: 560px) {
+    .card-grid { grid-template-columns: minmax(0, 1fr); }
+  }
+  .card-stage-label { display: flex; align-items: center; gap: var(--la-space-2xs); margin: 0 0 var(--la-space-md); font-size: var(--la-font-size-sm); font-weight: var(--la-font-weight-medium); color: var(--la-color-text-secondary); }
+  .card-stage-label .n { color: var(--la-color-text-faint); font-weight: var(--la-font-weight-normal); }
+  .card-stage-label + .card-grid + .card-stage-label { margin-top: var(--la-space-xl); }
+
+  /* The playbook modal's In progress list, as 05-playbooks.html draws it in
+     new-design: the row variant, unchanged by the card. */
+  .run-stage { max-width: 560px; padding: var(--la-space-lg) var(--la-space-xl); border: 1px solid var(--la-color-border-light); border-radius: var(--la-radius-lg); background: var(--la-color-bg); }
+  .run-stage .pbx-label { margin: 0 0 var(--la-space-sm); font-size: var(--la-font-size-md); font-weight: var(--la-font-weight-medium); color: var(--la-color-text-muted); }
+  .pbx-runs { margin-inline: calc(-1 * var(--la-space-xl)); }
+  .pbx-runs la-list-item { --la-list-item-inset: var(--la-space-xl); }
+  .pbx-runs la-list-item img { width: 40px; height: 40px; border-radius: var(--la-radius-md); object-fit: cover; display: block; }
+  .run-progress { display: flex; align-items: center; gap: var(--la-space-md); font-size: var(--la-font-size-md); font-weight: var(--la-font-weight-medium); color: var(--la-color-text); }
+  .run-progress .progress { width: 96px; height: 4px; border-radius: var(--la-radius-pill); background: var(--la-color-bg-muted); overflow: hidden; flex-shrink: 0; }
+  .run-progress .progress span { display: block; height: 100%; background: var(--la-color-text-secondary); transform-origin: left; }
+  .run-meta { display: inline-flex; align-items: center; gap: var(--la-space-sm); }
+  .run-meta i { color: var(--la-color-text-faint); font-size: var(--la-font-size-lg); }
+  @media (max-width: 560px) {
+    .page-content-inner .preview-frame.card-stage { padding: var(--la-space-lg); }
+    .run-stage { padding: var(--la-space-lg); }
+    .pbx-runs { margin-inline: calc(-1 * var(--la-space-lg)); }
+    .pbx-runs la-list-item { --la-list-item-inset: var(--la-space-lg); }
+    .run-progress { flex-direction: column; align-items: flex-start; gap: var(--la-space-2xs); }
+  }
+</style>
 <div class="preview-header" id="overview">
 <h1>la-list-item</h1>
 <p>Three-column structural row for lists — icon, content, meta, and a trailing actions slot. Non-interactive by default; flip <code style="font-family:monospace;color:#c3e88d;font-size:12px;">clickable</code> to turn the row into a native button with hover, focus-visible, and keyboard activation. Clicks inside the <code style="font-family:monospace;font-size:11px;">actions</code> slot do not bubble to the row — consumers can place per-row action buttons without hijacking the main row click.</p>
+<p>Two variants: the default <code>row</code>, a row in a ruled list, and <code>variant="card"</code>, a row that stands on its own as an elevated card in a grid of its siblings, for a catalogue the founder looks something up in (see <a href="#card">Card</a>).</p>
 </div>
 
 <div class="preview-header" id="anatomy" style="margin-top:8px;">
@@ -156,10 +192,25 @@
 </div>
 </div>
 <div class="control-group">
+<label>Variant</label>
+<div class="btn-group">
+<button class="btn-toggle active" data-variant="row">row</button>
+<button class="btn-toggle" data-variant="card">card</button>
+</div>
+</div>
+<div class="control-group">
+<label>Quiet</label>
+<div class="btn-group">
+<button class="btn-toggle" data-quiet="true">On</button>
+<button class="btn-toggle active" data-quiet="false">Off</button>
+</div>
+</div>
+<div class="control-group">
 <label>Content</label>
 <input id="ctrl-content" type="text" value="Articles of Incorporation"/>
 </div>
 </div>
+<p id="ctrl-card-note" hidden style="margin:12px 0 0;font-size:12px;color:var(--la-color-text-muted);">In a card, Meta fills the line under the title, Quiet adds the Coming Soon badge in place of the caret, and Actions draws nothing: a card is one press. Clickable is implied.</p>
 </div>
 
 <div class="preview-group" style="margin-top:-12px;">
@@ -307,6 +358,256 @@
 </div>
 </div>
 
+<div class="preview-header" id="card" style="margin-top:8px;">
+<h1>Card</h1>
+<p>Set <code>variant="card"</code> for a row that stands on its own: an elevated card in a grid of its siblings, for a catalogue the founder looks something up in. It is drawn from Orion's documents and single steps in <code>05-playbooks.html</code>, in <code>new-design</code>: an area page's Documents and single steps, the library search's results and the Documents catalogue. A card acts, so it is elevated and lifts to <code>--la-shadow-card</code> on hover and focus (<code>rule/one-card-surface</code>), and it is always a native button, with <code>clickable</code> implied. The leading slot takes a glyph on a 32px tile or a picture that fills it; the default slot is the title and the <code>description</code> slot its one line; the card draws a caret unless the <code>meta</code> slot holds something in its place.</p>
+</div>
+<div class="preview-group">
+<div class="preview-label">A glyph, a title, its line and the caret: a document, a single step and a journey</div>
+<div class="preview-frame card-stage">
+<div class="card-grid">
+<la-list-item variant="card" id="snap-card-1">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Director’s Consent to Act
+<span slot="description">The signed consent you need before you file the appointment</span>
+</la-list-item>
+<la-list-item variant="card" id="snap-card-2">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Record a Director Appointment
+<span slot="description">Collect and file the particulars for a new director</span>
+</la-list-item>
+<la-list-item variant="card" id="snap-card-3">
+<i slot="icon" class="ph ph-list-checks" aria-hidden="true"></i>
+Appoint a Director
+<span slot="description">Bring a new director onto your board and file it properly</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">A picture: an &lt;img&gt; in the icon slot fills the tile (the Documents catalogue)</div>
+<div class="preview-frame card-stage">
+<div class="card-grid">
+<la-list-item variant="card">
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Shareholders’ Agreement
+<span slot="description">Vesting, leavers, reserved matters and how shares can move</span>
+</la-list-item>
+<la-list-item variant="card">
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Articles of Association
+<span slot="description">Your company’s rulebook, clause by clause</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Quiet: not ready yet. The glyph’s tile turns dashed, or the picture greys, the title goes secondary and a ghost badge takes the caret’s place. It still opens.</div>
+<div class="preview-frame card-stage">
+<div class="card-grid">
+<la-list-item variant="card" quiet id="snap-card-quiet">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Employee IP Assignment
+<span slot="description">Make sure the company owns what your team creates</span>
+<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+</la-list-item>
+<la-list-item variant="card" quiet>
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Employee IP Assignment
+<span slot="description">Make sure the company owns what your team creates</span>
+<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">A long title and line: each is cut short with an ellipsis, so cards side by side keep one height</div>
+<div class="preview-frame card-stage">
+<div class="card-grid card-grid--narrow">
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Run Collective Redundancy or TUPE Consultation
+<span slot="description">Managing Staff · The extra duties that switch on at scale or on a transfer</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Work Out If You’re a Controller or Processor
+<span slot="description">Data Protection · The first question that decides what you owe</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Two up, one up on a phone: an area page’s Documents and single steps (Employment, Hiring Staff). The grid is the page’s: two columns <code>--la-space-sm</code> apart, one when the container is narrower than 560px.</div>
+<div class="preview-frame card-stage">
+<div class="card-stage-label"><i class="ph ph-files" aria-hidden="true"></i>Documents and single steps <span class="n">10</span></div>
+<div class="card-grid">
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Written Statement of Particulars
+<span slot="description">The employment terms you must give on or before day one</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Consultancy Agreement
+<span slot="description">Check someone is genuinely a contractor, then engage them</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Staff Privacy Notice
+<span slot="description">Tell your team what you do with their personal data</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Run a Fair Recruitment Step
+<span slot="description">Advertise, shortlist and interview without shutting anyone out</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Run a Right-to-Work Check
+<span slot="description">The prescribed check, the evidence to keep, and PAYE registration</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Sponsor an Overseas Worker
+<span slot="description">Take on someone who needs a Skilled Worker visa</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Set Up Pension Auto-Enrolment
+<span slot="description">Assess your workforce, enrol them, and start contributions</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Take Out Employers’ Liability Insurance
+<span slot="description">The cover the law requires from your first hire</span>
+</la-list-item>
+<la-list-item variant="card" quiet>
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Confidentiality and Restrictive Covenants
+<span slot="description">Protect your know-how and clients when someone leaves</span>
+<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+</la-list-item>
+<la-list-item variant="card" quiet>
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Employee IP Assignment
+<span slot="description">Make sure the company owns what your team creates</span>
+<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">The library search: the first six results for “director”, each line led by its sub-group</div>
+<div class="preview-frame card-stage">
+<div class="card-grid">
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-list-checks" aria-hidden="true"></i>
+Appoint a Director
+<span slot="description">Leadership &amp; Succession · Bring a new director onto your board and file it properly</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Deed of Indemnity for a Director
+<span slot="description">Insurance · Protect a director against personal liability, within the law</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Director’s Consent to Act
+<span slot="description">Leadership &amp; Succession · The signed consent you need before you file the appointment</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Director’s Declaration of Interest
+<span slot="description">Leadership &amp; Succession · Record a director’s interest in a deal the company is doing</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-list-checks" aria-hidden="true"></i>
+Handle Director Conflicts and Transactions
+<span slot="description">Leadership &amp; Succession · Declare and approve a director’s interest before the company acts</span>
+</la-list-item>
+<la-list-item variant="card">
+<i slot="icon" class="ph ph-check-square-offset" aria-hidden="true"></i>
+Record a Director Appointment
+<span slot="description">Leadership &amp; Succession · Collect and file the particulars for a new director</span>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">The Documents catalogue: Employment, Hiring Staff, with the document picture</div>
+<div class="preview-frame card-stage">
+<div class="card-stage-label">Hiring Staff <span class="n">5</span></div>
+<div class="card-grid">
+<la-list-item variant="card">
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Written Statement of Particulars
+<span slot="description">The employment terms you must give on or before day one</span>
+</la-list-item>
+<la-list-item variant="card">
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Consultancy Agreement
+<span slot="description">Check someone is genuinely a contractor, then engage them</span>
+</la-list-item>
+<la-list-item variant="card">
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Staff Privacy Notice
+<span slot="description">Tell your team what you do with their personal data</span>
+</la-list-item>
+<la-list-item variant="card" quiet>
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Confidentiality and Restrictive Covenants
+<span slot="description">Protect your know-how and clients when someone leaves</span>
+<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+</la-list-item>
+<la-list-item variant="card" quiet>
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+Employee IP Assignment
+<span slot="description">Make sure the company owns what your team creates</span>
+<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Hover and focus: the card lifts, and a focus ring sits outside it. Tab moves one stop per card, a quiet one included; Enter or Space opens it, and the click shows in the event log below.</div>
+<div class="preview-frame card-stage">
+<div class="card-grid" id="card-keyboard">
+<la-list-item variant="card" id="snap-card-key-1">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Privacy Notice
+<span slot="description">Tell people what you do with their data, in plain English</span>
+</la-list-item>
+<la-list-item variant="card" quiet id="snap-card-key-2">
+<i slot="icon" class="ph ph-file-text" aria-hidden="true"></i>
+Data Breach Response Plan
+<span slot="description">What to do in the 72 hours after a breach</span>
+<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>
+</la-list-item>
+</div>
+</div>
+</div>
+<div class="preview-group">
+<div class="preview-label">Unchanged by the card: the run row in the playbook modal (the default row, <code>clickable</code>, inset to the modal’s edges)</div>
+<div class="preview-frame card-stage">
+<div class="run-stage">
+<h3 class="pbx-label">In progress</h3>
+<div class="pbx-runs">
+<la-list-item clickable="" data-run="" id="snap-run-1">
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+<div class="run-progress"><span class="progress"><span style="transform:scaleX(0.2)"></span></span>2 of 10 steps</div>
+<span slot="meta" class="run-meta">Updated 4 minutes ago<i class="ph-bold ph-caret-right" aria-hidden="true"></i></span>
+</la-list-item>
+<la-list-item clickable="" data-run="" id="snap-run-2">
+<img slot="icon" src="../assets/illustrations/documents-thumb.jpg" alt="">
+<div class="run-progress"><span class="progress"><span style="transform:scaleX(0.43)"></span></span>3 of 7 steps</div>
+<span slot="meta" class="run-meta">Blocked · Awaiting HMRC<i class="ph-bold ph-caret-right" aria-hidden="true"></i></span>
+</la-list-item>
+</div>
+</div>
+</div>
+</div>
+
 <div class="preview-header" id="events-demo" style="margin-top:8px;">
 <h1>Events</h1>
 <p>Row clicks and action-button clicks are logged separately — proves the <code style="font-family:monospace;color:#c3e88d;font-size:12px;">actions</code> slot does not bubble.</p>
@@ -322,7 +623,7 @@
 
   <div id="reference" class="docs-section">
     <h2>la-list-item</h2>
-    <p>Three-column structural row for lists — icon, content, meta, and a trailing actions slot. Non-interactive by default; flip clickable to turn the row into a native button with hover, focus-visible, and keyboard activation. Clicks inside the actions slot do not bubble to the row — consumers can place per-row action buttons without hijacking the main row click.</p>
+    <p>Three-column structural row for lists — icon, content, meta, and a trailing actions slot. Non-interactive by default; flip clickable to turn the row into a native button with hover, focus-visible, and keyboard activation. Clicks inside the actions slot do not bubble to the row — consumers can place per-row action buttons without hijacking the main row click. Set variant="card" for a row that stands on its own: an elevated card that always opens, in a grid of its siblings.</p>
   </div>
 
   
@@ -354,7 +655,64 @@
           <td><span class="default">clickable</span></td>
           <td><span class="type">boolean</span></td>
           <td><span class="default">false</span></td>
-          <td>When true, the row renders as a native button — tab-focusable, keyboard-activated, hover + focus styles.</td>
+          <td>When true, the row renders as a native button — tab-focusable, keyboard-activated, hover + focus styles. Implied by the card variant.</td>
+        </tr>
+      
+        <tr>
+          <td>variant</td>
+          <td><span class="default">variant</span></td>
+          <td><span class="type">&#39;row&#39; | &#39;card&#39;</span></td>
+          <td><span class="default">&#39;row&#39;</span></td>
+          <td>`row` (default): a row in a ruled list. `card`: a row that stands on its own as an elevated card, always a button, for a grid of siblings such as a catalogue.</td>
+        </tr>
+      
+        <tr>
+          <td>quiet</td>
+          <td><span class="default">quiet</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Card only. Steps the card back for something not ready yet (the picture greys, the glyph's tile turns dashed, the title goes secondary); it still opens. Put the badge that says why in the meta slot.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>icon</td>
+          <td>leading column: a glyph or an avatar; in a card, a glyph on a 32px tile or an image (an img element) that fills it</td>
+        </tr>
+      
+        <tr>
+          <td>(default)</td>
+          <td>the row's content; in a card, its title (text), one line, cut short with an ellipsis</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td>a card's one line under the title, cut short with an ellipsis (card only)</td>
+        </tr>
+      
+        <tr>
+          <td>meta</td>
+          <td>trailing text; in a card, a badge in place of the caret it draws when this is empty</td>
+        </tr>
+      
+        <tr>
+          <td>actions</td>
+          <td>trailing buttons whose clicks never reach the row (row only: a card is one press)</td>
         </tr>
       
     </tbody>
@@ -363,8 +721,30 @@
 
 
     
-    
-    
+    <div class="docs-divider"></div>
+
+
+
+
+<div id="css-custom-properties" class="docs-section">
+  <h3>CSS custom properties</h3>
+  <table class="docs-table">
+    <thead><tr><th>Name</th><th>Default</th><th>Description</th></tr></thead>
+    <tbody>
+      
+        <tr>
+          <td>--la-list-item-inset</td>
+          <td>—</td>
+          <td>pads a row's both sides equally, for a row that runs edge to edge (row only)</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+
+
   
 
   
@@ -402,6 +782,35 @@
 <tr><td>--la-color-surface-danger</td><td>Error background</td></tr>
 <tr><td>--dur-fast</td><td>Hover fade duration</td></tr>
 <tr><td>--ease</td><td>Hover fade curve</td></tr>
+</tbody>
+</table>
+</div>
+<div>
+<p style="margin-bottom:8px;font-size:12px;color:#555;font-weight:600;">Card variant</p>
+<table class="docs-table">
+<thead><tr><th>Token used</th><th>Role</th></tr></thead>
+<tbody>
+<tr><td>--la-color-bg</td><td>Card surface</td></tr>
+<tr><td>--la-shadow-md</td><td>Resting elevation</td></tr>
+<tr><td>--la-shadow-card</td><td>Lift on hover and focus</td></tr>
+<tr><td>--la-radius-lg</td><td>Card corners</td></tr>
+<tr><td>--la-space-md</td><td>Vertical padding and the gap between columns</td></tr>
+<tr><td>--la-space-lg</td><td>Horizontal padding</td></tr>
+<tr><td>--la-radius-md</td><td>Leading tile corners</td></tr>
+<tr><td>--la-color-bg-muted</td><td>Leading tile, and a picture's ground while it loads</td></tr>
+<tr><td>--la-color-text-secondary</td><td>Glyph; a quiet card's title</td></tr>
+<tr><td>--la-font-size-xl</td><td>Glyph size (16px)</td></tr>
+<tr><td>--la-font-size-md</td><td>Title</td></tr>
+<tr><td>--la-font-weight-medium</td><td>Title weight</td></tr>
+<tr><td>--la-font-size-sm</td><td>Line under the title</td></tr>
+<tr><td>--la-space-3xs</td><td>Space between title and line</td></tr>
+<tr><td>--la-color-text-muted</td><td>Line under the title</td></tr>
+<tr><td>--la-font-size-lg</td><td>Caret size (14px)</td></tr>
+<tr><td>--la-color-text-faint</td><td>Caret; a quiet card's glyph</td></tr>
+<tr><td>--la-color-border</td><td>A quiet card's dashed tile</td></tr>
+<tr><td>--la-focus-ring-offset</td><td>Focus ring offset (outside the card)</td></tr>
+<tr><td>--dur-base</td><td>Lift duration (none under reduced motion)</td></tr>
+<tr><td>--ease</td><td>Lift curve</td></tr>
 </tbody>
 </table>
 </div>
@@ -467,6 +876,47 @@ item.addEventListener(<span class="str">'click'</span>, () =&gt; {
   <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"meta"</span><span class="kw">&gt;</span>Connection lost<span class="kw">&lt;/span&gt;</span>
 <span class="kw">&lt;/la-list-item&gt;</span></div>
 </div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Card: a glyph, a title, its line and the caret</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item</span> <span class="at">variant</span>=<span class="str">"card"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;i</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">class</span>=<span class="str">"ph ph-file-text"</span>
+     <span class="at">aria-hidden</span>=<span class="str">"true"</span><span class="kw">&gt;&lt;/i&gt;</span>
+  Director’s Consent to Act
+  <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"description"</span><span class="kw">&gt;</span>
+    The signed consent you need before
+    you file the appointment
+  <span class="kw">&lt;/span&gt;</span>
+<span class="kw">&lt;/la-list-item&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">Quiet card: a picture, and a badge in place of the caret</p>
+<div class="docs-code"><span class="kw">&lt;la-list-item</span> <span class="at">variant</span>=<span class="str">"card"</span> <span class="at">quiet</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;img</span> <span class="at">slot</span>=<span class="str">"icon"</span> <span class="at">src</span>=<span class="str">"documents.jpg"</span> <span class="at">alt</span>=<span class="str">""</span><span class="kw">&gt;</span>
+  Employee IP Assignment
+  <span class="kw">&lt;span</span> <span class="at">slot</span>=<span class="str">"description"</span><span class="kw">&gt;</span>
+    Make sure the company owns what
+    your team creates
+  <span class="kw">&lt;/span&gt;</span>
+  <span class="kw">&lt;la-badge</span> <span class="at">slot</span>=<span class="str">"meta"</span> <span class="at">appearance</span>=<span class="str">"ghost"</span>
+    <span class="at">variant</span>=<span class="str">"neutral"</span> <span class="at">size</span>=<span class="str">"sm"</span><span class="kw">&gt;</span>
+    Coming Soon
+  <span class="kw">&lt;/la-badge&gt;</span>
+<span class="kw">&lt;/la-list-item&gt;</span></div>
+</div>
+<div>
+<p style="margin-bottom:8px;color:#666;font-size:12px;">The grid around the cards is the page's</p>
+<div class="docs-code">.doc-grid {
+  display: grid;
+  grid-template-columns:
+    repeat(2, minmax(0, 1fr));
+  gap: var(--la-space-sm);
+}
+<span class="cm">/* One up on a phone, as 05 does */</span>
+@media (max-width: 760px) {
+  .doc-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}</div>
 </div>
 </div><div class="docs-divider"></div><div class="docs-section" id="notes">
 <h3>Notes</h3>
@@ -477,7 +927,27 @@ item.addEventListener(<span class="str">'click'</span>, () =&gt; {
 <div class="docs-note"><strong>Stacked lists just work</strong> — place multiple <code style="font-family:monospace;font-size:11px;">la-list-item</code>s back-to-back and the bottom separator appears between siblings; <code style="font-family:monospace;font-size:11px;">:last-child</code> auto-removes the final border. No separator primitive needed.</div>
 <div class="docs-note"><strong>Inset focus ring</strong> — the focus ring uses a negative <code style="font-family:monospace;font-size:11px;">outline-offset</code> to sit inside the row. Rows sit flush against siblings via <code style="font-family:monospace;font-size:11px;">border-bottom</code>, so an outset outline would overlap adjacent rows. This diverges from <code style="font-family:monospace;font-size:11px;">la-document-item</code>'s outset ring — intentional, driven by the container context.</div>
 <div class="docs-note"><strong>Composition note</strong> — <code style="font-family:monospace;font-size:11px;">la-list-item</code> covers director-row, person-row, and coverage-row patterns that appear across the founder-flow prototypes. Prefer it over handwritten <code style="font-family:monospace;font-size:11px;">&lt;div class="row"&gt;</code> chrome.</div>
+<div class="docs-note"><strong>A card always opens</strong>: an elevated surface says it responds (<code>rule/one-card-surface</code>), so <code>variant="card"</code> renders the native button whether or not <code>clickable</code> is set. A list whose rows do nothing stays on the default row.</div>
+<div class="docs-note"><strong>Quiet is not disabled</strong>: a quiet card is for something not ready yet, and it still takes focus and still opens, so the page can say why. In <code>05-playbooks.html</code> (in <code>new-design</code>) a quiet document opens the modal that says it isn’t available yet and offers Ask an Expert. The badge in the meta slot says the state; the tile and the title step back with it. <code>quiet</code> means what it means on <code>la-tile</code>: it steps back and still acts. There is no disabled card, because no catalogue row today is a door that can’t open.</div>
+<div class="docs-note"><strong>One press, one name</strong>: a card has no actions slot, so it is a single tab stop with a single click. Its accessible name is its content (the title, the line and any badge), so give a glyph <code>aria-hidden="true"</code> and a picture <code>alt=""</code>.</div>
+<div class="docs-note"><strong>The grid is the page's</strong>: the card fills its grid cell and stretches to the row's height, and lets the cell shrink below its title (<code>min-width: 0</code> on the host), so a long title truncates instead of widening the column. Lay cards out two up, <code>--la-space-sm</code> apart, and one up on a phone.</div>
+<div class="docs-note"><strong>What the card leaves alone</strong>: <code>--la-list-item-inset</code> is for a row that runs edge to edge; a card keeps its own padding. The default row draws exactly as it did before the card existed (see the run row above).</div>
+<div class="docs-note"><strong>Hidden works</strong>: <code>hidden</code> on any <code>la-list-item</code> takes it out of the layout, so a page that filters its rows (the Documents catalogue's search) can hide one. Before 2 October 2026 the host's own display kept a hidden row on screen.</div>
 </div>
+</div>
+<div class="docs-divider"></div>
+
+<div id="basis" class="docs-section">
+<h3>Basis</h3>
+<p>The card variant and the leading tile, against other systems (researched 13 Oct 2026).</p>
+<table class="docs-table">
+<thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>A row that opens as a whole</td><td><a href="https://github.com/Shopify/polaris/blob/main/polaris.shopify.com/content/components/lists/resource-item.mdx">Polaris’s ResourceItem</a> lays a link over the whole row; Carbon’s contained list makes a clickable row a button.</td><td>Backed</td></tr>
+<tr><td>A row with no icon draws an empty 40px tile</td><td>Polaris, Carbon and Material all make the leading media optional, and Polaris closes the column when there’s none. None draws an empty tile.</td><td>Closed: LI2, B: with no icon the column closes (Jonard, 14 Oct, on design’s recommendation; decision 155). Code owed</td></tr>
+<tr><td>A row that isn’t ready: a dashed tile and a badge</td><td>GOV.UK says it once: grey <em>Cannot start yet</em> and an unlinked row. Polaris and Carbon dim and unlink the row with no badge. None pairs a changed tile with a badge for the same state; Salt marks incomplete with dots, not dashes.</td><td>Closed: LI1, B: the badge says it once; the tile stays solid (<code>rule/state-said-once</code>; Jonard, 14 Oct, on design’s recommendation; decision 155). Code owed</td></tr>
+</tbody>
+</table>
 </div>
 
 
@@ -502,15 +972,19 @@ item.addEventListener(<span class="str">'click'</span>, () =&gt; {
           icon: true,
           meta: true,
           actions: false,
+          variant: 'row',
+          quiet: false,
           content: 'Articles of Incorporation',
         };
 
         function renderLive() {
+          const card = state.variant === 'card';
           let html = '';
-          if (state.icon) html += '<i slot="icon" class="ph ph-file-text"></i>';
+          if (state.icon) html += '<i slot="icon" class="ph ph-file-text"' + (card ? ' aria-hidden="true"' : '') + '></i>';
           html += state.content || 'Articles of Incorporation';
-          if (state.meta) html += '<span slot="meta">Corporate</span>';
-          if (state.actions) {
+          if (state.meta) html += '<span slot="' + (card ? 'description' : 'meta') + '">Corporate</span>';
+          if (card && state.quiet) html += '<la-badge slot="meta" appearance="ghost" variant="neutral" size="sm">Coming Soon</la-badge>';
+          if (state.actions && !card) {
             html += '<span slot="actions">' +
               '<la-icon-button size="sm" label="Edit"><i class="ph ph-pencil-simple"></i></la-icon-button>' +
               '<la-icon-button size="sm" label="Remove"><i class="ph ph-trash"></i></la-icon-button>' +
@@ -523,6 +997,12 @@ item.addEventListener(<span class="str">'click'</span>, () =&gt; {
 
           if (state.clickable) liveItem.setAttribute('clickable', '');
           else liveItem.removeAttribute('clickable');
+
+          liveItem.setAttribute('variant', state.variant);
+          if (card && state.quiet) liveItem.setAttribute('quiet', '');
+          else liveItem.removeAttribute('quiet');
+          document.getElementById('ctrl-card-note').hidden = !card;
+          document.getElementById('live-frame').classList.toggle('card-stage', card);
 
           wireLiveListeners();
         }
@@ -561,6 +1041,16 @@ item.addEventListener(<span class="str">'click'</span>, () =&gt; {
         bindToggle('icon');
         bindToggle('meta');
         bindToggle('actions');
+        bindToggle('quiet');
+
+        document.querySelectorAll('[data-variant]').forEach(btn => {
+          btn.addEventListener('click', () => {
+            document.querySelectorAll('[data-variant]').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            state.variant = btn.dataset.variant;
+            renderLive();
+          });
+        });
 
         contentInput.addEventListener('input', () => {
           state.content = contentInput.value;
@@ -568,9 +1058,10 @@ item.addEventListener(<span class="str">'click'</span>, () =&gt; {
         });
 
         // Bind event log to snapshot rows as well
-        document.querySelectorAll('la-list-item[clickable]:not(#live-item)').forEach(el => {
+        document.querySelectorAll('la-list-item[clickable]:not(#live-item), la-list-item[variant="card"]:not(#live-item)').forEach(el => {
           el.addEventListener('click', () => {
-            logEvent('row click → #' + (el.id || '(no id)'));
+            const title = Array.from(el.childNodes).find(n => n.nodeType === 3 && n.textContent.trim());
+            logEvent('row click → ' + (el.id ? '#' + el.id : '"' + (title ? title.textContent.trim() : '(no id)') + '"'));
           });
         });
         document.querySelectorAll('la-list-item:not(#live-item) la-icon-button').forEach(btn => {

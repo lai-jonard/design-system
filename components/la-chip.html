@@ -69,7 +69,7 @@
     
     <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
     <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
-    
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
   </div>
 </nav>
 
@@ -238,6 +238,23 @@
 <div class="docs-section" id="notes">
 <h3>Notes</h3>
 <p>Replaces the hand-rolled <code>.ix-scope-chip</code> in the Pharos options bar (15 Sep 2026). Rules: <code>rule/ghost-status-badges</code> (anything that looks pressable must be pressable), <code>rule/state-said-once</code>. Decision 99.</p>
+</div>
+<div class="docs-divider"></div>
+
+<div id="basis" class="docs-section">
+<h3>Basis</h3>
+<p>What other systems do for each choice, and where we differ (researched 13 Oct 2026).</p>
+<table class="docs-table">
+<thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+<tbody>
+<tr><td>The whole chip removes the filter</td><td><a href="https://design-patterns.service.justice.gov.uk/components/filter/">MOJ’s Filter</a> makes each selected filter a link that removes it. Carbon’s dismissible tag and Material’s input chip keep a separate × and leave the body for another action.</td><td>Backed (MOJ)</td></tr>
+<tr><td>Its name says which filter: “Remove filter: Area: Employment”</td><td>Material (“Remove” and the label), Polaris (“Remove {tag}”), Atlassian (“Remove” and the text) and MOJ (“Remove this filter” and the name) all name it. Carbon says only “Dismiss”.</td><td>Backed</td></tr>
+<tr><td>A list named “Active filters”</td><td>MOJ heads its chips “Selected filters”; Material’s chip set takes a label.</td><td>Backed</td></tr>
+<tr><td>22px tall, the chip its own target</td><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html">WCAG 2.5.8</a> asks for 24×24px, or space round a smaller target. Material’s chip is 32px with a 48px target; Carbon’s default tag is 24px. Decision 44 set a 24px chip on a 32px target.</td><td>Closed: CH1, B: a 24px chip on a 32px target, as decision 44 (Jonard, 14 Oct; decision 153). Code owed</td></tr>
+<tr><td>Clear all only from two chips</td><td>Polaris shows <em>Clear all</em> from one applied filter, and MOJ shows <em>Clear filters</em> whenever filters are selected. No system waits for two. The Playbooks page shows it from one.</td><td>Closed: CH2, B: Clear filters from one filter, as Polaris and MOJ, and as the page does (Jonard, 14 Oct; decision 153). Docs and code owed</td></tr>
+<tr><td>Never a status</td><td><a href="https://design-system.service.gov.uk/components/tag/">GOV.UK’s Tag</a> shows status and is never a link or button: the other side of the same line.</td><td>Backed</td></tr>
+</tbody>
+</table>
 </div>
 
 
