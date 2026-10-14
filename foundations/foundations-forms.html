@@ -129,12 +129,12 @@
     <table class="docs-table">
       <thead><tr><th>Field type</th><th>Width</th><th>Reason</th></tr></thead>
       <tbody>
-        <tr><td>Short text (name, email, code)</td><td>240–320px</td><td>Comfortably fits the value with margin. Never full-width on a wide surface.</td></tr>
+        <tr><td>Short text (name, email, code)</td><td>The expected answer's length in characters: about 20ch for a name, a code its own length</td><td>The width says how long an answer is expected (decision 146). Never full-width on a wide surface.</td></tr>
         <tr><td>Address line</td><td>100% of column (capped at 480px)</td><td>Real-world addresses run long.</td></tr>
         <tr><td>Long text / description</td><td>100% of column (capped at 560px)</td><td>Match optimal reading line length.</td></tr>
         <tr><td>Single-select / dropdown</td><td>240–360px</td><td>Caps trigger width — option list still expands as needed.</td></tr>
-        <tr><td>Number (count, year, percent)</td><td>80–120px</td><td>Numeric values are short; wider feels off.</td></tr>
-        <tr><td>Date</td><td>140–180px</td><td>Format-aware width.</td></tr>
+        <tr><td>Number (count, year, percent)</td><td>About 10ch for a count; a year 4ch</td><td>Sized to the number expected (decision 146).</td></tr>
+        <tr><td>Date</td><td>Its segments' own width (day 2, month 2, year 4)</td><td>As GOV.UK's date input (decision 146).</td></tr>
       </tbody>
     </table>
     <p style="margin-top:16px;">Caps are <em>caps</em> — if the column is narrower, the field shrinks with it. Set <code>max-width</code> on the field, not <code>width</code>, so the form stays responsive.</p>
