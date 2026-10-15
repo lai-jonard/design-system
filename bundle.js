@@ -7009,7 +7009,7 @@
           /* The format is always in the hint (decision 145, 3); the page's own hint
              comes first. A message takes the hint's place in the same live region. */
           const hint = this._message || (this.hint ? `${this.hint} · ${format}` : format);
-          return b `
+          return b `${iconStyles}
       <fieldset ?disabled=${this.disabled}>
         <legend class=${this.label ? '' : 'sr-only'}>
           ${this.label || fallbackLabel}${this.required ? b `<span class="req" aria-hidden="true">*</span>` : ''}${this.optional ? b `<span class="opt">Optional</span>` : ''}
@@ -7021,7 +7021,9 @@
           `)}
         </div>
         <div id=${this._hintId} class="hint ${this._invalid() ? 'is-invalid' : ''}" aria-live="polite">
-          ${hint}
+          ${this._invalid() && this._message
+            ? b `<i class="ph-fill ph-warning-circle" aria-hidden="true"></i><span>${hint}</span>`
+            : hint}
         </div>
       </fieldset>`;
       }
@@ -7109,7 +7111,19 @@
         font-size: var(--la-font-size-sm);
         line-height: 1.5;
       }
-      .hint.is-invalid { color: var(--la-color-danger-text); }
+      .hint.is-invalid {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-xs);
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-urgent-text);
+      }
+      /* The forms foundation's error: led by the warning glyph, so colour
+         isn't the only signal (decision 140, amended 15 Oct 2026). */
+      .hint.is-invalid i {
+        flex-shrink: 0;
+        margin-top: 0.15em;
+      }
       :host([disabled]) { opacity: 0.4; }
     `,
   ];
@@ -32335,6 +32349,8 @@
           this.error = '';
           this._hasGuidance = false;
           this._hasFollow = false;
+          /** The answer is a list to pick from (choices, people), not a field. */
+          this._list = false;
           /** The controls this question marked invalid, so it clears only its own. */
           this._marked = new Set();
       }
@@ -32418,6 +32434,8 @@
               this._mark();
       }
       _onAnswer() {
+          const el = this._answer();
+          this._list = !!el && (el.matches('[role="radiogroup"], [role="group"], la-people-answer') || !!el.querySelector('la-choice'));
           this._name();
           this._mark();
       }
@@ -32426,12 +32444,16 @@
           const text = level
               ? b `<p class="text" part="text" role="heading" aria-level=${level}>${this.text}</p>`
               : b `<p class="text" part="text">${this.text}</p>`;
-          return b `${text}
+          const error = b `<div class="error" part="error" aria-live="polite">${this.error
+            ? b `<p><i class="ph-fill ph-warning-circle" aria-hidden="true"></i><span>${this.error}</span></p>`
+            : A}</div>`;
+          return b `${iconStyles}${text}
       ${this.means
             ? b `<la-disclosure class="means" variant="quiet" summary="What this means"><p>${this.means}</p></la-disclosure>`
             : A}
-      <div class="error" part="error" aria-live="polite">${this.error ? b `<p>${this.error}</p>` : A}</div>
+      ${this._list ? error : A}
       <div class="answer" part="answer"><slot @slotchange=${this._onAnswer}></slot></div>
+      ${this._list ? A : error}
       <div class="guidance ${this._hasGuidance ? '' : 'empty'}" aria-live="polite">
         <div class="guidance-in">
           <slot name="guidance" @slotchange=${(e) => (this._hasGuidance = this._assigned(e))}></slot>
@@ -32479,14 +32501,23 @@
       .answer {
         margin-top: var(--la-space-md);
       }
-      /* What's missing, above the answer (decision 140). A polite live region
-         that stays in the tree, so the message is heard as it appears; empty,
-         it takes no space. */
+      /* What's missing, in the forms foundation's error, led by the warning
+         glyph so colour isn't the only signal (decision 140, amended 15 Oct
+         2026): under a field, and above a list of choices, so a long list
+         never pushes it out of sight. A polite live region that stays in the
+         tree, so the message is heard as it appears; empty, it takes no
+         space. */
       .error p {
-        margin: var(--la-space-md) 0 0;
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-xs);
+        margin: var(--la-space-sm) 0 0;
         font-size: var(--la-font-size-md);
-        font-weight: var(--la-font-weight-medium);
-        color: var(--la-color-danger-text); /* verdict-ok: validation, not a verdict (decision 117) */
+        color: var(--la-color-urgent-text); /* verdict-ok: validation, not a verdict (decision 117) */
+      }
+      .error i {
+        flex-shrink: 0;
+        margin-top: 0.15em;
       }
       .follow[hidden] {
         display: none;
@@ -32544,6 +32575,9 @@
   __decorate$8([
       r$1()
   ], exports.LaQuestion.prototype, "_hasFollow", void 0);
+  __decorate$8([
+      r$1()
+  ], exports.LaQuestion.prototype, "_list", void 0);
   exports.LaQuestion = __decorate$8([
       t$2('la-question')
   ], exports.LaQuestion);
@@ -32666,7 +32700,7 @@
              la-move-past or la-move-past-cancel. The reasons are la-choice's radio
              mode (decision 141): a second press keeps the pick, and picking
              unpicks the others. */
-          return b `<la-modal
+          return b `${iconStyles}<la-modal
       ?open=${this.open}
       size="sm"
       heading="Move past this step"
@@ -32675,7 +32709,9 @@
     >
       <div @la-change=${(e) => e.stopPropagation()}>
       <p class="q" id="q">Why are you moving past this step?</p>
-      <div aria-live="polite">${missing === 'reason' ? b `<p class="error" id="q-error">${REASON_MSG}</p>` : A}</div>
+      <div aria-live="polite">${missing === 'reason'
+            ? b `<p class="error at-list" id="q-error"><i class="ph-fill ph-warning-circle" aria-hidden="true"></i><span>${REASON_MSG}</span></p>`
+            : A}</div>
       <div
         class="opts"
         role="radiogroup"
@@ -32691,7 +32727,6 @@
             >${r.label}</la-choice
           >`)}
       </div>
-      <div aria-live="polite">${missing === 'text' ? b `<p class="error at-field">${TEXT_MSG}</p>` : A}</div>
       ${own
             ? b `<la-input
             placeholder="Say why"
@@ -32701,6 +32736,9 @@
             @la-change=${(e) => (this._text = e.detail.value)}
           ></la-input>`
             : A}
+      <div aria-live="polite">${missing === 'text'
+            ? b `<p class="error"><i class="ph-fill ph-warning-circle" aria-hidden="true"></i><span>${TEXT_MSG}</span></p>`
+            : A}</div>
       </div>
       <div slot="footer" class="footer">
         <la-button variant="ghost" @click=${this._cancel}>Cancel</la-button>
@@ -32729,16 +32767,23 @@
         display: grid;
         gap: var(--la-space-sm);
       }
-      /* What's missing, at the reasons or at the field (decision 140), as
-         la-question draws its error. */
+      /* What's missing, as la-question and every form draw it: above the
+         reasons, a list, and under the field for another reason (decision
+         140, amended 15 Oct 2026). */
       .error {
-        margin: 0 0 var(--la-space-sm);
-        font-size: var(--la-font-size-md);
-        font-weight: var(--la-font-weight-medium);
-        color: var(--la-color-danger-text); /* verdict-ok: validation, not a verdict (decision 117) */
-      }
-      .error.at-field {
+        display: flex;
+        align-items: flex-start;
+        gap: var(--la-space-xs);
         margin: var(--la-space-sm) 0 0;
+        font-size: var(--la-font-size-md);
+        color: var(--la-color-urgent-text); /* verdict-ok: validation, not a verdict (decision 117) */
+      }
+      .error.at-list {
+        margin: 0 0 var(--la-space-sm);
+      }
+      .error i {
+        flex-shrink: 0;
+        margin-top: 0.15em;
       }
       la-input {
         display: block;
