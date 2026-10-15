@@ -133,29 +133,36 @@
 /* ═══════════════════════════════════════════════════════════════════════════
  * UTILITY CLASSES
  * Apply these directly to elements. GPU-safe (transform + opacity only).
+ *
+ * Entrances fill backwards, not both: the first frame holds through any delay,
+ * and once the animation ends nothing is left behind. Their last frame is the
+ * element's own state, so nothing moves. A filled `transform`, even
+ * translateY(0), would make the element the containing block for every fixed
+ * descendant, so a modal opened inside an animated page column would be
+ * boxed into that column (14 Oct 2026, Orion's playbook run).
  * ═══════════════════════════════════════════════════════════════════════════ */
 
 .anim-fade-up {
-  animation: fade-up var(--dur-base) var(--ease-out) both;
+  animation: fade-up var(--dur-base) var(--ease-out) backwards;
 }
 .anim-fade-down {
-  animation: fade-down var(--dur-fast) var(--ease-out) both;
+  animation: fade-down var(--dur-fast) var(--ease-out) backwards;
 }
 .anim-scale-in {
-  animation: scale-in var(--dur-modal) var(--ease-spring-sm) both;
+  animation: scale-in var(--dur-modal) var(--ease-spring-sm) backwards;
 }
 .anim-slide-right {
-  animation: slide-right var(--dur-modal) var(--ease-drawer) both;
+  animation: slide-right var(--dur-modal) var(--ease-drawer) backwards;
 }
 .anim-slide-left {
-  animation: slide-left var(--dur-modal) var(--ease-drawer) both;
+  animation: slide-left var(--dur-modal) var(--ease-drawer) backwards;
 }
 .anim-fade-in {
-  animation: fade-in var(--dur-base) var(--ease) both;
+  animation: fade-in var(--dur-base) var(--ease) backwards;
 }
 
 /* Stagger helpers — add to parent, children pick up delay via nth-child */
-.anim-stagger > * { animation-fill-mode: both; }
+.anim-stagger > * { animation-fill-mode: backwards; }
 .anim-stagger > *:nth-child(1)  { animation-delay: calc(var(--stagger-md) * 0); }
 .anim-stagger > *:nth-child(2)  { animation-delay: calc(var(--stagger-md) * 1); }
 .anim-stagger > *:nth-child(3)  { animation-delay: calc(var(--stagger-md) * 2); }
@@ -658,16 +665,19 @@ la-sidebar {
 
 /* Toasts — enter from bottom-right */
 la-toast {
-  animation: fade-up var(--dur-base) var(--ease-out) both;
+  animation: fade-up var(--dur-base) var(--ease-out) backwards;
 }
 
 /* Modals / dialogs — page-authored ones. The Lit modals run their own open
-   transitions inside their shadow root; this rule's filling transform would
-   make their host the containing block for their fixed backdrop, which pins
-   the whole dialog to wherever the host happens to sit in the page flow. */
+   transitions inside their shadow root, so they're left out, la-drawer too
+   (its host is role="dialog", and a transform on it, even mid-entrance,
+   collapses its fixed panel to the host's zero height). The entrance fills
+   backwards, so no transform stays on a host once it has played: a filled one
+   would make the host the containing block for a fixed backdrop or panel
+   inside it, pinning the dialog to wherever the host sits in the page flow. */
 .modal, .modal-overlay,
-[role="dialog"]:not(la-modal):not(la-insight-modal) {
-  animation: scale-in var(--dur-modal) var(--ease-spring-sm) both;
+[role="dialog"]:not(la-modal):not(la-insight-modal):not(la-drawer) {
+  animation: scale-in var(--dur-modal) var(--ease-spring-sm) backwards;
 }
 
 /* Badges */
