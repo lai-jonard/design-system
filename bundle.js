@@ -6758,17 +6758,27 @@
   exports.LaDateInput = class LaDateInput extends i$3 {
       constructor() {
           super(...arguments);
+          /** @internal The value behind value, read from the value attribute. */
           this._dateValue = '';
           /** The reader's browser locale by default, not en-US (decision 145). */
           this.locale = readerLocale();
+          /** The visible name, the fieldset's legend. Without it the legend is hidden and reads aria-label, or "Date". */
           this.label = '';
+          /** The page's own guidance, shown before the format: "The date in the board minutes · DD/MM/YYYY". */
           this.hint = '';
+          /** The earliest date allowed, ISO. Earlier fails check() with "Enter a date on or after …". */
           this.min = '';
+          /** The latest date allowed, ISO. Later fails check() with "Enter a date on or before …". */
           this.max = '';
+          /** The name when the question above already shows it, as la-question sets it. */
           this.ariaLabel = '';
+          /** Empty fails check() with "Enter the date."; the legend shows an asterisk. */
           this.required = false;
+          /** Shows "Optional" after the legend, as la-input does. */
           this.optional = false;
+          /** Disables all three parts. */
           this.disabled = false;
+          /** The error look. check() sets it; one the page sets stays until the page clears it. */
           this.error = false;
           this._month = '';
           this._day = '';
@@ -6779,6 +6789,7 @@
           this._ownError = false;
           this._hintId = `la-date-hint-${Math.random().toString(36).slice(2, 8)}`;
       }
+      /** The date as ISO YYYY-MM-DD (the value attribute too). Empty while it's part-typed, impossible or outside min and max. */
       get value() { return this._dateValue; }
       /* A value the field already holds is an echo of its own la-change, such as
          the '' a page writes back while a date is being edited: keep the typed
@@ -6947,12 +6958,12 @@
       _problem() {
           const missing = this._order().filter(part => !this._partValue(part));
           if (missing.length === 3) {
-              /* Placeholder, on DI5's pattern, for Jonard: the decision gives no words
-                 for a required date left empty. */
+              /* On DI5's pattern; decision 149 gives no words for a required date left
+                 empty, and Jonard accepted these on 16 Oct 2026. */
               return this.required ? 'Enter the date.' : '';
           }
-          /* Two parts missing is named as one message, in the locale's order;
-             placeholder on DI5's pattern ("Enter the month."), for Jonard. */
+          /* Two parts missing is named as one message, in the locale's order, on
+             DI5's pattern ("Enter the month."); Jonard accepted it on 16 Oct 2026. */
           if (missing.length)
               return `Enter the ${missing.join(' and ')}.`;
           if (!this._validDate())
@@ -32317,9 +32328,10 @@
    * them (decision 149, Q3). A follow-up is a la-question in the `follow`
    * slot: one level down, indented under a 1px hairline (Q2).
    *
-   * Pressed too soon, the page's button sets `error`: the message shows above
-   * the answer, the choices are marked `invalid` (a field takes `error`), and
-   * the page calls focusAnswer() (decision 140). The page clears it as soon as
+   * Pressed too soon, the page's button sets `error`: the message shows under
+   * a field and above a list of choices (decision 140, amended 15 Oct 2026), the
+   * choices are marked `invalid` (a field takes `error`), and the page calls
+   * focusAnswer() (decision 140). The page clears it as soon as
    * the answer is given.
    *
    * Usage:
@@ -32333,7 +32345,8 @@
    * @prop means    - the plain-English gloss behind *What this means* (a quiet la-disclosure); none hides it
    * @prop headingLevel - attribute heading-level: the question is the screen's heading at this level (2–6),
    *                  for a screen that asks one question; 0 (default), it isn't a heading
-   * @prop error    - what's missing, above the answer, when the page's button was pressed too soon (decision 140)
+   * @prop error    - what's missing, when the page's button was pressed too soon: under a field, above a list
+   *                  of choices (decision 140, amended 15 Oct 2026)
    * @slot          - the answer: inputs, choices, a record row. The first element is the one the question names
    * @slot guidance - la-guidance for the picked option. Its wrapper is a polite live region that
    *                  stays in place, so a screen reader hears the guidance when an option is
@@ -34170,7 +34183,7 @@
   exports.LaRunOverview = class LaRunOverview extends i$3 {
       constructor() {
           super(...arguments);
-          /** One {name, done, total} per section, in run order. */
+          /** One section each, in run order: {name, steps?: {title, status}[], done?, total?}. With `steps` the counts come from them. JSON as an attribute. */
           this.sections = [];
           /** The popover's heading, and its accessible name. */
           this.heading = 'Playbook overview';

@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-run-overview — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .p-pad { padding: var(--la-space-lg); }
+    .p-box { width: 100%; max-width: 560px; }
+    .p-rows { display: flex; flex-direction: column; width: 100%; max-width: 560px; }
+    .p-row { display: grid; grid-template-columns: minmax(0, 160px) minmax(0, 1fr); align-items: center; gap: var(--la-space-lg); padding: var(--la-space-md) 0; border-top: 1px solid var(--la-color-border-light); }
+    .p-row:first-child { border-top: 0; }
+    .p-cap { font-size: var(--la-font-size-md); color: var(--la-color-text); }
+    .p-cap code { display: block; margin-top: var(--la-space-3xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .p-read { display: block; margin-top: var(--la-space-xs); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); overflow-wrap: anywhere; }
+    .p-narrow { width: 100%; max-width: 200px; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    /* ── Controls ─────────────────────────────────────── */
+    .ctl-text { width: calc(var(--la-space-xl) * 9); max-width: 100%; }
+    .ctl-acts { display: flex; gap: var(--la-space-sm); }
+
+    /* Room under an open popover. It opens in the top layer, so no frame
+       clips it (decision 143), but it would cover what follows. */
+    .p-tall { width: 100%; max-width: 560px; min-height: 620px; }
+    .run-head h4 { margin: 0 0 var(--la-space-xs); font-size: var(--la-font-size-xl); font-weight: var(--la-font-weight-medium); }
+    .run-head p { margin: 0 0 var(--la-space-md); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .usage-gap { margin-top: var(--la-space-lg); }
+    /* The Basis table's first column is prose, not a property name. */
+    #basis .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; width: 28%; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-run-overview</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-run-overview</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-run-overview</h1>
+          <p>Where a playbook run has got, in its header: a pill with the section you’re in and the count, which opens the playbook overview. The overview heads with <code>la-run-progress</code>, then lists each section with its own count and every step under it, with the card’s numbered marker. Picking a section or a step takes the page to it. The count stays on the pill, so the overview is never the only place a founder can see how far they’ve got. It opens in the top layer, placed against the pill, and focus moves into it (decision 143).</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="p-box">
+              <la-run-overview class="demo-run" data-state="part"></la-run-overview>
+            </div>
+            <ol class="anatomy-list">
+              <li><strong>Pill.</strong> The section you’re in, numbered (“02 Prepare and sign”), a hairline, the count (“3 of 10 steps done”) and a caret. It’s a button named by its own text. A section name too long for it is cut, and shown whole in a tooltip on hover and focus.</li>
+              <li><strong>Heading.</strong> “Playbook overview”, which names the popover, a non-modal dialog in the top layer.</li>
+              <li><strong>Progress.</strong> <code>la-run-progress</code>: the count, then the bar, named for the run (<code>run-title</code>).</li>
+              <li><strong>Sections.</strong> Each with <code>la-step-marker</code>’s check (done, in progress, not yet started), its name and its own count (“2 of 2”).</li>
+              <li><strong>Steps.</strong> Under each section, the card’s numbered <code>la-step-marker</code> and the step’s title, wrapped at 12px. The step you’re on reads heavier and is marked as current.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header">
+          <h1>Live preview</h1>
+          <p>Finish or undo steps to move the run; switch between a run with steps and one given only counts. The log shows the events, and the line under it what a screen reader gets from the pill.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>run</label>
+              <div class="ctl-acts">
+                <button class="btn-toggle" id="ctl-next" type="button">Finish the next step</button>
+                <button class="btn-toggle" id="ctl-undo" type="button">Undo</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>sections</label>
+              <div class="btn-group" data-control="shape">
+                <button class="btn-toggle active" data-value="steps" type="button">with steps</button>
+                <button class="btn-toggle" data-value="counts" type="button">counts only</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>open</label>
+              <div class="btn-group" data-control="open">
+                <button class="btn-toggle active" data-value="false" type="button">false</button>
+                <button class="btn-toggle" data-value="true" type="button">true</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-heading">heading</label>
+              <input id="ctl-heading" class="ctl-text" type="text" value="Playbook overview">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame p-pad">
+            <div class="p-tall">
+              <div class="run-head">
+                <h4>Appoint a director</h4>
+                <p>Appoint a new director to your board.</p>
+              </div>
+              <la-run-overview id="live" run-title="Appoint a director"></la-run-overview>
+            </div>
+          </div>
+          <div class="preview-label event-log" id="live-log" aria-live="polite">No events yet.</div>
+          <div class="preview-label event-log" id="live-read"></div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-states" class="preview-group">
+          <div class="preview-label">The pill, not started, part way and all done. All done shows the last section, with nothing current</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Not started<code>0 of 10</code></span><div><la-run-overview class="demo-run" data-state="start"></la-run-overview></div></div>
+              <div class="p-row"><span class="p-cap">Part way<code>3 of 10</code></span><div><la-run-overview class="demo-run" data-state="part"></la-run-overview></div></div>
+              <div class="p-row"><span class="p-cap">All done<code>10 of 10</code></span><div><la-run-overview class="demo-run" data-state="done"></la-run-overview></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-open" class="preview-group">
+          <div class="preview-label">Open, with <code>open</code> set by the page, so focus stays where it was: every step under its section. Moved past shows the bent arrow, the next step its filled number. It sits in the top layer, placed against its pill, and follows it as the page scrolls. One is open at a time, and a click anywhere else closes it, as on a run; press its pill to open it again, and focus moves to its first section</div>
+          <div class="preview-frame p-pad">
+            <div class="p-tall">
+              <la-run-overview class="demo-run" data-state="part" run-title="Appoint a director" open></la-run-overview>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-shapes" class="preview-group">
+          <div class="preview-label">Other runs: given counts only, each section is one row; one unnamed section shows only the count, and its popover only the bar; a long section name is cut on the pill, and shown whole in a tooltip on hover and focus, with no tooltip on a name that fits (RO3, decision 148); a long run’s list scrolls past 70% of the screen or 560px, and only the list moves (RO4, decision 148). Open each to see its list</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Counts only<code>{name, done, total}</code></span><div><la-run-overview class="demo-run" data-state="counts"></la-run-overview></div></div>
+              <div class="p-row"><span class="p-cap">One unnamed section<code>[{name: '', …}]</code></span><div><la-run-overview class="demo-run" data-state="single"></la-run-overview></div></div>
+              <div class="p-row"><span class="p-cap">A long section name<code>200px column</code></span><div class="p-narrow"><la-run-overview class="demo-run" data-state="long-name"></la-run-overview></div></div>
+              <div class="p-row"><span class="p-cap">A long run<code>5 sections, 30 steps</code></span><div><la-run-overview class="demo-run" data-state="long-run"></la-run-overview></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-read" class="preview-group">
+          <div class="preview-label">What a screen reader hears from the pill: its own text as its name, the whole section name included, whether it’s open, and that it opens a dialog. Read off the rendered pill</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows" id="aria-rows">
+              <div class="p-row"><span class="p-cap">Named sections</span><div><la-run-overview class="demo-run" data-state="part"></la-run-overview><span class="p-read"></span></div></div>
+              <div class="p-row"><span class="p-cap">One unnamed section</span><div><la-run-overview class="demo-run" data-state="single"></la-run-overview><span class="p-read"></span></div></div>
+            </div>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-run-overview</h2>
+    <p>Where a playbook run has got, in its header: a pill with the section you’re in and the count, which opens the playbook overview. The overview heads with la-run-progress, then lists each section with its own count and every step under it, with the card’s numbered marker. Picking a section or a step takes the page to it. The count stays on the pill, so the overview is never the only place a founder can see how far they’ve got. It opens in the top layer, placed against the pill, and focus moves into it (decision 143).</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>sections</td>
+          <td><span class="default">sections</span></td>
+          <td><span class="type">RunSection[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>one {name, steps?} or {name, done, total} per section, in run order (attribute: JSON)</td>
+        </tr>
+      
+        <tr>
+          <td>heading</td>
+          <td><span class="default">heading</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Playbook overview&#39;</span></td>
+          <td>the popover's heading and accessible name (default "Playbook overview")</td>
+        </tr>
+      
+        <tr>
+          <td>runTitle</td>
+          <td><span class="default">run-title</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>attribute run-title: the run's title, the name of the bar it draws (decision 148); without one the bar is "Playbook progress"</td>
+        </tr>
+      
+        <tr>
+          <td>open</td>
+          <td><span class="default">open</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>whether the overview is open; the founder's clicks set it, and a page may set it (reflected)</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-run-overview-toggle</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{open}: when the founder opens or closes it (not when the page sets `open`)</td>
+        </tr>
+      
+        <tr>
+          <td>la-section-select</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{index}: the section picked, for the page to open and scroll to</td>
+        </tr>
+      
+        <tr>
+          <td>la-step-select</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>{section, step, number}: the step picked (indexes, and its number in the run)</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-radius-pill</code> · <code>--la-shadow-xs</code> · <code>--la-color-border-light</code></td><td>The pill and its hairline ring.</td></tr>
+                <tr><td><code>--la-font-size-xs</code> · <code>--la-font-weight-medium</code></td><td>The pill’s text.</td></tr>
+                <tr><td><code>--la-radius-lg</code> · <code>--la-shadow-popover</code> · <code>--la-color-bg</code></td><td>The popover.</td></tr>
+                <tr><td><code>--la-font-size-base</code> · <code>--la-font-weight-semibold</code></td><td>The heading, and section names (medium).</td></tr>
+                <tr><td><code>--la-font-size-sm</code> · <code>--la-color-text-secondary</code></td><td>Step titles.</td></tr>
+                <tr><td><code>--la-step-marker-size</code> · <code>--la-step-marker-check-size</code></td><td>Markers, and the steps’ indent.</td></tr>
+                <tr><td><code>--la-space-sm</code> · <code>--la-space-lg</code></td><td>The popover’s gap from the pill, and its least distance from the window’s edges.</td></tr>
+                <tr><td><code>--dur-fast</code> · <code>--ease</code></td><td>The popover’s fade and the caret’s turn; neither moves under reduced motion.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>The run’s sections and steps, as a property.</p>
+            <div class="docs-code"><span class="kw">&lt;la-run-overview</span> <span class="at">run-title</span>=<span class="str">"Appoint a director"</span> .<span class="at">sections</span>=${[{<span class="at">name</span>: <span class="str">'Check'</span>, <span class="at">steps</span>: [{<span class="at">title</span>: <span class="str">'Check your articles…'</span>, <span class="at">status</span>: <span class="str">'complete'</span>}, …]}, …]}<span class="kw">&gt;&lt;/la-run-overview&gt;</span></div>
+            <p class="usage-gap">Counts only, as JSON in the attribute.</p>
+            <div class="docs-code"><span class="kw">&lt;la-run-overview</span> <span class="at">sections</span>=<span class="str">'[{"name":"Check","done":2,"total":2},{"name":"File","done":0,"total":4}]'</span><span class="kw">&gt;&lt;/la-run-overview&gt;</span></div>
+            <p class="usage-gap">Taking the page to what was picked: open the section if it’s folded, scroll, and put focus there.</p>
+            <div class="docs-code">overview.addEventListener(<span class="str">'la-step-select'</span>, (e) =&gt; showStep(e.detail.section, e.detail.step));</div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>When to use.</strong> The header of a playbook run. Not for a list of runs, where each row carries <code>la-progress</code>.</li>
+              <li><strong>The data, and a method.</strong> <code>sections</code> is one <code>{name, steps?, done?, total?}</code> per section, in run order. With <code>steps</code> (<code>{title, status}</code>, status complete · active · pending · passed) the counts come from them; without, <code>done</code> is kept between 0 and <code>total</code>. JSON as an attribute. Without <code>run-title</code> the bar is “Playbook progress”. A run with no steps isn’t drawn. <code>close()</code> closes it from the page.</li>
+              <li><strong>Where you are.</strong> The section on the pill is the first one not finished, because steps run in order; when all are done it shows the last. With steps given, the step you’re on is the one marked <code>active</code>.</li>
+              <li><strong>What counts.</strong> A step counts once it settles: done, moved past, or done before you started. Moved past counts as done (RP1, Jonard, 13 Oct).</li>
+              <li><strong>Focus.</strong> A panel you work in, so a non-modal dialog (decision 143): when the founder opens it, focus moves to its first section (to the panel itself when there are none). It isn’t trapped. Escape closes it and returns focus to the pill; a click outside closes it. One is open at a time. Opened by the page, it leaves focus where it was.</li>
+              <li><strong>Where it opens.</strong> In the top layer (the <code>popover</code> attribute), right after the pill in the page, so no container clips it and reading order holds. CSS anchor positioning puts it below the pill and flips it to fit; where the browser lacks it, the component places it from the pill, moves it as the page scrolls or resizes, and keeps it inside the window (decision 143, <code>rule/pop-outs-never-clip</code>), as <code>la-sources</code> does.</li>
+              <li><strong>What it leaves out.</strong> Orion’s north-star pill carried a status word, an owner and dates. Phase B has neither an owner nor dates, and no system puts a status word on a trigger (Jonard, 12 Oct 2026).</li>
+              <li><strong>Against Bobby’s CMS.</strong> 07 draws the count and bar on a line under the run’s intro. Here the count lives on the pill and the bar in the popover; the page doesn’t also show the line (RP2 closed 14 Oct, A, decision 148).</li>
+              <li><strong>Closed 14 Oct, built 14 Oct</strong> (decisions 148 and 143). The counts (RO2, amended 14 Oct): the pill says “3 of 10 steps done”, as the bar it opens; the page’s section headings keep “done”, the rows a bare count. A long section name is cut on the pill and shown whole in an <code>la-tooltip</code> on hover and focus (RO3, C). A long list scrolls past min(70vh, 560px), the heading and bar staying put (RO4, A). The bar is named for the run (RP3). The popover opens in the top layer, and focus moves in (X6).</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and where we differ (researched 12 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>A compact pill that opens into detail</td><td><a href="https://docs.appcues.com/checklists/what-are-checklists">Appcues</a> and Userpilot open a checklist from a launcher; <a href="https://linear.app/docs/project-milestones">Linear</a> opens a milestone’s detail; <a href="https://github.com/facebook/astryx/blob/main/packages/core/src/Stepper/Stepper.doc.mjs">Astryx’s Stepper</a> collapses to a compact summary; <a href="https://www.shapeof.ai/patterns/action-plan">Shape of AI’s Action plan</a> keeps a plan reviewable.</td><td>Backed</td></tr>
+                <tr><td>The count and current section stay on the pill</td><td>Appcues shows what’s left on its launcher; Shopify keeps “0 out of 3 steps completed” visible; Linear shows the current milestone; <a href="https://www.nngroup.com/articles/visibility-system-status/">NN/g</a>: keep people informed of status; GOV.UK’s step-by-step says which step you’re in.</td><td>Backed</td></tr>
+                <tr><td>No status word, owner or dates</td><td>No source puts a status word on a trigger. Owner and dates aren’t in PRO-210 or the brief.</td><td>Decided: Jonard, 12 Oct 2026</td></tr>
+                <tr><td>A popover, secondary to the page</td><td><a href="https://shopify.dev/docs/api/app-home/web-components/overlays/popover">Polaris</a>: popovers hold secondary information; <a href="https://carbondesignsystem.com/patterns/disclosures/">Carbon</a>: don’t hide critical information in a disclosure. The run’s cards are the primary record and the pill keeps the count.</td><td>Backed</td></tr>
+                <tr><td>Every step under its section, numbered markers, titles wrapped at 12px</td><td>Salesforce’s Setup Assistant marks every step; <a href="https://design-system.service.gov.uk/components/task-list/">GOV.UK’s task list</a> gives every row a status. Titles wrap, as <a href="https://www.carbondesignsystem.com/building-blocks/core/components/button/guidelines">Carbon</a> asks of labels (decision 131).</td><td>Decided: Jonard, 12 Oct 2026, from three mocks; rows backed</td></tr>
+                <tr><td>Rows take the page to their section or step</td><td><a href="https://www.nngroup.com/articles/table-of-contents/">NN/g</a> on in-page tables of contents; Atlassian’s Progress tracker and Carbon’s Progress indicator make steps clickable. Caution: GOV.UK doesn’t link tasks that can’t start; here a row only scrolls.</td><td>Backed, with GOV.UK’s caution</td></tr>
+                <tr><td>A non-modal dialog; focus moves in, and isn’t trapped</td><td><a href="https://primer.style/product/components/popover/accessibility/">Primer</a> (“programmatically move focus into it”), <a href="https://www.radix-ui.com/primitives/docs/components/popover">Radix</a>, Atlassian and Astryx; the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/dialog-modal/">APG</a>: “When a dialog opens, focus moves to an element inside the dialog.” Against: Astryx and Salesforce trap focus in a popover.</td><td>Closed: X6, 1C: a panel you work in is a dialog, and focus moves to its first section (Jonard, 14 Oct; decision 143). Built 14 Oct</td></tr>
+                <tr><td>Escape and a click outside close it; focus returns to the pill</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/API/Popover_API/Using">MDN’s popover</a>, APG, Carbon’s Toggletip, Atlassian’s Popup, Primer’s Overlay, Salesforce and Astryx.</td><td>Backed</td></tr>
+                <tr><td>The pill is named by its own text</td><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/label-in-name.html">WCAG 2.5.3</a> and failure F96; Primer’s Button accessibility.</td><td>Backed</td></tr>
+                <tr><td><code>open</code>, which a page may set</td><td><a href="https://github.com/facebook/astryx/blob/main/packages/core/src/Popover/Popover.spec.md">Astryx</a> (isOpen), <a href="https://github.com/material-components/material-web/blob/main/docs/components/menu.md">Material Web’s menu</a> (open), and Atlassian’s, Primer’s and Carbon’s popovers.</td><td>Backed</td></tr>
+                <tr><td>Count words: rows “2 of 2”, the page’s headers “1 of 2 done”, the pill “3 of 9 steps done”</td><td>Most write “X of Y” with a noun (Primer, Atlassian, Shopify, GOV.UK); <a href="https://primer.style/product/components/counter-label/accessibility/">Primer</a>: a count needs words saying what it counts.</td><td>Closed: RO2, A, amended (O4): the pill says “steps” too, as the bar (Jonard, 14 Oct; decision 148). Built 14 Oct</td></tr>
+                <tr><td>A long section name is cut on the pill</td><td>Carbon wraps button labels; <a href="https://primer.style/product/components/truncate/accessibility/">Primer</a>: don’t truncate focusable elements. Astryx’s Button truncates and keeps the full name; Carbon’s tags truncate with a tooltip on hover and focus.</td><td>Closed: RO3, C: cut, with the whole name in a tooltip on hover and focus, as Carbon’s tags (Jonard, 14 Oct; decision 148). Built 14 Oct</td></tr>
+                <tr><td>The list scrolls past 70% of the screen or 560px</td><td><a href="https://atlassian.design/components/popup/usage">Atlassian</a>: popups shouldn’t scroll; Carbon: rarely, the body only. Astryx, Polaris, Primer and Material 3 allow a bounded scroll; none uses our cap.</td><td>Closed: RO4, A, as built (Jonard, 14 Oct; decision 148)</td></tr>
+                <tr><td>In the top layer, placed against its pill and kept inside the window</td><td><a href="https://opensource.adobe.com/spectrum-web-components/components/overlay/">Spectrum</a>, Atlassian, <a href="https://github.com/material-components/material-web/blob/main/docs/components/menu.md">Material Web</a> and Astryx use the popover attribute; <a href="https://floating-ui.com/docs/misc">Floating UI</a>: a panel inside a container “may get clipped”. Anchor positioning is <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/anchor-name">Baseline</a> but partial on <a href="https://caniuse.com/css-anchor-positioning">caniuse</a>, hence the fallback.</td><td>Closed: X6, 2B (Jonard, 14 Oct; decision 143). Built 14 Oct</td></tr>
+                <tr><td>On a phone it stays a popover, kept inside the screen</td><td>Material 3 suggests a bottom sheet for menus on compact screens; Primer’s SelectPanel goes full screen; Astryx clamps a popover.</td><td>Decided: popover for now (plan of 12 Oct 2026)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+    (function () {
+      /* Appoint a director: ten steps in three sections. */
+      var RUN = [
+        { name: 'Check', titles: ['Check your articles give the power, and pick the route.', 'Confirm the person is eligible and not barred.'] },
+        { name: 'Prepare and sign', titles: ['Create the letter of appointment or service agreement.', 'Create the board minutes or written resolution.', 'Create the ordinary resolution of the shareholders.', 'Get the new director’s consent to act signed.'] },
+        { name: 'File', titles: ['Have the new director verify their identity at Companies House.', 'Collect the filing particulars.', 'File form AP01 at Companies House.', 'Handle an investor nominee.'] }
+      ];
+      /* A run where the first n steps settled (the third moved past) and the next is active. */
+      function withSteps(n, run) {
+        var k = 0;
+        return (run || RUN).map(function (s) {
+          return { name: s.name, steps: s.titles.map(function (t) {
+            var i = k++;
+            return { title: t, status: i < n ? (i === 2 ? 'passed' : 'complete') : i === n ? 'active' : 'pending' };
+          }) };
+        });
+      }
+      function counts(n) {
+        var k = 0;
+        return RUN.map(function (s) { var d = 0; s.titles.forEach(function () { if (k++ < n) d++; }); return { name: s.name, done: d, total: s.titles.length }; });
+      }
+      var LONG = [1, 2, 3, 4, 5].map(function (i) {
+        return { name: 'Section ' + i, titles: [1, 2, 3, 4, 5, 6].map(function (j) { return 'Step ' + ((i - 1) * 6 + j) + ' of the run, with a title long enough to wrap.'; }) };
+      });
+      var DATA = {
+        start: withSteps(0), part: withSteps(3), done: withSteps(10), counts: counts(3),
+        single: [{ name: '', done: 2, total: 5 }],
+        'long-name': [{ name: 'Prepare, sign and file the board minutes or written resolution', done: 0, total: 4 }, { name: 'File', done: 0, total: 4 }],
+        'long-run': withSteps(7, LONG)
+      };
+
+      function pillRead(el) {
+        var b = el.shadowRoot.querySelector('.pill');
+        if (!b) return '';
+        return 'button · name "' + b.textContent.replace(/\s+/g, ' ').trim() + '" · aria-expanded=' + b.getAttribute('aria-expanded') + ' · aria-haspopup=' + b.getAttribute('aria-haspopup');
+      }
+
+      customElements.whenDefined('la-run-overview').then(function () {
+        document.querySelectorAll('la-run-overview.demo-run').forEach(function (el) { el.sections = DATA[el.dataset.state]; });
+        document.querySelectorAll('#aria-rows la-run-overview').forEach(function (el) {
+          el.updateComplete.then(function () { el.nextElementSibling.textContent = pillRead(el); });
+        });
+
+        /* Live preview. */
+        var live = document.getElementById('live'), log = document.getElementById('live-log'), out = document.getElementById('live-read');
+        var n = 3, shape = 'steps';
+        function paint() { live.sections = shape === 'steps' ? withSteps(n) : counts(n); live.updateComplete.then(function () { out.textContent = pillRead(live); }); }
+        function note(t) { log.textContent = t; }
+        document.getElementById('ctl-next').addEventListener('click', function () { if (n < 10) { n++; paint(); } });
+        document.getElementById('ctl-undo').addEventListener('click', function () { if (n > 0) { n--; paint(); } });
+        document.getElementById('ctl-heading').addEventListener('input', function (e) { live.heading = e.target.value; });
+        document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-toggle'); if (!btn) return;
+            group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+            var v = btn.getAttribute('data-value');
+            if (group.getAttribute('data-control') === 'shape') { shape = v; paint(); }
+            if (group.getAttribute('data-control') === 'open') { live.open = v === 'true'; live.updateComplete.then(function () { out.textContent = pillRead(live); }); }
+          });
+        });
+        live.addEventListener('la-section-select', function (e) { note('la-section-select {index: ' + e.detail.index + '}'); });
+        live.addEventListener('la-step-select', function (e) { note('la-step-select {section: ' + e.detail.section + ', step: ' + e.detail.step + ', number: ' + e.detail.number + '}'); });
+        live.addEventListener('la-run-overview-toggle', function (e) {
+          note('la-run-overview-toggle {open: ' + e.detail.open + '}');
+          document.querySelectorAll('.btn-group[data-control="open"] .btn-toggle').forEach(function (b) { b.classList.toggle('active', b.getAttribute('data-value') === String(e.detail.open)); });
+          live.updateComplete.then(function () { out.textContent = pillRead(live); });
+        });
+        paint();
+      });
+    })();
+</script>
+
+
+</body>
+</html>

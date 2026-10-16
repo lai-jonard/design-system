@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-thinking — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .p-pad { padding: var(--la-space-xl); }
+    .d-box { width: 100%; max-width: 560px; }
+    .d-cap { display: block; margin-bottom: var(--la-space-xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .d-cap code { font-size: var(--la-font-size-sm); }
+    .d-pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--la-space-xl); width: 100%; }
+    .d-narrow { max-width: 220px; }
+    .d-acts { display: flex; gap: var(--la-space-sm); margin-top: var(--la-space-md); }
+    .d-text-input { width: min(100%, 44ch) !important; }
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .pattern-copy { font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .pattern-copy a { color: var(--la-color-text); }
+    .pattern-h { margin: var(--la-space-xl) 0 var(--la-space-sm); font-size: var(--la-font-size-lg); font-weight: var(--la-font-weight-semibold); color: var(--la-color-text); }
+    .pattern-list { margin: 0; padding-left: var(--la-space-lg); }
+    .pattern-list li { margin: var(--la-space-xs) 0; max-width: 80ch; }
+    .pattern-copy .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; }
+    /* In context: AI's panel while it reads, as la-step-questions draws it. */
+    .reading { display: flex; align-items: center; gap: var(--la-space-sm); margin: 0; }
+    .reading i { flex-shrink: 0; font-size: var(--la-font-size-lg); color: var(--la-color-text-muted); }
+    .ev-lead { margin: 0; font-size: var(--la-font-size-sm); color: var(--la-color-text-secondary); }
+    .quote { margin: var(--la-space-sm) 0 0; padding: var(--la-space-sm) var(--la-space-md); border-radius: var(--la-radius-md); background: var(--la-color-bg); border: 1px solid var(--la-color-border-light); font-size: var(--la-font-size-sm); }
+    /* The Basis table's first column is prose, so it wraps. */
+    #basis .docs-table td { white-space: normal; }
+    #basis .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); width: 30%; }
+    .placeholder { display: inline-flex; align-items: center; gap: var(--la-space-xs); margin-top: var(--la-space-sm); font-size: var(--la-font-size-sm); color: var(--la-color-warning-text); }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-thinking</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+      <a href="#content" class="docs-nav-item" data-nav-id="content">Content guidance</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-thinking</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-thinking</h1>
+          <p>AI is working on something, said in words, with a soft light sweeping across them. For a wait the founder can see coming but doesn’t have to sit through, where there’s nothing concrete to show yet: AI reading a document before it suggests an answer. Built as <a href="https://elements.ai-sdk.dev/components/shimmer">Vercel AI Elements’ Shimmer</a> is (<a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/137-la-thinking-while-ai-reads.md">decision 137</a>). The name was locked for the AI thinking state in <code>loading.md</code> §2.9.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="d-box"><la-thinking>Reading your articles of association…</la-thinking></div>
+            <ol class="anatomy-list">
+              <li><strong>The words.</strong> The default slot: what AI is doing, in the page’s words. Muted colour (<code>--la-color-text-muted</code>).</li>
+              <li><strong>The band.</strong> A soft band of the background colour, transparent at both ends, <code>spread</code> px per character either side of its middle. It sweeps from one side to the other and loops, every <code>duration</code> seconds, linear.</li>
+              <li><strong>The host.</strong> <code>role="status"</code> with <code>aria-live="polite"</code>: a screen reader hears the words once when they appear, not the motion.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header">
+          <h1>Live preview</h1>
+          <p>Each control sets a property on the preview.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>size</label>
+              <div class="btn-group" data-control="size">
+                <button class="btn-toggle active" data-value="default" type="button">default</button>
+                <button class="btn-toggle" data-value="sm" type="button">sm</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>duration</label>
+              <div class="btn-group" data-control="duration">
+                <button class="btn-toggle" data-value="1" type="button">1</button>
+                <button class="btn-toggle active" data-value="2" type="button">2</button>
+                <button class="btn-toggle" data-value="4" type="button">4</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>spread</label>
+              <div class="btn-group" data-control="spread">
+                <button class="btn-toggle" data-value="1" type="button">1</button>
+                <button class="btn-toggle active" data-value="2" type="button">2</button>
+                <button class="btn-toggle" data-value="4" type="button">4</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label for="ctl-text">text</label>
+              <input id="ctl-text" class="d-text-input" type="text" value="Reading your articles of association…">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame p-pad">
+            <div class="d-box"><la-thinking id="live">Reading your articles of association…</la-thinking></div>
+          </div>
+          <div class="preview-label event-log" id="live-log">size: default · duration: 2 · spread: 2</div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-sizes" class="preview-group">
+          <div class="preview-label">Sizes: default (14px) for a line on its own; <code>sm</code> (12px) inside a panel or under a question</div>
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="d-pair">
+              <div><span class="d-cap">default</span><la-thinking>Reading your articles of association…</la-thinking></div>
+              <div><span class="d-cap"><code>size="sm"</code></span><la-thinking size="sm">Reading your articles of association…</la-thinking></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-wrap" class="preview-group">
+          <div class="preview-label">A long line in a narrow column: it wraps, and one sweep crosses the whole block, as Vercel’s does</div>
+          <div class="preview-frame p-pad">
+            <div class="d-narrow"><la-thinking size="sm">Reading your shareholders’ agreement and your articles of association…</la-thinking></div>
+          </div>
+        </div>
+
+        <div id="snap-still" class="preview-group">
+          <div class="preview-label">Under reduced motion the sweep stops and the line is plain muted text (forced on here)</div>
+          <div class="preview-frame p-pad">
+            <div class="d-box"><la-thinking id="still">Reading your articles of association…</la-thinking></div>
+          </div>
+        </div>
+
+        <div id="snap-context" class="preview-group">
+          <div class="preview-label">In context: AI’s panel on a question while AI reads, with the document’s glyph. When it’s ready, the body becomes the evidence in place (decision 137). Press Ready, then Reading again</div>
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="d-box">
+              <la-ai-insight id="ctx" attribution="" headline="Suggested by LawAdvisor AI"></la-ai-insight>
+              <div class="d-acts">
+                <la-button size="sm" variant="secondary" id="ctx-ready">Ready</la-button>
+                <la-button size="sm" variant="ghost" id="ctx-again">Reading again</la-button>
+              </div>
+              <p class="placeholder"><i class="ph ph-warning-circle" aria-hidden="true"></i>Placeholder words, for Bobby or legal to write.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Content guidance -->
+        <div id="content" class="preview-header">
+          <h1>Content guidance</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="pattern-copy">
+            <h3 class="pattern-h">The words</h3>
+            <ul class="pattern-list">
+              <li><strong>Say what AI is doing, to what.</strong> “Reading your articles of association…”, not “Thinking…” or “Loading…”: the founder can tell what it’s for and what will come of it. Name the document as a sentence names it, in lower case (decision 139).</li>
+              <li><strong>One short line.</strong> It sits where the result will go; it isn’t the result.</li>
+              <li><strong>No progress it can’t back.</strong> No percentage and no time estimate: the wait is indeterminate (<code>loading.md</code>: use a determinate indicator only when the quantity is known).</li>
+              <li><strong>End with an ellipsis</strong> (…), the single character, as Vercel’s examples and the AI kits do.</li>
+            </ul>
+            <h3 class="pattern-h">When to use it</h3>
+            <table class="docs-table">
+              <thead><tr><th>Wait</th><th>Use</th></tr></thead>
+              <tbody>
+                <tr><td>AI is working and the founder can carry on meanwhile</td><td><code>la-thinking</code>, where the result will appear</td></tr>
+                <tr><td>Under 300ms</td><td>Nothing (<code>loading.md</code> §1)</td></tr>
+                <tr><td>A button’s own action</td><td><code>la-button loading</code></td></tr>
+                <tr><td>Content whose layout is known</td><td><code>la-skeleton</code> (<code>loading.md</code> §2.3)</td></tr>
+                <tr><td>A known quantity, such as an upload</td><td><code>la-progress</code></td></tr>
+                <tr><td>A surface that streams its words in</td><td>Nothing: the streaming text is the indicator (<code>loading.md</code> §2.9)</td></tr>
+              </tbody>
+            </table>
+            <h3 class="pattern-h">What can go wrong</h3>
+            <ul class="pattern-list">
+              <li><strong>It never ends.</strong> Every wait needs its failure: when AI fails, take <code>la-thinking</code> away. In <code>la-step-questions</code>, if the founder saw it reading, one quiet line takes its place: we couldn’t read the document, so answer it as you know it. If they didn’t, the question is simply asked (decision 157).</li>
+              <li><strong>The letters fade where the band passes.</strong> At its middle the text nears the background, as Vercel’s does. Keep it short so the line is readable between sweeps; the words are announced once, in full.</li>
+            </ul>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-thinking</h2>
+    <p>AI is working on something, said in words, with a soft light sweeping across them. For a wait the founder can see coming but doesn’t have to sit through, where there’s nothing concrete to show yet: AI reading a document before it suggests an answer. Built as Vercel AI Elements’ Shimmer is (decision 137).</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>duration</td>
+          <td><span class="default">duration</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">2</span></td>
+          <td>one sweep, in seconds (default 2)</td>
+        </tr>
+      
+        <tr>
+          <td>spread</td>
+          <td><span class="default">spread</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">2</span></td>
+          <td>the band's half-width, in px per character of the text (default 2)</td>
+        </tr>
+      
+        <tr>
+          <td>size</td>
+          <td><span class="default">size</span></td>
+          <td><span class="type">&#39;sm&#39; | &#39;default&#39;</span></td>
+          <td><span class="default">&#39;default&#39;</span></td>
+          <td>'sm' (12px) or default (14px), the text's size</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>(default)</td>
+          <td>what AI is doing, in words</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-color-text-muted</code></td><td>The words; the base under the band.</td></tr>
+                <tr><td><code>--la-color-bg</code></td><td>The band at its middle.</td></tr>
+                <tr><td><code>--la-font-size-base</code> · <code>--la-font-size-sm</code> · <code>--la-line-height</code></td><td>The text, by size.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>On its own.</p>
+            <div class="docs-code"><span class="kw">&lt;la-thinking&gt;</span>Reading your articles of association…<span class="kw">&lt;/la-thinking&gt;</span></div>
+            <p style="margin-top:var(--la-space-lg);">In <code>la-step-questions</code>, the page sets <code>reading</code> to the document’s own title and the modal draws AI’s panel with the document’s glyph and <code>la-thinking size="sm"</code>, naming the document in lower case in its sentence (decision 139). It sets <code>filled</code> when AI is done, or drops the id if AI failed.</p>
+            <div class="docs-code">modal.reading = { ad_reserve: <span class="str">'Articles of Association'</span> };</div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul class="pattern-list pattern-copy">
+              <li>Its keyframes live in its shadow root, as <code>la-spinner</code>’s do. The <code>.t-shimmer</code> utility <code>loading.md</code> named was never built, and a global class wouldn’t reach inside a component.</li>
+              <li>The sweep moves the gradient’s <code>background-position</code>, as Vercel’s does. It’s the one exception to <code>rule/motion-gpu-safe</code>: paint on one short line, only while AI reads, stopped under reduced motion (<a href="https://github.com/lawadvisor-ai/design/blob/main/decisions/158-la-thinking-may-move-its-gradient.md">decision 158</a>).</li>
+              <li>The text is one inline block, so a wrapped line shares one sweep (Vercel’s <code>inline-block</code>).</li>
+              <li>In forced colours the gradient is dropped and the text takes <code>CanvasText</code>.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Basis</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>A text shimmer for an AI wait</td><td><a href="https://elements.ai-sdk.dev/components/shimmer">Vercel AI Elements, Shimmer</a>: “An animated text shimmer component for creating eye-catching loading states”. The same label ships in <a href="https://design.rogo.ai/shimmer">Rogo’s Shimmer</a> (“work is happening but there’s nothing concrete to show yet”) and <a href="https://21st.dev/@kvnkld/components/thinking-state.md">21st.dev’s Thinking State</a>.</td><td>Backed</td></tr>
+                <tr><td>The mechanism: a 250%-wide band of the background over a muted base, clipped to the text, 100% → 0%, linear, 2s, <code>spread</code> 2</td><td>Vercel’s source, copied (Jonard, 13 Oct 2026: the first cut, a narrow band of ink, was “too sharp”).</td><td>Backed</td></tr>
+                <tr><td>It moves <code>background-position</code>, outside the transform-and-opacity rule</td><td><a href="https://github.com/vercel/ai-elements/blob/main/packages/elements/src/shimmer.tsx">Vercel’s source</a> animates <code>backgroundPosition</code>. Against: <a href="https://web.dev/articles/animations-guide">web.dev</a> says to avoid properties that trigger paint “unless it’s absolutely necessary”.</td><td>Decided: Jonard, 16 Oct 2026 (decision 158)</td></tr>
+                <tr><td>The sweep stops under reduced motion</td><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html">WCAG 2.3.3</a>; <code>la-spinner</code> and <code>la-modal</code> do the same. Vercel’s page doesn’t say.</td><td>Backed</td></tr>
+                <tr><td>A polite status region</td><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/status-messages.html">WCAG 4.1.3 Status messages</a>; <code>la-toast</code> does the same.</td><td>Backed</td></tr>
+                <tr><td>The letters fade where the band passes</td><td>As Vercel’s. Against: text contrast (WCAG 1.4.3) dips at the band’s middle.</td><td>Decided: Jonard, 13 Oct 2026</td></tr>
+                <tr><td>Inside AI’s panel while AI reads, with the document’s glyph</td><td>Shape of AI has no loading pattern; its <a href="https://www.shapeof.ai/patterns/stream-of-thought">Stream of Thought</a> shows more than one read needs. The glyph is the document mark Sources and decision 129’s card use.</td><td>Decided: Jonard, 13 Oct 2026 (decision 137)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+    (function () {
+      customElements.whenDefined('la-thinking').then(function () {
+        var live = document.getElementById('live'), log = document.getElementById('live-log');
+        function sync() { log.textContent = 'size: ' + live.size + ' · duration: ' + live.duration + ' · spread: ' + live.spread; }
+        document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-toggle'); if (!btn) return;
+            group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+            var v = btn.getAttribute('data-value');
+            switch (group.getAttribute('data-control')) {
+              case 'size': live.size = v; break;
+              case 'duration': live.duration = +v; break;
+              case 'spread': live.spread = +v; break;
+            }
+            sync();
+          });
+        });
+        document.getElementById('ctl-text').addEventListener('input', function (e) { live.textContent = e.target.value; });
+
+        /* The reduced-motion snapshot: the component's own rule, forced on. */
+        var still = document.getElementById('still'), s = document.createElement('style');
+        s.textContent = '.text{animation:none!important;background:none!important;color:var(--la-color-text-muted)!important}';
+        still.updateComplete.then(function () { still.shadowRoot.appendChild(s); });
+
+        var ctx = document.getElementById('ctx');
+        var READING = '<p class="reading"><i class="ph ph-file-text" aria-hidden="true"></i><la-thinking size="sm">Reading your articles of association…</la-thinking></p>';
+        var READY = '<p class="ev-lead">We suggest Yes. Check it’s right. From your articles of association, article 17.2:</p><p class="quote">“Any person who is willing to act as a director may be appointed by ordinary resolution of the shareholders, and not by a decision of the directors.”</p>';
+        ctx.innerHTML = READING;
+        document.getElementById('ctx-ready').addEventListener('click', function () { ctx.innerHTML = READY; });
+        document.getElementById('ctx-again').addEventListener('click', function () { ctx.innerHTML = READING; });
+      });
+    })();
+</script>
+
+
+</body>
+</html>

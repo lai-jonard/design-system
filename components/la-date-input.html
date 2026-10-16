@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-date-input — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .p-pad { padding: var(--la-space-lg); }
+    .p-rows { display: flex; flex-direction: column; width: 100%; max-width: 600px; }
+    .p-row { display: grid; grid-template-columns: minmax(0, 180px) minmax(0, 1fr); align-items: start; gap: var(--la-space-lg); padding: var(--la-space-md) 0; border-top: 1px solid var(--la-color-border-light); }
+    .p-row:first-child { border-top: 0; }
+    .p-cap { font-size: var(--la-font-size-md); color: var(--la-color-text); }
+    .p-cap code { display: block; margin-top: var(--la-space-3xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    /* The width the questions modal gives a date: its parts' own (decision 146, X9), as la-step-questions sizes it. */
+    .p-row la-date-input, #live { display: block; width: 100%; font-size: var(--la-font-size-base); max-width: calc(14ch + 4 * var(--la-space-sm) + 2 * var(--la-space-md) + 2px); }
+    /* The live field with the page's Next under it, which calls check(). */
+    .p-live { display: grid; gap: var(--la-space-md); justify-items: start; width: 100%; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    /* ── Controls ─────────────────────────────────────── */
+    .ctl-text { width: calc(var(--la-space-xl) * 7); max-width: 100%; }
+
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .usage-gap { margin-top: var(--la-space-lg); }
+    /* The Basis table's first column is prose, not a property name. */
+    #basis .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; width: 28%; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-date-input</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-date-input</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    <a href="#events" class="docs-nav-item docs-nav-item--subsection" data-nav-id="events">Events</a>
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-date-input</h1>
+          <p>A date someone knows, typed: three numeric parts in one field, in the reader’s locale’s order, with the format as its hint. It’s checked only when the page asks, on Next, with <code>check()</code>. It never opens a calendar; a date picker or a date range can compose it later. Its value is an ISO date, and empty while the date is part-typed or impossible. The questions modal uses it for a date question and for changing a date on your record.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack p-pad">
+            <la-date-input id="anat" label="Date of appointment" value="2026-10-12"></la-date-input>
+            <ol class="anatomy-list">
+              <li><strong>Legend.</strong> The fieldset’s name: <code>label</code> shown, or <code>aria-label</code> for screen readers only. Required adds an asterisk; optional says so.</li>
+              <li><strong>Parts.</strong> Day, month and year in the reader’s locale’s order (month first in en-US), each a labelled numeric field, with slashes between them. Typing stays in a part until you move.</li>
+              <li><strong>Hint.</strong> The format (“DD/MM/YYYY”), after the page’s own hint when there is one: never only the placeholder (decision 145). A message from <code>check()</code> replaces it, in the same polite live region.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header">
+          <h1>Live preview</h1>
+          <p>Each control sets a property. Type a date: the log shows each <code>la-change</code>. Nothing is checked as you type or leave the field; <em>Next</em> calls <code>check()</code>, as the questions modal does, and a message then clears as soon as the date is put right.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>locale</label>
+              <div class="btn-group" data-control="locale">
+                <button class="btn-toggle active" data-value="" type="button">the reader’s</button>
+                <button class="btn-toggle" data-value="en-US" type="button">en-US</button>
+                <button class="btn-toggle" data-value="en-GB" type="button">en-GB</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>state</label>
+              <div class="btn-group" data-control="state">
+                <button class="btn-toggle active" data-value="none" type="button">default</button>
+                <button class="btn-toggle" data-value="required" type="button">required</button>
+                <button class="btn-toggle" data-value="optional" type="button">optional</button>
+                <button class="btn-toggle" data-value="disabled" type="button">disabled</button>
+                <button class="btn-toggle" data-value="error" type="button">error</button>
+              </div>
+            </div>
+          </div>
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-label">label</label>
+              <input id="ctl-label" class="ctl-text" type="text" value="Date of appointment">
+            </div>
+            <div class="control-group">
+              <label for="ctl-min">min</label>
+              <input id="ctl-min" class="ctl-text" type="text" value="" placeholder="2026-01-01">
+            </div>
+            <div class="control-group">
+              <label for="ctl-max">max</label>
+              <input id="ctl-max" class="ctl-text" type="text" value="" placeholder="2026-12-31">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame p-pad">
+            <div class="p-live">
+              <la-date-input id="live" label="Date of appointment"></la-date-input>
+              <la-button id="live-next" size="md" variant="secondary">Next</la-button>
+            </div>
+          </div>
+          <div class="preview-label event-log" id="live-log">No change yet.</div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-locale" class="preview-group">
+          <div class="preview-label">Order and labels: the parts follow the reader’s locale, from the browser, unless a page sets one (decision 145), and the hint follows them. The modal names the field by the question, for screen readers only</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">The reader’s locale<code>no locale</code></span><la-date-input label="Date of appointment"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">US order<code>locale="en-US"</code></span><la-date-input label="Date of appointment" locale="en-US"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">UK order<code>locale="en-GB"</code></span><la-date-input label="Date of appointment" locale="en-GB"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Hidden name<code>aria-label="…"</code></span><la-date-input aria-label="When does the appointment take effect?"></la-date-input></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-states" class="preview-group">
+          <div class="preview-label">States: filled in, required, optional, the page’s own hint, an error from the page, and disabled</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Filled in<code>value="2026-10-12"</code></span><la-date-input label="Date of appointment" value="2026-10-12"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Required<code>required</code></span><la-date-input label="Date of appointment" required></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Optional<code>optional</code></span><la-date-input label="Date of appointment" optional></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Its own hint, then the format<code>hint="…"</code></span><la-date-input label="Date of appointment" hint="The date in the board minutes"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Error from the page<code>error</code></span><la-date-input label="Date of appointment" error></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Disabled<code>disabled</code></span><la-date-input label="Date of appointment" value="2026-10-12" disabled></la-date-input></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-errors" class="preview-group">
+          <div class="preview-label">Messages, typed in on load and then checked with <code>check()</code>, as Next does (decision 149, DI3): a missing month, an impossible date, and one before <code>min</code>. Verb first, never “valid” (DI5); the date in a message follows decision 145, so this year’s has no year. In UK order</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">No month<code>12 / – / 2026</code></span><la-date-input class="typed" data-parts="12,,2026" locale="en-GB" label="Date of appointment"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Impossible<code>31 / 02 / 2026</code></span><la-date-input class="typed" data-parts="31,02,2026" locale="en-GB" label="Date of appointment"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Before min<code>min="2026-10-01"</code></span><la-date-input class="typed" data-parts="15,09,2026" min="2026-10-01" locale="en-GB" label="Date of appointment"></la-date-input></div>
+              <div class="p-row"><span class="p-cap">Part-typed, left, not checked<code>12 / 1 / –</code></span><la-date-input class="typed" data-parts="12,1," data-nocheck locale="en-GB" label="Date of appointment"></la-date-input></div>
+            </div>
+          </div>
+        </div>
+
+        
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-date-input</h2>
+    <p>A date someone knows, typed: three numeric parts in one field, in the reader’s locale’s order, with the format as its hint. It’s checked only when the page asks, on Next, with check(). It never opens a calendar; a date picker or a date range can compose it later. Its value is an ISO date, and empty while the date is part-typed or impossible. The questions modal uses it for a date question and for changing a date on your record.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>value</td>
+          <td>—</td>
+          <td>—</td>
+          <td>—</td>
+          <td>The date as ISO YYYY-MM-DD (the value attribute too). Empty while it's part-typed, impossible or outside min and max.</td>
+        </tr>
+      
+        <tr>
+          <td>locale</td>
+          <td><span class="default">locale</span></td>
+          <td>—</td>
+          <td>—</td>
+          <td>The reader's browser locale by default, not en-US (decision 145).</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The visible name, the fieldset's legend. Without it the legend is hidden and reads aria-label, or "Date".</td>
+        </tr>
+      
+        <tr>
+          <td>hint</td>
+          <td><span class="default">hint</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The page's own guidance, shown before the format: "The date in the board minutes · DD/MM/YYYY".</td>
+        </tr>
+      
+        <tr>
+          <td>min</td>
+          <td><span class="default">min</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The earliest date allowed, ISO. Earlier fails check() with "Enter a date on or after …".</td>
+        </tr>
+      
+        <tr>
+          <td>max</td>
+          <td><span class="default">max</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The latest date allowed, ISO. Later fails check() with "Enter a date on or before …".</td>
+        </tr>
+      
+        <tr>
+          <td>ariaLabel</td>
+          <td><span class="default">aria-label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The name when the question above already shows it, as la-question sets it.</td>
+        </tr>
+      
+        <tr>
+          <td>required</td>
+          <td><span class="default">required</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Empty fails check() with "Enter the date."; the legend shows an asterisk.</td>
+        </tr>
+      
+        <tr>
+          <td>optional</td>
+          <td><span class="default">optional</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Shows "Optional" after the legend, as la-input does.</td>
+        </tr>
+      
+        <tr>
+          <td>disabled</td>
+          <td><span class="default">disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Disables all three parts.</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>The error look. check() sets it; one the page sets stays until the page clears it.</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    <div class="docs-divider"></div>
+
+
+<div id="events" class="docs-section">
+  <h3>Events</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Event</th><th>Type</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>la-change</td>
+          <td><span class="type">CustomEvent</span></td>
+          <td>—</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="methods" class="docs-section">
+            <h3>Methods</h3>
+            <p><code>check()</code> checks the date now, as the page asks on Next: it shows the message, sets <code>error</code>, and returns <code>true</code> when the date is whole, real and inside <code>min</code>/<code>max</code>, or empty and not required. <code>focus()</code> moves to the first part.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-button-height-md</code></td><td>The field’s height, on the button scale.</td></tr>
+                <tr><td><code>--la-color-border</code> · <code>--la-radius-md</code> · <code>--la-color-bg</code></td><td>The field.</td></tr>
+                <tr><td><code>--la-color-border-focus</code> · <code>--la-input-shadow-focus</code></td><td>Focus.</td></tr>
+                <tr><td><code>--la-color-border-danger</code></td><td>The box in error.</td></tr>
+                <tr><td><code>--la-color-urgent-text</code> · <code>--la-font-size-md</code></td><td>The hint in error, and a message from <code>check()</code>, led by <code>ph-fill ph-warning-circle</code> (decision 140, amended 15 Oct 2026).</td></tr>
+                <tr><td><code>--la-color-text-muted</code> · <code>--la-color-text-faint</code></td><td>The hint and the separators.</td></tr>
+                <tr><td><code>--la-font-size-base</code> · <code>--la-font-size-sm</code></td><td>The parts and the legend; the hint.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>A labelled date in UK order.</p>
+            <div class="docs-code"><span class="kw">&lt;la-date-input</span> <span class="at">label</span>=<span class="str">"Date of appointment"</span> <span class="at">locale</span>=<span class="str">"en-GB"</span><span class="kw">&gt;&lt;/la-date-input&gt;</span></div>
+            <p class="usage-gap">A question’s answer, named by the question, kept only once the date is whole.</p>
+            <div class="docs-code"><span class="kw">&lt;la-date-input</span> .<span class="at">value</span>=${answer} <span class="at">aria-label</span>=${question}
+  @<span class="at">la-change</span>=${(e) =&gt; set(e.detail.complete ? e.detail.value : <span class="str">''</span>)}<span class="kw">&gt;&lt;/la-date-input&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>No calendar.</strong> It’s for a date someone knows; a picker or a range composes it later.</li>
+              <li><strong>Editing a finished date</strong> keeps the other parts (12 Oct 2026 fix): a value the field already holds is ignored.</li>
+              <li><strong>Decided 14 Oct 2026</strong> (decision 149; built 14 Oct 2026): three parts in one box (DI1); the reader’s locale, from the browser (DI2, decision 145); checked when the page asks, on Next, with <code>check()</code>, never as it’s left (DI3, decision 156); no moving on by itself as you type (DI4); messages that say what’s wrong, never “valid” (DI5). A message clears as soon as the date is put right (decision 156). Its width is decision 146 (X9) and the date’s display format decision 145 (X8).</li>
+              <li><strong>The message’s look</strong> is the forms foundation’s error (decision 140, amended 15 Oct 2026; built in design#100): <code>--la-font-size-md</code>, <code>--la-color-urgent-text</code>, led by <code>ph-fill ph-warning-circle</code>, under the field in the hint’s place. The box keeps its red border.</li>
+              <li><strong>Readiness:</strong> excluded from document generation on 6 Aug 2026; the questions modal has used it since 6 Oct.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and where we differ (researched 12 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>No calendar for a date you know</td><td><a href="https://design-system.service.gov.uk/patterns/dates/">GOV.UK’s Dates pattern</a>, <a href="https://carbondesignsystem.com/components/date-picker/usage/">Carbon’s simple date picker</a>, <a href="https://m3.material.io/components/date-pickers/guidelines">Material 3</a> and <a href="https://www.nngroup.com/articles/date-input/">NN/g</a> all type a memorable date.</td><td>Backed</td></tr>
+                <tr><td>Three parts in one field</td><td><a href="https://design-system.service.gov.uk/components/date-input/">GOV.UK</a> uses three separate labelled fields; <a href="https://react-spectrum.adobe.com/react-spectrum/DateField.html">React Aria’s DateField</a> has parts in one field; Carbon, Atlassian and Material use one text field.</td><td>Closed: DI1, A: three parts in one box, as built (Jonard, 14 Oct; decision 149)</td></tr>
+                <tr><td>Order by the reader’s locale</td><td>GOV.UK is always day, month, year; React Aria and <a href="https://atlassian.design/components/datetime-picker/date-picker/usage">Atlassian</a> follow the locale.</td><td>Closed: DI2, by decision 145: the reader’s locale, from the browser (Jonard, 14 Oct). Built 14 Oct 2026</td></tr>
+                <tr><td>Moving to the next part as you type</td><td>GOV.UK: never tab people between the fields automatically. React Aria does it; Material avoids masking while typing.</td><td>Closed: DI4, B: it stays in the part until you move, as GOV.UK advises (Jonard, 14 Oct; decision 149). Built 14 Oct 2026</td></tr>
+                <tr><td>The format as a visible hint, not a placeholder</td><td>Carbon calls a placeholder-only format a problem; Material and Spectrum show it as helper text; GOV.UK gives an example as a hint.</td><td>Backed</td></tr>
+                <tr><td>Checked when the page asks, on Next</td><td>GOV.UK checks on submit; <a href="https://carbondesignsystem.com/patterns/forms-pattern/">Carbon</a> and NN/g when the field is left; Polaris once it’s complete, then live; Atlassian live.</td><td>Closed: DI3, C: checked when the page asks, on Next, with the error at the date (Jonard, 14 Oct; decision 149; decision 140); never on leaving it (decision 156). Built 14 Oct 2026: <code>check()</code></td></tr>
+                <tr><td>Messages: “Enter the month.”, “Enter a real date.”, “Enter a date on or after …”</td><td>GOV.UK’s templates say what’s wrong (“must include a month”, “must be a real date”); <a href="https://design-system.service.gov.uk/components/error-message/">GOV.UK</a> and Polaris avoid “valid” and “invalid”.</td><td>Closed: DI5, C: say what’s wrong, verb first, never “valid”: “Enter the month.”, “Enter a real date.” (Jonard, 14 Oct; decision 149). Built 14 Oct 2026; two missing parts read “Enter the day and month.” and an empty required date “Enter the date.”, on its pattern, accepted by Jonard on 16 Oct 2026</td></tr>
+                <tr><td>The message replaces the hint, in one live region</td><td>Carbon and Atlassian replace helper text with the error; no system documents the live region.</td><td>Backed (Carbon, Atlassian)</td></tr>
+                <tr><td>A fieldset and legend; a numeric keyboard</td><td>GOV.UK’s date input sits in a fieldset with <code>inputmode="numeric"</code>; Atlassian groups related fields in a fieldset.</td><td>Backed</td></tr>
+                <tr><td>Pasting a whole date</td><td>Material accepts dashes, spaces, slashes and dots; NN/g: accept any separator.</td><td>Backed</td></tr>
+                <tr><td>Its own width in the questions modal</td><td>GOV.UK sizes day and month for two characters and year for four; Baymard, NN/g and Carbon size a field to the answer it expects.</td><td>Closed: X9, C: a date at its parts’ own width (Jonard, 14 Oct; decision 146). Built in <code>la-step-questions</code></td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+    (function () {
+      /* Type parts into a field as a person would, then optionally leave it. */
+      function typeParts(el) {
+        var parts = (el.dataset.parts || '').split(',');
+        var inputs = el.shadowRoot.querySelectorAll('input');
+        parts.forEach(function (v, i) {
+          if (!v || !inputs[i]) return;
+          inputs[i].value = v;
+          inputs[i].dispatchEvent(new InputEvent('input', { bubbles: true, composed: true, data: v, inputType: 'insertText' }));
+        });
+        /* Check it as Next would; left unchecked, it shows nothing. */
+        if (!el.hasAttribute('data-nocheck')) el.updateComplete.then(function () { el.check(); });
+      }
+
+      customElements.whenDefined('la-date-input').then(function () {
+        document.querySelectorAll('la-date-input.typed').forEach(function (el) { el.updateComplete.then(function () { typeParts(el); }); });
+
+        var live = document.getElementById('live'), log = document.getElementById('live-log');
+        live.addEventListener('la-change', function (e) { log.textContent = 'la-change ' + JSON.stringify(e.detail); });
+        /* The page's Next: check, and stay with focus on the date if it fails. */
+        document.getElementById('live-next').addEventListener('click', function () {
+          var ok = live.check();
+          log.textContent = 'check() → ' + ok;
+          if (!ok) live.focus();
+        });
+        document.getElementById('ctl-label').addEventListener('input', function (e) { live.label = e.target.value; });
+        document.getElementById('ctl-min').addEventListener('input', function (e) { live.min = e.target.value; });
+        document.getElementById('ctl-max').addEventListener('input', function (e) { live.max = e.target.value; });
+        document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-toggle'); if (!btn) return;
+            group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+            var v = btn.getAttribute('data-value');
+            if (group.getAttribute('data-control') === 'locale') live.locale = v || navigator.language;
+            if (group.getAttribute('data-control') === 'state') {
+              ['required', 'optional', 'disabled', 'error'].forEach(function (k) { live[k] = k === v; });
+            }
+          });
+        });
+      });
+    })();
+</script>
+
+
+</body>
+</html>

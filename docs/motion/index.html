@@ -250,7 +250,7 @@
 <hr>
 <h2 id="core-rules">Core rules</h2>
 <ul>
-<li><strong>GPU-safe only.</strong> Animate <code>transform</code> and <code>opacity</code> exclusively. Never animate <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, <code>background</code>, or <code>color</code> directly.</li>
+<li><strong>GPU-safe only.</strong> Animate <code>transform</code> and <code>opacity</code> exclusively. Never animate <code>height</code>, <code>width</code>, <code>top</code>, <code>left</code>, <code>background</code>, or <code>color</code> directly. One exception: <code>la-thinking</code>'s shimmer moves its gradient's <code>background-position</code>, on one short line and only while AI reads (decision 158).</li>
 <li><strong>Never use <code>ease-in</code>.</strong> Feels sluggish for elements users are watching appear. Use <code>--ease-out</code> for entrances, <code>--ease</code> for hovers and micro-interactions.</li>
 <li><strong>Never scale from zero.</strong> Minimum starting scale is <code>0.96</code>. Zero-scale entrances look like the UI is popping into existence, not arriving.</li>
 <li><strong>Max 300ms for repeated interactions.</strong> Never exceed 500ms for anything triggered multiple times per session.</li>

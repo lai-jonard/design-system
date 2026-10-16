@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-question — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .p-pad { padding: var(--la-space-lg); }
+    .p-box { width: 100%; max-width: 600px; }
+    .p-label { display: block; margin: 0 0 var(--la-space-xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .p-stack { display: flex; flex-direction: column; gap: var(--la-space-xl); width: 100%; max-width: 600px; }
+    /* The page lays out the answer, as la-step-questions does. */
+    .opts { display: grid; gap: var(--la-space-sm); }
+    .opts.yn { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 360px; }
+    .rec { margin-left: 6px; vertical-align: 1px; }
+    /* Sized to the answer it expects (decision 146): free text is generous, capped at 560px. */
+    la-input.text { display: block; max-width: 560px; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .usage-gap { margin-top: var(--la-space-lg); }
+    /* The Basis table's first column is prose, not a property name. */
+    #basis .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; width: 28%; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-question</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-question</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-question</h1>
+          <p>One question on a playbook step: legal’s question, a quiet <em>What this means</em> where legal wrote a gloss, the answer, the guidance under the option picked, and any follow-up the answer asks. The question is its answer’s name, and the screen’s heading when it’s alone on the screen (decision 149). It doesn’t know its answer: the page owns that and fills the slots. In the step, <code>la-step-questions</code> asks one at a time in a modal.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="p-box"><la-question id="anat" class="q-demo" data-q="need" data-pick="y"></la-question></div>
+            <ol class="anatomy-list">
+              <li><strong>Question.</strong> Legal’s words, at the large text size. They’re the answer’s name, or its group’s, and the screen’s heading when <code>heading-level</code> is set (decision 149, Q1).</li>
+              <li><strong>What this means.</strong> <code>la-disclosure</code>’s quiet row, under the question, when legal wrote a gloss.</li>
+              <li><strong>Error.</strong> What’s missing, once the page’s button is pressed too soon: the forms foundation’s error, led by the warning glyph, under a field and above a list of choices (decision 140, amended 15 Oct 2026). It goes as soon as the answer is given.</li>
+              <li><strong>Answer.</strong> The default slot: the page’s choices, field or upload.</li>
+              <li><strong>Guidance.</strong> The <code>guidance</code> slot, under the answer once an option is picked: <code>la-guidance</code>, in a polite live region that grows in.</li>
+              <li><strong>Follow-up.</strong> The <code>follow</code> slot: questions the answer asks, indented under a hairline.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header">
+          <h1>Live preview</h1>
+          <p>Pick one of legal’s questions, from Appoint a director or the articles of association steps, then answer it. The guidance and any follow-up come from legal’s CMS (07).</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>question</label>
+              <div class="btn-group" data-control="q">
+                <button class="btn-toggle active" data-value="reserve" type="button">yes or no, with a gloss</button>
+                <button class="btn-toggle" data-value="route" type="button">a choice, recommended</button>
+                <button class="btn-toggle" data-value="need" type="button">a follow-up</button>
+              </div>
+            </div>
+            <div class="control-group">
+              <label>means</label>
+              <div class="btn-group" data-control="means">
+                <button class="btn-toggle active" data-value="on" type="button">legal’s gloss</button>
+                <button class="btn-toggle" data-value="off" type="button">none</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame p-pad">
+            <div class="p-box"><la-question id="live"></la-question></div>
+          </div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-gloss" class="preview-group">
+          <div class="preview-label"><em>What this means</em>, closed, and a question legal gave no gloss. Open it to read legal’s explanation</div>
+          <div class="preview-frame p-pad">
+            <div class="p-stack">
+              <div><span class="p-label">With a gloss</span><la-question class="q-demo" data-q="reserve"></la-question></div>
+              <div><span class="p-label">No gloss</span><la-question class="q-demo" data-q="who"></la-question></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-answers" class="preview-group">
+          <div class="preview-label">Answers in the default slot, laid out by the page as the modal does: yes or no side by side, a choice stacked with its recommendation, a typed answer</div>
+          <div class="preview-frame p-pad">
+            <div class="p-stack">
+              <div><span class="p-label">Yes or no</span><la-question class="q-demo" data-q="investor"></la-question></div>
+              <div><span class="p-label">A choice, with the recommended option</span><la-question class="q-demo" data-q="route"></la-question></div>
+              <div><span class="p-label">Typed</span><la-question class="q-demo" data-q="who"></la-question></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-guide" class="preview-group">
+          <div class="preview-label">Guidance under the picked option, and a follow-up the answer asks, indented under its hairline. In the modal a follow-up is its own screen; here it’s laid flat</div>
+          <div class="preview-frame p-pad">
+            <div class="p-stack">
+              <div><span class="p-label">Guidance</span><la-question class="q-demo" data-q="route" data-pick="board"></la-question></div>
+              <div><span class="p-label">Guidance and a follow-up</span><la-question class="q-demo" data-q="need" data-pick="y"></la-question></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-stack" class="preview-group">
+          <div class="preview-label">Laid flat: questions stacked, separated by space, with no rule between them (Q3, B; decision 149). In the modal there’s one at a time</div>
+          <div class="preview-frame p-pad">
+            <div class="p-box">
+              <la-question class="q-demo" data-q="reserve"></la-question>
+              <la-question class="q-demo" data-q="investor"></la-question>
+              <la-question class="q-demo" data-q="route"></la-question>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-error" class="preview-group">
+          <div class="preview-label">Pressed too soon (decision 140, amended 15 Oct 2026): the message with the warning glyph, above the choices here (under a field), and the choices or the field marked invalid; the page moves focus to the answer with <code>focusAnswer()</code>. Pick an answer, or type one, and it goes. The words are placeholders until legal writes each question’s message</div>
+          <div class="preview-frame p-pad">
+            <div class="p-stack">
+              <div><span class="p-label">A choice</span><la-question class="q-demo" data-q="investor" data-error="Select an answer."></la-question></div>
+              <div><span class="p-label">Typed</span><la-question class="q-demo" data-q="who" data-error="Enter an answer."></la-question></div>
+            </div>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-question</h2>
+    <p>One question on a playbook step: legal’s question, a quiet What this means where legal wrote a gloss, the answer, the guidance under the option picked, and any follow-up the answer asks. The question is its answer’s name, and the screen’s heading when it’s alone on the screen (decision 149). It doesn’t know its answer: the page owns that and fills the slots. In the step, la-step-questions asks one at a time in a modal.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>text</td>
+          <td><span class="default">text</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>the question, legal's words; also its answer's name</td>
+        </tr>
+      
+        <tr>
+          <td>means</td>
+          <td><span class="default">means</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>the plain-English gloss behind *What this means* (a quiet la-disclosure); none hides it</td>
+        </tr>
+      
+        <tr>
+          <td>headingLevel</td>
+          <td><span class="default">heading-level</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>attribute heading-level: the question is the screen's heading at this level (2–6), for a screen that asks one question; 0 (default), it isn't a heading</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>what's missing, when the page's button was pressed too soon: under a field, above a list of choices (decision 140, amended 15 Oct 2026)</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>(default)</td>
+          <td>the answer: inputs, choices, a record row. The first element is the one the question names</td>
+        </tr>
+      
+        <tr>
+          <td>guidance</td>
+          <td>la-guidance for the picked option. Its wrapper is a polite live region that stays in place, so a screen reader hears the guidance when an option is picked (WCAG 4.1.3; the gap GOV.UK notes for revealed content)</td>
+        </tr>
+      
+        <tr>
+          <td>follow</td>
+          <td>follow-up la-question elements, one level down</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="methods" class="docs-section">
+            <h3>Methods</h3>
+            <table class="docs-table">
+              <thead><tr><th>Method</th><th>What it does</th></tr></thead>
+              <tbody>
+                <tr><td><code>focusText()</code></td><td>Moves focus to the question’s words, for a page that has just shown a new question in place of the last.</td></tr>
+                <tr><td><code>focusAnswer()</code></td><td>Moves focus to the answer: the group’s tab stop, or into the field’s own control. For a press with the answer missing (decision 140).</td></tr>
+              </tbody>
+            </table>
+            <p>No events of its own: its answer’s controls fire theirs, and the page keeps the answer.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-font-size-lg</code> · <code>--la-color-text</code></td><td>The question.</td></tr>
+                <tr><td><code>--la-color-border</code></td><td>The follow-ups’ hairline.</td></tr>
+                <tr><td><code>--la-font-size-md</code> · <code>--la-color-urgent-text</code></td><td>The error message, the forms foundation’s, led by <code>ph-fill ph-warning-circle</code>: validation, not a verdict (decision 117; decision 140, amended 15 Oct 2026).</td></tr>
+                <tr><td><code>--la-space-3xs</code> · <code>--la-space-xs</code> · <code>--la-space-sm</code> · <code>--la-space-md</code> · <code>--la-space-lg</code></td><td>The rhythm between its parts.</td></tr>
+                <tr><td><code>--dur-base</code> · <code>--ease-out</code></td><td>The guidance growing in; none under reduced motion.</td></tr>
+              </tbody>
+            </table>
+            <p>CSS parts: <code>text</code>, <code>error</code>, <code>answer</code>, <code>follow</code>.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>A yes or no question with legal’s gloss, alone on the screen; the page fills the answer, and the question names it.</p>
+            <div class="docs-code"><span class="kw">&lt;la-question</span> <span class="at">text</span>=<span class="str">"Does an investor have a right to approve or appoint directors?"</span>
+             <span class="at">means</span>=<span class="str">"Usually set in a shareholders’ agreement after a funding round."</span> <span class="at">heading-level</span>=<span class="str">"3"</span><span class="kw">&gt;</span>
+  <span class="kw">&lt;div</span> <span class="at">class</span>=<span class="str">"opts yn"</span> <span class="at">role</span>=<span class="str">"radiogroup"</span><span class="kw">&gt;</span>…two la-choice…<span class="kw">&lt;/div&gt;</span>
+<span class="kw">&lt;/la-question&gt;</span></div>
+            <p class="usage-gap">Pressed too soon: say what’s missing, and move focus to the answer.</p>
+            <div class="docs-code">question.error = <span class="str">'Select an answer.'</span>; <span class="kw">await</span> question.updateComplete; question.<span class="at">focusAnswer</span>();</div>
+            <p class="usage-gap">Guidance once an option is picked.</p>
+            <div class="docs-code"><span class="kw">&lt;la-guidance</span> <span class="at">slot</span>=<span class="str">"guidance"</span><span class="kw">&gt;&lt;p&gt;</span>Get their consent in writing before you appoint anyone.<span class="kw">&lt;/p&gt;&lt;/la-guidance&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>Where it’s used.</strong> Inside <code>la-step-questions</code>, one question to a screen, as the screen’s heading. Laid flat, as on the step’s states page, questions stack with space between them.</li>
+              <li><strong>Why the words are set as the answer’s name.</strong> <code>aria-labelledby</code> can’t reach from a field’s shadow root to the question’s, and a legend in the page’s own DOM wouldn’t reach <code>la-input</code>’s input either. Each field already hands its <code>aria-label</code> to its own control, so a screen reader hears the heading, then the same words on the field (decision 149, Q1C).</li>
+              <li><strong>It holds no answer and runs no rule.</strong> The page decides what’s picked, what guidance shows and which follow-ups appear (decisions 116 and 117). Every question is required (decision 127).</li>
+              <li><strong>Follow-ups.</strong> In the modal a follow-up is its own screen; the <code>follow</code> slot is for a question laid flat.</li>
+              <li><strong>Guidance</strong> appears only once an option is picked, and says what that answer means for the founder (<code>la-guidance</code>, decision 117).</li>
+              <li><strong>Copy</strong> is legal’s, from the CMS (07): the question, the gloss and the guidance.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and where we differ (researched 12 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td><em>What this means</em> as a quiet disclosure under the question</td><td><a href="https://design-system.service.gov.uk/components/details/">GOV.UK Details</a> holds information only some users need; <a href="https://carbondesignsystem.com/components/toggletip/usage/">Carbon’s toggletip</a> and <a href="https://atlassian.design/components/inline-message/usage">Atlassian’s inline message</a> hold optional explanation. Information most people need stays visible as hint or helper text.</td><td>Backed (decision 118). Whether short glosses become hint text is with Bobby</td></tr>
+                <tr><td>Guidance under the picked option, only once picked</td><td>Polaris’s ChoiceList renders a choice’s children only when it’s selected. Against: <a href="https://design-system.service.gov.uk/components/radios/">GOV.UK</a> reveals only follow-up questions, never other content.</td><td>Backed (Polaris; la-guidance); GOV.UK differs</td></tr>
+                <tr><td>Guidance in a polite live region</td><td>WCAG 4.1.3 status messages (la-guidance’s basis). No system documents a live region for revealed content; GOV.UK relies on <code>aria-expanded</code> and lists not announcing reveals as a known issue.</td><td>Backed (WCAG 4.1.3)</td></tr>
+                <tr><td>Guidance grows in, and doesn’t move under reduced motion</td><td>Carbon’s Accordion animates over 110ms and Polaris’s Collapsible over 100ms; GOV.UK doesn’t animate. <a href="https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html">WCAG 2.3.3</a>: motion from interaction can be turned off. Our duration is <code>--dur-base</code> (200ms).</td><td>Backed in kind; duration from our motion tokens</td></tr>
+                <tr><td>Follow-ups indented under a 1px hairline</td><td>GOV.UK’s conditional reveal draws a 4px #cecece left border; Polaris indents with whitespace alone.</td><td>Closed: Q2, A, as built (Jonard, 14 Oct; decision 149)</td></tr>
+                <tr><td>Space between stacked questions, no rule</td><td>GOV.UK and <a href="https://carbondesignsystem.com/patterns/forms-pattern/">Carbon</a> separate questions with whitespace; neither draws a rule between them.</td><td>Closed: Q3, B (Jonard, 14 Oct; decision 149). Built 14 Oct</td></tr>
+                <tr><td>The question names its answer, and heads the screen</td><td>Every system ties the question to its input by a label or a fieldset’s legend; <a href="https://design-system.service.gov.uk/patterns/question-pages/">GOV.UK</a> makes the question the label or legend, and the page heading when there’s one question.</td><td>Closed: Q1, C (Jonard, 14 Oct; decision 149). Built 14 Oct: the words are the answer’s name, not a <code>&lt;label&gt;</code>, since none reaches across the shadow root</td></tr>
+                <tr><td>An error under a field, above a list, on a press</td><td>The forms foundation puts it under the field with a warning glyph, as Carbon, Atlassian, Polaris and Material do; <a href="https://design-system.service.gov.uk/components/error-message/">GOV.UK’s error message</a> sits above the answer, as ours does for a list, after the form is submitted; <a href="https://atlassian.design/components/form/usage">Atlassian</a> never disables the button.</td><td>Closed: X3, C (decisions 140 and 156); the placement amended 15 Oct (decision 140). Built 15 Oct; the words are legal’s, placeholders until then</td></tr>
+                <tr><td>One question to a screen in the modal</td><td><a href="https://www.gov.uk/service-manual/design/form-structure">GOV.UK’s service manual</a>: start with one thing per page.</td><td>Backed</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+    (function () {
+      /* Legal's questions from the CMS (07): Appoint a director step 1, and the articles of association step 2 (aoa2). */
+      var Q = {
+        reserve: { text: 'Do your articles or a shareholders’ agreement leave director appointments to the shareholders?', means: 'Some articles, or a shareholders’ agreement, say only the shareholders can appoint a director. If yours don’t, the board can appoint on its own.', type: 'yn', options: [{ id: 'y', label: 'Yes' }, { id: 'n', label: 'No' }] },
+        investor: { text: 'Does an investor have a right to approve or appoint directors?', means: 'Usually set in a shareholders’ agreement after a funding round.', type: 'yn', options: [{ id: 'y', label: 'Yes', guidance: 'Get their consent in writing before you appoint anyone.' }, { id: 'n', label: 'No' }] },
+        route: { text: 'Which route will you use?', means: 'The board means the existing directors decide, at a meeting or in a written resolution. The shareholders means an ordinary resolution, passed by more than half the votes cast.', type: 'choice', options: [
+          { id: 'board', label: 'The board appoints', rec: true, guidance: 'We draft board minutes or a directors’ written resolution. Mark the shareholders’ resolution step as done elsewhere: it’s for the other route.' },
+          { id: 'sh', label: 'The shareholders appoint', guidance: 'We draft an ordinary resolution of the shareholders. Mark the board minutes step as done elsewhere: it’s for the other route.' }] },
+        need: { text: 'Does it need anyone’s consent before you change your articles?', means: '', type: 'yn', options: [
+          { id: 'y', label: 'Yes', guidance: 'Hold the change until every consent is in writing.', follow: 'Who must consent?' },
+          { id: 'n', label: 'No', guidance: 'Nobody else needs to agree, so you can go ahead.' }] },
+        who: { text: 'Who must consent?', means: '', type: 'text' }
+      };
+
+      /* The page fills the slots, as la-step-questions does. */
+      function fill(el, key, picked, withMeans) {
+        var q = Q[key];
+        el.text = q.text;
+        el.means = withMeans === false ? '' : q.means;
+        el.innerHTML = '';
+        /* The question names its answer (decision 149): no aria-label here. */
+        if (q.type === 'text') {
+          var input = document.createElement('la-input');
+          input.className = 'text';
+          input.addEventListener('la-change', function (e) { if (String(e.detail.value).trim()) el.error = ''; });
+          el.appendChild(input);
+          return;
+        }
+        var opts = document.createElement('div');
+        opts.className = 'opts' + (q.type === 'yn' ? ' yn' : '');
+        opts.setAttribute('role', 'radiogroup');
+        q.options.forEach(function (o) {
+          var c = document.createElement('la-choice');
+          c.setAttribute('variant', 'contained');
+          c.checked = picked === o.id;
+          c.textContent = o.label;
+          if (o.rec) { var b = document.createElement('la-badge'); b.className = 'rec'; b.setAttribute('variant', 'neutral'); b.setAttribute('appearance', 'ghost'); b.setAttribute('size', 'sm'); b.textContent = 'Recommended'; c.appendChild(document.createTextNode(' ')); c.appendChild(b); }
+          c.addEventListener('la-change', function () { el.error = ''; fill(el, key, o.id, withMeans); });
+          opts.appendChild(c);
+        });
+        el.appendChild(opts);
+        var pick = q.options.filter(function (o) { return o.id === picked; })[0];
+        if (pick && pick.guidance) {
+          var g = document.createElement('la-guidance'); g.slot = 'guidance';
+          var p = document.createElement('p'); p.textContent = pick.guidance; g.appendChild(p);
+          el.appendChild(g);
+        }
+        if (pick && pick.follow) {
+          var f = document.createElement('la-question'); f.slot = 'follow'; f.text = pick.follow;
+          var fi = document.createElement('la-input'); fi.className = 'text';
+          f.appendChild(fi); el.appendChild(f);
+        }
+      }
+
+      Promise.all(['la-question', 'la-choice', 'la-guidance', 'la-input'].map(function (n) { return customElements.whenDefined(n); })).then(function () {
+        document.querySelectorAll('la-question.q-demo').forEach(function (el) {
+          fill(el, el.dataset.q, el.dataset.pick || '');
+          if (el.dataset.error) el.error = el.dataset.error;
+        });
+        var live = document.getElementById('live'), key = 'reserve', means = true;
+        fill(live, key, '', means);
+        document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-toggle'); if (!btn) return;
+            group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+            var v = btn.getAttribute('data-value');
+            if (group.getAttribute('data-control') === 'q') key = v;
+            if (group.getAttribute('data-control') === 'means') means = v === 'on';
+            fill(live, key, '', means);
+          });
+        });
+      });
+    })();
+</script>
+
+
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-run-progress — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .p-pad { padding: var(--la-space-lg); }
+    .p-box { width: 100%; max-width: 560px; }
+    .p-rows { display: flex; flex-direction: column; width: 100%; max-width: 560px; }
+    .p-row { display: grid; grid-template-columns: minmax(0, 160px) minmax(0, 1fr); align-items: center; gap: var(--la-space-lg); padding: var(--la-space-md) 0; border-top: 1px solid var(--la-color-border-light); }
+    .p-row:first-child { border-top: 0; }
+    .p-cap { font-size: var(--la-font-size-md); color: var(--la-color-text); }
+    .p-cap code { display: block; margin-top: var(--la-space-3xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .p-read { display: block; margin-top: var(--la-space-xs); font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); overflow-wrap: anywhere; }
+    .p-narrow { width: 100%; max-width: 220px; }
+
+    /* ── Anatomy ──────────────────────────────────────── */
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+
+    /* ── Controls ─────────────────────────────────────── */
+    .ctl-num { width: calc(var(--la-space-xl) * 3); }
+    .ctl-text { width: calc(var(--la-space-xl) * 9); max-width: 100%; }
+
+    /* ── In context: the overview open above its run ── */
+    /* Room for the open popover, which the frame would otherwise clip. */
+    .ctx-run { width: 100%; max-width: 560px; min-height: 640px; }
+    .ctx-run h4 { margin: 0 0 var(--la-space-xs); font-size: var(--la-font-size-xl); font-weight: var(--la-font-weight-medium); }
+    .ctx-run p { margin: 0 0 var(--la-space-md); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .usage-gap { margin-top: var(--la-space-lg); }
+    /* The Basis table's first column is prose, not a property name. */
+    #basis .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; width: 28%; }
+  </style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-run-progress</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-run-progress</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-run-progress</h1>
+          <p>How far a playbook run has got: “2 of 9 steps done”, then a 6px <code>la-progress</code> bar, named for the run. It counts settled steps (done, moved past, or done before you started) over every step in the run, and stays neutral at every value: the steps’ own check markers say which are done. It heads <code>la-run-overview</code>’s popover.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="p-box">
+              <la-run-progress done="2" total="9" label="Appoint a director"></la-run-progress>
+            </div>
+            <ol class="anatomy-list">
+              <li><strong>Count.</strong> “2 of 9 steps done”, first, in the secondary text colour with tabular numbers: it names what it counts (decision 148). Hidden from screen readers, which hear the bar instead.</li>
+              <li><strong>Bar.</strong> <code>la-progress</code> at <code>lg</code> (6px), neutral, filling the rest of the line. It carries the role, name and value: named for the run, “Appoint a director”, valued “2 of 9 steps done”. The name never changes as the run moves; the value does.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header">
+          <h1>Live preview</h1>
+          <p>Each control sets a property. The line under the preview is what a screen reader gets, read off the rendered bar.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label for="ctl-done">done</label>
+              <input id="ctl-done" class="ctl-num" type="text" inputmode="numeric" value="2">
+            </div>
+            <div class="control-group">
+              <label for="ctl-total">total</label>
+              <input id="ctl-total" class="ctl-num" type="text" inputmode="numeric" value="9">
+            </div>
+            <div class="control-group">
+              <label for="ctl-label">label</label>
+              <input id="ctl-label" class="ctl-text" type="text" value="Appoint a director">
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame p-pad">
+            <div class="p-box">
+              <la-run-progress id="live" done="2" total="9" label="Appoint a director"></la-run-progress>
+            </div>
+          </div>
+          <div class="preview-label event-log" id="live-read" aria-live="polite"></div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-states" class="preview-group">
+          <div class="preview-label">Not started, part way and all done. All done keeps the neutral fill: the steps’ check markers say done (decision 132)</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Not started<code>done="0" total="9"</code></span><la-run-progress done="0" total="9"></la-run-progress></div>
+              <div class="p-row"><span class="p-cap">Part way<code>done="2" total="9"</code></span><la-run-progress done="2" total="9"></la-run-progress></div>
+              <div class="p-row"><span class="p-cap">All done<code>done="9" total="9"</code></span><la-run-progress done="9" total="9"></la-run-progress></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-edges" class="preview-group">
+          <div class="preview-label">Odd values: <code>done</code> is kept between 0 and <code>total</code>, so it can’t read “12 of 9 steps done”; a run with no steps reads “0 of 0 steps done”; in a narrow column the count keeps its line and the bar shrinks</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows">
+              <div class="p-row"><span class="p-cap">Done above total<code>done="12" total="9"</code></span><la-run-progress done="12" total="9"></la-run-progress></div>
+              <div class="p-row"><span class="p-cap">No steps<code>done="0" total="0"</code></span><la-run-progress done="0" total="0"></la-run-progress></div>
+              <div class="p-row"><span class="p-cap">Narrow column<code>220px</code></span><div class="p-narrow"><la-run-progress done="4" total="12"></la-run-progress></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-read" class="preview-group">
+          <div class="preview-label">What a screen reader hears. The count is hidden from it; the bar says the same in its value. <code>label</code> names the bar for the run; “Playbook progress” only where a page gives no title (decision 148). Each line is read off the rendered bar</div>
+          <div class="preview-frame p-pad">
+            <div class="p-rows" id="aria-rows">
+              <div class="p-row"><span class="p-cap">The run’s title<code>label="Appoint a director"</code></span><div><la-run-progress done="5" total="10" label="Appoint a director"></la-run-progress><span class="p-read"></span></div></div>
+              <div class="p-row"><span class="p-cap">No title given<code>done="2" total="9"</code></span><div><la-run-progress done="2" total="9"></la-run-progress><span class="p-read"></span></div></div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-context" class="preview-group">
+          <div class="preview-label">In context: heading <code>la-run-overview</code>’s popover, shown open here. Click elsewhere and it closes, as on a run; press its pill to open it again</div>
+          <div class="preview-frame p-pad">
+            <div class="ctx-run">
+              <h4>Appoint a director</h4>
+              <p>Appoint a new director to your board.</p>
+              <la-run-overview id="ctx-overview" run-title="Appoint a director" open></la-run-overview>
+            </div>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-run-progress</h2>
+    <p>How far a playbook run has got: “2 of 9 steps done”, then a 6px la-progress bar, named for the run. It counts settled steps (done, moved past, or done before you started) over every step in the run, and stays neutral at every value: the steps’ own check markers say which are done. It heads la-run-overview’s popover.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>done</td>
+          <td><span class="default">done</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>settled steps</td>
+        </tr>
+      
+        <tr>
+          <td>total</td>
+          <td><span class="default">total</span></td>
+          <td><span class="type">number</span></td>
+          <td><span class="default">0</span></td>
+          <td>every step in the run</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Playbook progress&#39;</span></td>
+          <td>the bar's accessible name: the run's title (default "Playbook progress", where there's none)</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-space-md</code></td><td>The gap between the count and the bar.</td></tr>
+                <tr><td><code>--la-color-text-secondary</code></td><td>The count.</td></tr>
+                <tr><td><code>--la-font-size-md</code></td><td>The count’s size.</td></tr>
+                <tr><td><code>--la-progress-height-lg</code></td><td>The bar’s height, through <code>la-progress</code>.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>A run with five of ten steps settled, named for the run.</p>
+            <div class="docs-code"><span class="kw">&lt;la-run-progress</span> <span class="at">done</span>=<span class="str">"5"</span> <span class="at">total</span>=<span class="str">"10"</span> <span class="at">label</span>=<span class="str">"Appoint a director"</span><span class="kw">&gt;&lt;/la-run-progress&gt;</span></div>
+            <p class="usage-gap">In <code>la-run-overview</code>, its <code>run-title</code> names the bar.</p>
+            <div class="docs-code"><span class="kw">&lt;la-run-overview</span> <span class="at">run-title</span>=<span class="str">"Appoint a director"</span> .<span class="at">sections</span>=${…}<span class="kw">&gt;&lt;/la-run-overview&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>What counts.</strong> A step counts once it settles: done, moved past with a reason, or done before you started. Jonard closed RP1 on 13 Oct: moved past counts as done, as Jira counts Cancelled (decision 133).</li>
+              <li><strong>The whole run.</strong> <code>total</code> is every step: in Phase B no step leaves the run (decision 124).</li>
+              <li><strong>Neutral.</strong> The fill never turns green, even at 9 of 9: the steps it sums up are on the same screen, and their check markers say done (decision 132, <code>rule/green-on-a-check</code>).</li>
+              <li><strong>The count reads first,</strong> then the bar (Jonard, 12 Oct 2026; Bobby’s CMS 07 draws it in that order).</li>
+              <li><strong>Where it lives.</strong> It heads <code>la-run-overview</code>’s popover, while the pill keeps the count on the page. The run page doesn’t also show it under the intro: RP2 closed 14 Oct, A (decision 148).</li>
+              <li><strong>Words.</strong> RP3 closed 14 Oct, B (decision 148), built 14 Oct: the visible count names its noun, “2 of 9 steps done”, as the bar’s value does, and the bar is named for the run, its title, with “Playbook progress” only when there’s none. The name stays put as the run moves; the value changes.</li>
+              <li><strong>Not this:</strong> a bar for an operation with no steps on screen is <code>la-progress</code>, which can take a variant; the step you’re on is <code>la-step-marker</code>.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and where we differ (researched 12 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>A bar that sums up a list of steps shown with it</td><td><a href="https://shopify.dev/docs/api/app-home/patterns/compositions/setup-guide">Shopify’s setup guide</a> pairs its checklist with “0 out of 3 steps completed”; <a href="https://github.com/salesforce-ux/design-system/blob/main/ui/components/setup-assistant/docs.mdx">Salesforce’s Setup Assistant</a> heads its steps with an overall bar; <a href="https://primer.style/product/components/progress-bar/">Primer</a> counts “4 of 12 tasks completed”. Against: Carbon uses a step indicator for user-driven steps.</td><td>Backed (decision 132)</td></tr>
+                <tr><td>Neutral at every value</td><td>Salesforce marks each step under its overall bar; <a href="https://design-system.service.gov.uk/patterns/complete-multiple-tasks/">GOV.UK</a> shows a completed task as plain text so the rest stand out.</td><td>Decided: decision 132; GOV.UK in support</td></tr>
+                <tr><td>6px, heading a panel</td><td><a href="https://atlassian.design/components/progress-bar/usage">Atlassian’s bar</a> is 6px; Carbon’s small bar is 4px.</td><td>Backed (Atlassian)</td></tr>
+                <tr><td>The count outside the bar, read first on the same line</td><td>Every system keeps text out of the track. <a href="https://www.carbondesignsystem.com/building-blocks/core/components/progress-bar/guidelines">Carbon</a> puts its count below or beside the bar; Salesforce and Astryx put the value on a row above it; Primer’s example puts it below. None puts the count first on the bar’s own line.</td><td>Decided: our own (Jonard, 12 Oct 2026; as Bobby’s CMS)</td></tr>
+                <tr><td>The visible count hidden from screen readers; the bar says it in words</td><td><a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Attributes/aria-valuetext">MDN</a>: set <code>aria-valuetext</code> where a step count would be read as a percentage; Salesforce hides its duplicated percentage.</td><td>Backed</td></tr>
+                <tr><td>“2 of 9 steps done”, the noun on screen too</td><td>Primer shows “4 of 12” and hides “tasks completed” for screen readers. Most say the noun aloud: Atlassian “5 of 10 files uploaded”, Shopify “0 out of 3 steps completed”, GOV.UK’s old “You’ve completed 3 of 8 sections”. None writes “done” without a noun.</td><td>Closed: RP3, B: the noun on screen, “2 of 9 steps done” (Jonard, 14 Oct; decision 148). Built 14 Oct</td></tr>
+                <tr><td>The bar named for the run</td><td>A name is required (<a href="https://www.w3.org/TR/wai-aria-1.2/#progressbar">WAI-ARIA 1.2</a>, <a href="https://developer.mozilla.org/en-US/docs/Web/Accessibility/ARIA/Reference/Roles/progressbar_role">MDN</a>). <a href="https://carbondesignsystem.com/components/progress-bar/usage/">Carbon</a>: “The text describes the process that the progress bar refers to”, and it “should never change”; Spectrum, GitLab and axe name the process; <a href="https://github.com/salesforce-ux/design-system/blob/master/ui/components/progress-bar/index.jsx">Salesforce</a> names its bar by the task’s title; the <a href="https://www.w3.org/WAI/ARIA/apg/practices/names-and-descriptions/">APG</a> asks unique names and no role name in them. Against: Atlassian and Primer put the state in the name.</td><td>Closed: RP3, B: the run’s title, “Playbook progress” only without one (Jonard, 14 Oct; decision 148). Built 14 Oct</td></tr>
+                <tr><td>Moved past and done before you started count as done</td><td>They diverge: <a href="https://linear.app/docs/project-graph">Linear</a> takes cancelled issues out of the total; Jira counts Cancelled as done; <a href="https://design-system.service.gov.uk/components/task-list/">GOV.UK</a> has no skipped state, only Completed. No system has “done before you started”.</td><td>Closed: RP1, as Jira (Jonard, 13 Oct; decision 133). Built</td></tr>
+                <tr><td>Total is every step</td><td>Product: Bobby’s brief B8, decision 124.</td><td>Product requirement</td></tr>
+                <tr><td>Shown inside the overview’s popover</td><td>Wherever a summary exists it’s on the page: Shopify’s and Salesforce’s headers, the Scottish Government’s task list. GOV.UK dropped its summary in October 2023. None keeps overall progress only in a popover; here the pill keeps the count on the page.</td><td>Closed: RP2, A: on the pill and in the popover, not under the intro (Jonard, 14 Oct; decision 148)</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+    (function () {
+      /* What a screen reader gets from the bar, read off the rendered la-progress. */
+      function read(el) {
+        var p = el.shadowRoot.querySelector('la-progress');
+        var t = p && p.shadowRoot && p.shadowRoot.querySelector('.track');
+        if (!t) return '';
+        return 'role="' + t.getAttribute('role') + '" · name "' + t.getAttribute('aria-label') + '" · valuenow ' + t.getAttribute('aria-valuenow') +
+          ' of ' + t.getAttribute('aria-valuemax') + ' · valuetext "' + t.getAttribute('aria-valuetext') + '"';
+      }
+      function settle(el) { return el.updateComplete.then(function () { var p = el.shadowRoot.querySelector('la-progress'); return p ? p.updateComplete : null; }); }
+
+      Promise.all(['la-run-progress', 'la-run-overview', 'la-progress'].map(function (n) { return customElements.whenDefined(n); })).then(function () {
+        var live = document.getElementById('live'), out = document.getElementById('live-read');
+        function sync() { settle(live).then(function () { out.textContent = read(live); }); }
+        document.getElementById('ctl-done').addEventListener('input', function (e) { live.done = Number(e.target.value); sync(); });
+        document.getElementById('ctl-total').addEventListener('input', function (e) { live.total = Number(e.target.value); sync(); });
+        document.getElementById('ctl-label').addEventListener('input', function (e) { live.label = e.target.value; sync(); });
+        sync();
+
+        [].slice.call(document.querySelectorAll('#aria-rows la-run-progress')).forEach(function (el) {
+          settle(el).then(function () { el.nextElementSibling.textContent = read(el); });
+        });
+
+        /* Appoint a director, three steps settled and the fourth next. */
+        document.getElementById('ctx-overview').sections = [
+          { name: 'Check', steps: [{ title: 'Check your articles give the power, and pick the route.', status: 'complete' }, { title: 'Confirm the person is eligible and not barred.', status: 'complete' }] },
+          { name: 'Prepare and sign', steps: [{ title: 'Create the letter of appointment or service agreement.', status: 'passed' }, { title: 'Create the board minutes or written resolution.', status: 'active' }, { title: 'Create the ordinary resolution of the shareholders.', status: 'pending' }, { title: 'Get the new director’s consent to act signed.', status: 'pending' }] },
+          { name: 'File', steps: [{ title: 'Have the new director verify their identity at Companies House.', status: 'pending' }, { title: 'Collect the filing particulars.', status: 'pending' }, { title: 'File form AP01 at Companies House.', status: 'pending' }, { title: 'Handle an investor nominee.', status: 'pending' }] }
+        ];
+      });
+    })();
+</script>
+
+
+</body>
+</html>
