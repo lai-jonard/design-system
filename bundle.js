@@ -33493,6 +33493,9 @@
    *                     locale (formatDate, decision 145); empty prints none
    * @prop notice      - a line above the questions, such as what changing a confirmed answer can undo
    * @prop passing     - the way past is open: la-move-past, a modal, from Mark as done elsewhere
+   * @prop reopened    - a done step the founder pressed Change on, open again until the change is
+   *                     confirmed: Mark as done elsewhere and the way past are hidden, since a step
+   *                     already done can't be moved past (Bobby, 19 Oct 2026; decision 159)
    *
    * For the other step types (7 Oct 2026, moving Orion's run onto the card): the
    * authored button opens the type's own surface (document creation, the check
@@ -33553,6 +33556,7 @@
           this.date = '';
           this.notice = '';
           this.passing = false;
+          this.reopened = false;
           this.locked = false;
           this.word = '';
           this.icon = '';
@@ -33706,8 +33710,11 @@
       }
       /** The only way past a step (decision 128; Bobby's 8 Oct brief, B8): a
        *  small ghost button on the right, beside Sources, away from the act. It
-       *  opens la-move-past, which asks why. */
+       *  opens la-move-past, which asks why. A done step reopened to change it
+       *  has no way past (decision 159). */
       _doneElsewhere() {
+          if (this.reopened)
+              return A;
           return b `<la-button variant="ghost" size="sm" @click=${() => (this.passing = true)}>Mark as done elsewhere</la-button>`;
       }
       /** The sub-step running now, once the step's own part is done; -1 when none. */
@@ -33741,7 +33748,7 @@
        * to the flow.
        */
       _wayPast() {
-          if (this._settled)
+          if (this._settled || this.reopened)
               return A;
           return b `<la-move-past
       ?open=${this.passing}
@@ -34233,6 +34240,9 @@
   __decorate$6([
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookStep.prototype, "passing", void 0);
+  __decorate$6([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "reopened", void 0);
   __decorate$6([
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookStep.prototype, "locked", void 0);
