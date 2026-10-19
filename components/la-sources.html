@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>la-sources — LawAdvisor AI Design System</title>
+  <link rel="icon" type="image/svg+xml" href="../assets/brand/favicon.svg">
+  <script src="../bundle.js" defer></script>
+  <link rel="stylesheet" href="../docs-shell.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/regular/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/fill/style.css">
+  <link rel="stylesheet" href="../assets/vendor/phosphor/bold/style.css">
+  
+<style>
+    /* ── Specimens ────────────────────────────────────── */
+    .p-pad { padding: var(--la-space-lg); }
+    /* The panel opens below the pill, in the top layer; the frame leaves it room. */
+    .p-down { min-height: 300px; display: flex; align-items: flex-start; }
+    .p-full { width: 100%; max-width: 600px; }
+    /* A box that scrolls, as a modal's body: the panel isn't clipped by it (decision 143). */
+    .p-scroll { height: 140px; max-width: 600px; overflow: auto; padding: var(--la-space-md); border: 1px solid var(--la-color-border-light); border-radius: var(--la-radius-md); }
+    .p-scroll p { margin: 0 0 var(--la-space-md); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .p-foot { display: flex; align-items: center; justify-content: space-between; gap: var(--la-space-md); width: 100%; max-width: 600px; padding-top: var(--la-space-md); border-top: 1px solid var(--la-color-border-light); }
+    /* With no sources the pill takes no space: the act keeps the foot to itself. */
+    .p-empty-note { margin: 0; font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
+    .anatomy-list { margin: 0; padding-left: var(--la-space-lg); font-size: var(--la-font-size-md); color: var(--la-color-text-secondary); }
+    .anatomy-list li { margin: var(--la-space-xs) 0; }
+    .event-log { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; }
+    .usage-gap { margin-top: var(--la-space-lg); }
+    #basis .docs-table td { white-space: normal; }
+    #basis .docs-table td:first-child { font-family: inherit; font-size: var(--la-font-size-md); color: var(--la-color-text); white-space: normal; width: 28%; }
+</style>
+
+</head>
+<body>
+
+  <header class="doc-topbar">
+    <div class="doc-topbar-inner">
+      <div class="doc-topbar-left">
+        <button id="nav-toggle" class="doc-nav-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">
+          <i class="ph ph-list" aria-hidden="true"></i>
+        </button>
+        <a href="../index.html" class="doc-brand" aria-label="LawAdvisor AI Design System — home">
+          <img src="../assets/brand/logo-mark.svg" alt="" class="doc-logo-mark">
+        </a>
+      </div>
+      <nav class="doc-topnav">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="page-container">
+    <div class="doc-drawer" id="doc-drawer">
+      <nav class="doc-drawer-primary" aria-label="Sections">
+        <a href="../docs/">Docs</a>
+        <a href="../foundations/">Foundations</a>
+        <a href="../components/" class="active">Components</a>
+        <a href="../pages/">Pages</a>
+        <a href="../patterns/">Patterns</a>
+      </nav>
+      
+<nav class="docs-nav" id="docs-nav">
+  <h3 class="docs-nav-title">la-sources</h3>
+
+  
+  <div class="docs-nav-group">
+    
+      <a href="#overview" class="docs-nav-item" data-nav-id="overview">Overview</a>
+    
+      <a href="#anatomy" class="docs-nav-item" data-nav-id="anatomy">Anatomy</a>
+    
+      <a href="#controls" class="docs-nav-item" data-nav-id="controls">Live preview</a>
+    
+      <a href="#snapshots" class="docs-nav-item" data-nav-id="snapshots">Snapshots</a>
+    
+  </div>
+  
+
+  <div class="docs-nav-group">
+    <a href="#reference" class="docs-nav-item" data-nav-id="reference">la-sources</a>
+    <a href="#properties" class="docs-nav-item docs-nav-item--subsection" data-nav-id="properties">Properties</a>
+    <a href="#slots" class="docs-nav-item docs-nav-item--subsection" data-nav-id="slots">Slots</a>
+    
+    
+    
+    <a href="#css-tokens" class="docs-nav-item docs-nav-item--subsection" data-nav-id="css-tokens">CSS tokens</a>
+    <a href="#usage" class="docs-nav-item docs-nav-item--subsection" data-nav-id="usage">Usage examples</a>
+    <a href="#notes" class="docs-nav-item docs-nav-item--subsection" data-nav-id="notes">Notes</a>
+    <a href="#basis" class="docs-nav-item docs-nav-item--subsection" data-nav-id="basis">Basis</a>
+  </div>
+</nav>
+
+    </div>
+
+    <div class="nav-scrim" id="nav-scrim" hidden></div>
+
+    <div class="page-content">
+      <div class="page-content-inner">
+        
+
+        <!-- Overview -->
+        <div id="overview" class="preview-header">
+          <h1>la-sources</h1>
+          <p>Where something came from. A ghost <em>Sources · 2</em> pill opens a panel naming the documents and registers a step, an insight or a deadline read from, so whenever we assert something the founder can see its source in one click. It’s provenance, not the law: a step’s legal grounding stays behind <em>More</em>. With no sources it draws nothing.</p>
+        </div>
+
+        <!-- Anatomy -->
+        <div id="anatomy" class="preview-header">
+          <h1>Anatomy</h1>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="p-down"><la-sources id="anatomy-sources"></la-sources></div>
+            <ol class="anatomy-list">
+              <li><strong>Pill.</strong> A ghost <code>la-button</code> at the small size: the label, then the count.</li>
+              <li><strong>Panel.</strong> In the top layer, below the pill: a title, then one row per source: its icon (a file for a document, buildings for a register, a table for the cap table), its name, and where in it.</li>
+              <li><strong>Rows.</strong> A row with somewhere to go is a link with the open-out arrow; one without is plain text. On a touch screen each row is at least 44px tall.</li>
+            </ol>
+          </div>
+        </div>
+
+        <!-- Live preview -->
+        <div id="controls" class="preview-header">
+          <h1>Live preview</h1>
+          <p>Open the pill and press a row: it’s a link. This page takes the click over, as a page that opens the source itself would, and logs where it goes. Escape closes the panel and returns focus to the pill. Pick <em>none</em> and the pill goes.</p>
+        </div>
+
+        <div class="controls">
+          <div class="controls-row">
+            <div class="control-group">
+              <label>sources</label>
+              <div class="btn-group" data-control="set">
+                <button class="btn-toggle" data-value="none" type="button">none</button>
+                <button class="btn-toggle" data-value="one" type="button">one</button>
+                <button class="btn-toggle active" data-value="two" type="button">two</button>
+                <button class="btn-toggle" data-value="plain" type="button">one without a page</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="preview-group">
+          <div class="preview-frame p-pad" id="live-frame">
+            <div class="p-down"><la-sources id="live"></la-sources></div>
+          </div>
+          <div class="preview-label event-log" id="live-log">No events yet.</div>
+        </div>
+
+        <!-- Snapshots -->
+        <div id="snapshots" class="preview-header">
+          <h1>Snapshots</h1>
+        </div>
+
+        <div id="snap-foot" class="preview-group">
+          <div class="preview-label">On a step’s foot: far right, opposite the act (SR2 closed, kept; decision 151). Appoint a director, step 1, reads the founder’s articles and shareholders’ agreement</div>
+          <div class="preview-frame p-pad">
+            <div class="p-down p-full">
+              <div class="p-foot">
+                <la-button variant="primary">Which appointment route applies to me?</la-button>
+                <la-sources data-set="two"></la-sources>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-empty" class="preview-group">
+          <div class="preview-label">No sources: nothing is drawn and the host takes no space, so the act keeps the foot to itself (Jonard, 16 Oct 2026). The <code>la-sources</code> here is in the foot, with an empty list</div>
+          <div class="preview-frame preview-frame--stack p-pad">
+            <div class="p-foot">
+              <la-button variant="primary">Which appointment route applies to me?</la-button>
+              <la-sources id="empty-sources"></la-sources>
+            </div>
+            <p class="p-empty-note" id="empty-log"></p>
+          </div>
+        </div>
+
+        <div id="snap-down" class="preview-group">
+          <div class="preview-label">Below the pill, right edges aligned, flipping up when there’s no room below and to the pill’s left edge when there’s none to the left (SR4; decision 151). Scroll this to the foot of the window and open it to see it flip</div>
+          <div class="preview-frame p-pad">
+            <div class="p-down"><la-sources data-set="two"></la-sources></div>
+          </div>
+        </div>
+
+        <div id="snap-scroll" class="preview-group">
+          <div class="preview-label">In a box that scrolls, as a modal’s body: the panel opens in the top layer, so the box can’t clip it (decision 143; rule/pop-outs-never-clip)</div>
+          <div class="preview-frame p-pad">
+            <div class="p-scroll">
+              <p>Appoint a director, step 1, reads the founder’s articles and shareholders’ agreement. The box is short and scrolls, as a modal’s body does.</p>
+              <la-sources data-set="two"></la-sources>
+              <p>Scroll the box: the panel moves with the pill.</p>
+            </div>
+          </div>
+        </div>
+
+        <div id="snap-trigger" class="preview-group">
+          <div class="preview-label">A page’s own trigger: Deadlines already says where each row came from, so that label opens the panel</div>
+          <div class="preview-frame p-pad">
+            <div class="p-down"><la-sources data-set="co"><la-button slot="trigger" variant="ghost" size="sm">Where this came from</la-button></la-sources></div>
+          </div>
+        </div>
+
+
+<div class="docs">
+
+  <div id="reference" class="docs-section">
+    <h2>la-sources</h2>
+    <p>Where something came from. A ghost Sources · 2 pill opens a panel naming the documents and registers a step, an insight or a deadline read from, so whenever we assert something the founder can see its source in one click. It’s provenance, not the law: a step’s legal grounding stays behind More. With no sources it draws nothing.</p>
+  </div>
+
+  
+    <div class="docs-divider"></div>
+    
+
+
+
+
+
+<div id="properties" class="docs-section">
+  <h3>Properties</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Property</th><th>Attribute</th><th>Type</th><th>Default</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>sources</td>
+          <td>—</td>
+          <td><span class="type">SourceItem[]</span></td>
+          <td><span class="default">[]</span></td>
+          <td>the documents and registers, in the order read</td>
+        </tr>
+      
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;Sources&#39;</span></td>
+          <td>the pill's word (default "Sources"); the count follows it</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    <div class="docs-divider"></div>
+
+
+<div id="slots" class="docs-section">
+  <h3>Slots</h3>
+  <table class="docs-table">
+    <thead>
+      <tr><th>Slot</th><th>Description</th></tr>
+    </thead>
+    <tbody>
+      
+        <tr>
+          <td>trigger</td>
+          <td>a page's own trigger in place of the pill</td>
+        </tr>
+      
+    </tbody>
+  </table>
+</div>
+
+
+    
+    
+  
+
+  
+          <div class="docs-divider"></div>
+
+          <div id="methods" class="docs-section">
+            <h3>Methods and events</h3>
+            <table class="docs-table">
+              <thead><tr><th>Name</th><th>What it is</th></tr></thead>
+              <tbody>
+                <tr><td><code>close()</code></td><td>Closes the panel, from the page.</td></tr>
+                <tr><td><code>click</code></td><td>The native event. A row with <code>href</code> is a link, so the browser follows it, and the panel closes. A page that opens the source itself listens for <code>click</code> on <code>la-sources</code> and calls <code>preventDefault()</code>; the link is the first <code>a</code> in <code>e.composedPath()</code> (decision 142). No event of its own: <code>la-source-open</code> went on 14 Oct 2026 (SR3).</td></tr>
+                <tr><td><code>empty</code></td><td>An attribute the host takes while it has no sources, and draws nothing. Read it; don’t set it.</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="css-tokens" class="docs-section">
+            <h3>CSS tokens</h3>
+            <table class="docs-table">
+              <thead><tr><th>Token</th><th>Used for</th></tr></thead>
+              <tbody>
+                <tr><td><code>--la-sources-min-width</code> · <code>--la-sources-max-width</code></td><td>The panel: 280px to 360px wide, and never more than 90% of the window.</td></tr>
+                <tr><td><code>--la-color-bg</code> · <code>--la-shadow-popover</code> · <code>--la-radius-lg</code></td><td>The panel.</td></tr>
+                <tr><td><code>--la-color-text-muted</code> · <code>--la-font-size-sm</code></td><td>The title, and each row’s icon colour.</td></tr>
+                <tr><td><code>--la-font-size-lg</code> · <code>--la-space-3xs</code></td><td>Each row’s icon and the open-out arrow, and how far they sit down to meet the first line.</td></tr>
+                <tr><td><code>--la-color-text-faint</code></td><td>Where in the source, and the open-out arrow.</td></tr>
+                <tr><td><code>--la-color-bg-subtle</code> · <code>--la-radius-md</code></td><td>A row on hover.</td></tr>
+                <tr><td><code>--la-button-height-lg</code></td><td>A row’s least height on a touch screen (44px).</td></tr>
+                <tr><td><code>--la-space-sm</code></td><td>The gap between the pill and the panel.</td></tr>
+                <tr><td><code>--la-color-border-focus</code> · <code>--la-focus-ring-width</code></td><td>A row’s focus ring.</td></tr>
+              </tbody>
+            </table>
+            <p>A long list scrolls inside the panel from <code>min(70vh, 560px)</code>, as <code>la-run-overview</code>’s does (decision 148, RO4). The 1px between rows, the rows’ 1.25 line height and the focus ring’s -2px inset are fixed, as in <code>la-run-overview</code> and <code>la-menu</code>. It fades in over <code>--dur-fast</code>, and at once under reduced motion.</p>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="usage" class="docs-section">
+            <h3>Usage examples</h3>
+            <p>On a step’s foot, through <code>la-playbook-step</code>’s <code>sources</code> slot.</p>
+            <div class="docs-code"><span class="kw">&lt;la-sources</span> <span class="at">slot</span>=<span class="str">"sources"</span><span class="kw">&gt;&lt;/la-sources&gt;</span>
+
+el.sources = [
+  {icon: <span class="str">'ph-file-text'</span>, doc: <span class="str">'Articles of Association'</span>, section: <span class="str">`adopted ${formatDate('2024-06-02')} · LawVault`</span>, href: <span class="str">'/lawvault/articles'</span>},
+  {icon: <span class="str">'ph-buildings'</span>, doc: <span class="str">'Companies House'</span>, section: <span class="str">'the disqualified directors register'</span>, href: <span class="str">'/registers/disqualified-directors'</span>}
+];</div>
+            <p class="usage-gap">Opening a source in the page instead of following its link (decision 142).</p>
+            <div class="docs-code">el.addEventListener(<span class="str">'click'</span>, (e) =&gt; {
+  <span class="kw">const</span> a = e.composedPath().find((n) =&gt; n.localName === <span class="str">'a'</span>);
+  <span class="kw">if</span> (!a || e.metaKey || e.ctrlKey || e.shiftKey) <span class="kw">return</span>;
+  e.preventDefault();
+  openPreview(a.href);
+});</div>
+            <p class="usage-gap">With a page’s own trigger.</p>
+            <div class="docs-code"><span class="kw">&lt;la-sources&gt;</span>
+  <span class="kw">&lt;la-button</span> <span class="at">slot</span>=<span class="str">"trigger"</span> <span class="at">variant</span>=<span class="str">"ghost"</span> <span class="at">size</span>=<span class="str">"sm"</span><span class="kw">&gt;</span>Where this came from<span class="kw">&lt;/la-button&gt;</span>
+<span class="kw">&lt;/la-sources&gt;</span></div>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="notes" class="docs-section">
+            <h3>Notes</h3>
+            <ul>
+              <li><strong>Where it’s used.</strong> <code>la-playbook-step</code>’s foot. Orion’s run, Insights and Deadlines draw their own copy (<code>sources.js</code>) and move onto this once the sync resumes.</li>
+              <li><strong>No sources, nothing drawn</strong> (Jonard, 16 Oct 2026). With an empty list there’s no pill, no panel and no page trigger, which would open nothing. The host takes <code>empty</code> and no space, and an open panel closes, so a page can pass whatever it has without counting first. Sources that arrive later draw the pill as usual.</li>
+              <li><strong>On a touch screen</strong> each row is at least 44px tall (<code>--la-button-height-lg</code>; responsive-design.md’s touch targets), plain rows too so a list keeps one rhythm, and its icon and arrow centre on the row. The pill is <code>la-button</code>’s small size, which has no touch padding of its own.</li>
+              <li><strong>On a narrow screen</strong> the panel is never wider than 90% of the window, and stays inside it: it aligns to the pill’s right edge, or to its left edge when there’s no room to the left, and opens upward when there’s no room below. It stays a popover on a phone, as <code>la-run-overview</code>’s does.</li>
+              <li><strong>A disclosure</strong> (decision 143; rule/popover-by-content). The trigger carries <code>aria-expanded</code> and <code>aria-controls</code>, focus stays on it as the panel opens, and Tab moves into the rows. Escape returns focus to the button inside the pill, which <code>la-button</code> doesn’t do for its host, and the pill’s <code>aria-expanded</code> is on that button so a screen reader hears it. <strong>Beyond baseline, still open:</strong> on a slotted <code>la-button</code> trigger, <code>aria-expanded</code> and <code>aria-controls</code> land on the host, where a screen reader doesn’t hear them, and <code>aria-controls</code> can’t reach a panel inside the shadow root.</li>
+              <li><strong>In the top layer</strong> (decision 143, built 14 Oct 2026). The panel is a manual popover, right after the pill in the page, so no box that scrolls can clip it and reading order holds. CSS anchor positioning places it; where the browser lacks it (or its flips), it’s placed from the pill’s position, moved on scroll and resize, and kept inside the window. Manual, not auto, so it keeps the disclosure’s own rules: one open at a time, a click outside or Escape closes it, and Escape is taken before a modal’s, so it closes the panel and not the modal.</li>
+              <li><strong>Decided 14 Oct 2026</strong> (decision 151; built 14 Oct 2026): the pill stays, one click away, reading <em>Sources · N</em> (SR1, A); far right of the foot (SR2, A); a row with a destination is a link (SR3, B); it opens below and flips up when there’s no room (SR4, B); the note slot goes (SR5, B). <strong>Gone:</strong> the <code>nav</code> field (now <code>href</code>), the <code>la-source-open</code> event, the <code>note</code> slot, and the <code>drop</code> property, whose upward default existed so a pill at a card’s foot didn’t push the page, which the top layer never does.</li>
+            </ul>
+          </div>
+
+          <div class="docs-divider"></div>
+
+          <div id="basis" class="docs-section">
+            <h3>Basis</h3>
+            <p>What other systems do for each choice, and where we differ (researched 13 Oct 2026; the last three rows 16 Oct 2026).</p>
+            <table class="docs-table">
+              <thead><tr><th>Choice</th><th>Elsewhere</th><th>Status</th></tr></thead>
+              <tbody>
+                <tr><td>Sources one click away, behind a pill</td><td>No system requires sources always shown. Carbon’s AI Chat ships a collapsed <em>Sources</em> toggle; <a href="https://carbondesignsystem.com/components/ai-label/usage/">Carbon’s AI label</a>, Microsoft HAX, Google PAIR and Atlassian Rovo put explanation on demand. Against: <a href="https://carbondesignsystem.com/patterns/disclosures-pattern/">Carbon</a> says not to hide critical information in a disclosure; <a href="https://www.shapeof.ai/patterns/references">Shape of AI</a> warns that hidden references make a black box. Our AI guidelines ask for them always visible.</td><td>Closed: SR1, A: the pill stays, one click away, reading Sources · N; the AI guidelines’ always-visible is scoped to AI claims (Jonard, 14 Oct; decision 151)</td></tr>
+                <tr><td>The pill reads <em>Sources · 2</em></td><td>Carbon’s AI Chat reads <em>Sources</em>, with no count. No system uses <em>From 2 documents</em> or a middle dot.</td><td>Closed: SR1, A (Jonard, 14 Oct; decision 151)</td></tr>
+                <tr><td>A disclosure: focus stays on the trigger, no <code>aria-haspopup</code></td><td><a href="https://carbondesignsystem.com/components/toggletip/accessibility/">Carbon’s toggletip</a> and the <a href="https://www.w3.org/WAI/ARIA/apg/patterns/disclosure/">APG disclosure</a>. Primer, Atlassian and Polaris use a non-modal dialog instead, moving focus in.</td><td>Backed (Carbon, APG)</td></tr>
+                <tr><td>Escape closes and returns focus; a click outside closes</td><td>Carbon, Primer, Atlassian and Polaris all do.</td><td>Backed</td></tr>
+                <tr><td>One panel open at a time</td><td><a href="https://carbondesignsystem.com/components/popover/usage/">Carbon’s Popover</a> and Disclosures pattern; Atlassian’s Inline dialog.</td><td>Backed</td></tr>
+                <tr><td>The pill’s accessible name includes its visible words</td><td>Primer requires it of an overlay’s trigger (WCAG 2.5.3).</td><td>Backed</td></tr>
+                <tr><td>Rows: an icon, the name, and a line under it</td><td><a href="https://primer.style/product/components/action-list/">Primer ActionList</a>’s leading visual and block description; Polaris ActionList’s prefix and help text.</td><td>Backed</td></tr>
+                <tr><td>A row that opens a page is a link (until 14 Oct, a button firing an event)</td><td>Primer and Polaris render a row with a destination as a link; Carbon’s contained list makes a clickable row a button. The APG uses links for navigation.</td><td>Closed: SR3, B: a row with a destination is a link, as decision 142 (Jonard, 14 Oct; decision 151). Built 14 Oct 2026</td></tr>
+                <tr><td>A page’s own trigger</td><td>Primer’s AnchoredOverlay takes the page’s anchor (<code>renderAnchor</code>, <code>anchorRef</code>).</td><td>Backed</td></tr>
+                <tr><td>Opens below, flipping up when there’s no room (until 14 Oct, upward with no flip)</td><td>Primer, Polaris and Floating UI open below; Atlassian picks the side with room. All flip when there’s no room.</td><td>Closed: SR4, B: below by default, flipping up when there’s no room, as decision 143 needs (Jonard, 14 Oct; decision 151). Built 14 Oct 2026</td></tr>
+                <tr><td>The panel in the top layer, placed by anchor positioning</td><td><a href="https://opensource.adobe.com/spectrum-web-components/components/overlay/">Spectrum</a> uses the popover attribute; <a href="https://atlassian.design/components/popup/code">Atlassian</a> is moving to CSS anchor positioning; <a href="https://github.com/material-components/material-web/blob/main/docs/components/menu.md">Material Web</a> uses popover for most cases. <a href="https://floating-ui.com/docs/misc">Floating UI</a>: a panel inside a container “may get clipped”. <a href="https://caniuse.com/css-anchor-positioning">caniuse</a> still marks anchor positioning partial, hence the fallback.</td><td>Decided: decision 143 (Jonard, 14 Oct). Built 14 Oct 2026</td></tr>
+                <tr><td>At the foot of a step, far right, opposite the act</td><td>At the foot: Carbon’s AI Chat puts <em>Sources</em> under the answer; Shape of AI’s nested references sit at the bottom of the block. Far right opposite the primary: Material Components Web’s card. Against: Polaris puts the primary act at the far right; Carbon puts AI provenance top right.</td><td>Closed: SR2, A: far right of the foot, as built (Jonard, 14 Oct; decision 151)</td></tr>
+                <tr><td>No note closing the panel</td><td>No basis found, and nothing uses it.</td><td>Closed: SR5, B: the note slot goes (Jonard, 14 Oct; decision 151). Removed 14 Oct 2026</td></tr>
+                <tr><td>No sources, nothing drawn</td><td><a href="https://www.smashingmagazine.com/2024/05/hidden-vs-disabled-ux/">Smashing Magazine</a>: “Hide if the value shown is currently irrelevant and can’t be used”; <a href="https://unityeditordesignsystem.unity.com/fundamentals/interactions">Unity’s editor design system</a> hides a control that can’t be used in most cases. Against: <a href="https://www.uxtigers.com/post/inactive-buttons">Jakob Nielsen</a> and SSW prefer a disabled control that says why. Here a step’s sources are known when it’s drawn, so an empty pill would never become usable.</td><td>Decided: Jonard, 16 Oct 2026</td></tr>
+                <tr><td>Rows at least 44px on a touch screen</td><td><a href="https://www.w3.org/WAI/WCAG22/Understanding/target-size-enhanced.html">WCAG 2.5.5</a> and Apple’s HIG ask for 44 by 44; <code>la-segmented</code> and <code>la-disclosure</code> do the same here.</td><td>Backed</td></tr>
+                <tr><td>Never wider than the window, kept inside it</td><td><a href="https://floating-ui.com/docs/size">Floating UI’s size</a> and <a href="https://floating-ui.com/docs/shift">shift</a> keep a floating panel inside the viewport, as <code>la-run-overview</code> does here.</td><td>Backed</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+
+</div>
+
+      </div>
+    </div>
+  </div>
+
+  <script src="../js/doc-shell.js" defer></script>
+  
+
+<script>
+    (function () {
+      var SRC = {
+        articles: { icon: 'ph-file-text', doc: 'Articles of Association', section: 'adopted 2 June 2024 · LawVault', href: '/lawvault/articles' },
+        sha: { icon: 'ph-file-text', doc: 'Shareholders’ Agreement', section: 'signed 2 June 2024 · LawVault', href: '/lawvault/shareholders-agreement' },
+        chCo: { icon: 'ph-buildings', doc: 'Companies House', section: 'Harbour Analytics Ltd, 12650338', href: '/registers/company' },
+        cap: { icon: 'ph-table', doc: 'Cap Table', section: 'your investors', href: '/cap-table' }
+      };
+      var plain = function (s) { return { icon: s.icon, doc: s.doc, section: s.section }; };
+      var SETS = {
+        none: [],
+        one: [SRC.cap],
+        two: [SRC.articles, SRC.sha],
+        plain: [SRC.articles, plain(SRC.chCo)],
+        co: [SRC.chCo]
+      };
+
+      customElements.whenDefined('la-sources').then(function () {
+        document.querySelectorAll('la-sources[data-set]').forEach(function (el) { el.sources = SETS[el.getAttribute('data-set')]; });
+        document.getElementById('anatomy-sources').sources = SETS.plain;
+
+        var empty = document.getElementById('empty-sources');
+        empty.sources = SETS.none;
+        empty.updateComplete.then(function () {
+          document.getElementById('empty-log').textContent = 'empty: ' + empty.hasAttribute('empty') + ' · display: ' + getComputedStyle(empty).display;
+        });
+
+        var live = document.getElementById('live'), log = document.getElementById('live-log');
+        live.sources = SETS.two;
+        /* Every pill here: a row is a link, and this page takes the click
+           over, as a page that opens the source itself would (decision 142). */
+        document.querySelectorAll('la-sources').forEach(function (el) {
+          el.addEventListener('click', function (e) {
+            var a = e.composedPath().find(function (n) { return n.localName === 'a'; });
+            if (!a) return;
+            e.preventDefault();
+            log.textContent = 'click → ' + a.getAttribute('href') + ' (' + a.querySelector('.doc').textContent + ')';
+          });
+        });
+        document.querySelectorAll('.btn-group[data-control]').forEach(function (group) {
+          group.addEventListener('click', function (e) {
+            var btn = e.target.closest('.btn-toggle'); if (!btn) return;
+            group.querySelectorAll('.btn-toggle').forEach(function (b) { b.classList.toggle('active', b === btn); });
+            var v = btn.getAttribute('data-value');
+            if (group.getAttribute('data-control') === 'set') {
+              live.sources = SETS[v];
+              if (v === 'none') log.textContent = 'No sources: nothing drawn.';
+            }
+          });
+        });
+      });
+    })();
+</script>
+
+
+</body>
+</html>

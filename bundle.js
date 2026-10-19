@@ -344,6 +344,10 @@
     --la-toast-min-width: 260px;
     --la-toast-max-width: 340px;
 
+    /* ── Sources panel sizing ───────────────────────── */
+    --la-sources-min-width: 280px;
+    --la-sources-max-width: 360px;
+
     /* ── Button sizing ──────────────────────────────── */
     /* Button heights live off the --la-space scale — they're typography-driven
        dimensions, not layout distances. See decisions/12-button-padding-off-scale.md. */
@@ -34784,6 +34788,13 @@
    * element is wired as the button (aria-expanded, aria-controls, click),
    * and the default pill isn't drawn.
    *
+   * With no sources it draws nothing: no pill, no panel, and no page trigger,
+   * which would open nothing (Jonard, 16 Oct 2026). The host takes `empty`
+   * and no space, so a page can place it without counting first.
+   *
+   * On a touch screen each row is at least 44px tall (responsive-design.md).
+   * The panel is never wider than 90% of the window, and stays inside it.
+   *
    * A disclosure, as Carbon's toggletip and the APG's disclosure pattern
    * (decision 143; rule/popover-by-content): the trigger has aria-expanded and
    * aria-controls and no aria-haspopup (whose `true` means a menu), focus stays
@@ -34894,13 +34905,29 @@
               }
           });
       }
-      firstUpdated() {
-          /* One anchor name per pill, so each panel finds its own. */
+      /* With no sources there's nothing to open: the host is `empty`, and an
+         open panel closes. */
+      willUpdate(changed) {
+          if (!changed.has('sources'))
+              return;
+          const empty = !this.sources?.length;
+          this.toggleAttribute('empty', empty);
+          if (empty)
+              this.close();
+      }
+      /* One anchor name per pill, so each panel finds its own. Set whenever the
+         anchor is drawn, since a pill with no sources draws none at first. */
+      _wireAnchor() {
+          const anchor = this._anchor;
+          const panel = this._panel;
+          if (!anchor || !panel || anchor.style.getPropertyValue('anchor-name'))
+              return;
           const name = `--${this._panelId}`;
-          this._anchor?.style.setProperty('anchor-name', name);
-          this._panel?.style.setProperty('position-anchor', name);
+          anchor.style.setProperty('anchor-name', name);
+          panel.style.setProperty('position-anchor', name);
       }
       updated(changed) {
+          this._wireAnchor();
           this.querySelectorAll('[slot="trigger"]').forEach((el) => el.setAttribute('aria-expanded', this._open ? 'true' : 'false'));
           void this._syncPill();
           if (changed.has('_open'))
@@ -34965,7 +34992,9 @@
               : b `<div class="item">${body}</div>`;
       }
       render() {
-          const n = this.sources.length;
+          const n = this.sources?.length ?? 0;
+          if (!n)
+              return A;
           return b `${iconStyles}
       <span class="anchor">
         <slot name="trigger" @slotchange=${this._onTriggerSlot}></slot>
@@ -34999,7 +35028,8 @@
         line-height: var(--la-line-height);
         color: var(--la-color-text);
       }
-      :host([hidden]) {
+      :host([hidden]),
+      :host([empty]) {
         display: none;
       }
       /* What the panel is placed against: the pill, or the page's trigger. */
@@ -35015,8 +35045,8 @@
         margin: 0;
         border: 0;
         box-sizing: border-box;
-        min-width: 280px;
-        max-width: min(360px, 90vw);
+        min-width: var(--la-sources-min-width);
+        max-width: min(var(--la-sources-max-width), 90vw);
         /* A long list scrolls inside the panel, at la-run-overview's cap. */
         max-height: min(70vh, 560px);
         overflow-y: auto;
@@ -35094,8 +35124,8 @@
       }
       .item .icon {
         flex: none;
-        margin-top: 2px;
-        font-size: 15px;
+        margin-top: var(--la-space-3xs);
+        font-size: var(--la-font-size-lg);
         color: var(--la-color-text-muted);
       }
       .doc {
@@ -35110,9 +35140,22 @@
       }
       .go {
         flex: none;
-        margin-top: 2px;
-        font-size: 14px;
+        margin-top: var(--la-space-3xs);
+        font-size: var(--la-font-size-lg);
         color: var(--la-color-text-faint);
+      }
+      /* A thumb gets 44px, the large button's height (responsive-design.md,
+         touch targets; as la-segmented and la-disclosure). Plain rows match the
+         links, so a list keeps one rhythm. */
+      @media (hover: none) and (pointer: coarse) {
+        .item {
+          min-height: var(--la-button-height-lg);
+          align-items: center;
+        }
+        .item .icon,
+        .go {
+          margin-top: 0;
+        }
       }
       @media (prefers-reduced-motion: reduce) {
         .panel {

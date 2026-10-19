@@ -408,16 +408,16 @@
 <p class="component-card-desc">How far a playbook run has got: “2 of 9 steps done”, then a neutral bar named for the run. Moved-past steps count.</p>
 </div>
 </a>
-<div class="component-card component-card--disabled">
-<div aria-hidden="true" class="component-card-image"></div>
+<a class="component-card" href="./la-sources.html">
+<div aria-hidden="true" class="component-card-image component-card-image--live"><div class="card-preview-frame"><la-sources id="pv-sources"></la-sources></div></div>
 <div class="component-card-body">
 <div class="component-card-head">
 <span class="component-card-title">Sources</span>
-<span class="status-chip status-chip--progress">In progress</span>
+<span class="status-chip status-chip--v1">v1 ready</span>
 </div>
-<p class="component-card-desc">Where something came from: a “Sources · 2” pill that opens the documents and registers it was read from.</p>
+<p class="component-card-desc">Where something came from: a “Sources · 2” pill that opens the documents and registers it was read from. With none, it draws nothing.</p>
 </div>
-</div>
+</a>
 <div class="component-card component-card--disabled">
 <div aria-hidden="true" class="component-card-image"></div>
 <div class="component-card-body">
@@ -1252,6 +1252,9 @@
   if (aw) aw.actions = [
     { label: 'Sign the SAFE', description: 'Waiting on your signature', icon: 'ph ph-pen-nib' },
     { label: 'Upload board minutes', description: 'Due this month', icon: 'ph ph-upload-simple' }];
+  var so = document.getElementById('pv-sources');
+  if (so) so.sources = [
+    { icon: 'ph-file-text', doc: 'Articles of Association' }, { icon: 'ph-file-text', doc: 'Shareholders’ Agreement' }];
   var up = document.getElementById('pv-unlock');
   if (up) up.checklistItems = ['Certificate of Incorporation', 'Board approvals'];
   var dt = document.getElementById('pv-datatable');

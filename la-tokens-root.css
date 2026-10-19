@@ -312,6 +312,10 @@
   --la-toast-min-width: 260px;
   --la-toast-max-width: 340px;
 
+  /* ── Sources panel sizing ───────────────────────── */
+  --la-sources-min-width: 280px;
+  --la-sources-max-width: 360px;
+
   /* ── Button sizing ──────────────────────────────── */
   /* Button heights live off the --la-space scale — they're typography-driven
      dimensions, not layout distances. See decisions/12-button-padding-off-scale.md. */
