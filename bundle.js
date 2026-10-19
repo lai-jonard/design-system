@@ -258,6 +258,16 @@
       0 8px 16px -4px rgba(3, 7, 18, 0.04);
     --la-shadow-float: 0 2px 8px rgba(3, 7, 18, 0.08), 0 8px 24px rgba(3, 7, 18, 0.08);
     --la-shadow-lg:    0 16px 48px rgba(0, 0, 0, 0.12);
+    /* frosted glass — a light take on the harness remote's Liquid glass (14 Oct 2026)
+       for floating chrome over the page: see-through, blurred, a rim of light on top.
+       Light rather than smoky so dark nav text keeps its contrast. First user: the
+       app shell's nav on tablet and phone (16 Oct 2026). */
+    --la-glass-bg:     rgba(250, 250, 250, 0.62);
+    --la-glass-sheen:  linear-gradient(160deg, rgba(255, 255, 255, 0.55) 0%, rgba(255, 255, 255, 0.12) 34%, rgba(255, 255, 255, 0) 58%, rgba(255, 255, 255, 0.18) 100%);
+    --la-glass-filter: blur(20px) saturate(185%);
+    --la-glass-rim:
+      inset 0 1px 0 rgba(255, 255, 255, 0.85),
+      inset 0 0 0 1px rgba(3, 7, 18, 0.06);
     /* dialog — a large panel over a scrim: a 1px ring for an edge, then contact,
        lift and falloff. The insight modal (DA-63, 2 Oct 2026). */
     --la-shadow-dialog: 0 0 0 1px rgba(3, 7, 18, 0.08), 0 1px 2px rgba(3, 7, 18, 0.06), 0 8px 16px -4px rgba(3, 7, 18, 0.10), 0 24px 48px -12px rgba(3, 7, 18, 0.22);
@@ -562,7 +572,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */function e$2(e,r){return (n,s,i)=>{const o=t=>t.renderRoot?.querySelector(e)??null;return e$3(n,s,{get(){return o(this)}})}}
 
-  var __decorate$1S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1T = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -864,22 +874,22 @@
       }
     `,
   ];
-  __decorate$1S([
+  __decorate$1T([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "variant", void 0);
-  __decorate$1S([
+  __decorate$1T([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "type", void 0);
-  __decorate$1S([
+  __decorate$1T([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "appearance", void 0);
-  __decorate$1S([
+  __decorate$1T([
       n({ reflect: true })
   ], exports.LaBadge.prototype, "size", void 0);
-  __decorate$1S([
+  __decorate$1T([
       n()
   ], exports.LaBadge.prototype, "detail", void 0);
-  exports.LaBadge = __decorate$1S([
+  exports.LaBadge = __decorate$1T([
       t$2('la-badge')
   ], exports.LaBadge);
 
@@ -889,7 +899,7 @@
    * SPDX-License-Identifier: BSD-3-Clause
    */const o=o=>o??A;
 
-  var __decorate$1R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1S = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1015,29 +1025,29 @@
       }
     `,
   ];
-  __decorate$1R([
+  __decorate$1S([
       n()
   ], exports.LaIconButton.prototype, "label", void 0);
-  __decorate$1R([
+  __decorate$1S([
       n({ type: Boolean })
   ], exports.LaIconButton.prototype, "expanded", void 0);
-  __decorate$1R([
+  __decorate$1S([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "pressed", void 0);
-  __decorate$1R([
+  __decorate$1S([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "size", void 0);
-  __decorate$1R([
+  __decorate$1S([
       n({ reflect: true })
   ], exports.LaIconButton.prototype, "variant", void 0);
-  __decorate$1R([
+  __decorate$1S([
       n({ type: Boolean, reflect: true })
   ], exports.LaIconButton.prototype, "disabled", void 0);
-  exports.LaIconButton = __decorate$1R([
+  exports.LaIconButton = __decorate$1S([
       t$2('la-icon-button')
   ], exports.LaIconButton);
 
-  var __decorate$1Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1R = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1172,17 +1182,17 @@
 
     `,
   ];
-  __decorate$1Q([
+  __decorate$1R([
       n({ type: Array })
   ], exports.LaBreadcrumb.prototype, "items", void 0);
-  __decorate$1Q([
+  __decorate$1R([
       r$1()
   ], exports.LaBreadcrumb.prototype, "_expanded", void 0);
-  exports.LaBreadcrumb = __decorate$1Q([
+  exports.LaBreadcrumb = __decorate$1R([
       t$2('la-breadcrumb')
   ], exports.LaBreadcrumb);
 
-  var __decorate$1P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1Q = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1290,20 +1300,20 @@
       }
     `,
   ];
-  __decorate$1P([
+  __decorate$1Q([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "size", void 0);
-  __decorate$1P([
+  __decorate$1Q([
       n({ reflect: true })
   ], exports.LaSpinner.prototype, "appearance", void 0);
-  __decorate$1P([
+  __decorate$1Q([
       n()
   ], exports.LaSpinner.prototype, "label", void 0);
-  exports.LaSpinner = __decorate$1P([
+  exports.LaSpinner = __decorate$1Q([
       t$2('la-spinner')
   ], exports.LaSpinner);
 
-  var __decorate$1O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1P = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1674,41 +1684,41 @@
       }
     `,
   ];
-  __decorate$1O([
+  __decorate$1P([
       n({ reflect: true })
   ], exports.LaButton.prototype, "variant", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ reflect: true })
   ], exports.LaButton.prototype, "size", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "pill", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "block", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "wrap", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ attribute: 'loading-label' })
   ], exports.LaButton.prototype, "loadingLabel", void 0);
-  __decorate$1O([
+  __decorate$1P([
       n({ type: Boolean, reflect: true, attribute: 'hide-label' })
   ], exports.LaButton.prototype, "hideLabel", void 0);
-  __decorate$1O([
+  __decorate$1P([
       r$1()
   ], exports.LaButton.prototype, "_hasIconLeft", void 0);
-  exports.LaButton = __decorate$1O([
+  exports.LaButton = __decorate$1P([
       t$2('la-button')
   ], exports.LaButton);
 
-  var __decorate$1N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1O = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1769,20 +1779,20 @@
       }
     `,
   ];
-  __decorate$1N([
+  __decorate$1O([
       n()
   ], exports.LaCard.prototype, "heading", void 0);
-  __decorate$1N([
+  __decorate$1O([
       n({ type: Boolean, reflect: true })
   ], exports.LaCard.prototype, "nopadding", void 0);
-  __decorate$1N([
+  __decorate$1O([
       n({ reflect: true })
   ], exports.LaCard.prototype, "variant", void 0);
-  exports.LaCard = __decorate$1N([
+  exports.LaCard = __decorate$1O([
       t$2('la-card')
   ], exports.LaCard);
 
-  var __decorate$1M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1N = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -1833,20 +1843,20 @@
       }
     `,
   ];
-  __decorate$1M([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "clickable", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n({ type: Boolean, reflect: true })
   ], exports.LaPanel.prototype, "dimmed", void 0);
-  __decorate$1M([
+  __decorate$1N([
       n()
   ], exports.LaPanel.prototype, "heading", void 0);
-  exports.LaPanel = __decorate$1M([
+  exports.LaPanel = __decorate$1N([
       t$2('la-panel')
   ], exports.LaPanel);
 
-  var __decorate$1L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1M = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2181,23 +2191,23 @@
       }
     `,
   ];
-  __decorate$1L([
+  __decorate$1M([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "error", void 0);
-  __decorate$1L([
+  __decorate$1M([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "clickable", void 0);
-  __decorate$1L([
+  __decorate$1M([
       n({ reflect: true })
   ], exports.LaListItem.prototype, "variant", void 0);
-  __decorate$1L([
+  __decorate$1M([
       n({ type: Boolean, reflect: true })
   ], exports.LaListItem.prototype, "quiet", void 0);
-  exports.LaListItem = __decorate$1L([
+  exports.LaListItem = __decorate$1M([
       t$2('la-list-item')
   ], exports.LaListItem);
 
-  var __decorate$1K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1L = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2303,26 +2313,26 @@
       }
     `,
   ];
-  __decorate$1K([
+  __decorate$1L([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "checked", void 0);
-  __decorate$1K([
+  __decorate$1L([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "indeterminate", void 0);
-  __decorate$1K([
+  __decorate$1L([
       n({ type: Boolean, reflect: true })
   ], exports.LaCheckbox.prototype, "disabled", void 0);
-  __decorate$1K([
+  __decorate$1L([
       n()
   ], exports.LaCheckbox.prototype, "label", void 0);
-  __decorate$1K([
+  __decorate$1L([
       e$2('input')
   ], exports.LaCheckbox.prototype, "input", void 0);
-  exports.LaCheckbox = __decorate$1K([
+  exports.LaCheckbox = __decorate$1L([
       t$2('la-checkbox')
   ], exports.LaCheckbox);
 
-  var __decorate$1J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1K = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2458,20 +2468,20 @@
       }
     `,
   ];
-  __decorate$1J([
+  __decorate$1K([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "checked", void 0);
-  __decorate$1J([
+  __decorate$1K([
       n({ type: Boolean, reflect: true })
   ], exports.LaSwitch.prototype, "disabled", void 0);
-  __decorate$1J([
+  __decorate$1K([
       n()
   ], exports.LaSwitch.prototype, "label", void 0);
-  exports.LaSwitch = __decorate$1J([
+  exports.LaSwitch = __decorate$1K([
       t$2('la-switch')
   ], exports.LaSwitch);
 
-  var __decorate$1I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1J = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2687,29 +2697,29 @@
       }
     `,
   ];
-  __decorate$1I([
+  __decorate$1J([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "variant", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "checked", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "invalid", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n({ type: Boolean, reflect: true })
   ], exports.LaChoice.prototype, "filled", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n()
   ], exports.LaChoice.prototype, "description", void 0);
-  __decorate$1I([
+  __decorate$1J([
       n({ reflect: true })
   ], exports.LaChoice.prototype, "type", void 0);
-  exports.LaChoice = __decorate$1I([
+  exports.LaChoice = __decorate$1J([
       t$2('la-choice')
   ], exports.LaChoice);
 
-  var __decorate$1H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1I = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2826,14 +2836,14 @@
       }
     `,
   ];
-  __decorate$1H([
+  __decorate$1I([
       n({ type: Array })
   ], exports.LaStepper.prototype, "steps", void 0);
-  exports.LaStepper = __decorate$1H([
+  exports.LaStepper = __decorate$1I([
       t$2('la-stepper')
   ], exports.LaStepper);
 
-  var __decorate$1G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1H = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -2995,35 +3005,35 @@
       }
     `,
   ];
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "total", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "done", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Boolean })
   ], exports.LaStepRing.prototype, "current", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "thickness", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "gap", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n({ type: Number })
   ], exports.LaStepRing.prototype, "corner", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n()
   ], exports.LaStepRing.prototype, "label", void 0);
-  __decorate$1G([
+  __decorate$1H([
       n()
   ], exports.LaStepRing.prototype, "sublabel", void 0);
-  exports.LaStepRing = __decorate$1G([
+  exports.LaStepRing = __decorate$1H([
       t$2('la-step-ring')
   ], exports.LaStepRing);
 
-  var __decorate$1F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1G = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3265,23 +3275,23 @@
       }
     `,
   ];
-  __decorate$1F([
+  __decorate$1G([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "status", void 0);
-  __decorate$1F([
+  __decorate$1G([
       n({ reflect: true })
   ], exports.LaStepMarker.prototype, "variant", void 0);
-  __decorate$1F([
+  __decorate$1G([
       n({ type: Number })
   ], exports.LaStepMarker.prototype, "index", void 0);
-  __decorate$1F([
+  __decorate$1G([
       n()
   ], exports.LaStepMarker.prototype, "label", void 0);
-  exports.LaStepMarker = __decorate$1F([
+  exports.LaStepMarker = __decorate$1G([
       t$2('la-step-marker')
   ], exports.LaStepMarker);
 
-  var __decorate$1E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1F = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3419,17 +3429,17 @@
       }
     `,
   ];
-  __decorate$1E([
+  __decorate$1F([
       n()
   ], exports.LaActivityItem.prototype, "time", void 0);
-  __decorate$1E([
+  __decorate$1F([
       n({ type: Boolean, reflect: true })
   ], exports.LaActivityItem.prototype, "last", void 0);
-  exports.LaActivityItem = __decorate$1E([
+  exports.LaActivityItem = __decorate$1F([
       t$2('la-activity-item')
   ], exports.LaActivityItem);
 
-  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1E = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3629,56 +3639,56 @@
       }
     `,
   ];
-  __decorate$1D([
+  __decorate$1E([
       n()
   ], exports.LaTextarea.prototype, "name", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n()
   ], exports.LaTextarea.prototype, "placeholder", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n()
   ], exports.LaTextarea.prototype, "value", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n()
   ], exports.LaTextarea.prototype, "label", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n()
   ], exports.LaTextarea.prototype, "hint", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "required", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Boolean })
   ], exports.LaTextarea.prototype, "optional", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "disabled", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Boolean, reflect: true })
   ], exports.LaTextarea.prototype, "error", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "rows", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Number, attribute: 'min-rows' })
   ], exports.LaTextarea.prototype, "minRows", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Number, attribute: 'max-rows' })
   ], exports.LaTextarea.prototype, "maxRows", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Number })
   ], exports.LaTextarea.prototype, "maxlength", void 0);
-  __decorate$1D([
+  __decorate$1E([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaTextarea.prototype, "showCount", void 0);
-  __decorate$1D([
+  __decorate$1E([
       e$2('textarea')
   ], exports.LaTextarea.prototype, "_textarea", void 0);
-  exports.LaTextarea = __decorate$1D([
+  exports.LaTextarea = __decorate$1E([
       t$2('la-textarea')
   ], exports.LaTextarea);
 
-  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1D = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -3976,35 +3986,35 @@
       }
     `,
   ];
-  __decorate$1C([
+  __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "signed", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ attribute: false })
   ], exports.LaStepSignoff.prototype, "stamps", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ type: Boolean })
   ], exports.LaStepSignoff.prototype, "reopenable", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n()
   ], exports.LaStepSignoff.prototype, "label", void 0);
-  __decorate$1C([
+  __decorate$1D([
       n({ type: Boolean, reflect: true })
   ], exports.LaStepSignoff.prototype, "quiet", void 0);
-  __decorate$1C([
+  __decorate$1D([
       r$1()
   ], exports.LaStepSignoff.prototype, "_reopening", void 0);
-  __decorate$1C([
+  __decorate$1D([
       r$1()
   ], exports.LaStepSignoff.prototype, "_historyOpen", void 0);
-  __decorate$1C([
+  __decorate$1D([
       r$1()
   ], exports.LaStepSignoff.prototype, "_reason", void 0);
-  exports.LaStepSignoff = __decorate$1C([
+  exports.LaStepSignoff = __decorate$1D([
       t$2('la-step-signoff')
   ], exports.LaStepSignoff);
 
-  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1C = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4484,41 +4494,41 @@
       }
     `,
   ];
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Boolean, reflect: true })
   ], exports.LaDisclosure.prototype, "open", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n()
   ], exports.LaDisclosure.prototype, "summary", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ reflect: true })
   ], exports.LaDisclosure.prototype, "variant", void 0);
-  __decorate$1B([
+  __decorate$1C([
       n({ type: Number, attribute: 'heading-level' })
   ], exports.LaDisclosure.prototype, "headingLevel", void 0);
-  __decorate$1B([
+  __decorate$1C([
       r$1()
   ], exports.LaDisclosure.prototype, "_shown", void 0);
-  __decorate$1B([
+  __decorate$1C([
       r$1()
   ], exports.LaDisclosure.prototype, "_expanded", void 0);
-  __decorate$1B([
+  __decorate$1C([
       r$1()
   ], exports.LaDisclosure.prototype, "_settled", void 0);
-  __decorate$1B([
+  __decorate$1C([
       r$1()
   ], exports.LaDisclosure.prototype, "_hasTrailing", void 0);
-  __decorate$1B([
+  __decorate$1C([
       e$2('details')
   ], exports.LaDisclosure.prototype, "_details", void 0);
-  __decorate$1B([
+  __decorate$1C([
       e$2('.body')
   ], exports.LaDisclosure.prototype, "_body", void 0);
-  exports.LaDisclosure = __decorate$1B([
+  exports.LaDisclosure = __decorate$1C([
       t$2('la-disclosure')
   ], exports.LaDisclosure);
 
-  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1B = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4620,23 +4630,23 @@
       }
     `,
   ];
-  __decorate$1A([
+  __decorate$1B([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "status", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n()
   ], exports.LaSlaPill.prototype, "label", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n({ reflect: true })
   ], exports.LaSlaPill.prototype, "size", void 0);
-  __decorate$1A([
+  __decorate$1B([
       n({ type: Boolean })
   ], exports.LaSlaPill.prototype, "clickable", void 0);
-  exports.LaSlaPill = __decorate$1A([
+  exports.LaSlaPill = __decorate$1B([
       t$2('la-sla-pill')
   ], exports.LaSlaPill);
 
-  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1A = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -4735,20 +4745,20 @@
       }
     `,
   ];
-  __decorate$1z([
+  __decorate$1A([
       n({ reflect: true })
   ], exports.LaDateTile.prototype, "tone", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n()
   ], exports.LaDateTile.prototype, "day", void 0);
-  __decorate$1z([
+  __decorate$1A([
       n()
   ], exports.LaDateTile.prototype, "month", void 0);
-  exports.LaDateTile = __decorate$1z([
+  exports.LaDateTile = __decorate$1A([
       t$2('la-date-tile')
   ], exports.LaDateTile);
 
-  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1z = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5144,41 +5154,41 @@
       }
     `,
   ];
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Number, attribute: 'stage-index' })
   ], exports.LaSlaStrip.prototype, "stageIndex", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Number, attribute: 'stage-total' })
   ], exports.LaSlaStrip.prototype, "stageTotal", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ attribute: 'stage-name' })
   ], exports.LaSlaStrip.prototype, "stageName", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ attribute: 'stage-status' })
   ], exports.LaSlaStrip.prototype, "stageStatus", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ attribute: 'stage-days-label' })
   ], exports.LaSlaStrip.prototype, "stageDaysLabel", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Number, attribute: 'case-sla-days' })
   ], exports.LaSlaStrip.prototype, "caseSlaDays", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ attribute: 'case-status' })
   ], exports.LaSlaStrip.prototype, "caseStatus", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ attribute: false })
   ], exports.LaSlaStrip.prototype, "stages", void 0);
-  __decorate$1y([
+  __decorate$1z([
       n({ type: Boolean, reflect: true })
   ], exports.LaSlaStrip.prototype, "open", void 0);
-  __decorate$1y([
+  __decorate$1z([
       r$1()
   ], exports.LaSlaStrip.prototype, "_phase", void 0);
-  exports.LaSlaStrip = __decorate$1y([
+  exports.LaSlaStrip = __decorate$1z([
       t$2('la-sla-strip')
   ], exports.LaSlaStrip);
 
-  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1y = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5281,23 +5291,23 @@
       }
     `,
   ];
-  __decorate$1x([
+  __decorate$1y([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "filled", void 0);
-  __decorate$1x([
+  __decorate$1y([
       n()
   ], exports.LaBandwidthBar.prototype, "label", void 0);
-  __decorate$1x([
+  __decorate$1y([
       n({ type: Number })
   ], exports.LaBandwidthBar.prototype, "count", void 0);
-  __decorate$1x([
+  __decorate$1y([
       n({ type: Boolean, attribute: 'show-count' })
   ], exports.LaBandwidthBar.prototype, "showCount", void 0);
-  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1x([
+  exports.LaBandwidthBar = LaBandwidthBar_1 = __decorate$1y([
       t$2('la-bandwidth-bar')
   ], exports.LaBandwidthBar);
 
-  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1x = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5367,17 +5377,17 @@
       :host([level='3+']) .badge { background: var(--la-color-level-3plus); }
     `,
   ];
-  __decorate$1w([
+  __decorate$1x([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "level", void 0);
-  __decorate$1w([
+  __decorate$1x([
       n({ reflect: true })
   ], exports.LaLevelIndicator.prototype, "size", void 0);
-  exports.LaLevelIndicator = __decorate$1w([
+  exports.LaLevelIndicator = __decorate$1x([
       t$2('la-level-indicator')
   ], exports.LaLevelIndicator);
 
-  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1w = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5453,17 +5463,17 @@
       .seg.r4 { background: var(--la-color-primary); }
     `,
   ];
-  __decorate$1v([
+  __decorate$1w([
       n({ attribute: false })
   ], exports.LaDistributionBar.prototype, "segments", void 0);
-  __decorate$1v([
+  __decorate$1w([
       n({ type: Number })
   ], exports.LaDistributionBar.prototype, "height", void 0);
-  exports.LaDistributionBar = __decorate$1v([
+  exports.LaDistributionBar = __decorate$1w([
       t$2('la-distribution-bar')
   ], exports.LaDistributionBar);
 
-  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+  var __decorate$1v = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
       if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
@@ -5586,18 +5596,145 @@
       }
     `,
   ];
-  __decorate$1u([
+  __decorate$1v([
       n({ type: Number })
   ], exports.LaThinking.prototype, "duration", void 0);
-  __decorate$1u([
+  __decorate$1v([
       n({ type: Number })
   ], exports.LaThinking.prototype, "spread", void 0);
-  __decorate$1u([
+  __decorate$1v([
       n({ reflect: true })
   ], exports.LaThinking.prototype, "size", void 0);
-  exports.LaThinking = __decorate$1u([
+  exports.LaThinking = __decorate$1v([
       t$2('la-thinking')
   ], exports.LaThinking);
+
+  var __decorate$1u = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+      var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+      if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+      else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+      return c > 3 && r && Object.defineProperty(target, key, r), r;
+  };
+  /* From dev/assets/brand/logo-mark.svg. f = the full-height first bar,
+     t = top row, b = bottom row. */
+  const BARS = [
+      ['f', 'M0 2C0 .9.9 0 2 0h10.2c1.1 0 2 .9 2 2v78H2c-1.1 0-2-.9-2-2V2Z'],
+      ['b', 'M12.4 44.4h14.4V78c0 1.1-.9 2-2 2H12.4V44.4Z'],
+      ['t', 'M24.8 2c0-1.1.9-2 2-2h12c1.1 0 2 .9 2 2v42.4h-16V2Z'],
+      ['b', 'M33.4 44.4h12.8V78c0 1.1-.9 2-2 2h-8.8c-1.1 0-2-.9-2-2V44.4Z'],
+      ['t', 'M46.4 2c0-1.1.9-2 2-2h6.4c1.1 0 2 .9 2 2v42.4H46.4V2Z'],
+      ['b', 'M52 44.4h12V78c0 1.1-.9 2-2 2h-8c-1.1 0-2-.9-2-2V44.4Z'],
+      ['t', 'M62.4 2c0-1.1.9-2 2-2h2.8c1.1 0 2 .9 2 2v42.4h-6.8V2Z'],
+      ['b', 'M67.6 44.4h9.2V78c0 1.1-.9 2-2 2h-5.2c-1.1 0-2-.9-2-2V44.4Z'],
+      ['t', 'M74.8 2c0-1.1.9-2 2-2H78c1.1 0 2 .9 2 2v42.4h-5.2V2Z'],
+  ];
+  /* Drafting, checking and filing build up and let go together, so each bar
+     has its own keyframes: bar i arrives at a%, all hold, all let go. */
+  const buildUps = BARS.map((_, i) => {
+      const a = 4 + i * 7;
+      const h = a + 8;
+      return `
+    @keyframes draft-${i} { 0%, ${a}% { opacity: 0; transform: scaleY(.3); } ${h}%, 80% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: none; } }
+    @keyframes check-${i} { 0%, ${a}% { opacity: .2; } ${a + 4}%, 86% { opacity: 1; } 96%, 100% { opacity: .2; } }
+    @keyframes file-${i} { 0%, ${a}% { opacity: 0; transform: translateY(-45%); } ${h}%, 80% { opacity: 1; transform: none; } 92%, 100% { opacity: 0; transform: none; } }
+    :host([motion='drafting']) path:nth-child(${i + 1}) { animation-name: draft-${i}; }
+    :host([motion='checking']) path:nth-child(${i + 1}) { animation-name: check-${i}; }
+    :host([motion='filing']) path:nth-child(${i + 1}) { animation-name: file-${i}; }`;
+  }).join('');
+  exports.LaAiMark = class LaAiMark extends i$3 {
+      constructor() {
+          super(...arguments);
+          this.motion = 'reading';
+          this.size = 'default';
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          if (!this.hasAttribute('aria-hidden'))
+              this.setAttribute('aria-hidden', 'true');
+          if (!this.hasAttribute('motion'))
+              this.setAttribute('motion', this.motion);
+      }
+      render() {
+          return b `<svg viewBox="0 0 80 80" focusable="false">
+      ${BARS.map(([row, d], i) => w `<path class=${row} style="--i: ${i}" d=${d}></path>`)}
+    </svg>`;
+      }
+  };
+  exports.LaAiMark.styles = [
+      tokens,
+      i$6 `
+      :host {
+        display: inline-block;
+        flex-shrink: 0;
+        width: 20px;
+        height: 20px;
+        color: var(--la-color-text);
+        vertical-align: middle;
+      }
+      :host([size='sm']) { width: 16px; height: 16px; }
+      :host([size='lg']) { width: 32px; height: 32px; }
+      :host([motion='failed']) { color: var(--la-color-text-faint); }
+
+      svg { display: block; width: 100%; height: 100%; overflow: visible; }
+      path {
+        fill: currentColor;
+        transform-box: fill-box;
+        animation-duration: var(--_dur, 1600ms);
+        animation-iteration-count: infinite;
+        animation-timing-function: var(--ease-in-out);
+        animation-delay: calc(var(--i) * var(--_stagger, 0ms));
+      }
+      path.t { transform-origin: 50% 100%; }
+      path.b { transform-origin: 50% 0%; }
+      path.f { transform-origin: 50% 55.5%; }
+
+      :host([motion='reading']) { --_dur: 1600ms; --_stagger: 110ms; }
+      :host([motion='reading']) path { opacity: 0.22; animation-name: read; }
+      @keyframes read { 0%, 100% { opacity: .22; } 20% { opacity: 1; } 45% { opacity: .22; } }
+
+      :host([motion='searching']) { --_dur: 1300ms; --_stagger: 70ms; }
+      :host([motion='searching']) path { animation-name: search; }
+      @keyframes search { 0%, 60%, 100% { transform: scaleY(1); opacity: 1; } 25% { transform: scaleY(.35); opacity: .45; } }
+
+      /* px here are the mark's own 80-unit grid, so every bar moves alike. */
+      :host([motion='matching']) { --_dur: 1800ms; }
+      :host([motion='matching']) path.t,
+      :host([motion='matching']) path.f { animation-name: match-t; }
+      :host([motion='matching']) path.b { animation-name: match-b; }
+      @keyframes match-t { 0%, 70%, 100% { transform: translateX(0); } 30%, 45% { transform: translateX(-6px); } }
+      @keyframes match-b { 0%, 70%, 100% { transform: translateX(0); opacity: 1; } 30%, 45% { transform: translateX(6px); opacity: .45; } }
+
+      :host([motion='drafting']) { --_dur: 2400ms; }
+      :host([motion='checking']) { --_dur: 2000ms; }
+      :host([motion='filing']) { --_dur: 2200ms; }
+
+      :host([motion='done']) path {
+        animation: done var(--dur-base, 300ms) var(--ease-out) both;
+        animation-delay: calc(var(--i) * 40ms);
+      }
+      @keyframes done { from { opacity: .3; transform: scaleY(.6); } to { opacity: 1; transform: none; } }
+
+      :host([motion='failed']) path,
+      :host([motion='rest']) path { animation: none; }
+
+      @media (prefers-reduced-motion: reduce) {
+        path { animation: none !important; opacity: 1 !important; transform: none !important; }
+      }
+      @media (forced-colors: active) {
+        :host { color: CanvasText; }
+      }
+    `,
+      r$5(buildUps),
+  ];
+  __decorate$1u([
+      n({ reflect: true })
+  ], exports.LaAiMark.prototype, "motion", void 0);
+  __decorate$1u([
+      n({ reflect: true })
+  ], exports.LaAiMark.prototype, "size", void 0);
+  exports.LaAiMark = __decorate$1u([
+      t$2('la-ai-mark')
+  ], exports.LaAiMark);
 
   var __decorate$1t = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
       var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
@@ -20917,18 +21054,27 @@
         * { transition-duration: 0ms !important; }
       }
 
+      /* Touch layouts. Rows are 36px and sub-items 32px, under the 44px touch
+         target in R-92: the nav is a dense, Notion-like list and every row runs
+         the full width, so the tap area stays wide (Riel, 16 Oct 2026). */
       @media (max-width: 1023px) {
         .nav-item,
-        .subtab,
         .collapsed-flyout-title,
-        .collapsed-flyout-item,
+        .collapsed-flyout-item {
+          min-height: 36px;
+        }
+
+        .subtab {
+          min-height: 32px;
+        }
+
         .user {
           min-height: 44px;
         }
 
         .collapse-btn::part(button) {
-          width: 44px;
-          height: 44px;
+          width: 36px;
+          height: 36px;
         }
       }
     `,
@@ -22530,6 +22676,11 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  const WORKING_VERBS = {
+      reading: 'Reading',
+      filing: 'Filing',
+      checking: 'Checking',
+  };
   exports.LaProcessingWidget = class LaProcessingWidget extends i$3 {
       constructor() {
           super(...arguments);
@@ -22539,6 +22690,11 @@
           // info alert above the items — no dismiss button by design (no re-entry
           // surface yet; dismissing would orphan the user).
           this.timeout = false;
+          // Opt-in: when AI is doing the work, the header shows the logomark at that
+          // job (la-ai-mark: 'reading', 'filing', …) instead of the spinner, and the
+          // rows lose their own spinners, so one mark stands for the batch; each
+          // row's secondary line says where it is. Unset, the spinner as before.
+          this.mark = '';
           this._showDetails = true;
       }
       get _processingCount() {
@@ -22578,6 +22734,9 @@
               parts.push(`${failed} failed`);
           if (parts.length > 1)
               return parts.join(', ');
+          // With the mark, the title names the job the mark shows: "Reading 3 files".
+          if (this.mark && processing > 0 && WORKING_VERBS[this.mark])
+              return `${WORKING_VERBS[this.mark]} ${processing} file${processing > 1 ? 's' : ''}`;
           return `Processing ${this.items.length} items`;
       }
       _reupload(item) {
@@ -22601,7 +22760,9 @@
         <div class="header">
           <div class="title">
             ${this._processingCount > 0
-            ? b `<la-spinner size="sm" label="Processing"></la-spinner>`
+            ? this.mark
+                ? b `<la-ai-mark size="sm" motion=${this.mark}></la-ai-mark>`
+                : b `<la-spinner size="sm" label="Processing"></la-spinner>`
             : A}
             <span class="title-text">${this._getTitle()}</span>
           </div>
@@ -22629,7 +22790,9 @@
                     <la-document-item
                       name=${item.name}
                       association=${item.area}
-                      status=${this._mapStatus(item.status)}
+                      status=${this.mark && item.status === 'processing'
+            ? 'none'
+            : this._mapStatus(item.status)}
                       error=${this._errorFor(item)}
                       ?dismissible=${item.status !== 'processing'}
                       non-interactive
@@ -22741,6 +22904,9 @@
   __decorate$x([
       n({ type: Boolean, reflect: true })
   ], exports.LaProcessingWidget.prototype, "timeout", void 0);
+  __decorate$x([
+      n({ reflect: true })
+  ], exports.LaProcessingWidget.prototype, "mark", void 0);
   __decorate$x([
       r$1()
   ], exports.LaProcessingWidget.prototype, "_showDetails", void 0);
@@ -25567,6 +25733,7 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
+  var LaInsightModal_1;
   /**
    * Where a founder can read each law for themselves (DA-54, Somya, 1 Oct 2026:
    * "each law should link to its page on GOV.UK"). The Acts and regulations
@@ -25595,21 +25762,72 @@
       'Employers’ Liability (Compulsory Insurance) Act 1969': LEG + 'ukpga/1969/57/contents',
       'Unfair Contract Terms Act 1977': LEG + 'ukpga/1977/50/contents',
       'Payment Services Regulations 2017': LEG + 'uksi/2017/752/contents',
+      /* DA-116 (Somya, 7 Oct 2026): the Acts the insights cite that had no
+         address, so they printed as plain text. Same names the data uses. */
+      'UK General Data Protection Regulation': LEG + 'eur/2016/679/contents',
+      'Data Protection Act 2018': LEG + 'ukpga/2018/12/contents',
+      'Pensions Act 2008': LEG + 'ukpga/2008/30/contents',
+      'Trade Marks Rules 2008': LEG + 'uksi/2008/1797/contents',
+      'Companies (Model Articles) Regulations 2008': LEG + 'uksi/2008/3229/contents',
+      'Immigration, Asylum and Nationality Act 2006': LEG + 'ukpga/2006/13/contents',
+      'Management of Health and Safety at Work Regulations 1999': LEG + 'uksi/1999/3242/contents',
+      'Financial Services and Markets Act 2000': LEG + 'ukpga/2000/8/contents',
+      /* Not legislation: the ACAS Code is guidance a tribunal must take into
+         account, so it links to ACAS rather than legislation.gov.uk. */
+      'ACAS Code of Practice': 'https://www.acas.org.uk/acas-code-of-practice-on-disciplinary-and-grievance-procedures',
   };
   /**
-   * One Act, named once. The rail lists instruments, not provisions, so an
-   * insight resting on two sections of the same statute would otherwise print
-   * that statute's name twice with nothing to tell the rows apart. `section` is
-   * still carried on the data — it is the authored record of which provision the
-   * insight rests on, and the rail simply does not show it.
+   * DA-116 (Somya, 7 Oct 2026): "link to the exact section, not just the Act".
+   * A law entry's own `url` wins. Without one, a section that starts with a
+   * reference we can read ("s.65", "reg 14", "r.17", "art 9", "Sch 5 para 44")
+   * is turned into that provision's page under the Act's address; anything
+   * else falls back to the Act's contents page.
    */
+  const PROVISION = [
+      [/^(?:sch(?:edule)?\.?)\s*(\d+[A-Z]?)\s*,?\s*para(?:graph)?\.?\s*(\d+[A-Z]?)/i, m => `schedule/${m[1]}/paragraph/${m[2]}`],
+      [/^(?:s|section)\.?\s*(\d+[A-Z]*)/, m => `section/${m[1]}`],
+      [/^(?:reg|regulation)\.?\s*(\d+[A-Z]?)/i, m => `regulation/${m[1]}`],
+      [/^(?:r|rule)\.\s*(\d+[A-Z]?)/i, m => `rule/${m[1]}`],
+      [/^(?:art|article)\.?\s*(\d+[A-Z]?)/i, m => `article/${m[1]}`],
+  ];
+  function lawUrl(law) {
+      if (law.url)
+          return law.url;
+      const act = LAW_LINKS[law.name];
+      if (!act)
+          return undefined;
+      if (!law.section || !act.endsWith('/contents'))
+          return act;
+      const ref = law.section.trim();
+      for (const [re, path] of PROVISION) {
+          const m = ref.match(re);
+          if (m)
+              return act.replace(/contents$/, path(m));
+      }
+      return act;
+  }
+  /** The short reference a row prints: the part of `section` before its dash. */
+  function lawRef(section) {
+      if (!section)
+          return '';
+      return section.split(/\s+[\u2014\u2013-]\s+/)[0].trim();
+  }
   function groupLaws(laws) {
       const rows = [];
       for (const law of laws) {
-          if (!rows.some(r => r.name === law.name))
-              rows.push({ name: law.name, url: law.url || LAW_LINKS[law.name] });
+          const ref = lawRef(law.section);
+          if (!rows.some(r => r.name === law.name && r.ref === ref)) {
+              rows.push({ name: law.name, ref, url: lawUrl(law), summary: law.summary, heading: law.heading });
+          }
       }
       return rows;
+  }
+  /** Where a law's link goes, as a person would say it. */
+  function lawSite(url) {
+      if (url.includes('legislation.gov.uk'))
+          return 'legislation.gov.uk';
+      const m = url.match(/\/\/(?:www\.)?([^/]+)/);
+      return m ? m[1] : 'its publisher’s site';
   }
   /** Legal Area names, as the rail's area row prints them, to their token key. */
   const AREA_KEYS = {
@@ -25620,7 +25838,17 @@
       'Data Protection': 'data',
       'Commercial Agreements': 'commercial',
   };
-  exports.LaInsightModal = class LaInsightModal extends i$3 {
+  /* Each Legal Area's own glyph, the set Home and Create Document use (14 Oct
+     2026, Riel: the area's icon, not a tag). */
+  const AREA_ICONS = {
+      governance: 'ph-buildings',
+      employment: 'ph-users',
+      ip: 'ph-lightbulb',
+      data: 'ph-shield-check',
+      fundraising: 'ph-trend-up',
+      commercial: 'ph-handshake',
+  };
+  exports.LaInsightModal = LaInsightModal_1 = class LaInsightModal extends i$3 {
       constructor() {
           super(...arguments);
           /** Whether the modal is visible */
@@ -25690,6 +25918,13 @@
            * showing none.
            */
           this.laws = [];
+          /**
+           * The people the insight is about, by name, shown in the rail as chips
+           * under "Who" (DA-115, Somya, 7 Oct 2026: the four women the pay review
+           * covers, from the HRIS record). Empty by default; most insights are about
+           * the company, and the row stays off.
+           */
+          this.people = [];
           /** Whether the insight has been resolved */
           this.resolved = false;
           /** Documents linked to this insight */
@@ -25729,6 +25964,32 @@
           this._relatedExpanded = false;
           /** Which issues are open, by index. */
           this._openIssues = {};
+          /** The law hover card: which row, and where in the panel. */
+          this._lawCard = null;
+          this._lawShowT = 0;
+          this._lawHideT = 0;
+          this._lawRow = null;
+          this._lawLeave = () => {
+              clearTimeout(this._lawShowT);
+              this._lawHideSoon();
+          };
+          this._lawHideSoon = () => {
+              clearTimeout(this._lawHideT);
+              this._lawHideT = window.setTimeout(() => {
+                  const card = this.renderRoot.querySelector('.law-card');
+                  if (card?.matches(':hover') || this._lawRow?.matches(':hover'))
+                      return;
+                  this._lawHide();
+              }, 160);
+          };
+          this._lawKeep = () => clearTimeout(this._lawHideT);
+          this._lawKey = (e) => {
+              if (e.key !== 'Escape' || !this._lawCard)
+                  return;
+              e.stopImmediatePropagation();
+              e.preventDefault();
+              this._lawHide();
+          };
       }
       get _resolutionsInFooter() {
           return this.resolutionsPlacement === 'footer' && !!this.resolutions?.length && !this.chosenResolution;
@@ -25739,6 +26000,125 @@
               this._relatedExpanded = false;
               this._openIssues = {};
           }
+          // The card belongs to the insight it was opened on.
+          if ((changed.has('open') && !this.open) || changed.has('laws'))
+              this._lawHide();
+      }
+      firstUpdated() {
+          // Scrolling moves the row out from under its card: the card goes.
+          this.renderRoot.addEventListener('scroll', () => { if (this._lawCard)
+              this._lawHide(); }, true);
+      }
+      disconnectedCallback() {
+          super.disconnectedCallback();
+          this._lawHide();
+      }
+      _lawEnter(e, i) {
+          if (e.pointerType === 'touch')
+              return;
+          const row = e.currentTarget;
+          clearTimeout(this._lawHideT);
+          clearTimeout(this._lawShowT);
+          this._lawShowT = window.setTimeout(() => this._lawShow(row, i), this._lawCard ? 0 : 250);
+      }
+      _lawFocus(e, i) {
+          const row = e.currentTarget;
+          if (row.matches(':focus-visible'))
+              this._lawShow(row, i);
+      }
+      _lawClick(e, i) {
+          if (!LaInsightModal_1._noHover) {
+              this._lawHide();
+              return;
+          }
+          if (this._lawCard?.i === i)
+              return; // second tap: follow the link
+          e.preventDefault();
+          this._lawShow(e.currentTarget, i);
+      }
+      async _lawShow(row, i) {
+          clearTimeout(this._lawHideT);
+          if (this._lawCard?.i === i)
+              return;
+          const panel = this.renderRoot.querySelector('.panel');
+          if (!panel)
+              return;
+          this._lawRow?.classList.remove('is-peeking');
+          this._lawRow = row;
+          row.classList.add('is-peeking');
+          const place = (h) => {
+              const p = panel.getBoundingClientRect();
+              const r = row.getBoundingClientRect();
+              const w = Math.min(320, p.width - 24);
+              const gap = 12, m = 12;
+              // Beside the row, over the prose, so the rail stays readable.
+              let left = r.left - p.left - w - gap;
+              let top = r.top - p.top - 6;
+              // No room beside it (the stacked rail on a phone): below it, or above.
+              if (left < m) {
+                  left = Math.min(Math.max(m, r.right - p.left - w), p.width - w - m);
+                  top = r.bottom - p.top + 8;
+                  if (top + h > p.height - m)
+                      top = r.top - p.top - h - 8;
+              }
+              top = Math.max(m, Math.min(top, p.height - h - m));
+              return { i, top: Math.round(top), left: Math.round(left) };
+          };
+          this._lawCard = place(200);
+          window.addEventListener('keydown', this._lawKey, true);
+          await this.updateComplete;
+          const card = this.renderRoot.querySelector('.law-card');
+          if (card && this._lawCard?.i === i)
+              this._lawCard = place(card.offsetHeight);
+      }
+      _lawHide() {
+          clearTimeout(this._lawShowT);
+          clearTimeout(this._lawHideT);
+          this._lawRow?.classList.remove('is-peeking');
+          this._lawRow = null;
+          if (this._lawCard)
+              this._lawCard = null;
+          window.removeEventListener('keydown', this._lawKey, true);
+      }
+      _renderLawCard() {
+          const c = this._lawCard;
+          if (!c)
+              return A;
+          const law = groupLaws(this.laws)[c.i];
+          if (!law?.summary)
+              return A;
+          const meta = law.heading || law.ref;
+          return b `
+      <div
+        class="law-card"
+        id="law-card"
+        style=${`top:${c.top}px;left:${c.left}px`}
+        @pointerenter=${this._lawKeep}
+        @pointerleave=${this._lawHideSoon}
+      >
+        <div class="law-card-head">
+          <span class="law-card-tile" aria-hidden="true"><i class="ph ph-scales"></i></span>
+          <span class="law-card-title">
+            <span class="law-card-name">${law.name}</span>
+            ${meta ? b `<span class="law-card-meta">${meta}</span>` : A}
+          </span>
+        </div>
+        <div class="law-card-body">
+          <span class="law-card-label">Our summary</span>
+          <p class="law-card-sum" id="law-card-sum">${law.summary}</p>
+        </div>
+        ${law.url ? b `
+          <div class="law-card-foot">
+            <a
+              class="law-card-out"
+              href=${law.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Read further on ${lawSite(law.url)} (opens in a new tab)"
+              @click=${() => this._lawHide()}
+            ><la-button variant="secondary" size="sm">Read Further<i slot="icon-right" class="ph ph-arrow-up-right"></i></la-button></a>
+          </div>` : A}
+      </div>`;
       }
       _close() {
           this.open = false;
@@ -26013,15 +26393,22 @@
         <div class="rail-close">
           <la-icon-button label="Close" @click=${this._close}><i class="ph ph-x"></i></la-icon-button>
         </div>
-        ${this.area ? b `<div class="rail-area"><i class="ph ${this.areaIcon || 'ph-tag'}" aria-hidden="true"></i>${this.area}</div>` : A}
+        ${this.area ? b `<div class="rail-area"><i class="ph ${this.areaIcon || AREA_ICONS[AREA_KEYS[this.area]] || 'ph-tag'}" aria-hidden="true"></i>${this.area}</div>` : A}
         ${this.meta.length > 0 ? b `
           <div class="rail-meta">
             ${this.meta.map(m => {
             const area = m.icon === 'ph-tag' ? AREA_KEYS[m.label] : undefined;
             return area
-                ? b `<div class="rail-meta-row is-area"><span class="area-tile" style=${`--area-bg: var(--la-area-${area}-bg); --area-fg: var(--la-area-${area}-fg)`}><i class="ph ph-tag" aria-hidden="true"></i></span>${m.label}</div>`
+                ? b `<div class="rail-meta-row is-area"><span class="area-tile" style=${`--area-bg: var(--la-area-${area}-bg); --area-fg: var(--la-area-${area}-fg)`}><i class="ph ${AREA_ICONS[area]}" aria-hidden="true"></i></span>${m.label}</div>`
                 : b `<div class="rail-meta-row"><i class="ph ${m.icon}" aria-hidden="true"></i>${m.label}</div>`;
         })}
+          </div>` : A}
+        ${this.people.length > 0 ? b `
+          <div>
+            <div class="rail-label">Who</div>
+            <div class="rail-people">
+              ${this.people.map(p => b `<la-chip label=${p} removable="false"></la-chip>`)}
+            </div>
           </div>` : A}
         ${ordered.length > 0 ? b `
           <div>
@@ -26031,15 +26418,31 @@
         ${this.laws.length > 0 ? b `
           <div>
             <div class="rail-label">Applicable Law</div>
-            ${groupLaws(this.laws).map(law => {
+            ${groupLaws(this.laws).map((law, i) => {
+            const label = law.ref ? `${law.name} · ${law.ref}` : law.name;
             const body = b `
                 <i class="ph ph-scales" aria-hidden="true"></i>
                 <span class="rail-src-body">
-                  <span class="rail-src-doc">${law.name}${law.url ? b `<i class="ph ph-arrow-up-right rail-src-out" aria-hidden="true"></i>` : A}</span>
+                  <span class="rail-src-doc">${label}${law.url ? b `<i class="ph ph-arrow-up-right rail-src-out" aria-hidden="true"></i>` : A}</span>
                 </span>`;
+            const where = law.url && law.url.includes('legislation.gov.uk') ? 'on legislation.gov.uk' : 'on its publisher’s site';
             /* Read the law itself, in a new tab so the insight stays open. */
+            /* With a summary, resting on the row shows it (the law hover card). */
+            const peek = !!law.summary;
             return law.url
-                ? b `<a class="rail-src" href=${law.url} target="_blank" rel="noopener noreferrer" aria-label="${law.name}, on legislation.gov.uk (opens in a new tab)">${body}</a>`
+                ? b `<a
+                    class="rail-src"
+                    href=${law.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="${label}, ${where} (opens in a new tab)"
+                    aria-describedby=${peek && this._lawCard?.i === i ? 'law-card-sum' : A}
+                    @pointerenter=${peek ? (e) => this._lawEnter(e, i) : A}
+                    @pointerleave=${peek ? this._lawLeave : A}
+                    @focus=${peek ? (e) => this._lawFocus(e, i) : A}
+                    @blur=${peek ? this._lawHideSoon : A}
+                    @click=${peek ? (e) => this._lawClick(e, i) : A}
+                  >${body}</a>`
                 : b `<div class="rail-src">${body}</div>`;
         })}
           </div>` : A}
@@ -26152,6 +26555,7 @@
           <div class="modal-page" data-page=${this._page} data-dir=${this._pageBack ? 'back' : 'forward'}>
             ${page}
           </div>
+          ${this._page === 'insight' ? this._renderLawCard() : A}
         </div>
       </div>
     `;
@@ -26276,25 +26680,41 @@
           if (!this._useRail)
               return A;
           const d = this.deadline;
-          const n = d && /(\d+)\s+day/.exec(d.sub || '');
-          const days = n ? `${n[1]} ${n[1] === '1' ? 'day' : 'days'}` : '';
+          /* DA-135 (Somya, 8 Oct 2026): the pill counts days in one of two forms,
+             "Overdue by x days" or "Due in x days" ("Action in" until the 13 Oct
+             2026 review, Brennan), as the cards do. The tone
+             still sets its colour; the words only fall back to a status when the
+             caller gave no count. */
+          const sub = (d && d.sub) || '';
+          const n = /(\d+)\s+day/.exec(sub);
+          const count = n ? Number(n[1]) : /tomorrow/i.test(sub) ? 1 : /today/i.test(sub) ? 0 : null;
+          const days = count === null ? '' : `${count.toLocaleString('en-GB')} ${count === 1 ? 'day' : 'days'}`;
+          /* More than a year out keeps its date, as the card does: "Action in
+             3,653 days" says nothing (QA, 9 Oct 2026). */
+          const far = count !== null && count > 365 && !/overdue/i.test(sub);
+          const action = count === 0 ? 'Due today' : far ? (d && d.label ? d.label : `Due in ${days}`) : `Due in ${days}`;
+          /* Overdue is what the count says, not the tone: an urgent insight with a
+             date still ahead read "Overdue by 7 days" beside a card saying "Action
+             in 7 days" (QA, 9 Oct 2026). Urgent and ahead takes the soon colour. */
+          const urgent = !!d && (d.tone === 'urgent' || d.tone === 'high');
+          const overdue = /overdue/i.test(sub) || (urgent && count === null);
           let status;
           let text;
           if (!d) {
               status = 'none';
               text = 'No deadline';
           }
-          else if (d.tone === 'urgent' || d.tone === 'high') {
+          else if (overdue) {
               status = 'late';
-              text = days ? `Overdue · ${days}` : 'Overdue';
+              text = days ? `Overdue by ${days}` : 'Overdue';
           }
-          else if (d.tone === 'proactive') {
+          else if (urgent || d.tone === 'proactive') {
               status = 'soon';
-              text = days ? `Due in ${days}` : 'Due soon';
+              text = days ? action : 'Due soon';
           }
           else {
               status = 'track';
-              text = days ? `On track · ${days}` : 'On track';
+              text = days ? action : 'On track';
           }
           return b `<span class="status-pill" data-status=${status}>${text}</span>`;
       }
@@ -27443,6 +27863,13 @@
       .issue-law { display: flex; align-items: center; gap: var(--la-space-xs); font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); }
       .issue-law i { font-size: 13px; }
 
+      /* The people an insight is about, as read-only chips (DA-115). */
+      .rail-people {
+        display: flex;
+        flex-wrap: wrap;
+        gap: var(--la-space-xs);
+      }
+
       .rail-label {
         font-size: var(--la-font-size-sm);
         color: var(--la-color-text-secondary);
@@ -27488,6 +27915,60 @@
         color: var(--la-color-text-muted);
         vertical-align: 0;
       }
+
+      /* ── Law hover card ───────────────────────────────── */
+      /* Resting on an Applicable Law row shows what the provision says, with
+         Read Further to the law itself (12 Oct 2026). A popover, not a
+         tooltip: it holds a button, so it stays while the pointer travels
+         onto it. It sits over the prose, beside the rail, inside the panel
+         (the panel is its containing block), and lifts in as menus do. */
+      .panel { position: relative; }
+      .law-card {
+        position: absolute;
+        z-index: 5;
+        width: 320px;
+        max-width: calc(100% - 24px);
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+        gap: var(--la-space-sm);
+        padding: var(--la-space-md);
+        background: var(--la-color-bg);
+        border: 1px solid var(--la-color-border-light);
+        border-radius: var(--la-radius-lg);
+        box-shadow: var(--la-shadow-popover, var(--la-shadow-md));
+        text-align: left;
+        animation: law-card-in var(--dur-fast) var(--ease-out) both;
+      }
+      @keyframes law-card-in {
+        from { opacity: 0; transform: translateY(4px); }
+        to { opacity: 1; transform: none; }
+      }
+      .law-card-head { display: flex; align-items: center; gap: var(--la-space-sm); }
+      .law-card-tile {
+        width: 28px; height: 28px; flex-shrink: 0;
+        display: inline-flex; align-items: center; justify-content: center;
+        border-radius: var(--la-radius-sm);
+        background: var(--la-color-bg-muted);
+        color: var(--la-color-text-secondary);
+        font-size: 15px;
+      }
+      .law-card-title { display: flex; flex-direction: column; gap: 1px; min-width: 0; }
+      .law-card-name { font-weight: var(--la-font-weight-semibold); line-height: 1.35; }
+      .law-card-meta { font-size: var(--la-font-size-sm); color: var(--la-color-text-muted); line-height: 1.35; }
+      .law-card-body { display: flex; flex-direction: column; gap: 2px; }
+      .law-card-label { font-size: var(--la-font-size-xs); color: var(--la-color-text-muted); }
+      .law-card-sum { margin: 0; font-size: var(--la-font-size-md); line-height: 1.5; color: var(--la-color-text); text-wrap: pretty; }
+      .law-card-foot {
+        display: flex;
+        justify-content: flex-end;
+        padding-top: var(--la-space-sm);
+        border-top: 1px solid var(--la-color-border-light);
+      }
+      .law-card-out { text-decoration: none; border-radius: var(--la-radius-sm); }
+      .law-card-out:focus-visible { outline: 2px solid var(--la-color-border-focus); outline-offset: 2px; }
+      a.rail-src.is-peeking .rail-src-doc { text-decoration: underline; text-underline-offset: 2px; }
+      @media (prefers-reduced-motion: reduce) { .law-card { animation: none; } }
       .rail-src > i {
         font-size: 14px;
         color: var(--la-color-text-muted);
@@ -28048,6 +28529,12 @@
 
     `,
   ];
+  /* ── Law hover card ─────────────────────────────────────
+   * Rest on a row (250ms) or focus it from the keyboard and the card opens.
+   * Moving down the rail swaps it at once. Leaving gives the pointer 160ms to
+   * reach the card. Esc closes it before the modal. On a screen with no
+   * hover, the first tap shows it and the second follows the link. */
+  exports.LaInsightModal._noHover = typeof matchMedia === 'function' && matchMedia('(hover: none)').matches;
   __decorate$j([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "open", void 0);
@@ -28130,6 +28617,9 @@
       n({ type: Array })
   ], exports.LaInsightModal.prototype, "laws", void 0);
   __decorate$j([
+      n({ type: Array })
+  ], exports.LaInsightModal.prototype, "people", void 0);
+  __decorate$j([
       n({ type: Boolean, reflect: true })
   ], exports.LaInsightModal.prototype, "resolved", void 0);
   __decorate$j([
@@ -28192,7 +28682,10 @@
   __decorate$j([
       r$1()
   ], exports.LaInsightModal.prototype, "_openIssues", void 0);
-  exports.LaInsightModal = __decorate$j([
+  __decorate$j([
+      r$1()
+  ], exports.LaInsightModal.prototype, "_lawCard", void 0);
+  exports.LaInsightModal = LaInsightModal_1 = __decorate$j([
       t$2('la-insight-modal')
   ], exports.LaInsightModal);
 
@@ -29620,6 +30113,20 @@
           pointer-events: auto;
         }
 
+        /* Frosted glass: the page shows through, blurred. The sidebar's own fill
+           goes so the glass on the slot is what you see. */
+        .sidebar-slot {
+          background-color: var(--la-glass-bg);
+          background-image: var(--la-glass-sheen);
+          -webkit-backdrop-filter: var(--la-glass-filter);
+          backdrop-filter: var(--la-glass-filter);
+          box-shadow: var(--la-glass-rim);
+        }
+
+        .sidebar-slot ::slotted(*) {
+          background: transparent;
+        }
+
         .sidebar-backdrop {
           display: block;
           position: fixed;
@@ -29703,6 +30210,33 @@
         }
       }
 
+      /* Tablet: the nav floats as a card over the page (Notion-style) instead of a
+         full-height edge drawer. Starts at 600px so iPad mini portrait (744px) gets it;
+         phones keep the edge drawer. No scrim, the page stays readable behind the card. */
+      @media (min-width: 600px) and (max-width: 1023px) {
+        .sidebar-slot {
+          inset: var(--la-space-sm) auto var(--la-space-sm) var(--la-space-sm);
+          height: auto;
+          border-radius: var(--la-radius-xl);
+          box-shadow: var(--la-glass-rim), var(--la-shadow-lg);
+          overflow: hidden;
+          opacity: 0;
+          transform: translateX(calc(-100% - var(--la-space-sm)));
+          transition:
+            transform var(--dur-base) var(--ease-out),
+            opacity var(--dur-base) var(--ease-out);
+        }
+
+        .sidebar-slot.open {
+          opacity: 1;
+          transform: translateX(0);
+        }
+
+        .sidebar-backdrop {
+          background: transparent;
+        }
+      }
+
       @media (max-width: 767px) {
         .body,
         :host(:not([show-header])) .body {
@@ -29727,6 +30261,15 @@
       @media (prefers-reduced-motion: reduce) {
         .sidebar-slot {
           transition: none;
+        }
+      }
+
+      /* Asked the system for less transparency: keep the shape, drop the see-through. */
+      @media (max-width: 1023px) and (prefers-reduced-transparency: reduce) {
+        .sidebar-slot {
+          background: var(--la-nav-bg);
+          -webkit-backdrop-filter: none;
+          backdrop-filter: none;
         }
       }
     `,

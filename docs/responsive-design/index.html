@@ -374,6 +374,16 @@ gap: 14px;
 <td>Right and left drawers become <code>width: 100vw</code> (corner radius collapses to 0). Top/bottom drawers are already full-width at every viewport, so the rule doesn't apply to them.</td>
 </tr>
 <tr>
+<td><code>la-app-shell</code></td>
+<td>600–1023px viewport</td>
+<td>The nav opens as a floating card (8px inset, <code>--la-radius-xl</code>, <code>--la-shadow-lg</code>, no scrim), Notion-style, instead of a full-height edge drawer. Starts at 600px so iPad mini portrait (744px) gets it; phones keep the edge drawer.</td>
+</tr>
+<tr>
+<td><code>la-sidebar</code></td>
+<td>≤1023px viewport</td>
+<td>Nav rows 36px, sub-items 32px, the close button 36px: an exception to the 44px touch target (R-92) so the nav stays a dense list. Each row runs the full nav width, so the tap area stays wide (Riel, 16 Oct 2026).</td>
+</tr>
+<tr>
 <td><code>la-person-item</code></td>
 <td>420px container</td>
 <td>Moves trailing status/actions beneath the person identity so names and roles remain legible in narrow lists.</td>
