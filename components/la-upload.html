@@ -452,6 +452,51 @@
           <td>—</td>
         </tr>
       
+        <tr>
+          <td>label</td>
+          <td><span class="default">label</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The document asked for, as the field's name ("Annual Accounts"), shown
+above Browse files and Google Drive (a playbook's Upload step, 21 Oct
+2026). Empty shows none.</td>
+        </tr>
+      
+        <tr>
+          <td>error</td>
+          <td><span class="default">error</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>A missing or wrong file, on the drop zone: la-upload-box's own error.
+A step pressed with no file shows its message here (decisions 140,
+156). A failed transfer is `transfer-error`, with Retry.</td>
+        </tr>
+      
+        <tr>
+          <td>errorMessage</td>
+          <td><span class="default">error-message</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>—</td>
+        </tr>
+      
+        <tr>
+          <td>fileName</td>
+          <td><span class="default">file-name</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>A file already uploaded, by name (la-upload-box `file-name`): a resumed
+step shows it, with Remove.</td>
+        </tr>
+      
+        <tr>
+          <td>fileNote</td>
+          <td><span class="default">file-note</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>An uploaded file's line in place of "Uploaded" (la-upload-box `file-note`).</td>
+        </tr>
+      
     </tbody>
   </table>
 </div>

@@ -9430,6 +9430,11 @@
            *  uploaded before without holding the File. Remove fires la-remove with
            *  no file, and clears it. */
           this.fileName = '';
+          /** What an uploaded file's row says in place of "Uploaded": where it was
+           *  saved, such as "Saved to your LawVault as Annual Accounts." A
+           *  playbook's Upload step says it before the upload, in `hint`, and after
+           *  it here (Jonard, 21 Oct 2026). */
+          this.fileNote = '';
           this._dragover = false;
       }
       reset() {
@@ -9587,7 +9592,7 @@
             ? b `
               <la-document-item
                 name=${this._file?.name ?? this.fileName}
-                association=${this.processing ? 'Uploading…' : this._file ? 'File selected' : 'Uploaded'}
+                association=${this.processing ? 'Uploading…' : this._file ? 'File selected' : this.fileNote || 'Uploaded'}
                 status=${this.processing ? 'processing' : 'none'}
                 non-interactive
                 ?dismissible=${!this.processing && !this.disabled}
@@ -9775,10 +9780,16 @@
         font-size: var(--la-font-size-xl);
         flex-shrink: 0;
       }
+      /* The prompt and hint are centred under the icon, as the zone is; the
+         compact zone sets them in a row beside it, left-aligned. (Left
+         alignment was on every zone, so a hint longer than its prompt
+         pushed the prompt off centre; 21 Oct 2026.) */
       .zone-text {
         display: flex;
         flex-direction: column;
         gap: 2px;
+      }
+      :host([compact]) .zone-text {
         text-align: left;
       }
       :host([compact]) .prompt {
@@ -9830,6 +9841,9 @@
   __decorate$1g([
       n({ attribute: 'file-name' })
   ], exports.LaUploadBox.prototype, "fileName", void 0);
+  __decorate$1g([
+      n({ attribute: 'file-note' })
+  ], exports.LaUploadBox.prototype, "fileNote", void 0);
   __decorate$1g([
       r$1()
   ], exports.LaUploadBox.prototype, "_file", void 0);
@@ -22934,9 +22948,27 @@
           // different recovery affordances per Sprint 1: Retry vs Re-select.
           this.transferError = false;
           this.transferErrorMessage = '';
+          /** The document asked for, as the field's name ("Annual Accounts"), shown
+           *  above Browse files and Google Drive (a playbook's Upload step, 21 Oct
+           *  2026). Empty shows none. */
+          this.label = '';
+          /** A missing or wrong file, on the drop zone: la-upload-box's own error.
+           *  A step pressed with no file shows its message here (decisions 140,
+           *  156). A failed transfer is `transfer-error`, with Retry. */
+          this.error = false;
+          this.errorMessage = '';
+          /** A file already uploaded, by name (la-upload-box `file-name`): a resumed
+           *  step shows it, with Remove. */
+          this.fileName = '';
+          /** An uploaded file's line in place of "Uploaded" (la-upload-box `file-note`). */
+          this.fileNote = '';
+          /* A file is in: Browse files and Google Drive go until it's removed, since
+             the drop zone takes one file and a second pick would do nothing. */
+          this._picked = false;
       }
       reset() {
           this._box?.reset();
+          this._picked = false;
           this.transferError = false;
           this.transferErrorMessage = '';
       }
@@ -22950,9 +22982,11 @@
           this.dispatchEvent(new CustomEvent('la-retry-transfer', { bubbles: true, composed: true }));
       }
       render() {
+          const hasFile = this._picked || !!this.fileName;
           return b `
       ${iconStyles}
-      <div class="sources">
+      ${this.label ? b `<span class="field-label">${this.label}</span>` : A}
+      <div class="sources" ?hidden=${hasFile}>
         <la-button variant="secondary" @click=${this._onBrowse}>
           <i slot="icon-left" class="ph ph-folder-open"></i>
           Browse files
@@ -22986,6 +23020,12 @@
         ?processing=${this.processing}
         prompt=${this.prompt}
         hint=${this.hint}
+        ?error=${this.error}
+        error-message=${this.errorMessage}
+        file-name=${this.fileName}
+        file-note=${this.fileNote}
+        @la-change=${() => (this._picked = true)}
+        @la-remove=${() => (this._picked = false)}
       ></la-upload-box>
     `;
       }
@@ -22996,8 +23036,21 @@
       :host {
         display: block;
       }
+      /* The document asked for, above both sources, so the buttons and the
+         drop zone read as one field: la-upload-box's own label style. */
+      .field-label {
+        display: block;
+        font-size: var(--la-font-size-base);
+        font-weight: var(--la-font-weight-normal);
+        color: var(--la-color-text);
+        margin-bottom: var(--la-space-xs);
+      }
+      .sources[hidden] {
+        display: none;
+      }
       .sources {
         display: flex;
+        flex-wrap: wrap;
         gap: var(--la-space-sm);
         margin-bottom: var(--la-space-md);
       }
@@ -23043,6 +23096,24 @@
   __decorate$w([
       n({ attribute: 'transfer-error-message' })
   ], exports.LaUpload.prototype, "transferErrorMessage", void 0);
+  __decorate$w([
+      n()
+  ], exports.LaUpload.prototype, "label", void 0);
+  __decorate$w([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaUpload.prototype, "error", void 0);
+  __decorate$w([
+      n({ attribute: 'error-message' })
+  ], exports.LaUpload.prototype, "errorMessage", void 0);
+  __decorate$w([
+      n({ attribute: 'file-name' })
+  ], exports.LaUpload.prototype, "fileName", void 0);
+  __decorate$w([
+      n({ attribute: 'file-note' })
+  ], exports.LaUpload.prototype, "fileNote", void 0);
+  __decorate$w([
+      r$1()
+  ], exports.LaUpload.prototype, "_picked", void 0);
   __decorate$w([
       e$2('la-upload-box')
   ], exports.LaUpload.prototype, "_box", void 0);
@@ -33526,6 +33597,8 @@
    *                     document renders
    * @slot body        - prose under the one-liner, in both not-reached and open
    * @slot insight     - an la-ai-insight under the body
+   * @slot settled     - on the done row, under its line: what the step left, such as the file an Upload
+   *                     step took, as la-document-item with an Open button and no Remove (Jonard, 21 Oct 2026)
    * @slot actions     - beside the authored button: the sign step's "Signed outside LawAdvisor?" fallback
    * @slot             - the step's la-step-questions, and anything the page places with the card. A value on
    *                     the record is asked in the modal, not here (decision 125)
@@ -33578,11 +33651,18 @@
           this.partOwn = 'Answer and confirm';
           this.confirmed = false;
           this._hasMore = false;
+          this._hasSettled = false;
           this._hasReview = false;
           this._hasBody = false;
           this._hasInsight = false;
           this._hasActions = false;
           this._hasSources = false;
+          /* Focus stays with the card when its act goes (WAI-ARIA APG, persistence
+             of focus). Confirming swaps the act for the done row, and Change swaps it
+             back, so the browser would drop focus to the page. Settled, focus goes to
+             the done row, which says what was recorded; open again, to the act. Only
+             when focus was in the card, so nothing moves for anyone else. */
+          this._hadFocus = false;
           /* The menu opens towards the room it has: leftwards from the right of the
              card, as usual, and rightwards when a narrow card stacks its acts at the
              left, so it never opens off the screen. Set as the trigger is pressed,
@@ -33600,6 +33680,33 @@
       }
       get _settled() {
           return this.state === 'done' || this.state === 'passed' || this.state === 'before';
+      }
+      willUpdate(changed) {
+          if (changed.has('state') || changed.has('reopened'))
+              this._hadFocus = !!this.shadowRoot?.activeElement;
+      }
+      updated(changed) {
+          if (!this._hadFocus || !(changed.has('state') || changed.has('reopened')))
+              return;
+          this._hadFocus = false;
+          if (this._settled)
+              this.focusSettled();
+          else
+              this.focusAct();
+      }
+      /** Focus the done row. For a page that draws the card afresh as it settles,
+       *  where the card can't tell that focus was in it. */
+      focusSettled() {
+          this.renderRoot.querySelector('.settled')?.focus();
+      }
+      /** Focus the step's act: the authored button, Confirm, or the current part's. */
+      async focusAct() {
+          const b = this.renderRoot.querySelector('.primary-act, .foot-acts la-button');
+          if (!b)
+              return;
+          /* A button drawn in this same update hasn't drawn its own yet. */
+          await b.updateComplete;
+          (b.shadowRoot?.querySelector('button') ?? b).focus();
       }
       /** The step you're on: the next one, or the one open (decision 147). */
       get _current() {
@@ -33632,14 +33739,17 @@
           return this.info ? 'Read' : 'Done';
       }
       _settledView() {
-          return b `<div class="settled">
+          return b `<div class="settled" tabindex="-1" role="group" aria-labelledby="settled-h settled-s">
       <div>
-        <h3>${this.heading}</h3>
-        <p class="summary">
+        <h3 id="settled-h">${this.heading}</h3>
+        <p class="summary" id="settled-s">
           <span class="word">${this._word()}</span>${this.summary ? b ` · ${this.summary}` : A}${this.date
             ? b ` · ${formatDate(this.date)}`
             : A}
         </p>
+        <div class="settled-slot" ?hidden=${!this._hasSettled}>
+          <slot name="settled" @slotchange=${(e) => (this._hasSettled = this._assigned(e))}></slot>
+        </div>
       </div>
       ${this.locked && this.button
             ? b `<la-button variant="secondary" @click=${() => this._fire('la-step-open')}
@@ -34036,6 +34146,24 @@
       /* Settled: the title and its state word, then Change under them on
          the text's left edge, where every other state puts its act
          (Jonard, 12 Oct 2026). */
+      /* The done row takes focus as the step settles (see _hadFocus): a ring
+         only for the keyboard. */
+      /* What the step left, on its done row: the uploaded file. */
+      .settled-slot {
+        margin-top: var(--la-space-sm);
+        max-width: 560px;
+      }
+      .settled-slot[hidden] {
+        display: none;
+      }
+      .settled:focus {
+        outline: none;
+      }
+      .settled:focus-visible {
+        outline: var(--la-focus-ring-width) solid var(--la-color-border-focus);
+        outline-offset: var(--la-focus-ring-offset);
+        border-radius: var(--la-radius-sm);
+      }
       .settled {
         display: flex;
         flex-direction: column;
@@ -34309,6 +34437,9 @@
   __decorate$6([
       r$1()
   ], exports.LaPlaybookStep.prototype, "_hasMore", void 0);
+  __decorate$6([
+      r$1()
+  ], exports.LaPlaybookStep.prototype, "_hasSettled", void 0);
   __decorate$6([
       r$1()
   ], exports.LaPlaybookStep.prototype, "_hasReview", void 0);
