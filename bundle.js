@@ -32562,7 +32562,7 @@
    * sentence it's lower case (decision 139).
    *
    * Usage:
-   *   <la-record-row label="Shareholders’ Agreement" value="signed 2 Jun 2024"
+   *   <la-record-row label="Shareholders’ Agreement" value="uploaded 2 Jun 2024"
    *                  source="LawVault" doc></la-record-row>
    *
    * @prop label  - what the value is ("Registered office", "Shareholders’ Agreement")
@@ -33169,8 +33169,10 @@
    * radio group of contained choices at the questions modal's spacing, so a
    * reason is asked the way a question is (decisions 119, 141, 152 MP2), a
    * field when it's another reason, and the act in the footer beside Cancel.
-   * Opened from *Mark as done elsewhere*, beside the step's act (decision
-   * 128). Its own wording waits on Bobby.
+   * Opened from *Mark as done elsewhere*, in the step's ⋯ menu (decision 128,
+   * amended by Bobby, 19 Oct 2026). A step moved past counts towards finishing,
+   * flagged as moved past (decision 133), and the line says so (Bobby, 19 Oct
+   * 2026). The reasons and messages wait on Bobby.
    *
    * The act is never disabled (decisions 140, 156). Pressed with no reason,
    * the message shows above the reasons, they're marked invalid and focus
@@ -33264,7 +33266,7 @@
       ?open=${this.open}
       size="sm"
       heading="Move past this step"
-      description="It won’t count as done, and we won’t ask about it again. You can reopen it any time."
+      description="It counts towards finishing, marked as moved past. You can reopen it any time."
       @close=${this._cancel}
     >
       <div @la-change=${(e) => e.stopPropagation()}>
@@ -33416,12 +33418,16 @@
    *             remain, what's left sits under the act in the small size
    *             ("One question left."); ready to confirm, nothing (the modal
    *             says nothing counts until Confirm). On the right, together and
-   *             quiet: "Mark as done elsewhere", a small ghost button that
-   *             opens la-move-past (decision 128; on the not-reached card too,
+   *             quiet: the sources pill, then the step's ⋯ menu, whose one item,
+   *             "Mark as done elsewhere", opens la-move-past. The way past is a
+   *             fallback, so it sits behind the menu (Bobby, 19 Oct 2026, keeping
+   *             L-2784 §5; amends decision 128). On the not-reached card too,
    *             since a step whose button opens another surface never opens as
-   *             a card, but not while it waits its turn), and the sources pill.
+   *             a card, but not while it waits its turn.
    *             Ask a lawyer is in the run's sidebar, not on the step.
-   *   done    - one line: Done · the answer that matters · the date, and Change
+   *   done    - one line: Done · the answer that matters · the date. No Change in Phase B: a
+   *             done step doesn't reopen (Bobby's RDC call 6, 21 Oct 2026); `changeable`
+   *             brings Change back for after launch
    *   passed  - moved past with a reason (la-step-marker `passed`, decision 115),
    *             a dashed card, and Change; on a run's rows, a row like the others
    *             (decision 147, amended)
@@ -33492,9 +33498,11 @@
    * @prop date        - the day it settled, ISO (`2026-10-06`), printed after the summary in the reader's
    *                     locale (formatDate, decision 145); empty prints none
    * @prop notice      - a line above the questions, such as what changing a confirmed answer can undo
-   * @prop passing     - the way past is open: la-move-past, a modal, from Mark as done elsewhere
+   * @prop passing     - the way past is open: la-move-past, a modal, from Mark as done elsewhere in the ⋯ menu
+   * @prop changeable  - a done step shows Change, to reopen it. Off in Phase B (RDC call 6, 21 Oct
+   *                     2026); a step moved past keeps Change either way, so it can still be done
    * @prop reopened    - a done step the founder pressed Change on, open again until the change is
-   *                     confirmed: Mark as done elsewhere and the way past are hidden, since a step
+   *                     confirmed: the ⋯ menu and the way past are hidden, since a step
    *                     already done can't be moved past (Bobby, 19 Oct 2026; decision 159)
    *
    * For the other step types (7 Oct 2026, moving Orion's run onto the card): the
@@ -33558,6 +33566,8 @@
           this.passing = false;
           this.reopened = false;
           this.locked = false;
+          /* A done step doesn't reopen in Phase B (RDC call 6, 21 Oct 2026). */
+          this.changeable = false;
           this.word = '';
           this.icon = '';
           this.disabled = false;
@@ -33573,6 +33583,17 @@
           this._hasInsight = false;
           this._hasActions = false;
           this._hasSources = false;
+          /* The menu opens towards the room it has: leftwards from the right of the
+             card, as usual, and rightwards when a narrow card stacks its acts at the
+             left, so it never opens off the screen. Set as the trigger is pressed,
+             before the menu opens. */
+          this._placeMenu = (e) => {
+              const menu = e.currentTarget;
+              const card = this.renderRoot.querySelector('.card')?.getBoundingClientRect();
+              const at = menu.getBoundingClientRect();
+              if (card)
+                  menu.origin = at.left - card.left < card.width / 2 ? 'top-left' : 'top-right';
+          };
       }
       _fire(name, detail) {
           this.dispatchEvent(new CustomEvent(name, { detail, bubbles: true, composed: true }));
@@ -33624,7 +33645,7 @@
             ? b `<la-button variant="secondary" @click=${() => this._fire('la-step-open')}
             >${this.icon ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this.button}</la-button
           >`
-            : this.state === 'before' || this.locked
+            : this.state === 'before' || this.locked || (this.state === 'done' && !this.changeable)
                 ? A
                 : b `<la-button variant="secondary" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
     </div>`;
@@ -33702,20 +33723,29 @@
           <span class="left ${part ? '' : 'vh'}" aria-live="polite">${part ? this._partsLeft() : this._leftText()}</span>
         </div>
         <div class="acts-side">
-          ${this._doneElsewhere()}
           <slot name="sources"></slot>
+          ${this._doneElsewhere()}
         </div>
       </div>
       </div>`;
       }
-      /** The only way past a step (decision 128; Bobby's 8 Oct brief, B8): a
-       *  small ghost button on the right, beside Sources, away from the act. It
-       *  opens la-move-past, which asks why. A done step reopened to change it
-       *  has no way past (decision 159). */
+      /** The only way past a step: *Mark as done elsewhere*, the one item in
+       *  the step's ⋯ menu, after Sources. It's a fallback, so it sits behind the
+       *  menu, as L-2784 §5 has it (Bobby, 19 Oct 2026; amends decision 128,
+       *  which had it as a ghost button). It opens la-move-past, which asks why.
+       *  A done step reopened to change it has no way past (decision 159). */
       _doneElsewhere() {
           if (this.reopened)
               return A;
-          return b `<la-button variant="ghost" size="sm" @click=${() => (this.passing = true)}>Mark as done elsewhere</la-button>`;
+          return b `<la-menu
+      label="More actions for this step"
+      @click=${{ handleEvent: this._placeMenu, capture: true }}
+      @la-menu-select=${(e) => {
+            e.stopPropagation();
+            this.passing = true;
+        }}
+      ><la-menu-item label="Mark as done elsewhere" value="move-past"></la-menu-item
+    ></la-menu>`;
       }
       /** The sub-step running now, once the step's own part is done; -1 when none. */
       get _partAt() {
@@ -33801,8 +33831,8 @@
                     ${wait ? b `<p class="wait">${this.disabledReason}</p>` : A}
                   </div>
                   <span class="acts-side" ?hidden=${this.disabled && !this._hasSources}>
-                    ${this.disabled ? A : this._doneElsewhere()}
                     <slot name="sources" @slotchange=${(e) => (this._hasSources = this._assigned(e))}></slot>
+                    ${this.disabled ? A : this._doneElsewhere()}
                   </span>
                 </div>`}`}
       </div>
@@ -34247,6 +34277,9 @@
       n({ type: Boolean, reflect: true })
   ], exports.LaPlaybookStep.prototype, "locked", void 0);
   __decorate$6([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaPlaybookStep.prototype, "changeable", void 0);
+  __decorate$6([
       n()
   ], exports.LaPlaybookStep.prototype, "word", void 0);
   __decorate$6([
@@ -34313,8 +34346,10 @@
    * *Add someone not listed* where the content allows it.
    *
    *   mode="pick"  tick people from the group: an la-choice per person, in a
-   *                `role="group"`, then *or* and an exclusive *None of them*
-   *                (decision 150, PA1, as GOV.UK's checkboxes): ticking it
+   *                `role="group"`. With `offer-none`, then *or* and an exclusive
+   *                *None of them* (decision 150, PA1, as GOV.UK's checkboxes; off in
+   *                Phase B, decision 160: where no one may apply, legal asks a yes
+   *                or no first): ticking it
    *                clears the people, and ticking a person clears it. `value`
    *                is the names ticked, or `[PEOPLE_NONE]`
    *   mode="each"  one answer per person: the name and la-choice radios of the
@@ -34345,6 +34380,7 @@
    * @prop value   - pick: string[] of names ticked, `[PEOPLE_NONE]` for None of them, `[]` unanswered ·
    *                 each: Record<name, option id>
    * @prop label   - accessible name of the group of rows (the question's text)
+   * @prop offerNone - attribute offer-none: an exclusive None of them after the people (off in Phase B, decision 160)
    * @prop add     - offer Add someone not listed (default true). Always offered when the group is
    *                 empty, so the question can always be answered (PRO-210; L-2795 §4).
    * @fires la-change - {value} when the founder ticks or answers
@@ -34362,6 +34398,9 @@
           this.value = [];
           this.label = '';
           this.add = true;
+          /** An exclusive *None of them* after the people. Off in Phase B: the tickets
+           *  don't have it (RDC call 12, decision 160). */
+          this.offerNone = false;
           this._draft = '';
       }
       _emit(value) {
@@ -34409,10 +34448,12 @@
           @la-change=${(e) => this._tick(p, e.detail.checked)}
           >${p}</la-choice
         >`)}
-      <p class="or">or</p>
-      <la-choice .checked=${l(none)} @la-change=${(e) => this._none(e.detail.checked)}
-        >None of them</la-choice
-      >
+      ${this.offerNone
+            ? b `<p class="or">or</p>
+            <la-choice .checked=${l(none)} @la-change=${(e) => this._none(e.detail.checked)}
+              >None of them</la-choice
+            >`
+            : A}
     </div>`;
       }
       /* One radio group per person (decision 141): la-choice keeps the pick to
@@ -34574,6 +34615,9 @@
   __decorate$5([
       n({ type: Boolean })
   ], exports.LaPeopleAnswer.prototype, "add", void 0);
+  __decorate$5([
+      n({ type: Boolean, attribute: 'offer-none' })
+  ], exports.LaPeopleAnswer.prototype, "offerNone", void 0);
   __decorate$5([
       r$1()
   ], exports.LaPeopleAnswer.prototype, "_draft", void 0);
@@ -35333,7 +35377,7 @@
    *
    * Usage:
    *   <la-sources .sources=${[{icon: 'ph-file-text', doc: 'Articles of Association',
-   *       section: `adopted ${formatDate('2024-06-02')} · LawVault`, href: '/lawvault/articles'}]}></la-sources>
+   *       section: `uploaded ${formatDate('2024-06-02')} · LawVault`, href: '/lawvault/articles'}]}></la-sources>
    *
    * A page can bring its own trigger in the `trigger` slot, as la-menu
    * allows: Deadlines already says where each row came from, so that label
@@ -35746,7 +35790,7 @@
    * pages, and confirms from here.
    *
    * An la-modal at its large size: the document's name as the heading, its
-   * meta as the description ("signed 2 June 2024 · From LawVault"), the pages
+   * meta as the description ("uploaded 2 June 2024 · From LawVault"), the pages
    * in la-pdf-preview, and a footer with the record row's own acts: *That's
    * right* (primary) and *Upload a different one* (ghost), plus *Open in
    * LawVault* on the left for the document's own page when `nav` is set.
@@ -35762,7 +35806,7 @@
    * The name is the document's, in Title Case (decision 139).
    *
    * Usage:
-   *   <la-document-preview name="Shareholders’ Agreement" meta="signed 2 June 2024 · From LawVault"
+   *   <la-document-preview name="Shareholders’ Agreement" meta="uploaded 2 June 2024 · From LawVault"
    *       src="/assets/sample-docs/shareholders-agreement-acme-preview.pdf" nav="lawvault-sha" open>
    *   </la-document-preview>
    *   <la-document-preview inline name="Shareholders’ Agreement" src="…"></la-document-preview>
