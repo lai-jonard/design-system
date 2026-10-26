@@ -2521,6 +2521,7 @@
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
   // filled=true: checked state uses success-surface fill instead of primary border
+  // slot="badge": a tag after the label (Recommended), on its line or wrapped flush left
   exports.LaChoice = class LaChoice extends i$3 {
       constructor() {
           super(...arguments);
@@ -2634,7 +2635,7 @@
           <la-checkbox ?checked=${this.checked} tabindex="-1"></la-checkbox>
         </div>
         <div class="content">
-          <span class="label"><slot></slot></span>
+          <span class="label-row"><span class="label"><slot></slot></span><slot name="badge"></slot></span>
           ${this.description ? b `<span class="description">${this.description}</span>` : ''}
         </div>
       </div>
@@ -2719,6 +2720,20 @@
       }
       .label {
         line-height: var(--la-line-height);
+      }
+      /* The label, then a tag such as Recommended (the badge slot): on the
+         label's line, centred on it, while it fits; when it doesn't, it wraps
+         to its own line, flush with the label's left edge. */
+      .label-row {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        column-gap: var(--la-space-xs);
+        row-gap: var(--la-space-3xs);
+        min-width: 0;
+      }
+      .label-row ::slotted([slot='badge']) {
+        flex: none;
       }
       .description {
         font-size: var(--la-font-size-sm);
@@ -32709,8 +32724,16 @@
    * name opens it (`la-record-preview`), to read it first. (Until 9 Oct a
    * document was confirmed only from its preview, which in the modal would
    * stack a modal on a modal.) Confirmed, the row says *You confirmed this*,
-   * with Undo, and Open for a document. Changed, it doesn't: the founder's
-   * value stands, with what the record has and Undo (decision 150, RR1).
+   * with Undo; a document opens from its name alone, as on every state.
+   * Changed, it doesn't: the founder's value stands, with what the record has
+   * and Undo (decision 150, RR1).
+   *
+   * A document is two lines: its name, then where it came from and anything
+   * more on a line of their own ("From LawVault · …"), never run
+   * on after the name (rule/document-row-two-lines). The name is two lines at
+   * most, and the file icon centres on it, not on the whole card. Every row is white on a
+   * hairline; a document card can be acted on, so it lifts a little, with
+   * --la-shadow-xs; empty, it keeps the hairline alone (decision 150, RR2).
    *
    * States, set by the page:
    *   held      - the value and its source, with That’s right · Change it;
@@ -32724,6 +32747,8 @@
    *               on the same solid hairline as every row (decision 150, RR2)
    *   editing   - the `editor` slot (an la-input and a Save, or an
    *               la-upload-box), with Cancel
+   *   use       - a document handed over, not asked about: Download is its one
+   *               act (decision 162, point 8)
    *
    * A document's label names it, so it's Title Case; in the empty row's
    * sentence it's lower case (decision 139).
@@ -32736,16 +32761,19 @@
    * @prop value  - the value on the record, or the founder's change
    * @prop source - where it came from ("LawVault", "Companies House")
    * @prop register - the source is an official register: its line takes ph-buildings,
-   *                  as la-sources does (decision 129); the record's is ph-database
+   *                  as la-sources does (decision 129). Otherwise the line's icon follows
+   *                  its words: LawVault ph-vault, a website ph-globe, a playbook ph-shapes,
+   *                  an upload ph-upload-simple, Google Drive its logo, else ph-database
    * @prop doc    - it's a document: a file icon, and Upload rather than Change
-   * @prop state  - held (default) · confirmed · changed · empty · editing
+   * @prop state  - held (default) · confirmed · changed · empty · editing · use
    * @prop changedNote - attribute changed-note: the changed row's line, what the record has (default "Your answer")
    * @slot editor - the field or upload shown while editing
    * @fires la-record-confirm - That’s right
    * @fires la-record-change  - Change it, Upload a different one, Add it or Upload it
    * @fires la-record-undo    - Undo, after confirming or changing
    * @fires la-record-cancel  - Cancel, while editing
-   * @fires la-record-preview - the document's name or Open, on a `doc` row: open it to read it
+   * @fires la-record-preview - the document's name, on a `doc` row: open it to read it
+   * @fires la-record-download - Download, on a `use` row
    */
   exports.LaRecordRow = class LaRecordRow extends i$3 {
       constructor() {
@@ -32761,22 +32789,40 @@
            *  Defaults to "Your answer" (decision 129: never "You changed this"). */
           this.changedNote = '';
       }
+      /* The source line's icon names where it came from, with the icon the
+         product already gives that place: LawVault's vault, Company DNA's
+         database, a register's buildings (decision 129), a website's globe,
+         Playbooks' shapes, an upload, Google Drive. Anything else is the record. */
+      _sourceIcon(line) {
+          const s = line.toLowerCase();
+          if (this.register || s.includes('companies house'))
+              return 'ph-buildings';
+          if (s.includes('playbook'))
+              return 'ph-shapes';
+          if (s.includes('google drive'))
+              return 'ph-google-drive-logo';
+          if (s.includes('lawvault'))
+              return 'ph-vault';
+          if (s.includes('website'))
+              return 'ph-globe';
+          if (s.includes('upload'))
+              return 'ph-upload-simple';
+          return 'ph-database';
+      }
       _fire(name) {
           this.dispatchEvent(new CustomEvent(name, { bubbles: true, composed: true }));
       }
-      /* Open, on a document row: read it, and confirm it there. */
-      _openBtn(variant) {
-          return b `<la-button size="sm" variant=${variant} @click=${() => this._fire('la-record-preview')}
-      ><i slot="icon-left" class="ph ph-arrow-square-out" aria-hidden="true"></i>Open</la-button
-    >`;
-      }
       _acts() {
           const s = this.state;
+          if (s === 'use') {
+              return b `<la-button size="sm" variant="ghost" @click=${() => this._fire('la-record-download')}
+        ><i slot="icon-left" class="ph ph-download-simple" aria-hidden="true"></i>Download</la-button
+      >`;
+          }
           if (s === 'confirmed' || s === 'changed') {
               /* A changed row doesn't say *You confirmed this*: those are the
                  confirmed state's words (decision 150, RR1). */
-              return b `${this.doc ? this._openBtn('ghost') : A}
-        ${s === 'confirmed'
+              return b `${s === 'confirmed'
                 ? b `<span class="mine"><i class="ph-bold ph-check" aria-hidden="true"></i>You confirmed this</span>`
                 : A}
         <la-icon-button size="sm" label="Undo" @click=${() => this._fire('la-record-undo')}
@@ -32803,24 +32849,39 @@
           /* Empty, the label sits in a sentence, where a document is a common
              noun in lower case (decision 139). */
           const empty = this.state === 'empty';
-          const source = this.state === 'changed' ? this.changedNote || 'Your answer' : this.source ? `From ${this.source}` : '';
+          const from = this.state === 'changed' ? this.changedNote || 'Your answer' : this.source ? `From ${this.source}` : '';
+          /* A document's second line: where it came from, then anything more. */
+          const source = this.doc ? [from, this.value].filter(Boolean).join(' · ') : from;
+          const sourceLine = !empty && source
+              ? b `<p class="source">
+            <i class="ph ${this._sourceIcon(source)}" aria-hidden="true"></i>${source}
+          </p>`
+              : A;
+          if (this.doc) {
+              return b `${iconStyles}<div class="row" part="row">
+        <div>
+          <div class="head">
+            <i class="ph ph-file-text icon" aria-hidden="true"></i>
+            <p class="value ${empty ? '' : 'clamp'}">
+              ${empty
+                ? b `Your record has no ${this.label.toLowerCase()} yet.`
+                : b `<button class="name" type="button" title=${this.label} @click=${() => this._fire('la-record-preview')} aria-label=${`Open ${this.label}`}
+                    >${this.label}<i class="ph ph-arrow-square-out" aria-hidden="true"></i></button
+                  >`}
+            </p>
+          </div>
+          ${sourceLine}
+        </div>
+        <div class="acts">${this._acts()}</div>
+      </div>`;
+          }
           return b `${iconStyles}<div class="row" part="row">
-      <i class="ph ${this.doc ? 'ph-file-text' : 'ph-identification-card'} icon" aria-hidden="true"></i>
+      <i class="ph ph-identification-card icon" aria-hidden="true"></i>
       <div>
         <p class="value">
-          ${empty
-            ? b `Your record has no ${this.label.toLowerCase()} yet.`
-            : this.doc
-                ? b `<button class="name" type="button" @click=${() => this._fire('la-record-preview')} aria-label=${`Open ${this.label}`}
-                    >${this.label}<i class="ph ph-arrow-square-out" aria-hidden="true"></i></button
-                  >${this.value ? `, ${this.value}` : ''}`
-                : b `<b>${this.label}</b>, ${this.value}`}
+          ${empty ? b `Your record has no ${this.label.toLowerCase()} yet.` : b `<b>${this.label}</b>, ${this.value}`}
         </p>
-        ${!empty && source
-            ? b `<p class="source">
-              <i class="ph ${this.register ? 'ph-buildings' : 'ph-database'}" aria-hidden="true"></i>${source}
-            </p>`
-            : A}
+        ${sourceLine}
       </div>
       <div class="acts">${this._acts()}</div>
     </div>`;
@@ -32847,13 +32908,19 @@
         padding: var(--la-space-md) var(--la-space-lg);
         border-radius: var(--la-radius-md);
         border: 1px solid var(--la-color-border-light);
-        background-color: var(--la-color-bg-subtle);
+        background-color: var(--la-color-bg);
       }
       /* Empty: the same solid hairline, without the fill. Not dashed: dashed
          means moved past (decision 115) and splits a run's steps (decision
          147), so it's declined here (decision 150, RR2). */
       :host([state='empty']) .row {
         background-color: transparent;
+      }
+      /* A document card acts (its name opens it), so it lifts a little off
+         the step: the hairline kept, the subtlest shadow under it. Empty
+         keeps the hairline alone. */
+      :host([doc]:not([state='empty'])) .row {
+        box-shadow: var(--la-shadow-xs);
       }
       .icon {
         font-size: 18px;
@@ -32881,6 +32948,9 @@
         border: 0;
         background: none;
         font: inherit;
+        /* A button centres its text: a long name wraps from the left edge,
+           in line with the source line under it. */
+        text-align: left;
         color: var(--la-color-text);
         cursor: pointer;
         text-decoration: underline;
@@ -32903,11 +32973,16 @@
       }
       .source {
         display: flex;
-        align-items: center;
+        align-items: flex-start;
         gap: 4px;
         margin: 2px 0 0;
         font-size: var(--la-font-size-sm);
         color: var(--la-color-text-muted);
+      }
+      /* The icon stays on the line's first row when the line wraps. */
+      .source i {
+        flex: none;
+        line-height: inherit;
       }
       .acts {
         display: flex;
@@ -32937,9 +33012,42 @@
       .editing ::slotted(*) {
         flex: 1 1 240px;
       }
+      /* A document: the file icon sits beside its name only, centred on the
+         name's one or two lines, and the second line runs under the name. */
+      :host([doc]) .row {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+      .head {
+        display: flex;
+        align-items: center;
+        gap: var(--la-space-md);
+      }
+      .head .icon {
+        flex: none;
+        width: 20px;
+        line-height: 1;
+        text-align: center;
+      }
+      .head + .source {
+        padding-left: calc(20px + var(--la-space-md));
+        /* A document's second line at the type floor, under the name at the
+           body size (decision 171). */
+        font-size: var(--la-font-size-xs);
+      }
+      /* A document's name is two lines at most. */
+      .value.clamp {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        line-clamp: 2;
+        overflow: hidden;
+      }
       @container (max-width: 440px) {
         .row {
           grid-template-columns: 20px minmax(0, 1fr);
+        }
+        :host([doc]) .row {
+          grid-template-columns: minmax(0, 1fr);
         }
         .acts {
           grid-column: 1 / -1;
@@ -36944,11 +37052,9 @@
               case 'choice':
                   return b `<div class="opts ${q.type === 'yesno' ? 'yn' : ''}" role="radiogroup">
           ${(q.options ?? []).map((o) => b `<la-choice variant="contained" .checked=${l(a === o.id)} @la-change=${() => this._set(q.id, o.id)}
-              >${o.label}${o.rec
-                    ? b ` <la-badge class="rec" variant="neutral" appearance="ghost" size="sm">Recommended</la-badge>`
-                    : this._suggests(this._filledFor(q)) && this._filledFor(q)?.value === o.id
-                        ? b ` <la-badge class="rec" variant="neutral" appearance="ghost" size="sm">Recommended</la-badge>`
-                        : A}</la-choice
+              >${o.label}${o.rec || (this._suggests(this._filledFor(q)) && this._filledFor(q)?.value === o.id)
+                    ? b `<la-badge slot="badge" variant="neutral" appearance="ghost" size="sm">Recommended</la-badge>`
+                    : A}</la-choice
             >`)}
         </div>`;
               case 'text':
@@ -37018,9 +37124,10 @@
       /** The summary is the questions and the founder's answers, nothing else
        *  (Jonard, 9 Oct 2026): where an answer came from was checked on its own
        *  screen, and repeating it here read as a second claim on the answer.
-       *  Each row has Change, which opens that question (decision 152, SQ2); its
-       *  name carries the question, as GOV.UK's hidden text does. Secondary, as
-       *  the step's own Change is (Jonard, 12 Oct 2026). */
+       *  Each row has the pencil, which opens that question (decision 152, SQ2):
+       *  the same quiet icon button and *Edit* tooltip as a done step's row
+       *  (decision 165), so every edit in a run looks alike (Jonard, 26 Oct
+       *  2026). Its name carries the question, as GOV.UK's hidden text does. */
       _summary(items) {
           return b `<dl class="sum" tabindex="-1">
         ${items.map((q, k) => {
@@ -37030,9 +37137,10 @@
             <dt>${q.text}</dt>
             <dd class=${none ? 'none' : ''}>${text}</dd>
             <dd class="sum-act">
-              <la-button size="sm" variant="secondary" @click=${() => this._change(k)}
-                >Change<span class="sr-only"> ${q.text}</span></la-button
-              >
+              <la-tooltip tip="Edit" size="sm" position="left" max-width=""
+                ><la-icon-button size="sm" label=${`Edit: ${q.text}`} @click=${() => this._change(k)}
+                  ><i class="ph ph-pencil-simple" aria-hidden="true"></i></la-icon-button
+              ></la-tooltip>
             </dd>
           </div>`;
         })}
@@ -37124,18 +37232,28 @@
       la-question {
         padding-top: 0;
         border-top: 0;
+        container-type: inline-size;
       }
       .opts {
         display: grid;
         gap: var(--la-space-sm);
       }
+      /* Yes and No side by side, two equal columns, at least 360px together
+         and as wide as the wider option needs, so a tag such as Recommended
+         stays on its option's line (26 Oct 2026). Where the question is too
+         narrow for both side by side, as on a phone, they stack, each full
+         width, and the tag still sits on its option's line. */
       .opts.yn {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-        max-width: 360px;
+        width: fit-content;
+        min-width: min(360px, 100%);
+        max-width: 100%;
       }
-      .rec {
-        margin-left: 6px;
-        vertical-align: 1px;
+      @container (max-width: 400px) {
+        .opts.yn {
+          grid-template-columns: minmax(0, 1fr);
+          width: auto;
+        }
       }
       /* A field is as wide as the answer it expects (decision 146), always a
          max-width, so it shrinks in a narrow column and nothing scrolls
@@ -37187,9 +37305,9 @@
       .doc-page:focus {
         outline: none;
       }
-      /* Each row: the question above the answer, and Change beside both
+      /* Each row: the question above the answer, and the pencil beside both
          (decision 152, SQ2), as GOV.UK's check answers puts Change on every
-         row. */
+         row; drawn as a done step's pencil (decision 165, 26 Oct 2026). */
       .sum-row {
         display: grid;
         grid-template-columns: minmax(0, 1fr) auto;
