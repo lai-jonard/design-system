@@ -426,6 +426,25 @@ default: a label wraps only when the container is too narrow.</td>
         </tr>
       
         <tr>
+          <td>softDisabled</td>
+          <td><span class="default">soft-disabled</span></td>
+          <td><span class="type">boolean</span></td>
+          <td><span class="default">false</span></td>
+          <td>Unavailable but focusable: `aria-disabled`, presses ignored, still in
+the tab order and hoverable (Material Web's `soft-disabled`). Pair it
+with `description` so a screen reader hears why.</td>
+        </tr>
+      
+        <tr>
+          <td>description</td>
+          <td><span class="default">description</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>Read after the label as the button's description (aria-describedby),
+for why it's unavailable: "Finish step 1 first." Not shown.</td>
+        </tr>
+      
+        <tr>
           <td>loading</td>
           <td><span class="default">loading</span></td>
           <td><span class="type">boolean</span></td>

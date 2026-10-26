@@ -1330,6 +1330,13 @@
            *  default: a label wraps only when the container is too narrow. */
           this.wrap = false;
           this.disabled = false;
+          /** Unavailable but focusable: `aria-disabled`, presses ignored, still in
+           *  the tab order and hoverable (Material Web's `soft-disabled`). Pair it
+           *  with `description` so a screen reader hears why. */
+          this.softDisabled = false;
+          /** Read after the label as the button's description (aria-describedby),
+           *  for why it's unavailable: "Finish step 1 first." Not shown. */
+          this.description = '';
           this.loading = false;
           this.loadingLabel = '';
           this.hideLabel = false;
@@ -1368,7 +1375,7 @@
           }
       }
       _onClick(e) {
-          if (this.loading || this.disabled) {
+          if (this.loading || this.disabled || this.softDisabled) {
               e.preventDefault();
               e.stopImmediatePropagation();
           }
@@ -1387,6 +1394,8 @@
           return b `<button
       part="button"
       ?disabled=${this.disabled}
+      aria-disabled=${this.softDisabled ? 'true' : A}
+      aria-describedby=${this.description ? 'description' : A}
       aria-busy=${this.loading ? 'true' : A}
       @click=${this._onClick}
     >
@@ -1418,6 +1427,7 @@
         </span>
       </span>
       <slot name="icon-right"></slot>
+      ${this.description ? b `<span class="description" id="description">${this.description}</span>` : A}
     </button>`;
       }
   };
@@ -1567,6 +1577,23 @@
       :host([disabled]) button {
         cursor: not-allowed;
       }
+      /* Unavailable but still focusable (Material Web's soft-disabled): it
+         looks disabled, ignores presses, and can still be reached by Tab and
+         hovered, so a tooltip saying why it waits shows for every input. */
+      :host([soft-disabled]) {
+        opacity: 0.4;
+      }
+      :host([soft-disabled]) button {
+        cursor: not-allowed;
+      }
+      .description {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+      }
 
       /* ── Loading state — auto-routed by icon-left presence ─────
          If the button has a consumer-supplied icon-left, the spinner
@@ -1702,6 +1729,12 @@
   __decorate$1P([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "disabled", void 0);
+  __decorate$1P([
+      n({ type: Boolean, reflect: true, attribute: 'soft-disabled' })
+  ], exports.LaButton.prototype, "softDisabled", void 0);
+  __decorate$1P([
+      n()
+  ], exports.LaButton.prototype, "description", void 0);
   __decorate$1P([
       n({ type: Boolean, reflect: true })
   ], exports.LaButton.prototype, "loading", void 0);
@@ -6027,6 +6060,38 @@
            * size to its content on a single line.
            */
           this.maxWidth = '240px';
+          /* Escape hides a tip that's showing (WCAG 1.4.13). Caught on the way
+             down, so a modal the tooltip sits in doesn't also close on the same
+             press; the next Escape reaches it. */
+          this._onKey = (e) => {
+              if (e.key !== 'Escape' || !this.tip || this.hasAttribute('dismissed'))
+                  return;
+              if (!this.matches(':hover') && !this.matches(':focus-within'))
+                  return;
+              this.setAttribute('dismissed', '');
+              e.preventDefault();
+              e.stopPropagation();
+          };
+          /** Dismissed stays until the pointer and focus have both left. */
+          this._clear = () => {
+              // After the event, once focus has moved: focusout fires while it's still here.
+              setTimeout(() => {
+                  if (!this.matches(':hover') && !this.matches(':focus-within'))
+                      this.removeAttribute('dismissed');
+              });
+          };
+      }
+      connectedCallback() {
+          super.connectedCallback();
+          window.addEventListener('keydown', this._onKey, true);
+          this.addEventListener('pointerleave', this._clear);
+          this.addEventListener('focusout', this._clear);
+      }
+      disconnectedCallback() {
+          window.removeEventListener('keydown', this._onKey, true);
+          this.removeEventListener('pointerleave', this._clear);
+          this.removeEventListener('focusout', this._clear);
+          super.disconnectedCallback();
       }
       render() {
           const wrap = this.maxWidth !== '';
@@ -6035,6 +6100,7 @@
       <slot></slot>
       <div
         class="tip ${wrap ? 'wrap' : ''}"
+        role="tooltip"
         data-pos=${this.position}
         style=${tipStyle}
       >${this.tip}</div>
@@ -6078,9 +6144,39 @@
         line-height: 1.4;
         width: max-content;
       }
+      /* WCAG 1.4.13, content on hover or focus. Hoverable: once shown, the
+         tip takes the pointer, and a bridge spans the gap to the trigger,
+         so moving onto it keeps it open. Dismissible: Escape hides it
+         without moving focus or the pointer (the dismissed attribute, cleared when
+         both leave). Persistent: it stays while hovered or focused. */
       :host(:hover) .tip,
       :host(:focus-within) .tip {
         opacity: var(--la-tooltip-hover-opacity, 1);
+        pointer-events: auto;
+      }
+      :host([dismissed]) .tip {
+        opacity: 0;
+        pointer-events: none;
+      }
+      .tip::before {
+        content: '';
+        position: absolute;
+      }
+      .tip[data-pos='top']::before {
+        inset: 100% 0 auto;
+        height: calc(var(--la-space-2xs) + 1px);
+      }
+      .tip[data-pos='bottom']::before {
+        inset: auto 0 100%;
+        height: calc(var(--la-space-2xs) + 1px);
+      }
+      .tip[data-pos='left']::before {
+        inset: 0 auto 0 100%;
+        width: calc(var(--la-space-2xs) + 1px);
+      }
+      .tip[data-pos='right']::before {
+        inset: 0 100% 0 auto;
+        width: calc(var(--la-space-2xs) + 1px);
       }
       /* Top (default) */
       .tip[data-pos='top'] {
@@ -32717,7 +32813,7 @@
             : this.doc
                 ? b `<button class="name" type="button" @click=${() => this._fire('la-record-preview')} aria-label=${`Open ${this.label}`}
                     >${this.label}<i class="ph ph-arrow-square-out" aria-hidden="true"></i></button
-                  >, ${this.value}`
+                  >${this.value ? `, ${this.value}` : ''}`
                 : b `<b>${this.label}</b>, ${this.value}`}
         </p>
         ${!empty && source
@@ -33496,17 +33592,19 @@
    *             since a step whose button opens another surface never opens as
    *             a card, but not while it waits its turn.
    *             Ask a lawyer is in the run's sidebar, not on the step.
-   *   done    - one line: Done · the answer that matters · the date. No Change in Phase B: a
-   *             done step doesn't reopen (Bobby's RDC call 6, 21 Oct 2026); `changeable`
-   *             brings Change back for after launch
+   *   done    - one line: Done · the answer that matters · the date, and the pencil on the
+   *             right that reopens it. It never reopens on its own (decision 160, amended
+   *             23 Oct 2026; decision 165)
    *   passed  - moved past with a reason (la-step-marker `passed`, decision 115),
    *             a dashed card, and Change; on a run's rows, a row like the others
    *             (decision 147, amended)
    *   before  - done before the founder started this run: nothing to change
    * Steps run in order (PRO-210, notes, 7 Oct 2026): only the next step opens.
-   * A later step's button waits, `disabled`, and says why in a line under it,
-   * `disabled-reason`; its marker reads *Cannot start yet* (la-step-marker
-   * `gated`). No tooltip on the disabled button (decision 152, PS2). Every
+   * A later step's button waits, and `disabled-reason` says why in a tooltip on
+   * it, on hover and on focus: the button is soft-disabled, so it stays in the
+   * tab order, ignores presses, and reads the reason as its description
+   * (Jonard, 23 Oct 2026; decision 152 had a line under it). Its marker reads
+   * *Cannot start yet* (la-step-marker `gated`). Every
    * founder sees every step; one that doesn't apply to them is moved past,
    * with a reason.
    *
@@ -33570,9 +33668,11 @@
    *                     locale (formatDate, decision 145); empty prints none
    * @prop notice      - a line above the questions, such as what changing a confirmed answer can undo
    * @prop passing     - the way past is open: la-move-past, a modal, from Mark as done elsewhere in the ⋯ menu
-   * @prop changeable  - a done step shows Change, to reopen it. Off in Phase B (RDC call 6, 21 Oct
-   *                     2026); a step moved past keeps Change either way, so it can still be done
-   * @prop reopened    - a done step the founder pressed Change on, open again until the change is
+   * @prop changeable  - a done step shows the pencil (Edit), to reopen it. On by default, so every
+   *                     done step can be edited (decision 160, amended 23 Oct 2026); a page sets the
+   *                     property false for one that can't. A step moved past keeps the pencil either
+   *                     way, so it can still be done
+   * @prop reopened    - a done step the founder pressed the pencil on, open again until the change is
    *                     confirmed: the ⋯ menu and the way past are hidden, since a step
    *                     already done can't be moved past (Bobby, 19 Oct 2026; decision 159)
    *
@@ -33587,7 +33687,8 @@
    * @prop icon        - a Phosphor class for the authored button's leading icon ("ph-file-plus")
    * @prop disabled    - the authored button can't be pressed yet: steps run in order, so every step but
    *                     the next one waits. Its marker reads Cannot start yet
-   * @prop disabledReason - attribute disabled-reason: why it waits, in a line under its button (decision 152)
+   * @prop disabledReason - attribute disabled-reason: why it waits, as a tooltip on its button, on hover and
+   *                     focus, and its description for a screen reader (23 Oct 2026; was a line, decision 152)
    * @prop parts       - sub-steps, run inside the card after the step's own part, in order:
    *                     {label, button, done?}[] (a property)
    * @prop partOwn     - attribute part-own: the step's own part, first in the sequence (default
@@ -33613,7 +33714,7 @@
    *                          On la-step-open the page opens the step and, when it asks
    *                          questions not yet answered, the modal at once (decision 120)
    * @fires la-step-confirm - Confirm on a step with no questions, or an information step's button
-   * @fires la-step-change  - Change on a done or passed step
+   * @fires la-step-change  - the pencil (Edit) on a done or passed step
    * @fires la-step-moved   - {reason, text} from la-move-past: the page settles the step as passed
    * @fires la-step-part    - {index}: the current sub-step's button. The page does it, marks the part done,
    *                          and settles the step when the last part is done
@@ -33640,7 +33741,7 @@
           this.reopened = false;
           this.locked = false;
           /* A done step doesn't reopen in Phase B (RDC call 6, 21 Oct 2026). */
-          this.changeable = false;
+          this.changeable = true;
           this.word = '';
           this.icon = '';
           this.disabled = false;
@@ -33739,7 +33840,8 @@
           return this.info ? 'Read' : 'Done';
       }
       _settledView() {
-          return b `<div class="settled" tabindex="-1" role="group" aria-labelledby="settled-h settled-s">
+          const edit = !(this.locked || this.state === 'before' || (this.state === 'done' && !this.changeable));
+          return b `<div class="settled ${edit ? 'has-edit' : ''}" tabindex="-1" role="group" aria-labelledby="settled-h settled-s">
       <div>
         <h3 id="settled-h">${this.heading}</h3>
         <p class="summary" id="settled-s">
@@ -33757,7 +33859,10 @@
           >`
             : this.state === 'before' || this.locked || (this.state === 'done' && !this.changeable)
                 ? A
-                : b `<la-button variant="secondary" @click=${() => this._fire('la-step-change')}>Change</la-button>`}
+                : b `<la-tooltip tip="Edit" size="sm" position="left" max-width=""
+              ><la-icon-button size="sm" label=${`Edit step ${this.index}`} @click=${() => this._fire('la-step-change')}
+                ><i class="ph ph-pencil-simple" aria-hidden="true"></i></la-icon-button
+            ></la-tooltip>`}
     </div>`;
       }
       _frame() {
@@ -33903,8 +34008,33 @@
         }}
     ></la-move-past>`;
       }
+      /** The step's act. Waiting with a reason, it's soft-disabled: it looks
+       *  disabled and ignores presses, but stays focusable for its tooltip,
+       *  and carries the reason as its description. */
+      _actButton(waitReason) {
+          return b `<la-button
+      class=${this.next ? 'primary-act' : ''}
+      variant=${this.next ? 'primary' : 'secondary'}
+      ?disabled=${this.disabled && !waitReason}
+      ?soft-disabled=${waitReason}
+      description=${waitReason ? this.disabledReason : ''}
+      ?loading=${this.loading}
+      loading-label=${this.loadingLabel}
+      @click=${() => this._partAt >= 0
+            ? this._fire('la-step-part', { index: this._partAt })
+            : this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
+      >${this.icon && this._partAt < 0 ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this._partAt >= 0
+            ? this.parts[this._partAt].button
+            : this.button}</la-button
+    >`;
+      }
       render() {
           const open = this.state === 'open';
+          // Why a step waits shows as a tooltip on its button, on hover and on
+          // focus (Jonard, 23 Oct 2026; it was a line under the button, decision
+          // 152). The button stays focusable, soft-disabled, and reads the
+          // reason as its description, so keyboard, touch and screen-reader
+          // users get it too.
           const wait = this._waiting && this.disabledReason;
           return b `${iconStyles}<article
         class="card ${this._current ? 'current' : ''}"
@@ -33921,24 +34051,11 @@
                 : b `${this._parts()}<div class="foot">
                   <div class="foot-main ${this.next ? 'has-primary' : ''}">
                     <span class="foot-acts">
-                      <la-button
-                        class=${this.next ? 'primary-act' : ''}
-                        variant=${this.next ? 'primary' : 'secondary'}
-                        ?disabled=${this.disabled}
-                        ?loading=${this.loading}
-                        loading-label=${this.loadingLabel}
-                        @click=${() => this._partAt >= 0
-                    ? this._fire('la-step-part', { index: this._partAt })
-                    : this._fire(this.info ? 'la-step-confirm' : 'la-step-open')}
-                        >${this.icon && this._partAt < 0 ? b `<i slot="icon-left" class="ph ${this.icon}" aria-hidden="true"></i>` : A}${this._partAt >= 0
-                    ? this.parts[this._partAt].button
-                    : this.button}</la-button
-                      >
+                      ${wait ? b `<la-tooltip tip=${this.disabledReason} size="sm">${this._actButton(true)}</la-tooltip>` : this._actButton(false)}
                       <span class="actions-slot" ?hidden=${!this._hasActions}>
                         <slot name="actions" @slotchange=${(e) => (this._hasActions = this._assigned(e))}></slot>
                       </span>
                     </span>
-                    ${wait ? b `<p class="wait">${this.disabledReason}</p>` : A}
                   </div>
                   <span class="acts-side" ?hidden=${this.disabled && !this._hasSources}>
                     <slot name="sources" @slotchange=${(e) => (this._hasSources = this._assigned(e))}></slot>
@@ -34086,14 +34203,6 @@
         flex-direction: column;
         align-items: flex-start;
       }
-      /* Why a step waits, in words under its button (decision 152, PS2;
-         GOV.UK's task list shows the reason as text, never a tooltip on a
-         disabled button). */
-      .wait {
-        margin: var(--la-space-xs) 0 0;
-        font-size: var(--la-font-size-sm);
-        color: var(--la-color-text-muted);
-      }
       .acts-side {
         display: flex;
         align-items: center;
@@ -34169,6 +34278,17 @@
         flex-direction: column;
         align-items: flex-start;
         gap: var(--la-space-sm);
+      }
+      /* A settled step reopens from a quiet pencil on the right, as the
+         Company Manual edits a row: it's there to use, not to push
+         (Jonard and AJ, 23 Oct 2026). */
+      .settled.has-edit {
+        flex-direction: row;
+        justify-content: space-between;
+      }
+      .settled.has-edit > div {
+        flex: 1;
+        min-width: 0;
       }
       .settled h3 {
         font-size: var(--la-font-size-lg);
@@ -36100,7 +36220,7 @@
    *   Company DNA - picked, with "From Companies House. Check it’s right."; a
    *               record question shows as a record row
    *   AI        - suggested, never picked (decision 130): AI's option carries
-   *               a "Suggested" tag, and la-ai-insight, headed "Suggested by
+   *               a "Recommended" tag, and la-ai-insight, headed "Recommended by
    *               LawAdvisor AI" with the LawAdvisor mark (decision 144), says
    *               "We suggest Yes. Check it’s right. From your articles of
    *               association, article 17.2:" (in a sentence, a document and
@@ -36297,8 +36417,9 @@
           return JSON.stringify(this._ans[q.id] ?? null) === JSON.stringify(f.value ?? null) ? 'kept' : 'changed';
       }
       /** What arrived filled in for a question. An AI suggestion is dropped on a
-       *  question where legal recommends an option: Recommended and Suggested
-       *  never show together (Jonard, 9 Oct 2026, decision 130). */
+       *  question where legal recommends an option: a question never shows
+       *  two recommendations, and legal's is kept (Jonard, 9 Oct 2026, decision
+       *  130; AI's tag says Recommended too since 23 Oct 2026). */
       _filledFor(q) {
           const f = this.filled[q.id];
           if (f?.ai && (q.options ?? []).some((o) => o.rec))
@@ -36727,7 +36848,7 @@
     </div>`;
       }
       /** AI's panel, from reading to ready, as one template (decision 137),
-       *  headed *Suggested by LawAdvisor AI* under la-ai-insight's LawAdvisor
+       *  headed *Recommended by LawAdvisor AI* under la-ai-insight's LawAdvisor
        *  mark: one mark, at the panel, with the name (decision 144).
        *  Lit keeps the same elements across the change, so each part swaps in
        *  place: the reading line collapses and fades as the evidence grows and
@@ -36749,7 +36870,7 @@
               ? b `<p class="ev-lead">We suggest ${v}. Check it’s right. ${this._from(f)}:</p>
           ${this._quoteBox(f)} ${use}`
               : A;
-          return b `${this._swap(reading || (!!f && !changed), b `<la-ai-insight class="evidence" attribution="" headline="Suggested by LawAdvisor AI">
+          return b `${this._swap(reading || (!!f && !changed), b `<la-ai-insight class="evidence" attribution="" headline="Recommended by LawAdvisor AI">
         ${this._swap(reading, b `<p class="reading">
             <i class="ph ph-file-text" aria-hidden="true"></i
             ><la-thinking size="sm">Reading your ${this._readDoc.get(q.id) ?? ''}…</la-thinking>
@@ -36771,8 +36892,8 @@
               return A;
           const changed = this._filledState(q) === 'changed';
           if (this._suggests(f)) {
-              // Suggested, never picked (decision 130): AI's option carries a
-              // "Suggested" tag and the evidence shows under the options; the
+              // Recommended, never picked (decision 130, amended 23 Oct 2026): AI's
+              // option carries a "Recommended" tag and the evidence shows under the options; the
               // founder's press is the answer. A suggestion for a typed answer has
               // "Use …" to put it in. Picking another shows the card with "Use Yes"
               // (SAP: choosing another rejects the suggestion).
@@ -36785,7 +36906,7 @@
               // LawAdvisor mark; without one, a line. Either way AI is named
               // LawAdvisor AI (decision 144).
               const panel = b `<p class="filled">
-        <la-badge variant="neutral" appearance="ghost" size="sm">Suggested by LawAdvisor AI</la-badge
+        <la-badge variant="neutral" appearance="ghost" size="sm">Recommended by LawAdvisor AI</la-badge
         ><span>We suggest ${v}. ${this._from(f)}. Check it’s right.</span>${use}
       </p>`;
               return b `${this._swap(!changed, panel)}${this._swap(changed, this._wasLine(q, f))}`;
@@ -36797,11 +36918,14 @@
           >${f.register ? 'We’ll keep their record and flag the difference.' : 'Your answer replaces it when you confirm.'}</span
         ></p>`);
           }
+          // Without a quote, where it came from is la-record-row's source line:
+          // the source's icon and its words, in the muted small size (Jonard,
+          // 23 Oct 2026), so a value filled in reads the same in a field as on a
+          // record row.
           const kept = f.quote
               ? this._sourcePanel(f)
-              : b `<p class="filled">
-          <la-badge variant="neutral" appearance="ghost" size="sm">Filled in</la-badge
-          ><span>${this._from(f)}. Check it’s right.</span>
+              : b `<p class="filled from">
+          <i class="ph ${this._sourceIcon(f)}" aria-hidden="true"></i><span>${this._from(f)}. Check it’s right.</span>
         </p>`;
           return b `${this._swap(!changed, kept)}${this._swap(changed, this._wasLine(q, f))}`;
       }
@@ -36823,7 +36947,7 @@
               >${o.label}${o.rec
                     ? b ` <la-badge class="rec" variant="neutral" appearance="ghost" size="sm">Recommended</la-badge>`
                     : this._suggests(this._filledFor(q)) && this._filledFor(q)?.value === o.id
-                        ? b ` <la-badge class="rec" variant="neutral" appearance="ghost" size="sm">Suggested</la-badge>`
+                        ? b ` <la-badge class="rec" variant="neutral" appearance="ghost" size="sm">Recommended</la-badge>`
                         : A}</la-choice
             >`)}
         </div>`;
@@ -37145,6 +37269,11 @@
         margin: var(--la-space-sm) 0 0;
         font-size: var(--la-font-size-sm);
         color: var(--la-color-text-muted);
+      }
+      /* The source line: the icon sits close to its words, as on
+         la-record-row. */
+      .filled.from {
+        gap: var(--la-space-xs);
       }
       /* AI's evidence (decision 126, amended): what to do first, then the
          quote in its own box, with the document it came from, as Shape of
