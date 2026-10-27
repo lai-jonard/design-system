@@ -32730,8 +32730,8 @@
    *
    * A document is two lines: its name, then where it came from and anything
    * more on a line of their own ("From LawVault · …"), never run
-   * on after the name (rule/document-row-two-lines). The name is two lines at
-   * most, and the file icon centres on it, not on the whole card. Every row is white on a
+   * on after the name (rule/document-row-two-lines). The name wraps in full,
+   * never cut short, and the file icon centres on it, not on the whole card. Every row is white on a
    * hairline; a document card can be acted on, so it lifts a little, with
    * --la-shadow-xs; empty, it keeps the hairline alone (decision 150, RR2).
    *
@@ -32862,10 +32862,10 @@
         <div>
           <div class="head">
             <i class="ph ph-file-text icon" aria-hidden="true"></i>
-            <p class="value ${empty ? '' : 'clamp'}">
+            <p class="value">
               ${empty
                 ? b `Your record has no ${this.label.toLowerCase()} yet.`
-                : b `<button class="name" type="button" title=${this.label} @click=${() => this._fire('la-record-preview')} aria-label=${`Open ${this.label}`}
+                : b `<button class="name" type="button" @click=${() => this._fire('la-record-preview')} aria-label=${`Open ${this.label}`}
                     >${this.label}<i class="ph ph-arrow-square-out" aria-hidden="true"></i></button
                   >`}
             </p>
@@ -33013,7 +33013,7 @@
         flex: 1 1 240px;
       }
       /* A document: the file icon sits beside its name only, centred on the
-         name's one or two lines, and the second line runs under the name. */
+         name's lines, and the second line runs under the name. */
       :host([doc]) .row {
         grid-template-columns: minmax(0, 1fr) auto;
       }
@@ -33033,14 +33033,6 @@
         /* A document's second line at the type floor, under the name at the
            body size (decision 171). */
         font-size: var(--la-font-size-xs);
-      }
-      /* A document's name is two lines at most. */
-      .value.clamp {
-        display: -webkit-box;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 2;
-        line-clamp: 2;
-        overflow: hidden;
       }
       @container (max-width: 440px) {
         .row {
