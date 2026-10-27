@@ -34276,10 +34276,12 @@
         font-size: var(--la-font-size-lg);
         color: var(--la-color-text-secondary);
       }
+      /* Why this matters: its label in the text colour, its text muted, a
+         step below the line, as How to do it is drawn (27 Oct 2026). */
       .matters {
         margin: var(--la-space-sm) 0 0;
         font-size: var(--la-font-size-md);
-        color: var(--la-color-text-secondary);
+        color: var(--la-color-text-muted);
       }
       .matters b {
         margin-right: 6px;
@@ -34293,8 +34295,11 @@
       .more[hidden] {
         display: none;
       }
+      /* More's text is muted, its labels in the text colour where the page
+         sets them, as Why this matters and How to do it (27 Oct 2026). */
       .more ::slotted(*) {
         max-width: 64ch;
+        color: var(--la-color-text-muted);
       }
       /* The act on the left, where the eye lands; the sources pill keeps
          the right. */
