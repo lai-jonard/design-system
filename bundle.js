@@ -33660,8 +33660,9 @@
    * counts until they confirm.
    *
    * Three states, plus kinds of settled:
-   *   idle    - not reached: the title, its one line, *Why this matters*, *More*,
-   *             and the authored button, whose label is the action. No caret:
+   *   idle    - not reached: the title, its one line, the body (How to do it,
+   *             always open: decision 175), *More* (opening on *Why this
+   *             matters*: decision 177), and the authored button, whose label is the action. No caret:
    *             with the answers and the record's facts in the modal, opening
    *             the card alone showed nothing new, and More holds the depth;
    *             a run folds by section instead (Jonard, 9 Oct 2026). `next` makes
@@ -33672,7 +33673,7 @@
    *   open    - the card lifts into the brief's three verbs, as bands with a
    *             hairline between them and no label (the words were for the
    *             review's grouping, not the founder; Jonard, 6 Oct 2026).
-   *             Review is the step's frame: the line, Why this matters and More.
+   *             Review is the step's frame: the line, the body and More.
    *             Decide and Confirm happen in the modal (la-step-questions),
    *             which the authored button opens together with the step: every
    *             question in legal's order, a value on the founder's record
@@ -33692,8 +33693,10 @@
    *             since a step whose button opens another surface never opens as
    *             a card, but not while it waits its turn.
    *             Ask a lawyer is in the run's sidebar, not on the step.
-   *   done    - one line: Done · the answer that matters · the date, and the pencil on the
-   *             right that reopens it. It never reopens on its own (decision 160, amended
+   *   done    - one line: `word` · the date, and the pencil on the right that
+   *             reopens it. A run sets `word` to *Completed by* and who pressed
+   *             (decision 162), and shows no answer (decision 181); `summary`
+   *             is for a settled state that needs one, such as moved past. It never reopens on its own (decision 160, amended
    *             23 Oct 2026; decision 165)
    *   passed  - moved past with a reason (la-step-marker `passed`, decision 115),
    *             a dashed card, and Change; on a run's rows, a row like the others
@@ -33757,9 +33760,10 @@
    *                     lifts as a card while it's the step you're on (decision 147)
    * @prop heading     - the step's title, legal's words
    * @prop line        - its one action-first sentence
-   * @prop matters     - why it matters, one line
+   * @prop matters     - why it matters, one paragraph: drawn first in More, as a lead-in (decision 177)
    * @prop button      - the authored button label: the action that opens it
-   * @prop info        - an information step, no questions: the button settles it ("Got it")
+   * @prop info        - an information step, no questions: the button settles it (the CMS's
+   *                     default label is "I’ve done this", L-2801)
    * @prop remaining   - questions that don't count yet (unanswered, or filled in and not yet checked); gates Confirm
    * @prop questionCount - attribute question-count: how many questions the modal asks; 0 hides the Decide band
    * @prop answered    - every asked question has an answer: show the `answers` summary, not the button
@@ -33799,15 +33803,16 @@
    * @slot body        - prose under the one-liner, in both not-reached and open
    * @slot insight     - an la-ai-insight under the body
    * @slot settled     - on the done row, under its line: what the step left, such as the file an Upload
-   *                     step took, as la-document-item with an Open button and no Remove (Jonard, 21 Oct 2026)
+   *                     step took, as the document card, la-record-row with doc (decisions 162, 167)
    * @slot actions     - beside the authored button: the sign step's "Signed outside LawAdvisor?" fallback
    * @slot             - the step's la-step-questions, and anything the page places with the card. A value on
    *                     the record is asked in the modal, not here (decision 125)
-   * @slot more        - *More*: what it is, when it bites, and the source (07's *Source*). Empty hides it. The
-   *                     source line links out where legal gives the step a source link (PRO-210 B, 11 Oct)
-   * @slot sources     - la-sources: the documents and registers the step reads from. It keeps the
-   *                     far right, opposite the act (Jonard, 28 Sep and 6 Oct 2026): provenance,
-   *                     not the law, which stays behind More
+   * @slot more        - *More*, after `matters`: what it is and when it bites, each one paragraph with
+   *                     a lead-in label (decision 176). No source: the law is in Sources (decision 178).
+   *                     With no `matters` and nothing slotted, there's no More
+   * @slot sources     - la-sources: every source the step reads, documents, registers and the law
+   *                     (the scales icon; decision 178). It keeps the far right, opposite the act
+   *                     (Jonard, 28 Sep and 6 Oct 2026)
    * @fires la-step-open    - the authored button, on a step that isn't an information step
    * @fires la-step-answer  - {at: 'next' | 'summary'}: open la-step-questions at the next unanswered question
    *                          (Finish answering) or at the summary (Confirm on a step with questions).
@@ -33973,9 +33978,11 @@
       <div class="body-slot" ?hidden=${!this._hasBody}>
         <slot name="body" @slotchange=${(e) => (this._hasBody = this._assigned(e))}></slot>
       </div>
-      ${this.matters ? b `<p class="matters"><b>Why this matters</b>${this.matters}</p>` : A}
-      <la-disclosure class="more" variant="quiet" summary="More" ?hidden=${!this._hasMore}>
-        <slot name="more" @slotchange=${(e) => (this._hasMore = e.target.assignedElements().length > 0)}></slot>
+      <la-disclosure class="more" variant="quiet" summary="More" ?hidden=${!this._hasMore && !this.matters}>
+        <div class="more-body">
+          ${this.matters ? b `<p class="matters"><b>Why this matters.</b> ${this.matters}</p>` : A}
+          <slot name="more" @slotchange=${(e) => (this._hasMore = e.target.assignedElements().length > 0)}></slot>
+        </div>
       </la-disclosure>
       <div class="insight-slot" ?hidden=${!this._hasInsight}>
         <slot name="insight" @slotchange=${(e) => (this._hasInsight = this._assigned(e))}></slot>
@@ -34268,15 +34275,17 @@
         font-size: var(--la-font-size-lg);
         color: var(--la-color-text-secondary);
       }
-      /* Why this matters: its label in the text colour, its text muted, a
-         step below the line, as How to do it is drawn (27 Oct 2026). */
+      /* Why this matters opens More (decision 177): one paragraph, so its
+         label is a lead-in in the text colour, its text muted (decision 176),
+         as the page's own paragraphs in the slot under it. */
+      .more-body {
+        max-width: 64ch;
+      }
       .matters {
-        margin: var(--la-space-sm) 0 0;
-        font-size: var(--la-font-size-md);
+        margin: 0 0 var(--la-space-xs);
         color: var(--la-color-text-muted);
       }
       .matters b {
-        margin-right: 6px;
         font-weight: var(--la-font-weight-normal);
         color: var(--la-color-text);
       }
