@@ -18984,6 +18984,9 @@
           this.expertReply = false;
           this.aiActive = false;
           this.unreadFlags = 0;
+          /** Which panels the rail offers, as a comma-separated list; empty is all of
+           *  them. A panel left out has no rail button and never opens. */
+          this.panels = '';
           /** Suppress the first-load auto-open of About. The icon rail stays collapsed
            *  and the unread-flags badge (red dot) still shows — the host just doesn't
            *  pop the panel open uninvited. */
@@ -19002,6 +19005,11 @@
           if (!item)
               return '';
           return item.id === 'chat' ? this.chatLabel : item.label;
+      }
+      /** The rail's items, in rail order, narrowed to `panels`. */
+      get _rail() {
+          const want = this.panels.split(',').map((p) => p.trim()).filter(Boolean);
+          return want.length ? LaCaseContextPanel_1.RAIL.filter((i) => want.includes(i.id)) : LaCaseContextPanel_1.RAIL;
       }
       firstUpdated() {
           // On first case load with unread flags, auto-open About (unless the host
@@ -19106,12 +19114,13 @@
           }
       }
       render() {
-          const active = this.openPanel;
-          const activeItem = LaCaseContextPanel_1.RAIL.find((i) => i.id === active);
+          const rail = this._rail;
+          const active = rail.some((i) => i.id === this.openPanel) ? this.openPanel : '';
+          const activeItem = rail.find((i) => i.id === active);
           return b `
       ${iconStyles}
       <nav class="rail" aria-label="Case context">
-        ${LaCaseContextPanel_1.RAIL.map((item) => b `
+        ${rail.map((item) => b `
             <la-tooltip tip=${this._railLabel(item)} position="right" size="sm">
               <span class="rail-btn">
                 <la-icon-button
@@ -19423,6 +19432,9 @@
   __decorate$G([
       n({ type: Number, attribute: 'unread-flags' })
   ], exports.LaCaseContextPanel.prototype, "unreadFlags", void 0);
+  __decorate$G([
+      n()
+  ], exports.LaCaseContextPanel.prototype, "panels", void 0);
   __decorate$G([
       n({ type: Boolean, attribute: 'no-auto-open' })
   ], exports.LaCaseContextPanel.prototype, "noAutoOpen", void 0);
