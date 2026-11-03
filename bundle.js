@@ -29467,9 +29467,9 @@
         display: inline-block;
         max-width: calc(100% - 2 * var(--la-space-md));
         padding: var(--la-space-2xs) var(--la-space-sm);
-        /* Concentric while the picture's curve reaches it; at this inset the
-           curve is spent, so the radius floors at xs rather than squaring. */
-        border-radius: max(calc(var(--la-radius-lg) - var(--la-space-md)), var(--la-radius-xs, 4px));
+        /* The system's pill shape, as the tags had before — the ask was the
+           padding and the inset, not a new corner (Jonard, 3 Nov 2026). */
+        border-radius: var(--la-radius-pill);
         background: #f3f4f6;
         font-size: var(--la-font-size-xs);
         font-weight: var(--la-font-weight-normal);
