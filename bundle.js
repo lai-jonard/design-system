@@ -29096,10 +29096,13 @@
       else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
       return c > 3 && r && Object.defineProperty(target, key, r), r;
   };
-  /** Each kind's line: its glyph and its label. A journey adds its step count. */
+  /** Each kind's line: its glyph and its label. A journey adds its step count.
+   *  The labels are the founder-facing words: everything is a playbook
+   *  (decision 190), and what we draft from is a document template
+   *  (decision 192). `journey` stays the prop value for compatibility. */
   const KIND = {
-      journey: { icon: 'ph ph-list-checks', label: 'Journey' },
-      document: { icon: 'ph ph-file-text', label: 'Document' },
+      journey: { icon: 'ph ph-list-checks', label: 'Playbook' },
+      document: { icon: 'ph ph-file-text', label: 'Document template' },
       step: { icon: 'ph ph-check-square-offset', label: 'Single step' },
   };
   /** The prompt's glyph when the page names none: the raise chooser's. */
@@ -29127,12 +29130,13 @@
    * The prompt is dashed and flat at rest, because it is not a playbook, and
    * lifts the same way.
    *
-   * No text sits on the picture (decision 134): how well text
-   * over a picture reads depends on the art, and a legal app puts legibility
-   * first. A recommendation's reason is a row of its own under the picture,
-   * always shown, as Polaris's MediaCard keeps text off its media; the compact
-   * card's kind and title sit under its picture too. Under
-   * prefers-reduced-motion the lift changes at once.
+   * Text sits on the picture only on a solid pill (decision 134, as amended):
+   * how well text straight over a picture reads depends on the art, and a legal
+   * app puts legibility first, so the sub-group pill carries its own surface.
+   * A recommendation's reason is a row of its own under the picture, always
+   * shown, as Polaris's MediaCard keeps text off its media; the compact card's
+   * kind and title sit under its picture too. Under prefers-reduced-motion the
+   * lift changes at once.
    *
    * Usage:
    *   <la-playbook-card heading="Hire an Employee" kind="journey" steps="7"
@@ -29145,7 +29149,7 @@
    *   <la-playbook-card variant="compact" heading="Non-Disclosure Agreement" kind="document"
    *     src="/assets/…/nda.jpg"></la-playbook-card>
    *
-   * @prop variant       - default · prompt · compact
+   * @prop variant       - default · horizontal · prompt · compact
    * @prop heading       - the title, and the control's accessible name (not `title`, which would
    *                       put a native tooltip on the whole card)
    * @prop description   - the line under the title (default and prompt)
@@ -29156,8 +29160,12 @@
    * @prop src           - the picture; decorative, so it has no alt (default and compact)
    * @prop icon          - the prompt's glyph in place of a picture; default ph-signpost
    * @prop reason        - why we recommend it, a row under the picture (default only)
-   * @prop action        - the cue at the foot; default "View Document" for a document, otherwise
-   *                       "View Playbook"; a prompt draws one only when this is set; compact never
+   * @prop overlay-label - the sub-group on a solid pill at the picture's foot ("Managing Staff")
+   * @prop action        - the cue at the foot; default "Create document" for a document, otherwise
+   *                       "Start playbook" (decisions 138 and 192); a prompt draws one only when
+   *                       this is set; compact never
+   * @slot mark          - the picture's head corner: the page's area mark (an la-area-icon),
+   *                       drawn on the chip's own solid surface; empty, no chip draws
    * @prop href          - set, the card is a link; unset, a button
    * @prop heading-level - the title's heading level, 2 to 6; default 3
    * @fires la-playbook-card-open - {heading, kind, href}, bubbles, composed and cancelable, when the
@@ -29173,6 +29181,10 @@
           this.kind = '';
           this.steps = 0;
           this.kindLabel = '';
+          /** A short label on a pill at the picture's foot: the sub-group the card
+           *  belongs to ("Managing Staff"). The pill is solid, so decision 134's
+           *  worry, text straight over art, does not arise; empty, nothing draws. */
+          this.overlayLabel = '';
           this.kindIcon = '';
           this.src = '';
           this.icon = '';
@@ -29180,9 +29192,18 @@
           this.action = '';
           this.href = '';
           this.headingLevel = 3;
+          /** Whether the mark slot holds anything: empty, its chip does not draw. */
+          this._hasMark = false;
+      }
+      _onMarkSlot(e) {
+          this._hasMark = e.target
+              .assignedNodes({ flatten: true })
+              .some((n) => n.nodeType === Node.ELEMENT_NODE || (n.textContent ?? '').trim() !== '');
       }
       get _variant() {
-          return this.variant === 'prompt' || this.variant === 'compact' ? this.variant : 'default';
+          return this.variant === 'prompt' || this.variant === 'compact' || this.variant === 'horizontal'
+              ? this.variant
+              : 'default';
       }
       get _kind() {
           return Object.prototype.hasOwnProperty.call(KIND, this.kind)
@@ -29251,8 +29272,8 @@
           const hasKind = kindLine !== A;
           const showDesc = variant !== 'compact' && this.description.trim() !== '';
           const showWhy = variant === 'default' && this.reason.trim() !== '';
-          const actionLabel = variant === 'default'
-              ? this.action.trim() || (this._kind === 'document' ? 'View Document' : 'View Playbook')
+          const actionLabel = variant === 'default' || variant === 'horizontal'
+              ? this.action.trim() || (this._kind === 'document' ? 'Create document' : 'Start playbook')
               : variant === 'prompt'
                   ? this.action.trim()
                   : '';
@@ -29266,6 +29287,10 @@
               : b `<div class="picture">
             ${this.src
                 ? b `<img src=${this.src} alt="" loading="lazy" decoding="async" />`
+                : A}<span class="mark" ?hidden=${!this._hasMark}
+              ><slot name="mark" @slotchange=${this._onMarkSlot}></slot></span
+            >${this.overlayLabel.trim()
+                ? b `<span class="pill">${this.overlayLabel}</span>`
                 : A}
           </div>`;
           return b `${iconStyles}<div class="card ${variant}">
@@ -29282,7 +29307,11 @@
           ${showDesc ? b `<p class="desc" id="desc">${this.description}</p>` : A}
           ${actionLabel
             ? b `<div class="action">
-                <la-button variant="secondary" size="sm" .inert=${true}>${actionLabel}</la-button>
+                <la-button variant="secondary" size="sm" .inert=${true}
+                  >${variant === 'default' || variant === 'horizontal'
+                ? b `<i slot="icon-left" class="ph-bold ph-plus" aria-hidden="true"></i>`
+                : A}${actionLabel}</la-button
+                >
               </div>`
             : A}
         </div>
@@ -29422,6 +29451,54 @@
         object-fit: cover;
         display: block;
       }
+      /* The sub-group pill at the picture's foot, and the page's mark (an
+         area icon, slotted) at its head. The pill is a solid light surface
+         with fixed colours, so it reads on any art in either theme; this is
+         the amendment to decision 134's bare no-text-on-pictures rule. */
+      /* The sub-group tag: quiet small text on its own solid surface, and its
+         corner concentric with the picture's corner it sits in — the picture's
+         radius minus the tag's inset (borders.md, decision 83; Jonard, 3 Nov
+         2026). Fixed colours: the picture has no theme. */
+      .pill {
+        position: absolute;
+        left: var(--la-space-md);
+        bottom: var(--la-space-md);
+        z-index: 1;
+        display: inline-block;
+        max-width: calc(100% - 2 * var(--la-space-md));
+        padding: var(--la-space-2xs) var(--la-space-sm);
+        /* Concentric while the picture's curve reaches it; at this inset the
+           curve is spent, so the radius floors at xs rather than squaring. */
+        border-radius: max(calc(var(--la-radius-lg) - var(--la-space-md)), var(--la-radius-xs, 4px));
+        background: #f3f4f6;
+        font-size: var(--la-font-size-xs);
+        font-weight: var(--la-font-weight-normal);
+        line-height: 1.4;
+        color: var(--la-color-text-secondary);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+      /* The mark's chip: its own solid surface, so whatever the page slots in
+         stays contained and legible on any art (decision 193's condition).
+         Fixed light colours, as the pill: the picture has no theme. The corner
+         is concentric with la-area-icon's rounded square (decision 153), not
+         the prototype's circle. */
+      .mark {
+        position: absolute;
+        top: var(--la-space-md);
+        left: var(--la-space-md);
+        z-index: 1;
+        display: inline-flex;
+        padding: var(--la-space-3xs, 3px);
+        border-radius: calc(var(--la-radius-sm, 8px) + var(--la-space-3xs, 3px));
+        background: rgba(255, 255, 255, 0.95);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.14);
+      }
+      .mark[hidden] {
+        display: none;
+      }
+
       /* The prompt's glyph stands in for a picture, so it is sized as one,
          not as a glyph beside text (rule/glyph-optical-size). */
       .prompt .picture {
@@ -29486,6 +29563,57 @@
         padding-top: var(--la-space-xs);
       }
 
+      /* ── Horizontal: the catalogue row (decision 193) ──
+         The picture flush to the left edge; beside it the kind and the cue on
+         one line, then the title, then the whole description. The body's DOM
+         order is the default card's; the grid reorders it. */
+      :host([variant='horizontal']) .card {
+        flex-direction: row;
+        align-items: stretch;
+      }
+      :host([variant='horizontal']) .picture {
+        width: 164px;
+        flex: none;
+        align-self: stretch;
+        aspect-ratio: auto;
+        border-radius: var(--la-radius-lg) 0 0 var(--la-radius-lg);
+      }
+      :host([variant='horizontal']) .body {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        grid-template-areas:
+          'kind action'
+          'heading heading'
+          'desc desc';
+        align-items: center;
+        gap: var(--la-space-xs) var(--la-space-md);
+        padding: var(--la-space-md) var(--la-space-lg);
+      }
+      :host([variant='horizontal']) .kind {
+        grid-area: kind;
+        white-space: nowrap;
+      }
+      :host([variant='horizontal']) .action {
+        grid-area: action;
+        margin: 0;
+        padding: 0;
+      }
+      :host([variant='horizontal']) .heading {
+        grid-area: heading;
+        font-size: var(--la-font-size-base);
+      }
+      :host([variant='horizontal']) .desc {
+        grid-area: desc;
+      }
+      @media (max-width: 1280px) {
+        :host([variant='horizontal']) .picture {
+          width: 112px;
+        }
+        :host([variant='horizontal']) .body {
+          padding: var(--la-space-md);
+        }
+      }
+
       /* ── Compact: the picture, then the kind and the title under it ── */
       .compact {
         align-self: flex-start;
@@ -29546,6 +29674,9 @@
       n({ attribute: 'kind-label' })
   ], exports.LaPlaybookCard.prototype, "kindLabel", void 0);
   __decorate$h([
+      n({ attribute: 'overlay-label' })
+  ], exports.LaPlaybookCard.prototype, "overlayLabel", void 0);
+  __decorate$h([
       n({ attribute: 'kind-icon' })
   ], exports.LaPlaybookCard.prototype, "kindIcon", void 0);
   __decorate$h([
@@ -29566,6 +29697,9 @@
   __decorate$h([
       n({ type: Number, attribute: 'heading-level' })
   ], exports.LaPlaybookCard.prototype, "headingLevel", void 0);
+  __decorate$h([
+      r$1()
+  ], exports.LaPlaybookCard.prototype, "_hasMark", void 0);
   exports.LaPlaybookCard = __decorate$h([
       t$2('la-playbook-card')
   ], exports.LaPlaybookCard);
