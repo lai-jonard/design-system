@@ -12606,6 +12606,8 @@
    *                   clears it when it doesn't select, so a tile that only
    *                   acts isn't announced as an unpressed toggle
    * @prop quiet   - steps back (nothing here for the current scope)
+   * @prop lean    - set by a lean strip: a compact row tile — a 24px square mark
+   *                 (decision 153's square) and the label, sized to its content
    * @fires la-tile-press - {value, label}
    */
   exports.LaTile = class LaTile extends i$3 {
@@ -12619,6 +12621,7 @@
           this.pressed = false;
           this.selectable = true;
           this.quiet = false;
+          this.lean = false;
           this._hasSlot = false;
       }
       _onSlot(e) {
@@ -12729,6 +12732,18 @@
         overflow: hidden;
         text-overflow: ellipsis;
       }
+      /* Lean: sized to content, a 24px square mark, the small label. */
+      :host([lean]) { flex: 1 1 auto; }
+      :host([lean])::after { top: var(--la-space-xs); bottom: var(--la-space-xs); }
+      :host([lean]) .tile { padding: var(--la-space-sm) var(--la-space-md); gap: var(--la-space-sm); width: auto; }
+      :host([lean]) .disc {
+        width: 24px;
+        height: 24px;
+        font-size: 13px;
+        border-radius: var(--la-radius-sm);
+      }
+      :host([lean]) .label { font-size: var(--la-font-size-sm); }
+      :host([lean]) .sub { display: none; }
       :host([quiet]) .disc, :host([quiet]) .label { opacity: .45; }
       :host([quiet]) .sub { color: var(--la-color-text-faint); }
       :host([quiet]) ::slotted([slot='icon']) { filter: grayscale(1); opacity: .5; }
@@ -12759,6 +12774,9 @@
   __decorate$12([
       n({ type: Boolean, reflect: true })
   ], exports.LaTile.prototype, "quiet", void 0);
+  __decorate$12([
+      n({ type: Boolean, reflect: true })
+  ], exports.LaTile.prototype, "lean", void 0);
   exports.LaTile = __decorate$12([
       t$2('la-tile')
   ], exports.LaTile);
@@ -12784,8 +12802,13 @@
    *   </la-tile-strip>
    *
    * @prop value     - the pressed tile's value (single selection); set it to move the press
+   * @prop variant   - 'default': the tile grid. 'lean': the North Star Dashboard's shelf — one
+   *                   row of compact tiles on a card surface, hairlines between (product's pick
+   *                   for the Playbooks pages, Akanksha, 3 Nov 2026; amends decision 153's grid
+   *                   on those pages, record to follow)
    * @prop columns   - columns at full width (default 4); 2 under 900px of strip width, 1 under 440px
-   *                   (900 is where eight two-line labels start truncating — seen at a 760px viewport, 17 Sep)
+   *                   (900 is where eight two-line labels start truncating — seen at a 760px viewport, 17 Sep);
+   *                   ignored by 'lean', which flows in one wrapping row
    * @prop selection - 'single' (default): pressing a tile presses it and lifts the others;
    *                   'none': tiles fire la-tile-press and the host decides (navigation tiles)
    * @fires la-tile-change - {value, label} after a press in single mode
@@ -12794,6 +12817,7 @@
       constructor() {
           super(...arguments);
           this.value = '';
+          this.variant = 'default';
           this.columns = 4;
           this.selection = 'single';
           this._onPress = (e) => {
@@ -12823,20 +12847,32 @@
       updated(changed) {
           if (changed.has('columns'))
               this.style.setProperty('--la-tile-columns', String(this.columns));
+          if (changed.has('variant'))
+              this._layout();
           if (changed.has('value') || changed.has('selection'))
               this._paint();
       }
       _tiles() {
           return Array.from(this.querySelectorAll(':scope > la-tile'));
       }
-      /** Read the live column count and mark the tiles that end a row or sit on the last row. */
+      /** Read the live column count and mark the tiles that end a row or sit on the last row.
+       *  Lean strips flow in one row: every tile is last-row, hairlines sit between. */
       _layout() {
           if (!this._grid)
               return;
-          const cols = getComputedStyle(this._grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
           const tiles = this._tiles();
+          if (this.variant === 'lean') {
+              tiles.forEach((t, i) => {
+                  t.toggleAttribute('lean', true);
+                  t.toggleAttribute('row-end', i === tiles.length - 1);
+                  t.toggleAttribute('last-row', true);
+              });
+              return;
+          }
+          const cols = getComputedStyle(this._grid).gridTemplateColumns.split(' ').filter(Boolean).length || 1;
           const rows = Math.ceil(tiles.length / cols);
           tiles.forEach((t, i) => {
+              t.toggleAttribute('lean', false);
               t.toggleAttribute('row-end', (i + 1) % cols === 0 || i === tiles.length - 1);
               t.toggleAttribute('last-row', Math.floor(i / cols) === rows - 1);
           });
@@ -12869,11 +12905,29 @@
       }
       @container (max-width: 900px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
       @container (max-width: 440px) { .grid { grid-template-columns: minmax(0, 1fr); } }
+
+      /* Lean: one wrapping row of compact tiles on its own card surface.
+         Concentric (borders.md, decision 83): the tile's pressed corner is
+         --la-radius-md, so the card is that plus its 4px inset. Tiles grow to
+         share each row, so a wrapped row never divides unevenly. */
+      :host([variant='lean']) {
+        background: var(--la-color-bg);
+        border-radius: calc(var(--la-radius-md, 12px) + var(--la-space-2xs, 4px));
+        box-shadow: var(--la-shadow-md);
+        padding: var(--la-space-2xs, 4px);
+      }
+      :host([variant='lean']) .grid {
+        display: flex;
+        flex-wrap: wrap;
+      }
     `,
   ];
   __decorate$11([
       n()
   ], exports.LaTileStrip.prototype, "value", void 0);
+  __decorate$11([
+      n({ reflect: true })
+  ], exports.LaTileStrip.prototype, "variant", void 0);
   __decorate$11([
       n({ type: Number })
   ], exports.LaTileStrip.prototype, "columns", void 0);
@@ -29466,14 +29520,17 @@
         z-index: 1;
         display: inline-block;
         max-width: calc(100% - 2 * var(--la-space-md));
-        padding: var(--la-space-2xs) var(--la-space-sm);
+        /* Chip-scale height (19px): line-height 1 and xs vertical padding,
+           just under la-chip's 22px — the tag read too tall at 27px
+           (Jonard, 4 Nov 2026). The 11px type is the system's floor. */
+        padding: var(--la-space-xs) var(--la-space-sm);
         /* The system's pill shape, as the tags had before — the ask was the
            padding and the inset, not a new corner (Jonard, 3 Nov 2026). */
         border-radius: var(--la-radius-pill);
         background: #f3f4f6;
         font-size: var(--la-font-size-xs);
         font-weight: var(--la-font-weight-normal);
-        line-height: 1.4;
+        line-height: 1;
         color: var(--la-color-text-secondary);
         white-space: nowrap;
         overflow: hidden;
