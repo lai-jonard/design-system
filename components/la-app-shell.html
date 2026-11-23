@@ -246,6 +246,27 @@
           <td>When true, renders the right aside panel (slot="aside")</td>
         </tr>
       
+        <tr>
+          <td>logoSrc</td>
+          <td><span class="default">logo-src</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The compact top bar's logo (narrow widths, and the page header). Left
+empty, the shell uses the slotted la-sidebar's `logo-src` and
+`wordmark-src`, so a page that points its sidebar at its logo files
+doesn't say it twice; with neither, the root `/assets/brand/` files.
+Root paths break wherever the page isn't served from the site root
+(an artifact, a subfolder), hence the attributes.</td>
+        </tr>
+      
+        <tr>
+          <td>wordmarkSrc</td>
+          <td><span class="default">wordmark-src</span></td>
+          <td><span class="type">string</span></td>
+          <td><span class="default">&#39;&#39;</span></td>
+          <td>The compact top bar's wordmark; see `logoSrc`.</td>
+        </tr>
+      
     </tbody>
   </table>
 </div>

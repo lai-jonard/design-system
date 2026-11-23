@@ -251,7 +251,9 @@
     --la-shadow-md:    0 0 0 1px #F1F3FA, 0 1px 2px -1px rgba(3,7,18,.08), 0 2px 4px 0 rgba(3,7,18,.04);
     /* card — soft three-layer card lift. Pairs with a 1px border (the border
        carries the edge, the shadow carries the elevation). For in-place
-       cards on near-white surfaces — la-upload-box has-file, etc. */
+       cards on near-white surfaces — la-upload-box has-file, etc. One
+       exception: a run's lifted step carries it with no hairline, inside a
+       section card one frame is enough (Jonard, 4 Nov 2026). */
     --la-shadow-card:
       0 1px 2px 0 rgba(3, 7, 18, 0.04),
       0 4px 8px -2px rgba(3, 7, 18, 0.06),
@@ -30098,6 +30100,17 @@
           this.showHeader = false;
           /** When true, renders the right aside panel (slot="aside") */
           this.showAside = false;
+          /**
+           * The compact top bar's logo (narrow widths, and the page header). Left
+           * empty, the shell uses the slotted la-sidebar's `logo-src` and
+           * `wordmark-src`, so a page that points its sidebar at its logo files
+           * doesn't say it twice; with neither, the root `/assets/brand/` files.
+           * Root paths break wherever the page isn't served from the site root
+           * (an artifact, a subfolder), hence the attributes.
+           */
+          this.logoSrc = '';
+          /** The compact top bar's wordmark; see `logoSrc`. */
+          this.wordmarkSrc = '';
           /** Tracks whether the aside overlay is open (tablet only) */
           this._asideOpen = false;
           /** Tracks whether the content area is narrow enough to use the drawer */
@@ -30130,18 +30143,29 @@
       </button>
     `;
       }
+      /** The logo files for the compact bar: the shell's own, then the sidebar's, then the root's. */
+      _brandSrc(which) {
+          const own = which === 'logo' ? this.logoSrc : this.wordmarkSrc;
+          if (own)
+              return own;
+          const sidebar = this.querySelector('[slot="sidebar"]');
+          const fromSidebar = sidebar?.getAttribute(which === 'logo' ? 'logo-src' : 'wordmark-src');
+          if (fromSidebar)
+              return fromSidebar;
+          return which === 'logo' ? '/assets/brand/logo-mark.svg' : '/assets/brand/logo-wordmark.svg';
+      }
       _renderCompactBrand() {
           return b `
       <span class="compact-brand" role="img" aria-label="LawAdvisor">
         <img
           class="compact-brand-mark"
-          src="/assets/brand/logo-mark.svg"
+          src=${this._brandSrc('logo')}
           alt=""
           aria-hidden="true"
         />
         <img
           class="compact-brand-wordmark"
-          src="/assets/brand/logo-wordmark.svg"
+          src=${this._brandSrc('wordmark')}
           alt=""
           aria-hidden="true"
         />
@@ -30674,6 +30698,12 @@
   __decorate$f([
       n({ type: Boolean, attribute: 'show-aside' })
   ], exports.LaAppShell.prototype, "showAside", void 0);
+  __decorate$f([
+      n({ attribute: 'logo-src' })
+  ], exports.LaAppShell.prototype, "logoSrc", void 0);
+  __decorate$f([
+      n({ attribute: 'wordmark-src' })
+  ], exports.LaAppShell.prototype, "wordmarkSrc", void 0);
   __decorate$f([
       r$1()
   ], exports.LaAppShell.prototype, "_asideOpen", void 0);
@@ -33918,10 +33948,10 @@
    * the page draws round its la-disclosure `section`, and its steps are rows
    * with no frame of their own, split by a dashed --la-color-border-light
    * line. The step you're on, the next or the one open, lifts out as a card:
-   * its hairline for the edge and --la-shadow-card for the lift, at
-   * --la-radius-xl, with no dashed line either side. On its own (`card`, the
-   * default) a step keeps its hairline card, and the step you're on lifts the
-   * same way.
+   * --la-shadow-card alone for the lift, no hairline, at --la-radius-xl, with
+   * no dashed line either side (Jonard, 4 Nov 2026; decision 147 paired the
+   * hairline with the shadow). On its own (`card`, the default) a step keeps
+   * its hairline card, and the step you're on lifts with hairline and shadow.
    *
    * No `processing`: Auto mode isn't designed, and a cut path is removed, not
    * hidden (decision 152, PS5; decision 124).
@@ -34439,8 +34469,16 @@
         background-color: var(--la-color-bg);
         box-shadow: var(--la-shadow-card);
       }
+      /* On a run the lifted card carries no hairline: inside the section
+         card one frame is enough, so the shadow alone holds the lift and no
+         line sits under the card (Jonard, 4 Nov 2026, amending decision
+         147's hairline-and-shadow pairing for rows). On its own (card, the
+         default) the hairline stays. */
+      :host([surface='row']) .card.current {
+        border-color: transparent;
+      }
       /* No dashed line either side of it: on a row, it sits over the line
-         the row below draws, its bottom hairline on that line and the
+         the row below draws, its background over that line and the
          section's white behind its corners over the line's ends. Positioned
          with no z-index, it paints after the rows around it without making a
          stacking context, so the modals it opens stay above the page. */

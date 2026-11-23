@@ -219,7 +219,9 @@
   --la-shadow-md:    0 0 0 1px #F1F3FA, 0 1px 2px -1px rgba(3,7,18,.08), 0 2px 4px 0 rgba(3,7,18,.04);
   /* card — soft three-layer card lift. Pairs with a 1px border (the border
      carries the edge, the shadow carries the elevation). For in-place
-     cards on near-white surfaces — la-upload-box has-file, etc. */
+     cards on near-white surfaces — la-upload-box has-file, etc. One
+     exception: a run's lifted step carries it with no hairline, inside a
+     section card one frame is enough (Jonard, 4 Nov 2026). */
   --la-shadow-card:
     0 1px 2px 0 rgba(3, 7, 18, 0.04),
     0 4px 8px -2px rgba(3, 7, 18, 0.06),
